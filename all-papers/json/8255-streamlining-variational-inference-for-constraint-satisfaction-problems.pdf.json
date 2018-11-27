@@ -1,0 +1,322 @@
+{
+    "filename": "8255-streamlining-variational-inference-for-constraint-satisfaction-problems.pdf",
+    "metadata": {
+        "title": "Streamlining Variational Inference for Constraint Satisfaction Problems",
+        "author": "Aditya Grover, Tudor Achim, Stefano Ermon",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8255-streamlining-variational-inference-for-constraint-satisfaction-problems.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Several algorithms for solving constraint satisfaction problems are based on survey propagation, a variational inference scheme used to obtain approximate marginal probability estimates for variable assignments. These marginals correspond to how frequently each variable is set to true among satisfying assignments, and are used to inform branching decisions during search; however, marginal estimates obtained via survey propagation are approximate and can be self-contradictory. We introduce a more general branching strategy based on streamlining constraints, which sidestep hard assignments to variables. We show that streamlined solvers consistently outperform decimation-based solvers on random k-SAT instances for several problem sizes, shrinking the gap between empirical performance and theoretical limits of satisfiability by 16.3% on average for k = 3, 4, 5, 6."
+    },
+    "keywords": [
+        {
+            "term": "markov logic",
+            "url": "https://en.wikipedia.org/wiki/markov_logic"
+        },
+        {
+            "term": "k-SAT",
+            "url": "https://en.wikipedia.org/wiki/k-SAT"
+        },
+        {
+            "term": "Constraint satisfaction problems",
+            "url": "https://en.wikipedia.org/wiki/Constraint_Satisfaction_Problems"
+        },
+        {
+            "term": "domain knowledge",
+            "url": "https://en.wikipedia.org/wiki/domain_knowledge"
+        },
+        {
+            "term": "variational inference",
+            "url": "https://en.wikipedia.org/wiki/variational_inference"
+        },
+        {
+            "term": "entity resolution",
+            "url": "https://en.wikipedia.org/wiki/entity_resolution"
+        },
+        {
+            "term": "information extraction",
+            "url": "https://en.wikipedia.org/wiki/information_extraction"
+        }
+    ],
+    "highlights": [
+        "Constraint satisfaction problems (CSP), such as boolean satisfiability (SAT), are useful modeling abstractions for many artificial intelligence and machine learning problems, including planning [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>], scheduling [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>], and logic-based probabilistic modeling frameworks such as Markov Logic Networks [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>]",
+        "The ability to combine constraints capturing domain knowledge with statistical reasoning has been successful across diverse areas such as ontology matching, information extraction, entity resolution, and computer vision [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>, <a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>, <a class=\"ref-link\" id=\"c31\" href=\"#r31\">31</a>, <a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>, <a class=\"ref-link\" id=\"c32\" href=\"#r32\">32</a>]",
+        "We introduce improved branching heuristics for survey propagation by extending this idea to Constraint satisfaction problems; namely, we show that branching on more complex predicates than single-variable constraints greatly improves survey propagation\u2019s ability to find solutions to Constraint satisfaction problems",
+        "Variational inference algorithms based on survey propagation achieve impressive performance for constraint satisfaction problems when employing the decimation heuristic",
+        "We explored cases where decimation failed, motivating a new branching procedure based on streamlining constraints over disjunctions of literals",
+        "We developed survey inspired streamlining, an improved algorithm for solving Constraint satisfaction problems via variational approximations"
+    ],
+    "key_statements": [
+        "Constraint satisfaction problems (CSP), such as boolean satisfiability (SAT), are useful modeling abstractions for many artificial intelligence and machine learning problems, including planning [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>], scheduling [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>], and logic-based probabilistic modeling frameworks such as Markov Logic Networks [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>]",
+        "The ability to combine constraints capturing domain knowledge with statistical reasoning has been successful across diverse areas such as ontology matching, information extraction, entity resolution, and computer vision [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>, <a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>, <a class=\"ref-link\" id=\"c31\" href=\"#r31\">31</a>, <a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>, <a class=\"ref-link\" id=\"c32\" href=\"#r32\">32</a>]",
+        "Solving a Constraint satisfaction problems involves finding an assignment to the variables that renders all of the problem\u2019s constraints satisfied, if one exists",
+        "Solvers that explore the search space exhaustively do not scale since the state space is exponential in the number of variables; the selection of branching criteria for variable assignments is the central design decision for improving the performance of these solvers [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>]",
+        "We focus on survey propagation",
+        "We introduce improved branching heuristics for survey propagation by extending this idea to Constraint satisfaction problems; namely, we show that branching on more complex predicates than single-variable constraints greatly improves survey propagation\u2019s ability to find solutions to Constraint satisfaction problems",
+        "Using these new branching heuristics, we develop an algorithm and empirically benchmark it on families of random Constraint satisfaction problems",
+        "The base algorithm used in many state-of-the-art solvers for constraint satisfaction problems such as random k-SAT is survey inspired decimation [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>, <a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>, <a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>]",
+        "Survey propagation is an iterative procedure for estimating variable marginals in a factor graph",
+        "The full iterative process of survey propagation followed by decimation is continued until a satisfying assignment is found, or a stopping condition is reached beyond which the instance is assumed to be sufficiently easy for local search using a standard algorithm such as WalkSAT [<a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>]",
+        "Note that when the factor graph is a tree and survey propagation converges to the exact warning message probabilities, Algorithm 1 is guaranteed to select good variables to branch on and to find a solution",
+        "We describe a more effective way to use the information from survey propagation",
+        "The algorithm replaces the decimation step of survey inspired decimation with a streamlining procedure that adds disjunction constraints to the original formula [Line 16], thereby making the problem increasingly constrained until the search space can be efficiently explored by local search",
+        "Disjunctions use the signal from the survey propagation messages without overcommitting to a particular variable assignment too early",
+        "We have found our pairing scheme to perform slightly better in practice",
+        "With every round of addition of streamlining constraints, the number of edges in the graph increases which leads to a higher chance of survey propagation failing to converge",
+        "As shown in Figure 2, the streamlining constraints have a major impact on the solver success rates",
+        "We find that the percentage of failures due to local search timeouts in survey inspired decimation and survey inspired streamlining are 36% and 24% respectively",
+        "Figures 3 and 4 reveal the salient features of survey inspired streamlining as it runs on an instance of 3-SAT with a constraint density of \u21b5 = 4.15, which is below the best achievable density but is known to be above the clustering threshold \u21b5d(3) \u21e1 3.86",
+        "Variational inference algorithms based on survey propagation achieve impressive performance for constraint satisfaction problems when employing the decimation heuristic",
+        "We explored cases where decimation failed, motivating a new branching procedure based on streamlining constraints over disjunctions of literals",
+        "We developed survey inspired streamlining, an improved algorithm for solving Constraint satisfaction problems via variational approximations",
+        "Similar to the backtracking procedure proposed for decimation [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>], we can backtrack streamlining constraints that are unlikely to render the original formula satisfiable during later iterations of survey propagation"
+    ],
+    "summary": [
+        "Constraint satisfaction problems (CSP), such as boolean satisfiability (SAT), are useful modeling abstractions for many artificial intelligence and machine learning problems, including planning [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>], scheduling [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>], and logic-based probabilistic modeling frameworks such as Markov Logic Networks [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>].",
+        "The base algorithm used in many state-of-the-art solvers for constraint satisfaction problems such as random k-SAT is survey inspired decimation [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>, <a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>, <a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>].",
+        "The algorithm employs survey propagation, a message passing procedure that computes approximate single-variable marginal probabilities for use in a decimation procedure.",
+        "Survey propagation is an iterative procedure for estimating variable marginals in a factor graph.",
+        "The full iterative process of survey propagation followed by decimation is continued until a satisfying assignment is found, or a stopping condition is reached beyond which the instance is assumed to be sufficiently easy for local search using a standard algorithm such as WalkSAT [<a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>].",
+        "Note that when the factor graph is a tree and survey propagation converges to the exact warning message probabilities, Algorithm 1 is guaranteed to select good variables to branch on and to find a solution.",
+        "The algorithm replaces the decimation step of survey inspired decimation with a streamlining procedure that adds disjunction constraints to the original formula [Line 16], thereby making the problem increasingly constrained until the search space can be efficiently explored by local search.",
+        "Disjunctions use the signal from the survey propagation messages without overcommitting to a particular variable assignment too early.",
+        "With every round of addition of streamlining constraints, the number of edges in the graph increases which leads to a higher chance of survey propagation failing to converge.",
+        "Figures 3 and 4 reveal the salient features of survey inspired streamlining as it runs on an instance of 3-SAT with a constraint density of \u21b5 = 4.15, which is below the best achievable density but is known to be above the clustering threshold \u21b5d(3) \u21e1 3.86.",
+        "By adding streamlining constraints in the first few iterations as a preprocessing routine, the algorithm carefully prunes the search space and modifies the original formula that can be subsequently fed to any external downstream solver.",
+        "Variational inference algorithms based on survey propagation achieve impressive performance for constraint satisfaction problems when employing the decimation heuristic.",
+        "We developed survey inspired streamlining, an improved algorithm for solving CSPs via variational approximations.",
+        "Similar to the backtracking procedure proposed for decimation [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>], we can backtrack streamlining constraints that are unlikely to render the original formula satisfiable during later iterations of survey propagation.",
+        "It would be interesting to perform survey propagation on clusters of variables and to use the joint marginals of the clustered variables to decide which streamlining constraints to add.",
+        "Our solver is available publicly at https://github.com/ ermongroup/streamline-vi-csp"
+    ],
+    "headline": "We introduce a more general branching strategy based on streamlining constraints, which sidestep hard assignments to variables",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] T. Achim, A. Sabharwal, and S. Ermon. Beyond parity constraints: Fourier analysis of hash functions for inference. In International Conference on Machine Learning, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Achim%2C%20T.%20Sabharwal%2C%20A.%20Ermon%2C%20S.%20Beyond%20parity%20constraints%3A%20Fourier%20analysis%20of%20hash%20functions%20for%20inference%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Achim%2C%20T.%20Sabharwal%2C%20A.%20Ermon%2C%20S.%20Beyond%20parity%20constraints%3A%20Fourier%20analysis%20of%20hash%20functions%20for%20inference%202016"
+        },
+        {
+            "id": "2",
+            "entry": "[2] D. Achlioptas and P. Jiang. Stochastic integration via error-correcting codes. In Uncertainty in Artificial Intelligence, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Achlioptas%2C%20D.%20Jiang%2C%20P.%20Stochastic%20integration%20via%20error-correcting%20codes%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Achlioptas%2C%20D.%20Jiang%2C%20P.%20Stochastic%20integration%20via%20error-correcting%20codes%202015"
+        },
+        {
+            "id": "3",
+            "entry": "[3] D. Achlioptas and Y. Peres. The threshold for random-SAT is 2k log 2 O(k). Journal of the American Mathematical Society, 17(4):947\u2013973, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Achlioptas%2C%20D.%20Peres%2C%20Y.%20The%20threshold%20for%20random-SAT%20is%202k%20log%202%20O%28k%29%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Achlioptas%2C%20D.%20Peres%2C%20Y.%20The%20threshold%20for%20random-SAT%20is%202k%20log%202%20O%28k%29%202004"
+        },
+        {
+            "id": "4",
+            "entry": "[4] M. Banko, M. J. Cafarella, S. Soderland, M. Broadhead, and O. Etzioni. Open information extraction for the web. In International Joint Conference on Artificial Intelligence, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Banko%2C%20M.%20Cafarella%2C%20M.J.%20Soderland%2C%20S.%20Broadhead%2C%20M.%20Open%20information%20extraction%20for%20the%20web%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Banko%2C%20M.%20Cafarella%2C%20M.J.%20Soderland%2C%20S.%20Broadhead%2C%20M.%20Open%20information%20extraction%20for%20the%20web%202007"
+        },
+        {
+            "id": "5",
+            "entry": "[5] A. Biere, M. Heule, H. van Maaren, and T. Walsh. Handbook of satisfiability. Frontiers in artificial intelligence and applications, vol. 185, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=A%20Biere%20M%20Heule%20H%20van%20Maaren%20and%20T%20Walsh%20Handbook%20of%20satisfiability%20Frontiers%20in%20artificial%20intelligence%20and%20applications%20vol%20185%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=A%20Biere%20M%20Heule%20H%20van%20Maaren%20and%20T%20Walsh%20Handbook%20of%20satisfiability%20Frontiers%20in%20artificial%20intelligence%20and%20applications%20vol%20185%202009"
+        },
+        {
+            "id": "6",
+            "entry": "[6] D. M. Blei, A. Kucukelbir, and J. D. McAuliffe. Variational inference: A review for statisticians. Journal of the American Statistical Association, 112(518):859\u2013877, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Blei%2C%20D.M.%20Kucukelbir%2C%20A.%20McAuliffe%2C%20J.D.%20Variational%20inference%3A%20A%20review%20for%20statisticians%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Blei%2C%20D.M.%20Kucukelbir%2C%20A.%20McAuliffe%2C%20J.D.%20Variational%20inference%3A%20A%20review%20for%20statisticians%202017"
+        },
+        {
+            "id": "7",
+            "entry": "[7] A. Braunstein, M. M\u00e9zard, and R. Zecchina. Survey propagation: An algorithm for satisfiability. Random Structures & Algorithms, 27(2):201\u2013226, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Braunstein%2C%20A.%20M%C3%A9zard%2C%20M.%20Zecchina%2C%20R.%20Survey%20propagation%3A%20An%20algorithm%20for%20satisfiability%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Braunstein%2C%20A.%20M%C3%A9zard%2C%20M.%20Zecchina%2C%20R.%20Survey%20propagation%3A%20An%20algorithm%20for%20satisfiability%202005"
+        },
+        {
+            "id": "8",
+            "entry": "[8] M. Chen, Z. Zhou, and C. J. Tomlin. Multiplayer reach-avoid games via low dimensional solutions and maximum matching. In American Control Conference, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20M.%20Zhou%2C%20Z.%20Tomlin%2C%20C.J.%20Multiplayer%20reach-avoid%20games%20via%20low%20dimensional%20solutions%20and%20maximum%20matching%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20M.%20Zhou%2C%20Z.%20Tomlin%2C%20C.J.%20Multiplayer%20reach-avoid%20games%20via%20low%20dimensional%20solutions%20and%20maximum%20matching%202014"
+        },
+        {
+            "id": "9",
+            "entry": "[9] M. Chen, Z. Zhou, and C. J. Tomlin. Multiplayer reach-avoid games via pairwise outcomes. IEEE Transactions on Automatic Control, 62(3):1451\u20131457, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20M.%20Zhou%2C%20Z.%20Tomlin%2C%20C.J.%20Multiplayer%20reach-avoid%20games%20via%20pairwise%20outcomes%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20M.%20Zhou%2C%20Z.%20Tomlin%2C%20C.J.%20Multiplayer%20reach-avoid%20games%20via%20pairwise%20outcomes%202017"
+        },
+        {
+            "id": "10",
+            "entry": "[10] A. Coja-Oghlan and K. Panagiotou. The asymptotic k-SAT threshold. Advances in Mathematics, 288:985\u20131068, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Coja-Oghlan%2C%20A.%20Panagiotou%2C%20K.%20The%20asymptotic%20k-SAT%20threshold%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Coja-Oghlan%2C%20A.%20Panagiotou%2C%20K.%20The%20asymptotic%20k-SAT%20threshold%202016"
+        },
+        {
+            "id": "11",
+            "entry": "[11] H. Daud\u00e9 and V. Ravelomanana. Random 2-XORSAT at the satisfiability threshold. In Latin American Symposium on Theoretical Informatics, pages 12\u201323.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Daud%C3%A9%2C%20H.%20Ravelomanana%2C%20V.%20Random%202-XORSAT%20at%20the%20satisfiability%20threshold",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Daud%C3%A9%2C%20H.%20Ravelomanana%2C%20V.%20Random%202-XORSAT%20at%20the%20satisfiability%20threshold"
+        },
+        {
+            "id": "12",
+            "entry": "[12] J. Ding, A. Sly, and N. Sun. Proof of the satisfiability conjecture for large k. In Symposium on Theory of Computing, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ding%2C%20J.%20Sly%2C%20A.%20Sun%2C%20N.%20Proof%20of%20the%20satisfiability%20conjecture%20for%20large%20k%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ding%2C%20J.%20Sly%2C%20A.%20Sun%2C%20N.%20Proof%20of%20the%20satisfiability%20conjecture%20for%20large%20k%202015"
+        },
+        {
+            "id": "13",
+            "entry": "[13] M. B. Do and S. Kambhampati. Planning as constraint satisfaction: Solving the planning graph by compiling it into csp. Artificial Intelligence, 132(2):151\u2013182, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Do%2C%20M.B.%20Kambhampati%2C%20S.%20Planning%20as%20constraint%20satisfaction%3A%20Solving%20the%20planning%20graph%20by%20compiling%20it%20into%20csp%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Do%2C%20M.B.%20Kambhampati%2C%20S.%20Planning%20as%20constraint%20satisfaction%3A%20Solving%20the%20planning%20graph%20by%20compiling%20it%20into%20csp%202001"
+        },
+        {
+            "id": "14",
+            "entry": "[14] S. Ermon, C. P. Gomes, A. Sabharwal, and B. Selman. Low-density parity constraints for hashing-based discrete integration. In International Conference on Machine Learning, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ermon%2C%20S.%20Gomes%2C%20C.P.%20Sabharwal%2C%20A.%20Selman%2C%20B.%20Low-density%20parity%20constraints%20for%20hashing-based%20discrete%20integration%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ermon%2C%20S.%20Gomes%2C%20C.P.%20Sabharwal%2C%20A.%20Selman%2C%20B.%20Low-density%20parity%20constraints%20for%20hashing-based%20discrete%20integration%202014"
+        },
+        {
+            "id": "15",
+            "entry": "[15] J. Euzenat, P. Shvaiko, et al. Ontology matching, volume 333.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=J%20Euzenat%20P%20Shvaiko%20et%20al%20Ontology%20matching%20volume%20333",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=J%20Euzenat%20P%20Shvaiko%20et%20al%20Ontology%20matching%20volume%20333"
+        },
+        {
+            "id": "16",
+            "entry": "[16] O. Gableske, S. M\u00fcelich, and D. Diepold. On the performance of CDCL-based message passing inspired decimation using \u21e2--PMP-i. Pragmatics of SAT, POS, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gableske%2C%20O.%20M%C3%BCelich%2C%20S.%20Diepold%2C%20D.%20On%20the%20performance%20of%20CDCL-based%20message%20passing%20inspired%20decimation%20using%20%E2%87%A2--PMP-i.%20Pragmatics%20of%202013"
+        },
+        {
+            "id": "17",
+            "entry": "[17] C. Gomes and M. Sellmann. Streamlined constraint reasoning. In Principles and Practice of Constraint Programming, pages 274\u2013289.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gomes%2C%20C.%20Sellmann%2C%20M.%20Streamlined%20constraint%20reasoning",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gomes%2C%20C.%20Sellmann%2C%20M.%20Streamlined%20constraint%20reasoning"
+        },
+        {
+            "id": "18",
+            "entry": "[18] C. P. Gomes, W. J. van Hoeve, A. Sabharwal, and B. Selman. Counting CSP solutions using generalized XOR constraints. In AAAI Conference on Artificial Intelligence, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gomes%2C%20C.P.%20van%20Hoeve%2C%20W.J.%20Sabharwal%2C%20A.%20Selman%2C%20B.%20Counting%20CSP%20solutions%20using%20generalized%20XOR%20constraints%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gomes%2C%20C.P.%20van%20Hoeve%2C%20W.J.%20Sabharwal%2C%20A.%20Selman%2C%20B.%20Counting%20CSP%20solutions%20using%20generalized%20XOR%20constraints%202007"
+        },
+        {
+            "id": "19",
+            "entry": "[19] J. Hromkovic. Algorithmics for hard problems: introduction to combinatorial optimization, randomization, approximation, and heuristics. Springer Science & Business Media, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hromkovic%2C%20J.%20Algorithmics%20for%20hard%20problems%3A%20introduction%20to%20combinatorial%20optimization%2C%20randomization%2C%20approximation%2C%20and%20heuristics%202013"
+        },
+        {
+            "id": "20",
+            "entry": "[20] L. Kroc, A. Sabharwal, and B. Selman. Message-passing and local heuristics as decimation strategies for satisfiability. In Symposium on Applied Computing, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kroc%2C%20L.%20Sabharwal%2C%20A.%20Selman%2C%20B.%20Message-passing%20and%20local%20heuristics%20as%20decimation%20strategies%20for%20satisfiability%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kroc%2C%20L.%20Sabharwal%2C%20A.%20Selman%2C%20B.%20Message-passing%20and%20local%20heuristics%20as%20decimation%20strategies%20for%20satisfiability%202009"
+        },
+        {
+            "id": "21",
+            "entry": "[21] E. Maneva, E. Mossel, and M. J. Wainwright. A new look at survey propagation and its generalizations. Journal of the ACM, 54(4):17, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Maneva%2C%20E.%20Mossel%2C%20E.%20Wainwright%2C%20M.J.%20A%20new%20look%20at%20survey%20propagation%20and%20its%20generalizations%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Maneva%2C%20E.%20Mossel%2C%20E.%20Wainwright%2C%20M.J.%20A%20new%20look%20at%20survey%20propagation%20and%20its%20generalizations%202007"
+        },
+        {
+            "id": "22",
+            "entry": "[22] R. Marino, G. Parisi, and F. Ricci-Tersenghi. The backtracking survey propagation algorithm for solving random k-SAT problems. Nature communications, 7:12996, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Marino%2C%20R.%20Parisi%2C%20G.%20Ricci-Tersenghi%2C%20F.%20The%20backtracking%20survey%20propagation%20algorithm%20for%20solving%20random%20k-SAT%20problems%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Marino%2C%20R.%20Parisi%2C%20G.%20Ricci-Tersenghi%2C%20F.%20The%20backtracking%20survey%20propagation%20algorithm%20for%20solving%20random%20k-SAT%20problems%202016"
+        },
+        {
+            "id": "23",
+            "entry": "[23] M. M\u00e9zard, G. Parisi, and R. Zecchina. Analytic and algorithmic solution of random satisfiability problems. Science, 297(5582):812\u2013815, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=M%C3%A9zard%2C%20M.%20Parisi%2C%20G.%20Zecchina%2C%20R.%20Analytic%20and%20algorithmic%20solution%20of%20random%20satisfiability%20problems%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=M%C3%A9zard%2C%20M.%20Parisi%2C%20G.%20Zecchina%2C%20R.%20Analytic%20and%20algorithmic%20solution%20of%20random%20satisfiability%20problems%202002"
+        },
+        {
+            "id": "24",
+            "entry": "[24] D. Mitchell, B. Selman, and H. Levesque. Hard and easy distributions of SAT problems. In AAAI Conference on Artificial Intelligence, 1992.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mitchell%2C%20D.%20Selman%2C%20B.%20Levesque%2C%20H.%20Hard%20and%20easy%20distributions%20of%20SAT%20problems%201992",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mitchell%2C%20D.%20Selman%2C%20B.%20Levesque%2C%20H.%20Hard%20and%20easy%20distributions%20of%20SAT%20problems%201992"
+        },
+        {
+            "id": "25",
+            "entry": "[25] M. Molloy. Models for random constraint satisfaction problems. SIAM Journal on Computing, 32(4):935\u2013949, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Molloy%2C%20M.%20Models%20for%20random%20constraint%20satisfaction%20problems%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Molloy%2C%20M.%20Models%20for%20random%20constraint%20satisfaction%20problems%202003"
+        },
+        {
+            "id": "26",
+            "entry": "[26] W. Nuijten. Time and resource constrained scheduling: a constraint satisfaction approach. PhD thesis, TUE: Department of Mathematics and Computer Science, 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nuijten%2C%20W.%20Time%20and%20resource%20constrained%20scheduling%3A%20a%20constraint%20satisfaction%20approach%201994"
+        },
+        {
+            "id": "27",
+            "entry": "[27] B. Pittel and G. B. Sorkin. The satisfiability threshold for k-XORSAT. Combinatorics, Probability and Computing, 25(2):236\u2013268, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pittel%2C%20B.%20Sorkin%2C%20G.B.%20The%20satisfiability%20threshold%20for%20k-XORSAT%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pittel%2C%20B.%20Sorkin%2C%20G.B.%20The%20satisfiability%20threshold%20for%20k-XORSAT%202016"
+        },
+        {
+            "id": "28",
+            "entry": "[28] H. Ren, R. Stewart, J. Song, V. Kuleshov, and S. Ermon. Adversarial constraint learning for structured prediction. International Joint Conference on Artificial Intelligence, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ren%2C%20H.%20Stewart%2C%20R.%20Song%2C%20J.%20Kuleshov%2C%20V.%20Adversarial%20constraint%20learning%20for%20structured%20prediction%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ren%2C%20H.%20Stewart%2C%20R.%20Song%2C%20J.%20Kuleshov%2C%20V.%20Adversarial%20constraint%20learning%20for%20structured%20prediction%202018"
+        },
+        {
+            "id": "29",
+            "entry": "[29] M. Richardson and P. Domingos. Markov logic networks. Machine Learning, 62(1):107\u2013136, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Richardson%2C%20M.%20Domingos%2C%20P.%20Markov%20logic%20networks%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Richardson%2C%20M.%20Domingos%2C%20P.%20Markov%20logic%20networks%202006"
+        },
+        {
+            "id": "30",
+            "entry": "[30] B. Selman, H. A. Kautz, and B. Cohen. Noise strategies for improving local search. In AAAI Conference on Artificial Intelligence, 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Selman%2C%20B.%20Kautz%2C%20H.A.%20Cohen%2C%20B.%20Noise%20strategies%20for%20improving%20local%20search%201994",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Selman%2C%20B.%20Kautz%2C%20H.A.%20Cohen%2C%20B.%20Noise%20strategies%20for%20improving%20local%20search%201994"
+        },
+        {
+            "id": "31",
+            "entry": "[31] P. Singla and P. Domingos. Entity resolution with Markov logic. In International Conference on Data Mining, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Singla%2C%20P.%20Domingos%2C%20P.%20Entity%20resolution%20with%20Markov%20logic%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Singla%2C%20P.%20Domingos%2C%20P.%20Entity%20resolution%20with%20Markov%20logic%202006"
+        },
+        {
+            "id": "32",
+            "entry": "[32] R. Stewart and S. Ermon. Label-free supervision of neural networks with physics and domain knowledge. In AAAI Conference on Artificial Intelligence, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Stewart%2C%20R.%20Ermon%2C%20S.%20Label-free%20supervision%20of%20neural%20networks%20with%20physics%20and%20domain%20knowledge%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Stewart%2C%20R.%20Ermon%2C%20S.%20Label-free%20supervision%20of%20neural%20networks%20with%20physics%20and%20domain%20knowledge%202017"
+        },
+        {
+            "id": "33",
+            "entry": "[33] M. J. Wainwright and M. I. Jordan. Graphical models, exponential families, and variational inference. Foundations and Trends in Machine Learning, 1(1-2):1\u2013305, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wainwright%2C%20M.J.%20Jordan%2C%20M.I.%20Graphical%20models%2C%20exponential%20families%2C%20and%20variational%20inference%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wainwright%2C%20M.J.%20Jordan%2C%20M.I.%20Graphical%20models%2C%20exponential%20families%2C%20and%20variational%20inference%202008"
+        },
+        {
+            "id": "34",
+            "entry": "[34] W. Wei, J. Erenrich, and B. Selman. Towards efficient sampling: exploiting random walk strategies. In AAAI Conference on Artificial Intelligence, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wei%2C%20W.%20Erenrich%2C%20J.%20Selman%2C%20B.%20Towards%20efficient%20sampling%3A%20exploiting%20random%20walk%20strategies%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wei%2C%20W.%20Erenrich%2C%20J.%20Selman%2C%20B.%20Towards%20efficient%20sampling%3A%20exploiting%20random%20walk%20strategies%202004"
+        },
+        {
+            "id": "35",
+            "entry": "[35] S. Zhao, S. Chaturapruek, A. Sabharwal, and S. Ermon. Closing the gap between short and long XORs for model counting. In AAAI Conference on Artificial Intelligence, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhao%2C%20S.%20Chaturapruek%2C%20S.%20Sabharwal%2C%20A.%20Ermon%2C%20S.%20Closing%20the%20gap%20between%20short%20and%20long%20XORs%20for%20model%20counting%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhao%2C%20S.%20Chaturapruek%2C%20S.%20Sabharwal%2C%20A.%20Ermon%2C%20S.%20Closing%20the%20gap%20between%20short%20and%20long%20XORs%20for%20model%20counting%202016"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Z. Zhou, J. Ding, H. Huang, R. Takei, and C. Tomlin. Efficient path planning algorithms in reach-avoid problems. Automatica, 89:28\u201336, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhou%2C%20Z.%20Ding%2C%20J.%20Huang%2C%20H.%20Takei%2C%20R.%20Efficient%20path%20planning%20algorithms%20in%20reach-avoid%20problems%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhou%2C%20Z.%20Ding%2C%20J.%20Huang%2C%20H.%20Takei%2C%20R.%20Efficient%20path%20planning%20algorithms%20in%20reach-avoid%20problems%202018"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Z. Zhou, P. Mertikopoulos, N. Bambos, S. Boyd, and P. W. Glynn. Stochastic mirror descent in variationally coherent optimization problems. In Advances in Neural Information Processing Systems, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhou%2C%20Z.%20Mertikopoulos%2C%20P.%20Bambos%2C%20N.%20Boyd%2C%20S.%20Stochastic%20mirror%20descent%20in%20variationally%20coherent%20optimization%20problems%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhou%2C%20Z.%20Mertikopoulos%2C%20P.%20Bambos%2C%20N.%20Boyd%2C%20S.%20Stochastic%20mirror%20descent%20in%20variationally%20coherent%20optimization%20problems%202017"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Z. Zhou, M. P. Vitus, and C. J. Tomlin. Convexity verification for a hybrid chance constrained method in stochastic control problems. In American Control Conference, 2014. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhou%2C%20Z.%20Vitus%2C%20M.P.%20Tomlin%2C%20C.J.%20Convexity%20verification%20for%20a%20hybrid%20chance%20constrained%20method%20in%20stochastic%20control%20problems%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhou%2C%20Z.%20Vitus%2C%20M.P.%20Tomlin%2C%20C.J.%20Convexity%20verification%20for%20a%20hybrid%20chance%20constrained%20method%20in%20stochastic%20control%20problems%202014"
+        }
+    ]
+}

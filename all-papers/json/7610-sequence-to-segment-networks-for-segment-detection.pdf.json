@@ -1,0 +1,354 @@
+{
+    "filename": "7610-sequence-to-segment-networks-for-segment-detection.pdf",
+    "metadata": {
+        "title": "Sequence-to-Segment Networks for Segment Detection",
+        "author": "Zijun Wei, Boyu Wang, Minh Hoai Nguyen, Jianming Zhang, Zhe Lin, Xiaohui Shen, Radomir Mech, Dimitris Samaras",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7610-sequence-to-segment-networks-for-segment-detection.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Detecting segments of interest from an input sequence is a challenging problem which often requires not only good knowledge of individual target segments, but also contextual understanding of the entire input sequence and the relationships between the target segments. To address this problem, we propose the Sequence-toSegments Network (S2N), a novel end-to-end sequential encoder-decoder architecture. S2N first encodes the input into a sequence of hidden states that progressively capture both local and holistic information. It then employs a novel decoding architecture, called Segment Detection Unit (SDU), that integrates the decoder state and encoder hidden states to detect segments sequentially. During training, we formulate the assignment of predicted segments to ground truth as the bipartite matching problem and use the Earth Mover\u2019s Distance to calculate the localization errors. Experiments on temporal action proposal and video summarization show that S2N achieves state-of-the-art performance on both tasks."
+    },
+    "keywords": [
+        {
+            "term": "time series",
+            "url": "https://en.wikipedia.org/wiki/time_series"
+        },
+        {
+            "term": "Recurrent Neural Networks",
+            "url": "https://en.wikipedia.org/wiki/Recurrent_Neural_Network"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "We address the problem of detecting temporal segments of \u201cinterest\u201d in an input time series",
+        "We introduce a novel architecture, named Segment Detection Unit (SDU), which outputs a segment based on the decoding state and the hidden states of the encoder",
+        "We describe the overall S2N architecture and the details of the proposed Segment Detection Unit (SDU), the core component of S2N for localizing a temporal segment of interest",
+        "The comparison to baselines under average recall-N, average recall-F, and Recall@F=1.0-temporal intersection over union metrics are shown in Fig 2",
+        "We have proposed the Sequence-to-Segments Network (S2N), a novel architecture that uses Segment Detection Units (SDU) to detect segments sequentially from an input sequence",
+        "We have shown that S2N can be applied to real-world problems and achieve state-of-the-art performance"
+    ],
+    "key_statements": [
+        "We address the problem of detecting temporal segments of \u201cinterest\u201d in an input time series",
+        "We assume there are training time series with annotated segments of interest, and our goal is to train a neural network that can detect the segments of interest in unseen time series",
+        "This general problem arises in many situations including temporal event detection [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>], video summarization [<a class=\"ref-link\" id=\"c47\" href=\"#r47\">47</a>, <a class=\"ref-link\" id=\"c48\" href=\"#r48\">48</a>], sentence chunking [<a class=\"ref-link\" id=\"c32\" href=\"#r32\">32</a>], gene localization [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>], and discriminative localization [<a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>, <a class=\"ref-link\" id=\"c31\" href=\"#r31\">31</a>]",
+        "The segments of interest are the ones that correspond to the temporal extents of human actions",
+        "In this paper we propose the Sequence-to-Segments Network (S2N), a novel recurrent neural network for analyzing a time series to detect temporal segments of interest",
+        "We introduce a novel architecture, named Segment Detection Unit (SDU), which outputs a segment based on the decoding state and the hidden states of the encoder",
+        "We describe the overall S2N architecture and the details of the proposed Segment Detection Unit (SDU), the core component of S2N for localizing a temporal segment of interest",
+        "We propose to use Gated Recurrent Unit [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>] because it has a simpler architecture and fewer parameters than the others",
+        "For a given probability distribution over the location of the segment boundary returned by the pointing module, one way to define the localization loss is to use the cross-entropy loss as in [<a class=\"ref-link\" id=\"c43\" href=\"#r43\">43</a>]",
+        "We propose to use a loss function that is defined based on the Earth Mover\u2019s Distance (EMD) between the probability distribution of the predicted boundary and the distribution that represents the ground truth boundary",
+        "We evaluate S2Ns on the THUMOS14 dataset [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>], a challenging benchmark for the action proposal task",
+        "We compare S2N to the state-of-the art Temporal Action Proposal generation methods including DAPs [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>] that uses an encoder LSTM and a regression branch for localization, Sparse-prop [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>] that applies dictionary learning for class independent proposal generation over a large set of candidate proposals, and TURN-Temporal Action Proposal [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>] that evaluates candidate proposals in a sliding window manner over different temporal scales and level of contexts",
+        "The comparison to baselines under average recall-N, average recall-F, and Recall@F=1.0-temporal intersection over union metrics are shown in Fig 2",
+        "S2N outperforms the baselines by a significant margin over all the metrics",
+        "We have proposed the Sequence-to-Segments Network (S2N), a novel architecture that uses Segment Detection Units (SDU) to detect segments sequentially from an input sequence",
+        "We have shown that S2N can be applied to real-world problems and achieve state-of-the-art performance"
+    ],
+    "summary": [
+        "We address the problem of detecting temporal segments of \u201cinterest\u201d in an input time series.",
+        "To train an S2N, we optimize a loss function that is defined based on the localization offsets and the recall rate of the proposed segments.",
+        "The proposed S2N simultaneously detects segments and estimate their confidence scores, can be applied to different problems such as temporal action proposal generation and video summarization.",
+        "As shown in Fig 1, each SDU has four components: a Gated Recurrent Unit (GRU) [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>] for updating and communicating states between time steps, two pointing modules [<a class=\"ref-link\" id=\"c43\" href=\"#r43\">43</a>] for pointing to the beginning and ending positions of the segment, and a score estimator for evaluating the interest score of the segment.",
+        "We first present the loss function, and describe how we match the sequence of predicted segments to the set of target segments.",
+        "The loss value for the predicted sequence of segments and the set of ground truth instances is computed as follows: K",
+        "For a given probability distribution over the location of the segment boundary returned by the pointing module, one way to define the localization loss is to use the cross-entropy loss as in [<a class=\"ref-link\" id=\"c43\" href=\"#r43\">43</a>].",
+        "We propose to use a loss function that is defined based on the Earth Mover\u2019s Distance (EMD) between the probability distribution of the predicted boundary and the distribution that represents the ground truth boundary.",
+        "To implement the above loss functions, we need an assignment strategy to match the target segments to the predicted ones.",
+        "We compare S2N with the baselines under the following metrics: AR-N [<a class=\"ref-link\" id=\"c46\" href=\"#r46\">46</a>]: AR-N measures average recall (AR) as a function of number of proposals per video.",
+        "We compare S2N to the state-of-the art TAP generation methods including DAPs [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>] that uses an encoder LSTM and a regression branch for localization, Sparse-prop [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>] that applies dictionary learning for class independent proposal generation over a large set of candidate proposals, and TURN-TAP [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>] that evaluates candidate proposals in a sliding window manner over different temporal scales and level of contexts.",
+        "We show that S2N can be trained to summarize long videos by generating a set of segments.",
+        "Following the standard practice [<a class=\"ref-link\" id=\"c47\" href=\"#r47\">47</a>, <a class=\"ref-link\" id=\"c48\" href=\"#r48\">48</a>], we select segments based on their scores by maximizing the total scores while ensuring that the summary length does not exceed a limit, which is usually 15% of the video length.",
+        "It is possible to base S2N on the fully convolutional encoder-decoder architecture [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>, <a class=\"ref-link\" id=\"c42\" href=\"#r42\">42</a>]"
+    ],
+    "headline": "We propose the Sequence-toSegments Network , a novel end-to-end sequential encoder-decoder architecture",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] D. Bahdanau, K. Cho, and Y. Bengio. Neural machine translation by jointly learning to align and translate. In Proceedings of the International Conference on Learning and Representation, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bahdanau%2C%20D.%20Cho%2C%20K.%20Bengio%2C%20Y.%20Neural%20machine%20translation%20by%20jointly%20learning%20to%20align%20and%20translate%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bahdanau%2C%20D.%20Cho%2C%20K.%20Bengio%2C%20Y.%20Neural%20machine%20translation%20by%20jointly%20learning%20to%20align%20and%20translate%202014"
+        },
+        {
+            "id": "2",
+            "entry": "[2] S. Buch, V. Escorcia, B. Ghanem, L. Fei-Fei, and J. Niebles. End-to-end, single-stream temporal action detection in untrimmed videos. In Proceedings of the British Machine Vision Conference, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Buch%2C%20S.%20Escorcia%2C%20V.%20Ghanem%2C%20B.%20Fei-Fei%2C%20L.%20single-stream%20temporal%20action%20detection%20in%20untrimmed%20videos%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Buch%2C%20S.%20Escorcia%2C%20V.%20Ghanem%2C%20B.%20Fei-Fei%2C%20L.%20single-stream%20temporal%20action%20detection%20in%20untrimmed%20videos%202017"
+        },
+        {
+            "id": "3",
+            "entry": "[3] S. Buch, V. Escorcia, C. Shen, B. Ghanem, and J. C. Niebles. Sst: Single-stream temporal action proposals. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Buch%2C%20S.%20Escorcia%2C%20V.%20Shen%2C%20C.%20Ghanem%2C%20B.%20Sst%3A%20Single-stream%20temporal%20action%20proposals%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Buch%2C%20S.%20Escorcia%2C%20V.%20Shen%2C%20C.%20Ghanem%2C%20B.%20Sst%3A%20Single-stream%20temporal%20action%20proposals%202017"
+        },
+        {
+            "id": "4",
+            "entry": "[4] F. Caba Heilbron, J. Carlos Niebles, and B. Ghanem. Fast temporal activity proposals for efficient detection of human actions in untrimmed videos. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Heilbron%2C%20F.Caba%20Niebles%2C%20J.Carlos%20Ghanem%2C%20B.%20Fast%20temporal%20activity%20proposals%20for%20efficient%20detection%20of%20human%20actions%20in%20untrimmed%20videos%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Heilbron%2C%20F.Caba%20Niebles%2C%20J.Carlos%20Ghanem%2C%20B.%20Fast%20temporal%20activity%20proposals%20for%20efficient%20detection%20of%20human%20actions%20in%20untrimmed%20videos%202016"
+        },
+        {
+            "id": "5",
+            "entry": "[5] K. Cho, B. Van Merri\u00ebnboer, C. Gulcehre, D. Bahdanau, F. Bougares, H. Schwenk, and Y. Bengio. Learning phrase representations using rnn encoder-decoder for statistical machine translation. In Proceedings of International Conference on Empirical Methods in Natural Language Processing, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cho%2C%20K.%20Merri%C3%ABnboer%2C%20B.Van%20Gulcehre%2C%20C.%20Bahdanau%2C%20D.%20Learning%20phrase%20representations%20using%20rnn%20encoder-decoder%20for%20statistical%20machine%20translation%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cho%2C%20K.%20Merri%C3%ABnboer%2C%20B.Van%20Gulcehre%2C%20C.%20Bahdanau%2C%20D.%20Learning%20phrase%20representations%20using%20rnn%20encoder-decoder%20for%20statistical%20machine%20translation%202014"
+        },
+        {
+            "id": "6",
+            "entry": "[6] J. Chung, C. Gulcehre, K. Cho, and Y. Bengio. Empirical evaluation of gated recurrent neural networks on sequence modeling. arXiv:1412.3555, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.3555"
+        },
+        {
+            "id": "7",
+            "entry": "[7] J. Donahue, L. Anne Hendricks, S. Guadarrama, M. Rohrbach, S. Venugopalan, K. Saenko, and T. Darrell. Long-term recurrent convolutional networks for visual recognition and description. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Donahue%2C%20J.%20Hendricks%2C%20L.Anne%20Guadarrama%2C%20S.%20Rohrbach%2C%20M.%20Long-term%20recurrent%20convolutional%20networks%20for%20visual%20recognition%20and%20description%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Donahue%2C%20J.%20Hendricks%2C%20L.Anne%20Guadarrama%2C%20S.%20Rohrbach%2C%20M.%20Long-term%20recurrent%20convolutional%20networks%20for%20visual%20recognition%20and%20description%202015"
+        },
+        {
+            "id": "8",
+            "entry": "[8] V. Escorcia, F. C. Heilbron, J. C. Niebles, and B. Ghanem. Daps: Deep action proposals for action understanding. In Proceedings of the European Conference on Computer Vision, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Escorcia%2C%20V.%20Heilbron%2C%20F.C.%20Niebles%2C%20J.C.%20Ghanem%2C%20B.%20Daps%3A%20Deep%20action%20proposals%20for%20action%20understanding%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Escorcia%2C%20V.%20Heilbron%2C%20F.C.%20Niebles%2C%20J.C.%20Ghanem%2C%20B.%20Daps%3A%20Deep%20action%20proposals%20for%20action%20understanding%202016"
+        },
+        {
+            "id": "9",
+            "entry": "[9] J. Gao, Z. Yang, K. Chen, C. Sun, and R. Nevatia. Turn tap: Temporal unit regression network for temporal action proposals. In Proceedings of the International Conference on Computer Vision, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gao%2C%20J.%20Yang%2C%20Z.%20Chen%2C%20K.%20Sun%2C%20C.%20Turn%20tap%3A%20Temporal%20unit%20regression%20network%20for%20temporal%20action%20proposals%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gao%2C%20J.%20Yang%2C%20Z.%20Chen%2C%20K.%20Sun%2C%20C.%20Turn%20tap%3A%20Temporal%20unit%20regression%20network%20for%20temporal%20action%20proposals%202017"
+        },
+        {
+            "id": "10",
+            "entry": "[10] J. Gehring, M. Auli, D. Grangier, D. Yarats, and Y. N. Dauphin. Convolutional sequence to sequence learning. Proceedings of the International Conference on Machine Learning, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gehring%2C%20J.%20Auli%2C%20M.%20Grangier%2C%20D.%20Yarats%2C%20D.%20Convolutional%20sequence%20to%20sequence%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gehring%2C%20J.%20Auli%2C%20M.%20Grangier%2C%20D.%20Yarats%2C%20D.%20Convolutional%20sequence%20to%20sequence%20learning%202017"
+        },
+        {
+            "id": "11",
+            "entry": "[11] B. Gong, W.-L. Chao, K. Grauman, and F. Sha. Diverse sequential subset selection for supervised video summarization. In Advances in Neural Information Processing Systems, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gong%2C%20B.%20Chao%2C%20W.-L.%20Grauman%2C%20K.%20Sha%2C%20F.%20Diverse%20sequential%20subset%20selection%20for%20supervised%20video%20summarization%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gong%2C%20B.%20Chao%2C%20W.-L.%20Grauman%2C%20K.%20Sha%2C%20F.%20Diverse%20sequential%20subset%20selection%20for%20supervised%20video%20summarization%202014"
+        },
+        {
+            "id": "12",
+            "entry": "[12] I. Goodfellow, J. Pouget-Abadie, M. Mirza, B. Xu, D. Warde-Farley, S. Ozair, A. Courville, and Y. Bengio. Generative adversarial nets. In Advances in Neural Information Processing Systems, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goodfellow%2C%20I.%20Pouget-Abadie%2C%20J.%20Mirza%2C%20M.%20Xu%2C%20B.%20Generative%20adversarial%20nets%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goodfellow%2C%20I.%20Pouget-Abadie%2C%20J.%20Mirza%2C%20M.%20Xu%2C%20B.%20Generative%20adversarial%20nets%202014"
+        },
+        {
+            "id": "13",
+            "entry": "[13] A. Graves, S. Fern\u00e1ndez, F. Gomez, and J. Schmidhuber. Connectionist temporal classification: labelling unsegmented sequence data with recurrent neural networks. In Proceedings of the International Conference on Machine Learning, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=A.%20Graves%2C%20S.%20Fern%C3%A1ndez%2C%20F.%20Gomez%20Schmidhuber%2C%20J.%20Connectionist%20temporal%20classification%3A%20labelling%20unsegmented%20sequence%20data%20with%20recurrent%20neural%20networks%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=A.%20Graves%2C%20S.%20Fern%C3%A1ndez%2C%20F.%20Gomez%20Schmidhuber%2C%20J.%20Connectionist%20temporal%20classification%3A%20labelling%20unsegmented%20sequence%20data%20with%20recurrent%20neural%20networks%202006"
+        },
+        {
+            "id": "14",
+            "entry": "[14] A. Graves, G. Wayne, and I. Danihelka. Neural turing machines. arXiv:1410.5401, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1410.5401"
+        },
+        {
+            "id": "15",
+            "entry": "[15] M. Gygli, H. Grabner, H. Riemenschneider, and L. Van Gool. Creating summaries from user videos. In Proceedings of the European Conference on Computer Vision, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gygli%2C%20M.%20Grabner%2C%20H.%20Riemenschneider%2C%20H.%20Gool%2C%20L.Van%20Creating%20summaries%20from%20user%20videos%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gygli%2C%20M.%20Grabner%2C%20H.%20Riemenschneider%2C%20H.%20Gool%2C%20L.Van%20Creating%20summaries%20from%20user%20videos%202014"
+        },
+        {
+            "id": "16",
+            "entry": "[16] M. Gygli, H. Grabner, and L. Van Gool. Video summarization by learning submodular mixtures of objectives. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gygli%2C%20M.%20Grabner%2C%20H.%20Gool%2C%20L.Van%20Video%20summarization%20by%20learning%20submodular%20mixtures%20of%20objectives%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gygli%2C%20M.%20Grabner%2C%20H.%20Gool%2C%20L.Van%20Video%20summarization%20by%20learning%20submodular%20mixtures%20of%20objectives%202015"
+        },
+        {
+            "id": "17",
+            "entry": "[17] M. Hoai and F. De la Torre. Max-margin early event detectors. International Journal of Computer Vision, 107(2):191\u2013202, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hoai%2C%20M.%20la%20Torre%2C%20F.De%20Max-margin%20early%20event%20detectors%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hoai%2C%20M.%20la%20Torre%2C%20F.De%20Max-margin%20early%20event%20detectors%202014"
+        },
+        {
+            "id": "18",
+            "entry": "[18] M. Hoai, Z.-Z. Lan, and F. De la Torre. Joint segmentation and classification of human actions in video. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hoai%2C%20M.%20Lan%2C%20Z.-Z.%20la%20Torre%2C%20F.De%20Joint%20segmentation%20and%20classification%20of%20human%20actions%20in%20video%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hoai%2C%20M.%20Lan%2C%20Z.-Z.%20la%20Torre%2C%20F.De%20Joint%20segmentation%20and%20classification%20of%20human%20actions%20in%20video%202011"
+        },
+        {
+            "id": "19",
+            "entry": "[19] M. Hoai, L. Torresani, F. De la Torre, and C. Rother. Learning discriminative localization from weakly labeled data. Pattern Recognition, 47(3):1523\u20131534, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hoai%2C%20M.%20Torresani%2C%20L.%20la%20Torre%2C%20F.De%20Rother%2C%20C.%20Learning%20discriminative%20localization%20from%20weakly%20labeled%20data%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hoai%2C%20M.%20Torresani%2C%20L.%20la%20Torre%2C%20F.De%20Rother%2C%20C.%20Learning%20discriminative%20localization%20from%20weakly%20labeled%20data%202014"
+        },
+        {
+            "id": "20",
+            "entry": "[20] L. Hou, C.-P. Yu, and D. Samaras. Squared earth mover\u2019s distance-based loss for training deep neural networks. arXiv:1611.05916, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.05916"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Y.-G. Jiang, J. Liu, A. Roshan Zamir, G. Toderici, I. Laptev, M. Shah, and R. Sukthankar. THUMOS challenge: Action recognition with a large number of classes. http://crcv.ucf.edu/THUMOS14/, 2014.",
+            "url": "http://crcv.ucf.edu/THUMOS14/"
+        },
+        {
+            "id": "22",
+            "entry": "[22] R. Jozefowicz, W. Zaremba, and I. Sutskever. An empirical exploration of recurrent network architectures. In Proceedings of the International Conference on Machine Learning, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jozefowicz%2C%20R.%20Zaremba%2C%20W.%20Sutskever%2C%20I.%20An%20empirical%20exploration%20of%20recurrent%20network%20architectures%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jozefowicz%2C%20R.%20Zaremba%2C%20W.%20Sutskever%2C%20I.%20An%20empirical%20exploration%20of%20recurrent%20network%20architectures%202015"
+        },
+        {
+            "id": "23",
+            "entry": "[23] A. Karpathy, J. Johnson, and L. Fei-Fei. Visualizing and understanding recurrent networks. In Proceedings of the International Conference on Learning and Representation, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Karpathy%2C%20A.%20Johnson%2C%20J.%20Fei-Fei%2C%20L.%20Visualizing%20and%20understanding%20recurrent%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Karpathy%2C%20A.%20Johnson%2C%20J.%20Fei-Fei%2C%20L.%20Visualizing%20and%20understanding%20recurrent%20networks%202016"
+        },
+        {
+            "id": "24",
+            "entry": "[24] D. R. Kelley, Y. A. Reshef, D. Belanger, C. McLean, J. Snoek, and M. Bileschi. Sequential regulatory activity prediction across chromosomes with convolutional neural networks. Genome research, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kelley%2C%20D.R.%20Reshef%2C%20Y.A.%20Belanger%2C%20D.%20McLean%2C%20C.%20Sequential%20regulatory%20activity%20prediction%20across%20chromosomes%20with%20convolutional%20neural%20networks%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kelley%2C%20D.R.%20Reshef%2C%20Y.A.%20Belanger%2C%20D.%20McLean%2C%20C.%20Sequential%20regulatory%20activity%20prediction%20across%20chromosomes%20with%20convolutional%20neural%20networks%202018"
+        },
+        {
+            "id": "25",
+            "entry": "[25] D. P. Kingma and J. Ba. Adam: A method for stochastic optimization. In Proceedings of the International Conference on Learning and Representation, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20D.P.%20Ba%2C%20J.%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20D.P.%20Ba%2C%20J.%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202015"
+        },
+        {
+            "id": "26",
+            "entry": "[26] S. Li, W. Li, C. Cook, C. Zhu, and Y. Gao. Independently recurrent neural network (indrnn): Building a longer and deeper rnn. arXiv:1803.04831, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.04831"
+        },
+        {
+            "id": "27",
+            "entry": "[27] W. Liu, D. Anguelov, D. Erhan, C. Szegedy, S. Reed, C.-Y. Fu, and A. C. Berg. Ssd: Single shot multibox detector. In Proceedings of the European Conference on Computer Vision, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20W.%20Anguelov%2C%20D.%20Erhan%2C%20D.%20Szegedy%2C%20C.%20Ssd%3A%20Single%20shot%20multibox%20detector%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liu%2C%20W.%20Anguelov%2C%20D.%20Erhan%2C%20D.%20Szegedy%2C%20C.%20Ssd%3A%20Single%20shot%20multibox%20detector%202016"
+        },
+        {
+            "id": "28",
+            "entry": "[28] D. G. Luenberger. Introduction to linear and nonlinear programming. Addison-Wesley publishing company, 1973.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Luenberger%2C%20D.G.%20Introduction%20to%20linear%20and%20nonlinear%20programming%201973"
+        },
+        {
+            "id": "29",
+            "entry": "[29] S. Ma, L. Sigal, and S. Sclaroff. Learning activity progression in lstms for activity detection and early detection. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ma%2C%20S.%20Sigal%2C%20L.%20Sclaroff%2C%20S.%20Learning%20activity%20progression%20in%20lstms%20for%20activity%20detection%20and%20early%20detection%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ma%2C%20S.%20Sigal%2C%20L.%20Sclaroff%2C%20S.%20Learning%20activity%20progression%20in%20lstms%20for%20activity%20detection%20and%20early%20detection%202016"
+        },
+        {
+            "id": "30",
+            "entry": "[30] B. Mahasseni, M. Lam, and S. Todorovic. Unsupervised video summarization with adversarial lstm networks. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mahasseni%2C%20B.%20Lam%2C%20M.%20Todorovic%2C%20S.%20Unsupervised%20video%20summarization%20with%20adversarial%20lstm%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mahasseni%2C%20B.%20Lam%2C%20M.%20Todorovic%2C%20S.%20Unsupervised%20video%20summarization%20with%20adversarial%20lstm%20networks%202017"
+        },
+        {
+            "id": "31",
+            "entry": "[31] M. H. Nguyen, L. Torresani, F. De la Torre, and C. Rother. Weakly supervised discriminative localization and classification: a joint learning process. In Proceedings of the International Conference on Computer Vision, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nguyen%2C%20M.H.%20Torresani%2C%20L.%20la%20Torre%2C%20F.De%20Rother%2C%20C.%20Weakly%20supervised%20discriminative%20localization%20and%20classification%3A%20a%20joint%20learning%20process%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nguyen%2C%20M.H.%20Torresani%2C%20L.%20la%20Torre%2C%20F.De%20Rother%2C%20C.%20Weakly%20supervised%20discriminative%20localization%20and%20classification%3A%20a%20joint%20learning%20process%202009"
+        },
+        {
+            "id": "32",
+            "entry": "[32] N. Peng and M. Dredze. Named entity recognition for chinese social media with jointly trained embeddings. In Proceedings of International Conference on Empirical Methods in Natural Language Processing, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Peng%2C%20N.%20Dredze%2C%20M.%20Named%20entity%20recognition%20for%20chinese%20social%20media%20with%20jointly%20trained%20embeddings%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Peng%2C%20N.%20Dredze%2C%20M.%20Named%20entity%20recognition%20for%20chinese%20social%20media%20with%20jointly%20trained%20embeddings%202015"
+        },
+        {
+            "id": "33",
+            "entry": "[33] J. Redmon, S. Divvala, R. Girshick, and A. Farhadi. You only look once: Unified, real-time object detection. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Redmon%2C%20J.%20Divvala%2C%20S.%20Girshick%2C%20R.%20Farhadi%2C%20A.%20You%20only%20look%20once%3A%20Unified%2C%20real-time%20object%20detection%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Redmon%2C%20J.%20Divvala%2C%20S.%20Girshick%2C%20R.%20Farhadi%2C%20A.%20You%20only%20look%20once%3A%20Unified%2C%20real-time%20object%20detection%202016"
+        },
+        {
+            "id": "34",
+            "entry": "[34] D. Rumelhart, G. Hinton, and R. Williams. Learning internal representations by error propagation. In Parallel Distributed Processing, volume 1, chapter 8, pages 318\u2013362. MIT Press, Cambridge, MA, 1986.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rumelhart%2C%20D.%20Hinton%2C%20G.%20Williams%2C%20R.%20Learning%20internal%20representations%20by%20error%20propagation%201986",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rumelhart%2C%20D.%20Hinton%2C%20G.%20Williams%2C%20R.%20Learning%20internal%20representations%20by%20error%20propagation%201986"
+        },
+        {
+            "id": "35",
+            "entry": "[35] S. Shalev-Shwartz and A. Tewari. Stochastic methods for l1-regularized loss minimization. Journal of Machine Learning Research, 12(Jun):1865\u20131892, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shalev-Shwartz%2C%20S.%20Tewari%2C%20A.%20Stochastic%20methods%20for%20l1-regularized%20loss%20minimization%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shalev-Shwartz%2C%20S.%20Tewari%2C%20A.%20Stochastic%20methods%20for%20l1-regularized%20loss%20minimization%202011"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Z. Shou, D. Wang, and S.-F. Chang. Temporal action localization in untrimmed videos via multi-stage cnns. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shou%2C%20Z.%20Wang%2C%20D.%20Chang%2C%20S.-F.%20Temporal%20action%20localization%20in%20untrimmed%20videos%20via%20multi-stage%20cnns%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shou%2C%20Z.%20Wang%2C%20D.%20Chang%2C%20S.-F.%20Temporal%20action%20localization%20in%20untrimmed%20videos%20via%20multi-stage%20cnns%202016"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Z. Shou, J. Chan, A. Zareian, K. Miyazawa, and S.-F. Chang. Cdc: convolutional-de-convolutional networks for precise temporal action localization in untrimmed videos. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shou%2C%20Z.%20Chan%2C%20J.%20Zareian%2C%20A.%20Miyazawa%2C%20K.%20Cdc%3A%20convolutional-de-convolutional%20networks%20for%20precise%20temporal%20action%20localization%20in%20untrimmed%20videos%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shou%2C%20Z.%20Chan%2C%20J.%20Zareian%2C%20A.%20Miyazawa%2C%20K.%20Cdc%3A%20convolutional-de-convolutional%20networks%20for%20precise%20temporal%20action%20localization%20in%20untrimmed%20videos%202017"
+        },
+        {
+            "id": "38",
+            "entry": "[38] N. Srivastava, E. Mansimov, and R. Salakhudinov. Unsupervised learning of video representations using lstms. In Proceedings of the International Conference on Machine Learning, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Srivastava%2C%20N.%20Mansimov%2C%20E.%20Salakhudinov%2C%20R.%20Unsupervised%20learning%20of%20video%20representations%20using%20lstms%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Srivastava%2C%20N.%20Mansimov%2C%20E.%20Salakhudinov%2C%20R.%20Unsupervised%20learning%20of%20video%20representations%20using%20lstms%202015"
+        },
+        {
+            "id": "39",
+            "entry": "[39] R. Stewart, M. Andriluka, and A. Y. Ng. End-to-end people detection in crowded scenes. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Stewart%2C%20R.%20Andriluka%2C%20M.%20Ng%2C%20A.Y.%20End-to-end%20people%20detection%20in%20crowded%20scenes%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Stewart%2C%20R.%20Andriluka%2C%20M.%20Ng%2C%20A.Y.%20End-to-end%20people%20detection%20in%20crowded%20scenes%202016"
+        },
+        {
+            "id": "40",
+            "entry": "[40] I. Sutskever, O. Vinyals, and Q. V. Le. Sequence to sequence learning with neural networks. In Advances in Neural Information Processing Systems, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutskever%2C%20I.%20Vinyals%2C%20O.%20Le%2C%20Q.V.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutskever%2C%20I.%20Vinyals%2C%20O.%20Le%2C%20Q.V.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014"
+        },
+        {
+            "id": "41",
+            "entry": "[41] D. Tran, L. Bourdev, R. Fergus, L. Torresani, and M. Paluri. Learning spatiotemporal features with 3d convolutional networks. In Proceedings of the International Conference on Computer Vision, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tran%2C%20D.%20Bourdev%2C%20L.%20Fergus%2C%20R.%20Torresani%2C%20L.%20Learning%20spatiotemporal%20features%20with%203d%20convolutional%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tran%2C%20D.%20Bourdev%2C%20L.%20Fergus%2C%20R.%20Torresani%2C%20L.%20Learning%20spatiotemporal%20features%20with%203d%20convolutional%20networks%202015"
+        },
+        {
+            "id": "42",
+            "entry": "[42] A. Vaswani, N. Shazeer, N. Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, L. Kaiser, and I. Polosukhin. Attention is all you need. In Advances in Neural Information Processing Systems, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=A%20Vaswani%20N%20Shazeer%20N%20Parmar%20J%20Uszkoreit%20L%20Jones%20A%20N%20Gomez%20L%20Kaiser%20and%20I%20Polosukhin%20Attention%20is%20all%20you%20need%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=A%20Vaswani%20N%20Shazeer%20N%20Parmar%20J%20Uszkoreit%20L%20Jones%20A%20N%20Gomez%20L%20Kaiser%20and%20I%20Polosukhin%20Attention%20is%20all%20you%20need%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%202017"
+        },
+        {
+            "id": "43",
+            "entry": "[43] O. Vinyals, M. Fortunato, and N. Jaitly. Pointer networks. In Advances in Neural Information Processing Systems, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=O%20Vinyals%20M%20Fortunato%20and%20N%20Jaitly%20Pointer%20networks%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=O%20Vinyals%20M%20Fortunato%20and%20N%20Jaitly%20Pointer%20networks%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%202015"
+        },
+        {
+            "id": "44",
+            "entry": "[44] O. Vinyals, L. Kaiser, T. Koo, S. Petrov, I. Sutskever, and G. Hinton. Grammar as a foreign language. In Advances in Neural Information Processing Systems, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vinyals%2C%20O.%20Kaiser%2C%20L.%20Koo%2C%20T.%20Petrov%2C%20S.%20Grammar%20as%20a%20foreign%20language%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vinyals%2C%20O.%20Kaiser%2C%20L.%20Koo%2C%20T.%20Petrov%2C%20S.%20Grammar%20as%20a%20foreign%20language%202015"
+        },
+        {
+            "id": "45",
+            "entry": "[45] O. Vinyals, A. Toshev, S. Bengio, and D. Erhan. Show and tell: A neural image caption generator. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vinyals%2C%20O.%20Toshev%2C%20A.%20Bengio%2C%20S.%20Erhan%2C%20D.%20Show%20and%20tell%3A%20A%20neural%20image%20caption%20generator%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vinyals%2C%20O.%20Toshev%2C%20A.%20Bengio%2C%20S.%20Erhan%2C%20D.%20Show%20and%20tell%3A%20A%20neural%20image%20caption%20generator%202015"
+        },
+        {
+            "id": "46",
+            "entry": "[46] G. Yu and J. Yuan. Fast action proposals for human action detection and search. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yu%2C%20G.%20Yuan%2C%20J.%20Fast%20action%20proposals%20for%20human%20action%20detection%20and%20search%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yu%2C%20G.%20Yuan%2C%20J.%20Fast%20action%20proposals%20for%20human%20action%20detection%20and%20search%202015"
+        },
+        {
+            "id": "47",
+            "entry": "[47] K. Zhang, W.-L. Chao, F. Sha, and K. Grauman. Video summarization with long short-term memory. In Proceedings of the European Conference on Computer Vision, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20K.%20Chao%2C%20W.-L.%20Sha%2C%20F.%20Grauman%2C%20K.%20Video%20summarization%20with%20long%20short-term%20memory%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20K.%20Chao%2C%20W.-L.%20Sha%2C%20F.%20Grauman%2C%20K.%20Video%20summarization%20with%20long%20short-term%20memory%202016"
+        },
+        {
+            "id": "48",
+            "entry": "[48] K. Zhou and Y. Qiao. Deep reinforcement learning for unsupervised video summarization with diversityrepresentativeness reward. In Proceedings of the AAAI Conference on Artificial Intelligence, 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhou%2C%20K.%20Qiao%2C%20Y.%20Deep%20reinforcement%20learning%20for%20unsupervised%20video%20summarization%20with%20diversityrepresentativeness%20reward%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhou%2C%20K.%20Qiao%2C%20Y.%20Deep%20reinforcement%20learning%20for%20unsupervised%20video%20summarization%20with%20diversityrepresentativeness%20reward%202017"
+        }
+    ]
+}

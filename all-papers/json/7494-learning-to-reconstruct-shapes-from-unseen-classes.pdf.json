@@ -1,0 +1,480 @@
+{
+    "filename": "7494-learning-to-reconstruct-shapes-from-unseen-classes.pdf",
+    "metadata": {
+        "title": "Learning to Reconstruct Shapes from Unseen Classes",
+        "author": "Xiuming Zhang\u2217 MIT CSAIL",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7494-learning-to-reconstruct-shapes-from-unseen-classes.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "From a single image, humans are able to perceive the full 3D shape of an object by exploiting learned shape priors from everyday life. Contemporary single-image 3D reconstruction algorithms aim to solve this task in a similar fashion, but often end up with priors that are highly biased by training classes. Here we present an algorithm, Generalizable Reconstruction (GenRe), designed to capture more generic, class-agnostic shape priors. We achieve this with an inference network and training procedure that combine 2.5D representations of visible surfaces (depth and silhouette), spherical shape representations of both visible and non-visible surfaces, and 3D voxel-based representations, in a principled manner that exploits the causal structure of how 3D shapes give rise to 2D images. Experiments demonstrate that GenRe performs well on single-view shape reconstruction, and generalizes to diverse novel objects from categories not seen during training."
+    },
+    "keywords": [
+        {
+            "term": "3d model",
+            "url": "https://en.wikipedia.org/wiki/3d_model"
+        },
+        {
+            "term": "view 3d",
+            "url": "https://en.wikipedia.org/wiki/View_3D"
+        },
+        {
+            "term": "surface normal",
+            "url": "https://en.wikipedia.org/wiki/surface_normal"
+        }
+    ],
+    "highlights": [
+        "Humans can imagine an object\u2019s full 3D shape from just a single image, showing only a fraction of the object\u2019s surface",
+        "We explore how these ideas can be integrated into state-of-the-art computer vision systems for 3D shape reconstruction",
+        "As demonstrated in Figure 8, our model not only retains the visible details in the original view, but completes the unseen surfaces using the generic shape priors learned from rigid objects.\n5.3",
+        "We have studied the problem of generalizable single-image 3D reconstruction",
+        "We have proposed Generalizable Reconstruction, a novel viewer-centered model that integrates these representations for generalizable, high-quality 3D shape reconstruction",
+        "Experiments demonstrate that Generalizable Reconstruction achieves state-of-the-art performance on shape reconstruction for both seen and unseen classes"
+    ],
+    "key_statements": [
+        "Humans can imagine an object\u2019s full 3D shape from just a single image, showing only a fraction of the object\u2019s surface",
+        "We explore how these ideas can be integrated into state-of-the-art computer vision systems for 3D shape reconstruction",
+        "We propose to disentangle geometric projections from shape reconstruction to better generalize to unseen shape categories",
+        "We propose to disentangle geometric projections from shape reconstruction, and include spherical maps with differentiable, deterministic projections in an integrated neural model",
+        "While these proposed methods are for recognizing and categorizing images or shapes, in this paper we explore reconstructing the 3D shape of an object from unseen classes",
+        "To provide a performance upper bound for our spherical inpainting and voxel refinement networks (b and c in Figure 2), we include the results when our model has access to ground-truth depth in the original view (GenRe-Oracle) and to ground-truth full spherical maps (GenRe-SphOracle).\n4.2",
+        "We present results on generalizing to novel objects from the training classes",
+        "Comparing our model with its variants, we find that the two-step approaches (GenRe-2step and Generalizable Reconstruction) outperform the one-step approach across all novel categories",
+        "As demonstrated in Figure 8, our model not only retains the visible details in the original view, but completes the unseen surfaces using the generic shape priors learned from rigid objects.\n5.3",
+        "We have studied the problem of generalizable single-image 3D reconstruction",
+        "We have proposed Generalizable Reconstruction, a novel viewer-centered model that integrates these representations for generalizable, high-quality 3D shape reconstruction",
+        "Experiments demonstrate that Generalizable Reconstruction achieves state-of-the-art performance on shape reconstruction for both seen and unseen classes"
+    ],
+    "summary": [
+        "Humans can imagine an object\u2019s full 3D shape from just a single image, showing only a fraction of the object\u2019s surface.",
+        "Such a representation combines appealing features of 2D and 3D: spherical maps are a form of 2D images, on which neural inpainting models work well; but they have a semantics that allows them to be projected into 3D to recover full shape geometry.",
+        "We demonstrate that the resulting model achieves state-of-the-art performance on single-image 3D shape reconstruction for objects within and outside training classes.",
+        "It takes two 3D shapes as input, one projected from the inpainted spherical map and the other from the estimated depth map, and outputs a final 3D shape.",
+        "We observe that networks trained to inpaint spherical maps generalize well to new shape classes (Figure 3).",
+        "This module takes two voxelized shapes as input, one projected from the estimated depth map and the other from the inpainted spherical map, and predicts the final shape.",
+        "As shown in the experiments, when provided with ground-truth depth and spherical maps, this module performs consistently well across training and unseen classes.",
+        "The spherical map inpainting network has a similar architecture as the single-view depth estimator.",
+        "Our voxel refinement network takes as input voxels projected from the estimated, original-view depth and from the inpainted spherical map, and recovers the final shape in voxel space.",
+        "We train the voxel refinement network on coarse shapes predicted by the inpainting network as well as 3D surfaces backprojected from the estimated 2.5D sketches, with the corresponding ground-truth shapes as supervision.",
+        "To provide a performance upper bound for our spherical inpainting and voxel refinement networks (b and c in Figure 2), we include the results when our model has access to ground-truth depth in the original view (GenRe-Oracle) and to ground-truth full spherical maps (GenRe-SphOracle).",
+        "Because neither depth maps nor spherical maps provide information inside shapes, our model predicts only surface voxels that are not guaranteed watertight.",
+        "As the focus is mainly on the spherical map inpainting network (Figure 2b) and the voxel refinement network (Figure 2c), we assume our model has access to the ground-truth single-view depth (i.e., GenRe-Oracle) in this experiment.",
+        "As demonstrated in Figure 8, our model not only retains the visible details in the original view, but completes the unseen surfaces using the generic shape priors learned from rigid objects.",
+        "Similar to Section 5.2, the model has only seen cars, chairs, and airplanes during training, and we assume our model has access to the ground-truth single-view depth (i.e., GenRe-Oracle).",
+        "We have proposed GenRe, a novel viewer-centered model that integrates these representations for generalizable, high-quality 3D shape reconstruction.",
+        "We hope our system will inspire future research along this challenging but rewarding research direction"
+    ],
+    "headline": "Generalizable Reconstruction , designed to capture more generic, class-agnostic shape priors",
+    "reference_links": [
+        {
+            "id": "Akata_et+al_2016_a",
+            "entry": "Zeynep Akata, Mateusz Malinowski, Mario Fritz, and Bernt Schiele. Multi-cue zero-shot learning with strong supervision. In CVPR, 2016. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Akata%2C%20Zeynep%20Malinowski%2C%20Mateusz%20Fritz%2C%20Mario%20Schiele%2C%20Bernt%20Multi-cue%20zero-shot%20learning%20with%20strong%20supervision%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Akata%2C%20Zeynep%20Malinowski%2C%20Mateusz%20Fritz%2C%20Mario%20Schiele%2C%20Bernt%20Multi-cue%20zero-shot%20learning%20with%20strong%20supervision%202016"
+        },
+        {
+            "id": "Stanislaw_2014_a",
+            "entry": "Stanislaw Antol, C Lawrence Zitnick, and Devi Parikh. Zero-shot learning via visual abstraction. In ECCV, 2014. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Stanislaw%20Antol%2C%20C.Lawrence%20Zitnick%20Parikh%2C%20Devi%20Zero-shot%20learning%20via%20visual%20abstraction%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Stanislaw%20Antol%2C%20C.Lawrence%20Zitnick%20Parikh%2C%20Devi%20Zero-shot%20learning%20via%20visual%20abstraction%202014"
+        },
+        {
+            "id": "Bansal_2016_a",
+            "entry": "Aayush Bansal and Bryan Russell. Marr revisited: 2D-3D alignment via surface normal prediction. In CVPR, 2016. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bansal%2C%20Aayush%20Russell%2C%20Bryan%20Marr%20revisited%3A%202D-3D%20alignment%20via%20surface%20normal%20prediction%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bansal%2C%20Aayush%20Russell%2C%20Bryan%20Marr%20revisited%3A%202D-3D%20alignment%20via%20surface%20normal%20prediction%202016"
+        },
+        {
+            "id": "Barron_2015_a",
+            "entry": "Jonathan T Barron and Jitendra Malik. Shape, illumination, and reflectance from shading. IEEE TPAMI, 37(8): 1670\u20131687, 2015. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Barron%2C%20Jonathan%20T.%20Malik%2C%20Jitendra%20Shape%2C%20illumination%2C%20and%20reflectance%20from%20shading%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Barron%2C%20Jonathan%20T.%20Malik%2C%20Jitendra%20Shape%2C%20illumination%2C%20and%20reflectance%20from%20shading%202015"
+        },
+        {
+            "id": "Barrow_1978_a",
+            "entry": "Harry G Barrow and Jay M Tenenbaum. Recovering intrinsic scene characteristics from images. Computer Vision Systems, 1978. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Barrow%2C%20Harry%20G.%20Tenenbaum%2C%20Jay%20M.%20Recovering%20intrinsic%20scene%20characteristics%20from%20images%201978",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Barrow%2C%20Harry%20G.%20Tenenbaum%2C%20Jay%20M.%20Recovering%20intrinsic%20scene%20characteristics%20from%20images%201978"
+        },
+        {
+            "id": "Barrow_et+al_1977_a",
+            "entry": "Harry G Barrow, Jay M Tenenbaum, Robert C Bolles, and Helen C Wolf. Parametric correspondence and chamfer matching: two new techniques for image matching. In IJCAI, 1977. 6",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Barrow%2C%20Harry%20G.%20Tenenbaum%2C%20Jay%20M.%20Bolles%2C%20Robert%20C.%20Wolf%2C%20Helen%20C.%20Parametric%20correspondence%20and%20chamfer%20matching%3A%20two%20new%20techniques%20for%20image%20matching%201977",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Barrow%2C%20Harry%20G.%20Tenenbaum%2C%20Jay%20M.%20Bolles%2C%20Robert%20C.%20Wolf%2C%20Helen%20C.%20Parametric%20correspondence%20and%20chamfer%20matching%3A%20two%20new%20techniques%20for%20image%20matching%201977"
+        },
+        {
+            "id": "Bart_2005_a",
+            "entry": "Evgeniy Bart and Shimon Ullman. Cross-generalization: learning novel classes from a single example by feature replacement. In CVPR, 2005. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bart%2C%20Evgeniy%20Ullman%2C%20Shimon%20Cross-generalization%3A%20learning%20novel%20classes%20from%20a%20single%20example%20by%20feature%20replacement%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bart%2C%20Evgeniy%20Ullman%2C%20Shimon%20Cross-generalization%3A%20learning%20novel%20classes%20from%20a%20single%20example%20by%20feature%20replacement%202005"
+        },
+        {
+            "id": "Bell_et+al_2014_a",
+            "entry": "Sean Bell, Kavita Bala, and Noah Snavely. Intrinsic images in the wild. ACM TOG, 33(4):159, 2014. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bell%2C%20Sean%20Bala%2C%20Kavita%20Snavely%2C%20Noah%20Intrinsic%20images%20in%20the%20wild%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bell%2C%20Sean%20Bala%2C%20Kavita%20Snavely%2C%20Noah%20Intrinsic%20images%20in%20the%20wild%202014"
+        },
+        {
+            "id": "Bronstein_et+al_2008_a",
+            "entry": "Alexander M Bronstein, Michael M Bronstein, and Ron Kimmel. Numerical geometry of non-rigid shapes. Springer Science & Business Media, 2008. 6",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bronstein%2C%20Alexander%20M.%20Bronstein%2C%20Michael%20M.%20Kimmel%2C%20Ron%20Numerical%20geometry%20of%20non-rigid%20shapes%202008"
+        },
+        {
+            "id": "Cao_et+al_2017_a",
+            "entry": "Zhangjie Cao, Qixing Huang, and Karthik Ramani. 3D object classification via spherical projections. In 3DV, 2017. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cao%2C%20Zhangjie%20Huang%2C%20Qixing%20Ramani%2C%20Karthik%203D%20object%20classification%20via%20spherical%20projections%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cao%2C%20Zhangjie%20Huang%2C%20Qixing%20Ramani%2C%20Karthik%203D%20object%20classification%20via%20spherical%20projections%202017"
+        },
+        {
+            "id": "Chang_et+al_2015_a",
+            "entry": "Angel X Chang, Thomas Funkhouser, Leonidas Guibas, Pat Hanrahan, Qixing Huang, Zimo Li, Silvio Savarese, Manolis Savva, Shuran Song, Hao Su, Jianxiong Xiao, Li Yi, and Fisher Yu. ShapeNet: an information-rich 3D model repository. arXiv:1512.03012, 2015. 1, 2, 5, 6",
+            "arxiv_url": "https://arxiv.org/pdf/1512.03012"
+        },
+        {
+            "id": "Chen_et+al_2016_a",
+            "entry": "Weifeng Chen, Zhao Fu, Dawei Yang, and Jia Deng. Single-image depth perception in the wild. In NIPS, 2016. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Weifeng%20Fu%2C%20Zhao%20Yang%2C%20Dawei%20Deng%2C%20Jia%20Single-image%20depth%20perception%20in%20the%20wild%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Weifeng%20Fu%2C%20Zhao%20Yang%2C%20Dawei%20Deng%2C%20Jia%20Single-image%20depth%20perception%20in%20the%20wild%202016"
+        },
+        {
+            "id": "Choy_et+al_2016_a",
+            "entry": "Christopher B Choy, Danfei Xu, JunYoung Gwak, Kevin Chen, and Silvio Savarese. 3D-R2N2: a unified approach for single and multi-view 3D object reconstruction. In ECCV, 2016. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Choy%2C%20Christopher%20B.%20Xu%2C%20Danfei%20Gwak%2C%20JunYoung%20Chen%2C%20Kevin%203D-R2N2%3A%20a%20unified%20approach%20for%20single%20and%20multi-view%203D%20object%20reconstruction%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Choy%2C%20Christopher%20B.%20Xu%2C%20Danfei%20Gwak%2C%20JunYoung%20Chen%2C%20Kevin%203D-R2N2%3A%20a%20unified%20approach%20for%20single%20and%20multi-view%203D%20object%20reconstruction%202016"
+        },
+        {
+            "id": "Cohen_et+al_2017_a",
+            "entry": "Taco Cohen, Mario Geiger, and Max Welling. Convolutional networks for spherical signals. In ICML Workshop, 2017. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cohen%2C%20Taco%20Geiger%2C%20Mario%20Welling%2C%20Max%20Convolutional%20networks%20for%20spherical%20signals%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cohen%2C%20Taco%20Geiger%2C%20Mario%20Welling%2C%20Max%20Convolutional%20networks%20for%20spherical%20signals%202017"
+        },
+        {
+            "id": "Taco_2018_a",
+            "entry": "Taco S Cohen, Mario Geiger, Jonas K\u00f6hler, and Max Welling. Spherical CNNs. In ICLR, 2018. 3, 4",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Taco%20S%20Cohen%2C%20Mario%20Geiger%2C%20Jonas%20K%C3%B6hler%20Welling%2C%20Max%20Spherical%20CNNs%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Taco%20S%20Cohen%2C%20Mario%20Geiger%2C%20Jonas%20K%C3%B6hler%20Welling%2C%20Max%20Spherical%20CNNs%202018"
+        },
+        {
+            "id": "Eigen_2015_a",
+            "entry": "David Eigen and Rob Fergus. Predicting depth, surface normals and semantic labels with a common multi-scale convolutional architecture. In ICCV, 2015. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Eigen%2C%20David%20Fergus%2C%20Rob%20Predicting%20depth%2C%20surface%20normals%20and%20semantic%20labels%20with%20a%20common%20multi-scale%20convolutional%20architecture%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Eigen%2C%20David%20Fergus%2C%20Rob%20Predicting%20depth%2C%20surface%20normals%20and%20semantic%20labels%20with%20a%20common%20multi-scale%20convolutional%20architecture%202015"
+        },
+        {
+            "id": "Esteves_et+al_2018_a",
+            "entry": "Carlos Esteves, Christine Allen-Blanchette, Ameesh Makadia, and Kostas Daniilidis. Learning SO(3) equivariant representations with spherical CNNs. In ECCV, 2018. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Esteves%2C%20Carlos%20Allen-Blanchette%2C%20Christine%20Makadia%2C%20Ameesh%20Daniilidis%2C%20Kostas%20Learning%20SO%283%29%20equivariant%20representations%20with%20spherical%20CNNs%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Esteves%2C%20Carlos%20Allen-Blanchette%2C%20Christine%20Makadia%2C%20Ameesh%20Daniilidis%2C%20Kostas%20Learning%20SO%283%29%20equivariant%20representations%20with%20spherical%20CNNs%202018"
+        },
+        {
+            "id": "Fan_et+al_2017_a",
+            "entry": "Haoqiang Fan, Hao Su, and Leonidas Guibas. A point set generation network for 3D object reconstruction from a single image. In CVPR, 2017. 2, 5",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fan%2C%20Haoqiang%20Su%2C%20Hao%20Guibas%2C%20Leonidas%20A%20point%20set%20generation%20network%20for%203D%20object%20reconstruction%20from%20a%20single%20image%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fan%2C%20Haoqiang%20Su%2C%20Hao%20Guibas%2C%20Leonidas%20A%20point%20set%20generation%20network%20for%203D%20object%20reconstruction%20from%20a%20single%20image%202017"
+        },
+        {
+            "id": "Farhadi_et+al_2009_a",
+            "entry": "Ali Farhadi, Ian Endres, Derek Hoiem, and David Forsyth. Describing objects by their attributes. In CVPR, 2009. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Farhadi%2C%20Ali%20Endres%2C%20Ian%20Hoiem%2C%20Derek%20Forsyth%2C%20David%20Describing%20objects%20by%20their%20attributes%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Farhadi%2C%20Ali%20Endres%2C%20Ian%20Hoiem%2C%20Derek%20Forsyth%2C%20David%20Describing%20objects%20by%20their%20attributes%202009"
+        },
+        {
+            "id": "Freeman_1994_a",
+            "entry": "William T Freeman. The generic viewpoint assumption in a framework for visual perception. Nature, 368(6471): 542, 1994. 8",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Freeman%2C%20William%20T.%20The%20generic%20viewpoint%20assumption%20in%20a%20framework%20for%20visual%20perception%201994",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Freeman%2C%20William%20T.%20The%20generic%20viewpoint%20assumption%20in%20a%20framework%20for%20visual%20perception%201994"
+        },
+        {
+            "id": "Funk_2017_a",
+            "entry": "Christopher Funk and Yanxi Liu. Beyond planar symmetry: modeling human perception of reflection and rotation symmetries in the wild. In ICCV, 2017. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Funk%2C%20Christopher%20Liu%2C%20Yanxi%20Beyond%20planar%20symmetry%3A%20modeling%20human%20perception%20of%20reflection%20and%20rotation%20symmetries%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Funk%2C%20Christopher%20Liu%2C%20Yanxi%20Beyond%20planar%20symmetry%3A%20modeling%20human%20perception%20of%20reflection%20and%20rotation%20symmetries%202017"
+        },
+        {
+            "id": "Girdhar_et+al_2016_a",
+            "entry": "Rohit Girdhar, David F Fouhey, Mikel Rodriguez, and Abhinav Gupta. Learning a predictable and generative vector representation for objects. In ECCV, 2016. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Girdhar%2C%20Rohit%20Fouhey%2C%20David%20F.%20Rodriguez%2C%20Mikel%20Gupta%2C%20Abhinav%20Learning%20a%20predictable%20and%20generative%20vector%20representation%20for%20objects%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Girdhar%2C%20Rohit%20Fouhey%2C%20David%20F.%20Rodriguez%2C%20Mikel%20Gupta%2C%20Abhinav%20Learning%20a%20predictable%20and%20generative%20vector%20representation%20for%20objects%202016"
+        },
+        {
+            "id": "Groueix_et+al_2018_a",
+            "entry": "Thibault Groueix, Matthew Fisher, Vladimir G Kim, Bryan C Russell, and Mathieu Aubry. AtlasNet: a Papier-Mache approach to learning 3D surface generation. In CVPR, 2018. 5, 6, 7",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Groueix%2C%20Thibault%20Fisher%2C%20Matthew%20Kim%2C%20Vladimir%20G.%20Russell%2C%20Bryan%20C.%20AtlasNet%3A%20a%20Papier-Mache%20approach%20to%20learning%203D%20surface%20generation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Groueix%2C%20Thibault%20Fisher%2C%20Matthew%20Kim%2C%20Vladimir%20G.%20Russell%2C%20Bryan%20C.%20AtlasNet%3A%20a%20Papier-Mache%20approach%20to%20learning%203D%20surface%20generation%202018"
+        },
+        {
+            "id": "Haene_et+al_2017_a",
+            "entry": "Christian H\u00e4ne, Shubham Tulsiani, and Jitendra Malik. Hierarchical surface prediction for 3D object reconstruction. In 3DV, 2017. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=H%C3%A4ne%2C%20Christian%20Tulsiani%2C%20Shubham%20Malik%2C%20Jitendra%20Hierarchical%20surface%20prediction%20for%203D%20object%20reconstruction%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=H%C3%A4ne%2C%20Christian%20Tulsiani%2C%20Shubham%20Malik%2C%20Jitendra%20Hierarchical%20surface%20prediction%20for%203D%20object%20reconstruction%202017"
+        },
+        {
+            "id": "Hariharan_2017_a",
+            "entry": "Bharath Hariharan and Ross Girshick. Low-shot visual recognition by shrinking and hallucinating features. In ICCV, 2017. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hariharan%2C%20Bharath%20Girshick%2C%20Ross%20Low-shot%20visual%20recognition%20by%20shrinking%20and%20hallucinating%20features%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hariharan%2C%20Bharath%20Girshick%2C%20Ross%20Low-shot%20visual%20recognition%20by%20shrinking%20and%20hallucinating%20features%202017"
+        },
+        {
+            "id": "He_et+al_2015_a",
+            "entry": "Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. In CVPR, 2015. 5",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202015"
+        },
+        {
+            "id": "Horn_1989_a",
+            "entry": "Berthold KP Horn and Michael J Brooks. Shape from shading. MIT press, 1989. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Horn%2C%20Berthold%20K.P.%20Brooks%2C%20Michael%20J.%20Shape%20from%20shading%201989"
+        },
+        {
+            "id": "Izadi_et+al_2011_a",
+            "entry": "Shahram Izadi, David Kim, Otmar Hilliges, David Molyneaux, Richard A Newcombe, Pushmeet Kohli, Jamie Shotton, Steve Hodges, Dustin Freeman, Andrew J Davison, and Andrew W Fitzgibbon. KinectFusion: real-time 3D reconstruction and interaction using a moving depth camera. In UIST, 2011. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Izadi%2C%20Shahram%20Kim%2C%20David%20Hilliges%2C%20Otmar%20Molyneaux%2C%20David%20KinectFusion%3A%20real-time%203D%20reconstruction%20and%20interaction%20using%20a%20moving%20depth%20camera%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Izadi%2C%20Shahram%20Kim%2C%20David%20Hilliges%2C%20Otmar%20Molyneaux%2C%20David%20KinectFusion%3A%20real-time%203D%20reconstruction%20and%20interaction%20using%20a%20moving%20depth%20camera%202011"
+        },
+        {
+            "id": "Jakob_2010_a",
+            "entry": "Wenzel Jakob. Mitsuba renderer, 2010. 6",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jakob%2C%20Wenzel%20Mitsuba%20renderer%202010"
+        },
+        {
+            "id": "Janner_et+al_2017_a",
+            "entry": "Michael Janner, Jiajun Wu, Tejas Kulkarni, Ilker Yildirim, and Joshua B Tenenbaum. Self-supervised intrinsic image decomposition. In NIPS, 2017. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Janner%2C%20Michael%20Wu%2C%20Jiajun%20Kulkarni%2C%20Tejas%20Yildirim%2C%20Ilker%20Self-supervised%20intrinsic%20image%20decomposition%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Janner%2C%20Michael%20Wu%2C%20Jiajun%20Kulkarni%2C%20Tejas%20Yildirim%2C%20Ilker%20Self-supervised%20intrinsic%20image%20decomposition%202017"
+        },
+        {
+            "id": "Jayaraman_et+al_2018_a",
+            "entry": "Dinesh Jayaraman, Ruohan Gao, and Kristen Grauman. ShapeCodes: self-supervised feature learning by lifting views to viewgrids. In ECCV, 2018. 3, 6",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jayaraman%2C%20Dinesh%20Gao%2C%20Ruohan%20Grauman%2C%20Kristen%20ShapeCodes%3A%20self-supervised%20feature%20learning%20by%20lifting%20views%20to%20viewgrids%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jayaraman%2C%20Dinesh%20Gao%2C%20Ruohan%20Grauman%2C%20Kristen%20ShapeCodes%3A%20self-supervised%20feature%20learning%20by%20lifting%20views%20to%20viewgrids%202018"
+        },
+        {
+            "id": "Kar_et+al_2015_a",
+            "entry": "Abhishek Kar, Shubham Tulsiani, Joao Carreira, and Jitendra Malik. Category-specific object reconstruction from a single image. In CVPR, 2015. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kar%2C%20Abhishek%20Tulsiani%2C%20Shubham%20Carreira%2C%20Joao%20Malik%2C%20Jitendra%20Category-specific%20object%20reconstruction%20from%20a%20single%20image%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kar%2C%20Abhishek%20Tulsiani%2C%20Shubham%20Carreira%2C%20Joao%20Malik%2C%20Jitendra%20Category-specific%20object%20reconstruction%20from%20a%20single%20image%202015"
+        },
+        {
+            "id": "Kazhdan_et+al_2002_a",
+            "entry": "Michael Kazhdan, Bernard Chazelle, David Dobkin, Adam Finkelstein, and Thomas Funkhouser. A reflective symmetry descriptor. In ECCV, 2002. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Michael%20Kazhdan%20Bernard%20Chazelle%20David%20Dobkin%20Adam%20Finkelstein%20and%20Thomas%20Funkhouser%20A%20reflective%20symmetry%20descriptor%20In%20ECCV%202002%203",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Michael%20Kazhdan%20Bernard%20Chazelle%20David%20Dobkin%20Adam%20Finkelstein%20and%20Thomas%20Funkhouser%20A%20reflective%20symmetry%20descriptor%20In%20ECCV%202002%203"
+        },
+        {
+            "id": "Kazhdan_et+al_2004_a",
+            "entry": "Michael Kazhdan, Thomas Funkhouser, and Szymon Rusinkiewicz. Symmetry descriptors and 3D shape matching. In SGP, 2004. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kazhdan%2C%20Michael%20Funkhouser%2C%20Thomas%20Rusinkiewicz%2C%20Szymon%20Symmetry%20descriptors%20and%203D%20shape%20matching%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kazhdan%2C%20Michael%20Funkhouser%2C%20Thomas%20Rusinkiewicz%2C%20Szymon%20Symmetry%20descriptors%20and%203D%20shape%20matching%202004"
+        },
+        {
+            "id": "Lampert_et+al_2009_a",
+            "entry": "Christoph H Lampert, Hannes Nickisch, and Stefan Harmeling. Learning to detect unseen object classes by between-class attribute transfer. In CVPR, 2009. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lampert%2C%20Christoph%20H.%20Nickisch%2C%20Hannes%20Harmeling%2C%20Stefan%20Learning%20to%20detect%20unseen%20object%20classes%20by%20between-class%20attribute%20transfer%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lampert%2C%20Christoph%20H.%20Nickisch%2C%20Hannes%20Harmeling%2C%20Stefan%20Learning%20to%20detect%20unseen%20object%20classes%20by%20between-class%20attribute%20transfer%202009"
+        },
+        {
+            "id": "Lewiner_et+al_2003_a",
+            "entry": "Thomas Lewiner, H\u00e9lio Lopes, Ant\u00f4nio Wilson Vieira, and Geovan Tavares. Efficient implementation of marching cubes\u2019 cases with topological guarantees. Journal of Graphics Tools, 8(2):1\u201315, 2003. 5",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lewiner%2C%20Thomas%20Lopes%2C%20H%C3%A9lio%20Vieira%2C%20Ant%C3%B4nio%20Wilson%20Tavares%2C%20Geovan%20Efficient%20implementation%20of%20marching%20cubes%E2%80%99%20cases%20with%20topological%20guarantees%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lewiner%2C%20Thomas%20Lopes%2C%20H%C3%A9lio%20Vieira%2C%20Ant%C3%B4nio%20Wilson%20Tavares%2C%20Geovan%20Efficient%20implementation%20of%20marching%20cubes%E2%80%99%20cases%20with%20topological%20guarantees%202003"
+        },
+        {
+            "id": "David_1982_a",
+            "entry": "David Marr. Vision. W. H. Freeman and Company, 1982. 1",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=David%20Marr%20Vision%20W%20H%20Freeman%20and%20Company%201982%201",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=David%20Marr%20Vision%20W%20H%20Freeman%20and%20Company%201982%201"
+        },
+        {
+            "id": "Mccormac_et+al_2017_a",
+            "entry": "John McCormac, Ankur Handa, Stefan Leutenegger, and Andrew J Davison. SceneNet RGB-D: can 5M synthetic images beat generic imagenet pre-training on indoor segmentation? In ICCV, 2017. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=McCormac%2C%20John%20Handa%2C%20Ankur%20Leutenegger%2C%20Stefan%20Davison%2C%20Andrew%20J.%20SceneNet%20RGB-D%3A%20can%205M%20synthetic%20images%20beat%20generic%20imagenet%20pre-training%20on%20indoor%20segmentation%3F%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=McCormac%2C%20John%20Handa%2C%20Ankur%20Leutenegger%2C%20Stefan%20Davison%2C%20Andrew%20J.%20SceneNet%20RGB-D%3A%20can%205M%20synthetic%20images%20beat%20generic%20imagenet%20pre-training%20on%20indoor%20segmentation%3F%202017"
+        },
+        {
+            "id": "Novotny_et+al_2017_a",
+            "entry": "David Novotny, Diane Larlus, and Andrea Vedaldi. Learning 3D object categories by looking around them. In ICCV, 2017. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Novotny%2C%20David%20Larlus%2C%20Diane%20Vedaldi%2C%20Andrea%20Learning%203D%20object%20categories%20by%20looking%20around%20them%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Novotny%2C%20David%20Larlus%2C%20Diane%20Vedaldi%2C%20Andrea%20Learning%203D%20object%20categories%20by%20looking%20around%20them%202017"
+        },
+        {
+            "id": "Peng_et+al_2015_a",
+            "entry": "Xingchao Peng, Baochen Sun, Karim Ali, and Kate Saenko. Learning deep object detectors from 3D models. In ICCV, 2015. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Peng%2C%20Xingchao%20Sun%2C%20Baochen%20Ali%2C%20Karim%20Saenko%2C%20Kate%20Learning%20deep%20object%20detectors%20from%203D%20models%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Peng%2C%20Xingchao%20Sun%2C%20Baochen%20Ali%2C%20Karim%20Saenko%2C%20Kate%20Learning%20deep%20object%20detectors%20from%203D%20models%202015"
+        },
+        {
+            "id": "Proesmans_et+al_1996_a",
+            "entry": "Marc Proesmans, Luc Van Gool, and Andr\u00e9 Oosterlinck. One-shot active 3D shape acquisition. In ICPR, 1996. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Proesmans%2C%20Marc%20Gool%2C%20Luc%20Van%20Oosterlinck%2C%20Andr%C3%A9%20One-shot%20active%203D%20shape%20acquisition%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Proesmans%2C%20Marc%20Gool%2C%20Luc%20Van%20Oosterlinck%2C%20Andr%C3%A9%20One-shot%20active%203D%20shape%20acquisition%201996"
+        },
+        {
+            "id": "Danilo_et+al_2016_a",
+            "entry": "Danilo Jimenez Rezende, S M Ali Eslami, Shakir Mohamed, Peter Battaglia, Max Jaderberg, and Nicolas Heess. Unsupervised learning of 3D structure from images. In NIPS, 2016. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Danilo%20Jimenez%20Rezende%2C%20S.M.Ali%20Eslami%20Mohamed%2C%20Shakir%20Battaglia%2C%20Peter%20Jaderberg%2C%20Max%20Unsupervised%20learning%20of%203D%20structure%20from%20images%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Danilo%20Jimenez%20Rezende%2C%20S.M.Ali%20Eslami%20Mohamed%2C%20Shakir%20Battaglia%2C%20Peter%20Jaderberg%2C%20Max%20Unsupervised%20learning%20of%203D%20structure%20from%20images%202016"
+        },
+        {
+            "id": "Riegler_et+al_2017_a",
+            "entry": "Gernot Riegler, Ali Osman Ulusoys, and Andreas Geiger. OctNet: learning deep 3D representations at high resolutions. In CVPR, 2017. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Riegler%2C%20Gernot%20Ulusoys%2C%20Ali%20Osman%20Geiger%2C%20Andreas%20OctNet%3A%20learning%20deep%203D%20representations%20at%20high%20resolutions%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Riegler%2C%20Gernot%20Ulusoys%2C%20Ali%20Osman%20Geiger%2C%20Andreas%20OctNet%3A%20learning%20deep%203D%20representations%20at%20high%20resolutions%202017"
+        },
+        {
+            "id": "Rock_et+al_2015_a",
+            "entry": "Jason Rock, Tanmay Gupta, Justin Thorsen, JunYoung Gwak, Daeyun Shin, and Derek Hoiem. Completing 3D object shape from one depth image. In CVPR, 2015. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rock%2C%20Jason%20Gupta%2C%20Tanmay%20Thorsen%2C%20Justin%20Gwak%2C%20JunYoung%20Completing%203D%20object%20shape%20from%20one%20depth%20image%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rock%2C%20Jason%20Gupta%2C%20Tanmay%20Thorsen%2C%20Justin%20Gwak%2C%20JunYoung%20Completing%203D%20object%20shape%20from%20one%20depth%20image%202015"
+        },
+        {
+            "id": "Ronneberger_et+al_2015_a",
+            "entry": "Olaf Ronneberger, Philipp Fischer, and Thomas Brox. U-Net: convolutional networks for biomedical image segmentation. In MICCAI, 2015. 5",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ronneberger%2C%20Olaf%20Fischer%2C%20Philipp%20Brox%2C%20Thomas%20U-Net%3A%20convolutional%20networks%20for%20biomedical%20image%20segmentation%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ronneberger%2C%20Olaf%20Fischer%2C%20Philipp%20Brox%2C%20Thomas%20U-Net%3A%20convolutional%20networks%20for%20biomedical%20image%20segmentation%202015"
+        },
+        {
+            "id": "Sagawa_et+al_2011_a",
+            "entry": "Ryusuke Sagawa, Hiroshi Kawasaki, Shota Kiyota, and Ryo Furukawa. Dense one-shot 3D reconstruction by detecting continuous regions with parallel line projection. In ICCV, 2011. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sagawa%2C%20Ryusuke%20Kawasaki%2C%20Hiroshi%20Kiyota%2C%20Shota%20Furukawa%2C%20Ryo%20Dense%20one-shot%203D%20reconstruction%20by%20detecting%20continuous%20regions%20with%20parallel%20line%20projection%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sagawa%2C%20Ryusuke%20Kawasaki%2C%20Hiroshi%20Kiyota%2C%20Shota%20Furukawa%2C%20Ryo%20Dense%20one-shot%203D%20reconstruction%20by%20detecting%20continuous%20regions%20with%20parallel%20line%20projection%202011"
+        },
+        {
+            "id": "Shi_et+al_2017_a",
+            "entry": "Jian Shi, Yue Dong, Hao Su, and Stella X Yu. Learning non-lambertian object intrinsics across shapenet categories. In CVPR, 2017. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shi%2C%20Jian%20Dong%2C%20Yue%20Su%2C%20Hao%20Yu%2C%20Stella%20X.%20Learning%20non-lambertian%20object%20intrinsics%20across%20shapenet%20categories%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shi%2C%20Jian%20Dong%2C%20Yue%20Su%2C%20Hao%20Yu%2C%20Stella%20X.%20Learning%20non-lambertian%20object%20intrinsics%20across%20shapenet%20categories%202017"
+        },
+        {
+            "id": "Shin_et+al_2018_a",
+            "entry": "Daeyun Shin, Charless C Fowlkes, and Derek Hoiem. Pixels, voxels, and views: a study of shape representations for single view 3D object shape prediction. In CVPR, 2018. 3, 6, 7, 8",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shin%2C%20Daeyun%20Fowlkes%2C%20Charless%20C.%20Hoiem%2C%20Derek%20Pixels%2C%20voxels%2C%20and%20views%3A%20a%20study%20of%20shape%20representations%20for%20single%20view%203D%20object%20shape%20prediction%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shin%2C%20Daeyun%20Fowlkes%2C%20Charless%20C.%20Hoiem%2C%20Derek%20Pixels%2C%20voxels%2C%20and%20views%3A%20a%20study%20of%20shape%20representations%20for%20single%20view%203D%20object%20shape%20prediction%202018"
+        },
+        {
+            "id": "Silberman_et+al_2012_a",
+            "entry": "Nathan Silberman, Derek Hoiem, Pushmeet Kohli, and Rob Fergus. Indoor segmentation and support inference from RGBD images. In ECCV, 2012. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silberman%2C%20Nathan%20Hoiem%2C%20Derek%20Kohli%2C%20Pushmeet%20Fergus%2C%20Rob%20Indoor%20segmentation%20and%20support%20inference%20from%20RGBD%20images%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silberman%2C%20Nathan%20Hoiem%2C%20Derek%20Kohli%2C%20Pushmeet%20Fergus%2C%20Rob%20Indoor%20segmentation%20and%20support%20inference%20from%20RGBD%20images%202012"
+        },
+        {
+            "id": "Soltani_et+al_2017_a",
+            "entry": "Amir Arsalan Soltani, Haibin Huang, Jiajun Wu, Tejas D Kulkarni, and Joshua B Tenenbaum. Synthesizing 3D shapes via modeling multi-view depth maps and silhouettes with deep generative networks. In CVPR, 2017. 6",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Soltani%2C%20Amir%20Arsalan%20Huang%2C%20Haibin%20Wu%2C%20Jiajun%20Kulkarni%2C%20Tejas%20D.%20Synthesizing%203D%20shapes%20via%20modeling%20multi-view%20depth%20maps%20and%20silhouettes%20with%20deep%20generative%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Soltani%2C%20Amir%20Arsalan%20Huang%2C%20Haibin%20Wu%2C%20Jiajun%20Kulkarni%2C%20Tejas%20D.%20Synthesizing%203D%20shapes%20via%20modeling%20multi-view%20depth%20maps%20and%20silhouettes%20with%20deep%20generative%20networks%202017"
+        },
+        {
+            "id": "Song_et+al_2017_a",
+            "entry": "Shuran Song, Fisher Yu, Andy Zeng, Angel X Chang, Manolis Savva, and Thomas Funkhouser. Semantic scene completion from a single depth image. In CVPR, 2017. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Song%2C%20Shuran%20Yu%2C%20Fisher%20Zeng%2C%20Andy%20Chang%2C%20Angel%20X.%20Semantic%20scene%20completion%20from%20a%20single%20depth%20image%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Song%2C%20Shuran%20Yu%2C%20Fisher%20Zeng%2C%20Andy%20Chang%2C%20Angel%20X.%20Semantic%20scene%20completion%20from%20a%20single%20depth%20image%202017"
+        },
+        {
+            "id": "Sun_et+al_2018_a",
+            "entry": "Xingyuan Sun, Jiajun Wu, Xiuming Zhang, Zhoutong Zhang, Chengkai Zhang, Tianfan Xue, Joshua B Tenenbaum, and William T Freeman. Pix3D: dataset and methods for single-image 3D shape modeling. In CVPR, 2018. 6",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sun%2C%20Xingyuan%20Wu%2C%20Jiajun%20Zhang%2C%20Xiuming%20Zhang%2C%20Zhoutong%20Pix3D%3A%20dataset%20and%20methods%20for%20single-image%203D%20shape%20modeling%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sun%2C%20Xingyuan%20Wu%2C%20Jiajun%20Zhang%2C%20Xiuming%20Zhang%2C%20Zhoutong%20Pix3D%3A%20dataset%20and%20methods%20for%20single-image%203D%20shape%20modeling%202018"
+        },
+        {
+            "id": "Tappen_et+al_2003_a",
+            "entry": "Marshall F Tappen, William T Freeman, and Edward H Adelson. Recovering intrinsic images from a single image. In NIPS, 2003. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tappen%2C%20Marshall%20F.%20Freeman%2C%20William%20T.%20Adelson%2C%20Edward%20H.%20Recovering%20intrinsic%20images%20from%20a%20single%20image%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tappen%2C%20Marshall%20F.%20Freeman%2C%20William%20T.%20Adelson%2C%20Edward%20H.%20Recovering%20intrinsic%20images%20from%20a%20single%20image%202003"
+        },
+        {
+            "id": "Tatarchenko_et+al_2016_a",
+            "entry": "Maxim Tatarchenko, Alexey Dosovitskiy, and Thomas Brox. Multi-view 3D models from single images with a convolutional network. In ECCV, 2016. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tatarchenko%2C%20Maxim%20Dosovitskiy%2C%20Alexey%20Brox%2C%20Thomas%20Multi-view%203D%20models%20from%20single%20images%20with%20a%20convolutional%20network%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tatarchenko%2C%20Maxim%20Dosovitskiy%2C%20Alexey%20Brox%2C%20Thomas%20Multi-view%203D%20models%20from%20single%20images%20with%20a%20convolutional%20network%202016"
+        },
+        {
+            "id": "Tatarchenko_et+al_2017_a",
+            "entry": "Maxim Tatarchenko, Alexey Dosovitskiy, and Thomas Brox. Octree generating networks: Efficient convolutional architectures for high-resolution 3D outputs. In ICCV, 2017. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tatarchenko%2C%20Maxim%20Dosovitskiy%2C%20Alexey%20Brox%2C%20Thomas%20Octree%20generating%20networks%3A%20Efficient%20convolutional%20architectures%20for%20high-resolution%203D%20outputs%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tatarchenko%2C%20Maxim%20Dosovitskiy%2C%20Alexey%20Brox%2C%20Thomas%20Octree%20generating%20networks%3A%20Efficient%20convolutional%20architectures%20for%20high-resolution%203D%20outputs%202017"
+        },
+        {
+            "id": "Torralba_et+al_2007_a",
+            "entry": "Antonio Torralba, Kevin P Murphy, and William T Freeman. Sharing visual features for multiclass and multiview object detection. IEEE TPAMI, 29(5), 2007. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Torralba%2C%20Antonio%20Murphy%2C%20Kevin%20P.%20Freeman%2C%20William%20T.%20Sharing%20visual%20features%20for%20multiclass%20and%20multiview%20object%20detection%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Torralba%2C%20Antonio%20Murphy%2C%20Kevin%20P.%20Freeman%2C%20William%20T.%20Sharing%20visual%20features%20for%20multiclass%20and%20multiview%20object%20detection%202007"
+        },
+        {
+            "id": "Tulsiani_et+al_2017_a",
+            "entry": "Shubham Tulsiani, Tinghui Zhou, Alexei A Efros, and Jitendra Malik. Multi-view supervision for single-view reconstruction via differentiable ray consistency. In CVPR, 2017. 2, 5, 7",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tulsiani%2C%20Shubham%20Zhou%2C%20Tinghui%20Efros%2C%20Alexei%20A.%20Malik%2C%20Jitendra%20Multi-view%20supervision%20for%20single-view%20reconstruction%20via%20differentiable%20ray%20consistency%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tulsiani%2C%20Shubham%20Zhou%2C%20Tinghui%20Efros%2C%20Alexei%20A.%20Malik%2C%20Jitendra%20Multi-view%20supervision%20for%20single-view%20reconstruction%20via%20differentiable%20ray%20consistency%202017"
+        },
+        {
+            "id": "Wang_et+al_2017_a",
+            "entry": "Peng Wang, Lingqiao Liu, Chunhua Shen, Zi Huang, Anton van den Hengel, and Heng Tao Shen. Multi-attention network for one shot learning. In CVPR, 2017. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Peng%20Liu%2C%20Lingqiao%20Shen%2C%20Chunhua%20Huang%2C%20Zi%20Multi-attention%20network%20for%20one%20shot%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Peng%20Liu%2C%20Lingqiao%20Shen%2C%20Chunhua%20Huang%2C%20Zi%20Multi-attention%20network%20for%20one%20shot%20learning%202017"
+        },
+        {
+            "id": "Wang_et+al_2015_a",
+            "entry": "Xiaolong Wang, David Fouhey, and Abhinav Gupta. Designing deep networks for surface normal estimation. In CVPR, 2015. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Xiaolong%20Fouhey%2C%20David%20Gupta%2C%20Abhinav%20Designing%20deep%20networks%20for%20surface%20normal%20estimation%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Xiaolong%20Fouhey%2C%20David%20Gupta%2C%20Abhinav%20Designing%20deep%20networks%20for%20surface%20normal%20estimation%202015"
+        },
+        {
+            "id": "Wang_2016_a",
+            "entry": "Yu-Xiong Wang and Martial Hebert. Learning to learn: Model regression networks for easy small sample learning. In ECCV, 2016. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Yu-Xiong%20Hebert%2C%20Martial%20Learning%20to%20learn%3A%20Model%20regression%20networks%20for%20easy%20small%20sample%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Yu-Xiong%20Hebert%2C%20Martial%20Learning%20to%20learn%3A%20Model%20regression%20networks%20for%20easy%20small%20sample%20learning%202016"
+        },
+        {
+            "id": "Weiss_2001_a",
+            "entry": "Yair Weiss. Deriving intrinsic images from image sequences. In ICCV, 2001. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Weiss%2C%20Yair%20Deriving%20intrinsic%20images%20from%20image%20sequences%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Weiss%2C%20Yair%20Deriving%20intrinsic%20images%20from%20image%20sequences%202001"
+        },
+        {
+            "id": "Wu_et+al_2016_a",
+            "entry": "Jiajun Wu, Chengkai Zhang, Tianfan Xue, William T Freeman, and Joshua B Tenenbaum. Learning a probabilistic latent space of object shapes via 3D generative-adversarial modeling. In NIPS, 2016. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20Jiajun%20Zhang%2C%20Chengkai%20Xue%2C%20Tianfan%20Freeman%2C%20William%20T.%20Learning%20a%20probabilistic%20latent%20space%20of%20object%20shapes%20via%203D%20generative-adversarial%20modeling%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20Jiajun%20Zhang%2C%20Chengkai%20Xue%2C%20Tianfan%20Freeman%2C%20William%20T.%20Learning%20a%20probabilistic%20latent%20space%20of%20object%20shapes%20via%203D%20generative-adversarial%20modeling%202016"
+        },
+        {
+            "id": "Wu_et+al_2017_a",
+            "entry": "Jiajun Wu, Yifan Wang, Tianfan Xue, Xingyuan Sun, William T Freeman, and Joshua B Tenenbaum. MarrNet: 3D shape reconstruction via 2.5D sketches. In NIPS, 2017. 1, 2, 4, 5, 7",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20Jiajun%20Wang%2C%20Yifan%20Xue%2C%20Tianfan%20Sun%2C%20Xingyuan%20MarrNet%3A%203D%20shape%20reconstruction%20via%202.5D%20sketches%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20Jiajun%20Wang%2C%20Yifan%20Xue%2C%20Tianfan%20Sun%2C%20Xingyuan%20MarrNet%3A%203D%20shape%20reconstruction%20via%202.5D%20sketches%202017"
+        },
+        {
+            "id": "Wu_et+al_2018_a",
+            "entry": "Jiajun Wu, Chengkai Zhang, Xiuming Zhang, Zhoutong Zhang, William T Freeman, and Joshua B Tenenbaum. Learning 3D shape priors for shape completion and reconstruction. In ECCV, 2018. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20Jiajun%20Zhang%2C%20Chengkai%20Zhang%2C%20Xiuming%20Zhang%2C%20Zhoutong%20Learning%203D%20shape%20priors%20for%20shape%20completion%20and%20reconstruction%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20Jiajun%20Zhang%2C%20Chengkai%20Zhang%2C%20Xiuming%20Zhang%2C%20Zhoutong%20Learning%203D%20shape%20priors%20for%20shape%20completion%20and%20reconstruction%202018"
+        },
+        {
+            "id": "Xian_et+al_2017_a",
+            "entry": "Yongqin Xian, Bernt Schiele, and Zeynep Akata. Zero-shot learning-the good, the bad and the ugly. In CVPR, 2017. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xian%2C%20Yongqin%20Schiele%2C%20Bernt%20Akata%2C%20Zeynep%20Zero-shot%20learning-the%20good%2C%20the%20bad%20and%20the%20ugly%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xian%2C%20Yongqin%20Schiele%2C%20Bernt%20Akata%2C%20Zeynep%20Zero-shot%20learning-the%20good%2C%20the%20bad%20and%20the%20ugly%202017"
+        },
+        {
+            "id": "Yan_et+al_2016_a",
+            "entry": "Xinchen Yan, Jimei Yang, Ersin Yumer, Yijie Guo, and Honglak Lee. Perspective transformer nets: Learning single-view 3D object reconstruction without 3D supervision. In NIPS, 2016. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yan%2C%20Xinchen%20Yang%2C%20Jimei%20Yumer%2C%20Ersin%20Guo%2C%20Yijie%20Perspective%20transformer%20nets%3A%20Learning%20single-view%203D%20object%20reconstruction%20without%203D%20supervision%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yan%2C%20Xinchen%20Yang%2C%20Jimei%20Yumer%2C%20Ersin%20Guo%2C%20Yijie%20Perspective%20transformer%20nets%3A%20Learning%20single-view%203D%20object%20reconstruction%20without%203D%20supervision%202016"
+        },
+        {
+            "id": "Yao_et+al_2018_a",
+            "entry": "Shunyu Yao, Tzu Ming Harry Hsu, Jun-Yan Zhu, Jiajun Wu, Antonio Torralba, William T Freeman, and Joshua B Tenenbaum. 3D-aware scene manipulation via inverse graphics. In NIPS, 2018. 5",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yao%2C%20Shunyu%20Hsu%2C%20Tzu%20Ming%20Harry%20Zhu%2C%20Jun-Yan%20Wu%2C%20Jiajun%203D-aware%20scene%20manipulation%20via%20inverse%20graphics%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yao%2C%20Shunyu%20Hsu%2C%20Tzu%20Ming%20Harry%20Zhu%2C%20Jun-Yan%20Wu%2C%20Jiajun%203D-aware%20scene%20manipulation%20via%20inverse%20graphics%202018"
+        },
+        {
+            "id": "Zhang_et+al_1999_a",
+            "entry": "Ruo Zhang, Ping-Sing Tsai, James Edwin Cryer, and Mubarak Shah. Shape-from-shading: a survey. IEEE TPAMI, 21(8):690\u2013706, 1999. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Ruo%20Tsai%2C%20Ping-Sing%20Cryer%2C%20James%20Edwin%20Shah%2C%20Mubarak%20Shape-from-shading%3A%20a%20survey%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Ruo%20Tsai%2C%20Ping-Sing%20Cryer%2C%20James%20Edwin%20Shah%2C%20Mubarak%20Shape-from-shading%3A%20a%20survey%201999"
+        },
+        {
+            "id": "Zhu_et+al_2018_a",
+            "entry": "Jun-Yan Zhu, Zhoutong Zhang, Chengkai Zhang, Jiajun Wu, Antonio Torralba, Joshua B. Tenenbaum, and William T. Freeman. Visual object networks: image generation with disentangled 3D representations. In NIPS, 2018. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhu%2C%20Jun-Yan%20Zhang%2C%20Zhoutong%20Zhang%2C%20Chengkai%20Wu%2C%20Jiajun%20Visual%20object%20networks%3A%20image%20generation%20with%20disentangled%203D%20representations%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhu%2C%20Jun-Yan%20Zhang%2C%20Zhoutong%20Zhang%2C%20Chengkai%20Wu%2C%20Jiajun%20Visual%20object%20networks%3A%20image%20generation%20with%20disentangled%203D%20representations%202018"
+        }
+    ]
+}

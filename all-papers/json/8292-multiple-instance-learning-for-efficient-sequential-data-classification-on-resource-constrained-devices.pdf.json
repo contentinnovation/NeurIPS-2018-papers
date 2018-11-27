@@ -1,0 +1,286 @@
+{
+    "filename": "8292-multiple-instance-learning-for-efficient-sequential-data-classification-on-resource-constrained-devices.pdf",
+    "metadata": {
+        "title": "Multiple Instance Learning for Efficient Sequential Data Classification on Resource-constrained Devices",
+        "author": "Don Dennis, Chirag Pabbaraju, Harsha Vardhan Simhadri, Prateek Jain",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8292-multiple-instance-learning-for-efficient-sequential-data-classification-on-resource-constrained-devices.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We study the problem of fast and efficient classification of sequential data (such as time-series) on tiny devices, which is critical for various IoT related applications like audio keyword detection or gesture detection. Such tasks are cast as a standard classification task by sliding windows over the data stream to construct data points. Deploying such classification modules on tiny devices is challenging as predictions over sliding windows of data need to be invoked continuously at a high frequency. Each such predictor instance in itself is expensive as it evaluates large models over long windows of data. In this paper, we address this challenge by exploiting the following two observations about classification tasks arising in typical IoT related applications: (a) the \"signature\" of a particular class (e.g. an audio keyword) typically occupies a small fraction of the overall data, and (b) class signatures tend to be discernible early on in the data. We propose a method, EMI-RNN, that exploits these observations by using a multiple instance learning formulation along with an early prediction technique to learn a model that achieves better accuracy compared to baseline models, while simultaneously reducing computation by a large fraction. For instance, on a gesture detection benchmark [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>], EMI-RNN requires 72x less computation than standard LSTM while improving accuracy by 1%. This enables us to deploy such models for continuous real-time prediction on devices as small as a Raspberry Pi0 and Arduino variants, a task that the baseline LSTM could not achieve. Finally, we also provide an analysis of our multiple instance learning algorithm in a simple setting and show that the proposed algorithm converges to the global optima at a linear rate, one of the first such result in this domain. The code for EMI-RNN is available at: https://github.com/Microsoft/EdgeML/tree/master/tf/examples/EMI-RNN"
+    },
+    "keywords": [
+        {
+            "term": "Internet of Things",
+            "url": "https://en.wikipedia.org/wiki/Internet_of_Things"
+        },
+        {
+            "term": "Inertial Measurement Unit",
+            "url": "https://en.wikipedia.org/wiki/Inertial_Measurement_Unit"
+        },
+        {
+            "term": "time series",
+            "url": "https://en.wikipedia.org/wiki/time_series"
+        },
+        {
+            "term": "recurrent neural network",
+            "url": "https://en.wikipedia.org/wiki/recurrent_neural_network"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Classification of sequential data: Several critical applications, especially in the Internet of Things (IoT) domain, require real-time predictions on sensor data",
+        "Our method: In this work, we propose a method that addresses above mentioned challenges in deployment on tiny devices",
+        "Based on the above observations, we propose a robust multi-instance learning (MIL) method with early stopping",
+        "MI-Recurrent Neural Networks and E-Recurrent Neural Networks are complementary techniques \u2014 MI-Recurrent Neural Networks reduces the number of time-steps in the sequential data point and E-Recurrent Neural Networks provides early prediction",
+        "Figure 3 demonstrates the trade-off between accuracy gain of the LSTM trained by the EMI-Recurrent Neural Networks method and the percentage of computation saved due to fewer LSTM steps, at a fixed hidden dimension",
+        "This paper proposed EMI-Recurrent Neural Networks algorithm for sequential data classification"
+    ],
+    "key_statements": [
+        "Classification of sequential data: Several critical applications, especially in the Internet of Things (IoT) domain, require real-time predictions on sensor data",
+        "Our method: In this work, we propose a method that addresses above mentioned challenges in deployment on tiny devices",
+        "Based on the above observations, we propose a robust multi-instance learning (MIL) method with early stopping",
+        "We would like to stress that our method is orthogonal to the actual neural-network architecture used for classification and can be used with any of the state-of-the-art classification techniques employed for sequential data",
+        "MI-Recurrent Neural Networks and E-Recurrent Neural Networks are complementary techniques \u2014 MI-Recurrent Neural Networks reduces the number of time-steps in the sequential data point and E-Recurrent Neural Networks provides early prediction",
+        "We propose an architecture that trains MI-Recurrent Neural Networks and E-Recurrent Neural Networks jointly",
+        "That E-Recurrent Neural Networks can train a model that can accurately predict a large fraction of time-series data points early",
+        "Figure 3 demonstrates the trade-off between accuracy gain of the LSTM trained by the EMI-Recurrent Neural Networks method and the percentage of computation saved due to fewer LSTM steps, at a fixed hidden dimension",
+        "This paper proposed EMI-Recurrent Neural Networks algorithm for sequential data classification"
+    ],
+    "summary": [
+        "Classification of sequential data: Several critical applications, especially in the Internet of Things (IoT) domain, require real-time predictions on sensor data.",
+        "We train our model to predict the label after observing the data only for a few time-steps of the instance.",
+        "Their technique is complementary to our work as our focus is on early classification, i.e., predicting the class before observing the entire sequential data point.",
+        "Given Z, the goal is to learn a classifier f : Rd\u00d7T \u2192 RL that can accurately predict the class of the input sequential data point X using arg maxb fb(X).",
+        "For f to be deployable on tiny devices in real-world settings, it must satisfy three key requirements: a) small memory footprint, b) can be computed quickly on resource-constrained devices, c) should predict the correct class after observing as few time-step data points of X as possible, i.e., as early as possible.",
+        "This implies that early classification with small number of time-step data points is critical to minimizing the lag in prediction.",
+        "We further refine the trained LSTM by re-estimating the \"correct\" set of instances per sequential data point using a simple thresholding scheme.",
+        "Within a small number of steps the algorithm is able to learn the correct set of positive points in each bag and the optimal classifier w\u2217 as well.",
+        "MI-RNN and E-RNN are complementary techniques \u2014 MI-RNN reduces the number of time-steps in the sequential data point and E-RNN provides early prediction.",
+        "On GesturePod-6 dataset early classification at 55% time-step leads to a 10% drop in accuracy for E-RNN.",
+        "We use the tunable Algorithm 2 for early prediction for each instance and compute y = arg maxb max\u03c4 t\u2208[\u03c4,\u03c4+k\u22121] fbE\u2212RNN, where f E\u2212RNN is computed using our jointly trained LSTM model f applied to Algorithm 2.",
+        "For a given algorithm, we compute predicted label yj for each sequential data point Xjtest, 1 \u2264 j \u2264 m in the test set and compute accuracy as",
+        "That E-RNN can train a model that can accurately predict a large fraction of time-series data points early.",
+        "Figure 3 demonstrates the trade-off between accuracy gain of the LSTM trained by the EMI-RNN method and the percentage of computation saved due to fewer LSTM steps, at a fixed hidden dimension.",
+        "EMI-RNN was based on a multi-instance learning (MIL) formulation of the sequential data classification problem and exploited techniques from robust learning to ensure efficient training.",
+        "On several benchmarks, EMI-RNN outperformed baseline LSTM while providing up to 70x reduction in inference cost"
+    ],
+    "headline": "We study the problem of fast and efficient classification of sequential data  on tiny devices, which is critical for various Internet of Things related applications like audio keyword detection or gesture detection",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Jaume Amores. Multiple instance classification: Review, taxonomy and comparative study. Artificial Intelligence, 201:81\u2013105, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Amores%2C%20Jaume%20Multiple%20instance%20classification%3A%20Review%2C%20taxonomy%20and%20comparative%20study%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Amores%2C%20Jaume%20Multiple%20instance%20classification%3A%20Review%2C%20taxonomy%20and%20comparative%20study%202013"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra, and Jorge Luis Reyes-Ortiz. A public domain dataset for human activity recognition using smartphones. In ESANN, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Anguita%2C%20Davide%20Ghio%2C%20Alessandro%20Oneto%2C%20Luca%20Parra%2C%20Xavier%20A%20public%20domain%20dataset%20for%20human%20activity%20recognition%20using%20smartphones.%20In%20ESANN%202013"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Martin Arjovsky, Amar Shah, and Yoshua Bengio. Unitary evolution recurrent neural networks. In International Conference on Machine Learning, pages 1120\u20131128, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Arjovsky%2C%20Martin%20Shah%2C%20Amar%20Bengio%2C%20Yoshua%20Unitary%20evolution%20recurrent%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Arjovsky%2C%20Martin%20Shah%2C%20Amar%20Bengio%2C%20Yoshua%20Unitary%20evolution%20recurrent%20neural%20networks%202016"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Peter Auer, Philip M Long, and Aravind Srinivasan. Approximating hyper-rectangles: Learning and pseudo-random sets. In Proceedings of the twenty-ninth annual ACM symposium on Theory of computing, pages 314\u2013323. ACM, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Auer%2C%20Peter%20Long%2C%20Philip%20M.%20Srinivasan%2C%20Aravind%20Approximating%20hyper-rectangles%3A%20Learning%20and%20pseudo-random%20sets%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Auer%2C%20Peter%20Long%2C%20Philip%20M.%20Srinivasan%2C%20Aravind%20Approximating%20hyper-rectangles%3A%20Learning%20and%20pseudo-random%20sets%201997"
+        },
+        {
+            "id": "5",
+            "entry": "[5] J. P. Bello, C. Mydlarz, and J. Salamon. Sound analysis in smart cities. In Computational Analysis of Sound Scenes and Events, pages 373\u2013397. 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bello%2C%20J.P.%20Mydlarz%2C%20C.%20Salamon%2C%20J.%20Sound%20analysis%20in%20smart%20cities%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bello%2C%20J.P.%20Mydlarz%2C%20C.%20Salamon%2C%20J.%20Sound%20analysis%20in%20smart%20cities%202018"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Kush Bhatia, Prateek Jain, and Purushottam Kar. Robust Regression via Hard Thresholding. In Proceedings of the 29th Annual Conference on Neural Information Processing Systems (NIPS), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bhatia%2C%20Kush%20Jain%2C%20Prateek%20Kar%2C%20Purushottam%20Robust%20Regression%20via%20Hard%20Thresholding%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bhatia%2C%20Kush%20Jain%2C%20Prateek%20Kar%2C%20Purushottam%20Robust%20Regression%20via%20Hard%20Thresholding%202015"
+        },
+        {
+            "id": "7",
+            "entry": "[7] V\u00edctor Campos, Brendan Jou, Xavier Gir\u00f3 i Nieto, Jordi Torres, and Shih-Fu Chang. Skip RNN: Learning to skip state updates in recurrent neural networks. In International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Campos%2C%20V%C3%ADctor%20Jou%2C%20Brendan%20i%20Nieto%2C%20Xavier%20Gir%C3%B3%20Torres%2C%20Jordi%20Skip%20RNN%3A%20Learning%20to%20skip%20state%20updates%20in%20recurrent%20neural%20networks%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Campos%2C%20V%C3%ADctor%20Jou%2C%20Brendan%20i%20Nieto%2C%20Xavier%20Gir%C3%B3%20Torres%2C%20Jordi%20Skip%20RNN%3A%20Learning%20to%20skip%20state%20updates%20in%20recurrent%20neural%20networks%202018"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Kyunghyun Cho, Bart Van Merri\u00ebnboer, Dzmitry Bahdanau, and Yoshua Bengio. On the properties of neural machine translation: Encoder-decoder approaches. arXiv preprint arXiv:1409.1259, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1409.1259"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Kyunghyun Cho, Bart van Merrienboer, Caglar Gulcehre, Dzmitry Bahdanau, Fethi Bougares, Holger Schwenk, and Yoshua Bengio. Learning phrase representations using rnn encoder\u2013 decoder for statistical machine translation. In Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP), pages 1724\u20131734, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cho%2C%20Kyunghyun%20van%20Merrienboer%2C%20Bart%20Gulcehre%2C%20Caglar%20Bahdanau%2C%20Dzmitry%20Learning%20phrase%20representations%20using%20rnn%20encoder%E2%80%93%20decoder%20for%20statistical%20machine%20translation%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cho%2C%20Kyunghyun%20van%20Merrienboer%2C%20Bart%20Gulcehre%2C%20Caglar%20Bahdanau%2C%20Dzmitry%20Learning%20phrase%20representations%20using%20rnn%20encoder%E2%80%93%20decoder%20for%20statistical%20machine%20translation%202014"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Junyoung Chung, Caglar Gulcehre, KyungHyun Cho, and Yoshua Bengio. Empirical evaluation of gated recurrent neural networks on sequence modeling. arXiv preprint arXiv:1412.3555, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.3555"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Jasmine Collins, Jascha Sohl-Dickstein, and David Sussillo. Capacity and trainability in recurrent neural networks. arXiv preprint arXiv:1611.09913, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.09913"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Asma Dachraoui, Alexis Bondu, and Antoine Cornu\u00e9jols. Early classification of time series as a non myopic sequential decision making problem. In Machine Learning and Knowledge Discovery in Databases, pages 433\u2013447, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dachraoui%2C%20Asma%20Bondu%2C%20Alexis%20Cornu%C3%A9jols%2C%20Antoine%20Early%20classification%20of%20time%20series%20as%20a%20non%20myopic%20sequential%20decision%20making%20problem%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dachraoui%2C%20Asma%20Bondu%2C%20Alexis%20Cornu%C3%A9jols%2C%20Antoine%20Early%20classification%20of%20time%20series%20as%20a%20non%20myopic%20sequential%20decision%20making%20problem%202015"
+        },
+        {
+            "id": "13",
+            "entry": "[13] I. Diakonikolas, G. Kamath, D. M. Kane, J. Li, A. Moitra, and A. Stewart. Robust estimators in high dimensions without the computational intractability. In 2016 IEEE 57th Annual Symposium on Foundations of Computer Science (FOCS), pages 655\u2013664, Oct 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Diakonikolas%2C%20I.%20Kamath%2C%20G.%20Kane%2C%20D.M.%20Li%2C%20J.%20Robust%20estimators%20in%20high%20dimensions%20without%20the%20computational%20intractability%202016-10",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Diakonikolas%2C%20I.%20Kamath%2C%20G.%20Kane%2C%20D.M.%20Li%2C%20J.%20Robust%20estimators%20in%20high%20dimensions%20without%20the%20computational%20intractability%202016-10"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Jeffrey Donahue, Lisa Anne Hendricks, Sergio Guadarrama, Marcus Rohrbach, Subhashini Venugopalan, Kate Saenko, and Trevor Darrell. Long-term recurrent convolutional networks for visual recognition and description. In Proceedings of the IEEE conference on computer vision and pattern recognition, pages 2625\u20132634, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Donahue%2C%20Jeffrey%20Hendricks%2C%20Lisa%20Anne%20Guadarrama%2C%20Sergio%20Rohrbach%2C%20Marcus%20Long-term%20recurrent%20convolutional%20networks%20for%20visual%20recognition%20and%20description%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Donahue%2C%20Jeffrey%20Hendricks%2C%20Lisa%20Anne%20Guadarrama%2C%20Sergio%20Rohrbach%2C%20Marcus%20Long-term%20recurrent%20convolutional%20networks%20for%20visual%20recognition%20and%20description%202015"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Alessandro D\u2019Ausilio. Arduino: A low-cost multipurpose lab equipment. Behavior research methods, 44(2):305\u2013313, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=D%E2%80%99Ausilio%2C%20Alessandro%20Arduino%3A%20A%20low-cost%20multipurpose%20lab%20equipment%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=D%E2%80%99Ausilio%2C%20Alessandro%20Arduino%3A%20A%20low-cost%20multipurpose%20lab%20equipment%202012"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Mohamed F. Ghalwash and Zoran Obradovic. Early classification of multivariate temporal observations by extraction of interpretable shapelets. BMC Bioinformatics, 13(1):195, Aug 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mohamed%2C%20F.%20Ghalwash%20and%20Zoran%20Obradovic.%20Early%20classification%20of%20multivariate%20temporal%20observations%20by%20extraction%20of%20interpretable%20shapelets%202012-08",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mohamed%2C%20F.%20Ghalwash%20and%20Zoran%20Obradovic.%20Early%20classification%20of%20multivariate%20temporal%20observations%20by%20extraction%20of%20interpretable%20shapelets%202012-08"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Chirag Gupta, Arun Sai Suggala, Ankit Goyal, Harsha Vardhan Simhadri, Bhargavi Paranjape, Ashish Kumar, Saurabh Goyal, Raghavendra Udupa, Manik Varma, and Prateek Jain. ProtoNN: Compressed and accurate kNN for resource-scarce devices. In Proceedings of the 34th International Conference on Machine Learning, pages 1331\u20131340, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gupta%2C%20Chirag%20Suggala%2C%20Arun%20Sai%20Goyal%2C%20Ankit%20Simhadri%2C%20Harsha%20Vardhan%20ProtoNN%3A%20Compressed%20and%20accurate%20kNN%20for%20resource-scarce%20devices%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gupta%2C%20Chirag%20Suggala%2C%20Arun%20Sai%20Goyal%2C%20Ankit%20Simhadri%2C%20Harsha%20Vardhan%20ProtoNN%3A%20Compressed%20and%20accurate%20kNN%20for%20resource-scarce%20devices%202017"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Gareth Halfacree and Eben Upton. Raspberry Pi User Guide. Wiley Publishing, 1st edition, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Halfacree%2C%20Gareth%20Upton%2C%20Eben%20Raspberry%20Pi%20User%20Guide%202012"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Nils Y. Hammerla, Shane Halloran, and Thomas Ploetz. Deep, convolutional, and recurrent models for human activity recognition using wearables. arXiv preprint arXiv:1604.08880, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1604.08880"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Sepp Hochreiter and J\u00fcrgen Schmidhuber. Long short-term memory. Neural computation, 9(8):1735\u20131780, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Long%20short-term%20memory%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Long%20short-term%20memory%201997"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Diederik P Kingma and Jimmy Ba. Adam: A method for stochastic optimization. arXiv preprint arXiv:1412.6980, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6980"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Ashish Kumar, Saurabh Goyal, and Manik Varma. Resource-efficient machine learning in 2 KB RAM for the internet of things. In Proceedings of the 34th International Conference on Machine Learning, pages 1935\u20131944, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kumar%2C%20Ashish%20Goyal%2C%20Saurabh%20Varma%2C%20Manik%20Resource-efficient%20machine%20learning%20in%202%20KB%20RAM%20for%20the%20internet%20of%20things%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kumar%2C%20Ashish%20Goyal%2C%20Saurabh%20Varma%2C%20Manik%20Resource-efficient%20machine%20learning%20in%202%20KB%20RAM%20for%20the%20internet%20of%20things%202017"
+        },
+        {
+            "id": "23",
+            "entry": "[23] S. Ma, L. Sigal, and S. Sclaroff. Learning activity progression in lstms for activity detection and early detection. In 2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pages 1942\u20131950, June 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ma%2C%20S.%20Sigal%2C%20L.%20Sclaroff%2C%20S.%20Learning%20activity%20progression%20in%20lstms%20for%20activity%20detection%20and%20early%20detection%201942-06",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ma%2C%20S.%20Sigal%2C%20L.%20Sclaroff%2C%20S.%20Learning%20activity%20progression%20in%20lstms%20for%20activity%20detection%20and%20early%20detection%201942-06"
+        },
+        {
+            "id": "24",
+            "entry": "[24] U. Mori, A. Mendiburu, S. Dasgupta, and J. A. Lozano. Early classification of time series by simultaneously optimizing the accuracy and earliness. IEEE Transactions on Neural Networks and Learning Systems, pages 1\u201310, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mori%2C%20U.%20Mendiburu%2C%20A.%20Dasgupta%2C%20S.%20Lozano%2C%20J.A.%20Early%20classification%20of%20time%20series%20by%20simultaneously%20optimizing%20the%20accuracy%20and%20earliness%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mori%2C%20U.%20Mendiburu%2C%20A.%20Dasgupta%2C%20S.%20Lozano%2C%20J.A.%20Early%20classification%20of%20time%20series%20by%20simultaneously%20optimizing%20the%20accuracy%20and%20earliness%202017"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Shishir Patil, Don Kurian Dennis, Chirag Pabbaraju, Rajanikant Deshmukh, Harsha Simhadri, Manik Varma, and Prateek Jain. Gesturepod: Programmable gesture recognition for augmenting assistive devices. Technical report, May 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Patil%2C%20Shishir%20Dennis%2C%20Don%20Kurian%20Pabbaraju%2C%20Chirag%20Deshmukh%2C%20Rajanikant%20Gesturepod%3A%20Programmable%20gesture%20recognition%20for%20augmenting%20assistive%20devices%202018-05"
+        },
+        {
+            "id": "_0000_a",
+            "entry": "https://www.microsoft.com/en-us/research/publication/",
+            "url": "https://www.microsoft.com/en-us/research/publication/"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Sivan Sabato and Naftali Tishby. Multi-instance learning with any hypothesis class. Journal of Machine Learning Research, 13(Oct):2999\u20133039, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sabato%2C%20Sivan%20Tishby%2C%20Naftali%20Multi-instance%20learning%20with%20any%20hypothesis%20class%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sabato%2C%20Sivan%20Tishby%2C%20Naftali%20Multi-instance%20learning%20with%20any%20hypothesis%20class%202012"
+        },
+        {
+            "id": "27",
+            "entry": "[27] T. N. Sainath, O. Vinyals, A. Senior, and H. Sak. Convolutional, long short-term memory, fully connected deep neural networks. In 2015 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), pages 4580\u20134584, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sainath%2C%20T.N.%20Vinyals%2C%20O.%20Senior%2C%20A.%20Sak%2C%20H.%20Convolutional%2C%20long%20short-term%20memory%2C%20fully%20connected%20deep%20neural%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sainath%2C%20T.N.%20Vinyals%2C%20O.%20Senior%2C%20A.%20Sak%2C%20H.%20Convolutional%2C%20long%20short-term%20memory%2C%20fully%20connected%20deep%20neural%20networks%202015"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Tara N Sainath and Carolina Parada. Convolutional neural networks for small-footprint keyword spotting. In Sixteenth Annual Conference of the International Speech Communication Association, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sainath%2C%20Tara%20N.%20Parada%2C%20Carolina%20Convolutional%20neural%20networks%20for%20small-footprint%20keyword%20spotting%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sainath%2C%20Tara%20N.%20Parada%2C%20Carolina%20Convolutional%20neural%20networks%20for%20small-footprint%20keyword%20spotting%202015"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Hasim Sak, Andrew W. Senior, Kanishka Rao, and Fran\u00e7oise Beaufays. Fast and accurate recurrent neural network acoustic models for speech recognition. In Sixteenth Annual Conference of the International Speech Communication Association, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sak%2C%20Hasim%20Senior%2C%20Andrew%20W.%20Rao%2C%20Kanishka%20Beaufays%2C%20Fran%C3%A7oise%20Fast%20and%20accurate%20recurrent%20neural%20network%20acoustic%20models%20for%20speech%20recognition%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sak%2C%20Hasim%20Senior%2C%20Andrew%20W.%20Rao%2C%20Kanishka%20Beaufays%2C%20Fran%C3%A7oise%20Fast%20and%20accurate%20recurrent%20neural%20network%20acoustic%20models%20for%20speech%20recognition%202015"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Ilya Sutskever, James Martens, George Dahl, and Geoffrey Hinton. On the importance of initialization and momentum in deep learning. In Proceedings of the 30th International Conference on Machine Learning, pages 1139\u20131147, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutskever%2C%20Ilya%20Martens%2C%20James%20Dahl%2C%20George%20Hinton%2C%20Geoffrey%20On%20the%20importance%20of%20initialization%20and%20momentum%20in%20deep%20learning%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutskever%2C%20Ilya%20Martens%2C%20James%20Dahl%2C%20George%20Hinton%2C%20Geoffrey%20On%20the%20importance%20of%20initialization%20and%20momentum%20in%20deep%20learning%202013"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Raphael Tang, Weijie Wang, Zhucheng Tu, and Jimmy Lin. An experimental analysis of the power consumption of convolutional neural networks for keyword spotting. arXiv preprint arXiv:1711.00333, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.00333"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Romain Tavenard and Simon Malinowski. Cost-aware early classification of time series. In Joint European Conference on Machine Learning and Knowledge Discovery in Databases, pages 632\u2013647, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tavenard%2C%20Romain%20Malinowski%2C%20Simon%20Cost-aware%20early%20classification%20of%20time%20series%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tavenard%2C%20Romain%20Malinowski%2C%20Simon%20Cost-aware%20early%20classification%20of%20time%20series%202016"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Roman Vershynin. Introduction to the non-asymptotic analysis of random matrices. In Y. Eldar and G. Kutyniok, editors, Compressed Sensing, Theory and Applications, chapter 5, pages 210\u2013268. Cambridge University Press, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vershynin%2C%20Roman%20Introduction%20to%20the%20non-asymptotic%20analysis%20of%20random%20matrices%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vershynin%2C%20Roman%20Introduction%20to%20the%20non-asymptotic%20analysis%20of%20random%20matrices%202012"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Pete Warden. Speech commands: A public dataset for single-word speech recognition., 2017. Dataset available from http://download.tensorflow.org/data/speech_commands_v0.01.tar.gz.",
+            "url": "http://download.tensorflow.org/data/speech_commands_v0.01.tar.gz",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Warden%2C%20Pete%20Speech%20commands%3A%20A%20public%20dataset%20for%20single-word%20speech%202017"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Zhengzheng Xing, Jian Pei, and Philip S. Yu. Early classification on time series. Knowledge and Information Systems, 31(1):105\u2013127, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xing%2C%20Zhengzheng%20Pei%2C%20Jian%20Yu%2C%20Philip%20S.%20Early%20classification%20on%20time%20series%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xing%2C%20Zhengzheng%20Pei%2C%20Jian%20Yu%2C%20Philip%20S.%20Early%20classification%20on%20time%20series%202012"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Jiong Zhang, Qi Lei, and Inderjit S Dhillon. Stabilizing gradients for deep neural networks via efficient SVD parameterization. arXiv preprint arXiv:1803.09327, 2018. ",
+            "arxiv_url": "https://arxiv.org/pdf/1803.09327"
+        }
+    ]
+}

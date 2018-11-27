@@ -1,0 +1,263 @@
+{
+    "filename": "7355-deep-neural-nets-with-interpolating-function-as-output-activation.pdf",
+    "metadata": {
+        "title": "Deep Neural Nets with Interpolating Function as Output Activation",
+        "author": "Bao Wang, Xiyang Luo, Zhen Li, Wei Zhu, Zuoqiang Shi, Stanley Osher",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7355-deep-neural-nets-with-interpolating-function-as-output-activation.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We replace the output layer of deep neural nets, typically the softmax function, by a novel interpolating function. And we propose end-to-end training and testing algorithms for this new architecture. Compared to classical neural nets with softmax function as output activation, the surrogate with interpolating function as output activation combines advantages of both deep and manifold learning. The new framework demonstrates the following major advantages: First, it is better applicable to the case with insufficient training data. Second, it significantly improves the generalization accuracy on a wide variety of networks. The algorithm is implemented in PyTorch, and the code is available at https://github.com/ BaoWangMath/DNN-DataDependentActivation."
+    },
+    "keywords": [
+        {
+            "term": "activation function",
+            "url": "https://en.wikipedia.org/wiki/activation_function"
+        },
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "rectified linear unit",
+            "url": "https://en.wikipedia.org/wiki/rectified_linear_unit"
+        },
+        {
+            "term": "softmax function",
+            "url": "https://en.wikipedia.org/wiki/softmax_function"
+        },
+        {
+            "term": "support vector machine",
+            "url": "https://en.wikipedia.org/wiki/support_vector_machine"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        },
+        {
+            "term": "deep network",
+            "url": "https://en.wikipedia.org/wiki/deep_network"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Generalizability is crucial to deep learning, and many efforts have been made to improve the training and generalization accuracy of deep neural nets (DNNs) [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>]",
+        "Activation functions adaptively trained to the data such as the adaptive piecewise linear unit (APLU) [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>] and parametric rectified linear unit (PReLU) [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>] have lead to further improvements in performance of deep neural nets",
+        "Though training deep neural nets with softmax or support vector machine as output activation is effective in many tasks, it is possible that alternative activations that consider manifold structure of data by interpolating the output based on both training and testing data can boost performance of the network",
+        "We show the superiority of weighted nonlocal Laplacian activated deep neural nets in terms of generalization accuracies when compared to their surrogates with softmax or support vector machine output activations",
+        "We propose to replace the classical output activation function, i.e., softmax, by a harmonic extension type of interpolating function",
+        "Our new framework resolves the degradation problem caused by insufficient data; on the other hand, it boosts the generalization accuracy significantly compared to the baseline"
+    ],
+    "key_statements": [
+        "Generalizability is crucial to deep learning, and many efforts have been made to improve the training and generalization accuracy of deep neural nets (DNNs) [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>]",
+        "Activation functions adaptively trained to the data such as the adaptive piecewise linear unit (APLU) [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>] and parametric rectified linear unit (PReLU) [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>] have lead to further improvements in performance of deep neural nets",
+        "Though training deep neural nets with softmax or support vector machine as output activation is effective in many tasks, it is possible that alternative activations that consider manifold structure of data by interpolating the output based on both training and testing data can boost performance of the network",
+        "Based on the ideas from manifold learning, we propose a novel output layer named weighted nonlocal Laplacian (WNLL) layer for deep neural nets",
+        "We train the vanilla deep neural nets with softmax output activation for 810 epochs with the same optimizers used in weighted nonlocal Laplacian activated ones",
+        "We show the superiority of weighted nonlocal Laplacian activated deep neural nets in terms of generalization accuracies when compared to their surrogates with softmax or support vector machine output activations",
+        "We propose to replace the classical output activation function, i.e., softmax, by a harmonic extension type of interpolating function",
+        "Our new framework resolves the degradation problem caused by insufficient data; on the other hand, it boosts the generalization accuracy significantly compared to the baseline"
+    ],
+    "summary": [
+        "Generalizability is crucial to deep learning, and many efforts have been made to improve the training and generalization accuracy of deep neural nets (DNNs) [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>].",
+        "In both training and testing of the WNLL activated DNNs, we need to reserve a small portion of data/label pairs denoted as (Xte, Yte), to interpolate the label Y for new data.",
+        "We remove the linear classifier from the neural nets and use the DNN block together with WNLL to predict new data (Fig. 2 (c)).",
+        "We summarize the training and testing procedures for the WNLL activated DNNs in Algorithms 1 and 2, respectively.",
+        "Algorithm 1 DNNs with WNLL as Output Activation: Training Procedure.",
+        "Algorithm 2 DNNs with WNLL as Output Activation: Testing Procedure.",
+        "In training WNLL activated DNNs, the two output activation functions in the auxiliary networks are, in a sense, each competing to minimize its own objective where, in equilibrium, the neural nets can learn better features for both linear and interpolation-based activations.",
+        "Before diving into the performance of DNNs with different output activation functions, we first compare the performance of WNLL with softmax on the raw input images for various datasets.",
+        "The batch sizes are 128 and 2000 when training softmax/linear and WNLL activated DNNs, respectively.",
+        "We train the vanilla DNNs with softmax output activation for 810 epochs with the same optimizers used in WNLL activated ones.",
+        "In the rest of this section, we show that the proposed framework resolves the issue of lacking big training data and boosts the generalization accuracies of DNNs via numerical results on CIFAR10/CIFAR100.",
+        "The left and right panels plot the cases when the first 1000 and 10000 data in the training set of CIFAR10 are used to train the vanilla and WNLL DNNs. As shown in Fig. 3, by using WNLL activation, the generalization error rates decay consistently as the network goes deeper, in contrast to the degradation for vanilla DNNs. The generalization accuracy between the vanilla and WNLL DNNs can differ up to 10 percent within our testing regime.",
+        "Panels (a) and (b) plot the test accuracies for ResNet50 with softmax and WNLL activations (1-400 and 406-805 epochs corresponds to linear activation), respectively, with only the first 1000 examples as training data from CIFAR10.",
+        "In table 2, we list the generalization errors for 15 different DNNs from VGG, ResNet, Pre-activated ResNet families on the entire, first 10000 and first 1000 instances of the CIFAR10 training set."
+    ],
+    "headline": "We propose end-to-end training and testing algorithms for this new architecture",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] F. Agostinelli, M. Hoffman, P. Sadowski, and P. Baldi. Learning activation functions to improve deep neural networks. arXiv preprint arXiv:1412.6830, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6830"
+        },
+        {
+            "id": "2",
+            "entry": "[2] M. Courbariaux Y. Bengio and J. David. Binaryconnet: Training deep neural networks with binary weights. NIPS, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bengio%2C%20M.Courbariaux%20Y.%20David%2C%20J.%20Binaryconnet%3A%20Training%20deep%20neural%20networks%20with%20binary%20weights%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bengio%2C%20M.Courbariaux%20Y.%20David%2C%20J.%20Binaryconnet%3A%20Training%20deep%20neural%20networks%20with%20binary%20weights%202015"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Y. Bengio, P. Lamblin, D. Popovici, and H. Larochelle. Greedy layer-wise training of deep networks. NIPS, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bengio%2C%20Y.%20Lamblin%2C%20P.%20Popovici%2C%20D.%20Larochelle%2C%20H.%20Greedy%20layer-wise%20training%20of%20deep%20networks%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bengio%2C%20Y.%20Lamblin%2C%20P.%20Popovici%2C%20D.%20Larochelle%2C%20H.%20Greedy%20layer-wise%20training%20of%20deep%20networks%202007"
+        },
+        {
+            "id": "4",
+            "entry": "[4] J. Calder. The game theoretic p-laplacian and semi-supervised learning with few labels. ArXiv:1711.10144, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.10144"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Bo Chang, Lili Meng, Eldad Haber, Frederick Tung, and David Begert. Multi-level residual networks from dynamical systems view. arXiv preprint arXiv:1710.10348, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.10348"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Y. Chen, J. Li, H. Xiao, X. Jin, S. Yan, and J. Feng. Dual path networks. NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Y.%20Li%2C%20J.%20Xiao%2C%20H.%20Jin%2C%20X.%20Dual%20path%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Y.%20Li%2C%20J.%20Xiao%2C%20H.%20Jin%2C%20X.%20Dual%20path%20networks%202017"
+        },
+        {
+            "id": "7",
+            "entry": "[7] J. Deng, W. Dong., R. Socher, J. Li, K. Li, and F. Li. ImageNet: A Large-Scale Hierarchical Image Database. In CVPR09, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Deng%2C%20J.%20Dong.%2C%20W.%20Socher%2C%20R.%20Li%2C%20J.%20ImageNet%3A%20A%20Large-Scale%20Hierarchical%20Image%20Database%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Deng%2C%20J.%20Dong.%2C%20W.%20Socher%2C%20R.%20Li%2C%20J.%20ImageNet%3A%20A%20Large-Scale%20Hierarchical%20Image%20Database%202009"
+        },
+        {
+            "id": "8",
+            "entry": "[8] X. Glorot, A. Bordes, and Y. Bengio. Deep sparse rectifier neural networks. In Proceedings of the Fourteenth International Conference on Artificial Intelligence and Statistics, pages 315\u2013 323, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Glorot%2C%20X.%20Bordes%2C%20A.%20Bengio%2C%20Y.%20Deep%20sparse%20rectifier%20neural%20networks%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Glorot%2C%20X.%20Bordes%2C%20A.%20Bengio%2C%20Y.%20Deep%20sparse%20rectifier%20neural%20networks%202011"
+        },
+        {
+            "id": "9",
+            "entry": "[9] I. Goodfellow, J. Pouget-Abadie, M. Mirza, B. Xu, D. Warde-Farley, S. Ozair, A. Courville, and Y. Bengio. Generative adversarial nets. Advances in Neural Information Processing Systems, pages 2672\u20132680, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goodfellow%2C%20I.%20Pouget-Abadie%2C%20J.%20Mirza%2C%20M.%20Xu%2C%20B.%20Generative%20adversarial%20nets%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goodfellow%2C%20I.%20Pouget-Abadie%2C%20J.%20Mirza%2C%20M.%20Xu%2C%20B.%20Generative%20adversarial%20nets%202014"
+        },
+        {
+            "id": "10",
+            "entry": "[10] I. Goodfellow, D. Warde-Farley, M. Mirza, A. Courville, and Y. Bengio. Maxout networks. arXiv preprint arXiv:1302.4389, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1302.4389"
+        },
+        {
+            "id": "11",
+            "entry": "[11] K. He, X. Zhang, S. Ren, and J. Sun. Delving deep into rectifiers: Surpassing human-level performance on imagenet classification. In Proceedings of the IEEE international conference on computer vision, pages 1026\u20131034, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Delving%20deep%20into%20rectifiers%3A%20Surpassing%20human-level%20performance%20on%20imagenet%20classification%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Delving%20deep%20into%20rectifiers%3A%20Surpassing%20human-level%20performance%20on%20imagenet%20classification%202015"
+        },
+        {
+            "id": "12",
+            "entry": "[12] K. He, X. Zhang, S. Ren, and J. Sun. Deep residual learning for image recognition. CVPR, pages 770\u2013778, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%202016"
+        },
+        {
+            "id": "13",
+            "entry": "[13] K. He, X. Zhang, S. Ren, and J. Sun. Identity mappings in deep residual networks. ECCV, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Identity%20mappings%20in%20deep%20residual%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Identity%20mappings%20in%20deep%20residual%20networks%202016"
+        },
+        {
+            "id": "14",
+            "entry": "[14] G. Hinton, S. Osindero, and T. Teh. A fast learning algorithm for deep belief nets. Neural Computation, 18(7):1527\u20131554, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hinton%2C%20G.%20Osindero%2C%20S.%20Teh%2C%20T.%20A%20fast%20learning%20algorithm%20for%20deep%20belief%20nets%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hinton%2C%20G.%20Osindero%2C%20S.%20Teh%2C%20T.%20A%20fast%20learning%20algorithm%20for%20deep%20belief%20nets%202006"
+        },
+        {
+            "id": "15",
+            "entry": "[15] G. Hinton, N. Srivastava, A. Krizhevsky, I. Sutskever, and R. Salakhutdinov. Improving neural networks by preventing co-adaptation of feature detectors. arXiv preprint arXiv:1207.0580, 2012.",
+            "arxiv_url": "https://arxiv.org/pdf/1207.0580"
+        },
+        {
+            "id": "16",
+            "entry": "[16] G. Huang, Z. Liu, K. Weinberger, and L. van der Maaten. Densely connected convolutional networks. CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huang%2C%20G.%20Liu%2C%20Z.%20Weinberger%2C%20K.%20van%20der%20Maaten%2C%20L.%20Densely%20connected%20convolutional%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huang%2C%20G.%20Liu%2C%20Z.%20Weinberger%2C%20K.%20van%20der%20Maaten%2C%20L.%20Densely%20connected%20convolutional%20networks%202017"
+        },
+        {
+            "id": "17",
+            "entry": "[17] G. Huang, Y. Sun, Z. Liu, D. Sedra, and K. WeinBerger. Deep networks with stochastic depth. ECCV, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huang%2C%20G.%20Sun%2C%20Y.%20Liu%2C%20Z.%20Sedra%2C%20D.%20Deep%20networks%20with%20stochastic%20depth%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huang%2C%20G.%20Sun%2C%20Y.%20Liu%2C%20Z.%20Sedra%2C%20D.%20Deep%20networks%20with%20stochastic%20depth%202016"
+        },
+        {
+            "id": "18",
+            "entry": "[18] A. Krizhevsky. Learning multiple layers of features from tiny images. 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20A.%20Learning%20multiple%20layers%20of%20features%20from%20tiny%20images%202009"
+        },
+        {
+            "id": "19",
+            "entry": "[19] A. Krizhevsky, I. Sutskever, and G. Hinton. Imagenet classification with deep convolutional neural networks. In Advances in neural information processing systems, pages 1097\u20131105, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20A.%20Sutskever%2C%20I.%20Hinton%2C%20G.%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krizhevsky%2C%20A.%20Sutskever%2C%20I.%20Hinton%2C%20G.%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Y. LeCun. The mnist database of handwritten digits. 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=LeCun%2C%20Y.%20The%20mnist%20database%20of%20handwritten%20digits%201998"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Z. Li and Z. Shi. Deep residual learning and pdes on manifold. arXiv preprint arXiv:1708.05115, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1708.05115"
+        },
+        {
+            "id": "22",
+            "entry": "[22] M. Muja and D. Lowe. Scalable nearest neighbor algorithms for high dimensional data. Pattern Analysis and Machine Intelligence (PAMI), 36, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Muja%2C%20M.%20Lowe%2C%20D.%20Scalable%20nearest%20neighbor%20algorithms%20for%20high%20dimensional%20data%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Muja%2C%20M.%20Lowe%2C%20D.%20Scalable%20nearest%20neighbor%20algorithms%20for%20high%20dimensional%20data%202014"
+        },
+        {
+            "id": "23",
+            "entry": "[23] V. Nair and G. Hinton. Rectified linear units improve restricted boltzmann machines. In Proceedings of the 27th international conference on machine learning (ICML-10), pages 807\u2013 814, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nair%2C%20V.%20Hinton%2C%20G.%20Rectified%20linear%20units%20improve%20restricted%20boltzmann%20machines%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nair%2C%20V.%20Hinton%2C%20G.%20Rectified%20linear%20units%20improve%20restricted%20boltzmann%20machines%202010"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Y. Netzer, T. Wang, A. Coates, A. Bissacco, B. Wu, and A. Ng. Reading digits in natural images with unsupervised features learning. NIPS Workshop on Deep Learning and Unsupervised Feature Learning, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Netzer%2C%20Y.%20Wang%2C%20T.%20Coates%2C%20A.%20Bissacco%2C%20A.%20Reading%20digits%20in%20natural%20images%20with%20unsupervised%20features%20learning%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Netzer%2C%20Y.%20Wang%2C%20T.%20Coates%2C%20A.%20Bissacco%2C%20A.%20Reading%20digits%20in%20natural%20images%20with%20unsupervised%20features%20learning%202011"
+        },
+        {
+            "id": "25",
+            "entry": "[25] N. Papernot, P. McDaniel, S. Jha, M. Fredrikson, Z. Celik, and A. Swami. The limitations of deep learning in adversarial settings. ArXiv:1511.07528, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.07528"
+        },
+        {
+            "id": "26",
+            "entry": "[26] A. Paszke and et al. Automatic differentiation in pyTorch. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=and%2C%20A.%20Paszke%20Automatic%20differentiation%20in%20pyTorch%202017"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Z. Shi, S. Osher, and W. Zhu. Weighted nonlocal Laplacian on interpolation from sparse data. Journal of Scientific Computing, 73:1164\u20131177, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shi%2C%20Z.%20Osher%2C%20S.%20Zhu%2C%20W.%20Weighted%20nonlocal%20Laplacian%20on%20interpolation%20from%20sparse%20data%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shi%2C%20Z.%20Osher%2C%20S.%20Zhu%2C%20W.%20Weighted%20nonlocal%20Laplacian%20on%20interpolation%20from%20sparse%20data%202017"
+        },
+        {
+            "id": "28",
+            "entry": "[28] K. Simonyan and A. Zisserman. Very deep convolutional networks for large-scale image recognition. Arxiv:1409.1556, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1409.1556"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Y. Tang. Deep learning using linear support vector machines. ArXiv:1306.0239, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1306.0239"
+        },
+        {
+            "id": "30",
+            "entry": "[30] L. Wan, M. Zeiler, S. Zhang, Y. LeCun, and R. Fergus. Regularization of neural networks using dropconnect. In International Conference on Machine Learning, pages 1058\u20131066, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wan%2C%20L.%20Zeiler%2C%20M.%20Zhang%2C%20S.%20LeCun%2C%20Y.%20Regularization%20of%20neural%20networks%20using%20dropconnect%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wan%2C%20L.%20Zeiler%2C%20M.%20Zhang%2C%20S.%20LeCun%2C%20Y.%20Regularization%20of%20neural%20networks%20using%20dropconnect%202013"
+        },
+        {
+            "id": "31",
+            "entry": "[31] S. Zagoruyko and N. Komodakis. Wide residual networks. BMVC, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zagoruyko%2C%20S.%20Komodakis%2C%20N.%20Wide%20residual%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zagoruyko%2C%20S.%20Komodakis%2C%20N.%20Wide%20residual%20networks%202016"
+        },
+        {
+            "id": "32",
+            "entry": "[32] W. Zhu, Q. Qiu, J. Huang, R. Carderbank, G. Sapiro, and I. Daubechies. LDMNet: Low dimensional manifold regularized neural networks. UCLA CAM Report: 17-66, 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhu%2C%20W.%20Qiu%2C%20Q.%20Huang%2C%20J.%20Carderbank%2C%20R.%20Daubechies.%20LDMNet%3A%20Low%20dimensional%20manifold%20regularized%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhu%2C%20W.%20Qiu%2C%20Q.%20Huang%2C%20J.%20Carderbank%2C%20R.%20Daubechies.%20LDMNet%3A%20Low%20dimensional%20manifold%20regularized%20neural%20networks%202017"
+        }
+    ]
+}

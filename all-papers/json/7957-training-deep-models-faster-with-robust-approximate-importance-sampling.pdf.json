@@ -1,0 +1,259 @@
+{
+    "filename": "7957-training-deep-models-faster-with-robust-approximate-importance-sampling.pdf",
+    "metadata": {
+        "title": "Training Deep Models Faster with Robust, Approximate Importance Sampling",
+        "author": "Tyler B. Johnson, Carlos Guestrin",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7957-training-deep-models-faster-with-robust-approximate-importance-sampling.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "In theory, importance sampling speeds up stochastic gradient algorithms for supervised learning by prioritizing training examples. In practice, the cost of computing importances greatly limits the impact of importance sampling. We propose a robust, approximate importance sampling procedure (RAIS) for stochastic gradient descent. By approximating the ideal sampling distribution using robust optimization, RAIS provides much of the benefit of exact importance sampling with drastically reduced overhead. Empirically, we find RAIS-SGD and standard SGD follow similar learning curves, but RAIS moves faster through these paths, achieving speed-ups of at least 20% and sometimes much more."
+    },
+    "keywords": [
+        {
+            "term": "variance reduction",
+            "url": "https://en.wikipedia.org/wiki/variance_reduction"
+        },
+        {
+            "term": "stochastic optimization",
+            "url": "https://en.wikipedia.org/wiki/stochastic_optimization"
+        },
+        {
+            "term": "importance sampling",
+            "url": "https://en.wikipedia.org/wiki/importance_sampling"
+        },
+        {
+            "term": "stochastic gradient descent",
+            "url": "https://en.wikipedia.org/wiki/stochastic_gradient_descent"
+        },
+        {
+            "term": "robust optimization",
+            "url": "https://en.wikipedia.org/wiki/robust_optimization"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        }
+    ],
+    "highlights": [
+        "Importance sampling prioritizes training examples for SGD in a principled way",
+        "We propose Robust approximate importance sampling, an importance sampling procedure for SGD with several appealing qualities",
+        "We assume an objective function, learning rate schedule, and minibatch size, and we propose a modified algorithm called Robust approximate importance sampling-SGD",
+        "Since the importance sampling distribution changes over time, we find it important to compute weighted batch statistics when using Robust approximate importance sampling with batch normalization",
+        "We proposed a relatively simple and very practical importance sampling procedure for speeding up the training of deep models",
+        "Robust approximate importance sampling is a promising approach with minimal downside and potential for large improvements in training speed"
+    ],
+    "key_statements": [
+        "Importance sampling prioritizes training examples for SGD in a principled way",
+        "We propose Robust approximate importance sampling, an importance sampling procedure for SGD with several appealing qualities",
+        "We assume an objective function, learning rate schedule, and minibatch size, and we propose a modified algorithm called Robust approximate importance sampling-SGD",
+        "We introduce an SGD algorithm with \u201coracle\u201d importance sampling, which prioritizes examples using exact knowledge of importance values",
+        "O-SGD samples training examples non-uniformly in a way that minimizes the variance of the stochastic gradient",
+        "In addition to the sampling distribution, Robust approximate importance sampling must approximate the gain ratio in O-SGD",
+        "We find Robust approximate importance sampling works well with momentum [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>, <a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>]",
+        "Since the importance sampling distribution changes over time, we find it important to compute weighted batch statistics when using Robust approximate importance sampling with batch normalization",
+        "Robust approximate importance sampling elegantly compensates for approximation error by choosing a sampling distribution that is minimax optimal with respect to an uncertainty set",
+        "We demonstrate how Robust approximate importance sampling performs in practice",
+        "The performance of Robust approximate importance sampling varies little with these parameters, since they only determine the number of minibatches to consider when training the uncertainty set and estimating the gain ratio",
+        "We proposed a relatively simple and very practical importance sampling procedure for speeding up the training of deep models",
+        "Robust approximate importance sampling is a promising approach with minimal downside and potential for large improvements in training speed"
+    ],
+    "summary": [
+        "Importance sampling prioritizes training examples for SGD in a principled way.",
+        "We assume an objective function, learning rate schedule, and minibatch size, and we propose a modified algorithm called RAIS-SGD.",
+        "RAIS prioritizes examples by sampling minibatches non-uniformly, allowing us to train models using fewer iterations and less time.",
+        "O-SGD samples training examples non-uniformly in a way that minimizes the variance of the stochastic gradient.",
+        "To make importance sampling practical, we propose RAIS-SGD.",
+        "RAIS recovers the minimax optimal sampling distribution by defining p / vi(t) for all training examples.",
+        "For any c and d, the mean of Qcd( \u0303s, vi) over the weighted training set should approximately equal the mean of Qcd(s, vi\u21e4), which depends on current gradient norms.",
+        "The weighted mean over the RAIS training set approximates the mean of current Qcd, rfi(w(t)) ) values.",
+        "In addition to the sampling distribution, RAIS must approximate the gain ratio in O-SGD.",
+        "Define g(t) as a stochastic gradient of the form (4) using minibatch size 1 and RAIS sampling.",
+        "Since our features s1(t:)n depend on past minibatch updates, we do not use RAIS for the first epoch of training\u2014instead we sample examples sequentially.",
+        "Approximating per-example gradient norms To train the uncertainty set, RAIS computes krfi(w(t))k for each example in each minibatch.",
+        "RAIS elegantly compensates for approximation error by choosing a sampling distribution that is minimax optimal with respect to an uncertainty set.",
+        "We approximately optimize and the learning rate schedule in order to achieve good validation performance with SGD at the end of training.",
+        "For RAIS-SGD, we use |D| = 2 \u21e5 104 training examples to learn c and d and \u21b5 = 0.01 to estimate r(t).",
+        "The performance of RAIS varies little with these parameters, since they only determine the number of minibatches to consider when training the uncertainty set and estimating the gain ratio.",
+        "For the uncertainty set features, we use simple moving averages of the most recently computed gradient norms for each example.",
+        "This result contrasts starkly with [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>], for example, in which case generalization performance differs significantly for the importance sampling and standard algorithms.",
+        "We proposed a relatively simple and very practical importance sampling procedure for speeding up the training of deep models.",
+        "By using robust optimization to define the sampling distribution, RAIS depends minimally on user-specified parameters."
+    ],
+    "headline": "Approximate importance sampling procedure  for stochastic gradient descent",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] P. Zhao and T. Zhang. Stochastic optimization with importance sampling for regularized loss minimization. In Proceedings of the 32nd International Conference on Machine Learning, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhao%2C%20P.%20Zhang%2C%20T.%20Stochastic%20optimization%20with%20importance%20sampling%20for%20regularized%20loss%20minimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhao%2C%20P.%20Zhang%2C%20T.%20Stochastic%20optimization%20with%20importance%20sampling%20for%20regularized%20loss%20minimization%202015"
+        },
+        {
+            "id": "2",
+            "entry": "[2] D. Needell, R. Ward, and N. Srebro. Stochastic gradient descent, weighted sampling, and the randomized Kaczmarz algorithm. In Advances in Neural Information Processing Systems 27, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Needell%2C%20D.%20Ward%2C%20R.%20Srebro%2C%20N.%20Stochastic%20gradient%20descent%2C%20weighted%20sampling%2C%20and%20the%20randomized%20Kaczmarz%20algorithm%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Needell%2C%20D.%20Ward%2C%20R.%20Srebro%2C%20N.%20Stochastic%20gradient%20descent%2C%20weighted%20sampling%2C%20and%20the%20randomized%20Kaczmarz%20algorithm%202014"
+        },
+        {
+            "id": "3",
+            "entry": "[3] G. Alain, A. Lamb, C. Sankar, A. Courville, and Y. Bengio. Variance reduction in SGD by distributed importance sampling. In 4th International Conference on Learning Representations Workshop, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Alain%2C%20G.%20Lamb%2C%20A.%20Sankar%2C%20C.%20Courville%2C%20A.%20Variance%20reduction%20in%20SGD%20by%20distributed%20importance%20sampling%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Alain%2C%20G.%20Lamb%2C%20A.%20Sankar%2C%20C.%20Courville%2C%20A.%20Variance%20reduction%20in%20SGD%20by%20distributed%20importance%20sampling%202016"
+        },
+        {
+            "id": "4",
+            "entry": "[4] A. Katharopoulos and F. Fleuret. Biased importance sampling for deep neural network training. arXiv:1706.00043, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.00043"
+        },
+        {
+            "id": "5",
+            "entry": "[5] A. Katharopoulos and F. Fleuret. Not all samples are created equal: Deep learning with importance sampling. In Proceedings of the 35th International Conference on Machine Learning, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Katharopoulos%2C%20A.%20Fleuret%2C%20F.%20Not%20all%20samples%20are%20created%20equal%3A%20Deep%20learning%20with%20importance%20sampling%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Katharopoulos%2C%20A.%20Fleuret%2C%20F.%20Not%20all%20samples%20are%20created%20equal%3A%20Deep%20learning%20with%20importance%20sampling%202018"
+        },
+        {
+            "id": "6",
+            "entry": "[6] S. Gopal. Adaptive sampling for SGD by exploiting side information. In Proceedings of the 33rd International Conference on Machine Learning, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gopal%2C%20S.%20Adaptive%20sampling%20for%20SGD%20by%20exploiting%20side%20information%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gopal%2C%20S.%20Adaptive%20sampling%20for%20SGD%20by%20exploiting%20side%20information%202016"
+        },
+        {
+            "id": "7",
+            "entry": "[7] A. Ben-Tal, L. El Ghaoui, and A. Nemirovski. Robust Optimization. Princeton University Press, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ben-Tal%2C%20A.%20Ghaoui%2C%20L.El%20Nemirovski%2C%20A.%20Robust%20Optimization%202009"
+        },
+        {
+            "id": "8",
+            "entry": "[8] B. T. Polyak. Some methods of speeding up the convergence of iteration methods. USSR Computational Mathematics and Mathematical Physics, 4(5):1\u201317, 1964.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Polyak%2C%20B.T.%20Some%20methods%20of%20speeding%20up%20the%20convergence%20of%20iteration%20methods%201964",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Polyak%2C%20B.T.%20Some%20methods%20of%20speeding%20up%20the%20convergence%20of%20iteration%20methods%201964"
+        },
+        {
+            "id": "9",
+            "entry": "[9] I. Sutskever, J. Martens, G. Dahl, and G. Hinton. On the importance of initialization and momentum in deep learning. In Proceedings of the 30th International Conference on Machine Learning, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutskever%2C%20I.%20Martens%2C%20J.%20Dahl%2C%20G.%20Hinton%2C%20G.%20On%20the%20importance%20of%20initialization%20and%20momentum%20in%20deep%20learning%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutskever%2C%20I.%20Martens%2C%20J.%20Dahl%2C%20G.%20Hinton%2C%20G.%20On%20the%20importance%20of%20initialization%20and%20momentum%20in%20deep%20learning%202013"
+        },
+        {
+            "id": "10",
+            "entry": "[10] N. Srivastava, G. Hinton, A. Krizhevsky, I. Sutskever, and R. Salakhutdinov. Dropout: A simple way to prevent neural networks from overfitting. Journal of Machine Learning Research, 15:1929\u20131958, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Srivastava%2C%20N.%20Hinton%2C%20G.%20Krizhevsky%2C%20A.%20Sutskever%2C%20I.%20Dropout%3A%20A%20simple%20way%20to%20prevent%20neural%20networks%20from%20overfitting%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Srivastava%2C%20N.%20Hinton%2C%20G.%20Krizhevsky%2C%20A.%20Sutskever%2C%20I.%20Dropout%3A%20A%20simple%20way%20to%20prevent%20neural%20networks%20from%20overfitting%202014"
+        },
+        {
+            "id": "11",
+            "entry": "[11] S. Ioffe and C. Szegedy. Batch normalization: Accelerating deep network training by reducing internal covariate shift. In 32nd International Conference on Machine Learning, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ioffe%2C%20S.%20Szegedy%2C%20C.%20Batch%20normalization%3A%20Accelerating%20deep%20network%20training%20by%20reducing%20internal%20covariate%20shift%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ioffe%2C%20S.%20Szegedy%2C%20C.%20Batch%20normalization%3A%20Accelerating%20deep%20network%20training%20by%20reducing%20internal%20covariate%20shift%202015"
+        },
+        {
+            "id": "12",
+            "entry": "[12] T. Schaul, J. Quan, I. Antonoglou, and D. Silver. Prioritized experience replay. In 6th International Conference on Learning Representations, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=T%20Schaul%20J%20Quan%20I%20Antonoglou%20and%20D%20Silver%20Prioritized%20experience%20replay%20In%206th%20International%20Conference%20on%20Learning%20Representations%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=T%20Schaul%20J%20Quan%20I%20Antonoglou%20and%20D%20Silver%20Prioritized%20experience%20replay%20In%206th%20International%20Conference%20on%20Learning%20Representations%202016"
+        },
+        {
+            "id": "13",
+            "entry": "[13] D. Horgan, J. Quan, D. Budden, G. Barth-Maron, M. Hessel, H. van Hasselt, and D. Silver. Distributed prioritized experience replay. In 6th International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=D%20Horgan%20J%20Quan%20D%20Budden%20G%20BarthMaron%20M%20Hessel%20H%20van%20Hasselt%20and%20D%20Silver%20Distributed%20prioritized%20experience%20replay%20In%206th%20International%20Conference%20on%20Learning%20Representations%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=D%20Horgan%20J%20Quan%20D%20Budden%20G%20BarthMaron%20M%20Hessel%20H%20van%20Hasselt%20and%20D%20Silver%20Distributed%20prioritized%20experience%20replay%20In%206th%20International%20Conference%20on%20Learning%20Representations%202018"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Y. Bengio, J. Louradour, R. Collobert, and J. Weston. Curriculum learning. In Proceedings of the 26th International Conference on Machine Learning, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bengio%2C%20Y.%20Louradour%2C%20J.%20Collobert%2C%20R.%20Weston%2C%20J.%20Curriculum%20learning%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bengio%2C%20Y.%20Louradour%2C%20J.%20Collobert%2C%20R.%20Weston%2C%20J.%20Curriculum%20learning%202009"
+        },
+        {
+            "id": "15",
+            "entry": "[15] A. Shrivastava, A. Gupta, and R. Girshick. Training region-based object detectors with online hard example mining. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shrivastava%2C%20A.%20Gupta%2C%20A.%20Girshick%2C%20R.%20Training%20region-based%20object%20detectors%20with%20online%20hard%20example%20mining%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shrivastava%2C%20A.%20Gupta%2C%20A.%20Girshick%2C%20R.%20Training%20region-based%20object%20detectors%20with%20online%20hard%20example%20mining%202016"
+        },
+        {
+            "id": "16",
+            "entry": "[16] S. Shalev-Shwartz and Y. Wexler. Minimizing the maximal loss: How and why. In Proceedings of the 33rd International Conference on Machine Learning, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shalev-Shwartz%2C%20S.%20Wexler%2C%20Y.%20Minimizing%20the%20maximal%20loss%3A%20How%20and%20why%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shalev-Shwartz%2C%20S.%20Wexler%2C%20Y.%20Minimizing%20the%20maximal%20loss%3A%20How%20and%20why%202016"
+        },
+        {
+            "id": "17",
+            "entry": "[17] A. McCallum H.-S. Chang, E. Learned-Miller. Active bias: Training more accurate neural networks by emphasizing high variance samples. In Advances in Neural Information Processing Systems 30, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chang%2C%20A.McCallum%20H.-S.%20Learned-Miller%2C%20E.%20Active%20bias%3A%20Training%20more%20accurate%20neural%20networks%20by%20emphasizing%20high%20variance%20samples%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chang%2C%20A.McCallum%20H.-S.%20Learned-Miller%2C%20E.%20Active%20bias%3A%20Training%20more%20accurate%20neural%20networks%20by%20emphasizing%20high%20variance%20samples%202017"
+        },
+        {
+            "id": "18",
+            "entry": "[18] C. Zhang, H. Kjellstr\u00f6m, and S. Mandt. Determinantal point processes for mini-batch diversification. Conference in Uncertainty in Artificial Intelligence, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20C.%20Kjellstr%C3%B6m%2C%20H.%20Mandt%2C%20S.%20Determinantal%20point%20processes%20for%20mini-batch%20diversification%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20C.%20Kjellstr%C3%B6m%2C%20H.%20Mandt%2C%20S.%20Determinantal%20point%20processes%20for%20mini-batch%20diversification%202017"
+        },
+        {
+            "id": "19",
+            "entry": "[19] C. Zhang, C. \u00d6ztireli, S. Mandt, and G. Salvi. Active mini-batch sampling using repulsive point processes. arXiv:1804.02772, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1804.02772"
+        },
+        {
+            "id": "20",
+            "entry": "[20] M. Mahoney. Randomized algorithms for matrices and data. Foundations and Trends in Machine learning, 3(2), 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mahoney%2C%20M.%20Randomized%20algorithms%20for%20matrices%20and%20data%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mahoney%2C%20M.%20Randomized%20algorithms%20for%20matrices%20and%20data%202011"
+        },
+        {
+            "id": "21",
+            "entry": "[21] P. Ma, B. Yu, , and M. Mahoney. A statistical perspective on algorithmic leveraging. In Proceedings of the 31st International Conference on Machine Learning, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=P.%20Ma%2C%20B.%20Yu%20Mahoney%2C%20M.%20A%20statistical%20perspective%20on%20algorithmic%20leveraging%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=P.%20Ma%2C%20B.%20Yu%20Mahoney%2C%20M.%20A%20statistical%20perspective%20on%20algorithmic%20leveraging%202014"
+        },
+        {
+            "id": "22",
+            "entry": "[22] S. U. Stich, A. Raj, and M. Jaggi. Safe adaptive importance sampling. In Advances in Neural Information Processing Systems 30, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Stich%2C%20S.U.%20Raj%2C%20A.%20Jaggi%2C%20M.%20Safe%20adaptive%20importance%20sampling%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Stich%2C%20S.U.%20Raj%2C%20A.%20Jaggi%2C%20M.%20Safe%20adaptive%20importance%20sampling%202017"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Z. Borsos, A. Krause, and K. Y. Levy. Online variance reduction for stochastic optimization. arXiv:1802.04715, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.04715"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Y. Lecun, L. Bottou, Y. Bengio, and P. Haffner. Gradient-based learning applied to document recognition. In Proceedings of the IEEE, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lecun%2C%20Y.%20Bottou%2C%20L.%20Bengio%2C%20Y.%20Haffner%2C%20P.%20Gradient-based%20learning%20applied%20to%20document%20recognition%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lecun%2C%20Y.%20Bottou%2C%20L.%20Bengio%2C%20Y.%20Haffner%2C%20P.%20Gradient-based%20learning%20applied%20to%20document%20recognition%201998"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Y. Netzer, T. Wang, A. Coates, A. Bissacco, B. Wu, and A. Y. Ng. Reading digits in natural images with unsupervised feature learning. In NIPS Workshop on Deep Learning and Unsupervised Feature Learning, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Netzer%2C%20Y.%20Wang%2C%20T.%20Coates%2C%20A.%20Bissacco%2C%20A.%20Reading%20digits%20in%20natural%20images%20with%20unsupervised%20feature%20learning%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Netzer%2C%20Y.%20Wang%2C%20T.%20Coates%2C%20A.%20Bissacco%2C%20A.%20Reading%20digits%20in%20natural%20images%20with%20unsupervised%20feature%20learning%202011"
+        },
+        {
+            "id": "26",
+            "entry": "[26] H. Larochelle, D. Erhan, A. Courville, J. Bergstra, and Y. Bengio. An empirical evaluation of deep architectures on problems with many factors of variation. In Proceedings of the 24th International Conference on Machine Learning, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Larochelle%2C%20H.%20Erhan%2C%20D.%20Courville%2C%20A.%20Bergstra%2C%20J.%20An%20empirical%20evaluation%20of%20deep%20architectures%20on%20problems%20with%20many%20factors%20of%20variation%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Larochelle%2C%20H.%20Erhan%2C%20D.%20Courville%2C%20A.%20Bergstra%2C%20J.%20An%20empirical%20evaluation%20of%20deep%20architectures%20on%20problems%20with%20many%20factors%20of%20variation%202007"
+        },
+        {
+            "id": "27",
+            "entry": "[27] A. Krizhevsky. Learning multiple layers of features from tiny images. Technical report, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20A.%20Learning%20multiple%20layers%20of%20features%20from%20tiny%20images%202009"
+        },
+        {
+            "id": "28",
+            "entry": "[28] T. S. Cohen and M. Welling. Group equivariant convolutional networks. In Proceedings of the 33rd International Conference on Machine Learning, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cohen%2C%20T.S.%20Welling%2C%20M.%20Group%20equivariant%20convolutional%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cohen%2C%20T.S.%20Welling%2C%20M.%20Group%20equivariant%20convolutional%20networks%202016"
+        },
+        {
+            "id": "29",
+            "entry": "[29] K. He, X. Zhang, S. Ren, and J. Sun. Identity mapping in deep residual networks. In European Conference on Computer Vision, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Identity%20mapping%20in%20deep%20residual%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Identity%20mapping%20in%20deep%20residual%20networks%202016"
+        }
+    ]
+}

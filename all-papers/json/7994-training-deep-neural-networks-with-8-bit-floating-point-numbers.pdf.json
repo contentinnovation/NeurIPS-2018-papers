@@ -1,0 +1,244 @@
+{
+    "filename": "7994-training-deep-neural-networks-with-8-bit-floating-point-numbers.pdf",
+    "metadata": {
+        "title": "Training Deep Neural Networks with 8-bit Floating Point Numbers",
+        "author": "Naigang Wang, Jungwook Choi, Daniel Brand, Chia-Yu Chen, Kailash Gopalakrishnan",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7994-training-deep-neural-networks-with-8-bit-floating-point-numbers.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "The state-of-the-art hardware platforms for training Deep Neural Networks (DNNs) are moving from traditional single precision (32-bit) computations towards 16 bits of precision \u2013 in large part due to the high energy efficiency and smaller bit storage associated with using reduced-precision representations. However, unlike inference, training with numbers represented with less than 16 bits has been challenging due to the need to maintain fidelity of the gradient computations during back-propagation. Here we demonstrate, for the first time, the successful training of DNNs using 8-bit floating point numbers while fully maintaining the accuracy on a spectrum of Deep Learning models and datasets. In addition to reducing the data and computation precision to 8 bits, we also successfully reduce the arithmetic precision for additions (used in partial product accumulation and weight updates) from 32 bits to 16 bits through the introduction of a number of key ideas including chunk-based accumulation and floating point stochastic rounding. The use of these novel techniques lays the foundation for a new generation of hardware training platforms with the potential for 2 \u2212 4\u00d7 improved throughput over today\u2019s systems."
+    },
+    "keywords": [
+        {
+            "term": "approximate computing",
+            "url": "https://en.wikipedia.org/wiki/approximate_computing"
+        },
+        {
+            "term": "learning algorithm",
+            "url": "https://en.wikipedia.org/wiki/learning_algorithm"
+        },
+        {
+            "term": "stochastic rounding",
+            "url": "https://en.wikipedia.org/wiki/stochastic_rounding"
+        },
+        {
+            "term": "Convolutional Neural Networks",
+            "url": "https://en.wikipedia.org/wiki/Convolutional_Neural_Network"
+        },
+        {
+            "term": "machine learning",
+            "url": "https://en.wikipedia.org/wiki/machine_learning"
+        },
+        {
+            "term": "energy efficiency",
+            "url": "https://en.wikipedia.org/wiki/energy_efficiency"
+        },
+        {
+            "term": "least significant bits",
+            "url": "https://en.wikipedia.org/wiki/least_significant_bits"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        },
+        {
+            "term": "partial product",
+            "url": "https://en.wikipedia.org/wiki/partial_product"
+        },
+        {
+            "term": "deep neural networks",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_networks"
+        },
+        {
+            "term": "stochastic gradient descent",
+            "url": "https://en.wikipedia.org/wiki/stochastic_gradient_descent"
+        },
+        {
+            "term": "f p",
+            "url": "https://en.wikipedia.org/wiki/F_P"
+        },
+        {
+            "term": "hardware platform",
+            "url": "https://en.wikipedia.org/wiki/hardware_platform"
+        },
+        {
+            "term": "machine translation",
+            "url": "https://en.wikipedia.org/wiki/machine_translation"
+        },
+        {
+            "term": "speech recognition",
+            "url": "https://en.wikipedia.org/wiki/speech_recognition"
+        },
+        {
+            "term": "neural networks",
+            "url": "https://en.wikipedia.org/wiki/neural_networks"
+        }
+    ],
+    "highlights": [
+        "Deep Learning has emerged as the dominant Machine Learning algorithm showing remarkable success in a wide spectrum of applications, including image processing [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>], machine translation [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>], speech recognition [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>] and many others.<br/><br/>In each of these domains, Deep Neural Networks (DNNs) achieve superior accuracy through the use of very large and deep models \u2013 necessitating up to 100s of ExaOps of computation during training and Gigabytes of storage",
+        "Deep Learning has emerged as the dominant Machine Learning algorithm showing remarkable success in a wide spectrum of applications, including image processing [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>], machine translation [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>], speech recognition [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>] and many others",
+        "All networks are trained using the stochastic gradient descent optimizer via the proposed F P 8 training scheme without changes to network architectures, data pre-processing, or hyper-parameters, the results are compared with the F P 32 baseline",
+        "Our experimental results indicate that training with F P 8 representations, F P 16 accumulations and F P 16 weight updates show remarkable robustness across a wide spectrum of application domains, network types and optimizer choices",
+        "We have demonstrated Deep Neural Networks training with 8-bit floating point numbers (F P 8) that achieves 2 \u2212 4\u00d7 speedup without compromise in accuracy",
+        "We propose two new techniques, chunk-based accumulation and floating point stochastic rounding, that enable a reduction of bit-precision for additions down to 16 bits \u2013 as well as implement them in hardware"
+    ],
+    "key_statements": [
+        "Deep Learning has emerged as the dominant Machine Learning algorithm showing remarkable success in a wide spectrum of applications, including image processing [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>], machine translation [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>], speech recognition [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>] and many others.<br/><br/>In each of these domains, Deep Neural Networks (DNNs) achieve superior accuracy through the use of very large and deep models \u2013 necessitating up to 100s of ExaOps of computation during training and Gigabytes of storage",
+        "Deep Learning has emerged as the dominant Machine Learning algorithm showing remarkable success in a wide spectrum of applications, including image processing [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>], machine translation [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>], speech recognition [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>] and many others",
+        "Approximate computing techniques have been widely studied to minimize the computational complexity of these algorithms as well as to improve the throughput and energy efficiency of hardware platforms executing Deep Learning kernels [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>]",
+        "Devised a new F P 8 floating point format that, in combination with Deep Neural Networks training insights, allows general matrix multiplication computations for Deep Learning to work without loss in model accuracy",
+        "We demonstrate that swamping severely limits reduction in training precision and propose two novel schemes that completely overcome this limit and enable low-precision F P 8 Deep Neural Networks training: chunk-based accumulation and floating point stochastic rounding",
+        "To the best of our knowledge, this work is the first to demonstrate the effectiveness of chunk-based accumulation and floating point stochastic rounding towards 8-bit Deep Neural Networks training of large models",
+        "All networks are trained using the stochastic gradient descent optimizer via the proposed F P 8 training scheme without changes to network architectures, data pre-processing, or hyper-parameters, the results are compared with the F P 32 baseline",
+        "With the proposed F P 8 training technique, every single network tested achieved almost identical test errors compared to the full-precision baseline while memory foot-print for not only weight but the master copy is reduced by 2\u00d7 due to F P 8 weight and F P 16 master copy",
+        "Our experimental results indicate that training with F P 8 representations, F P 16 accumulations and F P 16 weight updates show remarkable robustness across a wide spectrum of application domains, network types and optimizer choices",
+        "We have demonstrated Deep Neural Networks training with 8-bit floating point numbers (F P 8) that achieves 2 \u2212 4\u00d7 speedup without compromise in accuracy",
+        "We propose two new techniques, chunk-based accumulation and floating point stochastic rounding, that enable a reduction of bit-precision for additions down to 16 bits \u2013 as well as implement them in hardware"
+    ],
+    "summary": [
+        "Deep Learning has emerged as the dominant Machine Learning algorithm showing remarkable success in a wide spectrum of applications, including image processing [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>], machine translation [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>], speech recognition [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>] and many others.<br/><br/>In each of these domains, Deep Neural Networks (DNNs) achieve superior accuracy through the use of very large and deep models \u2013 necessitating up to 100s of ExaOps of computation during training and Gigabytes of storage.",
+        "Devised a new F P 8 floating point format that, in combination with DNN training insights, allows GEMM computations for Deep Learning to work without loss in model accuracy.",
+        "To maintain model accuracy for reduced-precision training, much of recent work keeps the data and computation precision in at least 16 bits.",
+        "MPT [<a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>] uses a IEEE half-precision floating point format (16 bits) accumulating results into 32-bit arrays and proposes a loss-scaling method to preserve gradients with very small magnitudes.",
+        "Using the new ideas presented in this paper, we show that it is possible to train these networks using just 8-bit floating point representations for all of the arrays used in matrix and tensor computations \u2013 weights, activations, errors and gradients.",
+        "We demonstrate that swamping severely limits reduction in training precision and propose two novel schemes that completely overcome this limit and enable low-precision F P 8 DNN training: chunk-based accumulation and floating point stochastic rounding.",
+        "In spite of this difference, we show both numerically and empirically that this technique works robustly for DNNs. To the best of our knowledge, this work is the first to demonstrate the effectiveness of chunk-based accumulation and floating point stochastic rounding towards 8-bit DNN training of large models.",
+        "Comparison of Accumulation Techniques We perform numerical analysis to investigate the effectiveness of the proposed chunk-based accumulation and floating point stochastic rounding schemes.",
+        "Given these results on simple dot-products, we employ chunk-based accumulation for Forward/Backward/Gradient GEMMs, using the reduced-precision dot-product algorithm described in Fig. 3(a).",
+        "Motivated by the significant area/energy expense of F P 32 adders, we counter this by claiming that chunk-based accumulations can effectively address this loss in long dot-products while maintaining accumulation bit-precision in F P 16.",
+        "To understand the impact of chunk size on accumulation accuracy for Gradient GEMM in DNN training, we extracted data from Activation and Error matrices from the two different Conv layers in the CIFAR10-ResNet model to compute Gradient GEMM with varying chunk sizes.",
+        "We maintain F P 16 for the entire weight update process in SGD (i.e., L2-Reg, Momentum-Acc, and Weight-Upd), as a part of our F P 8 training scheme; stochastic rounding is applied to avoid accuracy loss.",
+        "We propose two new techniques, chunk-based accumulation and floating point stochastic rounding, that enable a reduction of bit-precision for additions down to 16 bits \u2013 as well as implement them in hardware.",
+        "Future work aims to further optimize data formats and computations in order to increase margins as well as study additional benchmarks and datasets"
+    ],
+    "headline": "For the first time, the successful training of Deep Neural Networks using 8-bit floating point numbers while fully maintaining the accuracy on a spectrum of Deep Learning models and datasets",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Anthony M Castaldo, R Clint Whaley, and Anthony T Chronopoulos. Reducing floating point error in dot product using the superblock family of algorithms. SIAM journal on scientific computing, 31(2): 1156\u20131174, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Castaldo%2C%20Anthony%20M.%20Whaley%2C%20R.Clint%20Chronopoulos%2C%20Anthony%20T.%20Reducing%20floating%20point%20error%20in%20dot%20product%20using%20the%20superblock%20family%20of%20algorithms%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Castaldo%2C%20Anthony%20M.%20Whaley%2C%20R.Clint%20Chronopoulos%2C%20Anthony%20T.%20Reducing%20floating%20point%20error%20in%20dot%20product%20using%20the%20superblock%20family%20of%20algorithms%202008"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Chia-Yu Chen, Jungwook Choi, Kailash Gopalakrishnan, Viji Srinivasan, and Swagath Venkataramani. Exploiting approximate computing for deep learning acceleration. In Design, Automation Test in Europe Conference Exhibition (DATE), pages 821\u2013826, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Chia-Yu%20Choi%2C%20Jungwook%20Gopalakrishnan%2C%20Kailash%20Srinivasan%2C%20Viji%20Exploiting%20approximate%20computing%20for%20deep%20learning%20acceleration%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Chia-Yu%20Choi%2C%20Jungwook%20Gopalakrishnan%2C%20Kailash%20Srinivasan%2C%20Viji%20Exploiting%20approximate%20computing%20for%20deep%20learning%20acceleration%202018"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Jungwook Choi, Zhuo Wang, Swagath Venkataramani, Pierce I-Jen Chuang, Vijayalakshmi Srinivasan, and Kailash Gopalakrishnan. Pact: Parameterized clipping activation for quantized neural networks. arXiv preprint arXiv:1805.06085, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1805.06085"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Dipankar Das, Naveen Mellempudi, Dheevatsa Mudigere, Dhiraj Kalamkar, Sasikanth Avancha, Kunal Banerjee, Srinivas Sridharan, Karthik Vaidyanathan, Bharat Kaul, Evangelos Georganas, et al. Mixed precision training of convolutional neural networks using integer operations. arXiv preprint arXiv:1802.00930, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.00930"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Bruce Fleischer, Sunil Shukla, Matthew Ziegler, Joel Silberman, Jinwook Oh, Vijayalakshmi Srinivasan, Jungwook Choi, Silvia Mueller, Ankur Agrawal, Tina Babinsky, et al. A scalable multi-teraops deep learning processor core for ai training and inference. In VLSI Circuits, 2018 Symposium on. IEEE, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fleischer%2C%20Bruce%20Shukla%2C%20Sunil%20Ziegler%2C%20Matthew%20Silberman%2C%20Joel%20A%20scalable%20multi-teraops%20deep%20learning%20processor%20core%20for%20ai%20training%20and%20inference%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fleischer%2C%20Bruce%20Shukla%2C%20Sunil%20Ziegler%2C%20Matthew%20Silberman%2C%20Joel%20A%20scalable%20multi-teraops%20deep%20learning%20processor%20core%20for%20ai%20training%20and%20inference%202018"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Suyog Gupta, Ankur Agrawal, Kailash Gopalakrishnan, and Pritish Narayanan. Deep learning with limited numerical precision. In International Conference on Machine Learning, pages 1737\u20131746, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gupta%2C%20Suyog%20Agrawal%2C%20Ankur%20Gopalakrishnan%2C%20Kailash%20Narayanan%2C%20Pritish%20Deep%20learning%20with%20limited%20numerical%20precision%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gupta%2C%20Suyog%20Agrawal%2C%20Ankur%20Gopalakrishnan%2C%20Kailash%20Narayanan%2C%20Pritish%20Deep%20learning%20with%20limited%20numerical%20precision%202015"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Suyog Gupta, Wei Zhang, and Fei Wang. Model accuracy and runtime tradeoff in distributed deep learning: A systematic study. In Data Mining (ICDM), 2016 IEEE 16th International Conference on, pages 171\u2013180. IEEE, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gupta%2C%20Suyog%20Zhang%2C%20Wei%20Wang%2C%20Fei%20Model%20accuracy%20and%20runtime%20tradeoff%20in%20distributed%20deep%20learning%3A%20A%20systematic%20study%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gupta%2C%20Suyog%20Zhang%2C%20Wei%20Wang%2C%20Fei%20Model%20accuracy%20and%20runtime%20tradeoff%20in%20distributed%20deep%20learning%3A%20A%20systematic%20study%202016"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Mark Harris. Mixed-precision programming with cuda 8, 2016. URL https://devblogs.nvidia.com/mixed-precision-programming-cuda-8/.",
+            "url": "https://devblogs.nvidia.com/mixed-precision-programming-cuda-8/"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep Residual Learning for Image Recognition. IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pages 770\u2013778, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20Residual%20Learning%20for%20Image%20Recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20Residual%20Learning%20for%20Image%20Recognition%202016"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Nicholas J Higham. The accuracy of floating point summation. SIAM Journal on Scientific Computing, 14 (4):783\u2013799, 1993.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Higham%2C%20Nicholas%20J.%20The%20accuracy%20of%20floating%20point%20summation%201993",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Higham%2C%20Nicholas%20J.%20The%20accuracy%20of%20floating%20point%20summation%201993"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Itay Hubara, Matthieu Courbariaux, Daniel Soudry, Ran El-Yaniv, and Yoshua Bengio. Binarized neural networks. In Advances in neural information processing systems, pages 4107\u20134115, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Itay%20Hubara%20Matthieu%20Courbariaux%20Daniel%20Soudry%20Ran%20ElYaniv%20and%20Yoshua%20Bengio%20Binarized%20neural%20networks%20In%20Advances%20in%20neural%20information%20processing%20systems%20pages%2041074115%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Itay%20Hubara%20Matthieu%20Courbariaux%20Daniel%20Soudry%20Ran%20ElYaniv%20and%20Yoshua%20Bengio%20Binarized%20neural%20networks%20In%20Advances%20in%20neural%20information%20processing%20systems%20pages%2041074115%202016"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Diederik P. Kingma and Jimmy Ba. Adam: A Method for Stochastic Optimization. International Conference on Learning Representations (ICLR), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Ba%2C%20Jimmy%20Adam%3A%20A%20Method%20for%20Stochastic%20Optimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Ba%2C%20Jimmy%20Adam%3A%20A%20Method%20for%20Stochastic%20Optimization%202015"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Urs K\u00f6ster, Tristan Webb, Xin Wang, Marcel Nassar, Arjun K Bansal, William Constable, Oguz Elibol, Scott Gray, Stewart Hall, Luke Hornof, et al. Flexpoint: An adaptive numerical format for efficient training of deep neural networks. In Advances in Neural Information Processing Systems, pages 1742\u20131752, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=K%C3%B6ster%2C%20Urs%20Webb%2C%20Tristan%20Wang%2C%20Xin%20Nassar%2C%20Marcel%20Flexpoint%3A%20An%20adaptive%20numerical%20format%20for%20efficient%20training%20of%20deep%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=K%C3%B6ster%2C%20Urs%20Webb%2C%20Tristan%20Wang%2C%20Xin%20Nassar%2C%20Marcel%20Flexpoint%3A%20An%20adaptive%20numerical%20format%20for%20efficient%20training%20of%20deep%20neural%20networks%202017"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Alex Krizhevsky and G Hinton. Convolutional deep belief networks on cifar-10. Unpublished manuscript, 40, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20Alex%20Hinton%2C%20G.%20Convolutional%20deep%20belief%20networks%20on%20cifar-10%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krizhevsky%2C%20Alex%20Hinton%2C%20G.%20Convolutional%20deep%20belief%20networks%20on%20cifar-10%202010"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Alex Krizhevsky, Ilya Sutskever, and Geoffrey E. Hinton. ImageNet Classification with Deep Convolutional Neural Networks. In Advances in Neural Information Processing Systems 25 (NIPS), pages 1097\u20131105, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Hinton%2C%20Geoffrey%20E.%20ImageNet%20Classification%20with%20Deep%20Convolutional%20Neural%20Networks%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Hinton%2C%20Geoffrey%20E.%20ImageNet%20Classification%20with%20Deep%20Convolutional%20Neural%20Networks%202012"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Paulius Micikevicius, Sharan Narang, Jonah Alben, Gregory Diamos, Erich Elsen, David Garcia, Boris Ginsburg, Michael Houston, Oleksii Kuchaev, Ganesh Venkatesh, et al. Mixed precision training. arXiv preprint arXiv:1710.03740, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.03740"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Thomas G Robertazzi and Stuart C Schwartz. Best \u201cordering\u201d for floating-point addition. ACM Transactions on Mathematical Software (TOMS), 14(1):101\u2013110, 1988.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Robertazzi%2C%20Thomas%20G.%20Schwartz%2C%20Stuart%20C.%20Best%20%E2%80%9Cordering%E2%80%9D%20for%20floating-point%20addition%201988",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Robertazzi%2C%20Thomas%20G.%20Schwartz%2C%20Stuart%20C.%20Best%20%E2%80%9Cordering%E2%80%9D%20for%20floating-point%20addition%201988"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Ewout van den Berg, Bhuvana Ramabhadran, and Michael Picheny. Training variance and performance evaluation of neural networks in speech. In Acoustics, Speech and Signal Processing (ICASSP), 2017 IEEE International Conference on, pages 2287\u20132291. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=van%20den%20Berg%2C%20Ewout%20Ramabhadran%2C%20Bhuvana%20Picheny%2C%20Michael%20Training%20variance%20and%20performance%20evaluation%20of%20neural%20networks%20in%20speech%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=van%20den%20Berg%2C%20Ewout%20Ramabhadran%2C%20Bhuvana%20Picheny%2C%20Michael%20Training%20variance%20and%20performance%20evaluation%20of%20neural%20networks%20in%20speech%202017"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Shuang Wu, Guoqi Li, Feng Chen, and Luping Shi. Training and inference with integers in deep neural networks. arXiv preprint arXiv:1802.04680, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.04680"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Yonghui Wu, Mike Schuster, Zhifeng Chen, Quoc V Le, Mohammad Norouzi, Wolfgang Macherey, Maxim Krikun, Yuan Cao, Qin Gao, Klaus Macherey, et al. Google\u2019s neural machine translation system: Bridging the gap between human and machine translation. arXiv preprint arXiv:1609.08144, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.08144"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Wayne Xiong, Jasha Droppo, Xuedong Huang, Frank Seide, Mike Seltzer, Andreas Stolcke, Dong Yu, and Geoffrey Zweig. The microsoft 2016 conversational speech recognition system. In Acoustics, Speech and Signal Processing (ICASSP), 2017 IEEE International Conference on, pages 5255\u20135259. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wayne%20Xiong%20Jasha%20Droppo%20Xuedong%20Huang%20Frank%20Seide%20Mike%20Seltzer%20Andreas%20Stolcke%20Dong%20Yu%20and%20Geoffrey%20Zweig%20The%20microsoft%202016%20conversational%20speech%20recognition%20system%20In%20Acoustics%20Speech%20and%20Signal%20Processing%20ICASSP%202017%20IEEE%20International%20Conference%20on%20pages%2052555259%20IEEE%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wayne%20Xiong%20Jasha%20Droppo%20Xuedong%20Huang%20Frank%20Seide%20Mike%20Seltzer%20Andreas%20Stolcke%20Dong%20Yu%20and%20Geoffrey%20Zweig%20The%20microsoft%202016%20conversational%20speech%20recognition%20system%20In%20Acoustics%20Speech%20and%20Signal%20Processing%20ICASSP%202017%20IEEE%20International%20Conference%20on%20pages%2052555259%20IEEE%202017"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Shuchang Zhou, Zekun Ni, Xinyu Zhou, He Wen, Yuxin Wu, and Yuheng Zou. DoReFa-Net: Training Low Bitwidth Convolutional Neural Networks with Low Bitwidth Gradients. CoRR, abs/1606.06160, 2016. ",
+            "arxiv_url": "https://arxiv.org/pdf/1606.06160"
+        }
+    ]
+}

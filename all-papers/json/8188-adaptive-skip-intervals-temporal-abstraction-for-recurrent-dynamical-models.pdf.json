@@ -1,0 +1,230 @@
+{
+    "filename": "8188-adaptive-skip-intervals-temporal-abstraction-for-recurrent-dynamical-models.pdf",
+    "metadata": {
+        "title": "Adaptive Skip Intervals: Temporal Abstraction for Recurrent Dynamical Models",
+        "author": "Alexander Neitz, Giambattista Parascandolo, Stefan Bauer, Bernhard Sch\u00f6lkopf",
+        "date": 2007,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8188-adaptive-skip-intervals-temporal-abstraction-for-recurrent-dynamical-models.pdf"
+        },
+        "abstract": "We introduce a method which enables a recurrent dynamics model to be temporally abstract. Our approach, which we call Adaptive Skip Intervals (ASI), is based on the observation that in many sequential prediction tasks, the exact time at which events occur is irrelevant to the underlying objective. Moreover, in many situations, there exist prediction intervals which result in particularly easy-to-predict transitions. We show that there are prediction tasks for which we gain both computational efficiency and prediction accuracy by allowing the model to make predictions at a sampling rate which it can choose itself."
+    },
+    "keywords": [
+        {
+            "term": "generative model",
+            "url": "https://en.wikipedia.org/wiki/generative_model"
+        },
+        {
+            "term": "dynamic model",
+            "url": "https://en.wikipedia.org/wiki/dynamic_model"
+        },
+        {
+            "term": "dynamic time",
+            "url": "https://en.wikipedia.org/wiki/dynamic_time"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        }
+    ],
+    "highlights": [
+        "A core component of intelligent agents is the ability to predict certain properties of future states of their environments (<a class=\"ref-link\" id=\"cLegg_2007_a\" href=\"#rLegg_2007_a\"><a class=\"ref-link\" id=\"cLegg_2007_a\" href=\"#rLegg_2007_a\">Legg and Hutter, 2007</a></a>)",
+        "We propose Adaptive Skip Intervals (ASI), a simple change to autoregressive environment simulators (<a class=\"ref-link\" id=\"cChiappa_et+al_2017_a\" href=\"#rChiappa_et+al_2017_a\">Chiappa et al, 2017</a>; <a class=\"ref-link\" id=\"cBuesing_et+al_2018_a\" href=\"#rBuesing_et+al_2018_a\">Buesing et al, 2018</a>) which can be applied to systems in which it is not necessary to predict the exact time of events",
+        "We presented a time skipping framework for the problem of sequential predictions",
+        "An interesting direction for future work is the combination of temporal abstraction with abstractions in a latent space",
+        "The idea of an optimal prediction skip interval should extend to the case of stochastic generative models, where instead of a deterministic mapping from current to state, the model provides a probability distribution over states",
+        "Another line of investigation which is left to future work is to integrate as described in Section 3. with action-conditional models"
+    ],
+    "key_statements": [
+        "A core component of intelligent agents is the ability to predict certain properties of future states of their environments (<a class=\"ref-link\" id=\"cLegg_2007_a\" href=\"#rLegg_2007_a\"><a class=\"ref-link\" id=\"cLegg_2007_a\" href=\"#rLegg_2007_a\">Legg and Hutter, 2007</a></a>)",
+        "We propose Adaptive Skip Intervals (ASI), a simple change to autoregressive environment simulators (<a class=\"ref-link\" id=\"cChiappa_et+al_2017_a\" href=\"#rChiappa_et+al_2017_a\">Chiappa et al, 2017</a>; <a class=\"ref-link\" id=\"cBuesing_et+al_2018_a\" href=\"#rBuesing_et+al_2018_a\">Buesing et al, 2018</a>) which can be applied to systems in which it is not necessary to predict the exact time of events",
+        "We presented a time skipping framework for the problem of sequential predictions",
+        "An interesting direction for future work is the combination of temporal abstraction with abstractions in a latent space",
+        "The idea of an optimal prediction skip interval should extend to the case of stochastic generative models, where instead of a deterministic mapping from current to state, the model provides a probability distribution over states",
+        "as described in Section 3. should lead to simpler distributions, allowing for simpler models and more data efficiency just as in the deterministic case",
+        "The evaluation of this claim is left for future work",
+        "Another line of investigation which is left to future work is to integrate as described in Section 3. with action-conditional models",
+        "As mentioned in Section 2.1, the problem could be addressed by using a separate ASIdynamical model for each policy or option, which would allow for option-conditional planning"
+    ],
+    "summary": [
+        "A core component of intelligent agents is the ability to predict certain properties of future states of their environments (<a class=\"ref-link\" id=\"cLegg_2007_a\" href=\"#rLegg_2007_a\"><a class=\"ref-link\" id=\"cLegg_2007_a\" href=\"#rLegg_2007_a\">Legg and Hutter, 2007</a></a>).",
+        "Training process The main idea of ASI is that the dynamical model f is not forced to predict every single time step in the sequence.",
+        "We train the model f via gradient descent to reduce the prediction loss Lx. In the example with the funnel, this could intuitively work as follows: the transition from the ball which falls into the funnel to the ball which is at the end of the funnel is the most robust one \u2013 it occurs virtually every time.",
+        "Besides exploration of temporal matching,as mentioned in Section 2.2 we adopt another curriculum scheme, scheduled sampling (<a class=\"ref-link\" id=\"cBengio_et+al_2015_a\" href=\"#rBengio_et+al_2015_a\">Bengio et al, 2015</a>), which gradually shifts the training distribution from observation-dependent transitions towards prediction-dependent transitions.",
+        "F can unfold the dynamics over multiple steps and \u03c8 is applied to the resulting frames, allowing the combined model to predict the label from the initial frame.",
+        "(ASI w/o exploration) (c) The dynamics model without adaptive skip intervals such that it is forced to predict every step).",
+        "The network trained with ASI has learned to skip a variable number of frames, specifically avoiding the bouncing in the funnel, and directly predicting the exiting ball.",
+        "Since the adaptive skip intervals methods are allowed to skip frames, they need fewer model evaluations than fixed-rate training schemes.",
+        "The idea of skipping time steps has been investigated in <a class=\"ref-link\" id=\"cKe_et+al_2017_a\" href=\"#rKe_et+al_2017_a\">Ke et al (2017</a>), where the authors present a way to attack the problem of long-term credit assignment in recurrent neural networks by only propagating errors through selected states instead of every single past timestep.",
+        "Related to our work is the Predictron (<a class=\"ref-link\" id=\"cSilver_et+al_2016_a\" href=\"#rSilver_et+al_2016_a\">Silver et al, 2016</a>), which is a deep neural network architecture which is set up to perform a sequence of temporally abstract lookahead steps in a latent space.",
+        "Similar in spirit to the Predictron, the value prediction network (VPN) (<a class=\"ref-link\" id=\"cOh_et+al_2017_a\" href=\"#rOh_et+al_2017_a\">Oh et al, 2017</a>) proposes a neural network architecture to learn a dynamics model whose abstract states make option-conditional predictions of future values rather than of future observations.",
+        "In cases where our approach fails, e.g. when the alignment of predicted and ground truth is lost and the model does not have the power to restore it, more advanced optimization methods like dynamic time warping (M\u00fcller, 2007) during the matching phase may help at the cost of the simplicity and seamless integration of the scheduled sampling, as described in Section 3.",
+        "There may be a more interesting interplay between ideal skip intervals and switching points for options, which suggest that they should ideally be learned jointly"
+    ],
+    "headline": "We introduce a method which enables a recurrent dynamics model to be temporally abstract",
+    "reference_links": [
+        {
+            "id": "Arulkumaran_et+al_2017_a",
+            "entry": "Arulkumaran, K., Deisenroth, M. P., Brundage, M., and Bharath, A. A. (2017). A brief survey of deep reinforcement learning. arXiv preprint arXiv:1708.05866.",
+            "arxiv_url": "https://arxiv.org/pdf/1708.05866"
+        },
+        {
+            "id": "Barto_2003_a",
+            "entry": "Barto, A. G. and Mahadevan, S. (2003). Recent advances in hierarchical reinforcement learning. Discrete event dynamic systems, 13(1-2):41\u201377.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Barto%2C%20A.G.%20Mahadevan%2C%20S.%20Recent%20advances%20in%20hierarchical%20reinforcement%20learning.%20Discrete%20event%20dynamic%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Barto%2C%20A.G.%20Mahadevan%2C%20S.%20Recent%20advances%20in%20hierarchical%20reinforcement%20learning.%20Discrete%20event%20dynamic%202003"
+        },
+        {
+            "id": "Belzner_2016_a",
+            "entry": "Belzner, L. (2016). Time-adaptive cross entropy planning. In Proceedings of the 31st Annual ACM Symposium on Applied Computing, pages 254\u2013259. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Belzner%2C%20L.%20Time-adaptive%20cross%20entropy%20planning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Belzner%2C%20L.%20Time-adaptive%20cross%20entropy%20planning%202016"
+        },
+        {
+            "id": "Bengio_et+al_2015_a",
+            "entry": "Bengio, S., Vinyals, O., Jaitly, N., and Shazeer, N. (2015). Scheduled sampling for sequence prediction with recurrent neural networks. In Advances in Neural Information Processing Systems, pages 1171\u20131179.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bengio%2C%20S.%20Vinyals%2C%20O.%20Jaitly%2C%20N.%20Shazeer%2C%20N.%20Scheduled%20sampling%20for%20sequence%20prediction%20with%20recurrent%20neural%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bengio%2C%20S.%20Vinyals%2C%20O.%20Jaitly%2C%20N.%20Shazeer%2C%20N.%20Scheduled%20sampling%20for%20sequence%20prediction%20with%20recurrent%20neural%20networks%202015"
+        },
+        {
+            "id": "Braylan_et+al_2000_a",
+            "entry": "Braylan, A., Hollenbeck, M., Meyerson, E., and Miikkulainen, R. (2000). Frame skip is a powerful parameter for learning to play atari. Space, 1600:1800.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Braylan%20A%20Hollenbeck%20M%20Meyerson%20E%20and%20Miikkulainen%20R%202000%20Frame%20skip%20is%20a%20powerful%20parameter%20for%20learning%20to%20play%20atari%20Space%2016001800"
+        },
+        {
+            "id": "Buesing_et+al_2018_a",
+            "entry": "Buesing, L., Weber, T., Racaniere, S., Eslami, S., Rezende, D., Reichert, D. P., Viola, F., Besse, F., Gregor, K., Hassabis, D., et al. (2018). Learning and querying fast generative models for reinforcement learning. arXiv preprint arXiv:1802.03006.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.03006"
+        },
+        {
+            "id": "Chiappa_et+al_2017_a",
+            "entry": "Chiappa, S., Racaniere, S., Wierstra, D., and Mohamed, S. (2017). Recurrent environment simulators. arXiv preprint arXiv:1704.02254.",
+            "arxiv_url": "https://arxiv.org/pdf/1704.02254"
+        },
+        {
+            "id": "Daw_2012_a",
+            "entry": "Daw, N. D. (2012). Model-based reinforcement learning as cognitive search: neurocomputational theories.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Daw%2C%20N.D.%20Model-based%20reinforcement%20learning%20as%20cognitive%20search%3A%20neurocomputational%20theories%202012"
+        },
+        {
+            "id": "Ebert_et+al_2017_a",
+            "entry": "Ebert, F., Finn, C., Lee, A. X., and Levine, S. (2017). Self-supervised visual planning with temporal skip connections. arXiv preprint arXiv:1710.05268.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.05268"
+        },
+        {
+            "id": "Finn_2017_a",
+            "entry": "Finn, C. and Levine, S. (2017). Deep visual foresight for planning robot motion. In Robotics and Automation (ICRA), 2017 IEEE International Conference on, pages 2786\u20132793. IEEE.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Finn%2C%20C.%20Levine%2C%20S.%20Deep%20visual%20foresight%20for%20planning%20robot%20motion%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Finn%2C%20C.%20Levine%2C%20S.%20Deep%20visual%20foresight%20for%20planning%20robot%20motion%202017"
+        },
+        {
+            "id": "Glorot_et+al_2011_a",
+            "entry": "Glorot, X., Bordes, A., and Bengio, Y. (2011). Deep sparse rectifier neural networks. In Proceedings of the fourteenth international conference on artificial intelligence and statistics, pages 315\u2013323.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Glorot%2C%20X.%20Bordes%2C%20A.%20Bengio%2C%20Y.%20Deep%20sparse%20rectifier%20neural%20networks%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Glorot%2C%20X.%20Bordes%2C%20A.%20Bengio%2C%20Y.%20Deep%20sparse%20rectifier%20neural%20networks%202011"
+        },
+        {
+            "id": "He_et+al_2015_a",
+            "entry": "He, K., Zhang, X., Ren, S., and Sun, J. (2015). Delving deep into rectifiers: Surpassing human-level performance on imagenet classification. In Proceedings of the IEEE international conference on computer vision, pages 1026\u20131034.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Delving%20deep%20into%20rectifiers%3A%20Surpassing%20human-level%20performance%20on%20imagenet%20classification%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Delving%20deep%20into%20rectifiers%3A%20Surpassing%20human-level%20performance%20on%20imagenet%20classification%202015"
+        },
+        {
+            "id": "Heess_et+al_2016_a",
+            "entry": "Heess, N., Wayne, G., Tassa, Y., Lillicrap, T., Riedmiller, M., and Silver, D. (2016). Learning and transfer of modulated locomotor controllers. arXiv preprint arXiv:1610.05182.",
+            "arxiv_url": "https://arxiv.org/pdf/1610.05182"
+        },
+        {
+            "id": "Ke_et+al_2017_a",
+            "entry": "Ke, N. R., Goyal, A., Bilaniuk, O., Binas, J., Charlin, L., Pal, C., and Bengio, Y. (2017). Sparse attentive backtracking: Long-range credit assignment in recurrent networks. arXiv preprint arXiv:1711.02326.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.02326"
+        },
+        {
+            "id": "Kingma_2014_a",
+            "entry": "Kingma, D. P. and Ba, J. (2014). Adam: A method for stochastic optimization. arXiv preprint arXiv:1412.6980.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6980"
+        },
+        {
+            "id": "Legg_2007_a",
+            "entry": "Legg, S. and Hutter, M. (2007). Universal intelligence: A definition of machine intelligence. Minds and Machines, 17(4):391\u2013444.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Legg%2C%20S.%20Hutter%2C%20M.%20Universal%20intelligence%3A%20A%20definition%20of%20machine%20intelligence%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Legg%2C%20S.%20Hutter%2C%20M.%20Universal%20intelligence%3A%20A%20definition%20of%20machine%20intelligence%202007"
+        },
+        {
+            "id": "Machado_et+al_2017_a",
+            "entry": "Machado, M. C., Bellemare, M. G., Talvitie, E., Veness, J., Hausknecht, M., and Bowling, M. (2017). Revisiting the arcade learning environment: Evaluation protocols and open problems for general agents. arXiv preprint arXiv:1709.06009.",
+            "arxiv_url": "https://arxiv.org/pdf/1709.06009"
+        },
+        {
+            "id": "Mueller_2007_a",
+            "entry": "M\u00fcller, M. (2007). Dynamic time warping. Information retrieval for music and motion, pages 69\u201384.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=M%C3%BCller%2C%20M.%20Dynamic%20time%20warping.%20Information%20retrieval%20for%20music%20and%20motion%202007"
+        },
+        {
+            "id": "Oh_et+al_2015_a",
+            "entry": "Oh, J., Guo, X., Lee, H., Lewis, R. L., and Singh, S. (2015). Action-conditional video prediction using deep networks in atari games. In Advances in Neural Information Processing Systems, pages 2863\u20132871.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Oh%2C%20J.%20Guo%2C%20X.%20Lee%2C%20H.%20Lewis%2C%20R.L.%20Action-conditional%20video%20prediction%20using%20deep%20networks%20in%20atari%20games%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Oh%2C%20J.%20Guo%2C%20X.%20Lee%2C%20H.%20Lewis%2C%20R.L.%20Action-conditional%20video%20prediction%20using%20deep%20networks%20in%20atari%20games%202015"
+        },
+        {
+            "id": "Oh_et+al_2017_a",
+            "entry": "Oh, J., Singh, S., and Lee, H. (2017). Value prediction network. In Advances in Neural Information Processing Systems, pages 6120\u20136130.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Oh%2C%20J.%20Singh%2C%20S.%20Lee%2C%20H.%20Value%20prediction%20network%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Oh%2C%20J.%20Singh%2C%20S.%20Lee%2C%20H.%20Value%20prediction%20network%202017"
+        },
+        {
+            "id": "Parascandolo_2017_a",
+            "entry": "Parascandolo, G., Rojas-Carulla, M., Kilbertus, N., and Sch\u00f6lkopf, B. (2017). Learning independent causal mechanisms. arXiv preprint arXiv:1712.00961.",
+            "arxiv_url": "https://arxiv.org/pdf/1712.00961"
+        },
+        {
+            "id": "Pearl_2009_a",
+            "entry": "Pearl, J. (2009). Causality. Cambridge university press.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pearl%2C%20J.%20Causality%202009"
+        },
+        {
+            "id": "Peters_et+al_2016_a",
+            "entry": "Peters, J., B\u00fchlmann, P., and Meinshausen, N. (2016). Causal inference by using invariant prediction: identification and confidence intervals. Journal of the Royal Statistical Society: Series B (Statistical Methodology), 78(5):947\u20131012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Peters%2C%20J.%20B%C3%BChlmann%2C%20P.%20Meinshausen%2C%20N.%20Causal%20inference%20by%20using%20invariant%20prediction%3A%20identification%20and%20confidence%20intervals%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Peters%2C%20J.%20B%C3%BChlmann%2C%20P.%20Meinshausen%2C%20N.%20Causal%20inference%20by%20using%20invariant%20prediction%3A%20identification%20and%20confidence%20intervals%202016"
+        },
+        {
+            "id": "Peters_2017_a",
+            "entry": "Peters, J., Janzing, D., and Sch\u00f6lkopf, B. (2017). Elements of causal inference: foundations and learning algorithms. MIT Press.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Elements%20of%20causal%20inference%3A%20foundations%20and%20learning%20algorithms%202017"
+        },
+        {
+            "id": "Pong_et+al_2018_a",
+            "entry": "Pong, V., Gu, S., Dalal, M., and Levine, S. (2018). Temporal difference models: Model-free deep rl for model-based control. arXiv preprint arXiv:1802.09081.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.09081"
+        },
+        {
+            "id": "Puterman_1994_a",
+            "entry": "Puterman, M. L. (1994). Markov decision processes. j. Wiley and Sons. Sch\u00f6lkopf, B., Janzing, D., Peters, J., Sgouritsa, E., Zhang, K., and Mooij, J. (2012). On causal and anticausal learning. In Langford, J. and Pineau, J., editors, Proceedings of the 29th International Conference on Machine Learning (ICML), pages 1255\u20131262, New York, NY, USA. Omnipress.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Puterman%2C%20M.L.%20Markov%20decision%20processes%201994",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Puterman%2C%20M.L.%20Markov%20decision%20processes%201994"
+        },
+        {
+            "id": "Silver_et+al_2016_a",
+            "entry": "Silver, D., van Hasselt, H., Hessel, M., Schaul, T., Guez, A., Harley, T., Dulac-Arnold, G., Reichert, D., Rabinowitz, N., Barreto, A., et al. (2016). The predictron: End-to-end learning and planning. arXiv preprint arXiv:1612.08810.",
+            "arxiv_url": "https://arxiv.org/pdf/1612.08810"
+        },
+        {
+            "id": "Sutton_et+al_1999_a",
+            "entry": "Sutton, R. S., Precup, D., and Singh, S. (1999). Between mdps and semi-mdps: A framework for temporal abstraction in reinforcement learning. Artificial intelligence, 112(1-2):181\u2013211.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20R.S.%20Precup%2C%20D.%20Singh%2C%20S.%20Between%20mdps%20and%20semi-mdps%3A%20A%20framework%20for%20temporal%20abstraction%20in%20reinforcement%20learning%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutton%2C%20R.S.%20Precup%2C%20D.%20Singh%2C%20S.%20Between%20mdps%20and%20semi-mdps%3A%20A%20framework%20for%20temporal%20abstraction%20in%20reinforcement%20learning%201999"
+        },
+        {
+            "id": "Watter_et+al_2015_a",
+            "entry": "Watter, M., Springenberg, J., Boedecker, J., and Riedmiller, M. (2015). Embed to control: A locally linear latent dynamics model for control from raw images. In Advances in neural information processing systems, pages 2746\u20132754.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Watter%2C%20M.%20Springenberg%2C%20J.%20Boedecker%2C%20J.%20Riedmiller%2C%20M.%20Embed%20to%20control%3A%20A%20locally%20linear%20latent%20dynamics%20model%20for%20control%20from%20raw%20images%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Watter%2C%20M.%20Springenberg%2C%20J.%20Boedecker%2C%20J.%20Riedmiller%2C%20M.%20Embed%20to%20control%3A%20A%20locally%20linear%20latent%20dynamics%20model%20for%20control%20from%20raw%20images%202015"
+        },
+        {
+            "id": "Weber_et+al_2017_a",
+            "entry": "Weber, T., Racani\u00e8re, S., Reichert, D. P., Buesing, L., Guez, A., Rezende, D. J., Badia, A. P., Vinyals, O., Heess, N., Li, Y., et al. (2017). Imagination-augmented agents for deep reinforcement learning. arXiv preprint arXiv:1707.06203.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.06203"
+        }
+    ]
+}

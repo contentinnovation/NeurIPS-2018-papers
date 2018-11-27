@@ -1,0 +1,334 @@
+{
+    "filename": "7877-graph-convolutional-policy-network-for-goal-directed-molecular-graph-generation.pdf",
+    "metadata": {
+        "title": "Graph Convolutional Policy Network for Goal-Directed Molecular Graph Generation",
+        "author": "Jiaxuan You, Bowen Liu, Zhitao Ying, Vijay Pande, Jure Leskovec",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7877-graph-convolutional-policy-network-for-goal-directed-molecular-graph-generation.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Generating novel graph structures that optimize given objectives while obeying some given underlying rules is fundamental for chemistry, biology and social science research. This is especially important in the task of molecular graph generation, whose goal is to discover novel molecules with desired properties such as drug-likeness and synthetic accessibility, while obeying physical laws such as chemical valency. However, designing models to find molecules that optimize desired properties while incorporating highly complex and non-differentiable rules remains to be a challenging task. Here we propose Graph Convolutional Policy Network (GCPN), a general graph convolutional network based model for goaldirected graph generation through reinforcement learning. The model is trained to optimize domain-specific rewards and adversarial loss through policy gradient, and acts in an environment that incorporates domain-specific rules. Experimental results show that GCPN can achieve 61% improvement on chemical property optimization over state-of-the-art baselines while resembling known molecules, and achieve 184% improvement on the constrained property optimization task."
+    },
+    "keywords": [
+        {
+            "term": "Markov Decision Process",
+            "url": "https://en.wikipedia.org/wiki/Markov_Decision_Process"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "simplified molecular-input line-entry system",
+            "url": "https://en.wikipedia.org/wiki/simplified_molecular-input_line-entry_system"
+        },
+        {
+            "term": "molecular weight",
+            "url": "https://en.wikipedia.org/wiki/molecular_weight"
+        },
+        {
+            "term": "recurrent neural network",
+            "url": "https://en.wikipedia.org/wiki/recurrent_neural_network"
+        },
+        {
+            "term": "policy network",
+            "url": "https://en.wikipedia.org/wiki/Policy_Network"
+        },
+        {
+            "term": "molecular property",
+            "url": "https://en.wikipedia.org/wiki/molecular_property"
+        },
+        {
+            "term": "drug discovery",
+            "url": "https://en.wikipedia.org/wiki/drug_discovery"
+        },
+        {
+            "term": "chemical space",
+            "url": "https://en.wikipedia.org/wiki/chemical_space"
+        },
+        {
+            "term": "molecular structure",
+            "url": "https://en.wikipedia.org/wiki/molecular_structure"
+        }
+    ],
+    "highlights": [
+        "Many important problems in drug discovery and material science are based on the principle of designing molecular structures with specific desired properties",
+        "We propose Graph Convolutional Policy Network (GCPN), an approach to generate molecules where the generation process can be guided towards specified desired objectives, while restricting the output space based on underlying chemical rules",
+        "Graph Convolutional Policy Network predicts the action of the bond addition, and is trained via policy gradient to optimize a reward composed of molecular property objectives and adversarial loss",
+        "We evaluate Graph Convolutional Policy Network in three distinct molecule generation tasks that are relevant to drug discovery and materials science: molecule property optimization, property targeting and conditional property optimization",
+        "We describe the problem definition, the environment design, and the Graph Convolutional Policy Network that predicts a distribution of actions which are used to update the graph being generated.\n3.1",
+        "We introduced Graph Convolutional Policy Network, a graph generation policy network using graph state representation and adversarial training, and applied it to the task of goal-directed molecular graph generation"
+    ],
+    "key_statements": [
+        "Many important problems in drug discovery and material science are based on the principle of designing molecular structures with specific desired properties",
+        "We propose Graph Convolutional Policy Network (GCPN), an approach to generate molecules where the generation process can be guided towards specified desired objectives, while restricting the output space based on underlying chemical rules",
+        "Graph Convolutional Policy Network predicts the action of the bond addition, and is trained via policy gradient to optimize a reward composed of molecular property objectives and adversarial loss",
+        "We evaluate Graph Convolutional Policy Network in three distinct molecule generation tasks that are relevant to drug discovery and materials science: molecule property optimization, property targeting and conditional property optimization",
+        "We describe the problem definition, the environment design, and the Graph Convolutional Policy Network that predicts a distribution of actions which are used to update the graph being generated.\n3.1",
+        "Junction Tree variational autoencoder (JT-variational autoencoder) [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>] is a state-of-the-art algorithm that combines graph representation and a variational autoencoder framework for generating molecular graphs, and uses Bayesian optimization over the learned latent space to search for molecules with optimized property scores",
+        "We introduced Graph Convolutional Policy Network, a graph generation policy network using graph state representation and adversarial training, and applied it to the task of goal-directed molecular graph generation"
+    ],
+    "summary": [
+        "Many important problems in drug discovery and material science are based on the principle of designing molecular structures with specific desired properties.",
+        "We propose Graph Convolutional Policy Network (GCPN), an approach to generate molecules where the generation process can be guided towards specified desired objectives, while restricting the output space based on underlying chemical rules.",
+        "Desired molecular properties such as drug-likeness [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>] and molecule constraints such as valency are complex and non-differentiable, they cannot be directly incorporated into the objective function of graph generative models.",
+        "GCPN predicts the action of the bond addition, and is trained via policy gradient to optimize a reward composed of molecular property objectives and adversarial loss.",
+        "GCPN generates molecules with property scores 61% higher than the best baseline method, and outperforms the baseline models in the constrained optimization setting by 184% on average.",
+        "Junction Tree VAE (JT-VAE) [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>] is a state-of-the-art algorithm that combines graph representation and a VAE framework for generating molecular graphs, and uses Bayesian optimization over the learned latent space to search for molecules with optimized property scores.",
+        "We start with a graph containing a single atom, traverse all valid actions given the current state, randomly pick the state with top 5 highest property score as long as there is improvement over the current state, and loop until reaching the maximum number of nodes.",
+        "Most generated molecules are realistic, in some very rare cases, especially where we reduce the of the adversarial reward and expert pretraining components, our method can generate undesirable molecules with astonishingly high penalized logP predicted by the empirical model, such as the one on the bottom-right of Figure 2(a) in which our method correctly identified that Iodine has the highest per atom contribution in the empirical model used to calculate logP.",
+        "Note that the hill climbing baseline algorithm mostly generates undesirable cases where the accuracy of the empirical prediction model is questionable, its performance with optimizing penalized logP is not listed on Table 1.",
+        "GCPN is able to generate molecules with high diversity, indicating that it is capable of learning a general stochastic policy to generate molecular graphs that fulfill the property requirements.",
+        "We train a fixed GCPN in an environment whose initial state is randomly set to be one of the 800 ZINC molecules, conduct the same training procedure as the property optimization task.",
+        "We introduced GCPN, a graph generation policy network using graph state representation and adversarial training, and applied it to the task of goal-directed molecular graph generation.",
+        "GCPN consistently outperforms other state-of-the-art approaches in the tasks of molecular property optimization and targeting, and at the same time, maintains 100% validity and resemblance to realistic molecules.",
+        "The algorithm can be applied to generate graphs in many contexts, such as electric circuits, social networks, and explore graphs that can optimize certain domain specific properties"
+    ],
+    "headline": "We propose Graph Convolutional Policy Network , a general graph convolutional network based model for goaldirected graph generation through reinforcement learning",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] G. R. Bickerton, G. V. Paolini, J. Besnard, S. Muresan, and A. L. Hopkins. Quantifying the chemical beauty of drugs. Nature chemistry, 4(2):90, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bickerton%2C%20G.R.%20Paolini%2C%20G.V.%20Besnard%2C%20J.%20Muresan%2C%20S.%20Quantifying%20the%20chemical%20beauty%20of%20drugs%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bickerton%2C%20G.R.%20Paolini%2C%20G.V.%20Besnard%2C%20J.%20Muresan%2C%20S.%20Quantifying%20the%20chemical%20beauty%20of%20drugs%202012"
+        },
+        {
+            "id": "2",
+            "entry": "[2] K. H. Bleicher, H.-J. B\u00f6hm, K. M\u00fcller, and A. I. Alanine. Hit and lead generation: beyond high-throughput screening. Nature Reviews Drug Discovery, 2:369\u2013378, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=K.%20H.%20Bleicher%2C%20H.-J.%20B%C3%B6hm%2C%20K.%20M%C3%BCller%20Alanine%2C%20A.%20I.%20Hit%20and%20lead%20generation%3A%20beyond%20high-throughput%20screening%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=K.%20H.%20Bleicher%2C%20H.-J.%20B%C3%B6hm%2C%20K.%20M%C3%BCller%20Alanine%2C%20A.%20I.%20Hit%20and%20lead%20generation%3A%20beyond%20high-throughput%20screening%202003"
+        },
+        {
+            "id": "3",
+            "entry": "[3] G. Brockman, V. Cheung, L. Pettersson, J. Schneider, J. Schulman, J. Tang, and W. Zaremba. Openai gym. CoRR, abs/1606.01540, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.01540"
+        },
+        {
+            "id": "4",
+            "entry": "[4] H. Dai, Y. Tian, B. Dai, S. Skiena, and L. Song. Syntax-directed variational autoencoder for structured data. arXiv preprint arXiv:1802.08786, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.08786"
+        },
+        {
+            "id": "5",
+            "entry": "[5] D. K. Duvenaud, D. Maclaurin, J. Iparraguirre, R. Bombarell, T. Hirzel, A. Aspuru-Guzik, and R. P. Adams. Convolutional networks on graphs for learning molecular fingerprints. In Advances in neural information processing systems, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Duvenaud%2C%20D.K.%20Maclaurin%2C%20D.%20Iparraguirre%2C%20J.%20Bombarell%2C%20R.%20Convolutional%20networks%20on%20graphs%20for%20learning%20molecular%20fingerprints%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Duvenaud%2C%20D.K.%20Maclaurin%2C%20D.%20Iparraguirre%2C%20J.%20Bombarell%2C%20R.%20Convolutional%20networks%20on%20graphs%20for%20learning%20molecular%20fingerprints%202015"
+        },
+        {
+            "id": "6",
+            "entry": "[6] P. Ertl. Estimation of synthetic accessibility score of drug-like molecules. J. Cheminform, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ertl%2C%20P.%20Estimation%20of%20synthetic%20accessibility%20score%20of%20drug-like%20molecules%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ertl%2C%20P.%20Estimation%20of%20synthetic%20accessibility%20score%20of%20drug-like%20molecules%202009"
+        },
+        {
+            "id": "7",
+            "entry": "[7] P. Ertl, R. Lewis, E. J. Martin, and V. Polyakov. In silico generation of novel, drug-like chemical matter using the LSTM neural network. CoRR, abs/1712.07449, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1712.07449"
+        },
+        {
+            "id": "8",
+            "entry": "[8] J. Gilmer, S. S. Schoenholz, P. F. Riley, O. Vinyals, and G. E. Dahl. Neural message passing for quantum chemistry, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gilmer%2C%20J.%20Schoenholz%2C%20S.S.%20Riley%2C%20P.F.%20Vinyals%2C%20O.%20Neural%20message%20passing%20for%20quantum%20chemistry%202017"
+        },
+        {
+            "id": "9",
+            "entry": "[9] R. G\u00f3mez-Bombarelli, J. N. Wei, D. Duvenaud, J. M. Hern\u00e1ndez-Lobato, B. S\u00e1nchez-Lengeling, D. Sheberla, J. Aguilera-Iparraguirre, T. D. Hirzel, R. P. Adams, and A. Aspuru-Guzik. Automatic chemical design using a data-driven continuous representation of molecules. ACS Central Science, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=G%C3%B3mez-Bombarelli%2C%20R.%20Wei%2C%20J.N.%20Duvenaud%2C%20D.%20Hern%C3%A1ndez-Lobato%2C%20J.M.%20Automatic%20chemical%20design%20using%20a%20data-driven%20continuous%20representation%20of%20molecules%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=G%C3%B3mez-Bombarelli%2C%20R.%20Wei%2C%20J.N.%20Duvenaud%2C%20D.%20Hern%C3%A1ndez-Lobato%2C%20J.M.%20Automatic%20chemical%20design%20using%20a%20data-driven%20continuous%20representation%20of%20molecules%202016"
+        },
+        {
+            "id": "10",
+            "entry": "[10] I. Goodfellow, J. Pouget-Abadie, M. Mirza, B. Xu, D. Warde-Farley, S. Ozair, A. Courville, and Y. Bengio. Generative adversarial nets. In Advances in neural information processing systems, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goodfellow%2C%20I.%20Pouget-Abadie%2C%20J.%20Mirza%2C%20M.%20Xu%2C%20B.%20Generative%20adversarial%20nets%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goodfellow%2C%20I.%20Pouget-Abadie%2C%20J.%20Mirza%2C%20M.%20Xu%2C%20B.%20Generative%20adversarial%20nets%202014"
+        },
+        {
+            "id": "11",
+            "entry": "[11] W. Hamilton, Z. Ying, and J. Leskovec. Inductive representation learning on large graphs. In Advances in Neural Information Processing Systems, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hamilton%2C%20W.%20Ying%2C%20Z.%20Leskovec%2C%20J.%20Inductive%20representation%20learning%20on%20large%20graphs%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hamilton%2C%20W.%20Ying%2C%20Z.%20Leskovec%2C%20J.%20Inductive%20representation%20learning%20on%20large%20graphs%202017"
+        },
+        {
+            "id": "12",
+            "entry": "[12] S. Ioffe and C. Szegedy. Batch normalization: Accelerating deep network training by reducing internal covariate shift. In F. Bach and D. Blei, editors, Proceedings of the 32nd International Conference on Machine Learning, volume 37 of Proceedings of Machine Learning Research, pages 448\u2013456, Lille, France, 07\u201309 Jul 2015. PMLR.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ioffe%2C%20S.%20Szegedy%2C%20C.%20Batch%20normalization%3A%20Accelerating%20deep%20network%20training%20by%20reducing%20internal%20covariate%20shift%202015-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ioffe%2C%20S.%20Szegedy%2C%20C.%20Batch%20normalization%3A%20Accelerating%20deep%20network%20training%20by%20reducing%20internal%20covariate%20shift%202015-07"
+        },
+        {
+            "id": "13",
+            "entry": "[13] J. J. Irwin, T. Sterling, M. M. Mysinger, E. S. Bolstad, and R. G. Coleman. Zinc: a free tool to discover chemistry for biology. Journal of chemical information and modeling, 52(7):1757\u2013 1768, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Irwin%2C%20J.J.%20Sterling%2C%20T.%20Mysinger%2C%20M.M.%20Bolstad%2C%20E.S.%20Zinc%3A%20a%20free%20tool%20to%20discover%20chemistry%20for%20biology%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Irwin%2C%20J.J.%20Sterling%2C%20T.%20Mysinger%2C%20M.M.%20Bolstad%2C%20E.S.%20Zinc%3A%20a%20free%20tool%20to%20discover%20chemistry%20for%20biology%202012"
+        },
+        {
+            "id": "14",
+            "entry": "[14] E. Jannik Bjerrum and R. Threlfall. Molecular Generation with Recurrent Neural Networks (RNNs). arXiv preprint arXiv:1705.04612, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1705.04612"
+        },
+        {
+            "id": "15",
+            "entry": "[15] W. Jin, R. Barzilay, and T. Jaakkola. Junction tree variational autoencoder for molecular graph generation. arXiv preprint arXiv:1802.04364, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.04364"
+        },
+        {
+            "id": "16",
+            "entry": "[16] S. Kakade and J. Langford. Approximately optimal approximate reinforcement learning. In International Conference on Machine Learning, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kakade%2C%20S.%20Langford%2C%20J.%20Approximately%20optimal%20approximate%20reinforcement%20learning%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kakade%2C%20S.%20Langford%2C%20J.%20Approximately%20optimal%20approximate%20reinforcement%20learning%202002"
+        },
+        {
+            "id": "17",
+            "entry": "[17] S. Kearnes, K. McCloskey, M. Berndl, V. Pande, and P. Riley. Molecular graph convolutions: moving beyond fingerprints. Journal of Computer-Aided Molecular Design, 30:595\u2013608, Aug. 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kearnes%2C%20S.%20McCloskey%2C%20K.%20Berndl%2C%20M.%20Pande%2C%20V.%20Molecular%20graph%20convolutions%3A%20moving%20beyond%20fingerprints%202016-08",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kearnes%2C%20S.%20McCloskey%2C%20K.%20Berndl%2C%20M.%20Pande%2C%20V.%20Molecular%20graph%20convolutions%3A%20moving%20beyond%20fingerprints%202016-08"
+        },
+        {
+            "id": "18",
+            "entry": "[18] D. P. Kingma and J. Ba. Adam: A method for stochastic optimization. International Conference on Learning Representations, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20D.P.%20Ba%2C%20J.%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20D.P.%20Ba%2C%20J.%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202015"
+        },
+        {
+            "id": "19",
+            "entry": "[19] T. N. Kipf and M. Welling. Semi-supervised classification with graph convolutional networks. In ICLR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kipf%2C%20T.N.%20Welling%2C%20M.%20Semi-supervised%20classification%20with%20graph%20convolutional%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kipf%2C%20T.N.%20Welling%2C%20M.%20Semi-supervised%20classification%20with%20graph%20convolutional%20networks%202016"
+        },
+        {
+            "id": "20",
+            "entry": "[20] P. Kirkpatrick and C. Ellis. Chemical space. Nature, 432:823 EP \u2013, Dec 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kirkpatrick%2C%20P.%20Ellis%2C%20C.%20Chemical%20space%202004-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kirkpatrick%2C%20P.%20Ellis%2C%20C.%20Chemical%20space%202004-12"
+        },
+        {
+            "id": "21",
+            "entry": "[21] M. J. Kusner, B. Paige, and J. M. Hern\u00e1ndez-Lobato. Grammar variational autoencoder. In D. Precup and Y. W. Teh, editors, International Conference on Machine Learning, volume 70 of Proceedings of Machine Learning Research, International Convention Centre, Sydney, Australia, 06\u201311 Aug 2017. PMLR.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kusner%2C%20M.J.%20Paige%2C%20B.%20Hern%C3%A1ndez-Lobato%2C%20J.M.%20Grammar%20variational%20autoencoder%202017-08",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kusner%2C%20M.J.%20Paige%2C%20B.%20Hern%C3%A1ndez-Lobato%2C%20J.M.%20Grammar%20variational%20autoencoder%202017-08"
+        },
+        {
+            "id": "22",
+            "entry": "[22] G. Landrum. Rdkit: Open-source cheminformatics. 2006. Google Scholar, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=G%20Landrum%20Rdkit%20Opensource%20cheminformatics%202006%20Google%20Scholar%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=G%20Landrum%20Rdkit%20Opensource%20cheminformatics%202006%20Google%20Scholar%202006"
+        },
+        {
+            "id": "23",
+            "entry": "[23] S. Levine and V. Koltun. Guided policy search. In International Conference on Machine",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Levine%2C%20S.%20Koltun%2C%20V.%20Guided%20policy%20search",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Levine%2C%20S.%20Koltun%2C%20V.%20Guided%20policy%20search"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Y. Li, O. Vinyals, C. Dyer, R. Pascanu, and P. Battaglia. Learning deep generative models of graphs. arXiv preprint arXiv:1803.03324, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.03324"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Y. Li, L. Zhang, and Z. Liu. Multi-Objective De Novo Drug Design with Conditional Graph Generative Model. ArXiv e-prints, Jan. 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Y.%20Zhang%2C%20L.%20Liu%2C%20Z.%20Multi-Objective%20De%20Novo%20Drug%20Design%20with%20Conditional%20Graph%20Generative%20Model.%20ArXiv%20e-prints%202018-01"
+        },
+        {
+            "id": "26",
+            "entry": "[26] G. Lima Guimaraes, B. Sanchez-Lengeling, C. Outeiral, P. L. Cunha Farias, and A. AspuruGuzik. Objective-Reinforced Generative Adversarial Networks (ORGAN) for Sequence Generation Models. ArXiv e-prints, May 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Guimaraes%2C%20G.Lima%20Sanchez-Lengeling%2C%20B.%20Outeiral%2C%20C.%20Farias%2C%20P.L.Cunha%20Objective-Reinforced%20Generative%20Adversarial%20Networks%20%28ORGAN%29%20for%20Sequence%20Generation%20Models.%20ArXiv%20e-prints%202017-05"
+        },
+        {
+            "id": "27",
+            "entry": "[27] J. H. Lin and A. Y. H. Lu. Role of pharmacokinetics and metabolism in drug discovery and development. Pharmacological Reviews, 49(4):403\u2013449, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20J.H.%20Lu%2C%20A.Y.H.%20Role%20of%20pharmacokinetics%20and%20metabolism%20in%20drug%20discovery%20and%20development%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lin%2C%20J.H.%20Lu%2C%20A.Y.H.%20Role%20of%20pharmacokinetics%20and%20metabolism%20in%20drug%20discovery%20and%20development%201997"
+        },
+        {
+            "id": "28",
+            "entry": "[28] C. A. Lipinski, F. Lombardo, B. W. Dominy, and P. J. Feeney. Experimental and computational approaches to estimate solubility and permeability in drug discovery and development settings. Advanced Drug Delivery Reviews, 23(1):3\u201325, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lipinski%2C%20C.A.%20Lombardo%2C%20F.%20Dominy%2C%20B.W.%20Feeney%2C%20P.J.%20Experimental%20and%20computational%20approaches%20to%20estimate%20solubility%20and%20permeability%20in%20drug%20discovery%20and%20development%20settings%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lipinski%2C%20C.A.%20Lombardo%2C%20F.%20Dominy%2C%20B.W.%20Feeney%2C%20P.J.%20Experimental%20and%20computational%20approaches%20to%20estimate%20solubility%20and%20permeability%20in%20drug%20discovery%20and%20development%20settings%201997"
+        },
+        {
+            "id": "29",
+            "entry": "[29] B. Liu, B. Ramsundar, P. Kawthekar, J. Shi, J. Gomes, Q. Luu Nguyen, S. Ho, J. Sloane, P. Wender, and V. Pande. Retrosynthetic reaction prediction using neural sequence-to-sequence models. ACS Central Science, 3(10):1103\u20131113, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20B.%20Ramsundar%2C%20B.%20Kawthekar%2C%20P.%20Shi%2C%20J.%20Retrosynthetic%20reaction%20prediction%20using%20neural%20sequence-to-sequence%20models%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liu%2C%20B.%20Ramsundar%2C%20B.%20Kawthekar%2C%20P.%20Shi%2C%20J.%20Retrosynthetic%20reaction%20prediction%20using%20neural%20sequence-to-sequence%20models%202017"
+        },
+        {
+            "id": "30",
+            "entry": "[30] M. Olivecrona, T. Blaschke, O. Engkvist, and H. Chen. Molecular de-novo design through deep reinforcement learning. Journal of Cheminformatics, 9(1):48, Sep 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Olivecrona%2C%20M.%20Blaschke%2C%20T.%20Engkvist%2C%20O.%20Chen%2C%20H.%20Molecular%20de-novo%20design%20through%20deep%20reinforcement%20learning%202017-09",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Olivecrona%2C%20M.%20Blaschke%2C%20T.%20Engkvist%2C%20O.%20Chen%2C%20H.%20Molecular%20de-novo%20design%20through%20deep%20reinforcement%20learning%202017-09"
+        },
+        {
+            "id": "31",
+            "entry": "[31] P. G. Polishchuk, T. I. Madzhidov, and A. Varnek. Estimation of the size of drug-like chemical space based on gdb-17 data. Journal of Computer-Aided Molecular Design, 27(8):675\u2013679, Aug 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Polishchuk%2C%20P.G.%20Madzhidov%2C%20T.I.%20Varnek%2C%20A.%20Estimation%20of%20the%20size%20of%20drug-like%20chemical%20space%20based%20on%20gdb-17%20data%202013-08",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Polishchuk%2C%20P.G.%20Madzhidov%2C%20T.I.%20Varnek%2C%20A.%20Estimation%20of%20the%20size%20of%20drug-like%20chemical%20space%20based%20on%20gdb-17%20data%202013-08"
+        },
+        {
+            "id": "32",
+            "entry": "[32] D. Rogers and M. Hahn. Extended-connectivity fingerprints. Journal of chemical information and modeling, 50(5):742\u2013754, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rogers%2C%20D.%20Hahn%2C%20M.%20Extended-connectivity%20fingerprints%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rogers%2C%20D.%20Hahn%2C%20M.%20Extended-connectivity%20fingerprints%202010"
+        },
+        {
+            "id": "33",
+            "entry": "[33] B. Sanchez-Lengeling, C. Outeiral, G. L. Guimaraes, and A. Aspuru-Guzik. Optimizing distributions over molecular space. An Objective-Reinforced Generative Adversarial Network for Inverse-design Chemistry (ORGANIC). ChemRxiv e-prints, 8 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sanchez-Lengeling%2C%20B.%20Outeiral%2C%20C.%20Guimaraes%2C%20G.L.%20Aspuru-Guzik%2C%20A.%20Optimizing%20distributions%20over%20molecular%20space.%20An%20Objective-Reinforced%20Generative%20Adversarial%20Network%20for%20Inverse-design%20Chemistry%20%28ORGANIC%29%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sanchez-Lengeling%2C%20B.%20Outeiral%2C%20C.%20Guimaraes%2C%20G.L.%20Aspuru-Guzik%2C%20A.%20Optimizing%20distributions%20over%20molecular%20space.%20An%20Objective-Reinforced%20Generative%20Adversarial%20Network%20for%20Inverse-design%20Chemistry%20%28ORGANIC%29%202017"
+        },
+        {
+            "id": "34",
+            "entry": "[34] J. Schulman, F. Wolski, P. Dhariwal, A. Radford, and O. Klimov. Proximal policy optimization algorithms. CoRR, abs/1707.06347, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.06347"
+        },
+        {
+            "id": "35",
+            "entry": "[35] K. T. Sch\u00fctt, F. Arbabzadah, S. Chmiela, K. R. M\u00fcller, and A. Tkatchenko. Quantum-chemical insights from deep tensor neural networks. Nature Communications, 8:13890, Jan 2017. Article.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Quantum-chemical%20insights%20from%20deep%20tensor%20neural%20networks%202017-01",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Quantum-chemical%20insights%20from%20deep%20tensor%20neural%20networks%202017-01"
+        },
+        {
+            "id": "36",
+            "entry": "[36] M. D. Segall. Multi-parameter optimization: Identifying high quality compounds with a balance of properties. Current Pharmaceutical Design, 18(9):1292\u20131310, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Segall%2C%20M.D.%20Multi-parameter%20optimization%3A%20Identifying%20high%20quality%20compounds%20with%20a%20balance%20of%20properties%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Segall%2C%20M.D.%20Multi-parameter%20optimization%3A%20Identifying%20high%20quality%20compounds%20with%20a%20balance%20of%20properties%202012"
+        },
+        {
+            "id": "37",
+            "entry": "[37] M. H. S. Segler, T. Kogej, C. Tyrchan, and M. P. Waller. Generating focused molecule libraries for drug discovery with recurrent neural networks. ACS Central Science, 4(1):120\u2013131, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Segler%2C%20M.H.S.%20Kogej%2C%20T.%20Tyrchan%2C%20C.%20Waller%2C%20M.P.%20Generating%20focused%20molecule%20libraries%20for%20drug%20discovery%20with%20recurrent%20neural%20networks%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Segler%2C%20M.H.S.%20Kogej%2C%20T.%20Tyrchan%2C%20C.%20Waller%2C%20M.P.%20Generating%20focused%20molecule%20libraries%20for%20drug%20discovery%20with%20recurrent%20neural%20networks%202018"
+        },
+        {
+            "id": "38",
+            "entry": "[38] M. Simonovsky and N. Komodakis. Graphvae: Towards generation of small graphs using variational autoencoders. arXiv preprint arXiv:1802.03480, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.03480"
+        },
+        {
+            "id": "39",
+            "entry": "[39] D. Weininger. Smiles, a chemical language and information system. 1. introduction to methodology and encoding rules. Journal of chemical information and computer sciences, 28(1):31\u201336, 1988.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Smiles%2C%20D.Weininger%20a%20chemical%20language%20and%20information%20system.%201.%20introduction%20to%20methodology%20and%20encoding%20rules%201988",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Smiles%2C%20D.Weininger%20a%20chemical%20language%20and%20information%20system.%201.%20introduction%20to%20methodology%20and%20encoding%20rules%201988"
+        },
+        {
+            "id": "40",
+            "entry": "[40] S. A. Wildman and G. M. Crippen. Prediction of physicochemical parameters by atomic contributions. Journal of Chemical Information and Computer Sciences, 39(5):868\u2013873, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wildman%2C%20S.A.%20Crippen%2C%20G.M.%20Prediction%20of%20physicochemical%20parameters%20by%20atomic%20contributions%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wildman%2C%20S.A.%20Crippen%2C%20G.M.%20Prediction%20of%20physicochemical%20parameters%20by%20atomic%20contributions%201999"
+        },
+        {
+            "id": "41",
+            "entry": "[41] X. Yang, J. Zhang, K. Yoshizoe, K. Terayama, and K. Tsuda. ChemTS: An Efficient Python Library for de novo Molecular Generation. ArXiv e-prints, Sept. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yang%2C%20X.%20Zhang%2C%20J.%20Yoshizoe%2C%20K.%20Terayama%2C%20K.%20ChemTS%3A%20An%20Efficient%20Python%20Library%20for%20de%20novo%20Molecular%20Generation.%20ArXiv%20e-prints%202017-09"
+        },
+        {
+            "id": "42",
+            "entry": "[42] J. You, R. Ying, X. Ren, W. L. Hamilton, and J. Leskovec. Graphrnn: A deep generative model for graphs. arXiv preprint arXiv:1802.08773, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.08773"
+        },
+        {
+            "id": "43",
+            "entry": "[43] L. Yu, W. Zhang, J. Wang, and Y. Yu. Seqgan: Sequence generative adversarial nets with policy gradient. In AAAI, 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yu%2C%20L.%20Zhang%2C%20W.%20Wang%2C%20J.%20Yu%2C%20Y.%20Seqgan%3A%20Sequence%20generative%20adversarial%20nets%20with%20policy%20gradient.%20In%20AAAI%202017"
+        }
+    ]
+}

@@ -1,0 +1,401 @@
+{
+    "filename": "7561-fast-estimation-of-causal-interactions-using-wold-processes.pdf",
+    "metadata": {
+        "title": "Fast Estimation of Causal Interactions using Wold Processes",
+        "author": "Flavio Figueiredo, Guilherme Resende Borges, Pedro O.S. Vaz de Melo, Renato Assun\u00e7\u00e3o",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7561-fast-estimation-of-causal-interactions-using-wold-processes.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We here focus on the task of learning Granger causality matrices for multivariate point processes. In order to accomplish this task, our work is the first to explore the use of Wold processes. By doing so, we are able to develop asymptotically fast MCMC learning algorithms. With N being the total number of events and K the number of processes, our learning algorithm has a O(N ( log(N ) + log(K))) cost per iteration. This is much faster than the O(N 3 K2) or O(K3) for the state of the art. Our approach, called GRANGER-BUSCA, is validated on nine datasets. This is an advance in relation to most prior efforts which focus mostly on subsets of the Memetracker data. Regarding accuracy, GRANGER-BUSCA is three times more accurate (in Precision@10) than the state of the art for the commonly explored subsets Memetracker. Due to GRANGER-BUSCA\u2019s much lower training complexity, our approach is the only one able to train models for larger, full, sets of data."
+    },
+    "keywords": [
+        {
+            "term": "granger causality",
+            "url": "https://en.wikipedia.org/wiki/granger_causality"
+        },
+        {
+            "term": "topic model",
+            "url": "https://en.wikipedia.org/wiki/topic_model"
+        },
+        {
+            "term": "Markov Chain Monte Carlo",
+            "url": "https://en.wikipedia.org/wiki/Markov_Chain_Monte_Carlo"
+        },
+        {
+            "term": "BUSCA",
+            "url": "https://en.wikipedia.org/wiki/Busca"
+        },
+        {
+            "term": "stationary point",
+            "url": "https://en.wikipedia.org/wiki/stationary_point"
+        },
+        {
+            "term": "point process",
+            "url": "https://en.wikipedia.org/wiki/point_process"
+        },
+        {
+            "term": "time series",
+            "url": "https://en.wikipedia.org/wiki/time_series"
+        },
+        {
+            "term": "markov chain",
+            "url": "https://en.wikipedia.org/wiki/markov_chain"
+        }
+    ],
+    "highlights": [
+        "A temporal point process P is a probability model for a collection of times {0 \u2264 t0 < t1 < t2 < . . .}<br/><br/>indexing the occurrences of random isolated events",
+        "We developed our Markov Chain Monte Carlo (MCMC) sampling algorithm to learn GRANGER-BUSCA from data",
+        "Most baselines do not execute on large datasets in under 24h of training time (TT), in contrast with GRANGER-BUSCA",
+        "We present the first method to extract Granger causality matrices via Wold Processes",
+        "Though it was proposed over sixty years ago, this framework of point processes remain largely unexplored by the machine learning community",
+        "Given the efficacy of GRANGER-BUSCA, our hope is that current results may open up a new class of models, Wold processes, to be explored by the machine learning community"
+    ],
+    "key_statements": [
+        "A temporal point process P is a probability model for a collection of times {0 \u2264 t0 < t1 < t2 < . . .}<br/><br/>indexing the occurrences of random isolated events",
+        "Busca [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>] is another point process model based on Wold processes and it is GRANGER-BUSCA\u2019s starting point",
+        "We developed our Markov Chain Monte Carlo (MCMC) sampling algorithm to learn GRANGER-BUSCA from data",
+        "Most baselines do not execute on large datasets in under 24h of training time (TT), in contrast with GRANGER-BUSCA",
+        "To allow comparisons with GRANGER-BUSCA, we considered subsamples containing only the events involving the Top-100 destinations",
+        "We present the first method to extract Granger causality matrices via Wold Processes",
+        "Though it was proposed over sixty years ago, this framework of point processes remain largely unexplored by the machine learning community",
+        "Given the efficacy of GRANGER-BUSCA, our hope is that current results may open up a new class of models, Wold processes, to be explored by the machine learning community"
+    ],
+    "summary": [
+        "A temporal point process P is a probability model for a collection of times {0 \u2264 t0 < t1 < t2 < . . .}<br/><br/>indexing the occurrences of random isolated events.",
+        "The networked point process is a stochastic model for these systems, when data take the form of a time series of random events observed in each node.",
+        "Similar to recent efforts [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c48\" href=\"#r48\">48</a>], our goal in this work is to extract Granger causality [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>] from multivariate point process data only.",
+        "When we measure the Precision@10 score between our Granger causal estimates and the ground-truth number of mentions of the commonly explored Memetracker data [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>], our results are at least three times more accurate than the most recent and most accurate method [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>].",
+        "Busca [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>] is another point process model based on Wold processes and it is GRANGER-BUSCA\u2019s starting point.",
+        "We define GRANGER-BUSCA using Figure 1, which exemplifies the behavior of the model with two processes.",
+        "When the expected values of \u2206ba(t) are small, events in Pb usually precede Pa. In this sense, one intuition on how GRANGER-BUSCA works is that larger observed values of \u2206ba(t) lead to weaker evidence for the influence of process Pb on process Pa. The above behavior motivates GRANGER-BUSCA\u2019s multivariate conditional intensity function: \u03bba(t) =",
+        "Given two processes Pa and Pb whose intensity functions follow Eq (3), Granger causality arises when \u03b1ba = 0 2.",
+        "G is estimated based on the number of events that Pb caused on Pa, whereas \u03bc is estimated as the maximum likelihood rate for a Poisson process based on the exogenous events for Pa. We can learn GRANGER-BUSCA with an Expectation Maximization approach.",
+        "In Table 2, we present the overall scores for GRANGER-BUSCA and the Hawkes-Cumulants (HC) [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>] approach, focusing only on the Memetracker",
+        "To present an overall view of GRANGER-BUSCA against all three competing methods (ADM4, HC and HG), in Figure 2 we show Precision@5, 10 and 20 scores for each approach on every Top-100 dataset.",
+        "Recall that a Wold process is an adequate model when there is a strong dependency between consecutive inter-event times \u03b4t and \u03b4t+1.",
+        "We present the first method to extract Granger causality matrices via Wold Processes.",
+        "Called GRANGER-BUSCA, outperforms recent baseline methods [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c48\" href=\"#r48\">48</a>, <a class=\"ref-link\" id=\"c53\" href=\"#r53\">53</a>] both in training time and in overall accuracy.",
+        "Given the efficacy of GRANGER-BUSCA, our hope is that current results may open up a new class of models, Wold processes, to be explored by the machine learning community.",
+        "GRANGER-BUSCA can be used to explore real world behavior in complex large scale datasets"
+    ],
+    "headline": "Our results show significant improvements over the state of the art methods",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] M. Achab, E. Bacry, S. Ga\u0131ffas, I. Mastromatteo, and J.-F. Muzy. Uncovering causality from multivariate hawkes integrated cumulants. In ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Achab%2C%20M.%20Bacry%2C%20E.%20Ga%C4%B1ffas%2C%20S.%20Mastromatteo%2C%20I.%20Uncovering%20causality%20from%20multivariate%20hawkes%20integrated%20cumulants%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Achab%2C%20M.%20Bacry%2C%20E.%20Ga%C4%B1ffas%2C%20S.%20Mastromatteo%2C%20I.%20Uncovering%20causality%20from%20multivariate%20hawkes%20integrated%20cumulants%202017"
+        },
+        {
+            "id": "2",
+            "entry": "[2] R. Alves, R. Assuncao, and P. O. S. Vaz de Melo. Burstiness scale: A parsimonious model for characterizing random series of events. In KDD, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Alves%2C%20R.%20Assuncao%2C%20R.%20de%20Melo%2C%20P.O.S.Vaz%20Burstiness%20scale%3A%20A%20parsimonious%20model%20for%20characterizing%20random%20series%20of%20events%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Alves%2C%20R.%20Assuncao%2C%20R.%20de%20Melo%2C%20P.O.S.Vaz%20Burstiness%20scale%3A%20A%20parsimonious%20model%20for%20characterizing%20random%20series%20of%20events%202016"
+        },
+        {
+            "id": "3",
+            "entry": "[3] R. H. Arpaci-Dusseau and A. C. Arpaci-Dusseau. Operating Systems: Three Easy Pieces. Arpaci-Dusseau Books, 0.91 edition, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Arpaci-Dusseau%2C%20R.H.%20Arpaci-Dusseau%2C%20A.C.%20Operating%20Systems%3A%20Three%20Easy%20Pieces%202015"
+        },
+        {
+            "id": "4",
+            "entry": "[4] E. Bacry, I. Mastromatteo, and J.-F. Muzy. Hawkes processes in finance. Market Microstructure and Liquidity, 1(01), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bacry%2C%20E.%20Mastromatteo%2C%20I.%20Muzy%2C%20J.-F.%20Hawkes%20processes%20in%20finance%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bacry%2C%20E.%20Mastromatteo%2C%20I.%20Muzy%2C%20J.-F.%20Hawkes%20processes%20in%20finance%202015"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Y. Bao, Z. Kuang, P. Peissig, D. Page, and R. Willett. Hawkes process modeling of adverse drug reactions with longitudinal observational data. In ML for HC, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bao%2C%20Y.%20Kuang%2C%20Z.%20Peissig%2C%20P.%20Page%2C%20D.%20Hawkes%20process%20modeling%20of%20adverse%20drug%20reactions%20with%20longitudinal%20observational%20data%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bao%2C%20Y.%20Kuang%2C%20Z.%20Peissig%2C%20P.%20Page%2C%20D.%20Hawkes%20process%20modeling%20of%20adverse%20drug%20reactions%20with%20longitudinal%20observational%20data%202017"
+        },
+        {
+            "id": "6",
+            "entry": "[6] A.-L. Barabasi and M. Posfai. Network science. Cambridge University Press, Cambridge, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Barabasi%2C%20A.-L.%20Posfai%2C%20M.%20Network%20science%202016"
+        },
+        {
+            "id": "7",
+            "entry": "[7] J. S. Bergstra, R. Bardenet, Y. Bengio, and B. Kegl. Algorithms for hyper-parameter optimization. In NIPS, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bergstra%2C%20J.S.%20Bardenet%2C%20R.%20Bengio%2C%20Y.%20Kegl%2C%20B.%20Algorithms%20for%20hyper-parameter%20optimization%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bergstra%2C%20J.S.%20Bardenet%2C%20R.%20Bengio%2C%20Y.%20Kegl%2C%20B.%20Algorithms%20for%20hyper-parameter%20optimization%202011"
+        },
+        {
+            "id": "8",
+            "entry": "[8] C. Blundell, J. Beck, and K. A. Heller. Modeling reciprocating relationships with hawkes processes. In NIPS, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Blundell%2C%20C.%20Beck%2C%20J.%20Heller%2C%20K.A.%20Modeling%20reciprocating%20relationships%20with%20hawkes%20processes%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Blundell%2C%20C.%20Beck%2C%20J.%20Heller%2C%20K.A.%20Modeling%20reciprocating%20relationships%20with%20hawkes%20processes%202012"
+        },
+        {
+            "id": "9",
+            "entry": "[9] S. Chen, A. Shojaie, E. Shea-Brown, and D. Witten. The multivariate hawkes process in high dimensions: Beyond mutual excitation. arXiv preprint arXiv:1707.04928, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.04928"
+        },
+        {
+            "id": "10",
+            "entry": "[10] J. Chevallier, M. J. Caceres, M. Doumic, and P. Reynaud-Bouret. Microscopic approach of a time elapsed neural model. Mathematical Models and Methods in Applied Sciences, 25(14), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chevallier%2C%20J.%20Caceres%2C%20M.J.%20Doumic%2C%20M.%20Reynaud-Bouret%2C%20P.%20Microscopic%20approach%20of%20a%20time%20elapsed%20neural%20model%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chevallier%2C%20J.%20Caceres%2C%20M.J.%20Doumic%2C%20M.%20Reynaud-Bouret%2C%20P.%20Microscopic%20approach%20of%20a%20time%20elapsed%20neural%20model%202015"
+        },
+        {
+            "id": "11",
+            "entry": "[11] E. Choi, N. Du, R. Chen, L. Song, and J. Sun. Constructing disease network and temporal progression model via context-sensitive hawkes process. In ICDM, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Choi%2C%20E.%20Du%2C%20N.%20Chen%2C%20R.%20Song%2C%20L.%20Constructing%20disease%20network%20and%20temporal%20progression%20model%20via%20context-sensitive%20hawkes%20process%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Choi%2C%20E.%20Du%2C%20N.%20Chen%2C%20R.%20Song%2C%20L.%20Constructing%20disease%20network%20and%20temporal%20progression%20model%20via%20context-sensitive%20hawkes%20process%202015"
+        },
+        {
+            "id": "12",
+            "entry": "[12] D. R. Cox. Some statistical methods connected with series of events. Journal of the Royal Statistical Society. Series B (Methodological), 1955.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cox%2C%20D.R.%20Some%20statistical%20methods%20connected%20with%20series%20of%20events%201955",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cox%2C%20D.R.%20Some%20statistical%20methods%20connected%20with%20series%20of%20events%201955"
+        },
+        {
+            "id": "13",
+            "entry": "[13] D. Daley. Stationary point processes by markov-dependent intervals and infinite intensity. Journal of Applied Probability, 19(A), 1982.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Daley%2C%20D.%20Stationary%20point%20processes%20by%20markov-dependent%20intervals%20and%20infinite%20intensity%201982",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Daley%2C%20D.%20Stationary%20point%20processes%20by%20markov-dependent%20intervals%20and%20infinite%20intensity%201982"
+        },
+        {
+            "id": "14",
+            "entry": "[14] D. J. Daley and D. Vere-Jones. An introduction to the theory of point processes, vol.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Daley%2C%20D.J.%20Vere-Jones%2C%20D.%20An%20introduction%20to%20the%20theory%20of%20point%20processes"
+        },
+        {
+            "id": "1",
+            "entry": "1. Springer, New York, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Springer%20New%20York%202003"
+        },
+        {
+            "id": "15",
+            "entry": "[15] M. Dhamala, G. Rangarajan, and M. Ding. Estimating granger causality from fourier and wavelet transforms of time series data. Physical review letters, 100(1), 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dhamala%2C%20M.%20Rangarajan%2C%20G.%20Ding%2C%20M.%20Estimating%20granger%20causality%20from%20fourier%20and%20wavelet%20transforms%20of%20time%20series%20data%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dhamala%2C%20M.%20Rangarajan%2C%20G.%20Ding%2C%20M.%20Estimating%20granger%20causality%20from%20fourier%20and%20wavelet%20transforms%20of%20time%20series%20data%202008"
+        },
+        {
+            "id": "16",
+            "entry": "[16] V. Didelez. Graphical models for marked point processes based on local independence. Journal of the Royal Statistical Society: Series B (Statistical Methodology), 70(1), 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Didelez%2C%20V.%20Graphical%20models%20for%20marked%20point%20processes%20based%20on%20local%20independence%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Didelez%2C%20V.%20Graphical%20models%20for%20marked%20point%20processes%20based%20on%20local%20independence%202008"
+        },
+        {
+            "id": "17",
+            "entry": "[17] N. Du, M. Farajtabar, A. Ahmed, A. J. Smola, and L. Song. Dirichlet-hawkes processes with applications to clustering continuous-time document streams. In KDD, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Du%2C%20N.%20Farajtabar%2C%20M.%20Ahmed%2C%20A.%20Smola%2C%20A.J.%20Dirichlet-hawkes%20processes%20with%20applications%20to%20clustering%20continuous-time%20document%20streams%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Du%2C%20N.%20Farajtabar%2C%20M.%20Ahmed%2C%20A.%20Smola%2C%20A.J.%20Dirichlet-hawkes%20processes%20with%20applications%20to%20clustering%20continuous-time%20document%20streams%202015"
+        },
+        {
+            "id": "18",
+            "entry": "[18] J. Etesami, N. Kiyavash, K. Zhang, and K. Singhal. Learning network of multivariate hawkes processes: A time series approach. In UAI, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Etesami%2C%20J.%20Kiyavash%2C%20N.%20Zhang%2C%20K.%20Singhal%2C%20K.%20Learning%20network%20of%20multivariate%20hawkes%20processes%3A%20A%20time%20series%20approach%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Etesami%2C%20J.%20Kiyavash%2C%20N.%20Zhang%2C%20K.%20Singhal%2C%20K.%20Learning%20network%20of%20multivariate%20hawkes%20processes%3A%20A%20time%20series%20approach%202016"
+        },
+        {
+            "id": "19",
+            "entry": "[19] P. M. Fenwick. A new data structure for cumulative frequency tables. Software: Practice and Experience, 24(3), 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fenwick%2C%20P.M.%20A%20new%20data%20structure%20for%20cumulative%20frequency%20tables%201994",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fenwick%2C%20P.M.%20A%20new%20data%20structure%20for%20cumulative%20frequency%20tables%201994"
+        },
+        {
+            "id": "20",
+            "entry": "[20] C. W. Granger. Investigating causal relations by econometric models and cross-spectral methods. Econometrica: Journal of the Econometric Society, 1969.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Granger%2C%20C.W.%20Investigating%20causal%20relations%20by%20econometric%20models%20and%20cross-spectral%20methods%201969",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Granger%2C%20C.W.%20Investigating%20causal%20relations%20by%20econometric%20models%20and%20cross-spectral%20methods%201969"
+        },
+        {
+            "id": "21",
+            "entry": "[21] P. Guttorp and T. L. Thorarinsdottir. What happened to discrete chaos, the quenouille process, and the sharp markov property? some history of stochastic point processes. International Statistical Review, 80(2), 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Guttorp%2C%20P.%20L%2C%20T.%20Thorarinsdottir.%20What%20happened%20to%20discrete%20chaos%2C%20the%20quenouille%20process%2C%20and%20the%20sharp%20markov%20property%3F%20some%20history%20of%20stochastic%20point%20processes%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Guttorp%2C%20P.%20L%2C%20T.%20Thorarinsdottir.%20What%20happened%20to%20discrete%20chaos%2C%20the%20quenouille%20process%2C%20and%20the%20sharp%20markov%20property%3F%20some%20history%20of%20stochastic%20point%20processes%202012"
+        },
+        {
+            "id": "22",
+            "entry": "[22] D. Hallac, Y. Park, S. Boyd, and J. Leskovec. Network inference via the time-varying graphical lasso. In KDD, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hallac%2C%20D.%20Park%2C%20Y.%20Boyd%2C%20S.%20Leskovec%2C%20J.%20Network%20inference%20via%20the%20time-varying%20graphical%20lasso%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hallac%2C%20D.%20Park%2C%20Y.%20Boyd%2C%20S.%20Leskovec%2C%20J.%20Network%20inference%20via%20the%20time-varying%20graphical%20lasso%202017"
+        },
+        {
+            "id": "23",
+            "entry": "[23] W. K. Hastings. Monte carlo sampling methods using markov chains and their applications. Biometrika, 57(1):97\u2013109, 1970.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hastings%2C%20W.K.%20Monte%20carlo%20sampling%20methods%20using%20markov%20chains%20and%20their%20applications%201970",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hastings%2C%20W.K.%20Monte%20carlo%20sampling%20methods%20using%20markov%20chains%20and%20their%20applications%201970"
+        },
+        {
+            "id": "24",
+            "entry": "[24] A. G. Hawkes. Point spectra of some mutually exciting point processes. Journal of the Royal Statistical Society. Series B (Methodological), 1971.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hawkes%2C%20A.G.%20Point%20spectra%20of%20some%20mutually%20exciting%20point%20processes%201971",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hawkes%2C%20A.G.%20Point%20spectra%20of%20some%20mutually%20exciting%20point%20processes%201971"
+        },
+        {
+            "id": "25",
+            "entry": "[25] A. G. Hawkes. Spectra of some self-exciting and mutually exciting point processes. Biometrika, 58(1), 1971.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hawkes%2C%20A.G.%20Spectra%20of%20some%20self-exciting%20and%20mutually%20exciting%20point%20processes%201971",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hawkes%2C%20A.G.%20Spectra%20of%20some%20self-exciting%20and%20mutually%20exciting%20point%20processes%201971"
+        },
+        {
+            "id": "26",
+            "entry": "[26] R. A. Horn and C. R. Johnson. Matrix analysis. Cambridge university press, 1990.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Horn%2C%20R.A.%20Johnson%2C%20C.R.%20Matrix%20analysis%201990"
+        },
+        {
+            "id": "27",
+            "entry": "[27] V. Isham. A markov construction for a multidimensional point process. Journal of Applied Probability, 14(3), 1977.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Isham%2C%20V.%20A%20markov%20construction%20for%20a%20multidimensional%20point%20process%201977",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Isham%2C%20V.%20A%20markov%20construction%20for%20a%20multidimensional%20point%20process%201977"
+        },
+        {
+            "id": "28",
+            "entry": "[28] S. Kumar, F. Spezzano, V. Subrahmanian, and C. Faloutsos. Edge weight prediction in weighted signed networks. In ICDM, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kumar%2C%20S.%20Spezzano%2C%20F.%20Subrahmanian%2C%20V.%20Faloutsos%2C%20C.%20Edge%20weight%20prediction%20in%20weighted%20signed%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kumar%2C%20S.%20Spezzano%2C%20F.%20Subrahmanian%2C%20V.%20Faloutsos%2C%20C.%20Edge%20weight%20prediction%20in%20weighted%20signed%20networks%202016"
+        },
+        {
+            "id": "29",
+            "entry": "[29] J. Leskovec, L. Backstrom, and J. Kleinberg. Meme-tracking and the dynamics of the news cycle. In KDD, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Leskovec%2C%20J.%20Backstrom%2C%20L.%20Kleinberg%2C%20J.%20Meme-tracking%20and%20the%20dynamics%20of%20the%20news%20cycle%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Leskovec%2C%20J.%20Backstrom%2C%20L.%20Kleinberg%2C%20J.%20Meme-tracking%20and%20the%20dynamics%20of%20the%20news%20cycle%202009"
+        },
+        {
+            "id": "30",
+            "entry": "[30] J. Leskovec, D. P. Huttenlocher, and J. M. Kleinberg. Governance in social media: A case study of the wikipedia promotion process. In ICWSM, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Leskovec%2C%20J.%20Huttenlocher%2C%20D.P.%20Kleinberg%2C%20J.M.%20Governance%20in%20social%20media%3A%20A%20case%20study%20of%20the%20wikipedia%20promotion%20process%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Leskovec%2C%20J.%20Huttenlocher%2C%20D.P.%20Kleinberg%2C%20J.M.%20Governance%20in%20social%20media%3A%20A%20case%20study%20of%20the%20wikipedia%20promotion%20process%202010"
+        },
+        {
+            "id": "31",
+            "entry": "[31] J. Leskovec, J. Kleinberg, and C. Faloutsos. Graph evolution: Densification and shrinking diameters. ACM Transactions on Knowledge Discovery from Data (TKDD), 1(1), 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Leskovec%2C%20J.%20Kleinberg%2C%20J.%20Faloutsos%2C%20C.%20Graph%20evolution%3A%20Densification%20and%20shrinking%20diameters%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Leskovec%2C%20J.%20Kleinberg%2C%20J.%20Faloutsos%2C%20C.%20Graph%20evolution%3A%20Densification%20and%20shrinking%20diameters%202007"
+        },
+        {
+            "id": "32",
+            "entry": "[32] A. Q. Li, A. Ahmed, S. Ravi, and A. J. Smola. Reducing the sampling complexity of topic models. In KDD, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20A.Q.%20Ahmed%2C%20A.%20Ravi%2C%20S.%20Smola%2C%20A.J.%20Reducing%20the%20sampling%20complexity%20of%20topic%20models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20A.Q.%20Ahmed%2C%20A.%20Ravi%2C%20S.%20Smola%2C%20A.J.%20Reducing%20the%20sampling%20complexity%20of%20topic%20models%202014"
+        },
+        {
+            "id": "33",
+            "entry": "[33] S. Li, X. Gao, W. Bao, and G. Chen. Fm-hawkes: A hawkes process based approach for modeling online activity correlations. In CIKM, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20S.%20Gao%2C%20X.%20Bao%2C%20W.%20Chen%2C%20G.%20Fm-hawkes%3A%20A%20hawkes%20process%20based%20approach%20for%20modeling%20online%20activity%20correlations%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20S.%20Gao%2C%20X.%20Bao%2C%20W.%20Chen%2C%20G.%20Fm-hawkes%3A%20A%20hawkes%20process%20based%20approach%20for%20modeling%20online%20activity%20correlations%202017"
+        },
+        {
+            "id": "34",
+            "entry": "[34] S. Linderman and R. Adams. Discovering latent network structure in point process data. In ICML, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Linderman%2C%20S.%20Adams%2C%20R.%20Discovering%20latent%20network%20structure%20in%20point%20process%20data%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Linderman%2C%20S.%20Adams%2C%20R.%20Discovering%20latent%20network%20structure%20in%20point%20process%20data%202014"
+        },
+        {
+            "id": "35",
+            "entry": "[35] S. Linderman and R. Adams. Scalable bayesian inference for excitatory point process networks. arXiv preprint arXiv:1507.03228, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1507.03228"
+        },
+        {
+            "id": "36",
+            "entry": "[36] R. P. Monti, P. Hellyer, D. Sharp, R. Leech, C. Anagnostopoulos, and G. Montana. Estimating time-varying brain connectivity networks from functional mri time series. NeuroImage, 103, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Monti%2C%20R.P.%20Hellyer%2C%20P.%20Sharp%2C%20D.%20Leech%2C%20R.%20Estimating%20time-varying%20brain%20connectivity%20networks%20from%20functional%20mri%20time%20series%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Monti%2C%20R.P.%20Hellyer%2C%20P.%20Sharp%2C%20D.%20Leech%2C%20R.%20Estimating%20time-varying%20brain%20connectivity%20networks%20from%20functional%20mri%20time%20series%202014"
+        },
+        {
+            "id": "37",
+            "entry": "[37] A. Namaki, A. Shirazi, R. Raei, and G. Jafari. Network analysis of a financial market based on genuine correlation and threshold method. Physica A: Statistical Mechanics and its Applications, 390(21), 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Namaki%2C%20A.%20Shirazi%2C%20A.%20Raei%2C%20R.%20Jafari%2C%20G.%20Network%20analysis%20of%20a%20financial%20market%20based%20on%20genuine%20correlation%20and%20threshold%20method%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Namaki%2C%20A.%20Shirazi%2C%20A.%20Raei%2C%20R.%20Jafari%2C%20G.%20Network%20analysis%20of%20a%20financial%20market%20based%20on%20genuine%20correlation%20and%20threshold%20method%202011"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Y. Ogata. On lewis\u2019 simulation method for point processes. IEEE Transactions on Information Theory, 27(1):23\u201331, 1981.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ogata%2C%20Y.%20On%20lewis%E2%80%99%20simulation%20method%20for%20point%20processes%201981",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ogata%2C%20Y.%20On%20lewis%E2%80%99%20simulation%20method%20for%20point%20processes%201981"
+        },
+        {
+            "id": "39",
+            "entry": "[39] P. Panzarasa, T. Opsahl, and K. M. Carley. Patterns and dynamics of users\u2019 behavior and interaction: Network analysis of an online community. Journal of the Association for Information Science and Technology, 60(5), 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Panzarasa%2C%20P.%20Opsahl%2C%20T.%20Carley%2C%20K.M.%20Patterns%20and%20dynamics%20of%20users%E2%80%99%20behavior%20and%20interaction%3A%20Network%20analysis%20of%20an%20online%20community%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Panzarasa%2C%20P.%20Opsahl%2C%20T.%20Carley%2C%20K.M.%20Patterns%20and%20dynamics%20of%20users%E2%80%99%20behavior%20and%20interaction%3A%20Network%20analysis%20of%20an%20online%20community%202009"
+        },
+        {
+            "id": "40",
+            "entry": "[40] A. Paranjape, A. R. Benson, and J. Leskovec. Motifs in temporal networks. In WSDM, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=A%20Paranjape%20A%20R%20Benson%20and%20J%20Leskovec%20Motifs%20in%20temporal%20networks%20In%20WSDM%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=A%20Paranjape%20A%20R%20Benson%20and%20J%20Leskovec%20Motifs%20in%20temporal%20networks%20In%20WSDM%202017"
+        },
+        {
+            "id": "41",
+            "entry": "[41] M.-A. Rizoiu, Y. Lee, S. Mishra, and L. Xie. Frontiers of multimedia research. chapter Hawkes Processes for Events in Social Media. 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rizoiu%2C%20M.-A.%20Lee%2C%20Y.%20Mishra%2C%20S.%20Xie%2C%20L.%20Frontiers%20of%20multimedia%20research.%20chapter%20Hawkes%20Processes%20for%20Events%20in%20Social%20Media%202018"
+        },
+        {
+            "id": "42",
+            "entry": "[42] J. Silva and R. Willett. Hypergraph-based anomaly detection of high-dimensional cooccurrences. IEEE transactions on pattern analysis and machine intelligence, 31(3), 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silva%2C%20J.%20Willett%2C%20R.%20Hypergraph-based%20anomaly%20detection%20of%20high-dimensional%20cooccurrences%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silva%2C%20J.%20Willett%2C%20R.%20Hypergraph-based%20anomaly%20detection%20of%20high-dimensional%20cooccurrences%202009"
+        },
+        {
+            "id": "43",
+            "entry": "[43] M. Steyvers and T. Griffiths. Probabilistic topic models. Handbook of latent semantic analysis, 427(7), 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Steyvers%2C%20M.%20Griffiths%2C%20T.%20Probabilistic%20topic%20models.%20Handbook%20of%20latent%20semantic%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Steyvers%2C%20M.%20Griffiths%2C%20T.%20Probabilistic%20topic%20models.%20Handbook%20of%20latent%20semantic%202007"
+        },
+        {
+            "id": "44",
+            "entry": "[44] A. Terenin and E. P. Xing. Techniques for proving asynchronous convergence results for markov chain monte carlo methods. In NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Terenin%2C%20A.%20Xing%2C%20E.P.%20Techniques%20for%20proving%20asynchronous%20convergence%20results%20for%20markov%20chain%20monte%20carlo%20methods%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Terenin%2C%20A.%20Xing%2C%20E.P.%20Techniques%20for%20proving%20asynchronous%20convergence%20results%20for%20markov%20chain%20monte%20carlo%20methods%202017"
+        },
+        {
+            "id": "45",
+            "entry": "[45] P. O. S. Vaz de Melo, C. Faloutsos, R. Assuncao, R. Alves, and A. A. Loureiro. Universal and distinct properties of communication dynamics: how to generate realistic inter-event times. ACM Transactions on Knowledge Discovery from Data (TKDD), 9(3), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=de%20Melo%2C%20P.O.S.Vaz%20Faloutsos%2C%20C.%20Assuncao%2C%20R.%20Alves%2C%20R.%20Universal%20and%20distinct%20properties%20of%20communication%20dynamics%3A%20how%20to%20generate%20realistic%20inter-event%20times%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=de%20Melo%2C%20P.O.S.Vaz%20Faloutsos%2C%20C.%20Assuncao%2C%20R.%20Alves%2C%20R.%20Universal%20and%20distinct%20properties%20of%20communication%20dynamics%3A%20how%20to%20generate%20realistic%20inter-event%20times%202015"
+        },
+        {
+            "id": "46",
+            "entry": "[46] P. O. S. Vaz de Melo, C. Faloutsos, R. Assuncao, and A. Loureiro. The self-feeding process: A unifying model for communication dynamics in the web. In WWW, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=de%20Melo%2C%20P.O.S.Vaz%20Faloutsos%2C%20C.%20Assuncao%2C%20R.%20Loureiro%2C%20A.%20The%20self-feeding%20process%3A%20A%20unifying%20model%20for%20communication%20dynamics%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=de%20Melo%2C%20P.O.S.Vaz%20Faloutsos%2C%20C.%20Assuncao%2C%20R.%20Loureiro%2C%20A.%20The%20self-feeding%20process%3A%20A%20unifying%20model%20for%20communication%20dynamics%202013"
+        },
+        {
+            "id": "47",
+            "entry": "[47] H. Wold. On stationary point processes and markov chains. Scandinavian Actuarial Journal, 1948(1-2), 1948.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wold%2C%20H.%20On%20stationary%20point%20processes%20and%20markov%20chains%201948",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wold%2C%20H.%20On%20stationary%20point%20processes%20and%20markov%20chains%201948"
+        },
+        {
+            "id": "48",
+            "entry": "[48] H. Xu, M. Farajtabar, and H. Zha. Learning granger causality for hawkes processes. In ICML, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xu%2C%20H.%20Farajtabar%2C%20M.%20Zha%2C%20H.%20Learning%20granger%20causality%20for%20hawkes%20processes%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xu%2C%20H.%20Farajtabar%2C%20M.%20Zha%2C%20H.%20Learning%20granger%20causality%20for%20hawkes%20processes%202016"
+        },
+        {
+            "id": "49",
+            "entry": "[49] Y. Yang, J. Etesami, N. He, and N. Kiyavash. Online learning for multivariate hawkes processes. In NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yang%2C%20Y.%20Etesami%2C%20J.%20He%2C%20N.%20Kiyavash%2C%20N.%20Online%20learning%20for%20multivariate%20hawkes%20processes%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yang%2C%20Y.%20Etesami%2C%20J.%20He%2C%20N.%20Kiyavash%2C%20N.%20Online%20learning%20for%20multivariate%20hawkes%20processes%202017"
+        },
+        {
+            "id": "50",
+            "entry": "[50] H. Yin, A. R. Benson, J. Leskovec, and D. F. Gleich. Local higher-order graph clustering. In KDD, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yin%2C%20H.%20Benson%2C%20A.R.%20Leskovec%2C%20J.%20Gleich%2C%20D.F.%20Local%20higher-order%20graph%20clustering%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yin%2C%20H.%20Benson%2C%20A.R.%20Leskovec%2C%20J.%20Gleich%2C%20D.F.%20Local%20higher-order%20graph%20clustering%202017"
+        },
+        {
+            "id": "51",
+            "entry": "[51] H.-F. Yu, C.-J. Hsieh, H. Yun, S. Vishwanathan, and I. S. Dhillon. A scalable asynchronous distributed algorithm for topic modeling. In WWW, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yu%2C%20H.-F.%20Hsieh%2C%20C.-J.%20Yun%2C%20H.%20Vishwanathan%2C%20S.%20A%20scalable%20asynchronous%20distributed%20algorithm%20for%20topic%20modeling%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yu%2C%20H.-F.%20Hsieh%2C%20C.-J.%20Yun%2C%20H.%20Vishwanathan%2C%20S.%20A%20scalable%20asynchronous%20distributed%20algorithm%20for%20topic%20modeling%202015"
+        },
+        {
+            "id": "52",
+            "entry": "[52] J. Yuan, F. Gao, Q. Ho, W. Dai, J. Wei, X. Zheng, E. P. Xing, T.-Y. Liu, and W.-Y. Ma. Lightlda: Big topic models on modest computer clusters. In WWW, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yuan%2C%20J.%20Gao%2C%20F.%20Ho%2C%20Q.%20Dai%2C%20W.%20Lightlda%3A%20Big%20topic%20models%20on%20modest%20computer%20clusters%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yuan%2C%20J.%20Gao%2C%20F.%20Ho%2C%20Q.%20Dai%2C%20W.%20Lightlda%3A%20Big%20topic%20models%20on%20modest%20computer%20clusters%202015"
+        },
+        {
+            "id": "53",
+            "entry": "[53] K. Zhou, H. Zha, and L. Song. Learning social infectivity in sparse low-rank networks using multi-dimensional hawkes processes. In AISTATS, 2013. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhou%2C%20K.%20Zha%2C%20H.%20Song%2C%20L.%20Learning%20social%20infectivity%20in%20sparse%20low-rank%20networks%20using%20multi-dimensional%20hawkes%20processes.%20In%20AISTATS%202013"
+        }
+    ]
+}

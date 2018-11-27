@@ -1,0 +1,337 @@
+{
+    "filename": "7781-breaking-the-curse-of-horizon-infinite-horizon-off-policy-estimation.pdf",
+    "metadata": {
+        "title": "Breaking the Curse of Horizon: Infinite-Horizon Off-Policy Estimation",
+        "author": "Qiang Liu, Lihong Li, Ziyang Tang, Dengyong Zhou",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7781-breaking-the-curse-of-horizon-infinite-horizon-off-policy-estimation.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We consider off-policy estimation of the expected reward of a target policy using samples collected by a different behavior policy. Importance sampling (IS) has been a key technique for deriving (nearly) unbiased estimators, but is known to suffer from an excessively high variance in long-horizon problems. In the extreme case of infinite-horizon problems, the variance of an IS-based estimator may even be unbounded. In this paper, we propose a new off-policy estimator that applies IS directly on the stationary state-visitation distributions to avoid the exploding variance faced by existing methods. Our key contribution is a novel approach to estimating the density ratio of two stationary state distributions, with trajectories sampled from only the behavior distribution. We develop a mini-max loss function for the estimation problem, and derive a closed-form solution for the case of RKHS. We support our method with both theoretical and empirical analyses."
+    },
+    "keywords": [
+        {
+            "term": "mean square error",
+            "url": "https://en.wikipedia.org/wiki/mean_square_error"
+        },
+        {
+            "term": "importance sampling",
+            "url": "https://en.wikipedia.org/wiki/importance_sampling"
+        },
+        {
+            "term": "density ratio",
+            "url": "https://en.wikipedia.org/wiki/density_ratio"
+        },
+        {
+            "term": "value function",
+            "url": "https://en.wikipedia.org/wiki/value_function"
+        },
+        {
+            "term": "horizon problem",
+            "url": "https://en.wikipedia.org/wiki/horizon_problem"
+        },
+        {
+            "term": "estimation problem",
+            "url": "https://en.wikipedia.org/wiki/estimation_problem"
+        },
+        {
+            "term": "stationary state",
+            "url": "https://en.wikipedia.org/wiki/stationary_state"
+        },
+        {
+            "term": "Reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/Reinforcement_learning"
+        },
+        {
+            "term": "reproducing kernel Hilbert space",
+            "url": "https://en.wikipedia.org/wiki/reproducing_kernel_Hilbert_space"
+        },
+        {
+            "term": "transition probability",
+            "url": "https://en.wikipedia.org/wiki/transition_probability"
+        },
+        {
+            "term": "dynamic programming",
+            "url": "https://en.wikipedia.org/wiki/dynamic_programming"
+        }
+    ],
+    "highlights": [
+        "In the extreme case when the trajectory length is infinite, as in infinite-horizon average-reward problems, some of these estimators are not even well-defined",
+        "We develop a mini-max loss function for estimating the true stationary density ratio, which yields a closed-form representation similar to maximum mean discrepancy [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>] when combined with a reproducing kernel Hilbert space (RKHS)",
+        "As we show in the sequel, this allows us to estimate the expected reward using a much more efficient importance sampling, whose importance weight equals the single-step density ratio \u21e1/\u21e10, instead of the cumulative product weight w0:T in (3), allowing us to significantly reduce the variance",
+        "We can take F to be a ball of a reproducing kernel Hilbert space (RKHS), which enables a closed form representation of as we show in the following",
+        "Total variation distance between d\u21e1 = wd\u21e10 with the true d\u21e1 with TV distance as we optimize the loss function",
+        "We study the off-policy estimation problem in infinite-horizon problems and develop a new algorithm based on direct estimation of the stationary state density ratio between the target and behavior policies"
+    ],
+    "key_statements": [
+        "In the extreme case when the trajectory length is infinite, as in infinite-horizon average-reward problems, some of these estimators are not even well-defined",
+        "We develop a mini-max loss function for estimating the true stationary density ratio, which yields a closed-form representation similar to maximum mean discrepancy [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>] when combined with a reproducing kernel Hilbert space (RKHS)",
+        "As we show in the sequel, this allows us to estimate the expected reward using a much more efficient importance sampling, whose importance weight equals the single-step density ratio \u21e1/\u21e10, instead of the cumulative product weight w0:T in (3), allowing us to significantly reduce the variance",
+        "We can take F to be a ball of a reproducing kernel Hilbert space (RKHS), which enables a closed form representation of as we show in the following",
+        "Lemma 5 below reveals an interesting connection between L(w, f ) and the Bellman equation, allowing us to bound the estimation error of density ratio and expected reward with the mini-max loss when the discriminator space F is chosen properly (Theorems 6 and 7)",
+        "We compare with an on-policy oracle and a naive averaging baseline, which estimates the reward using direct averaging over the trajectories generated by the target policy and behavior policy, respectively",
+        "We assume w is a standard feed-forward neural network, and F is a reproducing kernel Hilbert space with a standard Gaussian RBF kernel whose bandwidth equals the median of the pairwise distances between the observed data points",
+        "Total variation distance between d\u21e1 = wd\u21e10 with the true d\u21e1 with TV distance as we optimize the loss function",
+        "Our results are shown in Figure 3, where we again find that our method generally outperforms the standard trajectory-wise and step-wise weighted IS, and works favorably in long-horizon problems (Figure 3(b))",
+        "We study the off-policy estimation problem in infinite-horizon problems and develop a new algorithm based on direct estimation of the stationary state density ratio between the target and behavior policies"
+    ],
+    "summary": [
+        "In the extreme case when the trajectory length is infinite, as in infinite-horizon average-reward problems, some of these estimators are not even well-defined.",
+        "We typically have no access to transition probabilities of the environment, so estimating importance ratios of state visitation distributions has been very difficult, especially when only off-policy samples are available.",
+        "The problem of off-policy value estimation is to estimate the expected reward R\u21e1 of a given target policy \u21e1, when we only observe a set of trajectories",
+        "As we show in the sequel, this allows us to estimate the expected reward using a much more efficient importance sampling, whose importance weight equals the single-step density ratio \u21e1/\u21e10, instead of the cumulative product weight w0:T in (3), allowing us to significantly reduce the variance.",
+        "Our idea is to construct an IS estimator based on (5), where the importance ratio is computed on state-action pairs rather than on trajectories:",
+        "We approximate the expectation in (12) using discounted empirical distribution of the transition pairs, yielding consistent estimates following standard results on V-statistics [<a class=\"ref-link\" id=\"c33\" href=\"#r33\">33</a>].",
+        "Lemma 5 below reveals an interesting connection between L(w, f ) and the Bellman equation, allowing us to bound the estimation error of density ratio and expected reward with the mini-max loss when the discriminator space F is chosen properly (Theorems 6 and 7).",
+        "Our idea can be extended to estimating value functions as well, by using estimated density ratios to weight observed transitions (c.f., the distribution \u03bc in LSTDQ [<a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>]).",
+        "We compare with an on-policy oracle and a naive averaging baseline, which estimates the reward using direct averaging over the trajectories generated by the target policy and behavior policy, respectively.",
+        "For problems with discrete action and state spaces, we compare with a standard model-based method, which estimates the transition and reward model and calculates expected reward explicitly using the model up to the desired truncation length.",
+        "Our results are shown in Figure 3, where we again find that our method generally outperforms the standard trajectory-wise and step-wise WIS, and works favorably in long-horizon problems (Figure 3(b)).",
+        "We study the off-policy estimation problem in infinite-horizon problems and develop a new algorithm based on direct estimation of the stationary state density ratio between the target and behavior policies.",
+        "Future directions include scaling our method to larger scale problems and extending it to estimate value functions and leverage off-policy data in policy optimization."
+    ],
+    "headline": "We propose a new off-policy estimator that applies importance sampling directly on the stationary state-visitation distributions to avoid the exploding variance faced by existing methods",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] S\u00f8ren Asmussen and Peter W. Glynn. Stochastic Simulation: Algorithms and Analysis, volume 57 of Probability Theory and Stochastic Processes. Springer-Verlag, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Asmussen%2C%20S%C3%B8ren%20Glynn%2C%20Peter%20W.%20Stochastic%20Simulation%3A%20Algorithms%20and%20Analysis%2C%20volume%2057%20of%20Probability%20Theory%20and%20Stochastic%20Processes%202007"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Richard E. Bellman. Dynamic Programming. Princeton University Press, 1957.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bellman%2C%20Richard%20E.%20Dynamic%20Programming%201957"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Alain Berlinet and Christine Thomas-Agnan. Reproducing kernel Hilbert spaces in probability and statistics. Springer Science & Business Media, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Berlinet%2C%20Alain%20Thomas-Agnan%2C%20Christine%20Reproducing%20kernel%20Hilbert%20spaces%20in%20probability%20and%20statistics%202011"
+        },
+        {
+            "id": "4",
+            "entry": "[4] L\u00e9on Bottou, Jonas Peters, Joaquin Qui\u00f1onero-Candela, Denis Xavier Charles, D. Max Chickering, Elon Portugaly, Dipankar Ray, Patrice Simard, and Ed Snelson. Counterfactual reasoning and learning systems: The example of computational advertising. Journal of Machine Learning Research, 14:3207\u20133260, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20reasoning%20and%20learning%20systems%3A%20The%20example%20of%20computational%20advertising%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20reasoning%20and%20learning%20systems%3A%20The%20example%20of%20computational%20advertising%202013"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Olivier Chapelle, Eren Manavoglu, and Romer Rosales. Simple and scalable response prediction for display advertising. ACM Transactions on Intelligent Systems and Technology, 5(4):61:1\u2013 61:34, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chapelle%2C%20Olivier%20Manavoglu%2C%20Eren%20Rosales%2C%20Romer%20Simple%20and%20scalable%20response%20prediction%20for%20display%20advertising%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chapelle%2C%20Olivier%20Manavoglu%2C%20Eren%20Rosales%2C%20Romer%20Simple%20and%20scalable%20response%20prediction%20for%20display%20advertising%202014"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Thomas G Dietterich. Hierarchical reinforcement learning with the MAXQ value function decomposition. Journal of Artificial Intelligence Research, 13:227\u2013303, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dietterich%2C%20Thomas%20G.%20Hierarchical%20reinforcement%20learning%20with%20the%20MAXQ%20value%20function%20decomposition%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dietterich%2C%20Thomas%20G.%20Hierarchical%20reinforcement%20learning%20with%20the%20MAXQ%20value%20function%20decomposition%202000"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Miroslav Dud\u00edk, John Langford, and Lihong Li. Doubly robust policy evaluation and learning. In Proceedings of the 28th International Conference on Machine Learning (ICML), pages 1097\u20131104, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dud%C3%ADk%2C%20Miroslav%20Langford%2C%20John%20Li%2C%20Lihong%20Doubly%20robust%20policy%20evaluation%20and%20learning%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dud%C3%ADk%2C%20Miroslav%20Langford%2C%20John%20Li%2C%20Lihong%20Doubly%20robust%20policy%20evaluation%20and%20learning%202011"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Ian Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, and Yoshua Bengio. Generative adversarial nets. In Advances in Neural Information Processing Systems 27 (NIPS), pages 2672\u20132680, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goodfellow%2C%20Ian%20Pouget-Abadie%2C%20Jean%20Mirza%2C%20Mehdi%20Xu%2C%20Bing%20Generative%20adversarial%20nets%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goodfellow%2C%20Ian%20Pouget-Abadie%2C%20Jean%20Mirza%2C%20Mehdi%20Xu%2C%20Bing%20Generative%20adversarial%20nets%202014"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Arthur Gretton, Karsten M Borgwardt, Malte J Rasch, Bernhard Sch\u00f6lkopf, and Alexander Smola. A kernel two-sample test. The Journal of Machine Learning Research, 13(1):723\u2013773, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gretton%2C%20Arthur%20Borgwardt%2C%20Karsten%20M.%20Rasch%2C%20Malte%20J.%20Sch%C3%B6lkopf%2C%20Bernhard%20A%20kernel%20two-sample%20test%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gretton%2C%20Arthur%20Borgwardt%2C%20Karsten%20M.%20Rasch%2C%20Malte%20J.%20Sch%C3%B6lkopf%2C%20Bernhard%20A%20kernel%20two-sample%20test%202012"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Zhaohan Guo, Philip S. Thomas, and Emma Brunskill. Using options and covariance testing for long horizon off-policy policy evaluation. In Advances in Neural Information Processing Systems 30 (NIPS), pages 2489\u20132498, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Guo%2C%20Zhaohan%20Thomas%2C%20Philip%20S.%20Brunskill%2C%20Emma%20Using%20options%20and%20covariance%20testing%20for%20long%20horizon%20off-policy%20policy%20evaluation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Guo%2C%20Zhaohan%20Thomas%2C%20Philip%20S.%20Brunskill%2C%20Emma%20Using%20options%20and%20covariance%20testing%20for%20long%20horizon%20off-policy%20policy%20evaluation%202017"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Assaf Hallak and Shie Mannor. Consistent on-line off-policy evaluation. In Proceedings of the 34th International Conference on Machine Learning (ICML), pages 1372\u20131383, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hallak%2C%20Assaf%20Mannor%2C%20Shie%20Consistent%20on-line%20off-policy%20evaluation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hallak%2C%20Assaf%20Mannor%2C%20Shie%20Consistent%20on-line%20off-policy%20evaluation%202017"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Assaf Hallak, Aviv Tamar, Remi Munos, and Shie Mannor. Generalized emphatic temporal difference learning: Bias-variance analysis. In Proceedings of the 30th AAAI Conference on Artificial Intelligence, pages 1631\u20131637, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hallak%2C%20Assaf%20Tamar%2C%20Aviv%20Munos%2C%20Remi%20Mannor%2C%20Shie%20Generalized%20emphatic%20temporal%20difference%20learning%3A%20Bias-variance%20analysis%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hallak%2C%20Assaf%20Tamar%2C%20Aviv%20Munos%2C%20Remi%20Mannor%2C%20Shie%20Generalized%20emphatic%20temporal%20difference%20learning%3A%20Bias-variance%20analysis%202016"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Keisuke Hirano, Guido W Imbens, and Geert Ridder. Efficient estimation of average treatment effects using the estimated propensity score. Econometrica, 71(4):1161\u20131189, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hirano%2C%20Keisuke%20Imbens%2C%20Guido%20W.%20Ridder%2C%20Geert%20Efficient%20estimation%20of%20average%20treatment%20effects%20using%20the%20estimated%20propensity%20score%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hirano%2C%20Keisuke%20Imbens%2C%20Guido%20W.%20Ridder%2C%20Geert%20Efficient%20estimation%20of%20average%20treatment%20effects%20using%20the%20estimated%20propensity%20score%202003"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Nan Jiang and Lihong Li. Doubly robust off-policy evaluation for reinforcement learning. In Proceedings of the 23rd International Conference on Machine Learning (ICML), pages 652\u2013661, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jiang%2C%20Nan%20Li%2C%20Lihong%20Doubly%20robust%20off-policy%20evaluation%20for%20reinforcement%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jiang%2C%20Nan%20Li%2C%20Lihong%20Doubly%20robust%20off-policy%20evaluation%20for%20reinforcement%20learning%202016"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Daniel Krajzewicz, Jakob Erdmann, Michael Behrisch, and Laura Bieker. Recent development and applications of sumo-simulation of urban mobility. International Journal On Advances in Systems and Measurements, 5(3&4), 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krajzewicz%2C%20Daniel%20Erdmann%2C%20Jakob%20Behrisch%2C%20Michael%20Bieker%2C%20Laura%20Recent%20development%20and%20applications%20of%20sumo-simulation%20of%20urban%20mobility%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krajzewicz%2C%20Daniel%20Erdmann%2C%20Jakob%20Behrisch%2C%20Michael%20Bieker%2C%20Laura%20Recent%20development%20and%20applications%20of%20sumo-simulation%20of%20urban%20mobility%202012"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Michail G. Lagoudakis and Ronald Parr. Least-squares policy iteration. Journal of Machine Learning Research, 4:1107\u20131149, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lagoudakis%2C%20Michail%20G.%20Parr%2C%20Ronald%20Least-squares%20policy%20iteration%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lagoudakis%2C%20Michail%20G.%20Parr%2C%20Ronald%20Least-squares%20policy%20iteration%202003"
+        },
+        {
+            "id": "17",
+            "entry": "[17] David A Levin and Yuval Peres. Markov chains and mixing times, volume 107. American Mathematical Soc., 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Levin%2C%20David%20A.%20Peres%2C%20Yuval%20Markov%20chains%20and%20mixing%20times%2C%20volume%20107%202017"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Lihong Li, Shunbao Chen, Ankur Gupta, and Jim Kleban. Counterfactual analysis of click metrics for search engine optimization: A case study. In Proceedings of the 24th International World Wide Web Conference (WWW), Companion Volume, pages 929\u2013934, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Lihong%20Chen%2C%20Shunbao%20Gupta%2C%20Ankur%20Kleban%2C%20Jim%20Counterfactual%20analysis%20of%20click%20metrics%20for%20search%20engine%20optimization%3A%20A%20case%20study%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20Lihong%20Chen%2C%20Shunbao%20Gupta%2C%20Ankur%20Kleban%2C%20Jim%20Counterfactual%20analysis%20of%20click%20metrics%20for%20search%20engine%20optimization%3A%20A%20case%20study%202015"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Lihong Li, Wei Chu, John Langford, and Xuanhui Wang. Unbiased offline evaluation of contextual-bandit-based news article recommendation algorithms. In Proceedings of the 4th International Conference on Web Search and Data Mining (WSDM), pages 297\u2013306, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Lihong%20Chu%2C%20Wei%20Langford%2C%20John%20Wang%2C%20Xuanhui%20Unbiased%20offline%20evaluation%20of%20contextual-bandit-based%20news%20article%20recommendation%20algorithms%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20Lihong%20Chu%2C%20Wei%20Langford%2C%20John%20Wang%2C%20Xuanhui%20Unbiased%20offline%20evaluation%20of%20contextual-bandit-based%20news%20article%20recommendation%20algorithms%202011"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Lihong Li, R\u00e9mi Munos, and Csaba Szepesv\u00e1ri. Toward minimax off-policy value estimation. In Proceedings of the 18th International Conference on Artificial Intelligence and Statistics (AISTATS), pages 608\u2013616, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Lihong%20Munos%2C%20R%C3%A9mi%20Szepesv%C3%A1ri%2C%20Csaba%20Toward%20minimax%20off-policy%20value%20estimation%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20Lihong%20Munos%2C%20R%C3%A9mi%20Szepesv%C3%A1ri%2C%20Csaba%20Toward%20minimax%20off-policy%20value%20estimation%202015"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Hao Liu, Yihao Feng, Yi Mao, Dengyong Zhou, Jian Peng, and Qiang Liu. Action-dependent control variates for policy optimization via stein identity. In Proceedings of the 6th International Conference on Learning Representations (ICLR), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20Hao%20Feng%2C%20Yihao%20Mao%2C%20Yi%20Zhou%2C%20Dengyong%20Action-dependent%20control%20variates%20for%20policy%20optimization%20via%20stein%20identity%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liu%2C%20Hao%20Feng%2C%20Yihao%20Mao%2C%20Yi%20Zhou%2C%20Dengyong%20Action-dependent%20control%20variates%20for%20policy%20optimization%20via%20stein%20identity%202018"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Jun S. Liu. Monte Carlo Strategies in Scientific Computing. Springer Series in Statistics. Springer-Verlag, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20Jun%20S.%20Monte%20Carlo%20Strategies%20in%20Scientific%20Computing.%20Springer%20Series%20in%20Statistics%202001"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Travis Mandel, Yun-En Liu, Sergey Levine, Emma Brunskill, and Zoran Popovic. Offline policy evaluation across representations with applications to educational games. In Proceedings of the 13th International Conference on Autonomous Agents and Multi-Agent Systems (AAMAS), pages 1077\u20131084, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mandel%2C%20Travis%20Liu%2C%20Yun-En%20Levine%2C%20Sergey%20Brunskill%2C%20Emma%20Offline%20policy%20evaluation%20across%20representations%20with%20applications%20to%20educational%20games%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mandel%2C%20Travis%20Liu%2C%20Yun-En%20Levine%2C%20Sergey%20Brunskill%2C%20Emma%20Offline%20policy%20evaluation%20across%20representations%20with%20applications%20to%20educational%20games%202014"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Krikamol Muandet, Kenji Fukumizu, Bharath Sriperumbudur, Bernhard Sch\u00f6lkopf, et al. Kernel mean embedding of distributions: A review and beyond. Foundations and Trends R in Machine Learning, 10(1-2):1\u2013141, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Muandet%2C%20Krikamol%20Fukumizu%2C%20Kenji%20Sriperumbudur%2C%20Bharath%20Sch%C3%B6lkopf%2C%20Bernhard%20Kernel%20mean%20embedding%20of%20distributions%3A%20A%20review%20and%20beyond%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Muandet%2C%20Krikamol%20Fukumizu%2C%20Kenji%20Sriperumbudur%2C%20Bharath%20Sch%C3%B6lkopf%2C%20Bernhard%20Kernel%20mean%20embedding%20of%20distributions%3A%20A%20review%20and%20beyond%202017"
+        },
+        {
+            "id": "25",
+            "entry": "[25] R\u00e9mi Munos, Tom Stepleton, Anna Harutyunyan, and Marc G. Bellemare. Safe and efficient off-policy reinforcement learning. In Advances in Neural Information Processing Systems 29 (NIPS), pages 1046\u20131054, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Munos%2C%20R%C3%A9mi%20Stepleton%2C%20Tom%20Harutyunyan%2C%20Anna%20Bellemare%2C%20Marc%20G.%20Safe%20and%20efficient%20off-policy%20reinforcement%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Munos%2C%20R%C3%A9mi%20Stepleton%2C%20Tom%20Harutyunyan%2C%20Anna%20Bellemare%2C%20Marc%20G.%20Safe%20and%20efficient%20off-policy%20reinforcement%20learning%202016"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Susan A. Murphy, Mark van der Laan, and James M. Robins. Marginal mean models for dynamic regimes. Journal of the American Statistical Association, 96(456):1410\u20131423, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Murphy%2C%20Susan%20A.%20van%20der%20Laan%2C%20Mark%20Robins%2C%20James%20M.%20Marginal%20mean%20models%20for%20dynamic%20regimes%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Murphy%2C%20Susan%20A.%20van%20der%20Laan%2C%20Mark%20Robins%2C%20James%20M.%20Marginal%20mean%20models%20for%20dynamic%20regimes%202001"
+        },
+        {
+            "id": "27",
+            "entry": "[27] XuanLong Nguyen, Martin J Wainwright, and Michael Jordan. Estimating divergence functionals and the likelihood ratio by convex risk minimization. Information Theory, IEEE Transactions on, 56(11):5847\u20135861, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nguyen%2C%20XuanLong%20Wainwright%2C%20Martin%20J.%20Jordan%2C%20Michael%20Estimating%20divergence%20functionals%20and%20the%20likelihood%20ratio%20by%20convex%20risk%20minimization%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nguyen%2C%20XuanLong%20Wainwright%2C%20Martin%20J.%20Jordan%2C%20Michael%20Estimating%20divergence%20functionals%20and%20the%20likelihood%20ratio%20by%20convex%20risk%20minimization%202010"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Art B. Owen. Monte Carlo Theory, Methods and Examples. 2013. http://statweb.stanford.edu/~owen/mc.",
+            "url": "http://statweb.stanford.edu/~owen/mc"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Doina Precup, Richard S. Sutton, and Sanjoy Dasgupta. Off-policy temporal-difference learning with funtion approximation. In Proceedings of the 18th Conference on Machine Learning (ICML), pages 417\u2013424, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Precup%2C%20Doina%20Sutton%2C%20Richard%20S.%20Dasgupta%2C%20Sanjoy%20Off-policy%20temporal-difference%20learning%20with%20funtion%20approximation%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Precup%2C%20Doina%20Sutton%2C%20Richard%20S.%20Dasgupta%2C%20Sanjoy%20Off-policy%20temporal-difference%20learning%20with%20funtion%20approximation%202001"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Doina Precup, Richard S. Sutton, and Satinder P. Singh. Eligibility traces for off-policy policy evaluation. In Proceedings of the 17th International Conference on Machine Learning (ICML), pages 759\u2013766, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Precup%2C%20Doina%20Sutton%2C%20Richard%20S.%20Singh%2C%20Satinder%20P.%20Eligibility%20traces%20for%20off-policy%20policy%20evaluation%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Precup%2C%20Doina%20Sutton%2C%20Richard%20S.%20Singh%2C%20Satinder%20P.%20Eligibility%20traces%20for%20off-policy%20policy%20evaluation%202000"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Martin L. Puterman. Markov Decision Processes: Discrete Stochastic Dynamic Programming. Wiley-Interscience, New York, 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Puterman%2C%20Martin%20L.%20Markov%20Decision%20Processes%3A%20Discrete%20Stochastic%20Dynamic%20Programming.%20Wiley-Interscience%201994"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Bernhard Scholkopf and Alexander J Smola. Learning with kernels: support vector machines, regularization, optimization, and beyond. MIT press, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Scholkopf%2C%20Bernhard%20Smola%2C%20Alexander%20J.%20Learning%20with%20kernels%3A%20support%20vector%20machines%2C%20regularization%2C%20optimization%2C%20and%20beyond%202001"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Robert J Serfling. Approximation theorems of mathematical statistics, volume 162. John Wiley & Sons, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Serfling%2C%20Robert%20J.%20Approximation%20theorems%20of%20mathematical%20statistics%2C%20volume%20162%202009"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Alexander L. Strehl, John Langford, Lihong Li, and Sham M. Kakade. Learning from logged implicit exploration data. In Advances in Neural Information Processing Systems 23 (NIPS-10), pages 2217\u20132225, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Strehl%2C%20Alexander%20L.%20Langford%2C%20John%20Li%2C%20Lihong%20Kakade%2C%20Sham%20M.%20Learning%20from%20logged%20implicit%20exploration%20data%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Strehl%2C%20Alexander%20L.%20Langford%2C%20John%20Li%2C%20Lihong%20Kakade%2C%20Sham%20M.%20Learning%20from%20logged%20implicit%20exploration%20data%202010"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Masashi Sugiyama, Taiji Suzuki, and Takafumi Kanamori. Density ratio estimation in machine learning. Cambridge University Press, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sugiyama%2C%20Masashi%20Suzuki%2C%20Taiji%20Kanamori%2C%20Takafumi%20Density%20ratio%20estimation%20in%20machine%20learning%202012"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Richard S. Sutton and Andrew G. Barto. Reinforcement Learning: An Introduction. MIT Press, Cambridge, MA, March 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20Richard%20S.%20Barto%2C%20Andrew%20G.%20Reinforcement%20Learning%3A%20An%20Introduction%201998-03"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Richard S. Sutton, A. Rupam Mahmood, and Martha White. An emphatic approach to the problem of off-policy temporal-difference learning. Journal of Machine Learning Research, 17(73):1\u201329, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20Richard%20S.%20Mahmood%2C%20A.Rupam%20White%2C%20Martha%20An%20emphatic%20approach%20to%20the%20problem%20of%20off-policy%20temporal-difference%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutton%2C%20Richard%20S.%20Mahmood%2C%20A.Rupam%20White%2C%20Martha%20An%20emphatic%20approach%20to%20the%20problem%20of%20off-policy%20temporal-difference%20learning%202016"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Liang Tang, Romer Rosales, Ajit Singh, and Deepak Agarwal. Automatic ad format selection via contextual bandits. In Proceedings of the 22nd ACM International Conference on Information & Knowledge Management (CIKM), pages 1587\u20131594, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tang%2C%20Liang%20Rosales%2C%20Romer%20Singh%2C%20Ajit%20Agarwal%2C%20Deepak%20Automatic%20ad%20format%20selection%20via%20contextual%20bandits%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tang%2C%20Liang%20Rosales%2C%20Romer%20Singh%2C%20Ajit%20Agarwal%2C%20Deepak%20Automatic%20ad%20format%20selection%20via%20contextual%20bandits%202013"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Philip S. Thomas and Emma Brunskill. Data-efficient off-policy policy evaluation for reinforcement learning. In Proceedings of the 33rd International Conference on Machine Learning (ICML), pages 2139\u20132148, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Thomas%2C%20Philip%20S.%20Brunskill%2C%20Emma%20Data-efficient%20off-policy%20policy%20evaluation%20for%20reinforcement%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Thomas%2C%20Philip%20S.%20Brunskill%2C%20Emma%20Data-efficient%20off-policy%20policy%20evaluation%20for%20reinforcement%20learning%202016"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Philip S. Thomas, Georgios Theocharous, Mohammad Ghavamzadeh, Ishan Durugkar, and Emma Brunskill. Predictive off-policy policy evaluation for nonstationary decision problems, with applications to digital marketing. In Proceedings of the 31st AAAI Conference on Artificial Intelligence (AAAI), pages 4740\u20134745, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Thomas%2C%20Philip%20S.%20Theocharous%2C%20Georgios%20Ghavamzadeh%2C%20Mohammad%20Durugkar%2C%20Ishan%20Predictive%20off-policy%20policy%20evaluation%20for%20nonstationary%20decision%20problems%2C%20with%20applications%20to%20digital%20marketing%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Thomas%2C%20Philip%20S.%20Theocharous%2C%20Georgios%20Ghavamzadeh%2C%20Mohammad%20Durugkar%2C%20Ishan%20Predictive%20off-policy%20policy%20evaluation%20for%20nonstationary%20decision%20problems%2C%20with%20applications%20to%20digital%20marketing%202017"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Elise Van der Pol and Frans A Oliehoek. Coordinated deep reinforcement learners for traffic light control. In NIPS Workshop on Learning, Inference and Control of Multi-Agent Systems, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=der%2C%20Elise%20Van%20Pol%20and%20Frans%20A%20Oliehoek.%20Coordinated%20deep%20reinforcement%20learners%20for%20traffic%20light%20control%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=der%2C%20Elise%20Van%20Pol%20and%20Frans%20A%20Oliehoek.%20Coordinated%20deep%20reinforcement%20learners%20for%20traffic%20light%20control%202016"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Yu-Xiang Wang, Alekh Agarwal, and Miroslav Dud\u00edk. Optimal and adaptive off-policy evaluation in contextual bandits. In Proceedings of the 34th International Conference on Machine Learning (ICML), pages 3589\u20133597, 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Yu-Xiang%20Agarwal%2C%20Alekh%20Dud%C3%ADk%2C%20Miroslav%20Optimal%20and%20adaptive%20off-policy%20evaluation%20in%20contextual%20bandits%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Yu-Xiang%20Agarwal%2C%20Alekh%20Dud%C3%ADk%2C%20Miroslav%20Optimal%20and%20adaptive%20off-policy%20evaluation%20in%20contextual%20bandits%202017"
+        }
+    ]
+}

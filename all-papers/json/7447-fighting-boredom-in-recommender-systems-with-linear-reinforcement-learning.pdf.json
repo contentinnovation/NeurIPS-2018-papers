@@ -1,0 +1,216 @@
+{
+    "filename": "7447-fighting-boredom-in-recommender-systems-with-linear-reinforcement-learning.pdf",
+    "metadata": {
+        "title": "Fighting Boredom in Recommender Systems with Linear Reinforcement Learning",
+        "author": "Romain WARLOP, Alessandro Lazaric, J\u00e9r\u00e9mie Mary",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7447-fighting-boredom-in-recommender-systems-with-linear-reinforcement-learning.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "A common assumption in recommender systems (RS) is the existence of a best fixed recommendation strategy. Such strategy may be simple and work at the item level (e.g., in multi-armed bandit it is assumed one best fixed arm/item exists) or implement more sophisticated RS (e.g., the objective of A/B testing is to find the best fixed RS and execute it thereafter). We argue that this assumption is rarely verified in practice, as the recommendation process itself may impact the user\u2019s preferences. For instance, a user may get bored by a strategy, while she may gain interest again, if enough time passed since the last time that strategy was used. In this case, a better approach consists in alternating different solutions at the right frequency to fully exploit their potential. In this paper, we first cast the problem as a Markov decision process, where the rewards are a linear function of the recent history of actions, and we show that a policy considering the long-term influence of the recommendations may outperform both fixed-action and contextual greedy policies. We then introduce an extension of the UCRL algorithm (LINUCRL) to effectively balance exploration and exploitation in an unknown environment, and we derive a regret bound that is independent of the number of states. Finally, we empirically validate the model assumptions and the algorithm in a number of realistic scenarios."
+    },
+    "keywords": [
+        {
+            "term": "recommender system",
+            "url": "https://en.wikipedia.org/wiki/recommender_system"
+        },
+        {
+            "term": "long term",
+            "url": "https://en.wikipedia.org/wiki/long_term"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "Markov decision process",
+            "url": "https://en.wikipedia.org/wiki/Markov_decision_process"
+        }
+    ],
+    "highlights": [
+        "Consider a movie recommendation problem, where the recommender system (RS) selects the genre to suggest to a user",
+        "As the preferences depend on the sequence of recommendations, a successful strategy should \u201cdrive\u201d the user\u2019s state in the most favorable condition to gain as much reward as possible in the long term, instead selecting the best \u201cinstantaneous\u201d action at each step",
+        "We prove that LINUCRL successfully exploits the structure of the problem to reduce its cumulative regret w.r.t. basic UCRL",
+        "We showed that estimating the influence of the recommendation strategy on the reward and computing a policy maximizing the long-term reward may significantly outperform fixed-action or greedy contextual policies",
+        "We introduced a novel learning algorithm, LINUCRL, to effectively learn such policy and we prove that its regret is much smaller than for standard reinforcement learning algorithms (UCRL)",
+        "Given its speed of convergence, it could be interesting to run a different instance of LINUCRL per user - or group of users - in order to offer personalized \u201cboredom\u201d curves"
+    ],
+    "key_statements": [
+        "Consider a movie recommendation problem, where the recommender system (RS) selects the genre to suggest to a user",
+        "While this strategy is sensible in the short term, it overlooks the dynamics of the user\u2019s preferences caused by the recommendation process",
+        "This effect is due to the recommendation strategy itself and not by an actual evolution of user\u2019s preferences, as she would still like the same genres, if only they were not proposed so often.1",
+        "As the preferences depend on the sequence of recommendations, a successful strategy should \u201cdrive\u201d the user\u2019s state in the most favorable condition to gain as much reward as possible in the long term, instead selecting the best \u201cinstantaneous\u201d action at each step",
+        "We propose to use a reinforcement learning (RL) [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>] model to capture this dynamical structure, where the reward depends on a state that summarizes the effect of the recent recommendations on user\u2019s preferences",
+        "Despite producing context-dependent policies, this model does not consider the influence that the actions may have on the state and overlook the potential of long-term reward maximization.\n2 Problem Formulation",
+        "We prove that LINUCRL successfully exploits the structure of the problem to reduce its cumulative regret w.r.t. basic UCRL",
+        "We propose to use both synthetic and dataset-based experiments to empirically validate our model and compare LINUCRL to existing baselines",
+        "In order to overcome the difficulty of creating full complex recommender system and evaluate them on offline datasets, we focus on a relatively simple scenario where a recommender system directly recommends movies from one chosen genre, for which we have already validated our model in Sec. 3",
+        "In order to compare the learning performance of LINUCRL to existing baselines, we use the movielens100k dataset to estimate the parameters of our model and construct the corresponding \u201csimulator\u201d",
+        "As in the movielens experiment, we do not have enough data to evaluate a learning algorithm on the historical events, so we first compute a simulator based on the data and run LINUCRL-that does not know the parameters of the simulator and must try to estimate them - and compare it to simple baselines",
+        "Using this simulator we compute oracle greedy and optimal policies and we compare LINUCB, LINUCRL, which is no longer able to learn the \u201ctrue\u201d model, since it does not satisfy the linear assumption, and UCRL, which may suffer from the large number of state but targets a model with potentially better performance",
+        "We showed that estimating the influence of the recommendation strategy on the reward and computing a policy maximizing the long-term reward may significantly outperform fixed-action or greedy contextual policies",
+        "We introduced a novel learning algorithm, LINUCRL, to effectively learn such policy and we prove that its regret is much smaller than for standard reinforcement learning algorithms (UCRL)",
+        "Our results illustrate how the optimal policy effectively alternates between different options, in order to keep the interest of the users as high as possible",
+        "A venue for future work is to extend the current model to take into consideration correlations between actions",
+        "Given its speed of convergence, it could be interesting to run a different instance of LINUCRL per user - or group of users - in order to offer personalized \u201cboredom\u201d curves"
+    ],
+    "summary": [
+        "Consider a movie recommendation problem, where the recommender system (RS) selects the genre to suggest to a user.",
+        "As the preferences depend on the sequence of recommendations, a successful strategy should \u201cdrive\u201d the user\u2019s state in the most favorable condition to gain as much reward as possible in the long term, instead selecting the best \u201cinstantaneous\u201d action at each step.",
+        "We propose to use a reinforcement learning (RL) [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>] model to capture this dynamical structure, where the reward depends on a state that summarizes the effect of the recent recommendations on user\u2019s preferences.",
+        "Despite producing context-dependent policies, this model does not consider the influence that the actions may have on the state and overlook the potential of long-term reward maximization.",
+        "In order to verify this intuition, we sort ratings for each user using their timestamps to produce an ordered sequence of ratings.5 For different genres observed more than 10, 000 times, we compute the average rating for each value of the recency function \u03c1 at the states st encountered in the dataset.",
+        "\u0397\u2217 is in general much larger than the optimal average reward of a greedy policy selecting the best instantanous action at each step.",
+        "In order to compare the learning performance of LINUCRL to existing baselines, we use the movielens100k dataset to estimate the parameters of our model and construct the corresponding \u201csimulator\u201d.",
+        "The parameters that describe the dependency of the reward function on the recency are computed by using the ratings averaged over all users for each state encountered and for ten different genres in the dataset.",
+        "At early learning stages LINUCRL is already better than LINUCB, and its performance keeps improving until, at 2000 steps, it performs better than the oracle greedy strategy and it is close to the optimal policy.",
+        "As in the movielens experiment, we do not have enough data to evaluate a learning algorithm on the historical events, so we first compute a simulator based on the data and run LINUCRL-that does not know the parameters of the simulator and must try to estimate them - and compare it to simple baselines.",
+        "Using this simulator we compute oracle greedy and optimal policies and we compare LINUCB, LINUCRL, which is no longer able to learn the \u201ctrue\u201d model, since it does not satisfy the linear assumption, and UCRL, which may suffer from the large number of state but targets a model with potentially better performance.",
+        "We showed that estimating the influence of the recommendation strategy on the reward and computing a policy maximizing the long-term reward may significantly outperform fixed-action or greedy contextual policies.",
+        "Using different models of the reward as a function of the recency could be used in case of binary rewards"
+    ],
+    "headline": "We argue that this assumption is rarely verified in practice, as the recommendation process itself may impact the user\u2019s preferences",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Y. Abbasi-yadkori, D. P\u00e1l, and C. Szepesv\u00e1ri. Improved algorithms for linear stochastic bandits. In J. Shawe-Taylor, R. S. Zemel, P. L. Bartlett, F. Pereira, and K. Q. Weinberger, editors, Advances in Neural Information Processing Systems 24, pages 2312\u20132320. Curran Associates, Inc., 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abbasi-yadkori%2C%20Y.%20P%C3%A1l%2C%20D.%20Szepesv%C3%A1ri%2C%20C.%20Improved%20algorithms%20for%20linear%20stochastic%20bandits%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abbasi-yadkori%2C%20Y.%20P%C3%A1l%2C%20D.%20Szepesv%C3%A1ri%2C%20C.%20Improved%20algorithms%20for%20linear%20stochastic%20bandits%202011"
+        },
+        {
+            "id": "2",
+            "entry": "[2] P. Auer. Using confidence bounds for exploitation-exploration trade-offs. J. Mach. Learn. Res., 3:397\u2013422, mar 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Auer%2C%20P.%20Using%20confidence%20bounds%20for%20exploitation-exploration%20trade-offs%202003-03",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Auer%2C%20P.%20Using%20confidence%20bounds%20for%20exploitation-exploration%20trade-offs%202003-03"
+        },
+        {
+            "id": "3",
+            "entry": "[3] P. Auer, T. Jaksch, and R. Ortner. Near-optimal regret bounds for reinforcement learning. In D. Koller, D. Schuurmans, Y. Bengio, and L. Bottou, editors, Advances in Neural Information Processing Systems 21, pages 89\u201396. Curran Associates, Inc., 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Auer%2C%20P.%20Jaksch%2C%20T.%20Ortner%2C%20R.%20Near-optimal%20regret%20bounds%20for%20reinforcement%20learning%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Auer%2C%20P.%20Jaksch%2C%20T.%20Ortner%2C%20R.%20Near-optimal%20regret%20bounds%20for%20reinforcement%20learning%202009"
+        },
+        {
+            "id": "4",
+            "entry": "[4] S. Bubeck and N. Cesa-Bianchi. Regret analysis of stochastic and nonstochastic multi-armed bandit problems. Foundations and Trends R in Machine Learning, 5(1):1\u2013122, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bubeck%2C%20S.%20Cesa-Bianchi%2C%20N.%20Regret%20analysis%20of%20stochastic%20and%20nonstochastic%20multi-armed%20bandit%20problems%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bubeck%2C%20S.%20Cesa-Bianchi%2C%20N.%20Regret%20analysis%20of%20stochastic%20and%20nonstochastic%20multi-armed%20bandit%20problems%202012"
+        },
+        {
+            "id": "5",
+            "entry": "[5] A. Dasdan, S. S. Irani, and R. K. Gupta. Efficient algorithms for optimum cycle mean and optimum cost to time ratio problems. In Proceedings of the 36th Annual ACM/IEEE Design Automation Conference, DAC \u201999, pages 37\u201342, New York, NY, USA, 1999. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dasdan%2C%20A.%20Irani%2C%20S.S.%20Gupta%2C%20R.K.%20Efficient%20algorithms%20for%20optimum%20cycle%20mean%20and%20optimum%20cost%20to%20time%20ratio%20problems%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dasdan%2C%20A.%20Irani%2C%20S.S.%20Gupta%2C%20R.K.%20Efficient%20algorithms%20for%20optimum%20cycle%20mean%20and%20optimum%20cost%20to%20time%20ratio%20problems%201999"
+        },
+        {
+            "id": "6",
+            "entry": "[6] S. Filippi, O. Capp\u00e9, and A. Garivier. Optimally Sensing a Single Channel Without Prior Information: The Tiling Algorithm and Regret Bounds. IEEE Journal of Selected Topics in Signal Processing, 5(1):68 \u2013 76, Feb. 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=S.%20Filippi%2C%20O.%20Capp%C3%A9%20Garivier%2C%20A.%20Optimally%20Sensing%20a%20Single%20Channel%20Without%20Prior%20Information%3A%20The%20Tiling%20Algorithm%20and%20Regret%20Bounds%202010-02",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=S.%20Filippi%2C%20O.%20Capp%C3%A9%20Garivier%2C%20A.%20Optimally%20Sensing%20a%20Single%20Channel%20Without%20Prior%20Information%3A%20The%20Tiling%20Algorithm%20and%20Regret%20Bounds%202010-02"
+        },
+        {
+            "id": "7",
+            "entry": "[7] H. Heidari, M. Kearns, and A. Roth. Tight policy regret bounds for improving and decaying bandits. In Proceedings of the Twenty-Fifth International Joint Conference on Artificial Intelligence, IJCAI\u201916, pages 1562\u20131570. AAAI Press, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Heidari%2C%20H.%20Kearns%2C%20M.%20Roth%2C%20A.%20Tight%20policy%20regret%20bounds%20for%20improving%20and%20decaying%20bandits%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Heidari%2C%20H.%20Kearns%2C%20M.%20Roth%2C%20A.%20Tight%20policy%20regret%20bounds%20for%20improving%20and%20decaying%20bandits%202016"
+        },
+        {
+            "id": "8",
+            "entry": "[8] J. Herlocker, J. Konstan, A. Borchers, and J. Riedl. An algorithmic framework for performing collaborative filtering. In Proceedings of the 1999 Conference on Research and Development in Information Retrieval, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Herlocker%2C%20J.%20Konstan%2C%20J.%20Borchers%2C%20A.%20Riedl%2C%20J.%20An%20algorithmic%20framework%20for%20performing%20collaborative%20filtering%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Herlocker%2C%20J.%20Konstan%2C%20J.%20Borchers%2C%20A.%20Riedl%2C%20J.%20An%20algorithmic%20framework%20for%20performing%20collaborative%20filtering%201999"
+        },
+        {
+            "id": "9",
+            "entry": "[9] T. Jaksch, R. Ortner, and P. Auer. Near-optimal regret bounds for reinforcement learning. J. Mach. Learn. Res., 11:1563\u20131600, Aug. 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jaksch%2C%20T.%20Ortner%2C%20R.%20Auer%2C%20P.%20Near-optimal%20regret%20bounds%20for%20reinforcement%20learning%202010-08",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jaksch%2C%20T.%20Ortner%2C%20R.%20Auer%2C%20P.%20Near-optimal%20regret%20bounds%20for%20reinforcement%20learning%202010-08"
+        },
+        {
+            "id": "10",
+            "entry": "[10] K. G. Jamieson and A. Talwalkar. Non-stochastic best arm identification and hyperparameter optimization. In AISTATS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jamieson%2C%20K.G.%20Talwalkar%2C%20A.%20Non-stochastic%20best%20arm%20identification%20and%20hyperparameter%20optimization%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jamieson%2C%20K.G.%20Talwalkar%2C%20A.%20Non-stochastic%20best%20arm%20identification%20and%20hyperparameter%20optimization%202016"
+        },
+        {
+            "id": "11",
+            "entry": "[11] K. Kapoor, K. Subbian, J. Srivastava, and P. Schrater. Just in time recommendations: Modeling the dynamics of boredom in activity streams. In Proceedings of the Eighth ACM International Conference on Web Search and Data Mining, WSDM \u201915, pages 233\u2013242, New York, NY, USA, 2015. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kapoor%2C%20K.%20Subbian%2C%20K.%20Srivastava%2C%20J.%20Schrater%2C%20P.%20Just%20in%20time%20recommendations%3A%20Modeling%20the%20dynamics%20of%20boredom%20in%20activity%20streams%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kapoor%2C%20K.%20Subbian%2C%20K.%20Srivastava%2C%20J.%20Schrater%2C%20P.%20Just%20in%20time%20recommendations%3A%20Modeling%20the%20dynamics%20of%20boredom%20in%20activity%20streams%202015"
+        },
+        {
+            "id": "12",
+            "entry": "[12] R. M. Karp. A characterization of the minimum cycle mean in a digraph. 23:309\u2013311, 12 1978.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Karp%2C%20R.M.%20A%20characterization%20of%20the%20minimum%20cycle%20mean%20in%20a%20digraph%201978",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Karp%2C%20R.M.%20A%20characterization%20of%20the%20minimum%20cycle%20mean%20in%20a%20digraph%201978"
+        },
+        {
+            "id": "13",
+            "entry": "[13] J. Komiyama and T. Qin. Time-Decaying Bandits for Non-stationary Systems, pages 460\u2013466. Springer International Publishing, Cham, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Komiyama%2C%20J.%20Qin%2C%20T.%20Time-Decaying%20Bandits%20for%20Non-stationary%20Systems%202014"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Y. Koren. Collaborative filtering with temporal dynamics. In Proceedings of the 15th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, KDD \u201909, pages 447\u2013456, New York, NY, USA, 2009. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Koren%2C%20Y.%20Collaborative%20filtering%20with%20temporal%20dynamics%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Koren%2C%20Y.%20Collaborative%20filtering%20with%20temporal%20dynamics%202009"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Y. Koren, R. Bell, and C. Volinsky. Matrix factorization techniques for recommender systems. Computer, 42(8):30\u201337, Aug. 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Koren%2C%20Y.%20Bell%2C%20R.%20Volinsky%2C%20C.%20Matrix%20factorization%20techniques%20for%20recommender%20systems%202009-08",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Koren%2C%20Y.%20Bell%2C%20R.%20Volinsky%2C%20C.%20Matrix%20factorization%20techniques%20for%20recommender%20systems%202009-08"
+        },
+        {
+            "id": "16",
+            "entry": "[16] L. Li, W. Chu, J. Langford, and R. E. Schapire. A contextual-bandit approach to personalized news article recommendation. In M. Rappa, P. Jones, J. Freire, and S. Chakrabarti, editors, WWW, pages 661\u2013670. ACM, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20L.%20Chu%2C%20W.%20Langford%2C%20J.%20Schapire%2C%20R.E.%20A%20contextual-bandit%20approach%20to%20personalized%20news%20article%20recommendation%202010"
+        },
+        {
+            "id": "17",
+            "entry": "[17] L. Li, W. Chu, J. Langford, and X. Wang. Unbiased offline evaluation of contextual-bandit-based news article recommendation algorithms. In Proceedings of the Fourth ACM International Conference on Web Search and Data Mining, WSDM \u201911, pages 297\u2013306, New York, NY, USA, 2011. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20L.%20Chu%2C%20W.%20Langford%2C%20J.%20Wang%2C%20X.%20Unbiased%20offline%20evaluation%20of%20contextual-bandit-based%20news%20article%20recommendation%20algorithms%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20L.%20Chu%2C%20W.%20Langford%2C%20J.%20Wang%2C%20X.%20Unbiased%20offline%20evaluation%20of%20contextual-bandit-based%20news%20article%20recommendation%20algorithms%202011"
+        },
+        {
+            "id": "18",
+            "entry": "[18] R. Ortner. Online regret bounds for markov decision processes with deterministic transitions. In Y. Freund, L. Gy\u00f6rfi, G. Tur\u00e1n, and T. Zeugmann, editors, Algorithmic Learning Theory, pages 123\u2013137, Berlin, Heidelberg, 2008. Springer Berlin Heidelberg.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ortner%2C%20R.%20Online%20regret%20bounds%20for%20markov%20decision%20processes%20with%20deterministic%20transitions%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ortner%2C%20R.%20Online%20regret%20bounds%20for%20markov%20decision%20processes%20with%20deterministic%20transitions%202008"
+        },
+        {
+            "id": "19",
+            "entry": "[19] R. Ortner, D. Ryabko, P. Auer, and R. Munos. Regret bounds for restless markov bandits. Theor. Comput. Sci., 558:62\u201376, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ortner%2C%20R.%20Ryabko%2C%20D.%20Auer%2C%20P.%20Munos%2C%20R.%20Regret%20bounds%20for%20restless%20markov%20bandits%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ortner%2C%20R.%20Ryabko%2C%20D.%20Auer%2C%20P.%20Munos%2C%20R.%20Regret%20bounds%20for%20restless%20markov%20bandits%202014"
+        },
+        {
+            "id": "20",
+            "entry": "[20] G. Shani, D. Heckerman, and R. I. Brafman. An mdp-based recommender system. J. Mach. Learn. Res., 6:1265\u20131295, Dec. 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shani%2C%20G.%20Heckerman%2C%20D.%20Brafman%2C%20R.I.%20An%20mdp-based%20recommender%20system%202005-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shani%2C%20G.%20Heckerman%2C%20D.%20Brafman%2C%20R.I.%20An%20mdp-based%20recommender%20system%202005-12"
+        },
+        {
+            "id": "21",
+            "entry": "[21] M. Soare, A. Lazaric, and R. Munos. Best-Arm Identification in Linear Bandits. In NIPS Advances in Neural Information Processing Systems 27, Montreal, Canada, Dec. 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Soare%2C%20M.%20Lazaric%2C%20A.%20Munos%2C%20R.%20Best-Arm%20Identification%20in%20Linear%20Bandits%202014-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Soare%2C%20M.%20Lazaric%2C%20A.%20Munos%2C%20R.%20Best-Arm%20Identification%20in%20Linear%20Bandits%202014-12"
+        },
+        {
+            "id": "22",
+            "entry": "[22] R. S. Sutton and A. G. Barto. Introduction to Reinforcement Learning. MIT Press, Cambridge, MA, USA, 1st edition, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20R.S.%20Barto%2C%20A.G.%20Introduction%20to%20Reinforcement%20Learning%201998"
+        },
+        {
+            "id": "23",
+            "entry": "[23] A. Swaminathan and T. Joachims. Batch learning from logged bandit feedback through counterfactual risk minimization. J. Mach. Learn. Res., 16(1):1731\u20131755, Jan. 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Swaminathan%2C%20A.%20Joachims%2C%20T.%20Batch%20learning%20from%20logged%20bandit%20feedback%20through%20counterfactual%20risk%20minimization%202015-01",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Swaminathan%2C%20A.%20Joachims%2C%20T.%20Batch%20learning%20from%20logged%20bandit%20feedback%20through%20counterfactual%20risk%20minimization%202015-01"
+        },
+        {
+            "id": "24",
+            "entry": "[24] C. Tekin and M. Liu. Online Learning of Rested and Restless Bandits. IEEE Transactions on Information Theory 58(8), Aug. 2012. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tekin%2C%20C.%20Liu%2C%20M.%20Online%20Learning%20of%20Rested%20and%20Restless%20Bandits%202012-08",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tekin%2C%20C.%20Liu%2C%20M.%20Online%20Learning%20of%20Rested%20and%20Restless%20Bandits%202012-08"
+        }
+    ]
+}

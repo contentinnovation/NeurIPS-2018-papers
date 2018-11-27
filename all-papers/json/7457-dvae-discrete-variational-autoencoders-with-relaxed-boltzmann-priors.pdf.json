@@ -1,0 +1,384 @@
+{
+    "filename": "7457-dvae-discrete-variational-autoencoders-with-relaxed-boltzmann-priors.pdf",
+    "metadata": {
+        "title": "DVAE#: Discrete Variational Autoencoders with Relaxed Boltzmann Priors",
+        "author": "Arash Vahdat, Evgeny Andriyash, William Macready",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7457-dvae-discrete-variational-autoencoders-with-relaxed-boltzmann-priors.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Boltzmann machines are powerful distributions that have been shown to be an effective prior over binary latent variables in variational autoencoders (VAEs). However, previous methods for training discrete VAEs have used the evidence lower bound and not the tighter importance-weighted bound. We propose two approaches for relaxing Boltzmann machines to continuous distributions that permit training with importance-weighted bounds. These relaxations are based on generalized overlapping transformations and the Gaussian integral trick. Experiments on the MNIST and OMNIGLOT datasets show that these relaxations outperform previous discrete VAEs with Boltzmann priors. An implementation which reproduces these results is available at https://github.com/QuadrantAI/dvae."
+    },
+    "keywords": [
+        {
+            "term": "deep belief network",
+            "url": "https://en.wikipedia.org/wiki/deep_belief_network"
+        },
+        {
+            "term": "neural computation",
+            "url": "https://en.wikipedia.org/wiki/neural_computation"
+        },
+        {
+            "term": "generative model",
+            "url": "https://en.wikipedia.org/wiki/generative_model"
+        },
+        {
+            "term": "variational inference",
+            "url": "https://en.wikipedia.org/wiki/variational_inference"
+        },
+        {
+            "term": "latent variable",
+            "url": "https://en.wikipedia.org/wiki/latent_variable"
+        },
+        {
+            "term": "random variable",
+            "url": "https://en.wikipedia.org/wiki/random_variable"
+        },
+        {
+            "term": "automatic differentiation",
+            "url": "https://en.wikipedia.org/wiki/automatic_differentiation"
+        },
+        {
+            "term": "cumulative distribution function",
+            "url": "https://en.wikipedia.org/wiki/cumulative_distribution_function"
+        },
+        {
+            "term": "boltzmann machine",
+            "url": "https://en.wikipedia.org/wiki/boltzmann_machine"
+        },
+        {
+            "term": "monte carlo",
+            "url": "https://en.wikipedia.org/wiki/monte_carlo"
+        },
+        {
+            "term": "restricted Boltzmann machine",
+            "url": "https://en.wikipedia.org/wiki/restricted_Boltzmann_machine"
+        },
+        {
+            "term": "continuous distribution",
+            "url": "https://en.wikipedia.org/wiki/continuous_distribution"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Let x represent observed random variables and \u03b6 continuous latent variables",
+        "This paper makes two contributions: i) We introduce two continuous relaxations of Boltzmann machines and use these relaxations to train a discrete variational autoencoders with a Boltzmann prior using the importance weighted bound. ii) We generalize the overlapping transformations of [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>] to any pair of distributions with computable probability density function (PDF) and cumulative density function (CDF)",
+        "Reparameterization cannot be applied to binary latent variables because the cumulative distribution function is not differentiable.\n2And not because our model is proposed after discrete variational autoencoder and discrete variational autoencoder++",
+        "We have introduced two approaches for relaxing Boltzmann machines to continuous distributions, and shown that the resulting distributions can be trained as priors in discrete variational autoencoder using an importance-weighted bound",
+        "We have proposed a generalization of overlapping transformations that removes the need for computing the inverse cumulative distribution function analytically"
+    ],
+    "key_statements": [
+        "Let x represent observed random variables and \u03b6 continuous latent variables",
+        "This paper makes two contributions: i) We introduce two continuous relaxations of Boltzmann machines and use these relaxations to train a discrete variational autoencoders with a Boltzmann prior using the importance weighted bound. ii) We generalize the overlapping transformations of [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>] to any pair of distributions with computable probability density function (PDF) and cumulative density function (CDF)",
+        "Reparameterization cannot be applied to binary latent variables because the cumulative distribution function is not differentiable.\n2And not because our model is proposed after discrete variational autoencoder and discrete variational autoencoder++",
+        "We have introduced two approaches for relaxing Boltzmann machines to continuous distributions, and shown that the resulting distributions can be trained as priors in discrete variational autoencoder using an importance-weighted bound",
+        "We have proposed a generalization of overlapping transformations that removes the need for computing the inverse cumulative distribution function analytically"
+    ],
+    "summary": [
+        "Let x represent observed random variables and \u03b6 continuous latent variables.",
+        "Using these more general overlapping transformations, we propose new smoothing transformations using mixtures of Gaussian and power-function [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>] distributions.",
+        "Power-function overlapping transformations provide lower variance gradient estimates and improved test set log-likelihoods when the inverse temperature is large.",
+        "We introduce two relaxations of Boltzmann machines to define the continuous prior distribution p(\u03b6 ) in the IW bound of Eq (3).",
+        "To train an IWAE using Eq (3) with p(\u03b6 ) as a prior, we must compute log p(\u03b6 ) and its gradient with respect to the parameters of the Boltzmann distribution and the approximate posterior.",
+        "The first term in Eq (5) is the result of computing the average energy under a factorial distribution.3 The second expectation corresponds to the negative phase in training Boltzmann machines and is approximated by Monte Carlo sampling from p(z).",
+        "The overlapping transformations introduced in DVAE++ [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>] are limited to mixtures of exponential or logistic distributions where the inverse CDF can be computed analytically.",
+        "We provide a general approach for reparameterizing overlapping transformations that does not require analytic inverse CDFs. Our approach is a special case of the reparameterization method for multivariate mixture distributions proposed in [<a class=\"ref-link\" id=\"c42\" href=\"#r42\">42</a>].",
+        "For all experiments we use a generative model of the form p(x, \u03b6 ) = p(\u03b6 )p(x|\u03b6 ) where p(\u03b6 ) is a continuous relaxation obtained from either the overlapping relaxation of Eq (4) or the Gaussian integral trick of Eq (7).",
+        "We compare exponential, uniform+exp, Gaussian, and power-function.",
+        "For DVAE++, in addition to exponential smoothing, we use a mixture of power-functions.",
+        "With the Gaussian integral trick, each mixture component in the prior contains off-diagonal correlations and the approximation of the posterior over \u03b6 should capture this.",
+        "To assess the quality of the mean-field approximation, in Fig. 2(b) we compute the KL divergence for randomly selected \u03b6 s during training at different iterations for exponential and power-function smoothings with different \u03b2s.",
+        "As noted in Fig. 1, power-function smoothing potentially has moderate gradient noise while still providing a good approximation of binary variables at large \u03b2.",
+        "We have introduced two approaches for relaxing Boltzmann machines to continuous distributions, and shown that the resulting distributions can be trained as priors in DVAEs using an importance-weighted bound.",
+        "The mixture of power-function smoothing provides a good approximation of binary variables while the gradient noise remains moderate.",
+        "In the case of sharp power smoothing, our model outperforms previous discrete VAEs"
+    ],
+    "headline": "We propose two approaches for relaxing Boltzmann machines to continuous distributions that permit training with importance-weighted bounds",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Diederik Kingma and Max Welling. Auto-encoding variational Bayes. In The International Conference on Learning Representations (ICLR), 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20Welling%2C%20Max%20Auto-encoding%20variational%20Bayes%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20Welling%2C%20Max%20Auto-encoding%20variational%20Bayes%202014"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Danilo Jimenez Rezende, Shakir Mohamed, and Daan Wierstra. Stochastic backpropagation and approximate inference in deep generative models. In International Conference on Machine Learning, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rezende%2C%20Danilo%20Jimenez%20Mohamed%2C%20Shakir%20Wierstra%2C%20Daan%20Stochastic%20backpropagation%20and%20approximate%20inference%20in%20deep%20generative%20models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rezende%2C%20Danilo%20Jimenez%20Mohamed%2C%20Shakir%20Wierstra%2C%20Daan%20Stochastic%20backpropagation%20and%20approximate%20inference%20in%20deep%20generative%20models%202014"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Andriy Mnih and Karol Gregor. Neural variational inference and learning in belief networks. In International Conference on Machine Learning, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20Andriy%20Gregor%2C%20Karol%20Neural%20variational%20inference%20and%20learning%20in%20belief%20networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20Andriy%20Gregor%2C%20Karol%20Neural%20variational%20inference%20and%20learning%20in%20belief%20networks%202014"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Karol Gregor, Ivo Danihelka, Andriy Mnih, Charles Blundell, and Daan Wierstra. Deep autoregressive networks. In International Conference on Machine Learning, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gregor%2C%20Karol%20Danihelka%2C%20Ivo%20Mnih%2C%20Andriy%20Blundell%2C%20Charles%20Deep%20autoregressive%20networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gregor%2C%20Karol%20Danihelka%2C%20Ivo%20Mnih%2C%20Andriy%20Blundell%2C%20Charles%20Deep%20autoregressive%20networks%202014"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Yuchen Pu, Zhe Gan, Ricardo Henao, Chunyuan Li, Shaobo Han, and Lawrence Carin. VAE learning via Stein variational gradient descent. In Advances in Neural Information Processing Systems. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pu%2C%20Yuchen%20Gan%2C%20Zhe%20Henao%2C%20Ricardo%20Li%2C%20Chunyuan%20VAE%20learning%20via%20Stein%20variational%20gradient%20descent%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pu%2C%20Yuchen%20Gan%2C%20Zhe%20Henao%2C%20Ricardo%20Li%2C%20Chunyuan%20VAE%20learning%20via%20Stein%20variational%20gradient%20descent%202017"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Tim Salimans, Diederik Kingma, and Max Welling. Markov chain Monte Carlo and variational inference: Bridging the gap. In International Conference on Machine Learning, pages 1218\u20131226, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Salimans%2C%20Tim%20Kingma%2C%20Diederik%20Welling%2C%20Max%20Markov%20chain%20Monte%20Carlo%20and%20variational%20inference%3A%20Bridging%20the%20gap%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Salimans%2C%20Tim%20Kingma%2C%20Diederik%20Welling%2C%20Max%20Markov%20chain%20Monte%20Carlo%20and%20variational%20inference%3A%20Bridging%20the%20gap%202015"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Rafael G\u00f3mez-Bombarelli, Jennifer N Wei, David Duvenaud, Jos\u00e9 Miguel Hern\u00e1ndez-Lobato, Benjam\u00edn S\u00e1nchez-Lengeling, Dennis Sheberla, Jorge Aguilera-Iparraguirre, Timothy D Hirzel, Ryan P Adams, and Al\u00e1n Aspuru-Guzik. Automatic chemical design using a data-driven continuous representation of molecules. ACS Central Science, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=G%C3%B3mez-Bombarelli%2C%20Rafael%20Wei%2C%20Jennifer%20N.%20Duvenaud%2C%20David%20Hern%C3%A1ndez-Lobato%2C%20Jos%C3%A9%20Miguel%20Automatic%20chemical%20design%20using%20a%20data-driven%20continuous%20representation%20of%20molecules%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=G%C3%B3mez-Bombarelli%2C%20Rafael%20Wei%2C%20Jennifer%20N.%20Duvenaud%2C%20David%20Hern%C3%A1ndez-Lobato%2C%20Jos%C3%A9%20Miguel%20Automatic%20chemical%20design%20using%20a%20data-driven%20continuous%20representation%20of%20molecules%202016"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Matt J Kusner, Brooks Paige, and Jos\u00e9 Miguel Hern\u00e1ndez-Lobato. Grammar variational autoencoder. In International Conference on Machine Learning, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Matt%20J%20Kusner%20Brooks%20Paige%20and%20Jos%C3%A9%20Miguel%20Hern%C3%A1ndezLobato%20Grammar%20variational%20autoencoder%20In%20International%20Conference%20on%20Machine%20Learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Matt%20J%20Kusner%20Brooks%20Paige%20and%20Jos%C3%A9%20Miguel%20Hern%C3%A1ndezLobato%20Grammar%20variational%20autoencoder%20In%20International%20Conference%20on%20Machine%20Learning%202017"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Adam Roberts, Jesse Engel, Colin Raffel, Curtis Hawthorne, and Douglas Eck. A hierarchical latent vector model for learning long-term structure in music. In International Conference on Machine Learning, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Roberts%2C%20Adam%20Engel%2C%20Jesse%20Raffel%2C%20Colin%20Hawthorne%2C%20Curtis%20A%20hierarchical%20latent%20vector%20model%20for%20learning%20long-term%20structure%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Roberts%2C%20Adam%20Engel%2C%20Jesse%20Raffel%2C%20Colin%20Hawthorne%2C%20Curtis%20A%20hierarchical%20latent%20vector%20model%20for%20learning%20long-term%20structure%202018"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Vijayaraghavan Murali, Letao Qi, Swarat Chaudhuri, and Chris Jermaine. Neural sketch learning for conditional program generation. In The International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Murali%2C%20Vijayaraghavan%20Qi%2C%20Letao%20Chaudhuri%2C%20Swarat%20Jermaine%2C%20Chris%20Neural%20sketch%20learning%20for%20conditional%20program%20generation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Murali%2C%20Vijayaraghavan%20Qi%2C%20Letao%20Chaudhuri%2C%20Swarat%20Jermaine%2C%20Chris%20Neural%20sketch%20learning%20for%20conditional%20program%20generation%202018"
+        },
+        {
+            "id": "11",
+            "entry": "[11] J\u00f6rg Bornschein, Andriy Mnih, Daniel Zoran, and Danilo Jimenez Rezende. Variational memory addressing in generative models. In Advances in Neural Information Processing Systems, pages 3923\u20133932, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bornschein%2C%20J%C3%B6rg%20Mnih%2C%20Andriy%20Zoran%2C%20Daniel%20Rezende%2C%20Danilo%20Jimenez%20Variational%20memory%20addressing%20in%20generative%20models%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bornschein%2C%20J%C3%B6rg%20Mnih%2C%20Andriy%20Zoran%2C%20Daniel%20Rezende%2C%20Danilo%20Jimenez%20Variational%20memory%20addressing%20in%20generative%20models%202017"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Nicolas Le Roux and Yoshua Bengio. Representational power of restricted Boltzmann machines and deep belief networks. Neural computation, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Roux%2C%20Nicolas%20Le%20Bengio%2C%20Yoshua%20Representational%20power%20of%20restricted%20Boltzmann%20machines%20and%20deep%20belief%20networks.%20Neural%20computation%202008"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Ruslan Salakhutdinov and Geoffrey E. Hinton. Deep Boltzmann machines. In International Conference on Artificial Intelligence and Statistics, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Salakhutdinov%2C%20Ruslan%20Hinton%2C%20Geoffrey%20E.%20Deep%20Boltzmann%20machines%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Salakhutdinov%2C%20Ruslan%20Hinton%2C%20Geoffrey%20E.%20Deep%20Boltzmann%20machines%202009"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Hugo Larochelle and Yoshua Bengio. Classification using discriminative restricted Boltzmann machines. In International Conference on Machine Learning (ICML), 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Larochelle%2C%20Hugo%20Bengio%2C%20Yoshua%20Classification%20using%20discriminative%20restricted%20Boltzmann%20machines%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Larochelle%2C%20Hugo%20Bengio%2C%20Yoshua%20Classification%20using%20discriminative%20restricted%20Boltzmann%20machines%202008"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Tu Dinh Nguyen, Dinh Phung, Viet Huynh, and Trung Le. Supervised restricted Boltzmann machines. In UAI, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nguyen%2C%20Tu%20Dinh%20Phung%2C%20Dinh%20Huynh%2C%20Viet%20Le%2C%20Trung%20Supervised%20restricted%20Boltzmann%20machines%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nguyen%2C%20Tu%20Dinh%20Phung%2C%20Dinh%20Huynh%2C%20Viet%20Le%2C%20Trung%20Supervised%20restricted%20Boltzmann%20machines%202017"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Brian Sallans and Geoffrey E. Hinton. Reinforcement learning with factored states and actions. J. Mach. Learn. Res., 5:1063\u20131088, December 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sallans%2C%20Brian%20Hinton%2C%20Geoffrey%20E.%20Reinforcement%20learning%20with%20factored%20states%20and%20actions%202004-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sallans%2C%20Brian%20Hinton%2C%20Geoffrey%20E.%20Reinforcement%20learning%20with%20factored%20states%20and%20actions%202004-12"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Geoffrey E. Hinton and Ruslan Salakhutdinov. Reducing the dimensionality of data with neural networks. Science, 313(5786):504\u2013507, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hinton%2C%20Geoffrey%20E.%20Salakhutdinov%2C%20Ruslan%20Reducing%20the%20dimensionality%20of%20data%20with%20neural%20networks%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hinton%2C%20Geoffrey%20E.%20Salakhutdinov%2C%20Ruslan%20Reducing%20the%20dimensionality%20of%20data%20with%20neural%20networks%202006"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Ruslan Salakhutdinov, Andriy Mnih, and Geoffrey E. Hinton. Restricted Boltzmann machines for collaborative filtering. In Proceedings of the 24th International Conference on Machine Learning, ICML \u201907, pages 791\u2013798, New York, NY, USA, 2007. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Salakhutdinov%2C%20Ruslan%20Mnih%2C%20Andriy%20Hinton%2C%20Geoffrey%20E.%20Restricted%20Boltzmann%20machines%20for%20collaborative%20filtering%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Salakhutdinov%2C%20Ruslan%20Mnih%2C%20Andriy%20Hinton%2C%20Geoffrey%20E.%20Restricted%20Boltzmann%20machines%20for%20collaborative%20filtering%202007"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Jason Tyler Rolfe. Discrete variational autoencoders. In International Conference on Learning Representations (ICLR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rolfe%2C%20Jason%20Tyler%20Discrete%20variational%20autoencoders%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rolfe%2C%20Jason%20Tyler%20Discrete%20variational%20autoencoders%202017"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Arash Vahdat, William G. Macready, Zhengbing Bian, Amir Khoshaman, and Evgeny Andriyash. DVAE++: Discrete variational autoencoders with overlapping transformations. In International Conference on Machine Learning (ICML), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vahdat%2C%20Arash%20Macready%2C%20William%20G.%20Bian%2C%20Zhengbing%20Khoshaman%2C%20Amir%20DVAE%2B%2B%3A%20Discrete%20variational%20autoencoders%20with%20overlapping%20transformations%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vahdat%2C%20Arash%20Macready%2C%20William%20G.%20Bian%2C%20Zhengbing%20Khoshaman%2C%20Amir%20DVAE%2B%2B%3A%20Discrete%20variational%20autoencoders%20with%20overlapping%20transformations%202018"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Yuri Burda, Roger Grosse, and Ruslan Salakhutdinov. Importance weighted autoencoders. In The International Conference on Learning Representations (ICLR), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Burda%2C%20Yuri%20Grosse%2C%20Roger%20Salakhutdinov%2C%20Ruslan%20Importance%20weighted%20autoencoders%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Burda%2C%20Yuri%20Grosse%2C%20Roger%20Salakhutdinov%2C%20Ruslan%20Importance%20weighted%20autoencoders%202016"
+        },
+        {
+            "id": "22",
+            "entry": "[22] John Hertz, Richard Palmer, and Anders Krogh. Introduction to the theory of neural computation. 1991.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hertz%2C%20John%20Palmer%2C%20Richard%20Krogh%2C%20Anders%20Introduction%20to%20the%20theory%20of%20neural%20computation%201991"
+        },
+        {
+            "id": "23",
+            "entry": "[23] J Hubbard. Calculation of partition functions. Physical Review Letters, 3(2):77, 1959.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hubbard%2C%20J.%20Calculation%20of%20partition%20functions%201959",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hubbard%2C%20J.%20Calculation%20of%20partition%20functions%201959"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Zakkula Govindarajulu. Characterization of the exponential and power distributions. Scandinavian Actuarial Journal, 1966(3-4):132\u2013136, 1966.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Govindarajulu%2C%20Zakkula%20Characterization%20of%20the%20exponential%20and%20power%20distributions%201966",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Govindarajulu%2C%20Zakkula%20Characterization%20of%20the%20exponential%20and%20power%20distributions%201966"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Diederik P Kingma, Shakir Mohamed, Danilo Jimenez Rezende, and Max Welling. Semi-supervised learning with deep generative models. In Advances in Neural Information Processing Systems, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Mohamed%2C%20Shakir%20Rezende%2C%20Danilo%20Jimenez%20Welling%2C%20Max%20Semi-supervised%20learning%20with%20deep%20generative%20models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Mohamed%2C%20Shakir%20Rezende%2C%20Danilo%20Jimenez%20Welling%2C%20Max%20Semi-supervised%20learning%20with%20deep%20generative%20models%202014"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Lars Maal\u00f8e, Marco Fraccaro, and Ole Winther. Semi-supervised generation with cluster-aware generative models. arXiv preprint arXiv:1704.00637, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1704.00637"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Michalis Titsias RC AUEB and Miguel L\u00e1zaro-Gredilla. Local expectation gradients for black box variational inference. In Advances in neural information processing systems, pages 2638\u20132646, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=AUEB%2C%20Michalis%20Titsias%20R.C.%20L%C3%A1zaro-Gredilla%2C%20Miguel%20Local%20expectation%20gradients%20for%20black%20box%20variational%20inference%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=AUEB%2C%20Michalis%20Titsias%20R.C.%20L%C3%A1zaro-Gredilla%2C%20Miguel%20Local%20expectation%20gradients%20for%20black%20box%20variational%20inference%202015"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Seiya Tokui and Issei Sato. Evaluating the variance of likelihood-ratio gradient estimators. In International Conference on Machine Learning, pages 3414\u20133423, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tokui%2C%20Seiya%20Sato%2C%20Issei%20Evaluating%20the%20variance%20of%20likelihood-ratio%20gradient%20estimators%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tokui%2C%20Seiya%20Sato%2C%20Issei%20Evaluating%20the%20variance%20of%20likelihood-ratio%20gradient%20estimators%202017"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Eric Jang, Shixiang Gu, and Ben Poole. Categorical reparametrization with gumble-softmax. In International Conference on Learning Representations, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jang%2C%20Eric%20Gu%2C%20Shixiang%20Poole%2C%20Ben%20Categorical%20reparametrization%20with%20gumble-softmax%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jang%2C%20Eric%20Gu%2C%20Shixiang%20Poole%2C%20Ben%20Categorical%20reparametrization%20with%20gumble-softmax%202017"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Yoshua Bengio, Nicholas L\u00e9onard, and Aaron Courville. Estimating or propagating gradients through stochastic neurons for conditional computation. arXiv preprint arXiv:1308.3432, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1308.3432"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Tapani Raiko, Mathias Berglund, Guillaume Alain, and Laurent Dinh. Techniques for learning binary stochastic feedforward neural networks. arXiv preprint arXiv:1406.2989, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1406.2989"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Chris J Maddison, Andriy Mnih, and Yee Whye Teh. The concrete distribution: A continuous relaxation of discrete random variables. In International Conference on Learning Representations (ICLR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Maddison%2C%20Chris%20J.%20Mnih%2C%20Andriy%20and%20Yee%20Whye%20Teh.%20The%20concrete%20distribution%3A%20A%20continuous%20relaxation%20of%20discrete%20random%20variables%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Maddison%2C%20Chris%20J.%20Mnih%2C%20Andriy%20and%20Yee%20Whye%20Teh.%20The%20concrete%20distribution%3A%20A%20continuous%20relaxation%20of%20discrete%20random%20variables%202017"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Ronald J Williams. Simple statistical gradient-following algorithms for connectionist reinforcement learning. In Reinforcement Learning, pages 5\u201332.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%2C%20Ronald%20J.%20Simple%20statistical%20gradient-following%20algorithms%20for%20connectionist%20reinforcement%20learning",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Williams%2C%20Ronald%20J.%20Simple%20statistical%20gradient-following%20algorithms%20for%20connectionist%20reinforcement%20learning"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Peter W Glynn. Likelihood ratio gradient estimation for stochastic systems. Communications of the ACM, 33(10):75\u201384, 1990.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Glynn%2C%20Peter%20W.%20Likelihood%20ratio%20gradient%20estimation%20for%20stochastic%20systems%201990",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Glynn%2C%20Peter%20W.%20Likelihood%20ratio%20gradient%20estimation%20for%20stochastic%20systems%201990"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Shixiang Gu, Sergey Levine, Ilya Sutskever, and Andriy Mnih. MuProp: Unbiased backpropagation for stochastic neural networks. In The International Conference on Learning Representations (ICLR), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gu%2C%20Shixiang%20Levine%2C%20Sergey%20Sutskever%2C%20Ilya%20Mnih%2C%20Andriy%20MuProp%3A%20Unbiased%20backpropagation%20for%20stochastic%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gu%2C%20Shixiang%20Levine%2C%20Sergey%20Sutskever%2C%20Ilya%20Mnih%2C%20Andriy%20MuProp%3A%20Unbiased%20backpropagation%20for%20stochastic%20neural%20networks%202016"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Andriy Mnih and Danilo Rezende. Variational inference for Monte Carlo objectives. In International Conference on Machine Learning, pages 2188\u20132196, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20Andriy%20Rezende%2C%20Danilo%20Variational%20inference%20for%20Monte%20Carlo%20objectives%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20Andriy%20Rezende%2C%20Danilo%20Variational%20inference%20for%20Monte%20Carlo%20objectives%202016"
+        },
+        {
+            "id": "37",
+            "entry": "[37] George Tucker, Andriy Mnih, Chris J Maddison, John Lawson, and Jascha Sohl-Dickstein. REBAR: Low-variance, unbiased gradient estimates for discrete latent variable models. In Advances in Neural Information Processing Systems, pages 2624\u20132633, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tucker%2C%20George%20Mnih%2C%20Andriy%20Maddison%2C%20Chris%20J.%20Lawson%2C%20John%20REBAR%3A%20Low-variance%2C%20unbiased%20gradient%20estimates%20for%20discrete%20latent%20variable%20models%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tucker%2C%20George%20Mnih%2C%20Andriy%20Maddison%2C%20Chris%20J.%20Lawson%2C%20John%20REBAR%3A%20Low-variance%2C%20unbiased%20gradient%20estimates%20for%20discrete%20latent%20variable%20models%202017"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Will Grathwohl, Dami Choi, Yuhuai Wu, Geoff Roeder, and David Duvenaud. Backpropagation through the void: Optimizing control variates for black-box gradient estimation. In International Conference on Learning Representations (ICLR), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Grathwohl%2C%20Will%20Choi%2C%20Dami%20Wu%2C%20Yuhuai%20Roeder%2C%20Geoff%20Backpropagation%20through%20the%20void%3A%20Optimizing%20control%20variates%20for%20black-box%20gradient%20estimation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Grathwohl%2C%20Will%20Choi%2C%20Dami%20Wu%2C%20Yuhuai%20Roeder%2C%20Geoff%20Backpropagation%20through%20the%20void%3A%20Optimizing%20control%20variates%20for%20black-box%20gradient%20estimation%202018"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Yingzhen Li and Richard E Turner. R\u00e9nyi divergence variational inference. In Advances in Neural Information Processing Systems, pages 1073\u20131081, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Yingzhen%20Turner%2C%20Richard%20E.%20R%C3%A9nyi%20divergence%20variational%20inference%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20Yingzhen%20Turner%2C%20Richard%20E.%20R%C3%A9nyi%20divergence%20variational%20inference%202016"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Max Welling and Geoffrey E Hinton. A new learning algorithm for mean field Boltzmann machines. In International Conference on Artificial Neural Networks, pages 351\u2013357.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Welling%2C%20Max%20Hinton%2C%20Geoffrey%20E.%20A%20new%20learning%20algorithm%20for%20mean%20field%20Boltzmann%20machines",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Welling%2C%20Max%20Hinton%2C%20Geoffrey%20E.%20A%20new%20learning%20algorithm%20for%20mean%20field%20Boltzmann%20machines"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Yichuan Zhang, Zoubin Ghahramani, Amos J Storkey, and Charles A Sutton. Continuous relaxations for discrete Hamiltonian Monte Carlo. In Advances in Neural Information Processing Systems, pages 3194\u20133202, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Yichuan%20Ghahramani%2C%20Zoubin%20Storkey%2C%20Amos%20J.%20and%20Charles%20A%20Sutton.%20Continuous%20relaxations%20for%20discrete%20Hamiltonian%20Monte%20Carlo%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Yichuan%20Ghahramani%2C%20Zoubin%20Storkey%2C%20Amos%20J.%20and%20Charles%20A%20Sutton.%20Continuous%20relaxations%20for%20discrete%20Hamiltonian%20Monte%20Carlo%202012"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Alex Graves. Stochastic backpropagation through mixture density distributions. arXiv preprint arXiv:1607.05690, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1607.05690"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Ruslan Salakhutdinov and Iain Murray. On the quantitative analysis of deep belief networks. In Proceedings of the 25th international conference on Machine learning, pages 872\u2013879. ACM, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Salakhutdinov%2C%20Ruslan%20Murray%2C%20Iain%20On%20the%20quantitative%20analysis%20of%20deep%20belief%20networks%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Salakhutdinov%2C%20Ruslan%20Murray%2C%20Iain%20On%20the%20quantitative%20analysis%20of%20deep%20belief%20networks%202008"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Brenden M Lake, Ruslan Salakhutdinov, and Joshua B Tenenbaum. Human-level concept learning through probabilistic program induction. Science, 350(6266):1332\u20131338, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lake%2C%20Brenden%20M.%20Salakhutdinov%2C%20Ruslan%20Tenenbaum%2C%20Joshua%20B.%20Human-level%20concept%20learning%20through%20probabilistic%20program%20induction%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lake%2C%20Brenden%20M.%20Salakhutdinov%2C%20Ruslan%20Tenenbaum%2C%20Joshua%20B.%20Human-level%20concept%20learning%20through%20probabilistic%20program%20induction%202015"
+        },
+        {
+            "id": "45",
+            "entry": "[45] K Hukushima and Y Iba. Population annealing and its application to a spin glass. In AIP Conference Proceedings, volume 690, pages 200\u2013206. AIP, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hukushima%2C%20K.%20Iba%2C%20Y.%20Population%20annealing%20and%20its%20application%20to%20a%20spin%20glass%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hukushima%2C%20K.%20Iba%2C%20Y.%20Population%20annealing%20and%20its%20application%20to%20a%20spin%20glass%202003"
+        },
+        {
+            "id": "46",
+            "entry": "[46] Tijmen Tieleman. Training restricted Boltzmann machines using approximations to the likelihood gradient. In Proceedings of the 25th international conference on Machine learning, pages 1064\u20131071. ACM, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tieleman%2C%20Tijmen%20Training%20restricted%20Boltzmann%20machines%20using%20approximations%20to%20the%20likelihood%20gradient%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tieleman%2C%20Tijmen%20Training%20restricted%20Boltzmann%20machines%20using%20approximations%20to%20the%20likelihood%20gradient%202008"
+        },
+        {
+            "id": "47",
+            "entry": "[47] Radford M. Neal. Annealed importance sampling. Statistics and computing, 11(2):125\u2013139, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Neal%2C%20Radford%20M.%20Annealed%20importance%20sampling%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Neal%2C%20Radford%20M.%20Annealed%20importance%20sampling%202001"
+        },
+        {
+            "id": "48",
+            "entry": "[48] Ruslan Salakhutdinov and Iain Murray. On the quantitative analysis of deep belief networks. In Proceedings of the 25th international conference on Machine learning, pages 872\u2013879. ACM, 2008. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Salakhutdinov%2C%20Ruslan%20Murray%2C%20Iain%20On%20the%20quantitative%20analysis%20of%20deep%20belief%20networks%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Salakhutdinov%2C%20Ruslan%20Murray%2C%20Iain%20On%20the%20quantitative%20analysis%20of%20deep%20belief%20networks%202008"
+        }
+    ]
+}

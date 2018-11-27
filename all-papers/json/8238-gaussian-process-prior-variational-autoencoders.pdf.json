@@ -1,0 +1,334 @@
+{
+    "filename": "8238-gaussian-process-prior-variational-autoencoders.pdf",
+    "metadata": {
+        "title": "Gaussian Process Prior Variational Autoencoders",
+        "author": "Francesco Paolo Casale, Adrian Dalca, Luca Saglietti, Jennifer Listgarten, Nicolo Fusi",
+        "date": 2013,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8238-gaussian-process-prior-variational-autoencoders.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Variational autoencoders (VAE) are a powerful and widely-used class of models to learn complex data distributions in an unsupervised fashion. One important limitation of VAEs is the prior assumption that latent sample representations are independent and identically distributed. However, for many important datasets, such as time-series of images, this assumption is too strong: accounting for covariances between samples, such as those in time, can yield to a more appropriate model specification and improve performance in downstream tasks. In this work, we introduce a new model, the Gaussian Process (GP) Prior Variational Autoencoder (GPPVAE), to specifically address this issue. The GPPVAE aims to combine the power of VAEs with the ability to model correlations afforded by GP priors. To achieve efficient inference in this new class of models, we leverage structure in the covariance matrix, and introduce a new stochastic backpropagation strategy that allows for computing stochastic gradients in a distributed and low-memory fashion. We show that our method outperforms conditional VAEs (CVAEs) and an adaptation of standard VAEs in two image data applications."
+    },
+    "keywords": [
+        {
+            "term": "generative model",
+            "url": "https://en.wikipedia.org/wiki/generative_model"
+        },
+        {
+            "term": "variational inference",
+            "url": "https://en.wikipedia.org/wiki/variational_inference"
+        },
+        {
+            "term": "dimensionality reduction",
+            "url": "https://en.wikipedia.org/wiki/dimensionality_reduction"
+        },
+        {
+            "term": "time series",
+            "url": "https://en.wikipedia.org/wiki/time_series"
+        },
+        {
+            "term": "mean squared error",
+            "url": "https://en.wikipedia.org/wiki/mean_squared_error"
+        },
+        {
+            "term": "evidence lower bound",
+            "url": "https://en.wikipedia.org/wiki/evidence_lower_bound"
+        },
+        {
+            "term": "low memory",
+            "url": "https://en.wikipedia.org/wiki/low_memory"
+        },
+        {
+            "term": "gaussian process",
+            "url": "https://en.wikipedia.org/wiki/gaussian_process"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Dimensionality reduction is a fundamental approach to compression of complex, large-scale data sets, either for visualization or for pre-processing before application of supervised approaches",
+        "We introduce the Gaussian Process Prior Variational Autoencoder (GPPVAE), an extension of the Variational Autoencoder latent variable model where correlation between samples is modeled through a Gaussian process prior on the latent encodings",
+        "In addition to the Gaussian Process Prior Variational Autoencoder presented (GPPVAE-joint), we considered a version with a simpler optimization scheme (GPPVAE-dis)",
+        "Outof-sample predictions from Gaussian Process Prior Variational Autoencoder-joint were obtained by using the predictive posterior in Eq (12);",
+        "Consistent with the L2 reconstruction error appearing in the loss off all the aforementioned Variational Autoencoder (e. g., Eq (8)), we considered pixel-wise mean squared error (MSE) as the evaluation metric",
+        "We introduced Gaussian Process Prior Variational Autoencoder, a generative model that incorporates a Gaussian process prior over the latent space"
+    ],
+    "key_statements": [
+        "Dimensionality reduction is a fundamental approach to compression of complex, large-scale data sets, either for visualization or for pre-processing before application of supervised approaches",
+        "These two formulations have been combined through the Variational Autoencoder (VAE) (<a class=\"ref-link\" id=\"cKingma_2013_a\" href=\"#rKingma_2013_a\">Kingma and Welling, 2013</a>), wherein the expressiveness of neural networks was used to model both the mean and the variance of a simple likelihood",
+        "We introduce the Gaussian Process Prior Variational Autoencoder (GPPVAE), an extension of the Variational Autoencoder latent variable model where correlation between samples is modeled through a Gaussian process prior on the latent encodings",
+        "In addition to the Gaussian Process Prior Variational Autoencoder presented (GPPVAE-joint), we considered a version with a simpler optimization scheme (GPPVAE-dis)",
+        "Outof-sample predictions from Gaussian Process Prior Variational Autoencoder-joint were obtained by using the predictive posterior in Eq (12);",
+        "Consistent with the L2 reconstruction error appearing in the loss off all the aforementioned Variational Autoencoder (e. g., Eq (8)), we considered pixel-wise mean squared error (MSE) as the evaluation metric",
+        "For conditional VAEs and LIVAE, we considered the alternative strategy of selecting the value of \u03c3y2 that maximizes out-of-sample prediction performance on the validation set",
+        "We introduced Gaussian Process Prior Variational Autoencoder, a generative model that incorporates a Gaussian process prior over the latent space",
+        "We presented a low-memory and computationally efficient inference strategy for this model, which makes the model applicable to large high-dimensional datasets",
+        "Another extension is to consider approximations of the Gaussian process likelihood that fully factorize over data points (Hensman et al, 2013); this could further improve the scalability of our method"
+    ],
+    "summary": [
+        "Dimensionality reduction is a fundamental approach to compression of complex, large-scale data sets, either for visualization or for pre-processing before application of supervised approaches.",
+        "We introduce the Gaussian Process Prior Variational Autoencoder (GPPVAE), an extension of the VAE latent variable model where correlation between samples is modeled through a GP prior on the latent encodings.",
+        "In contrast to existing methods, we propose to model the relationship between the latent space and the auxiliary information using a GP prior, leaving the encoder and decoder as in a standard VAE.",
+        "We consider datasets with images of objects in different views.",
+        "We use a Gaussian process (GP) prior on f , which allows us to model sample covariances in the latent space as a function of object and view feature vectors.",
+        "We approximate the expectation by sampling from a reparameterized variational posterior over the latent representations, obtaining the following loss function: l \u03c6, \u03c8, \u03b8, \u03b1, \u03c3y2 =",
+        "Given training samples Y , object feature vectors X, and view feature vectors W , the predictive posterior for image representation y of object p in view q is given by p(y | x , w , Y , X, W ) \u2248 p(y | z ) p(z | x , w , Z, X, W ) q(Z | Y ) dz dZ(12)",
+        "Decode GP prediction latent-space GP predictive posterior encode training data where x and w are object and feature vectors of object p and view q respectively, and we dropped the dependency on parameters for notational compactness.",
+        "We considered the following procedure to generate an image of object p in view q.",
+        "We computed latent representations of all the images of object p across all the views in the training data.",
+        "The resulting composite kernel K, expresses the covariance between images n and m in terms of the corresponding rotations angles wqn and wqm and object feature vectors xpn and xpm as",
+        "GPPVAE-joint learns different variational parameters than a standard VAE (Fig. 2c,d), used by GPPVAE-dis, consistent with the fact that GPPVAE-joint performs better by adapting the VAE latent space using guidance from the prior.",
+        "GPPVAE outperforms natural baselines (CVAE and linear interpolations in the VAE latent space) when predicting out-of-sample test images of objects in specified views (e.",
+        "2 We could have used the pose angles as view feature scalar similar to the application in rotated MNIST, but purposely ignored these features to consider a more challenging setting were neither object and view features are observed."
+    ],
+    "headline": "We introduce a new model, the Gaussian Process  Prior Variational Autoencoder , to specifically address this issue",
+    "reference_links": [
+        {
+            "id": "Bauer_et+al_2016_a",
+            "entry": "Matthias Bauer, Mark van der Wilk, and Carl Edward Rasmussen. Understanding probabilistic sparse gaussian process approximations. In Advances in neural information processing systems, pages 1533\u20131541, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bauer%2C%20Matthias%20van%20der%20Wilk%2C%20Mark%20Rasmussen%2C%20Carl%20Edward%20Understanding%20probabilistic%20sparse%20gaussian%20process%20approximations%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bauer%2C%20Matthias%20van%20der%20Wilk%2C%20Mark%20Rasmussen%2C%20Carl%20Edward%20Understanding%20probabilistic%20sparse%20gaussian%20process%20approximations%202016"
+        },
+        {
+            "id": "Bonilla_et+al_2007_a",
+            "entry": "Edwin V Bonilla, Felix V Agakov, and Christopher KI Williams. Kernel multi-task learning using task-specific features. In Artificial Intelligence and Statistics, pages 43\u201350, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bonilla%2C%20Edwin%20V.%20Agakov%2C%20Felix%20V.%20Williams%2C%20Christopher%20K.I.%20Kernel%20multi-task%20learning%20using%20task-specific%20features%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bonilla%2C%20Edwin%20V.%20Agakov%2C%20Felix%20V.%20Williams%2C%20Christopher%20K.I.%20Kernel%20multi-task%20learning%20using%20task-specific%20features%202007"
+        },
+        {
+            "id": "Casale_et+al_2015_a",
+            "entry": "Francesco Paolo Casale, Barbara Rakitsch, Christoph Lippert, and Oliver Stegle. Efficient set tests for the genetic analysis of correlated traits. Nature methods, 12(8):755, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Casale%2C%20Francesco%20Paolo%20Rakitsch%2C%20Barbara%20Lippert%2C%20Christoph%20Stegle%2C%20Oliver%20Efficient%20set%20tests%20for%20the%20genetic%20analysis%20of%20correlated%20traits%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Casale%2C%20Francesco%20Paolo%20Rakitsch%2C%20Barbara%20Lippert%2C%20Christoph%20Stegle%2C%20Oliver%20Efficient%20set%20tests%20for%20the%20genetic%20analysis%20of%20correlated%20traits%202015"
+        },
+        {
+            "id": "Casale_et+al_2017_a",
+            "entry": "Francesco Paolo Casale, Danilo Horta, Barbara Rakitsch, and Oliver Stegle. Joint genetic analysis using variant sets reveals polygenic gene-context interactions. PLoS genetics, 13(4):e1006693, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Casale%2C%20Francesco%20Paolo%20Horta%2C%20Danilo%20Rakitsch%2C%20Barbara%20Stegle%2C%20Oliver%20Joint%20genetic%20analysis%20using%20variant%20sets%20reveals%20polygenic%20gene-context%20interactions%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Casale%2C%20Francesco%20Paolo%20Horta%2C%20Danilo%20Rakitsch%2C%20Barbara%20Stegle%2C%20Oliver%20Joint%20genetic%20analysis%20using%20variant%20sets%20reveals%20polygenic%20gene-context%20interactions%202017"
+        },
+        {
+            "id": "Chen_et+al_2016_a",
+            "entry": "Xi Chen, Diederik P Kingma, Tim Salimans, Yan Duan, Prafulla Dhariwal, John Schulman, Ilya Sutskever, and Pieter Abbeel. Variational lossy autoencoder. arXiv preprint arXiv:1611.02731, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.02731"
+        },
+        {
+            "id": "Csat_2002_a",
+            "entry": "Lehel Csat\u00f3 and Manfred Opper. Sparse on-line gaussian processes. Neural computation, 14(3): 641\u2013668, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Csat%C3%B3%2C%20Lehel%20Opper%2C%20Manfred%20Sparse%20on-line%20gaussian%20processes%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Csat%C3%B3%2C%20Lehel%20Opper%2C%20Manfred%20Sparse%20on-line%20gaussian%20processes%202002"
+        },
+        {
+            "id": "Durrande_et+al_2011_a",
+            "entry": "Nicolas Durrande, David Ginsbourger, Olivier Roustant, and Laurent Carraro. Additive covariance kernels for high-dimensional gaussian process modeling. arXiv preprint arXiv:1111.6233, 2011.",
+            "arxiv_url": "https://arxiv.org/pdf/1111.6233"
+        },
+        {
+            "id": "Gal_et+al_2014_a",
+            "entry": "Yarin Gal, Mark Van Der Wilk, and Carl Edward Rasmussen. Distributed variational inference in sparse gaussian process regression and latent variable models. In Advances in Neural Information Processing Systems, pages 3257\u20133265, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gal%2C%20Yarin%20Wilk%2C%20Mark%20Van%20Der%20Rasmussen%2C%20Carl%20Edward%20Distributed%20variational%20inference%20in%20sparse%20gaussian%20process%20regression%20and%20latent%20variable%20models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gal%2C%20Yarin%20Wilk%2C%20Mark%20Van%20Der%20Rasmussen%2C%20Carl%20Edward%20Distributed%20variational%20inference%20in%20sparse%20gaussian%20process%20regression%20and%20latent%20variable%20models%202014"
+        },
+        {
+            "id": "Goenen_2011_a",
+            "entry": "Mehmet G\u00f6nen and Ethem Alpayd\u0131n. Multiple kernel learning algorithms. Journal of machine learning research, 12(Jul):2211\u20132268, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=G%C3%B6nen%2C%20Mehmet%20Alpayd%C4%B1n%2C%20Ethem%20Multiple%20kernel%20learning%20algorithms%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=G%C3%B6nen%2C%20Mehmet%20Alpayd%C4%B1n%2C%20Ethem%20Multiple%20kernel%20learning%20algorithms%202011"
+        },
+        {
+            "id": "Goodfellow_et+al_2014_a",
+            "entry": "Ian Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, and Yoshua Bengio. Generative adversarial nets. In Advances in neural information processing systems, pages 2672\u20132680, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goodfellow%2C%20Ian%20Pouget-Abadie%2C%20Jean%20Mirza%2C%20Mehdi%20Xu%2C%20Bing%20Generative%20adversarial%20nets%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goodfellow%2C%20Ian%20Pouget-Abadie%2C%20Jean%20Mirza%2C%20Mehdi%20Xu%2C%20Bing%20Generative%20adversarial%20nets%202014"
+        },
+        {
+            "id": "Henderson_1981_a",
+            "entry": "Harold V Henderson and Shayle R Searle. On deriving the inverse of a sum of matrices. Siam Review, 23(1):53\u201360, 1981.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Henderson%2C%20Harold%20V.%20Searle%2C%20Shayle%20R.%20On%20deriving%20the%20inverse%20of%20a%20sum%20of%20matrices%201981",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Henderson%2C%20Harold%20V.%20Searle%2C%20Shayle%20R.%20On%20deriving%20the%20inverse%20of%20a%20sum%20of%20matrices%201981"
+        },
+        {
+            "id": "Hoffman_2016_a",
+            "entry": "Matthew D Hoffman and Matthew J Johnson. Elbo surgery: yet another way to carve up the variational evidence lower bound. In Workshop in Advances in Approximate Bayesian Inference, NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hoffman%2C%20Matthew%20D.%20Johnson%2C%20Matthew%20J.%20Elbo%20surgery%3A%20yet%20another%20way%20to%20carve%20up%20the%20variational%20evidence%20lower%20bound%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hoffman%2C%20Matthew%20D.%20Johnson%2C%20Matthew%20J.%20Elbo%20surgery%3A%20yet%20another%20way%20to%20carve%20up%20the%20variational%20evidence%20lower%20bound%202016"
+        },
+        {
+            "id": "Hou_et+al_2017_a",
+            "entry": "Xianxu Hou, Linlin Shen, Ke Sun, and Guoping Qiu. Deep feature consistent variational autoencoder. In Applications of Computer Vision (WACV), 2017 IEEE Winter Conference on, pages 1133\u20131141. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hou%2C%20Xianxu%20Shen%2C%20Linlin%20Sun%2C%20Ke%20Qiu%2C%20Guoping%20Deep%20feature%20consistent%20variational%20autoencoder%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hou%2C%20Xianxu%20Shen%2C%20Linlin%20Sun%2C%20Ke%20Qiu%2C%20Guoping%20Deep%20feature%20consistent%20variational%20autoencoder%202017"
+        },
+        {
+            "id": "Jiang_et+al_2016_a",
+            "entry": "Zhuxi Jiang, Yin Zheng, Huachun Tan, Bangsheng Tang, and Hanning Zhou. Variational deep embedding: An unsupervised and generative approach to clustering. arXiv preprint arXiv:1611.05148, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.05148"
+        },
+        {
+            "id": "Johnson_et+al_2016_a",
+            "entry": "Matthew Johnson, David K Duvenaud, Alex Wiltschko, Ryan P Adams, and Sandeep R Datta. Composing graphical models with neural networks for structured representations and fast inference. In Advances in neural information processing systems, pages 2946\u20132954, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Johnson%2C%20Matthew%20Duvenaud%2C%20David%20K.%20Wiltschko%2C%20Alex%20Adams%2C%20Ryan%20P.%20Composing%20graphical%20models%20with%20neural%20networks%20for%20structured%20representations%20and%20fast%20inference%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Johnson%2C%20Matthew%20Duvenaud%2C%20David%20K.%20Wiltschko%2C%20Alex%20Adams%2C%20Ryan%20P.%20Composing%20graphical%20models%20with%20neural%20networks%20for%20structured%20representations%20and%20fast%20inference%202016"
+        },
+        {
+            "id": "Kingma_2014_a",
+            "entry": "Diederik P Kingma and Jimmy Ba. Adam: A method for stochastic optimization. arXiv preprint arXiv:1412.6980, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6980"
+        },
+        {
+            "id": "Kingma_2013_a",
+            "entry": "Diederik P Kingma and Max Welling. Auto-encoding variational bayes. arXiv preprint arXiv:1312.6114, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.6114"
+        },
+        {
+            "id": "Kingma_et+al_2014_b",
+            "entry": "Diederik P Kingma, Shakir Mohamed, Danilo Jimenez Rezende, and Max Welling. Semi-supervised learning with deep generative models. In Advances in Neural Information Processing Systems, pages 3581\u20133589, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Mohamed%2C%20Shakir%20Rezende%2C%20Danilo%20Jimenez%20Welling%2C%20Max%20Semi-supervised%20learning%20with%20deep%20generative%20models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Mohamed%2C%20Shakir%20Rezende%2C%20Danilo%20Jimenez%20Welling%2C%20Max%20Semi-supervised%20learning%20with%20deep%20generative%20models%202014"
+        },
+        {
+            "id": "Kingma_et+al_2016_a",
+            "entry": "Diederik P Kingma, Tim Salimans, Rafal Jozefowicz, Xi Chen, Ilya Sutskever, and Max Welling. Improved variational inference with inverse autoregressive flow. In Advances in Neural Information Processing Systems, pages 4743\u20134751, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Salimans%2C%20Tim%20Jozefowicz%2C%20Rafal%20Chen%2C%20Xi%20Improved%20variational%20inference%20with%20inverse%20autoregressive%20flow%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Salimans%2C%20Tim%20Jozefowicz%2C%20Rafal%20Chen%2C%20Xi%20Improved%20variational%20inference%20with%20inverse%20autoregressive%20flow%202016"
+        },
+        {
+            "id": "Kulkarni_et+al_2015_a",
+            "entry": "Tejas D Kulkarni, William F Whitney, Pushmeet Kohli, and Josh Tenenbaum. Deep convolutional inverse graphics network. In Advances in Neural Information Processing Systems, pages 2539\u2013 2547, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kulkarni%2C%20Tejas%20D.%20Whitney%2C%20William%20F.%20Kohli%2C%20Pushmeet%20Tenenbaum%2C%20Josh%20Deep%20convolutional%20inverse%20graphics%20network%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kulkarni%2C%20Tejas%20D.%20Whitney%2C%20William%20F.%20Kohli%2C%20Pushmeet%20Tenenbaum%2C%20Josh%20Deep%20convolutional%20inverse%20graphics%20network%202015"
+        },
+        {
+            "id": "Lawrence_2005_a",
+            "entry": "Neil Lawrence. Probabilistic non-linear principal component analysis with gaussian process latent variable models. Journal of machine learning research, 6(Nov):1783\u20131816, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lawrence%2C%20Neil%20Probabilistic%20non-linear%20principal%20component%20analysis%20with%20gaussian%20process%20latent%20variable%20models%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lawrence%2C%20Neil%20Probabilistic%20non-linear%20principal%20component%20analysis%20with%20gaussian%20process%20latent%20variable%20models%202005"
+        },
+        {
+            "id": "Lecun_1995_a",
+            "entry": "Yann LeCun, Yoshua Bengio, et al. Convolutional networks for images, speech, and time series. The handbook of brain theory and neural networks, 3361(10):1995, 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=LeCun%2C%20Yann%20Bengio%2C%20Yoshua%20Convolutional%20networks%20for%20images%2C%20speech%2C%20and%20time%20series%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=LeCun%2C%20Yann%20Bengio%2C%20Yoshua%20Convolutional%20networks%20for%20images%2C%20speech%2C%20and%20time%20series%201995"
+        },
+        {
+            "id": "Lonsdale_et+al_2013_a",
+            "entry": "John Lonsdale, Jeffrey Thomas, Mike Salvatore, Rebecca Phillips, Edmund Lo, Saboor Shad, Richard Hasz, Gary Walters, Fernando Garcia, Nancy Young, et al. The genotype-tissue expression (gtex) project. Nature genetics, 45(6):580, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lonsdale%2C%20John%20Thomas%2C%20Jeffrey%20Salvatore%2C%20Mike%20Phillips%2C%20Rebecca%20The%20genotype-tissue%20expression%20%28gtex%29%20project%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lonsdale%2C%20John%20Thomas%2C%20Jeffrey%20Salvatore%2C%20Mike%20Phillips%2C%20Rebecca%20The%20genotype-tissue%20expression%20%28gtex%29%20project%202013"
+        },
+        {
+            "id": "Maal_et+al_2016_a",
+            "entry": "Lars Maal\u00f8e, Casper Kaae S\u00f8nderby, S\u00f8ren Kaae S\u00f8nderby, and Ole Winther. Auxiliary deep generative models. arXiv preprint arXiv:1602.05473, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1602.05473"
+        },
+        {
+            "id": "Nalisnick_et+al_2016_a",
+            "entry": "Eric Nalisnick, Lars Hertel, and Padhraic Smyth. Approximate inference for deep latent gaussian mixtures. In NIPS Workshop on Bayesian Deep Learning, volume 2, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nalisnick%2C%20Eric%20Hertel%2C%20Lars%20Smyth%2C%20Padhraic%20Approximate%20inference%20for%20deep%20latent%20gaussian%20mixtures%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nalisnick%2C%20Eric%20Hertel%2C%20Lars%20Smyth%2C%20Padhraic%20Approximate%20inference%20for%20deep%20latent%20gaussian%20mixtures%202016"
+        },
+        {
+            "id": "Pandey_2017_a",
+            "entry": "Gaurav Pandey and Ambedkar Dukkipati. Variational methods for conditional multimodal deep learning. In Neural Networks (IJCNN), 2017 International Joint Conference on, pages 308\u2013315. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pandey%2C%20Gaurav%20Dukkipati%2C%20Ambedkar%20Variational%20methods%20for%20conditional%20multimodal%20deep%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pandey%2C%20Gaurav%20Dukkipati%2C%20Ambedkar%20Variational%20methods%20for%20conditional%20multimodal%20deep%20learning%202017"
+        },
+        {
+            "id": "Qui_2005_a",
+            "entry": "Joaquin Qui\u00f1onero-Candela and Carl Edward Rasmussen. A unifying view of sparse approximate gaussian process regression. Journal of Machine Learning Research, 6(Dec):1939\u20131959, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Qui%C3%B1onero-Candela%2C%20Joaquin%20Rasmussen%2C%20Carl%20Edward%20A%20unifying%20view%20of%20sparse%20approximate%20gaussian%20process%20regression%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Qui%C3%B1onero-Candela%2C%20Joaquin%20Rasmussen%2C%20Carl%20Edward%20A%20unifying%20view%20of%20sparse%20approximate%20gaussian%20process%20regression%202005"
+        },
+        {
+            "id": "Rakitsch_et+al_2013_a",
+            "entry": "Barbara Rakitsch, Christoph Lippert, Karsten Borgwardt, and Oliver Stegle. It is all in the noise: Efficient multi-task gaussian process inference with structured residuals. In Advances in neural information processing systems, pages 1466\u20131474, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rakitsch%2C%20Barbara%20Lippert%2C%20Christoph%20Borgwardt%2C%20Karsten%20Stegle%2C%20Oliver%20It%20is%20all%20in%20the%20noise%3A%20Efficient%20multi-task%20gaussian%20process%20inference%20with%20structured%20residuals%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rakitsch%2C%20Barbara%20Lippert%2C%20Christoph%20Borgwardt%2C%20Karsten%20Stegle%2C%20Oliver%20It%20is%20all%20in%20the%20noise%3A%20Efficient%20multi-task%20gaussian%20process%20inference%20with%20structured%20residuals%202013"
+        },
+        {
+            "id": "Ranganath_et+al_2016_a",
+            "entry": "Rajesh Ranganath, Dustin Tran, and David Blei. Hierarchical variational models. In International Conference on Machine Learning, pages 324\u2013333, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ranganath%2C%20Rajesh%20Tran%2C%20Dustin%20Blei%2C%20David%20Hierarchical%20variational%20models%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ranganath%2C%20Rajesh%20Tran%2C%20Dustin%20Blei%2C%20David%20Hierarchical%20variational%20models%202016"
+        },
+        {
+            "id": "Rezende_2015_a",
+            "entry": "Danilo Jimenez Rezende and Shakir Mohamed. Variational inference with normalizing flows. arXiv preprint arXiv:1505.05770, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1505.05770"
+        },
+        {
+            "id": "Rezende_et+al_2014_a",
+            "entry": "Danilo Jimenez Rezende, Shakir Mohamed, and Daan Wierstra. Stochastic backpropagation and approximate inference in deep generative models. arXiv preprint arXiv:1401.4082, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1401.4082"
+        },
+        {
+            "id": "Righi_et+al_2012_a",
+            "entry": "Giulia Righi, Jessie J Peissig, and Michael J Tarr. Recognizing disguised faces. Visual Cognition, 20 (2):143\u2013169, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Righi%2C%20Giulia%20Peissig%2C%20Jessie%20J.%20Tarr%2C%20Michael%20J.%20Recognizing%20disguised%20faces.%20Visual%20Cognition%202012"
+        },
+        {
+            "id": "Shu_et+al_2016_a",
+            "entry": "Rui Shu, James Brofos, Frank Zhang, Hung Hai Bui, Mohammad Ghavamzadeh, and Mykel Kochenderfer. Stochastic video prediction with conditional density estimation. In ECCV Workshop on Action and Anticipation for Visual Learning, volume 2, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shu%2C%20Rui%20Brofos%2C%20James%20Zhang%2C%20Frank%20Bui%2C%20Hung%20Hai%20Stochastic%20video%20prediction%20with%20conditional%20density%20estimation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shu%2C%20Rui%20Brofos%2C%20James%20Zhang%2C%20Frank%20Bui%2C%20Hung%20Hai%20Stochastic%20video%20prediction%20with%20conditional%20density%20estimation%202016"
+        },
+        {
+            "id": "Siddharth_et+al_2016_a",
+            "entry": "N Siddharth, Brooks Paige, Alban Desmaison, Van de Meent, Frank Wood, Noah D Goodman, Pushmeet Kohli, Philip HS Torr, et al. Inducing interpretable representations with variational autoencoders. arXiv preprint arXiv:1611.07492, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.07492"
+        },
+        {
+            "id": "Siddharth_et+al_2017_a",
+            "entry": "N Siddharth, Brooks Paige, Jan-Willem Van de Meent, Alban Desmaison, Frank Wood, Noah D Goodman, Pushmeet Kohli, and Philip HS Torr. Learning disentangled representations with semi-supervised deep generative models. ArXiv e-prints (Jun 2017), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Siddharth%2C%20N.%20Paige%2C%20Brooks%20de%20Meent%2C%20Jan-Willem%20Van%20Desmaison%2C%20Alban%20Learning%20disentangled%20representations%20with%20semi-supervised%20deep%20generative%20models.%20ArXiv%20e-prints%202017-06"
+        },
+        {
+            "id": "Snelson_2006_a",
+            "entry": "Edward Snelson and Zoubin Ghahramani. Sparse gaussian processes using pseudo-inputs. In Advances in neural information processing systems, pages 1257\u20131264, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Snelson%2C%20Edward%20Ghahramani%2C%20Zoubin%20Sparse%20gaussian%20processes%20using%20pseudo-inputs%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Snelson%2C%20Edward%20Ghahramani%2C%20Zoubin%20Sparse%20gaussian%20processes%20using%20pseudo-inputs%202006"
+        },
+        {
+            "id": "Sohn_et+al_2015_a",
+            "entry": "Kihyuk Sohn, Honglak Lee, and Xinchen Yan. Learning structured output representation using deep conditional generative models. In Advances in Neural Information Processing Systems, pages 3483\u20133491, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sohn%2C%20Kihyuk%20Lee%2C%20Honglak%20Yan%2C%20Xinchen%20Learning%20structured%20output%20representation%20using%20deep%20conditional%20generative%20models%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sohn%2C%20Kihyuk%20Lee%2C%20Honglak%20Yan%2C%20Xinchen%20Learning%20structured%20output%20representation%20using%20deep%20conditional%20generative%20models%202015"
+        },
+        {
+            "id": "Stegle_et+al_2011_a",
+            "entry": "Oliver Stegle, Christoph Lippert, Joris M Mooij, Neil D Lawrence, and Karsten M Borgwardt. Efficient inference in matrix-variate gaussian models with\\iid observation noise. In Advances in neural information processing systems, pages 630\u2013638, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Stegle%2C%20Oliver%20Lippert%2C%20Christoph%20Mooij%2C%20Joris%20M.%20Lawrence%2C%20Neil%20D.%20Efficient%20inference%20in%20matrix-variate%20gaussian%20models%20with%5Ciid%20observation%20noise%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Stegle%2C%20Oliver%20Lippert%2C%20Christoph%20Mooij%2C%20Joris%20M.%20Lawrence%2C%20Neil%20D.%20Efficient%20inference%20in%20matrix-variate%20gaussian%20models%20with%5Ciid%20observation%20noise%202011"
+        },
+        {
+            "id": "Suzuki_et+al_2016_a",
+            "entry": "Masahiro Suzuki, Kotaro Nakayama, and Yutaka Matsuo. Joint multimodal learning with deep generative models. arXiv preprint arXiv:1611.01891, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.01891"
+        },
+        {
+            "id": "Titsias_2009_a",
+            "entry": "Michalis Titsias. Variational learning of inducing variables in sparse gaussian processes. In Artificial Intelligence and Statistics, pages 567\u2013574, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Titsias%2C%20Michalis%20Variational%20learning%20of%20inducing%20variables%20in%20sparse%20gaussian%20processes%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Titsias%2C%20Michalis%20Variational%20learning%20of%20inducing%20variables%20in%20sparse%20gaussian%20processes%202009"
+        },
+        {
+            "id": "Tomczak_2017_a",
+            "entry": "Jakub M Tomczak and Max Welling. Vae with a vampprior. arXiv preprint arXiv:1705.07120, 2017. Dustin Tran, Rajesh Ranganath, and David M Blei. The variational gaussian process. arXiv preprint arXiv:1511.06499, 2015. Ramakrishna Vedantam, Ian Fischer, Jonathan Huang, and Kevin Murphy. Generative models of visually grounded imagination. arXiv preprint arXiv:1705.10762, 2017. Weiran Wang, Xinchen Yan, Honglak Lee, and Karen Livescu. Deep variational canonical correlation analysis. arXiv preprint arXiv:1610.03454, 2016. Andrew Wilson and Ryan Adams. Gaussian process kernels for pattern discovery and extrapolation.",
+            "arxiv_url": "https://arxiv.org/pdf/1705.07120"
+        },
+        {
+            "id": "In_2013_a",
+            "entry": "In International Conference on Machine Learning, pages 1067\u20131075, 2013. Andrew Gordon Wilson, Zhiting Hu, Ruslan Salakhutdinov, and Eric P Xing. Deep kernel learning.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20Andrew%20Gordon%20Wilson%2C%20Zhiting%20Hu%2C%20Ruslan%20Salakhutdinov%2C%20and%20Eric%20P%20Xing.%20Deep%20kernel%20learning%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Andrew%20Gordon%20Wilson%2C%20Zhiting%20Hu%2C%20Ruslan%20Salakhutdinov%2C%20and%20Eric%20P%20Xing.%20Deep%20kernel%20learning%202013"
+        },
+        {
+            "id": "In_2016_a",
+            "entry": "In Artificial Intelligence and Statistics, pages 370\u2013378, 2016. Mike Wu and Noah Goodman. Multimodal generative models for scalable weakly-supervised learning. arXiv preprint arXiv:1802.05335, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.05335"
+        }
+    ]
+}

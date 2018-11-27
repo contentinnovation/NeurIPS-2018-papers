@@ -1,0 +1,308 @@
+{
+    "filename": "7854-deep-state-space-models-for-unconditional-word-generation.pdf",
+    "metadata": {
+        "date": 2018,
+        "title": "Deep State Space Models for Unconditional Word Generation",
+        "author": "Florian Schmidt",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7854-deep-state-space-models-for-unconditional-word-generation.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Autoregressive feedback is considered a necessity for successful unconditional text generation using stochastic sequence models. However, such feedback is known to introduce systematic biases into the training process and it obscures a principle of generation: committing to global information and forgetting local nuances. We show that a non-autoregressive deep state space model with a clear separation of global and local uncertainty can be built from only two ingredients: An independent noise source and a deterministic transition function. Recent advances on flowbased variational inference can be used to train an evidence lower-bound without resorting to annealing, auxiliary losses or similar measures. The result is a highly interpretable generative model on par with comparable auto-regressive models on the task of word generation."
+    },
+    "keywords": [
+        {
+            "term": "dialogue system",
+            "url": "https://en.wikipedia.org/wiki/dialogue_system"
+        },
+        {
+            "term": "generative model",
+            "url": "https://en.wikipedia.org/wiki/generative_model"
+        },
+        {
+            "term": "maximum likelihood",
+            "url": "https://en.wikipedia.org/wiki/maximum_likelihood"
+        },
+        {
+            "term": "variational inference",
+            "url": "https://en.wikipedia.org/wiki/variational_inference"
+        },
+        {
+            "term": "language model",
+            "url": "https://en.wikipedia.org/wiki/language_model"
+        },
+        {
+            "term": "recurrent neural network",
+            "url": "https://en.wikipedia.org/wiki/recurrent_neural_network"
+        },
+        {
+            "term": "state space model",
+            "url": "https://en.wikipedia.org/wiki/State_Space_Model"
+        },
+        {
+            "term": "evidence lower bound",
+            "url": "https://en.wikipedia.org/wiki/evidence_lower_bound"
+        },
+        {
+            "term": "machine translation",
+            "url": "https://en.wikipedia.org/wiki/machine_translation"
+        },
+        {
+            "term": "speech recognition",
+            "url": "https://en.wikipedia.org/wiki/speech_recognition"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        },
+        {
+            "term": "text generation",
+            "url": "https://en.wikipedia.org/wiki/text_generation"
+        }
+    ],
+    "highlights": [
+        "Deep generative models for sequential data are an active field of research",
+        "Recurrent neural networks language models have been used with success in speech recognition [MKB+10, GJ14]",
+        "We propose a stochastic sequence model that preserves the Markov structure of standard state space models by cleanly separating the stochasticity in the state evolution, injected via a white noise process, from the randomness in the local token generation",
+        "In this paper we have shown how a deep state space model can be defined and trained with the help of variational flows",
+        "We have shown how an importance-weighted conditioning mechanism integrated into the objective allows shifting stochastic complexity from the inference to the generative model",
+        "We believe that pushing the boundaries of non-autoregressive modeling is key to understanding stochastic text generation and can open the door to related fields such as particle filtering [NLRB17, MLT+17]"
+    ],
+    "key_statements": [
+        "Deep generative models for sequential data are an active field of research",
+        "Recurrent neural networks language models have been used with success in speech recognition [MKB+10, GJ14]",
+        "We propose a stochastic sequence model that preserves the Markov structure of standard state space models by cleanly separating the stochasticity in the state evolution, injected via a white noise process, from the randomness in the local token generation",
+        "We argue that text generation is subject to two sorts of uncertainty: Uncertainty about plausible long-term continuations and uncertainty about the emission of the current token",
+        "These approaches are largely patching-up the output feedback mechanism to allow for better modeling of local correlations, leaving the deterministic skeleton of the Recurrent neural networks state sequence untouched",
+        "We investigate deviating from the factorization (3) by using a bidirectional Recurrent neural networks conditioning on all w1...T in every timestep",
+        "In this paper we have shown how a deep state space model can be defined and trained with the help of variational flows",
+        "We have shown how an importance-weighted conditioning mechanism integrated into the objective allows shifting stochastic complexity from the inference to the generative model",
+        "We believe that pushing the boundaries of non-autoregressive modeling is key to understanding stochastic text generation and can open the door to related fields such as particle filtering [NLRB17, MLT+17]"
+    ],
+    "summary": [
+        "Deep generative models for sequential data are an active field of research.",
+        "We propose a stochastic sequence model that preserves the Markov structure of standard state space models by cleanly separating the stochasticity in the state evolution, injected via a white noise process, from the randomness in the local token generation.",
+        "We train our model using variational inference (VI) and build upon recent advances in normalizing flows [RM15, KSW16] to define rich enough stochastic state transition functions for both, generation and inference.",
+        "Let us define a state space model with transition function",
+        "We propose to use two separate transition functions Fq and Fg for the inference and the generative model, respectively.",
+        "Remember that sampling from the inference network amounts to sampling \u03bet \u223c q(\u00b7|ht\u22121, wt...T ) and performing the deterministic transition Fq. We observe much better training stability when conditioning q on the data wt...T only and modeling interaction with ht\u22121 exclusively through Fq. This coincides with our intuition that the two inputs to a transition function provide semantically orthogonal contributions.",
+        "We will use the symmetry of this argument to let the inference model condition on potential states hgt = Fg, \u03bet \u223c N (0, I) from the generative model without requiring every hgt to allow q to make a good proposal.",
+        "These approaches are largely patching-up the output feedback mechanism to allow for better modeling of local correlations, leaving the deterministic skeleton of the RNN state sequence untouched.",
+        "A recent evolution of deep stochastic sequence models has developed models of ever increasing complexity including intertwined stochastic and deterministic state sequences [CKD+15, FSPW16] additional auxiliary latent variables [GSC+17] auxiliary losses [SATB17] and annealing schedules [BVV+15].",
+        "This metric can be addressed by all models which operate by first stochastically generating a sequence of hidden states and defining a distribution over the data-space given the state sequence.",
+        "In this paper we have shown how a deep state space model can be defined and trained with the help of variational flows.",
+        "The recurrent mechanism is driven purely by a simple white noise process and does not require an autoregressive conditioning on previously generated symbols.",
+        "We have shown how an importance-weighted conditioning mechanism integrated into the objective allows shifting stochastic complexity from the inference to the generative model.",
+        "The result is a highly flexible framework for sequence generation with an extremely simple overall architecture, a measurable notion of latent information and no need for pre-training, annealing or auxiliary losses.",
+        "We believe that pushing the boundaries of non-autoregressive modeling is key to understanding stochastic text generation and can open the door to related fields such as particle filtering [NLRB17, MLT+17]"
+    ],
+    "headline": "We show that a non-autoregressive deep state space model with a clear separation of global and local uncertainty can be built from only two ingredients: An independent noise source and a deterministic transition function",
+    "reference_links": [
+        {
+            "id": "Bahdanau_et+al_2014_a",
+            "entry": "[BCB14] Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio. Neural machine translation by jointly learning to align and translate. CoRR, abs/1409.0473, 2014. 1",
+            "arxiv_url": "https://arxiv.org/pdf/1409.0473"
+        },
+        {
+            "id": "Burda_et+al_2015_a",
+            "entry": "[BGS15] Yuri Burda, Roger B. Grosse, and Ruslan Salakhutdinov. Importance weighted autoencoders. CoRR, abs/1509.00519, 2015. 2.7, 3, A",
+            "arxiv_url": "https://arxiv.org/pdf/1509.00519"
+        },
+        {
+            "id": "Bayer_2014_a",
+            "entry": "Justin Bayer and Christian Osendorfer. Learning stochastic recurrent networks. arXiv preprint arXiv:1411.7610, 2014. arXiv. 3",
+            "arxiv_url": "https://arxiv.org/pdf/1411.7610"
+        },
+        {
+            "id": "Bengio_et+al_2015_a",
+            "entry": "Samy Bengio, Oriol Vinyals, Navdeep Jaitly, and Noam Shazeer. Scheduled sampling for sequence prediction with recurrent neural networks. CoRR, abs/1506.03099, 2015. 1, 3",
+            "arxiv_url": "https://arxiv.org/pdf/1506.03099"
+        },
+        {
+            "id": "Samuel_2015_a",
+            "entry": "Samuel R. Bowman, Luke Vilnis, Oriol Vinyals, Andrew M. Dai, Rafal J\u00f3zefowicz, and Samy Bengio. Generating sentences from a continuous space. CoRR, abs/1511.06349, 2015. 1, 1, 1, 1, 3",
+            "arxiv_url": "https://arxiv.org/pdf/1511.06349"
+        },
+        {
+            "id": "Chung_et+al_2015_a",
+            "entry": "Junyoung Chung, Kyle Kastner, Laurent Dinh, Kratarth Goel, Aaron C Courville, and Yoshua Bengio. A recurrent latent variable model for sequential data. In NIPS, pages 2980\u20132988, 2015. 1, 2.2, 3, 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chung%2C%20Junyoung%20Kastner%2C%20Kyle%20Dinh%2C%20Laurent%20Goel%2C%20Kratarth%20and%20Yoshua%20Bengio.%20A%20recurrent%20latent%20variable%20model%20for%20sequential%20data%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chung%2C%20Junyoung%20Kastner%2C%20Kyle%20Dinh%2C%20Laurent%20Goel%2C%20Kratarth%20and%20Yoshua%20Bengio.%20A%20recurrent%20latent%20variable%20model%20for%20sequential%20data%202015"
+        },
+        {
+            "id": "Che_et+al_2017_a",
+            "entry": "Tong Che, Yanran Li, Ruixiang Zhang, R. Devon Hjelm, Wenjie Li, Yangqiu Song, and Yoshua Bengio. Maximum-likelihood augmented discrete generative adversarial networks. CoRR, abs/1702.07983, 2017. 3",
+            "arxiv_url": "https://arxiv.org/pdf/1702.07983"
+        },
+        {
+            "id": "Dinh_et+al_2016_a",
+            "entry": "Laurent Dinh, Jascha Sohl-Dickstein, and Samy Bengio. Density estimation using real NVP. CoRR, abs/1605.08803, 2016. 2.2, 2.4, 2.5",
+            "arxiv_url": "https://arxiv.org/pdf/1605.08803"
+        },
+        {
+            "id": "Filippova_et+al_2015_a",
+            "entry": "Katja Filippova, Enrique Alfonseca, Carlos A Colmenares, Lukasz Kaiser, and Oriol Vinyals. Sentence compression by deletion with lstms. In EMNLP 2015, pages 360\u2013368, 2015. 1",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Filippova%2C%20Katja%20Alfonseca%2C%20Enrique%20Colmenares%2C%20Carlos%20A.%20Kaiser%2C%20Lukasz%20Sentence%20compression%20by%20deletion%20with%20lstms%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Filippova%2C%20Katja%20Alfonseca%2C%20Enrique%20Colmenares%2C%20Carlos%20A.%20Kaiser%2C%20Lukasz%20Sentence%20compression%20by%20deletion%20with%20lstms%202015"
+        },
+        {
+            "id": "Fedus_et+al_2018_a",
+            "entry": "[FGD18] William Fedus, Ian J. Goodfellow, and Andrew M. Dai. Maskgan: Better text generation via filling in the ______. CoRR, abs/1801.07736, 2018. 1, 3, 4.1",
+            "arxiv_url": "https://arxiv.org/pdf/1801.07736"
+        },
+        {
+            "id": "Fraccaro_et+al_2016_a",
+            "entry": "[FSnPW16] Marco Fraccaro, S\u00f8ren Kaae S\u00f8 nderby, Ulrich Paquet, and Ole Winther. Sequential neural models with stochastic layers. pages 2199\u20132207. Curran Associates, Inc., 2016. 2.2, 2.6",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fraccaro%2C%20Marco%20nderby%2C%20S%C3%B8ren%20Kaae%20S%C3%B8%20Paquet%2C%20Ulrich%20Winther%2C%20Ole%20Sequential%20neural%20models%20with%20stochastic%20layers%202016"
+        },
+        {
+            "id": "Fraccaro_et+al_2016_b",
+            "entry": "[FSPW16] Marco Fraccaro, S\u00f8ren Kaae S\u00f8nderby, Ulrich Paquet, and Ole Winther. Sequential neural models with stochastic layers. pages 2199\u20132207, 2016. NIPS. 1, 2.2, 2.5, 3, 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fraccaro%2C%20Marco%20S%C3%B8nderby%2C%20S%C3%B8ren%20Kaae%20Paquet%2C%20Ulrich%20Winther%2C%20Ole%20Sequential%20neural%20models%20with%20stochastic%20layers%202016"
+        },
+        {
+            "id": "Gregor_et+al_2015_a",
+            "entry": "[GDGW15] Karol Gregor, Ivo Danihelka, Alex Graves, and Daan Wierstra. DRAW: A recurrent neural network for image generation. CoRR, abs/1502.04623, 2015. 3",
+            "arxiv_url": "https://arxiv.org/pdf/1502.04623"
+        },
+        {
+            "id": "Graves_2014_a",
+            "entry": "Alex Graves and Navdeep Jaitly. Towards end-to-end speech recognition with recurrent neural networks. In ICML 2014, pages 1764\u20131772, 2014. 1",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Graves%2C%20Alex%20Jaitly%2C%20Navdeep%20Towards%20end-to-end%20speech%20recognition%20with%20recurrent%20neural%20networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Graves%2C%20Alex%20Jaitly%2C%20Navdeep%20Towards%20end-to-end%20speech%20recognition%20with%20recurrent%20neural%20networks%202014"
+        },
+        {
+            "id": "Goyal_et+al_2016_a",
+            "entry": "[GLZ+16] Anirudh Goyal, Alex Lamb, Ying Zhang, Saizheng Zhang, Aaron C. Courville, and Yoshua Bengio. Professor forcing: A new algorithm for training recurrent networks. In NIPS 2016, pages 4601\u20134609, 2016. 1, 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goyal%2C%20Anirudh%20Lamb%2C%20Alex%20Zhang%2C%20Ying%20Zhang%2C%20Saizheng%20Professor%20forcing%3A%20A%20new%20algorithm%20for%20training%20recurrent%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goyal%2C%20Anirudh%20Lamb%2C%20Alex%20Zhang%2C%20Ying%20Zhang%2C%20Saizheng%20Professor%20forcing%3A%20A%20new%20algorithm%20for%20training%20recurrent%20networks%202016"
+        },
+        {
+            "id": "Graves_2013_a",
+            "entry": "Alex Graves. Generating sequences with recurrent neural networks. arXiv preprint arXiv:1308.0850, 2013. 1, 1",
+            "arxiv_url": "https://arxiv.org/pdf/1308.0850"
+        },
+        {
+            "id": "Goyal_et+al_2017_a",
+            "entry": "Anirudh Goyal, Alessandro Sordoni, Marc-Alexandre C\u00f4t\u00e9, Nan Rosemary Ke, and Yoshua Bengio. Z-forcing: Training stochastic recurrent networks. In NIPS 2017, pages 6716\u20136726, 2017. 1, 2.6, 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goyal%2C%20Anirudh%20Sordoni%2C%20Alessandro%20C%C3%B4t%C3%A9%2C%20Marc-Alexandre%20Ke%2C%20Nan%20Rosemary%20Z-forcing%3A%20Training%20stochastic%20recurrent%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goyal%2C%20Anirudh%20Sordoni%2C%20Alessandro%20C%C3%B4t%C3%A9%2C%20Marc-Alexandre%20Ke%2C%20Nan%20Rosemary%20Z-forcing%3A%20Training%20stochastic%20recurrent%20networks%202017"
+        },
+        {
+            "id": "Hu_et+al_2017_a",
+            "entry": "Z. Hu, Z. Yang, Liang X., R. Salakhutdinov, and E. R. Xing. Toward controlled generation of text. In International Conference on Machine Learning (ICML), 2017. 1",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hu%2C%20Z.%20Yang%2C%20Z.%20X.%2C%20Liang%20Salakhutdinov%2C%20R.%20Toward%20controlled%20generation%20of%20text%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hu%2C%20Z.%20Yang%2C%20Z.%20X.%2C%20Liang%20Salakhutdinov%2C%20R.%20Toward%20controlled%20generation%20of%20text%202017"
+        },
+        {
+            "id": "Kusner_2016_a",
+            "entry": "[JKMHL16] Matt J. Kusner and Jos\u00e9 Miguel Hern\u00e1ndez-Lobato. Gans for sequences of discrete elements with the gumbel-softmax distribution. 11 2016. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kusner%2C%20Matt%20J.%20Hern%C3%A1ndez-Lobato%2C%20Jos%C3%A9%20Miguel%20Gans%20for%20sequences%20of%20discrete%20elements%20with%20the%20gumbel-softmax%20distribution%202016"
+        },
+        {
+            "id": "Kingma_2014_a",
+            "entry": "Diederik P. Kingma and Jimmy Ba. Adam: A method for stochastic optimization. CoRR, abs/1412.6980, 2014. 2.6",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6980"
+        },
+        {
+            "id": "Karl_et+al_2017_a",
+            "entry": "[KSBvdS17] Maximilian Karl, Maximilian Soelch, Justin Bayer, and Patrick van der Smagt. Deep variational bayes filters: Unsupervised learning of state space models from raw data. arXiv preprint arXiv:1605.06432, 2017. ICLR. 3",
+            "arxiv_url": "https://arxiv.org/pdf/1605.06432"
+        },
+        {
+            "id": "Kingma_et+al_2016_a",
+            "entry": "[KSW16] Diederik P. Kingma, Tim Salimans, and Max Welling. Improving variational inference with inverse autoregressive flow. CoRR, abs/1606.04934, 2016. 1, 2.2",
+            "arxiv_url": "https://arxiv.org/pdf/1606.04934"
+        },
+        {
+            "id": "Kiros_et+al_2015_a",
+            "entry": "Ryan Kiros, Yukun Zhu, Ruslan Salakhutdinov, Richard S Zemel, Antonio Torralba, Raquel Urtasun, and Sanja Fidler. Skip-thought vectors. arXiv preprint arXiv:1506.06726, 2015. 5.1",
+            "arxiv_url": "https://arxiv.org/pdf/1506.06726"
+        },
+        {
+            "id": "Leblond_et+al_2017_a",
+            "entry": "[LAOL17] R\u00e9mi Leblond, Jean-Baptiste Alayrac, Anton Osokin, and Simon Lacoste-Julien. SEARNN: training rnns with global-local losses. CoRR, abs/1706.04499, 2017. 3",
+            "arxiv_url": "https://arxiv.org/pdf/1706.04499"
+        },
+        {
+            "id": "Tom_2010_a",
+            "entry": "Tom\u00e1\u0161 Mikolov, Martin Karafi\u00e1t, Luk\u00e1\u0161 Burget, Jan Cernocky, and Sanjeev Khudanpur. Recurrent neural network based language model. In INTERSPEECH 2010, 2010. 1",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Recurrent%20neural%20network%20based%20language%20model%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Recurrent%20neural%20network%20based%20language%20model%202010"
+        },
+        {
+            "id": "Maddison_et+al_2017_a",
+            "entry": "Chris J. Maddison, Dieterich Lawson, George Tucker, Nicolas Heess, Mohammad Norouzi, Andriy Mnih, Arnaud Doucet, and Yee Whye Teh. Filtering variational objectives. CoRR, abs/1705.09279, 2017. 6",
+            "arxiv_url": "https://arxiv.org/pdf/1705.09279"
+        },
+        {
+            "id": "Naesseth_et+al_2017_a",
+            "entry": "[NLRB17] Christian A Naesseth, Scott W Linderman, Rajesh Ranganath, and David M Blei. Variational sequential monte carlo. arXiv preprint arXiv:1705.11140, 2017. 6",
+            "arxiv_url": "https://arxiv.org/pdf/1705.11140"
+        },
+        {
+            "id": "Ranzato_et+al_2015_a",
+            "entry": "[RCAZ15a] Marc\u2019Aurelio Ranzato, Sumit Chopra, Michael Auli, and Wojciech Zaremba. Sequence level training with recurrent neural networks. arXiv preprint arXiv:1511.06732, 2015. 1",
+            "arxiv_url": "https://arxiv.org/pdf/1511.06732"
+        },
+        {
+            "id": "Ranzato_et+al_2015_b",
+            "entry": "[RCAZ15b] Marc\u2019Aurelio Ranzato, Sumit Chopra, Michael Auli, and Wojciech Zaremba. Sequence level training with recurrent neural networks. CoRR, abs/1511.06732, 2015. 3",
+            "arxiv_url": "https://arxiv.org/pdf/1511.06732"
+        },
+        {
+            "id": "Rush_et+al_2015_a",
+            "entry": "[RCW15] Alexander M. Rush, Sumit Chopra, and Jason Weston. A neural attention model for abstractive sentence summarization. CoRR, abs/1509.00685, 2015. 1",
+            "arxiv_url": "https://arxiv.org/pdf/1509.00685"
+        },
+        {
+            "id": "Rezende_2015_a",
+            "entry": "Danilo Jimenez Rezende and Shakir Mohamed. Variational inference with normalizing flows. In ICML 2015, pages 1530\u20131538, 2015. 1, 2.2, 2.2, 2.2, 2.4, 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rezende%2C%20Danilo%20Jimenez%20Mohamed%2C%20Shakir%20Variational%20inference%20with%20normalizing%20flows%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rezende%2C%20Danilo%20Jimenez%20Mohamed%2C%20Shakir%20Variational%20inference%20with%20normalizing%20flows%202015"
+        },
+        {
+            "id": "Shabanian_et+al_2017_a",
+            "entry": "Samira Shabanian, Devansh Arpit, Adam Trischler, and Y Bengio. Variational bi-lstms. 11 2017. 1, 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shabanian%2C%20Samira%20Arpit%2C%20Devansh%20Trischler%2C%20Adam%20Bengio%2C%20Y.%20Variational%20bi-lstms%202017"
+        },
+        {
+            "id": "Serban_et+al_2016_a",
+            "entry": "Iulian Vlad Serban, Alessandro Sordoni, Yoshua Bengio, Aaron C Courville, and Joelle Pineau. Building end-to-end dialogue systems using generative hierarchical neural network models. In AAAI, volume 16, pages 3776\u20133784, 2016. 1",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Serban%2C%20Iulian%20Vlad%20Sordoni%2C%20Alessandro%20Bengio%2C%20Yoshua%20Courville%2C%20Aaron%20C.%20Building%20end-to-end%20dialogue%20systems%20using%20generative%20hierarchical%20neural%20network%20models%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Serban%2C%20Iulian%20Vlad%20Sordoni%2C%20Alessandro%20Bengio%2C%20Yoshua%20Courville%2C%20Aaron%20C.%20Building%20end-to-end%20dialogue%20systems%20using%20generative%20hierarchical%20neural%20network%20models%202016"
+        },
+        {
+            "id": "Sutskever_et+al_2014_a",
+            "entry": "Ilya Sutskever, Oriol Vinyals, and Quoc V. Le. Sequence to sequence learning with neural networks. In NIPS 2017, NIPS\u201914, pages 3104\u20133112, Cambridge, MA, USA, 2014. MIT Press. 1, 1",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutskever%2C%20Ilya%20Vinyals%2C%20Oriol%20Le%2C%20Quoc%20V.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutskever%2C%20Ilya%20Vinyals%2C%20Oriol%20Le%2C%20Quoc%20V.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014"
+        },
+        {
+            "id": "Vaswani_et+al_2017_a",
+            "entry": "Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, and Illia Polosukhin. Attention is all you need. CoRR, abs/1706.03762, 2017. 1",
+            "arxiv_url": "https://arxiv.org/pdf/1706.03762"
+        },
+        {
+            "id": "Wiseman_2016_a",
+            "entry": "Sam Wiseman and Alexander M. Rush. Sequence-to-sequence learning as beam-search optimization. CoRR, abs/1606.02960, 2016. 1, 3",
+            "arxiv_url": "https://arxiv.org/pdf/1606.02960"
+        },
+        {
+            "id": "Williams_1989_a",
+            "entry": "Ronald J Williams and David Zipser. A learning algorithm for continually running fully recurrent neural networks. Neural computation, 1(2):270\u2013280, 1989. 1",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%2C%20Ronald%20J.%20Zipser%2C%20David%20A%20learning%20algorithm%20for%20continually%20running%20fully%20recurrent%20neural%20networks%201989",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Williams%2C%20Ronald%20J.%20Zipser%2C%20David%20A%20learning%20algorithm%20for%20continually%20running%20fully%20recurrent%20neural%20networks%201989"
+        },
+        {
+            "id": "Yu_et+al_2016_a",
+            "entry": "[YZWY16] Lantao Yu, Weinan Zhang, Jun Wang, and Yong Yu. Seqgan: Sequence generative adversarial nets with policy gradient. CoRR, abs/1609.05473, 2016. 1, 3",
+            "arxiv_url": "https://arxiv.org/pdf/1609.05473"
+        },
+        {
+            "id": "Zhu_et+al_2015_a",
+            "entry": "Yukun Zhu, Ryan Kiros, Richard Zemel, Ruslan Salakhutdinov, Raquel Urtasun, Antonio Torralba, and Sanja Fidler. Aligning books and movies: Towards story-like visual explanations by watching movies and reading books. arXiv preprint arXiv:1506.06724, 2015. 5.1",
+            "arxiv_url": "https://arxiv.org/pdf/1506.06724"
+        }
+    ]
+}

@@ -1,0 +1,474 @@
+{
+    "filename": "7617-neural-code-comprehension-a-learnable-representation-of-code-semantics.pdf",
+    "metadata": {
+        "title": "Neural Code Comprehension: A Learnable Representation of Code Semantics",
+        "author": "Tal Ben-Nun, Alice Shoshana Jakobovits, Torsten Hoefler",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7617-neural-code-comprehension-a-learnable-representation-of-code-semantics.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "With the recent success of embeddings in natural language processing, research has been conducted into applying similar methods to code analysis. Most works attempt to process the code directly or use a syntactic tree representation, treating it like sentences written in a natural language. However, none of the existing methods are sufficient to comprehend program semantics robustly, due to structural features such as function calls, branching, and interchangeable order of statements. In this paper, we propose a novel processing technique to learn code semantics, and apply it to a variety of program analysis tasks. In particular, we stipulate that a robust distributional hypothesis of code applies to both humanand machine-generated programs. Following this hypothesis, we define an embedding space, inst2vec, based on an Intermediate Representation (IR) of the code that is independent of the source programming language. We provide a novel definition of contextual flow for this IR, leveraging both the underlying dataand control-flow of the program. We then analyze the embeddings qualitatively using analogies and clustering, and evaluate the learned representation on three different high-level tasks. We show that even without fine-tuning, a single RNN architecture and fixed inst2vec embeddings outperform specialized approaches for performance prediction (compute device mapping, optimal thread coarsening); and algorithm classification from raw code (104 classes), where we set a new state-of-the-art."
+    },
+    "keywords": [
+        {
+            "term": "Abstract Syntax Trees",
+            "url": "https://en.wikipedia.org/wiki/Abstract_Syntax_Tree"
+        },
+        {
+            "term": "LLVM",
+            "url": "https://en.wikipedia.org/wiki/LLVM"
+        },
+        {
+            "term": "Program Dependence Graph",
+            "url": "https://en.wikipedia.org/wiki/Program_Dependence_Graph"
+        },
+        {
+            "term": "language model",
+            "url": "https://en.wikipedia.org/wiki/language_model"
+        },
+        {
+            "term": "neural code",
+            "url": "https://en.wikipedia.org/wiki/neural_code"
+        },
+        {
+            "term": "Static Single Assignment",
+            "url": "https://en.wikipedia.org/wiki/Static_Single_Assignment"
+        },
+        {
+            "term": "natural language",
+            "url": "https://en.wikipedia.org/wiki/natural_language"
+        },
+        {
+            "term": "source code",
+            "url": "https://en.wikipedia.org/wiki/source_code"
+        },
+        {
+            "term": "Intermediate Representation",
+            "url": "https://en.wikipedia.org/wiki/Intermediate_Representation"
+        },
+        {
+            "term": "Natural Language Processing",
+            "url": "https://en.wikipedia.org/wiki/Natural_Language_Processing"
+        },
+        {
+            "term": "high level",
+            "url": "https://en.wikipedia.org/wiki/high_level"
+        },
+        {
+            "term": "programming language",
+            "url": "https://en.wikipedia.org/wiki/programming_language"
+        },
+        {
+            "term": "language processing",
+            "url": "https://en.wikipedia.org/wiki/language_processing"
+        },
+        {
+            "term": "program analysis",
+            "url": "https://en.wikipedia.org/wiki/program_analysis"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "The emergence of the \u201cBig Data era\u201d manifests in the form of a dramatic increase in accessible code",
+        "This paper presents Neural Code Comprehension1: a general-purpose processing pipeline geared towards representing code semantics in a robust and learnable manner",
+        "As for representing the context of a token, which is necessary for training embeddings, some works rely on lexicographical locality [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>, <a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>, <a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>], whereas others exploit the structural nature of code, using Data Flow Graphs [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>], Control Flow Graphs [<a class=\"ref-link\" id=\"c51\" href=\"#r51\">51</a>, <a class=\"ref-link\" id=\"c53\" href=\"#r53\">53</a>, <a class=\"ref-link\" id=\"c64\" href=\"#r64\">64</a>], Abstract Syntax Trees (ASTs) [<a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>, <a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>], paths in the Abstract Syntax Trees [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>], or an augmented Abstract Syntax Trees, for instance with additional edges connecting different uses and updates of syntax tokens corresponding to variables [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>]",
+        "We have empirically shown that semantics of statements can be successfully recovered from their context alone",
+        "This recovery relies both on proper granularity, where we propose to use filtered LLVM Intermediate Representation instructions; and on the grouping of statements, for which we use a mixture of dataand control-flow",
+        "Further research could be conducted in various directions"
+    ],
+    "key_statements": [
+        "The emergence of the \u201cBig Data era\u201d manifests in the form of a dramatic increase in accessible code",
+        "This paper presents Neural Code Comprehension1: a general-purpose processing pipeline geared towards representing code semantics in a robust and learnable manner",
+        "Neural Code Comprehension is evaluated on multiple levels, using clustering and analogies for inst2vec, as well as three different code comprehension tasks for XFGs: algorithm classification; heterogeneous compute device (e.g., CPU, GPU) mapping; and optimal thread coarsening factor prediction, which model the runtime of an application without running it",
+        "As for representing the context of a token, which is necessary for training embeddings, some works rely on lexicographical locality [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>, <a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>, <a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>], whereas others exploit the structural nature of code, using Data Flow Graphs [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>], Control Flow Graphs [<a class=\"ref-link\" id=\"c51\" href=\"#r51\">51</a>, <a class=\"ref-link\" id=\"c53\" href=\"#r53\">53</a>, <a class=\"ref-link\" id=\"c64\" href=\"#r64\">64</a>], Abstract Syntax Trees (ASTs) [<a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>, <a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>], paths in the Abstract Syntax Trees [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>], or an augmented Abstract Syntax Trees, for instance with additional edges connecting different uses and updates of syntax tokens corresponding to variables [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>]",
+        "We use Neural Code Comprehension to predict whether a given OpenCL program will run faster on a CPU (Intel Core i7-3820) or a GPU (AMD Tahiti 7970 and NVIDIA GTX 970) given its code, input data size, and work-group size",
+        "We have empirically shown that semantics of statements can be successfully recovered from their context alone",
+        "This recovery relies both on proper granularity, where we propose to use filtered LLVM Intermediate Representation instructions; and on the grouping of statements, for which we use a mixture of dataand control-flow",
+        "Further research could be conducted in various directions"
+    ],
+    "summary": [
+        "The emergence of the \u201cBig Data era\u201d manifests in the form of a dramatic increase in accessible code.",
+        "The XFG structure is used to train an embedding space for individual statements, called inst2vec, which is fed to RNNs for a variety of high-level tasks.",
+        "Neural Code Comprehension is evaluated on multiple levels, using clustering and analogies for inst2vec, as well as three different code comprehension tasks for XFGs: algorithm classification; heterogeneous compute device (e.g., CPU, GPU) mapping; and optimal thread coarsening factor prediction, which model the runtime of an application without running it.",
+        "We evaluate the representation using clustering, analogies, semantic tests, and three fundamentally different high-level code learning tasks.",
+        "Code Representation Previous research focuses on embedding high-level programming languages such as Java [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>, <a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>], C [<a class=\"ref-link\" id=\"c41\" href=\"#r41\">41</a>], or OpenCL [<a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>] in the form of tokens or statements, as well as lower",
+        "As for representing the context of a token, which is necessary for training embeddings, some works rely on lexicographical locality [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>, <a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>, <a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>], whereas others exploit the structural nature of code, using Data Flow Graphs [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>], Control Flow Graphs [<a class=\"ref-link\" id=\"c51\" href=\"#r51\">51</a>, <a class=\"ref-link\" id=\"c53\" href=\"#r53\">53</a>, <a class=\"ref-link\" id=\"c64\" href=\"#r64\">64</a>], Abstract Syntax Trees (ASTs) [<a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>, <a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>], paths in the AST [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>], or an augmented AST, for instance with additional edges connecting different uses and updates of syntax tokens corresponding to variables [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>].",
+        "Setup and Training Given a set of XFGs created from the LLVM IR files, we generate neighboring statement pairs up to a certain context size, following the skip-gram model [<a class=\"ref-link\" id=\"c48\" href=\"#r48\">48</a>].",
+        "Clustering Fig. 6 depicts the t-SNE [<a class=\"ref-link\" id=\"c60\" href=\"#r60\">60</a>] plots for trained inst2vec spaces with different XFG context sizes, colored by statement and data type.",
+        "The results confirm that over all scores, a context size of 2 is the best-performing configuration, and show that the XFG representation is more complete and leads to better embeddings than taking into account control or data flow alone.",
+        "For the compute device mapping and optimal thread coarsening factor prediction tasks, we train the LLVM IR statements with the immediate values that were stripped from them during preprocessing.",
+        "For the compute device mapping and optimal thread coarsening factor prediction tasks, we use an OpenCL code dataset3 provided by Cummins et al [<a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>].",
+        "We use Neural Code Comprehension to predict whether a given OpenCL program will run faster on a CPU (Intel Core i7-3820) or a GPU (AMD Tahiti 7970 and NVIDIA GTX 970) given its code, input data size, and work-group size.",
+        "We use our proposed representation to perform three high-level classification and prediction tasks, outperforming all manually-extracted features and achieving results that are on-par with two inherently different state-of-the-art specialized DNN solutions.",
+        "Rather than directly using statements, the representation may be refined using part-based models, which have already been applied successfully in language models [<a class=\"ref-link\" id=\"c55\" href=\"#r55\">55</a>]. inst2vec can be used as a basis for neural code interpretation, using a modified Differentiable Neural Computer [<a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>] to enable execution of arbitrary code over DNNs"
+    ],
+    "headline": "We propose a novel processing technique to learn code semantics, and apply it to a variety of program analysis tasks",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Mart\u00edn Abadi, Ashish Agarwal, Paul Barham, Eugene Brevdo, Zhifeng Chen, Craig Citro, Greg S. Corrado, Andy Davis, Jeffrey Dean, Matthieu Devin, Sanjay Ghemawat, Ian Goodfellow, Andrew Harp, Geoffrey Irving, Michael Isard, Yangqing Jia, Rafal Jozefowicz, Lukasz Kaiser, Manjunath Kudlur, Josh Levenberg, Dandelion Man\u00e9, Rajat Monga, Sherry Moore, Derek Murray, Chris Olah, Mike Schuster, Jonathon Shlens, Benoit Steiner, Ilya Sutskever, Kunal Talwar, Paul Tucker, Vincent Vanhoucke, Vijay Vasudevan, Fernanda Vi\u00e9gas, Oriol Vinyals, Pete Warden, Martin Wattenberg, Martin Wicke, Yuan Yu, and Xiaoqiang Zheng. TensorFlow: Largescale machine learning on heterogeneous systems, 2015. Software available from tensorflow.org.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abadi%2C%20Mart%C3%ADn%20Agarwal%2C%20Ashish%20Barham%2C%20Paul%20Brevdo%2C%20Eugene%20TensorFlow%3A%20Largescale%20machine%20learning%20on%20heterogeneous%20systems%202015"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Miltiadis Allamanis, Earl T. Barr, Christian Bird, and Charles Sutton. Suggesting accurate method and class names. In Proceedings of the 2015 10th Joint Meeting on Foundations of Software Engineering, ESEC/FSE 2015, pages 38\u201349, New York, NY, USA, 2015. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Allamanis%2C%20Miltiadis%20Barr%2C%20Earl%20T.%20Bird%2C%20Christian%20Sutton%2C%20Charles%20Suggesting%20accurate%20method%20and%20class%20names%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Allamanis%2C%20Miltiadis%20Barr%2C%20Earl%20T.%20Bird%2C%20Christian%20Sutton%2C%20Charles%20Suggesting%20accurate%20method%20and%20class%20names%202015"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Miltiadis Allamanis, Earl T. Barr, Premkumar T. Devanbu, and Charles A. Sutton. A survey of machine learning for big code and naturalness. CoRR, abs/1709.06182, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1709.06182"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Miltiadis Allamanis and Marc Brockschmidt. Smartpaste: Learning to adapt source code. CoRR, abs/1705.07867, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1705.07867"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Miltiadis Allamanis, Marc Brockschmidt, and Mahmoud Khademi. Learning to represent programs with graphs. CoRR, abs/1711.00740, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.00740"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Miltiadis Allamanis, Hao Peng, and Charles A. Sutton. A convolutional attention network for extreme summarization of source code. CoRR, abs/1602.03001, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1602.03001"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Uri Alon, Meital Zilberstein, Omer Levy, and Eran Yahav. code2vec: Learning distributed representations of code. CoRR, abs/1803.09473, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.09473"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Uri Alon, Meital Zilberstein, Omer Levy, and Eran Yahav. A general path-based representation for predicting program properties. CoRR, abs/1803.09544, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.09544"
+        },
+        {
+            "id": "9",
+            "entry": "[9] AMD. AMD OpenCL accelerated parallel processing SDK. https://developer.amd.com/amd-accelerated-parallel-processing-app-sdk/.",
+            "url": "https://developer.amd.com/amd-accelerated-parallel-processing-app-sdk/"
+        },
+        {
+            "id": "10",
+            "entry": "[10] P. Balaprakash, R. B. Gramacy, and S. M. Wild. Active-learning-based surrogate models for empirical performance tuning. In 2013 IEEE International Conference on Cluster Computing (CLUSTER), pages 1\u20138, Sept 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Balaprakash%2C%20P.%20Gramacy%2C%20R.B.%20Wild%2C%20S.M.%20Active-learning-based%20surrogate%20models%20for%20empirical%20performance%20tuning%202013-09",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Balaprakash%2C%20P.%20Gramacy%2C%20R.B.%20Wild%2C%20S.M.%20Active-learning-based%20surrogate%20models%20for%20empirical%20performance%20tuning%202013-09"
+        },
+        {
+            "id": "11",
+            "entry": "[11] M. Baldauf, A. Seifert, J. F\u00f6rstner, D. Majewski, M. Raschendorfer, and T. Reinhardt. Operational Convective-Scale Numerical Weather Prediction with the COSMO Model: Description and Sensitivities. Monthly Weather Review, 139:3887\u20133905, December 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Baldauf%2C%20M.%20Seifert%2C%20A.%20F%C3%B6rstner%2C%20J.%20Majewski%2C%20D.%20Operational%20Convective-Scale%20Numerical%20Weather%20Prediction%20with%20the%20COSMO%20Model%3A%20Description%20and%20Sensitivities%202011-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Baldauf%2C%20M.%20Seifert%2C%20A.%20F%C3%B6rstner%2C%20J.%20Majewski%2C%20D.%20Operational%20Convective-Scale%20Numerical%20Weather%20Prediction%20with%20the%20COSMO%20Model%3A%20Description%20and%20Sensitivities%202011-12"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Pavol Bielik, Veselin Raychev, and Martin Vechev. PHOG: Probabilistic model for code. In Maria Florina Balcan and Kilian Q. Weinberger, editors, Proceedings of The 33rd International Conference on Machine Learning, volume 48 of Proceedings of Machine Learning Research, pages 2933\u20132942, New York, New York, USA, June 2016. PMLR.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bielik%2C%20Pavol%20Raychev%2C%20Veselin%20Vechev%2C%20Martin%20PHOG%3A%20Probabilistic%20model%20for%20code.%20In%20Maria%20Florina%20Balcan%20and%202016-06",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bielik%2C%20Pavol%20Raychev%2C%20Veselin%20Vechev%2C%20Martin%20PHOG%3A%20Probabilistic%20model%20for%20code.%20In%20Maria%20Florina%20Balcan%20and%202016-06"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Rudy Bunel, Alban Desmaison, M. Pawan Kumar, Philip H. S. Torr, and Pushmeet Kohli. Learning to superoptimize programs. International Conference on Learning Representations, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bunel%2C%20Rudy%20Alban%20Desmaison%2C%20M.Pawan%20Kumar%20Torr%2C%20Philip%20H.S.%20Kohli%2C%20Pushmeet%20Learning%20to%20superoptimize%20programs%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bunel%2C%20Rudy%20Alban%20Desmaison%2C%20M.Pawan%20Kumar%20Torr%2C%20Philip%20H.S.%20Kohli%2C%20Pushmeet%20Learning%20to%20superoptimize%20programs%202017"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Shuai Che, Michael Boyer, Jiayuan Meng, David Tarjan, Jeremy W. Sheaffer, Sang-Ha Lee, and Kevin Skadron. Rodinia: A benchmark suite for heterogeneous computing. In Proceedings of the 2009 IEEE International Symposium on Workload Characterization (IISWC), IISWC \u201909, pages 44\u201354, Washington, DC, USA, 2009. IEEE Computer Society.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Che%2C%20Shuai%20Boyer%2C%20Michael%20Meng%2C%20Jiayuan%20Tarjan%2C%20David%20Rodinia%3A%20A%20benchmark%20suite%20for%20heterogeneous%20computing%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Che%2C%20Shuai%20Boyer%2C%20Michael%20Meng%2C%20Jiayuan%20Tarjan%2C%20David%20Rodinia%3A%20A%20benchmark%20suite%20for%20heterogeneous%20computing%202009"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Cliff Click and Keith D. Cooper. Combining analyses, combining optimizations. ACM Transactions on Programming Languages and Systems, 17, 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Click%2C%20Cliff%20Cooper%2C%20Keith%20D.%20Combining%20analyses%2C%20combining%20optimizations%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Click%2C%20Cliff%20Cooper%2C%20Keith%20D.%20Combining%20analyses%2C%20combining%20optimizations%201995"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Cliff Click and Michael Paleczny. A simple graph-based intermediate representation. SIGPLAN Not., 30(3):35\u201349, March 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Click%2C%20Cliff%20Paleczny%2C%20Michael%20A%20simple%20graph-based%20intermediate%20representation%201995-03",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Click%2C%20Cliff%20Paleczny%2C%20Michael%20A%20simple%20graph-based%20intermediate%20representation%201995-03"
+        },
+        {
+            "id": "17",
+            "entry": "[17] NVIDIA Corporation. CUDA. http://developer.nvidia.com/object/cuda.html.",
+            "url": "http://developer.nvidia.com/object/cuda.html"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Chris Cummins, Pavlos Petoumenos, Zheng Wang, and Hugh Leather. End-to-end deep learning of optimization heuristics. In PACT. ACM, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cummins%2C%20Chris%20Petoumenos%2C%20Pavlos%20Wang%2C%20Zheng%20Leather%2C%20Hugh%20End-to-end%20deep%20learning%20of%20optimization%20heuristics%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cummins%2C%20Chris%20Petoumenos%2C%20Pavlos%20Wang%2C%20Zheng%20Leather%2C%20Hugh%20End-to-end%20deep%20learning%20of%20optimization%20heuristics%202017"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Ron Cytron, Jeanne Ferrante, Barry K. Rosen, Mark N. Wegman, and F. Kenneth Zadeck. Efficiently computing static single assignment form and the control dependence graph. ACM Trans. Program. Lang. Syst., 13(4):451\u2013490, October 1991.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cytron%2C%20Ron%20Ferrante%2C%20Jeanne%20Rosen%2C%20Barry%20K.%20Wegman%2C%20Mark%20N.%20Efficiently%20computing%20static%20single%20assignment%20form%20and%20the%20control%20dependence%20graph%201991-10",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cytron%2C%20Ron%20Ferrante%2C%20Jeanne%20Rosen%2C%20Barry%20K.%20Wegman%2C%20Mark%20N.%20Efficiently%20computing%20static%20single%20assignment%20form%20and%20the%20control%20dependence%20graph%201991-10"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Hoa Khanh Dam, Truyen Tran, and Trang Pham. A deep language model for software code. CoRR, abs/1608.02715, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1608.02715"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Anthony Danalis, Gabriel Marin, Collin McCurdy, Jeremy S. Meredith, Philip Roth, Kyle Spafford, Vinod Tipparaju, and Jeffrey Vetter. The Scalable HeterOgeneous Computing (SHOC) benchmark suite. pages 63\u201374, January 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Danalis%2C%20Anthony%20Marin%2C%20Gabriel%20McCurdy%2C%20Collin%20Meredith%2C%20Jeremy%20S.%20The%20Scalable%20HeterOgeneous%20Computing%20%28SHOC%29%20benchmark%20suite%202010-01"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Jack Dongarra. Basic linear algebra subprograms technical forum standard. page 1 \u2014 111, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dongarra%2C%20Jack%20Basic%20linear%20algebra%20subprograms%20technical%20forum%20standard"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Jeffrey L. Elman. Finding structure in time. Cognitive Science, 14(2):179 \u2013 211, 1990.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Elman%2C%20Jeffrey%20L.%20Finding%20structure%20in%20time%201990",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Elman%2C%20Jeffrey%20L.%20Finding%20structure%20in%20time%201990"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Jeanne Ferrante, Karl J. Ottenstein, and Joe D. Warren. The program dependence graph and its use in optimization. ACM Trans. Program. Lang. Syst., 9(3):319\u2013349, July 1987.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ferrante%2C%20Jeanne%20Ottenstein%2C%20Karl%20J.%20Warren%2C%20Joe%20D.%20The%20program%20dependence%20graph%20and%20its%20use%20in%20optimization%201987-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ferrante%2C%20Jeanne%20Ottenstein%2C%20Karl%20J.%20Warren%2C%20Joe%20D.%20The%20program%20dependence%20graph%20and%20its%20use%20in%20optimization%201987-07"
+        },
+        {
+            "id": "25",
+            "entry": "[25] GitHub. GitHub Octoverse. https://octoverse.github.com/, 2017.",
+            "url": "https://octoverse.github.com/"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Xavier Glorot, Antoine Bordes, and Yoshua Bengio. Deep sparse rectifier neural networks. 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Glorot%2C%20Xavier%20Bordes%2C%20Antoine%20Bengio%2C%20Yoshua%20Deep%20sparse%20rectifier%20neural%20networks%202011"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Scott Grauer-Gray, Lifan Xu, Robert Searles, Sudhee Ayalasomayajula, and John Cavazos. Auto-tuning a high-level language targeted to GPU codes. 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Grauer-Gray%2C%20Scott%20Xu%2C%20Lifan%20Searles%2C%20Robert%20Ayalasomayajula%2C%20Sudhee%20Auto-tuning%20a%20high-level%20language%20targeted%20to%20GPU%20codes%202012"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Alex Graves, Greg Wayne, Malcolm Reynolds, Tim Harley, Ivo Danihelka, Agnieszka GrabskaBarwinska, Sergio G\u00f3mez Colmenarejo, Edward Grefenstette, Tiago Ramalho, John Agapiou, et al. Hybrid computing using a neural network with dynamic external memory. Nature, 538(7626):471\u2013476, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Graves%2C%20Alex%20Wayne%2C%20Greg%20Reynolds%2C%20Malcolm%20Harley%2C%20Tim%20Hybrid%20computing%20using%20a%20neural%20network%20with%20dynamic%20external%20memory%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Graves%2C%20Alex%20Wayne%2C%20Greg%20Reynolds%2C%20Malcolm%20Harley%2C%20Tim%20Hybrid%20computing%20using%20a%20neural%20network%20with%20dynamic%20external%20memory%202016"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Dominik Grewe, Zheng Wang, and Michael O\u2019Boyle. Portable mapping of data parallel programs to OpenCL for heterogeneous systems. pages 1\u201310, February 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Grewe%2C%20Dominik%20Wang%2C%20Zheng%20O%E2%80%99Boyle%2C%20Michael%20Portable%20mapping%20of%20data%20parallel%20programs%20to%20OpenCL%20for%20heterogeneous%20systems%202013-02"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Xiaodong Gu, Hongyu Zhang, Dongmei Zhang, and Sunghun Kim. Deep API learning. In Proceedings of the 2016 24th ACM SIGSOFT International Symposium on Foundations of Software Engineering, FSE 2016, pages 631\u2013642, New York, NY, USA, 2016. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gu%2C%20Xiaodong%20Zhang%2C%20Hongyu%20Zhang%2C%20Dongmei%20Kim%2C%20Sunghun%20Deep%20API%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gu%2C%20Xiaodong%20Zhang%2C%20Hongyu%20Zhang%2C%20Dongmei%20Kim%2C%20Sunghun%20Deep%20API%20learning%202016"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Ga\u00ebl Guennebaud and Beno\u00eet Jacob et al. Eigen v3. http://eigen.tuxfamily.org, 2010.",
+            "url": "http://eigen.tuxfamily.org"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Zellig S. Harris. Distributional Structure, pages 3\u201322. Springer Netherlands, Dordrecht, 1981.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Harris%2C%20Zellig%20S.%20Distributional%20Structure%201981"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Sepp Hochreiter and J\u00fcrgen Schmidhuber. Long short-term memory. Neural Computation, 9(8):1735\u20131780, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Long%20short-term%20memory%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Long%20short-term%20memory%201997"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Chun-Hung Hsiao, Michael Cafarella, and Satish Narayanasamy. Using web corpus statistics for program analysis. In Proceedings of the 2014 ACM International Conference on Object Oriented Programming Systems Languages & Applications, OOPSLA \u201914, pages 49\u201365, New York, NY, USA, 2014. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hsiao%2C%20Chun-Hung%20Cafarella%2C%20Michael%20and%20Satish%20Narayanasamy.%20Using%20web%20corpus%20statistics%20for%20program%20analysis%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hsiao%2C%20Chun-Hung%20Cafarella%2C%20Michael%20and%20Satish%20Narayanasamy.%20Using%20web%20corpus%20statistics%20for%20program%20analysis%202014"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Sergey Ioffe and Christian Szegedy. Batch normalization: Accelerating deep network training by reducing internal covariate shift. In Proceedings of the 32Nd International Conference on International Conference on Machine Learning - Volume 37, ICML\u201915, pages 448\u2013456. JMLR.org, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20Sergey%20Ioffe%20and%20Christian%20Szegedy.%20Batch%20normalization%3A%20Accelerating%20deep%20network%20training%20by%20reducing%20internal%20covariate%20shift%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Sergey%20Ioffe%20and%20Christian%20Szegedy.%20Batch%20normalization%3A%20Accelerating%20deep%20network%20training%20by%20reducing%20internal%20covariate%20shift%202015"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Itseez. Open source computer vision library. https://github.com/itseez/opencv, 2015.",
+            "url": "https://github.com/itseez/opencv"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Diederik P. Kingma and Jimmy Ba. Adam: A method for stochastic optimization. CoRR, abs/1412.6980, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6980"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Leslie Lamport. Time, clocks, and the ordering of events in a distributed system. Commun. ACM, 21(7):558\u2013565, July 1978.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Time%2C%20Leslie%20Lamport%20clocks%20and%20the%20ordering%20of%20events%20in%20a%20distributed%20system%201978-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Time%2C%20Leslie%20Lamport%20clocks%20and%20the%20ordering%20of%20events%20in%20a%20distributed%20system%201978-07"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Chris Lattner and Vikram Adve. LLVM: a compilation framework for lifelong program analysis transformation. In International Symposium on Code Generation and Optimization, 2004. CGO 2004., pages 75\u201386, March 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lattner%2C%20Chris%20Adve%2C%20Vikram%20LLVM%3A%20a%20compilation%20framework%20for%20lifelong%20program%20analysis%20transformation%202004-03",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lattner%2C%20Chris%20Adve%2C%20Vikram%20LLVM%3A%20a%20compilation%20framework%20for%20lifelong%20program%20analysis%20transformation%202004-03"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Hugh Leather, Edwin Bonilla, and Michael O\u2019Boyle. Automatic feature generation for machine learning based optimizing compilation. In Proceedings of the 7th Annual IEEE/ACM International Symposium on Code Generation and Optimization, CGO \u201909, pages 81\u201391, Washington, DC, USA, 2009. IEEE Computer Society.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Leather%2C%20Hugh%20Bonilla%2C%20Edwin%20O%E2%80%99Boyle%2C%20Michael%20Automatic%20feature%20generation%20for%20machine%20learning%20based%20optimizing%20compilation%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Leather%2C%20Hugh%20Bonilla%2C%20Edwin%20O%E2%80%99Boyle%2C%20Michael%20Automatic%20feature%20generation%20for%20machine%20learning%20based%20optimizing%20compilation%202009"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Dor Levy and Lior Wolf. Learning to align the source code to the compiled object code. In Proceedings of the 34th International Conference on Machine Learning, ICML 2017, Sydney, NSW, Australia, 6-11 August 2017, pages 2043\u20132051, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Levy%2C%20Dor%20Wolf%2C%20Lior%20Learning%20to%20align%20the%20source%20code%20to%20the%20compiled%20object%20code%202017-08",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Levy%2C%20Dor%20Wolf%2C%20Lior%20Learning%20to%20align%20the%20source%20code%20to%20the%20compiled%20object%20code%202017-08"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Linux. Linux kernel source code (version 4.15.1). https://www.kernel.org/.",
+            "url": "https://www.kernel.org/"
+        },
+        {
+            "id": "43",
+            "entry": "[43] LLVM. Flang: a FORTRAN compiler frontend for LLVM. https://github.com/flang-compiler/flang.",
+            "url": "https://github.com/flang-compiler/flang"
+        },
+        {
+            "id": "44",
+            "entry": "[44] LLVM. Clang: a C language family frontend for LLVM v4.0.0. http://clang.llvm.org/, 2017.",
+            "url": "http://clang.llvm.org/"
+        },
+        {
+            "id": "45",
+            "entry": "[45] LLVM. LLVM language reference manual. https://llvm.org/docs/LangRef.html, 2018.",
+            "url": "https://llvm.org/docs/LangRef.html"
+        },
+        {
+            "id": "46",
+            "entry": "[46] Alberto Magni, Christophe Dubach, and Michael O\u2019Boyle. Automatic optimization of threadcoarsening for graphics processors. In Proceedings of the 23rd International Conference on Parallel Architectures and Compilation, PACT \u201914, pages 455\u2013466, New York, NY, USA, 2014. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Magni%2C%20Alberto%20Dubach%2C%20Christophe%20O%E2%80%99Boyle%2C%20Michael%20Automatic%20optimization%20of%20threadcoarsening%20for%20graphics%20processors%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Magni%2C%20Alberto%20Dubach%2C%20Christophe%20O%E2%80%99Boyle%2C%20Michael%20Automatic%20optimization%20of%20threadcoarsening%20for%20graphics%20processors%202014"
+        },
+        {
+            "id": "47",
+            "entry": "[47] Tomas Mikolov, Kai Chen, Greg Corrado, and Jeffrey Dean. Efficient estimation of word representations in vector space. CoRR, abs/1301.3781, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1301.3781"
+        },
+        {
+            "id": "48",
+            "entry": "[48] Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg Corrado, and Jeffrey Dean. Distributed representations of words and phrases and their compositionality. In Proceedings of the 26th International Conference on Neural Information Processing Systems - Volume 2, NIPS\u201913, pages 3111\u20133119, USA, 2013. Curran Associates Inc.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mikolov%2C%20Tomas%20Sutskever%2C%20Ilya%20Chen%2C%20Kai%20Corrado%2C%20Greg%20Distributed%20representations%20of%20words%20and%20phrases%20and%20their%20compositionality%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mikolov%2C%20Tomas%20Sutskever%2C%20Ilya%20Chen%2C%20Kai%20Corrado%2C%20Greg%20Distributed%20representations%20of%20words%20and%20phrases%20and%20their%20compositionality%202013"
+        },
+        {
+            "id": "49",
+            "entry": "[49] Lili Mou, Ge Li, Lu Zhang, Tao Wang, and Zhi Jin. Convolutional neural networks over tree structures for programming language processing. In Proceedings of the Thirtieth AAAI Conference on Artificial Intelligence, AAAI\u201916, pages 1287\u20131293. AAAI Press, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mou%2C%20Lili%20Li%2C%20Ge%20Zhang%2C%20Lu%20Wang%2C%20Tao%20Convolutional%20neural%20networks%20over%20tree%20structures%20for%20programming%20language%20processing%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mou%2C%20Lili%20Li%2C%20Ge%20Zhang%2C%20Lu%20Wang%2C%20Tao%20Convolutional%20neural%20networks%20over%20tree%20structures%20for%20programming%20language%20processing%202016"
+        },
+        {
+            "id": "50",
+            "entry": "[50] Mircea Namolaru, Albert Cohen, Grigori Fursin, Ayal Zaks, and Ari Freund. Practical aggregation of semantical program properties for machine learning based optimization. In Proceedings of the 2010 International Conference on Compilers, Architectures and Synthesis for Embedded Systems, CASES \u201910, pages 197\u2013206, New York, NY, USA, 2010. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Namolaru%2C%20Mircea%20Cohen%2C%20Albert%20Fursin%2C%20Grigori%20Zaks%2C%20Ayal%20Practical%20aggregation%20of%20semantical%20program%20properties%20for%20machine%20learning%20based%20optimization%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Namolaru%2C%20Mircea%20Cohen%2C%20Albert%20Fursin%2C%20Grigori%20Zaks%2C%20Ayal%20Practical%20aggregation%20of%20semantical%20program%20properties%20for%20machine%20learning%20based%20optimization%202010"
+        },
+        {
+            "id": "51",
+            "entry": "[51] Ricardo Nobre, Luiz G. A. Martins, and Jo\u00e3o M. P. Cardoso. A graph-based iterative compiler pass selection and phase ordering approach. In Proceedings of the 17th ACM SIGPLAN/SIGBED Conference on Languages, Compilers, Tools, and Theory for Embedded Systems, LCTES 2016, pages 21\u201330, New York, NY, USA, 2016. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nobre%2C%20Ricardo%20Martins%2C%20Luiz%20G.A.%20Cardoso%2C%20Jo%C3%A3o%20M.P.%20A%20graph-based%20iterative%20compiler%20pass%20selection%20and%20phase%20ordering%20approach%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nobre%2C%20Ricardo%20Martins%2C%20Luiz%20G.A.%20Cardoso%2C%20Jo%C3%A3o%20M.P.%20A%20graph-based%20iterative%20compiler%20pass%20selection%20and%20phase%20ordering%20approach%202016"
+        },
+        {
+            "id": "52",
+            "entry": "[52] Patrick Pantel. Inducing ontological co-occurrence vectors. In Proceedings of the 43rd Annual Meeting on Association for Computational Linguistics, ACL \u201905, pages 125\u2013132, Stroudsburg, PA, USA, 2005. Association for Computational Linguistics.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pantel%2C%20Patrick%20Inducing%20ontological%20co-occurrence%20vectors%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pantel%2C%20Patrick%20Inducing%20ontological%20co-occurrence%20vectors%202005"
+        },
+        {
+            "id": "53",
+            "entry": "[53] Eunjung Park, John Cavazos, and Marco A. Alvarez. Using graph-based program characterization for predictive modeling. In Proceedings of the Tenth International Symposium on Code Generation and Optimization, CGO \u201912, pages 196\u2013206, New York, NY, USA, 2012. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Park%2C%20Eunjung%20Cavazos%2C%20John%20Alvarez%2C%20Marco%20A.%20Using%20graph-based%20program%20characterization%20for%20predictive%20modeling%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Park%2C%20Eunjung%20Cavazos%2C%20John%20Alvarez%2C%20Marco%20A.%20Using%20graph-based%20program%20characterization%20for%20predictive%20modeling%202012"
+        },
+        {
+            "id": "54",
+            "entry": "[54] Veselin Raychev, Martin Vechev, and Eran Yahav. Code completion with statistical language models. SIGPLAN Not., 49(6):419\u2013428, June 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Raychev%2C%20Veselin%20Vechev%2C%20Martin%20Yahav%2C%20Eran%20Code%20completion%20with%20statistical%20language%20models%202014-06",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Raychev%2C%20Veselin%20Vechev%2C%20Martin%20Yahav%2C%20Eran%20Code%20completion%20with%20statistical%20language%20models%202014-06"
+        },
+        {
+            "id": "55",
+            "entry": "[55] Cicero Dos Santos and Bianca Zadrozny. Learning character-level representations for part-ofspeech tagging. In Eric P. Xing and Tony Jebara, editors, Proceedings of the 31st International Conference on Machine Learning, volume 32 of Proceedings of Machine Learning Research, pages 1818\u20131826, Bejing, China, June 2014. PMLR.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Santos%2C%20Cicero%20Dos%20Zadrozny%2C%20Bianca%20Learning%20character-level%20representations%20for%20part-ofspeech%20tagging%202014-06",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Santos%2C%20Cicero%20Dos%20Zadrozny%2C%20Bianca%20Learning%20character-level%20representations%20for%20part-ofspeech%20tagging%202014-06"
+        },
+        {
+            "id": "56",
+            "entry": "[56] Eric Schkufza, Rahul Sharma, and Alex Aiken. Stochastic superoptimization. In Proceedings of the Eighteenth International Conference on Architectural Support for Programming Languages and Operating Systems, ASPLOS \u201913, pages 305\u2013316, New York, NY, USA, 2013. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schkufza%2C%20Eric%20Sharma%2C%20Rahul%20Aiken%2C%20Alex%20Stochastic%20superoptimization%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schkufza%2C%20Eric%20Sharma%2C%20Rahul%20Aiken%2C%20Alex%20Stochastic%20superoptimization%202013"
+        },
+        {
+            "id": "57",
+            "entry": "[57] Sangmin Seo, Gangwon Jo, and Jaejin Lee. Performance characterization of the nas parallel benchmarks in opencl. In Proceedings of the 2011 IEEE International Symposium on Workload Characterization, IISWC \u201911, pages 137\u2013148, Washington, DC, USA, 2011. IEEE Computer Society.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Seo%2C%20Sangmin%20Jo%2C%20Gangwon%20Lee%2C%20Jaejin%20Performance%20characterization%20of%20the%20nas%20parallel%20benchmarks%20in%20opencl%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Seo%2C%20Sangmin%20Jo%2C%20Gangwon%20Lee%2C%20Jaejin%20Performance%20characterization%20of%20the%20nas%20parallel%20benchmarks%20in%20opencl%202011"
+        },
+        {
+            "id": "58",
+            "entry": "[58] Vugranam C. Sreedhar and Guang R. Gao. A linear time algorithm for placing phi-nodes. In Proceedings of the 22Nd ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages, POPL \u201995, pages 62\u201373, New York, NY, USA, 1995. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sreedhar%2C%20Vugranam%20C.%20Gao%2C%20Guang%20R.%20A%20linear%20time%20algorithm%20for%20placing%20phi-nodes%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sreedhar%2C%20Vugranam%20C.%20Gao%2C%20Guang%20R.%20A%20linear%20time%20algorithm%20for%20placing%20phi-nodes%201995"
+        },
+        {
+            "id": "59",
+            "entry": "[59] John A. Stratton, Christopher Rodrigues, I-Jui Sung, Nady Obeid, Li-Wen Chang, Nasser Anssari, Geng Daniel Liu, and Wen-mei W. Hwu. Parboil: A revised benchmark suite for scientific and commercial throughput computing. Center for Reliable and High-Performance Computing, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Stratton%2C%20John%20A.%20Christopher%20Rodrigues%2C%20I.-Jui%20Sung%20Obeid%2C%20Nady%20Chang%2C%20Li-Wen%20Parboil%3A%20A%20revised%20benchmark%20suite%20for%20scientific%20and%20commercial%20throughput%20computing%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Stratton%2C%20John%20A.%20Christopher%20Rodrigues%2C%20I.-Jui%20Sung%20Obeid%2C%20Nady%20Chang%2C%20Li-Wen%20Parboil%3A%20A%20revised%20benchmark%20suite%20for%20scientific%20and%20commercial%20throughput%20computing%202012"
+        },
+        {
+            "id": "60",
+            "entry": "[60] Laurens van der Maaten and Geoffrey Hinton. Visualizing data using t-SNE. Journal of Machine Learning Research, 9:2579\u20132605, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=van%20der%20Maaten%2C%20Laurens%20Hinton%2C%20Geoffrey%20Visualizing%20data%20using%20t-SNE%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=van%20der%20Maaten%2C%20Laurens%20Hinton%2C%20Geoffrey%20Visualizing%20data%20using%20t-SNE%202008"
+        },
+        {
+            "id": "61",
+            "entry": "[61] Martin Vechev and Eran Yahav. Programming with \"big code\". Found. Trends Program. Lang., 3(4):231\u2013284, December 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vechev%2C%20Martin%20Yahav%2C%20Eran%20Programming%20with%20%22big%20code%22.%20Found%202016-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vechev%2C%20Martin%20Yahav%2C%20Eran%20Programming%20with%20%22big%20code%22.%20Found%202016-12"
+        },
+        {
+            "id": "62",
+            "entry": "[62] Baoezeng Wang, Xiaochun Yang, and Guoren Wang. Detecting copy directions among programs using extreme learning machines. 2015:1\u201315, 05 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Baoezeng%20Yang%2C%20Xiaochun%20Wang%2C%20Guoren%20Detecting%20copy%20directions%20among%20programs%20using%20extreme%20learning%20machines%202015"
+        },
+        {
+            "id": "63",
+            "entry": "[63] Martin White, Michele Tufano, Christopher Vendome, and Denys Poshyvanyk. Deep learning code fragments for code clone detection. In Proceedings of the 31st IEEE/ACM International Conference on Automated Software Engineering, ASE 2016, pages 87\u201398, New York, NY, USA, 2016. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=White%2C%20Martin%20Tufano%2C%20Michele%20Vendome%2C%20Christopher%20Poshyvanyk%2C%20Denys%20Deep%20learning%20code%20fragments%20for%20code%20clone%20detection%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=White%2C%20Martin%20Tufano%2C%20Michele%20Vendome%2C%20Christopher%20Poshyvanyk%2C%20Denys%20Deep%20learning%20code%20fragments%20for%20code%20clone%20detection%202016"
+        },
+        {
+            "id": "64",
+            "entry": "[64] Xiaojun Xu, Chang Liu, Qian Feng, Heng Yin, Le Song, and Dawn Song. Neural network-based graph embedding for cross-platform binary code similarity detection. CoRR, abs/1708.06525, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1708.06525"
+        },
+        {
+            "id": "65",
+            "entry": "[65] Yixiao Yang, Yu Jiang, Ming Gu, Jiaguang Sun, Jian Gao, and Han Liu. A language model for statements of software code. In Proceedings of the 32Nd IEEE/ACM International Conference on Automated Software Engineering, ASE 2017, pages 682\u2013687, Piscataway, NJ, USA, 2017. IEEE Press. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yang%2C%20Yixiao%20Jiang%2C%20Yu%20Gu%2C%20Ming%20Sun%2C%20Jiaguang%20A%20language%20model%20for%20statements%20of%20software%20code%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yang%2C%20Yixiao%20Jiang%2C%20Yu%20Gu%2C%20Ming%20Sun%2C%20Jiaguang%20A%20language%20model%20for%20statements%20of%20software%20code%202017"
+        }
+    ]
+}

@@ -1,0 +1,219 @@
+{
+    "filename": "7309-snap-ml-a-hierarchical-framework-for-machine-learning.pdf",
+    "metadata": {
+        "title": "Snap ML: A Hierarchical Framework for Machine Learning",
+        "author": "Celestine D\u00fcnner, Thomas Parnell, Dimitrios Sarigiannis, Nikolas Ioannou, Andreea Anghel, Gummadi Ravi, Madhusudanan Kandasamy, Haralampos Pozidis",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7309-snap-ml-a-hierarchical-framework-for-machine-learning.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We describe a new software framework for fast training of generalized linear models. The framework, named Snap Machine Learning (Snap ML), combines recent advances in machine learning systems and algorithms in a nested manner to reflect the hierarchical architecture of modern computing systems. We prove theoretically that such a hierarchical system can accelerate training in distributed environments where intra-node communication is cheaper than inter-node communication. Additionally, we provide a review of the implementation of Snap ML in terms of GPU acceleration, pipelining, communication patterns and software architecture, highlighting aspects that were critical for achieving high performance. We evaluate the performance of Snap ML in both single-node and multi-node environments, quantifying the benefit of the hierarchical scheme and the data streaming functionality, and comparing with other widely-used machine learning software frameworks. Finally, we present a logistic regression benchmark on the Criteo Terabyte Click Logs dataset and show that Snap ML achieves the same test loss an order of magnitude faster than any of the previously reported results, including those obtained using TensorFlow and scikit-learn."
+    },
+    "keywords": [
+        {
+            "term": "generalized linear models",
+            "url": "https://en.wikipedia.org/wiki/generalized_linear_models"
+        },
+        {
+            "term": "logistic regression",
+            "url": "https://en.wikipedia.org/wiki/logistic_regression"
+        },
+        {
+            "term": "machine learning",
+            "url": "https://en.wikipedia.org/wiki/machine_learning"
+        },
+        {
+            "term": "real time",
+            "url": "https://en.wikipedia.org/wiki/real_time"
+        },
+        {
+            "term": "software framework",
+            "url": "https://en.wikipedia.org/wiki/software_framework"
+        },
+        {
+            "term": "Apache Software Foundation",
+            "url": "https://en.wikipedia.org/wiki/Apache_Software_Foundation"
+        },
+        {
+            "term": "linear model",
+            "url": "https://en.wikipedia.org/wiki/linear_model"
+        }
+    ],
+    "highlights": [
+        "The widespread adoption of machine learning and artificial intelligence has been, in part, driven by the ever-increasing availability of data",
+        "We review the implementation of the Snap Machine Learning framework, including its GPU-based local solver, streaming CUDA operations, communication patterns and software architecture",
+        "In this work we have described Snap Machine Learning, a new framework for fast training of generalized linear models",
+        "Snap Machine Learning can exploit modern computing infrastructure consisting of multiple machines that contain both CPUs and GPUs",
+        "We have shown that Snap Machine Learning can provide significantly faster training than existing frameworks in both single-node and multi-node benchmarks",
+        "On one of the largest publicly available datasets, we have shown that Snap Machine Learning can be used to train a logistic regression classifier in 1.5 minutes: more than an order of magnitude faster than any of the previously reported results"
+    ],
+    "key_statements": [
+        "The widespread adoption of machine learning and artificial intelligence has been, in part, driven by the ever-increasing availability of data",
+        "We review the implementation of the Snap Machine Learning framework, including its GPU-based local solver, streaming CUDA operations, communication patterns and software architecture",
+        "We will describe implementation details of Snap Machine Learning starting with details of the GPU-based local solver and working up to the high-level APIs",
+        "We have attempted to highlight the components that are most critical in terms of performance, in the hope that some of these ideas may be applicable to other machine learning software, including popular deep learning frameworks.\n3.1",
+        "We provide a Python module, snap-ml-local, that adheres to the scikit-learn API and can be used to accelerate training of generalized linear models in a non-distributed setting",
+        "In this work we have described Snap Machine Learning, a new framework for fast training of generalized linear models",
+        "Snap Machine Learning can exploit modern computing infrastructure consisting of multiple machines that contain both CPUs and GPUs",
+        "We have shown that Snap Machine Learning can provide significantly faster training than existing frameworks in both single-node and multi-node benchmarks",
+        "On one of the largest publicly available datasets, we have shown that Snap Machine Learning can be used to train a logistic regression classifier in 1.5 minutes: more than an order of magnitude faster than any of the previously reported results"
+    ],
+    "summary": [
+        "The widespread adoption of machine learning and artificial intelligence has been, in part, driven by the ever-increasing availability of data.",
+        "We will describe implementation details of Snap ML starting with details of the GPU-based local solver and working up to the high-level APIs. We have attempted to highlight the components that are most critical in terms of performance, in the hope that some of these ideas may be applicable to other machine learning software, including popular deep learning frameworks.",
+        "We provide a Python module, snap-ml-local, that adheres to the scikit-learn API and can be used to accelerate training of GLMs in a non-distributed setting.",
+        "We benchmark the single node performance of Snap ML for the training of a logistic regression classifier against an equivalent solution in scikit-learn and TensorFlow.",
+        "In order to evaluate the streaming performance of Snap ML we train a logistic regression model using a single GPU for the first 200 million training examples of the criteo-tb dataset.",
+        "We train a logistic regression model from snap-ml-mpi and evaluate the time to reach a target training suboptimality \u03b5 as a function of the number of inner CoCoA iterations performed (t2) using both a fast network (InfiniBand) and a slow network (1Gbit Ethernet).",
+        "To evaluate the performance of Snap ML on criteo-tb, we use the snap-ml-mpi interface to train a logistic regression classifier using all 16 GPUs in the cluster.",
+        "Criteo have published code [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>] to train a logistic regression model that uses Tensorflow together with Spark for distributing the training across multiples node.",
+        "We can observe that Snap ML on 16 GPUs is capable of training such a model to a similar level of accuracy, 46x faster than the best previously reported results, which was obtained using TensorFlow.",
+        "Snap ML can exploit modern computing infrastructure consisting of multiple machines that contain both CPUs and GPUs. The framework is hierarchical in nature, allowing it to adapt to cloud-based deployments where the cost of communication between nodes may be relatively high.",
+        "It is able to effectively leverage modern high-speed interconnects to hide the cost of transferring data between CPU and GPU when training on datasets that are too large to fit into GPU memory.",
+        "On one of the largest publicly available datasets, we have shown that Snap ML can be used to train a logistic regression classifier in 1.5 minutes: more than an order of magnitude faster than any of the previously reported results."
+    ],
+    "headline": "We describe a new software framework for fast training of generalized linear models",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Mart\u00edn Abadi, Ashish Agarwal, Paul Barham, Eugene Brevdo, Zhifeng Chen, Craig Citro, Greg S. Corrado, Andy Davis, Jeffrey Dean, Matthieu Devin, Sanjay Ghemawat, Ian Goodfellow, Andrew Harp, Geoffrey Irving, Michael Isard, Yangqing Jia, Rafal Jozefowicz, Lukasz Kaiser, Manjunath Kudlur, Josh Levenberg, Dandelion Man\u00e9, Rajat Monga, Sherry Moore, Derek Murray, Chris Olah, Mike Schuster, Jonathon Shlens, Benoit Steiner, Ilya Sutskever, Kunal Talwar, Paul Tucker, Vincent Vanhoucke, Vijay Vasudevan, Fernanda Vi\u00e9gas, Oriol Vinyals, Pete Warden, Martin Wattenberg, Martin Wicke, Yuan Yu, and Xiaoqiang Zheng. TensorFlow: Large-scale machine learning on heterogeneous systems, 2015. Software available from https://www.tensorflow.org/.",
+            "url": "https://www.tensorflow.org/",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abadi%2C%20Mart%C3%ADn%20Agarwal%2C%20Ashish%20Barham%2C%20Paul%20Brevdo%2C%20Eugene%20TensorFlow%3A%20Large-scale%20machine%20learning%20on%20heterogeneous%20systems%202015"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Chih-Chung Chang and Chih-Jen Lin. LIBSVM : a library for support vector machines. ACM Transactions on Intelligent Systems and Technology, 2011. Software available at http://www.csie.ntu.edu.tw/~cjlin/libsvm.",
+            "url": "http://www.csie.ntu.edu.tw/~cjlin/libsvm",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Chih-Chung%20Chang%20and%20Chih-Jen%20Lin.%20LIBSVM%20%3A%20a%20library%20for%20support%20vector%20machines%202011"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Criteo Labs. Criteo releases industry\u2019s largest-ever dataset for machine learning to academic community, 2015. https://www.criteo.com/news/press-releases/2015/07/",
+            "url": "https://www.criteo.com/news/press-releases/2015/07/"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Criteo Labs. Learning Click-Through Rate at Scale with Tensorflow on Spark, 2018. https://github.com/criteo/CriteoDisplayCTR-TFOnSpark.",
+            "url": "https://github.com/criteo/CriteoDisplayCTR-TFOnSpark"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Barthelemy Dagenais. Py4j: A bridge between python and java, 2018. Software available at https://www.py4j.org.",
+            "url": "https://www.py4j.org",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Barthelemy%20Dagenais%20Py4j%20A%20bridge%20between%20python%20and%20java%202018%20Software%20available%20at%20httpswwwpy4jorg"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Celestine D\u00fcnner, Thomas Parnell, Kubilay Atasu, Manolis Sifalakis, and Haris Pozidis. Understanding optimizing distributed machine learning applications on apache spark. In Proceedings of the IEEE International Conference on Big Data, IEEEBigData\u201917, pages 99\u2013100, Boston, MA, December 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=D%C3%BCnner%2C%20Celestine%20Parnell%2C%20Thomas%20Atasu%2C%20Kubilay%20Sifalakis%2C%20Manolis%20Understanding%20optimizing%20distributed%20machine%20learning%20applications%20on%20apache%20spark%202017-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=D%C3%BCnner%2C%20Celestine%20Parnell%2C%20Thomas%20Atasu%2C%20Kubilay%20Sifalakis%2C%20Manolis%20Understanding%20optimizing%20distributed%20machine%20learning%20applications%20on%20apache%20spark%202017-12"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Celestine D\u00fcnner, Thomas Parnell, and Martin Jaggi. Efficient use of limited memory accelerators for linear learning on heterogeneous systems. In Advances in Neural Information Processing Systems 30, NIPS\u201917, pages 4261\u20134270, Long Beach, CA, December 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=D%C3%BCnner%2C%20Celestine%20Parnell%2C%20Thomas%20Jaggi%2C%20Martin%20Efficient%20use%20of%20limited%20memory%20accelerators%20for%20linear%20learning%20on%20heterogeneous%20systems%202017-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=D%C3%BCnner%2C%20Celestine%20Parnell%2C%20Thomas%20Jaggi%2C%20Martin%20Efficient%20use%20of%20limited%20memory%20accelerators%20for%20linear%20learning%20on%20heterogeneous%20systems%202017-12"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Rong-En Fan, Kai-Wei Chang, Cho-Jui Hsieh, Xiang-Rui Wang, and Chih-Jen Lin. Liblinear: A library for large linear classification. Journal of machine learning research, 9(Aug):1871\u20131874, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fan%2C%20Rong-En%20Chang%2C%20Kai-Wei%20Cho-Jui%20Hsieh%2C%20Xiang-Rui%20Wang%2C%20and%20Chih-Jen%20Lin.%20Liblinear%3A%20A%20library%20for%20large%20linear%20classification%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fan%2C%20Rong-En%20Chang%2C%20Kai-Wei%20Cho-Jui%20Hsieh%2C%20Xiang-Rui%20Wang%2C%20and%20Chih-Jen%20Lin.%20Liblinear%3A%20A%20library%20for%20large%20linear%20classification%202008"
+        },
+        {
+            "id": "9",
+            "entry": "[9] George Marsaglia. Xorshift rngs. Journal of Statistical Software, Articles, 8(14), 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Marsaglia%2C%20George%20Xorshift%20rngs%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Marsaglia%2C%20George%20Xorshift%20rngs%202003"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Xiangrui Meng, Joseph Bradley, Burak Yavuz, Evan Sparks, Shivaram Venkataraman, Davies Liu, Jeremy Freeman, DB Tsai, Manish Amde, Sean Owen, Doris Xin, Reynold Xin, Michael J. Franklin, Reza Zadeh, Matei Zaharia, and Ameet Talwalkar. Mllib: Machine learning in apache spark. J. Mach. Learn. Res., 17(1):1235\u20131241, January 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Meng%2C%20Xiangrui%20Bradley%2C%20Joseph%20Yavuz%2C%20Burak%20Sparks%2C%20Evan%20Mllib%3A%20Machine%20learning%20in%20apache%20spark%202016-01",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Meng%2C%20Xiangrui%20Bradley%2C%20Joseph%20Yavuz%2C%20Burak%20Sparks%2C%20Evan%20Mllib%3A%20Machine%20learning%20in%20apache%20spark%202016-01"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Gonzalo Gasca Meza. Samples for google cloud machine learning engine, 2017. https://github.com/ GoogleCloudPlatform/cloudml-samples.",
+            "url": "https://github.com/GoogleCloudPlatform/cloudml-samples"
+        },
+        {
+            "id": "12",
+            "entry": "[12] NVIDIA. Thrust, 2018. Software available at https://developer.nvidia.com/thrust.",
+            "url": "https://developer.nvidia.com/thrust"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Stack Overflow. Use large dataset in tensorflow, 2016. https://stackoverflow.com/questions/38087342/use-large-dataset-in-tensorflow.",
+            "url": "https://stackoverflow.com/questions/38087342/use-large-dataset-in-tensorflow"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Thomas Parnell, Celestine D\u00fcnner, Kubilay Atasu, Manolis Sifalakis, and Haralampous Pozidis. Tera-scale coordinate descent on gpus. Future Generation Computer Systems, 0(0):0, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Parnell%2C%20Thomas%20D%C3%BCnner%2C%20Celestine%20Atasu%2C%20Kubilay%20Sifalakis%2C%20Manolis%20Tera-scale%20coordinate%20descent%20on%20gpus%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Parnell%2C%20Thomas%20D%C3%BCnner%2C%20Celestine%20Atasu%2C%20Kubilay%20Sifalakis%2C%20Manolis%20Tera-scale%20coordinate%20descent%20on%20gpus%202018"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Thomas Parnell, Celestine D\u00fcnner, Kubilay Atasu, Manolis Sifalakis, and Haris Pozidis. Large-scale stochastic learning using gpus. In Proceedings of the IEEE International Parallel and Distributed Processing Symposium Workshops, IPDPS\u201917, pages 419\u2013428, Orlando, FL, May 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Parnell%2C%20Thomas%20D%C3%BCnner%2C%20Celestine%20Atasu%2C%20Kubilay%20Sifalakis%2C%20Manolis%20Large-scale%20stochastic%20learning%20using%20gpus%202017-05",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Parnell%2C%20Thomas%20D%C3%BCnner%2C%20Celestine%20Atasu%2C%20Kubilay%20Sifalakis%2C%20Manolis%20Large-scale%20stochastic%20learning%20using%20gpus%202017-05"
+        },
+        {
+            "id": "16",
+            "entry": "[16] F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel, B. Thirion, O. Grisel, M. Blondel, P. Prettenhofer, R. Weiss, V. Dubourg, J. Vanderplas, A. Passos, D. Cournapeau, M. Brucher, M. Perrot, and E. Duchesnay. Scikit-learn: Machine learning in Python. Journal of Machine Learning Research, 12:2825\u20132830, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pedregosa%2C%20F.%20Varoquaux%2C%20G.%20Gramfort%2C%20A.%20Michel%2C%20V.%20Scikit-learn%3A%20Machine%20learning%20in%20Python%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pedregosa%2C%20F.%20Varoquaux%2C%20G.%20Gramfort%2C%20A.%20Michel%2C%20V.%20Scikit-learn%3A%20Machine%20learning%20in%20Python%202011"
+        },
+        {
+            "id": "17",
+            "entry": "[17] NVIDIA Research. Cub, 2018. https://github.com/NVlabs/cub.",
+            "url": "https://github.com/NVlabs/cub",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=NVIDIA%20Research%20Cub%202018%20httpsgithubcomNVlabscub"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Virginia Smith, Simone Forte, Chenxin Ma, Martin Tak\u00e1c, Michael I Jordan, and Martin Jaggi. CoCoA: A General Framework for Communication-Efficient Distributed Optimization. JMLR, 18:1\u201349, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Smith%2C%20Virginia%20Forte%2C%20Simone%20Ma%2C%20Chenxin%20Tak%C3%A1c%2C%20Martin%20CoCoA%3A%20A%20General%20Framework%20for%20Communication-Efficient%20Distributed%20Optimization%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Smith%2C%20Virginia%20Forte%2C%20Simone%20Ma%2C%20Chenxin%20Tak%C3%A1c%2C%20Martin%20CoCoA%3A%20A%20General%20Framework%20for%20Communication-Efficient%20Distributed%20Optimization%202018"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Rambler Digital Solutions. criteo-1tb-benchmark, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rambler%20Digital%20Solutions%20criteo1tbbenchmark%202017"
+        },
+        {
+            "id": "_0000_a",
+            "entry": "https://github.com/",
+            "url": "https://github.com/"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Andreas Sterbenz. Using google cloud machine learning to predict clicks at scale, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sterbenz%2C%20Andreas%20Using%20google%20cloud%20machine%20learning%20to%20predict%20clicks%20at%20scale%202017"
+        },
+        {
+            "id": "_0000_b",
+            "entry": "https://cloud.google.com/blog/big-data/2017/02/",
+            "url": "https://cloud.google.com/blog/big-data/2017/02/"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Hsiang-Fu Yu, Cho-Jui Hsieh, Kai-Wei Chang, and Chih-Jen Lin. Large linear classification when data cannot fit in memory. ACM Transactions on Knowledge Discovery from Data (TKDD), 5(4):23, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yu%2C%20Hsiang-Fu%20Hsieh%2C%20Cho-Jui%20Chang%2C%20Kai-Wei%20Lin%2C%20Chih-Jen%20Large%20linear%20classification%20when%20data%20cannot%20fit%20in%20memory%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yu%2C%20Hsiang-Fu%20Hsieh%2C%20Cho-Jui%20Chang%2C%20Kai-Wei%20Lin%2C%20Chih-Jen%20Large%20linear%20classification%20when%20data%20cannot%20fit%20in%20memory%202012"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Hsiang-Fu Yu, Fang-Lan Huang, and Chih-Jen Lin. Dual coordinate descent methods for logistic regression and maximum entropy models. Machine Learning, 85(1):41\u201375, Oct 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yu%2C%20Hsiang-Fu%20Huang%2C%20Fang-Lan%20Lin%2C%20Chih-Jen%20Dual%20coordinate%20descent%20methods%20for%20logistic%20regression%20and%20maximum%20entropy%20models%202011-10",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yu%2C%20Hsiang-Fu%20Huang%2C%20Fang-Lan%20Lin%2C%20Chih-Jen%20Dual%20coordinate%20descent%20methods%20for%20logistic%20regression%20and%20maximum%20entropy%20models%202011-10"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Huan Zhang and Cho-Jui Hsieh. Fixing the convergence problems in parallel asynchronous dual coordinate descent. In Data Mining (ICDM), 2016 IEEE 16th International Conference on, pages 619\u2013628. IEEE, 2016. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Huan%20Hsieh%2C%20Cho-Jui%20Fixing%20the%20convergence%20problems%20in%20parallel%20asynchronous%20dual%20coordinate%20descent%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Huan%20Hsieh%2C%20Cho-Jui%20Fixing%20the%20convergence%20problems%20in%20parallel%20asynchronous%20dual%20coordinate%20descent%202016"
+        }
+    ]
+}

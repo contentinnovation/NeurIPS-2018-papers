@@ -1,0 +1,259 @@
+{
+    "filename": "7886-compact-generalized-non-local-network.pdf",
+    "metadata": {
+        "title": "Compact Generalized Non-local Network",
+        "author": "Kaiyu Yue, Ming Sun, Yuchen Yuan, Feng Zhou, Errui Ding, Fuxin Xu",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7886-compact-generalized-non-local-network.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "The non-local module [<a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>] is designed for capturing long-range spatio-temporal dependencies in images and videos. Although having shown excellent performance, it lacks the mechanism to model the interactions between positions across channels, which are of vital importance in recognizing fine-grained objects and actions. To address this limitation, we generalize the non-local module and take the correlations between the positions of any two channels into account. This extension utilizes the compact representation for multiple kernel functions with Taylor expansion that makes the generalized non-local module in a fast and low-complexity computation flow. Moreover, we implement our generalized non-local method within channel groups to ease the optimization. Experimental results illustrate the clear-cut improvements and practical applicability of the generalized non-local module on both fine-grained object recognition and video classification. Code is available at: https://github.com/KaiyuYue/cgnl-network.pytorch."
+    },
+    "keywords": [
+        {
+            "term": "long range",
+            "url": "https://en.wikipedia.org/wiki/long_range"
+        },
+        {
+            "term": "kernel function",
+            "url": "https://en.wikipedia.org/wiki/kernel_function"
+        },
+        {
+            "term": "local network",
+            "url": "https://en.wikipedia.org/wiki/local_network"
+        },
+        {
+            "term": "taylor expansion",
+            "url": "https://en.wikipedia.org/wiki/taylor_expansion"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        },
+        {
+            "term": "convolutional neural network",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_network"
+        }
+    ],
+    "highlights": [
+        "Capturing spatio-temporal dependencies between spatial pixels or temporal frames plays a key role in the tasks of fine-grained object and action classification",
+        "Similar results can be found in the experiments based on R-101, where adding 1 compact generalized non-local provides about more than 2% improvement, which is larger than that of adding 1NL block",
+        "Table 2b shows the main results on the UCF101 dataset, where adding 1CGNL block achieves higher accuracy than adding 1NL block",
+        "To understand the effects brought by compact generalized non-local network, we show the visualization analysis as shown in Fig 5 and Fig 6",
+        "We have introduced a simple approximated formulation of compact generalized non-local operation, and have validated it on the task of fine-grained classification and action recognition from RGB images",
+        "To ease the heavy computation of generalized non-local operation, we propose a compact representation with the simple matrix production by using Taylor expansion for multiple kernel functions"
+    ],
+    "key_statements": [
+        "Capturing spatio-temporal dependencies between spatial pixels or temporal frames plays a key role in the tasks of fine-grained object and action classification",
+        "The non-local method can greatly improve the performances of existing networks on many video classification benchmarks",
+        "We propose its compact representation for various kernel functions to address the high computation burden issue",
+        "We show that as a self-contained module, the compact generalized non-local (CGNL) module provides steady improvements in classification tasks",
+        "We investigate the grouped compact generalized non-local blocks, which model the correlations across channels within each group",
+        "We evaluate the proposed compact generalized non-local method on the task of fine-grained classification and action recognition",
+        "Inspired by [<a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>], we present the generalized non-local (GNL) module, which generalizes the non-local (NL) module to learn the correlations between any two positions across the channels",
+        "To achieve generality and compatibility with existing neural network blocks, the compact generalized non-local block is implemented by wrapping Eq 8 in an identity mapping of the input as in residual learning [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>]: Z = concat(BN (Y Wz)) + X, (13)",
+        "We evaluate the compact generalized non-local network on multiple tasks, including fine-grained classification and action recognition",
+        "Similar results can be found in the experiments based on R-101, where adding 1 compact generalized non-local provides about more than 2% improvement, which is larger than that of adding 1NL block",
+        "Table 2b shows the main results on the UCF101 dataset, where adding 1CGNL block achieves higher accuracy than adding 1NL block",
+        "To understand the effects brought by compact generalized non-local network, we show the visualization analysis as shown in Fig 5 and Fig 6",
+        "Table 4c shows the main results on COCO2017 dataset [<a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>] by adopting our 1 compact generalized non-local block in the backbone of Mask-RCNN [<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>]",
+        "We have introduced a simple approximated formulation of compact generalized non-local operation, and have validated it on the task of fine-grained classification and action recognition from RGB images",
+        "To ease the heavy computation of generalized non-local operation, we propose a compact representation with the simple matrix production by using Taylor expansion for multiple kernel functions",
+        "We further report the results of our spatial compact generalized non-local network on the large-scale ImageNet [<a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>] dataset, which has 1.2 million training images and 50000 images for validation in 1000 object categories",
+        "For a better demonstration of the generality of our compact generalized non-local network, we investigate both adding 1 dot production compact generalized non-local block and 1 Gaussian RBF compact generalized non-local block in Table 5"
+    ],
+    "summary": [
+        "Capturing spatio-temporal dependencies between spatial pixels or temporal frames plays a key role in the tasks of fine-grained object and action classification.",
+        "To improve the effectiveness in fine-grained object and action recognition tasks, this work extends the non-local module by learning explicit correlations among all of the elements across the channels.",
+        "Suppose that an image or video is given to the network and let X \u2208 RN\u00d7C denote the input feature map of the non-local module, where C is the number of channels.",
+        "We generalize the original non-local operation to model long-range dependencies between any positions of any channels.",
+        "Compared to the original non-local operation (Eq 4), GNL utilizes a more general pairwise function f (\u00b7, \u00b7) : RNC \u00d7 RNC \u2192 RNC\u00d7NC that can differentiate between pairs of same location but at different channels.",
+        "This richer similarity greatly augments the non-local operation in discriminating fine-grained object parts or action snippets that usually correspond to channels of the input feature.",
+        "To achieve generality and compatibility with existing neural network blocks, the CGNL block is implemented by wrapping Eq 8 in an identity mapping of the input as in residual learning [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>]: Z = concat(BN (Y Wz)) + X, (13)",
+        "These experiments suggest that considering the correlations between any two positions across the channels can significantly improve the performance than that of original non-local methods.",
+        "We have introduced a simple approximated formulation of compact generalized non-local operation, and have validated it on the task of fine-grained classification and action recognition from RGB images.",
+        "To ease the heavy computation of generalized non-local operation, we propose a compact representation with the simple matrix production by using Taylor expansion for multiple kernel functions.",
+        "It is easy to implement and requires little additional parameters, making it an attractive alternative to the original non-local block, which only considers the correlations between two positions along the specific channel.",
+        "The CGNL block is compatible with complementary techniques developed for the image task of fine-grained classification, temporal feature needed task of action recognition and the basic task of object detection.",
+        "We further report the results of our spatial CGNL network on the large-scale ImageNet [<a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>] dataset, which has 1.2 million training images and 50000 images for validation in 1000 object categories.",
+        "For a better demonstration of the generality of our CGNL network, we investigate both adding 1 dot production CGNL block and 1 Gaussian RBF CGNL block in Table 5.",
+        "Our model produces competitive or state-of-the-art results on various benchmarked datasets"
+    ],
+    "headline": "We propose its compact representation for various kernel functions to address the high computation burden issue",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] J. Carreira, R. Caseiro, J. Batista, and C. Sminchisescu. Semantic segmentation with second-order pooling. In European Conference on Computer Vision, pages 430\u2013443.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Carreira%2C%20J.%20Caseiro%2C%20R.%20Batista%2C%20J.%20Sminchisescu%2C%20C.%20Semantic%20segmentation%20with%20second-order%20pooling",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Carreira%2C%20J.%20Caseiro%2C%20R.%20Batista%2C%20J.%20Sminchisescu%2C%20C.%20Semantic%20segmentation%20with%20second-order%20pooling"
+        },
+        {
+            "id": "2",
+            "entry": "[2] F. Chollet. Xception: Deep learning with depthwise separable convolutions. arXiv preprint, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chollet%2C%20F.%20Xception%3A%20Deep%20learning%20with%20depthwise%20separable%20convolutions.%20arXiv%20p%202016"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Y. Cui, F. Zhou, J. Wang, X. Liu, Y. Lin, and S. Belongie. Kernel pooling for convolutional neural networks. In Computer Vision and Pattern Recognition (CVPR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cui%2C%20Y.%20Zhou%2C%20F.%20Wang%2C%20J.%20Liu%2C%20X.%20Kernel%20pooling%20for%20convolutional%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cui%2C%20Y.%20Zhou%2C%20F.%20Wang%2C%20J.%20Liu%2C%20X.%20Kernel%20pooling%20for%20convolutional%20neural%20networks%202017"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Y. Gao, O. Beijbom, N. Zhang, and T. Darrell. Compact bilinear pooling. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 317\u2013326, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gao%2C%20Y.%20Beijbom%2C%20O.%20Zhang%2C%20N.%20Darrell%2C%20T.%20Compact%20bilinear%20pooling%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gao%2C%20Y.%20Beijbom%2C%20O.%20Zhang%2C%20N.%20Darrell%2C%20T.%20Compact%20bilinear%20pooling%202016"
+        },
+        {
+            "id": "5",
+            "entry": "[5] P. Goyal, P. Doll\u00e1r, R. Girshick, P. Noordhuis, L. Wesolowski, A. Kyrola, A. Tulloch, Y. Jia, and K. He. Accurate, large minibatch sgd: training imagenet in 1 hour. arXiv preprint arXiv:1706.02677, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.02677"
+        },
+        {
+            "id": "6",
+            "entry": "[6] K. He, G. Gkioxari, P. Doll\u00e1r, and R. Girshick. Mask r-cnn. In Computer Vision (ICCV), 2017 IEEE International Conference on, pages 2980\u20132988. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=K%20He%20G%20Gkioxari%20P%20Doll%C3%A1r%20and%20R%20Girshick%20Mask%20rcnn%20In%20Computer%20Vision%20ICCV%202017%20IEEE%20International%20Conference%20on%20pages%2029802988%20IEEE%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=K%20He%20G%20Gkioxari%20P%20Doll%C3%A1r%20and%20R%20Girshick%20Mask%20rcnn%20In%20Computer%20Vision%20ICCV%202017%20IEEE%20International%20Conference%20on%20pages%2029802988%20IEEE%202017"
+        },
+        {
+            "id": "7",
+            "entry": "[7] K. He, X. Zhang, S. Ren, and J. Sun. Deep residual learning for image recognition. In Proceedings of the IEEE conference on computer vision and pattern recognition, pages 770\u2013778, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%202016"
+        },
+        {
+            "id": "8",
+            "entry": "[8] A. G. Howard, M. Zhu, B. Chen, D. Kalenichenko, W. Wang, T. Weyand, M. Andreetto, and H. Adam. Mobilenets: Efficient convolutional neural networks for mobile vision applications. arXiv preprint arXiv:1704.04861, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1704.04861"
+        },
+        {
+            "id": "9",
+            "entry": "[9] J. Hu, L. Shen, and G. Sun. Squeeze-and-excitation networks. arXiv preprint arXiv:1709.01507, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1709.01507"
+        },
+        {
+            "id": "10",
+            "entry": "[10] S. Ioffe and C. Szegedy. Batch normalization: Accelerating deep network training by reducing internal covariate shift. arXiv preprint arXiv:1502.03167, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1502.03167"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Y. LeCun, L. Bottou, Y. Bengio, and P. Haffner. Gradient-based learning applied to document recognition. Proceedings of the IEEE, 86(11):2278\u20132324, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=LeCun%2C%20Y.%20Bottou%2C%20L.%20Bengio%2C%20Y.%20Haffner%2C%20P.%20Gradient-based%20learning%20applied%20to%20document%20recognition%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=LeCun%2C%20Y.%20Bottou%2C%20L.%20Bengio%2C%20Y.%20Haffner%2C%20P.%20Gradient-based%20learning%20applied%20to%20document%20recognition%201998"
+        },
+        {
+            "id": "12",
+            "entry": "[12] T.-Y. Lin, M. Maire, S. Belongie, J. Hays, P. Perona, D. Ramanan, P. Doll\u00e1r, and C. L. Zitnick. Microsoft coco: Common objects in context. In European conference on computer vision, pages 740\u2013755.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=TY%20Lin%20M%20Maire%20S%20Belongie%20J%20Hays%20P%20Perona%20D%20Ramanan%20P%20Doll%C3%A1r%20and%20C%20L%20Zitnick%20Microsoft%20coco%20Common%20objects%20in%20context%20In%20European%20conference%20on%20computer%20vision%20pages%20740755",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=TY%20Lin%20M%20Maire%20S%20Belongie%20J%20Hays%20P%20Perona%20D%20Ramanan%20P%20Doll%C3%A1r%20and%20C%20L%20Zitnick%20Microsoft%20coco%20Common%20objects%20in%20context%20In%20European%20conference%20on%20computer%20vision%20pages%20740755"
+        },
+        {
+            "id": "13",
+            "entry": "[13] T.-Y. Lin, A. RoyChowdhury, and S. Maji. Bilinear cnn models for fine-grained visual recognition. In Proceedings of the IEEE International Conference on Computer Vision, pages 1449\u20131457, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20T.-Y.%20RoyChowdhury%2C%20A.%20Maji%2C%20S.%20Bilinear%20cnn%20models%20for%20fine-grained%20visual%20recognition%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lin%2C%20T.-Y.%20RoyChowdhury%2C%20A.%20Maji%2C%20S.%20Bilinear%20cnn%20models%20for%20fine-grained%20visual%20recognition%202015"
+        },
+        {
+            "id": "14",
+            "entry": "[14] D. G. Lowe. Distinctive image features from scale-invariant keypoints. International journal of computer vision, 60(2):91\u2013110, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lowe%2C%20D.G.%20Distinctive%20image%20features%20from%20scale-invariant%20keypoints%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lowe%2C%20D.G.%20Distinctive%20image%20features%20from%20scale-invariant%20keypoints%202004"
+        },
+        {
+            "id": "15",
+            "entry": "[15] W. Luo, Y. Li, R. Urtasun, and R. Zemel. Understanding the effective receptive field in deep convolutional neural networks. In Advances in Neural Information Processing Systems, pages 4898\u20134906, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Luo%2C%20W.%20Li%2C%20Y.%20Urtasun%2C%20R.%20Zemel%2C%20R.%20Understanding%20the%20effective%20receptive%20field%20in%20deep%20convolutional%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Luo%2C%20W.%20Li%2C%20Y.%20Urtasun%2C%20R.%20Zemel%2C%20R.%20Understanding%20the%20effective%20receptive%20field%20in%20deep%20convolutional%20neural%20networks%202016"
+        },
+        {
+            "id": "16",
+            "entry": "[16] F. Perronnin, J. S\u00e1nchez, and T. Mensink. Improving the fisher kernel for large-scale image classification. In European conference on computer vision, pages 143\u2013156.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Perronnin%2C%20F.%20S%C3%A1nchez%2C%20J.%20Mensink%2C%20T.%20Improving%20the%20fisher%20kernel%20for%20large-scale%20image%20classification",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Perronnin%2C%20F.%20S%C3%A1nchez%2C%20J.%20Mensink%2C%20T.%20Improving%20the%20fisher%20kernel%20for%20large-scale%20image%20classification"
+        },
+        {
+            "id": "17",
+            "entry": "[17] N. Pham and R. Pagh. Fast and scalable polynomial kernels via explicit feature maps. In Proceedings of the 19th ACM SIGKDD international conference on Knowledge discovery and data mining, pages 239\u2013247. ACM, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pham%2C%20N.%20Pagh%2C%20R.%20Fast%20and%20scalable%20polynomial%20kernels%20via%20explicit%20feature%20maps%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pham%2C%20N.%20Pagh%2C%20R.%20Fast%20and%20scalable%20polynomial%20kernels%20via%20explicit%20feature%20maps%202013"
+        },
+        {
+            "id": "18",
+            "entry": "[18] T. Poggio and F. Girosi. Networks for approximation and learning. Proceedings of the IEEE, 78(9):1481\u2013 1497, 1990.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Poggio%2C%20T.%20Girosi%2C%20F.%20Networks%20for%20approximation%20and%20learning%201990",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Poggio%2C%20T.%20Girosi%2C%20F.%20Networks%20for%20approximation%20and%20learning%201990"
+        },
+        {
+            "id": "19",
+            "entry": "[19] O. Russakovsky, J. Deng, H. Su, J. Krause, S. Satheesh, S. Ma, Z. Huang, A. Karpathy, A. Khosla, M. Bernstein, et al. Imagenet large scale visual recognition challenge. International Journal of Computer Vision, 115(3):211\u2013252, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Russakovsky%2C%20O.%20Deng%2C%20J.%20Su%2C%20H.%20Krause%2C%20J.%20Imagenet%20large%20scale%20visual%20recognition%20challenge%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Russakovsky%2C%20O.%20Deng%2C%20J.%20Su%2C%20H.%20Krause%2C%20J.%20Imagenet%20large%20scale%20visual%20recognition%20challenge%202015"
+        },
+        {
+            "id": "20",
+            "entry": "[20] B. Scholkopf and A. J. Smola. Learning with kernels: support vector machines, regularization, optimization, and beyond. MIT press, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Scholkopf%2C%20B.%20Smola%2C%20A.J.%20Learning%20with%20kernels%3A%20support%20vector%20machines%2C%20regularization%2C%20optimization%2C%20and%20beyond%202001"
+        },
+        {
+            "id": "21",
+            "entry": "[21] K. Soomro, A. R. Zamir, and M. Shah. Ucf101: A dataset of 101 human actions classes from videos in the wild. arXiv preprint arXiv:1212.0402, 2012.",
+            "arxiv_url": "https://arxiv.org/pdf/1212.0402"
+        },
+        {
+            "id": "22",
+            "entry": "[22] N. Srivastava, G. Hinton, A. Krizhevsky, I. Sutskever, and R. Salakhutdinov. Dropout: A simple way to prevent neural networks from overfitting. The Journal of Machine Learning Research, 15(1):1929\u20131958, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Srivastava%2C%20N.%20Hinton%2C%20G.%20Krizhevsky%2C%20A.%20Sutskever%2C%20I.%20Dropout%3A%20A%20simple%20way%20to%20prevent%20neural%20networks%20from%20overfitting%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Srivastava%2C%20N.%20Hinton%2C%20G.%20Krizhevsky%2C%20A.%20Sutskever%2C%20I.%20Dropout%3A%20A%20simple%20way%20to%20prevent%20neural%20networks%20from%20overfitting%202014"
+        },
+        {
+            "id": "23",
+            "entry": "[23] I. Ustyuzhaninov, W. Brendel, L. A. Gatys, and M. Bethge. What does it take to generate natural textures? In ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ustyuzhaninov%2C%20I.%20Brendel%2C%20W.%20Gatys%2C%20L.A.%20Bethge%2C%20M.%20What%20does%20it%20take%20to%20generate%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ustyuzhaninov%2C%20I.%20Brendel%2C%20W.%20Gatys%2C%20L.A.%20Bethge%2C%20M.%20What%20does%20it%20take%20to%20generate%202017"
+        },
+        {
+            "id": "24",
+            "entry": "[24] A. Vaswani, N. Shazeer, N. Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, L. Kaiser, and I. Polosukhin. Attention is all you need. In NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=A%20Vaswani%20N%20Shazeer%20N%20Parmar%20J%20Uszkoreit%20L%20Jones%20A%20N%20Gomez%20L%20Kaiser%20and%20I%20Polosukhin%20Attention%20is%20all%20you%20need%20In%20NIPS%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=A%20Vaswani%20N%20Shazeer%20N%20Parmar%20J%20Uszkoreit%20L%20Jones%20A%20N%20Gomez%20L%20Kaiser%20and%20I%20Polosukhin%20Attention%20is%20all%20you%20need%20In%20NIPS%202017"
+        },
+        {
+            "id": "25",
+            "entry": "[25] C. Wah, S. Branson, P. Welinder, P. Perona, and S. Belongie. The Caltech-UCSD birds-200-2011 dataset. Technical Report CNS-TR-2011-001, California Institute of Technology, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wah%2C%20C.%20Branson%2C%20S.%20Welinder%2C%20P.%20Perona%2C%20P.%20The%20Caltech-UCSD%202011"
+        },
+        {
+            "id": "26",
+            "entry": "[26] H. Wang, A. Kl\u00e4ser, C. Schmid, and C.-L. Liu. Action recognition by dense trajectories. In Computer Vision and Pattern Recognition (CVPR), 2011 IEEE Conference on, pages 3169\u20133176. IEEE, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20H.%20Kl%C3%A4ser%2C%20A.%20Schmid%2C%20C.%20Liu%2C%20C.-L.%20Action%20recognition%20by%20dense%20trajectories%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20H.%20Kl%C3%A4ser%2C%20A.%20Schmid%2C%20C.%20Liu%2C%20C.-L.%20Action%20recognition%20by%20dense%20trajectories%202011"
+        },
+        {
+            "id": "27",
+            "entry": "[27] X. Wang, R. Girshick, A. Gupta, and K. He. Non-local neural networks. arXiv preprint arXiv:1711.07971, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.07971"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Y. Wu and K. He. Group normalization. arXiv preprint arXiv:1803.08494, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.08494"
+        },
+        {
+            "id": "29",
+            "entry": "[29] S. Xie, R. Girshick, P. Doll\u00e1r, Z. Tu, and K. He. Aggregated residual transformations for deep neural networks. In Computer Vision and Pattern Recognition (CVPR), 2017 IEEE Conference on, pages 5987\u20135995. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Aggregated%20residual%20transformations%20for%20deep%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Aggregated%20residual%20transformations%20for%20deep%20neural%20networks%202017"
+        },
+        {
+            "id": "30",
+            "entry": "[30] S. Xie, C. Sun, J. Huang, Z. Tu, and K. Murphy. Rethinking spatiotemporal feature learning for video understanding. arXiv preprint arXiv:1712.04851, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1712.04851"
+        },
+        {
+            "id": "31",
+            "entry": "[31] X. Zhang, X. Zhou, M. Lin, and J. Sun. Shufflenet: An extremely efficient convolutional neural network for mobile devices. arXiv preprint arXiv:1707.01083, 2017. ",
+            "arxiv_url": "https://arxiv.org/pdf/1707.01083"
+        }
+    ]
+}

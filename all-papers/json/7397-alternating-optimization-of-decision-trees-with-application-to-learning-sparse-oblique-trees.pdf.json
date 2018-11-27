@@ -1,0 +1,266 @@
+{
+    "filename": "7397-alternating-optimization-of-decision-trees-with-application-to-learning-sparse-oblique-trees.pdf",
+    "metadata": {
+        "title": "Alternating optimization of decision trees, with application to learning sparse oblique trees",
+        "author": "Miguel A. Carreira-Perpinan, Pooya Tavallali",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7397-alternating-optimization-of-decision-trees-with-application-to-learning-sparse-oblique-trees.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Learning a decision tree from data is a difficult optimization problem. The most widespread algorithm in practice, dating to the 1980s, is based on a greedy growth of the tree structure by recursively splitting nodes, and possibly pruning back the final tree. The parameters (decision function) of an internal node are approximately estimated by minimizing an impurity measure. We give an algorithm that, given an input tree (its structure and the parameter values at its nodes), produces a new tree with the same or smaller structure but new parameter values that provably lower or leave unchanged the misclassification error. This can be applied to both axis-aligned and oblique trees and our experiments show it consistently outperforms various other algorithms while being highly scalable to large datasets and trees. Further, the same algorithm can handle a sparsity penalty, so it can learn sparse oblique trees, having a structure that is a subset of the original tree and few nonzero parameters. This combines the best of axis-aligned and oblique trees: flexibility to model correlated data, low generalization error, fast inference and interpretable nodes that involve only a few features in their decision."
+    },
+    "keywords": [
+        {
+            "term": "decision tree",
+            "url": "https://en.wikipedia.org/wiki/decision_tree"
+        },
+        {
+            "term": "neural net",
+            "url": "https://en.wikipedia.org/wiki/neural_net"
+        }
+    ],
+    "highlights": [
+        "Decision trees are among the most widely used statistical models in practice",
+        "The prediction made by the tree is a path from the root to a leaf consisting of a sequence of decisions, each involving a question of the type \u201cxj > bi\u201d for axis-aligned trees, or \u201cwiT x > bi\u201d for oblique trees",
+        "Where L is the misclassification error on the training set, given below in eq (2), and C is the complexity of the tree, e.g. its depth or number of nodes",
+        "Where Tree Alternating Optimization is truly remarkable is with sparse oblique trees, and we explore this here in the MNIST benchmark [<a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>]",
+        "In order to optimize the misclassification error, Tree Alternating Optimization fundamentally relies on alternating optimization",
+        "We have presented Tree Alternating Optimization (TAO), a scalable algorithm that can find a local optimum of oblique trees given a fixed structure, in the sense of repeatedly decreasing the misclassification loss until no more progress can be done"
+    ],
+    "key_statements": [
+        "Decision trees are among the most widely used statistical models in practice",
+        "The prediction made by the tree is a path from the root to a leaf consisting of a sequence of decisions, each involving a question of the type \u201cxj > bi\u201d for axis-aligned trees, or \u201cwiT x > bi\u201d for oblique trees",
+        "Where L is the misclassification error on the training set, given below in eq (2), and C is the complexity of the tree, e.g. its depth or number of nodes",
+        "We propose an optimization algorithm for the tree parameters that considerably decreases its misclassification error",
+        "Soft decision trees assign a probability to every root-leaf path of a fixed tree structure, such as the hierarchical mixtures of experts [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>]",
+        "As Tree Alternating Optimization iterates, the root-leaf path followed by each training point changes and so does the set of points that reach a particular node",
+        "Optimizing the misclassification error at a single node As we show below, optimizing eq (2), the K-class misclassification error of the tree over a node\u2019s parameters, reduces to optimizing a misclassification error of a simpler classifier",
+        "For axis-aligned trees, one Tree Alternating Optimization iteration is comparable to running CART to grow a tree of the same size, since in both cases the nodes run an enumeration procedure over features and thresholds",
+        "Where Tree Alternating Optimization is truly remarkable is with sparse oblique trees, and we explore this here in the MNIST benchmark [<a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>]",
+        "As soon as Tree Alternating Optimization runs on the initial CART tree, the improvement is drastic: from a training/test error of 1.95%/11.03% down to 0.09%/5.66%",
+        "Further decreasing C increases both training and test error and produces smaller trees with sparser weight vectors that underfit.\n1During the review period we found out that Tree Alternating Optimization performs about as well on random initial trees as on trees induced by CART",
+        "In order to optimize the misclassification error, Tree Alternating Optimization fundamentally relies on alternating optimization",
+        "We have presented Tree Alternating Optimization (TAO), a scalable algorithm that can find a local optimum of oblique trees given a fixed structure, in the sense of repeatedly decreasing the misclassification loss until no more progress can be done"
+    ],
+    "summary": [
+        "Decision trees are among the most widely used statistical models in practice.",
+        "Where L is the misclassification error on the training set, given below in eq (2), and C is the complexity of the tree, e.g. its depth or number of nodes.",
+        "The CART book [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>] is a good summary of work on decision trees up to the 80s, including the basic algorithms to learn the tree structure, and to optimize the impurity measure at each node.",
+        "As TAO iterates, the root-leaf path followed by each training point changes and so does the set of points that reach a particular node.",
+        "Optimizing (2) over an internal node i is exactly equivalent to a reduced problem: a binary misclassification loss for a certain subset Ci of the training points over the parameters \u03b8i of i\u2019s decision function fi(x; \u03b8i).",
+        "Sparse oblique trees The equivalence of optimizing (2) over one oblique node to the reduced problem (4) makes it computationally easy to introduce constraints over the weight vector and learn more flexible types of oblique trees than was possible before.",
+        "For axis-aligned trees, one TAO iteration is comparable to running CART to grow a tree of the same size, since in both cases the nodes run an enumeration procedure over features and thresholds.",
+        "We constructed paths using initial CART trees of depths 4 to 12 on the MNIST dataset, splitting its training set of 60k points into 48k training and 12k validation, and reporting generalization error on its 10k test points.",
+        "As soon as TAO runs on the initial CART tree, the improvement is drastic: from a training/test error of 1.95%/11.03% down to 0.09%/5.66%.",
+        "Interpretable trees By using a high sparsity penalty, TAO allows us to obtain trees of suboptimal but reasonable test error that have a really small number of nodes and nonzero weights and are eminently interpretable.",
+        "TAO optimizes the misclassification error of the entire tree; each step updates one entire set of nodes.",
+        "We have presented Tree Alternating Optimization (TAO), a scalable algorithm that can find a local optimum of oblique trees given a fixed structure, in the sense of repeatedly decreasing the misclassification loss until no more progress can be done.",
+        "A critical difference with the standard tree induction algorithm is that we do not optimize a proxy measure greedily one node at a time, but the misclassification error itself, jointly and iteratively over all nodes.",
+        "For MNIST, we believe this is the first time that a single decision tree achieves such high accuracy, comparable to that of much larger models"
+    ],
+    "headline": "In this paper we focus on classification trees with a binary tree  where the bipartition in each node is either an axis-aligned hyperplane or an arbitrary hyperplane ",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] P. Auer, R. C. Holte, and W. Maass. Theory and applications of agnostic PAC\u2013learning with small decision trees. In A. Prieditis and S. J. Russell, editors, Proc. of the 12th Int. Conf. Machine Learning (ICML\u201995), pages 21\u201329, Tahoe City, CA, July 9\u201312 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Auer%2C%20P.%20Holte%2C%20R.C.%20Maass%2C%20W.%20Theory%20and%20applications%20of%20agnostic%20PAC%E2%80%93learning%20with%20small%20decision%20trees%201995-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Auer%2C%20P.%20Holte%2C%20R.C.%20Maass%2C%20W.%20Theory%20and%20applications%20of%20agnostic%20PAC%E2%80%93learning%20with%20small%20decision%20trees%201995-07"
+        },
+        {
+            "id": "2",
+            "entry": "[2] K. P. Bennett. Decision tree construction via linear programming. In Proc. 4th Midwest Artificial Intelligence and Cognitive Sience Society Conference, pages 97\u2013101, 1992.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bennett%2C%20K.P.%20Decision%20tree%20construction%20via%20linear%20programming%201992",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bennett%2C%20K.P.%20Decision%20tree%20construction%20via%20linear%20programming%201992"
+        },
+        {
+            "id": "3",
+            "entry": "[3] K. P. Bennett. Global tree optimization: A non-greedy decision tree algorithm. Computing Science and Statistics, 26:156\u2013160, 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bennett%2C%20K.P.%20Global%20tree%20optimization%3A%20A%20non-greedy%20decision%20tree%20algorithm%201994",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bennett%2C%20K.P.%20Global%20tree%20optimization%3A%20A%20non-greedy%20decision%20tree%20algorithm%201994"
+        },
+        {
+            "id": "4",
+            "entry": "[4] D. Bertsimas and J. Dunn. Optimal classification trees. Machine Learning, 106(7):1039\u20131082, July 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bertsimas%2C%20D.%20Dunn%2C%20J.%20Optimal%20classification%20trees%202017-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bertsimas%2C%20D.%20Dunn%2C%20J.%20Optimal%20classification%20trees%202017-07"
+        },
+        {
+            "id": "5",
+            "entry": "[5] A. Beygelzimer, S. Kakade, and J. Langford. Cover trees for nearest neighbor. In W. W. Cohen and A. Moore, editors, Proc. of the 23rd Int. Conf. Machine Learning (ICML\u201906), pages 97\u2013104, Pittsburgh, PA, June 25\u201329 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Beygelzimer%2C%20A.%20Kakade%2C%20S.%20Langford%2C%20J.%20Cover%20trees%20for%20nearest%20neighbor%202006-06",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Beygelzimer%2C%20A.%20Kakade%2C%20S.%20Langford%2C%20J.%20Cover%20trees%20for%20nearest%20neighbor%202006-06"
+        },
+        {
+            "id": "6",
+            "entry": "[6] S. Boyd, N. Parikh, E. Chu, B. Peleato, and J. Eckstein. Distributed optimization and statistical learning via the alternating direction method of multipliers. Foundations and Trends in Machine Learning, 3(1):1\u2013122, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Boyd%2C%20S.%20Parikh%2C%20N.%20Chu%2C%20E.%20Peleato%2C%20B.%20Distributed%20optimization%20and%20statistical%20learning%20via%20the%20alternating%20direction%20method%20of%20multipliers%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Boyd%2C%20S.%20Parikh%2C%20N.%20Chu%2C%20E.%20Peleato%2C%20B.%20Distributed%20optimization%20and%20statistical%20learning%20via%20the%20alternating%20direction%20method%20of%20multipliers%202011"
+        },
+        {
+            "id": "7",
+            "entry": "[7] L. Breiman. Random forests. Machine Learning, 45(1):5\u201332, Oct. 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Breiman%2C%20L.%20Random%20forests%202001-10",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Breiman%2C%20L.%20Random%20forests%202001-10"
+        },
+        {
+            "id": "8",
+            "entry": "[8] L. J. Breiman, J. H. Friedman, R. A. Olshen, and C. J. Stone. Classification and Regression Trees. Wadsworth, Belmont, Calif., 1984.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Breiman%2C%20L.J.%20Friedman%2C%20J.H.%20Olshen%2C%20R.A.%20Stone%2C%20C.J.%20Classification%20and%20Regression%20Trees%201984"
+        },
+        {
+            "id": "9",
+            "entry": "[9] M. A . Carreira-Perpinan. Model compression as constrained optimization, with application to neural nets. Part I: General framework. arXiv:1707.01209, July 5 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.01209"
+        },
+        {
+            "id": "10",
+            "entry": "[10] M. A . Carreira-Perpinan and Y. Idelbayev. Model compression as constrained optimization, with application to neural nets. Part II: Quantization. arXiv:1707.04319, July 13 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.04319"
+        },
+        {
+            "id": "11",
+            "entry": "[11] M. A . Carreira-Perpinan and Y. Idelbayev. \u201cLearning-compression\u201d algorithms for neural net pruning. In Proc. of the 2018 IEEE Computer Society Conf. Computer Vision and Pattern Recognition (CVPR\u201918), Salt Lake City, UT, June 18\u201322 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Carreira-Perpinan%2C%20M.%20A%20.%20Idelbayev%2C%20Y.%20%E2%80%9CLearning-compression%E2%80%9D%20algorithms%20for%20neural%20net%20pruning%202018-06",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Carreira-Perpinan%2C%20M.%20A%20.%20Idelbayev%2C%20Y.%20%E2%80%9CLearning-compression%E2%80%9D%20algorithms%20for%20neural%20net%20pruning%202018-06"
+        },
+        {
+            "id": "12",
+            "entry": "[12] M. A . Carreira-Perpinan and W. Wang. Distributed optimization of deeply nested systems. In S. Kaski and J. Corander, editors, Proc. of the 17th Int. Conf. Artificial Intelligence and Statistics (AISTATS 2014), pages 10\u201319, Reykjavik, Iceland, Apr. 22\u201325 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Carreira-Perpinan%2C%20M.%20A%20.%20Wang%2C%20W.%20Distributed%20optimization%20of%20deeply%20nested%20systems%202014-04",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Carreira-Perpinan%2C%20M.%20A%20.%20Wang%2C%20W.%20Distributed%20optimization%20of%20deeply%20nested%20systems%202014-04"
+        },
+        {
+            "id": "13",
+            "entry": "[13] A. Criminisi and J. Shotton. Decision Forests for Computer Vision and Medical Image Analysis. Advances in Computer Vision and Pattern Recognition. Springer-Verlag, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Criminisi%2C%20A.%20Shotton%2C%20J.%20Decision%20Forests%20for%20Computer%20Vision%20and%20Medical%20Image%20Analysis%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Criminisi%2C%20A.%20Shotton%2C%20J.%20Decision%20Forests%20for%20Computer%20Vision%20and%20Medical%20Image%20Analysis%202013"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Y. C. Eldar and G. Kutyniok, editors. Compressed Sensing: Theory and Applications. Cambridge University Press, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Eldar%2C%20Y.C.%20G.%20Kutyniok%2C%20editors.%20Compressed%20Sensing%3A%20Theory%20and%20Applications%202012"
+        },
+        {
+            "id": "15",
+            "entry": "[15] R.-E. Fan, K.-W. Chang, C.-J. Hsieh, X.-R. Wang, and C.-J. Lin. LIBLINEAR: A library for large linear classification. J. Machine Learning Research, 9:1871\u20131874, Aug. 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fan%2C%20R.-E.%20Chang%2C%20K.-W.%20Hsieh%2C%20C.-J.%20Wang%2C%20X.-R.%20LIBLINEAR%3A%20A%20library%20for%20large%20linear%20classification%202008-08",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fan%2C%20R.-E.%20Chang%2C%20K.-W.%20Hsieh%2C%20C.-J.%20Wang%2C%20X.-R.%20LIBLINEAR%3A%20A%20library%20for%20large%20linear%20classification%202008-08"
+        },
+        {
+            "id": "16",
+            "entry": "[16] J. H. Friedman, J. L. Bentley, and R. A. Finkel. An algorithm for finding best matches in logarithmic expected time. ACM Trans. Mathematical Software, 3(3):209\u2013226, 1977.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Friedman%2C%20J.H.%20Bentley%2C%20J.L.%20Finkel%2C%20R.A.%20An%20algorithm%20for%20finding%20best%20matches%20in%20logarithmic%20expected%20time%201977",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Friedman%2C%20J.H.%20Bentley%2C%20J.L.%20Finkel%2C%20R.A.%20An%20algorithm%20for%20finding%20best%20matches%20in%20logarithmic%20expected%20time%201977"
+        },
+        {
+            "id": "17",
+            "entry": "[17] V. Guruswami and P. Raghavendra. Hardness of learning halfspaces with noise. SIAM J. Comp., 39(2):742\u2013765, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Guruswami%2C%20V.%20Raghavendra%2C%20P.%20Hardness%20of%20learning%20halfspaces%20with%20noise%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Guruswami%2C%20V.%20Raghavendra%2C%20P.%20Hardness%20of%20learning%20halfspaces%20with%20noise%202009"
+        },
+        {
+            "id": "18",
+            "entry": "[18] S. Han, J. Pool, J. Tran, and W. Dally. Learning both weights and connections for efficient neural network. In C. Cortes, N. D. Lawrence, D. D. Lee, M. Sugiyama, and R. Garnett, editors, Advances in Neural Information Processing Systems (NIPS), volume 28, pages 1135\u2013 1143. MIT Press, Cambridge, MA, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Han%2C%20S.%20Pool%2C%20J.%20Tran%2C%20J.%20Dally%2C%20W.%20Learning%20both%20weights%20and%20connections%20for%20efficient%20neural%20network%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Han%2C%20S.%20Pool%2C%20J.%20Tran%2C%20J.%20Dally%2C%20W.%20Learning%20both%20weights%20and%20connections%20for%20efficient%20neural%20network%202015"
+        },
+        {
+            "id": "19",
+            "entry": "[19] T. Hastie, R. Tibshirani, and M. Wainwright. Statistical Learning with Sparsity: The Lasso and Generalizations. Monographs on Statistics and Applied Probability. Chapman & Hall/CRC, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hastie%2C%20T.%20Tibshirani%2C%20R.%20Wainwright%2C%20M.%20Statistical%20Learning%20with%20Sparsity%3A%20The%20Lasso%20and%20Generalizations%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hastie%2C%20T.%20Tibshirani%2C%20R.%20Wainwright%2C%20M.%20Statistical%20Learning%20with%20Sparsity%3A%20The%20Lasso%20and%20Generalizations%202015"
+        },
+        {
+            "id": "20",
+            "entry": "[20] T. J. Hastie, R. J. Tibshirani, and J. H. Friedman. The Elements of Statistical Learning\u2014 Data Mining, Inference and Prediction. Springer Series in Statistics. Springer-Verlag, second edition, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hastie%2C%20T.J.%20Tibshirani%2C%20R.J.%20Friedman%2C%20J.H.%20The%20Elements%20of%20Statistical%20Learning%E2%80%94%20Data%20Mining%2C%20Inference%20and%20Prediction.%20Springer%20Series%20in%20Statistics%202009"
+        },
+        {
+            "id": "21",
+            "entry": "[21] K.-U. Hoffgen, H. U. Simon, and K. S. Vanhorn. Robust trainability of single neurons. J. Computer and System Sciences, 50(1):114\u2013125, Feb. 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=KU%20Hoffgen%20H%20U%20Simon%20and%20K%20S%20Vanhorn%20Robust%20trainability%20of%20single%20neurons%20J%20Computer%20and%20System%20Sciences%20501114125%20Feb%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=KU%20Hoffgen%20H%20U%20Simon%20and%20K%20S%20Vanhorn%20Robust%20trainability%20of%20single%20neurons%20J%20Computer%20and%20System%20Sciences%20501114125%20Feb%201995"
+        },
+        {
+            "id": "22",
+            "entry": "[22] L. Hyafil and R. L. Rivest. Constructing optimal binary decision trees is NP-complete. Information Processing Letters, 5(1):15\u201317, 1975.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hyafil%2C%20L.%20Rivest%2C%20R.L.%20Constructing%20optimal%20binary%20decision%20trees%20is%20NP-complete%201975",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hyafil%2C%20L.%20Rivest%2C%20R.L.%20Constructing%20optimal%20binary%20decision%20trees%20is%20NP-complete%201975"
+        },
+        {
+            "id": "23",
+            "entry": "[23] M. I. Jordan and R. A. Jacobs. Hierarchical mixtures of experts and the EM algorithm. Neural Computation, 6(2):181\u2013214, Mar. 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jordan%2C%20M.I.%20Jacobs%2C%20R.A.%20Hierarchical%20mixtures%20of%20experts%20and%20the%20EM%20algorithm%201994-03",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jordan%2C%20M.I.%20Jacobs%2C%20R.A.%20Hierarchical%20mixtures%20of%20experts%20and%20the%20EM%20algorithm%201994-03"
+        },
+        {
+            "id": "24",
+            "entry": "[24] A. Kumar, S. Goyal, and M. Varma. Resource-efficient machine learning in 2 KB RAM for the internet of things. In D. Precup and Y. W. Teh, editors, Proc. of the 34th Int. Conf. Machine Learning (ICML 2017), pages 1935\u20131944, Sydney, Australia, Aug. 6\u201311 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kumar%2C%20A.%20Goyal%2C%20S.%20Varma%2C%20M.%20Resource-efficient%20machine%20learning%20in%202%20KB%20RAM%20for%20the%20internet%20of%20things%202017-08",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kumar%2C%20A.%20Goyal%2C%20S.%20Varma%2C%20M.%20Resource-efficient%20machine%20learning%20in%202%20KB%20RAM%20for%20the%20internet%20of%20things%202017-08"
+        },
+        {
+            "id": "25",
+            "entry": "[25] C. Mathy, N. Derbinsky, J. Bento, J. Rosenthal, and J. Yedidia. The boundary forest algorithm for online supervised and unsupervised learning. In Proc. of the 29th National Conference on Artificial Intelligence (AAAI 2015), pages 2864\u20132870, Austin, TX, Jan. 25\u201329 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mathy%2C%20C.%20Derbinsky%2C%20N.%20Bento%2C%20J.%20Rosenthal%2C%20J.%20The%20boundary%20forest%20algorithm%20for%20online%20supervised%20and%20unsupervised%20learning%202015-01",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mathy%2C%20C.%20Derbinsky%2C%20N.%20Bento%2C%20J.%20Rosenthal%2C%20J.%20The%20boundary%20forest%20algorithm%20for%20online%20supervised%20and%20unsupervised%20learning%202015-01"
+        },
+        {
+            "id": "26",
+            "entry": "[26] N. Megiddo. On the complexity of polyhedral separability. Discrete & Computational Geometry, 3(4):325\u2013337, Dec. 1988. http://yann.lecun.com/exdb/mnist.",
+            "url": "http://yann.lecun.com/exdb/mnist",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Megiddo%2C%20N.%20On%20the%20complexity%20of%20polyhedral%20separability%201988-12"
+        },
+        {
+            "id": "28",
+            "entry": "[28] S. K. Murthy, S. Kasif, and S. Salzberg. A system for induction of oblique decision trees. J. Artificial Intelligence Research, 2:1\u201332, 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Murthy%2C%20S.K.%20Kasif%2C%20S.%20Salzberg%2C%20S.%20A%20system%20for%20induction%20of%20oblique%20decision%20trees%201994",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Murthy%2C%20S.K.%20Kasif%2C%20S.%20Salzberg%2C%20S.%20A%20system%20for%20induction%20of%20oblique%20decision%20trees%201994"
+        },
+        {
+            "id": "29",
+            "entry": "[29] M. Norouzi, M. Collins, D. J. Fleet, and P. Kohli. CO2 forest: Improved random forest by continuous optimization of oblique splits. arXiv:1506.06155, June 24 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1506.06155"
+        },
+        {
+            "id": "30",
+            "entry": "[30] M. Norouzi, M. Collins, M. A. Johnson, D. J. Fleet, and P. Kohli. Efficient non-greedy optimization of decision trees. In C. Cortes, N. D. Lawrence, D. D. Lee, M. Sugiyama, and R. Garnett, editors, Advances in Neural Information Processing Systems (NIPS), volume 28, pages 1720\u20131728. MIT Press, Cambridge, MA, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Norouzi%2C%20M.%20Collins%2C%20M.%20Johnson%2C%20M.A.%20Fleet%2C%20D.J.%20Efficient%20non-greedy%20optimization%20of%20decision%20trees%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Norouzi%2C%20M.%20Collins%2C%20M.%20Johnson%2C%20M.A.%20Fleet%2C%20D.J.%20Efficient%20non-greedy%20optimization%20of%20decision%20trees%202015"
+        },
+        {
+            "id": "31",
+            "entry": "[31] J. R. Quinlan. C4.5: Programs for Machine Learning. Morgan Kaufmann, 1993.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Quinlan%2C%20J.R.%20C4.%205%3A%20Programs%20for%20Machine%20Learning%201993"
+        },
+        {
+            "id": "32",
+            "entry": "[32] L. Rokach and O. Maimon. Data Mining With Decision Trees. Theory and Applications. Number 69 in Series in Machine Perception and Artificial Intelligence. World Scientific, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rokach%2C%20L.%20Maimon%2C%20O.%20Data%20Mining%20With%20Decision%20Trees.%20Theory%20and%20Applications.%20Number%2069%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rokach%2C%20L.%20Maimon%2C%20O.%20Data%20Mining%20With%20Decision%20Trees.%20Theory%20and%20Applications.%20Number%2069%202007"
+        },
+        {
+            "id": "33",
+            "entry": "[33] R. E. Schapire and Y. Freund. Boosting. Foundations and Algorithms. Adaptive Computation and Machine Learning Series. MIT Press, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schapire%2C%20R.E.%20Boosting%2C%20Y.Freund%20Foundations%20and%20Algorithms.%20Adaptive%20Computation%20and%20Machine%20Learning%20Series%202012"
+        },
+        {
+            "id": "34",
+            "entry": "[34] C. Tjortjis and J. Keane. T3: A classification algorithm for data mining. In H. Yin, N. Allinson, R. Freeman, J. Keane, and S. Hubbard, editors, Proc. of the 6th Int. Conf. Intelligent Data Engineering and Automated Learning (IDEAL\u201902), pages 50\u201355, Manchester, UK, Aug. 12\u2013 14 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tjortjis%2C%20C.%20Keane%2C%20J.%20T3%3A%20A%20classification%20algorithm%20for%20data%20mining%202002-08-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tjortjis%2C%20C.%20Keane%2C%20J.%20T3%3A%20A%20classification%20algorithm%20for%20data%20mining%202002-08-12"
+        },
+        {
+            "id": "35",
+            "entry": "[35] P. Tzirakis and C. Tjortjis. T3C: Improving a decision tree classification algorithm\u2019s interval splits on continuous attributes. Advances in Data Analysis and Classification, 11(2):353\u2013370, June 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tzirakis%2C%20P.%20Tjortjis%2C%20C.%20T3C%3A%20Improving%20a%20decision%20tree%20classification%20algorithm%E2%80%99s%20interval%20splits%20on%20continuous%20attributes%202017-06",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tzirakis%2C%20P.%20Tjortjis%2C%20C.%20T3C%3A%20Improving%20a%20decision%20tree%20classification%20algorithm%E2%80%99s%20interval%20splits%20on%20continuous%20attributes%202017-06"
+        },
+        {
+            "id": "36",
+            "entry": "[36] X. Wu, V. Kumar, J. R. Quinlan, J. Ghosh, Q. Yang, H. Motoda, G. J. McLachlan, A. Ng, B. Liu, P. S. Yu, Z.-H. Zhou, M. Steinbach, D. J. Hand, and D. Steinberg. Top 10 algorithms in data mining. Knowledge and Information Systems, 14(1):1\u201337, Jan. 2008. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20X.%20Kumar%2C%20V.%20Quinlan%2C%20J.R.%20Ghosh%2C%20J.%20Top%2010%20algorithms%20in%20data%20mining%202008-01",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20X.%20Kumar%2C%20V.%20Quinlan%2C%20J.R.%20Ghosh%2C%20J.%20Top%2010%20algorithms%20in%20data%20mining%202008-01"
+        }
+    ]
+}

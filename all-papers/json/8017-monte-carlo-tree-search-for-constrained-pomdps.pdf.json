@@ -1,0 +1,217 @@
+{
+    "filename": "8017-monte-carlo-tree-search-for-constrained-pomdps.pdf",
+    "metadata": {
+        "title": "Monte-Carlo Tree Search for Constrained POMDPs",
+        "author": "Jongmin Lee, Geon-hyeong Kim, Pascal Poupart, Kee-Eung Kim",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8017-monte-carlo-tree-search-for-constrained-pomdps.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Monte-Carlo Tree Search (MCTS) has been successfully applied to very large POMDPs, a standard model for stochastic sequential decision-making problems. However, many real-world problems inherently have multiple goals, where multiobjective formulations are more natural. The constrained POMDP (CPOMDP) is such a model that maximizes the reward while constraining the cost, extending the standard POMDP model. To date, solution methods for CPOMDPs assume an explicit model of the environment, and thus are hardly applicable to large-scale realworld problems. In this paper, we present CC-POMCP (Cost-Constrained POMCP), an online MCTS algorithm for large CPOMDPs that leverages the optimization of LP-induced parameters and only requires a black-box simulator of the environment. In the experiments, we demonstrate that CC-POMCP converges to the optimal stochastic action selection in CPOMDP and pushes the state-of-the-art by being able to scale to very large problems."
+    },
+    "keywords": [
+        {
+            "term": "MCTS",
+            "url": "https://en.wikipedia.org/wiki/MCTS"
+        },
+        {
+            "term": "markov decision process",
+            "url": "https://en.wikipedia.org/wiki/markov_decision_process"
+        },
+        {
+            "term": "Monte-Carlo tree search",
+            "url": "https://en.wikipedia.org/wiki/Monte-Carlo_tree_search"
+        },
+        {
+            "term": "linear program",
+            "url": "https://en.wikipedia.org/wiki/linear_program"
+        },
+        {
+            "term": "Markov decision processes",
+            "url": "https://en.wikipedia.org/wiki/Markov_decision_processes"
+        },
+        {
+            "term": "transition probability",
+            "url": "https://en.wikipedia.org/wiki/transition_probability"
+        },
+        {
+            "term": "POMDP",
+            "url": "https://en.wikipedia.org/wiki/POMDP"
+        }
+    ],
+    "highlights": [
+        "Observable Markov decision processes (POMDPs) [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>] provide a principled framework for modeling sequential decision making problems under stochastic transitions and noisy observations",
+        "We demonstrate that CC-Partially observable Monte-Carlo Planner converges to the optimal stochastic action selection using a synthetic domain and that it is able to handle very large problems including constrained variants of Rocksample(15,15) and Atari 2600 arcade game, pushing the state-of-the-art scalability in constrained partially observable MDPs solvers",
+        "Since belief bt is a sufficient statistic of history ht, the partially observable MDPs can be understood as the belief-state Markov decision processes B, A, T, R, \u03b3, b0 , where b0 is the initial state, B is the set of reachable beliefs starting from b0, T (b |b, a) = o,s,s Zp(o|s , a)Tp(s |s, a)b(s)\u03b4(b , bao) is the transition probability, R(b, a) = s b(s)Rp(s, a) is the immediate reward function",
+        "We presented CC-Partially observable Monte-Carlo Planner, an online Monte-Carlo tree search algorithm for very large constrained partially observable MDPs",
+        "We showed that solving the dual linear program of constrained partially observable MDPs is equivalent to jointly solving an unconstrained partially observable MDPs and optimizing its linear program-induced parameters \u03bb, and provided theoretical results that shed insight on the properties of \u03bb and how to optimize it",
+        "We empirically showed that CC-Partially observable Monte-Carlo Planner converges to the optimal stochastic actions on a toy domain and scales to very large constrained partially observable MDPs through the constrained variants of Rocksample and the multi-objective version of PONG"
+    ],
+    "key_statements": [
+        "Observable Markov decision processes (POMDPs) [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>] provide a principled framework for modeling sequential decision making problems under stochastic transitions and noisy observations",
+        "We present our algorithm, Cost-Constrained Partially observable Monte-Carlo Planner (CC-Partially observable Monte-Carlo Planner), for solving large constrained partially observable MDPs that combine traditional Monte-Carlo tree search with linear program-induced parameter optimization",
+        "We demonstrate that CC-Partially observable Monte-Carlo Planner converges to the optimal stochastic action selection using a synthetic domain and that it is able to handle very large problems including constrained variants of Rocksample(15,15) and Atari 2600 arcade game, pushing the state-of-the-art scalability in constrained partially observable MDPs solvers",
+        "Since belief bt is a sufficient statistic of history ht, the partially observable MDPs can be understood as the belief-state Markov decision processes B, A, T, R, \u03b3, b0 , where b0 is the initial state, B is the set of reachable beliefs starting from b0, T (b |b, a) = o,s,s Zp(o|s , a)Tp(s |s, a)b(s)\u03b4(b , bao) is the transition probability, R(b, a) = s b(s)Rp(s, a) is the immediate reward function",
+        "We presented CC-Partially observable Monte-Carlo Planner, an online Monte-Carlo tree search algorithm for very large constrained partially observable MDPs",
+        "We showed that solving the dual linear program of constrained partially observable MDPs is equivalent to jointly solving an unconstrained partially observable MDPs and optimizing its linear program-induced parameters \u03bb, and provided theoretical results that shed insight on the properties of \u03bb and how to optimize it",
+        "We extended Partially observable Monte-Carlo Planner to maximize the scalarized value while simultaneously updating \u03bb using the current action-value estimates QC",
+        "We empirically showed that CC-Partially observable Monte-Carlo Planner converges to the optimal stochastic actions on a toy domain and scales to very large constrained partially observable MDPs through the constrained variants of Rocksample and the multi-objective version of PONG"
+    ],
+    "summary": [
+        "Observable Markov decision processes (POMDPs) [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>] provide a principled framework for modeling sequential decision making problems under stochastic transitions and noisy observations.",
+        "It can be formally shown that QR(h, a) asymptotically converges to the optimal value QR\u2217 (h, a) in POMDPs. it is not straightforward to use POMCP for CPOMDPs since the original UCB1 action selection rule does not have any notion of cost constraints.",
+        "VC\u03c0\u03bb\u2217 (b0) \u2212 \u02c6c is a negative subgradient that decreases the objective in Eq (3), where \u03c0\u03bb\u2217 is the optimal policy with respect to the scalarized reward function R(b, a) \u2212 \u03bb C(b, a).",
+        "We have eliminated the cost-constraints by introducing simultaneous update of \u03bb, it still relies on exactly solving POMDPs via SolveBeliefMDP in each iteration, which is impractical for large CPOMDPs. all we need in step 3 is the cost value at the initial belief state VC\u03c0\u03bb\u2217 (b0) with respect to the optimal policy when the reward function is given by R \u2212 \u03bb C.",
+        "Note that CC-POMCP inherits the scalability of POMCP and does not require an explicit model of the environment: all we need is a black-box simulator G of the CPOMDP, which generates sample (s , o, r, c) \u223c G(s, a) of the state s , observation o, reward r, and cost vector c, given the current state s and action a.",
+        "CPOMDP: Toy and Rocksample We first tested CC-POMCP on the synthetic toy domain introduced in [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>] to demonstrate convergence to stochastic optimal actions, where the cost constraint cis 0.95.",
+        "In Rocksample (5, 7), the reward performance of CC-POMCP is comparable to CALP when more than 2 seconds of search time is allowed while at the same time satisfying the cost constraint.",
+        "On Rocksample (7, 8), CALP failed to compute a feasible policy, and CC-POMCP outperformed CALP in terms of reward while satisfying the cost constraint.",
+        "CC-POMCP was able to scale to Rocksample (11, 11) and (15, 15): given a few seconds of search time, CC-POMCP was able to find actions satisfying the cost constraints, and tended to yield higher returns as we increased the number of simulations.",
+        "We presented CC-POMCP, an online MCTS algorithm for very large CPOMDPs. We showed that solving the dual LP of CPOMDPs is equivalent to jointly solving an unconstrained POMDP and optimizing its LP-induced parameters \u03bb, and provided theoretical results that shed insight on the properties of \u03bb and how to optimize it.",
+        "We empirically showed that CC-POMCP converges to the optimal stochastic actions on a toy domain and scales to very large CPOMDPs through the constrained variants of Rocksample and the multi-objective version of PONG."
+    ],
+    "headline": "We present CC-Partially observable Monte-Carlo Planner , an online Monte-Carlo tree search algorithm for large constrained partially observable MDPs that leverages the optimization of linear program-induced parameters and only requires a black-box simulator of the environment",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Eitan Altman. Constrained Markov Decision Processes. Chapman and Hall, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Altman%2C%20Eitan%20Constrained%20Markov%20Decision%20Processes%201999"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Peter Auer, Nicol\u00f2 Cesa-Bianchi, and Paul Fischer. Finite-time analysis of the multiarmed bandit problem. Machine Learning, 47(2):235\u2013256, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Peter%20Auer%2C%20Nicol%C3%B2%20Cesa-Bianchi%20Fischer%2C%20Paul%20Finite-time%20analysis%20of%20the%20multiarmed%20bandit%20problem%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Peter%20Auer%2C%20Nicol%C3%B2%20Cesa-Bianchi%20Fischer%2C%20Paul%20Finite-time%20analysis%20of%20the%20multiarmed%20bandit%20problem%202002"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Marc G. Bellemare, Yavar Naddaf, Joel Veness, and Michael Bowling. The arcade learning environment: An evaluation platform for general agents. Journal of Artificial Intelligence Research, 47:253\u2013279, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bellemare%2C%20Marc%20G.%20Naddaf%2C%20Yavar%20Veness%2C%20Joel%20Bowling%2C%20Michael%20The%20arcade%20learning%20environment%3A%20An%20evaluation%20platform%20for%20general%20agents%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bellemare%2C%20Marc%20G.%20Naddaf%2C%20Yavar%20Veness%2C%20Joel%20Bowling%2C%20Michael%20The%20arcade%20learning%20environment%3A%20An%20evaluation%20platform%20for%20general%20agents%202013"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Cameron Browne, Edward Powley, Daniel Whitehouse, Simon Lucas, Peter I. Cowling, Stephen Tavener, Diego Perez, Spyridon Samothrakis, and Simon Colton. A survey of Monte Carlo tree search methods. IEEE Transactions on Computational Intelligence and AI in Games, 4:1\u201349, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Browne%2C%20Cameron%20Powley%2C%20Edward%20Whitehouse%2C%20Daniel%20Lucas%2C%20Simon%20A%20survey%20of%20Monte%20Carlo%20tree%20search%20methods%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Browne%2C%20Cameron%20Powley%2C%20Edward%20Whitehouse%2C%20Daniel%20Lucas%2C%20Simon%20A%20survey%20of%20Monte%20Carlo%20tree%20search%20methods%202012"
+        },
+        {
+            "id": "5",
+            "entry": "[5] R\u00e9mi Coulom. Efficient selectivity and backup operators in Monte-Carlo tree search. In Proceedings of the 5th International Conference on Computers and Games, pages 72\u201383, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Coulom%2C%20R%C3%A9mi%20Efficient%20selectivity%20and%20backup%20operators%20in%20Monte-Carlo%20tree%20search%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Coulom%2C%20R%C3%A9mi%20Efficient%20selectivity%20and%20backup%20operators%20in%20Monte-Carlo%20tree%20search%202006"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Eugene A Feinberga and Aleksey B Piunovskiyb. Nonatomic total rewards markov decision processes with multiple criteria. J. Math. Anal. Appl, 273:93\u2013111, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Feinberga%2C%20Eugene%20A.%20Piunovskiyb%2C%20Aleksey%20B.%20Nonatomic%20total%20rewards%20markov%20decision%20processes%20with%20multiple%20criteria%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Feinberga%2C%20Eugene%20A.%20Piunovskiyb%2C%20Aleksey%20B.%20Nonatomic%20total%20rewards%20markov%20decision%20processes%20with%20multiple%20criteria%202002"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Sylvain Gelly and David Silver. Monte-Carlo tree search and rapid action value estimation in computer Go. Artif. Intell., 175(11):1856\u20131875, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gelly%2C%20Sylvain%20Silver%2C%20David%20Monte-Carlo%20tree%20search%20and%20rapid%20action%20value%20estimation%20in%20computer%20Go%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gelly%2C%20Sylvain%20Silver%2C%20David%20Monte-Carlo%20tree%20search%20and%20rapid%20action%20value%20estimation%20in%20computer%20Go%202011"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Arthur Guez, David Silver, and Peter Dayan. Scalable and efficient Bayes-adaptive reinforcement learning based on Monte-carlo tree search. Journal of Artificial Intelligence Research, pages 841\u2013883, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Guez%2C%20Arthur%20Silver%2C%20David%20Dayan%2C%20Peter%20Scalable%20and%20efficient%20Bayes-adaptive%20reinforcement%20learning%20based%20on%20Monte-carlo%20tree%20search%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Guez%2C%20Arthur%20Silver%2C%20David%20Dayan%2C%20Peter%20Scalable%20and%20efficient%20Bayes-adaptive%20reinforcement%20learning%20based%20on%20Monte-carlo%20tree%20search%202013"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Joshua D. Isom, Sean P. Meyn, and Richard D. Braatz. Piecewise linear dynamic programming for constrained POMDPs. In Proceedings of the Twenty-Third AAAI Conference on Artificial Intelligence, pages 291\u2013296, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Isom%2C%20Joshua%20D.%20Meyn%2C%20Sean%20P.%20Braatz%2C%20Richard%20D.%20Piecewise%20linear%20dynamic%20programming%20for%20constrained%20POMDPs%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Isom%2C%20Joshua%20D.%20Meyn%2C%20Sean%20P.%20Braatz%2C%20Richard%20D.%20Piecewise%20linear%20dynamic%20programming%20for%20constrained%20POMDPs%202008"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Sammie Katt, Frans A. Oliehoek, and Christopher Amato. Learning in POMDPs with Monte Carlo tree search. In Proceedings of the 34th International Conference on Machine Learning, pages 1819\u20131827, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Katt%2C%20Sammie%20Oliehoek%2C%20Frans%20A.%20Amato%2C%20Christopher%20Learning%20in%20POMDPs%20with%20Monte%20Carlo%20tree%20search%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Katt%2C%20Sammie%20Oliehoek%2C%20Frans%20A.%20Amato%2C%20Christopher%20Learning%20in%20POMDPs%20with%20Monte%20Carlo%20tree%20search%202017"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Dongho Kim, Jaesong Lee, Kee-Eung Kim, and Pascal Poupart. Point-based value iteration for constrained POMDPs. In Proceedings of the Twenty-Second International Joint Conference on Artificial Intelligence Volume Volume Three, IJCAI\u201911, pages 1968\u20131974, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kim%2C%20Dongho%20Lee%2C%20Jaesong%20Kim%2C%20Kee-Eung%20Poupart%2C%20Pascal%20Point-based%20value%20iteration%20for%20constrained%20POMDPs%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kim%2C%20Dongho%20Lee%2C%20Jaesong%20Kim%2C%20Kee-Eung%20Poupart%2C%20Pascal%20Point-based%20value%20iteration%20for%20constrained%20POMDPs%202011"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Levente Kocsis and Csaba Szepesv\u00e1ri. Bandit based Monte-Carlo planning. In Proceedings of the Seventeenth European Conference on Machine Learning (ECML 2006), pages 282\u2013293, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kocsis%2C%20Levente%20Szepesv%C3%A1ri%2C%20Csaba%20Bandit%20based%20Monte-Carlo%20planning%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kocsis%2C%20Levente%20Szepesv%C3%A1ri%2C%20Csaba%20Bandit%20based%20Monte-Carlo%20planning%202006"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Levente Kocsis, Csaba Szepesv\u00e1ri, and Jan Willemson. Improved Monte-Carlo Search. Technical Report 1, Univ. Tartu, Estonia, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kocsis%2C%20Levente%20Szepesv%C3%A1ri%2C%20Csaba%20Willemson%2C%20Jan%20Improved%20Monte-Carlo%20Search%202006"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Jongmin Lee, Youngsoo Jang, Pascal Poupart, and Kee-Eung Kim. Constrained Bayesian reinforcement learning via approximate linear programming. In Proceedings of the Twenty-Sixth International Joint Conference on Artificial Intelligence (IJCAI-17), pages 2088\u20132095, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lee%2C%20Jongmin%20Jang%2C%20Youngsoo%20Poupart%2C%20Pascal%20Kim%2C%20Kee-Eung%20Constrained%20Bayesian%20reinforcement%20learning%20via%20approximate%20linear%20programming%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lee%2C%20Jongmin%20Jang%2C%20Youngsoo%20Poupart%2C%20Pascal%20Kim%2C%20Kee-Eung%20Constrained%20Bayesian%20reinforcement%20learning%20via%20approximate%20linear%20programming%202017"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Eunsoo Oh and Kee-Eung Kim. A geometric traversal algorithm for reward-uncertain MDPs. In Proceedings of the Twenty-Seventh Conference on Uncertainty in Artificial Intelligence (UAI-11), pages 565\u2013572, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20Eunsoo%20Oh%20and%20Kee-Eung%20Kim.%20A%20geometric%20traversal%20algorithm%20for%20reward-uncertain%20MDPs%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Eunsoo%20Oh%20and%20Kee-Eung%20Kim.%20A%20geometric%20traversal%20algorithm%20for%20reward-uncertain%20MDPs%202011"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Christos Papadimitriou and John N. Tsitsiklis. The complexity of Markov decision processes. Math. Oper. Res., 12(3):441\u2013450, 1987.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Papadimitriou%2C%20Christos%20Tsitsiklis%2C%20John%20N.%20The%20complexity%20of%20Markov%20decision%20processes%201987",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Papadimitriou%2C%20Christos%20Tsitsiklis%2C%20John%20N.%20The%20complexity%20of%20Markov%20decision%20processes%201987"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Alexei B Piunovskiy and Xuerong Mao. Constrained Markovian decision processes: the dynamic programming approach. Operations research letters, 27(3):119\u2013126, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Piunovskiy%2C%20Alexei%20B.%20Mao%2C%20Xuerong%20Constrained%20Markovian%20decision%20processes%3A%20the%20dynamic%20programming%20approach%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Piunovskiy%2C%20Alexei%20B.%20Mao%2C%20Xuerong%20Constrained%20Markovian%20decision%20processes%3A%20the%20dynamic%20programming%20approach%202000"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Pascal Poupart, Aarti Malhotra, Pei Pei, Kee-Eung Kim, Bongseok Goh, and Michael Bowling. Approximate linear programming for constrained partially observable Markov decision processes. In Proceedings of the Twenty-Ninth AAAI Conference on Artificial Intelligence, pages 3342\u20133348, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Poupart%2C%20Pascal%20Malhotra%2C%20Aarti%20Pei%2C%20Pei%20Kim%2C%20Kee-Eung%20Approximate%20linear%20programming%20for%20constrained%20partially%20observable%20Markov%20decision%20processes%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Poupart%2C%20Pascal%20Malhotra%2C%20Aarti%20Pei%2C%20Pei%20Kim%2C%20Kee-Eung%20Approximate%20linear%20programming%20for%20constrained%20partially%20observable%20Markov%20decision%20processes%202015"
+        },
+        {
+            "id": "19",
+            "entry": "[19] David Silver and Joel Veness. Monte-Carlo planning in large POMDPs. In Advances in Neural Information Processing Systems 23, pages 2164\u20132172, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silver%2C%20David%20Veness%2C%20Joel%20Monte-Carlo%20planning%20in%20large%20POMDPs%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silver%2C%20David%20Veness%2C%20Joel%20Monte-Carlo%20planning%20in%20large%20POMDPs%202010"
+        },
+        {
+            "id": "20",
+            "entry": "[20] David Silver, Aja Huang, Chris J. Maddison, Arthur Guez, Laurent Sifre, George van den Driessche, Julian Schrittwieser, Ioannis Antonoglou, Veda Panneershelvam, Marc Lanctot, Sander Dieleman, Dominik Grewe, John Nham, Nal Kalchbrenner, Ilya Sutskever, Timothy Lillicrap, Madeleine Leach, Koray Kavukcuoglu, Thore Graepel, and Demis Hassabis. Mastering the game of Go with deep neural networks and tree search. Nature, pages 484\u2013489, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silver%2C%20David%20Huang%2C%20Aja%20Maddison%2C%20Chris%20J.%20Guez%2C%20Arthur%20Thore%20Graepel%2C%20and%20Demis%20Hassabis.%20Mastering%20the%20game%20of%20Go%20with%20deep%20neural%20networks%20and%20tree%20search%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silver%2C%20David%20Huang%2C%20Aja%20Maddison%2C%20Chris%20J.%20Guez%2C%20Arthur%20Thore%20Graepel%2C%20and%20Demis%20Hassabis.%20Mastering%20the%20game%20of%20Go%20with%20deep%20neural%20networks%20and%20tree%20search%202016"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Trey Smith and Reid Simmons. Heuristic search value iteration for pomdps. In Proceedings of the 20th Conference on Uncertainty in Artificial Intelligence, UAI \u201904, pages 520\u2013527, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Smith%2C%20Trey%20Simmons%2C%20Reid%20Heuristic%20search%20value%20iteration%20for%20pomdps%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Smith%2C%20Trey%20Simmons%2C%20Reid%20Heuristic%20search%20value%20iteration%20for%20pomdps%202004"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Edward J. Sondik. The Optimal Control of Partially Observable Markov Processes. PhD thesis, Stanford University, 1971.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sondik%2C%20Edward%20J.%20The%20Optimal%20Control%20of%20Partially%20Observable%20Markov%20Processes%201971"
+        },
+        {
+            "id": "23",
+            "entry": "[23] A. Undurti and J. P. How. An online algorithm for constrained POMDPs. In 2010 IEEE International Conference on Robotics and Automation, pages 3966\u20133973, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Undurti%2C%20A.%20How%2C%20J.P.%20An%20online%20algorithm%20for%20constrained%20POMDPs%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Undurti%2C%20A.%20How%2C%20J.P.%20An%20online%20algorithm%20for%20constrained%20POMDPs%202010"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Jason D. Williams and Steve Young. Partially observable markov decision processes for spoken dialog systems. Computer Speech and Language, 21(2):393\u2013422, 2007. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%2C%20Jason%20D.%20Young%2C%20Steve%20Partially%20observable%20markov%20decision%20processes%20for%20spoken%20dialog%20systems%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Williams%2C%20Jason%20D.%20Young%2C%20Steve%20Partially%20observable%20markov%20decision%20processes%20for%20spoken%20dialog%20systems%202007"
+        }
+    ]
+}

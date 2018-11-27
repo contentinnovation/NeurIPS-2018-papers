@@ -1,0 +1,336 @@
+{
+    "filename": "8143-sniper-efficient-multi-scale-training.pdf",
+    "metadata": {
+        "title": "SNIPER: Efficient Multi-Scale Training",
+        "author": "Bharat Singh, Mahyar Najibi, Larry S. Davis",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8143-sniper-efficient-multi-scale-training.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We present SNIPER, an algorithm for performing efficient multi-scale training in instance level visual recognition tasks. Instead of processing every pixel in an image pyramid, SNIPER processes context regions around ground-truth instances (referred to as chips) at the appropriate scale. For background sampling, these context-regions are generated using proposals extracted from a region proposal network trained with a short learning schedule. Hence, the number of chips generated per image during training adaptively changes based on the scene complexity. SNIPER only processes 30% more pixels compared to the commonly used single scale training at 800x1333 pixels on the COCO dataset. But, it also observes samples from extreme resolutions of the image pyramid, like 1400x2000 pixels. As SNIPER operates on resampled low resolution chips (512x512 pixels), it can have a batch size as large as 20 on a single GPU even with a ResNet-101 backbone. Therefore it can benefit from batch-normalization during training without the need for synchronizing batch-normalization statistics across GPUs. SNIPER brings training of instance level recognition tasks like object detection closer to the protocol for image classification and suggests that the commonly accepted guideline that it is important to train on high resolution images for instance level visual recognition tasks might not be correct. Our implementation based on Faster-RCNN with a ResNet-101 backbone obtains an mAP of 47.6% on the COCO dataset for bounding box detection and can process 5 images per second during inference with a single GPU. Code is available at https://github.com/mahyarnajibi/SNIPER/."
+    },
+    "keywords": [
+        {
+            "term": "batch normalization",
+            "url": "https://en.wikipedia.org/wiki/batch_normalization"
+        },
+        {
+            "term": "SNIPER",
+            "url": "https://en.wikipedia.org/wiki/Sniper"
+        },
+        {
+            "term": "image pyramid",
+            "url": "https://en.wikipedia.org/wiki/image_pyramid"
+        },
+        {
+            "term": "Intelligence Advanced Research Projects Activity",
+            "url": "https://en.wikipedia.org/wiki/Intelligence_Advanced_Research_Projects_Activity"
+        },
+        {
+            "term": "image classification",
+            "url": "https://en.wikipedia.org/wiki/image_classification"
+        },
+        {
+            "term": "object detection",
+            "url": "https://en.wikipedia.org/wiki/object_detection"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        },
+        {
+            "term": "convolutional neural network",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_network"
+        }
+    ],
+    "highlights": [
+        "Deep learning based object detection algorithms have primarily evolved from the R-CNN detector [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>], which started with object proposals generated with an unsupervised algorithm [<a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>], resized these proposals to a canonical 224x224 size image and classified them using a convolutional neural network [<a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>]",
+        "Under the same conditions, we show that SNIPER performs as well as the multi-scale strategy proposed in SNIP [<a class=\"ref-link\" id=\"c33\" href=\"#r33\">33</a>] while reducing the number of pixels processed by a factor of 3 during training on the COCO dataset",
+        "Deep learning based object detection algorithms have primarily evolved from the R-CNN detector [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>], which started with object proposals generated with an unsupervised algorithm [<a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>], resized these proposals to a canonical 224x224 size image and classified them using a convolutional neural network [<a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>]",
+        "With SNIPER, we show that the image resolution bottleneck can be alleviated for instance level recognition tasks",
+        "We presented an algorithm for efficient multi-scale training which sampled low resolution chips from a multi-scale image pyramid to accelerate multi-scale training by a factor of 3 times",
+        "As SNIPER operates on re-sampled low resolution chips, it can be trained with a large batch size on a single GPU which brings it closer to the protocol for training image classification"
+    ],
+    "key_statements": [
+        "Deep learning based object detection algorithms have primarily evolved from the R-CNN detector [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>], which started with object proposals generated with an unsupervised algorithm [<a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>], resized these proposals to a canonical 224x224 size image and classified them using a convolutional neural network [<a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>]",
+        "We present a novel training algorithm called Scale Normalization for Image Pyramids with Efficient Resampling (SNIPER), which adaptively samples chips from multiple scales of an image pyramid, conditioned on the image content",
+        "Under the same conditions, we show that SNIPER performs as well as the multi-scale strategy proposed in SNIP [<a class=\"ref-link\" id=\"c33\" href=\"#r33\">33</a>] while reducing the number of pixels processed by a factor of 3 during training on the COCO dataset",
+        "Deep learning based object detection algorithms have primarily evolved from the R-CNN detector [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>], which started with object proposals generated with an unsupervised algorithm [<a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>], resized these proposals to a canonical 224x224 size image and classified them using a convolutional neural network [<a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>]",
+        "As SNIPER does not upsample the image where there are large objects and does not process easy background regions, it is significantly faster compared to a Fast-RCNN detector trained on an image pyramid",
+        "At extreme scales, SNIPER observes less than one tenth of the original content present in the image! as SNIPER chips generated only using ground-truth instances are very small compared to the resolution of the original image, a significant portion of the background does not participate in training",
+        "With SNIPER, we show that the image resolution bottleneck can be alleviated for instance level recognition tasks",
+        "We evaluate SNIPER on the COCO dataset for object detection",
+        "We presented an algorithm for efficient multi-scale training which sampled low resolution chips from a multi-scale image pyramid to accelerate multi-scale training by a factor of 3 times",
+        "SNIPER did not compromise on the performance of the detector due to effective sampling techniques for positive and negative chips",
+        "As SNIPER operates on re-sampled low resolution chips, it can be trained with a large batch size on a single GPU which brings it closer to the protocol for training image classification"
+    ],
+    "summary": [
+        "Deep learning based object detection algorithms have primarily evolved from the R-CNN detector [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>], which started with object proposals generated with an unsupervised algorithm [<a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>], resized these proposals to a canonical 224x224 size image and classified them using a convolutional neural network [<a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>].",
+        "We show that SNIPER performs as well as the multi-scale strategy proposed in SNIP [<a class=\"ref-link\" id=\"c33\" href=\"#r33\">33</a>] while reducing the number of pixels processed by a factor of 3 during training on the COCO dataset.",
+        "As SNIPER does not upsample the image where there are large objects and does not process easy background regions, it is significantly faster compared to a Fast-RCNN detector trained on an image pyramid.",
+        "As SNIPER chips generated only using ground-truth instances are very small compared to the resolution of the original image, a significant portion of the background does not participate in training.",
+        "The proposals of this network are used to generate chips for regions which are likely to contain false positives.",
+        "In this example, SNIPER efficiently processes all ground-truth objects in an appropriate scale by forming 4 low-resolution chips.",
+        "Our network is trained end to end on these chips like Faster-RCNN, i.e. it learns to generate proposals as well as classify them with a single network.",
+        "Proposals generated by RPN are assigned labels and bounding box targets based on all the ground-truth boxes which are present inside the chip.",
+        "We generate \u223c 5 chips of size 512x512 per image on the COCO dataset when training on three scales (512/ms 2, 1.667, 3).",
+        "As long as we can cover negatives and use appropriate scale normalization methods, we can train with a large batch size of resampled low resolution chips, even on challenging datasets like COCO.",
+        "SNIPER uses negative chip mining to reduce the false positive rate while speeding up the training by skipping the easy regions inside the image.",
+        "It is difficult to fairly compare different detectors as they differ in backbone architectures, pre-training data (e.g. ImageNet-5k, JFT [<a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>], OpenImages [<a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>]), different structures in the underlying network (e.g multi-scale features [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>, <a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>], deformable convolutions [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>], heavier heads [<a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>], anchor sizes, path aggregation [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>]), test time augmentations like flipping, mask tightening, iterative bounding box regression etc.",
+        "Like SNIP [<a class=\"ref-link\" id=\"c33\" href=\"#r33\">33</a>], SNIPER ignores gradients of objects at extreme scales in the image pyramid to improve multi-scale training.",
+        "We presented an algorithm for efficient multi-scale training which sampled low resolution chips from a multi-scale image pyramid to accelerate multi-scale training by a factor of 3 times.",
+        "As SNIPER operates on re-sampled low resolution chips, it can be trained with a large batch size on a single GPU which brings it closer to the protocol for training image classification.",
+        "It would be interesting to evaluate at what chip resolution does context start to hurt the performance of object detectors"
+    ],
+    "headline": "We present SNIPER, an algorithm for performing efficient multi-scale training in instance level visual recognition tasks",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] S. Bell, C. Lawrence Zitnick, K. Bala, and R. Girshick. Inside-outside net: Detecting objects in context with skip pooling and recurrent neural networks. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 2874\u20132883, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bell%2C%20S.%20Zitnick%2C%20C.Lawrence%20Bala%2C%20K.%20Girshick%2C%20R.%20Inside-outside%20net%3A%20Detecting%20objects%20in%20context%20with%20skip%20pooling%20and%20recurrent%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bell%2C%20S.%20Zitnick%2C%20C.Lawrence%20Bala%2C%20K.%20Girshick%2C%20R.%20Inside-outside%20net%3A%20Detecting%20objects%20in%20context%20with%20skip%20pooling%20and%20recurrent%20neural%20networks%202016"
+        },
+        {
+            "id": "2",
+            "entry": "[2] V. P. Boda and P. Narayan. Sampling rate distortion. IEEE Transactions on Information Theory, 63(1):563\u2013 574, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Boda%2C%20V.P.%20Narayan%2C%20P.%20Sampling%20rate%20distortion%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Boda%2C%20V.P.%20Narayan%2C%20P.%20Sampling%20rate%20distortion%202017"
+        },
+        {
+            "id": "3",
+            "entry": "[3] V. P. Boda and P. Narayan. Universal sampling rate distortion. IEEE Transactions on Information Theory, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Boda%2C%20V.P.%20Narayan%2C%20P.%20Universal%20sampling%20rate%20distortion%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Boda%2C%20V.P.%20Narayan%2C%20P.%20Universal%20sampling%20rate%20distortion%202018"
+        },
+        {
+            "id": "4",
+            "entry": "[4] N. Bodla, B. Singh, R. Chellappa, and L. S. Davis. Soft-nms\u2014improving object detection with one line of code. In 2017 IEEE International Conference on Computer Vision (ICCV), pages 5562\u20135570. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bodla%2C%20N.%20Singh%2C%20B.%20Chellappa%2C%20R.%20Davis%2C%20L.S.%20Soft-nms%E2%80%94improving%20object%20detection%20with%20one%20line%20of%20code%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bodla%2C%20N.%20Singh%2C%20B.%20Chellappa%2C%20R.%20Davis%2C%20L.S.%20Soft-nms%E2%80%94improving%20object%20detection%20with%20one%20line%20of%20code%202017"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Z. Cai, Q. Fan, R. S. Feris, and N. Vasconcelos. A unified multi-scale deep convolutional neural network for fast object detection. In European Conference on Computer Vision, pages 354\u2013370.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cai%2C%20Z.%20Fan%2C%20Q.%20Feris%2C%20R.S.%20Vasconcelos%2C%20N.%20A%20unified%20multi-scale%20deep%20convolutional%20neural%20network%20for%20fast%20object%20detection",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cai%2C%20Z.%20Fan%2C%20Q.%20Feris%2C%20R.S.%20Vasconcelos%2C%20N.%20A%20unified%20multi-scale%20deep%20convolutional%20neural%20network%20for%20fast%20object%20detection"
+        },
+        {
+            "id": "6",
+            "entry": "[6] F. Chollet. Xception: Deep learning with depthwise separable convolutions. CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chollet%2C%20F.%20Xception%3A%20Deep%20learning%20with%20depthwise%20separable%20convolutions%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chollet%2C%20F.%20Xception%3A%20Deep%20learning%20with%20depthwise%20separable%20convolutions%202017"
+        },
+        {
+            "id": "7",
+            "entry": "[7] M. Corbetta and G. L. Shulman. Control of goal-directed and stimulus-driven attention in the brain. Nature reviews neuroscience, 3(3):201, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Corbetta%2C%20M.%20Shulman%2C%20G.L.%20Control%20of%20goal-directed%20and%20stimulus-driven%20attention%20in%20the%20brain%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Corbetta%2C%20M.%20Shulman%2C%20G.L.%20Control%20of%20goal-directed%20and%20stimulus-driven%20attention%20in%20the%20brain%202002"
+        },
+        {
+            "id": "8",
+            "entry": "[8] J. Dai, H. Qi, Y. Xiong, Y. Li, G. Zhang, H. Hu, and Y. Wei. Deformable convolutional networks. ICCV, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dai%2C%20J.%20Qi%2C%20H.%20Xiong%2C%20Y.%20Li%2C%20Y.%20Deformable%20convolutional%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dai%2C%20J.%20Qi%2C%20H.%20Xiong%2C%20Y.%20Li%2C%20Y.%20Deformable%20convolutional%20networks%202017"
+        },
+        {
+            "id": "9",
+            "entry": "[9] S. Gidaris and N. Komodakis. Locnet: Improving localization accuracy for object detection. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 789\u2013798, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gidaris%2C%20S.%20Komodakis%2C%20N.%20Locnet%3A%20Improving%20localization%20accuracy%20for%20object%20detection%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gidaris%2C%20S.%20Komodakis%2C%20N.%20Locnet%3A%20Improving%20localization%20accuracy%20for%20object%20detection%202016"
+        },
+        {
+            "id": "10",
+            "entry": "[10] R. Girshick. Fast r-cnn. In Computer Vision (ICCV), 2015 IEEE International Conference on, pages 1440\u20131448. IEEE, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=R%20Girshick%20Fast%20rcnn%20In%20Computer%20Vision%20ICCV%202015%20IEEE%20International%20Conference%20on%20pages%2014401448%20IEEE%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=R%20Girshick%20Fast%20rcnn%20In%20Computer%20Vision%20ICCV%202015%20IEEE%20International%20Conference%20on%20pages%2014401448%20IEEE%202015"
+        },
+        {
+            "id": "11",
+            "entry": "[11] R. Girshick, J. Donahue, T. Darrell, and J. Malik. Rich feature hierarchies for accurate object detection and semantic segmentation. In Proceedings of the IEEE conference on computer vision and pattern recognition, pages 580\u2013587, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Girshick%2C%20R.%20Donahue%2C%20J.%20Darrell%2C%20T.%20Malik%2C%20J.%20Rich%20feature%20hierarchies%20for%20accurate%20object%20detection%20and%20semantic%20segmentation%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Girshick%2C%20R.%20Donahue%2C%20J.%20Darrell%2C%20T.%20Malik%2C%20J.%20Rich%20feature%20hierarchies%20for%20accurate%20object%20detection%20and%20semantic%20segmentation%202014"
+        },
+        {
+            "id": "12",
+            "entry": "[12] K. He, G. Gkioxari, P. Doll\u00e1r, and R. Girshick. Mask r-cnn. In Computer Vision (ICCV), 2017 IEEE International Conference on, pages 2980\u20132988. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=K%20He%20G%20Gkioxari%20P%20Doll%C3%A1r%20and%20R%20Girshick%20Mask%20rcnn%20In%20Computer%20Vision%20ICCV%202017%20IEEE%20International%20Conference%20on%20pages%2029802988%20IEEE%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=K%20He%20G%20Gkioxari%20P%20Doll%C3%A1r%20and%20R%20Girshick%20Mask%20rcnn%20In%20Computer%20Vision%20ICCV%202017%20IEEE%20International%20Conference%20on%20pages%2029802988%20IEEE%202017"
+        },
+        {
+            "id": "13",
+            "entry": "[13] K. He, X. Zhang, S. Ren, and J. Sun. Spatial pyramid pooling in deep convolutional networks for visual recognition. In European Conference on Computer Vision, pages 346\u2013361.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Spatial%20pyramid%20pooling%20in%20deep%20convolutional%20networks%20for%20visual%20recognition",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Spatial%20pyramid%20pooling%20in%20deep%20convolutional%20networks%20for%20visual%20recognition"
+        },
+        {
+            "id": "14",
+            "entry": "[14] K. He, X. Zhang, S. Ren, and J. Sun. Deep residual learning for image recognition. In Proceedings of the IEEE conference on computer vision and pattern recognition, pages 770\u2013778, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%202016"
+        },
+        {
+            "id": "15",
+            "entry": "[15] K. He, X. Zhang, S. Ren, and J. Sun. Identity mappings in deep residual networks. In European Conference on Computer Vision, pages 630\u2013645.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Identity%20mappings%20in%20deep%20residual%20networks",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Identity%20mappings%20in%20deep%20residual%20networks"
+        },
+        {
+            "id": "16",
+            "entry": "[16] G. Hinton, O. Vinyals, and J. Dean. Distilling the knowledge in a neural network. arXiv preprint arXiv:1503.02531, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1503.02531"
+        },
+        {
+            "id": "17",
+            "entry": "[17] S. Ioffe and C. Szegedy. Batch normalization: Accelerating deep network training by reducing internal covariate shift. ICML, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ioffe%2C%20S.%20Szegedy%2C%20C.%20Batch%20normalization%3A%20Accelerating%20deep%20network%20training%20by%20reducing%20internal%20covariate%20shift%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ioffe%2C%20S.%20Szegedy%2C%20C.%20Batch%20normalization%3A%20Accelerating%20deep%20network%20training%20by%20reducing%20internal%20covariate%20shift%202015"
+        },
+        {
+            "id": "18",
+            "entry": "[18] I. Krasin, T. Duerig, N. Alldrin, V. Ferrari, S. Abu-El-Haija, A. Kuznetsova, H. Rom, J. Uijlings, S. Popov, S. Kamali, M. Malloci, J. Pont-Tuset, A. Veit, S. Belongie, V. Gomes, A. Gupta, C. Sun, G. Chechik, D. Cai, Z. Feng, D. Narayanan, and K. Murphy. Openimages: A public dataset for large-scale multi-label and multi-class image classification. Dataset available from https://storage.googleapis.com/openimages/web/index.html, 2017.",
+            "url": "https://storage.googleapis.com/openimages/web/index.html",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krasin%2C%20I.%20Duerig%2C%20T.%20Alldrin%2C%20N.%20Ferrari%2C%20V.%20Openimages%3A%20A%20public%20dataset%20for%20large-scale%20multi-label%20and%20multi-class%20image%20classification%202017"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Y. LeCun, L. Bottou, Y. Bengio, and P. Haffner. Gradient-based learning applied to document recognition. Proceedings of the IEEE, 86(11):2278\u20132324, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=LeCun%2C%20Y.%20Bottou%2C%20L.%20Bengio%2C%20Y.%20Haffner%2C%20P.%20Gradient-based%20learning%20applied%20to%20document%20recognition%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=LeCun%2C%20Y.%20Bottou%2C%20L.%20Bengio%2C%20Y.%20Haffner%2C%20P.%20Gradient-based%20learning%20applied%20to%20document%20recognition%201998"
+        },
+        {
+            "id": "20",
+            "entry": "[20] T.-Y. Lin, P. Doll\u00e1r, R. Girshick, K. He, B. Hariharan, and S. Belongie. Feature pyramid networks for object detection. In CVPR, pages 936\u2013944, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Feature%20pyramid%20networks%20for%20object%20detection%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Feature%20pyramid%20networks%20for%20object%20detection%202017"
+        },
+        {
+            "id": "21",
+            "entry": "[21] T.-Y. Lin, P. Goyal, R. Girshick, K. He, and P. Doll\u00e1r. Focal loss for dense object detection. IEEE transactions on pattern analysis and machine intelligence, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20T.-Y.%20Goyal%2C%20P.%20Girshick%2C%20R.%20He%2C%20K.%20Focal%20loss%20for%20dense%20object%20detection%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lin%2C%20T.-Y.%20Goyal%2C%20P.%20Girshick%2C%20R.%20He%2C%20K.%20Focal%20loss%20for%20dense%20object%20detection%202018"
+        },
+        {
+            "id": "22",
+            "entry": "[22] S. Liu, L. Qi, H. Qin, J. Shi, and J. Jia. Path aggregation network for instance segmentation. CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20S.%20Qi%2C%20L.%20Qin%2C%20H.%20Shi%2C%20J.%20Path%20aggregation%20network%20for%20instance%20segmentation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liu%2C%20S.%20Qi%2C%20L.%20Qin%2C%20H.%20Shi%2C%20J.%20Path%20aggregation%20network%20for%20instance%20segmentation%202018"
+        },
+        {
+            "id": "23",
+            "entry": "[23] W. Liu, D. Anguelov, D. Erhan, C. Szegedy, S. Reed, C.-Y. Fu, and A. C. Berg. Ssd: Single shot multibox detector. In European conference on computer vision, pages 21\u201337.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20W.%20Anguelov%2C%20D.%20Erhan%2C%20D.%20Szegedy%2C%20C.%20Ssd%3A%20Single%20shot%20multibox%20detector",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liu%2C%20W.%20Anguelov%2C%20D.%20Erhan%2C%20D.%20Szegedy%2C%20C.%20Ssd%3A%20Single%20shot%20multibox%20detector"
+        },
+        {
+            "id": "24",
+            "entry": "[24] W. Luo, Y. Li, R. Urtasun, and R. Zemel. Understanding the effective receptive field in deep convolutional neural networks. In Advances in Neural Information Processing Systems, pages 4898\u20134906, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Luo%2C%20W.%20Li%2C%20Y.%20Urtasun%2C%20R.%20Zemel%2C%20R.%20Understanding%20the%20effective%20receptive%20field%20in%20deep%20convolutional%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Luo%2C%20W.%20Li%2C%20Y.%20Urtasun%2C%20R.%20Zemel%2C%20R.%20Understanding%20the%20effective%20receptive%20field%20in%20deep%20convolutional%20neural%20networks%202016"
+        },
+        {
+            "id": "25",
+            "entry": "[25] R. Mottaghi, X. Chen, X. Liu, N.-G. Cho, S.-W. Lee, S. Fidler, R. Urtasun, and A. Yuille. The role of context for object detection and semantic segmentation in the wild. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 891\u2013898, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mottaghi%2C%20R.%20Chen%2C%20X.%20Liu%2C%20X.%20Cho%2C%20N.-G.%20The%20role%20of%20context%20for%20object%20detection%20and%20semantic%20segmentation%20in%20the%20wild%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mottaghi%2C%20R.%20Chen%2C%20X.%20Liu%2C%20X.%20Cho%2C%20N.-G.%20The%20role%20of%20context%20for%20object%20detection%20and%20semantic%20segmentation%20in%20the%20wild%202014"
+        },
+        {
+            "id": "26",
+            "entry": "[26] M. Najibi, P. Samangouei, R. Chellappa, and L. Davis. SSH: Single stage headless face detector. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 4875\u20134884, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Najibi%2C%20M.%20Samangouei%2C%20P.%20Chellappa%2C%20R.%20Davis%2C%20L.%20SSH%3A%20Single%20stage%20headless%20face%20detector%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Najibi%2C%20M.%20Samangouei%2C%20P.%20Chellappa%2C%20R.%20Davis%2C%20L.%20SSH%3A%20Single%20stage%20headless%20face%20detector%202017"
+        },
+        {
+            "id": "27",
+            "entry": "[27] S. Narang, G. Diamos, E. Elsen, P. Micikevicius, J. Alben, D. Garcia, B. Ginsburg, M. Houston, O. Kuchaiev, G. Venkatesh, et al. Mixed precision training. ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=S%20Narang%20G%20Diamos%20E%20Elsen%20P%20Micikevicius%20J%20Alben%20D%20Garcia%20B%20Ginsburg%20M%20Houston%20O%20Kuchaiev%20G%20Venkatesh%20et%20al%20Mixed%20precision%20training%20ICLR%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=S%20Narang%20G%20Diamos%20E%20Elsen%20P%20Micikevicius%20J%20Alben%20D%20Garcia%20B%20Ginsburg%20M%20Houston%20O%20Kuchaiev%20G%20Venkatesh%20et%20al%20Mixed%20precision%20training%20ICLR%202018"
+        },
+        {
+            "id": "28",
+            "entry": "[28] C. Peng, T. Xiao, Z. Li, Y. Jiang, X. Zhang, K. Jia, G. Yu, and J. Sun. Megdet: A large mini-batch object detector. CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Peng%2C%20C.%20Xiao%2C%20T.%20Li%2C%20Z.%20Jiang%2C%20Y.%20Megdet%3A%20A%20large%20mini-batch%20object%20detector%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Peng%2C%20C.%20Xiao%2C%20T.%20Li%2C%20Z.%20Jiang%2C%20Y.%20Megdet%3A%20A%20large%20mini-batch%20object%20detector%202018"
+        },
+        {
+            "id": "29",
+            "entry": "[29] S. Ren, K. He, R. Girshick, and J. Sun. Faster r-cnn: Towards real-time object detection with region proposal networks. In Advances in neural information processing systems, pages 91\u201399, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ren%2C%20S.%20He%2C%20K.%20Girshick%2C%20R.%20Sun%2C%20J.%20Faster%20r-cnn%3A%20Towards%20real-time%20object%20detection%20with%20region%20proposal%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ren%2C%20S.%20He%2C%20K.%20Girshick%2C%20R.%20Sun%2C%20J.%20Faster%20r-cnn%3A%20Towards%20real-time%20object%20detection%20with%20region%20proposal%20networks%202015"
+        },
+        {
+            "id": "30",
+            "entry": "[30] R. A. Rensink. The dynamic representation of scenes. Visual cognition, 7(1-3):17\u201342, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rensink%2C%20R.A.%20The%20dynamic%20representation%20of%20scenes%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rensink%2C%20R.A.%20The%20dynamic%20representation%20of%20scenes%202000"
+        },
+        {
+            "id": "31",
+            "entry": "[31] M. Sandler, A. Howard, M. Zhu, A. Zhmoginov, and L.-C. Chen. Mobilenetv2: Inverted residuals and linear bottlenecks. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 4510\u20134520, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sandler%2C%20M.%20Howard%2C%20A.%20Zhu%2C%20M.%20Zhmoginov%2C%20A.%20Mobilenetv2%3A%20Inverted%20residuals%20and%20linear%20bottlenecks%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sandler%2C%20M.%20Howard%2C%20A.%20Zhu%2C%20M.%20Zhmoginov%2C%20A.%20Mobilenetv2%3A%20Inverted%20residuals%20and%20linear%20bottlenecks%202018"
+        },
+        {
+            "id": "32",
+            "entry": "[32] A. Shrivastava, A. Gupta, and R. Girshick. Training region-based object detectors with online hard example mining. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 761\u2013769, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shrivastava%2C%20A.%20Gupta%2C%20A.%20Girshick%2C%20R.%20Training%20region-based%20object%20detectors%20with%20online%20hard%20example%20mining%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shrivastava%2C%20A.%20Gupta%2C%20A.%20Girshick%2C%20R.%20Training%20region-based%20object%20detectors%20with%20online%20hard%20example%20mining%202016"
+        },
+        {
+            "id": "33",
+            "entry": "[33] B. Singh and L. S. Davis. An analysis of scale invariance in object detection-snip. CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Singh%2C%20B.%20Davis%2C%20L.S.%20An%20analysis%20of%20scale%20invariance%20in%20object%20detection-snip%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Singh%2C%20B.%20Davis%2C%20L.S.%20An%20analysis%20of%20scale%20invariance%20in%20object%20detection-snip%202018"
+        },
+        {
+            "id": "34",
+            "entry": "[34] J. R. Uijlings, K. E. Van De Sande, T. Gevers, and A. W. Smeulders. Selective search for object recognition. International journal of computer vision, 104(2):154\u2013171, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Uijlings%2C%20J.R.%20Sande%2C%20K.E.Van%20De%20Gevers%2C%20T.%20W%2C%20A.%20Smeulders.%20Selective%20search%20for%20object%20recognition%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Uijlings%2C%20J.R.%20Sande%2C%20K.E.Van%20De%20Gevers%2C%20T.%20W%2C%20A.%20Smeulders.%20Selective%20search%20for%20object%20recognition%202013"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Y. Wu and K. He. Group normalization. arXiv:1803.08494, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.08494"
+        },
+        {
+            "id": "36",
+            "entry": "[36] S. Xie, R. Girshick, P. Doll\u00e1r, Z. Tu, and K. He. Aggregated residual transformations for deep neural networks. In Computer Vision and Pattern Recognition (CVPR), 2017 IEEE Conference on, pages 5987\u20135995. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Aggregated%20residual%20transformations%20for%20deep%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Aggregated%20residual%20transformations%20for%20deep%20neural%20networks%202017"
+        },
+        {
+            "id": "37",
+            "entry": "[37] F. Yang, W. Choi, and Y. Lin. Exploit all the layers: Fast and accurate cnn object detector with scale dependent pooling and cascaded rejection classifiers. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 2129\u20132137, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yang%2C%20F.%20Choi%2C%20W.%20Lin%2C%20Y.%20Exploit%20all%20the%20layers%3A%20Fast%20and%20accurate%20cnn%20object%20detector%20with%20scale%20dependent%20pooling%20and%20cascaded%20rejection%20classifiers%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yang%2C%20F.%20Choi%2C%20W.%20Lin%2C%20Y.%20Exploit%20all%20the%20layers%3A%20Fast%20and%20accurate%20cnn%20object%20detector%20with%20scale%20dependent%20pooling%20and%20cascaded%20rejection%20classifiers%202016"
+        },
+        {
+            "id": "38",
+            "entry": "[38] F. Yu and V. Koltun. Multi-scale context aggregation by dilated convolutions. arXiv preprint arXiv:1511.07122, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.07122"
+        },
+        {
+            "id": "39",
+            "entry": "[39] S. Zagoruyko, A. Lerer, T.-Y. Lin, P. O. Pinheiro, S. Gross, S. Chintala, and P. Dollar. A multipath network for object detection. BMVC, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zagoruyko%2C%20S.%20Lerer%2C%20A.%20Lin%2C%20T.-Y.%20Pinheiro%2C%20P.O.%20A%20multipath%20network%20for%20object%20detection%202016"
+        },
+        {
+            "id": "40",
+            "entry": "[40] X. Zeng, W. Ouyang, J. Yan, H. Li, T. Xiao, K. Wang, Y. Liu, Y. Zhou, B. Yang, Z. Wang, et al. Crafting gbd-net for object detection. IEEE Transactions on Pattern Analysis and Machine Intelligence, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zeng%2C%20X.%20Ouyang%2C%20W.%20Yan%2C%20J.%20Li%2C%20H.%20Crafting%20gbd-net%20for%20object%20detection%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zeng%2C%20X.%20Ouyang%2C%20W.%20Yan%2C%20J.%20Li%2C%20H.%20Crafting%20gbd-net%20for%20object%20detection%202017"
+        },
+        {
+            "id": "41",
+            "entry": "[41] H. Zhao, J. Shi, X. Qi, X. Wang, and J. Jia. Pyramid scene parsing network. In IEEE Conf. on Computer Vision and Pattern Recognition (CVPR), pages 2881\u20132890, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhao%2C%20H.%20Shi%2C%20J.%20Qi%2C%20X.%20Wang%2C%20X.%20Pyramid%20scene%20parsing%20network%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhao%2C%20H.%20Shi%2C%20J.%20Qi%2C%20X.%20Wang%2C%20X.%20Pyramid%20scene%20parsing%20network%202017"
+        },
+        {
+            "id": "42",
+            "entry": "[42] C. L. Zitnick and P. Doll\u00e1r. Edge boxes: Locating object proposals from edges. In European Conference on Computer Vision, pages 391\u2013405. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zitnick%2C%20C.L.%20Doll%C3%A1r%2C%20P.%20Edge%20boxes%3A%20Locating%20object%20proposals%20from%20edges",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zitnick%2C%20C.L.%20Doll%C3%A1r%2C%20P.%20Edge%20boxes%3A%20Locating%20object%20proposals%20from%20edges"
+        }
+    ]
+}

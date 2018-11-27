@@ -1,0 +1,394 @@
+{
+    "filename": "7996-understanding-batch-normalization.pdf",
+    "metadata": {
+        "title": "Understanding Batch Normalization",
+        "author": "Nils Bjorck, Carla P. Gomes, Bart Selman, Kilian Q. Weinberger",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7996-understanding-batch-normalization.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Batch normalization (BN) is a technique to normalize activations in intermediate layers of deep neural networks. Its tendency to improve accuracy and speed up training have established BN as a favorite technique in deep learning. Yet, despite its enormous success, there remains little consensus on the exact reason and mechanism behind these improvements. In this paper we take a step towards a better understanding of BN, following an empirical approach. We conduct several experiments, and show that BN primarily enables training with larger learning rates, which is the cause for faster convergence and better generalization. For networks without BN we demonstrate how large gradient updates can result in diverging loss and activations growing uncontrollably with network depth, which limits possible learning rates. BN avoids this problem by constantly correcting activations to be zero-mean and of unit standard deviation, which enables larger gradient steps, yields faster convergence and may help bypass sharp local minima. We further show various ways in which gradients and activations of deep unnormalized networks are ill-behaved. We contrast our results against recent findings in random matrix theory, shedding new light on classical initialization schemes and their consequences."
+    },
+    "keywords": [
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "random matrix theory",
+            "url": "https://en.wikipedia.org/wiki/random_matrix_theory"
+        },
+        {
+            "term": "deep network",
+            "url": "https://en.wikipedia.org/wiki/deep_network"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        }
+    ],
+    "highlights": [
+        "Normalizing the input data of neural networks to zero-mean and constant standard deviation has been known for decades [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>] to be beneficial to neural network training",
+        "With the rise of deep networks, Batch Normalization (BN) naturally extends this idea across the intermediate layers within a deep network [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>], for speed reasons the normalization is performed across mini-batches and not the entire training set",
+        "We argue that a good reason to doubt that the primary benefit of Batch Normalization is eliminating internal covariate shift comes from results in [<a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>], where an initialization scheme that ensures that all layers are normalized is proposed",
+        "We have investigated batch normalization and its benefits, showing how the latter are mainly mediated by larger learning rates",
+        "We argue that the larger learning rate increases the implicit regularization of SGD, which improves generalization",
+        "Our experiments show that large parameter updates to unnormalized networks can result in activations whose magnitudes grow dramatically with depth, which limits large learning rates"
+    ],
+    "key_statements": [
+        "Normalizing the input data of neural networks to zero-mean and constant standard deviation has been known for decades [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>] to be beneficial to neural network training",
+        "With the rise of deep networks, Batch Normalization (BN) naturally extends this idea across the intermediate layers within a deep network [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>], for speed reasons the normalization is performed across mini-batches and not the entire training set",
+        "[<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>] Ioffe and Szegedy hypothesize that Batch Normalization may alleviate \u201cinternal covariate shift\u201d \u2013 the tendency of the distribution of activations to drift during training, affecting the inputs to subsequent layers",
+        "We have found that the initial learning rate of the Resnet model needs to be decreased to \u03b1 = 0.0001 for convergence and training takes roughly 2400 epochs",
+        "We have provided empirical evidence that the benefits of batch normalization are primarily caused by higher learning rates",
+        "We investigate why Batch Normalization facilitates training with higher learning rates in the first place",
+        "A natural way of investigating divergence is to look at the loss landscape along the gradient direction during the first few mini-batches that occur with the normal learning rate (0.1 with Batch Normalization, 0.0001 without)",
+        "We argue that a good reason to doubt that the primary benefit of Batch Normalization is eliminating internal covariate shift comes from results in [<a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>], where an initialization scheme that ensures that all layers are normalized is proposed",
+        "We have investigated batch normalization and its benefits, showing how the latter are mainly mediated by larger learning rates",
+        "We argue that the larger learning rate increases the implicit regularization of SGD, which improves generalization",
+        "Our experiments show that large parameter updates to unnormalized networks can result in activations whose magnitudes grow dramatically with depth, which limits large learning rates",
+        "Via recent results in random matrix theory, we have argued that the ill-conditioned activations are natural consequences of the random initialization"
+    ],
+    "summary": [
+        "Normalizing the input data of neural networks to zero-mean and constant standard deviation has been known for decades [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>] to be beneficial to neural network training.",
+        "These results are illustrated in Figure 1, where we see that a batch normalized networks with such a low learning schedule performs no better than an unnormalized network.",
+        "We argue that the better generalization accuracy of networks with BN, as shown in Figure 1, can be explained by the higher learning rates that BN enables.",
+        "A natural way of investigating divergence is to look at the loss landscape along the gradient direction during the first few mini-batches that occur with the normal learning rate (0.1 with BN, 0.0001 without).",
+        "Initialization, where Lb is the loss for image b in our mini-batch, and activations j corresponds to class j at the final layer.",
+        "Table 5 suggests that for an unnormalized network the gradients are similar across spatial dimensions and images within a batch.",
+        "To study this we consider the matrix Mi,o = xy | bxy dboxixyy| at initialization, which intuitively measures the average gradient magnitude of kernel parameters between input channel i and output channel o.",
+        "The theoretical distribution minx Ax \u2212 y 2 if one only optimizes over a becomes increasingly heavy-tailed for more matrices, as single weight matrix Ai. It is well known that does the empirical distributions of Figure 9 the complexity of solving minx Ax \u2212 y via gradient descent can be characterized by the condition number \u03ba of A, the ratio between largest \u03c3max and smallest singular value \u03c3min.",
+        "Based upon Theorem 1, we expect the conditioning of a linear neural network at initialization for more shallow networks to be better which would allow a higher learning rate.",
+        "We argue that a good reason to doubt that the primary benefit of BN is eliminating internal covariate shift comes from results in [<a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>], where an initialization scheme that ensures that all layers are normalized is proposed.",
+        "Another line of work of relevance is [<a class=\"ref-link\" id=\"c48\" href=\"#r48\">48</a>] and [<a class=\"ref-link\" id=\"c47\" href=\"#r47\">47</a>], where the relationship between various network parameters, accuracy and convergence speed is investigated, the former article argues for the importance of batch normalization to facilitate a phenomenon dubbed \u2019super convergence\u2019.",
+        "Our experiments show that large parameter updates to unnormalized networks can result in activations whose magnitudes grow dramatically with depth, which limits large learning rates.",
+        "We have demonstrated that unnormalized networks have large and ill-behaved outputs, and that this results in gradients that are input independent.",
+        "Via recent results in random matrix theory, we have argued that the ill-conditioned activations are natural consequences of the random initialization"
+    ],
+    "headline": "For networks without Batch Normalization we demonstrate how large gradient updates can result in diverging loss and activations growing uncontrollably with network depth, which limits possible learning rates",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Martin Arjovsky, Amar Shah, and Yoshua Bengio. Unitary evolution recurrent neural networks. In International Conference on Machine Learning, pages 1120\u20131128, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Arjovsky%2C%20Martin%20Shah%2C%20Amar%20Bengio%2C%20Yoshua%20Unitary%20evolution%20recurrent%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Arjovsky%2C%20Martin%20Shah%2C%20Amar%20Bengio%2C%20Yoshua%20Unitary%20evolution%20recurrent%20neural%20networks%202016"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Jimmy Lei Ba, Jamie Ryan Kiros, and Geoffrey E Hinton. Layer normalization. arXiv preprint arXiv:1607.06450, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1607.06450"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Dimitri P Bertsekas and Athena Scientific. Convex optimization algorithms. Athena Scientific Belmont, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bertsekas%2C%20Dimitri%20P.%20Scientific%2C%20Athena%20Convex%20optimization%20algorithms%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bertsekas%2C%20Dimitri%20P.%20Scientific%2C%20Athena%20Convex%20optimization%20algorithms%202015"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Johan Bjorck, Carla Gomes, and Bart Selman. Understanding batch normalization. arXiv preprint arXiv:1806.02375, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1806.02375"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Pratik Chaudhari, Anna Choromanska, Stefano Soatto, and Yann LeCun. Entropy-sgd: Biasing gradient descent into wide valleys. arXiv preprint arXiv:1611.01838, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.01838"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Pratik Chaudhari and Stefano Soatto. Stochastic gradient descent performs variational inference, converges to limit cycles for deep networks. arXiv preprint arXiv:1710.11029, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.11029"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Yunpeng Chen, Jianan Li, Huaxin Xiao, Xiaojie Jin, Shuicheng Yan, and Jiashi Feng. Dual path networks. In Advances in Neural Information Processing Systems, pages 4470\u20134478, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Yunpeng%20Li%2C%20Jianan%20Xiao%2C%20Huaxin%20Jin%2C%20Xiaojie%20Dual%20path%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Yunpeng%20Li%2C%20Jianan%20Xiao%2C%20Huaxin%20Jin%2C%20Xiaojie%20Dual%20path%20networks%202017"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Anna Choromanska, Mikael Henaff, Michael Mathieu, G\u00e9rard Ben Arous, and Yann LeCun. The loss surfaces of multilayer networks. In Artificial Intelligence and Statistics, pages 192\u2013204, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Choromanska%2C%20Anna%20Henaff%2C%20Mikael%20Mathieu%2C%20Michael%20Arous%2C%20G%C3%A9rard%20Ben%20The%20loss%20surfaces%20of%20multilayer%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Choromanska%2C%20Anna%20Henaff%2C%20Mikael%20Mathieu%2C%20Michael%20Arous%2C%20G%C3%A9rard%20Ben%20The%20loss%20surfaces%20of%20multilayer%20networks%202015"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Tim Cooijmans, Nicolas Ballas, C\u00e9sar Laurent, \u00c7aglar G\u00fcl\u00e7ehre, and Aaron Courville. Recurrent batch normalization. arXiv preprint arXiv:1603.09025, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1603.09025"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Chris de Sa. Advanced machine learning systems : lecture notes, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=de%20Sa%2C%20Chris%20Advanced%20machine%20learning%20systems%202017"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Alan Edelman. Eigenvalues and condition numbers of random matrices. SIAM Journal on Matrix Analysis and Applications, 9(4):543\u2013560, 1988.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Edelman%2C%20Alan%20Eigenvalues%20and%20condition%20numbers%20of%20random%20matrices%201988",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Edelman%2C%20Alan%20Eigenvalues%20and%20condition%20numbers%20of%20random%20matrices%201988"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Xavier Glorot and Yoshua Bengio. Understanding the difficulty of training deep feedforward neural networks. In Proceedings of the Thirteenth International Conference on Artificial Intelligence and Statistics, pages 249\u2013256, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Glorot%2C%20Xavier%20Bengio%2C%20Yoshua%20Understanding%20the%20difficulty%20of%20training%20deep%20feedforward%20neural%20networks%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Glorot%2C%20Xavier%20Bengio%2C%20Yoshua%20Understanding%20the%20difficulty%20of%20training%20deep%20feedforward%20neural%20networks%202010"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Ian Goodfellow, Yoshua Bengio, and Aaron Courville. Deep Learning. MIT Press, 2016. http://www.deeplearningbook.org.",
+            "url": "http://www.deeplearningbook.org"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Priya Goyal, Piotr Doll\u00e1r, Ross Girshick, Pieter Noordhuis, Lukasz Wesolowski, Aapo Kyrola, Andrew Tulloch, Yangqing Jia, and Kaiming He. Accurate, large minibatch sgd: training imagenet in 1 hour. arXiv preprint arXiv:1706.02677, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.02677"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Moritz Hardt and Tengyu Ma. Identity matters in deep learning. arXiv preprint arXiv:1611.04231, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.04231"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Delving deep into rectifiers: Surpassing human-level performance on imagenet classification. In Proceedings of the IEEE international conference on computer vision, pages 1026\u20131034, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Delving%20deep%20into%20rectifiers%3A%20Surpassing%20human-level%20performance%20on%20imagenet%20classification%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Delving%20deep%20into%20rectifiers%3A%20Surpassing%20human-level%20performance%20on%20imagenet%20classification%202015"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. In Proceedings of the IEEE conference on computer vision and pattern recognition, pages 770\u2013778, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Sepp Hochreiter. Untersuchungen zu dynamischen neuronalen netzen. Diploma, Technische Universit\u00e4t M\u00fcnchen, 91(1), 1991.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hochreiter%2C%20Sepp%20Untersuchungen%20zu%20dynamischen%20neuronalen%20netzen%201991",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hochreiter%2C%20Sepp%20Untersuchungen%20zu%20dynamischen%20neuronalen%20netzen%201991"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Sepp Hochreiter and J\u00fcrgen Schmidhuber. Flat minima. Neural Computation, 9(1):1\u201342, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Flat%20minima%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Flat%20minima%201997"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Elad Hoffer, Itay Hubara, and Daniel Soudry. Train longer, generalize better: closing the generalization gap in large batch training of neural networks. In Advances in Neural Information Processing Systems, pages 1729\u20131739, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hoffer%2C%20Elad%20Hubara%2C%20Itay%20Soudry%2C%20Daniel%20Train%20longer%2C%20generalize%20better%3A%20closing%20the%20generalization%20gap%20in%20large%20batch%20training%20of%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hoffer%2C%20Elad%20Hubara%2C%20Itay%20Soudry%2C%20Daniel%20Train%20longer%2C%20generalize%20better%3A%20closing%20the%20generalization%20gap%20in%20large%20batch%20training%20of%20neural%20networks%202017"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Gao Huang, Zhuang Liu, Kilian Q Weinberger, and Laurens van der Maaten. Densely connected convolutional networks. In Proceedings of the IEEE conference on computer vision and pattern recognition, volume 1, page 3, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huang%2C%20Gao%20Liu%2C%20Zhuang%20Weinberger%2C%20Kilian%20Q.%20van%20der%20Maaten%2C%20Laurens%20Densely%20connected%20convolutional%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huang%2C%20Gao%20Liu%2C%20Zhuang%20Weinberger%2C%20Kilian%20Q.%20van%20der%20Maaten%2C%20Laurens%20Densely%20connected%20convolutional%20networks%202017"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Sergey Ioffe. Batch renormalization: Towards reducing minibatch dependence in batchnormalized models. In Advances in Neural Information Processing Systems, pages 1942\u20131950, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ioffe%2C%20Sergey%20Batch%20renormalization%3A%20Towards%20reducing%20minibatch%20dependence%20in%20batchnormalized%20models%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ioffe%2C%20Sergey%20Batch%20renormalization%3A%20Towards%20reducing%20minibatch%20dependence%20in%20batchnormalized%20models%202017"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Sergey Ioffe and Christian Szegedy. Batch normalization: Accelerating deep network training by reducing internal covariate shift. In International Conference on Machine Learning, pages 448\u2013456, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ioffe%2C%20Sergey%20Szegedy%2C%20Christian%20Batch%20normalization%3A%20Accelerating%20deep%20network%20training%20by%20reducing%20internal%20covariate%20shift%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ioffe%2C%20Sergey%20Szegedy%2C%20Christian%20Batch%20normalization%3A%20Accelerating%20deep%20network%20training%20by%20reducing%20internal%20covariate%20shift%202015"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Stanislaw Jastrzkebski, Zachary Kenton, Devansh Arpit, Nicolas Ballas, Asja Fischer, Yoshua Bengio, and Amos Storkey. Three factors influencing minima in sgd. arXiv preprint arXiv:1711.04623, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.04623"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Nitish Shirish Keskar, Dheevatsa Mudigere, Jorge Nocedal, Mikhail Smelyanskiy, and Ping Tak Peter Tang. On large-batch training for deep learning: Generalization gap and sharp minima. arXiv preprint arXiv:1609.04836, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.04836"
+        },
+        {
+            "id": "26",
+            "entry": "[26] G\u00fcnter Klambauer, Thomas Unterthiner, Andreas Mayr, and Sepp Hochreiter. Self-normalizing neural networks. In Advances in Neural Information Processing Systems, pages 972\u2013981, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Klambauer%2C%20G%C3%BCnter%20Unterthiner%2C%20Thomas%20Mayr%2C%20Andreas%20Hochreiter%2C%20Sepp%20Self-normalizing%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Klambauer%2C%20G%C3%BCnter%20Unterthiner%2C%20Thomas%20Mayr%2C%20Andreas%20Hochreiter%2C%20Sepp%20Self-normalizing%20neural%20networks%202017"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Alex Krizhevsky and Geoffrey Hinton. Learning multiple layers of features from tiny images. 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20Alex%20Hinton%2C%20Geoffrey%20Learning%20multiple%20layers%20of%20features%20from%20tiny%20images%202009"
+        },
+        {
+            "id": "28",
+            "entry": "[28] C\u00e9sar Laurent, Gabriel Pereyra, Phil\u00e9mon Brakel, Ying Zhang, and Yoshua Bengio. Batch normalized recurrent neural networks. In Acoustics, Speech and Signal Processing (ICASSP), 2016 IEEE International Conference on, pages 2657\u20132661. IEEE, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Laurent%2C%20C%C3%A9sar%20Pereyra%2C%20Gabriel%20Brakel%2C%20Phil%C3%A9mon%20Zhang%2C%20Ying%20Batch%20normalized%20recurrent%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Laurent%2C%20C%C3%A9sar%20Pereyra%2C%20Gabriel%20Brakel%2C%20Phil%C3%A9mon%20Zhang%2C%20Ying%20Batch%20normalized%20recurrent%20neural%20networks%202016"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Yann LeCun, L\u00e9on Bottou, Genevieve B Orr, and Klaus-Robert M\u00fcller. Efficient backprop. In Neural networks: Tricks of the trade, pages 9\u201350.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yann%20LeCun%20L%C3%A9on%20Bottou%20Genevieve%20B%20Orr%20and%20KlausRobert%20M%C3%BCller%20Efficient%20backprop%20In%20Neural%20networks%20Tricks%20of%20the%20trade%20pages%20950",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yann%20LeCun%20L%C3%A9on%20Bottou%20Genevieve%20B%20Orr%20and%20KlausRobert%20M%C3%BCller%20Efficient%20backprop%20In%20Neural%20networks%20Tricks%20of%20the%20trade%20pages%20950"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Dang-Zheng Liu, Dong Wang, Lun Zhang, et al. Bulk and soft-edge universality for singular values of products of ginibre random matrices. In Annales de l\u2019Institut Henri Poincar\u00e9, Probabilit\u00e9s et Statistiques, volume 52, pages 1734\u20131762. Institut Henri Poincar\u00e9, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20Dang-Zheng%20Wang%2C%20Dong%20Zhang%2C%20Lun%20Bulk%20and%20soft-edge%20universality%20for%20singular%20values%20of%20products%20of%20ginibre%20random%20matrices.%20In%20Annales%20de%20l%E2%80%99Institut%20Henri%20Poincar%C3%A9%2C%20Probabilit%C3%A9s%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liu%2C%20Dang-Zheng%20Wang%2C%20Dong%20Zhang%2C%20Lun%20Bulk%20and%20soft-edge%20universality%20for%20singular%20values%20of%20products%20of%20ginibre%20random%20matrices.%20In%20Annales%20de%20l%E2%80%99Institut%20Henri%20Poincar%C3%A9%2C%20Probabilit%C3%A9s%202016"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Cosme Louart, Zhenyu Liao, and Romain Couillet. A random matrix approach to neural networks. arXiv preprint arXiv:1702.05419, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1702.05419"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Haihao Lu and Kenji Kawaguchi. Depth creates no bad local minima. arXiv preprint arXiv:1702.08580, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1702.08580"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Dominic Masters and Carlo Luschi. Revisiting small batch training for deep neural networks. arXiv preprint arXiv:1804.07612, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1804.07612"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Dmytro Mishkin and Jiri Matas. All you need is a good init. arXiv preprint arXiv:1511.06422, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.06422"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Carles Roger Riera Molina and Oriol Pujol Vila. Solving internal covariate shift in deep learning with linked neurons. arXiv preprint arXiv:1712.02609, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1712.02609"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Behnam Neyshabur, Srinadh Bhojanapalli, David McAllester, and Nati Srebro. Exploring generalization in deep learning. In Advances in Neural Information Processing Systems, pages 5949\u20135958, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Neyshabur%2C%20Behnam%20Bhojanapalli%2C%20Srinadh%20McAllester%2C%20David%20Srebro%2C%20Nati%20Exploring%20generalization%20in%20deep%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Neyshabur%2C%20Behnam%20Bhojanapalli%2C%20Srinadh%20McAllester%2C%20David%20Srebro%2C%20Nati%20Exploring%20generalization%20in%20deep%20learning%202017"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Jeffrey Pennington and Yasaman Bahri. Geometry of neural network loss surfaces via random matrix theory. In International Conference on Machine Learning, pages 2798\u20132806, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pennington%2C%20Jeffrey%20Bahri%2C%20Yasaman%20Geometry%20of%20neural%20network%20loss%20surfaces%20via%20random%20matrix%20theory%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pennington%2C%20Jeffrey%20Bahri%2C%20Yasaman%20Geometry%20of%20neural%20network%20loss%20surfaces%20via%20random%20matrix%20theory%202017"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Jeffrey Pennington and Pratik Worah. Nonlinear random matrix theory for deep learning.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pennington%2C%20Jeffrey%20Worah%2C%20Pratik%20Nonlinear%20random%20matrix%20theory%20for%20deep%20learning"
+        },
+        {
+            "id": "39",
+            "entry": "[39] James Renegar. Incorporating condition measures into the complexity theory of linear programming. SIAM Journal on Optimization, 5(3):506\u2013524, 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Renegar%2C%20James%20Incorporating%20condition%20measures%20into%20the%20complexity%20theory%20of%20linear%20programming%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Renegar%2C%20James%20Incorporating%20condition%20measures%20into%20the%20complexity%20theory%20of%20linear%20programming%201995"
+        },
+        {
+            "id": "40",
+            "entry": "[40] David E Rumelhart, Geoffrey E Hinton, and Ronald J Williams. Learning representations by back-propagating errors. nature, 323(6088):533, 1986.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20Williams.%20Learning%20representations%20by%20back-propagating%20errors%201986",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Williams.%20Learning%20representations%20by%20back-propagating%20errors%201986"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Sirpa Saarinen, Randall Bramley, and George Cybenko. Ill-conditioning in neural network training problems. SIAM Journal on Scientific Computing, 14(3):693\u2013714, 1993.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Saarinen%2C%20Sirpa%20Bramley%2C%20Randall%20Cybenko%2C%20George%20Ill-conditioning%20in%20neural%20network%20training%20problems%201993",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Saarinen%2C%20Sirpa%20Bramley%2C%20Randall%20Cybenko%2C%20George%20Ill-conditioning%20in%20neural%20network%20training%20problems%201993"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Tim Salimans and Diederik P Kingma. Weight normalization: A simple reparameterization to accelerate training of deep neural networks. In Advances in Neural Information Processing Systems, pages 901\u2013909, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Salimans%2C%20Tim%20Kingma%2C%20Diederik%20P.%20Weight%20normalization%3A%20A%20simple%20reparameterization%20to%20accelerate%20training%20of%20deep%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Salimans%2C%20Tim%20Kingma%2C%20Diederik%20P.%20Weight%20normalization%3A%20A%20simple%20reparameterization%20to%20accelerate%20training%20of%20deep%20neural%20networks%202016"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Fabian Schilling. The effect of batch normalization on deep convolutional neural networks, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schilling%2C%20Fabian%20The%20effect%20of%20batch%20normalization%20on%20deep%20convolutional%20neural%20networks%202016"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Samuel S Schoenholz, Justin Gilmer, Surya Ganguli, and Jascha Sohl-Dickstein. Deep information propagation. arXiv preprint arXiv:1611.01232, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.01232"
+        },
+        {
+            "id": "45",
+            "entry": "[45] Hidetoshi Shimodaira. Improving predictive inference under covariate shift by weighting the log-likelihood function. Journal of statistical planning and inference, 90(2):227\u2013244, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shimodaira%2C%20Hidetoshi%20Improving%20predictive%20inference%20under%20covariate%20shift%20by%20weighting%20the%20log-likelihood%20function%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shimodaira%2C%20Hidetoshi%20Improving%20predictive%20inference%20under%20covariate%20shift%20by%20weighting%20the%20log-likelihood%20function%202000"
+        },
+        {
+            "id": "46",
+            "entry": "[46] David Silver, Julian Schrittwieser, Karen Simonyan, Ioannis Antonoglou, Aja Huang, Arthur Guez, Thomas Hubert, Lucas Baker, Matthew Lai, Adrian Bolton, et al. Mastering the game of go without human knowledge. Nature, 550(7676):354, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silver%2C%20David%20Schrittwieser%2C%20Julian%20Simonyan%2C%20Karen%20Antonoglou%2C%20Ioannis%20Mastering%20the%20game%20of%20go%20without%20human%20knowledge%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silver%2C%20David%20Schrittwieser%2C%20Julian%20Simonyan%2C%20Karen%20Antonoglou%2C%20Ioannis%20Mastering%20the%20game%20of%20go%20without%20human%20knowledge%202017"
+        },
+        {
+            "id": "47",
+            "entry": "[47] Leslie N Smith. A disciplined approach to neural network hyper-parameters: Part 1\u2013learning rate, batch size, momentum, and weight decay. arXiv preprint arXiv:1803.09820, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.09820"
+        },
+        {
+            "id": "48",
+            "entry": "[48] Leslie N Smith and Nicholay Topin. Super-convergence: Very fast training of residual networks using large learning rates. arXiv preprint arXiv:1708.07120, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1708.07120"
+        },
+        {
+            "id": "49",
+            "entry": "[49] Samuel L Smith, Pieter-Jan Kindermans, and Quoc V Le. Don\u2019t decay the learning rate, increase the batch size. arXiv preprint arXiv:1711.00489, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.00489"
+        },
+        {
+            "id": "50",
+            "entry": "[50] Samuel L Smith and Quoc V Le. A bayesian perspective on generalization and stochastic gradient descent. 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Smith%2C%20Samuel%20L.%20Le%2C%20Quoc%20V.%20A%20bayesian%20perspective%20on%20generalization%20and%20stochastic%20gradient%20descent%202018"
+        },
+        {
+            "id": "51",
+            "entry": "[51] D Ulyanov, A Vedaldi, and VS Lempitsky. Instance normalization: The missing ingredient for fast stylization. corr (2016). arXiv preprint arXiv:1607.08022.",
+            "arxiv_url": "https://arxiv.org/pdf/1607.08022"
+        },
+        {
+            "id": "52",
+            "entry": "[52] Patrick Van Der Smagt and Gerd Hirzinger. Solving the ill-conditioning in neural network learning. In Neural networks: tricks of the trade, pages 193\u2013206.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Smagt%2C%20Patrick%20Van%20Der%20Hirzinger%2C%20Gerd%20Solving%20the%20ill-conditioning%20in%20neural%20network%20learning",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Smagt%2C%20Patrick%20Van%20Der%20Hirzinger%2C%20Gerd%20Solving%20the%20ill-conditioning%20in%20neural%20network%20learning"
+        },
+        {
+            "id": "53",
+            "entry": "[53] Shuang Wu, Guoqi Li, Lei Deng, Liu Liu, Yuan Xie, and Luping Shi. L1-norm batch normalization for efficient training of deep neural networks. arXiv preprint arXiv:1802.09769, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.09769"
+        },
+        {
+            "id": "54",
+            "entry": "[54] Yuxin Wu and Kaiming He. Group normalization. arXiv preprint arXiv:1803.08494, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.08494"
+        },
+        {
+            "id": "55",
+            "entry": "[55] Lechao Xiao, Yasaman Bahri, Jascha Sohl-Dickstein, Samuel S Schoenholz, and Jeffrey Pennington. Dynamical isometry and a mean field theory of cnns: How to train 10,000-layer vanilla convolutional neural networks. arXiv preprint arXiv:1806.05393, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1806.05393"
+        },
+        {
+            "id": "56",
+            "entry": "[56] Chulhee Yun, Suvrit Sra, and Ali Jadbabaie. Global optimality conditions for deep neural networks. arXiv preprint arXiv:1707.02444, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.02444"
+        },
+        {
+            "id": "57",
+            "entry": "[57] Chiyuan Zhang, Samy Bengio, Moritz Hardt, Benjamin Recht, and Oriol Vinyals. Understanding deep learning requires rethinking generalization. arXiv preprint arXiv:1611.03530, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.03530"
+        },
+        {
+            "id": "58",
+            "entry": "[58] Tullio Zolezzi. Condition number theorems in optimization. SIAM Journal on Optimization, 14(2):507\u2013516, 2003. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zolezzi%2C%20Tullio%20Condition%20number%20theorems%20in%20optimization%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zolezzi%2C%20Tullio%20Condition%20number%20theorems%20in%20optimization%202003"
+        }
+    ]
+}

@@ -1,0 +1,244 @@
+{
+    "filename": "7919-scaling-gaussian-process-regression-with-derivatives.pdf",
+    "metadata": {
+        "title": "Scaling Gaussian Process Regression with Derivatives",
+        "author": "David Eriksson, Kun Dong, Eric Lee, David Bindel, Andrew G. Wilson",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7919-scaling-gaussian-process-regression-with-derivatives.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Gaussian processes (GPs) with derivatives are useful in many applications, including Bayesian optimization, implicit surface reconstruction, and terrain reconstruction. Fitting a GP to function values and derivatives at n points in d dimensions requires linear solves and log determinants with an n(d + 1) \u00d7 n(d + 1) positive definite matrix \u2013 leading to prohibitive O(n3d3) computations for standard direct methods. We propose iterative solvers using fast O(nd) matrix-vector multiplications (MVMs), together with pivoted Cholesky preconditioning that cuts the iterations to convergence by several orders of magnitude, allowing for fast kernel learning and prediction. Our approaches, together with dimensionality reduction, enables Bayesian optimization with derivatives to scale to high-dimensional problems and large evaluation budgets."
+    },
+    "keywords": [
+        {
+            "term": "gaussian process regression",
+            "url": "https://en.wikipedia.org/wiki/gaussian_process_regression"
+        },
+        {
+            "term": "function value",
+            "url": "https://en.wikipedia.org/wiki/function_value"
+        },
+        {
+            "term": "Gaussian processes",
+            "url": "https://en.wikipedia.org/wiki/Gaussian_processes"
+        },
+        {
+            "term": "Gaussian process",
+            "url": "https://en.wikipedia.org/wiki/Gaussian_process"
+        },
+        {
+            "term": "Bayesian optimization",
+            "url": "https://en.wikipedia.org/wiki/Bayesian_optimization"
+        }
+    ],
+    "highlights": [
+        "A Gaussian process (GP) is a collection of random variables, any finite number of which are jointly Gaussian [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>]; it defines a distribution over functions on Rd, f \u223c Gaussian processes(\u03bc, k), where \u03bc : Rd \u2192 R is a mean field and k : Rd \u00d7 Rd \u2192 R is a symmetric and positive-definite covariance kernel",
+        "We propose scalable methods for Gaussian processes with derivative information built on the structured kernel interpolation (SKI) framework [<a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>], which uses local interpolation to map scattered data onto a large grid of inducing points, enabling fast matrix-vector multiplications using FFTs",
+        "As the uniform grids in structured kernel interpolation scale poorly to high-dimensional spaces, we extend the structured kernel interpolation for products (SKIP) method, which approximates a high-dimensional product kernel as a Hadamard product of low rank Lanczos decompositions [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>]",
+        "We extend structured kernel interpolation for products, which enables scalable Gaussian process regression with derivatives in high-dimensional spaces without grids",
+        "They are a valuable source of information for Gaussian process regression; but inclusion of d extra pieces of information per point naturally leads to new scaling issues",
+        "We introduce two methods to deal with these scaling issues: D-structured kernel interpolation and D-structured kernel interpolation for products"
+    ],
+    "key_statements": [
+        "A Gaussian process (GP) is a collection of random variables, any finite number of which are jointly Gaussian [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>]; it defines a distribution over functions on Rd, f \u223c Gaussian processes(\u03bc, k), where \u03bc : Rd \u2192 R is a mean field and k : Rd \u00d7 Rd \u2192 R is a symmetric and positive-definite covariance kernel",
+        "We propose scalable methods for Gaussian processes with derivative information built on the structured kernel interpolation (SKI) framework [<a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>], which uses local interpolation to map scattered data onto a large grid of inducing points, enabling fast matrix-vector multiplications using FFTs",
+        "As the uniform grids in structured kernel interpolation scale poorly to high-dimensional spaces, we extend the structured kernel interpolation for products (SKIP) method, which approximates a high-dimensional product kernel as a Hadamard product of low rank Lanczos decompositions [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>]",
+        "We extend structured kernel interpolation to incorporate derivative information, enabling O complexity learning and O(1) prediction per test points, relying only on fast matrix-vector multiplications with the kernel matrix",
+        "We extend structured kernel interpolation for products, which enables scalable Gaussian process regression with derivatives in high-dimensional spaces without grids",
+        "In \u00a73, we extend structured kernel interpolation and structured kernel interpolation for products to handle derivative information",
+        "We do this for the structured kernel interpolation and structured kernel interpolation for products kernels below, but our general approach applies to any differentiable approximate matrix-vector multiplications.\n3.1",
+        "In our experiments with solvers for D-structured kernel interpolation and D-structured kernel interpolation for products, we have found that a truncated pivoted Cholesky factorization, K\u2207 \u2248 (\u03a0L)(\u03a0L)T works well for the low-rank factorization",
+        "Because we assume gradient information, dimensionality reduction based on active subspaces is a natural pre-processing phase before applying D-structured kernel interpolation and D-structured kernel interpolation for products",
+        "We use these kernels in tandem with D-structured kernel interpolation and D-structured kernel interpolation for products to achieve the fast matrix-vector multiplications derived in \u00a73",
+        "They are a valuable source of information for Gaussian process regression; but inclusion of d extra pieces of information per point naturally leads to new scaling issues",
+        "We introduce two methods to deal with these scaling issues: D-structured kernel interpolation and D-structured kernel interpolation for products",
+        "We present several experiments with kernel learning, dimensionality reduction, terrain reconstruction, implicit surface fitting, and scalable Bayesian optimization with gradients"
+    ],
+    "summary": [
+        "A Gaussian process (GP) is a collection of random variables, any finite number of which are jointly Gaussian [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>]; it defines a distribution over functions on Rd, f \u223c GP(\u03bc, k), where \u03bc : Rd \u2192 R is a mean field and k : Rd \u00d7 Rd \u2192 R is a symmetric and positive-definite covariance kernel.",
+        "We propose scalable methods for GPs with derivative information built on the structured kernel interpolation (SKI) framework [<a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>], which uses local interpolation to map scattered data onto a large grid of inducing points, enabling fast MVMs using FFTs. As the uniform grids in SKI scale poorly to high-dimensional spaces, we extend the structured kernel interpolation for products (SKIP) method, which approximates a high-dimensional product kernel as a Hadamard product of low rank Lanczos decompositions [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>].",
+        "We extend SKI to incorporate derivative information, enabling O complexity learning and O(1) prediction per test points, relying only on fast MVM with the kernel matrix.",
+        "The standard direct method to evaluate (1) and its derivatives with respect to the hyperparameters uses the Cholesky factorization of KXX , leading to O(n3) kernel learning that does not scale beyond a few thousand points.",
+        "We do this for the SKI and SKIP kernels below, but our general approach applies to any differentiable approximate MVM.",
+        "Assuming a compatible approximation scheme, this structure is inherited by the SKI approximation for the kernel matrix without derivatives, K \u2248 (W1K1W1T ) (W2K2W2T ) .",
+        "Because we assume gradient information, dimensionality reduction based on active subspaces is a natural pre-processing phase before applying D-SKI and D-SKIP.",
+        "We use these kernels in tandem with D-SKI and D-SKIP to achieve the fast MVMs derived in \u00a73.",
+        "We apply D-SKI and D-SKIP on the 3D and 6D active subspace, respectively, using 5000 training points, and compare the prediction error against D-SE with 190 training points because of our scaling advantage.",
+        "1: while Budget not exhausted do 2: Calculate active subspace projection P \u2208 RD\u00d7d using sampled gradients 3: Optimize acquisition function, un+1 = arg max A(u) with xn+1 = P un+1 4: Sample point xn+1, value fn+1, and gradient \u2207fn+1 5: Update data Di+1 = Di \u222a {xn+1, fn+1, \u2207fn+1} 6: Update hyperparameters of GP with gradient defined by kernel k(P T x, P T x ) 7: end",
+        "Fitting, and optimization of the acquisition function all occur in this low-dimensional subspace.",
+        "We have discussed practical details \u2014preconditioning is necessary to guarantee convergence of iterative methods and active subspace calculation reveals low-dimensional structure when gradients are available.",
+        "We present several experiments with kernel learning, dimensionality reduction, terrain reconstruction, implicit surface fitting, and scalable Bayesian optimization with gradients."
+    ],
+    "headline": "We propose iterative solvers using fast O matrix-vector multiplications , together with pivoted Cholesky preconditioning that cuts the iterations to convergence by several orders of magnitude, allowing for fast kernel learning and prediction",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Costas Bekas, Efi Kokiopoulou, and Yousef Saad. An estimator for the diagonal of a matrix. Applied Numerical Mathematics, 57(11-12):1214\u20131229, November 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bekas%2C%20Costas%20Kokiopoulou%2C%20Efi%20Saad%2C%20Yousef%20An%20estimator%20for%20the%20diagonal%20of%20a%20matrix%202007-11",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bekas%2C%20Costas%20Kokiopoulou%2C%20Efi%20Saad%2C%20Yousef%20An%20estimator%20for%20the%20diagonal%20of%20a%20matrix%202007-11"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Einat Neumann Ben-Ari and David M Steinberg. Modeling data from computer experiments: an empirical comparison of kriging with MARS and projection pursuit regression. Quality Engineering, 19(4):327\u2013338, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ben-Ari%2C%20Einat%20Neumann%20Steinberg%2C%20David%20M.%20Modeling%20data%20from%20computer%20experiments%3A%20an%20empirical%20comparison%20of%20kriging%20with%20MARS%20and%20projection%20pursuit%20regression%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ben-Ari%2C%20Einat%20Neumann%20Steinberg%2C%20David%20M.%20Modeling%20data%20from%20computer%20experiments%3A%20an%20empirical%20comparison%20of%20kriging%20with%20MARS%20and%20projection%20pursuit%20regression%202007"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Puget Sound LiDAR Consortium. Mount Saint Helens LiDAR data. University of Washington, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20Puget%20Sound%20LiDAR%20Consortium.%20Mount%20Saint%20Helens%20LiDAR%20data%202002"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Paul G. Constantine. Active subspaces: Emerging ideas for dimension reduction in parameter studies. SIAM, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Constantine%2C%20Paul%20G.%20Active%20subspaces%3A%20Emerging%20ideas%20for%20dimension%20reduction%20in%20parameter%20studies%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Constantine%2C%20Paul%20G.%20Active%20subspaces%3A%20Emerging%20ideas%20for%20dimension%20reduction%20in%20parameter%20studies%202015"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Kurt Cutajar, Michael Osborne, John Cunningham, and Maurizio Filippone. Preconditioning kernel matrices. In Proceedings of the International Conference on Machine Learning (ICML), pages 2529\u20132538, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cutajar%2C%20Kurt%20Osborne%2C%20Michael%20Cunningham%2C%20John%20Filippone%2C%20Maurizio%20Preconditioning%20kernel%20matrices%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cutajar%2C%20Kurt%20Osborne%2C%20Michael%20Cunningham%2C%20John%20Filippone%2C%20Maurizio%20Preconditioning%20kernel%20matrices%202016"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Kun Dong, David Eriksson, Hannes Nickisch, David Bindel, and Andrew G. Wilson. Scalable log determinants for Gaussian process kernel learning. In Advances in Neural Information Processing Systems (NIPS), pages 6330\u20136340, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dong%2C%20Kun%20Eriksson%2C%20David%20Nickisch%2C%20Hannes%20Bindel%2C%20David%20Scalable%20log%20determinants%20for%20Gaussian%20process%20kernel%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dong%2C%20Kun%20Eriksson%2C%20David%20Nickisch%2C%20Hannes%20Bindel%2C%20David%20Scalable%20log%20determinants%20for%20Gaussian%20process%20kernel%20learning%202017"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Alexander Forrester, Andy Keane, et al. Engineering design via surrogate modelling: a practical guide. John Wiley & Sons, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Forrester%2C%20Alexander%20Keane%2C%20Andy%20Engineering%20design%20via%20surrogate%20modelling%3A%20a%20practical%20guide%202008"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Jacob R Gardner, Geoff Pleiss, Ruihan Wu, Kilian Q Weinberger, and Andrew Gordon Wilson. Product kernel interpolation for scalable Gaussian processes. In Artificial Intelligence and Statistics (AISTATS), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gardner%2C%20Jacob%20R.%20Pleiss%2C%20Geoff%20Wu%2C%20Ruihan%20Weinberger%2C%20Kilian%20Q.%20Product%20kernel%20interpolation%20for%20scalable%20Gaussian%20processes%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gardner%2C%20Jacob%20R.%20Pleiss%2C%20Geoff%20Wu%2C%20Ruihan%20Weinberger%2C%20Kilian%20Q.%20Product%20kernel%20interpolation%20for%20scalable%20Gaussian%20processes%202018"
+        },
+        {
+            "id": "9",
+            "entry": "[9] David Gingras, Tom Lamarche, Jean-Luc Bedwani, and \u00c9rick Dupuis. Rough terrain reconstruction for rover motion planning. In Proceedings of the Canadian Conference on Computer and Robot Vision (CRV), pages 191\u2013198. IEEE, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gingras%2C%20David%20Lamarche%2C%20Tom%20Bedwani%2C%20Jean-Luc%20Dupuis%2C%20%C3%89rick%20Rough%20terrain%20reconstruction%20for%20rover%20motion%20planning%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gingras%2C%20David%20Lamarche%2C%20Tom%20Bedwani%2C%20Jean-Luc%20Dupuis%2C%20%C3%89rick%20Rough%20terrain%20reconstruction%20for%20rover%20motion%20planning%202010"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Raia Hadsell, J. Andrew Bagnell, Daniel F. Huber, and Martial Hebert. Space-carving kernels for accurate rough terrain estimation. International Journal of Robotics Research, 29:981\u2013996, July 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Raia%20Hadsell%2C%20J.Andrew%20Bagnell%20Huber%2C%20Daniel%20F.%20Hebert%2C%20Martial%20Space-carving%20kernels%20for%20accurate%20rough%20terrain%20estimation%202010-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Raia%20Hadsell%2C%20J.Andrew%20Bagnell%20Huber%2C%20Daniel%20F.%20Hebert%2C%20Martial%20Space-carving%20kernels%20for%20accurate%20rough%20terrain%20estimation%202010-07"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Insu Han, Dmitry Malioutov, and Jinwoo Shin. Large-scale log-determinant computation through stochastic Chebyshev expansions. In Proceedings of the International Conference on Machine Learning (ICML), pages 908\u2013917, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Han%2C%20Insu%20Malioutov%2C%20Dmitry%20Shin%2C%20Jinwoo%20Large-scale%20log-determinant%20computation%20through%20stochastic%20Chebyshev%20expansions%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Han%2C%20Insu%20Malioutov%2C%20Dmitry%20Shin%2C%20Jinwoo%20Large-scale%20log-determinant%20computation%20through%20stochastic%20Chebyshev%20expansions%202015"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Helmut Harbrecht, Michael Peters, and Reinhold Schneider. On the low-rank approximation by the pivoted Cholesky decomposition. Applied Numerical Mathematics, 62(4):428\u2013440, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Harbrecht%2C%20Helmut%20Peters%2C%20Michael%20Schneider%2C%20Reinhold%20On%20the%20low-rank%20approximation%20by%20the%20pivoted%20Cholesky%20decomposition%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Harbrecht%2C%20Helmut%20Peters%2C%20Michael%20Schneider%2C%20Reinhold%20On%20the%20low-rank%20approximation%20by%20the%20pivoted%20Cholesky%20decomposition%202012"
+        },
+        {
+            "id": "13",
+            "entry": "[13] James Hensman, Nicol\u00f3 Fusi, and Neil D. Lawrence. Gaussian processes for big data. In Proceedings of the Conference on Uncertainty in Artificial Intelligence (UAI), 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=James%20Hensman%2C%20Nicol%C3%B3%20Fusi%20Lawrence%2C%20Neil%20D.%20Gaussian%20processes%20for%20big%20data%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=James%20Hensman%2C%20Nicol%C3%B3%20Fusi%20Lawrence%2C%20Neil%20D.%20Gaussian%20processes%20for%20big%20data%202013"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Robert Keys. Cubic convolution interpolation for digital image processing. IEEE Transactions on Acoustics, Speech, and Signal Processing, 29(6):1153\u20131160, 1981.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Keys%2C%20Robert%20Cubic%20convolution%20interpolation%20for%20digital%20image%20processing%201981",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Keys%2C%20Robert%20Cubic%20convolution%20interpolation%20for%20digital%20image%20processing%201981"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Kurt Konolige, Motilal Agrawal, and Joan Sola. Large-scale visual odometry for rough terrain. In Robotics Research, pages 201\u2013212.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Konolige%2C%20Kurt%20Agrawal%2C%20Motilal%20Sola%2C%20Joan%20Large-scale%20visual%20odometry%20for%20rough%20terrain",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Konolige%2C%20Kurt%20Agrawal%2C%20Motilal%20Sola%2C%20Joan%20Large-scale%20visual%20odometry%20for%20rough%20terrain"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Quoc Le, Tamas Sarlos, and Alexander Smola. Fastfood \u2013 computing Hilbert space expansions in loglinear time. In Proceedings of the 30th International Conference on Machine Learning, pages 244\u2013252, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Le%2C%20Quoc%20Sarlos%2C%20Tamas%20Smola%2C%20Alexander%20Fastfood%20%E2%80%93%20computing%20Hilbert%20space%20expansions%20in%20loglinear%20time%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Le%2C%20Quoc%20Sarlos%2C%20Tamas%20Smola%2C%20Alexander%20Fastfood%20%E2%80%93%20computing%20Hilbert%20space%20expansions%20in%20loglinear%20time%202013"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Ives Macedo, Joao Paulo Gois, and Luiz Velho. Hermite radial basis functions implicits. Computer Graphics Forum, 30(1):27\u201342, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Macedo%2C%20Ives%20Gois%2C%20Joao%20Paulo%20Velho%2C%20Luiz%20Hermite%20radial%20basis%20functions%20implicits%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Macedo%2C%20Ives%20Gois%2C%20Joao%20Paulo%20Velho%2C%20Luiz%20Hermite%20radial%20basis%20functions%20implicits%202011"
+        },
+        {
+            "id": "18",
+            "entry": "[18] David J. C. MacKay. Information theory, inference and learning algorithms. Cambridge University Press, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=MacKay%2C%20David%20J.C.%20Information%20theory%2C%20inference%20and%20learning%20algorithms%202003"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Erik H. W. Meijering, Karel J. Zuiderveld, and Max A. Viergever. Image reconstruction by convolution with symmetrical piecewise nth-order polynomial kernels. IEEE Transactions on Image Processing, 8(2):192\u2013201, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Meijering%2C%20Erik%20H.W.%20Zuiderveld%2C%20Karel%20J.%20Viergever%2C%20Max%20A.%20Image%20reconstruction%20by%20convolution%20with%20symmetrical%20piecewise%20nth-order%20polynomial%20kernels%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Meijering%2C%20Erik%20H.W.%20Zuiderveld%2C%20Karel%20J.%20Viergever%2C%20Max%20A.%20Image%20reconstruction%20by%20convolution%20with%20symmetrical%20piecewise%20nth-order%20polynomial%20kernels%201999"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Joaquin Qui\u00f1onero-Candela and Carl Edward Rasmussen. A unifying view of sparse approximate Gaussian process regression. Journal of Machine Learning Research, 6(Dec):1939\u20131959, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Qui%C3%B1onero-Candela%2C%20Joaquin%20Rasmussen%2C%20Carl%20Edward%20A%20unifying%20view%20of%20sparse%20approximate%20Gaussian%20process%20regression%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Qui%C3%B1onero-Candela%2C%20Joaquin%20Rasmussen%2C%20Carl%20Edward%20A%20unifying%20view%20of%20sparse%20approximate%20Gaussian%20process%20regression%202005"
+        },
+        {
+            "id": "21",
+            "entry": "[21] C. E. Rasmussen and C. K. I. Williams. Gaussian processes for machine learning. The MIT Press, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rasmussen%2C%20C.E.%20Williams%2C%20C.K.I.%20Gaussian%20processes%20for%20machine%20learning%202006"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Carl Edward Rasmussen and Zoubin Ghahramani. Occam\u2019s razor. In Advances in Neural Information Processing Systems (NIPS), pages 294\u2013300, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Carl%20Edward%20Rasmussen%20and%20Zoubin%20Ghahramani%20Occams%20razor%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20NIPS%20pages%20294300%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Carl%20Edward%20Rasmussen%20and%20Zoubin%20Ghahramani%20Occams%20razor%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20NIPS%20pages%20294300%202001"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Edward Snelson and Zoubin Ghahramani. Sparse Gaussian processes using pseudo-inputs. In Advances in Neural Information Processing Systems (NIPS), pages 1257\u20131264, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Snelson%2C%20Edward%20Ghahramani%2C%20Zoubin%20Sparse%20Gaussian%20processes%20using%20pseudo-inputs%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Snelson%2C%20Edward%20Ghahramani%2C%20Zoubin%20Sparse%20Gaussian%20processes%20using%20pseudo-inputs%202005"
+        },
+        {
+            "id": "24",
+            "entry": "[24] S. Surjanovic and D. Bingham. Virtual library of simulation experiments: Test functions and datasets. http://www.sfu.ca/ssurjano, 2018.",
+            "url": "http://www.sfu.ca/ssurjano"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Shashanka Ubaru, Jie Chen, and Yousef Saad. Fast estimation of tr(F (A)) via stochastic Lanczos quadrature. SIAM Journal on Matrix Analysis and Applications, 38(4):1075\u20131099, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ubaru%2C%20Shashanka%20Chen%2C%20Jie%20Saad%2C%20Yousef%20Fast%20estimation%20of%20tr%28F%20%28A%29%29%20via%20stochastic%20Lanczos%20quadrature%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ubaru%2C%20Shashanka%20Chen%2C%20Jie%20Saad%2C%20Yousef%20Fast%20estimation%20of%20tr%28F%20%28A%29%29%20via%20stochastic%20Lanczos%20quadrature%202017"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Ziyu Wang, Masrour Zoghi, Frank Hutter, David Matheson, Nando De Freitas, et al. Bayesian optimization in high dimensions via random embeddings. In Proceedings of the International Joint Conferences on Artificial Intelligence, pages 1778\u20131784, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Ziyu%20Zoghi%2C%20Masrour%20Hutter%2C%20Frank%20Matheson%2C%20David%20Bayesian%20optimization%20in%20high%20dimensions%20via%20random%20embeddings%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Ziyu%20Zoghi%2C%20Masrour%20Hutter%2C%20Frank%20Matheson%2C%20David%20Bayesian%20optimization%20in%20high%20dimensions%20via%20random%20embeddings%202013"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Andrew G Wilson, Christoph Dann, Chris Lucas, and Eric P Xing. The human kernel. In Advances in neural information processing systems, pages 2854\u20132862, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wilson%2C%20Andrew%20G.%20Dann%2C%20Christoph%20Lucas%2C%20Chris%20and%20Eric%20P%20Xing.%20The%20human%20kernel%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wilson%2C%20Andrew%20G.%20Dann%2C%20Christoph%20Lucas%2C%20Chris%20and%20Eric%20P%20Xing.%20The%20human%20kernel%202015"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Andrew G. Wilson and Hannes Nickisch. Kernel interpolation for scalable structured Gaussian processes (KISS-GP). Proceedings of the International Conference on Machine Learning (ICML), pages 1775\u20131784, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wilson%2C%20Andrew%20G.%20Nickisch%2C%20Hannes%20Kernel%20interpolation%20for%20scalable%20structured%20Gaussian%20processes%20%28KISS-GP%29%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wilson%2C%20Andrew%20G.%20Nickisch%2C%20Hannes%20Kernel%20interpolation%20for%20scalable%20structured%20Gaussian%20processes%20%28KISS-GP%29%202015"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Jian Wu, Matthias Poloczek, Andrew G Wilson, and Peter Frazier. Bayesian optimization with gradients. In Advances in Neural Information Processing Systems (NIPS), pages 5273\u20135284, 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20Jian%20Poloczek%2C%20Matthias%20Wilson%2C%20Andrew%20G.%20Frazier%2C%20Peter%20Bayesian%20optimization%20with%20gradients%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20Jian%20Poloczek%2C%20Matthias%20Wilson%2C%20Andrew%20G.%20Frazier%2C%20Peter%20Bayesian%20optimization%20with%20gradients%202017"
+        }
+    ]
+}

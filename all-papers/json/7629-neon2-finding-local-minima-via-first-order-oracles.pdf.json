@@ -1,0 +1,267 @@
+{
+    "filename": "7629-neon2-finding-local-minima-via-first-order-oracles.pdf",
+    "metadata": {
+        "title": "NEON2: Finding Local Minima via First-Order Oracles",
+        "author": "Zeyuan Allen-Zhu, Yuanzhi Li",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7629-neon2-finding-local-minima-via-first-order-oracles.pdf"
+        },
+        "abstract": "We propose a reduction for non-convex optimization that can (1) turn an stationary-point finding algorithm into an local-minimum finding one, and (2) replace the Hessian-vector product computations with only gradient computations. It works both in the stochastic and the deterministic settings, without hurting the algorithm\u2019s performance. As applications, our reduction turns Natasha2 into a first-order method without hurting its theoretical performance. It also converts SGD, GD, SCSG, and SVRG into algorithms finding approximate local minima, outperforming some best known results."
+    },
+    "keywords": [
+        {
+            "term": "vector product",
+            "url": "https://en.wikipedia.org/wiki/vector_product"
+        },
+        {
+            "term": "local minima",
+            "url": "https://en.wikipedia.org/wiki/local_minima"
+        },
+        {
+            "term": "positive semidefinite",
+            "url": "https://en.wikipedia.org/wiki/positive_semidefinite"
+        },
+        {
+            "term": "variance reduction",
+            "url": "https://en.wikipedia.org/wiki/variance_reduction"
+        },
+        {
+            "term": "gradient descent",
+            "url": "https://en.wikipedia.org/wiki/gradient_descent"
+        },
+        {
+            "term": "linear time",
+            "url": "https://en.wikipedia.org/wiki/linear_time"
+        },
+        {
+            "term": "first order",
+            "url": "https://en.wikipedia.org/wiki/first_order"
+        },
+        {
+            "term": "stochastic gradient descent",
+            "url": "https://en.wikipedia.org/wiki/stochastic_gradient_descent"
+        },
+        {
+            "term": "local minimum",
+            "url": "https://en.wikipedia.org/wiki/local_minimum"
+        }
+    ],
+    "highlights": [
+        "Nonconvex optimization has become increasingly popular due its ability to capture modern machine learning tasks in large scale",
+        "Motivated by such large-scale machine learning applications, we wish to design faster first-order non-convex optimization methods that outperform the performance of gradient descent, both in the online and offline settings",
+        "In this high-level introduction, we focus only on the case when \u03b4 = \u03b51/C for some constant C.\n3Hessian-free methods are useful because when fi(\u00b7) is explicitly given, computing its gradient is in the same complexity as computing its Hessian-vector product [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>] [<a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>], using backpropagation",
+        "Second-order Lipschitz smoothness is needed for finding approximate local minima.\n1.2",
+        "We show how Neon2 can be applied to existing algorithms such as stochastic gradient decent, gradient descent, SCSG, SVRG, Natasha2, CDHS",
+        "To apply Neon2 to turn stochastic gradient decent into an algorithm finding approximate local minima, we propose the following process Neon2+stochastic gradient decent"
+    ],
+    "key_statements": [
+        "Nonconvex optimization has become increasingly popular due its ability to capture modern machine learning tasks in large scale",
+        "Motivated by such large-scale machine learning applications, we wish to design faster first-order non-convex optimization methods that outperform the performance of gradient descent, both in the online and offline settings",
+        "In this high-level introduction, we focus only on the case when \u03b4 = \u03b51/C for some constant C.\n3Hessian-free methods are useful because when fi(\u00b7) is explicitly given, computing its gradient is in the same complexity as computing its Hessian-vector product [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>] [<a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>], using backpropagation",
+        "Second-order Lipschitz smoothness is needed for finding approximate local minima.\n1.2",
+        "We show how Neon2 can be applied to existing algorithms such as stochastic gradient decent, gradient descent, SCSG, SVRG, Natasha2, CDHS",
+        "To apply Neon2 to turn stochastic gradient decent into an algorithm finding approximate local minima, we propose the following process Neon2+stochastic gradient decent"
+    ],
+    "summary": [
+        "Nonconvex optimization has become increasingly popular due its ability to capture modern machine learning tasks in large scale.",
+        "Hessian-vector methods for local minima.",
+        "NC-search can be solved by Oja\u2019s algorithm [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>] which costs O(1/\u03b42) computations of Hessian-vector products.",
+        "We propose a method Neon2online which solves the NC-search problem via only stochastic first-order updates.",
+        "Our Neon2online algorithm solves NC-search using O(1/\u03b42) stochastic gradients, without Hessian-vector product computations.",
+        "The independent work Neon [<a class=\"ref-link\" id=\"c31\" href=\"#r31\">31</a>] applies to the offline setting, and needs O(1/\u03b4) full gradients.",
+        "Neon2det turns CDHS into a first-order method without hurting its performance: it finds an (\u03b5, \u03b4)-approximate local minimum in O",
+        "Recall one can solve the NC-search\u221aproblem in the offline setting by the shift-andinvert [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>] method, using O(n + n3/4/ \u03b4) computations of Hessian-vector products.",
+        "Neon2finite turns CDHS into a first-order method without hurting its performance: it finds an (\u03b5, \u03b4)-approximate local minimum in T = O",
+        "Second-order Lipschitz smoothness is needed for finding approximate local minima.",
+        "Given any first-order method that finds stationary points, we can hope for using the NC-search routine to identify whether or not its output x satisfies \u22072f (x) \u2212\u03b4I.",
+        "In the independent work of Xu and Yang [<a class=\"ref-link\" id=\"c31\" href=\"#r31\">31</a>], they applied their Neon method for NC-search, and turned SGD and SCSG into first-order methods finding approximate local minima.",
+        "To apply power method to B, one needs to compute matrix inversion By =\u22121y for arbitrary vectors y \u2208 Rd. The stability of SI ensures that it suffices to compute By to some sufficiently high accuracy.7",
+        "One such method is KatyushaX, which directly accelerates the so-called SVRG method using momentum, and finds z using O(n + n3/4 L/\u03b4) computations of stochastic gradients.8 Whenever a stochastic gradient \u2207gi(z) =)z + y is needed at some point z \u2208 Rd for some random i \u2208 [n], instead of evaluating it exactly, we use \u2207fi(x0 + z) \u2212 \u2207fi(x0) to approximate \u22072fi(x0) \u00b7 z.",
+        "We show how Neon2 can be applied to existing algorithms such as SGD, GD, SCSG, SVRG, Natasha2, CDHS.",
+        "To apply Neon2 to turn SGD into an algorithm finding approximate local minima, we propose the following process Neon2+SGD.",
+        "With probability at least 1 \u2212 p, Neon2+SGD outputs an (\u03b5, \u03b4)-approximate local minimum in gradient complexity T = O",
+        "The applications to Natasha2 and CDHS are trivial because NC-search was already a subroutine required by both algorithms, so one can directly replace them with Neon2 of this paper."
+    ],
+    "headline": "We propose a reduction for non-convex optimization that can  turn an stationary-point finding algorithm into an local-minimum finding one, and  replace the Hessian-vector product computations with only gradient computations",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Naman Agarwal, Zeyuan Allen-Zhu, Brian Bullins, Elad Hazan, and Tengyu Ma. Finding Approximate Local Minima for Nonconvex Optimization in Linear Time. In STOC, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Agarwal%2C%20Naman%20Allen-Zhu%2C%20Zeyuan%20Bullins%2C%20Brian%20Hazan%2C%20Elad%20Finding%20Approximate%20Local%20Minima%20for%20Nonconvex%20Optimization%20in%20Linear%20Time%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Agarwal%2C%20Naman%20Allen-Zhu%2C%20Zeyuan%20Bullins%2C%20Brian%20Hazan%2C%20Elad%20Finding%20Approximate%20Local%20Minima%20for%20Nonconvex%20Optimization%20in%20Linear%20Time%202017"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Zeyuan Allen-Zhu. Natasha 2: Faster Non-Convex Optimization Than SGD. In NIPS, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Allen-Zhu%2C%20Zeyuan%20Natasha%202%3A%20Faster%20Non-Convex%20Optimization%20Than%20SGD%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Allen-Zhu%2C%20Zeyuan%20Natasha%202%3A%20Faster%20Non-Convex%20Optimization%20Than%20SGD%202018"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Zeyuan Allen-Zhu. Katyusha X: Practical Momentum Method for Stochastic Sum-ofNonconvex Optimization. In ICML, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Allen-Zhu%2C%20Zeyuan%20Katyusha%20X%3A%20Practical%20Momentum%20Method%20for%20Stochastic%20Sum-ofNonconvex%20Optimization%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Allen-Zhu%2C%20Zeyuan%20Katyusha%20X%3A%20Practical%20Momentum%20Method%20for%20Stochastic%20Sum-ofNonconvex%20Optimization%202018"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Zeyuan Allen-Zhu and Elad Hazan. Variance Reduction for Faster Non-Convex Optimization. In ICML, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Allen-Zhu%2C%20Zeyuan%20Hazan%2C%20Elad%20Variance%20Reduction%20for%20Faster%20Non-Convex%20Optimization%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Allen-Zhu%2C%20Zeyuan%20Hazan%2C%20Elad%20Variance%20Reduction%20for%20Faster%20Non-Convex%20Optimization%202016"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Zeyuan Allen-Zhu and Yuanzhi Li. LazySVD: Even Faster SVD Decomposition Yet Without Agonizing Pain. In NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Allen-Zhu%2C%20Zeyuan%20Li%2C%20Yuanzhi%20LazySVD%3A%20Even%20Faster%20SVD%20Decomposition%20Yet%20Without%20Agonizing%20Pain%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Allen-Zhu%2C%20Zeyuan%20Li%2C%20Yuanzhi%20LazySVD%3A%20Even%20Faster%20SVD%20Decomposition%20Yet%20Without%20Agonizing%20Pain%202016"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Zeyuan Allen-Zhu and Yuanzhi Li. Faster Principal Component Regression and Stable Matrix Chebyshev Approximation. In ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Allen-Zhu%2C%20Zeyuan%20Li%2C%20Yuanzhi%20Faster%20Principal%20Component%20Regression%20and%20Stable%20Matrix%20Chebyshev%20Approximation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Allen-Zhu%2C%20Zeyuan%20Li%2C%20Yuanzhi%20Faster%20Principal%20Component%20Regression%20and%20Stable%20Matrix%20Chebyshev%20Approximation%202017"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Zeyuan Allen-Zhu and Yuanzhi Li. Follow the Compressed Leader: Faster Online Learning of Eigenvectors and Faster MMWU. In ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Allen-Zhu%2C%20Zeyuan%20Li%2C%20Yuanzhi%20Follow%20the%20Compressed%20Leader%3A%20Faster%20Online%20Learning%20of%20Eigenvectors%20and%20Faster%20MMWU%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Allen-Zhu%2C%20Zeyuan%20Li%2C%20Yuanzhi%20Follow%20the%20Compressed%20Leader%3A%20Faster%20Online%20Learning%20of%20Eigenvectors%20and%20Faster%20MMWU%202017"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Yair Carmon, John C. Duchi, Oliver Hinder, and Aaron Sidford. Accelerated Methods for Non-Convex Optimization. ArXiv e-prints, abs/1611.00756, November 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.00756"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Yair Carmon, Oliver Hinder, John C. Duchi, and Aaron Sidford. \u201dConvex Until Proven Guilty\u201d: Dimension-Free Acceleration of Gradient Descent on Non-Convex Functions. In ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Carmon%2C%20Yair%20Hinder%2C%20Oliver%20Duchi%2C%20John%20C.%20and%20Aaron%20Sidford.%E2%80%9DConvex%20Until%20Proven%20Guilty%E2%80%9D%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Carmon%2C%20Yair%20Hinder%2C%20Oliver%20Duchi%2C%20John%20C.%20and%20Aaron%20Sidford.%E2%80%9DConvex%20Until%20Proven%20Guilty%E2%80%9D%202017"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Anna Choromanska, Mikael Henaff, Michael Mathieu, Gerard Ben Arous, and Yann LeCun. The loss surfaces of multilayer networks. In AISTATS, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Choromanska%2C%20Anna%20Henaff%2C%20Mikael%20Mathieu%2C%20Michael%20Arous%2C%20Gerard%20Ben%20The%20loss%20surfaces%20of%20multilayer%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Choromanska%2C%20Anna%20Henaff%2C%20Mikael%20Mathieu%2C%20Michael%20Arous%2C%20Gerard%20Ben%20The%20loss%20surfaces%20of%20multilayer%20networks%202015"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Yann N Dauphin, Razvan Pascanu, Caglar Gulcehre, Kyunghyun Cho, Surya Ganguli, and Yoshua Bengio. Identifying and attacking the saddle point problem in high-dimensional nonconvex optimization. In NIPS, pages 2933\u20132941, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dauphin%2C%20Yann%20N.%20Pascanu%2C%20Razvan%20Gulcehre%2C%20Caglar%20Cho%2C%20Kyunghyun%20Identifying%20and%20attacking%20the%20saddle%20point%20problem%20in%20high-dimensional%20nonconvex%20optimization%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dauphin%2C%20Yann%20N.%20Pascanu%2C%20Razvan%20Gulcehre%2C%20Caglar%20Cho%2C%20Kyunghyun%20Identifying%20and%20attacking%20the%20saddle%20point%20problem%20in%20high-dimensional%20nonconvex%20optimization%202014"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Aaron Defazio, Francis Bach, and Simon Lacoste-Julien. SAGA: A Fast Incremental Gradient Method With Support for Non-Strongly Convex Composite Objectives. In NIPS, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Defazio%2C%20Aaron%20Bach%2C%20Francis%20Lacoste-Julien%2C%20Simon%20SAGA%3A%20A%20Fast%20Incremental%20Gradient%20Method%20With%20Support%20for%20Non-Strongly%20Convex%20Composite%20Objectives%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Defazio%2C%20Aaron%20Bach%2C%20Francis%20Lacoste-Julien%2C%20Simon%20SAGA%3A%20A%20Fast%20Incremental%20Gradient%20Method%20With%20Support%20for%20Non-Strongly%20Convex%20Composite%20Objectives%202014"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Dan Garber, Elad Hazan, Chi Jin, Sham M. Kakade, Cameron Musco, Praneeth Netrapalli, and Aaron Sidford. Robust shift-and-invert preconditioning: Faster and more sample efficient algorithms for eigenvector computation. In ICML, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Garber%2C%20Dan%20Hazan%2C%20Elad%20Jin%2C%20Chi%20Kakade%2C%20Sham%20M.%20Robust%20shift-and-invert%20preconditioning%3A%20Faster%20and%20more%20sample%20efficient%20algorithms%20for%20eigenvector%20computation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Garber%2C%20Dan%20Hazan%2C%20Elad%20Jin%2C%20Chi%20Kakade%2C%20Sham%20M.%20Robust%20shift-and-invert%20preconditioning%3A%20Faster%20and%20more%20sample%20efficient%20algorithms%20for%20eigenvector%20computation%202016"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Rong Ge, Furong Huang, Chi Jin, and Yang Yuan. Escaping from saddle points\u2014online stochastic gradient for tensor decomposition. In Proceedings of the 28th Annual Conference on Learning Theory, COLT 2015, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ge%2C%20Rong%20Huang%2C%20Furong%20Jin%2C%20Chi%20Yuan%2C%20Yang%20Escaping%20from%20saddle%20points%E2%80%94online%20stochastic%20gradient%20for%20tensor%20decomposition",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ge%2C%20Rong%20Huang%2C%20Furong%20Jin%2C%20Chi%20Yuan%2C%20Yang%20Escaping%20from%20saddle%20points%E2%80%94online%20stochastic%20gradient%20for%20tensor%20decomposition"
+        },
+        {
+            "id": "15",
+            "entry": "[15] I. J. Goodfellow, O. Vinyals, and A. M. Saxe. Qualitatively characterizing neural network optimization problems. ArXiv e-prints, December 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goodfellow%2C%20I.J.%20Vinyals%2C%20O.%20Saxe%2C%20A.M.%20Qualitatively%20characterizing%20neural%20network%20optimization%20problems.%20ArXiv%20e-prints%202014-12"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Chi Jin, Rong Ge, Praneeth Netrapalli, Sham M Kakade, and Michael I Jordan. How to Escape Saddle Points Efficiently. In ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jin%2C%20Chi%20Ge%2C%20Rong%20Netrapalli%2C%20Praneeth%20Kakade%2C%20Sham%20M.%20How%20to%20Escape%20Saddle%20Points%20Efficiently%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jin%2C%20Chi%20Ge%2C%20Rong%20Netrapalli%2C%20Praneeth%20Kakade%2C%20Sham%20M.%20How%20to%20Escape%20Saddle%20Points%20Efficiently%202017"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Rie Johnson and Tong Zhang. Accelerating stochastic gradient descent using predictive variance reduction. In Advances in Neural Information Processing Systems, NIPS 2013, pages 315\u2013323, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Johnson%2C%20Rie%20Zhang%2C%20Tong%20Accelerating%20stochastic%20gradient%20descent%20using%20predictive%20variance%20reduction%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Johnson%2C%20Rie%20Zhang%2C%20Tong%20Accelerating%20stochastic%20gradient%20descent%20using%20predictive%20variance%20reduction%202013"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Cornelius Lanczos. An iteration method for the solution of the eigenvalue problem of linear differential and integral operators. Journal of Research of the National Bureau of Standards, 45(4), 1950.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lanczos%2C%20Cornelius%20An%20iteration%20method%20for%20the%20solution%20of%20the%20eigenvalue%20problem%20of%20linear%20differential%20and%20integral%20operators%201950",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lanczos%2C%20Cornelius%20An%20iteration%20method%20for%20the%20solution%20of%20the%20eigenvalue%20problem%20of%20linear%20differential%20and%20integral%20operators%201950"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Lihua Lei, Cheng Ju, Jianbo Chen, and Michael I Jordan. Nonconvex Finite-Sum Optimization Via SCSG Methods. In NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lei%2C%20Lihua%20Ju%2C%20Cheng%20Chen%2C%20Jianbo%20Jordan%2C%20Michael%20I.%20Nonconvex%20Finite-Sum%20Optimization%20Via%20SCSG%20Methods%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lei%2C%20Lihua%20Ju%2C%20Cheng%20Chen%2C%20Jianbo%20Jordan%2C%20Michael%20I.%20Nonconvex%20Finite-Sum%20Optimization%20Via%20SCSG%20Methods%202017"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Yurii Nesterov. Introductory Lectures on Convex Programming Volume: A Basic course, volume I. Kluwer Academic Publishers, 2004. ISBN 1402075537.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nesterov%2C%20Yurii%20Introductory%20Lectures%20on%20Convex%20Programming%20Volume%3A%20A%20Basic%20course%2C%20volume%20I%202004"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Yurii Nesterov and Boris T. Polyak. Cubic regularization of newton method and its global performance. Mathematical Programming, 108(1):177\u2013205, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nesterov%2C%20Yurii%20Polyak%2C%20Boris%20T.%20Cubic%20regularization%20of%20newton%20method%20and%20its%20global%20performance%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nesterov%2C%20Yurii%20Polyak%2C%20Boris%20T.%20Cubic%20regularization%20of%20newton%20method%20and%20its%20global%20performance%202006"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Erkki Oja. Simplified neuron model as a principal component analyzer. Journal of mathematical biology, 15(3):267\u2013273, 1982.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Oja%2C%20Erkki%20Simplified%20neuron%20model%20as%20a%20principal%20component%20analyzer%201982",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Oja%2C%20Erkki%20Simplified%20neuron%20model%20as%20a%20principal%20component%20analyzer%201982"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Barak A Pearlmutter. Fast exact multiplication by the hessian. Neural computation, 6(1): 147\u2013160, 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pearlmutter%2C%20Barak%20A.%20Fast%20exact%20multiplication%20by%20the%20hessian%201994",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pearlmutter%2C%20Barak%20A.%20Fast%20exact%20multiplication%20by%20the%20hessian%201994"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Sashank J. Reddi, Ahmed Hefny, Suvrit Sra, Barnabas Poczos, and Alex Smola. Stochastic variance reduction for nonconvex optimization. In ICML, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Reddi%2C%20Sashank%20J.%20Hefny%2C%20Ahmed%20Sra%2C%20Suvrit%20Poczos%2C%20Barnabas%20Stochastic%20variance%20reduction%20for%20nonconvex%20optimization%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Reddi%2C%20Sashank%20J.%20Hefny%2C%20Ahmed%20Sra%2C%20Suvrit%20Poczos%2C%20Barnabas%20Stochastic%20variance%20reduction%20for%20nonconvex%20optimization%202016"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Sashank J Reddi, Manzil Zaheer, Suvrit Sra, Barnabas Poczos, Francis Bach, Ruslan Salakhutdinov, and Alexander J Smola. A generic approach for escaping saddle points. ArXiv e-prints, abs/1709.01434, September 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1709.01434"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Youcef Saad. Numerical methods for large eigenvalue problems. Manchester University Press, 1992.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Saad%2C%20Youcef%20Numerical%20methods%20for%20large%20eigenvalue%20problems%201992"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Mark Schmidt, Nicolas Le Roux, and Francis Bach. Minimizing finite sums with the stochastic average gradient. ArXiv e-prints, abs/1309.2388, September 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1309.2388"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Nicol N Schraudolph. Fast curvature matrix-vector products for second-order gradient descent. Neural computation, 14(7):1723\u20131738, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schraudolph%2C%20Nicol%20N.%20Fast%20curvature%20matrix-vector%20products%20for%20second-order%20gradient%20descent%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schraudolph%2C%20Nicol%20N.%20Fast%20curvature%20matrix-vector%20products%20for%20second-order%20gradient%20descent%202002"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Shai Shalev-Shwartz. SDCA without Duality, Regularization, and Individual Convexity. In ICML, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shalev-Shwartz%2C%20Shai%20SDCA%20without%20Duality%2C%20Regularization%2C%20and%20Individual%20Convexity%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shalev-Shwartz%2C%20Shai%20SDCA%20without%20Duality%2C%20Regularization%2C%20and%20Individual%20Convexity%202016"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Lloyd N. Trefethen. Approximation Theory and Approximation Practice. SIAM, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Trefethen%2C%20Lloyd%20N.%20Approximation%20Theory%20and%20Approximation%20Practice%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Trefethen%2C%20Lloyd%20N.%20Approximation%20Theory%20and%20Approximation%20Practice%202013"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Yi Xu and Tianbao Yang. First-order Stochastic Algorithms for Escaping From Saddle Points in Almost Linear Time. ArXiv e-prints, abs/1711.01944, November 2017. ",
+            "arxiv_url": "https://arxiv.org/pdf/1711.01944"
+        }
+    ]
+}

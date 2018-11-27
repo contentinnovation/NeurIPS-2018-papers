@@ -1,0 +1,415 @@
+{
+    "filename": "7869-deep-structured-prediction-with-nonlinear-output-transformations.pdf",
+    "metadata": {
+        "title": "Deep Structured Prediction with Nonlinear Output Transformations",
+        "author": "Colin Graber, Ofer Meshi, Alexander Schwing",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7869-deep-structured-prediction-with-nonlinear-output-transformations.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Deep structured models are widely used for tasks like semantic segmentation, where explicit correlations between variables provide important prior information which generally helps to reduce the data needs of deep nets. However, current deep structured models are restricted by oftentimes very local neighborhood structure, which cannot be increased for computational complexity reasons, and by the fact that the output configuration, or a representation thereof, cannot be transformed further. Very recent approaches which address those issues include graphical model inference inside deep nets so as to permit subsequent non-linear output space transformations. However, optimization of those formulations is challenging and not well understood. Here, we develop a novel model which generalizes existing approaches, such as structured prediction energy networks, and discuss a formulation which maintains applicability of existing inference techniques."
+    },
+    "keywords": [
+        {
+            "term": "approximate inference",
+            "url": "https://en.wikipedia.org/wiki/approximate_inference"
+        },
+        {
+            "term": "deep net",
+            "url": "https://en.wikipedia.org/wiki/deep_net"
+        },
+        {
+            "term": "support vector machines",
+            "url": "https://en.wikipedia.org/wiki/support_vector_machines"
+        }
+    ],
+    "highlights": [
+        "Machine learning models are used widely across disciplines from computer vision and natural language processing to computational biology and physical sciences",
+        "We describe a technique to optimize structured deep nets augmented by non-linear output space transformations",
+        "We evaluate our non-linear structured deep net model on several diverse tasks: word recognition, image tagging, multilabel classification, and semantic segmentation",
+        "DeepStruct consists of a deep structured model [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>]; unless otherwise specified, these were trained by fixing the pretrained Unary potentials and learning pairwise potentials",
+        "In this work we developed a framework for deep structured models which allows for implicit modeling of higher-order structure as an intermediate layer in the deep net",
+        "We showed that our approach generalizes existing models such as structured prediction energy networks"
+    ],
+    "key_statements": [
+        "Machine learning models are used widely across disciplines from computer vision and natural language processing to computational biology and physical sciences",
+        "We provide two intuitive interpretations for including structured prediction inside a deep net rather than at its output",
+        "We demonstrate the effectiveness of our proposed approach on real-world applications, including OCR, image tagging, multilabel classification and semantic segmentation",
+        "Autoregressive Models: Another approach to solve structured prediction problems using deep nets defines an order over the output variables and predicts one variable at a time, conditioned on the previous ones",
+        "We describe a technique to optimize structured deep nets augmented by non-linear output space transformations",
+        "We evaluate our non-linear structured deep net model on several diverse tasks: word recognition, image tagging, multilabel classification, and semantic segmentation",
+        "DeepStruct consists of a deep structured model [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>]; unless otherwise specified, these were trained by fixing the pretrained Unary potentials and learning pairwise potentials",
+        "For the word recognition and segmentation experiments, the pairwise potentials are shared across every pair, and in the others, unique potentials are learned for every pair. These unary and pairwise potentials are fixed, and a \u201cTop\u201d model is trained using them; LinearTop consists of a structured deep net model with linear",
+        "NLTop consists of a structured deep net model where the form of T is task-specific",
+        "We evaluate the model using the same structured prediction energy networks-like inference procedure as described in the the Image Tagging experiment (SPENInf)",
+        "In this work we developed a framework for deep structured models which allows for implicit modeling of higher-order structure as an intermediate layer in the deep net",
+        "We showed that our approach generalizes existing models such as structured prediction energy networks"
+    ],
+    "summary": [
+        "Machine learning models are used widely across disciplines from computer vision and natural language processing to computational biology and physical sciences.",
+        "Structured prediction is used on top of a deep net, using simple models for the interactions between output variables, such as plain summation.",
+        "Structural constraints are enforced during inference, which is not the case with SPENs. We provide two intuitive interpretations for including structured prediction inside a deep net rather than at its output.",
+        "The prediction problem in such models is NP-hard in general [<a class=\"ref-link\" id=\"c47\" href=\"#r47\">47</a>], early work on structured prediction focused on special cases where the inference task was tractable.",
+        "Our proposed approach is different in that we combine deep potentials with another deep net that is able to transform the inferred output space or features thereof.",
+        "Autoregressive Models: Another approach to solve structured prediction problems using deep nets defines an order over the output variables and predicts one variable at a time, conditioned on the previous ones.",
+        "We use a more direct way of modeling structure and a more global approach to inference by predicting all variables together.",
+        "To alleviate the restriction of the score function being a sum, and to implicitly enable high-order interactions while modeling structure, our framework extends the aforementioned score via a nonlinear transformation of its output, formally, F (x, c, w) = T (c, H(x, c, w), w) .",
+        "Further note that for deep net based transformations T , x is no longer part of the outer-most function, making the proposed approach more general than existing methods.",
+        "To obtain consistency with existing structured deep net formulations and to maintain applicability of classical inference methods such as dynamic programming and LP relaxations, in the following, we discuss an alternative formulation for both inference and learning.",
+        "We describe a technique to optimize structured deep nets augmented by non-linear output space transformations.",
+        "We evaluate our non-linear structured deep net model on several diverse tasks: word recognition, image tagging, multilabel classification, and semantic segmentation.",
+        "DeepStruct consists of a deep structured model [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>]; unless otherwise specified, these were trained by fixing the pretrained Unary potentials and learning pairwise potentials.",
+        "These unary and pairwise potentials are fixed, and a \u201cTop\u201d model is trained using them; LinearTop consists of a structured deep net model with linear",
+        "NLTop consists of a structured deep net model where the form of T is task-specific.",
+        "We compare against a SPEN-like inference procedure (SPENInf) as follows: we load the trained NLTop model and find the optimal output structure maxx2X T (c, H(c, w, w), w) by relaxing x to be in [0, 1]24 and using gradient ascent.",
+        "Our approach was shown to improve performance on a variety of tasks over a base set of potentials"
+    ],
+    "headline": "We develop a novel model which generalizes existing approaches, such as structured prediction energy networks, and discuss a formulation which maintains applicability of existing inference techniques",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] J. Alvarez, Y. LeCun, T. Gevers, and A. Lopez. Semantic road segmentation via multi-scale ensembles of learned features. In Proc. ECCV, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Alvarez%2C%20J.%20LeCun%2C%20Y.%20Gevers%2C%20T.%20Lopez%2C%20A.%20Semantic%20road%20segmentation%20via%20multi-scale%20ensembles%20of%20learned%20features%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Alvarez%2C%20J.%20LeCun%2C%20Y.%20Gevers%2C%20T.%20Lopez%2C%20A.%20Semantic%20road%20segmentation%20via%20multi-scale%20ensembles%20of%20learned%20features%202012"
+        },
+        {
+            "id": "2",
+            "entry": "[2] B. Amos, L. Xu, and J. Z. Kolter. Input convex neural networks. In Proc. ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Amos%2C%20B.%20Xu%2C%20L.%20Kolter%2C%20J.Z.%20Input%20convex%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Amos%2C%20B.%20Xu%2C%20L.%20Kolter%2C%20J.Z.%20Input%20convex%20neural%20networks%202017"
+        },
+        {
+            "id": "3",
+            "entry": "[3] D. Belanger and A. McCallum. Structured Prediction Energy Networks. In Proc. ICML, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Belanger%2C%20D.%20McCallum%2C%20A.%20Structured%20Prediction%20Energy%20Networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Belanger%2C%20D.%20McCallum%2C%20A.%20Structured%20Prediction%20Energy%20Networks%202016"
+        },
+        {
+            "id": "4",
+            "entry": "[4] D. Belanger, B. Yang, and A. McCallum. End-to-end learning for structured prediction energy networks. In Proc. ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Belanger%2C%20D.%20Yang%2C%20B.%20McCallum%2C%20A.%20End-to-end%20learning%20for%20structured%20prediction%20energy%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Belanger%2C%20D.%20Yang%2C%20B.%20McCallum%2C%20A.%20End-to-end%20learning%20for%20structured%20prediction%20energy%20networks%202017"
+        },
+        {
+            "id": "5",
+            "entry": "[5] E. Borenstein and S. Ullman. Class-specific, top-down segmentation. In Proc. ECCV, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Borenstein%2C%20E.%20Ullman%2C%20S.%20Class-specific%2C%20top-down%20segmentation%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Borenstein%2C%20E.%20Ullman%2C%20S.%20Class-specific%2C%20top-down%20segmentation%202002"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Y. Boykov, O. Veksler, and R. Zabih. Fast Approximate Energy Minimization via Graph Cuts. PAMI, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Boykov%2C%20Y.%20Veksler%2C%20O.%20Zabih%2C%20R.%20Fast%20Approximate%20Energy%20Minimization%20via%20Graph%20Cuts%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Boykov%2C%20Y.%20Veksler%2C%20O.%20Zabih%2C%20R.%20Fast%20Approximate%20Energy%20Minimization%20via%20Graph%20Cuts%202001"
+        },
+        {
+            "id": "7",
+            "entry": "[7] A. Chambolle and T. Pock. A first-order primal-dual algorithm for convex problems with applications to imaging. Journal of mathematical imaging and vision, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chambolle%2C%20A.%20Pock%2C%20T.%20A%20first-order%20primal-dual%20algorithm%20for%20convex%20problems%20with%20applications%20to%20imaging%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chambolle%2C%20A.%20Pock%2C%20T.%20A%20first-order%20primal-dual%20algorithm%20for%20convex%20problems%20with%20applications%20to%20imaging%202011"
+        },
+        {
+            "id": "8",
+            "entry": "[8] L.-C. Chen, G. Papandreou, I. Kokkinos, K. Murphy, and A. L. Yuille. Semantic image segmentation with deep convolutional nets and fully connected crfs. In Proc. ICLR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20L.-C.%20Papandreou%2C%20G.%20Kokkinos%2C%20I.%20Murphy%2C%20K.%20Semantic%20image%20segmentation%20with%20deep%20convolutional%20nets%20and%20fully%20connected%20crfs%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20L.-C.%20Papandreou%2C%20G.%20Kokkinos%2C%20I.%20Murphy%2C%20K.%20Semantic%20image%20segmentation%20with%20deep%20convolutional%20nets%20and%20fully%20connected%20crfs%202015"
+        },
+        {
+            "id": "9",
+            "entry": "[9] L.-C. Chen\u21e4, A. G. Schwing\u21e4, A. L. Yuille, and R. Urtasun. Learning Deep Structured Models. In Proc. ICML, 2015. \u21e4equal contribution.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%E2%87%A4%2C%20L.-C.%20Schwing%E2%87%A4%2C%20A.G.%20Yuille%2C%20A.L.%20Urtasun%2C%20R.%20Learning%20Deep%20Structured%20Models%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%E2%87%A4%2C%20L.-C.%20Schwing%E2%87%A4%2C%20A.G.%20Yuille%2C%20A.L.%20Urtasun%2C%20R.%20Learning%20Deep%20Structured%20Models%202015"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Carlo Ciliberto, Francis Bach, and Alessandro Rudi. Localized structured prediction. arXiv preprint arXiv:1806.02402, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1806.02402"
+        },
+        {
+            "id": "11",
+            "entry": "[11] T. de Campos, B. R. Babu, and M. Varma. Character recognition in natural images. 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=de%20Campos%2C%20T.%20Babu%2C%20B.R.%20Varma%2C%20M.%20Character%20recognition%20in%20natural%20images%202009"
+        },
+        {
+            "id": "12",
+            "entry": "[12] J. Deng, W. Dong, R. Socher, L.-J. Li, K. Li, and L. Fei-Fei. ImageNet: A Large-Scale Hierarchical Image Database. In Proc. CVPR, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Deng%2C%20J.%20Dong%2C%20W.%20Socher%2C%20R.%20Li%2C%20L.-J.%20ImageNet%3A%20A%20Large-Scale%20Hierarchical%20Image%20Database%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Deng%2C%20J.%20Dong%2C%20W.%20Socher%2C%20R.%20Li%2C%20L.-J.%20ImageNet%3A%20A%20Large-Scale%20Hierarchical%20Image%20Database%202009"
+        },
+        {
+            "id": "13",
+            "entry": "[13] T. Finley and T. Joachims. Training structural SVMs when exact inference is intractable. In Proc. ICML, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Finley%2C%20T.%20Joachims%2C%20T.%20Training%20structural%20SVMs%20when%20exact%20inference%20is%20intractable%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Finley%2C%20T.%20Joachims%2C%20T.%20Training%20structural%20SVMs%20when%20exact%20inference%20is%20intractable%202008"
+        },
+        {
+            "id": "14",
+            "entry": "[14] A. Globerson and T. Jaakkola. Approximate Inference Using Planar Graph Decomposition. In Proc. NIPS, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Globerson%2C%20A.%20Jaakkola%2C%20T.%20Approximate%20Inference%20Using%20Planar%20Graph%20Decomposition%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Globerson%2C%20A.%20Jaakkola%2C%20T.%20Approximate%20Inference%20Using%20Planar%20Graph%20Decomposition%202006"
+        },
+        {
+            "id": "15",
+            "entry": "[15] M. Gygli, M. Norouzi, and A. Angelova. Deep value networks learn to evaluate and iteratively refine structured outputs. In Proc. ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gygli%2C%20M.%20Norouzi%2C%20M.%20Angelova%2C%20A.%20Deep%20value%20networks%20learn%20to%20evaluate%20and%20iteratively%20refine%20structured%20outputs%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gygli%2C%20M.%20Norouzi%2C%20M.%20Angelova%2C%20A.%20Deep%20value%20networks%20learn%20to%20evaluate%20and%20iteratively%20refine%20structured%20outputs%202017"
+        },
+        {
+            "id": "16",
+            "entry": "[16] T. Hazan and A. Shashua. Norm-Product Belief Propagation: Primal-Dual Message-Passing for LP-Relaxation and Approximate Inference. Trans. Information Theory, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hazan%2C%20T.%20Shashua%2C%20A.%20Norm-Product%20Belief%20Propagation%3A%20Primal-Dual%20Message-Passing%20for%20LP-Relaxation%20and%20Approximate%20Inference%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hazan%2C%20T.%20Shashua%2C%20A.%20Norm-Product%20Belief%20Propagation%3A%20Primal-Dual%20Message-Passing%20for%20LP-Relaxation%20and%20Approximate%20Inference%202010"
+        },
+        {
+            "id": "17",
+            "entry": "[17] T. Hazan and R. Urtasun. A Primal-Dual Message-Passing Algorithm for Approximated Large Scale Structured Prediction. In Proc. NIPS, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hazan%2C%20T.%20Urtasun%2C%20R.%20A%20Primal-Dual%20Message-Passing%20Algorithm%20for%20Approximated%20Large%20Scale%20Structured%20Prediction%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hazan%2C%20T.%20Urtasun%2C%20R.%20A%20Primal-Dual%20Message-Passing%20Algorithm%20for%20Approximated%20Large%20Scale%20Structured%20Prediction%202010"
+        },
+        {
+            "id": "18",
+            "entry": "[18] T. Hazan, A. G. Schwing, and R. Urtasun. Blending Learning and Inference in Conditional Random Fields. JMLR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hazan%2C%20T.%20Schwing%2C%20A.G.%20Urtasun%2C%20R.%20Blending%20Learning%20and%20Inference%20in%20Conditional%20Random%20Fields%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hazan%2C%20T.%20Schwing%2C%20A.G.%20Urtasun%2C%20R.%20Blending%20Learning%20and%20Inference%20in%20Conditional%20Random%20Fields%202016"
+        },
+        {
+            "id": "19",
+            "entry": "[19] K. He, X. Zhang, S. Ren, and J. Sun. Deep Residual Learning for Image Recognition. In Proc. CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20Residual%20Learning%20for%20Image%20Recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20Residual%20Learning%20for%20Image%20Recognition%202016"
+        },
+        {
+            "id": "20",
+            "entry": "[20] M. J. Huiskes and M. S. Lew. The mir flickr retrieval evaluation. In Proc. ACM international conference on Multimedia information retrieval. ACM, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huiskes%2C%20M.J.%20Lew%2C%20M.S.%20The%20mir%20flickr%20retrieval%20evaluation%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huiskes%2C%20M.J.%20Lew%2C%20M.S.%20The%20mir%20flickr%20retrieval%20evaluation%202008"
+        },
+        {
+            "id": "21",
+            "entry": "[21] S. Jegelka, H. Lin, and J. Bilmes. On Fast Approximate Submodular Minimization. In Proc. NIPS, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jegelka%2C%20S.%20Lin%2C%20H.%20Bilmes%2C%20J.%20On%20Fast%20Approximate%20Submodular%20Minimization%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jegelka%2C%20S.%20Lin%2C%20H.%20Bilmes%2C%20J.%20On%20Fast%20Approximate%20Submodular%20Minimization%202011"
+        },
+        {
+            "id": "22",
+            "entry": "[22] J. H. Kappes, B. Andres, F. A. Hamprecht, C. Schn\u00f6rr, S. Nowozin, D. Batra, S. Kim, B. X. Kausler, T. Kr\u00f6ger, J. Lellmann, N. Komodakis, B. Savchynskyy, and C. Rother. A comparative study of modern inference techniques for structured discrete energy minimization problems. IJCV, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=A%20comparative%20study%20of%20modern%20inference%20techniques%20for%20structured%20discrete%20energy%20minimization%20problems%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=A%20comparative%20study%20of%20modern%20inference%20techniques%20for%20structured%20discrete%20energy%20minimization%20problems%202015"
+        },
+        {
+            "id": "23",
+            "entry": "[23] N. Komodakis. Efficient training for pairwise or higher order crfs via dual decomposition. In Proc. CVPR, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Komodakis%2C%20N.%20Efficient%20training%20for%20pairwise%20or%20higher%20order%20crfs%20via%20dual%20decomposition%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Komodakis%2C%20N.%20Efficient%20training%20for%20pairwise%20or%20higher%20order%20crfs%20via%20dual%20decomposition%202011"
+        },
+        {
+            "id": "24",
+            "entry": "[24] N. Komodakis and N. Paragios. Beyond pairwise energies: Efficient optimization for higherorder mrfs. In Proc. CVPR, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Komodakis%2C%20N.%20Paragios%2C%20N.%20Beyond%20pairwise%20energies%3A%20Efficient%20optimization%20for%20higherorder%20mrfs%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Komodakis%2C%20N.%20Paragios%2C%20N.%20Beyond%20pairwise%20energies%3A%20Efficient%20optimization%20for%20higherorder%20mrfs%202009"
+        },
+        {
+            "id": "25",
+            "entry": "[25] A. Krizhevsky, I. Sutskever, and G. E. Hinton. ImageNet Classification with Deep Convolutional Neural Networks. In Proc. NIPS, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20A.%20Sutskever%2C%20I.%20Hinton%2C%20G.E.%20ImageNet%20Classification%20with%20Deep%20Convolutional%20Neural%20Networks%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krizhevsky%2C%20A.%20Sutskever%2C%20I.%20Hinton%2C%20G.E.%20ImageNet%20Classification%20with%20Deep%20Convolutional%20Neural%20Networks%202012"
+        },
+        {
+            "id": "26",
+            "entry": "[26] A. Kulesza and F. Pereira. Structured learning with approximate inference. In Proc. NIPS, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kulesza%2C%20A.%20Pereira%2C%20F.%20Structured%20learning%20with%20approximate%20inference%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kulesza%2C%20A.%20Pereira%2C%20F.%20Structured%20learning%20with%20approximate%20inference%202008"
+        },
+        {
+            "id": "27",
+            "entry": "[27] J. Lafferty, A. McCallum, and F. Pereira. Conditional Random Fields: Probabilistic Models for segmenting and labeling sequence data. In Proc. ICML, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lafferty%2C%20J.%20McCallum%2C%20A.%20Pereira%2C%20F.%20Conditional%20Random%20Fields%3A%20Probabilistic%20Models%20for%20segmenting%20and%20labeling%20sequence%20data%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lafferty%2C%20J.%20McCallum%2C%20A.%20Pereira%2C%20F.%20Conditional%20Random%20Fields%3A%20Probabilistic%20Models%20for%20segmenting%20and%20labeling%20sequence%20data%202001"
+        },
+        {
+            "id": "28",
+            "entry": "[28] R. Leblond, J.-B. Alayrac, A. Osokin, and S. Lacoste-Julien. SEARNN: Training RNNs with global-local losses. In International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Leblond%2C%20R.%20Alayrac%2C%20J.-B.%20Osokin%2C%20A.%20Lacoste-Julien%2C%20S.%20SEARNN%3A%20Training%20RNNs%20with%20global-local%20losses%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Leblond%2C%20R.%20Alayrac%2C%20J.-B.%20Osokin%2C%20A.%20Lacoste-Julien%2C%20S.%20SEARNN%3A%20Training%20RNNs%20with%20global-local%20losses%202018"
+        },
+        {
+            "id": "29",
+            "entry": "[29] G. Lin, C. Shen, I. Reid, and A. van den Hengel. Deeply learning the messages in message passing inference. In Proc. NIPS, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20G.%20Shen%2C%20C.%20Reid%2C%20I.%20van%20den%20Hengel%2C%20A.%20Deeply%20learning%20the%20messages%20in%20message%20passing%20inference%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lin%2C%20G.%20Shen%2C%20C.%20Reid%2C%20I.%20van%20den%20Hengel%2C%20A.%20Deeply%20learning%20the%20messages%20in%20message%20passing%20inference%202015"
+        },
+        {
+            "id": "31",
+            "entry": "[31] T. Meltzer, A. Globerson, and Y. Weiss. Convergent Message Passing Algorithms: A Unifying View. In Proc. UAI, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Meltzer%2C%20T.%20Globerson%2C%20A.%20Weiss%2C%20Y.%20Convergent%20Message%20Passing%20Algorithms%3A%20A%20Unifying%20View%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Meltzer%2C%20T.%20Globerson%2C%20A.%20Weiss%2C%20Y.%20Convergent%20Message%20Passing%20Algorithms%3A%20A%20Unifying%20View%202009"
+        },
+        {
+            "id": "32",
+            "entry": "[32] O. Meshi and A. Schwing. Asynchronous parallel coordinate minimization for map inference. In Proc. NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Meshi%2C%20O.%20Schwing%2C%20A.%20Asynchronous%20parallel%20coordinate%20minimization%20for%20map%20inference%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Meshi%2C%20O.%20Schwing%2C%20A.%20Asynchronous%20parallel%20coordinate%20minimization%20for%20map%20inference%202017"
+        },
+        {
+            "id": "33",
+            "entry": "[33] O. Meshi, D. Sontag, T. Jaakkola, and A. Globerson. Learning Efficiently with Approximate Inference via Dual Losses. In Proc. ICML, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Meshi%2C%20O.%20Sontag%2C%20D.%20Jaakkola%2C%20T.%20Globerson%2C%20A.%20Learning%20Efficiently%20with%20Approximate%20Inference%20via%20Dual%20Losses%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Meshi%2C%20O.%20Sontag%2C%20D.%20Jaakkola%2C%20T.%20Globerson%2C%20A.%20Learning%20Efficiently%20with%20Approximate%20Inference%20via%20Dual%20Losses%202010"
+        },
+        {
+            "id": "34",
+            "entry": "[34] O. Meshi, M. Mahdavi, and A. G. Schwing. Smooth and Strong: MAP Inference with Linear Convergence. In Proc. NIPS, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Meshi%2C%20O.%20Mahdavi%2C%20M.%20Schwing%2C%20A.G.%20Smooth%20and%20Strong%3A%20MAP%20Inference%20with%20Linear%20Convergence%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Meshi%2C%20O.%20Mahdavi%2C%20M.%20Schwing%2C%20A.G.%20Smooth%20and%20Strong%3A%20MAP%20Inference%20with%20Linear%20Convergence%202015"
+        },
+        {
+            "id": "35",
+            "entry": "[35] O. Meshi, M. Mahdavi, A. Weller, and D. Sontag. Train and test tightness of LP relaxations in structured prediction. In Proc. ICML, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Meshi%2C%20O.%20Mahdavi%2C%20M.%20Weller%2C%20A.%20Sontag%2C%20D.%20Train%20and%20test%20tightness%20of%20LP%20relaxations%20in%20structured%20prediction%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Meshi%2C%20O.%20Mahdavi%2C%20M.%20Weller%2C%20A.%20Sontag%2C%20D.%20Train%20and%20test%20tightness%20of%20LP%20relaxations%20in%20structured%20prediction%202016"
+        },
+        {
+            "id": "36",
+            "entry": "[36] J. Nam, E. Loza Menc\u00eda, H. J. Kim, and J. F\u00fcrnkranz. Maximizing subset accuracy with recurrent neural networks in multi-label classification. In Proc. NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nam%2C%20J.%20Menc%C3%ADa%2C%20E.Loza%20Kim%2C%20H.J.%20F%C3%BCrnkranz%2C%20J.%20Maximizing%20subset%20accuracy%20with%20recurrent%20neural%20networks%20in%20multi-label%20classification%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nam%2C%20J.%20Menc%C3%ADa%2C%20E.Loza%20Kim%2C%20H.J.%20F%C3%BCrnkranz%2C%20J.%20Maximizing%20subset%20accuracy%20with%20recurrent%20neural%20networks%20in%20multi-label%20classification%202017"
+        },
+        {
+            "id": "37",
+            "entry": "[37] K. Nguyen, C. Fookes, and S. Sridharan. Deep Context Modeling for Semantic Segmentation. In WACV, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nguyen%2C%20K.%20Fookes%2C%20C.%20Sridharan%2C%20S.%20Deep%20Context%20Modeling%20for%20Semantic%20Segmentation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nguyen%2C%20K.%20Fookes%2C%20C.%20Sridharan%2C%20S.%20Deep%20Context%20Modeling%20for%20Semantic%20Segmentation%202017"
+        },
+        {
+            "id": "38",
+            "entry": "[38] A. van den Oord, N. Kalchbrenner, and K. Kavukcuoglu. Pixel recurrent neural networks. In Proc. ICML, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=van%20den%20Oord%2C%20A.%20Kalchbrenner%2C%20N.%20Kavukcuoglu%2C%20K.%20Pixel%20recurrent%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=van%20den%20Oord%2C%20A.%20Kalchbrenner%2C%20N.%20Kavukcuoglu%2C%20K.%20Pixel%20recurrent%20neural%20networks%202016"
+        },
+        {
+            "id": "39",
+            "entry": "[39] J. Pearl. Reverend Bayes on inference engines: A distributed hierarchical approach. In Proc. AAAI, 1982.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pearl%2C%20J.%20Reverend%20Bayes%20on%20inference%20engines%3A%20A%20distributed%20hierarchical%20approach%201982",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pearl%2C%20J.%20Reverend%20Bayes%20on%20inference%20engines%3A%20A%20distributed%20hierarchical%20approach%201982"
+        },
+        {
+            "id": "40",
+            "entry": "[40] P. Pletscher, C. S. Ong, and J. M. Buhmann. Entropy and Margin Maximization for Structured Output Learning. In Proc. ECML PKDD, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pletscher%2C%20P.%20Ong%2C%20C.S.%20Buhmann%2C%20J.M.%20Entropy%20and%20Margin%20Maximization%20for%20Structured%20Output%20Learning%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pletscher%2C%20P.%20Ong%2C%20C.S.%20Buhmann%2C%20J.M.%20Entropy%20and%20Margin%20Maximization%20for%20Structured%20Output%20Learning%202010"
+        },
+        {
+            "id": "41",
+            "entry": "[41] A. Schrijver. Combinatorial Optimization. Springer, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schrijver%2C%20A.%20Combinatorial%20Optimization%202004"
+        },
+        {
+            "id": "42",
+            "entry": "[42] A. G. Schwing and R. Urtasun. Fully Connected Deep Structured Networks. In https://arxiv.org/abs/1503.02351, 2015.",
+            "url": "https://arxiv.org/abs/1503.02351",
+            "arxiv_url": "https://arxiv.org/pdf/1503.02351"
+        },
+        {
+            "id": "43",
+            "entry": "[43] A. G. Schwing, T. Hazan, M. Pollefeys, and R. Urtasun. Distributed Message Passing for Large Scale Graphical Models. In Proc. CVPR, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schwing%2C%20A.G.%20Hazan%2C%20T.%20Pollefeys%2C%20M.%20Urtasun%2C%20R.%20Distributed%20Message%20Passing%20for%20Large%20Scale%20Graphical%20Models%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schwing%2C%20A.G.%20Hazan%2C%20T.%20Pollefeys%2C%20M.%20Urtasun%2C%20R.%20Distributed%20Message%20Passing%20for%20Large%20Scale%20Graphical%20Models%202011"
+        },
+        {
+            "id": "44",
+            "entry": "[44] A. G. Schwing, T. Hazan, M. Pollefeys, and R. Urtasun. Globally Convergent Dual MAP LP Relaxation Solvers Using Fenchel-Young Margins. In Proc. NIPS, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schwing%2C%20A.G.%20Hazan%2C%20T.%20Pollefeys%2C%20M.%20Urtasun%2C%20R.%20Globally%20Convergent%20Dual%20MAP%20LP%20Relaxation%20Solvers%20Using%20Fenchel-Young%20Margins%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schwing%2C%20A.G.%20Hazan%2C%20T.%20Pollefeys%2C%20M.%20Urtasun%2C%20R.%20Globally%20Convergent%20Dual%20MAP%20LP%20Relaxation%20Solvers%20Using%20Fenchel-Young%20Margins%202012"
+        },
+        {
+            "id": "45",
+            "entry": "[45] A. G. Schwing, T. Hazan, M. Pollefeys, and R. Urtasun. Globally Convergent Parallel MAP LP Relaxation Solver Using the Frank-Wolfe Algorithm. In Proc. ICML, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schwing%2C%20A.G.%20Hazan%2C%20T.%20Pollefeys%2C%20M.%20Urtasun%2C%20R.%20Globally%20Convergent%20Parallel%20MAP%20LP%20Relaxation%20Solver%20Using%20the%20Frank-Wolfe%20Algorithm%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schwing%2C%20A.G.%20Hazan%2C%20T.%20Pollefeys%2C%20M.%20Urtasun%2C%20R.%20Globally%20Convergent%20Parallel%20MAP%20LP%20Relaxation%20Solver%20Using%20the%20Frank-Wolfe%20Algorithm%202014"
+        },
+        {
+            "id": "46",
+            "entry": "[46] E. Shelhamer, J. Long, and T. Darrell. Fully convolutional networks for semantic segmentation. PAMI, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shelhamer%2C%20E.%20Long%2C%20J.%20Darrell%2C%20T.%20Fully%20convolutional%20networks%20for%20semantic%20segmentation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shelhamer%2C%20E.%20Long%2C%20J.%20Darrell%2C%20T.%20Fully%20convolutional%20networks%20for%20semantic%20segmentation%202016"
+        },
+        {
+            "id": "47",
+            "entry": "[47] S. E. Shimony. Finding MAPs for Belief Networks is NP-hard. Artificial Intelligence, 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shimony%2C%20S.E.%20Finding%20MAPs%20for%20Belief%20Networks%20is%20NP-hard%201994",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shimony%2C%20S.E.%20Finding%20MAPs%20for%20Belief%20Networks%20is%20NP-hard%201994"
+        },
+        {
+            "id": "48",
+            "entry": "[48] Y. Song, A. G. Schwing, R. Zemel, and R. Urtasun. Training Deep Neural Networks via Direct Loss Minimization. In Proc. ICML, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Song%2C%20Y.%20Schwing%2C%20A.G.%20Zemel%2C%20R.%20Urtasun%2C%20R.%20Training%20Deep%20Neural%20Networks%20via%20Direct%20Loss%20Minimization%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Song%2C%20Y.%20Schwing%2C%20A.G.%20Zemel%2C%20R.%20Urtasun%2C%20R.%20Training%20Deep%20Neural%20Networks%20via%20Direct%20Loss%20Minimization%202016"
+        },
+        {
+            "id": "49",
+            "entry": "[49] D. Sontag, T. Meltzer, A. Globerson, and T. Jaakkola. Tightening LP Relaxations for MAP Using Message Passing. In Proc. NIPS, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sontag%2C%20D.%20Meltzer%2C%20T.%20Globerson%2C%20A.%20Jaakkola%2C%20T.%20Tightening%20LP%20Relaxations%20for%20MAP%20Using%20Message%20Passing%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sontag%2C%20D.%20Meltzer%2C%20T.%20Globerson%2C%20A.%20Jaakkola%2C%20T.%20Tightening%20LP%20Relaxations%20for%20MAP%20Using%20Message%20Passing%202008"
+        },
+        {
+            "id": "50",
+            "entry": "[50] P. Stobbe and A. Krause. Efficient Minimization of Decomposable Submodular Functions. In Proc. NIPS, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Stobbe%2C%20P.%20Krause%2C%20A.%20Efficient%20Minimization%20of%20Decomposable%20Submodular%20Functions%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Stobbe%2C%20P.%20Krause%2C%20A.%20Efficient%20Minimization%20of%20Decomposable%20Submodular%20Functions%202010"
+        },
+        {
+            "id": "51",
+            "entry": "[51] I. Sutskever, O. Vinyals, and Q. V. Le. Sequence to Sequence Learning with Neural Networks. In Proc. NIPS, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutskever%2C%20I.%20Vinyals%2C%20O.%20Le%2C%20Q.V.%20Sequence%20to%20Sequence%20Learning%20with%20Neural%20Networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutskever%2C%20I.%20Vinyals%2C%20O.%20Le%2C%20Q.V.%20Sequence%20to%20Sequence%20Learning%20with%20Neural%20Networks%202014"
+        },
+        {
+            "id": "52",
+            "entry": "[52] B. Taskar, C. Guestrin, and D. Koller. Max-Margin Markov Networks. In Proc. NIPS, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Taskar%2C%20B.%20Guestrin%2C%20C.%20Koller%2C%20D.%20Max-Margin%20Markov%20Networks%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Taskar%2C%20B.%20Guestrin%2C%20C.%20Koller%2C%20D.%20Max-Margin%20Markov%20Networks%202003"
+        },
+        {
+            "id": "53",
+            "entry": "[53] J. Tompson, A. Jain, Y. LeCun, and C. Bregler. Joint Training of a Convolutional Network and a Graphical Model for Human Pose Estimation. In Proc. NIPS, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tompson%2C%20J.%20Jain%2C%20A.%20LeCun%2C%20Y.%20Bregler%2C%20C.%20Joint%20Training%20of%20a%20Convolutional%20Network%20and%20a%20Graphical%20Model%20for%20Human%20Pose%20Estimation%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tompson%2C%20J.%20Jain%2C%20A.%20LeCun%2C%20Y.%20Bregler%2C%20C.%20Joint%20Training%20of%20a%20Convolutional%20Network%20and%20a%20Graphical%20Model%20for%20Human%20Pose%20Estimation%202014"
+        },
+        {
+            "id": "54",
+            "entry": "[54] I. Tsochantaridis, T. Joachims, T. Hofmann, and Y. Altun. Large Margin Methods for Structured and Interdependent Output Variables. JMLR, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tsochantaridis%2C%20I.%20Joachims%2C%20T.%20Hofmann%2C%20T.%20Altun%2C%20Y.%20Large%20Margin%20Methods%20for%20Structured%20and%20Interdependent%20Output%20Variables%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tsochantaridis%2C%20I.%20Joachims%2C%20T.%20Hofmann%2C%20T.%20Altun%2C%20Y.%20Large%20Margin%20Methods%20for%20Structured%20and%20Interdependent%20Output%20Variables%202005"
+        },
+        {
+            "id": "55",
+            "entry": "[55] L. Tu and K Gimpel. Learning approximate inference networks for structured prediction. In Proc. ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tu%2C%20L.%20Gimpel%2C%20K.%20Learning%20approximate%20inference%20networks%20for%20structured%20prediction%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tu%2C%20L.%20Gimpel%2C%20K.%20Learning%20approximate%20inference%20networks%20for%20structured%20prediction%202018"
+        },
+        {
+            "id": "56",
+            "entry": "[56] M. J. Wainwright and M. I. Jordan. Variational Inference in Graphical Models: The View from the Marginal Polytope. In Proc. Conf. on Control, Communication and Computing, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wainwright%2C%20M.J.%20Jordan%2C%20M.I.%20Variational%20Inference%20in%20Graphical%20Models%3A%20The%20View%20from%20the%20Marginal%20Polytope%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wainwright%2C%20M.J.%20Jordan%2C%20M.I.%20Variational%20Inference%20in%20Graphical%20Models%3A%20The%20View%20from%20the%20Marginal%20Polytope%202003"
+        },
+        {
+            "id": "57",
+            "entry": "[57] M. J. Wainwright and M. I. Jordan. Graphical Models, Exponential Families and Variational Inference. Foundations and Trends in Machine Learning, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wainwright%2C%20M.J.%20Jordan%2C%20M.I.%20Graphical%20Models%2C%20Exponential%20Families%20and%20Variational%20Inference%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wainwright%2C%20M.J.%20Jordan%2C%20M.I.%20Graphical%20Models%2C%20Exponential%20Families%20and%20Variational%20Inference%202008"
+        },
+        {
+            "id": "58",
+            "entry": "[58] T. Werner. A Linear Programming Approach to Max-Sum Problem: A Review. PAMI, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Werner%2C%20T.%20A%20Linear%20Programming%20Approach%20to%20Max-Sum%20Problem%3A%20A%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Werner%2C%20T.%20A%20Linear%20Programming%20Approach%20to%20Max-Sum%20Problem%3A%20A%202007"
+        },
+        {
+            "id": "59",
+            "entry": "[59] S. Zheng, S. Jayasumana, B. Romera-Paredes, V. Vineet, Z. Su, D. Du, C. Huang, and P. H. S. Torr. Conditional random fields as recurrent neural networks. In Proc. ICCV, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zheng%2C%20S.%20Jayasumana%2C%20S.%20Romera-Paredes%2C%20B.%20Vineet%2C%20V.%20Conditional%20random%20fields%20as%20recurrent%20neural%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zheng%2C%20S.%20Jayasumana%2C%20S.%20Romera-Paredes%2C%20B.%20Vineet%2C%20V.%20Conditional%20random%20fields%20as%20recurrent%20neural%20networks%202015"
+        }
+    ]
+}

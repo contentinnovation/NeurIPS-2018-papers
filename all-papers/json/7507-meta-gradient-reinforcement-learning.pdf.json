@@ -1,0 +1,388 @@
+{
+    "filename": "7507-meta-gradient-reinforcement-learning.pdf",
+    "metadata": {
+        "title": "Meta-Gradient Reinforcement Learning",
+        "author": "Zhongwen Xu, Hado P. van Hasselt, David Silver",
+        "date": 1988,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7507-meta-gradient-reinforcement-learning.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "The goal of reinforcement learning algorithms is to estimate and/or optimise the value function. However, unlike supervised learning, no teacher or oracle is available to provide the true value function. Instead, the majority of reinforcement learning algorithms estimate and/or optimise a proxy for the value function. This proxy is typically based on a sampled and bootstrapped approximation to the true value function, known as a return. The particular choice of return is one of the chief components determining the nature of the algorithm: the rate at which future rewards are discounted; when and how values should be bootstrapped; or even the nature of the rewards themselves. It is well-known that these decisions are crucial to the overall success of RL algorithms. We discuss a gradient-based meta-learning algorithm that is able to adapt the nature of the return, online, whilst interacting and learning from the environment. When applied to 57 games on the Atari 2600 environment over 200 million frames, our algorithm achieved a new state-of-the-art performance."
+    },
+    "keywords": [
+        {
+            "term": "gradient descent",
+            "url": "https://en.wikipedia.org/wiki/gradient_descent"
+        },
+        {
+            "term": "value function",
+            "url": "https://en.wikipedia.org/wiki/value_function"
+        },
+        {
+            "term": "discount factor",
+            "url": "https://en.wikipedia.org/wiki/discount_factor"
+        },
+        {
+            "term": "Markov reward process",
+            "url": "https://en.wikipedia.org/wiki/Markov_reward_process"
+        },
+        {
+            "term": "stochastic gradient descent",
+            "url": "https://en.wikipedia.org/wiki/stochastic_gradient_descent"
+        },
+        {
+            "term": "mean squared error",
+            "url": "https://en.wikipedia.org/wiki/mean_squared_error"
+        },
+        {
+            "term": "learning algorithm",
+            "url": "https://en.wikipedia.org/wiki/learning_algorithm"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        }
+    ],
+    "highlights": [
+        "There are potentially many other design choices that may be represented in the return, including off-policy corrections [<a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\"><a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\"><a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\"><a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\"><a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\"><a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\"><a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\"><a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\"><a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\">Espeholt et al, 2018</a></a></a></a></a></a></a></a></a>, <a class=\"ref-link\" id=\"cMunos_et+al_2016_a\" href=\"#rMunos_et+al_2016_a\"><a class=\"ref-link\" id=\"cMunos_et+al_2016_a\" href=\"#rMunos_et+al_2016_a\">Munos et al, 2016</a></a>], target networks [<a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\">Mnih et al, 2015</a></a></a></a></a></a></a>], emphasis on certain states [Sutton et al, 2016], reward clipping [<a class=\"ref-link\" id=\"cMnih_et+al_2013_a\" href=\"#rMnih_et+al_2013_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2013_a\" href=\"#rMnih_et+al_2013_a\">Mnih et al, 2013</a></a>], or even the nature of the rewards themselves [Randl\u00f8v and Alstr\u00f8m, 1998, <a class=\"ref-link\" id=\"cSingh_et+al_2005_a\" href=\"#rSingh_et+al_2005_a\"><a class=\"ref-link\" id=\"cSingh_et+al_2005_a\" href=\"#rSingh_et+al_2005_a\">Singh et al, 2005</a></a>, <a class=\"ref-link\" id=\"cZheng_et+al_2018_a\" href=\"#rZheng_et+al_2018_a\"><a class=\"ref-link\" id=\"cZheng_et+al_2018_a\" href=\"#rZheng_et+al_2018_a\">Zheng et al, 2018</a></a>]",
+        "We are interested in one of the fundamental problems in reinforcement learning: what would be the best form of return for the agent to maximise? Specifically, we propose to learn the return function by treating it as a parametric function with tunable meta-parameters \u03b7, for instance including the discount factor \u03b3, or the bootstrapping parameter \u03bb [<a class=\"ref-link\" id=\"cSutton_1988_a\" href=\"#rSutton_1988_a\">Sutton, 1988</a>]",
+        "The key idea is to provide the metaparameters \u03b7 as an additional input to condition the value function and policy, as follows: v\u03b8\u03b7(S) = v\u03b8([S; e\u03b7]), \u03c0\u03b8\u03b7(S) = \u03c0\u03b8([S; e\u03b7]), where e\u03b7 is the embedding of \u03b7, [s; e\u03b7] denotes concatenation of vectors s and e\u03b7, the embedding network e\u03b7 is updated by backpropagation during training but the gradient is not flowing through \u03b7",
+        "<a class=\"ref-link\" id=\"cSutton_1992_a\" href=\"#rSutton_1992_a\">Sutton [1992</a>], introduced the idea of online crossvalidation; this method was limited in scope to adapting the learning rate for linear updates in supervised learning; whereas we focus on the fundamental problem of reinforcement learning, i.e., adapting the return function to maximise the proxy returns we can achieve from the environment",
+        "<a class=\"ref-link\" id=\"cKonidaris_et+al_2011_a\" href=\"#rKonidaris_et+al_2011_a\">Konidaris et al [2011</a>] derive a maximum-likelihood estimator, TD(\u03b3), that weights the n-step returns according to the discount factor, leading to a parameter-free algorithm for temporal-difference learning with linear function approximation",
+        "Hyper-parameter tuning has been a thorn in the side of reinforcement learning research for several decades"
+    ],
+    "key_statements": [
+        "There are potentially many other design choices that may be represented in the return, including off-policy corrections [<a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\"><a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\"><a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\"><a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\"><a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\"><a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\"><a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\"><a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\"><a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\">Espeholt et al, 2018</a></a></a></a></a></a></a></a></a>, <a class=\"ref-link\" id=\"cMunos_et+al_2016_a\" href=\"#rMunos_et+al_2016_a\"><a class=\"ref-link\" id=\"cMunos_et+al_2016_a\" href=\"#rMunos_et+al_2016_a\">Munos et al, 2016</a></a>], target networks [<a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\">Mnih et al, 2015</a></a></a></a></a></a></a>], emphasis on certain states [Sutton et al, 2016], reward clipping [<a class=\"ref-link\" id=\"cMnih_et+al_2013_a\" href=\"#rMnih_et+al_2013_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2013_a\" href=\"#rMnih_et+al_2013_a\">Mnih et al, 2013</a></a>], or even the nature of the rewards themselves [Randl\u00f8v and Alstr\u00f8m, 1998, <a class=\"ref-link\" id=\"cSingh_et+al_2005_a\" href=\"#rSingh_et+al_2005_a\"><a class=\"ref-link\" id=\"cSingh_et+al_2005_a\" href=\"#rSingh_et+al_2005_a\">Singh et al, 2005</a></a>, <a class=\"ref-link\" id=\"cZheng_et+al_2018_a\" href=\"#rZheng_et+al_2018_a\"><a class=\"ref-link\" id=\"cZheng_et+al_2018_a\" href=\"#rZheng_et+al_2018_a\">Zheng et al, 2018</a></a>]",
+        "There are potentially many other design choices that may be represented in the return, including off-policy corrections [<a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\">Espeholt et al, 2018</a>, <a class=\"ref-link\" id=\"cMunos_et+al_2016_a\" href=\"#rMunos_et+al_2016_a\">Munos et al, 2016</a>], target networks [<a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\">Mnih et al, 2015</a>], emphasis on certain states [Sutton et al, 2016], reward clipping [<a class=\"ref-link\" id=\"cMnih_et+al_2013_a\" href=\"#rMnih_et+al_2013_a\">Mnih et al, 2013</a>], or even the nature of the rewards themselves [Randl\u00f8v and Alstr\u00f8m, 1998, <a class=\"ref-link\" id=\"cSingh_et+al_2005_a\" href=\"#rSingh_et+al_2005_a\">Singh et al, 2005</a>, <a class=\"ref-link\" id=\"cZheng_et+al_2018_a\" href=\"#rZheng_et+al_2018_a\">Zheng et al, 2018</a>]",
+        "We are interested in one of the fundamental problems in reinforcement learning: what would be the best form of return for the agent to maximise? Specifically, we propose to learn the return function by treating it as a parametric function with tunable meta-parameters \u03b7, for instance including the discount factor \u03b3, or the bootstrapping parameter \u03bb [<a class=\"ref-link\" id=\"cSutton_1988_a\" href=\"#rSutton_1988_a\">Sutton, 1988</a>]",
+        "The key idea is to provide the metaparameters \u03b7 as an additional input to condition the value function and policy, as follows: v\u03b8\u03b7(S) = v\u03b8([S; e\u03b7]), \u03c0\u03b8\u03b7(S) = \u03c0\u03b8([S; e\u03b7]), where e\u03b7 is the embedding of \u03b7, [s; e\u03b7] denotes concatenation of vectors s and e\u03b7, the embedding network e\u03b7 is updated by backpropagation during training but the gradient is not flowing through \u03b7",
+        "To illustrate the key idea of our meta-gradient approach, we provide two examples that show how the discount factor \u03b3 and temporal difference parameter \u03bb, respectively, can be meta-learned",
+        "We focus on meta-gradient prediction using the TD(\u03bb) algorithm and a mean squared error meta-objective with \u03b3 = 1 and \u03bb = 1, as described in Section 1.2",
+        "We focused on adapting the discount factor \u03b7 = {\u03b3}",
+        "We investigated adapting the bootstrapping parameter \u03bb",
+        "The meta-learning hyper-parameters are chosen according to the performance of six Atari games as common practice in Deep reinforcement learning Atari experiments [van Hasselt et al, 2016, <a class=\"ref-link\" id=\"cMnih_et+al_2016_a\" href=\"#rMnih_et+al_2016_a\">Mnih et al, 2016</a>, Wang et al, 2016b]",
+        "We compare against the state-of-the-art agent trained on Atari games, namely Rainbow [<a class=\"ref-link\" id=\"cHessel_et+al_2018_a\" href=\"#rHessel_et+al_2018_a\">Hessel et al, 2018</a>], which combines DQN [<a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\">Mnih et al, 2015</a>] with double Q-learning [van Hasselt et al, 2016, van Hasselt, 2010], prioritised replay [<a class=\"ref-link\" id=\"cSchaul_et+al_2016_a\" href=\"#rSchaul_et+al_2016_a\">Schaul et al, 2016</a>], dueling networks [Wang et al, 2016b], multi-step targets [<a class=\"ref-link\" id=\"cSutton_1988_a\" href=\"#rSutton_1988_a\">Sutton, 1988</a>, <a class=\"ref-link\" id=\"cSutton_2018_a\" href=\"#rSutton_2018_a\">Sutton and Barto, 2018</a>], distributional reinforcement learning [<a class=\"ref-link\" id=\"cBellemare_et+al_2017_a\" href=\"#rBellemare_et+al_2017_a\">Bellemare et al, 2017</a>], and parameter noise for exploration [<a class=\"ref-link\" id=\"cFortunato_et+al_2018_a\" href=\"#rFortunato_et+al_2018_a\">Fortunato et al, 2018</a>]",
+        "<a class=\"ref-link\" id=\"cSutton_1992_a\" href=\"#rSutton_1992_a\">Sutton [1992</a>], introduced the idea of online crossvalidation; this method was limited in scope to adapting the learning rate for linear updates in supervised learning; whereas we focus on the fundamental problem of reinforcement learning, i.e., adapting the return function to maximise the proxy returns we can achieve from the environment",
+        "<a class=\"ref-link\" id=\"cKonidaris_et+al_2011_a\" href=\"#rKonidaris_et+al_2011_a\">Konidaris et al [2011</a>] derive a maximum-likelihood estimator, TD(\u03b3), that weights the n-step returns according to the discount factor, leading to a parameter-free algorithm for temporal-difference learning with linear function approximation",
+        "Hyper-parameter tuning has been a thorn in the side of reinforcement learning research for several decades"
+    ],
+    "summary": [
+        "There are potentially many other design choices that may be represented in the return, including off-policy corrections [<a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\"><a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\"><a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\"><a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\"><a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\"><a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\"><a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\"><a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\"><a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\">Espeholt et al, 2018</a></a></a></a></a></a></a></a></a>, <a class=\"ref-link\" id=\"cMunos_et+al_2016_a\" href=\"#rMunos_et+al_2016_a\"><a class=\"ref-link\" id=\"cMunos_et+al_2016_a\" href=\"#rMunos_et+al_2016_a\">Munos et al, 2016</a></a>], target networks [<a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\">Mnih et al, 2015</a></a></a></a></a></a></a>], emphasis on certain states [Sutton et al, 2016], reward clipping [<a class=\"ref-link\" id=\"cMnih_et+al_2013_a\" href=\"#rMnih_et+al_2013_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2013_a\" href=\"#rMnih_et+al_2013_a\">Mnih et al, 2013</a></a>], or even the nature of the rewards themselves [Randl\u00f8v and Alstr\u00f8m, 1998, <a class=\"ref-link\" id=\"cSingh_et+al_2005_a\" href=\"#rSingh_et+al_2005_a\"><a class=\"ref-link\" id=\"cSingh_et+al_2005_a\" href=\"#rSingh_et+al_2005_a\">Singh et al, 2005</a></a>, <a class=\"ref-link\" id=\"cZheng_et+al_2018_a\" href=\"#rZheng_et+al_2018_a\"><a class=\"ref-link\" id=\"cZheng_et+al_2018_a\" href=\"#rZheng_et+al_2018_a\">Zheng et al, 2018</a></a>].",
+        "Many other instantiations of meta-gradient RL would be possible, since the majority of deep reinforcement learning updates are differentiable functions of the return, including, for instance, value-based methods like SARSA(\u03bb) [<a class=\"ref-link\" id=\"cRummery_1994_a\" href=\"#rRummery_1994_a\">Rummery and Niranjan, 1994</a>, <a class=\"ref-link\" id=\"cSutton_2018_a\" href=\"#rSutton_2018_a\"><a class=\"ref-link\" id=\"cSutton_2018_a\" href=\"#rSutton_2018_a\">Sutton and Barto, 2018</a></a>] and DQN [<a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\">Mnih et al, 2015</a></a></a>], policygradient methods [Williams, 1992], or actor-critic algorithms like A3C [<a class=\"ref-link\" id=\"cMnih_et+al_2016_a\" href=\"#rMnih_et+al_2016_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2016_a\" href=\"#rMnih_et+al_2016_a\">Mnih et al, 2016</a></a>] and IMPALA [<a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\"><a class=\"ref-link\" id=\"cEspeholt_et+al_2018_a\" href=\"#rEspeholt_et+al_2018_a\">Espeholt et al, 2018</a></a>].",
+        "\u2202f (\u03c4, \u03b8, \u03b7) = \u03b1 \u2202g\u03b7(\u03c4 ) \u2202log \u03c0\u03b8(A|S) + c \u2202v\u03b8(S) (12)",
+        "The performance is cross-validated on a subsequent sample of experience \u03c4 using the policy gradient meta-objective (Equation (13)).",
+        "The key idea is to provide the metaparameters \u03b7 as an additional input to condition the value function and policy, as follows: v\u03b8\u03b7(S) = v\u03b8([S; e\u03b7]), \u03c0\u03b8\u03b7(S) = \u03c0\u03b8([S; e\u03b7]), where e\u03b7 is the embedding of \u03b7, [s; e\u03b7] denotes concatenation of vectors s and e\u03b7, the embedding network e\u03b7 is updated by backpropagation during training but the gradient is not flowing through \u03b7.",
+        "To illustrate the key idea of our meta-gradient approach, we provide two examples that show how the discount factor \u03b3 and temporal difference parameter \u03bb, respectively, can be meta-learned.",
+        "The meta-gradient algorithm was able to adapt both \u03bb and \u03b3 to form returns that alternate between high or low values in odd or even states respectively.",
+        "The meta-learning hyper-parameters are chosen according to the performance of six Atari games as common practice in Deep RL Atari experiments [van Hasselt et al, 2016, <a class=\"ref-link\" id=\"cMnih_et+al_2016_a\" href=\"#rMnih_et+al_2016_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2016_a\" href=\"#rMnih_et+al_2016_a\">Mnih et al, 2016</a></a>, Wang et al, 2016b].",
+        "We compare against the state-of-the-art agent trained on Atari games, namely Rainbow [<a class=\"ref-link\" id=\"cHessel_et+al_2018_a\" href=\"#rHessel_et+al_2018_a\">Hessel et al, 2018</a>], which combines DQN [<a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\">Mnih et al, 2015</a></a></a>] with double Q-learning [van Hasselt et al, 2016, van Hasselt, 2010], prioritised replay [<a class=\"ref-link\" id=\"cSchaul_et+al_2016_a\" href=\"#rSchaul_et+al_2016_a\">Schaul et al, 2016</a>], dueling networks [Wang et al, 2016b], multi-step targets [<a class=\"ref-link\" id=\"cSutton_1988_a\" href=\"#rSutton_1988_a\">Sutton, 1988</a>, <a class=\"ref-link\" id=\"cSutton_2018_a\" href=\"#rSutton_2018_a\"><a class=\"ref-link\" id=\"cSutton_2018_a\" href=\"#rSutton_2018_a\">Sutton and Barto, 2018</a></a>], distributional RL [<a class=\"ref-link\" id=\"cBellemare_et+al_2017_a\" href=\"#rBellemare_et+al_2017_a\">Bellemare et al, 2017</a>], and parameter noise for exploration [<a class=\"ref-link\" id=\"cFortunato_et+al_2018_a\" href=\"#rFortunato_et+al_2018_a\">Fortunato et al, 2018</a>].",
+        "With our own work, <a class=\"ref-link\" id=\"cZheng_et+al_2018_a\" href=\"#rZheng_et+al_2018_a\">Zheng et al [2018</a>] propose a similar algorithm to learn meta-parameters of the return: in their case an auxiliary reward function that is added to the external rewards.",
+        "<a class=\"ref-link\" id=\"cKonidaris_et+al_2011_a\" href=\"#rKonidaris_et+al_2011_a\">Konidaris et al [2011</a>] derive a maximum-likelihood estimator, TD(\u03b3), that weights the n-step returns according to the discount factor, leading to a parameter-free algorithm for temporal-difference learning with linear function approximation.",
+        "This may result in better performance because the parameters can change over time and adapt to novel environments"
+    ],
+    "headline": "We are interested in one of the fundamental problems in reinforcement learning: what would be the best form of return for the agent to maximise? Specifically, we propose to learn the return function by treating it as a parametric function with tunable meta-parameters \u03b7, for instance including the discount factor \u03b3, or the bootstrapping parameter \u03bb ",
+    "reference_links": [
+        {
+            "id": "Abadi_et+al_2016_a",
+            "entry": "M. Abadi, P. Barham, J. Chen, Z. Chen, A. Davis, J. Dean, M. Devin, S. Ghemawat, G. Irving, M. Isard, et al. TensorFlow: A system for large-scale machine learning. In OSDI, volume 16, pages 265\u2013283, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abadi%2C%20M.%20Barham%2C%20P.%20Chen%2C%20J.%20Chen%2C%20Z.%20TensorFlow%3A%20A%20system%20for%20large-scale%20machine%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abadi%2C%20M.%20Barham%2C%20P.%20Chen%2C%20J.%20Chen%2C%20Z.%20TensorFlow%3A%20A%20system%20for%20large-scale%20machine%20learning%202016"
+        },
+        {
+            "id": "Al-Shedivat_et+al_2018_a",
+            "entry": "M. Al-Shedivat, T. Bansal, Y. Burda, I. Sutskever, I. Mordatch, and P. Abbeel. Continuous adaptation via meta-learning in nonstationary and competitive environments. In ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Al-Shedivat%2C%20M.%20Bansal%2C%20T.%20Burda%2C%20Y.%20Sutskever%2C%20I.%20Continuous%20adaptation%20via%20meta-learning%20in%20nonstationary%20and%20competitive%20environments%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Al-Shedivat%2C%20M.%20Bansal%2C%20T.%20Burda%2C%20Y.%20Sutskever%2C%20I.%20Continuous%20adaptation%20via%20meta-learning%20in%20nonstationary%20and%20competitive%20environments%202018"
+        },
+        {
+            "id": "Andrychowicz_et+al_2016_a",
+            "entry": "M. Andrychowicz, M. Denil, S. Gomez, M. W. Hoffman, D. Pfau, T. Schaul, and N. de Freitas. Learning to learn by gradient descent by gradient descent. In NIPS, pages 3981\u20133989, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Andrychowicz%2C%20M.%20Denil%2C%20M.%20Gomez%2C%20S.%20Hoffman%2C%20M.W.%20Learning%20to%20learn%20by%20gradient%20descent%20by%20gradient%20descent%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Andrychowicz%2C%20M.%20Denil%2C%20M.%20Gomez%2C%20S.%20Hoffman%2C%20M.W.%20Learning%20to%20learn%20by%20gradient%20descent%20by%20gradient%20descent%202016"
+        },
+        {
+            "id": "Bellemare_et+al_2013_a",
+            "entry": "M. G. Bellemare, Y. Naddaf, J. Veness, and M. Bowling. The arcade learning environment: An evaluation platform for general agents. J. Artif. Intell. Res.(JAIR), 47:253\u2013279, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bellemare%2C%20M.G.%20Naddaf%2C%20Y.%20Veness%2C%20J.%20Bowling%2C%20M.%20The%20arcade%20learning%20environment%3A%20An%20evaluation%20platform%20for%20general%20agents%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bellemare%2C%20M.G.%20Naddaf%2C%20Y.%20Veness%2C%20J.%20Bowling%2C%20M.%20The%20arcade%20learning%20environment%3A%20An%20evaluation%20platform%20for%20general%20agents%202013"
+        },
+        {
+            "id": "Bellemare_et+al_2017_a",
+            "entry": "M. G. Bellemare, W. Dabney, and R. Munos. A distributional perspective on reinforcement learning. In ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bellemare%2C%20M.G.%20Dabney%2C%20W.%20Munos%2C%20R.%20A%20distributional%20perspective%20on%20reinforcement%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bellemare%2C%20M.G.%20Dabney%2C%20W.%20Munos%2C%20R.%20A%20distributional%20perspective%20on%20reinforcement%20learning%202017"
+        },
+        {
+            "id": "Bertsekas_1996_a",
+            "entry": "D. P. Bertsekas and J. N. Tsitsiklis. Neuro-Dynamic Programming. Athena Scientific, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=D%20P%20Bertsekas%20and%20J%20N%20Tsitsiklis%20NeuroDynamic%20Programming%20Athena%20Scientific%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=D%20P%20Bertsekas%20and%20J%20N%20Tsitsiklis%20NeuroDynamic%20Programming%20Athena%20Scientific%201996"
+        },
+        {
+            "id": "Duan_et+al_2016_a",
+            "entry": "Y. Duan, J. Schulman, X. Chen, P. L. Bartlett, I. Sutskever, and P. Abbeel. RL2: Fast reinforcement learning via slow reinforcement learning. arXiv preprint arXiv:1611.02779, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.02779"
+        },
+        {
+            "id": "Elfwing_et+al_2017_a",
+            "entry": "S. Elfwing, E. Uchibe, and K. Doya. Online meta-learning by parallel algorithm competition. CoRR, abs/1702.07490, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1702.07490"
+        },
+        {
+            "id": "Espeholt_et+al_2018_a",
+            "entry": "L. Espeholt, H. Soyer, R. Munos, K. Simonyan, V. Mnih, T. Ward, Y. Doron, V. Firoiu, T. Harley, I. Dunning, et al. IMPALA: Scalable distributed Deep-RL with importance weighted actor-learner architectures. ICML, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Espeholt%2C%20L.%20Soyer%2C%20H.%20Munos%2C%20R.%20Simonyan%2C%20K.%20IMPALA%3A%20Scalable%20distributed%20Deep-RL%20with%20importance%20weighted%20actor-learner%20architectures%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Espeholt%2C%20L.%20Soyer%2C%20H.%20Munos%2C%20R.%20Simonyan%2C%20K.%20IMPALA%3A%20Scalable%20distributed%20Deep-RL%20with%20importance%20weighted%20actor-learner%20architectures%202018"
+        },
+        {
+            "id": "Finn_2018_a",
+            "entry": "C. Finn and S. Levine. Meta-learning and universality: Deep representations and gradient descent can approximate any learning algorithm. ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Finn%2C%20C.%20Levine%2C%20S.%20Meta-learning%20and%20universality%3A%20Deep%20representations%20and%20gradient%20descent%20can%20approximate%20any%20learning%20algorithm%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Finn%2C%20C.%20Levine%2C%20S.%20Meta-learning%20and%20universality%3A%20Deep%20representations%20and%20gradient%20descent%20can%20approximate%20any%20learning%20algorithm%202018"
+        },
+        {
+            "id": "Finn_et+al_2017_a",
+            "entry": "C. Finn, P. Abbeel, and S. Levine. Model-agnostic meta-learning for fast adaptation of deep networks. In ICML, 2017a.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Finn%2C%20C.%20Abbeel%2C%20P.%20Levine%2C%20S.%20Model-agnostic%20meta-learning%20for%20fast%20adaptation%20of%20deep%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Finn%2C%20C.%20Abbeel%2C%20P.%20Levine%2C%20S.%20Model-agnostic%20meta-learning%20for%20fast%20adaptation%20of%20deep%20networks%202017"
+        },
+        {
+            "id": "Finn_et+al_2017_b",
+            "entry": "C. Finn, T. Yu, T. Zhang, P. Abbeel, and S. Levine. One-shot visual imitation learning via metalearning. In CoRL, 2017b.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Finn%2C%20C.%20Yu%2C%20T.%20Zhang%2C%20T.%20Abbeel%2C%20P.%20One-shot%20visual%20imitation%20learning%20via%20metalearning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Finn%2C%20C.%20Yu%2C%20T.%20Zhang%2C%20T.%20Abbeel%2C%20P.%20One-shot%20visual%20imitation%20learning%20via%20metalearning%202017"
+        },
+        {
+            "id": "Fortunato_et+al_2018_a",
+            "entry": "M. Fortunato, M. G. Azar, B. Piot, J. Menick, I. Osband, A. Graves, V. Mnih, R. Munos, D. Hassabis, O. Pietquin, et al. Noisy networks for exploration. In ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fortunato%2C%20M.%20Azar%2C%20M.G.%20Piot%2C%20B.%20Menick%2C%20J.%20Noisy%20networks%20for%20exploration%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fortunato%2C%20M.%20Azar%2C%20M.G.%20Piot%2C%20B.%20Menick%2C%20J.%20Noisy%20networks%20for%20exploration%202018"
+        },
+        {
+            "id": "Franceschi_et+al_2017_a",
+            "entry": "L. Franceschi, M. Donini, P. Frasconi, and M. Pontil. Forward and reverse gradient-based hyperparameter optimization. In ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Franceschi%2C%20L.%20Donini%2C%20M.%20Frasconi%2C%20P.%20Pontil%2C%20M.%20Forward%20and%20reverse%20gradient-based%20hyperparameter%20optimization%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Franceschi%2C%20L.%20Donini%2C%20M.%20Frasconi%2C%20P.%20Pontil%2C%20M.%20Forward%20and%20reverse%20gradient-based%20hyperparameter%20optimization%202017"
+        },
+        {
+            "id": "Grant_et+al_2018_a",
+            "entry": "E. Grant, C. Finn, S. Levine, T. Darrell, and T. Griffiths. Recasting gradient-based meta-learning as hierarchical Bayes. ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Grant%2C%20E.%20Finn%2C%20C.%20Levine%2C%20S.%20Darrell%2C%20T.%20Recasting%20gradient-based%20meta-learning%20as%20hierarchical%20Bayes%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Grant%2C%20E.%20Finn%2C%20C.%20Levine%2C%20S.%20Darrell%2C%20T.%20Recasting%20gradient-based%20meta-learning%20as%20hierarchical%20Bayes%202018"
+        },
+        {
+            "id": "He_et+al_2016_a",
+            "entry": "K. He, X. Zhang, S. Ren, and J. Sun. Deep residual learning for image recognition. In CVPR, pages 770\u2013778, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%202016"
+        },
+        {
+            "id": "Hessel_et+al_2018_a",
+            "entry": "M. Hessel, J. Modayil, H. Van Hasselt, T. Schaul, G. Ostrovski, W. Dabney, D. Horgan, B. Piot, M. Azar, and D. Silver. Rainbow: Combining improvements in deep reinforcement learning. In AAAI, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hessel%2C%20M.%20Modayil%2C%20J.%20Hasselt%2C%20H.Van%20Schaul%2C%20T.%20Rainbow%3A%20Combining%20improvements%20in%20deep%20reinforcement%20learning%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hessel%2C%20M.%20Modayil%2C%20J.%20Hasselt%2C%20H.Van%20Schaul%2C%20T.%20Rainbow%3A%20Combining%20improvements%20in%20deep%20reinforcement%20learning%202018"
+        },
+        {
+            "id": "Hochreiter_1997_a",
+            "entry": "S. Hochreiter and J. Schmidhuber. Long short-term memory. Neural computation, 9(8):1735\u20131780, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hochreiter%2C%20S.%20Schmidhuber%2C%20J.%20Long%20short-term%20memory%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hochreiter%2C%20S.%20Schmidhuber%2C%20J.%20Long%20short-term%20memory%201997"
+        },
+        {
+            "id": "Jaderberg_et+al_0000_a",
+            "entry": "M. Jaderberg, V. Dalibard, S. Osindero, W. M. Czarnecki, J. Donahue, A. Razavi, O. Vinyals, T. Green, I. Dunning, K. Simonyan, et al. Population based training of neural networks. arXiv preprint arXiv:1711.09846, 2017a.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.09846"
+        },
+        {
+            "id": "Jaderberg_et+al_2017_a",
+            "entry": "M. Jaderberg, V. Mnih, W. M. Czarnecki, T. Schaul, J. Z. Leibo, D. Silver, and K. Kavukcuoglu. Reinforcement learning with unsupervised auxiliary tasks. In ICLR, 2017b.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jaderberg%2C%20M.%20Mnih%2C%20V.%20Czarnecki%2C%20W.M.%20Schaul%2C%20T.%20Reinforcement%20learning%20with%20unsupervised%20auxiliary%20tasks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jaderberg%2C%20M.%20Mnih%2C%20V.%20Czarnecki%2C%20W.M.%20Schaul%2C%20T.%20Reinforcement%20learning%20with%20unsupervised%20auxiliary%20tasks%202017"
+        },
+        {
+            "id": "Kearns_2000_a",
+            "entry": "M. J. Kearns and S. P. Singh. Bias-variance error bounds for temporal difference updates. In COLT, pages 142\u2013147, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kearns%2C%20M.J.%20Singh%2C%20S.P.%20Bias-variance%20error%20bounds%20for%20temporal%20difference%20updates%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kearns%2C%20M.J.%20Singh%2C%20S.P.%20Bias-variance%20error%20bounds%20for%20temporal%20difference%20updates%202000"
+        },
+        {
+            "id": "Kingma_2015_a",
+            "entry": "D. P. Kingma and J. Ba. ADAM: A method for stochastic optimization. ICLR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20D.P.%20Ba%2C%20J.%20ADAM%3A%20A%20method%20for%20stochastic%20optimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20D.P.%20Ba%2C%20J.%20ADAM%3A%20A%20method%20for%20stochastic%20optimization%202015"
+        },
+        {
+            "id": "Konidaris_et+al_2011_a",
+            "entry": "G. Konidaris, S. Niekum, and P. S. Thomas. TD\u03b3: Re-evaluating complex backups in temporal difference learning. In NIPS, pages 2402\u20132410, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Konidaris%2C%20G.%20Niekum%2C%20S.%20Thomas%2C%20P.S.%20TD%CE%B3%3A%20Re-evaluating%20complex%20backups%20in%20temporal%20difference%20learning%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Konidaris%2C%20G.%20Niekum%2C%20S.%20Thomas%2C%20P.S.%20TD%CE%B3%3A%20Re-evaluating%20complex%20backups%20in%20temporal%20difference%20learning%202011"
+        },
+        {
+            "id": "Maclaurin_et+al_2015_a",
+            "entry": "D. Maclaurin, D. Duvenaud, and R. Adams. Gradient-based hyperparameter optimization through reversible learning. In ICML, pages 2113\u20132122, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Maclaurin%2C%20D.%20Duvenaud%2C%20D.%20Adams%2C%20R.%20Gradient-based%20hyperparameter%20optimization%20through%20reversible%20learning%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Maclaurin%2C%20D.%20Duvenaud%2C%20D.%20Adams%2C%20R.%20Gradient-based%20hyperparameter%20optimization%20through%20reversible%20learning%202015"
+        },
+        {
+            "id": "Mahmood_2017_a",
+            "entry": "A. Mahmood. Incremental Off-policy Reinforcement Learning Algorithms. PhD thesis, University of Alberta, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mahmood%2C%20A.%20Incremental%20Off-policy%20Reinforcement%20Learning%20Algorithms%202017"
+        },
+        {
+            "id": "Mnih_et+al_2013_a",
+            "entry": "V. Mnih, K. Kavukcuoglu, D. Silver, A. Graves, I. Antonoglou, D. Wierstra, and M. Riedmiller. Playing atari with deep reinforcement learning. NIPS workshop, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20V.%20Kavukcuoglu%2C%20K.%20Silver%2C%20D.%20Graves%2C%20A.%20Playing%20atari%20with%20deep%20reinforcement%20learning%202013"
+        },
+        {
+            "id": "Mnih_et+al_2015_a",
+            "entry": "V. Mnih, K. Kavukcuoglu, D. Silver, A. A. Rusu, J. Veness, M. G. Bellemare, A. Graves, M. Riedmiller, A. K. Fidjeland, G. Ostrovski, et al. Human-level control through deep reinforcement learning. Nature, 518(7540):529, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20V.%20Kavukcuoglu%2C%20K.%20Silver%2C%20D.%20Rusu%2C%20A.A.%20Human-level%20control%20through%20deep%20reinforcement%20learning%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20V.%20Kavukcuoglu%2C%20K.%20Silver%2C%20D.%20Rusu%2C%20A.A.%20Human-level%20control%20through%20deep%20reinforcement%20learning%202015"
+        },
+        {
+            "id": "Mnih_et+al_2016_a",
+            "entry": "V. Mnih, A. P. Badia, M. Mirza, A. Graves, T. Lillicrap, T. Harley, D. Silver, and K. Kavukcuoglu. Asynchronous methods for deep reinforcement learning. In ICML, pages 1928\u20131937, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20V.%20Badia%2C%20A.P.%20Mirza%2C%20M.%20Graves%2C%20A.%20Asynchronous%20methods%20for%20deep%20reinforcement%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20V.%20Badia%2C%20A.P.%20Mirza%2C%20M.%20Graves%2C%20A.%20Asynchronous%20methods%20for%20deep%20reinforcement%20learning%202016"
+        },
+        {
+            "id": "Munos_et+al_2016_a",
+            "entry": "R. Munos, T. Stepleton, A. Harutyunyan, and M. Bellemare. Safe and efficient off-policy reinforcement learning. In NIPS, pages 1054\u20131062, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Munos%2C%20R.%20Stepleton%2C%20T.%20Harutyunyan%2C%20A.%20Bellemare%2C%20M.%20Safe%20and%20efficient%20off-policy%20reinforcement%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Munos%2C%20R.%20Stepleton%2C%20T.%20Harutyunyan%2C%20A.%20Bellemare%2C%20M.%20Safe%20and%20efficient%20off-policy%20reinforcement%20learning%202016"
+        },
+        {
+            "id": "Nair_et+al_2015_a",
+            "entry": "A. Nair, P. Srinivasan, S. Blackwell, C. Alcicek, R. Fearon, A. De Maria, V. Panneershelvam, M. Suleyman, C. Beattie, S. Petersen, et al. Massively parallel methods for deep reinforcement learning. arXiv preprint arXiv:1507.04296, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1507.04296"
+        },
+        {
+            "id": "Pedregosa_2016_a",
+            "entry": "F. Pedregosa. Hyperparameter optimization with approximate gradient. In ICML, pages 737\u2013746, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pedregosa%2C%20F.%20Hyperparameter%20optimization%20with%20approximate%20gradient%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pedregosa%2C%20F.%20Hyperparameter%20optimization%20with%20approximate%20gradient%202016"
+        },
+        {
+            "id": "Precup_et+al_2000_a",
+            "entry": "D. Precup, R. S. Sutton, and S. P. Singh. Eligibility traces for off-policy policy evaluation. In ICML, pages 759\u2013766, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Precup%2C%20D.%20Sutton%2C%20R.S.%20Singh%2C%20S.P.%20Eligibility%20traces%20for%20off-policy%20policy%20evaluation%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Precup%2C%20D.%20Sutton%2C%20R.S.%20Singh%2C%20S.P.%20Eligibility%20traces%20for%20off-policy%20policy%20evaluation%202000"
+        },
+        {
+            "id": "Prokhorov_1997_a",
+            "entry": "D. V. Prokhorov and D. C. Wunsch. Adaptive critic designs. TNN, 8(5):997\u20131007, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Prokhorov%2C%20D.V.%20Wunsch%2C%20D.C.%20Adaptive%20critic%20designs%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Prokhorov%2C%20D.V.%20Wunsch%2C%20D.C.%20Adaptive%20critic%20designs%201997"
+        },
+        {
+            "id": "Randl_1998_a",
+            "entry": "J. Randl\u00f8v and P. Alstr\u00f8m. Learning to drive a bicycle using reinforcement learning and shaping. In ICML, volume 98, pages 463\u2013471, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Randl%C3%B8v%2C%20J.%20Alstr%C3%B8m%2C%20P.%20Learning%20to%20drive%20a%20bicycle%20using%20reinforcement%20learning%20and%20shaping%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Randl%C3%B8v%2C%20J.%20Alstr%C3%B8m%2C%20P.%20Learning%20to%20drive%20a%20bicycle%20using%20reinforcement%20learning%20and%20shaping%201998"
+        },
+        {
+            "id": "Rummery_1994_a",
+            "entry": "G. A. Rummery and M. Niranjan. On-line Q-learning using connectionist sytems. Technical Report CUED/F-INFENG-TR 166, Cambridge University, UK, 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rummery%2C%20G.A.%20Niranjan%2C%20M.%20On-line%20Q-learning%20using%20connectionist%20sytems%201994"
+        },
+        {
+            "id": "Schaul_et+al_2015_a",
+            "entry": "T. Schaul, D. Horgan, K. Gregor, and D. Silver. Universal value function approximators. In ICML, pages 1312\u20131320, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=T%20Schaul%20D%20Horgan%20K%20Gregor%20and%20D%20Silver%20Universal%20value%20function%20approximators%20In%20ICML%20pages%2013121320%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=T%20Schaul%20D%20Horgan%20K%20Gregor%20and%20D%20Silver%20Universal%20value%20function%20approximators%20In%20ICML%20pages%2013121320%202015"
+        },
+        {
+            "id": "Schaul_et+al_2016_a",
+            "entry": "T. Schaul, J. Quan, I. Antonoglou, and D. Silver. Prioritized experience replay. In ICLR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=T%20Schaul%20J%20Quan%20I%20Antonoglou%20and%20D%20Silver%20Prioritized%20experience%20replay%20In%20ICLR%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=T%20Schaul%20J%20Quan%20I%20Antonoglou%20and%20D%20Silver%20Prioritized%20experience%20replay%20In%20ICLR%202016"
+        },
+        {
+            "id": "Schmidhuber_1987_a",
+            "entry": "J. Schmidhuber. Evolutionary principles in self-referential learning, or on learning how to learn: the meta-meta-... hook. PhD thesis, Technische Universit\u00e4t M\u00fcnchen, 1987.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schmidhuber%2C%20J.%20Evolutionary%20principles%20in%20self-referential%20learning%2C%20or%20on%20learning%20how%20to%20learn%3A%20the%20meta-meta-%201987"
+        },
+        {
+            "id": "Schraudolph_1999_a",
+            "entry": "N. N. Schraudolph. Local gain adaptation in stochastic gradient descent. In ICANN. IET, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schraudolph%2C%20N.N.%20Local%20gain%20adaptation%20in%20stochastic%20gradient%20descent.%20In%20ICANN%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schraudolph%2C%20N.N.%20Local%20gain%20adaptation%20in%20stochastic%20gradient%20descent.%20In%20ICANN%201999"
+        },
+        {
+            "id": "Singh_1998_a",
+            "entry": "S. Singh and P. Dayan. Analytical mean squared error curves for temporal difference learning. Machine Learning, 32(1):5\u201340, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Singh%2C%20S.%20Dayan%2C%20P.%20Analytical%20mean%20squared%20error%20curves%20for%20temporal%20difference%20learning%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Singh%2C%20S.%20Dayan%2C%20P.%20Analytical%20mean%20squared%20error%20curves%20for%20temporal%20difference%20learning%201998"
+        },
+        {
+            "id": "Singh_et+al_2005_a",
+            "entry": "S. P. Singh, A. G. Barto, and N. Chentanez. Intrinsically motivated reinforcement learning. In NIPS, pages 1281\u20131288, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Singh%2C%20S.P.%20Barto%2C%20A.G.%20Chentanez%2C%20N.%20Intrinsically%20motivated%20reinforcement%20learning%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Singh%2C%20S.P.%20Barto%2C%20A.G.%20Chentanez%2C%20N.%20Intrinsically%20motivated%20reinforcement%20learning%202005"
+        },
+        {
+            "id": "Snoek_et+al_2012_a",
+            "entry": "J. Snoek, H. Larochelle, and R. P. Adams. Practical Bayesian optimization of machine learning algorithms. In NIPS, pages 2951\u20132959, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Snoek%2C%20J.%20Larochelle%2C%20H.%20Adams%2C%20R.P.%20Practical%20Bayesian%20optimization%20of%20machine%20learning%20algorithms%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Snoek%2C%20J.%20Larochelle%2C%20H.%20Adams%2C%20R.P.%20Practical%20Bayesian%20optimization%20of%20machine%20learning%20algorithms%202012"
+        },
+        {
+            "id": "Sutton_1988_a",
+            "entry": "R. S. Sutton. Learning to predict by the methods of temporal differences. Machine learning, 3(1): 9\u201344, 1988.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20R.S.%20Learning%20to%20predict%20by%20the%20methods%20of%20temporal%20differences%201988",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutton%2C%20R.S.%20Learning%20to%20predict%20by%20the%20methods%20of%20temporal%20differences%201988"
+        },
+        {
+            "id": "Sutton_1992_a",
+            "entry": "R. S. Sutton. Adapting bias by gradient descent: An incremental version of delta-bar-delta. In AAAI, pages 171\u2013176, 1992.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20R.S.%20Adapting%20bias%20by%20gradient%20descent%3A%20An%20incremental%20version%20of%20delta-bar-delta%201992",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutton%2C%20R.S.%20Adapting%20bias%20by%20gradient%20descent%3A%20An%20incremental%20version%20of%20delta-bar-delta%201992"
+        },
+        {
+            "id": "Sutton_2018_a",
+            "entry": "R. S. Sutton and A. G. Barto. Reinforcement learning: An introduction. MIT press Cambridge, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20R.S.%20Barto%2C%20A.G.%20Reinforcement%20learning%3A%20An%20introduction%202018"
+        },
+        {
+            "id": "Sutton_et+al_2014_a",
+            "entry": "R. S. Sutton, A. R. Mahmood, D. Precup, and H. van Hasselt. A new Q(\u03bb) with interim forward view and Monte Carlo equivalence. In ICML, pages 568\u2013576, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20R.S.%20Mahmood%2C%20A.R.%20Precup%2C%20D.%20van%20Hasselt%2C%20H.%20A%20new%20Q%28%CE%BB%29%20with%20interim%20forward%20view%20and%20Monte%20Carlo%20equivalence%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutton%2C%20R.S.%20Mahmood%2C%20A.R.%20Precup%2C%20D.%20van%20Hasselt%2C%20H.%20A%20new%20Q%28%CE%BB%29%20with%20interim%20forward%20view%20and%20Monte%20Carlo%20equivalence%202014"
+        },
+        {
+            "id": "Sutton_et+al_1998_a",
+            "entry": "R. S. Sutton, A. R. Mahmood, and M. White. An emphatic approach to the problem of off-policy temporal-difference learning. JMLR, 17(1):2603\u20132631, 2016. S. Thrun and L. Pratt. Learning to learn. Springer Science & Business Media, 1998. T. Tieleman and G. Hinton. Lecture 6.5-RMSProp: Divide the gradient by a running average of its recent magnitude. COURSERA: Neural networks for machine learning, 4(2):26\u201331, 2012. H. van Hasselt. Double Q-learning. In NIPS, pages 2613\u20132621, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20R.S.%20Mahmood%2C%20A.R.%20White%2C%20M.%20An%20emphatic%20approach%20to%20the%20problem%20of%20off-policy%20temporal-difference%20learning%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutton%2C%20R.S.%20Mahmood%2C%20A.R.%20White%2C%20M.%20An%20emphatic%20approach%20to%20the%20problem%20of%20off-policy%20temporal-difference%20learning%201998"
+        },
+        {
+            "id": "A_2016_a",
+            "entry": "AAAI, volume 16, pages 2094\u20132100, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=AAAI%20volume%2016%20pages%2020942100%202016"
+        },
+        {
+            "id": "Van_et+al_2009_a",
+            "entry": "H. H. van Seijen, H. P. van Hasselt, S. Whiteson, and M. A. Wiering. A theoretical and empirical analysis of Expected Sarsa. In ADPRL, pages 177\u2013184, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=van%20Seijen%2C%20H.H.%20van%20Hasselt%2C%20H.P.%20Whiteson%2C%20S.%20Wiering%2C%20M.A.%20A%20theoretical%20and%20empirical%20analysis%20of%20Expected%20Sarsa%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=van%20Seijen%2C%20H.H.%20van%20Hasselt%2C%20H.P.%20Whiteson%2C%20S.%20Wiering%2C%20M.A.%20A%20theoretical%20and%20empirical%20analysis%20of%20Expected%20Sarsa%202009"
+        },
+        {
+            "id": "Wang_et+al_2016_a",
+            "entry": "J. X. Wang, Z. Kurth-Nelson, D. Tirumala, H. Soyer, J. Z. Leibo, R. Munos, C. Blundell, D. Kumaran, and M. Botvinick. Learning to reinforcement learn. arXiv preprint arXiv:1611.05763, 2016a. Z. Wang, T. Schaul, M. Hessel, H. Van Hasselt, M. Lanctot, and N. De Freitas. Dueling network architectures for deep reinforcement learning. ICML, 2016b. M. White and A. White. A greedy approach to adapting the trace parameter for temporal difference learning. In AAMAS, pages 557\u2013565, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.05763"
+        },
+        {
+            "id": "Wichrowska_et+al_1992_a",
+            "entry": "O. Wichrowska, N. Maheswaranathan, M. W. Hoffman, S. G. Colmenarejo, M. Denil, N. de Freitas, and J. Sohl-Dickstein. Learned optimizers that scale and generalize. In ICML, 2017. R. J. Williams. Simple statistical gradient-following algorithms for connectionist reinforcement learning. Machine Learning, 8(3-4):229\u2013256, May 1992. R. J. Williams and D. Zipser. A learning algorithm for continually running fully recurrent neural networks. Neural computation, 1(2):270\u2013280, 1989.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wichrowska%2C%20O.%20Maheswaranathan%2C%20N.%20Hoffman%2C%20M.W.%20Colmenarejo%2C%20S.G.%20Learned%20optimizers%20that%20scale%20and%20generalize%201992-05",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wichrowska%2C%20O.%20Maheswaranathan%2C%20N.%20Hoffman%2C%20M.W.%20Colmenarejo%2C%20S.G.%20Learned%20optimizers%20that%20scale%20and%20generalize%201992-05"
+        },
+        {
+            "id": "Zheng_et+al_2018_a",
+            "entry": "Z. Zheng, J. Oh, and S. Singh. On learning intrinsic rewards for policy gradient methods. In NIPS, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zheng%2C%20Z.%20Oh%2C%20J.%20Singh%2C%20S.%20On%20learning%20intrinsic%20rewards%20for%20policy%20gradient%20methods%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zheng%2C%20Z.%20Oh%2C%20J.%20Singh%2C%20S.%20On%20learning%20intrinsic%20rewards%20for%20policy%20gradient%20methods%202018"
+        }
+    ]
+}

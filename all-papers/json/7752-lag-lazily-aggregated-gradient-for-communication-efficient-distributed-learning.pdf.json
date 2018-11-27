@@ -1,0 +1,267 @@
+{
+    "filename": "7752-lag-lazily-aggregated-gradient-for-communication-efficient-distributed-learning.pdf",
+    "metadata": {
+        "title": "LAG: Lazily Aggregated Gradient for Communication-Efficient Distributed Learning",
+        "author": "Tianyi Chen, Georgios Giannakis, Tao Sun, Wotao Yin",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7752-lag-lazily-aggregated-gradient-for-communication-efficient-distributed-learning.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "This paper presents a new class of gradient methods for distributed machine learning that adaptively skip the gradient calculations to learn with reduced communication and computation. Simple rules are designed to detect slowly-varying gradients and, therefore, trigger the reuse of outdated gradients. The resultant gradient-based algorithms are termed Lazily Aggregated Gradient \u2014 justifying our acronym LAG used henceforth. Theoretically, the merits of this contribution are: i) the convergence rate is the same as batch gradient descent in stronglyconvex, convex, and nonconvex cases; and, ii) if the distributed datasets are heterogeneous (quantified by certain measurable constants), the communication rounds needed to achieve a targeted accuracy are reduced thanks to the adaptive reuse of lagged gradients. Numerical experiments on both synthetic and real data corroborate a significant communication reduction compared to alternatives."
+    },
+    "keywords": [
+        {
+            "term": "gradient descent",
+            "url": "https://en.wikipedia.org/wiki/gradient_descent"
+        },
+        {
+            "term": "machine learning",
+            "url": "https://en.wikipedia.org/wiki/machine_learning"
+        },
+        {
+            "term": "deep network",
+            "url": "https://en.wikipedia.org/wiki/deep_network"
+        },
+        {
+            "term": "convergence rate",
+            "url": "https://en.wikipedia.org/wiki/convergence_rate"
+        },
+        {
+            "term": "stochastic gradient descent",
+            "url": "https://en.wikipedia.org/wiki/stochastic_gradient_descent"
+        },
+        {
+            "term": "gradient method",
+            "url": "https://en.wikipedia.org/wiki/gradient_method"
+        }
+    ],
+    "highlights": [
+        "Different from the single server case, parallel implementation of the batch gradient descent (GD) is a popular choice, since stochastic gradient descent that has low complexity per iteration requires a large number of iterations communication rounds [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>]",
+        "We found that Lazily Aggregated gradient can reduce the communication required by gradient descent and other distributed learning methods by an order of magnitude",
+        "Building on the iteration complexity, we study the communication complexity of Lazily Aggregated gradient",
+        "\u25b7 Cyc-incremental aggregated gradient is the cyclic version of the incremental aggregated gradient (IAG) method [<a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>, <a class=\"ref-link\" id=\"c31\" href=\"#r31\">31</a>] that resembles the recursion (4), but communicates with one worker per iteration in a cyclic fashion. \u25b7 Num-incremental aggregated gradient resembles the recursion (4), and is the non-uniform-sampling enhancement of SAG [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>], but it randomly selects one wor\u2211ker to obtain a fresh gradient per-iteration with the probability of choosing worker m equal to Lm/ m\u2208M Lm. \u25b7 Batch-gradient descent is the gradient descent iteration (2) that communicates with all the workers per iteration",
+        "Confirmed by the impressive empirical performance on both synthetic and real datasets, this paper developed a promising communication-cognizant method for distributed machine learning that we term Lazily Aggregated gradient (LAG) approach",
+        "Lazily Aggregated gradient can achieve the same convergence rates as batch gradient descent (GD) in smooth strongly-convex, convex, and nonconvex cases, and requires fewer communication rounds than gradient descent given that the datasets at different workers are heterogeneous"
+    ],
+    "key_statements": [
+        "Different from the single server case, parallel implementation of the batch gradient descent (GD) is a popular choice, since stochastic gradient descent that has low complexity per iteration requires a large number of iterations communication rounds [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>]",
+        "We found that Lazily Aggregated gradient can reduce the communication required by gradient descent and other distributed learning methods by an order of magnitude",
+        "Building on the iteration complexity, we study the communication complexity of Lazily Aggregated gradient",
+        "\u25b7 Cyc-incremental aggregated gradient is the cyclic version of the incremental aggregated gradient (IAG) method [<a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>, <a class=\"ref-link\" id=\"c31\" href=\"#r31\">31</a>] that resembles the recursion (4), but communicates with one worker per iteration in a cyclic fashion. \u25b7 Num-incremental aggregated gradient resembles the recursion (4), and is the non-uniform-sampling enhancement of SAG [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>], but it randomly selects one wor\u2211ker to obtain a fresh gradient per-iteration with the probability of choosing worker m equal to Lm/ m\u2208M Lm. \u25b7 Batch-gradient descent is the gradient descent iteration (2) that communicates with all the workers per iteration",
+        "For uniform Lm, Lazily Aggregated gradient-WK still has marked improvements on communication, thanks to its ability of exploiting the hidden smoothness of the loss functions; that is, the local curvature of Lm may not be as steep as Lm",
+        "Additional tests under different number of workers are listed in Table 3, which corroborate the effectiveness of Lazily Aggregated gradient when it comes to communication reduction",
+        "Confirmed by the impressive empirical performance on both synthetic and real datasets, this paper developed a promising communication-cognizant method for distributed machine learning that we term Lazily Aggregated gradient (LAG) approach",
+        "Lazily Aggregated gradient can achieve the same convergence rates as batch gradient descent (GD) in smooth strongly-convex, convex, and nonconvex cases, and requires fewer communication rounds than gradient descent given that the datasets at different workers are heterogeneous"
+    ],
+    "summary": [
+        "Different from the single server case, parallel implementation of the batch gradient descent (GD) is a popular choice, since SGD that has low complexity per iteration requires a large number of iterations communication rounds [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>].",
+        "To keep this number in Server (PS) control, we judiciously design our simple trigger rules so that LAG can: i) achieve the same order of convergence rates as batch GD under strongly-convex, convex, and Workers nonconvex smooth cases; and, ii) require reduced communication to achieve a targeted learning accuracy, when the distributed datasets are heteroge-Figure 1: LAG in a parameter server setup.",
+        "Lemma 4 asserts that if the worker m has a small Lm (a close-to-linear loss function) such that H2(m) \u2264 \u03b3d, under LAG, it only communicates with the server at most k/(d + 1) rounds.",
+        "Theorems 2 and 3 assert that with the judiciously designed lazy gradient aggregation rules, LAG can achieve order of convergence rate identical to GD for generalconvex objective functions.",
+        "\u25b7 Cyc-IAG is the cyclic version of the incremental aggregated gradient (IAG) method [<a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>, <a class=\"ref-link\" id=\"c31\" href=\"#r31\">31</a>] that resembles the recursion (4), but communicates with one worker per iteration in a cyclic fashion.",
+        "\u25b7 Num-IAG resembles the recursion (4), and is the non-uniform-sampling enhancement of SAG [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>], but it randomly selects one wor\u2211ker to obtain a fresh gradient per-iteration with the probability of choosing worker m equal to Lm/ m\u2208M Lm.",
+        "For uniform Lm, LAG-WK still has marked improvements on communication, thanks to its ability of exploiting the hidden smoothness of the loss functions; that is, the local curvature of Lm may not be as steep as Lm. Performance is tested on the real datasets [<a class=\"ref-link\" id=\"c32\" href=\"#r32\">32</a>]: a) linear regression using Housing, Body fat, Abalone datasets; and, b) logistic regression using Ionosphere, Adult, Derm datasets; see Figure 4.",
+        "Additional tests under different number of workers are listed in Table 3, which corroborate the effectiveness of LAG when it comes to communication reduction.",
+        "Confirmed by the impressive empirical performance on both synthetic and real datasets, this paper developed a promising communication-cognizant method for distributed machine learning that we term Lazily Aggregated gradient (LAG) approach.",
+        "LAG can achieve the same convergence rates as batch gradient descent (GD) in smooth strongly-convex, convex, and nonconvex cases, and requires fewer communication rounds than GD given that the datasets at different workers are heterogeneous."
+    ],
+    "headline": "This paper presents a new class of gradient methods for distributed machine learning that adaptively skip the gradient calculations to learn with reduced communication and computation",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] A. Nedic and A. Ozdaglar, \u201cDistributed subgradient methods for multi-agent optimization,\u201d IEEE Trans. Automat. Control, vol. 54, no. 1, pp. 48\u201361, Jan. 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nedic%2C%20A.%20Ozdaglar%2C%20A.%20Distributed%20subgradient%20methods%20for%20multi-agent%20optimization%2C%202009-01",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nedic%2C%20A.%20Ozdaglar%2C%20A.%20Distributed%20subgradient%20methods%20for%20multi-agent%20optimization%2C%202009-01"
+        },
+        {
+            "id": "2",
+            "entry": "[2] G. B. Giannakis, Q. Ling, G. Mateos, I. D. Schizas, and H. Zhu, \u201cDecentralized Learning for Wireless Communications and Networking,\u201d in Splitting Methods in Communication and Imaging, Science and Engineering. New York: Springer, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Giannakis%2C%20G.B.%20Ling%2C%20Q.%20Mateos%2C%20G.%20Schizas%2C%20I.D.%20%E2%80%9CDecentralized%20Learning%20for%20Wireless%20Communications%20and%20Networking%2C%E2%80%9D%20in%20Splitting%20Methods%20in%20Communication%20and%20Imaging%2C%20Science%20and%20Engineering%202016"
+        },
+        {
+            "id": "3",
+            "entry": "[3] J. Dean, G. Corrado, R. Monga, K. Chen, M. Devin, M. Mao, A. Senior, P. Tucker, K. Yang, Q. V. Le et al., \u201cLarge scale distributed deep networks,\u201d in Proc. Advances in Neural Info. Process. Syst., Lake Tahoe, NV, 2012, pp. 1223\u20131231.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dean%2C%20J.%20Corrado%2C%20G.%20Monga%2C%20R.%20Chen%2C%20K.%20Large%20scale%20distributed%20deep%20networks%2C%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dean%2C%20J.%20Corrado%2C%20G.%20Monga%2C%20R.%20Chen%2C%20K.%20Large%20scale%20distributed%20deep%20networks%2C%202012"
+        },
+        {
+            "id": "4",
+            "entry": "[4] B. McMahan, E. Moore, D. Ramage, S. Hampson, and B. A. y Arcas, \u201cCommunication-efficient learning of deep networks from decentralized data,\u201d in Proc. Intl. Conf. Artificial Intell. and Stat., Fort Lauderdale, FL, Apr. 2017, pp. 1273\u20131282.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=McMahan%2C%20B.%20Moore%2C%20E.%20Ramage%2C%20D.%20Hampson%2C%20S.%20y%20Arcas%2C%20%E2%80%9CCommunication-efficient%20learning%20of%20deep%20networks%20from%20decentralized%20data%2C%E2%80%9D%202017-04",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=McMahan%2C%20B.%20Moore%2C%20E.%20Ramage%2C%20D.%20Hampson%2C%20S.%20y%20Arcas%2C%20%E2%80%9CCommunication-efficient%20learning%20of%20deep%20networks%20from%20decentralized%20data%2C%E2%80%9D%202017-04"
+        },
+        {
+            "id": "5",
+            "entry": "[5] V. Smith, C.-K. Chiang, M. Sanjabi, and A. S. Talwalkar, \u201cFederated multi-task learning,\u201d in Proc. Advances in Neural Info. Process. Syst., Long Beach, CA, Dec. 2017, pp. 4427\u20134437.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Smith%2C%20V.%20Chiang%2C%20C.-K.%20Sanjabi%2C%20M.%20Talwalkar%2C%20A.S.%20Federated%20multi-task%20learning%2C%202017-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Smith%2C%20V.%20Chiang%2C%20C.-K.%20Sanjabi%2C%20M.%20Talwalkar%2C%20A.S.%20Federated%20multi-task%20learning%2C%202017-12"
+        },
+        {
+            "id": "6",
+            "entry": "[6] I. Stoica, D. Song, R. A. Popa, D. Patterson, M. W. Mahoney, R. Katz, A. D. Joseph, M. Jordan, J. M. Hellerstein, J. E. Gonzalez et al., \u201cA Berkeley view of systems challenges for AI,\u201d arXiv preprint:1712.05855, Dec. 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1712.05855"
+        },
+        {
+            "id": "7",
+            "entry": "[7] L. Bottou, \u201cLarge-Scale Machine Learning with Stochastic Gradient Descent,\u201d in Proceedings of COMPSTAT\u20192010, Y. Lechevallier and G. Saporta, Eds. Heidelberg: Physica-Verlag HD, 2010, pp. 177\u2013186.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bottou%2C%20L.%20Large-Scale%20Machine%20Learning%20with%20Stochastic%20Gradient%20Descent%2C%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bottou%2C%20L.%20Large-Scale%20Machine%20Learning%20with%20Stochastic%20Gradient%20Descent%2C%202010"
+        },
+        {
+            "id": "8",
+            "entry": "[8] L. Bottou, F. E. Curtis, and J. Nocedal, \u201cOptimization methods for large-scale machine learning,\u201d arXiv preprint:1606.04838, Jun. 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.04838"
+        },
+        {
+            "id": "9",
+            "entry": "[9] R. Johnson and T. Zhang, \u201cAccelerating stochastic gradient descent using predictive variance reduction,\u201d in Proc. Advances in Neural Info. Process. Syst., Lake Tahoe, NV, Dec. 2013, pp. 315\u2013323.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Johnson%2C%20R.%20Zhang%2C%20T.%20Accelerating%20stochastic%20gradient%20descent%20using%20predictive%20variance%20reduction%2C%202013-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Johnson%2C%20R.%20Zhang%2C%20T.%20Accelerating%20stochastic%20gradient%20descent%20using%20predictive%20variance%20reduction%2C%202013-12"
+        },
+        {
+            "id": "10",
+            "entry": "[10] A. Defazio, F. Bach, and S. Lacoste-Julien, \u201cSaga: A fast incremental gradient method with support for non-strongly convex composite objectives,\u201d in Proc. Advances in Neural Info. Process. Syst., Montreal, Canada, Dec. 2014, pp. 1646\u20131654.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Defazio%2C%20A.%20Bach%2C%20F.%20Lacoste-Julien%2C%20S.%20Saga%3A%20A%20fast%20incremental%20gradient%20method%20with%20support%20for%20non-strongly%20convex%20composite%20objectives%2C%202014-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Defazio%2C%20A.%20Bach%2C%20F.%20Lacoste-Julien%2C%20S.%20Saga%3A%20A%20fast%20incremental%20gradient%20method%20with%20support%20for%20non-strongly%20convex%20composite%20objectives%2C%202014-12"
+        },
+        {
+            "id": "11",
+            "entry": "[11] M. Schmidt, N. Le Roux, and F. Bach, \u201cMinimizing finite sums with the stochastic average gradient,\u201d Mathematical Programming, vol. 162, no. 1-2, pp. 83\u2013112, Mar. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schmidt%2C%20M.%20Roux%2C%20N.Le%20Bach%2C%20F.%20Minimizing%20finite%20sums%20with%20the%20stochastic%20average%20gradient%2C%202017-03",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schmidt%2C%20M.%20Roux%2C%20N.Le%20Bach%2C%20F.%20Minimizing%20finite%20sums%20with%20the%20stochastic%20average%20gradient%2C%202017-03"
+        },
+        {
+            "id": "12",
+            "entry": "[12] M. Li, D. G. Andersen, A. J. Smola, and K. Yu, \u201cCommunication efficient distributed machine learning with the parameter server,\u201d in Proc. Advances in Neural Info. Process. Syst., Montreal, Canada, Dec. 2014, pp. 19\u201327.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20M.%20Andersen%2C%20D.G.%20Smola%2C%20A.J.%20Yu%2C%20K.%20Communication%20efficient%20distributed%20machine%20learning%20with%20the%20parameter%20server%2C%202014-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20M.%20Andersen%2C%20D.G.%20Smola%2C%20A.J.%20Yu%2C%20K.%20Communication%20efficient%20distributed%20machine%20learning%20with%20the%20parameter%20server%2C%202014-12"
+        },
+        {
+            "id": "13",
+            "entry": "[13] B. McMahan and D. Ramage, \u201cFederated learning: Collaborative machine learning without centralized training data,\u201d Google Research Blog, Apr. 2017. [Online]. Available: https://research.googleblog.com/2017/04/federated-learning-collaborative.html",
+            "url": "https://research.googleblog.com/2017/04/federated-learning-collaborative.html"
+        },
+        {
+            "id": "14",
+            "entry": "[14] L. Cannelli, F. Facchinei, V. Kungurtsev, and G. Scutari, \u201cAsynchronous parallel algorithms for nonconvex big-data optimization: Model and convergence,\u201d arXiv preprint:1607.04818, Jul. 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1607.04818"
+        },
+        {
+            "id": "15",
+            "entry": "[15] T. Sun, R. Hannah, and W. Yin, \u201cAsynchronous coordinate descent under more realistic assumptions,\u201d in Proc. Advances in Neural Info. Process. Syst., Long Beach, CA, Dec. 2017, pp. 6183\u20136191.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sun%2C%20T.%20Hannah%2C%20R.%20Yin%2C%20W.%20Asynchronous%20coordinate%20descent%20under%20more%20realistic%20assumptions%2C%202017-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sun%2C%20T.%20Hannah%2C%20R.%20Yin%2C%20W.%20Asynchronous%20coordinate%20descent%20under%20more%20realistic%20assumptions%2C%202017-12"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Z. Peng, Y. Xu, M. Yan, and W. Yin, \u201cArock: an algorithmic framework for asynchronous parallel coordinate updates,\u201d SIAM J. Sci. Comp., vol. 38, no. 5, pp. 2851\u20132879, Sep. 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Peng%2C%20Z.%20Xu%2C%20Y.%20Yan%2C%20M.%20Yin%2C%20W.%20Arock%3A%20an%20algorithmic%20framework%20for%20asynchronous%20parallel%20coordinate%20updates%2C%202016-09",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Peng%2C%20Z.%20Xu%2C%20Y.%20Yan%2C%20M.%20Yin%2C%20W.%20Arock%3A%20an%20algorithmic%20framework%20for%20asynchronous%20parallel%20coordinate%20updates%2C%202016-09"
+        },
+        {
+            "id": "17",
+            "entry": "[17] B. Recht, C. Re, S. Wright, and F. Niu, \u201cHogwild: A lock-free approach to parallelizing stochastic gradient descent,\u201d in Proc. Advances in Neural Info. Process. Syst., Granada, Spain, Dec. 2011, pp. 693\u2013701.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Recht%2C%20B.%20Re%2C%20C.%20Wright%2C%20S.%20Niu%2C%20F.%20Hogwild%3A%20A%20lock-free%20approach%20to%20parallelizing%20stochastic%20gradient%20descent%2C%202011-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Recht%2C%20B.%20Re%2C%20C.%20Wright%2C%20S.%20Niu%2C%20F.%20Hogwild%3A%20A%20lock-free%20approach%20to%20parallelizing%20stochastic%20gradient%20descent%2C%202011-12"
+        },
+        {
+            "id": "18",
+            "entry": "[18] J. Liu, S. Wright, C. R\u00e9, V. Bittorf, and S. Sridhar, \u201cAn asynchronous parallel stochastic coordinate descent algorithm,\u201d J. Machine Learning Res., vol. 16, no. 1, pp. 285\u2013322, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20J.%20Wright%2C%20S.%20R%C3%A9%2C%20C.%20Bittorf%2C%20V.%20An%20asynchronous%20parallel%20stochastic%20coordinate%20descent%20algorithm%2C%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liu%2C%20J.%20Wright%2C%20S.%20R%C3%A9%2C%20C.%20Bittorf%2C%20V.%20An%20asynchronous%20parallel%20stochastic%20coordinate%20descent%20algorithm%2C%202015"
+        },
+        {
+            "id": "19",
+            "entry": "[19] X. Lian, Y. Huang, Y. Li, and J. Liu, \u201cAsynchronous parallel stochastic gradient for nonconvex optimization,\u201d in Proc. Advances in Neural Info. Process. Syst., Montreal, Canada, Dec. 2015, pp. 2737\u20132745.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lian%2C%20X.%20Huang%2C%20Y.%20Li%2C%20Y.%20Liu%2C%20J.%20Asynchronous%20parallel%20stochastic%20gradient%20for%20nonconvex%20optimization%2C%202015-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lian%2C%20X.%20Huang%2C%20Y.%20Li%2C%20Y.%20Liu%2C%20J.%20Asynchronous%20parallel%20stochastic%20gradient%20for%20nonconvex%20optimization%2C%202015-12"
+        },
+        {
+            "id": "20",
+            "entry": "[20] M. I. Jordan, J. D. Lee, and Y. Yang, \u201cCommunication-efficient distributed statistical inference,\u201d J. American Statistical Association, vol. to appear, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jordan%2C%20M.I.%20Lee%2C%20J.D.%20Yang%2C%20Y.%20Communication-efficient%20distributed%20statistical%20inference%2C",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jordan%2C%20M.I.%20Lee%2C%20J.D.%20Yang%2C%20Y.%20Communication-efficient%20distributed%20statistical%20inference%2C"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Y. Zhang, J. C. Duchi, and M. J. Wainwright, \u201cCommunication-efficient algorithms for statistical optimization.\u201d J. Machine Learning Res., vol. 14, no. 11, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Y.%20Duchi%2C%20J.C.%20Wainwright%2C%20M.J.%20Communication-efficient%20algorithms%20for%20statistical%20optimization.%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Y.%20Duchi%2C%20J.C.%20Wainwright%2C%20M.J.%20Communication-efficient%20algorithms%20for%20statistical%20optimization.%202013"
+        },
+        {
+            "id": "22",
+            "entry": "[22] A. T. Suresh, X. Y. Felix, S. Kumar, and H. B. McMahan, \u201cDistributed mean estimation with limited communication,\u201d in Proc. Intl. Conf. Machine Learn., Sydney, Australia, Aug. 2017, pp. 3329\u20133337.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Suresh%2C%20A.T.%20Felix%2C%20X.Y.%20Kumar%2C%20S.%20McMahan%2C%20H.B.%20Distributed%20mean%20estimation%20with%20limited%20communication%2C%202017-08",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Suresh%2C%20A.T.%20Felix%2C%20X.Y.%20Kumar%2C%20S.%20McMahan%2C%20H.B.%20Distributed%20mean%20estimation%20with%20limited%20communication%2C%202017-08"
+        },
+        {
+            "id": "23",
+            "entry": "[23] M. Jaggi, V. Smith, M. Tak\u00e1c, J. Terhorst, S. Krishnan, T. Hofmann, and M. I. Jordan, \u201cCommunicationefficient distributed dual coordinate ascent,\u201d in Proc. Advances in Neural Info. Process. Syst., Montreal, Canada, Dec. 2014, pp. 3068\u20133076.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jaggi%2C%20M.%20Smith%2C%20V.%20Tak%C3%A1c%2C%20M.%20Terhorst%2C%20J.%20Communicationefficient%20distributed%20dual%20coordinate%20ascent%2C%202014-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jaggi%2C%20M.%20Smith%2C%20V.%20Tak%C3%A1c%2C%20M.%20Terhorst%2C%20J.%20Communicationefficient%20distributed%20dual%20coordinate%20ascent%2C%202014-12"
+        },
+        {
+            "id": "24",
+            "entry": "[24] C. Ma, J. Konecny, M. Jaggi, V. Smith, M. I. Jordan, P. Richt\u00e1rik, and M. Tak\u00e1c, \u201cDistributed optimization with arbitrary local solvers,\u201d Optimization Methods and Software, vol. 32, no. 4, pp. 813\u2013848, Jul. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ma%2C%20C.%20Konecny%2C%20J.%20Jaggi%2C%20M.%20Smith%2C%20V.%20Distributed%20optimization%20with%20arbitrary%20local%20solvers%2C%202017-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ma%2C%20C.%20Konecny%2C%20J.%20Jaggi%2C%20M.%20Smith%2C%20V.%20Distributed%20optimization%20with%20arbitrary%20local%20solvers%2C%202017-07"
+        },
+        {
+            "id": "25",
+            "entry": "[25] O. Shamir, N. Srebro, and T. Zhang, \u201cCommunication-efficient distributed optimization using an approximate newton-type method,\u201d in Proc. Intl. Conf. Machine Learn., Beijing, China, Jun. 2014, pp. 1000\u2013 1008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shamir%2C%20O.%20Srebro%2C%20N.%20Zhang%2C%20T.%20Communication-efficient%20distributed%20optimization%20using%20an%20approximate%20newton-type%20method%2C%202014-06",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shamir%2C%20O.%20Srebro%2C%20N.%20Zhang%2C%20T.%20Communication-efficient%20distributed%20optimization%20using%20an%20approximate%20newton-type%20method%2C%202014-06"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Y. Zhang and X. Lin, \u201cDiSCO: Distributed optimization for self-concordant empirical loss,\u201d in Proc. Intl. Conf. Machine Learn., Lille, France, Jun. 2015, pp. 362\u2013370.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Y.%20Lin%2C%20X.%20DiSCO%3A%20Distributed%20optimization%20for%20self-concordant%20empirical%20loss%2C%202015-06",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Y.%20Lin%2C%20X.%20DiSCO%3A%20Distributed%20optimization%20for%20self-concordant%20empirical%20loss%2C%202015-06"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Y. Liu, C. Nowzari, Z. Tian, and Q. Ling, \u201cAsynchronous periodic event-triggered coordination of multiagent systems,\u201d in Proc. IEEE Conf. Decision Control, Melbourne, Australia, Dec. 2017, pp. 6696\u20136701.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20Y.%20Nowzari%2C%20C.%20Tian%2C%20Z.%20Ling%2C%20Q.%20Asynchronous%20periodic%20event-triggered%20coordination%20of%20multiagent%20systems%2C%202017-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liu%2C%20Y.%20Nowzari%2C%20C.%20Tian%2C%20Z.%20Ling%2C%20Q.%20Asynchronous%20periodic%20event-triggered%20coordination%20of%20multiagent%20systems%2C%202017-12"
+        },
+        {
+            "id": "28",
+            "entry": "[28] G. Lan, S. Lee, and Y. Zhou, \u201cCommunication-efficient algorithms for decentralized and stochastic optimization,\u201d arXiv preprint:1701.03961, Jan. 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1701.03961"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Y. Nesterov, Introductory Lectures on Convex Optimization: A basic course. Berlin, Germany: Springer, 2013, vol. 87.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nesterov%2C%20Y.%20Introductory%20Lectures%20on%20Convex%20Optimization%3A%20A%20basic%20course%202013"
+        },
+        {
+            "id": "30",
+            "entry": "[30] D. Blatt, A. O. Hero, and H. Gauchman, \u201cA convergent incremental gradient method with a constant step size,\u201d SIAM J. Optimization, vol. 18, no. 1, pp. 29\u201351, Feb. 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Blatt%2C%20D.%20Hero%2C%20A.O.%20Gauchman%2C%20H.%20A%20convergent%20incremental%20gradient%20method%20with%20a%20constant%20step%20size%2C%202007-02",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Blatt%2C%20D.%20Hero%2C%20A.O.%20Gauchman%2C%20H.%20A%20convergent%20incremental%20gradient%20method%20with%20a%20constant%20step%20size%2C%202007-02"
+        },
+        {
+            "id": "31",
+            "entry": "[31] M. Gurbuzbalaban, A. Ozdaglar, and P. A. Parrilo, \u201cOn the convergence rate of incremental aggregated gradient algorithms,\u201d SIAM J. Optimization, vol. 27, no. 2, pp. 1035\u20131048, Jun. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gurbuzbalaban%2C%20M.%20Ozdaglar%2C%20A.%20Parrilo%2C%20P.A.%20On%20the%20convergence%20rate%20of%20incremental%20aggregated%20gradient%20algorithms%2C%202017-06",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gurbuzbalaban%2C%20M.%20Ozdaglar%2C%20A.%20Parrilo%2C%20P.A.%20On%20the%20convergence%20rate%20of%20incremental%20aggregated%20gradient%20algorithms%2C%202017-06"
+        },
+        {
+            "id": "32",
+            "entry": "[32] M. Lichman, \u201cUCI machine learning repository,\u201d 2013. [Online]. Available: http://archive.ics.uci.edu/ml",
+            "url": "http://archive.ics.uci.edu/ml"
+        },
+        {
+            "id": "33",
+            "entry": "[33] L. Song, A. Smola, A. Gretton, K. M. Borgwardt, and J. Bedo, \u201cSupervised feature selection via dependence estimation,\u201d in Proc. Intl. Conf. Machine Learn., Corvallis, OR, Jun. 2007, pp. 823\u2013830.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Song%2C%20L.%20Smola%2C%20A.%20Gretton%2C%20A.%20Borgwardt%2C%20K.M.%20Supervised%20feature%20selection%20via%20dependence%20estimation%2C%202007-06",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Song%2C%20L.%20Smola%2C%20A.%20Gretton%2C%20A.%20Borgwardt%2C%20K.M.%20Supervised%20feature%20selection%20via%20dependence%20estimation%2C%202007-06"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Y. LeCun, L. Bottou, Y. Bengio, and P. Haffner, \u201cGradient-based learning applied to document recognition,\u201d Proc. of the IEEE, vol. 86, no. 11, pp. 2278\u20132324, Nov. 1998. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=LeCun%2C%20Y.%20Bottou%2C%20L.%20Bengio%2C%20Y.%20Haffner%2C%20P.%20Gradient-based%20learning%20applied%20to%20document%20recognition%2C%201998-11",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=LeCun%2C%20Y.%20Bottou%2C%20L.%20Bengio%2C%20Y.%20Haffner%2C%20P.%20Gradient-based%20learning%20applied%20to%20document%20recognition%2C%201998-11"
+        }
+    ]
+}

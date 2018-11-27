@@ -1,0 +1,339 @@
+{
+    "filename": "7796-middle-out-decoding.pdf",
+    "metadata": {
+        "title": "Middle-Out Decoding",
+        "author": "Shikib Mehri, Leonid Sigal",
+        "date": 2014,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7796-middle-out-decoding.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Despite being virtually ubiquitous, sequence-to-sequence models are challenged by their lack of diversity and inability to be externally controlled. In this paper, we speculate that a fundamental shortcoming of sequence generation models is that the decoding is done strictly from left-to-right, meaning that outputs values generated earlier have a profound effect on those generated later. To address this issue, we propose a novel middle-out decoder architecture that begins from an initial middle-word and simultaneously expands the sequence in both directions. To facilitate information flow and maintain consistent decoding, we introduce a dual self-attention mechanism that allows us to model complex dependencies between the outputs. We illustrate the performance of our model on the task of video captioning, as well as a synthetic sequence de-noising task. Our middleout decoder achieves significant improvements on de-noising and competitive performance in the task of video captioning, while quantifiably improving the caption diversity. Furthermore, we perform a qualitative analysis that demonstrates our ability to effectively control the generation process of our decoder."
+    },
+    "keywords": [
+        {
+            "term": "question answering",
+            "url": "https://en.wikipedia.org/wiki/question_answering"
+        },
+        {
+            "term": "neural machine translation",
+            "url": "https://en.wikipedia.org/wiki/neural_machine_translation"
+        },
+        {
+            "term": "Mean squared error",
+            "url": "https://en.wikipedia.org/wiki/Mean_squared_error"
+        },
+        {
+            "term": "recurrent neural network",
+            "url": "https://en.wikipedia.org/wiki/recurrent_neural_network"
+        }
+    ],
+    "highlights": [
+        "Neural encoder-decoder architectures have gained significant popularity in tasks such as language translation (<a class=\"ref-link\" id=\"cSutskever_et+al_2014_a\" href=\"#rSutskever_et+al_2014_a\"><a class=\"ref-link\" id=\"cSutskever_et+al_2014_a\" href=\"#rSutskever_et+al_2014_a\">Sutskever et al, 2014</a></a>; <a class=\"ref-link\" id=\"cBahdanau_et+al_2015_a\" href=\"#rBahdanau_et+al_2015_a\"><a class=\"ref-link\" id=\"cBahdanau_et+al_2015_a\" href=\"#rBahdanau_et+al_2015_a\">Bahdanau et al, 2015</a></a>; <a class=\"ref-link\" id=\"cWu_et+al_2016_a\" href=\"#rWu_et+al_2016_a\"><a class=\"ref-link\" id=\"cWu_et+al_2016_a\" href=\"#rWu_et+al_2016_a\">Wu et al, 2016</a></a>), image captioning (<a class=\"ref-link\" id=\"cVinyals_et+al_2015_a\" href=\"#rVinyals_et+al_2015_a\"><a class=\"ref-link\" id=\"cVinyals_et+al_2015_a\" href=\"#rVinyals_et+al_2015_a\"><a class=\"ref-link\" id=\"cVinyals_et+al_2015_a\" href=\"#rVinyals_et+al_2015_a\">Vinyals et al, 2015</a></a></a>; <a class=\"ref-link\" id=\"cXu_et+al_2015_a\" href=\"#rXu_et+al_2015_a\"><a class=\"ref-link\" id=\"cXu_et+al_2015_a\" href=\"#rXu_et+al_2015_a\"><a class=\"ref-link\" id=\"cXu_et+al_2015_a\" href=\"#rXu_et+al_2015_a\">Xu et al, 2015</a></a></a>), video captioning (<a class=\"ref-link\" id=\"cVenugopalan_et+al_2015_a\" href=\"#rVenugopalan_et+al_2015_a\"><a class=\"ref-link\" id=\"cVenugopalan_et+al_2015_a\" href=\"#rVenugopalan_et+al_2015_a\">Venugopalan et al, 2015a</a></a>), visual question answering (<a class=\"ref-link\" id=\"cAntol_et+al_2015_a\" href=\"#rAntol_et+al_2015_a\"><a class=\"ref-link\" id=\"cAntol_et+al_2015_a\" href=\"#rAntol_et+al_2015_a\">Antol et al, 2015</a></a>; <a class=\"ref-link\" id=\"cMalinowski_et+al_2015_a\" href=\"#rMalinowski_et+al_2015_a\"><a class=\"ref-link\" id=\"cMalinowski_et+al_2015_a\" href=\"#rMalinowski_et+al_2015_a\">Malinowski et al, 2015</a></a>) and many others",
+        "One issue with such encoder-decoder architectures is that conditioning is done through the initial hidden state of the decoder (<a class=\"ref-link\" id=\"cVinyals_et+al_2015_a\" href=\"#rVinyals_et+al_2015_a\">Vinyals et al, 2015</a>) and has to be propagated forward to generate a relevant output sequence",
+        "We propose a novel middle-out decoder architecture that addresses these challenges",
+        "As we show in experiments such ability is difficult to achieve using traditional left-to-right decoder architectures",
+        "Symmetric Mean squared error measures the error between the two halves of the output sequence",
+        "We present a novel middle-out decoder architecture which begins from an important token and expands the sequence in both directions"
+    ],
+    "key_statements": [
+        "Neural encoder-decoder architectures have gained significant popularity in tasks such as language translation (<a class=\"ref-link\" id=\"cSutskever_et+al_2014_a\" href=\"#rSutskever_et+al_2014_a\"><a class=\"ref-link\" id=\"cSutskever_et+al_2014_a\" href=\"#rSutskever_et+al_2014_a\">Sutskever et al, 2014</a></a>; <a class=\"ref-link\" id=\"cBahdanau_et+al_2015_a\" href=\"#rBahdanau_et+al_2015_a\"><a class=\"ref-link\" id=\"cBahdanau_et+al_2015_a\" href=\"#rBahdanau_et+al_2015_a\">Bahdanau et al, 2015</a></a>; <a class=\"ref-link\" id=\"cWu_et+al_2016_a\" href=\"#rWu_et+al_2016_a\"><a class=\"ref-link\" id=\"cWu_et+al_2016_a\" href=\"#rWu_et+al_2016_a\">Wu et al, 2016</a></a>), image captioning (<a class=\"ref-link\" id=\"cVinyals_et+al_2015_a\" href=\"#rVinyals_et+al_2015_a\"><a class=\"ref-link\" id=\"cVinyals_et+al_2015_a\" href=\"#rVinyals_et+al_2015_a\"><a class=\"ref-link\" id=\"cVinyals_et+al_2015_a\" href=\"#rVinyals_et+al_2015_a\">Vinyals et al, 2015</a></a></a>; <a class=\"ref-link\" id=\"cXu_et+al_2015_a\" href=\"#rXu_et+al_2015_a\"><a class=\"ref-link\" id=\"cXu_et+al_2015_a\" href=\"#rXu_et+al_2015_a\"><a class=\"ref-link\" id=\"cXu_et+al_2015_a\" href=\"#rXu_et+al_2015_a\">Xu et al, 2015</a></a></a>), video captioning (<a class=\"ref-link\" id=\"cVenugopalan_et+al_2015_a\" href=\"#rVenugopalan_et+al_2015_a\"><a class=\"ref-link\" id=\"cVenugopalan_et+al_2015_a\" href=\"#rVenugopalan_et+al_2015_a\">Venugopalan et al, 2015a</a></a>), visual question answering (<a class=\"ref-link\" id=\"cAntol_et+al_2015_a\" href=\"#rAntol_et+al_2015_a\"><a class=\"ref-link\" id=\"cAntol_et+al_2015_a\" href=\"#rAntol_et+al_2015_a\">Antol et al, 2015</a></a>; <a class=\"ref-link\" id=\"cMalinowski_et+al_2015_a\" href=\"#rMalinowski_et+al_2015_a\"><a class=\"ref-link\" id=\"cMalinowski_et+al_2015_a\" href=\"#rMalinowski_et+al_2015_a\">Malinowski et al, 2015</a></a>) and many others",
+        "One issue with such encoder-decoder architectures is that conditioning is done through the initial hidden state of the decoder (<a class=\"ref-link\" id=\"cVinyals_et+al_2015_a\" href=\"#rVinyals_et+al_2015_a\">Vinyals et al, 2015</a>) and has to be propagated forward to generate a relevant output sequence",
+        "We propose a novel middle-out decoder architecture that addresses these challenges",
+        "As we show in experiments such ability is difficult to achieve using traditional left-to-right decoder architectures",
+        "We explore the problem of video captioning on the MSVD dataset (<a class=\"ref-link\" id=\"cChen_2011_a\" href=\"#rChen_2011_a\">Chen and Dolan, 2011</a>), evaluating our models for quality, diversity, and control.\n4.1",
+        "Results: We evaluate the de-noising of the sequences with two metrics, Mean squared error and symmetric Mean squared error",
+        "Symmetric Mean squared error measures the error between the two halves of the output sequence",
+        "We present a novel middle-out decoder architecture which begins from an important token and expands the sequence in both directions"
+    ],
+    "summary": [
+        "Neural encoder-decoder architectures have gained significant popularity in tasks such as language translation (<a class=\"ref-link\" id=\"cSutskever_et+al_2014_a\" href=\"#rSutskever_et+al_2014_a\"><a class=\"ref-link\" id=\"cSutskever_et+al_2014_a\" href=\"#rSutskever_et+al_2014_a\">Sutskever et al, 2014</a></a>; <a class=\"ref-link\" id=\"cBahdanau_et+al_2015_a\" href=\"#rBahdanau_et+al_2015_a\"><a class=\"ref-link\" id=\"cBahdanau_et+al_2015_a\" href=\"#rBahdanau_et+al_2015_a\">Bahdanau et al, 2015</a></a>; <a class=\"ref-link\" id=\"cWu_et+al_2016_a\" href=\"#rWu_et+al_2016_a\"><a class=\"ref-link\" id=\"cWu_et+al_2016_a\" href=\"#rWu_et+al_2016_a\">Wu et al, 2016</a></a>), image captioning (<a class=\"ref-link\" id=\"cVinyals_et+al_2015_a\" href=\"#rVinyals_et+al_2015_a\"><a class=\"ref-link\" id=\"cVinyals_et+al_2015_a\" href=\"#rVinyals_et+al_2015_a\"><a class=\"ref-link\" id=\"cVinyals_et+al_2015_a\" href=\"#rVinyals_et+al_2015_a\">Vinyals et al, 2015</a></a></a>; <a class=\"ref-link\" id=\"cXu_et+al_2015_a\" href=\"#rXu_et+al_2015_a\"><a class=\"ref-link\" id=\"cXu_et+al_2015_a\" href=\"#rXu_et+al_2015_a\"><a class=\"ref-link\" id=\"cXu_et+al_2015_a\" href=\"#rXu_et+al_2015_a\">Xu et al, 2015</a></a></a>), video captioning (<a class=\"ref-link\" id=\"cVenugopalan_et+al_2015_a\" href=\"#rVenugopalan_et+al_2015_a\"><a class=\"ref-link\" id=\"cVenugopalan_et+al_2015_a\" href=\"#rVenugopalan_et+al_2015_a\">Venugopalan et al, 2015a</a></a>), visual question answering (<a class=\"ref-link\" id=\"cAntol_et+al_2015_a\" href=\"#rAntol_et+al_2015_a\"><a class=\"ref-link\" id=\"cAntol_et+al_2015_a\" href=\"#rAntol_et+al_2015_a\">Antol et al, 2015</a></a>; <a class=\"ref-link\" id=\"cMalinowski_et+al_2015_a\" href=\"#rMalinowski_et+al_2015_a\"><a class=\"ref-link\" id=\"cMalinowski_et+al_2015_a\" href=\"#rMalinowski_et+al_2015_a\">Malinowski et al, 2015</a></a>) and many others.",
+        "The proposed architecture consists of two RNN decoders, implemented using LSTMs, one which decodes to the right and another to the left; both begin from the same important output word or value automatically predicted by a classifier.",
+        "A novel dual self-attention mechanism, that attends over both the generated output and hidden states, is used to ensure information flow and consistent decoding in both directions.",
+        "To produce the output sequence, we compute the hidden state at time t as a function of the previous decoder hidden state htd\u22121, the embedding of the previously generated word et\u22121 and the context vector ct: hdt = S.",
+        "The attention over the embedded outputs provides the decoder with direct information about the previously generated terms, allowing it to model non-sequential dependencies between output words (<a class=\"ref-link\" id=\"cWerlen_et+al_2018_a\" href=\"#rWerlen_et+al_2018_a\">Werlen et al, 2018</a>).",
+        "We opt to utilize a classifier to predict the initial value of the sequence for both the baseline model and the middle-out decoder.",
+        "This suggests that the middle-out decoder better models non-trivial dependencies in its outputs both through the use of its decoding order and self-attention mechanism.",
+        "Our dual self-attention mechanism applied to the baseline outperforms previous work, and significantly improves the results of the middle-out decoder.",
+        "As our baseline sequence-to-sequence model is incapable of receiving an external input, we re-train a modified model in which the decoder receives the embedded ground-truth middle-word as input every time-step; i.e. both approaches use same data.",
+        "The results shown in Table 2, demonstrate that despite the fact that the baseline in our oracle experiment was specifically trained for the task at hand, our middle-out decoder performs significantly better, achieving a METEOR score of 40.9.",
+        "The results of our oracle experiment, shown in Table 2, demonstrate our middle-out decoder to effectively utilize external input.",
+        "The results shown in Table 5 demonstrate that our middle-out decoder is better at effectively leveraging the oracle information to improve the quality of the generated caption.",
+        "Despite being trained to receive a ground-truth middle-word, the baseline model is incapable of effectively utilizing provided information, often choosing to ignore it entirely.",
+        "In order to ensure the coherence of the middle-out generation, we introduce a novel dual self-attention mechanism that allows us to model complex dependencies between the outputs.",
+        "We illustrate the effectiveness of the proposed model both through quantitative and qualitative experimentation, where we demonstrate its capability to achieve state-of-the-art results while producing diverse outputs and exhibiting controlability."
+    ],
+    "headline": "We propose a novel middle-out decoder architecture that begins from an initial middle-word and simultaneously expands the sequence in both directions",
+    "reference_links": [
+        {
+            "id": "Antol_et+al_2015_a",
+            "entry": "S. Antol, A. Agrawal, J. Lu, M. Mitchell, D. Batra, C. Lawrence Zitnick, and D. Parikh. Vqa: Visual question answering. In Proceedings of the IEEE International Conference on Computer Vision, pages 2425\u20132433. IEEE, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Antol%2C%20S.%20Agrawal%2C%20A.%20Lu%2C%20J.%20Mitchell%2C%20M.%20Vqa%3A%20Visual%20question%20answering%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Antol%2C%20S.%20Agrawal%2C%20A.%20Lu%2C%20J.%20Mitchell%2C%20M.%20Vqa%3A%20Visual%20question%20answering%202015"
+        },
+        {
+            "id": "Bahdanau_et+al_2015_a",
+            "entry": "D. Bahdanau, K. Cho, and Y. Bengio. Neural machine translation by jointly learning to align and translate. In Proceedings of ICLR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bahdanau%2C%20D.%20Cho%2C%20K.%20Bengio%2C%20Y.%20Neural%20machine%20translation%20by%20jointly%20learning%20to%20align%20and%20translate%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bahdanau%2C%20D.%20Cho%2C%20K.%20Bengio%2C%20Y.%20Neural%20machine%20translation%20by%20jointly%20learning%20to%20align%20and%20translate%202015"
+        },
+        {
+            "id": "Bengio_et+al_2015_a",
+            "entry": "S. Bengio, O. Vinyals, N. Jaitly, and N. Shazeer. Scheduled sampling for sequence prediction with recurrent neural networks. In Advances in Neural Information Processing Systems, pages 1171\u20131179, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bengio%2C%20S.%20Vinyals%2C%20O.%20Jaitly%2C%20N.%20Shazeer%2C%20N.%20Scheduled%20sampling%20for%20sequence%20prediction%20with%20recurrent%20neural%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bengio%2C%20S.%20Vinyals%2C%20O.%20Jaitly%2C%20N.%20Shazeer%2C%20N.%20Scheduled%20sampling%20for%20sequence%20prediction%20with%20recurrent%20neural%20networks%202015"
+        },
+        {
+            "id": "Bengio_et+al_1994_a",
+            "entry": "Y. Bengio, P. Simard, and P. Frasconi. Learning long-term dependencies with gradient descent is difficult. IEEE Transactions on Neural Networks, 5(2):157\u2013166, 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bengio%2C%20Y.%20Simard%2C%20P.%20Frasconi%2C%20P.%20Learning%20long-term%20dependencies%20with%20gradient%20descent%20is%20difficult%201994",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bengio%2C%20Y.%20Simard%2C%20P.%20Frasconi%2C%20P.%20Learning%20long-term%20dependencies%20with%20gradient%20descent%20is%20difficult%201994"
+        },
+        {
+            "id": "Carreira_2017_a",
+            "entry": "J. Carreira and A. Zisserman. Quo vadis, action recognition? a new model and the kinetics dataset. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 6299\u20136308. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Carreira%2C%20J.%20Zisserman%2C%20A.%20Quo%20vadis%2C%20action%20recognition%3F%20a%20new%20model%20and%20the%20kinetics%20dataset%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Carreira%2C%20J.%20Zisserman%2C%20A.%20Quo%20vadis%2C%20action%20recognition%3F%20a%20new%20model%20and%20the%20kinetics%20dataset%202017"
+        },
+        {
+            "id": "Chen_2011_a",
+            "entry": "D. Chen and W. Dolan. Collecting highly parallel data for paraphrase evaluation. In Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies, pages 190\u2013200. Association for Computational Linguistics, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20D.%20Dolan%2C%20W.%20Collecting%20highly%20parallel%20data%20for%20paraphrase%20evaluation%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20D.%20Dolan%2C%20W.%20Collecting%20highly%20parallel%20data%20for%20paraphrase%20evaluation%202011"
+        },
+        {
+            "id": "X_2015_a",
+            "entry": "X. Chen, H. Fang, T.-Y. Lin, R. Vedantam, S. Gupta, P. Doll\u00e1r, and C. L. Zitnick. Microsoft coco captions: Data collection and evaluation server. arXiv preprint arXiv:1504.00325, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1504.00325"
+        },
+        {
+            "id": "Cheng_et+al_2016_a",
+            "entry": "J. Cheng, L. Dong, and M. Lapata. Long short-term memory-networks for machine reading. In Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing, pages 551\u2013561, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cheng%2C%20J.%20Dong%2C%20L.%20Lapata%2C%20M.%20Long%20short-term%20memory-networks%20for%20machine%20reading%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cheng%2C%20J.%20Dong%2C%20L.%20Lapata%2C%20M.%20Long%20short-term%20memory-networks%20for%20machine%20reading%202016"
+        },
+        {
+            "id": "Dai_et+al_2017_a",
+            "entry": "B. Dai, S. Fidler, R. Urtasun, and D. Lin. Towards diverse and natural image descriptions via a conditional gan. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 2970\u20132979. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dai%2C%20B.%20Fidler%2C%20S.%20Urtasun%2C%20R.%20Lin%2C%20D.%20Towards%20diverse%20and%20natural%20image%20descriptions%20via%20a%20conditional%20gan%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dai%2C%20B.%20Fidler%2C%20S.%20Urtasun%2C%20R.%20Lin%2C%20D.%20Towards%20diverse%20and%20natural%20image%20descriptions%20via%20a%20conditional%20gan%202017"
+        },
+        {
+            "id": "Daniluk_et+al_2017_a",
+            "entry": "M. Daniluk, T. Rockt\u00e4schel, J. Welbl, and S. Riedel. Frustratingly short attention spans in neural language modeling. In Proceedings of ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Daniluk%2C%20M.%20Rockt%C3%A4schel%2C%20T.%20Welbl%2C%20J.%20Riedel%2C%20S.%20Frustratingly%20short%20attention%20spans%20in%20neural%20language%20modeling%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Daniluk%2C%20M.%20Rockt%C3%A4schel%2C%20T.%20Welbl%2C%20J.%20Riedel%2C%20S.%20Frustratingly%20short%20attention%20spans%20in%20neural%20language%20modeling%202017"
+        },
+        {
+            "id": "Deng_et+al_2009_a",
+            "entry": "J. Deng, W. Dong, R. Socher, L.-J. Li, K. Li, and L. Fei-Fei. Imagenet: A large-scale hierarchical image database. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 248\u2013255. IEEE, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Deng%2C%20J.%20Dong%2C%20W.%20Socher%2C%20R.%20Li%2C%20L.-J.%20Imagenet%3A%20A%20large-scale%20hierarchical%20image%20database%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Deng%2C%20J.%20Dong%2C%20W.%20Socher%2C%20R.%20Li%2C%20L.-J.%20Imagenet%3A%20A%20large-scale%20hierarchical%20image%20database%202009"
+        },
+        {
+            "id": "Denkowski_2014_a",
+            "entry": "M. Denkowski and A. Lavie. Meteor universal: Language specific translation evaluation for any target language. In Proceedings of the Ninth Workshop on Statistical Machine Translation, pages 376\u2013380, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Denkowski%2C%20M.%20Lavie%2C%20A.%20Meteor%20universal%3A%20Language%20specific%20translation%20evaluation%20for%20any%20target%20language%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Denkowski%2C%20M.%20Lavie%2C%20A.%20Meteor%20universal%3A%20Language%20specific%20translation%20evaluation%20for%20any%20target%20language%202014"
+        },
+        {
+            "id": "Devlin_et+al_2015_a",
+            "entry": "J. Devlin, H. Cheng, H. Fang, S. Gupta, L. Deng, X. He, G. Zweig, and M. Mitchell. Language models for image captioning: The quirks and what works. In Proceedings of the 53rd Annual Meeting of the Association for Computational Linguistics and the 7th International Joint Conference on Natural Language Processing (Volume 2: Short Papers), volume 2, pages 100\u2013105, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Devlin%2C%20J.%20Cheng%2C%20H.%20Fang%2C%20H.%20Gupta%2C%20S.%20Language%20models%20for%20image%20captioning%3A%20The%20quirks%20and%20what%20works%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Devlin%2C%20J.%20Cheng%2C%20H.%20Fang%2C%20H.%20Gupta%2C%20S.%20Language%20models%20for%20image%20captioning%3A%20The%20quirks%20and%20what%20works%202015"
+        },
+        {
+            "id": "Heuer_et+al_2016_a",
+            "entry": "H. Heuer, C. Monz, and A. W. Smeulders. Generating captions without looking beyond objects. In Workshop on Storytelling with Images and Videos, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Heuer%2C%20H.%20Monz%2C%20C.%20Smeulders%2C%20A.W.%20Generating%20captions%20without%20looking%20beyond%20objects%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Heuer%2C%20H.%20Monz%2C%20C.%20Smeulders%2C%20A.W.%20Generating%20captions%20without%20looking%20beyond%20objects%202016"
+        },
+        {
+            "id": "Hochreiter_1998_a",
+            "entry": "S. Hochreiter. The vanishing gradient problem during learning recurrent neural nets and problem solutions. International Journal of Uncertainty, Fuzziness and Knowledge-Based Systems, 6(02):107\u2013116, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hochreiter%2C%20S.%20The%20vanishing%20gradient%20problem%20during%20learning%20recurrent%20neural%20nets%20and%20problem%20solutions%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hochreiter%2C%20S.%20The%20vanishing%20gradient%20problem%20during%20learning%20recurrent%20neural%20nets%20and%20problem%20solutions%201998"
+        },
+        {
+            "id": "Hokamp_2017_a",
+            "entry": "C. Hokamp and Q. Liu. Lexically constrained decoding for sequence generation using grid beam search. In Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), volume 1, pages 1535\u20131546, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hokamp%2C%20C.%20Liu%2C%20Q.%20Lexically%20constrained%20decoding%20for%20sequence%20generation%20using%20grid%20beam%20search%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hokamp%2C%20C.%20Liu%2C%20Q.%20Lexically%20constrained%20decoding%20for%20sequence%20generation%20using%20grid%20beam%20search%202017"
+        },
+        {
+            "id": "Huang_et+al_2017_a",
+            "entry": "L. Huang, K. Zhao, and M. Ma. When to finish? optimal beam search for neural text generation (modulo beam size). In Proceedings of the 2017 Conference on Empirical Methods in Natural Language Processing, pages 2134\u20132139, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huang%2C%20L.%20Zhao%2C%20K.%20Ma%2C%20M.%20When%20to%20finish%3F%20optimal%20beam%20search%20for%20neural%20text%20generation%20%28modulo%20beam%20size%29%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huang%2C%20L.%20Zhao%2C%20K.%20Ma%2C%20M.%20When%20to%20finish%3F%20optimal%20beam%20search%20for%20neural%20text%20generation%20%28modulo%20beam%20size%29%202017"
+        },
+        {
+            "id": "Kingma_2015_a",
+            "entry": "D. P. Kingma and J. Ba. Adam: A method for stochastic optimization. In Proceedings of ICLR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20D.P.%20Ba%2C%20J.%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20D.P.%20Ba%2C%20J.%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202015"
+        },
+        {
+            "id": "Lin_2004_a",
+            "entry": "C.-Y. Lin. Rouge: A package for automatic evaluation of summaries. Text Summarization Branches Out, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20C.-Y.%20Rouge%3A%20A%20package%20for%20automatic%20evaluation%20of%20summaries.%20Text%20Summarization%20Branches%20Out%202004"
+        },
+        {
+            "id": "Liu_2017_a",
+            "entry": "Y. Liu and M. Lapata. Learning structured text representations. arXiv preprint arXiv:1705.09207, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1705.09207"
+        },
+        {
+            "id": "Luong_et+al_2015_a",
+            "entry": "T. Luong, H. Pham, and C. D. Manning. Effective approaches to attention-based neural machine translation. In Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing, pages 1412\u20131421, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Luong%2C%20T.%20Pham%2C%20H.%20Manning%2C%20C.D.%20Effective%20approaches%20to%20attention-based%20neural%20machine%20translation%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Luong%2C%20T.%20Pham%2C%20H.%20Manning%2C%20C.D.%20Effective%20approaches%20to%20attention-based%20neural%20machine%20translation%202015"
+        },
+        {
+            "id": "Malinowski_et+al_2015_a",
+            "entry": "M. Malinowski, M. Rohrbach, and M. Fritz. Ask your neurons: A neural-based approach to answering questions about images. In Proceedings of the IEEE International Conference on Computer Vision, pages 1\u20139. IEEE, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Malinowski%2C%20M.%20Rohrbach%2C%20M.%20Fritz%2C%20M.%20Ask%20your%20neurons%3A%20A%20neural-based%20approach%20to%20answering%20questions%20about%20images%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Malinowski%2C%20M.%20Rohrbach%2C%20M.%20Fritz%2C%20M.%20Ask%20your%20neurons%3A%20A%20neural-based%20approach%20to%20answering%20questions%20about%20images%202015"
+        },
+        {
+            "id": "Mao_et+al_2015_a",
+            "entry": "J. Mao, W. Xu, Y. Yang, J. Wang, Z. Huang, and A. Yuille. Deep captioning with multimocal recurrent neural networks. In Proceedings of ICLR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mao%2C%20J.%20Xu%2C%20W.%20Yang%2C%20Y.%20Wang%2C%20J.%20Deep%20captioning%20with%20multimocal%20recurrent%20neural%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mao%2C%20J.%20Xu%2C%20W.%20Yang%2C%20Y.%20Wang%2C%20J.%20Deep%20captioning%20with%20multimocal%20recurrent%20neural%20networks%202015"
+        },
+        {
+            "id": "Mikolov_et+al_2013_a",
+            "entry": "T. Mikolov, I. Sutskever, K. Chen, G. S. Corrado, and J. Dean. Distributed representations of words and phrases and their compositionality. In Advances in Neural Information Processing Systems, pages 3111\u20133119, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mikolov%2C%20T.%20Sutskever%2C%20I.%20Chen%2C%20K.%20Corrado%2C%20G.S.%20Distributed%20representations%20of%20words%20and%20phrases%20and%20their%20compositionality%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mikolov%2C%20T.%20Sutskever%2C%20I.%20Chen%2C%20K.%20Corrado%2C%20G.S.%20Distributed%20representations%20of%20words%20and%20phrases%20and%20their%20compositionality%202013"
+        },
+        {
+            "id": "Pan_et+al_2016_a",
+            "entry": "P. Pan, Z. Xu, Y. Yang, F. Wu, and Y. Zhuang. Hierarchical recurrent neural encoder for video representation with application to captioning. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 1029\u20131038. IEEE, 2016a.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pan%2C%20P.%20Xu%2C%20Z.%20Yang%2C%20Y.%20Wu%2C%20F.%20Hierarchical%20recurrent%20neural%20encoder%20for%20video%20representation%20with%20application%20to%20captioning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pan%2C%20P.%20Xu%2C%20Z.%20Yang%2C%20Y.%20Wu%2C%20F.%20Hierarchical%20recurrent%20neural%20encoder%20for%20video%20representation%20with%20application%20to%20captioning%202016"
+        },
+        {
+            "id": "Pan_et+al_2016_b",
+            "entry": "Y. Pan, T. Mei, T. Yao, H. Li, and Y. Rui. Jointly modeling embedding and translation to bridge video and language. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 4594\u20134602. IEEE, 2016b.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pan%2C%20Y.%20Mei%2C%20T.%20Yao%2C%20T.%20Li%2C%20H.%20Jointly%20modeling%20embedding%20and%20translation%20to%20bridge%20video%20and%20language%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pan%2C%20Y.%20Mei%2C%20T.%20Yao%2C%20T.%20Li%2C%20H.%20Jointly%20modeling%20embedding%20and%20translation%20to%20bridge%20video%20and%20language%202016"
+        },
+        {
+            "id": "Papineni_et+al_2002_a",
+            "entry": "K. Papineni, S. Roukos, T. Ward, and W.-J. Zhu. Bleu: a method for automatic evaluation of machine translation. In Proceedings of 40th Annual Meeting of the Association for Computational Linguistics, pages 311\u2013318. Association for Computational Linguistics, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Papineni%2C%20K.%20Roukos%2C%20S.%20Ward%2C%20T.%20Zhu%2C%20W.-J.%20Bleu%3A%20a%20method%20for%20automatic%20evaluation%20of%20machine%20translation%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Papineni%2C%20K.%20Roukos%2C%20S.%20Ward%2C%20T.%20Zhu%2C%20W.-J.%20Bleu%3A%20a%20method%20for%20automatic%20evaluation%20of%20machine%20translation%202002"
+        },
+        {
+            "id": "Pasunuru_2017_a",
+            "entry": "R. Pasunuru and M. Bansal. Multi-task video captioning with video and entailment generation. In Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), volume 1, pages 1273\u20131283. Association for Computational Linguistics, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pasunuru%2C%20R.%20Bansal%2C%20M.%20Multi-task%20video%20captioning%20with%20video%20and%20entailment%20generation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pasunuru%2C%20R.%20Bansal%2C%20M.%20Multi-task%20video%20captioning%20with%20video%20and%20entailment%20generation%202017"
+        },
+        {
+            "id": "Polosukhin_2018_a",
+            "entry": "I. Polosukhin and A. Skidanov. Neural program search: Solving programming tasks from description and examples. arXiv preprint arXiv:1802.04335, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.04335"
+        },
+        {
+            "id": "Post_2018_a",
+            "entry": "M. Post and D. Vilar. Fast lexically constrained decoding with dynamic beam allocation for neural machine translation. In Proceedings of the 2018 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long Papers), volume 1, pages 1314\u20131324, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Post%2C%20M.%20Vilar%2C%20D.%20Fast%20lexically%20constrained%20decoding%20with%20dynamic%20beam%20allocation%20for%20neural%20machine%20translation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Post%2C%20M.%20Vilar%2C%20D.%20Fast%20lexically%20constrained%20decoding%20with%20dynamic%20beam%20allocation%20for%20neural%20machine%20translation%202018"
+        },
+        {
+            "id": "Song_et+al_2017_a",
+            "entry": "J. Song, Z. Guo, L. Gao, W. Liu, D. Zhang, and H. T. Shen. Hierarchical lstm with adjusted temporal attention for video captioning. In Proceedings of the Twenty-Sixth International Joint Conference on Artificial Intelligence. AAAI Press, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Song%2C%20J.%20Guo%2C%20Z.%20Gao%2C%20L.%20Liu%2C%20W.%20Hierarchical%20lstm%20with%20adjusted%20temporal%20attention%20for%20video%20captioning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Song%2C%20J.%20Guo%2C%20Z.%20Gao%2C%20L.%20Liu%2C%20W.%20Hierarchical%20lstm%20with%20adjusted%20temporal%20attention%20for%20video%20captioning%202017"
+        },
+        {
+            "id": "Sutskever_et+al_2014_a",
+            "entry": "I. Sutskever, O. Vinyals, and Q. V. Le. Sequence to sequence learning with neural networks. In Advances in neural information processing systems, pages 3104\u20133112, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutskever%2C%20I.%20Vinyals%2C%20O.%20Le%2C%20Q.V.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutskever%2C%20I.%20Vinyals%2C%20O.%20Le%2C%20Q.V.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014"
+        },
+        {
+            "id": "Szegedy_et+al_2017_a",
+            "entry": "C. Szegedy, S. Ioffe, V. Vanhoucke, and A. A. Alemi. Inception-v4, inception-resnet and the impact of residual connections on learning. In AAAI, volume 4, page 12, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Szegedy%2C%20C.%20Ioffe%2C%20S.%20Vanhoucke%2C%20V.%20Alemi%2C%20A.A.%20Inception-v4%2C%20inception-resnet%20and%20the%20impact%20of%20residual%20connections%20on%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Szegedy%2C%20C.%20Ioffe%2C%20S.%20Vanhoucke%2C%20V.%20Alemi%2C%20A.A.%20Inception-v4%2C%20inception-resnet%20and%20the%20impact%20of%20residual%20connections%20on%20learning%202017"
+        },
+        {
+            "id": "Vaswani_et+al_2017_a",
+            "entry": "A. Vaswani, N. Shazeer, N. Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, \u0141. Kaiser, and I. Polosukhin. Attention is all you need. In Advances in Neural Information Processing Systems, pages 6000\u20136010, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=A%20Vaswani%20N%20Shazeer%20N%20Parmar%20J%20Uszkoreit%20L%20Jones%20A%20N%20Gomez%20%C5%81%20Kaiser%20and%20I%20Polosukhin%20Attention%20is%20all%20you%20need%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20pages%2060006010%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=A%20Vaswani%20N%20Shazeer%20N%20Parmar%20J%20Uszkoreit%20L%20Jones%20A%20N%20Gomez%20%C5%81%20Kaiser%20and%20I%20Polosukhin%20Attention%20is%20all%20you%20need%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20pages%2060006010%202017"
+        },
+        {
+            "id": "Vedantam_et+al_2015_a",
+            "entry": "R. Vedantam, C. Lawrence Zitnick, and D. Parikh. Cider: Consensus-based image description evaluation. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 4566\u20134575. IEEE, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vedantam%2C%20R.%20Zitnick%2C%20C.Lawrence%20Parikh%2C%20D.%20Cider%3A%20Consensus-based%20image%20description%20evaluation%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vedantam%2C%20R.%20Zitnick%2C%20C.Lawrence%20Parikh%2C%20D.%20Cider%3A%20Consensus-based%20image%20description%20evaluation%202015"
+        },
+        {
+            "id": "Venugopalan_et+al_2015_a",
+            "entry": "S. Venugopalan, M. Rohrbach, J. Donahue, R. Mooney, T. Darrell, and K. Saenko. Sequence to sequence-video to text. In Proceedings of the IEEE International Conference on Computer Vision, pages 4534\u20134542. IEEE, 2015a.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Venugopalan%2C%20S.%20Rohrbach%2C%20M.%20Donahue%2C%20J.%20Mooney%2C%20R.%20Sequence%20to%20sequence-video%20to%20text%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Venugopalan%2C%20S.%20Rohrbach%2C%20M.%20Donahue%2C%20J.%20Mooney%2C%20R.%20Sequence%20to%20sequence-video%20to%20text%202015"
+        },
+        {
+            "id": "Venugopalan_et+al_2015_b",
+            "entry": "S. Venugopalan, H. Xu, J. Donahue, M. Rohrbach, R. Mooney, and K. Saenko. Translating videos to natural language using deep recurrent neural networks. In Proceedings of the 2015 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, pages 1494\u20131504, 2015b.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Venugopalan%2C%20S.%20Xu%2C%20H.%20Donahue%2C%20J.%20Rohrbach%2C%20M.%20Translating%20videos%20to%20natural%20language%20using%20deep%20recurrent%20neural%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Venugopalan%2C%20S.%20Xu%2C%20H.%20Donahue%2C%20J.%20Rohrbach%2C%20M.%20Translating%20videos%20to%20natural%20language%20using%20deep%20recurrent%20neural%20networks%202015"
+        },
+        {
+            "id": "Vinyals_et+al_2015_a",
+            "entry": "O. Vinyals, A. Toshev, S. Bengio, and D. Erhan. Show and tell: A neural image caption generator. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. IEEE, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vinyals%2C%20O.%20Toshev%2C%20A.%20Bengio%2C%20S.%20Erhan%2C%20D.%20Show%20and%20tell%3A%20A%20neural%20image%20caption%20generator%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vinyals%2C%20O.%20Toshev%2C%20A.%20Bengio%2C%20S.%20Erhan%2C%20D.%20Show%20and%20tell%3A%20A%20neural%20image%20caption%20generator%202015"
+        },
+        {
+            "id": "Wang_et+al_2016_a",
+            "entry": "Z. Wang, F. Wu, W. Lu, J. Xiao, X. Li, Z. Zhang, and Y. Zhuang. Diverse image captioning via grouptalk. In Proceedings of the Twenty-Fifth International Joint Conference on Artificial Intelligence, pages 2957\u20132964. AAAI Press, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Z.%20Wu%2C%20F.%20Lu%2C%20W.%20Xiao%2C%20J.%20Diverse%20image%20captioning%20via%20grouptalk%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Z.%20Wu%2C%20F.%20Lu%2C%20W.%20Xiao%2C%20J.%20Diverse%20image%20captioning%20via%20grouptalk%202016"
+        },
+        {
+            "id": "Werlen_et+al_2018_a",
+            "entry": "L. M. Werlen, N. Pappas, D. Ram, and A. Popescu-Belis. Self-attentive residual decoder for neural machine translation. Annual Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Werlen%2C%20L.M.%20Pappas%2C%20N.%20Ram%2C%20D.%20Popescu-Belis%2C%20A.%20Self-attentive%20residual%20decoder%20for%20neural%20machine%20translation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Werlen%2C%20L.M.%20Pappas%2C%20N.%20Ram%2C%20D.%20Popescu-Belis%2C%20A.%20Self-attentive%20residual%20decoder%20for%20neural%20machine%20translation%202018"
+        },
+        {
+            "id": "Wu_et+al_2016_a",
+            "entry": "Y. Wu, M. Schuster, Z. Chen, Q. V. Le, M. Norouzi, W. Macherey, M. Krikun, Y. Cao, Q. Gao, K. Macherey, et al. Google\u2019s neural machine translation system: Bridging the gap between human and machine translation. arXiv preprint arXiv:1609.08144, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.08144"
+        },
+        {
+            "id": "Xu_et+al_2015_a",
+            "entry": "K. Xu, J. L. Ba, R. Kiros, K. Cho, A. Courville, R. Salakhutdinov, R. S. Zemel, and Y. Bengio. Show, attend and tell: Neural image caption generation with visual attention. In Proceedings of the 32nd International Conference on Machine Learning, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xu%2C%20K.%20Ba%2C%20J.L.%20Kiros%2C%20R.%20Cho%2C%20K.%20attend%20and%20tell%3A%20Neural%20image%20caption%20generation%20with%20visual%20attention%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xu%2C%20K.%20Ba%2C%20J.L.%20Kiros%2C%20R.%20Cho%2C%20K.%20attend%20and%20tell%3A%20Neural%20image%20caption%20generation%20with%20visual%20attention%202015"
+        },
+        {
+            "id": "Yao_et+al_2015_a",
+            "entry": "L. Yao, A. Torabi, K. Cho, N. Ballas, C. Pal, H. Larochelle, and A. Courville. Describing videos by exploiting temporal structure. In Proceedings of the IEEE International Conference on Computer Vision, pages 4507\u2013 4515. IEEE, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yao%2C%20L.%20Torabi%2C%20A.%20Cho%2C%20K.%20Ballas%2C%20N.%20Describing%20videos%20by%20exploiting%20temporal%20structure%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yao%2C%20L.%20Torabi%2C%20A.%20Cho%2C%20K.%20Ballas%2C%20N.%20Describing%20videos%20by%20exploiting%20temporal%20structure%202015"
+        },
+        {
+            "id": "Yu_et+al_2016_a",
+            "entry": "H. Yu, J. Wang, Z. Huang, Y. Yang, and W. Xu. Video paragraph captioning using hierarchical recurrent neural networks. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 4584\u20134593. IEEE, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yu%2C%20H.%20Wang%2C%20J.%20Huang%2C%20Z.%20Yang%2C%20Y.%20Video%20paragraph%20captioning%20using%20hierarchical%20recurrent%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yu%2C%20H.%20Wang%2C%20J.%20Huang%2C%20Z.%20Yang%2C%20Y.%20Video%20paragraph%20captioning%20using%20hierarchical%20recurrent%20neural%20networks%202016"
+        },
+        {
+            "id": "Yu_et+al_2017_a",
+            "entry": "Y. Yu, H. Ko, J. Choi, and G. Kim. End-to-end concept word detection for video captioning, retrieval, and question answering. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 3165\u20133173. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yu%2C%20Y.%20Ko%2C%20H.%20Choi%2C%20J.%20Kim%2C%20G.%20End-to-end%20concept%20word%20detection%20for%20video%20captioning%2C%20retrieval%2C%20and%20question%20answering%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yu%2C%20Y.%20Ko%2C%20H.%20Choi%2C%20J.%20Kim%2C%20G.%20End-to-end%20concept%20word%20detection%20for%20video%20captioning%2C%20retrieval%2C%20and%20question%20answering%202017"
+        },
+        {
+            "id": "Zhu_et+al_2018_a",
+            "entry": "Y. Zhu, S. Lu, L. Zheng, J. Guo, W. Zhang, J. Wang, and Y. Yu. Texygen: A benchmarking platform for text generation models. arXiv preprint arXiv:1802.01886, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.01886"
+        }
+    ]
+}

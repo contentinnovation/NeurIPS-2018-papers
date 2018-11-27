@@ -1,0 +1,318 @@
+{
+    "filename": "8161-probabilistic-model-agnostic-meta-learning.pdf",
+    "metadata": {
+        "title": "Probabilistic Model-Agnostic Meta-Learning",
+        "author": "Chelsea Finn, Kelvin Xu, Sergey Levine",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8161-probabilistic-model-agnostic-meta-learning.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Meta-learning for few-shot learning entails acquiring a prior over previous tasks and experiences, such that new tasks be learned from small amounts of data. However, a critical challenge in few-shot learning is task ambiguity: even when a powerful prior can be meta-learned from a large number of prior tasks, a small dataset for a new task can simply be too ambiguous to acquire a single model (e.g., a classifier) for that task that is accurate. In this paper, we propose a probabilistic meta-learning algorithm that can sample models for a new task from a model distribution. Our approach extends model-agnostic meta-learning, which adapts to new tasks via gradient descent, to incorporate a parameter distribution that is trained via a variational lower bound. At meta-test time, our algorithm adapts via a simple procedure that injects noise into gradient descent, and at meta-training time, the model is trained such that this stochastic adaptation procedure produces samples from the approximate model posterior. Our experimental results show that our method can sample plausible classifiers and regressors in ambiguous few-shot learning problems. We also show how reasoning about ambiguity can also be used for downstream active learning problems."
+    },
+    "keywords": [
+        {
+            "term": "maximum a posteriori",
+            "url": "https://en.wikipedia.org/wiki/maximum_a_posteriori"
+        },
+        {
+            "term": "gradient descent",
+            "url": "https://en.wikipedia.org/wiki/gradient_descent"
+        },
+        {
+            "term": "meta learning",
+            "url": "https://en.wikipedia.org/wiki/meta_learning"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "active learning",
+            "url": "https://en.wikipedia.org/wiki/active_learning"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Learning from a few examples is a key aspect of human intelligence",
+        "When the end goal of few-shot meta-learning is to learn solutions to new tasks from small amounts of data, a critical issue that must be dealt with is task ambiguity: even with the best possible prior, there might not be enough information in the examples for a new task to resolve that task with high certainty",
+        "Our approach extends model-agnostic meta-learning to model a distribution over prior model parameters, which leads to an appealing simple stochastic adaptation procedure that injects noise into gradient descent at meta-test time",
+        "Our approach differs from these methods in that we explicitly train a hierarchical Bayesian model over weights, where a posterior task-specific parameter distribution is inferred at meta-test time conditioned on a learned weight prior and a training set, while conventional Bayesian neural networks directly learn only the posterior weight distribution for a single task",
+        "The goal of our experimental evaluation is to answer the following questions: (1) can our approach enable sampling from the distribution over potential functions underlying the training data?, (2) does our approach improve upon the model-agnostic meta-learning algorithm when there is ambiguity over the class of functions?, and (3) can our approach scale to deep convolutional networks? We study two illustrative toy examples and a realistic ambiguous few-shot image classification problem",
+        "We introduced an algorithm for few-shot meta-learning that enables simple and effective sampling of models for new tasks at meta-test time"
+    ],
+    "key_statements": [
+        "Learning from a few examples is a key aspect of human intelligence",
+        "When the end goal of few-shot meta-learning is to learn solutions to new tasks from small amounts of data, a critical issue that must be dealt with is task ambiguity: even with the best possible prior, there might not be enough information in the examples for a new task to resolve that task with high certainty",
+        "Our approach extends model-agnostic meta-learning to model a distribution over prior model parameters, which leads to an appealing simple stochastic adaptation procedure that injects noise into gradient descent at meta-test time",
+        "Our approach differs from these methods in that we explicitly train a hierarchical Bayesian model over weights, where a posterior task-specific parameter distribution is inferred at meta-test time conditioned on a learned weight prior and a training set, while conventional Bayesian neural networks directly learn only the posterior weight distribution for a single task",
+        "Our goal is to build a meta-learning method that can handle the uncertainty and ambiguity that occurs when learning from small amounts of data, while scaling to highly-expressive function approximators such as neural networks",
+        "The goal of our experimental evaluation is to answer the following questions: (1) can our approach enable sampling from the distribution over potential functions underlying the training data?, (2) does our approach improve upon the model-agnostic meta-learning algorithm when there is ambiguity over the class of functions?, and (3) can our approach scale to deep convolutional networks? We study two illustrative toy examples and a realistic ambiguous few-shot image classification problem",
+        "We show the function f\u03c6i learned by model-agnostic meta-learning in black",
+        "We introduced an algorithm for few-shot meta-learning that enables simple and effective sampling of models for new tasks at meta-test time",
+        "We showed how our approach can be applied in settings where uncertainty can directly guide data acquisition, leading to better few-shot active learning"
+    ],
+    "summary": [
+        "Learning from a few examples is a key aspect of human intelligence.",
+        "Our approach extends MAML to model a distribution over prior model parameters, which leads to an appealing simple stochastic adaptation procedure that injects noise into gradient descent at meta-test time.",
+        "The meta-training procedure optimizes for this simple inference process to produce samples from an approximate model posterior.",
+        "Other work that considers model uncertainty in the few-shot learning setting is the LLAMA method [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>], which builds on the MAML algorithm.",
+        "Our approach differs from these methods in that we explicitly train a hierarchical Bayesian model over weights, where a posterior task-specific parameter distribution is inferred at meta-test time conditioned on a learned weight prior and a training set, while conventional Bayesian neural networks directly learn only the posterior weight distribution for a single task.",
+        "The MAML algorithm trains for few-shot generalization by optimizing for a set of initial parameters \u03b8 such that one or a few steps of gradient descent on Dtr achieves good performance on Dtest.",
+        "This choice is reasonable, because it encourages \u03c6i to stay close to the prior parameters \u03c6i, but we will see how a more expressive implicit conditional can be obtained using gradient descent, resulting in a procedure that more closely resembles the original MAML algorithm while still modeling the uncertainty.",
+        "Require: training data DTtr for new task T Require: learned \u0398 1: Sample \u03b8 from the prior p(\u03b8|Dtr) 2: Evaluate \u2207\u03b8L(\u03b8, Dtr) 3: Compute adapted parameters with gradient descent: \u03c6i = \u03b8 \u2212 \u03b1\u2207\u03b8L(\u03b8, Dtr)",
+        "The goal of our experimental evaluation is to answer the following questions: (1) can our approach enable sampling from the distribution over potential functions underlying the training data?, (2) does our approach improve upon the MAML algorithm when there is ambiguity over the class of functions?, and (3) can our approach scale to deep convolutional networks?",
+        "We will refer to our version of MAML as a PLATIPUS (Probabilistic LATent model for Incorporating Priors and Uncertainty in few-Shot learning), due to its unusual combination of two approximate inference methods: amortized inference and MAP.",
+        "We introduced an algorithm for few-shot meta-learning that enables simple and effective sampling of models for new tasks at meta-test time.",
+        "During meta-training, the model parameters are optimized with respect to a variational lower bound on the likelihood for the meta-training tasks, so as to enable this simple adaptation procedure to produce approximate samples from the model posterior when conditioned on a few-shot training set."
+    ],
+    "headline": "We propose a probabilistic meta-learning algorithm that can sample models for a new task from a model distribution",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] D. Barber and C. M. Bishop. Ensemble learning for multi-layer networks. In neural information processing systems (NIPS), 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Barber%2C%20D.%20Bishop%2C%20C.M.%20Ensemble%20learning%20for%20multi-layer%20networks%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Barber%2C%20D.%20Bishop%2C%20C.M.%20Ensemble%20learning%20for%20multi-layer%20networks%201998"
+        },
+        {
+            "id": "2",
+            "entry": "[2] C. Blundell, J. Cornebise, K. Kavukcuoglu, and D. Wierstra. Weight uncertainty in neural networks. arXiv preprint arXiv:1505.05424, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1505.05424"
+        },
+        {
+            "id": "3",
+            "entry": "[3] D. A. Braun, C. Mehring, and D. M. Wolpert. Structure learning in action. Behavioural brain research, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Braun%2C%20D.A.%20Mehring%2C%20C.%20Wolpert%2C%20D.M.%20Structure%20learning%20in%20action%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Braun%2C%20D.A.%20Mehring%2C%20C.%20Wolpert%2C%20D.M.%20Structure%20learning%20in%20action%202010"
+        },
+        {
+            "id": "4",
+            "entry": "[4] H. Daum\u00e9 III. Bayesian multitask learning with latent hierarchies. In Conference on Uncertainty in Artificial Intelligence (UAI), 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Daum%C3%A9%2C%20III%2C%20H.%20Bayesian%20multitask%20learning%20with%20latent%20hierarchies%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Daum%C3%A9%2C%20III%2C%20H.%20Bayesian%20multitask%20learning%20with%20latent%20hierarchies%202009"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Y. Duan, J. Schulman, X. Chen, P. L. Bartlett, I. Sutskever, and P. Abbeel. Rl \u03982: Fast reinforcement learning via slow reinforcement learning. arXiv preprint arXiv:1611.02779, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.02779"
+        },
+        {
+            "id": "6",
+            "entry": "[6] H. Edwards and A. Storkey. Towards a neural statistician. In International Conference on Learning Representations (ICLR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Edwards%2C%20H.%20Storkey%2C%20A.%20Towards%20a%20neural%20statistician%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Edwards%2C%20H.%20Storkey%2C%20A.%20Towards%20a%20neural%20statistician%202017"
+        },
+        {
+            "id": "7",
+            "entry": "[7] L. Fei-Fei et al. A Bayesian approach to unsupervised one-shot learning of object categories. In Conference on Computer Vision and Pattern Recognition (CVPR), 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fei-Fei%2C%20L.%20A%20Bayesian%20approach%20to%20unsupervised%20one-shot%20learning%20of%20object%20categories%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fei-Fei%2C%20L.%20A%20Bayesian%20approach%20to%20unsupervised%20one-shot%20learning%20of%20object%20categories%202003"
+        },
+        {
+            "id": "8",
+            "entry": "[8] C. Finn and S. Levine. Meta-learning and universality: Deep representations and gradient descent can approximate any learning algorithm. arXiv preprint arXiv:1710.11622, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.11622"
+        },
+        {
+            "id": "9",
+            "entry": "[9] C. Finn, P. Abbeel, and S. Levine. Model-agnostic meta-learning for fast adaptation of deep networks. In International Conference on Machine Learning (ICML), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Finn%2C%20C.%20Abbeel%2C%20P.%20Levine%2C%20S.%20Model-agnostic%20meta-learning%20for%20fast%20adaptation%20of%20deep%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Finn%2C%20C.%20Abbeel%2C%20P.%20Levine%2C%20S.%20Model-agnostic%20meta-learning%20for%20fast%20adaptation%20of%20deep%20networks%202017"
+        },
+        {
+            "id": "10",
+            "entry": "[10] C. Finn, T. Yu, T. Zhang, P. Abbeel, and S. Levine. One-shot visual imitation learning via meta-learning. arXiv preprint arXiv:1709.04905, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1709.04905"
+        },
+        {
+            "id": "11",
+            "entry": "[11] M. Fortunato, C. Blundell, and O. Vinyals. Bayesian recurrent neural networks. arXiv preprint arXiv:1704.02798, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1704.02798"
+        },
+        {
+            "id": "12",
+            "entry": "[12] J. Gao, W. Fan, J. Jiang, and J. Han. Knowledge transfer via multiple model local structure mapping. In ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD). ACM, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gao%2C%20J.%20Fan%2C%20W.%20Jiang%2C%20J.%20Han%2C%20J.%20Knowledge%20transfer%20via%20multiple%20model%20local%20structure%20mapping%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gao%2C%20J.%20Fan%2C%20W.%20Jiang%2C%20J.%20Han%2C%20J.%20Knowledge%20transfer%20via%20multiple%20model%20local%20structure%20mapping%202008"
+        },
+        {
+            "id": "13",
+            "entry": "[13] V. Garcia and J. Bruna. Few-shot learning with graph neural networks. arXiv preprint arXiv:1711.04043, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.04043"
+        },
+        {
+            "id": "14",
+            "entry": "[14] E. Grant, C. Finn, J. Peterson, J. Abbott, S. Levine, T. Darrell, and T. Griffiths. Concept acquisition through meta-learning. In NIPS Workshop on Cognitively Informed Artificial Intelligence, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Grant%2C%20E.%20Finn%2C%20C.%20Peterson%2C%20J.%20Abbott%2C%20J.%20Concept%20acquisition%20through%20meta-learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Grant%2C%20E.%20Finn%2C%20C.%20Peterson%2C%20J.%20Abbott%2C%20J.%20Concept%20acquisition%20through%20meta-learning%202017"
+        },
+        {
+            "id": "15",
+            "entry": "[15] E. Grant, C. Finn, S. Levine, T. Darrell, and T. Griffiths. Recasting gradient-based meta-learning as hierarchical bayes. In International Conference on Learning Representations (ICLR), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Grant%2C%20E.%20Finn%2C%20C.%20Levine%2C%20S.%20Darrell%2C%20T.%20Recasting%20gradient-based%20meta-learning%20as%20hierarchical%20bayes%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Grant%2C%20E.%20Finn%2C%20C.%20Levine%2C%20S.%20Darrell%2C%20T.%20Recasting%20gradient-based%20meta-learning%20as%20hierarchical%20bayes%202018"
+        },
+        {
+            "id": "16",
+            "entry": "[16] A. Graves. Practical variational inference for neural networks. In Neural Information Processing Systems (NIPS), 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Graves%2C%20A.%20Practical%20variational%20inference%20for%20neural%20networks%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Graves%2C%20A.%20Practical%20variational%20inference%20for%20neural%20networks%202011"
+        },
+        {
+            "id": "17",
+            "entry": "[17] I. Higgins, L. Matthey, X. Glorot, A. Pal, B. Uria, C. Blundell, S. Mohamed, and A. Lerchner. Early visual concept learning with unsupervised deep learning. International Conference on Learning Representations (ICLR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Higgins%2C%20I.%20Matthey%2C%20L.%20Glorot%2C%20X.%20Pal%2C%20A.%20Early%20visual%20concept%20learning%20with%20unsupervised%20deep%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Higgins%2C%20I.%20Matthey%2C%20L.%20Glorot%2C%20X.%20Pal%2C%20A.%20Early%20visual%20concept%20learning%20with%20unsupervised%20deep%20learning%202017"
+        },
+        {
+            "id": "18",
+            "entry": "[18] G. E. Hinton and D. Van Camp. Keeping the neural networks simple by minimizing the description length of the weights. In Conference on Computational learning theory, 1993.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hinton%2C%20G.E.%20Camp%2C%20D.Van%20Keeping%20the%20neural%20networks%20simple%20by%20minimizing%20the%20description%20length%20of%20the%20weights%201993",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hinton%2C%20G.E.%20Camp%2C%20D.Van%20Keeping%20the%20neural%20networks%20simple%20by%20minimizing%20the%20description%20length%20of%20the%20weights%201993"
+        },
+        {
+            "id": "19",
+            "entry": "[19] S. Hochreiter, A. Younger, and P. Conwell. Learning to learn using gradient descent. International Conference on Artificial Neural Networks (ICANN), 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hochreiter%2C%20S.%20Younger%2C%20A.%20Conwell%2C%20P.%20Learning%20to%20learn%20using%20gradient%20descent%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hochreiter%2C%20S.%20Younger%2C%20A.%20Conwell%2C%20P.%20Learning%20to%20learn%20using%20gradient%20descent%202001"
+        },
+        {
+            "id": "20",
+            "entry": "[20] M. D. Hoffman, D. M. Blei, C. Wang, and J. Paisley. Stochastic variational inference. The Journal of Machine Learning Research, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hoffman%2C%20M.D.%20Blei%2C%20D.M.%20Wang%2C%20C.%20Paisley%2C%20J.%20Stochastic%20variational%20inference%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hoffman%2C%20M.D.%20Blei%2C%20D.M.%20Wang%2C%20C.%20Paisley%2C%20J.%20Stochastic%20variational%20inference%202013"
+        },
+        {
+            "id": "21",
+            "entry": "[21] M. Johnson, D. K. Duvenaud, A. Wiltschko, R. P. Adams, and S. R. Datta. Composing graphical models with neural networks for structured representations and fast inference. In Neural Information Processing Systems (NIPS), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Johnson%2C%20M.%20Duvenaud%2C%20D.K.%20Wiltschko%2C%20A.%20Adams%2C%20R.P.%20Composing%20graphical%20models%20with%20neural%20networks%20for%20structured%20representations%20and%20fast%20inference%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Johnson%2C%20M.%20Duvenaud%2C%20D.K.%20Wiltschko%2C%20A.%20Adams%2C%20R.P.%20Composing%20graphical%20models%20with%20neural%20networks%20for%20structured%20representations%20and%20fast%20inference%202016"
+        },
+        {
+            "id": "22",
+            "entry": "[22] D. P. Kingma and M. Welling. Auto-encoding variational bayes. arXiv preprint arXiv:1312.6114, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.6114"
+        },
+        {
+            "id": "23",
+            "entry": "[23] A. Lacoste, T. Boquet, N. Rostamzadeh, B. Oreshki, W. Chung, and D. Krueger. Deep prior. arXiv preprint arXiv:1712.05016, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1712.05016"
+        },
+        {
+            "id": "24",
+            "entry": "[24] B. M. Lake, R. Salakhutdinov, and J. B. Tenenbaum. Human-level concept learning through probabilistic program induction. Science, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lake%2C%20B.M.%20Salakhutdinov%2C%20R.%20Tenenbaum%2C%20J.B.%20Human-level%20concept%20learning%20through%20probabilistic%20program%20induction%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lake%2C%20B.M.%20Salakhutdinov%2C%20R.%20Tenenbaum%2C%20J.B.%20Human-level%20concept%20learning%20through%20probabilistic%20program%20induction%202015"
+        },
+        {
+            "id": "25",
+            "entry": "[25] N. D. Lawrence and J. C. Platt. Learning to learn with the informative vector machine. In International Conference on Machine Learning (ICML), page 65, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lawrence%2C%20N.D.%20Platt%2C%20J.C.%20Learning%20to%20learn%20with%20the%20informative%20vector%20machine%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lawrence%2C%20N.D.%20Platt%2C%20J.C.%20Learning%20to%20learn%20with%20the%20informative%20vector%20machine%202004"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Z. Li, F. Zhou, F. Chen, and H. Li. Meta-sgd: Learning to learn quickly for few shot learning. arXiv preprint arXiv:1707.09835, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.09835"
+        },
+        {
+            "id": "27",
+            "entry": "[27] D. J. MacKay. A practical Bayesian framework for backpropagation networks. Neural computation, 1992.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=MacKay%2C%20D.J.%20A%20practical%20Bayesian%20framework%20for%20backpropagation%20networks%201992",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=MacKay%2C%20D.J.%20A%20practical%20Bayesian%20framework%20for%20backpropagation%20networks%201992"
+        },
+        {
+            "id": "28",
+            "entry": "[28] N. Mishra, M. Rohaninejad, X. Chen, and P. Abbeel. A simple neural attentive meta-learner. International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mishra%2C%20N.%20Rohaninejad%2C%20M.%20Chen%2C%20X.%20Abbeel%2C%20P.%20A%20simple%20neural%20attentive%20meta-learner%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mishra%2C%20N.%20Rohaninejad%2C%20M.%20Chen%2C%20X.%20Abbeel%2C%20P.%20A%20simple%20neural%20attentive%20meta-learner%202018"
+        },
+        {
+            "id": "29",
+            "entry": "[29] R. M. Neal. Bayesian learning for neural networks. PhD thesis, University of Toronto, 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Neal%2C%20R.M.%20Bayesian%20learning%20for%20neural%20networks%201995"
+        },
+        {
+            "id": "30",
+            "entry": "[30] A. Nichol and J. Schulman. Reptile: a scalable metalearning algorithm. arXiv preprint arXiv:1803.02999, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.02999"
+        },
+        {
+            "id": "31",
+            "entry": "[31] S. Ravi and H. Larochelle. Optimization as a model for few-shot learning. In International Conference on Learning Representations (ICLR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ravi%2C%20S.%20Larochelle%2C%20H.%20Optimization%20as%20a%20model%20for%20few-shot%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ravi%2C%20S.%20Larochelle%2C%20H.%20Optimization%20as%20a%20model%20for%20few-shot%20learning%202017"
+        },
+        {
+            "id": "32",
+            "entry": "[32] D. J. Rezende, S. Mohamed, and D. Wierstra. Stochastic backpropagation and approximate inference in deep generative models. arXiv preprint arXiv:1401.4082, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1401.4082"
+        },
+        {
+            "id": "33",
+            "entry": "[33] A. Santoro, S. Bartunov, M. Botvinick, D. Wierstra, and T. Lillicrap. Meta-learning with memory-augmented neural networks. In International Conference on Machine Learning (ICML), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Santoro%2C%20A.%20Bartunov%2C%20S.%20Botvinick%2C%20M.%20Wierstra%2C%20D.%20Meta-learning%20with%20memory-augmented%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Santoro%2C%20A.%20Bartunov%2C%20S.%20Botvinick%2C%20M.%20Wierstra%2C%20D.%20Meta-learning%20with%20memory-augmented%20neural%20networks%202016"
+        },
+        {
+            "id": "34",
+            "entry": "[34] R. J. Santos. Equivalence of regularization and truncated iteration for general ill-posed problems. Linear Algebra and its Applications, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Santos%2C%20R.J.%20Equivalence%20of%20regularization%20and%20truncated%20iteration%20for%20general%20ill-posed%20problems%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Santos%2C%20R.J.%20Equivalence%20of%20regularization%20and%20truncated%20iteration%20for%20general%20ill-posed%20problems%201996"
+        },
+        {
+            "id": "35",
+            "entry": "[35] J. Schmidhuber. Evolutionary principles in self-referential learning. PhD thesis, Institut f\u00fcr Informatik, Technische Universit\u00e4t M\u00fcnchen, 1987.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schmidhuber%2C%20J.%20Evolutionary%20principles%20in%20self-referential%20learning%201987"
+        },
+        {
+            "id": "36",
+            "entry": "[36] R. Shu, H. H. Bui, S. Zhao, M. J. Kochenderfer, and S. Ermon. Amortized inference regularization. arXiv preprint arXiv:1805.08913, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1805.08913"
+        },
+        {
+            "id": "37",
+            "entry": "[37] J. Snell, K. Swersky, and R. S. Zemel. Prototypical networks for few-shot learning. In Neural Information Processing Systems (NIPS), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Snell%2C%20J.%20Swersky%2C%20K.%20Zemel%2C%20R.S.%20Prototypical%20networks%20for%20few-shot%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Snell%2C%20J.%20Swersky%2C%20K.%20Zemel%2C%20R.S.%20Prototypical%20networks%20for%20few-shot%20learning%202017"
+        },
+        {
+            "id": "38",
+            "entry": "[38] F. Sung, Y. Yang, L. Zhang, T. Xiang, P. H. S. Torr, and T. M. Hospedales. Learning to compare: Relation network for few-shot learning. CoRR, abs/1711.06025, 2017. URL http://arxiv.org/abs/1711.06025.",
+            "url": "http://arxiv.org/abs/1711.06025",
+            "arxiv_url": "https://arxiv.org/pdf/1711.06025"
+        },
+        {
+            "id": "39",
+            "entry": "[39] J. B. Tenenbaum. A Bayesian framework for concept learning. PhD thesis, Massachusetts Institute of Technology, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tenenbaum%2C%20J.B.%20A%20Bayesian%20framework%20for%20concept%20learning%201999"
+        },
+        {
+            "id": "40",
+            "entry": "[40] O. Vinyals, C. Blundell, T. Lillicrap, D. Wierstra, et al. Matching networks for one shot learning. In Neural Information Processing Systems (NIPS), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vinyals%2C%20O.%20Blundell%2C%20C.%20Lillicrap%2C%20T.%20Wierstra%2C%20D.%20Matching%20networks%20for%20one%20shot%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vinyals%2C%20O.%20Blundell%2C%20C.%20Lillicrap%2C%20T.%20Wierstra%2C%20D.%20Matching%20networks%20for%20one%20shot%20learning%202016"
+        },
+        {
+            "id": "41",
+            "entry": "[41] J. Wan, Z. Zhang, J. Yan, T. Li, B. D. Rao, S. Fang, S. Kim, S. L. Risacher, A. J. Saykin, and L. Shen. Sparse Bayesian multi-task learning for predicting cognitive outcomes from neuroimaging measures in Alzheimer\u2019s disease. In Conference on Computer Vision and Pattern Recognition (CVPR), 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wan%2C%20J.%20Zhang%2C%20Z.%20Yan%2C%20J.%20Li%2C%20T.%20Sparse%20Bayesian%20multi-task%20learning%20for%20predicting%20cognitive%20outcomes%20from%20neuroimaging%20measures%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wan%2C%20J.%20Zhang%2C%20Z.%20Yan%2C%20J.%20Li%2C%20T.%20Sparse%20Bayesian%20multi-task%20learning%20for%20predicting%20cognitive%20outcomes%20from%20neuroimaging%20measures%202012"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Y.-X. Wang and M. Hebert. Learning to learn: Model regression networks for easy small sample learning. In European Conference on Computer Vision (ECCV), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Y.-X.%20Hebert%2C%20M.%20Learning%20to%20learn%3A%20Model%20regression%20networks%20for%20easy%20small%20sample%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Y.-X.%20Hebert%2C%20M.%20Learning%20to%20learn%3A%20Model%20regression%20networks%20for%20easy%20small%20sample%20learning%202016"
+        },
+        {
+            "id": "43",
+            "entry": "[43] K. Yu, V. Tresp, and A. Schwaighofer. Learning Gaussian processes from multiple tasks. In International Conference on Machine Learning (ICML), 2005. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yu%2C%20K.%20Tresp%2C%20V.%20Schwaighofer%2C%20A.%20Learning%20Gaussian%20processes%20from%20multiple%20tasks%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yu%2C%20K.%20Tresp%2C%20V.%20Schwaighofer%2C%20A.%20Learning%20Gaussian%20processes%20from%20multiple%20tasks%202005"
+        }
+    ]
+}

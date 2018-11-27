@@ -1,0 +1,338 @@
+{
+    "filename": "7697-sparsified-sgd-with-memory.pdf",
+    "metadata": {
+        "title": "Sparsified SGD with Memory",
+        "author": "Sebastian U. Stich, Jean-Baptiste Cordonnier, Martin Jaggi",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7697-sparsified-sgd-with-memory.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Huge scale machine learning problems are nowadays tackled by distributed optimization algorithms, i.e. algorithms that leverage the compute power of many devices for training. The communication overhead is a key bottleneck that hinders perfect scalability. Various recent works proposed to use quantization or sparsification techniques to reduce the amount of data that needs to be communicated, for instance by only sending the most significant entries of the stochastic gradient (top-k sparsification). Whilst such schemes showed very promising performance in practice, they have eluded theoretical analysis so far. In this work we analyze Stochastic Gradient Descent (SGD) with k-sparsification or compression (for instance top-k or random-k) and show that this scheme converges at the same rate as vanilla SGD when equipped with error compensation (keeping track of accumulated errors in memory). That is, communication can be reduced by a factor of the dimension of the problem (sometimes even more) whilst still converging at the same rate. We present numerical experiments to illustrate the theoretical findings and the good scalability for distributed applications."
+    },
+    "keywords": [
+        {
+            "term": "optimization algorithm",
+            "url": "https://en.wikipedia.org/wiki/optimization_algorithm"
+        },
+        {
+            "term": "gradient descent",
+            "url": "https://en.wikipedia.org/wiki/gradient_descent"
+        },
+        {
+            "term": "machine learning",
+            "url": "https://en.wikipedia.org/wiki/machine_learning"
+        },
+        {
+            "term": "multi core",
+            "url": "https://en.wikipedia.org/wiki/multi_core"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        }
+    ],
+    "highlights": [
+        "Stochastic Gradient Descent (SGD) [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>] and variants thereof (e.g. [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>]) are among the most popular optimization algorithms in machineand deep-learning [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>]",
+        "Note that in general both gt and \u2207f are dense vectors1 of size d, i.e. Stochastic Gradient Descent does not address the communication bottleneck of gradient descent, which occurs as a roadblock both in distributed as well as parallel training",
+        "We report results for a parallel multi-core implementation of Stochastic Gradient Descent with memory that show that the algorithm scales as well as asynchronous Stochastic Gradient Descent and drastically decreases the communication cost without sacrificing the rate of convergence",
+        "As the usefulness of Stochastic Gradient Descent with sparsification techniques has already been shown in practical applications [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>, <a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>, <a class=\"ref-link\" id=\"c33\" href=\"#r33\">33</a>, <a class=\"ref-link\" id=\"c37\" href=\"#r37\">37</a>] we focus here on a few particular aspects",
+        "We show the performance of the parallel Stochastic Gradient Descent depicted in Algorithm 2 in a multi-core setting with shared memory and compare the speed-up to asynchronous Stochastic Gradient Descent.\n4.1",
+        "Our experiments verify the drastic reduction in communication cost by demonstrating that MEMSGD requires one to two orders of magnitude less bits to be communicated than QSGD [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>] while converging to the same accuracy"
+    ],
+    "key_statements": [
+        "Stochastic Gradient Descent (SGD) [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>] and variants thereof (e.g. [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>]) are among the most popular optimization algorithms in machineand deep-learning [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>]",
+        "Note that in general both gt and \u2207f are dense vectors1 of size d, i.e. Stochastic Gradient Descent does not address the communication bottleneck of gradient descent, which occurs as a roadblock both in distributed as well as parallel training",
+        "We report results for a parallel multi-core implementation of Stochastic Gradient Descent with memory that show that the algorithm scales as well as asynchronous Stochastic Gradient Descent and drastically decreases the communication cost without sacrificing the rate of convergence",
+        "As the usefulness of Stochastic Gradient Descent with sparsification techniques has already been shown in practical applications [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>, <a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>, <a class=\"ref-link\" id=\"c33\" href=\"#r33\">33</a>, <a class=\"ref-link\" id=\"c37\" href=\"#r37\">37</a>] we focus here on a few particular aspects",
+        "We show the performance of the parallel Stochastic Gradient Descent depicted in Algorithm 2 in a multi-core setting with shared memory and compare the speed-up to asynchronous Stochastic Gradient Descent.\n4.1",
+        "We compare MEM-Stochastic Gradient Descent with the QSGD compression scheme [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>] which reduces communication cost by random quantization",
+        "We would like to set the quantization precision in QSGD such that the number of bits transmitted by QSGD and MEM-Stochastic Gradient Descent are identical and compare their convergence \u221aproperties",
+        "Figure 3 shows that MEM-Stochastic Gradient Descent with top1 on epsilon and RCV1 converges as fast as QSGD in term of iterations for 8 and 4-bits",
+        "Our experiments verify the drastic reduction in communication cost by demonstrating that MEMSGD requires one to two orders of magnitude less bits to be communicated than QSGD [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>] while converging to the same accuracy"
+    ],
+    "summary": [
+        "Stochastic Gradient Descent (SGD) [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>] and variants thereof (e.g. [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>]) are among the most popular optimization algorithms in machineand deep-learning [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>].",
+        "In this paper we give a concise convergence rate analysis for SGD with memory and k-compression operators2, such as top-k sparsification.",
+        "We consider a sequential sparsified SGD algorithm with error accumulation technique and prove convergence for k-compression operators, 0 < k \u2264 d.",
+        "We report results for a parallel multi-core implementation of SGD with memory that show that the algorithm scales as well as asynchronous SGD and drastically decreases the communication cost without sacrificing the rate of convergence.",
+        "Similar as discussed in [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>, <a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>] we have to define a suitable averaging scheme for the iterates {xt}t\u22650 to get the optimal convergence rate.",
+        "We compare our method with QSGD [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>] which decreases the communication cost in SGD by using random quantization operators, but without memory.",
+        "We show the performance of the parallel SGD depicted in Algorithm 2 in a multi-core setting with shared memory and compare the speed-up to asynchronous SGD.",
+        "We experimentally verified the convergence properties of MEM-SGD for different sparsification operators and stepsizes but we want to further evaluate its fundamental benefits in terms of sparsity enforcement and reduction of the communication bottleneck.",
+        "We compare MEM-SGD with the QSGD compression scheme [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>] which reduces communication cost by random quantization.",
+        "We would like to set the quantization precision in QSGD such that the number of bits transmitted by QSGD and MEM-SGD are identical and compare their convergence \u221aproperties.",
+        "It is not possible to reach the compression level of sparsification operators such as top-k or random-k, that only transmit a constant number of bits per iteration.5 we did not enforce this condition and resorted to pick reasonable levels of quantization in QSGD (s = 2b with b \u2208 {2, 4, 8}).",
+        "Figure 3 shows that MEM-SGD with top1 on epsilon and RCV1 converges as fast as QSGD in term of iterations for 8 and 4-bits.",
+        "We observe that PARALLEL-MEM-SGD with a reasonable sparsification parameter k does not suffer of having multiple independent memories.",
+        "SGD with memory computes gradients on stale iterates that differ only by a few coordinates.",
+        "This extremely communication-efficient variant of SGD enforces sparsity of the applied updates by only updating a constant number of coordinates in every iteration.",
+        "This way, the method overcomes the communication bottleneck of SGD, while still enjoying the same convergence rate in terms of stochastic gradient computations.",
+        "There, both schemes are on par, and show better scaling than a simple shared memory implementation that just writes the unquantized updates in a lock-free asynchronous fashion"
+    ],
+    "headline": "We present numerical experiments to illustrate the theoretical findings and the good scalability for distributed applications",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Alham Fikri Aji and Kenneth Heafield. Sparse communication for distributed gradient descent. In Proceedings of the 2017 Conference on Empirical Methods in Natural Language Processing, pages 440\u2013445. Association for Computational Linguistics, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Aji%2C%20Alham%20Fikri%20Heafield%2C%20Kenneth%20Sparse%20communication%20for%20distributed%20gradient%20descent%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Aji%2C%20Alham%20Fikri%20Heafield%2C%20Kenneth%20Sparse%20communication%20for%20distributed%20gradient%20descent%202017"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Dan Alistarh, Christopher De Sa, and Nikola Konstantinov. The convergence of stochastic gradient descent in asynchronous shared memory. In Proceedings of the 2018 ACM Symposium on Principles of Distributed Computing, PODC \u201918, pages 169\u2013178, New York, NY, USA, 2018. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Alistarh%2C%20Dan%20Sa%2C%20Christopher%20De%20Konstantinov%2C%20Nikola%20The%20convergence%20of%20stochastic%20gradient%20descent%20in%20asynchronous%20shared%20memory%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Alistarh%2C%20Dan%20Sa%2C%20Christopher%20De%20Konstantinov%2C%20Nikola%20The%20convergence%20of%20stochastic%20gradient%20descent%20in%20asynchronous%20shared%20memory%202018"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Dan Alistarh, Demjan Grubic, Jerry Li, Ryota Tomioka, and Milan Vojnovic. QSGD: Communicationefficient SGD via gradient quantization and encoding. In I. Guyon, U. V. Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, NIPS - Advances in Neural Information Processing Systems 30, pages 1709\u20131720. Curran Associates, Inc., 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Alistarh%2C%20Dan%20Grubic%2C%20Demjan%20Li%2C%20Jerry%20Tomioka%2C%20Ryota%20QSGD%3A%20Communicationefficient%20SGD%20via%20gradient%20quantization%20and%20encoding%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Alistarh%2C%20Dan%20Grubic%2C%20Demjan%20Li%2C%20Jerry%20Tomioka%2C%20Ryota%20QSGD%3A%20Communicationefficient%20SGD%20via%20gradient%20quantization%20and%20encoding%202017"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Dan Alistarh, Torsten Hoefler, Mikael Johansson, Sarit Khirirat, Nikola Konstantinov, and C\u00e9dric Renggli. The convergence of sparsified gradient methods. In NIPS 2018, to appear and CoRR abs/1809.10505, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1809.10505"
+        },
+        {
+            "id": "5",
+            "entry": "[5] L\u00e9on Bottou. Large-scale machine learning with stochastic gradient descent. In Yves Lechevallier and Gilbert Saporta, editors, Proceedings of COMPSTAT\u20192010, pages 177\u2013186, Heidelberg, 2010. PhysicaVerlag HD.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bottou%2C%20L%C3%A9on%20Large-scale%20machine%20learning%20with%20stochastic%20gradient%20descent%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bottou%2C%20L%C3%A9on%20Large-scale%20machine%20learning%20with%20stochastic%20gradient%20descent%202010"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Leon Bottou. Stochastic Gradient Descent Tricks, volume 7700, page 430\u2013445. Springer, January 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bottou%2C%20Leon%20Stochastic%20Gradient%20Descent%202012-01",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bottou%2C%20Leon%20Stochastic%20Gradient%20Descent%202012-01"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Chia-Yu Chen, Jungwook Choi, Daniel Brand, Ankur Agrawal, Wei Zhang, and Kailash Gopalakrishnan. Adacomp : Adaptive residual gradient compression for data-parallel distributed training. In Sheila A. McIlraith and Kilian Q. Weinberger, editors, Proceedings of the Thirty-Second AAAI Conference on Artificial Intelligence, New Orleans, Louisiana, USA, February 2-7, 2018. AAAI Press, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kailash%20Gopalakrishnan.%20Adacomp%20%3A%20Adaptive%20residual%20gradient%20compression%20for%20data-parallel%20distributed%20training%202018-02-02",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kailash%20Gopalakrishnan.%20Adacomp%20%3A%20Adaptive%20residual%20gradient%20compression%20for%20data-parallel%20distributed%20training%202018-02-02"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Jean-Baptiste Cordonnier. Convex optimization using sparsified stochastic gradient descent with memory. Master\u2019s thesis, EPFL, Lausanne, Switzerland, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cordonnier%2C%20Jean-Baptiste%20Convex%20optimization%20using%20sparsified%20stochastic%20gradient%20descent%20with%20memory%202018"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Nikoli Dryden, Sam Ade Jacobs, Tim Moon, and Brian Van Essen. Communication quantization for data-parallel training of deep neural networks. In Proceedings of the Workshop on Machine Learning in High Performance Computing Environments, MLHPC \u201916, pages 1\u20138, Piscataway, NJ, USA, 2016. IEEE Press.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dryden%2C%20Nikoli%20Jacobs%2C%20Sam%20Ade%20Moon%2C%20Tim%20Essen%2C%20Brian%20Van%20Communication%20quantization%20for%20data-parallel%20training%20of%20deep%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dryden%2C%20Nikoli%20Jacobs%2C%20Sam%20Ade%20Moon%2C%20Tim%20Essen%2C%20Brian%20Van%20Communication%20quantization%20for%20data-parallel%20training%20of%20deep%20neural%20networks%202016"
+        },
+        {
+            "id": "10",
+            "entry": "[10] John Duchi, Elad Hazan, and Yoram Singer. Adaptive subgradient methods for online learning and stochastic optimization. JMLR, 12:2121\u20132159, August 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Duchi%2C%20John%20Hazan%2C%20Elad%20Singer%2C%20Yoram%20Adaptive%20subgradient%20methods%20for%20online%20learning%20and%20stochastic%20optimization%202011-08",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Duchi%2C%20John%20Hazan%2C%20Elad%20Singer%2C%20Yoram%20Adaptive%20subgradient%20methods%20for%20online%20learning%20and%20stochastic%20optimization%202011-08"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Celestine D\u00fcnner, Thomas Parnell, and Martin Jaggi. Efficient use of limited-memory accelerators for linear learning on heterogeneous systems. In I. Guyon, U. V. Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, NIPS - Advances in Neural Information Processing Systems 30, pages 4258\u20134267. Curran Associates, Inc., 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=D%C3%BCnner%2C%20Celestine%20Parnell%2C%20Thomas%20Jaggi%2C%20Martin%20Efficient%20use%20of%20limited-memory%20accelerators%20for%20linear%20learning%20on%20heterogeneous%20systems%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=D%C3%BCnner%2C%20Celestine%20Parnell%2C%20Thomas%20Jaggi%2C%20Martin%20Efficient%20use%20of%20limited-memory%20accelerators%20for%20linear%20learning%20on%20heterogeneous%20systems%202017"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Priya Goyal, Piotr Doll\u00e1r, Ross B. Girshick, Pieter Noordhuis, Lukasz Wesolowski, Aapo Kyrola, Andrew Tulloch, Yangqing Jia, and Kaiming He. Accurate, large minibatch SGD: training ImageNet in 1 hour. CoRR, abs/1706.02677, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.02677"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Suyog Gupta, Ankur Agrawal, Kailash Gopalakrishnan, and Pritish Narayanan. Deep learning with limited numerical precision. In Proceedings of the 32Nd International Conference on International Conference on Machine Learning - Volume 37, ICML\u201915, pages 1737\u20131746. JMLR.org, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gupta%2C%20Suyog%20Agrawal%2C%20Ankur%20Gopalakrishnan%2C%20Kailash%20Narayanan%2C%20Pritish%20Deep%20learning%20with%20limited%20numerical%20precision%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gupta%2C%20Suyog%20Agrawal%2C%20Ankur%20Gopalakrishnan%2C%20Kailash%20Narayanan%2C%20Pritish%20Deep%20learning%20with%20limited%20numerical%20precision%202015"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Cho-Jui Hsieh, Hsiang-Fu Yu, and Inderjit Dhillon. Passcode: Parallel asynchronous stochastic dual co-ordinate descent. In International Conference on Machine Learning, pages 2370\u20132379, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hsieh%2C%20Cho-Jui%20Yu%2C%20Hsiang-Fu%20Dhillon%2C%20Inderjit%20Passcode%3A%20Parallel%20asynchronous%20stochastic%20dual%20co-ordinate%20descent%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hsieh%2C%20Cho-Jui%20Yu%2C%20Hsiang-Fu%20Dhillon%2C%20Inderjit%20Passcode%3A%20Parallel%20asynchronous%20stochastic%20dual%20co-ordinate%20descent%202015"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Eric Jones, Travis Oliphant, Pearu Peterson, et al. SciPy: Open source scientific tools for Python, 2001\u2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Eric%20Jones%20Travis%20Oliphant%20Pearu%20Peterson%20et%20al%20SciPy%20Open%20source%20scientific%20tools%20for%20Python%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Eric%20Jones%20Travis%20Oliphant%20Pearu%20Peterson%20et%20al%20SciPy%20Open%20source%20scientific%20tools%20for%20Python%202001"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Diederik P. Kingma and Jimmy Ba. Adam: A method for stochastic optimization. CoRR, abs/1412.6980, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6980"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Simon Lacoste-Julien, Mark W. Schmidt, and Francis R. Bach. A simpler approach to obtaining an O(1/t) convergence rate for the projected stochastic subgradient method. CoRR, abs/1212.2002, 2012.",
+            "arxiv_url": "https://arxiv.org/pdf/1212.2002"
+        },
+        {
+            "id": "18",
+            "entry": "[18] R\u00e9mi Leblond, Fabian Pedregosa, and Simon Lacoste-Julien. ASAGA: Asynchronous parallel SAGA. In Aarti Singh and Jerry Zhu, editors, Proceedings of the 20th International Conference on Artificial Intelligence and Statistics, volume 54 of Proceedings of Machine Learning Research, pages 46\u201354, Fort Lauderdale, FL, USA, 20\u201322 Apr 2017. PMLR.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Leblond%2C%20R%C3%A9mi%20Pedregosa%2C%20Fabian%20Lacoste-Julien%2C%20Simon%20ASAGA%3A%20Asynchronous%20parallel%20SAGA%202017-04-20",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Leblond%2C%20R%C3%A9mi%20Pedregosa%2C%20Fabian%20Lacoste-Julien%2C%20Simon%20ASAGA%3A%20Asynchronous%20parallel%20SAGA%202017-04-20"
+        },
+        {
+            "id": "19",
+            "entry": "[19] R\u00e9mi Leblond, Fabian Pedregosa, and Simon Lacoste-Julien. Improved asynchronous parallel optimization analysis for stochastic incremental methods. CoRR, abs/1801.03749, January 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1801.03749"
+        },
+        {
+            "id": "20",
+            "entry": "[20] David D. Lewis, Yiming Yang, Tony G. Rose, and Fan Li. RCV1: A new benchmark collection for text categorization research. Journal of Machine Learning Research, 5:361\u2013397, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lewis%2C%20David%20D.%20Yang%2C%20Yiming%20Rose%2C%20Tony%20G.%20Li%2C%20Fan%20RCV1%3A%20A%20new%20benchmark%20collection%20for%20text%20categorization%20research%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lewis%2C%20David%20D.%20Yang%2C%20Yiming%20Rose%2C%20Tony%20G.%20Li%2C%20Fan%20RCV1%3A%20A%20new%20benchmark%20collection%20for%20text%20categorization%20research%202004"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Yujun Lin, Song Han, Huizi Mao, Yu Wang, and Bill Dally. Deep gradient compression: Reducing the communication bandwidth for distributed training. In ICLR 2018 - International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20Yujun%20Han%2C%20Song%20Mao%2C%20Huizi%20Wang%2C%20Yu%20Deep%20gradient%20compression%3A%20Reducing%20the%20communication%20bandwidth%20for%20distributed%20training%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lin%2C%20Yujun%20Han%2C%20Song%20Mao%2C%20Huizi%20Wang%2C%20Yu%20Deep%20gradient%20compression%3A%20Reducing%20the%20communication%20bandwidth%20for%20distributed%20training%202018"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Horia Mania, Xinghao Pan, Dimitris Papailiopoulos, Benjamin Recht, Kannan Ramchandran, and Michael I. Jordan. Perturbed iterate analysis for asynchronous stochastic optimization. SIAM Journal on Optimization, 27(4):2202\u20132229, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mania%2C%20Horia%20Pan%2C%20Xinghao%20Papailiopoulos%2C%20Dimitris%20Recht%2C%20Benjamin%20Perturbed%20iterate%20analysis%20for%20asynchronous%20stochastic%20optimization%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mania%2C%20Horia%20Pan%2C%20Xinghao%20Papailiopoulos%2C%20Dimitris%20Recht%2C%20Benjamin%20Perturbed%20iterate%20analysis%20for%20asynchronous%20stochastic%20optimization%202017"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Eric Moulines and Francis R. Bach. Non-asymptotic analysis of stochastic approximation algorithms for machine learning. In J. Shawe-Taylor, R. S. Zemel, P. L. Bartlett, F. Pereira, and K. Q. Weinberger, editors, NIPS - Advances in Neural Information Processing Systems 24, pages 451\u2013459. Curran Associates, Inc., 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Moulines%2C%20Eric%20Bach%2C%20Francis%20R.%20Non-asymptotic%20analysis%20of%20stochastic%20approximation%20algorithms%20for%20machine%20learning%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Moulines%2C%20Eric%20Bach%2C%20Francis%20R.%20Non-asymptotic%20analysis%20of%20stochastic%20approximation%20algorithms%20for%20machine%20learning%202011"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Taesik Na, Jong Hwan Ko, Jaeha Kung, and Saibal Mukhopadhyay. On-chip training of recurrent neural networks with limited numerical precision. 2017 International Joint Conference on Neural Networks (IJCNN), pages 3716\u20133723, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Na%2C%20Taesik%20Ko%2C%20Jong%20Hwan%20Kung%2C%20Jaeha%20Mukhopadhyay%2C%20Saibal%20On-chip%20training%20of%20recurrent%20neural%20networks%20with%20limited%20numerical%20precision%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Na%2C%20Taesik%20Ko%2C%20Jong%20Hwan%20Kung%2C%20Jaeha%20Mukhopadhyay%2C%20Saibal%20On-chip%20training%20of%20recurrent%20neural%20networks%20with%20limited%20numerical%20precision%202017"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Feng Niu, Benjamin Recht, Christopher Re, and Stephen J. Wright. HOGWILD!: A lock-free approach to parallelizing stochastic gradient descent. In NIPS - Proceedings of the 24th International Conference on Neural Information Processing Systems, NIPS\u201911, pages 693\u2013701, USA, 2011. Curran Associates Inc.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Niu%2C%20Feng%20Recht%2C%20Benjamin%20Re%2C%20Christopher%20Wright%2C%20Stephen%20J.%20HOGWILD%21%3A%20A%20lock-free%20approach%20to%20parallelizing%20stochastic%20gradient%20descent%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Niu%2C%20Feng%20Recht%2C%20Benjamin%20Re%2C%20Christopher%20Wright%2C%20Stephen%20J.%20HOGWILD%21%3A%20A%20lock-free%20approach%20to%20parallelizing%20stochastic%20gradient%20descent%202011"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Fabian Pedregosa, Ga\u00ebl Varoquaux, Alexandre Gramfort, Vincent Michel, Bertrand Thirion, Olivier Grisel, Mathieu Blondel, Peter Prettenhofer, Ron Weiss, Vincent Dubourg, et al. Scikit-learn: Machine learning in python. Journal of machine learning research, 12(Oct):2825\u20132830, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pedregosa%2C%20Fabian%20Varoquaux%2C%20Ga%C3%ABl%20Gramfort%2C%20Alexandre%20Michel%2C%20Vincent%20Scikit-learn%3A%20Machine%20learning%20in%20python%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pedregosa%2C%20Fabian%20Varoquaux%2C%20Ga%C3%ABl%20Gramfort%2C%20Alexandre%20Michel%2C%20Vincent%20Scikit-learn%3A%20Machine%20learning%20in%20python%202011"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Boris T. Polyak and Anatoli B. Juditsky. Acceleration of stochastic approximation by averaging. SIAM Journal on Control and Optimization, 30(4):838\u2013855, 1992.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Polyak%2C%20Boris%20T.%20Juditsky%2C%20Anatoli%20B.%20Acceleration%20of%20stochastic%20approximation%20by%20averaging%201992",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Polyak%2C%20Boris%20T.%20Juditsky%2C%20Anatoli%20B.%20Acceleration%20of%20stochastic%20approximation%20by%20averaging%201992"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Alexander Rakhlin, Ohad Shamir, and Karthik Sridharan. Making gradient descent optimal for strongly convex stochastic optimization. In Proceedings of the 29th International Coference on International Conference on Machine Learning, ICML\u201912, pages 1571\u20131578, USA, 2012. Omnipress.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rakhlin%2C%20Alexander%20Shamir%2C%20Ohad%20Sridharan%2C%20Karthik%20Making%20gradient%20descent%20optimal%20for%20strongly%20convex%20stochastic%20optimization%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rakhlin%2C%20Alexander%20Shamir%2C%20Ohad%20Sridharan%2C%20Karthik%20Making%20gradient%20descent%20optimal%20for%20strongly%20convex%20stochastic%20optimization%202012"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Herbert Robbins and Sutton Monro. A Stochastic Approximation Method. The Annals of Mathematical Statistics, 22(3):400\u2013407, September 1951.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Robbins%2C%20Herbert%20Monro%2C%20Sutton%20A%20Stochastic%20Approximation%20Method%201951-09",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Robbins%2C%20Herbert%20Monro%2C%20Sutton%20A%20Stochastic%20Approximation%20Method%201951-09"
+        },
+        {
+            "id": "30",
+            "entry": "[30] David Ruppert. Efficient estimations from a slowly convergent Robbins-Monro process. Technical report, Cornell University Operations Research and Industrial Engineering, 1988.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ruppert%2C%20David%20Efficient%20estimations%20from%20a%20slowly%20convergent%20Robbins-Monro%20process%201988"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Christopher De Sa, Ce Zhang, Kunle Olukotun, and Christopher R\u00e9. Taming the wild: A unified analysis of HOGWILD!-style algorithms. In NIPS - Proceedings of the 28th International Conference on Neural Information Processing Systems, NIPS\u201915, pages 2674\u20132682, Cambridge, MA, USA, 2015. MIT Press.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sa%2C%20Christopher%20De%20Zhang%2C%20Ce%20Olukotun%2C%20Kunle%20R%C3%A9%2C%20Christopher%20Taming%20the%20wild%3A%20A%20unified%20analysis%20of%20HOGWILD%21-style%20algorithms%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sa%2C%20Christopher%20De%20Zhang%2C%20Ce%20Olukotun%2C%20Kunle%20R%C3%A9%2C%20Christopher%20Taming%20the%20wild%3A%20A%20unified%20analysis%20of%20HOGWILD%21-style%20algorithms%202015"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Mark Schmidt, Nicolas Le Roux, and Francis Bach. Minimizing finite sums with the stochastic average gradient. Math. Program., 162(1-2):83\u2013112, March 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schmidt%2C%20Mark%20Roux%2C%20Nicolas%20Le%20Bach%2C%20Francis%20Minimizing%20finite%20sums%20with%20the%20stochastic%20average%20gradient%202017-03",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schmidt%2C%20Mark%20Roux%2C%20Nicolas%20Le%20Bach%2C%20Francis%20Minimizing%20finite%20sums%20with%20the%20stochastic%20average%20gradient%202017-03"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Frank Seide, Hao Fu, Jasha Droppo, Gang Li, and Dong Yu. 1-bit stochastic gradient descent and its application to data-parallel distributed training of speech DNNs. In Haizhou Li, Helen M. Meng, Bin Ma, Engsiong Chng, and Lei Xie, editors, INTERSPEECH, pages 1058\u20131062. ISCA, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Seide%2C%20Frank%20Fu%2C%20Hao%20Droppo%2C%20Jasha%20Li%2C%20Gang%201-bit%20stochastic%20gradient%20descent%20and%20its%20application%20to%20data-parallel%20distributed%20training%20of%20speech%20DNNs%202014"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Ohad Shamir and Tong Zhang. Stochastic gradient descent for non-smooth optimization: Convergence results and optimal averaging schemes. In Sanjoy Dasgupta and David McAllester, editors, Proceedings of the 30th International Conference on Machine Learning, volume 28 of Proceedings of Machine Learning Research, pages 71\u201379, Atlanta, Georgia, USA, 17\u201319 Jun 2013. PMLR.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shamir%2C%20Ohad%20Zhang%2C%20Tong%20Stochastic%20gradient%20descent%20for%20non-smooth%20optimization%3A%20Convergence%20results%20and%20optimal%20averaging%20schemes%202013-06-17",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shamir%2C%20Ohad%20Zhang%2C%20Tong%20Stochastic%20gradient%20descent%20for%20non-smooth%20optimization%3A%20Convergence%20results%20and%20optimal%20averaging%20schemes%202013-06-17"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Soren Sonnenburg, Vojtvech Franc, E. Yom-Tov, and M. Sebag. Pascal large scale learning challenge. 10:1937\u20131953, 01 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sonnenburg%2C%20Soren%20Vojtvech%20Franc%2C%20E.Yom-Tov%20Sebag%2C%20M.%20Pascal%20large%20scale%20learning%20challenge.%2010%201937"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Sebastian U. Stich. Local SGD converges fast and communicates little. CoRR, abs/1805.09767, May 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1805.09767"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Nikko Strom. Scalable distributed DNN training using commodity GPU cloud computing. In INTERSPEECH, pages 1488\u20131492. ISCA, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Strom%2C%20Nikko%20Scalable%20distributed%20DNN%20training%20using%20commodity%20GPU%20cloud%20computing%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Strom%2C%20Nikko%20Scalable%20distributed%20DNN%20training%20using%20commodity%20GPU%20cloud%20computing%202015"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Xu Sun, Xuancheng Ren, Shuming Ma, and Houfeng Wang. meProp: Sparsified back propagation for accelerated deep learning with reduced overfitting. In Doina Precup and Yee Whye Teh, editors, Proceedings of the 34th International Conference on Machine Learning, volume 70 of Proceedings of Machine Learning Research, pages 3299\u20133308, International Convention Centre, Sydney, Australia, 06\u201311 Aug 2017. PMLR.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sun%2C%20Xu%20Ren%2C%20Xuancheng%20Ma%2C%20Shuming%20Wang%2C%20Houfeng%20meProp%3A%20Sparsified%20back%20propagation%20for%20accelerated%20deep%20learning%20with%20reduced%20overfitting%202017-08",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sun%2C%20Xu%20Ren%2C%20Xuancheng%20Ma%2C%20Shuming%20Wang%2C%20Houfeng%20meProp%3A%20Sparsified%20back%20propagation%20for%20accelerated%20deep%20learning%20with%20reduced%20overfitting%202017-08"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Hanlin Tang, Shaoduo Gan, Ce Zhang, and Ji Liu. Communication compression for decentralized training. In NIPS 2018, to apprear and CoRR abs/1803.06443, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.06443"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Jianqiao Wangni, Jialei Wang, Ji Liu, and Tong Zhang. Gradient sparsification for communication-efficient distributed optimization. In NIPS 2018, to appear and CoRR abs/1710.09854, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.09854"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Wei Wen, Cong Xu, Feng Yan, Chunpeng Wu, Yandan Wang, Yiran Chen, and Hai Li. Terngrad: Ternary gradients to reduce communication in distributed deep learning. In I. Guyon, U. V. Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, NIPS - Advances in Neural Information Processing Systems 30, pages 1509\u20131519. Curran Associates, Inc., 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wen%2C%20Wei%20Xu%2C%20Cong%20Yan%2C%20Feng%20Wu%2C%20Chunpeng%20Terngrad%3A%20Ternary%20gradients%20to%20reduce%20communication%20in%20distributed%20deep%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wen%2C%20Wei%20Xu%2C%20Cong%20Yan%2C%20Feng%20Wu%2C%20Chunpeng%20Terngrad%3A%20Ternary%20gradients%20to%20reduce%20communication%20in%20distributed%20deep%20learning%202017"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Jiaxiang Wu, Weidong Huang, Junzhou Huang, and Tong Zhang. Error compensated quantized SGD and its applications to large-scale distributed optimization. In ICML 2018 - Proceedings of the 35th International Conference on Machine Learning, pages 5321\u20135329, July 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20Jiaxiang%20Huang%2C%20Weidong%20Huang%2C%20Junzhou%20Zhang%2C%20Tong%20Error%20compensated%20quantized%20SGD%20and%20its%20applications%20to%20large-scale%20distributed%20optimization%202018-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20Jiaxiang%20Huang%2C%20Weidong%20Huang%2C%20Junzhou%20Zhang%2C%20Tong%20Error%20compensated%20quantized%20SGD%20and%20its%20applications%20to%20large-scale%20distributed%20optimization%202018-07"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Yang You, Igor Gitman, and Boris Ginsburg. Scaling SGD batch size to 32k for ImageNet training. CoRR, abs/1708.03888, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1708.03888"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Hantian Zhang, Jerry Li, Kaan Kara, Dan Alistarh, Ji Liu, and Ce Zhang. ZipML: Training linear models with end-to-end low precision, and a little bit of deep learning. In Doina Precup and Yee Whye Teh, editors, Proceedings of the 34th International Conference on Machine Learning, volume 70 of Proceedings of Machine Learning Research, pages 4035\u20134043, International Convention Centre, Sydney, Australia, 06\u201311 Aug 2017. PMLR.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Hantian%20Li%2C%20Jerry%20Kara%2C%20Kaan%20Alistarh%2C%20Dan%20ZipML%3A%20Training%20linear%20models%20with%20end-to-end%20low%20precision%2C%20and%20a%20little%20bit%20of%20deep%20learning%202017-08",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Hantian%20Li%2C%20Jerry%20Kara%2C%20Kaan%20Alistarh%2C%20Dan%20ZipML%3A%20Training%20linear%20models%20with%20end-to-end%20low%20precision%2C%20and%20a%20little%20bit%20of%20deep%20learning%202017-08"
+        },
+        {
+            "id": "45",
+            "entry": "[45] Yuchen Zhang, Martin J Wainwright, and John C Duchi. Communication-efficient algorithms for statistical optimization. In F. Pereira, C. J. C. Burges, L. Bottou, and K. Q. Weinberger, editors, NIPS - Advances in Neural Information Processing Systems 25, pages 1502\u20131510. Curran Associates, Inc., 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Yuchen%20Wainwright%2C%20Martin%20J.%20Duchi%2C%20John%20C.%20Communication-efficient%20algorithms%20for%20statistical%20optimization%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Yuchen%20Wainwright%2C%20Martin%20J.%20Duchi%2C%20John%20C.%20Communication-efficient%20algorithms%20for%20statistical%20optimization%202012"
+        },
+        {
+            "id": "46",
+            "entry": "[46] Peilin Zhao and Tong Zhang. Stochastic optimization with importance sampling for regularized loss minimization. In Francis Bach and David Blei, editors, Proceedings of the 32nd International Conference on Machine Learning, volume 37 of Proceedings of Machine Learning Research, pages 1\u20139, Lille, France, 07\u201309 Jul 2015. PMLR. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhao%2C%20Peilin%20Zhang%2C%20Tong%20Stochastic%20optimization%20with%20importance%20sampling%20for%20regularized%20loss%20minimization%202015-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhao%2C%20Peilin%20Zhang%2C%20Tong%20Stochastic%20optimization%20with%20importance%20sampling%20for%20regularized%20loss%20minimization%202015-07"
+        }
+    ]
+}

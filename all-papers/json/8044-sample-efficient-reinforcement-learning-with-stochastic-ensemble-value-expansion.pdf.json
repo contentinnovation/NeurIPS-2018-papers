@@ -1,0 +1,252 @@
+{
+    "filename": "8044-sample-efficient-reinforcement-learning-with-stochastic-ensemble-value-expansion.pdf",
+    "metadata": {
+        "title": "Sample-Efficient Reinforcement Learning with Stochastic Ensemble Value Expansion",
+        "author": "Jacob Buckman\u2217 Danijar Hafner George Tucker Eugene Brevdo Google Brain, Mountain View, CA, USA",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8044-sample-efficient-reinforcement-learning-with-stochastic-ensemble-value-expansion.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Integrating model-free and model-based approaches in reinforcement learning has the potential to achieve the high performance of model-free algorithms with low sample complexity. However, this is difficult because an imperfect dynamics model can degrade the performance of the learning algorithm, and in sufficiently complex environments, the dynamics model will almost always be imperfect. As a result, a key challenge is to combine model-based approaches with model-free learning in such a way that errors in the model do not degrade performance. We propose stochastic ensemble value expansion (STEVE), a novel model-based technique that addresses this issue. By dynamically interpolating between model rollouts of various horizon lengths for each individual example, STEVE ensures that the model is only utilized when doing so does not introduce significant errors. Our approach outperforms model-free baselines on challenging continuous control benchmarks with an order-of-magnitude increase in sample efficiency, and in contrast to previous model-based approaches, performance does not degrade in complex environments."
+    },
+    "keywords": [
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "mean squared error",
+            "url": "https://en.wikipedia.org/wiki/mean_squared_error"
+        },
+        {
+            "term": "wall clock",
+            "url": "https://en.wikipedia.org/wiki/wall_clock"
+        },
+        {
+            "term": "temporal difference",
+            "url": "https://en.wikipedia.org/wiki/temporal_difference"
+        },
+        {
+            "term": "dynamic model",
+            "url": "https://en.wikipedia.org/wiki/dynamic_model"
+        },
+        {
+            "term": "STEVE",
+            "url": "https://en.wikipedia.org/wiki/STEVE"
+        },
+        {
+            "term": "real world",
+            "url": "https://en.wikipedia.org/wiki/real_world"
+        },
+        {
+            "term": "sample complexity",
+            "url": "https://en.wikipedia.org/wiki/sample_complexity"
+        }
+    ],
+    "highlights": [
+        "Reinforcement learning aims to learn an agent policy that maximizes the expected sum of rewards [<a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>]",
+        "We propose stochastic ensemble value expansion (STEVE), an extension to model-based value expansion (MVE) proposed by Feinberg et al [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>]",
+        "Figure 1 compares the sample efficiency of various algorithms on a tabular toy environment, which shows that stochastic ensemble value expansion significantly outperforms Model-Based Value Expansion and temporal difference-learning baselines when the dynamics model is noisy",
+        "We systematically evaluate stochastic ensemble value expansion on several challenging continuous control benchmarks and demonstrate that stochastic ensemble value expansion significantly outperforms model-free baselines with an order-of-magnitude increase in sample efficiency",
+        "Our ablation studies (Section 4.3) support the hypothesis that the increased performance is due to the uncertainty-dependent reweighting of targets, as well as demonstrate that the performance of stochastic ensemble value expansion consistently increases with longer horizon lengths, even in complex environments",
+        "We demonstrated that stochastic ensemble value expansion, an uncertainty-aware approach for merging model-free and model-based reinforcement learning, outperforms model-free approaches while reducing sample complexity by an order magnitude on several challenging tasks"
+    ],
+    "key_statements": [
+        "Reinforcement learning aims to learn an agent policy that maximizes the expected sum of rewards [<a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>]",
+        "We propose stochastic ensemble value expansion (STEVE), an extension to model-based value expansion (MVE) proposed by Feinberg et al [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>]",
+        "Figure 1 compares the sample efficiency of various algorithms on a tabular toy environment, which shows that stochastic ensemble value expansion significantly outperforms Model-Based Value Expansion and temporal difference-learning baselines when the dynamics model is noisy",
+        "We systematically evaluate stochastic ensemble value expansion on several challenging continuous control benchmarks and demonstrate that stochastic ensemble value expansion significantly outperforms model-free baselines with an order-of-magnitude increase in sample efficiency",
+        "We evaluated stochastic ensemble value expansion on a variety of continuous control tasks [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>]; we plot learning curves in Figure 3",
+        "We found that stochastic ensemble value expansion yields significant improvements in both performance and sample efficiency across a wide range of environments",
+        "In order to verify that stochastic ensemble value expansion\u2019s gains in sample efficiency are due to the reweighting, and not due to the additional parameters of the ensembles of its components, we examine several ablations",
+        "We investigate the effect of the horizon parameter on the performance of both stochastic ensemble value expansion and Model-Based Value Expansion",
+        "Our ablation studies (Section 4.3) support the hypothesis that the increased performance is due to the uncertainty-dependent reweighting of targets, as well as demonstrate that the performance of stochastic ensemble value expansion consistently increases with longer horizon lengths, even in complex environments",
+        "The speed gains associated with improved sample efficiency will only be exacerbated as samples become more expensive to collect, making stochastic ensemble value expansion a promising choice for applications involving real-world interaction",
+        "We demonstrated that stochastic ensemble value expansion, an uncertainty-aware approach for merging model-free and model-based reinforcement learning, outperforms model-free approaches while reducing sample complexity by an order magnitude on several challenging tasks"
+    ],
+    "summary": [
+        "Reinforcement learning aims to learn an agent policy that maximizes the expected sum of rewards [<a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>].",
+        "Model-based approaches aim to reduce the number of samples required to learn a policy by modeling the dynamics of the environment.",
+        "Both techniques use a dynamics model to compute \u201crollouts\u201d that are used to improve the targets for temporal difference learning.",
+        "Figure 1 compares the sample efficiency of various algorithms on a tabular toy environment, which shows that STEVE significantly outperforms MVE and TD-learning baselines when the dynamics model is noisy.",
+        "Feinberg et al [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>] showed that a learned dynamics model can be used to improve value estimation.",
+        "When the model is perfect and the learned Q-function has similar bias on all states and actions, Feinberg et al [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>] show that the MVE target with rollout horizon H will decrease the target error by a factor of \u03b32H .",
+        "It was first proposed by Osband et al [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>] as a technique to improve exploration, and subsequent work showed that this approach gives a good estimate of the uncertainty of both value functions [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>] and models [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>].",
+        "We train another three deep feedforward networks to represent our world model, corresponding to function approximators for the transition T\u03be(s, a), termination d\u03be(t | s), and reward r\u03c8(s, a, s ), and minimize the loss function given in Equation 4.",
+        "We find that increasing the rollout horizon increases the sample efficiency of STEVE, even though the dynamics model for Humanoid-v1 has high error.",
+        "Our ablation studies (Section 4.3) support the hypothesis that the increased performance is due to the uncertainty-dependent reweighting of targets, as well as demonstrate that the performance of STEVE consistently increases with longer horizon lengths, even in complex environments.",
+        "Our wall-clock experiments (Section 4.4) demonstrate that in spite of the additional computation per epoch, the gains in sample efficiency are enough that it is competitive with model-free algorithms in terms of wall-clock time.",
+        "Depeweg et al [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>] use a Bayesian neural network as the environment model in a policy search setting, learning a policy purely from imagined rollouts.",
+        "They use a variant of Dyna-Q [<a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>], augmenting the experience available to the model-free learner with imaginary on-policy data generated via environment rollouts.",
+        "We demonstrated that STEVE, an uncertainty-aware approach for merging model-free and model-based reinforcement learning, outperforms model-free approaches while reducing sample complexity by an order magnitude on several challenging tasks.",
+        "Other future directions include exploring more complex worldmodels for various tasks, as well as comparing various techniques for calculating uncertainty and estimating bias"
+    ],
+    "headline": "We propose stochastic ensemble value expansion , a novel model-based technique that addresses this issue",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] M. Abadi, P. Barham, J. Chen, Z. Chen, A. Davis, J. Dean, M. Devin, S. Ghemawat, G. Irving, M. Isard, et al. Tensorflow: A system for large-scale machine learning. In OSDI, volume 16, pages 265\u2013283, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abadi%2C%20M.%20Barham%2C%20P.%20Chen%2C%20J.%20Chen%2C%20Z.%20Tensorflow%3A%20A%20system%20for%20large-scale%20machine%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abadi%2C%20M.%20Barham%2C%20P.%20Chen%2C%20J.%20Chen%2C%20Z.%20Tensorflow%3A%20A%20system%20for%20large-scale%20machine%20learning%202016"
+        },
+        {
+            "id": "2",
+            "entry": "[2] G. Barth-Maron, M. W. Hoffman, D. Budden, W. Dabney, D. Horgan, D. TB, A. Muldal, N. Heess, and T. Lillicrap. Distributional policy gradients. In International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Barth-Maron%2C%20G.%20Hoffman%2C%20M.W.%20Budden%2C%20D.%20Dabney%2C%20W.%20Distributional%20policy%20gradients%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Barth-Maron%2C%20G.%20Hoffman%2C%20M.W.%20Budden%2C%20D.%20Dabney%2C%20W.%20Distributional%20policy%20gradients%202018"
+        },
+        {
+            "id": "3",
+            "entry": "[3] G. Brockman, V. Cheung, L. Pettersson, J. Schneider, J. Schulman, J. Tang, and W. Zaremba. Openai gym. arXiv preprint arXiv:1606.01540, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.01540"
+        },
+        {
+            "id": "4",
+            "entry": "[4] M. Deisenroth and C. E. Rasmussen. PILCO: A model-based and data-efficient approach to policy search. In Proceedings of the 28th International Conference on machine learning (ICML-11), pages 465\u2013472, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Deisenroth%2C%20M.%20Rasmussen%2C%20C.E.%20PILCO%3A%20A%20model-based%20and%20data-efficient%20approach%20to%20policy%20search%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Deisenroth%2C%20M.%20Rasmussen%2C%20C.E.%20PILCO%3A%20A%20model-based%20and%20data-efficient%20approach%20to%20policy%20search%202011"
+        },
+        {
+            "id": "5",
+            "entry": "[5] S. Depeweg, J. M. Hern\u00e1ndez-Lobato, F. Doshi-Velez, and S. Udluft. Learning and policy search in stochastic dynamical systems with Bayesian neural networks. 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Depeweg%2C%20S.%20Hern%C3%A1ndez-Lobato%2C%20J.M.%20Doshi-Velez%2C%20F.%20Udluft%2C%20S.%20Learning%20and%20policy%20search%20in%20stochastic%20dynamical%20systems%20with%20Bayesian%20neural%20networks%202016"
+        },
+        {
+            "id": "6",
+            "entry": "[6] L. Espeholt, H. Soyer, R. Munos, K. Simonyan, V. Mnih, T. Ward, Y. Doron, V. Firoiu, T. Harley, I. Dunning, et al. Impala: Scalable distributed deep-rl with importance weighted actor-learner architectures. In Proceedings of the International Conference on Machine Learning, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Espeholt%2C%20L.%20Soyer%2C%20H.%20Munos%2C%20R.%20Simonyan%2C%20K.%20Impala%3A%20Scalable%20distributed%20deep-rl%20with%20importance%20weighted%20actor-learner%20architectures%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Espeholt%2C%20L.%20Soyer%2C%20H.%20Munos%2C%20R.%20Simonyan%2C%20K.%20Impala%3A%20Scalable%20distributed%20deep-rl%20with%20importance%20weighted%20actor-learner%20architectures%202018"
+        },
+        {
+            "id": "7",
+            "entry": "[7] V. Feinberg, A. Wan, I. Stoica, M. I. Jordan, J. E. Gonzalez, and S. Levine. Model-based value estimation for efficient model-free reinforcement learning. arXiv preprint arXiv:1803.00101, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.00101"
+        },
+        {
+            "id": "8",
+            "entry": "[8] J. Fleiss. Review papers: The statistical basis of meta-analysis. Statistical methods in medical research, 2(2):121\u2013145, 1993.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fleiss%2C%20J.%20Review%20papers%3A%20The%20statistical%20basis%20of%20meta-analysis%201993",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fleiss%2C%20J.%20Review%20papers%3A%20The%20statistical%20basis%20of%20meta-analysis%201993"
+        },
+        {
+            "id": "9",
+            "entry": "[9] S. Fujimoto, H. van Hoof, and D. Meger. Addressing function approximation error in actor-critic methods. In J. Dy and A. Krause, editors, Proceedings of the 35th International Conference on Machine Learning, volume 80 of Proceedings of Machine Learning Research, pages 1587\u20131596, Stockholmsm\u00e4ssan, Stockholm Sweden, 10\u201315 Jul 2018. PMLR. URL http://proceedings.mlr.press/v80/fujimoto18a.html.",
+            "url": "http://proceedings.mlr.press/v80/fujimoto18a.html",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fujimoto%2C%20S.%20van%20Hoof%2C%20H.%20Meger%2C%20D.%20Addressing%20function%20approximation%20error%20in%20actor-critic%20methods%202018-07"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Y. Gal and Z. Ghahramani. Dropout as a Bayesian approximation: Representing model uncertainty in deep learning. In international conference on machine learning, pages 1050\u2013 1059, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gal%2C%20Y.%20Ghahramani%2C%20Z.%20Dropout%20as%20a%20Bayesian%20approximation%3A%20Representing%20model%20uncertainty%20in%20deep%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gal%2C%20Y.%20Ghahramani%2C%20Z.%20Dropout%20as%20a%20Bayesian%20approximation%3A%20Representing%20model%20uncertainty%20in%20deep%20learning%202016"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Y. Gal, R. McAllister, and C. E. Rasmussen. Improving PILCO with Bayesian neural network dynamics models.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gal%2C%20Y.%20McAllister%2C%20R.%20Rasmussen%2C%20C.E.%20Improving%20PILCO%20with%20Bayesian%20neural%20network%20dynamics%20models"
+        },
+        {
+            "id": "12",
+            "entry": "[12] S. Gu, T. Lillicrap, I. Sutskever, and S. Levine. Continuous deep Q-learning with model-based acceleration. In International Conference on Machine Learning, pages 2829\u20132838, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gu%2C%20S.%20Lillicrap%2C%20T.%20Sutskever%2C%20I.%20Levine%2C%20S.%20Continuous%20deep%20Q-learning%20with%20model-based%20acceleration%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gu%2C%20S.%20Lillicrap%2C%20T.%20Sutskever%2C%20I.%20Levine%2C%20S.%20Continuous%20deep%20Q-learning%20with%20model-based%20acceleration%202016"
+        },
+        {
+            "id": "13",
+            "entry": "[13] S. Gu, T. Lillicrap, Z. Ghahramani, R. E. Turner, and S. Levine. Q-prop: Sample-efficient policy gradient with an off-policy critic. International Conference on Learning Representations, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gu%2C%20S.%20Lillicrap%2C%20T.%20Ghahramani%2C%20Z.%20Turner%2C%20R.E.%20Q-prop%3A%20Sample-efficient%20policy%20gradient%20with%20an%20off-policy%20critic%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gu%2C%20S.%20Lillicrap%2C%20T.%20Ghahramani%2C%20Z.%20Turner%2C%20R.E.%20Q-prop%3A%20Sample-efficient%20policy%20gradient%20with%20an%20off-policy%20critic%202017"
+        },
+        {
+            "id": "14",
+            "entry": "[14] T. Haarnoja, A. Zhou, P. Abbeel, and S. Levine. Soft actor-critic: Off-policy maximum entropy deep reinforcement learning with a stochastic actor, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Haarnoja%2C%20T.%20Zhou%2C%20A.%20Abbeel%2C%20P.%20Levine%2C%20S.%20Soft%20actor-critic%3A%20Off-policy%20maximum%20entropy%20deep%20reinforcement%20learning%20with%20a%20stochastic%20actor%202018"
+        },
+        {
+            "id": "15",
+            "entry": "[15] N. Heess, G. Wayne, D. Silver, T. Lillicrap, T. Erez, and Y. Tassa. Learning continuous control policies by stochastic value gradients. In Advances in Neural Information Processing Systems, pages 2944\u20132952, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Heess%2C%20N.%20Wayne%2C%20G.%20Silver%2C%20D.%20Lillicrap%2C%20T.%20Learning%20continuous%20control%20policies%20by%20stochastic%20value%20gradients%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Heess%2C%20N.%20Wayne%2C%20G.%20Silver%2C%20D.%20Lillicrap%2C%20T.%20Learning%20continuous%20control%20policies%20by%20stochastic%20value%20gradients%202015"
+        },
+        {
+            "id": "16",
+            "entry": "[16] D. Horgan, J. Quan, D. Budden, G. Barth-Maron, M. Hessel, H. van Hasselt, and D. Silver. Distributed prioritized experience replay. In International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Horgan%2C%20D.%20Quan%2C%20J.%20Budden%2C%20D.%20Barth-Maron%2C%20G.%20Distributed%20prioritized%20experience%20replay%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Horgan%2C%20D.%20Quan%2C%20J.%20Budden%2C%20D.%20Barth-Maron%2C%20G.%20Distributed%20prioritized%20experience%20replay%202018"
+        },
+        {
+            "id": "17",
+            "entry": "[17] G. Kalweit and J. Boedecker. Uncertainty-driven imagination for continuous deep reinforcement learning. In Conference on Robot Learning, pages 195\u2013206, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kalweit%2C%20G.%20Boedecker%2C%20J.%20Uncertainty-driven%20imagination%20for%20continuous%20deep%20reinforcement%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kalweit%2C%20G.%20Boedecker%2C%20J.%20Uncertainty-driven%20imagination%20for%20continuous%20deep%20reinforcement%20learning%202017"
+        },
+        {
+            "id": "18",
+            "entry": "[18] D. P. Kingma and J. Ba. Adam: A method for stochastic optimization. International Conference on Learning Representations, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20D.P.%20Ba%2C%20J.%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20D.P.%20Ba%2C%20J.%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202015"
+        },
+        {
+            "id": "19",
+            "entry": "[19] O. Klimov and J. Schulman. Roboschool. https://github.com/openai/roboschool.",
+            "url": "https://github.com/openai/roboschool"
+        },
+        {
+            "id": "20",
+            "entry": "[20] T. Kurutach, I. Clavera, Y. Duan, A. Tamar, and P. Abbeel. Model-ensemble trust-region policy optimization. In International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kurutach%2C%20T.%20Clavera%2C%20I.%20Duan%2C%20Y.%20Tamar%2C%20A.%20Model-ensemble%20trust-region%20policy%20optimization%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kurutach%2C%20T.%20Clavera%2C%20I.%20Duan%2C%20Y.%20Tamar%2C%20A.%20Model-ensemble%20trust-region%20policy%20optimization%202018"
+        },
+        {
+            "id": "21",
+            "entry": "[21] T. P. Lillicrap, J. J. Hunt, A. Pritzel, N. Heess, T. Erez, Y. Tassa, D. Silver, and D. Wierstra. Continuous control with deep reinforcement learning. International Conference on Learning Representations, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lillicrap%2C%20T.P.%20Hunt%2C%20J.J.%20Pritzel%2C%20A.%20Heess%2C%20N.%20Continuous%20control%20with%20deep%20reinforcement%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lillicrap%2C%20T.P.%20Hunt%2C%20J.J.%20Pritzel%2C%20A.%20Heess%2C%20N.%20Continuous%20control%20with%20deep%20reinforcement%20learning%202016"
+        },
+        {
+            "id": "22",
+            "entry": "[22] D. J. MacKay. A practical Bayesian framework for backpropagation networks. Neural computation, 4(3):448\u2013472, 1992.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=MacKay%2C%20D.J.%20A%20practical%20Bayesian%20framework%20for%20backpropagation%20networks%201992",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=MacKay%2C%20D.J.%20A%20practical%20Bayesian%20framework%20for%20backpropagation%20networks%201992"
+        },
+        {
+            "id": "23",
+            "entry": "[23] V. Mnih, K. Kavukcuoglu, D. Silver, A. Graves, I. Antonoglou, D. Wierstra, and M. Riedmiller. Playing atari with deep reinforcement learning. In NIPS Deep Learning Workshop. 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20V.%20Kavukcuoglu%2C%20K.%20Silver%2C%20D.%20Graves%2C%20A.%20Playing%20atari%20with%20deep%20reinforcement%20learning.%20In%20NIPS%20Deep%20Learning%20Workshop%202013"
+        },
+        {
+            "id": "24",
+            "entry": "[24] I. Osband, C. Blundell, A. Pritzel, and B. Van Roy. Deep exploration via bootstrapped DQN. In Advances in neural information processing systems, pages 4026\u20134034, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Osband%2C%20I.%20Blundell%2C%20C.%20Pritzel%2C%20A.%20Roy%2C%20B.Van%20Deep%20exploration%20via%20bootstrapped%20DQN%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Osband%2C%20I.%20Blundell%2C%20C.%20Pritzel%2C%20A.%20Roy%2C%20B.Van%20Deep%20exploration%20via%20bootstrapped%20DQN%202016"
+        },
+        {
+            "id": "25",
+            "entry": "[25] J. Schulman, F. Wolski, P. Dhariwal, A. Radford, and O. Klimov. Proximal policy optimization algorithms. arXiv preprint arXiv:1707.06347, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.06347"
+        },
+        {
+            "id": "26",
+            "entry": "[26] D. Silver, A. Huang, C. J. Maddison, A. Guez, L. Sifre, G. Van Den Driessche, J. Schrittwieser, I. Antonoglou, V. Panneershelvam, M. Lanctot, et al. Mastering the game of go with deep neural networks and tree search. nature, 529(7587):484\u2013489, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silver%2C%20D.%20Huang%2C%20A.%20Maddison%2C%20C.J.%20Guez%2C%20A.%20Mastering%20the%20game%20of%20go%20with%20deep%20neural%20networks%20and%20tree%20search%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silver%2C%20D.%20Huang%2C%20A.%20Maddison%2C%20C.J.%20Guez%2C%20A.%20Mastering%20the%20game%20of%20go%20with%20deep%20neural%20networks%20and%20tree%20search%202016"
+        },
+        {
+            "id": "27",
+            "entry": "[27] R. S. Sutton. Integrated architectures for learning, planning, and reacting based on approximating dynamic programming. In Machine Learning Proceedings 1990, pages 216\u2013224.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20R.S.%20Integrated%20architectures%20for%20learning%2C%20planning%2C%20and%20reacting%20based%20on%20approximating%20dynamic%20programming%201990",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutton%2C%20R.S.%20Integrated%20architectures%20for%20learning%2C%20planning%2C%20and%20reacting%20based%20on%20approximating%20dynamic%20programming%201990"
+        },
+        {
+            "id": "28",
+            "entry": "[28] R. S. Sutton and A. G. Barto. Reinforcement Learning: An Introduction, volume 1. MIT Press Cambridge, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20R.S.%20Barto%2C%20A.G.%20Reinforcement%20Learning%3A%20An%20Introduction%2C%20volume%201%201998"
+        },
+        {
+            "id": "29",
+            "entry": "[29] T. Weber, S. Racani\u00e8re, D. P. Reichert, L. Buesing, A. Guez, D. J. Rezende, A. P. Badia, O. Vinyals, N. Heess, Y. Li, et al. Imagination-augmented agents for deep reinforcement learning. 31st Conference on Neural Information Processing Systems, 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Weber%2C%20T.%20Racani%C3%A8re%2C%20S.%20Reichert%2C%20D.P.%20Buesing%2C%20L.%20Imagination-augmented%20agents%20for%20deep%20reinforcement%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Weber%2C%20T.%20Racani%C3%A8re%2C%20S.%20Reichert%2C%20D.P.%20Buesing%2C%20L.%20Imagination-augmented%20agents%20for%20deep%20reinforcement%20learning%202017"
+        }
+    ]
+}

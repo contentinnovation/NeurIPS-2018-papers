@@ -1,0 +1,386 @@
+{
+    "filename": "7987-simple-distributed-and-accelerated-probabilistic-programming.pdf",
+    "metadata": {
+        "title": "Simple, Distributed, and Accelerated Probabilistic Programming",
+        "author": "Dustin Tran, Matthew W. Hoffman, Dave Moore, Christopher Suter, Srinivas Vasudevan, Alexey Radul",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7987-simple-distributed-and-accelerated-probabilistic-programming.pdf"
+        },
+        "abstract": "We describe a simple, low-level approach for embedding probabilistic programming in a deep learning ecosystem. In particular, we distill probabilistic programming down to a single abstraction\u2014the random variable. Our lightweight implementation in TensorFlow enables numerous applications: a model-parallel variational auto-encoder (VAE) with 2nd-generation tensor processing units (TPUv2s); a data-parallel autoregressive model (Image Transformer) with TPUv2s; and multi-GPU No-U-Turn Sampler (NUTS). For both a state-of-the-art VAE on 64x64 ImageNet and Image Transformer on 256x256 CelebA-HQ, our approach achieves an optimal linear speedup from 1 to 256 TPUv2 chips. With NUTS, we see a 100x speedup on GPUs over Stan and 37x over PyMC3."
+    },
+    "keywords": [
+        {
+            "term": "no u",
+            "url": "https://en.wikipedia.org/wiki/No_U"
+        },
+        {
+            "term": "NUTS",
+            "url": "https://en.wikipedia.org/wiki/NUTS"
+        },
+        {
+            "term": "gradient descent",
+            "url": "https://en.wikipedia.org/wiki/gradient_descent"
+        },
+        {
+            "term": "tensor processing units",
+            "url": "https://en.wikipedia.org/wiki/tensor_processing_units"
+        },
+        {
+            "term": "linear speedup",
+            "url": "https://en.wikipedia.org/wiki/linear_speedup"
+        },
+        {
+            "term": "processing unit",
+            "url": "https://en.wikipedia.org/wiki/processing_unit"
+        },
+        {
+            "term": "low level",
+            "url": "https://en.wikipedia.org/wiki/low_level"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        },
+        {
+            "term": "probabilistic programming",
+            "url": "https://en.wikipedia.org/wiki/probabilistic_programming"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        }
+    ],
+    "highlights": [
+        "Many developments in deep learning can be interpreted as blurring the line between model and computation",
+        "We describe a simple approach for embedding probabilistic programming in a deep learning ecosystem; our implementation is in TensorFlow and Python, named Edward2.2",
+        "Figure 4 implements a model-parallel variational auto-encoder (VAE), which consists of a decoder, prior, and encoder",
+        "We apply tracing, a classic technique used across probabilistic programming [e.g., 27, 45, 36, 10, 34] as well as automatic differentiation [e.g., 26]",
+        "We introduced a lightweight approach for embedding probabilistic programming in a deep learning ecosystem",
+        "Low-level approach for embedding probabilistic programming in a deep learning ecosystem"
+    ],
+    "key_statements": [
+        "Many developments in deep learning can be interpreted as blurring the line between model and computation",
+        "We describe a simple approach for embedding probabilistic programming in a deep learning ecosystem; our implementation is in TensorFlow and Python, named Edward2.2",
+        "Figure 4 implements a model-parallel variational auto-encoder (VAE), which consists of a decoder, prior, and encoder",
+        "We apply tracing, a classic technique used across probabilistic programming [e.g., 27, 45, 36, 10, 34] as well as automatic differentiation [e.g., 26]",
+        "We introduced a lightweight approach for embedding probabilistic programming in a deep learning ecosystem",
+        "Since adaptive sampling may lead No-U-Turn Sampler iterations to take wildly different numbers of leapfrog steps, we report the average time per leapfrog step, averaged over 5 full No-U-Turn Sampler trajectories",
+        "Low-level approach for embedding probabilistic programming in a deep learning ecosystem"
+    ],
+    "summary": [
+        "Many developments in deep learning can be interpreted as blurring the line between model and computation.",
+        "There is no abstraction for learning: algorithms may for example be functions taking a model as input and returning tensors.",
+        "We illustrate three applications: a model-parallel variational auto-encoder (VAE) [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>] with TPUs; a data-parallel autoregressive model (Image Transformer [<a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>]) with TPUs; and multi-GPU No-U-Turn Sampler (NUTS) [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>].",
+        "Figure 4 implements a model-parallel variational auto-encoder (VAE), which consists of a decoder, prior, and encoder.",
+        "They capture recent advances such as autoregressive flows and multi-scale latent variables, and they enable never-before-tried architectures where with 16x16 TPUv2 chips (512 cores), the model can split across 4.1TB memory and utilize up to 1016 FLOPS.",
+        "We apply tracing, a classic technique used across probabilistic programming [e.g., 27, 45, 36, 10, 34] as well as automatic differentiation [e.g., 26].",
+        "It takes a model program as input and returns its joint density function across a trace.",
+        "We described probabilistic programs and how to manipulate their computation with low-level tracing functions.",
+        "Figure 9 represents the Image Transformer [<a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>] as a log-probability function.",
+        "Unlike the log-probability, sampling requires programming the autoregressivity in serial, which is inefficient and harder to implement.6 With the log-probability representation, data parallelism with TPUs is immediate by cross-sharding the optimizer.",
+        "The reverse program transformation from density to sampling can be done efficiently: in this example, sampling can at best compute in serial order; it requires no performance optimization.",
+        "A variational inference algorithm takes two programs as input\u2014the model program and variational program\u2014and computes a loss function for optimization.",
+        "Import model, variational, align, x grad_fn = tfe.gradients_function optimizer = tf.train.AdamOptimizer(0.1)",
+        "We cross-shard the optimizer for data-parallelism: each shard takes a batch size of 1 for the high-quality image generation experiments and 512 for the MNIST experiments.",
+        "The model\u2019s log joint density is implemented as \u201chandwritten\u201d TensorFlow code and by a probabilistic program in Edward2; see code in Appendix D.",
+        "Table 1 shows that Edward2 (GPU) has up to a 37x speedup over PyMC3 with multi-threaded CPU; it has up to a 100x speedup over Stan, which is single-threaded.8 In addition, while Edward2 in principle introduces overhead in eager mode due to its tracing mechanism, the speed differential between Edward2 and handwritten TensorFlow code is neligible.",
+        "Recent work has improved distributed programming of neural networks for both model parallelism and parallelism over large inputs such as super-highresolution images [<a class=\"ref-link\" id=\"c40\" href=\"#r40\">40</a>]."
+    ],
+    "headline": "Low-level approach for embedding probabilistic programming in a deep learning ecosystem",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Amos, B. and Kolter, J. Z. (2017). OptNet: Differentiable optimization as a layer in neural networks. In International Conference on Machine Learning.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Amos%2C%20B.%20Kolter%2C%20J.Z.%20OptNet%3A%20Differentiable%20optimization%20as%20a%20layer%20in%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Amos%2C%20B.%20Kolter%2C%20J.Z.%20OptNet%3A%20Differentiable%20optimization%20as%20a%20layer%20in%20neural%20networks%202017"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Andrychowicz, M., Denil, M., Gomez, S., Hoffman, M. W., Pfau, D., Schaul, T., and de Freitas, N. (2016). Learning to learn by gradient descent by gradient descent. In Neural Information Processing Systems.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Andrychowicz%2C%20M.%20Denil%2C%20M.%20Gomez%2C%20S.%20Hoffman%2C%20M.W.%20Learning%20to%20learn%20by%20gradient%20descent%20by%20gradient%20descent%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Andrychowicz%2C%20M.%20Denil%2C%20M.%20Gomez%2C%20S.%20Hoffman%2C%20M.W.%20Learning%20to%20learn%20by%20gradient%20descent%20by%20gradient%20descent%202016"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Bahdanau, D., Cho, K., and Bengio, Y. (2015). Neural machine translation by jointly learning to align and translate. In International Conference on Learning Representations.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bahdanau%2C%20D.%20Cho%2C%20K.%20Bengio%2C%20Y.%20Neural%20machine%20translation%20by%20jointly%20learning%20to%20align%20and%20translate%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bahdanau%2C%20D.%20Cho%2C%20K.%20Bengio%2C%20Y.%20Neural%20machine%20translation%20by%20jointly%20learning%20to%20align%20and%20translate%202015"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Baydin, A. G., Pearlmutter, B. A., Radul, A. A., and Siskind, J. M. (2015). Automatic differentiation in machine learning: a survey. arXiv preprint arXiv:1502.05767.",
+            "arxiv_url": "https://arxiv.org/pdf/1502.05767"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Baylor, D., Breck, E., Cheng, H.-T., Fiedel, N., Foo, C. Y., Haque, Z., Haykal, S., Ispir, M., Jain, V., Koc, L., et al. (2017). TFX: A TensorFlow-based production-scale machine learning platform. In Knowledge Discovery and Data Mining.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Baylor%2C%20D.%20Breck%2C%20E.%20Cheng%2C%20H.-T.%20Fiedel%2C%20N.%20TFX%3A%20A%20TensorFlow-based%20production-scale%20machine%20learning%20platform.%20In%20Knowledge%20Discovery%20and%20Data%20Mining%202017"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Bengio, E., Bacon, P.-L., Pineau, J., and Precup, D. (2015). Conditional computation in neural networks for faster models. arXiv preprint arXiv:1511.06297.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.06297"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Carpenter, B., Gelman, A., Hoffman, M. D., Lee, D., Goodrich, B., Betancourt, M., Brubaker, M., Guo, J., Li, P., and Riddell, A. (2016). Stan: A probabilistic programming language. Journal of Statistical Software.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Carpenter%2C%20B.%20Gelman%2C%20A.%20Hoffman%2C%20M.D.%20Lee%2C%20D.%20Stan%3A%20A%20probabilistic%20programming%20language%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Carpenter%2C%20B.%20Gelman%2C%20A.%20Hoffman%2C%20M.D.%20Lee%2C%20D.%20Stan%3A%20A%20probabilistic%20programming%20language%202016"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Cusumano-Towner, M. F. and Mansinghka, V. K. (2018). Using probabilistic programs as proposals. In POPL Workshop.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cusumano-Towner%2C%20M.F.%20Mansinghka%2C%20V.K.%20Using%20probabilistic%20programs%20as%20proposals%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cusumano-Towner%2C%20M.F.%20Mansinghka%2C%20V.K.%20Using%20probabilistic%20programs%20as%20proposals%202018"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Dillon, J. V., Langmore, I., Tran, D., Brevdo, E., Vasudevan, S., Moore, D., Patton, B., Alemi, A., Hoffman, M., and Saurous, R. A. (2017). TensorFlow Distributions. arXiv preprint arXiv:1711.10604.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.10604"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Ge, H., Xu, K., Scibior, A., Ghahramani, Z., et al. (2018). The Turing language for probabilistic programming. In Artificial Intelligence and Statistics.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ge%2C%20H.%20Xu%2C%20K.%20Scibior%2C%20A.%20Ghahramani%2C%20Z.%20The%20Turing%20language%20for%20probabilistic%20programming%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ge%2C%20H.%20Xu%2C%20K.%20Scibior%2C%20A.%20Ghahramani%2C%20Z.%20The%20Turing%20language%20for%20probabilistic%20programming%202018"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Giles, C. L., Sun, G.-Z., Chen, H.-H., Lee, Y.-C., and Chen, D. (1990). Higher order recurrent networks and grammatical inference. In Neural Information Processing Systems.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Giles%2C%20C.L.%20Sun%2C%20G.-Z.%20Chen%2C%20H.-H.%20Lee%2C%20Y.-C.%20Higher%20order%20recurrent%20networks%201990",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Giles%2C%20C.L.%20Sun%2C%20G.-Z.%20Chen%2C%20H.-H.%20Lee%2C%20Y.-C.%20Higher%20order%20recurrent%20networks%201990"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Goodfellow, I., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair, S., Courville, A., and Bengio, Y. (2014). Generative Adversarial Nets. In Neural Information Processing Systems.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goodfellow%2C%20I.%20Pouget-Abadie%2C%20J.%20Mirza%2C%20M.%20Xu%2C%20B.%20Generative%20Adversarial%20Nets%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goodfellow%2C%20I.%20Pouget-Abadie%2C%20J.%20Mirza%2C%20M.%20Xu%2C%20B.%20Generative%20Adversarial%20Nets%202014"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Graves, A. (2016). Adaptive computation time for recurrent neural networks. arXiv preprint arXiv:1603.08983.",
+            "arxiv_url": "https://arxiv.org/pdf/1603.08983"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Graves, A., Wayne, G., and Danihelka, I. (2014). Neural turing machines. arXiv preprint arxiv:1410.5401.",
+            "arxiv_url": "https://arxiv.org/pdf/1410.5401"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Hafner, D., Tran, D., Irpan, A., Lillicrap, T., and Davidson, J. (2018). Reliable uncertainty estimates in deep neural networks using noise contrastive priors. arXiv preprint.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hafner%2C%20D.%20Tran%2C%20D.%20Irpan%2C%20A.%20Lillicrap%2C%20T.%20Reliable%20uncertainty%20estimates%20in%20deep%20neural%20networks%20using%20noise%20contrastive%20priors.%20arXiv%20p%202018"
+        },
+        {
+            "id": "16",
+            "entry": "[16] He, K., Zhang, X., Ren, S., and Sun, J. (2016). Deep residual learning for image recognition. In Computer Vision and Pattern Recognition.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%202016"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Hochreiter, S. and Schmidhuber, J. (1997). Long short-term memory. Neural computation, 9(8):1735\u20131780.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hochreiter%2C%20S.%20Schmidhuber%2C%20J.%20Long%20short-term%20memory%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hochreiter%2C%20S.%20Schmidhuber%2C%20J.%20Long%20short-term%20memory%201997"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Hochreiter, S., Younger, A. S., and Conwell, P. R. (2001). Learning to learn using gradient descent. In International Conference on Artificial Neural Networks, pages 87\u201394.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hochreiter%2C%20S.%20Younger%2C%20A.S.%20Conwell%2C%20P.R.%20Learning%20to%20learn%20using%20gradient%20descent%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hochreiter%2C%20S.%20Younger%2C%20A.S.%20Conwell%2C%20P.R.%20Learning%20to%20learn%20using%20gradient%20descent%202001"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Hoffman, M. D. (2017). Learning deep latent Gaussian models with Markov chain Monte Carlo. In International Conference on Machine Learning.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hoffman%2C%20M.D.%20Learning%20deep%20latent%20Gaussian%20models%20with%20Markov%20chain%20Monte%20Carlo%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hoffman%2C%20M.D.%20Learning%20deep%20latent%20Gaussian%20models%20with%20Markov%20chain%20Monte%20Carlo%202017"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Hoffman, M. D. and Gelman, A. (2014). The No-U-turn sampler: Adaptively setting path lengths in Hamiltonian Monte Carlo. Journal of Machine Learning Research, 15(1):1593\u20131623.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hoffman%2C%20M.D.%20Gelman%2C%20A.%20The%20No-U-turn%20sampler%3A%20Adaptively%20setting%20path%20lengths%20in%20Hamiltonian%20Monte%20Carlo%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hoffman%2C%20M.D.%20Gelman%2C%20A.%20The%20No-U-turn%20sampler%3A%20Adaptively%20setting%20path%20lengths%20in%20Hamiltonian%20Monte%20Carlo%202014"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Jouppi, N. P., Young, C., Patil, N., Patterson, D., Agrawal, G., Bajwa, R., Bates, S., Bhatia, S., Boden, N., Borchers, A., et al. (2017). In-datacenter performance analysis of a tensor processing unit. In Proceedings of the 44th Annual International Symposium on Computer Architecture.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jouppi%2C%20N.P.%20Young%2C%20C.%20Patil%2C%20N.%20Patterson%2C%20D.%20In-datacenter%20performance%20analysis%20of%20a%20tensor%20processing%20unit%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jouppi%2C%20N.P.%20Young%2C%20C.%20Patil%2C%20N.%20Patterson%2C%20D.%20In-datacenter%20performance%20analysis%20of%20a%20tensor%20processing%20unit%202017"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Karras, T., Aila, T., Laine, S., and Lehtinen, J. (2018). Progressive growing of gans for improved quality, stability, and variation. In International Conference on Learning Representations.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Karras%2C%20T.%20Aila%2C%20T.%20Laine%2C%20S.%20Lehtinen%2C%20J.%20Progressive%20growing%20of%20gans%20for%20improved%20quality%2C%20stability%2C%20and%20variation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Karras%2C%20T.%20Aila%2C%20T.%20Laine%2C%20S.%20Lehtinen%2C%20J.%20Progressive%20growing%20of%20gans%20for%20improved%20quality%2C%20stability%2C%20and%20variation%202018"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Kingma, D. P. and Welling, M. (2014). Auto-encoding variational Bayes. In International Conference on Learning Representations.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20D.P.%20Welling%2C%20M.%20Auto-encoding%20variational%20Bayes%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20D.P.%20Welling%2C%20M.%20Auto-encoding%20variational%20Bayes%202014"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Kucukelbir, A., Tran, D., Ranganath, R., Gelman, A., and Blei, D. M. (2017). Automatic differentiation variational inference. The Journal of Machine Learning Research, 18(1):430\u2013474.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kucukelbir%2C%20A.%20Tran%2C%20D.%20Ranganath%2C%20R.%20Gelman%2C%20A.%20Automatic%20differentiation%20variational%20inference%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kucukelbir%2C%20A.%20Tran%2C%20D.%20Ranganath%2C%20R.%20Gelman%2C%20A.%20Automatic%20differentiation%20variational%20inference%202017"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Kusner, M. J., Paige, B., and Hern\u00e1ndez-Lobato, J. M. (2017). Grammar variational autoencoder. In International Conference on Machine Learning.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kusner%2C%20M.J.%20Paige%2C%20B.%20Hern%C3%A1ndez-Lobato%2C%20J.M.%20Grammar%20variational%20autoencoder%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kusner%2C%20M.J.%20Paige%2C%20B.%20Hern%C3%A1ndez-Lobato%2C%20J.M.%20Grammar%20variational%20autoencoder%202017"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Maclaurin, D., Duvenaud, D., Johnson, M., and Adams, R. P. (2015). Autograd: Reverse-mode differentiation of native Python.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Maclaurin%2C%20D.%20Duvenaud%2C%20D.%20Johnson%2C%20M.%20Adams%2C%20R.P.%20Autograd%3A%20Reverse-mode%20differentiation%20of%20native%20Python%202015"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Mansinghka, V., Selsam, D., and Perov, Y. (2014). Venture: A higher-order probabilistic programming platform with programmable inference. arXiv preprint arXiv:1404.0099.",
+            "arxiv_url": "https://arxiv.org/pdf/1404.0099"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Oord, A. v. d., Kalchbrenner, N., and Kavukcuoglu, K. (2016). Pixel recurrent neural networks. arXiv preprint arXiv:1601.06759.",
+            "arxiv_url": "https://arxiv.org/pdf/1601.06759"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Papamakarios, G., Murray, I., and Pavlakou, T. (2017). Masked autoregressive flow for density estimation. In Advances in Neural Information Processing Systems, pages 2335\u20132344.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Papamakarios%2C%20G.%20Murray%2C%20I.%20Pavlakou%2C%20T.%20Masked%20autoregressive%20flow%20for%20density%20estimation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Papamakarios%2C%20G.%20Murray%2C%20I.%20Pavlakou%2C%20T.%20Masked%20autoregressive%20flow%20for%20density%20estimation%202017"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Parmar, N., Vaswani, A., Uszkoreit, J., Kaiser, \u0141., Shazeer, N., Ku, A., and Tran, D. (2018). Image transformer. In International Conference on Machine Learning.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Parmar%20N%20Vaswani%20A%20Uszkoreit%20J%20Kaiser%20%C5%81%20Shazeer%20N%20Ku%20A%20and%20Tran%20D%202018%20Image%20transformer%20In%20International%20Conference%20on%20Machine%20Learning",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Parmar%20N%20Vaswani%20A%20Uszkoreit%20J%20Kaiser%20%C5%81%20Shazeer%20N%20Ku%20A%20and%20Tran%20D%202018%20Image%20transformer%20In%20International%20Conference%20on%20Machine%20Learning"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Pearl, J. (2003). Causality: models, reasoning, and inference. Econometric Theory, 19(675685):46.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pearl%2C%20J.%20Causality%3A%20models%2C%20reasoning%2C%20and%20inference%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pearl%2C%20J.%20Causality%3A%20models%2C%20reasoning%2C%20and%20inference%202003"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Pfeffer, A. (2007). The design and implementation of IBAL: A general-purpose probabilistic language. Introduction to Statistical Relational Learning, page 399.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pfeffer%2C%20A.%20The%20design%20and%20implementation%20of%20IBAL%3A%20A%20general-purpose%20probabilistic%20language%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pfeffer%2C%20A.%20The%20design%20and%20implementation%20of%20IBAL%3A%20A%20general-purpose%20probabilistic%20language%202007"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Probtorch Developers (2017). Probtorch. https://github.com/probtorch/probtorch.",
+            "url": "https://github.com/probtorch/probtorch"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Pyro Developers (2017). Pyro. https://github.com/pyro/pyro.",
+            "url": "https://github.com/pyro/pyro"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Ranganath, R., Altosaar, J., Tran, D., and Blei, D. M. (2016). Operator variational inference. In Neural Information Processing Systems.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ranganath%2C%20R.%20Altosaar%2C%20J.%20Tran%2C%20D.%20Blei%2C%20D.M.%20Operator%20variational%20inference%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ranganath%2C%20R.%20Altosaar%2C%20J.%20Tran%2C%20D.%20Blei%2C%20D.M.%20Operator%20variational%20inference%202016"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Ritchie, D., Horsfall, P., and Goodman, N. D. (2016). Deep Amortized Inference for Probabilistic Programs. arXiv preprint arXiv:1610.05735.",
+            "arxiv_url": "https://arxiv.org/pdf/1610.05735"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Roy, A., Vaswani, A., Neelakantan, A., and Parmar, N. (2018). Theory and experiments on vector quantized autoencoders. arXiv preprint arXiv:1805.11063.",
+            "arxiv_url": "https://arxiv.org/pdf/1805.11063"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Salimans, T., Kingma, D., and Welling, M. (2015). Markov chain Monte Carlo and variational inference: Bridging the gap. In International Conference on Machine Learning.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Salimans%2C%20T.%20Kingma%2C%20D.%20Welling%2C%20M.%20Markov%20chain%20Monte%20Carlo%20and%20variational%20inference%3A%20Bridging%20the%20gap%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Salimans%2C%20T.%20Kingma%2C%20D.%20Welling%2C%20M.%20Markov%20chain%20Monte%20Carlo%20and%20variational%20inference%3A%20Bridging%20the%20gap%202015"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Salvatier, J., Wiecki, T. V., and Fonnesbeck, C. (2016). Probabilistic programming in Python using PyMC3. PeerJ Computer Science, 2:e55.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Salvatier%2C%20J.%20Wiecki%2C%20T.V.%20Fonnesbeck%2C%20C.%20Probabilistic%20programming%20in%20Python%20using%20PyMC3%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Salvatier%2C%20J.%20Wiecki%2C%20T.V.%20Fonnesbeck%2C%20C.%20Probabilistic%20programming%20in%20Python%20using%20PyMC3%202016"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Shazeer, N., Cheng, Y., Parmar, N., Tran, D., Vaswani, A., Koanantakool, P., Hawkins, P., Lee, H., Hong, M., Young, C., Sepassi, R., and Hechtman, B. (2018). Mesh-tensorflow: Deep learning for supercomputers. In Neural Information Processing Systems.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shazeer%2C%20N.%20Cheng%2C%20Y.%20Parmar%2C%20N.%20Tran%2C%20D.%20Mesh-tensorflow%3A%20Deep%20learning%20for%20supercomputers%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shazeer%2C%20N.%20Cheng%2C%20Y.%20Parmar%2C%20N.%20Tran%2C%20D.%20Mesh-tensorflow%3A%20Deep%20learning%20for%20supercomputers%202018"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Shazeer, N., Mirhoseini, A., Maziarz, K., Davis, A., Le, Q., Hinton, G., and Dean, J. (2017). Outrageously large neural networks: The sparsely-gated mixture-of-experts layer. arXiv preprint arXiv:1701.06538.",
+            "arxiv_url": "https://arxiv.org/pdf/1701.06538"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Shi, J., Chen, J., Zhu, J., Sun, S., Luo, Y., Gu, Y., and Zhou, Y. (2017). Zhusuan: A library for bayesian deep learning. arXiv preprint arXiv:1709.05870.",
+            "arxiv_url": "https://arxiv.org/pdf/1709.05870"
+        },
+        {
+            "id": "43",
+            "entry": "[43] S\u00f8nderby, C. K., Raiko, T., Maal\u00f8e, L., S\u00f8nderby, S. K., and Winther, O. (2016). Ladder variational autoencoders. In Neural Information Processing Systems.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=S%C3%B8nderby%2C%20C.K.%20Raiko%2C%20T.%20Maal%C3%B8e%2C%20L.%20S%C3%B8nderby%2C%20S.K.%20Ladder%20variational%20autoencoders%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=S%C3%B8nderby%2C%20C.K.%20Raiko%2C%20T.%20Maal%C3%B8e%2C%20L.%20S%C3%B8nderby%2C%20S.K.%20Ladder%20variational%20autoencoders%202016"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Spiegelhalter, D. J., Thomas, A., Best, N. G., and Gilks, W. R. (1995). BUGS: Bayesian inference using Gibbs sampling, version 0.50. MRC Biostatistics Unit, Cambridge.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Spiegelhalter%2C%20D.J.%20Thomas%2C%20A.%20Best%2C%20N.G.%20Gilks%2C%20W.R.%20BUGS%3A%20Bayesian%20inference%20using%20Gibbs%20sampling%2C%20version%200.50%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Spiegelhalter%2C%20D.J.%20Thomas%2C%20A.%20Best%2C%20N.G.%20Gilks%2C%20W.R.%20BUGS%3A%20Bayesian%20inference%20using%20Gibbs%20sampling%2C%20version%200.50%201995"
+        },
+        {
+            "id": "45",
+            "entry": "[45] Tolpin, D., van de Meent, J.-W., Yang, H., and Wood, F. (2016). Design and implementation of probabilistic programming language Anglican. In Proceedings of the 28th Symposium on the Implementation and Application of Functional Programming Languages, page 6.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tolpin%2C%20D.%20van%20de%20Meent%2C%20J.-W.%20Yang%2C%20H.%20Wood%2C%20F.%20Design%20and%20implementation%20of%20probabilistic%20programming%20language%20Anglican%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tolpin%2C%20D.%20van%20de%20Meent%2C%20J.-W.%20Yang%2C%20H.%20Wood%2C%20F.%20Design%20and%20implementation%20of%20probabilistic%20programming%20language%20Anglican%202016"
+        },
+        {
+            "id": "46",
+            "entry": "[46] Tomczak, J. M. and Welling, M. (2018). Vae with a vampprior. In Artificial Intelligence and Statistics.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tomczak%2C%20J.M.%20Welling%2C%20M.%20Vae%20with%20a%20vampprior%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tomczak%2C%20J.M.%20Welling%2C%20M.%20Vae%20with%20a%20vampprior%202018"
+        },
+        {
+            "id": "47",
+            "entry": "[47] Tran, D. and Blei, D. (2018). Implicit causal models for genome-wide association studies. In International Conference on Learning Representations.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tran%2C%20D.%20Blei%2C%20D.%20Implicit%20causal%20models%20for%20genome-wide%20association%20studies%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tran%2C%20D.%20Blei%2C%20D.%20Implicit%20causal%20models%20for%20genome-wide%20association%20studies%202018"
+        },
+        {
+            "id": "48",
+            "entry": "[48] Tran, D., Hoffman, M. D., Saurous, R. A., Brevdo, E., Murphy, K., and Blei, D. M. (2017). Deep probabilistic programming. In International Conference on Learning Representations.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tran%2C%20D.%20Hoffman%2C%20M.D.%20Saurous%2C%20R.A.%20Brevdo%2C%20E.%20Deep%20probabilistic%20programming%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tran%2C%20D.%20Hoffman%2C%20M.D.%20Saurous%2C%20R.A.%20Brevdo%2C%20E.%20Deep%20probabilistic%20programming%202017"
+        },
+        {
+            "id": "49",
+            "entry": "[49] Tran, D., Kucukelbir, A., Dieng, A. B., Rudolph, M., Liang, D., and Blei, D. M. (2016). Edward: A library for probabilistic modeling, inference, and criticism. arXiv preprint arXiv:1610.09787.",
+            "arxiv_url": "https://arxiv.org/pdf/1610.09787"
+        },
+        {
+            "id": "50",
+            "entry": "[50] Vaswani, A., Bengio, S., Brevdo, E., Chollet, F., Gomez, A. N., Gouws, S., Jones, L., Kaiser, L., Kalchbrenner, N., Parmar, N., Sepassi, R., Shazeer, N., and Uszkoreit, J. (2018). Tensor2tensor for neural machine translation. CoRR, abs/1803.07416.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.07416"
+        },
+        {
+            "id": "51",
+            "entry": "[51] Wen, Y., Vicol, P., Ba, J., Tran, D., and Grosse, R. (2018). Flipout: Efficient pseudoindependent weight perturbations on mini-batches. In International Conference on Learning Representations.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wen%2C%20Y.%20Vicol%2C%20P.%20Ba%2C%20J.%20Tran%2C%20D.%20Flipout%3A%20Efficient%20pseudoindependent%20weight%20perturbations%20on%20mini-batches%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wen%2C%20Y.%20Vicol%2C%20P.%20Ba%2C%20J.%20Tran%2C%20D.%20Flipout%3A%20Efficient%20pseudoindependent%20weight%20perturbations%20on%20mini-batches%202018"
+        },
+        {
+            "id": "52",
+            "entry": "[52] Zoph, B. and Le, Q. V. (2017). Neural architecture search with reinforcement learning. In International Conference on Learning Representations. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zoph%2C%20B.%20Le%2C%20Q.V.%20Neural%20architecture%20search%20with%20reinforcement%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zoph%2C%20B.%20Le%2C%20Q.V.%20Neural%20architecture%20search%20with%20reinforcement%20learning%202017"
+        }
+    ]
+}

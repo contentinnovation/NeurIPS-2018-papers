@@ -1,0 +1,344 @@
+{
+    "filename": "8033-credit-assignment-for-collective-multiagent-rl-with-global-rewards.pdf",
+    "metadata": {
+        "title": "Credit Assignment For Collective Multiagent RL With Global Rewards",
+        "author": "Duc Thien Nguyen, Akshat Kumar, Hoong Chuin Lau",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8033-credit-assignment-for-collective-multiagent-rl-with-global-rewards.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Scaling decision theoretic planning to large multiagent systems is challenging due to uncertainty and partial observability in the environment. We focus on a multiagent planning model subclass, relevant to urban settings, where agent interactions are dependent on their \u201ccollective influence\u201d on each other, rather than their identities. Unlike previous work, we address a general setting where system reward is not decomposable among agents. We develop collective actor-critic RL approaches for this setting, and address the problem of multiagent credit assignment, and computing low variance policy gradient estimates that result in faster convergence to high quality solutions. We also develop difference rewards based credit assignment methods for the collective setting. Empirically our new approaches provide significantly better solutions than previous methods in the presence of global rewards on two real world problems modeling taxi fleet optimization and multiagent patrolling, and a synthetic grid navigation domain."
+    },
+    "keywords": [
+        {
+            "term": "multiagent planning",
+            "url": "https://en.wikipedia.org/wiki/multiagent_planning"
+        },
+        {
+            "term": "actor critic",
+            "url": "https://en.wikipedia.org/wiki/actor_critic"
+        }
+    ],
+    "highlights": [
+        "Sequential multiagent decision making allows multiple agents operating in an uncertain, partially observable environment to take coordinated decision towards a long term goal [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>]",
+        "We address the crucial challenge of multiagent credit assignment in the collective setting when joint actions generate a team reward that may not be decomposable among agents",
+        "We address two crucial issues\u2014multiagent credit assignment, and computing low variance policy gradient estimates for faster convergence to high quality solutions even with thousands of agents",
+        "We show empirically that Difference rewards can result in high variance policy gradient estimates, and are unable to provide high quality solutions when the agent population is small",
+        "We developed several approaches for credit assignment in collective multiagent RL",
+        "We extended the notion of difference rewards to the collective setting and showed how to compute them efficiently even for very large agent population"
+    ],
+    "key_statements": [
+        "Sequential multiagent decision making allows multiple agents operating in an uncertain, partially observable environment to take coordinated decision towards a long term goal [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>]",
+        "We address the crucial challenge of multiagent credit assignment in the collective setting when joint actions generate a team reward that may not be decomposable among agents",
+        "We address two crucial issues\u2014multiagent credit assignment, and computing low variance policy gradient estimates for faster convergence to high quality solutions even with thousands of agents",
+        "We show empirically that Difference rewards can result in high variance policy gradient estimates, and are unable to provide high quality solutions when the agent population is small",
+        "Notice counts that nsa computing gradients \u2207\u03b8au, \u2207w\u03b8 lq for Difference rewards requires taking expectation over state-action), which can have high variance",
+        "We show how to address these limitations by developing a new approach called mean collective actor critic (MCAC) which is robust across a range of population sizes, and empirically works better than Difference rewards in several problems",
+        "We developed several approaches for credit assignment in collective multiagent RL",
+        "We extended the notion of difference rewards to the collective setting and showed how to compute them efficiently even for very large agent population"
+    ],
+    "summary": [
+        "Sequential multiagent decision making allows multiple agents operating in an uncertain, partially observable environment to take coordinated decision towards a long term goal [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>].",
+        "We focus on the problem of learning agent policies in a MARL setting for CDec-POMDPs. We address the crucial challenge of multiagent credit assignment in the collective setting when joint actions generate a team reward that may not be decomposable among agents.",
+        "Similar to previous works [<a class=\"ref-link\" id=\"c43\" href=\"#r43\">43</a>, <a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>], our goal is to compute a homogenous stochastic policy \u03c0t(j|i, ot(i, dt, nst )) that outputs the probability of each action j given an agent in state i receiving local observation ot depending on the state variable dt and state-counts nts at time t.",
+        "Given the constraint set \u03a9 in (1), the count table nst+1 is computed from ntsas; dt+1 is the global state.",
+        "We show several techniques to estimate the collective policy gradient \u2207\u03b8J(\u03b8) that help in the credit assignment problem and provide low variance gradient estimates even for very large number of agents.",
+        "Upon experiencing the tuple, global reward rt is used to train the global critic Qw. An agent m in state-action (i, j) accumulates the gradient term Qij\u2207\u03b8 log \u03c0t(j|i, o(i, dt, nst)) as per the standard policy gradient result [<a class=\"ref-link\" id=\"c37\" href=\"#r37\">37</a>].",
+        "Notice counts that nsa computing gradients \u2207\u03b8au, \u2207w\u03b8 lq for DRs requires taking expectation over state-action), which can have high variance.",
+        "The DR approximation is accurate only when the agent population M is large; for smaller populations we empirically observed a drop in the solution quality using DRs. We show how to address these limitations by developing a new approach called mean collective actor critic (MCAC) which is robust across a range of population sizes, and empirically works better than DRs in several problems.",
+        "In the above expression we sample and analytically marginalize out state-action counts ntsa, which will result in lower variance than using (3) directly to estimate gradients.",
+        "Consider the global critic Qw, we consider its first order Taylor expansion at the mean value of action counts nt sa = E[ntsa | nst, dt] = nts(i)\u03c0(j|i, o(i, dt, nts))\u2200i, j with \u03c0 as the current policy: Qw \u2248 Qw + (\u2207nsa Qw|nsa=nt sa )",
+        "Using the first-order Taylor approximation of the critic at the expected state-action counts nt sa = E[ntsa | nts, dt; \u03c0], the collective policy gradient is: H",
+        "This approach, called MCAC, was more robust than difference rewards based approach across a number of problems settings and consistently provided better quality over varying agent population sizes."
+    ],
+    "headline": "We focus on a multiagent planning model subclass, relevant to urban settings, where agent interactions are dependent on their \u201ccollective influence\u201d on each other, rather than their identities",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Adrian K Agogino and Kagan Tumer. Unifying temporal and structural credit assignment problems. In International Joint Conference on Autonomous Agents and Multiagent Systems, pages 980\u2013987, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Agogino%2C%20Adrian%20K.%20Tumer%2C%20Kagan%20Unifying%20temporal%20and%20structural%20credit%20assignment%20problems%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Agogino%2C%20Adrian%20K.%20Tumer%2C%20Kagan%20Unifying%20temporal%20and%20structural%20credit%20assignment%20problems%202004"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Lucas Agussurja, Akshat Kumar, and Hoong Chuin Lau. Resource-constrained scheduling for maritime traffic management. In AAAI Conference on Artificial Intelligence, pages 6086\u20136093, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Agussurja%2C%20Lucas%20Kumar%2C%20Akshat%20Lau%2C%20Hoong%20Chuin%20Resource-constrained%20scheduling%20for%20maritime%20traffic%20management%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Agussurja%2C%20Lucas%20Kumar%2C%20Akshat%20Lau%2C%20Hoong%20Chuin%20Resource-constrained%20scheduling%20for%20maritime%20traffic%20management%202018"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Christopher Amato, Daniel S. Bernstein, and Shlomo Zilberstein. Optimizing fixed-size stochastic controllers for pomdps and decentralized pomdps. Autonomous Agents and Multi-Agent Systems, 21(3):293\u2013 320, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Amato%2C%20Christopher%20Bernstein%2C%20Daniel%20S.%20Zilberstein%2C%20Shlomo%20Optimizing%20fixed-size%20stochastic%20controllers%20for%20pomdps%20and%20decentralized%20pomdps%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Amato%2C%20Christopher%20Bernstein%2C%20Daniel%20S.%20Zilberstein%2C%20Shlomo%20Optimizing%20fixed-size%20stochastic%20controllers%20for%20pomdps%20and%20decentralized%20pomdps%202010"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Christopher Amato, George Konidaris, Gabriel Cruz, Christopher A. Maynor, Jonathan P. How, and Leslie Pack Kaelbling. Planning for decentralized control of multiple robots under uncertainty. In IEEE International Conference on Robotics and Automation, ICRA, pages 1241\u20131248, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Amato%2C%20Christopher%20Konidaris%2C%20George%20Cruz%2C%20Gabriel%20Maynor%2C%20Christopher%20A.%20Planning%20for%20decentralized%20control%20of%20multiple%20robots%20under%20uncertainty%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Amato%2C%20Christopher%20Konidaris%2C%20George%20Cruz%2C%20Gabriel%20Maynor%2C%20Christopher%20A.%20Planning%20for%20decentralized%20control%20of%20multiple%20robots%20under%20uncertainty%202015"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Kavosh Asadi, Cameron Allen, Melrose Roderick, Abdel-Rahman Mohamed, George Konidaris, and Michael Littman. Mean Actor Critic. In eprint arXiv:1709.00503, September 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1709.00503"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Raphen Becker, Shlomo Zilberstein, and Victor Lesser. Decentralized Markov decision processes with event-driven interactions. In International Conference on Autonomous Agents and Multiagent Systems, pages 302\u2013309, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Becker%2C%20Raphen%20Zilberstein%2C%20Shlomo%20Lesser%2C%20Victor%20Decentralized%20Markov%20decision%20processes%20with%20event-driven%20interactions%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Becker%2C%20Raphen%20Zilberstein%2C%20Shlomo%20Lesser%2C%20Victor%20Decentralized%20Markov%20decision%20processes%20with%20event-driven%20interactions%202004"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Raphen Becker, Shlomo Zilberstein, Victor Lesser, and Claudia V. Goldman. Solving transition independent decentralized Markov decision processes. Journal of Artificial Intelligence Research, 22:423\u2013455, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Becker%2C%20Raphen%20Zilberstein%2C%20Shlomo%20Lesser%2C%20Victor%20Goldman%2C%20Claudia%20V.%20Solving%20transition%20independent%20decentralized%20Markov%20decision%20processes%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Becker%2C%20Raphen%20Zilberstein%2C%20Shlomo%20Lesser%2C%20Victor%20Goldman%2C%20Claudia%20V.%20Solving%20transition%20independent%20decentralized%20Markov%20decision%20processes%202004"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Daniel S. Bernstein, Rob Givan, Neil Immerman, and Shlomo Zilberstein. The complexity of decentralized control of Markov decision processes. Mathematics of Operations Research, 27:819\u2013840, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bernstein%2C%20Daniel%20S.%20Givan%2C%20Rob%20Immerman%2C%20Neil%20Zilberstein%2C%20Shlomo%20The%20complexity%20of%20decentralized%20control%20of%20Markov%20decision%20processes%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bernstein%2C%20Daniel%20S.%20Givan%2C%20Rob%20Immerman%2C%20Neil%20Zilberstein%2C%20Shlomo%20The%20complexity%20of%20decentralized%20control%20of%20Markov%20decision%20processes%202002"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Yu-Han Chang, Tracey Ho, and Leslie P Kaelbling. All learning is local: Multi-agent learning in global reward games. In Advances in neural information processing systems, pages 807\u2013814, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chang%2C%20Yu-Han%20Ho%2C%20Tracey%20Kaelbling%2C%20Leslie%20P.%20All%20learning%20is%20local%3A%20Multi-agent%20learning%20in%20global%20reward%20games%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chang%2C%20Yu-Han%20Ho%2C%20Tracey%20Kaelbling%2C%20Leslie%20P.%20All%20learning%20is%20local%3A%20Multi-agent%20learning%20in%20global%20reward%20games%202004"
+        },
+        {
+            "id": "10",
+            "entry": "[10] J. Chase, J. Du, N. Fu, T. V. Le, and H. C. Lau. Law enforcement resource optimization with response time guarantees. In IEEE Symposium Series on Computational Intelligence, pages 1\u20137, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chase%2C%20J.%20Du%2C%20J.%20Fu%2C%20N.%20Le%2C%20T.V.%20Law%20enforcement%20resource%20optimization%20with%20response%20time%20guarantees%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chase%2C%20J.%20Du%2C%20J.%20Fu%2C%20N.%20Le%2C%20T.V.%20Law%20enforcement%20resource%20optimization%20with%20response%20time%20guarantees%202017"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Kamil Ciosek and Shimon Whiteson. Expected policy gradients. In AAAI Conference on Artificial Intelligence, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ciosek%2C%20Kamil%20Whiteson%2C%20Shimon%20Expected%20policy%20gradients%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ciosek%2C%20Kamil%20Whiteson%2C%20Shimon%20Expected%20policy%20gradients%202018"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Sam Devlin, Logan Yliniemi, Daniel Kudenko, and Kagan Tumer. Potential-based difference rewards for multiagent reinforcement learning. In International conference on Autonomous agents and multi-agent systems, pages 165\u2013172, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Devlin%2C%20Sam%20Yliniemi%2C%20Logan%20Kudenko%2C%20Daniel%20Tumer%2C%20Kagan%20Potential-based%20difference%20rewards%20for%20multiagent%20reinforcement%20learning%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Devlin%2C%20Sam%20Yliniemi%2C%20Logan%20Kudenko%2C%20Daniel%20Tumer%2C%20Kagan%20Potential-based%20difference%20rewards%20for%20multiagent%20reinforcement%20learning%202014"
+        },
+        {
+            "id": "13",
+            "entry": "[13] P Diaconis and Diaconis Freedman. De Finetti\u2019s generalizations of exchangeability. Studies in Inductive Logic and Probability, 2:233\u2013249, 1980.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Diaconis%2C%20P.%20Freedman%2C%20Diaconis%20De%20Finetti%E2%80%99s%20generalizations%20of%20exchangeability%201980",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Diaconis%2C%20P.%20Freedman%2C%20Diaconis%20De%20Finetti%E2%80%99s%20generalizations%20of%20exchangeability%201980"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Jilles Steeve Dibangoye and Olivier Buffet. Learning to act in decentralized partially observable MDPs. In International Conference on Machine Learning, pages 1241\u20131250, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dibangoye%2C%20Jilles%20Steeve%20Buffet%2C%20Olivier%20Learning%20to%20act%20in%20decentralized%20partially%20observable%20MDPs%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dibangoye%2C%20Jilles%20Steeve%20Buffet%2C%20Olivier%20Learning%20to%20act%20in%20decentralized%20partially%20observable%20MDPs%202018"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Ed Durfee and Shlomo Zilberstein. Multiagent planning, control, and execution. In Gerhard Weiss, editor, Multiagent Systems, chapter 11, pages 485\u2013546. MIT Press, Cambridge, MA, USA, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ed%20Durfee%20and%20Shlomo%20Zilberstein%20Multiagent%20planning%20control%20and%20execution%20In%20Gerhard%20Weiss%20editor%20Multiagent%20Systems%20chapter%2011%20pages%20485546%20MIT%20Press%20Cambridge%20MA%20USA%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ed%20Durfee%20and%20Shlomo%20Zilberstein%20Multiagent%20planning%20control%20and%20execution%20In%20Gerhard%20Weiss%20editor%20Multiagent%20Systems%20chapter%2011%20pages%20485546%20MIT%20Press%20Cambridge%20MA%20USA%202013"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Jakob Foerster, Gregory Farquhar, Triantafyllos Afouras, Nantas Nardelli, and Shimon Whiteson. Counterfactual multi-agent policy gradients. In AAAI Conference on Artificial Intelligence, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Foerster%2C%20Jakob%20Farquhar%2C%20Gregory%20Afouras%2C%20Triantafyllos%20Nardelli%2C%20Nantas%20Counterfactual%20multi-agent%20policy%20gradients%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Foerster%2C%20Jakob%20Farquhar%2C%20Gregory%20Afouras%2C%20Triantafyllos%20Nardelli%2C%20Nantas%20Counterfactual%20multi-agent%20policy%20gradients%202018"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Diogo A Gomes, Joana Mohr, and Rafael Rigao Souza. Discrete time, finite state space mean field games. Journal de math\u00e9matiques pures et appliqu\u00e9es, 93(3):308\u2013328, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gomes%2C%20Diogo%20A.%20Mohr%2C%20Joana%20Souza%2C%20Rafael%20Rigao%20Discrete%20time%2C%20finite%20state%20space%20mean%20field%20games%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gomes%2C%20Diogo%20A.%20Mohr%2C%20Joana%20Souza%2C%20Rafael%20Rigao%20Discrete%20time%2C%20finite%20state%20space%20mean%20field%20games%202010"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Carlos Guestrin, Daphne Koller, and Ronald Parr. Multiagent planning with factored MDPs. In Advances in Neural Information Processing Systems, pages 1523\u20131530, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Guestrin%2C%20Carlos%20Koller%2C%20Daphne%20Parr%2C%20Ronald%20Multiagent%20planning%20with%20factored%20MDPs%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Guestrin%2C%20Carlos%20Koller%2C%20Daphne%20Parr%2C%20Ronald%20Multiagent%20planning%20with%20factored%20MDPs%202002"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Tarun Gupta, Akshat Kumar, and Praveen Paruchuri. Planning and learning for decentralized MDPs with event driven rewards. In AAAI Conference on Artificial Intelligence, pages 6186\u20136194, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gupta%2C%20Tarun%20Kumar%2C%20Akshat%20Paruchuri%2C%20Praveen%20Planning%20and%20learning%20for%20decentralized%20MDPs%20with%20event%20driven%20rewards%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gupta%2C%20Tarun%20Kumar%2C%20Akshat%20Paruchuri%2C%20Praveen%20Planning%20and%20learning%20for%20decentralized%20MDPs%20with%20event%20driven%20rewards%202018"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Jelle R Kok and Nikos Vlassis. Collaborative multiagent reinforcement learning by payoff propagation. Journal of Machine Learning Research, 7(Sep):1789\u20131828, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kok%2C%20Jelle%20R.%20Vlassis%2C%20Nikos%20Collaborative%20multiagent%20reinforcement%20learning%20by%20payoff%20propagation%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kok%2C%20Jelle%20R.%20Vlassis%2C%20Nikos%20Collaborative%20multiagent%20reinforcement%20learning%20by%20payoff%20propagation%202006"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Vijay R. Konda and John N. Tsitsiklis. On actor-critic algorithms. SIAM Journal on Control and Optimization, 42(4):1143\u20131166, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Konda%2C%20Vijay%20R.%20Tsitsiklis%2C%20John%20N.%20On%20actor-critic%20algorithms%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Konda%2C%20Vijay%20R.%20Tsitsiklis%2C%20John%20N.%20On%20actor-critic%20algorithms%202003"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Liping Liu, Daniel Sheldon, and Thomas Dietterich. Gaussian approximation of collective graphical models. In International Conference on Machine Learning, pages 1602\u20131610, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20Liping%20Sheldon%2C%20Daniel%20Dietterich%2C%20Thomas%20Gaussian%20approximation%20of%20collective%20graphical%20models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liu%2C%20Liping%20Sheldon%2C%20Daniel%20Dietterich%2C%20Thomas%20Gaussian%20approximation%20of%20collective%20graphical%20models%202014"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Ryan Lowe, Yi Wu, Aviv Tamar, Jean Harb, Pieter Abbeel, and Igor Mordatch. Multi-agent actor-critic for mixed cooperative-competitive environments. In Advances in Neural Information Processing Systems, pages 6382\u20136393, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lowe%2C%20Ryan%20Wu%2C%20Yi%20Tamar%2C%20Aviv%20Harb%2C%20Jean%20Multi-agent%20actor-critic%20for%20mixed%20cooperative-competitive%20environments%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lowe%2C%20Ryan%20Wu%2C%20Yi%20Tamar%2C%20Aviv%20Harb%2C%20Jean%20Multi-agent%20actor-critic%20for%20mixed%20cooperative-competitive%20environments%202017"
+        },
+        {
+            "id": "24",
+            "entry": "[24] R. Nair, P. Varakantham, M. Tambe, and M. Yokoo. Networked distributed POMDPs: A synthesis of distributed constraint optimization and POMDPs. In AAAI Conference on Artificial Intelligence, pages 133\u2013139, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nair%2C%20R.%20Varakantham%2C%20P.%20Tambe%2C%20M.%20Yokoo%2C%20M.%20Networked%20distributed%20POMDPs%3A%20A%20synthesis%20of%20distributed%20constraint%20optimization%20and%20POMDPs%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nair%2C%20R.%20Varakantham%2C%20P.%20Tambe%2C%20M.%20Yokoo%2C%20M.%20Networked%20distributed%20POMDPs%3A%20A%20synthesis%20of%20distributed%20constraint%20optimization%20and%20POMDPs%202005"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Duc Thien Nguyen, Akshat Kumar, and Hoong Chuin Lau. Collective multiagent sequential decision making under uncertainty. In AAAI Conference on Artificial Intelligence, pages 3036\u20133043, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nguyen%2C%20Duc%20Thien%20Kumar%2C%20Akshat%20Lau%2C%20Hoong%20Chuin%20Collective%20multiagent%20sequential%20decision%20making%20under%20uncertainty%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nguyen%2C%20Duc%20Thien%20Kumar%2C%20Akshat%20Lau%2C%20Hoong%20Chuin%20Collective%20multiagent%20sequential%20decision%20making%20under%20uncertainty%202017"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Duc Thien Nguyen, Akshat Kumar, and Hoong Chuin Lau. Policy gradient with value function approximation for collective multiagent planning. In Advances in Neural Information Processing Systems, pages 4322\u20134332, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nguyen%2C%20Duc%20Thien%20Kumar%2C%20Akshat%20Lau%2C%20Hoong%20Chuin%20Policy%20gradient%20with%20value%20function%20approximation%20for%20collective%20multiagent%20planning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nguyen%2C%20Duc%20Thien%20Kumar%2C%20Akshat%20Lau%2C%20Hoong%20Chuin%20Policy%20gradient%20with%20value%20function%20approximation%20for%20collective%20multiagent%20planning%202017"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Mathias Niepert and Guy Van den Broeck. Tractability through exchangeability: A new perspective on efficient probabilistic inference. In AAAI Conference on Artificial Intelligence, pages 2467\u20132475, July 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Niepert%2C%20Mathias%20den%20Broeck%2C%20Guy%20Van%20Tractability%20through%20exchangeability%3A%20A%20new%20perspective%20on%20efficient%20probabilistic%20inference%202014-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Niepert%2C%20Mathias%20den%20Broeck%2C%20Guy%20Van%20Tractability%20through%20exchangeability%3A%20A%20new%20perspective%20on%20efficient%20probabilistic%20inference%202014-07"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Pascal Poupart and Craig Boutilier. Bounded finite state controllers. In Neural Information Processing Systems, pages 823\u2013830, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Poupart%2C%20Pascal%20Boutilier%2C%20Craig%20Bounded%20finite%20state%20controllers%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Poupart%2C%20Pascal%20Boutilier%2C%20Craig%20Bounded%20finite%20state%20controllers%202003"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Tabish Rashid, Mikayel Samvelyan, Christian Schr\u00f6der de Witt, Gregory Farquhar, Jakob N. Foerster, and Shimon Whiteson. QMIX: monotonic value function factorisation for deep multi-agent reinforcement learning. In International Conference on Machine Learning, pages 4292\u20134301, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rashid%2C%20Tabish%20Samvelyan%2C%20Mikayel%20de%20Witt%2C%20Christian%20Schr%C3%B6der%20Farquhar%2C%20Gregory%20QMIX%3A%20monotonic%20value%20function%20factorisation%20for%20deep%20multi-agent%20reinforcement%20learning%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rashid%2C%20Tabish%20Samvelyan%2C%20Mikayel%20de%20Witt%2C%20Christian%20Schr%C3%B6der%20Farquhar%2C%20Gregory%20QMIX%3A%20monotonic%20value%20function%20factorisation%20for%20deep%20multi-agent%20reinforcement%20learning%202018"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Philipp Robbel, Frans A Oliehoek, and Mykel J Kochenderfer. Exploiting anonymity in approximate linear programming: Scaling to large multiagent MDPs. In AAAI Conference on Artificial Intelligence, pages 2537\u20132543, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Robbel%2C%20Philipp%20Oliehoek%2C%20Frans%20A.%20Kochenderfer%2C%20Mykel%20J.%20Exploiting%20anonymity%20in%20approximate%20linear%20programming%3A%20Scaling%20to%20large%20multiagent%20MDPs%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Robbel%2C%20Philipp%20Oliehoek%2C%20Frans%20A.%20Kochenderfer%2C%20Mykel%20J.%20Exploiting%20anonymity%20in%20approximate%20linear%20programming%3A%20Scaling%20to%20large%20multiagent%20MDPs%202016"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Daniel R Sheldon and Thomas G Dietterich. Collective graphical models. In Advances in Neural Information Processing Systems, pages 1161\u20131169, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sheldon%2C%20Daniel%20R.%20Dietterich%2C%20Thomas%20G.%20Collective%20graphical%20models%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sheldon%2C%20Daniel%20R.%20Dietterich%2C%20Thomas%20G.%20Collective%20graphical%20models%202011"
+        },
+        {
+            "id": "32",
+            "entry": "[32] David Silver, Guy Lever, Nicolas Heess, Thomas Degris, Daan Wierstra, and Martin Riedmiller. Deterministic policy gradient algorithms. In International Conference on Machine Learning, pages 387\u2013395, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silver%2C%20David%20Lever%2C%20Guy%20Heess%2C%20Nicolas%20Degris%2C%20Thomas%20Deterministic%20policy%20gradient%20algorithms%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silver%2C%20David%20Lever%2C%20Guy%20Heess%2C%20Nicolas%20Degris%2C%20Thomas%20Deterministic%20policy%20gradient%20algorithms%202014"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Ekhlas Sonu, Yingke Chen, and Prashant Doshi. Individual planning in agent populations: Exploiting anonymity and frame-action hypergraphs. In International Conference on Automated Planning and Scheduling, pages 202\u2013210, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sonu%2C%20Ekhlas%20Chen%2C%20Yingke%20Doshi%2C%20Prashant%20Individual%20planning%20in%20agent%20populations%3A%20Exploiting%20anonymity%20and%20frame-action%20hypergraphs%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sonu%2C%20Ekhlas%20Chen%2C%20Yingke%20Doshi%2C%20Prashant%20Individual%20planning%20in%20agent%20populations%3A%20Exploiting%20anonymity%20and%20frame-action%20hypergraphs%202015"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Matthijs T. J. Spaan and Francisco S. Melo. Interaction-driven Markov games for decentralized multiagent planning under uncertainty. In International COnference on Autonomous Agents and Multi Agent Systems, pages 525\u2013532, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Spaan%2C%20Matthijs%20T.J.%20Melo%2C%20Francisco%20S.%20Interaction-driven%20Markov%20games%20for%20decentralized%20multiagent%20planning%20under%20uncertainty%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Spaan%2C%20Matthijs%20T.J.%20Melo%2C%20Francisco%20S.%20Interaction-driven%20Markov%20games%20for%20decentralized%20multiagent%20planning%20under%20uncertainty%202008"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Tao Sun, Daniel Sheldon, and Akshat Kumar. Message passing for collective graphical models. In International Conference on Machine Learning, pages 853\u2013861, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sun%2C%20Tao%20Sheldon%2C%20Daniel%20Kumar%2C%20Akshat%20Message%20passing%20for%20collective%20graphical%20models%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sun%2C%20Tao%20Sheldon%2C%20Daniel%20Kumar%2C%20Akshat%20Message%20passing%20for%20collective%20graphical%20models%202015"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Peter Sunehag, Guy Lever, Audrunas Gruslys, Wojciech Marian Czarnecki, Vinicius Zambaldi, Max Jaderberg, Marc Lanctot, Nicolas Sonnerat, Joel Z Leibo, Karl Tuyls, et al. Value-decomposition networks for cooperative multi-agent learning. arXiv preprint arXiv:1706.05296, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.05296"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Richard S. Sutton, David McAllester, Satinder Singh, and Yishay Mansour. Policy gradient methods for reinforcement learning with function approximation. In International Conference on Neural Information Processing Systems, pages 1057\u20131063, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20Richard%20S.%20McAllester%2C%20David%20Singh%2C%20Satinder%20Mansour%2C%20Yishay%20Policy%20gradient%20methods%20for%20reinforcement%20learning%20with%20function%20approximation%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutton%2C%20Richard%20S.%20McAllester%2C%20David%20Singh%2C%20Satinder%20Mansour%2C%20Yishay%20Policy%20gradient%20methods%20for%20reinforcement%20learning%20with%20function%20approximation%201999"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Ming Tan. Multi-agent reinforcement learning: Independent vs. cooperative agents. In Proceedings of the tenth international conference on machine learning, pages 330\u2013337, 1993.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tan%2C%20Ming%20Multi-agent%20reinforcement%20learning%3A%20Independent%20vs.%20cooperative%20agents%201993",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tan%2C%20Ming%20Multi-agent%20reinforcement%20learning%3A%20Independent%20vs.%20cooperative%20agents%201993"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Kagan Tumer and Adrian Agogino. Distributed agent-based air traffic flow management. In International Joint Conference on Autonomous Agents and Multiagent Systems, pages 255:1\u2013255:8, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tumer%2C%20Kagan%20Agogino%2C%20Adrian%20Distributed%20agent-based%20air%20traffic%20flow%20management%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tumer%2C%20Kagan%20Agogino%2C%20Adrian%20Distributed%20agent-based%20air%20traffic%20flow%20management%202007"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Kagan Tumer and Adrian K. Agogino. Multiagent learning for black box system reward functions. Advances in Complex Systems, 12(4-5):475\u2013492, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tumer%2C%20Kagan%20Agogino%2C%20Adrian%20K.%20Multiagent%20learning%20for%20black%20box%20system%20reward%20functions%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tumer%2C%20Kagan%20Agogino%2C%20Adrian%20K.%20Multiagent%20learning%20for%20black%20box%20system%20reward%20functions%202009"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Kagan Tumer, Adrian K Agogino, and David H Wolpert. Learning sequences of actions in collectives of autonomous agents. In International joint conference on Autonomous agents and multiagent systems, pages 378\u2013385, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tumer%2C%20Kagan%20Agogino%2C%20Adrian%20K.%20Wolpert%2C%20David%20H.%20Learning%20sequences%20of%20actions%20in%20collectives%20of%20autonomous%20agents%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tumer%2C%20Kagan%20Agogino%2C%20Adrian%20K.%20Wolpert%2C%20David%20H.%20Learning%20sequences%20of%20actions%20in%20collectives%20of%20autonomous%20agents%202002"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Pradeep Varakantham, Yossiri Adulyasak, and Patrick Jaillet. Decentralized stochastic planning with anonymity in interactions. In AAAI Conference on Artificial Intelligence, pages 2505\u20132512, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Varakantham%2C%20Pradeep%20Adulyasak%2C%20Yossiri%20Jaillet%2C%20Patrick%20Decentralized%20stochastic%20planning%20with%20anonymity%20in%20interactions%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Varakantham%2C%20Pradeep%20Adulyasak%2C%20Yossiri%20Jaillet%2C%20Patrick%20Decentralized%20stochastic%20planning%20with%20anonymity%20in%20interactions%202014"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Pradeep Reddy Varakantham, Shih-Fen Cheng, Geoff Gordon, and Asrar Ahmed. Decision support for agent populations in uncertain and congested environments. In AAAI Conference on Artificial Intelligence, pages 1471\u20131477, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Varakantham%2C%20Pradeep%20Reddy%20Cheng%2C%20Shih-Fen%20Gordon%2C%20Geoff%20Ahmed%2C%20Asrar%20Decision%20support%20for%20agent%20populations%20in%20uncertain%20and%20congested%20environments%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Varakantham%2C%20Pradeep%20Reddy%20Cheng%2C%20Shih-Fen%20Gordon%2C%20Geoff%20Ahmed%2C%20Asrar%20Decision%20support%20for%20agent%20populations%20in%20uncertain%20and%20congested%20environments%202012"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Stefan J. Witwicki and Edmund H. Durfee. Influence-based policy abstraction for weakly-coupled DecPOMDPs. In International Conference on Automated Planning and Scheduling, pages 185\u2013192, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Witwicki%2C%20Stefan%20J.%20Durfee%2C%20Edmund%20H.%20Influence-based%20policy%20abstraction%20for%20weakly-coupled%20DecPOMDPs%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Witwicki%2C%20Stefan%20J.%20Durfee%2C%20Edmund%20H.%20Influence-based%20policy%20abstraction%20for%20weakly-coupled%20DecPOMDPs%202010"
+        },
+        {
+            "id": "45",
+            "entry": "[45] Jiachen Yang, Xiaojing Ye, Rakshit Trivedi, Huan Xu, and Hongyuan Zha. Deep mean field games for learning optimal behavior policy of large populations. In International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yang%2C%20Jiachen%20Ye%2C%20Xiaojing%20Trivedi%2C%20Rakshit%20Xu%2C%20Huan%20Deep%20mean%20field%20games%20for%20learning%20optimal%20behavior%20policy%20of%20large%20populations%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yang%2C%20Jiachen%20Ye%2C%20Xiaojing%20Trivedi%2C%20Rakshit%20Xu%2C%20Huan%20Deep%20mean%20field%20games%20for%20learning%20optimal%20behavior%20policy%20of%20large%20populations%202018"
+        },
+        {
+            "id": "46",
+            "entry": "[46] Yaodong Yang, Rui Luo, Minne Li, Ming Zhou, Weinan Zhang, and Jun Wang. Mean field multi-agent reinforcement learning. In International Conference on Machine Learning, pages 5567\u20135576, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yang%2C%20Yaodong%20Luo%2C%20Rui%20Li%2C%20Minne%20Zhou%2C%20Ming%20Mean%20field%20multi-agent%20reinforcement%20learning%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yang%2C%20Yaodong%20Luo%2C%20Rui%20Li%2C%20Minne%20Zhou%2C%20Ming%20Mean%20field%20multi-agent%20reinforcement%20learning%202018"
+        },
+        {
+            "id": "47",
+            "entry": "[47] Chongjie Zhang and Victor R. Lesser. Coordinated multi-agent reinforcement learning in networked distributed POMDPs. In AAAI Conference on Artificial Intelligence, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Chongjie%20Lesser%2C%20Victor%20R.%20Coordinated%20multi-agent%20reinforcement%20learning%20in%20networked%20distributed%20POMDPs%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Chongjie%20Lesser%2C%20Victor%20R.%20Coordinated%20multi-agent%20reinforcement%20learning%20in%20networked%20distributed%20POMDPs%202011"
+        },
+        {
+            "id": "48",
+            "entry": "[48] Chongjie Zhang and Victor R. Lesser. Coordinating multi-agent reinforcement learning with limited communication. In International conference on Autonomous Agents and Multi-Agent Systems, pages 1101\u20131108, 2013. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Chongjie%20Lesser%2C%20Victor%20R.%20Coordinating%20multi-agent%20reinforcement%20learning%20with%20limited%20communication%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Chongjie%20Lesser%2C%20Victor%20R.%20Coordinating%20multi-agent%20reinforcement%20learning%20with%20limited%20communication%202013"
+        }
+    ]
+}

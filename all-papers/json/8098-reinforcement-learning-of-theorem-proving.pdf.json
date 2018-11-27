@@ -1,0 +1,366 @@
+{
+  "filename": "8098-reinforcement-learning-of-theorem-proving.pdf",
+  "metadata": {
+    "title": "Reinforcement Learning of Theorem Proving",
+    "author": "Cezary Kaliszyk, Josef Urban, Henryk Michalewski, Miroslav Olšák",
+    "identifiers": {
+      "url": "https://papers.nips.cc/paper/8098-reinforcement-learning-of-theorem-proving.pdf"
+    },
+    "journal": "Conference on Neural Information Processing Systems",
+    "abstract": "We introduce a theorem proving algorithm that uses practically no domain heuristics for guiding its connection-style proof search. Instead, it runs many MonteCarlo simulations guided by reinforcement learning from previous proof attempts. We produce several versions of the prover, parameterized by different learning and guiding algorithms. The strongest version of the system is trained on a large corpus of mathematical problems and evaluated on previously unseen problems. The trained system solves within the same number of inferences over 40% more problems than a baseline prover, which is an unusually high improvement in this hard AI domain. To our knowledge this is the first time reinforcement learning has been convincingly applied to solving general mathematical problems on a large scale."
+  },
+  "keywords": [
+    {
+      "term": "clause normal form",
+      "url": "https://en.wikipedia.org/wiki/clause_normal_form"
+    },
+    {
+      "term": "first-order logic",
+      "url": "https://en.wikipedia.org/wiki/first-order_logic"
+    },
+    {
+      "term": "tree search",
+      "url": "https://en.wikipedia.org/wiki/tree_search"
+    },
+    {
+      "term": "reinforcement learning",
+      "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+    },
+    {
+      "term": "semantic feature",
+      "url": "https://en.wikipedia.org/wiki/semantic_feature"
+    },
+    {
+      "term": "interactive theorem proving",
+      "url": "https://en.wikipedia.org/wiki/interactive_theorem_proving"
+    },
+    {
+      "term": "theorem proving",
+      "url": "https://en.wikipedia.org/wiki/theorem_proving"
+    },
+    {
+      "term": "hard science",
+      "url": "https://en.wikipedia.org/wiki/hard_science"
+    },
+    {
+      "term": "monte carlo",
+      "url": "https://en.wikipedia.org/wiki/monte_carlo"
+    },
+    {
+      "term": "mathematical problem",
+      "url": "https://en.wikipedia.org/wiki/mathematical_problem"
+    },
+    {
+      "term": "Automated theorem proving",
+      "url": "https://en.wikipedia.org/wiki/Automated_theorem_proving"
+    },
+    {
+      "term": "HOL4",
+      "url": "https://en.wikipedia.org/wiki/HOL4"
+    }
+  ],
+  "highlights": [
+    "Automated theorem proving (ATP) [<a class=\"ref-link\" id=\"c38\" href=\"#r38\">38</a>] can in principle be used to attack any formally stated mathematical problem",
+    "State-of-the-art Automated theorem proving systems rely on fast implementations of complete proof calculi such as resolution [<a class=\"ref-link\" id=\"c37\" href=\"#r37\">37</a>], superposition [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>], SMT [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>] and tableau [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>] that have been over several decades improved by many search heuristics",
+    "In this work we have developed a theorem proving algorithm that uses practically no domain engineering and instead relies on Monte-Carlo simulations guided by reinforcement learning from previous proof searches",
+    "We have shown that when trained on a large corpus of general mathematical problems, the resulting system is more than 40% stronger than the baseline system in terms of solving nontrivial new problems",
+    "We believe that development of suitable learning architectures that capture both syntactic and semantic features of the mathematical objects will be crucial for training strong assistants for mathematics and hard science by reinforcement learning"
+  ],
+  "key_statements": [
+    "Automated theorem proving (ATP) [<a class=\"ref-link\" id=\"c38\" href=\"#r38\">38</a>] can in principle be used to attack any formally stated mathematical problem",
+    "State-of-the-art Automated theorem proving systems rely on fast implementations of complete proof calculi such as resolution [<a class=\"ref-link\" id=\"c37\" href=\"#r37\">37</a>], superposition [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>], SMT [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>] and tableau [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>] that have been over several decades improved by many search heuristics",
+    "In this work we have developed a theorem proving algorithm that uses practically no domain engineering and instead relies on Monte-Carlo simulations guided by reinforcement learning from previous proof searches",
+    "We have shown that when trained on a large corpus of general mathematical problems, the resulting system is more than 40% stronger than the baseline system in terms of solving nontrivial new problems",
+    "We believe that development of suitable learning architectures that capture both syntactic and semantic features of the mathematical objects will be crucial for training strong assistants for mathematics and hard science by reinforcement learning"
+  ],
+  "summary": [
+    "Automated theorem proving (ATP) [<a class=\"ref-link\" id=\"c38\" href=\"#r38\">38</a>] can in principle be used to attack any formally stated mathematical problem.",
+    "Based on the bare prover, we build a sequence of systems, adding Monte-Carlo tree search [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>], and reinforcement learning [<a class=\"ref-link\" id=\"c44\" href=\"#r44\">44</a>] of policy and value guidance.",
+    "For value learning we characterize the proof states of the nodes by extracting features from all goals, the active path, and the whole tableau.",
+    "We use the M2k dataset to compare the performance of the baseline mlCoP with the bare prover and with the non-learning rlCoP using only UCT with the simple goal-counting proof state evaluation heuristic.",
+    "RlCoP using UCT with no policy and only the simple proof state evaluation heuristic is weaker than mlCoP, already significantly better than the bare prover.",
+    "We run on the M2k dataset 20 iterations of full rlCoP with UCT and both policy and value learning.",
+    "We again measure the performance of the unguided systems, i.e., comparing mlCoP, the bare prover and the non-learning rlCoP using only UCT with the simple goal-counting proof state evaluation heuristic.",
+    "We run 10 iterations of full rlCoP with UCT and both policy and value learning.",
+    "RlCoP guided by the policy and value learned on the training data from iterations 0 − 4 proves 1624 testing problems, which is 42.1% more than mlCoP run with the same inference limit.",
+    "An obvious question this performance comparison poses is how much can rlCoP improve solely by better machine learning in the current setting, and if further engineering and learning of more abstract guidance systems such as equality handling and literal/clause selection heuristics will be needed.",
+    "All these theorems have nontrivial human-written formal proof in Mizar, and they are relatively hard to prove using state-of-the-art saturation-style ATPs. Figure 2 partially shows an example of the completed Monte-Carlo tree search for WAYBEL 0:28.",
+    "Several systems have been produced recently that use supervised learning from large proof corpora for guiding the internal proof search of ATPs. This has been done in the connection tableau setting [<a class=\"ref-link\" id=\"c48\" href=\"#r48\">48</a>, <a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>, <a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>], saturation style setting [<a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>, <a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>], and as direct automation inside interactive theorem provers [<a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>, <a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>, <a class=\"ref-link\" id=\"c49\" href=\"#r49\">49</a>].",
+    "The closest recent work is [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>], where Monte-Carlo tree search is added to connection tableau, without reinforcement learning iterations, with complete backtracking, and without learned value.",
+    "In this work we have developed a theorem proving algorithm that uses practically no domain engineering and instead relies on Monte-Carlo simulations guided by reinforcement learning from previous proof searches.",
+    "We believe that development of suitable learning architectures that capture both syntactic and semantic features of the mathematical objects will be crucial for training strong assistants for mathematics and hard science by reinforcement learning"
+  ],
+  "headline": "We introduce a theorem proving algorithm that uses practically no domain heuristics for guiding its connection-style proof search",
+  "reference_links": [
+    {
+      "id": "1",
+      "entry": "[1] J. Alama, T. Heskes, D. Kuhlwein, E. Tsivtsivadze, and J. Urban. Premise selection for mathematics by corpus analysis and kernel methods. J. Autom. Reasoning, 52(2):191–213, 2014.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Alama%2C%20J.%20Heskes%2C%20T.%20Kuhlwein%2C%20D.%20Tsivtsivadze%2C%20E.%20Premise%20selection%20for%20mathematics%20by%20corpus%20analysis%20and%20kernel%20methods%202014",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Alama%2C%20J.%20Heskes%2C%20T.%20Kuhlwein%2C%20D.%20Tsivtsivadze%2C%20E.%20Premise%20selection%20for%20mathematics%20by%20corpus%20analysis%20and%20kernel%20methods%202014"
+    },
+    {
+      "id": "2",
+      "entry": "[2] A. A. Alemi, F. Chollet, N. Een, G. Irving, C. Szegedy, and J. Urban. DeepMath - deep sequence models for premise selection. In D. D. Lee, M. Sugiyama, U. V. Luxburg, I. Guyon, and R. Garnett, editors, Advances in Neural Information Processing Systems 29: Annual Conference on Neural Information Processing Systems 2016, pages 2235–2243, 2016.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Alemi%2C%20A.A.%20Chollet%2C%20F.%20Een%2C%20N.%20Irving%2C%20G.%20DeepMath%20-%20deep%20sequence%20models%20for%20premise%20selection%202016",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Alemi%2C%20A.A.%20Chollet%2C%20F.%20Een%2C%20N.%20Irving%2C%20G.%20DeepMath%20-%20deep%20sequence%20models%20for%20premise%20selection%202016"
+    },
+    {
+      "id": "3",
+      "entry": "[3] T. Anthony, Z. Tian, and D. Barber. Thinking fast and slow with deep learning and tree search. In I. Guyon, U. von Luxburg, S. Bengio, H. M. Wallach, R. Fergus, S. V. N. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems 30: Annual Conference on Neural Information Processing Systems 2017, pages 5366–5376, 2017.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Anthony%2C%20T.%20Tian%2C%20Z.%20Barber%2C%20D.%20Thinking%20fast%20and%20slow%20with%20deep%20learning%20and%20tree%20search%202017",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Anthony%2C%20T.%20Tian%2C%20Z.%20Barber%2C%20D.%20Thinking%20fast%20and%20slow%20with%20deep%20learning%20and%20tree%20search%202017"
+    },
+    {
+      "id": "4",
+      "entry": "[4] L. Bachmair and H. Ganzinger. Rewrite-based equational theorem proving with selection and simplification. Journal of Logic and Computation, 4(3):217–247, 1994.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Bachmair%2C%20L.%20Ganzinger%2C%20H.%20Rewrite-based%20equational%20theorem%20proving%20with%20selection%20and%20simplification%201994",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Bachmair%2C%20L.%20Ganzinger%2C%20H.%20Rewrite-based%20equational%20theorem%20proving%20with%20selection%20and%20simplification%201994"
+    },
+    {
+      "id": "5",
+      "entry": "[5] C. W. Barrett, R. Sebastiani, S. A. Seshia, C. Tinelli, et al. Satisfiability modulo theories. Handbook of satisfiability, 185:825–885, 2009.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Barrett%2C%20C.W.%20Sebastiani%2C%20R.%20Seshia%2C%20S.A.%20Tinelli%2C%20C.%20Satisfiability%20modulo%20theories%202009",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Barrett%2C%20C.W.%20Sebastiani%2C%20R.%20Seshia%2C%20S.A.%20Tinelli%2C%20C.%20Satisfiability%20modulo%20theories%202009"
+    },
+    {
+      "id": "6",
+      "entry": "[6] J. C. Blanchette, D. Greenaway, C. Kaliszyk, D. Kuhlwein, and J. Urban. A learning-based fact selector for Isabelle/HOL. J. Autom. Reasoning, 57(3):219–244, 2016.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Blanchette%2C%20J.C.%20Greenaway%2C%20D.%20Kaliszyk%2C%20C.%20Kuhlwein%2C%20D.%20A%20learning-based%20fact%20selector%20for%20Isabelle/HOL%202016",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Blanchette%2C%20J.C.%20Greenaway%2C%20D.%20Kaliszyk%2C%20C.%20Kuhlwein%2C%20D.%20A%20learning-based%20fact%20selector%20for%20Isabelle/HOL%202016"
+    },
+    {
+      "id": "7",
+      "entry": "[7] J. C. Blanchette, C. Kaliszyk, L. C. Paulson, and J. Urban. Hammering towards QED. J. Formalized Reasoning, 9(1):101–148, 2016.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Blanchette%2C%20J.C.%20Kaliszyk%2C%20C.%20Paulson%2C%20L.C.%20Urban%2C%20J.%20Hammering%20towards%20QED%202016",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Blanchette%2C%20J.C.%20Kaliszyk%2C%20C.%20Paulson%2C%20L.C.%20Urban%2C%20J.%20Hammering%20towards%20QED%202016"
+    },
+    {
+      "id": "8",
+      "entry": "[8] T. Chen and C. Guestrin. XGBoost: A scalable tree boosting system. In Proceedings of the 22Nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, KDD ’16, pages 785–794, New York, NY, USA, 2016. ACM.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20T.%20Guestrin%2C%20C.%20XGBoost%3A%20A%20scalable%20tree%20boosting%20system%202016",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20T.%20Guestrin%2C%20C.%20XGBoost%3A%20A%20scalable%20tree%20boosting%20system%202016"
+    },
+    {
+      "id": "9",
+      "entry": "[9] R.-E. Fan, K.-W. Chang, C.-J. Hsieh, X.-R. Wang, and C.-J. Lin. Liblinear: A library for large linear classification. Journal of machine learning research, 9(Aug):1871–1874, 2008.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Fan%2C%20R.-E.%20Chang%2C%20K.-W.%20Hsieh%2C%20C.-J.%20Wang%2C%20X.-R.%20Liblinear%3A%20A%20library%20for%20large%20linear%20classification%202008",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Fan%2C%20R.-E.%20Chang%2C%20K.-W.%20Hsieh%2C%20C.-J.%20Wang%2C%20X.-R.%20Liblinear%3A%20A%20library%20for%20large%20linear%20classification%202008"
+    },
+    {
+      "id": "10",
+      "entry": "[10] M. Farber, C. Kaliszyk, and J. Urban. Monte Carlo tableau proof search. In L. de Moura, editor, 26th International Conference on Automated Deduction (CADE), volume 10395 of LNCS, pages 563–579.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Farber%2C%20M.%20Kaliszyk%2C%20C.%20Urban%2C%20J.%20Monte%20Carlo%20tableau%20proof%20search",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Farber%2C%20M.%20Kaliszyk%2C%20C.%20Urban%2C%20J.%20Monte%20Carlo%20tableau%20proof%20search"
+    },
+    {
+      "id": "11",
+      "entry": "[11] T. Gauthier and C. Kaliszyk. Premise selection and external provers for HOL4. In X. Leroy and A. Tiu, editors, Proc. of the 4th Conference on Certified Programs and Proofs (CPP’15), pages 49–57. ACM, 2015.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Gauthier%2C%20T.%20Kaliszyk%2C%20C.%20Premise%20selection%20and%20external%20provers%20for%20HOL4%202015",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Gauthier%2C%20T.%20Kaliszyk%2C%20C.%20Premise%20selection%20and%20external%20provers%20for%20HOL4%202015"
+    },
+    {
+      "id": "12",
+      "entry": "[12] T. Gauthier, C. Kaliszyk, and J. Urban. TacticToe: Learning to reason with HOL4 tactics. In T. Eiter and D. Sands, editors, 21st International Conference on Logic for Programming, Artificial Intelligence and Reasoning, LPAR-21, volume 46 of EPiC Series in Computing, pages 125–143. EasyChair, 2017.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Gauthier%2C%20T.%20Kaliszyk%2C%20C.%20Urban%2C%20J.%20TacticToe%3A%20Learning%20to%20reason%20with%20HOL4%20tactics%202017",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Gauthier%2C%20T.%20Kaliszyk%2C%20C.%20Urban%2C%20J.%20TacticToe%3A%20Learning%20to%20reason%20with%20HOL4%20tactics%202017"
+    },
+    {
+      "id": "13",
+      "entry": "[13] A. Grabowski, A. Korniłowicz, and A. Naumowicz. Mizar in a nutshell. J. Formalized Reasoning, 3(2):153–245, 2010.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Grabowski%2C%20A.%20Korni%C5%82owicz%2C%20A.%20Naumowicz%2C%20A.%20Mizar%20in%20a%20nutshell%202010",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Grabowski%2C%20A.%20Korni%C5%82owicz%2C%20A.%20Naumowicz%2C%20A.%20Mizar%20in%20a%20nutshell%202010"
+    },
+    {
+      "id": "14",
+      "entry": "[14] T. Gransden, N. Walkinshaw, and R. Raman. SEPIA: search for proofs using inferred automata. In Automated Deduction - CADE-25 - 25th International Conference on Automated Deduction, Berlin, Germany, August 1-7, 2015, Proceedings, pages 246–255, 2015.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Gransden%2C%20T.%20Walkinshaw%2C%20N.%20Raman%2C%20R.%20SEPIA%3A%20search%20for%20proofs%20using%20inferred%20automata.%20In%20Automated%20Deduction%20-%20CADE-25-25th%20International%20Conference%20on%20Automated%20Deduction%202015-08-01",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Gransden%2C%20T.%20Walkinshaw%2C%20N.%20Raman%2C%20R.%20SEPIA%3A%20search%20for%20proofs%20using%20inferred%20automata.%20In%20Automated%20Deduction%20-%20CADE-25-25th%20International%20Conference%20on%20Automated%20Deduction%202015-08-01"
+    },
+    {
+      "id": "16",
+      "entry": "[16] J. Jakubuv and J. Urban. ENIGMA: efficient learning-based inference guiding machine. In H. Geuvers, M. England, O. Hasan, F. Rabe, and O. Teschke, editors, Intelligent Computer Mathematics - 10th International Conference, CICM 2017, volume 10383 of Lecture Notes in Computer Science, pages 292–302.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Jakubuv%2C%20J.%20Urban%2C%20J.%20ENIGMA%3A%20efficient%20learning-based%20inference%20guiding%20machine%202017",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Jakubuv%2C%20J.%20Urban%2C%20J.%20ENIGMA%3A%20efficient%20learning-based%20inference%20guiding%20machine%202017"
+    },
+    {
+      "id": "17",
+      "entry": "[17] J. Jakubuv and J. Urban. Hierarchical invention of theorem proving strategies. AI Commun., 31(3):237–250, 2018.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Jakubuv%2C%20J.%20Urban%2C%20J.%20Hierarchical%20invention%20of%20theorem%20proving%20strategies%202018",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Jakubuv%2C%20J.%20Urban%2C%20J.%20Hierarchical%20invention%20of%20theorem%20proving%20strategies%202018"
+    },
+    {
+      "id": "18",
+      "entry": "[18] C. Kaliszyk and J. Urban. Stronger automation for Flyspeck by feature weighting and strategy evolution. In J. C. Blanchette and J. Urban, editors, PxTP 2013, volume 14 of EPiC Series, pages 87–95. EasyChair, 2013.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Kaliszyk%2C%20C.%20Urban%2C%20J.%20Stronger%20automation%20for%20Flyspeck%20by%20feature%20weighting%20and%20strategy%20evolution%202013"
+    },
+    {
+      "id": "19",
+      "entry": "[19] C. Kaliszyk and J. Urban. Learning-assisted automated reasoning with Flyspeck. J. Autom. Reasoning, 53(2):173–213, 2014.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Kaliszyk%2C%20C.%20Urban%2C%20J.%20Learning-assisted%20automated%20reasoning%20with%20Flyspeck%202014",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Kaliszyk%2C%20C.%20Urban%2C%20J.%20Learning-assisted%20automated%20reasoning%20with%20Flyspeck%202014"
+    },
+    {
+      "id": "20",
+      "entry": "[20] C. Kaliszyk and J. Urban. FEMaLeCoP: Fairly efficient machine learning connection prover. In M. Davis, A. Fehnker, A. McIver, and A. Voronkov, editors, Logic for Programming, Artificial Intelligence, and Reasoning - 20th International Conference, volume 9450 of Lecture Notes in Computer Science, pages 88–96.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Kaliszyk%2C%20C.%20Urban%2C%20J.%20FEMaLeCoP%3A%20Fairly%20efficient%20machine%20learning%20connection%20prover",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Kaliszyk%2C%20C.%20Urban%2C%20J.%20FEMaLeCoP%3A%20Fairly%20efficient%20machine%20learning%20connection%20prover"
+    },
+    {
+      "id": "21",
+      "entry": "[21] C. Kaliszyk and J. Urban. MizAR 40 for Mizar 40. J. Autom. Reasoning, 55(3):245–256, 2015.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Kaliszyk%2C%20C.%20Urban%2C%20J.%20MizAR%2040%20for%20Mizar%2040%202015",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Kaliszyk%2C%20C.%20Urban%2C%20J.%20MizAR%2040%20for%20Mizar%2040%202015"
+    },
+    {
+      "id": "22",
+      "entry": "[22] C. Kaliszyk, J. Urban, and J. Vyskocil. Machine learner for automated reasoning 0.4 and 0.5. In S. Schulz, L. de Moura, and B. Konev, editors, 4th Workshop on Practical Aspects of Automated Reasoning, PAAR@IJCAR 2014, Vienna, Austria, 2014, volume 31 of EPiC Series in Computing, pages 60–66. EasyChair, 2014.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Kaliszyk%2C%20C.%20Urban%2C%20J.%20Vyskocil%2C%20J.%20Machine%20learner%20for%20automated%20reasoning%200.4%20and%200.5%202014",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Kaliszyk%2C%20C.%20Urban%2C%20J.%20Vyskocil%2C%20J.%20Machine%20learner%20for%20automated%20reasoning%200.4%20and%200.5%202014"
+    },
+    {
+      "id": "23",
+      "entry": "[23] C. Kaliszyk, J. Urban, and J. Vyskocil. Certified connection tableaux proofs for HOL Light and TPTP. In X. Leroy and A. Tiu, editors, Proc. of the 4th Conference on Certified Programs and Proofs (CPP’15), pages 59–66. ACM, 2015.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Kaliszyk%2C%20C.%20Urban%2C%20J.%20Vyskocil%2C%20J.%20Certified%20connection%20tableaux%20proofs%20for%20HOL%20Light%20and%20TPTP%202015",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Kaliszyk%2C%20C.%20Urban%2C%20J.%20Vyskocil%2C%20J.%20Certified%20connection%20tableaux%20proofs%20for%20HOL%20Light%20and%20TPTP%202015"
+    },
+    {
+      "id": "24",
+      "entry": "[24] C. Kaliszyk, J. Urban, and J. Vyskocil. Efficient semantic features for automated reasoning over large theories. In Q. Yang and M. Wooldridge, editors, IJCAI’15, pages 3084–3090. AAAI Press, 2015.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Kaliszyk%2C%20C.%20Urban%2C%20J.%20Vyskocil%2C%20J.%20Efficient%20semantic%20features%20for%20automated%20reasoning%20over%20large%20theories%202015"
+    },
+    {
+      "id": "25",
+      "entry": "[25] L. Kocsis and C. Szepesvari. Bandit based monte-carlo planning. In J. Furnkranz, T. Scheffer, and M. Spiliopoulou, editors, Machine Learning: ECML 2006, 17th European Conference on Machine Learning, volume 4212 of LNCS, pages 282–293.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Kocsis%2C%20L.%20Szepesvari%2C%20C.%20Bandit%20based%20monte-carlo%20planning%202006",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Kocsis%2C%20L.%20Szepesvari%2C%20C.%20Bandit%20based%20monte-carlo%20planning%202006"
+    },
+    {
+      "id": "26",
+      "entry": "[26] L. Kovacs and A. Voronkov. First-order theorem proving and Vampire. In N. Sharygina and H. Veith, editors, CAV, volume 8044 of LNCS, pages 1–35.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Kovacs%2C%20L.%20Voronkov%2C%20A.%20First-order%20theorem%20proving%20and%20Vampire",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Kovacs%2C%20L.%20Voronkov%2C%20A.%20First-order%20theorem%20proving%20and%20Vampire"
+    },
+    {
+      "id": "27",
+      "entry": "[27] D. Kuhlwein and J. Urban. MaLeS: A framework for automatic tuning of automated theorem provers. J. Autom. Reasoning, 55(2):91–116, 2015.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Kuhlwein%2C%20D.%20Urban%2C%20J.%20MaLeS%3A%20A%20framework%20for%20automatic%20tuning%20of%20automated%20theorem%20provers%202015",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Kuhlwein%2C%20D.%20Urban%2C%20J.%20MaLeS%3A%20A%20framework%20for%20automatic%20tuning%20of%20automated%20theorem%20provers%202015"
+    },
+    {
+      "id": "28",
+      "entry": "[28] D. Kuhlwein, T. van Laarhoven, E. Tsivtsivadze, J. Urban, and T. Heskes. Overview and evaluation of premise selection techniques for large theory mathematics. In B. Gramlich, D. Miller, and U. Sattler, editors, IJCAR, volume 7364 of LNCS, pages 378–392.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Kuhlwein%2C%20D.%20van%20Laarhoven%2C%20T.%20Tsivtsivadze%2C%20E.%20Urban%2C%20J.%20Overview%20and%20evaluation%20of%20premise%20selection%20techniques%20for%20large%20theory%20mathematics",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Kuhlwein%2C%20D.%20van%20Laarhoven%2C%20T.%20Tsivtsivadze%2C%20E.%20Urban%2C%20J.%20Overview%20and%20evaluation%20of%20premise%20selection%20techniques%20for%20large%20theory%20mathematics"
+    },
+    {
+      "id": "29",
+      "entry": "[29] R. Letz, K. Mayr, and C. Goller. Controlled integration of the cut rule into connection tableau calculi. Journal of Automated Reasoning, 13:297–337, 1994.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Letz%2C%20R.%20Mayr%2C%20K.%20Goller%2C%20C.%20Controlled%20integration%20of%20the%20cut%20rule%20into%20connection%20tableau%20calculi%201994",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Letz%2C%20R.%20Mayr%2C%20K.%20Goller%2C%20C.%20Controlled%20integration%20of%20the%20cut%20rule%20into%20connection%20tableau%20calculi%201994"
+    },
+    {
+      "id": "30",
+      "entry": "[30] S. M. Loos, G. Irving, C. Szegedy, and C. Kaliszyk. Deep network guided proof search. In T. Eiter and D. Sands, editors, 21st International Conference on Logic for Programming, Artificial Intelligence and Reasoning, LPAR-21, volume 46 of EPiC Series in Computing, pages 85–105. EasyChair, 2017.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Loos%2C%20S.M.%20Irving%2C%20G.%20Szegedy%2C%20C.%20Kaliszyk%2C%20C.%20Deep%20network%20guided%20proof%20search%202017",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Loos%2C%20S.M.%20Irving%2C%20G.%20Szegedy%2C%20C.%20Kaliszyk%2C%20C.%20Deep%20network%20guided%20proof%20search%202017"
+    },
+    {
+      "id": "32",
+      "entry": "[32] J. Meng and L. C. Paulson. Translating higher-order clauses to first-order clauses. J. Autom. Reasoning, 40(1):35–60, 2008.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Meng%2C%20J.%20Paulson%2C%20L.C.%20Translating%20higher-order%20clauses%20to%20first-order%20clauses%202008",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Meng%2C%20J.%20Paulson%2C%20L.C.%20Translating%20higher-order%20clauses%20to%20first-order%20clauses%202008"
+    },
+    {
+      "id": "33",
+      "entry": "[33] J. Otten. Restricting backtracking in connection calculi. AI Commun., 23(2-3):159–182, 2010.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Otten%2C%20J.%20Restricting%20backtracking%20in%20connection%20calculi%202010",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Otten%2C%20J.%20Restricting%20backtracking%20in%20connection%20calculi%202010"
+    },
+    {
+      "id": "34",
+      "entry": "[34] J. Otten and W. Bibel. leanCoP: lean connection-based theorem proving. J. Symb. Comput., 36(1-2):139–161, 2003.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Otten%2C%20J.%20Bibel%2C%20W.%20leanCoP%3A%20lean%20connection-based%20theorem%20proving%202003",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Otten%2C%20J.%20Bibel%2C%20W.%20leanCoP%3A%20lean%20connection-based%20theorem%20proving%202003"
+    },
+    {
+      "id": "35",
+      "entry": "[35] F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel, B. Thirion, O. Grisel, M. Blondel, P. Prettenhofer, R. Weiss, V. Dubourg, J. Vanderplas, A. Passos, D. Cournapeau, M. Brucher, M. Perrot, and E. Duchesnay. Scikit-learn: Machine learning in Python. Journal of Machine Learning Research, 12:2825–2830, 2011.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Pedregosa%2C%20F.%20Varoquaux%2C%20G.%20Gramfort%2C%20A.%20Michel%2C%20V.%20Scikit-learn%3A%20Machine%20learning%20in%20Python%202011",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Pedregosa%2C%20F.%20Varoquaux%2C%20G.%20Gramfort%2C%20A.%20Michel%2C%20V.%20Scikit-learn%3A%20Machine%20learning%20in%20Python%202011"
+    },
+    {
+      "id": "36",
+      "entry": "[36] B. Piotrowski and J. Urban. ATPboost: Learning premise selection in binary setting with ATP feedback. In D. Galmiche, S. Schulz, and R. Sebastiani, editors, Automated Reasoning - 9th International Joint Conference, IJCAR 2018, Held as Part of the Federated Logic Conference, FloC 2018, Oxford, UK, July 14-17, 2018, Proceedings, volume 10900 of Lecture Notes in Computer Science, pages 566–574.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Piotrowski%2C%20B.%20Urban%2C%20J.%20ATPboost%3A%20Learning%20premise%20selection%20in%20binary%20setting%20with%20ATP%20feedback%202018-07-14",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Piotrowski%2C%20B.%20Urban%2C%20J.%20ATPboost%3A%20Learning%20premise%20selection%20in%20binary%20setting%20with%20ATP%20feedback%202018-07-14"
+    },
+    {
+      "id": "37",
+      "entry": "[37] J. A. Robinson. A machine-oriented logic based on the resolution principle. Journal of the ACM (JACM), 12(1):23–41, 1965.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Robinson%2C%20J.A.%20A%20machine-oriented%20logic%20based%20on%20the%20resolution%20principle%201965",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Robinson%2C%20J.A.%20A%20machine-oriented%20logic%20based%20on%20the%20resolution%20principle%201965"
+    },
+    {
+      "id": "38",
+      "entry": "[38] J. A. Robinson and A. Voronkov, editors. Handbook of Automated Reasoning (in 2 volumes). Elsevier and MIT Press, 2001.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Robinson%2C%20J.A.%20A.%20Voronkov%2C%20editors.%20Handbook%20of%20Automated%20Reasoning%20%28in%202%20volumes%29%202001"
+    },
+    {
+      "id": "39",
+      "entry": "[39] S. Schafer and S. Schulz. Breeding theorem proving heuristics with genetic algorithms. In G. Gottlob, G. Sutcliffe, and A. Voronkov, editors, Global Conference on Artificial Intelligence, GCAI 2015, volume 36 of EPiC Series in Computing, pages 263–274. EasyChair, 2015.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Schafer%2C%20S.%20Schulz%2C%20S.%20Breeding%20theorem%20proving%20heuristics%20with%20genetic%20algorithms%202015",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Schafer%2C%20S.%20Schulz%2C%20S.%20Breeding%20theorem%20proving%20heuristics%20with%20genetic%20algorithms%202015"
+    },
+    {
+      "id": "41",
+      "entry": "[41] D. Silver, A. Huang, C. J. Maddison, A. Guez, L. Sifre, G. van den Driessche, J. Schrittwieser, I. Antonoglou, V. Panneershelvam, M. Lanctot, S. Dieleman, D. Grewe, J. Nham, N. Kalchbrenner, I. Sutskever, T. P. Lillicrap, M. Leach, K. Kavukcuoglu, T. Graepel, and D. Hassabis. Mastering the game of Go with deep neural networks and tree search. Nature, 529(7587):484– 489, 2016.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Silver%2C%20D.%20Huang%2C%20A.%20Maddison%2C%20C.J.%20Guez%2C%20A.%20Mastering%20the%20game%20of%20Go%20with%20deep%20neural%20networks%20and%20tree%20search%202016",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Silver%2C%20D.%20Huang%2C%20A.%20Maddison%2C%20C.J.%20Guez%2C%20A.%20Mastering%20the%20game%20of%20Go%20with%20deep%20neural%20networks%20and%20tree%20search%202016"
+    },
+    {
+      "id": "42",
+      "entry": "[42] D. Silver, T. Hubert, J. Schrittwieser, I. Antonoglou, M. Lai, A. Guez, M. Lanctot, L. Sifre, D. Kumaran, T. Graepel, T. P. Lillicrap, K. Simonyan, and D. Hassabis. Mastering chess and shogi by self-play with a general reinforcement learning algorithm. CoRR, abs/1712.01815, 2017.",
+      "arxiv_url": "https://arxiv.org/pdf/1712.01815"
+    },
+    {
+      "id": "43",
+      "entry": "[43] D. Silver, J. Schrittwieser, K. Simonyan, I. Antonoglou, A. Huang, A. Guez, T. Hubert, L. Baker, M. Lai, A. Bolton, et al. Mastering the game of go without human knowledge. Nature, 550(7676):354, 2017.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Silver%2C%20D.%20Schrittwieser%2C%20J.%20Simonyan%2C%20K.%20Antonoglou%2C%20I.%20Mastering%20the%20game%20of%20go%20without%20human%20knowledge%202017",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Silver%2C%20D.%20Schrittwieser%2C%20J.%20Simonyan%2C%20K.%20Antonoglou%2C%20I.%20Mastering%20the%20game%20of%20go%20without%20human%20knowledge%202017"
+    },
+    {
+      "id": "44",
+      "entry": "[44] R. S. Sutton and A. G. Barto. Reinforcement learning: An introduction, volume 1. Cambridge Univ Press, 1998.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20R.S.%20Barto%2C%20A.G.%20Reinforcement%20learning%3A%20An%20introduction%2C%20volume%201%201998"
+    },
+    {
+      "id": "45",
+      "entry": "[45] J. Urban. MPTP 0.2: Design, implementation, and initial experiments. J. Autom. Reasoning, 37(1-2):21–43, 2006.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Urban%2C%20J.%20MPTP%200.2%3A%20Design%2C%20implementation%2C%20and%20initial%20experiments%202006",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Urban%2C%20J.%20MPTP%200.2%3A%20Design%2C%20implementation%2C%20and%20initial%20experiments%202006"
+    },
+    {
+      "id": "46",
+      "entry": "[46] J. Urban. BliStr: The Blind Strategymaker. In G. Gottlob, G. Sutcliffe, and A. Voronkov, editors, Global Conference on Artificial Intelligence, GCAI 2015, volume 36 of EPiC Series in Computing, pages 312–319. EasyChair, 2015.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Urban%2C%20J.%20BliStr%3A%20The%20Blind%20Strategymaker%202015",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Urban%2C%20J.%20BliStr%3A%20The%20Blind%20Strategymaker%202015"
+    },
+    {
+      "id": "47",
+      "entry": "[47] J. Urban, G. Sutcliffe, P. Pudlak, and J. Vyskocil. MaLARea SG1 - Machine Learner for Automated Reasoning with Semantic Guidance. In A. Armando, P. Baumgartner, and G. Dowek, editors, IJCAR, volume 5195 of LNCS, pages 441–456.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Urban%2C%20J.%20Sutcliffe%2C%20G.%20Pudlak%2C%20P.%20Vyskocil%2C%20J.%20MaLARea%20SG1%20-%20Machine%20Learner%20for%20Automated%20Reasoning%20with%20Semantic%20Guidance",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Urban%2C%20J.%20Sutcliffe%2C%20G.%20Pudlak%2C%20P.%20Vyskocil%2C%20J.%20MaLARea%20SG1%20-%20Machine%20Learner%20for%20Automated%20Reasoning%20with%20Semantic%20Guidance"
+    },
+    {
+      "id": "48",
+      "entry": "[48] J. Urban, J. Vyskocil, and P. Stepanek. MaLeCoP: Machine learning connection prover. In K. Brunnler and G. Metcalfe, editors, TABLEAUX, volume 6793 of LNCS, pages 263–277.",
+      "scholar_url": "https://scholar.google.co.uk/scholar?q=Urban%2C%20J.%20Vyskocil%2C%20J.%20Stepanek%2C%20P.%20MaLeCoP%3A%20Machine%20learning%20connection%20prover",
+      "oa_query": "https://api.scholarcy.com/oa_version?query=Urban%2C%20J.%20Vyskocil%2C%20J.%20Stepanek%2C%20P.%20MaLeCoP%3A%20Machine%20learning%20connection%20prover"
+    },
+    {
+      "id": "49",
+      "entry": "[49] D. Whalen. Holophrasm: a neural automated theorem prover for higher-order logic. CoRR, abs/1608.02644, 2016. ",
+      "arxiv_url": "https://arxiv.org/pdf/1608.02644"
+    }
+  ]
+}

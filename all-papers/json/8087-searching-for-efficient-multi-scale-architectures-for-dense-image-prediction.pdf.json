@@ -1,0 +1,677 @@
+{
+    "filename": "8087-searching-for-efficient-multi-scale-architectures-for-dense-image-prediction.pdf",
+    "metadata": {
+        "title": "Searching for Efficient Multi-Scale Architectures for Dense Image Prediction",
+        "author": "Liang-Chieh Chen, Maxwell Collins, Yukun Zhu, George Papandreou, Barret Zoph, Florian Schroff, Hartwig Adam, Jon Shlens",
+        "date": 2012,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8087-searching-for-efficient-multi-scale-architectures-for-dense-image-prediction.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "The design of neural network architectures is an important component for achieving state-of-the-art performance with machine learning systems across a broad array of tasks. Much work has endeavored to design and build architectures automatically through clever construction of a search space paired with simple learning algorithms. Recent progress has demonstrated that such meta-learning methods may exceed scalable human-invented architectures on image classification tasks. An open question is the degree to which such methods may generalize to new domains. In this work we explore the construction of meta-learning techniques for dense image prediction focused on the tasks of scene parsing, person-part segmentation, and semantic image segmentation. Constructing viable search spaces in this domain is challenging because of the multi-scale representation of visual information and the necessity to operate on high resolution imagery. Based on a survey of techniques in dense image prediction, we construct a recursive search space and demonstrate that even with efficient random search, we can identify architectures that outperform human-invented architectures and achieve state-of-the-art performance on three dense prediction tasks including 82.7% on Cityscapes (street scene parsing), 71.3% on PASCAL-Person-Part (person-part segmentation), and 87.9% on PASCAL VOC 2012 (semantic image segmentation). Additionally, the resulting architecture is more computationally efficient, requiring half the parameters and half the computational cost as previous state of the art systems."
+    },
+    "keywords": [
+        {
+            "term": "PASCAL",
+            "url": "https://en.wikipedia.org/wiki/PASCAL"
+        },
+        {
+            "term": "neural architecture search",
+            "url": "https://en.wikipedia.org/wiki/neural_architecture_search"
+        },
+        {
+            "term": "search space",
+            "url": "https://en.wikipedia.org/wiki/search_space"
+        },
+        {
+            "term": "convolutional neural networks",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_networks"
+        },
+        {
+            "term": "directed acyclic graph",
+            "url": "https://en.wikipedia.org/wiki/directed_acyclic_graph"
+        },
+        {
+            "term": "image classification",
+            "url": "https://en.wikipedia.org/wiki/image_classification"
+        },
+        {
+            "term": "speech recognition",
+            "url": "https://en.wikipedia.org/wiki/speech_recognition"
+        },
+        {
+            "term": "network architecture",
+            "url": "https://en.wikipedia.org/wiki/network_architecture"
+        }
+    ],
+    "highlights": [
+        "The resurgence of neural networks in machine learning has shifted the emphasis for building state-ofthe-art systems in such tasks as image recognition [<a class=\"ref-link\" id=\"c44\" href=\"#r44\">44</a>, <a class=\"ref-link\" id=\"c84\" href=\"#r84\">84</a>, <a class=\"ref-link\" id=\"c83\" href=\"#r83\">83</a>, <a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>], speech recognition [<a class=\"ref-link\" id=\"c36\" href=\"#r36\">36</a>, <a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>], and machine translation [<a class=\"ref-link\" id=\"c88\" href=\"#r88\">88</a>, <a class=\"ref-link\" id=\"c82\" href=\"#r82\">82</a>] towards the design of neural network architectures",
+        "Motivated by this last point, we focus our efforts on developing a tractable and powerful search space for dense image prediction paired with efficient random search [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>, <a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>]",
+        "We demonstrate the effectiveness of our proposed method on three dense prediction tasks that are well studied in the literature: scene parsing (Cityscapes [<a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>]), person part segmentation (PASCAL-PersonPart [<a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>]), and semantic image segmentation (PASCAL VOC 2012 [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>])",
+        "This work demonstrates how architecture search techniques may be employed for problems beyond image classification \u2013 in particular, problems of dense image prediction where multi-scale processing is critical for achieving state-of-the-art performance",
+        "The resulting architecture is more efficient than state-of-the-art systems, requiring half of the parameters and 38% of the computational demand when using deeper Xception [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c67\" href=\"#r67\">67</a>, <a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>] as network backbone"
+    ],
+    "key_statements": [
+        "The resurgence of neural networks in machine learning has shifted the emphasis for building state-ofthe-art systems in such tasks as image recognition [<a class=\"ref-link\" id=\"c44\" href=\"#r44\">44</a>, <a class=\"ref-link\" id=\"c84\" href=\"#r84\">84</a>, <a class=\"ref-link\" id=\"c83\" href=\"#r83\">83</a>, <a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>], speech recognition [<a class=\"ref-link\" id=\"c36\" href=\"#r36\">36</a>, <a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>], and machine translation [<a class=\"ref-link\" id=\"c88\" href=\"#r88\">88</a>, <a class=\"ref-link\" id=\"c82\" href=\"#r82\">82</a>] towards the design of neural network architectures",
+        "In just the last year such meta-learning techniques have identified architectures that exceed the performance of human-invented architectures for large-scale image classification problems [<a class=\"ref-link\" id=\"c101\" href=\"#r101\">101</a>, <a class=\"ref-link\" id=\"c52\" href=\"#r52\">52</a>, <a class=\"ref-link\" id=\"c68\" href=\"#r68\">68</a>]",
+        "We present the first effort towards applying meta-learning to dense image prediction (Fig. 1) \u2013 largely focused on the heavily-studied problem of scene labeling",
+        "We find that an effective random search policy provides a strong baseline [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>, <a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>] and identify several candidate network architectures for scene labeling",
+        "In experiments on the Cityscapes dataset [<a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>], we find architectures that achieve 82.7% mean intersection-over-union accuracy, exceeding the performance of human-invented architectures by 0.7% [<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>]",
+        "Motivated by this last point, we focus our efforts on developing a tractable and powerful search space for dense image prediction paired with efficient random search [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>, <a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>]",
+        "Two key components for building a successful architecture search method are the design of the search space and the design of the proxy task [<a class=\"ref-link\" id=\"c100\" href=\"#r100\">100</a>, <a class=\"ref-link\" id=\"c101\" href=\"#r101\">101</a>]",
+        "In preliminary experiments we found that B = 5 provides a good trade-off between flexibility and computational tractability",
+        "Image classification employs low resolution images [<a class=\"ref-link\" id=\"c43\" href=\"#r43\">43</a>] as a fast proxy task for high-resolution [<a class=\"ref-link\" id=\"c73\" href=\"#r73\">73</a>]. This proxy task does not work for dense image prediction where high resolution imagery is critical for conveying multi-scale context information",
+        "We demonstrate the effectiveness of our proposed method on three dense prediction tasks that are well studied in the literature: scene parsing (Cityscapes [<a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>]), person part segmentation (PASCAL-PersonPart [<a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>]), and semantic image segmentation (PASCAL VOC 2012 [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>])",
+        "Experiments, we demonstrate that these strategies provide an instructive signal for predicting the efficacy of a given architecture",
+        "Following [<a class=\"ref-link\" id=\"c39\" href=\"#r39\">39</a>] we examine the L1 norm of the weights connecting each branch to the output of the top performing dense prediction cell in Fig. 5b",
+        "We train a model on this dataset employing the same dense prediction cell identified during architecture search using the modified Xception network backbone",
+        "This work demonstrates how architecture search techniques may be employed for problems beyond image classification \u2013 in particular, problems of dense image prediction where multi-scale processing is critical for achieving state-of-the-art performance",
+        "The resulting architecture is more efficient than state-of-the-art systems, requiring half of the parameters and 38% of the computational demand when using deeper Xception [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c67\" href=\"#r67\">67</a>, <a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>] as network backbone"
+    ],
+    "summary": [
+        "The resurgence of neural networks in machine learning has shifted the emphasis for building state-ofthe-art systems in such tasks as image recognition [<a class=\"ref-link\" id=\"c44\" href=\"#r44\">44</a>, <a class=\"ref-link\" id=\"c84\" href=\"#r84\">84</a>, <a class=\"ref-link\" id=\"c83\" href=\"#r83\">83</a>, <a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>], speech recognition [<a class=\"ref-link\" id=\"c36\" href=\"#r36\">36</a>, <a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>], and machine translation [<a class=\"ref-link\" id=\"c88\" href=\"#r88\">88</a>, <a class=\"ref-link\" id=\"c82\" href=\"#r82\">82</a>] towards the design of neural network architectures.",
+        "Image classification has provided a great starting point because much research effort has identified successful network motifs and operators that may be employed to construct search spaces for architectures [<a class=\"ref-link\" id=\"c52\" href=\"#r52\">52</a>, <a class=\"ref-link\" id=\"c68\" href=\"#r68\">68</a>, <a class=\"ref-link\" id=\"c101\" href=\"#r101\">101</a>].",
+        "We perform an array of experiments to demonstrate how to construct a computationally tractable and simple proxy task that may provide predictive information on multi-scale architectures for high resolution imagery.",
+        "If one fine-tunes the entire model with a single dense prediction cell (DPC) on the Cityscapes dataset, training a candidate architecture with 90K iterations requires 1+ week",
+        "We focus on designing a proxy task that is (1) fast to compute and (2) may predict the performance in a large-scale training setting.",
+        "This proxy task does not work for dense image prediction where high resolution imagery is critical for conveying multi-scale context information.",
+        "We perform the experiments and subsequent architecture search on Cityscapes [<a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>], which features large variations in object scale across 19 semantic labels.",
+        "Following previous state-of-the-art segmentation models, we employ the Xception architecture [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c67\" href=\"#r67\">67</a>, <a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>] for the large-scale setting.",
+        "We deploy the resulting proxy task, with our proposed architecture search space, on Cityscapes to explore 28K DPC architectures across 370 GPUs over one week.",
+        "We employ a simple and efficient random search [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>, <a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>] and select the top 50 architectures (w.r.t. validation set performance) for re-ranking based on fine-tuning the entire model using MobileNet-v2 network backbone.",
+        "We train a model on this dataset employing the same DPC identified during architecture search using the modified Xception network backbone.",
+        "This work demonstrates how architecture search techniques may be employed for problems beyond image classification \u2013 in particular, problems of dense image prediction where multi-scale processing is critical for achieving state-of-the-art performance.",
+        "The application of architecture search to dense image prediction was achieved through (1) the construction of a recursive search space leveraging innovations in the dense prediction literature and (2) the construction of a fast proxy predictive of the large-scale task.",
+        "The resulting learned architecture surpasses human-invented architectures across three dense image prediction tasks: scene parsing [<a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>], person-part segmentation [<a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>] and semantic segmentation [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>].",
+        "Previous work identified the design of a large and flexible search space as a critical element for achieving strong results [<a class=\"ref-link\" id=\"c101\" href=\"#r101\">101</a>, <a class=\"ref-link\" id=\"c52\" href=\"#r52\">52</a>, <a class=\"ref-link\" id=\"c100\" href=\"#r100\">100</a>, <a class=\"ref-link\" id=\"c65\" href=\"#r65\">65</a>].",
+        "The resulting architecture is more efficient than state-of-the-art systems, requiring half of the parameters and 38% of the computational demand when using deeper Xception [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c67\" href=\"#r67\">67</a>, <a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>] as network backbone"
+    ],
+    "headline": "In this work we explore the construction of meta-learning techniques for dense image prediction focused on the tasks of scene parsing, person-part segmentation, and semantic image segmentation",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] M. Andriluka, L. Pishchulin, P. Gehler, and B. Schiele. 2d human pose estimation: New benchmark and state of the art analysis. In CVPR, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Andriluka%2C%20M.%20Pishchulin%2C%20L.%20Gehler%2C%20P.%20Schiele%2C%20B.%202d%20human%20pose%20estimation%3A%20New%20benchmark%20and%20state%20of%20the%20art%20analysis%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Andriluka%2C%20M.%20Pishchulin%2C%20L.%20Gehler%2C%20P.%20Schiele%2C%20B.%202d%20human%20pose%20estimation%3A%20New%20benchmark%20and%20state%20of%20the%20art%20analysis%202014"
+        },
+        {
+            "id": "2",
+            "entry": "[2] V. Badrinarayanan, A. Kendall, and R. Cipolla. Segnet: A deep convolutional encoder-decoder architecture for image segmentation. arXiv:1511.00561, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.00561"
+        },
+        {
+            "id": "3",
+            "entry": "[3] B. Baker, O. Gupta, N. Naik, and R. Raskar. Designing neural network architectures using reinforcement learning. In ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Baker%2C%20B.%20Gupta%2C%20O.%20Naik%2C%20N.%20Raskar%2C%20R.%20Designing%20neural%20network%20architectures%20using%20reinforcement%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Baker%2C%20B.%20Gupta%2C%20O.%20Naik%2C%20N.%20Raskar%2C%20R.%20Designing%20neural%20network%20architectures%20using%20reinforcement%20learning%202017"
+        },
+        {
+            "id": "4",
+            "entry": "[4] S. Bell, P. Upchurch, N. Snavely, and K. Bala. Material recognition in the wild with the materials in context database. In CVPR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bell%2C%20S.%20Upchurch%2C%20P.%20Snavely%2C%20N.%20Bala%2C%20K.%20Material%20recognition%20in%20the%20wild%20with%20the%20materials%20in%20context%20database%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bell%2C%20S.%20Upchurch%2C%20P.%20Snavely%2C%20N.%20Bala%2C%20K.%20Material%20recognition%20in%20the%20wild%20with%20the%20materials%20in%20context%20database%202015"
+        },
+        {
+            "id": "5",
+            "entry": "[5] J. Bergstra and Y. Bengio. Random search for hyper-parameter optimization. JMLR, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bergstra%2C%20J.%20Bengio%2C%20Y.%20Random%20search%20for%20hyper-parameter%20optimization%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bergstra%2C%20J.%20Bengio%2C%20Y.%20Random%20search%20for%20hyper-parameter%20optimization%202012"
+        },
+        {
+            "id": "6",
+            "entry": "[6] S. R. Bul\u00f2, L. Porzi, and P. Kontschieder. In-place activated batchnorm for memory-optimized training of dnns. In CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bul%C3%B2%2C%20S.R.%20Porzi%2C%20L.%20Kontschieder%2C%20P.%20In-place%20activated%20batchnorm%20for%20memory-optimized%20training%20of%20dnns%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bul%C3%B2%2C%20S.R.%20Porzi%2C%20L.%20Kontschieder%2C%20P.%20In-place%20activated%20batchnorm%20for%20memory-optimized%20training%20of%20dnns%202018"
+        },
+        {
+            "id": "7",
+            "entry": "[7] H. Cai, T. Chen, W. Zhang, Y. Yu, and J. Wang. Efficient architecture search by network transformation.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cai%2C%20H.%20Chen%2C%20T.%20Zhang%2C%20W.%20Yu%2C%20Y.%20Efficient%20architecture%20search%20by%20network%20transformation"
+        },
+        {
+            "id": "8",
+            "entry": "[8] W. Chan, N. Jaitly, Q. Le, and O. Vinyals. Listen, attend and spell: A neural network for large vocabulary conversational speech recognition. In ICASSP, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chan%2C%20W.%20Jaitly%2C%20N.%20Le%2C%20Q.%20Listen%2C%20O.Vinyals%20attend%20and%20spell%3A%20A%20neural%20network%20for%20large%20vocabulary%20conversational%20speech%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chan%2C%20W.%20Jaitly%2C%20N.%20Le%2C%20Q.%20Listen%2C%20O.Vinyals%20attend%20and%20spell%3A%20A%20neural%20network%20for%20large%20vocabulary%20conversational%20speech%20recognition%202016"
+        },
+        {
+            "id": "9",
+            "entry": "[9] L.-C. Chen, A. Hermans, G. Papandreou, F. Schroff, P. Wang, and H. Adam. Masklab: Instance segmentation by refining object detection with semantic and direction features. In CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20L.-C.%20Hermans%2C%20A.%20Papandreou%2C%20G.%20Schroff%2C%20F.%20Masklab%3A%20Instance%20segmentation%20by%20refining%20object%20detection%20with%20semantic%20and%20direction%20features%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20L.-C.%20Hermans%2C%20A.%20Papandreou%2C%20G.%20Schroff%2C%20F.%20Masklab%3A%20Instance%20segmentation%20by%20refining%20object%20detection%20with%20semantic%20and%20direction%20features%202018"
+        },
+        {
+            "id": "10",
+            "entry": "[10] L.-C. Chen, G. Papandreou, I. Kokkinos, K. Murphy, and A. L. Yuille. Semantic image segmentation with deep convolutional nets and fully connected crfs. In ICLR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20L.-C.%20Papandreou%2C%20G.%20Kokkinos%2C%20I.%20Murphy%2C%20K.%20Semantic%20image%20segmentation%20with%20deep%20convolutional%20nets%20and%20fully%20connected%20crfs%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20L.-C.%20Papandreou%2C%20G.%20Kokkinos%2C%20I.%20Murphy%2C%20K.%20Semantic%20image%20segmentation%20with%20deep%20convolutional%20nets%20and%20fully%20connected%20crfs%202015"
+        },
+        {
+            "id": "11",
+            "entry": "[11] L.-C. Chen, G. Papandreou, I. Kokkinos, K. Murphy, and A. L. Yuille. Deeplab: Semantic image segmentation with deep convolutional nets, atrous convolution, and fully connected crfs. TPAMI, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20L.-C.%20Papandreou%2C%20G.%20Kokkinos%2C%20I.%20Murphy%2C%20K.%20Deeplab%3A%20Semantic%20image%20segmentation%20with%20deep%20convolutional%20nets%2C%20atrous%20convolution%2C%20and%20fully%20connected%20crfs%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20L.-C.%20Papandreou%2C%20G.%20Kokkinos%2C%20I.%20Murphy%2C%20K.%20Deeplab%3A%20Semantic%20image%20segmentation%20with%20deep%20convolutional%20nets%2C%20atrous%20convolution%2C%20and%20fully%20connected%20crfs%202017"
+        },
+        {
+            "id": "12",
+            "entry": "[12] L.-C. Chen, G. Papandreou, F. Schroff, and H. Adam. Rethinking atrous convolution for semantic image segmentation. arXiv:1706.05587, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.05587"
+        },
+        {
+            "id": "13",
+            "entry": "[13] L.-C. Chen, Y. Yang, J. Wang, W. Xu, and A. L. Yuille. Attention to scale: Scale-aware semantic image segmentation. In CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20L.-C.%20Yang%2C%20Y.%20Wang%2C%20J.%20Xu%2C%20W.%20Attention%20to%20scale%3A%20Scale-aware%20semantic%20image%20segmentation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20L.-C.%20Yang%2C%20Y.%20Wang%2C%20J.%20Xu%2C%20W.%20Attention%20to%20scale%3A%20Scale-aware%20semantic%20image%20segmentation%202016"
+        },
+        {
+            "id": "14",
+            "entry": "[14] L.-C. Chen, Y. Zhu, G. Papandreou, F. Schroff, and H. Adam. Encoder-decoder with atrous separable convolution for semantic image segmentation. In ECCV, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20L.-C.%20Zhu%2C%20Y.%20Papandreou%2C%20G.%20Schroff%2C%20F.%20Encoder-decoder%20with%20atrous%20separable%20convolution%20for%20semantic%20image%20segmentation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20L.-C.%20Zhu%2C%20Y.%20Papandreou%2C%20G.%20Schroff%2C%20F.%20Encoder-decoder%20with%20atrous%20separable%20convolution%20for%20semantic%20image%20segmentation%202018"
+        },
+        {
+            "id": "15",
+            "entry": "[15] T. Chen, I. Goodfellow, and J. Shlens. Net2Net: Accelerating learning via knowledge transfer. In ICLR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20T.%20Goodfellow%2C%20I.%20Shlens%2C%20J.%20Net2Net%3A%20Accelerating%20learning%20via%20knowledge%20transfer%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20T.%20Goodfellow%2C%20I.%20Shlens%2C%20J.%20Net2Net%3A%20Accelerating%20learning%20via%20knowledge%20transfer%202016"
+        },
+        {
+            "id": "16",
+            "entry": "[16] X. Chen, R. Mottaghi, X. Liu, S. Fidler, R. Urtasun, and A. Yuille. Detect what you can: Detecting and representing objects using holistic models and body parts. In CVPR, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20X.%20Mottaghi%2C%20R.%20Liu%2C%20X.%20Fidler%2C%20S.%20Detect%20what%20you%20can%3A%20Detecting%20and%20representing%20objects%20using%20holistic%20models%20and%20body%20parts%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20X.%20Mottaghi%2C%20R.%20Liu%2C%20X.%20Fidler%2C%20S.%20Detect%20what%20you%20can%3A%20Detecting%20and%20representing%20objects%20using%20holistic%20models%20and%20body%20parts%202014"
+        },
+        {
+            "id": "17",
+            "entry": "[17] F. Chollet. Xception: Deep learning with depthwise separable convolutions. In CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chollet%2C%20F.%20Xception%3A%20Deep%20learning%20with%20depthwise%20separable%20convolutions%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chollet%2C%20F.%20Xception%3A%20Deep%20learning%20with%20depthwise%20separable%20convolutions%202017"
+        },
+        {
+            "id": "18",
+            "entry": "[18] M. Cordts, M. Omran, S. Ramos, T. Rehfeld, M. Enzweiler, R. Benenson, U. Franke, S. Roth, and B. Schiele. The cityscapes dataset for semantic urban scene understanding. In CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cordts%2C%20M.%20Omran%2C%20M.%20Ramos%2C%20S.%20Rehfeld%2C%20T.%20The%20cityscapes%20dataset%20for%20semantic%20urban%20scene%20understanding%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cordts%2C%20M.%20Omran%2C%20M.%20Ramos%2C%20S.%20Rehfeld%2C%20T.%20The%20cityscapes%20dataset%20for%20semantic%20urban%20scene%20understanding%202016"
+        },
+        {
+            "id": "19",
+            "entry": "[19] J. Dai, K. He, and J. Sun. Convolutional feature masking for joint object and stuff segmentation. In",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dai%2C%20J.%20He%2C%20K.%20Sun%2C%20J.%20Convolutional%20feature%20masking%20for%20joint%20object%20and%20stuff%20segmentation",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dai%2C%20J.%20He%2C%20K.%20Sun%2C%20J.%20Convolutional%20feature%20masking%20for%20joint%20object%20and%20stuff%20segmentation"
+        },
+        {
+            "id": "20",
+            "entry": "[20] J. Dai, K. He, and J. Sun. Instance-aware semantic segmentation via multi-task network cascades. In",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dai%2C%20J.%20He%2C%20K.%20Sun%2C%20J.%20Instance-aware%20semantic%20segmentation%20via%20multi-task%20network%20cascades",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dai%2C%20J.%20He%2C%20K.%20Sun%2C%20J.%20Instance-aware%20semantic%20segmentation%20via%20multi-task%20network%20cascades"
+        },
+        {
+            "id": "21",
+            "entry": "[21] J. Dai, Y. Li, K. He, and J. Sun. R-fcn: Object detection via region-based fully convolutional networks.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dai%2C%20J.%20Li%2C%20Y.%20He%2C%20K.%20Sun%2C%20J.%20R-fcn%3A%20Object%20detection%20via%20region-based%20fully%20convolutional%20networks"
+        },
+        {
+            "id": "22",
+            "entry": "[22] J. Dai, H. Qi, Y. Xiong, Y. Li, G. Zhang, H. Hu, and Y. Wei. Deformable convolutional networks. In",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dai%2C%20J.%20Qi%2C%20H.%20Xiong%2C%20Y.%20Li%2C%20Y.%20Deformable%20convolutional%20networks",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dai%2C%20J.%20Qi%2C%20H.%20Xiong%2C%20Y.%20Li%2C%20Y.%20Deformable%20convolutional%20networks"
+        },
+        {
+            "id": "23",
+            "entry": "[23] D. Eigen and R. Fergus. Predicting depth, surface normals and semantic labels with a common multi-scale convolutional architecture. In ICCV, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Eigen%2C%20D.%20Fergus%2C%20R.%20Predicting%20depth%2C%20surface%20normals%20and%20semantic%20labels%20with%20a%20common%20multi-scale%20convolutional%20architecture%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Eigen%2C%20D.%20Fergus%2C%20R.%20Predicting%20depth%2C%20surface%20normals%20and%20semantic%20labels%20with%20a%20common%20multi-scale%20convolutional%20architecture%202015"
+        },
+        {
+            "id": "24",
+            "entry": "[24] M. Everingham, S. M. A. Eslami, L. V. Gool, C. K. I. Williams, J. Winn, and A. Zisserman. The pascal visual object classes challenge \u2013 a retrospective. IJCV, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Everingham%2C%20M.%20Eslami%2C%20S.M.A.%20Gool%2C%20L.V.%20Williams%2C%20C.K.I.%20The%20pascal%20visual%20object%20classes%20challenge%20%E2%80%93%20a%20retrospective%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Everingham%2C%20M.%20Eslami%2C%20S.M.A.%20Gool%2C%20L.V.%20Williams%2C%20C.K.I.%20The%20pascal%20visual%20object%20classes%20challenge%20%E2%80%93%20a%20retrospective%202014"
+        },
+        {
+            "id": "25",
+            "entry": "[25] H.-S. Fang, G. Lu, X. Fang, J. Xie, Y.-W. Tai, and C. Lu. Weakly and semi supervised human body part parsing via pose-guided knowledge transfer. In CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fang%2C%20H.-S.%20Lu%2C%20G.%20Fang%2C%20X.%20Xie%2C%20J.%20Weakly%20and%20semi%20supervised%20human%20body%20part%20parsing%20via%20pose-guided%20knowledge%20transfer%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fang%2C%20H.-S.%20Lu%2C%20G.%20Fang%2C%20X.%20Xie%2C%20J.%20Weakly%20and%20semi%20supervised%20human%20body%20part%20parsing%20via%20pose-guided%20knowledge%20transfer%202018"
+        },
+        {
+            "id": "26",
+            "entry": "[26] C. Farabet, C. Couprie, L. Najman, and Y. LeCun. Learning hierarchical features for scene labeling. PAMI, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Farabet%2C%20C.%20Couprie%2C%20C.%20Najman%2C%20L.%20LeCun%2C%20Y.%20Learning%20hierarchical%20features%20for%20scene%20labeling%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Farabet%2C%20C.%20Couprie%2C%20C.%20Najman%2C%20L.%20LeCun%2C%20Y.%20Learning%20hierarchical%20features%20for%20scene%20labeling%202013"
+        },
+        {
+            "id": "27",
+            "entry": "[27] D. Fourure, R. Emonet, E. Fromont, D. Muselet, A. Tremeau, and C. Wolf. Residual conv-deconv grid network for semantic segmentation. In BMVC, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fourure%2C%20D.%20Emonet%2C%20R.%20Fromont%2C%20E.%20Muselet%2C%20D.%20Residual%20conv-deconv%20grid%20network%20for%20semantic%20segmentation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fourure%2C%20D.%20Emonet%2C%20R.%20Fromont%2C%20E.%20Muselet%2C%20D.%20Residual%20conv-deconv%20grid%20network%20for%20semantic%20segmentation%202017"
+        },
+        {
+            "id": "28",
+            "entry": "[28] J. Fu, J. Liu, Y. Wang, and H. Lu. Stacked deconvolutional network for semantic segmentation. arXiv:1708.04943, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1708.04943"
+        },
+        {
+            "id": "29",
+            "entry": "[29] A. Giusti, D. Ciresan, J. Masci, L. Gambardella, and J. Schmidhuber. Fast image scanning with deep max-pooling convolutional neural networks. In ICIP, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Giusti%2C%20A.%20Ciresan%2C%20D.%20Masci%2C%20J.%20Gambardella%2C%20L.%20Fast%20image%20scanning%20with%20deep%20max-pooling%20convolutional%20neural%20networks%202013"
+        },
+        {
+            "id": "30",
+            "entry": "[30] D. Golovin, B. Solnik, S. Moitra, G. Kochanski, J. Karro, and D. Sculley. Google vizier: A service for black-box optimization. In SIGKDD, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Golovin%2C%20D.%20Solnik%2C%20B.%20Moitra%2C%20S.%20Kochanski%2C%20G.%20Google%20vizier%3A%20A%20service%20for%20black-box%20optimization%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Golovin%2C%20D.%20Solnik%2C%20B.%20Moitra%2C%20S.%20Kochanski%2C%20G.%20Google%20vizier%3A%20A%20service%20for%20black-box%20optimization%202017"
+        },
+        {
+            "id": "31",
+            "entry": "[31] S. Gould, R. Fulton, and D. Koller. Decomposing a scene into geometric and semantically consistent regions. In ICCV, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gould%2C%20S.%20Fulton%2C%20R.%20Koller%2C%20D.%20Decomposing%20a%20scene%20into%20geometric%20and%20semantically%20consistent%20regions%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gould%2C%20S.%20Fulton%2C%20R.%20Koller%2C%20D.%20Decomposing%20a%20scene%20into%20geometric%20and%20semantically%20consistent%20regions%202009"
+        },
+        {
+            "id": "32",
+            "entry": "[32] B. Hariharan, P. Arbel\u00e1ez, L. Bourdev, S. Maji, and J. Malik. Semantic contours from inverse detectors. In ICCV, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hariharan%2C%20B.%20Arbel%C3%A1ez%2C%20P.%20Bourdev%2C%20L.%20Maji%2C%20S.%20Semantic%20contours%20from%20inverse%20detectors%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hariharan%2C%20B.%20Arbel%C3%A1ez%2C%20P.%20Bourdev%2C%20L.%20Maji%2C%20S.%20Semantic%20contours%20from%20inverse%20detectors%202011"
+        },
+        {
+            "id": "33",
+            "entry": "[33] K. He, G. Gkioxari, P. Doll\u00e1r, and R. Girshick. Mask r-cnn. In ICCV, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=K%20He%20G%20Gkioxari%20P%20Doll%C3%A1r%20and%20R%20Girshick%20Mask%20rcnn%20In%20ICCV%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=K%20He%20G%20Gkioxari%20P%20Doll%C3%A1r%20and%20R%20Girshick%20Mask%20rcnn%20In%20ICCV%202017"
+        },
+        {
+            "id": "34",
+            "entry": "[34] K. He, X. Zhang, S. Ren, and J. Sun. Deep residual learning for image recognition. In CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%202016"
+        },
+        {
+            "id": "35",
+            "entry": "[35] X. He, R. S. Zemel, and M. Carreira-Perpindn. Multiscale conditional random fields for image labeling.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20X.%20Zemel%2C%20R.S.%20Carreira-Perpindn%2C%20M.%20Multiscale%20conditional%20random%20fields%20for%20image%20labeling"
+        },
+        {
+            "id": "36",
+            "entry": "[36] G. Hinton, L. Deng, D. Yu, G. E. Dahl, A.-r. Mohamed, N. Jaitly, A. Senior, V. Vanhoucke, P. Nguyen, T. N. Sainath, et al. Deep neural networks for acoustic modeling in speech recognition: The shared views of four research groups. IEEE Signal Processing Magazine, 29(6):82\u201397, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hinton%2C%20G.%20Deng%2C%20L.%20Yu%2C%20D.%20Dahl%2C%20G.E.%20Deep%20neural%20networks%20for%20acoustic%20modeling%20in%20speech%20recognition%3A%20The%20shared%20views%20of%20four%20research%20groups%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hinton%2C%20G.%20Deng%2C%20L.%20Yu%2C%20D.%20Dahl%2C%20G.E.%20Deep%20neural%20networks%20for%20acoustic%20modeling%20in%20speech%20recognition%3A%20The%20shared%20views%20of%20four%20research%20groups%202012"
+        },
+        {
+            "id": "37",
+            "entry": "[37] M. Holschneider, R. Kronland-Martinet, J. Morlet, and P. Tchamitchian. A real-time algorithm for signal analysis with the help of the wavelet transform. In Wavelets: Time-Frequency Methods and Phase Space, pages 289\u2013297. 1989.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Holschneider%2C%20M.%20Kronland-Martinet%2C%20R.%20Morlet%2C%20J.%20Tchamitchian%2C%20P.%20A%20real-time%20algorithm%20for%20signal%20analysis%20with%20the%20help%20of%20the%20wavelet%20transform%201989",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Holschneider%2C%20M.%20Kronland-Martinet%2C%20R.%20Morlet%2C%20J.%20Tchamitchian%2C%20P.%20A%20real-time%20algorithm%20for%20signal%20analysis%20with%20the%20help%20of%20the%20wavelet%20transform%201989"
+        },
+        {
+            "id": "38",
+            "entry": "[38] A. G. Howard, M. Zhu, B. Chen, D. Kalenichenko, W. Wang, T. Weyand, M. Andreetto, and H. Adam. Mobilenets: Efficient convolutional neural networks for mobile vision applications. arXiv:1704.04861, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1704.04861"
+        },
+        {
+            "id": "39",
+            "entry": "[39] G. Huang, Z. Liu, L. van der Maaten, and K. Q. Weinberger. Densely connected convolutional networks. In CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huang%2C%20G.%20Liu%2C%20Z.%20van%20der%20Maaten%2C%20L.%20Weinberger%2C%20K.Q.%20Densely%20connected%20convolutional%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huang%2C%20G.%20Liu%2C%20Z.%20van%20der%20Maaten%2C%20L.%20Weinberger%2C%20K.Q.%20Densely%20connected%20convolutional%20networks%202017"
+        },
+        {
+            "id": "40",
+            "entry": "[40] S. Ioffe and C. Szegedy. Batch normalization: accelerating deep network training by reducing internal covariate shift. In ICML, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ioffe%2C%20S.%20Szegedy%2C%20C.%20Batch%20normalization%3A%20accelerating%20deep%20network%20training%20by%20reducing%20internal%20covariate%20shift%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ioffe%2C%20S.%20Szegedy%2C%20C.%20Batch%20normalization%3A%20accelerating%20deep%20network%20training%20by%20reducing%20internal%20covariate%20shift%202015"
+        },
+        {
+            "id": "41",
+            "entry": "[41] P. Kohli, P. H. Torr, et al. Robust higher order potentials for enforcing label consistency. IJCV, 82(3):302\u2013 324, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kohli%2C%20P.%20Torr%2C%20P.H.%20Robust%20higher%20order%20potentials%20for%20enforcing%20label%20consistency%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kohli%2C%20P.%20Torr%2C%20P.H.%20Robust%20higher%20order%20potentials%20for%20enforcing%20label%20consistency%202009"
+        },
+        {
+            "id": "42",
+            "entry": "[42] P. Kr\u00e4henb\u00fchl and V. Koltun. Efficient inference in fully connected crfs with gaussian edge potentials. In NIPS, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kr%C3%A4henb%C3%BChl%2C%20P.%20Koltun%2C%20V.%20Efficient%20inference%20in%20fully%20connected%20crfs%20with%20gaussian%20edge%20potentials%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kr%C3%A4henb%C3%BChl%2C%20P.%20Koltun%2C%20V.%20Efficient%20inference%20in%20fully%20connected%20crfs%20with%20gaussian%20edge%20potentials%202011"
+        },
+        {
+            "id": "43",
+            "entry": "[43] A. Krizhevsky and G. Hinton. Learning multiple layers of features from tiny images. Technical report, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20A.%20Hinton%2C%20G.%20Learning%20multiple%20layers%20of%20features%20from%20tiny%20images%202009"
+        },
+        {
+            "id": "44",
+            "entry": "[44] A. Krizhevsky, I. Sutskever, and G. E. Hinton. Imagenet classification with deep convolutional neural networks. In NIPS, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20A.%20Sutskever%2C%20I.%20Hinton%2C%20G.E.%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krizhevsky%2C%20A.%20Sutskever%2C%20I.%20Hinton%2C%20G.E.%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012"
+        },
+        {
+            "id": "45",
+            "entry": "[45] L. Ladicky, C. Russell, P. Kohli, and P. H. Torr. Associative hierarchical crfs for object class image segmentation. In ICCV, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ladicky%2C%20L.%20Russell%2C%20C.%20Kohli%2C%20P.%20Torr%2C%20P.H.%20Associative%20hierarchical%20crfs%20for%20object%20class%20image%20segmentation%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ladicky%2C%20L.%20Russell%2C%20C.%20Kohli%2C%20P.%20Torr%2C%20P.H.%20Associative%20hierarchical%20crfs%20for%20object%20class%20image%20segmentation%202009"
+        },
+        {
+            "id": "46",
+            "entry": "[46] Y. LeCun, B. Boser, J. S. Denker, D. Henderson, R. E. Howard, W. Hubbard, and L. D. Jackel. Backpropagation applied to handwritten zip code recognition. Neural computation, 1(4):541\u2013551, 1989.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=LeCun%2C%20Y.%20Boser%2C%20B.%20Denker%2C%20J.S.%20Henderson%2C%20D.%20Backpropagation%20applied%20to%20handwritten%20zip%20code%20recognition%201989",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=LeCun%2C%20Y.%20Boser%2C%20B.%20Denker%2C%20J.S.%20Henderson%2C%20D.%20Backpropagation%20applied%20to%20handwritten%20zip%20code%20recognition%201989"
+        },
+        {
+            "id": "47",
+            "entry": "[47] X. Liang, L. Lin, X. Shen, J. Feng, S. Yan, and E. P. Xing. Interpretable structure-evolving lstm. In CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=X%20Liang%20L%20Lin%20X%20Shen%20J%20Feng%20S%20Yan%20and%20E%20P%20Xing%20Interpretable%20structureevolving%20lstm%20In%20CVPR%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=X%20Liang%20L%20Lin%20X%20Shen%20J%20Feng%20S%20Yan%20and%20E%20P%20Xing%20Interpretable%20structureevolving%20lstm%20In%20CVPR%202017"
+        },
+        {
+            "id": "48",
+            "entry": "[48] D. Lin, Y. Ji, D. Lischinski, D. Cohen-Or, and H. Huang. Multi-scale context intertwining for semantic segmentation. In ECCV, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20D.%20Ji%2C%20Y.%20Lischinski%2C%20D.%20Cohen-Or%2C%20D.%20Multi-scale%20context%20intertwining%20for%20semantic%20segmentation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lin%2C%20D.%20Ji%2C%20Y.%20Lischinski%2C%20D.%20Cohen-Or%2C%20D.%20Multi-scale%20context%20intertwining%20for%20semantic%20segmentation%202018"
+        },
+        {
+            "id": "49",
+            "entry": "[49] G. Lin, A. Milan, C. Shen, and I. Reid. Refinenet: Multi-path refinement networks with identity mappings for high-resolution semantic segmentation. In CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20G.%20Milan%2C%20A.%20Shen%2C%20C.%20Reid%2C%20I.%20Refinenet%3A%20Multi-path%20refinement%20networks%20with%20identity%20mappings%20for%20high-resolution%20semantic%20segmentation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lin%2C%20G.%20Milan%2C%20A.%20Shen%2C%20C.%20Reid%2C%20I.%20Refinenet%3A%20Multi-path%20refinement%20networks%20with%20identity%20mappings%20for%20high-resolution%20semantic%20segmentation%202017"
+        },
+        {
+            "id": "50",
+            "entry": "[50] G. Lin, C. Shen, A. van den Hengel, and I. Reid. Efficient piecewise training of deep structured models for semantic segmentation. In CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20G.%20Shen%2C%20C.%20van%20den%20Hengel%2C%20A.%20Reid%2C%20I.%20Efficient%20piecewise%20training%20of%20deep%20structured%20models%20for%20semantic%20segmentation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lin%2C%20G.%20Shen%2C%20C.%20van%20den%20Hengel%2C%20A.%20Reid%2C%20I.%20Efficient%20piecewise%20training%20of%20deep%20structured%20models%20for%20semantic%20segmentation%202016"
+        },
+        {
+            "id": "51",
+            "entry": "[51] T.-Y. Lin et al. Microsoft coco: Common objects in context. In ECCV, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=TY%20Lin%20et%20al%20Microsoft%20coco%20Common%20objects%20in%20context%20In%20ECCV%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=TY%20Lin%20et%20al%20Microsoft%20coco%20Common%20objects%20in%20context%20In%20ECCV%202014"
+        },
+        {
+            "id": "52",
+            "entry": "[52] C. Liu, B. Zoph, M. Neumann, J. Shlens, W. Hua, L.-J. Li, L. Fei-Fei, A. Yuille, J. Huang, and K. Murphy. Progressive neural architecture search. In ECCV, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=C%20Liu%20B%20Zoph%20M%20Neumann%20J%20Shlens%20W%20Hua%20LJ%20Li%20L%20FeiFei%20A%20Yuille%20J%20Huang%20and%20K%20Murphy%20Progressive%20neural%20architecture%20search%20In%20ECCV%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=C%20Liu%20B%20Zoph%20M%20Neumann%20J%20Shlens%20W%20Hua%20LJ%20Li%20L%20FeiFei%20A%20Yuille%20J%20Huang%20and%20K%20Murphy%20Progressive%20neural%20architecture%20search%20In%20ECCV%202018"
+        },
+        {
+            "id": "53",
+            "entry": "[53] H. Liu, K. Simonyan, O. Vinyals, C. Fernando, and K. Kavukcuoglu. Hierarchical representations for efficient architecture search. In ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20H.%20Simonyan%2C%20K.%20Vinyals%2C%20O.%20Fernando%2C%20C.%20Hierarchical%20representations%20for%20efficient%20architecture%20search%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liu%2C%20H.%20Simonyan%2C%20K.%20Vinyals%2C%20O.%20Fernando%2C%20C.%20Hierarchical%20representations%20for%20efficient%20architecture%20search%202018"
+        },
+        {
+            "id": "54",
+            "entry": "[54] H. Liu, K. Simonyan, and Y. Yang. Darts: Differentiable architecture search. arXiv:1806.09055, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1806.09055"
+        },
+        {
+            "id": "55",
+            "entry": "[55] W. Liu, D. Anguelov, D. Erhan, C. Szegedy, S. Reed, C.-Y. Fu, and A. C. Berg. SSD: Single shot multibox detector. In ECCV, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=W%20Liu%20D%20Anguelov%20D%20Erhan%20C%20Szegedy%20S%20Reed%20CY%20Fu%20and%20A%20C%20Berg%20SSD%20Single%20shot%20multibox%20detector%20In%20ECCV%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=W%20Liu%20D%20Anguelov%20D%20Erhan%20C%20Szegedy%20S%20Reed%20CY%20Fu%20and%20A%20C%20Berg%20SSD%20Single%20shot%20multibox%20detector%20In%20ECCV%202016"
+        },
+        {
+            "id": "56",
+            "entry": "[56] W. Liu, A. Rabinovich, and A. C. Berg. Parsenet: Looking wider to see better. arXiv:1506.04579, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1506.04579"
+        },
+        {
+            "id": "57",
+            "entry": "[57] Z. Liu, X. Li, P. Luo, C. C. Loy, and X. Tang. Semantic image segmentation via deep parsing network. In",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20Z.%20Li%2C%20X.%20Luo%2C%20P.%20Loy%2C%20C.C.%20Semantic%20image%20segmentation%20via%20deep%20parsing%20network",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liu%2C%20Z.%20Li%2C%20X.%20Luo%2C%20P.%20Loy%2C%20C.C.%20Semantic%20image%20segmentation%20via%20deep%20parsing%20network"
+        },
+        {
+            "id": "58",
+            "entry": "[58] J. Long, E. Shelhamer, and T. Darrell. Fully convolutional networks for semantic segmentation. In CVPR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Long%2C%20J.%20Shelhamer%2C%20E.%20Darrell%2C%20T.%20Fully%20convolutional%20networks%20for%20semantic%20segmentation%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Long%2C%20J.%20Shelhamer%2C%20E.%20Darrell%2C%20T.%20Fully%20convolutional%20networks%20for%20semantic%20segmentation%202015"
+        },
+        {
+            "id": "59",
+            "entry": "[59] R. Miikkulainen, J. Liang, E. Meyerson, A. Rawal, D. Fink, O. Francon, B. Raju, H. Shahrzad, A. Navruzyan, N. Duffy, and B. Hodjat. Evolving deep neural networks. arXiv:1703.00548, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.00548"
+        },
+        {
+            "id": "60",
+            "entry": "[60] M. Mostajabi, P. Yadollahpour, and G. Shakhnarovich. Feedforward semantic segmentation with zoom-out features. In CVPR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mostajabi%2C%20M.%20Yadollahpour%2C%20P.%20Shakhnarovich%2C%20G.%20Feedforward%20semantic%20segmentation%20with%20zoom-out%20features%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mostajabi%2C%20M.%20Yadollahpour%2C%20P.%20Shakhnarovich%2C%20G.%20Feedforward%20semantic%20segmentation%20with%20zoom-out%20features%202015"
+        },
+        {
+            "id": "61",
+            "entry": "[61] R. Negrinho and G. Gordon. Deeparchitect: Automatically designing and training deep architectures. arXiv:1704.08792, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1704.08792"
+        },
+        {
+            "id": "62",
+            "entry": "[62] G. Papandreou, I. Kokkinos, and P.-A. Savalle. Modeling local and global deformations in deep learning: Epitomic convolution, multiple instance learning, and sliding window detection. In CVPR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Papandreou%2C%20G.%20Kokkinos%2C%20I.%20Savalle%2C%20P.-A.%20Modeling%20local%20and%20global%20deformations%20in%20deep%20learning%3A%20Epitomic%20convolution%2C%20multiple%20instance%20learning%2C%20and%20sliding%20window%20detection%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Papandreou%2C%20G.%20Kokkinos%2C%20I.%20Savalle%2C%20P.-A.%20Modeling%20local%20and%20global%20deformations%20in%20deep%20learning%3A%20Epitomic%20convolution%2C%20multiple%20instance%20learning%2C%20and%20sliding%20window%20detection%202015"
+        },
+        {
+            "id": "63",
+            "entry": "[63] G. Papandreou, T. Zhu, L.-C. Chen, S. Gidaris, J. Tompson, and K. Murphy. Personlab: Person pose estimation and instance segmentation with a bottom-up, part-based, geometric embedding model. In ECCV, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Papandreou%2C%20G.%20Zhu%2C%20T.%20Chen%2C%20L.-C.%20Gidaris%2C%20S.%20Personlab%3A%20Person%20pose%20estimation%20and%20instance%20segmentation%20with%20a%20bottom-up%2C%20part-based%2C%20geometric%20embedding%20model%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Papandreou%2C%20G.%20Zhu%2C%20T.%20Chen%2C%20L.-C.%20Gidaris%2C%20S.%20Personlab%3A%20Person%20pose%20estimation%20and%20instance%20segmentation%20with%20a%20bottom-up%2C%20part-based%2C%20geometric%20embedding%20model%202018"
+        },
+        {
+            "id": "64",
+            "entry": "[64] C. Peng, X. Zhang, G. Yu, G. Luo, and J. Sun. Large kernel matters\u2013improve semantic segmentation by global convolutional network. In CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Peng%2C%20C.%20Zhang%2C%20X.%20Yu%2C%20G.%20Luo%2C%20G.%20Large%20kernel%20matters%E2%80%93improve%20semantic%20segmentation%20by%20global%20convolutional%20network%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Peng%2C%20C.%20Zhang%2C%20X.%20Yu%2C%20G.%20Luo%2C%20G.%20Large%20kernel%20matters%E2%80%93improve%20semantic%20segmentation%20by%20global%20convolutional%20network%202017"
+        },
+        {
+            "id": "65",
+            "entry": "[65] H. Pham, M. Y. Guan, B. Zoph, Q. V. Le, and J. Dean. Efficient neural architecture search via parameter sharing. In ICML, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pham%2C%20H.%20Guan%2C%20M.Y.%20Zoph%2C%20B.%20Le%2C%20Q.V.%20Efficient%20neural%20architecture%20search%20via%20parameter%20sharing%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pham%2C%20H.%20Guan%2C%20M.Y.%20Zoph%2C%20B.%20Le%2C%20Q.V.%20Efficient%20neural%20architecture%20search%20via%20parameter%20sharing%202018"
+        },
+        {
+            "id": "66",
+            "entry": "[66] P. Pinheiro and R. Collobert. Recurrent convolutional neural networks for scene labeling. In ICML, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pinheiro%2C%20P.%20Collobert%2C%20R.%20Recurrent%20convolutional%20neural%20networks%20for%20scene%20labeling%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pinheiro%2C%20P.%20Collobert%2C%20R.%20Recurrent%20convolutional%20neural%20networks%20for%20scene%20labeling%202014"
+        },
+        {
+            "id": "67",
+            "entry": "[67] H. Qi, Z. Zhang, B. Xiao, H. Hu, B. Cheng, Y. Wei, and J. Dai. Deformable convolutional networks \u2013 coco detection and segmentation challenge 2017 entry. ICCV COCO Challenge Workshop, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=H%20Qi%20Z%20Zhang%20B%20Xiao%20H%20Hu%20B%20Cheng%20Y%20Wei%20and%20J%20Dai%20Deformable%20convolutional%20networks%20%20coco%20detection%20and%20segmentation%20challenge%202017%20entry%20ICCV%20COCO%20Challenge%20Workshop%202017"
+        },
+        {
+            "id": "68",
+            "entry": "[68] E. Real, A. Aggarwal, Y. Huang, and Q. V. Le. Regularized evolution for image classifier architecture search. arXiv:1802.01548, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.01548"
+        },
+        {
+            "id": "69",
+            "entry": "[69] E. Real, S. Moore, A. Selle, S. Saxena, Y. L. Suematsu, J. Tan, Q. Le, and A. Kurakin. Large-scale evolution of image classifiers. In ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=E%20Real%20S%20Moore%20A%20Selle%20S%20Saxena%20Y%20L%20Suematsu%20J%20Tan%20Q%20Le%20and%20A%20Kurakin%20Largescale%20evolution%20of%20image%20classifiers%20In%20ICML%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=E%20Real%20S%20Moore%20A%20Selle%20S%20Saxena%20Y%20L%20Suematsu%20J%20Tan%20Q%20Le%20and%20A%20Kurakin%20Largescale%20evolution%20of%20image%20classifiers%20In%20ICML%202017"
+        },
+        {
+            "id": "70",
+            "entry": "[70] J. Redmon, S. Divvala, R. Girshick, and A. Farhadi. You only look once: Unified, real-time object detection. In CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Redmon%2C%20J.%20Divvala%2C%20S.%20Girshick%2C%20R.%20Farhadi%2C%20A.%20You%20only%20look%20once%3A%20Unified%2C%20real-time%20object%20detection%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Redmon%2C%20J.%20Divvala%2C%20S.%20Girshick%2C%20R.%20Farhadi%2C%20A.%20You%20only%20look%20once%3A%20Unified%2C%20real-time%20object%20detection%202016"
+        },
+        {
+            "id": "71",
+            "entry": "[71] S. Ren, K. He, R. Girshick, and J. Sun. Faster r-cnn: Towards real-time object detection with region proposal networks. In NIPS, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ren%2C%20S.%20He%2C%20K.%20Girshick%2C%20R.%20Sun%2C%20J.%20Faster%20r-cnn%3A%20Towards%20real-time%20object%20detection%20with%20region%20proposal%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ren%2C%20S.%20He%2C%20K.%20Girshick%2C%20R.%20Sun%2C%20J.%20Faster%20r-cnn%3A%20Towards%20real-time%20object%20detection%20with%20region%20proposal%20networks%202015"
+        },
+        {
+            "id": "72",
+            "entry": "[72] O. Ronneberger, P. Fischer, and T. Brox. U-net: Convolutional networks for biomedical image segmentation. In MICCAI, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ronneberger%2C%20O.%20Fischer%2C%20P.%20Brox%2C%20T.%20U-net%3A%20Convolutional%20networks%20for%20biomedical%20image%20segmentation%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ronneberger%2C%20O.%20Fischer%2C%20P.%20Brox%2C%20T.%20U-net%3A%20Convolutional%20networks%20for%20biomedical%20image%20segmentation%202015"
+        },
+        {
+            "id": "73",
+            "entry": "[73] O. Russakovsky, J. Deng, H. Su, J. Krause, S. Satheesh, S. Ma, Z. Huang, A. Karpathy, A. Khosla, M. Bernstein, A. C. Berg, and L. Fei-Fei. ImageNet Large Scale Visual Recognition Challenge. IJCV, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Russakovsky%2C%20O.%20Deng%2C%20J.%20Su%2C%20H.%20Krause%2C%20J.%20ImageNet%20Large%20Scale%20Visual%20Recognition%20Challenge%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Russakovsky%2C%20O.%20Deng%2C%20J.%20Su%2C%20H.%20Krause%2C%20J.%20ImageNet%20Large%20Scale%20Visual%20Recognition%20Challenge%202015"
+        },
+        {
+            "id": "74",
+            "entry": "[74] M. Sandler, A. Howard, M. Zhu, A. Zhmoginov, and L.-C. Chen. Mobilenetv2: Inverted residuals and linear bottlenecks. In CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=M%20Sandler%20A%20Howard%20M%20Zhu%20A%20Zhmoginov%20and%20LC%20Chen%20Mobilenetv2%20Inverted%20residuals%20and%20linear%20bottlenecks%20In%20CVPR%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=M%20Sandler%20A%20Howard%20M%20Zhu%20A%20Zhmoginov%20and%20LC%20Chen%20Mobilenetv2%20Inverted%20residuals%20and%20linear%20bottlenecks%20In%20CVPR%202018"
+        },
+        {
+            "id": "75",
+            "entry": "[75] S. Saxena and J. Verbeek. Convolutional neural fabrics. In NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Saxena%2C%20S.%20Verbeek%2C%20J.%20Convolutional%20neural%20fabrics%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Saxena%2C%20S.%20Verbeek%2C%20J.%20Convolutional%20neural%20fabrics%202016"
+        },
+        {
+            "id": "76",
+            "entry": "[76] A. G. Schwing and R. Urtasun. Fully connected deep structured networks. arXiv:1503.02351, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1503.02351"
+        },
+        {
+            "id": "77",
+            "entry": "[77] P. Sermanet, D. Eigen, X. Zhang, M. Mathieu, R. Fergus, and Y. LeCun. Overfeat: Integrated recognition, localization and detection using convolutional networks. In ICLR, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sermanet%2C%20P.%20Eigen%2C%20D.%20Zhang%2C%20X.%20Mathieu%2C%20M.%20Overfeat%3A%20Integrated%20recognition%2C%20localization%20and%20detection%20using%20convolutional%20networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sermanet%2C%20P.%20Eigen%2C%20D.%20Zhang%2C%20X.%20Mathieu%2C%20M.%20Overfeat%3A%20Integrated%20recognition%2C%20localization%20and%20detection%20using%20convolutional%20networks%202014"
+        },
+        {
+            "id": "78",
+            "entry": "[78] J. Shotton, J. Winn, C. Rother, and A. Criminisi. Textonboost for image understanding: Multi-class object recognition and segmentation by jointly modeling texture, layout, and context. IJCV, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shotton%2C%20J.%20Winn%2C%20J.%20Rother%2C%20C.%20Criminisi%2C%20A.%20Textonboost%20for%20image%20understanding%3A%20Multi-class%20object%20recognition%20and%20segmentation%20by%20jointly%20modeling%20texture%2C%20layout%2C%20and%20context%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shotton%2C%20J.%20Winn%2C%20J.%20Rother%2C%20C.%20Criminisi%2C%20A.%20Textonboost%20for%20image%20understanding%3A%20Multi-class%20object%20recognition%20and%20segmentation%20by%20jointly%20modeling%20texture%2C%20layout%2C%20and%20context%202009"
+        },
+        {
+            "id": "79",
+            "entry": "[79] L. Sifre. Rigid-motion scattering for image classification. PhD thesis, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sifre%2C%20L.%20Rigid-motion%20scattering%20for%20image%20classification%202014"
+        },
+        {
+            "id": "80",
+            "entry": "[80] N. Silberman, D. Hoiem, P. Kohli, and R. Fergus. Indoor segmentation and support inference from rgbd images. In ECCV, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silberman%2C%20N.%20Hoiem%2C%20D.%20Kohli%2C%20P.%20Fergus%2C%20R.%20Indoor%20segmentation%20and%20support%20inference%20from%20rgbd%20images%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silberman%2C%20N.%20Hoiem%2C%20D.%20Kohli%2C%20P.%20Fergus%2C%20R.%20Indoor%20segmentation%20and%20support%20inference%20from%20rgbd%20images%202012"
+        },
+        {
+            "id": "81",
+            "entry": "[81] K. O. Stanley and R. Miikkulainen. Evolving neural networks through augmenting topologies. Evolutionary computation, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Stanley%2C%20K.O.%20Miikkulainen%2C%20R.%20Evolving%20neural%20networks%20through%20augmenting%20topologies%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Stanley%2C%20K.O.%20Miikkulainen%2C%20R.%20Evolving%20neural%20networks%20through%20augmenting%20topologies%202002"
+        },
+        {
+            "id": "82",
+            "entry": "[82] I. Sutskever, O. Vinyals, and Q. V. Le. Sequence to sequence learning with neural networks. In NIPS, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutskever%2C%20I.%20Vinyals%2C%20O.%20Le%2C%20Q.V.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutskever%2C%20I.%20Vinyals%2C%20O.%20Le%2C%20Q.V.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014"
+        },
+        {
+            "id": "83",
+            "entry": "[83] C. Szegedy, W. Liu, Y. Jia, P. Sermanet, S. Reed, D. Anguelov, D. Erhan, V. Vanhoucke, and A. Rabinovich. Going deeper with convolutions. In CVPR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Szegedy%2C%20C.%20Liu%2C%20W.%20Jia%2C%20Y.%20Sermanet%2C%20P.%20Going%20deeper%20with%20convolutions%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Szegedy%2C%20C.%20Liu%2C%20W.%20Jia%2C%20Y.%20Sermanet%2C%20P.%20Going%20deeper%20with%20convolutions%202015"
+        },
+        {
+            "id": "84",
+            "entry": "[84] C. Szegedy, V. Vanhoucke, S. Ioffe, J. Shlens, and Z. Wojna. Rethinking the inception architecture for computer vision. In CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Szegedy%2C%20C.%20Vanhoucke%2C%20V.%20Ioffe%2C%20S.%20Shlens%2C%20J.%20Rethinking%20the%20inception%20architecture%20for%20computer%20vision%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Szegedy%2C%20C.%20Vanhoucke%2C%20V.%20Ioffe%2C%20S.%20Shlens%2C%20J.%20Rethinking%20the%20inception%20architecture%20for%20computer%20vision%202016"
+        },
+        {
+            "id": "85",
+            "entry": "[85] V. Vanhoucke. Learning visual representations at scale. ICLR invited talk, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vanhoucke%2C%20V.%20Learning%20visual%20representations%20at%20scale%202014"
+        },
+        {
+            "id": "86",
+            "entry": "[86] M. Wang, B. Liu, and H. Foroosh. Design of efficient convolutional layers using single intra-channel convolution, topological subdivisioning and spatial \"bottleneck\" structure. arXiv:1608.04337, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1608.04337"
+        },
+        {
+            "id": "87",
+            "entry": "[87] P. Wang, P. Chen, Y. Yuan, D. Liu, Z. Huang, X. Hou, and G. Cottrell. Understanding convolution for semantic segmentation. arXiv:1702.08502, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1702.08502"
+        },
+        {
+            "id": "88",
+            "entry": "[88] Y. Wu, M. Schuster, Z. Chen, Q. V. Le, M. Norouzi, W. Macherey, M. Krikun, Y. Cao, Q. Gao, K. Macherey, et al. Google\u2019s neural machine translation system: Bridging the gap between human and machine translation. arXiv:1609.08144, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.08144"
+        },
+        {
+            "id": "89",
+            "entry": "[89] F. Xia, P. Wang, X. Chen, and A. L. Yuille. Joint multi-person pose estimation and semantic part segmentation. In CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xia%2C%20F.%20Wang%2C%20P.%20Chen%2C%20X.%20Yuille%2C%20A.L.%20Joint%20multi-person%20pose%20estimation%20and%20semantic%20part%20segmentation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xia%2C%20F.%20Wang%2C%20P.%20Chen%2C%20X.%20Yuille%2C%20A.L.%20Joint%20multi-person%20pose%20estimation%20and%20semantic%20part%20segmentation%202017"
+        },
+        {
+            "id": "90",
+            "entry": "[90] L. Xie and A. Yuille. Genetic cnn. In ICCV, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=L%20Xie%20and%20A%20Yuille%20Genetic%20cnn%20In%20ICCV%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=L%20Xie%20and%20A%20Yuille%20Genetic%20cnn%20In%20ICCV%202017"
+        },
+        {
+            "id": "91",
+            "entry": "[91] M. Yang, K. Yu, C. Zhang, Z. Li, and K. Yang. Denseaspp for semantic segmentation in street scenes. In",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yang%2C%20M.%20Yu%2C%20K.%20Zhang%2C%20C.%20Li%2C%20Z.%20Denseaspp%20for%20semantic%20segmentation%20in%20street%20scenes",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yang%2C%20M.%20Yu%2C%20K.%20Zhang%2C%20C.%20Li%2C%20Z.%20Denseaspp%20for%20semantic%20segmentation%20in%20street%20scenes"
+        },
+        {
+            "id": "92",
+            "entry": "[92] J. Yao, S. Fidler, and R. Urtasun. Describing the scene as a whole: Joint object detection, scene classification and semantic segmentation. In CVPR, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yao%2C%20J.%20Fidler%2C%20S.%20Urtasun%2C%20R.%20Describing%20the%20scene%20as%20a%20whole%3A%20Joint%20object%20detection%2C%20scene%20classification%20and%20semantic%20segmentation%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yao%2C%20J.%20Fidler%2C%20S.%20Urtasun%2C%20R.%20Describing%20the%20scene%20as%20a%20whole%3A%20Joint%20object%20detection%2C%20scene%20classification%20and%20semantic%20segmentation%202012"
+        },
+        {
+            "id": "93",
+            "entry": "[93] C. Yu, J. Wang, C. Peng, C. Gao, G. Yu, and N. Sang. Learning a discriminative feature network for semantic segmentation. In CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yu%2C%20C.%20Wang%2C%20J.%20Peng%2C%20C.%20Gao%2C%20C.%20Learning%20a%20discriminative%20feature%20network%20for%20semantic%20segmentation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yu%2C%20C.%20Wang%2C%20J.%20Peng%2C%20C.%20Gao%2C%20C.%20Learning%20a%20discriminative%20feature%20network%20for%20semantic%20segmentation%202018"
+        },
+        {
+            "id": "94",
+            "entry": "[94] F. Yu and V. Koltun. Multi-scale context aggregation by dilated convolutions. In ICLR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yu%2C%20F.%20Koltun%2C%20V.%20Multi-scale%20context%20aggregation%20by%20dilated%20convolutions%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yu%2C%20F.%20Koltun%2C%20V.%20Multi-scale%20context%20aggregation%20by%20dilated%20convolutions%202016"
+        },
+        {
+            "id": "95",
+            "entry": "[95] H. Zhang, K. Dana, J. Shi, Z. Zhang, X. Wang, A. Tyagi, and A. Agrawal. Context encoding for semantic segmentation. In CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20H.%20Dana%2C%20K.%20Shi%2C%20J.%20Zhang%2C%20Z.%20Context%20encoding%20for%20semantic%20segmentation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20H.%20Dana%2C%20K.%20Shi%2C%20J.%20Zhang%2C%20Z.%20Context%20encoding%20for%20semantic%20segmentation%202018"
+        },
+        {
+            "id": "96",
+            "entry": "[96] Z. Zhang, X. Zhang, C. Peng, D. Cheng, and J. Sun. Exfuse: Enhancing feature fusion for semantic segmentation. In ECCV, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Z.%20Zhang%2C%20X.%20Peng%2C%20C.%20Cheng%2C%20D.%20Exfuse%3A%20Enhancing%20feature%20fusion%20for%20semantic%20segmentation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Z.%20Zhang%2C%20X.%20Peng%2C%20C.%20Cheng%2C%20D.%20Exfuse%3A%20Enhancing%20feature%20fusion%20for%20semantic%20segmentation%202018"
+        },
+        {
+            "id": "97",
+            "entry": "[97] H. Zhao, J. Shi, X. Qi, X. Wang, and J. Jia. Pyramid scene parsing network. In CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhao%2C%20H.%20Shi%2C%20J.%20Qi%2C%20X.%20Wang%2C%20X.%20Pyramid%20scene%20parsing%20network%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhao%2C%20H.%20Shi%2C%20J.%20Qi%2C%20X.%20Wang%2C%20X.%20Pyramid%20scene%20parsing%20network%202017"
+        },
+        {
+            "id": "98",
+            "entry": "[98] S. Zheng, S. Jayasumana, B. Romera-Paredes, V. Vineet, Z. Su, D. Du, C. Huang, and P. Torr. Conditional random fields as recurrent neural networks. In ICCV, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zheng%2C%20S.%20Jayasumana%2C%20S.%20Romera-Paredes%2C%20B.%20Vineet%2C%20V.%20Conditional%20random%20fields%20as%20recurrent%20neural%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zheng%2C%20S.%20Jayasumana%2C%20S.%20Romera-Paredes%2C%20B.%20Vineet%2C%20V.%20Conditional%20random%20fields%20as%20recurrent%20neural%20networks%202015"
+        },
+        {
+            "id": "99",
+            "entry": "[99] Z. Zhong, J. Yan, and C.-L. Liu. Practical network blocks design with q-learning. In AAAI, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhong%2C%20Z.%20Yan%2C%20J.%20Liu%2C%20C.-L.%20Practical%20network%20blocks%20design%20with%20q-learning%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhong%2C%20Z.%20Yan%2C%20J.%20Liu%2C%20C.-L.%20Practical%20network%20blocks%20design%20with%20q-learning%202018"
+        },
+        {
+            "id": "100",
+            "entry": "[100] B. Zoph and Q. V. Le. Neural architecture search with reinforcement learning. In ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zoph%2C%20B.%20Le%2C%20Q.V.%20Neural%20architecture%20search%20with%20reinforcement%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zoph%2C%20B.%20Le%2C%20Q.V.%20Neural%20architecture%20search%20with%20reinforcement%20learning%202017"
+        },
+        {
+            "id": "101",
+            "entry": "[101] B. Zoph, V. Vasudevan, J. Shlens, and Q. V. Le. Learning transferable architectures for scalable image recognition. In CVPR, 2018. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zoph%2C%20B.%20Vasudevan%2C%20V.%20Shlens%2C%20J.%20Le%2C%20Q.V.%20Learning%20transferable%20architectures%20for%20scalable%20image%20recognition%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zoph%2C%20B.%20Vasudevan%2C%20V.%20Shlens%2C%20J.%20Le%2C%20Q.V.%20Learning%20transferable%20architectures%20for%20scalable%20image%20recognition%202018"
+        }
+    ]
+}

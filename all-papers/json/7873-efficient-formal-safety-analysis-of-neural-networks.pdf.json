@@ -1,0 +1,307 @@
+{
+    "filename": "7873-efficient-formal-safety-analysis-of-neural-networks.pdf",
+    "metadata": {
+        "title": "Efficient Formal Safety Analysis of Neural Networks",
+        "author": "Shiqi Wang, Kexin Pei, Justin Whitehouse, Junfeng Yang, Suman Jana",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7873-efficient-formal-safety-analysis-of-neural-networks.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Neural networks are increasingly deployed in real-world safety-critical domains such as autonomous driving, aircraft collision avoidance, and malware detection. However, these networks have been shown to often mispredict on inputs with minor adversarial or even accidental perturbations. Consequences of such errors can be disastrous and even potentially fatal as shown by the recent Tesla autopilot crashes. Thus, there is an urgent need for formal analysis systems that can rigorously check neural networks for violations of different safety properties such as robustness against adversarial perturbations within a certain L-norm of a given image. An effective safety analysis system for a neural network must be able to either ensure that a safety property is satisfied by the network or find a counterexample, i.e., an input for which the network will violate the property. Unfortunately, most existing techniques for performing such analysis struggle to scale beyond very small networks and the ones that can scale to larger networks suffer from high false positives and cannot produce concrete counterexamples in case of a property violation. In this paper, we present a new efficient approach for rigorously checking different safety properties of neural networks that significantly outperforms existing approaches by multiple orders of magnitude. Our approach can check different safety properties and find concrete counterexamples for networks that are 10\u00d7 larger than the ones supported by existing analysis techniques. We believe that our approach to estimating tight output bounds of a network for a given input range can also help improve the explainability of neural networks and guide the training process of more robust neural networks."
+    },
+    "keywords": [
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "safety property",
+            "url": "https://en.wikipedia.org/wiki/safety_property"
+        },
+        {
+            "term": "collision avoidance system",
+            "url": "https://en.wikipedia.org/wiki/collision_avoidance_system"
+        },
+        {
+            "term": "interval analysis",
+            "url": "https://en.wikipedia.org/wiki/interval_analysis"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "We build upon two prior works [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>, <a class=\"ref-link\" id=\"c38\" href=\"#r38\">38</a>] on using interval analysis and linear relaxations for analyzing neural networks",
+        "We introduce a novel technique called directed constraint refinement to iteratively minimize the errors introduced during the relaxation process until either a safety property is satisfied or a counterexample is found",
+        "We present a technique for identifying the overestimated intermediate nodes, i.e., the nodes whose outputs are overestimated, during symbolic linear relaxation and propose directed constraint refinement to iteratively refine the output ranges of these nodes",
+        "We evaluate how symbolic linear relaxation and directed constraint refinement each can improve the performance compared with Relu-",
+        "We propose symbolic linear relaxation to compute a tight over-approximation of a network\u2019s output for a given input range and use directed constraint refinement to further refine the bounds using linear solvers",
+        "Our extensive empirical results demonstrate that Neurify outperforms state-of-the-art formal analysis systems by several orders of magnitude and can scale to networks with more than 10,000 ReLU nodes"
+    ],
+    "key_statements": [
+        "We build upon two prior works [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>, <a class=\"ref-link\" id=\"c38\" href=\"#r38\">38</a>] on using interval analysis and linear relaxations for analyzing neural networks",
+        "We introduce a novel technique called directed constraint refinement to iteratively minimize the errors introduced during the relaxation process until either a safety property is satisfied or a counterexample is found",
+        "To make the refinement process efficient, we identify the potentially overestimated nodes, i.e., the nodes where inaccuracies introduced during relaxation can potentially affect the checking of a given safety property, and use off-the-shelf solvers to focus only on those nodes to further tighten their output ranges",
+        "There are three possible output intervals that the ReLU node can produce depending on the bounds of Eq: (1) z = [Eq, Eq] when l \u2265 0, (2) z = [0, 0] when u \u2264 0, or (3) z = [l, u] when l < 0 < u",
+        "We present a technique for identifying the overestimated intermediate nodes, i.e., the nodes whose outputs are overestimated, during symbolic linear relaxation and propose directed constraint refinement to iteratively refine the output ranges of these nodes",
+        "Neurify will use directed constraint refinement guided by symbolic linear relaxation to obtain a tighter output bound and recheck the property with the solver.\n3.1",
+        "We develop another generic approach, directed constraint refinement, to further improve the overall performance of property checking",
+        "To Table 6: The timeout cases out of 100 random illustrate how Directed Constraint Refinement can improve the overall perimages generated while using symbolic linear reformance when combined with Symbolic Linear Relaxation, we evallaxation alone and together with directed conuate Neurify on MNIST_CN and measure the straint refinement",
+        "We evaluate how symbolic linear relaxation and directed constraint refinement each can improve the performance compared with Relu-",
+        "We summarize the total cases that can be verified by Neurify, original ReluVal, and ReluVal+Symbolic Linear Relaxation out of 100 random MNIST images within 600 seconds in Figure 5",
+        "We propose symbolic linear relaxation to compute a tight over-approximation of a network\u2019s output for a given input range and use directed constraint refinement to further refine the bounds using linear solvers",
+        "Our extensive empirical results demonstrate that Neurify outperforms state-of-the-art formal analysis systems by several orders of magnitude and can scale to networks with more than 10,000 ReLU nodes"
+    ],
+    "summary": [
+        "We build upon two prior works [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>, <a class=\"ref-link\" id=\"c38\" href=\"#r38\">38</a>] on using interval analysis and linear relaxations for analyzing neural networks.",
+        "Neurify takes in a range of inputs X and determines using linear solver whether the output estimation generated by symbolic linear relaxation satisfies the safety proprieties.",
+        "Neurify will use directed constraint refinement guided by symbolic linear relaxation to obtain a tighter output bound and recheck the property with the solver.",
+        "We develop another generic approach, directed constraint refinement, to further improve the overall performance of property checking.",
+        "Each step of directed constraint refinement of an overestimated node results in two independent problems as shown in Equation 3 that can be checked with a linear solver.",
+        "We specify the safety properties of neural network based on defining constraints on its input-output.",
+        "Properties specified using L\u221e naturally fit into our symbolic linear relaxation process where each input features are bounded by an interval.",
+        "The safety properties involving changes in brightness and contrast can be efficiently checked by iteratively bisecting the input nodes simultaneously as minx\u2208[x\u2212 ,x+ ](F (x)) = min), minx\u2208[x\u2212 ,x](F (x))) where F represents the computation performed by the target network .",
+        "We show that Neurify is the first formal analysis tool that can systematically check different safety properties for a large convolutional self-driving car network, Dave [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>, <a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>].",
+        "As the bounds get larger, the number of verified safe cases drop drastically because (i) the underlying model tends to have real violations and Neurify suffers from relatively higher overestimation errors.",
+        "Pare the widths of estimated output ranges computed by naive interval arithmetic [<a class=\"ref-link\" id=\"c38\" href=\"#r38\">38</a>] and symbolic linear relaxation on MNIST_FC1, MNIST_FC2, MNIST_FC3.",
+        "To Table 6: The timeout cases out of 100 random illustrate how DCR can improve the overall perimages generated while using symbolic linear reformance when combined with SLR, we evallaxation alone and together with directed conuate Neurify on MNIST_CN and measure the straint refinement.",
+        "We evaluate how symbolic linear relaxation and directed constraint refinement each can improve the performance compared with Relu-",
+        "Neurify\u2019s DCR approach mitigated that problem and verify up to 65% more cases on average compared to ReluVal. We designed and implemented Neurify, an efficient and scalable platform for verifying safety properties of real-world neural networks and providing concrete counterexamples.",
+        "We propose symbolic linear relaxation to compute a tight over-approximation of a network\u2019s output for a given input range and use directed constraint refinement to further refine the bounds using linear solvers.",
+        "Our extensive empirical results demonstrate that Neurify outperforms state-of-the-art formal analysis systems by several orders of magnitude and can scale to networks with more than 10,000 ReLU nodes"
+    ],
+    "headline": "We present a new efficient approach for rigorously checking different safety properties of neural networks that significantly outperforms existing approaches by multiple orders of magnitude",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] NAVAIR plans to install ACAS Xu on MQ-4C fleet. https://www.flightglobal.com/news/articles/navair-plans-to-install-acas-xu-on-mq-4c-fleet-444989/.",
+            "url": "https://www.flightglobal.com/news/articles/navair-plans-to-install-acas-xu-on-mq-4c-fleet-444989/"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Nvidia-Autopilot-Keras. https://github.com/0bserver07/Nvidia-Autopilot-Keras.",
+            "url": "https://github.com/0bserver07/Nvidia-Autopilot-Keras"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Tesla\u2019s autopilot was involved in another deadly car crash. https://www.wired.com/story/teslaautopilot-self-driving-crash-california/.",
+            "url": "https://www.wired.com/story/teslaautopilot-self-driving-crash-california/"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Using Deep Learning to Predict Steering Angles. https://github.com/udacity/self-driving-car.",
+            "url": "https://github.com/udacity/self-driving-car"
+        },
+        {
+            "id": "5",
+            "entry": "[5] D. Arp, M. Spreitzenbarth, M. Hubner, H. Gascon, K. Rieck, and C. Siemens. Drebin: Effective and explainable detection of android malware in your pocket. In Proceedings of the Network and Distributed System Security Symposium, volume 14, pages 23\u201326, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Arp%2C%20D.%20Spreitzenbarth%2C%20M.%20Hubner%2C%20M.%20Gascon%2C%20H.%20Drebin%3A%20Effective%20and%20explainable%20detection%20of%20android%20malware%20in%20your%20pocket%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Arp%2C%20D.%20Spreitzenbarth%2C%20M.%20Hubner%2C%20M.%20Gascon%2C%20H.%20Drebin%3A%20Effective%20and%20explainable%20detection%20of%20android%20malware%20in%20your%20pocket%202014"
+        },
+        {
+            "id": "6",
+            "entry": "[6] M. Bojarski, D. Del Testa, D. Dworakowski, B. Firner, B. Flepp, P. Goyal, L. D. Jackel, M. Monfort, U. Muller, J. Zhang, et al. End to end learning for self-driving cars. IEEE Intelligent Vehicles Symposium, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bojarski%2C%20M.%20Testa%2C%20D.Del%20Dworakowski%2C%20D.%20Firner%2C%20B.%20End%20to%20end%20learning%20for%20self-driving%20cars%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bojarski%2C%20M.%20Testa%2C%20D.Del%20Dworakowski%2C%20D.%20Firner%2C%20B.%20End%20to%20end%20learning%20for%20self-driving%20cars%202017"
+        },
+        {
+            "id": "7",
+            "entry": "[7] S. Dutta, S. Jha, S. Sankaranarayanan, and A. Tiwari. Output range analysis for deep feedforward neural networks. In NASA Formal Methods Symposium, pages 121\u2013138.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dutta%2C%20S.%20Jha%2C%20S.%20Sankaranarayanan%2C%20S.%20Tiwari%2C%20A.%20Output%20range%20analysis%20for%20deep%20feedforward%20neural%20networks",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dutta%2C%20S.%20Jha%2C%20S.%20Sankaranarayanan%2C%20S.%20Tiwari%2C%20A.%20Output%20range%20analysis%20for%20deep%20feedforward%20neural%20networks"
+        },
+        {
+            "id": "8",
+            "entry": "[8] K. Dvijotham, S. Gowal, R. Stanforth, R. Arandjelovic, B. O\u2019Donoghue, J. Uesato, and P. Kohli. Training verified learners with learned verifiers. arXiv preprint arXiv:1805.10265, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1805.10265"
+        },
+        {
+            "id": "9",
+            "entry": "[9] K. Dvijotham, R. Stanforth, S. Gowal, T. Mann, and P. Kohli. A dual approach to scalable verification of deep networks. The Conference on Uncertainty in Artificial Intelligence, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dvijotham%2C%20K.%20Stanforth%2C%20R.%20Gowal%2C%20S.%20Mann%2C%20T.%20A%20dual%20approach%20to%20scalable%20verification%20of%20deep%20networks%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dvijotham%2C%20K.%20Stanforth%2C%20R.%20Gowal%2C%20S.%20Mann%2C%20T.%20A%20dual%20approach%20to%20scalable%20verification%20of%20deep%20networks%202018"
+        },
+        {
+            "id": "10",
+            "entry": "[10] R. Ehlers. Formal verification of piece-wise linear feed-forward neural networks. 15th International Symposium on Automated Technology for Verification and Analysis, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ehlers%2C%20R.%20Formal%20verification%20of%20piece-wise%20linear%20feed-forward%20neural%20networks.%2015th%20International%20Symposium%20on%20Automated%20Technology%20for%20Verification%20and%20Analysis%202017"
+        },
+        {
+            "id": "11",
+            "entry": "[11] R. Eldan. A polynomial number of random points does not determine the volume of a convex body. Discrete & Computational Geometry, 46(1):29\u201347, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Eldan%2C%20R.%20A%20polynomial%20number%20of%20random%20points%20does%20not%20determine%20the%20volume%20of%20a%20convex%20body%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Eldan%2C%20R.%20A%20polynomial%20number%20of%20random%20points%20does%20not%20determine%20the%20volume%20of%20a%20convex%20body%202011"
+        },
+        {
+            "id": "12",
+            "entry": "[12] M. Fischetti and J. Jo. Deep neural networks as 0-1 mixed integer linear programs: A feasibility study. arXiv preprint arXiv:1712.06174, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1712.06174"
+        },
+        {
+            "id": "13",
+            "entry": "[13] T. Gehr, M. Mirman, D. Drachsler-Cohen, P. Tsankov, S. Chaudhuri, and M. Vechev. Ai 2: Safety and robustness certification of neural networks with abstract interpretation. In IEEE Symposium on Security and Privacy, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gehr%2C%20T.%20Mirman%2C%20M.%20Drachsler-Cohen%2C%20D.%20Tsankov%2C%20P.%20Ai%202%3A%20Safety%20and%20robustness%20certification%20of%20neural%20networks%20with%20abstract%20interpretation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gehr%2C%20T.%20Mirman%2C%20M.%20Drachsler-Cohen%2C%20D.%20Tsankov%2C%20P.%20Ai%202%3A%20Safety%20and%20robustness%20certification%20of%20neural%20networks%20with%20abstract%20interpretation%202018"
+        },
+        {
+            "id": "14",
+            "entry": "[14] I. J. Goodfellow, J. Shlens, and C. Szegedy. Explaining and harnessing adversarial examples. International Conference on Learning Representations, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goodfellow%2C%20I.J.%20Shlens%2C%20J.%20Szegedy%2C%20C.%20Explaining%20and%20harnessing%20adversarial%20examples%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goodfellow%2C%20I.J.%20Shlens%2C%20J.%20Szegedy%2C%20C.%20Explaining%20and%20harnessing%20adversarial%20examples%202015"
+        },
+        {
+            "id": "15",
+            "entry": "[15] X. Huang, M. Kwiatkowska, S. Wang, and M. Wu. Safety verification of deep neural networks. In International Conference on Computer Aided Verification, pages 3\u201329.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huang%2C%20X.%20Kwiatkowska%2C%20M.%20Wang%2C%20S.%20Wu%2C%20M.%20Safety%20verification%20of%20deep%20neural%20networks",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huang%2C%20X.%20Kwiatkowska%2C%20M.%20Wang%2C%20S.%20Wu%2C%20M.%20Safety%20verification%20of%20deep%20neural%20networks"
+        },
+        {
+            "id": "16",
+            "entry": "[16] K. D. Julian, J. Lopez, J. S. Brush, M. P. Owen, and M. J. Kochenderfer. Policy compression for aircraft collision avoidance systems. In 35th Digital Avionics Systems Conference, pages 1\u201310. IEEE, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Julian%2C%20K.D.%20Lopez%2C%20J.%20Brush%2C%20J.S.%20Owen%2C%20M.P.%20Policy%20compression%20for%20aircraft%20collision%20avoidance%20systems%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Julian%2C%20K.D.%20Lopez%2C%20J.%20Brush%2C%20J.S.%20Owen%2C%20M.P.%20Policy%20compression%20for%20aircraft%20collision%20avoidance%20systems%202016"
+        },
+        {
+            "id": "17",
+            "entry": "[17] G. Katz, C. Barrett, D. Dill, K. Julian, and M. Kochenderfer. Reluplex: An efficient smt solver for verifying deep neural networks. International Conference on Computer Aided Verification, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Katz%2C%20G.%20Barrett%2C%20C.%20Dill%2C%20D.%20Julian%2C%20K.%20Reluplex%3A%20An%20efficient%20smt%20solver%20for%20verifying%20deep%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Katz%2C%20G.%20Barrett%2C%20C.%20Dill%2C%20D.%20Julian%2C%20K.%20Reluplex%3A%20An%20efficient%20smt%20solver%20for%20verifying%20deep%20neural%20networks%202017"
+        },
+        {
+            "id": "18",
+            "entry": "[18] G. Katz, C. Barrett, D. L. Dill, K. Julian, and M. J. Kochenderfer. Towards proving the adversarial robustness of deep neural networks. 1st Workshop on Formal Verification of Autonomous Vehicles, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Katz%2C%20G.%20Barrett%2C%20C.%20Dill%2C%20D.L.%20Julian%2C%20K.%20Towards%20proving%20the%20adversarial%20robustness%20of%20deep%20neural%20networks.%201st%20Workshop%20on%20Formal%20Verification%20of%20Autonomous%20Vehicles%202017"
+        },
+        {
+            "id": "19",
+            "entry": "[19] M. J. Kochenderfer, J. E. Holland, and J. P. Chryssanthacopoulos. Next-generation airborne collision avoidance system. Technical report, Massachusetts Institute of Technology-Lincoln Laboratory Lexington United States, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kochenderfer%2C%20M.J.%20Holland%2C%20J.E.%20Chryssanthacopoulos%2C%20J.P.%20Next-generation%20airborne%20collision%20avoidance%20system%202012"
+        },
+        {
+            "id": "20",
+            "entry": "[20] P. W. Koh and P. Liang. Understanding black-box predictions via influence functions. International Conference on Machine Learning, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Koh%2C%20P.W.%20Liang%2C%20P.%20Understanding%20black-box%20predictions%20via%20influence%20functions%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Koh%2C%20P.W.%20Liang%2C%20P.%20Understanding%20black-box%20predictions%20via%20influence%20functions%202017"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Y. LeCun. The mnist database of handwritten digits. http://yann.lecun.com/exdb/mnist/, 1998.",
+            "url": "http://yann.lecun.com/exdb/mnist/"
+        },
+        {
+            "id": "22",
+            "entry": "[22] M. Lecuyer, V. Atlidakis, R. Geambasu, H. Daniel, and S. Jana. Certified robustness to adversarial examples with differential privacy. arXiv preprint arXiv:1802.03471, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.03471"
+        },
+        {
+            "id": "23",
+            "entry": "[23] J. Li, W. Monroe, and D. Jurafsky. Understanding neural networks through representation erasure. arXiv preprint arXiv:1612.08220, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1612.08220"
+        },
+        {
+            "id": "24",
+            "entry": "[24] M. Mirman, T. Gehr, and M. Vechev. Differentiable abstract interpretation for provably robust neural networks. In International Conference on Machine Learning, pages 3575\u20133583, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mirman%2C%20M.%20Gehr%2C%20T.%20Vechev%2C%20M.%20Differentiable%20abstract%20interpretation%20for%20provably%20robust%20neural%20networks%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mirman%2C%20M.%20Gehr%2C%20T.%20Vechev%2C%20M.%20Differentiable%20abstract%20interpretation%20for%20provably%20robust%20neural%20networks%202018"
+        },
+        {
+            "id": "25",
+            "entry": "[25] G. F. Montufar, R. Pascanu, K. Cho, and Y. Bengio. On the number of linear regions of deep neural networks. In Advances in neural information processing systems, pages 2924\u20132932, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Montufar%2C%20G.F.%20Pascanu%2C%20R.%20Cho%2C%20K.%20Bengio%2C%20Y.%20On%20the%20number%20of%20linear%20regions%20of%20deep%20neural%20networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Montufar%2C%20G.F.%20Pascanu%2C%20R.%20Cho%2C%20K.%20Bengio%2C%20Y.%20On%20the%20number%20of%20linear%20regions%20of%20deep%20neural%20networks%202014"
+        },
+        {
+            "id": "26",
+            "entry": "[26] M. T. Notes. Airborne collision avoidance system x. MIT Lincoln Laboratory, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=T%2C%20M.%20Notes.%20Airborne%20collision%20avoidance%20system%20x%202015"
+        },
+        {
+            "id": "27",
+            "entry": "[27] R. Pascanu, G. Montufar, and Y. Bengio. On the number of response regions of deep feed forward networks with piece-wise linear activations. Advances in neural information processing systems, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pascanu%2C%20R.%20Montufar%2C%20G.%20Bengio%2C%20Y.%20On%20the%20number%20of%20response%20regions%20of%20deep%20feed%20forward%20networks%20with%20piece-wise%20linear%20activations.%20Advances%20in%20neural%20information%20processing%20systems%202013"
+        },
+        {
+            "id": "28",
+            "entry": "[28] J. Peck, J. Roels, B. Goossens, and Y. Saeys. Lower bounds on the robustness to adversarial perturbations. In Advances in Neural Information Processing Systems, pages 804\u2013813, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Peck%2C%20J.%20Roels%2C%20J.%20Goossens%2C%20B.%20Saeys%2C%20Y.%20Lower%20bounds%20on%20the%20robustness%20to%20adversarial%20perturbations%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Peck%2C%20J.%20Roels%2C%20J.%20Goossens%2C%20B.%20Saeys%2C%20Y.%20Lower%20bounds%20on%20the%20robustness%20to%20adversarial%20perturbations%202017"
+        },
+        {
+            "id": "29",
+            "entry": "[29] K. Pei, Y. Cao, J. Yang, and S. Jana. Deepxplore: Automated whitebox testing of deep learning systems. In 26th Symposium on Operating Systems Principles, pages 1\u201318. ACM, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pei%2C%20K.%20Cao%2C%20Y.%20Yang%2C%20J.%20Jana%2C%20S.%20Deepxplore%3A%20Automated%20whitebox%20testing%20of%20deep%20learning%20systems%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pei%2C%20K.%20Cao%2C%20Y.%20Yang%2C%20J.%20Jana%2C%20S.%20Deepxplore%3A%20Automated%20whitebox%20testing%20of%20deep%20learning%20systems%202017"
+        },
+        {
+            "id": "30",
+            "entry": "[30] K. Pei, Y. Cao, J. Yang, and S. Jana. Towards practical verification of machine learning: The case of computer vision systems. arXiv preprint arXiv:1712.01785, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1712.01785"
+        },
+        {
+            "id": "31",
+            "entry": "[31] L. Pulina and A. Tacchella. An abstraction-refinement approach to verification of artificial neural networks. In International Conference on Computer Aided Verification, pages 243\u2013257.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pulina%2C%20L.%20Tacchella%2C%20A.%20An%20abstraction-refinement%20approach%20to%20verification%20of%20artificial%20neural%20networks",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pulina%2C%20L.%20Tacchella%2C%20A.%20An%20abstraction-refinement%20approach%20to%20verification%20of%20artificial%20neural%20networks"
+        },
+        {
+            "id": "32",
+            "entry": "[32] A. Raghunathan, J. Steinhardt, and P. Liang. Certified defenses against adversarial examples. International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Raghunathan%2C%20A.%20Steinhardt%2C%20J.%20Liang%2C%20P.%20Certified%20defenses%20against%20adversarial%20examples%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Raghunathan%2C%20A.%20Steinhardt%2C%20J.%20Liang%2C%20P.%20Certified%20defenses%20against%20adversarial%20examples%202018"
+        },
+        {
+            "id": "33",
+            "entry": "[33] M. J. C. Ramon E. Moore, R. Baker Kearfott. Introduction to Interval Analysis. SIAM, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Moore%2C%20M.J.C.Ramon%20E.%20Kearfott%2C%20R.Baker%20Introduction%20to%20Interval%20Analysis%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Moore%2C%20M.J.C.Ramon%20E.%20Kearfott%2C%20R.Baker%20Introduction%20to%20Interval%20Analysis%202009"
+        },
+        {
+            "id": "34",
+            "entry": "[34] A. Shrikumar, P. Greenside, and A. Kundaje. Learning important features through propagating activation differences. International Conference on Machine Learning, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shrikumar%2C%20A.%20Greenside%2C%20P.%20Kundaje%2C%20A.%20Learning%20important%20features%20through%20propagating%20activation%20differences%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shrikumar%2C%20A.%20Greenside%2C%20P.%20Kundaje%2C%20A.%20Learning%20important%20features%20through%20propagating%20activation%20differences%202017"
+        },
+        {
+            "id": "35",
+            "entry": "[35] C. Szegedy, W. Zaremba, I. Sutskever, J. Bruna, D. Erhan, I. Goodfellow, and R. Fergus. Intriguing properties of neural networks. International Conference on Learning Representations, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Szegedy%2C%20C.%20Zaremba%2C%20W.%20Sutskever%2C%20I.%20Bruna%2C%20J.%20Intriguing%20properties%20of%20neural%20networks%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Szegedy%2C%20C.%20Zaremba%2C%20W.%20Sutskever%2C%20I.%20Bruna%2C%20J.%20Intriguing%20properties%20of%20neural%20networks%202013"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Y. Tian, K. Pei, S. Jana, and B. Ray. DeepTest: Automated testing of deep-neural-network-driven autonomous cars. In 40th International Conference on Software Engineering, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tian%2C%20Y.%20Pei%2C%20K.%20Jana%2C%20S.%20Ray%2C%20B.%20DeepTest%3A%20Automated%20testing%20of%20deep-neural-network-driven%20autonomous%20cars%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tian%2C%20Y.%20Pei%2C%20K.%20Jana%2C%20S.%20Ray%2C%20B.%20DeepTest%3A%20Automated%20testing%20of%20deep-neural-network-driven%20autonomous%20cars%202018"
+        },
+        {
+            "id": "37",
+            "entry": "[37] V. Tjeng, K. Xiao, and R. Tedrake. Evaluating robustness of neural networks with mixed integer programming. arXiv preprint arXiv:1711.07356, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.07356"
+        },
+        {
+            "id": "38",
+            "entry": "[38] S. Wang, K. Pei, W. Justin, J. Yang, and S. Jana. Formal security analysis of neural networks using symbolic intervals. 27th USENIX Security Symposium, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20S.%20Pei%2C%20K.%20Justin%2C%20W.%20Yang%2C%20J.%20Formal%20security%20analysis%20of%20neural%20networks%20using%20symbolic%20intervals.%2027th%20USENIX%20Security%20Symposium%202018"
+        },
+        {
+            "id": "39",
+            "entry": "[39] T.-W. Weng, H. Zhang, P.-Y. Chen, J. Yi, D. Su, Y. Gao, C.-J. Hsieh, and L. Daniel. Evaluating the robustness of neural networks: An extreme value theory approach. International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Weng%2C%20T.-W.%20Zhang%2C%20H.%20Chen%2C%20P.-Y.%20Yi%2C%20J.%20Evaluating%20the%20robustness%20of%20neural%20networks%3A%20An%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Weng%2C%20T.-W.%20Zhang%2C%20H.%20Chen%2C%20P.-Y.%20Yi%2C%20J.%20Evaluating%20the%20robustness%20of%20neural%20networks%3A%20An%202018"
+        },
+        {
+            "id": "40",
+            "entry": "[40] E. Wong and J. Z. Kolter. Provable defenses against adversarial examples via the convex outer adversarial polytope. International Conference on Machine Learning, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wong%2C%20E.%20Kolter%2C%20J.Z.%20Provable%20defenses%20against%20adversarial%20examples%20via%20the%20convex%20outer%20adversarial%20polytope%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wong%2C%20E.%20Kolter%2C%20J.Z.%20Provable%20defenses%20against%20adversarial%20examples%20via%20the%20convex%20outer%20adversarial%20polytope%202018"
+        },
+        {
+            "id": "41",
+            "entry": "[41] E. Wong, F. Schmidt, J. H. Metzen, and J. Z. Kolter. Scaling provable adversarial defenses. Advances in Neural Information Processing Systems, 2018. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wong%2C%20E.%20Schmidt%2C%20F.%20Metzen%2C%20J.H.%20Kolter%2C%20J.Z.%20Scaling%20provable%20adversarial%20defenses%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wong%2C%20E.%20Schmidt%2C%20F.%20Metzen%2C%20J.H.%20Kolter%2C%20J.Z.%20Scaling%20provable%20adversarial%20defenses%202018"
+        }
+    ]
+}

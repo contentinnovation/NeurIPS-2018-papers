@@ -1,0 +1,251 @@
+{
+    "filename": "7736-interpreting-neural-network-judgments-via-minimal-stable-and-symbolic-corrections.pdf",
+    "metadata": {
+        "date": 2018,
+        "title": "Interpreting Neural Network Judgments via Minimal, Stable, and Symbolic Corrections",
+        "author": "Xin Zhang CSAIL, MIT xzhang@csail.mit.edu",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7736-interpreting-neural-network-judgments-via-minimal-stable-and-symbolic-corrections.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We present a new algorithm to generate minimal, stable, and symbolic corrections to an input that will cause a neural network with ReLU activations to change its output. We argue that such a correction is a useful way to provide feedback to a user when the network\u2019s output is different from a desired output. Our algorithm generates such a correction by solving a series of linear constraint satisfaction problems. The technique is evaluated on three neural network models: one predicting whether an applicant will pay a mortgage, one predicting whether a first-order theorem can be proved efficiently by a solver using certain heuristics, and the final one judging whether a drawing is an accurate rendition of a canonical drawing of a cat."
+    },
+    "keywords": [
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "recurrent neural network",
+            "url": "https://en.wikipedia.org/wiki/recurrent_neural_network"
+        },
+        {
+            "term": "neural network model",
+            "url": "https://en.wikipedia.org/wiki/neural_network_model"
+        },
+        {
+            "term": "linear programming",
+            "url": "https://en.wikipedia.org/wiki/linear_programming"
+        }
+    ],
+    "highlights": [
+        "We first introduce some notations we will use in explaining our approach",
+        "We argue that for the specific class of judgment problems, minimal, stable, and symbolic corrections are an ideal way of explaining a neural network decision",
+        "We argue that a correction is a useful form of feedback; what could I have done differently to elicit a positive judgment? For example, if I applied for a mortgage, knowing that I would have gotten a positive judgment if my debt to income ratio (DTI) was 10% lower is extremely useful; it is actionable information that I can use to adjust my finances",
+        "We find the running time is dominated by invocations to the linear programming solver",
+        "We only study corrections generated under debt to income ratio and interest rate",
+        "We proposed a new approach to interpret a neural network by generating minimal, stable, and symbolic corrections that would change its output"
+    ],
+    "key_statements": [
+        "We first introduce some notations we will use in explaining our approach",
+        "We argue that for the specific class of judgment problems, minimal, stable, and symbolic corrections are an ideal way of explaining a neural network decision",
+        "We argue that a correction is a useful form of feedback; what could I have done differently to elicit a positive judgment? For example, if I applied for a mortgage, knowing that I would have gotten a positive judgment if my debt to income ratio (DTI) was 10% lower is extremely useful; it is actionable information that I can use to adjust my finances",
+        "We present the first algorithm capable of computing minimal stable symbolic corrections",
+        "Given a neural network with ReLU activations and an input with a negative judgment, our algorithm produces a symbolic description of a space of corrections such that any correction in that space is guaranteed to change the judgment",
+        "We show that in practice, the algorithm is able to find good symbolic corrections in 12 minutes on average for small but realistic networks",
+        "Suppose F is a neural network with ReLU activation",
+        "Our approach is parameterized by the number of features n allowed to change simultaneously, the maximum number of regions to consider m, the stability metric, the distance metric, and the shape of the generated symbolic correction",
+        "For the selected 100 inputs that are rejected by each network, POLARIS successfully generated symbolic corrections for 85 inputs of mortgage underwriting, 81 inputs of solver performance prediction, and 75 inputs of drawing tutoring",
+        "We find the running time is dominated by invocations to the linear programming solver",
+        "We only study corrections generated under debt to income ratio and interest rate",
+        "We proposed a new approach to interpret a neural network by generating minimal, stable, and symbolic corrections that would change its output"
+    ],
+    "summary": [
+        "We first introduce some notations we will use in explaining our approach.",
+        "Given a neural network with ReLU activations and an input with a negative judgment, our algorithm produces a symbolic description of a space of corrections such that any correction in that space is guaranteed to change the judgment.",
+        "Algorithm 1 outlines our approach to find a judgment interpretation for a given neural network F and an input vector v.",
+        "To generate a stable and verified correction, we exploit the fact that ReLU-based neural networks are piece-wise linear functions.",
+        "Our key insight is that, since a ReLU-based neural network is a continuous function, two regions are connected if their activations differ by one neuron, and there are concrete corrections on the face of one of the corresponding convex hulls, and this face corresponds to the differing neuron.",
+        "Algorithm 2 infers a set of linear constraints whose corresponding concrete corrections are contained in the discovered regions.",
+        "Our approach is parameterized by the number of features n allowed to change simultaneously, the maximum number of regions to consider m, the stability metric, the distance metric, and the shape of the generated symbolic correction.",
+        "We set n = 2 for mortgage underwriting and solver performance prediction as corrections of higher dimensions on them are hard for end users to understand.",
+        "We use triangles to represent the corrections for mortgage underwriting and solver performance prediction, while we use axis-aligned boxes for drawing tutoring.",
+        "For the selected 100 inputs that are rejected by each network, POLARIS successfully generated symbolic corrections for 85 inputs of mortgage underwriting, 81 inputs of solver performance prediction, and 75 inputs of drawing tutoring.",
+        "This is because POLARIS uses a generative network to decide which features to change for drawing tutoring, which leads to one invocation to Algorithm 2 per input.",
+        "For mortgage underwriting, POLARIS needs to invoke Algorithm 2 for multiple times per input which searches under a combination of different features.",
+        "These approaches typically generate a single input prototype or relevant features, but do not result in corrections or a space of inputs that would lead the prediction to move from an undesirable class to a desirable class.",
+        "We proposed a new approach to interpret a neural network by generating minimal, stable, and symbolic corrections that would change its output.",
+        "We designed and implemented the first algorithm for generating such corrections, and demonstrated its effectiveness on three neural network models from different real-world domains."
+    ],
+    "headline": "We present a new algorithm to generate minimal, stable, and symbolic corrections to an input that will cause a neural network with ReLU activations to change its output",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] S. Bach, A. Binder, G. Montavon, F. Klauschen, K.-R. M\u00fcller, and W. Samek. On pixel-wise explanations for non-linear classifier decisions by layer-wise relevance propagation. PloS one, 10(7):e0130140, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=On%20pixel-wise%20explanations%20for%20non-linear%20classifier%20decisions%20by%20layer-wise%20relevance%20propagation%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=On%20pixel-wise%20explanations%20for%20non-linear%20classifier%20decisions%20by%20layer-wise%20relevance%20propagation%202015"
+        },
+        {
+            "id": "2",
+            "entry": "[2] O. Bastani, Y. Ioannou, L. Lampropoulos, D. Vytiniotis, A. V. Nori, and A. Criminisi. Measuring neural net robustness with constraints. In Advances in Neural Information Processing Systems 29: Annual Conference on Neural Information Processing Systems 2016, December 5-10, 2016, Barcelona, Spain, pages 2613\u20132621, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bastani%2C%20O.%20Ioannou%2C%20Y.%20Lampropoulos%2C%20L.%20Vytiniotis%2C%20D.%20Measuring%20neural%20net%20robustness%20with%20constraints%202016-12-05",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bastani%2C%20O.%20Ioannou%2C%20Y.%20Lampropoulos%2C%20L.%20Vytiniotis%2C%20D.%20Measuring%20neural%20net%20robustness%20with%20constraints%202016-12-05"
+        },
+        {
+            "id": "3",
+            "entry": "[3] O. Bastani, C. Kim, and H. Bastani. Interpretability via model extraction. CoRR, abs/1706.09773, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.09773"
+        },
+        {
+            "id": "4",
+            "entry": "[4] A. Dhurandhar, P. Chen, R. Luss, C. Tu, P. Ting, K. Shanmugam, and P. Das. Explanations based on the missing: Towards contrastive explanations with pertinent negatives. CoRR, abs/1802.07623, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.07623"
+        },
+        {
+            "id": "5",
+            "entry": "[5] D. Erhan, Y. Bengio, A. Courville, and P. Vincent. Visualizing higher-layer features of a deep network. University of Montreal, 1341(3):1, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Erhan%2C%20D.%20Bengio%2C%20Y.%20Courville%2C%20A.%20Vincent%2C%20P.%20Visualizing%20higher-layer%20features%20of%20a%20deep%20network%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Erhan%2C%20D.%20Bengio%2C%20Y.%20Courville%2C%20A.%20Vincent%2C%20P.%20Visualizing%20higher-layer%20features%20of%20a%20deep%20network%202009"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Fannie Mae. Fannie Mae single-family loan performance data. http://www.fanniemae.com/portal/funding-the-market/data/loan-performance-data.html, 2017. Accessed:2018-02-07.",
+            "url": "http://www.fanniemae.com/portal/funding-the-market/data/loan-performance-data.html"
+        },
+        {
+            "id": "7",
+            "entry": "[7] I. J. Goodfellow, J. Shlens, and C. Szegedy. Explaining and harnessing adversarial examples. CoRR, abs/1412.6572, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6572"
+        },
+        {
+            "id": "8",
+            "entry": "[8] I. Google. The Quick, Draw! Dataset. https://github.com/googlecreativelab/quickdraw-dataset, 2017. Accessed:2018-05-13.",
+            "url": "https://github.com/googlecreativelab/quickdraw-dataset"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Gurobi Optimization, Inc. Gurobi optimizer reference manual. http://www.gurobi.com, 2018.",
+            "url": "http://www.gurobi.com"
+        },
+        {
+            "id": "10",
+            "entry": "[10] D. Ha and D. Eck. A neural representation of sketch drawings. arXiv preprint arXiv:1704.03477, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1704.03477"
+        },
+        {
+            "id": "11",
+            "entry": "[11] K. He, X. Zhang, S. Ren, and J. Sun. Deep residual learning for image recognition. In 2016 IEEE Conference on Computer Vision and Pattern Recognition, CVPR 2016, Las Vegas, NV, USA, June 27-30, 2016, pages 770\u2013778, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%202016-06-27",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%202016-06-27"
+        },
+        {
+            "id": "13",
+            "entry": "[13] S. B. H. James P Bridge and L. C. Paulson. First-order theorem proving Data Set. https://archive.ics.uci.edu/ml/datasets/First-order+theorem+proving, 2013. Accessed:2018-05-13.",
+            "url": "https://archive.ics.uci.edu/ml/datasets/First-order+theorem+proving"
+        },
+        {
+            "id": "14",
+            "entry": "[14] P.-J. Kindermans, K. T. Sch\u00fctt, M. Alber, K.-R. M\u00fcller, D. Erhan, B. Kim, and S. D\u00e4hne. Learning how to explain neural networks: Patternnet and patternattribution. In International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Learning%20how%20to%20explain%20neural%20networks%3A%20Patternnet%20and%20patternattribution%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Learning%20how%20to%20explain%20neural%20networks%3A%20Patternnet%20and%20patternattribution%202018"
+        },
+        {
+            "id": "15",
+            "entry": "[15] P. W. Koh and P. Liang. Understanding black-box predictions via influence functions. In Proceedings of the 34th International Conference on Machine Learning, ICML 2017, Sydney, NSW, Australia, 6-11 August 2017, pages 1885\u20131894, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Koh%2C%20P.W.%20Liang%2C%20P.%20Understanding%20black-box%20predictions%20via%20influence%20functions%202017-08",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Koh%2C%20P.W.%20Liang%2C%20P.%20Understanding%20black-box%20predictions%20via%20influence%20functions%202017-08"
+        },
+        {
+            "id": "16",
+            "entry": "[16] V. Krakovna and F. Doshi-Velez. Increasing the interpretability of recurrent neural networks using hidden markov models. CoRR, abs/1606.05320, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.05320"
+        },
+        {
+            "id": "17",
+            "entry": "[17] H. Lee, R. B. Grosse, R. Ranganath, and A. Y. Ng. Convolutional deep belief networks for scalable unsupervised learning of hierarchical representations. In Proceedings of the 26th Annual International Conference on Machine Learning, ICML 2009, Montreal, Quebec, Canada, June 14-18, 2009, pages 609\u2013616, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lee%2C%20H.%20Grosse%2C%20R.B.%20Ranganath%2C%20R.%20Ng%2C%20A.Y.%20Convolutional%20deep%20belief%20networks%20for%20scalable%20unsupervised%20learning%20of%20hierarchical%20representations%202009-06-14",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lee%2C%20H.%20Grosse%2C%20R.B.%20Ranganath%2C%20R.%20Ng%2C%20A.Y.%20Convolutional%20deep%20belief%20networks%20for%20scalable%20unsupervised%20learning%20of%20hierarchical%20representations%202009-06-14"
+        },
+        {
+            "id": "18",
+            "entry": "[18] T. Lei, R. Barzilay, and T. S. Jaakkola. Rationalizing neural predictions. In Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing, EMNLP 2016, Austin, Texas, USA, November 1-4, 2016, pages 107\u2013117, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lei%2C%20T.%20Barzilay%2C%20R.%20Jaakkola%2C%20T.S.%20Rationalizing%20neural%20predictions%202016-11-01",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lei%2C%20T.%20Barzilay%2C%20R.%20Jaakkola%2C%20T.S.%20Rationalizing%20neural%20predictions%202016-11-01"
+        },
+        {
+            "id": "19",
+            "entry": "[19] O. Li, H. Liu, C. Chen, and C. Rudin. Deep learning for case-based reasoning through prototypes: A neural network that explains its predictions. CoRR, abs/1710.04806, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.04806"
+        },
+        {
+            "id": "20",
+            "entry": "[20] S. M. Lundberg and S. Lee. A unified approach to interpreting model predictions. In Advances in Neural Information Processing Systems 30: Annual Conference on Neural Information Processing Systems 2017, 4-9 December 2017, Long Beach, CA, USA, pages 4768\u20134777, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lundberg%2C%20S.M.%20Lee%2C%20S.%20A%20unified%20approach%20to%20interpreting%20model%20predictions%202017-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lundberg%2C%20S.M.%20Lee%2C%20S.%20A%20unified%20approach%20to%20interpreting%20model%20predictions%202017-12"
+        },
+        {
+            "id": "21",
+            "entry": "[21] G. Montavon, W. Samek, and K. M\u00fcller. Methods for interpreting and understanding deep neural networks. CoRR, abs/1706.07979, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.07979"
+        },
+        {
+            "id": "22",
+            "entry": "[22] S. Moosavi-Dezfooli, A. Fawzi, and P. Frossard. Deepfool: A simple and accurate method to fool deep neural networks. In 2016 IEEE Conference on Computer Vision and Pattern Recognition, CVPR 2016, Las Vegas, NV, USA, June 27-30, 2016, pages 2574\u20132582, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Moosavi-Dezfooli%2C%20S.%20Fawzi%2C%20A.%20Frossard%2C%20P.%20Deepfool%3A%20A%20simple%20and%20accurate%20method%20to%20fool%20deep%20neural%20networks%202016-06-27",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Moosavi-Dezfooli%2C%20S.%20Fawzi%2C%20A.%20Frossard%2C%20P.%20Deepfool%3A%20A%20simple%20and%20accurate%20method%20to%20fool%20deep%20neural%20networks%202016-06-27"
+        },
+        {
+            "id": "23",
+            "entry": "[23] A. Nguyen, A. Dosovitskiy, J. Yosinski, T. Brox, and J. Clune. Synthesizing the preferred inputs for neurons in neural networks via deep generator networks. In Advances in Neural Information Processing Systems, pages 3387\u20133395, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nguyen%2C%20A.%20Dosovitskiy%2C%20A.%20Yosinski%2C%20J.%20Brox%2C%20T.%20Synthesizing%20the%20preferred%20inputs%20for%20neurons%20in%20neural%20networks%20via%20deep%20generator%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nguyen%2C%20A.%20Dosovitskiy%2C%20A.%20Yosinski%2C%20J.%20Brox%2C%20T.%20Synthesizing%20the%20preferred%20inputs%20for%20neurons%20in%20neural%20networks%20via%20deep%20generator%20networks%202016"
+        },
+        {
+            "id": "24",
+            "entry": "[24] N. Papernot, N. Carlini, I. Goodfellow, R. Feinman, F. Faghri, A. Matyasko, K. Hambardzumyan, Y.-L. Juang, A. Kurakin, R. Sheatsley, A. Garg, and Y.-C. Lin. cleverhans v2.0.0: an adversarial machine learning library. arXiv preprint arXiv:1610.00768, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1610.00768"
+        },
+        {
+            "id": "25",
+            "entry": "[25] P. H. O. Pinheiro and R. Collobert. From image-level to pixel-level labeling with convolutional networks. In IEEE Conference on Computer Vision and Pattern Recognition, CVPR 2015, Boston, MA, USA, June 7-12, 2015, pages 1713\u20131721, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pinheiro%2C%20P.H.O.%20Collobert%2C%20R.%20From%20image-level%20to%20pixel-level%20labeling%20with%20convolutional%20networks%202015-06-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pinheiro%2C%20P.H.O.%20Collobert%2C%20R.%20From%20image-level%20to%20pixel-level%20labeling%20with%20convolutional%20networks%202015-06-07"
+        },
+        {
+            "id": "26",
+            "entry": "[26] M. T. Ribeiro, S. Singh, and C. Guestrin. \"Why should I trust you?\": Explaining the predictions of any classifier. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, San Francisco, CA, USA, August 13-17, 2016, pages 1135\u20131144, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ribeiro%2C%20M.T.%20Singh%2C%20S.%20Guestrin%2C%20C.%20%22Why%20should%20I%20trust%20you%3F%22%3A%20Explaining%20the%20predictions%20of%20any%20classifier%202016-08-13",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ribeiro%2C%20M.T.%20Singh%2C%20S.%20Guestrin%2C%20C.%20%22Why%20should%20I%20trust%20you%3F%22%3A%20Explaining%20the%20predictions%20of%20any%20classifier%202016-08-13"
+        },
+        {
+            "id": "27",
+            "entry": "[27] M. T. Ribeiro, S. Singh, and C. Guestrin. Anchors: High-precision model-agnostic explanations. In Proceedings of the Thirty-Second AAAI Conference on Artificial Intelligence, New Orleans, Louisiana, USA, February 2-7, 2018, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ribeiro%2C%20M.T.%20Singh%2C%20S.%20Guestrin%2C%20C.%20Anchors%3A%20High-precision%20model-agnostic%20explanations%202018-02-02",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ribeiro%2C%20M.T.%20Singh%2C%20S.%20Guestrin%2C%20C.%20Anchors%3A%20High-precision%20model-agnostic%20explanations%202018-02-02"
+        },
+        {
+            "id": "28",
+            "entry": "[28] J. Sirignano, A. Sadhwani, and K. Giesecke. Deep learning for mortgage risk. arXiv preprint arXiv:1607.02470, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1607.02470"
+        },
+        {
+            "id": "29",
+            "entry": "[29] C. Szegedy, W. Zaremba, I. Sutskever, J. Bruna, D. Erhan, I. J. Goodfellow, and R. Fergus. Intriguing properties of neural networks. CoRR, abs/1312.6199, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.6199"
+        },
+        {
+            "id": "30",
+            "entry": "[30] S. Tan, K. C. Sim, and M. J. F. Gales. Improving the interpretability of deep neural networks with stimulated learning. In 2015 IEEE Workshop on Automatic Speech Recognition and Understanding, ASRU 2015, Scottsdale, AZ, USA, December 13-17, 2015, pages 617\u2013623, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tan%2C%20S.%20Sim%2C%20K.C.%20Gales%2C%20M.J.F.%20Improving%20the%20interpretability%20of%20deep%20neural%20networks%20with%20stimulated%20learning%202015-12-13",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tan%2C%20S.%20Sim%2C%20K.C.%20Gales%2C%20M.J.F.%20Improving%20the%20interpretability%20of%20deep%20neural%20networks%20with%20stimulated%20learning%202015-12-13"
+        },
+        {
+            "id": "31",
+            "entry": "[31] A. van den Oord, N. Kalchbrenner, and K. Kavukcuoglu. Pixel recurrent neural networks. In Proceedings of the 33nd International Conference on Machine Learning, ICML 2016, New York City, NY, USA, June 19-24, 2016, pages 1747\u20131756, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=van%20den%20Oord%2C%20A.%20Kalchbrenner%2C%20N.%20Kavukcuoglu%2C%20K.%20Pixel%20recurrent%20neural%20networks%202016-06-19",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=van%20den%20Oord%2C%20A.%20Kalchbrenner%2C%20N.%20Kavukcuoglu%2C%20K.%20Pixel%20recurrent%20neural%20networks%202016-06-19"
+        },
+        {
+            "id": "32",
+            "entry": "[32] C. Wu, P. Karanasou, M. J. F. Gales, and K. C. Sim. Stimulated deep neural network for speech recognition. In Interspeech 2016, 17th Annual Conference of the International Speech Communication Association, San Francisco, CA, USA, September 8-12, 2016, pages 400\u2013404, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20C.%20Karanasou%2C%20P.%20Gales%2C%20M.J.F.%20Sim%2C%20K.C.%20Stimulated%20deep%20neural%20network%20for%20speech%20recognition%202016-09-08",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20C.%20Karanasou%2C%20P.%20Gales%2C%20M.J.F.%20Sim%2C%20K.C.%20Stimulated%20deep%20neural%20network%20for%20speech%20recognition%202016-09-08"
+        },
+        {
+            "id": "33",
+            "entry": "[33] M. D. Zeiler and R. Fergus. Visualizing and understanding convolutional networks. In Computer Vision - ECCV 2014 - 13th European Conference, Zurich, Switzerland, September 6-12, 2014, Proceedings, Part I, pages 818\u2013833, 2014. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=M%20D%20Zeiler%20and%20R%20Fergus%20Visualizing%20and%20understanding%20convolutional%20networks%20In%20Computer%20Vision%20%20ECCV%202014%20%2013th%20European%20Conference%20Zurich%20Switzerland%20September%20612%202014%20Proceedings%20Part%20I%20pages%20818833%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=M%20D%20Zeiler%20and%20R%20Fergus%20Visualizing%20and%20understanding%20convolutional%20networks%20In%20Computer%20Vision%20%20ECCV%202014%20%2013th%20European%20Conference%20Zurich%20Switzerland%20September%20612%202014%20Proceedings%20Part%20I%20pages%20818833%202014"
+        }
+    ]
+}

@@ -1,0 +1,225 @@
+{
+    "filename": "7835-constructing-fast-network-through-deconstruction-of-convolution.pdf",
+    "metadata": {
+        "title": "Constructing Fast Network through Deconstruction of Convolution",
+        "author": "Yunho Jeon, Junmo Kim",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7835-constructing-fast-network-through-deconstruction-of-convolution.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Convolutional neural networks have achieved great success in various vision tasks; however, they incur heavy resource costs. By using deeper and wider networks, network accuracy can be improved rapidly. However, in an environment with limited resources (e.g., mobile applications), heavy networks may not be usable. This study shows that naive convolution can be deconstructed into a shift operation and pointwise convolution. To cope with various convolutions, we propose a new shift operation called active shift layer (ASL) that formulates the amount of shift as a learnable function with shift parameters. This new layer can be optimized end-to-end through backpropagation and it can provide optimal shift values. Finally, we apply this layer to a light and fast network that surpasses existing state-of-the-art networks. Code is available at https://github.com/ jyh2986/Active-Shift."
+    },
+    "keywords": [
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "convolutional neural networks",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_networks"
+        },
+        {
+            "term": "graphics processing units",
+            "url": "https://en.wikipedia.org/wiki/graphics_processing_units"
+        },
+        {
+            "term": "general matrix multiply",
+            "url": "https://en.wikipedia.org/wiki/general_matrix_multiply"
+        }
+    ],
+    "highlights": [
+        "Decomposing a convolution is effective for reducing the number of parameters and computational complexity",
+        "We deconstruct convolution to a shift operation followed by pointwise convolution",
+        "The amount of shift can be learned end-to-end through backpropagation",
+        "We showed that using active shift layer could improve the network accuracy while reducing the network parameters and inference time",
+        "By using the proposed layer, we suggested a fast and light network and achieved better results compared to those of existing networks",
+        "The use of active shift layer for more general network architectures could be an interesting extension of the present study"
+    ],
+    "key_statements": [
+        "Decomposing a convolution is effective for reducing the number of parameters and computational complexity",
+        "We show that a convolution can be deconstructed into two components: 1\u00d71 convolution and shift operation",
+        "Where K is the spatial dimension of the kernel (e.g., K is nine for 3\u00d73 convolution); C and D are the numbers of input and output channels, respectively; and the spatial dimension of the input feature is W \u00d7 H.\n3.1",
+        "Table 5 shows the result for ImageNet, and our method obtains much better results with fewer parameters compared to other networks",
+        "We deconstruct convolution to a shift operation followed by pointwise convolution",
+        "The amount of shift can be learned end-to-end through backpropagation",
+        "We showed that using active shift layer could improve the network accuracy while reducing the network parameters and inference time",
+        "By using the proposed layer, we suggested a fast and light network and achieved better results compared to those of existing networks",
+        "The use of active shift layer for more general network architectures could be an interesting extension of the present study"
+    ],
+    "summary": [
+        "Decomposing a convolution is effective for reducing the number of parameters and computational complexity.",
+        "Shift operations have been used to replace spatial convolutions[<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>] and reduce the number of parameters and computational complexity.",
+        "It reduces the computational complexity of trained architectures while maintaining the accuracy of the original networks.",
+        "If we can share the shifted inputs regardless of the kernel index, that is, Sk(X) = S(X), this simplifies to just one pointwise (i.e., 1\u00d71) convolution and greatly reduces the computation complexity: W :,:,k \u00d7 Sk(X) = W :,:,k \u00d7 S(X) = ( W :,:,k) \u00d7 S(X) = W \u00d7 S(X) (4)",
+        "As in this extreme case, if only one shift is applied to all input channels, the receptive field of convolution is too limited, and the network will provide poor results.",
+        "The amount of shift is assigned heuristically to cover all kernel dimensions, and pointwise convolution is applied before and after the shift layer to make it invariant to the permutation of input and output channels.",
+        "Applying the shift by group is a little artificial, and if the kernel size is large, the number of input channels per shift is reduced.",
+        "Because the shifted input SC(X) goes through single 1\u00d71 convolutions, this reduces the computational complexity by a factor of the kernel size K.",
+        "This can provide a greater speed improvement than that achieved by reducing only the number of FLOPs. we consider how to assign the shift value for each channel.",
+        "With the shift parameter \u03b8s, a conventional convolution can be formulated as follows with ASL SC\u03b8s : X",
+        "Depthwise convolution reduces the number of parameters and FLOPs greatly, this operation needs fragmented memory access that is not easy to optimize.",
+        "Our proposed layer not only reduces the computa-Table 2: Comparison with networks for depthwise convolution.",
+        "3 shows an example of the shift parameters of each layer after optimizations (ASNet with base width of 88).",
+        "Table 5 shows the result for ImageNet, and our method obtains much better results with fewer parameters compared to other networks.",
+        "This is because of a key characteristic of ASL, namely, that it learns the real-valued shift amounts using the network itself.",
+        "By sharing the shifted input, the number of parameters and computational complexity can be reduced greatly.",
+        "We showed that using ASL could improve the network accuracy while reducing the network parameters and inference time.",
+        "The use of ASL for more general network architectures could be an interesting extension of the present study"
+    ],
+    "headline": "This study shows that naive convolution can be deconstructed into a shift operation and pointwise convolution",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Liang-Chieh Chen, George Papandreou, Iasonas Kokkinos, Kevin Murphy, and Alan Yuille. Semantic image segmentation with deep convolutional nets and fully connected crfs. In International Conference on Learning Representations (ICLR), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Liang-Chieh%20Papandreou%2C%20George%20Kokkinos%2C%20Iasonas%20Murphy%2C%20Kevin%20Semantic%20image%20segmentation%20with%20deep%20convolutional%20nets%20and%20fully%20connected%20crfs%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Liang-Chieh%20Papandreou%2C%20George%20Kokkinos%2C%20Iasonas%20Murphy%2C%20Kevin%20Semantic%20image%20segmentation%20with%20deep%20convolutional%20nets%20and%20fully%20connected%20crfs%202015"
+        },
+        {
+            "id": "2",
+            "entry": "[2] F. Chollet. Xception: Deep learning with depthwise separable convolutions. In IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pages 1800\u20131807, July 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chollet%2C%20F.%20Xception%3A%20Deep%20learning%20with%20depthwise%20separable%20convolutions%202017-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chollet%2C%20F.%20Xception%3A%20Deep%20learning%20with%20depthwise%20separable%20convolutions%202017-07"
+        },
+        {
+            "id": "3",
+            "entry": "[3] J. Dai, H. Qi, Y. Xiong, Y. Li, G. Zhang, H. Hu, and Y. Wei. Deformable convolutional networks. In Proceedings of the IEEE International Conference on Computer Vision (ICCV), pages 764\u2013773, Oct 2017. doi: 10.1109/ICCV.2017.89.",
+            "crossref": "https://dx.doi.org/10.1109/ICCV.2017.89",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1109/ICCV.2017.89"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Song Han, Jeff Pool, John Tran, and William Dally. Learning both weights and connections for efficient neural network. In Advances in Neural Information Processing Systems, pages 1135\u20131143, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Han%2C%20Song%20Pool%2C%20Jeff%20Tran%2C%20John%20Dally%2C%20William%20Learning%20both%20weights%20and%20connections%20for%20efficient%20neural%20network%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Han%2C%20Song%20Pool%2C%20Jeff%20Tran%2C%20John%20Dally%2C%20William%20Learning%20both%20weights%20and%20connections%20for%20efficient%20neural%20network%202015"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Song Han, Huizi Mao, and William J Dally. Deep compression: Compressing deep neural networks with pruning, trained quantization and huffman coding. In International Conference on Learning Representations (ICLR), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Han%2C%20Song%20Mao%2C%20Huizi%20Dally%2C%20William%20J.%20Deep%20compression%3A%20Compressing%20deep%20neural%20networks%20with%20pruning%2C%20trained%20quantization%20and%20huffman%20coding%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Han%2C%20Song%20Mao%2C%20Huizi%20Dally%2C%20William%20J.%20Deep%20compression%3A%20Compressing%20deep%20neural%20networks%20with%20pruning%2C%20trained%20quantization%20and%20huffman%20coding%202016"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. In The IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Identity mappings in deep residual networks. In European Conference on Computer Vision (ECCV), pages 630\u2013645.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Identity%20mappings%20in%20deep%20residual%20networks",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Identity%20mappings%20in%20deep%20residual%20networks"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Andrew G Howard, Menglong Zhu, Bo Chen, Dmitry Kalenichenko, Weijun Wang, Tobias Weyand, Marco Andreetto, and Hartwig Adam. Mobilenets: Efficient convolutional neural networks for mobile vision applications. arXiv preprint arXiv:1704.04861, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1704.04861"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Jie Hu, Li Shen, and Gang Sun. Squeeze-and-excitation networks. In The IEEE Conference on Computer Vision and Pattern Recognition (CVPR), June 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hu%2C%20Jie%20Shen%2C%20Li%20Sun%2C%20Gang%20Squeeze-and-excitation%20networks%202018-06",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hu%2C%20Jie%20Shen%2C%20Li%20Sun%2C%20Gang%20Squeeze-and-excitation%20networks%202018-06"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Forrest N Iandola, Song Han, Matthew W Moskewicz, Khalid Ashraf, William J Dally, and Kurt Keutzer. Squeezenet: Alexnet-level accuracy with 50x fewer parameters and< 0.5 mb model size. arXiv preprint arXiv:1602.07360, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1602.07360"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Yunho Jeon and Junmo Kim. Active convolution: Learning the shape of convolution for image classification. In IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pages 1846\u20131854. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jeon%2C%20Yunho%20Kim%2C%20Junmo%20Active%20convolution%3A%20Learning%20the%20shape%20of%20convolution%20for%20image%20classification%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jeon%2C%20Yunho%20Kim%2C%20Junmo%20Active%20convolution%3A%20Learning%20the%20shape%20of%20convolution%20for%20image%20classification%202017"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Yangqing Jia, Evan Shelhamer, Jeff Donahue, Sergey Karayev, Jonathan Long, Ross Girshick, Sergio Guadarrama, and Trevor Darrell. Caffe: Convolutional architecture for fast feature embedding. In Proceedings of the 22nd ACM international conference on Multimedia, pages 675\u2013678. ACM, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jia%2C%20Yangqing%20Shelhamer%2C%20Evan%20Donahue%2C%20Jeff%20Karayev%2C%20Sergey%20Caffe%3A%20Convolutional%20architecture%20for%20fast%20feature%20embedding%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jia%2C%20Yangqing%20Shelhamer%2C%20Evan%20Donahue%2C%20Jeff%20Karayev%2C%20Sergey%20Caffe%3A%20Convolutional%20architecture%20for%20fast%20feature%20embedding%202014"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Felix Juefei-Xu, Vishnu Naresh Boddeti, and Marios Savvides. Local binary convolutional neural networks. In The IEEE Conference on Computer Vision and Pattern Recognition (CVPR), July 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Juefei-Xu%2C%20Felix%20Boddeti%2C%20Vishnu%20Naresh%20Savvides%2C%20Marios%20Local%20binary%20convolutional%20neural%20networks%202017-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Juefei-Xu%2C%20Felix%20Boddeti%2C%20Vishnu%20Naresh%20Savvides%2C%20Marios%20Local%20binary%20convolutional%20neural%20networks%202017-07"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Alex Krizhevsky and Geoffrey Hinton. Learning multiple layers of features from tiny images. 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20Alex%20Hinton%2C%20Geoffrey%20Learning%20multiple%20layers%20of%20features%20from%20tiny%20images%202009"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Alex Krizhevsky, Ilya Sutskever, and Geoffrey E Hinton. Imagenet classification with deep convolutional neural networks. In F. Pereira, C. J. C. Burges, L. Bottou, and K. Q. Weinberger, editors, Advances in Neural Information Processing Systems, pages 1097\u20131105. Curran Associates, Inc., 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Hinton%2C%20Geoffrey%20E.%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Hinton%2C%20Geoffrey%20E.%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Vadim Lebedev, Yaroslav Ganin, Maksim Rakhuba, Ivan Oseledets, and Victor Lempitsky. Speeding-up convolutional neural networks using fine-tuned cp-decomposition. In International Conference on Learning Representations (ICLR), 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lebedev%2C%20Vadim%20Ganin%2C%20Yaroslav%20Rakhuba%2C%20Maksim%20Oseledets%2C%20Ivan%20Speeding-up%20convolutional%20neural%20networks%20using%20fine-tuned%20cp-decomposition%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lebedev%2C%20Vadim%20Ganin%2C%20Yaroslav%20Rakhuba%2C%20Maksim%20Oseledets%2C%20Ivan%20Speeding-up%20convolutional%20neural%20networks%20using%20fine-tuned%20cp-decomposition%202014"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Hao Li, Asim Kadav, Igor Durdanovic, Hanan Samet, and Hans Peter Graf. Pruning filters for efficient convnets. In International Conference on Learning Representations (ICLR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Hao%20Kadav%2C%20Asim%20Durdanovic%2C%20Igor%20Samet%2C%20Hanan%20Pruning%20filters%20for%20efficient%20convnets%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20Hao%20Kadav%2C%20Asim%20Durdanovic%2C%20Igor%20Samet%2C%20Hanan%20Pruning%20filters%20for%20efficient%20convnets%202017"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Mark Sandler, Andrew Howard, Menglong Zhu, Andrey Zhmoginov, and Liang-Chieh Chen. Mobilenetv2: Inverted residuals and linear bottlenecks. In The IEEE Conference on Computer Vision and Pattern Recognition (CVPR), June 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sandler%2C%20Mark%20Howard%2C%20Andrew%20Zhu%2C%20Menglong%20Zhmoginov%2C%20Andrey%20Mobilenetv2%3A%20Inverted%20residuals%20and%20linear%20bottlenecks%202018-06",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sandler%2C%20Mark%20Howard%2C%20Andrew%20Zhu%2C%20Menglong%20Zhmoginov%2C%20Andrey%20Mobilenetv2%3A%20Inverted%20residuals%20and%20linear%20bottlenecks%202018-06"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Karen Simonyan and Andrew Zisserman. Very Deep Convolutional Networks for Large-Scale Image Recognition. In International Conference on Learning Representations (ICLR), pages 1\u201314, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Simonyan%2C%20Karen%20Zisserman%2C%20Andrew%20Very%20Deep%20Convolutional%20Networks%20for%20Large-Scale%20Image%20Recognition%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Simonyan%2C%20Karen%20Zisserman%2C%20Andrew%20Very%20Deep%20Convolutional%20Networks%20for%20Large-Scale%20Image%20Recognition%202015"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott Reed, Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich. Going deeper with convolutions. In The IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Szegedy%2C%20Christian%20Liu%2C%20Wei%20Jia%2C%20Yangqing%20Sermanet%2C%20Pierre%20Going%20deeper%20with%20convolutions%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Szegedy%2C%20Christian%20Liu%2C%20Wei%20Jia%2C%20Yangqing%20Sermanet%2C%20Pierre%20Going%20deeper%20with%20convolutions%202015"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Christian Szegedy, Sergey Ioffe, Vincent Vanhoucke, and Alex A. Alemi. Inception-v4, inception-resnet and the impact of residual connections on learning. In ICLR 2016 Workshop, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Szegedy%2C%20Christian%20Ioffe%2C%20Sergey%20Vanhoucke%2C%20Vincent%20Alemi%2C%20Alex%20A.%20Inception-v4%2C%20inception-resnet%20and%20the%20impact%20of%20residual%20connections%20on%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Szegedy%2C%20Christian%20Ioffe%2C%20Sergey%20Vanhoucke%2C%20Vincent%20Alemi%2C%20Alex%20A.%20Inception-v4%2C%20inception-resnet%20and%20the%20impact%20of%20residual%20connections%20on%20learning%202016"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jon Shlens, and Zbigniew Wojna. Rethinking the inception architecture for computer vision. In The IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pages 2818\u20132826, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Szegedy%2C%20Christian%20Vanhoucke%2C%20Vincent%20Ioffe%2C%20Sergey%20Shlens%2C%20Jon%20Rethinking%20the%20inception%20architecture%20for%20computer%20vision%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Szegedy%2C%20Christian%20Vanhoucke%2C%20Vincent%20Ioffe%2C%20Sergey%20Shlens%2C%20Jon%20Rethinking%20the%20inception%20architecture%20for%20computer%20vision%202016"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Bichen Wu, Alvin Wan, Xiangyu Yue, Peter Jin, Sicheng Zhao, Noah Golmant, Amir Gholaminejad, Joseph Gonzalez, and Kurt Keutzer. Shift: A zero flop, zero parameter alternative to spatial convolutions. In The IEEE Conference on Computer Vision and Pattern Recognition (CVPR), June 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20Bichen%20Wan%2C%20Alvin%20Yue%2C%20Xiangyu%20Jin%2C%20Peter%20Shift%3A%20A%20zero%20flop%2C%20zero%20parameter%20alternative%20to%20spatial%20convolutions%202018-06",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20Bichen%20Wan%2C%20Alvin%20Yue%2C%20Xiangyu%20Jin%2C%20Peter%20Shift%3A%20A%20zero%20flop%2C%20zero%20parameter%20alternative%20to%20spatial%20convolutions%202018-06"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Saining Xie, Ross Girshick, Piotr Doll\u00e1r, Zhuowen Tu, and Kaiming He. Aggregated residual transformations for deep neural networks. In The IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pages 5987\u20135995. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xie%2C%20Saining%20Girshick%2C%20Ross%20Doll%C3%A1r%2C%20Piotr%20Tu%2C%20Zhuowen%20Aggregated%20residual%20transformations%20for%20deep%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xie%2C%20Saining%20Girshick%2C%20Ross%20Doll%C3%A1r%2C%20Piotr%20Tu%2C%20Zhuowen%20Aggregated%20residual%20transformations%20for%20deep%20neural%20networks%202017"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Fisher Yu and Vladlen Koltun. Multi-scale context aggregation by dilated convolutions. In International Conference on Learning Representations (ICLR), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yu%2C%20Fisher%20Koltun%2C%20Vladlen%20Multi-scale%20context%20aggregation%20by%20dilated%20convolutions%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yu%2C%20Fisher%20Koltun%2C%20Vladlen%20Multi-scale%20context%20aggregation%20by%20dilated%20convolutions%202016"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Xiangyu Zhang, Xinyu Zhou, Mengxiao Lin, and Jian Sun. Shufflenet: An extremely efficient convolutional neural network for mobile devices. In The IEEE Conference on Computer Vision and Pattern Recognition (CVPR), June 2018. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Xiangyu%20Zhou%2C%20Xinyu%20Lin%2C%20Mengxiao%20Sun%2C%20Jian%20Shufflenet%3A%20An%20extremely%20efficient%20convolutional%20neural%20network%20for%20mobile%20devices%202018-06",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Xiangyu%20Zhou%2C%20Xinyu%20Lin%2C%20Mengxiao%20Sun%2C%20Jian%20Shufflenet%3A%20An%20extremely%20efficient%20convolutional%20neural%20network%20for%20mobile%20devices%202018-06"
+        }
+    ]
+}

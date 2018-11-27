@@ -1,5 +1,8 @@
-# NeurIPS-2018-nlp-papers
-Machine-generated summaries and highlights of the NLP papers accepted at Thirty-second Conference on Neural Information Processing Systems. 
+# NeurIPS 2018 Paper Summaries
+
+Machine-generated summaries and highlights of every paper accepted at Thirty-second Conference on Neural Information Processing Systems.
+
+There are 1008 papers in total. The 41 NLP NeurIPS papers are now in a separate directory.
 
 Generated with the Scholarcy Highlights API.
 

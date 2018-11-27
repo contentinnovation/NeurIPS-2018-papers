@@ -1,0 +1,362 @@
+{
+    "filename": "7473-embedding-logical-queries-on-knowledge-graphs.pdf",
+    "metadata": {
+        "title": "Embedding Logical Queries on Knowledge Graphs",
+        "author": "Will Hamilton, Payal Bajaj, Marinka Zitnik, Dan Jurafsky, Jure Leskovec",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7473-embedding-logical-queries-on-knowledge-graphs.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Learning low-dimensional embeddings of knowledge graphs is a powerful approach used to predict unobserved or missing edges between entities. However, an open challenge in this area is developing techniques that can go beyond simple edge prediction and handle more complex logical queries, which might involve multiple unobserved edges, entities, and variables. For instance, given an incomplete biological knowledge graph, we might want to predict what drugs are likely to target proteins involved with both diseases X and Y?\u2014a query that requires reasoning about all possible proteins that might interact with diseases X and Y. Here we introduce a framework to efficiently make predictions about conjunctive logical queries\u2014a flexible but tractable subset of first-order logic\u2014on incomplete knowledge graphs. In our approach, we embed graph nodes in a low-dimensional space and represent logical operators as learned geometric operations (e.g., translation, rotation) in this embedding space. By performing logical operations within a low-dimensional embedding space, our approach achieves a time complexity that is linear in the number of query variables, compared to the exponential complexity required by a naive enumeration-based approach. We demonstrate the utility of this framework in two application studies on real-world datasets with millions of relations: predicting logical relationships in a network of drug-gene-disease interactions and in a graph-based representation of social interactions derived from a popular web forum."
+    },
+    "keywords": [
+        {
+            "term": "question answering",
+            "url": "https://en.wikipedia.org/wiki/question_answering"
+        },
+        {
+            "term": "graph node",
+            "url": "https://en.wikipedia.org/wiki/graph_node"
+        },
+        {
+            "term": "disease x",
+            "url": "https://en.wikipedia.org/wiki/Disease_X"
+        },
+        {
+            "term": "directed acyclic graph",
+            "url": "https://en.wikipedia.org/wiki/directed_acyclic_graph"
+        },
+        {
+            "term": "biological interaction",
+            "url": "https://en.wikipedia.org/wiki/biological_interaction"
+        },
+        {
+            "term": "real world",
+            "url": "https://en.wikipedia.org/wiki/real_world"
+        },
+        {
+            "term": "knowledge graph",
+            "url": "https://en.wikipedia.org/wiki/knowledge_graph"
+        }
+    ],
+    "highlights": [
+        "We can use the model to predict which nodes are likely to satisfy any valid conjunctive query, even if the query involves unobserved edges",
+        "The focus of these question answering approaches is understanding natural language, whereas we focus on queries that are in logical form.\n7 types of X: - physical binding - co-expression - catalysis - activation - inhibition, etc.\n29 types of X: - cardiovascular - reproductive - cognition, etc",
+        "We consider knowledge graphs G = (V, E) that consists of nodes v \u2208 V and directed edges e \u2208 E of various types",
+        "A knowledge graph derived from a number from public biomedical databases (Appendix B)",
+        "Table 1 contains the performance results for three variants of graph query embeddings based on bilinear transformations (i.e., Equation 4), DistMult, and TransE, as well as the ablated models that are only trained on edge prediction.2",
+        "We proposed a framework to embed conjunctive graph queries, demonstrating how to map a practical subset of logic to efficient geometric operations in an embedding space"
+    ],
+    "key_statements": [
+        "We can use the model to predict which nodes are likely to satisfy any valid conjunctive query, even if the query involves unobserved edges",
+        "The focus of these question answering approaches is understanding natural language, whereas we focus on queries that are in logical form.\n7 types of X: - physical binding - co-expression - catalysis - activation - inhibition, etc.\n29 types of X: - cardiovascular - reproductive - cognition, etc",
+        "We consider knowledge graphs G = (V, E) that consists of nodes v \u2208 V and directed edges e \u2208 E of various types",
+        "A knowledge graph derived from a number from public biomedical databases (Appendix B)",
+        "It consists of nodes corresponding to drugs, diseases, proteins, side effects, and biological processes",
+        "Given the geometric projection operator P (Equation 4) and the geometric intersection operator I (Equation 5) we can use Algorithm 1 to efficiently generate an embedding q that corresponds to any directed acyclic graph-structured conjunctive query q on the network",
+        "Table 1 contains the performance results for three variants of graph query embeddings based on bilinear transformations (i.e., Equation 4), DistMult, and TransE, as well as the ablated models that are only trained on edge prediction.2",
+        "We proposed a framework to embed conjunctive graph queries, demonstrating how to map a practical subset of logic to efficient geometric operations in an embedding space"
+    ],
+    "summary": [
+        "We can use the model to predict which nodes are likely to satisfy any valid conjunctive query, even if the query involves unobserved edges.",
+        "Given the geometric projection operator P (Equation 4) and the geometric intersection operator I (Equation 5) we can use Algorithm 1 to efficiently generate an embedding q that corresponds to any DAG-structured conjunctive query q on the network.",
+        "Given a network G = (V, E), there exists a set of node embeddings zv \u2208 Rd, \u2200v \u2208 V, geometric projection parameters R\u03c4 \u2208 Rd\u00d7d, \u2200\u03c4 \u2208 R, and geometric intersection parameters W\u03b3, B\u03b3 \u2208 Rd\u00d7d, \u2200\u03b3 \u2208 \u0393 with d = O(|V |) such that for all DAG-structured queries q \u2208 Q(G) containing E edges the following holds: Algorithm 1 can compute an embedding q of q using O(E) applications of the geometric operators P and I such that score(q, zv) =",
+        ", i.e., the observed denotation set of the query q train can be exactly computed in the embeddings space by Algorithm 1 using O(E) applications of the geometric operators P and I.",
+        "(A slightly less naive baseline variant where we use one-hot embeddings for nodes is intractable due to having quadratic complexity w.r.t. to the number of nodes.) As additional ablations, we consider simplified variants of our approach where we only train the projection operator P on edge prediction and where the intersection operator I is just an elementwise mean or min.",
+        "This tests how well Algorithm 1 can answer conjunctive queries using standard node embeddings that are only trained to perform edge prediction.",
+        "Table 1 contains the performance results for three variants of GQEs based on bilinear transformations (i.e., Equation 4), DistMult, and TransE, as well as the ablated models that are only trained on edge prediction.2 Overall, we can see that the full Bilinear model performs the best, with an AUC of 91.0 on the Bio data and an AUC of 76.4 on the Reddit data.",
+        "We proposed a framework to embed conjunctive graph queries, demonstrating how to map a practical subset of logic to efficient geometric operations in an embedding space.",
+        "Natural future directions include generalizing the space of logical queries\u2014for example, by learning a geometric negation operator\u2014and using graph neural networks [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>, <a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>] to incorporate richer feature information on nodes and edges."
+    ],
+    "headline": "We introduce a framework to efficiently make predictions about conjunctive logical queries\u2014a flexible but tractable subset of first-order logic\u2014on incomplete knowledge graphs",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] S. Abiteboul, R. Hull, and V. Vianu. Foundations of databases: The logical level. AddisonWesley, 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abiteboul%2C%20S.%20Hull%2C%20R.%20Vianu%2C%20V.%20Foundations%20of%20databases%3A%20The%20logical%20level%201995"
+        },
+        {
+            "id": "2",
+            "entry": "[2] M. Ashburner, C. Ball, J. Blake, D. Botstein, H. Butler, J. Cherry, A. Davis, K. Dolinski, S. Dwight, J. Eppig, et al. Gene Ontology: tool for the unification of biology. Nature Genetics, 25(1):25, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ashburner%2C%20M.%20Ball%2C%20C.%20Blake%2C%20J.%20Botstein%2C%20D.%20Gene%20Ontology%3A%20tool%20for%20the%20unification%20of%20biology%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ashburner%2C%20M.%20Ball%2C%20C.%20Blake%2C%20J.%20Botstein%2C%20D.%20Gene%20Ontology%3A%20tool%20for%20the%20unification%20of%20biology%202000"
+        },
+        {
+            "id": "3",
+            "entry": "[3] S. Bach, M. Broecheler, B. Huang, and L. Getoor. Hinge-loss Markov random fields and probabilistic soft logic. JMRL, 18(109):1\u201367, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bach%2C%20S.%20Broecheler%2C%20M.%20Huang%2C%20B.%20Getoor%2C%20L.%20Hinge-loss%20Markov%20random%20fields%20and%20probabilistic%20soft%20logic%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bach%2C%20S.%20Broecheler%2C%20M.%20Huang%2C%20B.%20Getoor%2C%20L.%20Hinge-loss%20Markov%20random%20fields%20and%20probabilistic%20soft%20logic%202017"
+        },
+        {
+            "id": "4",
+            "entry": "[4] J. Berant, A. Chou, R. Frostig, and P. Liang. Semantic parsing on freebase from question-answer pairs. In EMNLP, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Berant%2C%20J.%20Chou%2C%20A.%20Frostig%2C%20R.%20Liang%2C%20P.%20Semantic%20parsing%20on%20freebase%20from%20question-answer%20pairs%202013"
+        },
+        {
+            "id": "5",
+            "entry": "[5] A. Bordes, S. Chopra, and J. Weston. Question answering with subgraph embeddings. In EMNLP, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bordes%2C%20A.%20Chopra%2C%20S.%20Weston%2C%20J.%20Question%20answering%20with%20subgraph%20embeddings%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bordes%2C%20A.%20Chopra%2C%20S.%20Weston%2C%20J.%20Question%20answering%20with%20subgraph%20embeddings%202014"
+        },
+        {
+            "id": "6",
+            "entry": "[6] A. Bordes, N. Usunier, A. Garcia-Duran, J. Weston, and O. Yakhnenko. Translating embeddings for modeling multi-relational data. In NIPS, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bordes%2C%20A.%20Usunier%2C%20N.%20Garcia-Duran%2C%20A.%20Weston%2C%20J.%20Translating%20embeddings%20for%20modeling%20multi-relational%20data.%20In%20NIPS%202013"
+        },
+        {
+            "id": "7",
+            "entry": "[7] M. M. Bronstein, J. Bruna, Y. LeCun, A. Szlam, and P. Vandergheynst. Geometric deep learning: Going beyond Euclidean data. IEEE Signal Processing Magazine, 34(4):18\u201342, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bronstein%2C%20M.M.%20Bruna%2C%20J.%20LeCun%2C%20Y.%20Szlam%2C%20A.%20Geometric%20deep%20learning%3A%20Going%20beyond%20Euclidean%20data%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bronstein%2C%20M.M.%20Bruna%2C%20J.%20LeCun%2C%20Y.%20Szlam%2C%20A.%20Geometric%20deep%20learning%3A%20Going%20beyond%20Euclidean%20data%202017"
+        },
+        {
+            "id": "8",
+            "entry": "[8] A. Brown and C. Patel. A standard database for drug repositioning. Scientific Data, 4:170029, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Brown%2C%20A.%20Patel%2C%20C.%20A%20standard%20database%20for%20drug%20repositioning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Brown%2C%20A.%20Patel%2C%20C.%20A%20standard%20database%20for%20drug%20repositioning%202017"
+        },
+        {
+            "id": "9",
+            "entry": "[9] R. Cavallo and M. Pittarelli. The theory of probabilistic databases. In VLDB, 1987.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cavallo%2C%20R.%20Pittarelli%2C%20M.%20The%20theory%20of%20probabilistic%20databases%201987",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cavallo%2C%20R.%20Pittarelli%2C%20M.%20The%20theory%20of%20probabilistic%20databases%201987"
+        },
+        {
+            "id": "10",
+            "entry": "[10] A. Chatr-Aryamontri et al. The BioGRID interaction database: 2015 update. Nucleic Acids Res., 43(D1):D470\u2013D478, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=A%20ChatrAryamontri%20et%20al%20The%20BioGRID%20interaction%20database%202015%20update%20Nucleic%20Acids%20Res%2043D1D470D478%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=A%20ChatrAryamontri%20et%20al%20The%20BioGRID%20interaction%20database%202015%20update%20Nucleic%20Acids%20Res%2043D1D470D478%202015"
+        },
+        {
+            "id": "11",
+            "entry": "[11] W. Cohen. Tensorlog: A differentiable deductive database. arXiv:1605.06523, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1605.06523"
+        },
+        {
+            "id": "12",
+            "entry": "[12] N. Dalvi and D. Suciu. Efficient query evaluation on probabilistic databases. In VLDB, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dalvi%2C%20N.%20Suciu%2C%20D.%20Efficient%20query%20evaluation%20on%20probabilistic%20databases%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dalvi%2C%20N.%20Suciu%2C%20D.%20Efficient%20query%20evaluation%20on%20probabilistic%20databases%202007"
+        },
+        {
+            "id": "13",
+            "entry": "[13] R. Das, S. Dhuliawala, M. Zaheer, L. Vilnis, I. Durugkar, A. Krishnamurthy, A. Smola, and A. McCallum. Go for a walk and arrive at the answer: Reasoning over paths in knowledge bases using reinforcement learning. ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Das%2C%20R.%20Dhuliawala%2C%20S.%20Zaheer%2C%20M.%20Vilnis%2C%20L.%20Go%20for%20a%20walk%20and%20arrive%20at%20the%20answer%3A%20Reasoning%20over%20paths%20in%20knowledge%20bases%20using%20reinforcement%20learning%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Das%2C%20R.%20Dhuliawala%2C%20S.%20Zaheer%2C%20M.%20Vilnis%2C%20L.%20Go%20for%20a%20walk%20and%20arrive%20at%20the%20answer%3A%20Reasoning%20over%20paths%20in%20knowledge%20bases%20using%20reinforcement%20learning%202018"
+        },
+        {
+            "id": "14",
+            "entry": "[14] R. Das, A. Neelakantan, D. Belanger, and A. McCallum. Chains of reasoning over entities, relations, and text using recurrent neural networks. In EACL, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Das%2C%20R.%20Neelakantan%2C%20A.%20Belanger%2C%20D.%20McCallum%2C%20A.%20Chains%20of%20reasoning%20over%20entities%2C%20relations%2C%20and%20text%20using%20recurrent%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Das%2C%20R.%20Neelakantan%2C%20A.%20Belanger%2C%20D.%20McCallum%2C%20A.%20Chains%20of%20reasoning%20over%20entities%2C%20relations%2C%20and%20text%20using%20recurrent%20neural%20networks%202016"
+        },
+        {
+            "id": "15",
+            "entry": "[15] T. Demeester, T. Rockt\u00e4schel, and S. Riedel. Lifted rule injection for relation embeddings. In EMNLP, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Demeester%2C%20T.%20Rockt%C3%A4schel%2C%20T.%20Riedel%2C%20S.%20Lifted%20rule%20injection%20for%20relation%20embeddings%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Demeester%2C%20T.%20Rockt%C3%A4schel%2C%20T.%20Riedel%2C%20S.%20Lifted%20rule%20injection%20for%20relation%20embeddings%202016"
+        },
+        {
+            "id": "16",
+            "entry": "[16] L. Getoor and B. Taskar. Introduction to Statistical Relational Learning. MIT press, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Getoor%2C%20L.%20Taskar%2C%20B.%20Introduction%20to%20Statistical%20Relational%20Learning%202007"
+        },
+        {
+            "id": "17",
+            "entry": "[17] J. Gilmer, S. Schoenholz, P. F. Riley, O. Vinyals, and G. E. Dahl. Neural message passing for quantum chemistry. ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gilmer%2C%20J.%20Schoenholz%2C%20S.%20Riley%2C%20P.F.%20Vinyals%2C%20O.%20Neural%20message%20passing%20for%20quantum%20chemistry%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gilmer%2C%20J.%20Schoenholz%2C%20S.%20Riley%2C%20P.F.%20Vinyals%2C%20O.%20Neural%20message%20passing%20for%20quantum%20chemistry%202017"
+        },
+        {
+            "id": "18",
+            "entry": "[18] K. Guu, J. Miller, and P. Liang. Traversing knowledge graphs in vector space. EMNLP, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Guu%2C%20K.%20Miller%2C%20J.%20Liang%2C%20P.%20Traversing%20knowledge%20graphs%20in%20vector%20space%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Guu%2C%20K.%20Miller%2C%20J.%20Liang%2C%20P.%20Traversing%20knowledge%20graphs%20in%20vector%20space%202015"
+        },
+        {
+            "id": "19",
+            "entry": "[19] W. Hamilton, R. Ying, and J. Leskovec. Representation learning on graphs: Methods and applications. IEEE Data Engineering Bulletin, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hamilton%2C%20W.%20Ying%2C%20R.%20Leskovec%2C%20J.%20Representation%20learning%20on%20graphs%3A%20Methods%20and%20applications%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hamilton%2C%20W.%20Ying%2C%20R.%20Leskovec%2C%20J.%20Representation%20learning%20on%20graphs%3A%20Methods%20and%20applications%202017"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Z. Hu, X. Ma, Z. Liu, E. Hovy, and E. Xing. Harnessing deep neural networks with logic rules. In ACL, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hu%2C%20Z.%20Ma%2C%20X.%20Liu%2C%20Z.%20Hovy%2C%20E.%20Harnessing%20deep%20neural%20networks%20with%20logic%20rules%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hu%2C%20Z.%20Ma%2C%20X.%20Liu%2C%20Z.%20Hovy%2C%20E.%20Harnessing%20deep%20neural%20networks%20with%20logic%20rules%202016"
+        },
+        {
+            "id": "21",
+            "entry": "[21] P. Indyk and R. Motwani. Approximate nearest neighbors: towards removing the curse of dimensionality. In ACM Symp. Theory Comput., 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Indyk%2C%20P.%20Motwani%2C%20R.%20Approximate%20nearest%20neighbors%3A%20towards%20removing%20the%20curse%20of%20dimensionality%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Indyk%2C%20P.%20Motwani%2C%20R.%20Approximate%20nearest%20neighbors%3A%20towards%20removing%20the%20curse%20of%20dimensionality%201998"
+        },
+        {
+            "id": "22",
+            "entry": "[22] A. Kahn. Topological sorting of large networks. Communications of the ACM, 5(11):558\u2013562, 1962.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kahn%2C%20A.%20Topological%20sorting%20of%20large%20networks%201962",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kahn%2C%20A.%20Topological%20sorting%20of%20large%20networks%201962"
+        },
+        {
+            "id": "23",
+            "entry": "[23] D. Krompa\u00df, M. Nickel, and V. Tresp. Querying factorized probabilistic triple databases. In International Semantic Web Conference, pages 114\u2013129, Cham, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krompa%C3%9F%2C%20D.%20Nickel%2C%20M.%20Tresp%2C%20V.%20Querying%20factorized%20probabilistic%20triple%20databases%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krompa%C3%9F%2C%20D.%20Nickel%2C%20M.%20Tresp%2C%20V.%20Querying%20factorized%20probabilistic%20triple%20databases%202014"
+        },
+        {
+            "id": "24",
+            "entry": "[24] M. Kuhn et al. The SIDER database of drugs and side effects. Nucleic Acids Res., 44(D1):D1075\u2013 D1079, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kuhn%2C%20M.%20The%20SIDER%20database%20of%20drugs%20and%20side%20effects",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kuhn%2C%20M.%20The%20SIDER%20database%20of%20drugs%20and%20side%20effects"
+        },
+        {
+            "id": "25",
+            "entry": "[25] D. Liben-Nowell and J. Kleinberg. The link-prediction problem for social networks. J. Assoc. Inform. Sci. and Technol., 58(7):1019\u20131031, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liben-Nowell%2C%20D.%20Kleinberg%2C%20J.%20The%20link-prediction%20problem%20for%20social%20networks%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liben-Nowell%2C%20D.%20Kleinberg%2C%20J.%20The%20link-prediction%20problem%20for%20social%20networks%202007"
+        },
+        {
+            "id": "26",
+            "entry": "[26] J. Menche et al. Uncovering disease-disease relationships through the incomplete interactome. Science, 347(6224):1257601, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Menche%2C%20J.%20Uncovering%20disease-disease%20relationships%20through%20the%20incomplete%20interactome%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Menche%2C%20J.%20Uncovering%20disease-disease%20relationships%20through%20the%20incomplete%20interactome%202015"
+        },
+        {
+            "id": "27",
+            "entry": "[27] A. Neelakantan, B. Roth, and A. McCallum. Compositional vector space models for knowledge base inference. In AAAI, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Neelakantan%2C%20A.%20Roth%2C%20B.%20McCallum%2C%20A.%20Compositional%20vector%20space%20models%20for%20knowledge%20base%20inference%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Neelakantan%2C%20A.%20Roth%2C%20B.%20McCallum%2C%20A.%20Compositional%20vector%20space%20models%20for%20knowledge%20base%20inference%202015"
+        },
+        {
+            "id": "28",
+            "entry": "[28] M. Nickel, K. Murphy, V. Tresp, and E. Gabrilovich. A review of relational machine learning for knowledge graphs. Proc. IEEE, 104(1):11\u201333, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nickel%2C%20M.%20Murphy%2C%20K.%20Tresp%2C%20V.%20Gabrilovich%2C%20E.%20A%20review%20of%20relational%20machine%20learning%20for%20knowledge%20graphs%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nickel%2C%20M.%20Murphy%2C%20K.%20Tresp%2C%20V.%20Gabrilovich%2C%20E.%20A%20review%20of%20relational%20machine%20learning%20for%20knowledge%20graphs%202016"
+        },
+        {
+            "id": "29",
+            "entry": "[29] M. Nickel, V. Tresp, and H. Kriegel. A three-way model for collective learning on multirelational data. In ICML, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nickel%2C%20M.%20Tresp%2C%20V.%20Kriegel%2C%20H.%20A%20three-way%20model%20for%20collective%20learning%20on%20multirelational%20data%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nickel%2C%20M.%20Tresp%2C%20V.%20Kriegel%2C%20H.%20A%20three-way%20model%20for%20collective%20learning%20on%20multirelational%20data%202011"
+        },
+        {
+            "id": "30",
+            "entry": "[30] A. Paszke, S. Gross, S. Chintala, G. Chanan, E. Yang, Z. DeVito, Z. Lin, A. Desmaison, L. Antiga, and A. Lerer. Automatic differentiation in PyTorch. In NIPS Autodiff Workshop, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=A%20Paszke%20S%20Gross%20S%20Chintala%20G%20Chanan%20E%20Yang%20Z%20DeVito%20Z%20Lin%20A%20Desmaison%20L%20Antiga%20and%20A%20Lerer%20Automatic%20differentiation%20in%20PyTorch%20In%20NIPS%20Autodiff%20Workshop%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=A%20Paszke%20S%20Gross%20S%20Chintala%20G%20Chanan%20E%20Yang%20Z%20DeVito%20Z%20Lin%20A%20Desmaison%20L%20Antiga%20and%20A%20Lerer%20Automatic%20differentiation%20in%20PyTorch%20In%20NIPS%20Autodiff%20Workshop%202017"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Ja. Pi\u00f1ero, N. Queralt-Rosinach, \u00c0. Bravo, J. Deu-Pons, A. Bauer-Mehren, M. Baron, F. Sanz, and L. Furlong. DisGeNET: a discovery platform for the dynamical exploration of human diseases and their genes. Database, 2015, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ja.%20Pi%C3%B1ero%2C%20N.Queralt-Rosinach%20Bravo%2C%20%C3%80.%20Deu-Pons%2C%20J.%20Bauer-Mehren%2C%20A.%20DisGeNET%3A%20a%20discovery%20platform%20for%20the%20dynamical%20exploration%20of%20human%20diseases%20and%20their%20genes%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ja.%20Pi%C3%B1ero%2C%20N.Queralt-Rosinach%20Bravo%2C%20%C3%80.%20Deu-Pons%2C%20J.%20Bauer-Mehren%2C%20A.%20DisGeNET%3A%20a%20discovery%20platform%20for%20the%20dynamical%20exploration%20of%20human%20diseases%20and%20their%20genes%202015"
+        },
+        {
+            "id": "32",
+            "entry": "[32] C. Qi, H. Su, K. Mo, and L. Guibas. Pointnet: Deep learning on point sets for 3d classification and segmentation. In CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Qi%2C%20C.%20Su%2C%20H.%20Mo%2C%20K.%20Guibas%2C%20L.%20Pointnet%3A%20Deep%20learning%20on%20point%20sets%20for%203d%20classification%20and%20segmentation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Qi%2C%20C.%20Su%2C%20H.%20Mo%2C%20K.%20Guibas%2C%20L.%20Pointnet%3A%20Deep%20learning%20on%20point%20sets%20for%203d%20classification%20and%20segmentation%202017"
+        },
+        {
+            "id": "33",
+            "entry": "[33] G. Ramanathan. Towards a model theory for distributed representations. In AAAI Spring Symposium Series, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ramanathan%2C%20G.%20Towards%20a%20model%20theory%20for%20distributed%20representations%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ramanathan%2C%20G.%20Towards%20a%20model%20theory%20for%20distributed%20representations%202015"
+        },
+        {
+            "id": "34",
+            "entry": "[34] T. Rockt\u00e4schel. Combining representation learning with logic for language processing. arXiv:1712.09687, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1712.09687"
+        },
+        {
+            "id": "35",
+            "entry": "[35] T. Rockt\u00e4schel, M. Bo\u0161njak, S. Singh, and S. Riedel. Low-dimensional embeddings of logic. In ACL Semantic Parsing, pages 45\u201349, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=T%20Rockt%C3%A4schel%20M%20Bo%C5%A1njak%20S%20Singh%20and%20S%20Riedel%20Lowdimensional%20embeddings%20of%20logic%20In%20ACL%20Semantic%20Parsing%20pages%204549%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=T%20Rockt%C3%A4schel%20M%20Bo%C5%A1njak%20S%20Singh%20and%20S%20Riedel%20Lowdimensional%20embeddings%20of%20logic%20In%20ACL%20Semantic%20Parsing%20pages%204549%202014"
+        },
+        {
+            "id": "36",
+            "entry": "[36] T. Rockt\u00e4schel and S. Riedel. End-to-end differentiable proving. In NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rockt%C3%A4schel%2C%20T.%20Riedel%2C%20S.%20End-to-end%20differentiable%20proving%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rockt%C3%A4schel%2C%20T.%20Riedel%2C%20S.%20End-to-end%20differentiable%20proving%202017"
+        },
+        {
+            "id": "37",
+            "entry": "[37] T. Rockt\u00e4schel, S. Singh, and S. Riedel. Injecting logical background knowledge into embeddings for relation extraction. In NAACL HLT, pages 1119\u20131129, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rockt%C3%A4schel%2C%20T.%20Singh%2C%20S.%20Riedel%2C%20S.%20Injecting%20logical%20background%20knowledge%20into%20embeddings%20for%20relation%20extraction%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rockt%C3%A4schel%2C%20T.%20Singh%2C%20S.%20Riedel%2C%20S.%20Injecting%20logical%20background%20knowledge%20into%20embeddings%20for%20relation%20extraction%202015"
+        },
+        {
+            "id": "38",
+            "entry": "[38] T. Rolland et al. A proteome-scale map of the human interactome network. Cell, 159(5):1212\u2013 1226, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rolland%2C%20T.%20A%20proteome-scale%20map%20of%20the%20human%20interactome%20network",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rolland%2C%20T.%20A%20proteome-scale%20map%20of%20the%20human%20interactome%20network"
+        },
+        {
+            "id": "39",
+            "entry": "[39] D. Szklarczyk et al. STITCH 5: augmenting protein\u2013chemical interaction networks with tissue and affinity data. Nucleic Acids Res., 44(D1):D380\u2013D384, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Szklarczyk%2C%20D.%20STITCH%205%3A%20augmenting%20protein%E2%80%93chemical%20interaction%20networks%20with%20tissue%20and%20affinity%20data%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Szklarczyk%2C%20D.%20STITCH%205%3A%20augmenting%20protein%E2%80%93chemical%20interaction%20networks%20with%20tissue%20and%20affinity%20data%202015"
+        },
+        {
+            "id": "40",
+            "entry": "[40] D. Szklarczyk et al. The STRING database in 2017: quality-controlled protein\u2013protein association networks, made broadly accessible. Nucleic Acids Res., 45(D1):D362\u2013D368, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=D%20Szklarczyk%20et%20al%20The%20STRING%20database%20in%202017%20qualitycontrolled%20proteinprotein%20association%20networks%20made%20broadly%20accessible%20Nucleic%20Acids%20Res%2045D1D362D368%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=D%20Szklarczyk%20et%20al%20The%20STRING%20database%20in%202017%20qualitycontrolled%20proteinprotein%20association%20networks%20made%20broadly%20accessible%20Nucleic%20Acids%20Res%2045D1D362D368%202017"
+        },
+        {
+            "id": "41",
+            "entry": "[41] N. Tatonetti et al. Data-driven prediction of drug effects and interactions. Science Translational Medicine, 4(125):12531, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tatonetti%2C%20N.%20Data-driven%20prediction%20of%20drug%20effects%20and%20interactions%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tatonetti%2C%20N.%20Data-driven%20prediction%20of%20drug%20effects%20and%20interactions%202012"
+        },
+        {
+            "id": "42",
+            "entry": "[42] K. Thulasiraman and Madisetti N. Swamy. Graphs: theory and algorithms. John Wiley & Sons, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Thulasiraman%2C%20K.%20Swamy%2C%20Madisetti%20N.%20Graphs%3A%20theory%20and%20algorithms%202011"
+        },
+        {
+            "id": "43",
+            "entry": "[43] M. Wang, Y. Tang, J. Wang, and J. Deng. Premise selection for theorem proving by deep graph embedding. In NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20M.%20Tang%2C%20Y.%20Wang%2C%20J.%20Deng%2C%20J.%20Premise%20selection%20for%20theorem%20proving%20by%20deep%20graph%20embedding%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20M.%20Tang%2C%20Y.%20Wang%2C%20J.%20Deng%2C%20J.%20Premise%20selection%20for%20theorem%20proving%20by%20deep%20graph%20embedding%202017"
+        },
+        {
+            "id": "44",
+            "entry": "[44] L. Wu, A. Fisch, S. Chopra, K. Adams, A. Bordes, and J. Weston. Starspace: Embed all the things! In AAAI, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=L%20Wu%20A%20Fisch%20S%20Chopra%20K%20Adams%20A%20Bordes%20and%20J%20Weston%20Starspace%20Embed%20all%20the%20things%20In%20AAAI%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=L%20Wu%20A%20Fisch%20S%20Chopra%20K%20Adams%20A%20Bordes%20and%20J%20Weston%20Starspace%20Embed%20all%20the%20things%20In%20AAAI%202017"
+        },
+        {
+            "id": "45",
+            "entry": "[45] Bi. Yang, W. Yih, X. He, J. Gao, and L. Deng. Embedding entities and relations for learning and inference in knowledge bases. ICLR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bi.%20Yang%2C%20W.Yih%20He%2C%20X.%20Gao%2C%20J.%20Deng%2C%20L.%20Embedding%20entities%20and%20relations%20for%20learning%20and%20inference%20in%20knowledge%20bases%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bi.%20Yang%2C%20W.Yih%20He%2C%20X.%20Gao%2C%20J.%20Deng%2C%20L.%20Embedding%20entities%20and%20relations%20for%20learning%20and%20inference%20in%20knowledge%20bases%202015"
+        },
+        {
+            "id": "46",
+            "entry": "[46] M. Zaheer, S. Kottur, S. Ravanbakhsh, B. Poczos, R> Salakhutdinov, and A. J. Smola. Deep sets. In NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zaheer%2C%20M.%20Kottur%2C%20S.%20Ravanbakhsh%2C%20S.%20Poczos%2C%20B.%20Deep%20sets%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zaheer%2C%20M.%20Kottur%2C%20S.%20Ravanbakhsh%2C%20S.%20Poczos%2C%20B.%20Deep%20sets%202017"
+        },
+        {
+            "id": "47",
+            "entry": "[47] Y. Zhang, H. Dai, Z. Kozareva, A. Smola, and L. Song. Variational reasoning for question answering with knowledge graph. AAAI, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Y.%20Dai%2C%20H.%20Kozareva%2C%20Z.%20Smola%2C%20A.%20Variational%20reasoning%20for%20question%20answering%20with%20knowledge%20graph%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Y.%20Dai%2C%20H.%20Kozareva%2C%20Z.%20Smola%2C%20A.%20Variational%20reasoning%20for%20question%20answering%20with%20knowledge%20graph%202018"
+        },
+        {
+            "id": "48",
+            "entry": "[48] T. Zhou, J. Ren, M. Medo, and Y. Zhang. Bipartite network projection and personal recommendation. Phys. Rev. E, 76(4):046115, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhou%2C%20T.%20Ren%2C%20J.%20Medo%2C%20M.%20Zhang%2C%20Y.%20Bipartite%20network%20projection%20and%20personal%20recommendation%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhou%2C%20T.%20Ren%2C%20J.%20Medo%2C%20M.%20Zhang%2C%20Y.%20Bipartite%20network%20projection%20and%20personal%20recommendation%202007"
+        },
+        {
+            "id": "49",
+            "entry": "[49] M. Zitnik, M. Agrawal, and J. Leskovec. Modeling polypharmacy side effects with graph convolutional networks. Bioinformatics, 2018. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zitnik%2C%20M.%20Agrawal%2C%20M.%20Leskovec%2C%20J.%20Modeling%20polypharmacy%20side%20effects%20with%20graph%20convolutional%20networks%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zitnik%2C%20M.%20Agrawal%2C%20M.%20Leskovec%2C%20J.%20Modeling%20polypharmacy%20side%20effects%20with%20graph%20convolutional%20networks%202018"
+        }
+    ]
+}

@@ -1,0 +1,384 @@
+{
+    "filename": "7459-3d-aware-scene-manipulation-via-inverse-graphics.pdf",
+    "metadata": {
+        "title": "3D-Aware Scene Manipulation via Inverse Graphics",
+        "author": "Shunyu Yao, Tzu Ming Hsu, Jun-Yan Zhu, Jiajun Wu, Antonio Torralba, Bill Freeman, Josh Tenenbaum",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7459-3d-aware-scene-manipulation-via-inverse-graphics.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We aim to obtain an interpretable, expressive, and disentangled scene representation that contains comprehensive structural and textural information for each object. Previous scene representations learned by neural networks are often uninterpretable, limited to a single object, or lacking 3D knowledge. In this work, we propose 3D scene de-rendering networks (3D-SDN) to address the above issues by integrating disentangled representations for semantics, geometry, and appearance into a deep generative model. Our scene encoder performs inverse graphics, translating a scene into a structured object-wise representation. Our decoder has two components: a differentiable shape renderer and a neural texture generator. The disentanglement of semantics, geometry, and appearance supports 3D-aware scene manipulation, e.g., rotating and moving objects freely while keeping the consistent shape and texture, and changing the object appearance without affecting its shape. Experiments demonstrate that our editing scheme based on 3D-SDN is superior to its 2D counterpart."
+    },
+    "keywords": [
+        {
+            "term": "generative model",
+            "url": "https://en.wikipedia.org/wiki/generative_model"
+        },
+        {
+            "term": "free-form deformation",
+            "url": "https://en.wikipedia.org/wiki/free-form_deformation"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Humans are incredible at perceiving the world, but more distinguishing is our mental ability to simulate and imagine what will happen",
+        "Deep generative models have led to remarkable breakthroughs in learning hierarchical representations of images and decoding them back to images [<a class=\"ref-link\" id=\"cGoodfellow_et+al_2014_a\" href=\"#rGoodfellow_et+al_2014_a\">Goodfellow et al, 2014</a>]",
+        "We propose 3D scene de-rendering networks (3D-SDN) to incorporate an object-based, interpretable scene representation into a deep generative model",
+        "We propose 3D scene de-rendering networks (3D-SDN) in an encoder-decoder framework",
+        "We present how the 3D scene de-rendering networks enables 3D-aware image editing",
+        "We have developed 3D scene de-rendering networks (3D-SDN) to obtain an interpretable and disentangled scene representation with rich semantic, 3D structural, and textural information"
+    ],
+    "key_statements": [
+        "Humans are incredible at perceiving the world, but more distinguishing is our mental ability to simulate and imagine what will happen",
+        "Deep generative models have led to remarkable breakthroughs in learning hierarchical representations of images and decoding them back to images [<a class=\"ref-link\" id=\"cGoodfellow_et+al_2014_a\" href=\"#rGoodfellow_et+al_2014_a\">Goodfellow et al, 2014</a>]",
+        "We propose 3D scene de-rendering networks (3D-SDN) to incorporate an object-based, interpretable scene representation into a deep generative model",
+        "We propose 3D scene de-rendering networks (3D-SDN) in an encoder-decoder framework",
+        "We present how the 3D scene de-rendering networks enables 3D-aware image editing",
+        "We conduct a human study, where we show the target image as well as the edited results from two different methods: 3D scene de-rendering networks vs. 2D and 3D scene de-rendering networks vs. 2D+",
+        "We have developed 3D scene de-rendering networks (3D-SDN) to obtain an interpretable and disentangled scene representation with rich semantic, 3D structural, and textural information"
+    ],
+    "summary": [
+        "Humans are incredible at perceiving the world, but more distinguishing is our mental ability to simulate and imagine what will happen.",
+        "We propose 3D scene de-rendering networks (3D-SDN) to incorporate an object-based, interpretable scene representation into a deep generative model.",
+        "As shown in Fig. 2, we first de-render an image into disentangled representations for semantic, textural, and geometric information.",
+        "The geometric renderer computes an instance map, a pose map, and normal maps for objects in the scene for the textural branch.",
+        "Given a masked object image and its bounding box, the geometric branch of the 3D-SDN predicts the object\u2019s mesh model, scale, rotation, translation, and the free-form deformation (FFD) coefficients.",
+        "As shown in Fig. 3, given an object\u2019s masked image and estimated bounding box, the geometric de-renderer learns to predict the mesh M by first selecting a mesh from eight candidate shapes, and applying a Free-Form Deformation (FFD) [<a class=\"ref-link\" id=\"cSederberg_1986_a\" href=\"#rSederberg_1986_a\">Sederberg and Parry, 1986</a>] with inferred grid point coordinates \u03c6.",
+        "The semantic branch of the 3D-SDN uses a semantic segmentation model DRN [<a class=\"ref-link\" id=\"cYu_et+al_2017_a\" href=\"#rYu_et+al_2017_a\">Yu et al, 2017</a>, <a class=\"ref-link\" id=\"cZhou_et+al_2017_a\" href=\"#rZhou_et+al_2017_a\">Zhou et al, 2017</a>] to obtain an semantic map of the input image.",
+        "We formulate the textural branch of the 3D-SDN under a conditional adversarial learning framework with three networks (G, D, E): a textural derenderer E : (L, I) \u2192 z, a texture renderer G : (L, z) \u2192 I and a discriminator D : (L, I) \u2192 [0, 1] are trained jointly with the following objectives.",
+        "We predict its scale, rotation, translation, 43 FFD grid point coefficients, and an 8-dimensional distribution across candidate meshes with a ResNet-18 network [<a class=\"ref-link\" id=\"cHe_et+al_2015_a\" href=\"#rHe_et+al_2015_a\">He et al, 2015</a>].",
+        "We concatenate the pose map, the predicted object normal map, the texture code map z, the semantic label map, and the instance boundary map together, and feed them to the neural textural renderer to reconstruct the input image.",
+        "The Cityscapes dataset contains 2,975 training images with pixel-level semantic segmentation and instance segmentation ground truth, but with no 3D annotations, making the geometric inference more challenging.",
+        "Given each image, we first predict 3D attributes with our geometric branch pre-trained on Virtual KITTI dataset; we optimize both attributes and mesh parameters \u03c0 and \u03c6 by minimizing the reprojection loss Lreproj.",
+        "We have developed 3D scene de-rendering networks (3D-SDN) to obtain an interpretable and disentangled scene representation with rich semantic, 3D structural, and textural information.",
+        "Though our work mainly focuses on 3D-aware scene manipulation, the learned representations could be potentially useful for various tasks such as image reasoning, captioning, and analogy-making.",
+        "Future directions include better handling uncommon object appearance and pose, especially those not in the training set, and dealing with deformable shapes such as human bodies"
+    ],
+    "headline": "We propose 3D scene de-rendering networks  to address the above issues by integrating disentangled representations for semantics, geometry, and appearance into a deep generative model",
+    "reference_links": [
+        {
+            "id": "Barrow_1978_a",
+            "entry": "Harry G Barrow and Jay M Tenenbaum. Recovering intrinsic scene characteristics from images. Computer Vision Systems, 1978. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Barrow%2C%20Harry%20G.%20Tenenbaum%2C%20Jay%20M.%20Recovering%20intrinsic%20scene%20characteristics%20from%20images%201978",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Barrow%2C%20Harry%20G.%20Tenenbaum%2C%20Jay%20M.%20Recovering%20intrinsic%20scene%20characteristics%20from%20images%201978"
+        },
+        {
+            "id": "Chang_et+al_2015_a",
+            "entry": "Angel X Chang, Thomas Funkhouser, Leonidas Guibas, Pat Hanrahan, Qixing Huang, Zimo Li, Silvio Savarese, Manolis Savva, Shuran Song, Hao Su, Jianxiong Xiao, Li Yi, and Fisher Yu. Shapenet: An information-rich 3d model repository. arXiv:1512.03012, 2015. 6",
+            "arxiv_url": "https://arxiv.org/pdf/1512.03012"
+        },
+        {
+            "id": "Chen_et+al_2013_a",
+            "entry": "Tao Chen, Zhe Zhu, Ariel Shamir, Shi-Min Hu, and Daniel Cohen-Or. 3-sweep: Extracting editable objects from a single photo. ACM Transactions on Graphics (TOG), 32(6):195, 2013. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Tao%20Zhu%2C%20Zhe%20Shamir%2C%20Ariel%20Hu%2C%20Shi-Min%203-sweep%3A%20Extracting%20editable%20objects%20from%20a%20single%20photo%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Tao%20Zhu%2C%20Zhe%20Shamir%2C%20Ariel%20Hu%2C%20Shi-Min%203-sweep%3A%20Extracting%20editable%20objects%20from%20a%20single%20photo%202013"
+        },
+        {
+            "id": "Chen_et+al_2016_a",
+            "entry": "Xi Chen, Yan Duan, Rein Houthooft, John Schulman, Ilya Sutskever, and Pieter Abbeel. Infogan: Interpretable representation learning by information maximizing generative adversarial nets. In NIPS, 2016. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Xi%20Duan%2C%20Yan%20Houthooft%2C%20Rein%20Schulman%2C%20John%20Infogan%3A%20Interpretable%20representation%20learning%20by%20information%20maximizing%20generative%20adversarial%20nets%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Xi%20Duan%2C%20Yan%20Houthooft%2C%20Rein%20Schulman%2C%20John%20Infogan%3A%20Interpretable%20representation%20learning%20by%20information%20maximizing%20generative%20adversarial%20nets%202016"
+        },
+        {
+            "id": "Choy_et+al_2016_a",
+            "entry": "Christopher B Choy, Danfei Xu, JunYoung Gwak, Kevin Chen, and Silvio Savarese. 3d-r2n2: A unified approach for single and multi-view 3d object reconstruction. In ECCV, 2016. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Choy%2C%20Christopher%20B.%20Xu%2C%20Danfei%20Gwak%2C%20JunYoung%20Chen%2C%20Kevin%203d-r2n2%3A%20A%20unified%20approach%20for%20single%20and%20multi-view%203d%20object%20reconstruction%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Choy%2C%20Christopher%20B.%20Xu%2C%20Danfei%20Gwak%2C%20JunYoung%20Chen%2C%20Kevin%203d-r2n2%3A%20A%20unified%20approach%20for%20single%20and%20multi-view%203d%20object%20reconstruction%202016"
+        },
+        {
+            "id": "Cordts_et+al_2016_a",
+            "entry": "Marius Cordts, Mohamed Omran, Sebastian Ramos, Timo Rehfeld, Markus Enzweiler, Rodrigo Benenson, Uwe Franke, Stefan Roth, and Bernt Schiele. The cityscapes dataset for semantic urban scene understanding. In CVPR, 2016. 2, 6",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cordts%2C%20Marius%20Omran%2C%20Mohamed%20Ramos%2C%20Sebastian%20Rehfeld%2C%20Timo%20The%20cityscapes%20dataset%20for%20semantic%20urban%20scene%20understanding%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cordts%2C%20Marius%20Omran%2C%20Mohamed%20Ramos%2C%20Sebastian%20Rehfeld%2C%20Timo%20The%20cityscapes%20dataset%20for%20semantic%20urban%20scene%20understanding%202016"
+        },
+        {
+            "id": "Dosovitskiy_2016_a",
+            "entry": "Alexey Dosovitskiy and Thomas Brox. Generating images with perceptual similarity metrics based on deep networks. In NIPS, 2016. 5",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dosovitskiy%2C%20Alexey%20Brox%2C%20Thomas%20Generating%20images%20with%20perceptual%20similarity%20metrics%20based%20on%20deep%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dosovitskiy%2C%20Alexey%20Brox%2C%20Thomas%20Generating%20images%20with%20perceptual%20similarity%20metrics%20based%20on%20deep%20networks%202016"
+        },
+        {
+            "id": "Eigen_et+al_0000_a",
+            "entry": "David Eigen, Christian Puhrsch, and Rob Fergus. Depth map prediction from a single image using a multi-scale deep network. In NIPS, 2014. 4",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Eigen%2C%20David%20Puhrsch%2C%20Christian%20Fergus%2C%20Rob%20Depth%20map%20prediction%20from%20a%20single%20image%20using%20a%20multi-scale%20deep%20network",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Eigen%2C%20David%20Puhrsch%2C%20Christian%20Fergus%2C%20Rob%20Depth%20map%20prediction%20from%20a%20single%20image%20using%20a%20multi-scale%20deep%20network"
+        },
+        {
+            "id": "Gaidon_et+al_2016_a",
+            "entry": "Adrien Gaidon, Qiao Wang, Yohann Cabon, and Eleonora Vig. Virtual worlds as proxy for multi-object tracking analysis. In CVPR, 2016. 2, 6",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gaidon%2C%20Adrien%20Wang%2C%20Qiao%20Cabon%2C%20Yohann%20Vig%2C%20Eleonora%20Virtual%20worlds%20as%20proxy%20for%20multi-object%20tracking%20analysis%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gaidon%2C%20Adrien%20Wang%2C%20Qiao%20Cabon%2C%20Yohann%20Vig%2C%20Eleonora%20Virtual%20worlds%20as%20proxy%20for%20multi-object%20tracking%20analysis%202016"
+        },
+        {
+            "id": "Gatys_et+al_2016_a",
+            "entry": "Leon A Gatys, Alexander S Ecker, and Matthias Bethge. Image style transfer using convolutional neural networks. In CVPR, 2016. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gatys%2C%20Leon%20A.%20Ecker%2C%20Alexander%20S.%20Bethge%2C%20Matthias%20Image%20style%20transfer%20using%20convolutional%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gatys%2C%20Leon%20A.%20Ecker%2C%20Alexander%20S.%20Bethge%2C%20Matthias%20Image%20style%20transfer%20using%20convolutional%20neural%20networks%202016"
+        },
+        {
+            "id": "Geiger_et+al_2012_a",
+            "entry": "Andreas Geiger, Philip Lenz, and Raquel Urtasun. Are we ready for autonomous driving? the kitti vision benchmark suite. In CVPR, 2012. 6, 9",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Geiger%2C%20Andreas%20Lenz%2C%20Philip%20Urtasun%2C%20Raquel%20Are%20we%20ready%20for%20autonomous%20driving%3F%20the%20kitti%20vision%20benchmark%20suite%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Geiger%2C%20Andreas%20Lenz%2C%20Philip%20Urtasun%2C%20Raquel%20Are%20we%20ready%20for%20autonomous%20driving%3F%20the%20kitti%20vision%20benchmark%20suite%202012"
+        },
+        {
+            "id": "Gharbi_et+al_2016_a",
+            "entry": "Micha\u00ebl Gharbi, Gaurav Chaurasia, Sylvain Paris, and Fr\u00e9do Durand. Deep joint demosaicking and denoising. ACM Transactions on Graphics (TOG), 35(6):191, 2016. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gharbi%2C%20Micha%C3%ABl%20Chaurasia%2C%20Gaurav%20Paris%2C%20Sylvain%20Durand%2C%20Fr%C3%A9do%20Deep%20joint%20demosaicking%20and%20denoising%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gharbi%2C%20Micha%C3%ABl%20Chaurasia%2C%20Gaurav%20Paris%2C%20Sylvain%20Durand%2C%20Fr%C3%A9do%20Deep%20joint%20demosaicking%20and%20denoising%202016"
+        },
+        {
+            "id": "Goodfellow_et+al_2014_a",
+            "entry": "Ian Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, and Yoshua Bengio. Generative adversarial nets. In NIPS, 2014. 1, 2, 5",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goodfellow%2C%20Ian%20Pouget-Abadie%2C%20Jean%20Mirza%2C%20Mehdi%20Xu%2C%20Bing%20Generative%20adversarial%20nets%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goodfellow%2C%20Ian%20Pouget-Abadie%2C%20Jean%20Mirza%2C%20Mehdi%20Xu%2C%20Bing%20Generative%20adversarial%20nets%202014"
+        },
+        {
+            "id": "He_et+al_2015_a",
+            "entry": "Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. In CVPR, 2015. 6",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202015"
+        },
+        {
+            "id": "He_et+al_2017_a",
+            "entry": "Kaiming He, Georgia Gkioxari, Piotr Doll\u00e1r, and Ross Girshick. Mask r-cnn. In ICCV, 2017. 3, 6",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kaiming%20He%20Georgia%20Gkioxari%20Piotr%20Doll%C3%A1r%20and%20Ross%20Girshick%20Mask%20rcnn%20In%20ICCV%202017%203%206",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kaiming%20He%20Georgia%20Gkioxari%20Piotr%20Doll%C3%A1r%20and%20Ross%20Girshick%20Mask%20rcnn%20In%20ICCV%202017%203%206"
+        },
+        {
+            "id": "Isola_et+al_2017_a",
+            "entry": "Phillip Isola, Jun-Yan Zhu, Tinghui Zhou, and Alexei A Efros. Image-to-image translation with conditional adversarial networks. In CVPR, 2017. 3, 5, 8",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Isola%2C%20Phillip%20Zhu%2C%20Jun-Yan%20Zhou%2C%20Tinghui%20and%20Alexei%20A%20Efros.%20Image-to-image%20translation%20with%20conditional%20adversarial%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Isola%2C%20Phillip%20Zhu%2C%20Jun-Yan%20Zhou%2C%20Tinghui%20and%20Alexei%20A%20Efros.%20Image-to-image%20translation%20with%20conditional%20adversarial%20networks%202017"
+        },
+        {
+            "id": "Janner_et+al_2017_a",
+            "entry": "Michael Janner, Jiajun Wu, Tejas D. Kulkarni, Ilker Yildirim, and Josh Tenenbaum. Self-supervised intrinsic image decomposition. In NIPS, 2017. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Janner%2C%20Michael%20Wu%2C%20Jiajun%20Kulkarni%2C%20Tejas%20D.%20Yildirim%2C%20Ilker%20Self-supervised%20intrinsic%20image%20decomposition%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Janner%2C%20Michael%20Wu%2C%20Jiajun%20Kulkarni%2C%20Tejas%20D.%20Yildirim%2C%20Ilker%20Self-supervised%20intrinsic%20image%20decomposition%202017"
+        },
+        {
+            "id": "Johnson_et+al_2016_a",
+            "entry": "Justin Johnson, Alexandre Alahi, and Li Fei-Fei. Perceptual losses for real-time style transfer and superresolution. In ECCV, 2016. 5",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Johnson%2C%20Justin%20Alahi%2C%20Alexandre%20Fei-Fei%2C%20Li%20Perceptual%20losses%20for%20real-time%20style%20transfer%20and%20superresolution%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Johnson%2C%20Justin%20Alahi%2C%20Alexandre%20Fei-Fei%2C%20Li%20Perceptual%20losses%20for%20real-time%20style%20transfer%20and%20superresolution%202016"
+        },
+        {
+            "id": "Kar_et+al_2015_a",
+            "entry": "Abhishek Kar, Shubham Tulsiani, Joao Carreira, and Jitendra Malik. Category-specific object reconstruction from a single image. In CVPR, 2015. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kar%2C%20Abhishek%20Tulsiani%2C%20Shubham%20Carreira%2C%20Joao%20Malik%2C%20Jitendra%20Category-specific%20object%20reconstruction%20from%20a%20single%20image%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kar%2C%20Abhishek%20Tulsiani%2C%20Shubham%20Carreira%2C%20Joao%20Malik%2C%20Jitendra%20Category-specific%20object%20reconstruction%20from%20a%20single%20image%202015"
+        },
+        {
+            "id": "Karsch_et+al_2011_a",
+            "entry": "Kevin Karsch, Varsha Hedau, David Forsyth, and Derek Hoiem. Rendering synthetic objects into legacy photographs. ACM Transactions on Graphics (TOG), 30(6):157, 2011. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Karsch%2C%20Kevin%20Hedau%2C%20Varsha%20Forsyth%2C%20David%20Hoiem%2C%20Derek%20Rendering%20synthetic%20objects%20into%20legacy%20photographs%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Karsch%2C%20Kevin%20Hedau%2C%20Varsha%20Forsyth%2C%20David%20Hoiem%2C%20Derek%20Rendering%20synthetic%20objects%20into%20legacy%20photographs%202011"
+        },
+        {
+            "id": "Kato_et+al_2018_a",
+            "entry": "Hiroharu Kato, Yoshitaka Ushiku, and Tatsuya Harada. Neural 3d mesh renderer. In CVPR, 2018. 4, 6",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kato%2C%20Hiroharu%20Ushiku%2C%20Yoshitaka%20Harada%2C%20Tatsuya%20Neural%203d%20mesh%20renderer%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kato%2C%20Hiroharu%20Ushiku%2C%20Yoshitaka%20Harada%2C%20Tatsuya%20Neural%203d%20mesh%20renderer%202018"
+        },
+        {
+            "id": "Kholgade_et+al_2014_a",
+            "entry": "Natasha Kholgade, Tomas Simon, Alexei Efros, and Yaser Sheikh. 3d object manipulation in a single photograph using stock 3d models. ACM Transactions on Graphics (TOG), 33(4):127, 2014. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kholgade%2C%20Natasha%20Simon%2C%20Tomas%20Efros%2C%20Alexei%20Sheikh%2C%20Yaser%203d%20object%20manipulation%20in%20a%20single%20photograph%20using%20stock%203d%20models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kholgade%2C%20Natasha%20Simon%2C%20Tomas%20Efros%2C%20Alexei%20Sheikh%2C%20Yaser%203d%20object%20manipulation%20in%20a%20single%20photograph%20using%20stock%203d%20models%202014"
+        },
+        {
+            "id": "Kingma_2015_a",
+            "entry": "Diederik P. Kingma and Jimmy Ba. Adam: A method for stochastic optimization. In ICLR, 2015. 6, 7",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Ba%2C%20Jimmy%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Ba%2C%20Jimmy%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202015"
+        },
+        {
+            "id": "Kirillov_et+al_2018_a",
+            "entry": "Alexander Kirillov, Kaiming He, Ross Girshick, Carsten Rother, and Piotr Doll\u00e1r. Panoptic segmentation. arXiv preprint arXiv:1801.00868, 2018. 5",
+            "arxiv_url": "https://arxiv.org/pdf/1801.00868"
+        },
+        {
+            "id": "Kulkarni_et+al_2015_a",
+            "entry": "Tejas D Kulkarni, William F Whitney, Pushmeet Kohli, and Josh Tenenbaum. Deep convolutional inverse graphics network. In NIPS, 2015. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kulkarni%2C%20Tejas%20D.%20Whitney%2C%20William%20F.%20Kohli%2C%20Pushmeet%20Tenenbaum%2C%20Josh%20Deep%20convolutional%20inverse%20graphics%20network%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kulkarni%2C%20Tejas%20D.%20Whitney%2C%20William%20F.%20Kohli%2C%20Pushmeet%20Tenenbaum%2C%20Josh%20Deep%20convolutional%20inverse%20graphics%20network%202015"
+        },
+        {
+            "id": "Larsen_et+al_2016_a",
+            "entry": "Anders Boesen Lindbo Larsen, S\u00f8ren Kaae S\u00f8nderby, and Ole Winther. Autoencoding beyond pixels using a learned similarity metric. In ICML, 2016. 5",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Larsen%2C%20Anders%20Boesen%20Lindbo%20S%C3%B8nderby%2C%20S%C3%B8ren%20Kaae%20Winther%2C%20Ole%20Autoencoding%20beyond%20pixels%20using%20a%20learned%20similarity%20metric%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Larsen%2C%20Anders%20Boesen%20Lindbo%20S%C3%B8nderby%2C%20S%C3%B8ren%20Kaae%20Winther%2C%20Ole%20Autoencoding%20beyond%20pixels%20using%20a%20learned%20similarity%20metric%202016"
+        },
+        {
+            "id": "Liu_et+al_2017_a",
+            "entry": "Ming-Yu Liu, Thomas Breuel, and Jan Kautz. Unsupervised image-to-image translation networks. In NIPS, 2017. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20Ming-Yu%20Breuel%2C%20Thomas%20Kautz%2C%20Jan%20Unsupervised%20image-to-image%20translation%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liu%2C%20Ming-Yu%20Breuel%2C%20Thomas%20Kautz%2C%20Jan%20Unsupervised%20image-to-image%20translation%20networks%202017"
+        },
+        {
+            "id": "Mirza_2014_a",
+            "entry": "Mehdi Mirza and Simon Osindero. Conditional generative adversarial nets. arXiv preprint arXiv:1411.1784, 2014. 5",
+            "arxiv_url": "https://arxiv.org/pdf/1411.1784"
+        },
+        {
+            "id": "Mousavian_et+al_2017_a",
+            "entry": "Arsalan Mousavian, Dragomir Anguelov, John Flynn, and Jana Ko\u0161eck\u00e1. 3d bounding box estimation using deep learning and geometry. In CVPR. IEEE, 2017. 9",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mousavian%2C%20Arsalan%20Anguelov%2C%20Dragomir%20Flynn%2C%20John%20Ko%C5%A1eck%C3%A1%2C%20Jana%203d%20bounding%20box%20estimation%20using%20deep%20learning%20and%20geometry.%20In%20CVPR%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mousavian%2C%20Arsalan%20Anguelov%2C%20Dragomir%20Flynn%2C%20John%20Ko%C5%A1eck%C3%A1%2C%20Jana%203d%20bounding%20box%20estimation%20using%20deep%20learning%20and%20geometry.%20In%20CVPR%202017"
+        },
+        {
+            "id": "Pathak_et+al_2016_a",
+            "entry": "Deepak Pathak, Philipp Krahenbuhl, Jeff Donahue, Trevor Darrell, and Alexei A Efros. Context encoders: Feature learning by inpainting. In CVPR, 2016. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pathak%2C%20Deepak%20Krahenbuhl%2C%20Philipp%20Donahue%2C%20Jeff%20Darrell%2C%20Trevor%20and%20Alexei%20A%20Efros.%20Context%20encoders%3A%20Feature%20learning%20by%20inpainting%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pathak%2C%20Deepak%20Krahenbuhl%2C%20Philipp%20Donahue%2C%20Jeff%20Darrell%2C%20Trevor%20and%20Alexei%20A%20Efros.%20Context%20encoders%3A%20Feature%20learning%20by%20inpainting%202016"
+        },
+        {
+            "id": "Ren_et+al_0000_a",
+            "entry": "Shaoqing Ren, Kaiming He, Ross Girshick, and Jian Sun. Faster R-CNN: Towards real-time object detection with region proposal networks. In NIPS, 2015. 4",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ren%2C%20Shaoqing%20He%2C%20Kaiming%20Girshick%2C%20Ross%20Sun%2C%20Jian%20Faster%20R-CNN%3A%20Towards%20real-time%20object%20detection%20with%20region%20proposal%20networks",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ren%2C%20Shaoqing%20He%2C%20Kaiming%20Girshick%2C%20Ross%20Sun%2C%20Jian%20Faster%20R-CNN%3A%20Towards%20real-time%20object%20detection%20with%20region%20proposal%20networks"
+        },
+        {
+            "id": "Danilo_et+al_2016_a",
+            "entry": "Danilo Jimenez Rezende, SM Eslami, Shakir Mohamed, Peter Battaglia, Max Jaderberg, and Nicolas Heess. Unsupervised learning of 3d structure from images. In NIPS, 2016. 4",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Danilo%20Jimenez%20Rezende%2C%20S.M.Eslami%20Mohamed%2C%20Shakir%20Battaglia%2C%20Peter%20Jaderberg%2C%20Max%20Unsupervised%20learning%20of%203d%20structure%20from%20images%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Danilo%20Jimenez%20Rezende%2C%20S.M.Eslami%20Mohamed%2C%20Shakir%20Battaglia%2C%20Peter%20Jaderberg%2C%20Max%20Unsupervised%20learning%20of%203d%20structure%20from%20images%202016"
+        },
+        {
+            "id": "Sederberg_1986_a",
+            "entry": "Thomas W Sederberg and Scott R Parry. Free-form deformation of solid geometric models. ACM Transactions on Graphics (TOG), 20(4):151\u2013160, 1986. 4",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sederberg%2C%20Thomas%20W.%20Parry%2C%20Scott%20R.%20Free-form%20deformation%20of%20solid%20geometric%20models%201986",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sederberg%2C%20Thomas%20W.%20Parry%2C%20Scott%20R.%20Free-form%20deformation%20of%20solid%20geometric%20models%201986"
+        },
+        {
+            "id": "Shu_et+al_2017_a",
+            "entry": "Zhixin Shu, Ersin Yumer, Sunil Hadap, Kalyan Sunkavalli, Eli Shechtman, and Dimitris Samaras. Neural face editing with intrinsic image disentangling. In CVPR, 2017. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shu%2C%20Zhixin%20Yumer%2C%20Ersin%20Hadap%2C%20Sunil%20Sunkavalli%2C%20Kalyan%20Neural%20face%20editing%20with%20intrinsic%20image%20disentangling%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shu%2C%20Zhixin%20Yumer%2C%20Ersin%20Hadap%2C%20Sunil%20Sunkavalli%2C%20Kalyan%20Neural%20face%20editing%20with%20intrinsic%20image%20disentangling%202017"
+        },
+        {
+            "id": "Simonyan_2015_a",
+            "entry": "Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. In ICLR, 2015. 5, 6",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Simonyan%2C%20Karen%20Zisserman%2C%20Andrew%20Very%20deep%20convolutional%20networks%20for%20large-scale%20image%20recognition%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Simonyan%2C%20Karen%20Zisserman%2C%20Andrew%20Very%20deep%20convolutional%20networks%20for%20large-scale%20image%20recognition%202015"
+        },
+        {
+            "id": "Soltani_et+al_2017_a",
+            "entry": "Amir Arsalan Soltani, Haibin Huang, Jiajun Wu, Tejas D Kulkarni, and Joshua B Tenenbaum. Synthesizing 3d shapes via modeling multi-view depth maps and silhouettes with deep generative networks. In CVPR, 2017. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Soltani%2C%20Amir%20Arsalan%20Huang%2C%20Haibin%20Wu%2C%20Jiajun%20Kulkarni%2C%20Tejas%20D.%20Synthesizing%203d%20shapes%20via%20modeling%20multi-view%20depth%20maps%20and%20silhouettes%20with%20deep%20generative%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Soltani%2C%20Amir%20Arsalan%20Huang%2C%20Haibin%20Wu%2C%20Jiajun%20Kulkarni%2C%20Tejas%20D.%20Synthesizing%203d%20shapes%20via%20modeling%20multi-view%20depth%20maps%20and%20silhouettes%20with%20deep%20generative%20networks%202017"
+        },
+        {
+            "id": "Tatarchenko_et+al_2016_a",
+            "entry": "Maxim Tatarchenko, Alexey Dosovitskiy, and Thomas Brox. Multi-view 3d models from single images with a convolutional network. In ECCV, 2016. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tatarchenko%2C%20Maxim%20Dosovitskiy%2C%20Alexey%20Brox%2C%20Thomas%20Multi-view%203d%20models%20from%20single%20images%20with%20a%20convolutional%20network%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tatarchenko%2C%20Maxim%20Dosovitskiy%2C%20Alexey%20Brox%2C%20Thomas%20Multi-view%203d%20models%20from%20single%20images%20with%20a%20convolutional%20network%202016"
+        },
+        {
+            "id": "Tulsiani_et+al_2017_a",
+            "entry": "Shubham Tulsiani, Tinghui Zhou, Alexei A Efros, and Jitendra Malik. Multi-view supervision for single-view reconstruction via differentiable ray consistency. In CVPR, 2017. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tulsiani%2C%20Shubham%20Zhou%2C%20Tinghui%20Efros%2C%20Alexei%20A.%20Malik%2C%20Jitendra%20Multi-view%20supervision%20for%20single-view%20reconstruction%20via%20differentiable%20ray%20consistency%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tulsiani%2C%20Shubham%20Zhou%2C%20Tinghui%20Efros%2C%20Alexei%20A.%20Malik%2C%20Jitendra%20Multi-view%20supervision%20for%20single-view%20reconstruction%20via%20differentiable%20ray%20consistency%202017"
+        },
+        {
+            "id": "Wang_et+al_2018_a",
+            "entry": "Ting-Chun Wang, Ming-Yu Liu, Jun-Yan Zhu, Andrew Tao, Jan Kautz, and Bryan Catanzaro. High-resolution image synthesis and semantic manipulation with conditional gans. In CVPR, 2018. 3, 5, 6, 8, 9",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Ting-Chun%20Liu%2C%20Ming-Yu%20Zhu%2C%20Jun-Yan%20Tao%2C%20Andrew%20High-resolution%20image%20synthesis%20and%20semantic%20manipulation%20with%20conditional%20gans%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Ting-Chun%20Liu%2C%20Ming-Yu%20Zhu%2C%20Jun-Yan%20Tao%2C%20Andrew%20High-resolution%20image%20synthesis%20and%20semantic%20manipulation%20with%20conditional%20gans%202018"
+        },
+        {
+            "id": "Williams_1992_a",
+            "entry": "Ronald J Williams. Simple statistical gradient-following algorithms for connectionist reinforcement learning. MLJ, 8(3-4):229\u2013256, 1992. 4",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%2C%20Ronald%20J.%20Simple%20statistical%20gradient-following%20algorithms%20for%20connectionist%20reinforcement%20learning%201992",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Williams%2C%20Ronald%20J.%20Simple%20statistical%20gradient-following%20algorithms%20for%20connectionist%20reinforcement%20learning%201992"
+        },
+        {
+            "id": "Wu_et+al_2016_a",
+            "entry": "Jiajun Wu, Tianfan Xue, Joseph J Lim, Yuandong Tian, Joshua B Tenenbaum, Antonio Torralba, and William T Freeman. Single image 3d interpreter network. In ECCV, 2016a. 4",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20Jiajun%20Xue%2C%20Tianfan%20Lim%2C%20Joseph%20J.%20Tian%2C%20Yuandong%20Single%20image%203d%20interpreter%20network%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20Jiajun%20Xue%2C%20Tianfan%20Lim%2C%20Joseph%20J.%20Tian%2C%20Yuandong%20Single%20image%203d%20interpreter%20network%202016"
+        },
+        {
+            "id": "Wu_et+al_2016_b",
+            "entry": "Jiajun Wu, Chengkai Zhang, Tianfan Xue, William T Freeman, and Joshua B Tenenbaum. Learning a Probabilistic Latent Space of Object Shapes via 3D Generative-Adversarial Modeling. In NIPS, 2016b. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20Jiajun%20Zhang%2C%20Chengkai%20Xue%2C%20Tianfan%20Freeman%2C%20William%20T.%20Learning%20a%20Probabilistic%20Latent%20Space%20of%20Object%20Shapes%20via%203D%20Generative-Adversarial%20Modeling%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20Jiajun%20Zhang%2C%20Chengkai%20Xue%2C%20Tianfan%20Freeman%2C%20William%20T.%20Learning%20a%20Probabilistic%20Latent%20Space%20of%20Object%20Shapes%20via%203D%20Generative-Adversarial%20Modeling%202016"
+        },
+        {
+            "id": "Wu_et+al_2017_a",
+            "entry": "Jiajun Wu, Joshua B Tenenbaum, and Pushmeet Kohli. Neural scene de-rendering. In CVPR, 2017a. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jiajun%20Wu%20Joshua%20B%20Tenenbaum%20and%20Pushmeet%20Kohli%20Neural%20scene%20derendering%20In%20CVPR%202017a%202",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jiajun%20Wu%20Joshua%20B%20Tenenbaum%20and%20Pushmeet%20Kohli%20Neural%20scene%20derendering%20In%20CVPR%202017a%202"
+        },
+        {
+            "id": "Wu_et+al_2017_b",
+            "entry": "Jiajun Wu, Yifan Wang, Tianfan Xue, Xingyuan Sun, William T Freeman, and Joshua B Tenenbaum. MarrNet: 3D Shape Reconstruction via 2.5D Sketches. In NIPS, 2017b. 3, 4",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20Jiajun%20Wang%2C%20Yifan%20Xue%2C%20Tianfan%20Sun%2C%20Xingyuan%20MarrNet%3A%203D%20Shape%20Reconstruction%20via%202.5D%20Sketches%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20Jiajun%20Wang%2C%20Yifan%20Xue%2C%20Tianfan%20Sun%2C%20Xingyuan%20MarrNet%3A%203D%20Shape%20Reconstruction%20via%202.5D%20Sketches%202017"
+        },
+        {
+            "id": "Yan_et+al_2016_a",
+            "entry": "Xinchen Yan, Jimei Yang, Kihyuk Sohn, and Honglak Lee. Attribute2image: Conditional image generation from visual attributes. In ECCV, 2016a. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yan%2C%20Xinchen%20Yang%2C%20Jimei%20Sohn%2C%20Kihyuk%20Lee%2C%20Honglak%20Attribute2image%3A%20Conditional%20image%20generation%20from%20visual%20attributes%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yan%2C%20Xinchen%20Yang%2C%20Jimei%20Sohn%2C%20Kihyuk%20Lee%2C%20Honglak%20Attribute2image%3A%20Conditional%20image%20generation%20from%20visual%20attributes%202016"
+        },
+        {
+            "id": "Yan_et+al_2016_b",
+            "entry": "Xinchen Yan, Jimei Yang, Ersin Yumer, Yijie Guo, and Honglak Lee. Perspective transformer nets: Learning single-view 3d object reconstruction without 3d supervision. In NIPS, 2016b. 3, 4",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yan%2C%20Xinchen%20Yang%2C%20Jimei%20Yumer%2C%20Ersin%20Guo%2C%20Yijie%20Perspective%20transformer%20nets%3A%20Learning%20single-view%203d%20object%20reconstruction%20without%203d%20supervision%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yan%2C%20Xinchen%20Yang%2C%20Jimei%20Yumer%2C%20Ersin%20Guo%2C%20Yijie%20Perspective%20transformer%20nets%3A%20Learning%20single-view%203d%20object%20reconstruction%20without%203d%20supervision%202016"
+        },
+        {
+            "id": "Yang_et+al_2015_a",
+            "entry": "Jimei Yang, Scott E Reed, Ming-Hsuan Yang, and Honglak Lee. Weakly-supervised disentangling with recurrent transformations for 3d view synthesis. In NIPS, 2015. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yang%2C%20Jimei%20Reed%2C%20Scott%20E.%20Yang%2C%20Ming-Hsuan%20Lee%2C%20Honglak%20Weakly-supervised%20disentangling%20with%20recurrent%20transformations%20for%203d%20view%20synthesis%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yang%2C%20Jimei%20Reed%2C%20Scott%20E.%20Yang%2C%20Ming-Hsuan%20Lee%2C%20Honglak%20Weakly-supervised%20disentangling%20with%20recurrent%20transformations%20for%203d%20view%20synthesis%202015"
+        },
+        {
+            "id": "Yu_et+al_2017_a",
+            "entry": "Fisher Yu, Vladlen Koltun, and Thomas A Funkhouser. Dilated residual networks. In CVPR, 2017. 5, 6",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yu%2C%20Fisher%20Koltun%2C%20Vladlen%20Funkhouser%2C%20Thomas%20A.%20Dilated%20residual%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yu%2C%20Fisher%20Koltun%2C%20Vladlen%20Funkhouser%2C%20Thomas%20A.%20Dilated%20residual%20networks%202017"
+        },
+        {
+            "id": "Zhang_2016_a",
+            "entry": "Richard Zhang, Phillip Isola, and Alexei A Efros. Colorful image colorization. In ECCV, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Richard%20Isola%2C%20Phillip%20and%20Alexei%20A%20Efros.%20Colorful%20image%20colorization%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Richard%20Isola%2C%20Phillip%20and%20Alexei%20A%20Efros.%20Colorful%20image%20colorization%202016"
+        },
+        {
+            "id": "3",
+            "entry": "3 Richard Zhang, Phillip Isola, Alexei A Efros, Eli Shechtman, and Oliver Wang. The unreasonable effectiveness of deep networks as a perceptual metric. In CVPR, 2018. 7, 8",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Richard%20Isola%2C%20Phillip%20Efros%2C%20Alexei%20A.%20Shechtman%2C%20Eli%20The%20unreasonable%20effectiveness%20of%20deep%20networks%20as%20a%20perceptual%20metric%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Richard%20Isola%2C%20Phillip%20Efros%2C%20Alexei%20A.%20Shechtman%2C%20Eli%20The%20unreasonable%20effectiveness%20of%20deep%20networks%20as%20a%20perceptual%20metric%202018"
+        },
+        {
+            "id": "Zhou_et+al_2017_a",
+            "entry": "Bolei Zhou, Hang Zhao, Xavier Puig, Sanja Fidler, Adela Barriuso, and Antonio Torralba. Scene parsing through ade20k dataset. In CVPR, 2017. 5, 6",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhou%2C%20Bolei%20Zhao%2C%20Hang%20Puig%2C%20Xavier%20Fidler%2C%20Sanja%20Scene%20parsing%20through%20ade20k%20dataset%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhou%2C%20Bolei%20Zhao%2C%20Hang%20Puig%2C%20Xavier%20Fidler%2C%20Sanja%20Scene%20parsing%20through%20ade20k%20dataset%202017"
+        },
+        {
+            "id": "Zhu_et+al_2016_a",
+            "entry": "Jun-Yan Zhu, Philipp Kr\u00e4henb\u00fchl, Eli Shechtman, and Alexei A Efros. Generative visual manipulation on the natural image manifold. In ECCV, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhu%2C%20Jun-Yan%20Kr%C3%A4henb%C3%BChl%2C%20Philipp%20Shechtman%2C%20Eli%20and%20Alexei%20A%20Efros.%20Generative%20visual%20manipulation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhu%2C%20Jun-Yan%20Kr%C3%A4henb%C3%BChl%2C%20Philipp%20Shechtman%2C%20Eli%20and%20Alexei%20A%20Efros.%20Generative%20visual%20manipulation%202016"
+        },
+        {
+            "id": "3",
+            "entry": "3 Jun-Yan Zhu, Taesung Park, Phillip Isola, and Alexei A Efros. Unpaired image-to-image translation using cycle-consistent adversarial networks. In ICCV, 2017a.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhu%2C%20Jun-Yan%20Park%2C%20Taesung%20Isola%2C%20Phillip%20and%20Alexei%20A%20Efros.%20Unpaired%20image-to-image%20translation%20using%20cycle-consistent%20adversarial%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhu%2C%20Jun-Yan%20Park%2C%20Taesung%20Isola%2C%20Phillip%20and%20Alexei%20A%20Efros.%20Unpaired%20image-to-image%20translation%20using%20cycle-consistent%20adversarial%20networks%202017"
+        },
+        {
+            "id": "Toward_2017_a",
+            "entry": "Toward multimodal image-to-image translation. In NIPS, 2017b. 5",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20Toward%20multimodal%20image-to-image%20translation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Toward%20multimodal%20image-to-image%20translation%202017"
+        }
+    ]
+}

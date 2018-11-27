@@ -1,0 +1,282 @@
+{
+    "filename": "8169-an-intriguing-failing-of-convolutional-neural-networks-and-the-coordconv-solution.pdf",
+    "metadata": {
+        "title": "An intriguing failing of convolutional neural networks and the CoordConv solution",
+        "author": "Rosanne Liu, Joel Lehman, Piero Molino, Felipe Petroski Such, Eric Frank, Alex Sergeev, Jason Yosinski",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8169-an-intriguing-failing-of-convolutional-neural-networks-and-the-coordconv-solution.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Few ideas have enjoyed as large an impact on deep learning as convolution. For any problem involving pixels or spatial representations, common intuition holds that convolutional neural networks may be appropriate. In this paper we show a striking counterexample to this intuition via the seemingly trivial coordinate transform problem, which simply requires learning a mapping between coordinates in (x, y) Cartesian space and coordinates in one-hot pixel space. Although convolutional networks would seem appropriate for this task, we show that they fail spectacularly. We demonstrate and carefully analyze the failure first on a toy problem, at which point a simple fix becomes obvious. We call this solution CoordConv, which works by giving convolution access to its own input coordinates through the use of extra coordinate channels. Without sacrificing the computational and parametric efficiency of ordinary convolution, CoordConv allows networks to learn either complete translation invariance or varying degrees of translation dependence, as required by the end task. CoordConv solves the coordinate transform problem with perfect generalization and 150 times faster with 10\u2013100 times fewer parameters than convolution. This stark contrast raises the question: to what extent has this inability of convolution persisted insidiously inside other tasks, subtly hampering performance from within? A complete answer to this question will require further investigation, but we show preliminary evidence that swapping convolution for CoordConv can improve models on a diverse set of tasks. Using CoordConv in a GAN produced less mode collapse as the transform between high-level spatial latents and pixels becomes easier to learn. A Faster R-CNN detection model trained on MNIST detection showed 24% better IOU when using CoordConv, and in the Reinforcement Learning (RL) domain agents playing Atari games benefit significantly from the use of CoordConv layers."
+    },
+    "keywords": [
+        {
+            "term": "Generative Adversarial Networks",
+            "url": "https://en.wikipedia.org/wiki/Generative_Adversarial_Networks"
+        },
+        {
+            "term": "generative model",
+            "url": "https://en.wikipedia.org/wiki/generative_model"
+        },
+        {
+            "term": "coordinate transform",
+            "url": "https://en.wikipedia.org/wiki/coordinate_transform"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        },
+        {
+            "term": "Reinforcement Learning",
+            "url": "https://en.wikipedia.org/wiki/Reinforcement_Learning"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        },
+        {
+            "term": "convolutional neural network",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_network"
+        },
+        {
+            "term": "Compositional Pattern Producing Networks",
+            "url": "https://en.wikipedia.org/wiki/Compositional_Pattern_Producing_Network"
+        }
+    ],
+    "highlights": [
+        "Convolutional neural networks (CNNs) [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>] have enjoyed immense success as a key tool for enabling effective deep learning in a broad array of applications, like modeling natural images [<a class=\"ref-link\" id=\"c36\" href=\"#r36\">36</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>], images of human faces [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>], audio [<a class=\"ref-link\" id=\"c33\" href=\"#r33\">33</a>], and enabling agents to play games in domains with synthetic imagery like Atari [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>]",
+        "Throughout the rest of the paper, we examine the coordinate transform problem starting with the simplest scenario and ending with the most complex",
+        "On two-object Sort-of-Clevr [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>] images, Generative Adversarial Networks (GANs) and Variational Autoencoders (VAEs) using CoordConv exhibit less mode collapse, perhaps because ease of learning coordinate transforms translates to ease of using latents to span a 2D Cartesian space",
+        "While such works might appear to provide alternative solutions to the problem explored in this paper, in reality, similar coordinate transforms are often embedded within such models (e.g. a spatial transformer network contains a localization network that regresses from an image to a coordinate-based representation [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>]) and might benefit from CoordConv layers",
+        "We have shown the curious inability of Convolutional neural networks to model the coordinate transform task, shown a simple fix in the form of the CoordConv layer, and given results that suggest including these layers can boost performance in a wide range of applications",
+        "Future work will further evaluate the benefits of CoordConv in large-scale datasets, exploring its ability against perturbations of translation, its impact in relational reasoning [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>], language tasks, video prediction, with spatial transformer networks [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>], and with cutting-edge generative models [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>]"
+    ],
+    "key_statements": [
+        "Convolutional neural networks (CNNs) [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>] have enjoyed immense success as a key tool for enabling effective deep learning in a broad array of applications, like modeling natural images [<a class=\"ref-link\" id=\"c36\" href=\"#r36\">36</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>], images of human faces [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>], audio [<a class=\"ref-link\" id=\"c33\" href=\"#r33\">33</a>], and enabling agents to play games in domains with synthetic imagery like Atari [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>]",
+        "Throughout the rest of the paper, we examine the coordinate transform problem starting with the simplest scenario and ending with the most complex",
+        "On two-object Sort-of-Clevr [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>] images, Generative Adversarial Networks (GANs) and Variational Autoencoders (VAEs) using CoordConv exhibit less mode collapse, perhaps because ease of learning coordinate transforms translates to ease of using latents to span a 2D Cartesian space",
+        "While such works might appear to provide alternative solutions to the problem explored in this paper, in reality, similar coordinate transforms are often embedded within such models (e.g. a spatial transformer network contains a localization network that regresses from an image to a coordinate-based representation [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>]) and might benefit from CoordConv layers",
+        "On a simple problem of detecting MNIST digits scattered on a canvas, we found the test intersection-over-union (IOU) of a Faster R-Convolutional neural networks network improved by 24% when using CoordConv",
+        "We have shown the curious inability of Convolutional neural networks to model the coordinate transform task, shown a simple fix in the form of the CoordConv layer, and given results that suggest including these layers can boost performance in a wide range of applications",
+        "Future work will further evaluate the benefits of CoordConv in large-scale datasets, exploring its ability against perturbations of translation, its impact in relational reasoning [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>], language tasks, video prediction, with spatial transformer networks [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>], and with cutting-edge generative models [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>]"
+    ],
+    "summary": [
+        "Convolutional neural networks (CNNs) [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>] have enjoyed immense success as a key tool for enabling effective deep learning in a broad array of applications, like modeling natural images [<a class=\"ref-link\" id=\"c36\" href=\"#r36\">36</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>], images of human faces [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>], audio [<a class=\"ref-link\" id=\"c33\" href=\"#r33\">33</a>], and enabling agents to play games in domains with synthetic imagery like Atari [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>].",
+        "While straightforward stacks of convolutional layers excel at tasks like image classification, they are not quite the right model for coordinate transform.",
+        "On two-object Sort-of-Clevr [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>] images, Generative Adversarial Networks (GANs) and Variational Autoencoders (VAEs) using CoordConv exhibit less mode collapse, perhaps because ease of learning coordinate transforms translates to ease of using latents to span a 2D Cartesian space.",
+        "A standard convolutional layer with square kernel size k and with c input channels and c0 output channels will contain cc0k2 weights, whereas the corresponding CoordConv layer will contain (c + d)c0k2 weights, where d is the number of coordinate dimensions used (e.g. 2 or 3).",
+        "With respect to that work, we may see CoordConv as a simpler, single-layer mechanism that fits well within the paradigm of training large networks with gradient descent on GPUs. In a similar vein, research on convolutional sequence to sequence learning [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>] has used fixed and learned position embeddings at the input layer; in that work, positions were represented via an overcomplete basis that is added to the incoming data rather than being compactly represented and input as separate channels.",
+        "While such works might appear to provide alternative solutions to the problem explored in this paper, in reality, similar coordinate transforms are often embedded within such models (e.g. a spatial transformer network contains a localization network that regresses from an image to a coordinate-based representation [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>]) and might benefit from CoordConv layers.",
+        "If we expect to train generative models that can transform high level latents like horizontal and vertical position into pixel data, solving this toy task would seem a simple prerequisite.",
+        "A 900 parameter CoordConv model, where a single CoordConv layer is followed by several layers of standard convolution, trains quickly and generalizes in both the uniform and quadrant splits.",
+        "We hypothesize that mode collapse of position may be due to the difficulty of learning straightforward transforms from a high-level latent space containing coordinate information to pixel space and that using CoordConv could help.",
+        "We have shown the curious inability of CNNs to model the coordinate transform task, shown a simple fix in the form of the CoordConv layer, and given results that suggest including these layers can boost performance in a wide range of applications.",
+        "Future work will further evaluate the benefits of CoordConv in large-scale datasets, exploring its ability against perturbations of translation, its impact in relational reasoning [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>], language tasks, video prediction, with spatial transformer networks [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>], and with cutting-edge generative models [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>]."
+    ],
+    "headline": "In this paper we show a striking counterexample to this intuition via the seemingly trivial coordinate transform problem, which requires learning a mapping between coordinates in  Cartesian space and coordinates in one-hot pixel space",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Andrea Banino, Caswell Barry, Benigno Uria, Charles Blundell, Timothy Lillicrap, Piotr Mirowski, Alexander Pritzel, Martin J Chadwick, Thomas Degris, Joseph Modayil, et al. Vector-based navigation using grid-like representations in artificial agents. Nature, page 1, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Banino%2C%20Andrea%20Barry%2C%20Caswell%20Uria%2C%20Benigno%20Blundell%2C%20Charles%20Vector-based%20navigation%20using%20grid-like%20representations%20in%20artificial%20agents%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Banino%2C%20Andrea%20Barry%2C%20Caswell%20Uria%2C%20Benigno%20Blundell%2C%20Charles%20Vector-based%20navigation%20using%20grid-like%20representations%20in%20artificial%20agents%202018"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Clemens-Alexander Brust, Sven Sickert, Marcel Simon, Erik Rodner, and Joachim Denzler. Convolutional patch networks with spatial prior for road detection and urban scene understanding. In International Conference on Computer Vision Theory and Applications (VISAPP), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Brust%2C%20Clemens-Alexander%20Sickert%2C%20Sven%20Simon%2C%20Marcel%20Rodner%2C%20Erik%20Convolutional%20patch%20networks%20with%20spatial%20prior%20for%20road%20detection%20and%20urban%20scene%20understanding%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Brust%2C%20Clemens-Alexander%20Sickert%2C%20Sven%20Simon%2C%20Marcel%20Rodner%2C%20Erik%20Convolutional%20patch%20networks%20with%20spatial%20prior%20for%20road%20detection%20and%20urban%20scene%20understanding%202015"
+        },
+        {
+            "id": "3",
+            "entry": "[3] C. J. Cueva and X.-X. Wei. Emergence of grid-like representations by training recurrent neural networks to perform spatial localization. ArXiv e-prints, March 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cueva%2C%20C.J.%20Wei%2C%20X.-X.%20Emergence%20of%20grid-like%20representations%20by%20training%20recurrent%20neural%20networks%20to%20perform%20spatial%20localization%202018-03",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cueva%2C%20C.J.%20Wei%2C%20X.-X.%20Emergence%20of%20grid-like%20representations%20by%20training%20recurrent%20neural%20networks%20to%20perform%20spatial%20localization%202018-03"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Scott E Fahlman and Christian Lebiere. The cascade-correlation learning architecture. In Advances in neural information processing systems, pages 524\u2013532, 1990.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20Fahlman%20and%20Christian%20Lebiere.%20The%20cascade-correlation%20learning%20architecture%201990",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Fahlman%20and%20Christian%20Lebiere.%20The%20cascade-correlation%20learning%20architecture%201990"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Chelsea Finn, Xin Yu Tan, Yan Duan, Trevor Darrell, Sergey Levine, and Pieter Abbeel. Deep spatial autoencoders for visuomotor learning. In 2016 IEEE International Conference on Robotics and Automation (ICRA), pages 512\u2013519. IEEE, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Finn%2C%20Chelsea%20Tan%2C%20Xin%20Yu%20Duan%2C%20Yan%20Darrell%2C%20Trevor%20Deep%20spatial%20autoencoders%20for%20visuomotor%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Finn%2C%20Chelsea%20Tan%2C%20Xin%20Yu%20Duan%2C%20Yan%20Darrell%2C%20Trevor%20Deep%20spatial%20autoencoders%20for%20visuomotor%20learning%202016"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Mathias Franzius, Henning Sprekeler, and Laurenz Wiskott. Slowness and sparseness lead to place, head-direction, and spatial-view cells. PLoS computational biology, 3(8):e166, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Franzius%2C%20Mathias%20Sprekeler%2C%20Henning%20Wiskott%2C%20Laurenz%20Slowness%20and%20sparseness%20lead%20to%20place%2C%20head-direction%2C%20and%20spatial-view%20cells%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Franzius%2C%20Mathias%20Sprekeler%2C%20Henning%20Wiskott%2C%20Laurenz%20Slowness%20and%20sparseness%20lead%20to%20place%2C%20head-direction%2C%20and%20spatial-view%20cells%202007"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Jonas Gehring, Michael Auli, David Grangier, Denis Yarats, and Yann N. Dauphin. Convolutional sequence to sequence learning. CoRR, abs/1705.03122, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1705.03122"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Karol Gregor, Ivo Danihelka, Alex Graves, Danilo Jimenez Rezende, and Daan Wierstra. Draw: A recurrent neural network for image generation. arXiv preprint arXiv:1502.04623, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1502.04623"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. CoRR, abs/1512.03385, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1512.03385"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Geoffrey E Hinton and Drew Van Camp. Keeping neural networks simple by minimizing the description length of the weights. In Proceedings of the sixth annual conference on Computational learning theory, pages 5\u201313. ACM, 1993.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hinton%2C%20Geoffrey%20E.%20Camp%2C%20Drew%20Van%20Keeping%20neural%20networks%20simple%20by%20minimizing%20the%20description%20length%20of%20the%20weights%201993",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hinton%2C%20Geoffrey%20E.%20Camp%2C%20Drew%20Van%20Keeping%20neural%20networks%20simple%20by%20minimizing%20the%20description%20length%20of%20the%20weights%201993"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Amy K Hoover and Kenneth O Stanley. Exploiting functional relationships in musical composition. Connection Science, 21(2-3):227\u2013251, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hoover%2C%20Amy%20K.%20Stanley%2C%20Kenneth%20O.%20Exploiting%20functional%20relationships%20in%20musical%20composition%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hoover%2C%20Amy%20K.%20Stanley%2C%20Kenneth%20O.%20Exploiting%20functional%20relationships%20in%20musical%20composition%202009"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Dan Horgan, John Quan, David Budden, Gabriel Barth-Maron, Matteo Hessel, Hado Van Hasselt, and David Silver. Distributed prioritized experience replay. arXiv preprint arXiv:1803.00933, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.00933"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Max Jaderberg, Karen Simonyan, Andrew Zisserman, et al. Spatial transformer networks. In Advances in neural information processing systems, pages 2017\u20132025, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jaderberg%2C%20Max%20Simonyan%2C%20Karen%20Zisserman%2C%20Andrew%20Spatial%20transformer%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jaderberg%2C%20Max%20Simonyan%2C%20Karen%20Zisserman%2C%20Andrew%20Spatial%20transformer%20networks%202017"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Justin Johnson, Bharath Hariharan, Laurens van der Maaten, Li Fei-Fei, C Lawrence Zitnick, and Ross Girshick. Clevr: A diagnostic dataset for compositional language and elementary visual reasoning. In Computer Vision and Pattern Recognition (CVPR), 2017 IEEE Conference on, pages 1988\u20131997. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Johnson%2C%20Justin%20Hariharan%2C%20Bharath%20van%20der%20Maaten%2C%20Laurens%20Li%20Fei-Fei%2C%20C.Lawrence%20Zitnick%20Clevr%3A%20A%20diagnostic%20dataset%20for%20compositional%20language%20and%20elementary%20visual%20reasoning%201988",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Johnson%2C%20Justin%20Hariharan%2C%20Bharath%20van%20der%20Maaten%2C%20Laurens%20Li%20Fei-Fei%2C%20C.Lawrence%20Zitnick%20Clevr%3A%20A%20diagnostic%20dataset%20for%20compositional%20language%20and%20elementary%20visual%20reasoning%201988"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Tero Karras, Timo Aila, Samuli Laine, and Jaakko Lehtinen. Progressive growing of gans for improved quality, stability, and variation. In ICLR, volume abs/1710.10196, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Karras%2C%20Tero%20Aila%2C%20Timo%20Laine%2C%20Samuli%20Lehtinen%2C%20Jaakko%20Progressive%20growing%20of%20gans%20for%20improved%20quality%2C%20stability%2C%20and%20variation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Karras%2C%20Tero%20Aila%2C%20Timo%20Laine%2C%20Samuli%20Lehtinen%2C%20Jaakko%20Progressive%20growing%20of%20gans%20for%20improved%20quality%2C%20stability%2C%20and%20variation%202018"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Alex Krizhevsky, Ilya Sutskever, and Geoff Hinton. Imagenet classification with deep convolutional neural networks. In Advances in Neural Information Processing Systems 25, pages 1106\u20131114, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Hinton%2C%20Geoff%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Hinton%2C%20Geoff%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Yann LeCun, Yoshua Bengio, et al. Convolutional networks for images, speech, and time series. The handbook of brain theory and neural networks, 3361(10):1995, 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=LeCun%2C%20Yann%20Bengio%2C%20Yoshua%20Convolutional%20networks%20for%20images%2C%20speech%2C%20and%20time%20series%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=LeCun%2C%20Yann%20Bengio%2C%20Yoshua%20Convolutional%20networks%20for%20images%2C%20speech%2C%20and%20time%20series%201995"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Sergey Levine, Chelsea Finn, Trevor Darrell, and Pieter Abbeel. End-to-end training of deep visuomotor policies. The Journal of Machine Learning Research, 17(1):1334\u20131373, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Levine%2C%20Sergey%20Finn%2C%20Chelsea%20Darrell%2C%20Trevor%20Abbeel%2C%20Pieter%20End-to-end%20training%20of%20deep%20visuomotor%20policies%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Levine%2C%20Sergey%20Finn%2C%20Chelsea%20Darrell%2C%20Trevor%20Abbeel%2C%20Pieter%20End-to-end%20training%20of%20deep%20visuomotor%20policies%202016"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Chunyuan Li, Heerad Farkhoor, Rosanne Liu, and Jason Yosinski. Measuring the Intrinsic Dimension of Objective Landscapes. In International Conference on Learning Representations, April 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Chunyuan%20Farkhoor%2C%20Heerad%20Liu%2C%20Rosanne%20Yosinski%2C%20Jason%20Measuring%20the%20Intrinsic%20Dimension%20of%20Objective%20Landscapes%202018-04",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20Chunyuan%20Farkhoor%2C%20Heerad%20Liu%2C%20Rosanne%20Yosinski%2C%20Jason%20Measuring%20the%20Intrinsic%20Dimension%20of%20Objective%20Landscapes%202018-04"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Yecheng Lyu and Xinming Huang. Road segmentation using cnn with gru. arXiv preprint arXiv:1804.05164, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1804.05164"
+        },
+        {
+            "id": "21",
+            "entry": "[21] V. Mnih, K. Kavukcuoglu, D. Silver, A. Graves, I. Antonoglou, D. Wierstra, and M. Riedmiller. Playing Atari with Deep Reinforcement Learning. ArXiv e-prints, December 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20V.%20Kavukcuoglu%2C%20K.%20Silver%2C%20D.%20Graves%2C%20A.%20Playing%20Atari%20with%20Deep%20Reinforcement%20Learning.%20ArXiv%20e-prints%202013-12"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Volodymyr Mnih, Adria Puigdomenech Badia, Mehdi Mirza, Alex Graves, Timothy Lillicrap, Tim Harley, David Silver, and Koray Kavukcuoglu. Asynchronous methods for deep reinforcement learning. In International Conference on Machine Learning, pages 1928\u20131937, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20Volodymyr%20Badia%2C%20Adria%20Puigdomenech%20Mirza%2C%20Mehdi%20Graves%2C%20Alex%20Asynchronous%20methods%20for%20deep%20reinforcement%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20Volodymyr%20Badia%2C%20Adria%20Puigdomenech%20Mirza%2C%20Mehdi%20Graves%2C%20Alex%20Asynchronous%20methods%20for%20deep%20reinforcement%20learning%202016"
+        },
+        {
+            "id": "23",
+            "entry": "[23] A. Nguyen, J. Yosinski, Y. Bengio, A. Dosovitskiy, and J. Clune. Plug & Play Generative Networks: Conditional Iterative Generation of Images in Latent Space. ArXiv e-prints, November 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nguyen%2C%20A.%20Yosinski%2C%20J.%20Bengio%2C%20Y.%20Dosovitskiy%2C%20A.%20Plug%20%26%20Play%20Generative%20Networks%3A%20Conditional%20Iterative%20Generation%20of%20Images%20in%20Latent%20Space.%20ArXiv%20e-prints%202016-11"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Niki Parmar, Ashish Vaswani, Jakob Uszkoreit, \u0141ukasz Kaiser, Noam Shazeer, and Alexander Ku. Image transformer. arXiv preprint arXiv:1802.05751, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.05751"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Alec Radford, Luke Metz, and Soumith Chintala. Unsupervised representation learning with deep convolutional generative adversarial networks. arXiv preprint arXiv:1511.06434, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.06434"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Scott E Reed, Zeynep Akata, Santosh Mohan, Samuel Tenka, Bernt Schiele, and Honglak Lee. Learning what and where to draw. In Advances in Neural Information Processing Systems, pages 217\u2013225, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Reed%2C%20Scott%20E.%20Akata%2C%20Zeynep%20Mohan%2C%20Santosh%20Tenka%2C%20Samuel%20Learning%20what%20and%20where%20to%20draw%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Reed%2C%20Scott%20E.%20Akata%2C%20Zeynep%20Mohan%2C%20Santosh%20Tenka%2C%20Samuel%20Learning%20what%20and%20where%20to%20draw%202016"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Shaoqing Ren, Kaiming He, Ross Girshick, and Jian Sun. Faster r-cnn: Towards real-time object detection with region proposal networks. In Advances in neural information processing systems, pages 91\u201399, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ren%2C%20Shaoqing%20He%2C%20Kaiming%20Girshick%2C%20Ross%20Sun%2C%20Jian%20Faster%20r-cnn%3A%20Towards%20real-time%20object%20detection%20with%20region%20proposal%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ren%2C%20Shaoqing%20He%2C%20Kaiming%20Girshick%2C%20Ross%20Sun%2C%20Jian%20Faster%20r-cnn%3A%20Towards%20real-time%20object%20detection%20with%20region%20proposal%20networks%202015"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Jorma Rissanen. Modeling by shortest data description. Automatica, 14(5):465\u2013471, 1978.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rissanen%2C%20Jorma%20Modeling%20by%20shortest%20data%20description%201978",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rissanen%2C%20Jorma%20Modeling%20by%20shortest%20data%20description%201978"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Adam Santoro, David Raposo, David G Barrett, Mateusz Malinowski, Razvan Pascanu, Peter Battaglia, and Tim Lillicrap. A simple neural network module for relational reasoning. In Advances in neural information processing systems, pages 4974\u20134983, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Santoro%2C%20Adam%20Raposo%2C%20David%20Barrett%2C%20David%20G.%20Malinowski%2C%20Mateusz%20A%20simple%20neural%20network%20module%20for%20relational%20reasoning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Santoro%2C%20Adam%20Raposo%2C%20David%20Barrett%2C%20David%20G.%20Malinowski%2C%20Mateusz%20A%20simple%20neural%20network%20module%20for%20relational%20reasoning%202017"
+        },
+        {
+            "id": "30",
+            "entry": "[30] A. Sergeev and M. Del Balso. Horovod: fast and easy distributed deep learning in TensorFlow. ArXiv e-prints, February 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sergeev%2C%20A.%20Balso%2C%20M.Del%20Horovod%3A%20fast%20and%20easy%20distributed%20deep%20learning%20in%20TensorFlow.%20ArXiv%20e-prints%202018-02"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Kenneth O Stanley. Compositional pattern producing networks: A novel abstraction of development. Genetic programming and evolvable machines, 8(2):131\u2013162, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Stanley%2C%20Kenneth%20O.%20Compositional%20pattern%20producing%20networks%3A%20A%20novel%20abstraction%20of%20development.%20Genetic%20programming%20and%20evolvable%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Stanley%2C%20Kenneth%20O.%20Compositional%20pattern%20producing%20networks%3A%20A%20novel%20abstraction%20of%20development.%20Genetic%20programming%20and%20evolvable%202007"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Dmitry Ulyanov, Andrea Vedaldi, and Victor Lempitsky. Deep image prior. arXiv preprint arXiv:1711.10925, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.10925"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Aaron Van Den Oord, Sander Dieleman, Heiga Zen, Karen Simonyan, Oriol Vinyals, Alex Graves, Nal Kalchbrenner, Andrew Senior, and Koray Kavukcuoglu. Wavenet: A generative model for raw audio. arXiv preprint arXiv:1609.03499, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.03499"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, \u0141ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In Advances in Neural Information Processing Systems, pages 6000\u20136010, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ashish%20Vaswani%20Noam%20Shazeer%20Niki%20Parmar%20Jakob%20Uszkoreit%20Llion%20Jones%20Aidan%20N%20Gomez%20%C5%81ukasz%20Kaiser%20and%20Illia%20Polosukhin%20Attention%20is%20all%20you%20need%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20pages%2060006010%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ashish%20Vaswani%20Noam%20Shazeer%20Niki%20Parmar%20Jakob%20Uszkoreit%20Llion%20Jones%20Aidan%20N%20Gomez%20%C5%81ukasz%20Kaiser%20and%20Illia%20Polosukhin%20Attention%20is%20all%20you%20need%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20pages%2060006010%202017"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Fisher Yu, Ari Seff, Yinda Zhang, Shuran Song, Thomas Funkhouser, and Jianxiong Xiao. Lsun: Construction of a large-scale image dataset using deep learning with humans in the loop. arXiv preprint arXiv:1506.03365, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1506.03365"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Han Zhang, Tao Xu, Hongsheng Li, Shaoting Zhang, Xiaolei Huang, Xiaogang Wang, and Dimitris Metaxas. Stackgan: Text to photo-realistic image synthesis with stacked generative adversarial networks. In IEEE Int. Conf. Comput. Vision (ICCV), pages 5907\u20135915, 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Han%20Xu%2C%20Tao%20Li%2C%20Hongsheng%20Zhang%2C%20Shaoting%20Xiaolei%20Huang%2C%20Xiaogang%20Wang%2C%20and%20Dimitris%20Metaxas.%20Stackgan%3A%20Text%20to%20photo-realistic%20image%20synthesis%20with%20stacked%20generative%20adversarial%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Han%20Xu%2C%20Tao%20Li%2C%20Hongsheng%20Zhang%2C%20Shaoting%20Xiaolei%20Huang%2C%20Xiaogang%20Wang%2C%20and%20Dimitris%20Metaxas.%20Stackgan%3A%20Text%20to%20photo-realistic%20image%20synthesis%20with%20stacked%20generative%20adversarial%20networks%202017"
+        }
+    ]
+}

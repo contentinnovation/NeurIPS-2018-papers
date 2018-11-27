@@ -1,0 +1,203 @@
+{
+    "filename": "8293-transfer-of-deep-reactive-policies-for-mdp-planning.pdf",
+    "metadata": {
+        "title": "Transfer of Deep Reactive Policies for MDP Planning",
+        "author": "Aniket (Nick) Bajpai, Sankalp Garg, None",
+        "date": 2005,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8293-transfer-of-deep-reactive-policies-for-mdp-planning.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Domain-independent probabilistic planners input an MDP description in a factored representation language such as PPDDL or RDDL, and exploit the specifics of the representation for faster planning. Traditional algorithms operate on each problem instance independently, and good methods for transferring experience from policies of other instances of a domain to a new instance do not exist. Recently, researchers have begun exploring the use of deep reactive policies, trained via deep reinforcement learning (RL), for MDP planning domains. One advantage of deep reactive policies is that they are more amenable to transfer learning. In this paper, we present the first domain-independent transfer algorithm for MDP planning domains expressed in an RDDL representation. Our architecture exploits the symbolic state configuration and transition function of the domain (available via RDDL) to learn a shared embedding space for states and state-action pairs for all problem instances of a domain. We then learn an RL agent in the embedding space, making a near zero-shot transfer possible, i.e., without much training on the new instance, and without using the domain simulator at all. Experiments on three different benchmark domains underscore the value of our transfer algorithm. Compared against planning from scratch, and a state-of-the-art RL transfer algorithm, our transfer solution has significantly superior learning curves."
+    },
+    "keywords": [
+        {
+            "term": "Markov Decision Process",
+            "url": "https://en.wikipedia.org/wiki/Markov_Decision_Process"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "Markov Decision Processes",
+            "url": "https://en.wikipedia.org/wiki/Markov_Decision_Processes"
+        },
+        {
+            "term": "learning curve",
+            "url": "https://en.wikipedia.org/wiki/learning_curve"
+        },
+        {
+            "term": "RDDL",
+            "url": "https://en.wikipedia.org/wiki/RDDL"
+        }
+    ],
+    "highlights": [
+        "Reinforcement Learning<br/><br/>In its standard setting, an reinforcement learning agent acts for long periods of time in an uncertain environment and wishes to maximize its long-term return",
+        "We present the first domain-independent transfer algorithm for symbolic Markov Decision Process domains expressed in RDDL language.\n2",
+        "I=1 i=1 i=1 where N is the number of training instances, Lp is the loss function of the policy network of the A3C agent, Lc is the cross-entropy loss for the instance classifier and Ltr is cross-entropy loss for transition module",
+        "Comparing this to vanilla A3C and A2T in Figure 2, we learn that the use of Graph Convolution Network is critical in exposing the structure of the domain to the reinforcement learning agent, helping it in learning a final good policy",
+        "We present the first domain-independent transfer algorithm for transferring deep reinforcement learning policies from source probabilistic planning problems to a target problem from the same domain.2",
+        "Experiments show that TORPIDO is vastly superior in its learning curves compared to retraining from scratch as well as a state-of-the-art reinforcement learning transfer method"
+    ],
+    "key_statements": [
+        "Reinforcement Learning<br/><br/>In its standard setting, an reinforcement learning agent acts for long periods of time in an uncertain environment and wishes to maximize its long-term return",
+        "We present the first domain-independent transfer algorithm for symbolic Markov Decision Process domains expressed in RDDL language.\n2",
+        "An reinforcement learning agent acts for long periods of time in an uncertain environment and wishes to maximize its long-term return",
+        "Its dynamics is modeled via a Markov Decision Process",
+        "We propose a transfer mechanism that can be used for domain-independent RDDL planning",
+        "I=1 i=1 i=1 where N is the number of training instances, Lp is the loss function of the policy network of the A3C agent, Lc is the cross-entropy loss for the instance classifier and Ltr is cross-entropy loss for transition module",
+        "The weights for the state encoder and transition module remain fixed, while the weights for the decoder for the new instance are learned. This decoder can be directly used to transform the state-action embeddings predicted by the reinforcement learning module into a distribution over actions, or a policy for the new instance",
+        "This architecture leverages the extra information in RDDL domains in two ways: (i) it uses the input structure to represent the state as a graph, and uses a Graph Convolution Network to learn a state embedding it uses the transition function to learn the decoder for the new domain",
+        "Comparing this to vanilla A3C and A2T in Figure 2, we learn that the use of Graph Convolution Network is critical in exposing the structure of the domain to the reinforcement learning agent, helping it in learning a final good policy",
+        "We present the first domain-independent transfer algorithm for transferring deep reinforcement learning policies from source probabilistic planning problems to a target problem from the same domain.2",
+        "Experiments show that TORPIDO is vastly superior in its learning curves compared to retraining from scratch as well as a state-of-the-art reinforcement learning transfer method"
+    ],
+    "summary": [
+        "Reinforcement Learning<br/><br/>In its standard setting, an RL agent acts for long periods of time in an uncertain environment and wishes to maximize its long-term return.",
+        "We make use of the given transition function by training an instance-independent model of domain transition in the embedding space.",
+        "2. Our novel architecture TORPIDO uses the graph structure and transition function present in RDDL to induce instance-independent RL, state encoder and other components.",
+        "If the navigation problem is changed so that the goal is in the lower left corner, all other embeddings may transfer, but the final action output will be different (\"down\" and \"left\" for states symmetric to s1 and s2).",
+        "As an auxiliary task, we try to learn a classifier to predict the problem instance, given a state-action embedding.",
+        "This is done in an adversarial manner, so that the model learns to produce such state-action embeddings, that even the best possible classifier is unable to predict the instance from which they were generated.",
+        "I=1 i=1 i=1 where N is the number of training instances, Lp is the loss function of the policy network of the A3C agent, Lc is the cross-entropy loss for the instance classifier and Ltr is cross-entropy loss for transition module.",
+        "Transfer Phase: During this phase, the state encoder requires inputting the adjacency matrix of the target instance and it directly outputs state embeddings for this problem using SE.",
+        "This decoder can be directly used to transform the state-action embeddings predicted by the RL module into a distribution over actions, or a policy for the new instance.",
+        "This architecture leverages the extra information in RDDL domains in two ways: (i) it uses the input structure to represent the state as a graph, and uses a GCN to learn a state embedding it uses the transition function to learn the decoder for the new domain.",
+        "Comparing this to vanilla A3C and A2T in Figure 2, we learn that the use of GCN is critical in exposing the structure of the domain to the RL agent, helping it in learning a final good policy.",
+        "We present the first domain-independent transfer algorithm for transferring deep RL policies from source probabilistic planning problems to a target problem from the same domain.2 Our algorithm TORPIDO combines a base RL agent (A3C) with several novel components that use the RDDL model: state encoder, action decoder, transition transfer module and instance classifier.",
+        "This allows TORPIDO to perform an effective transfer even before the RL starts, by quickly retraining the action decoder using the given RDDL model.",
+        "We wish to extend this to transfer across problem sizes, and later transfer across domains"
+    ],
+    "headline": "We present the first domain-independent transfer algorithm for Markov Decision Process planning domains expressed in an RDDL representation",
+    "reference_links": [
+        {
+            "id": "Anand_et+al_2015_a",
+            "entry": "Ankit Anand, Aditya Grover, Mausam, and Parag Singla. ASAP-UCT: abstraction of state-action pairs in UCT. In Proceedings of the Twenty-Fourth International Joint Conference on Artificial Intelligence, IJCAI 2015, Buenos Aires, Argentina, July 25-31, 2015, pages 1509\u20131515, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Anand%2C%20Ankit%20Grover%2C%20Aditya%20Mausam%20Singla%2C%20Parag%20ASAP-UCT%3A%20abstraction%20of%20state-action%20pairs%20in%20UCT%202015-07-25",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Anand%2C%20Ankit%20Grover%2C%20Aditya%20Mausam%20Singla%2C%20Parag%20ASAP-UCT%3A%20abstraction%20of%20state-action%20pairs%20in%20UCT%202015-07-25"
+        },
+        {
+            "id": "Anand_et+al_2016_a",
+            "entry": "Ankit Anand, Ritesh Noothigattu, Mausam, and Parag Singla. OGA-UCT: on-the-go abstractions in UCT. In Proceedings of the Twenty-Sixth International Conference on Automated Planning and Scheduling, ICAPS 2016, London, UK, June 12-17, 2016., pages 29\u201337, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Anand%2C%20Ankit%20Noothigattu%2C%20Ritesh%20Mausam%20Singla%2C%20Parag%20OGA-UCT%3A%20on-the-go%20abstractions%20in%20UCT%202016-06-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Anand%2C%20Ankit%20Noothigattu%2C%20Ritesh%20Mausam%20Singla%2C%20Parag%20OGA-UCT%3A%20on-the-go%20abstractions%20in%20UCT%202016-06-12"
+        },
+        {
+            "id": "Bellman_1957_a",
+            "entry": "Richard Bellman. A Markovian Decision Process. Indiana University Mathematics Journal, 1957.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bellman%2C%20Richard%20A%20Markovian%20Decision%20Process%201957",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bellman%2C%20Richard%20A%20Markovian%20Decision%20Process%201957"
+        },
+        {
+            "id": "Clevert_et+al_2015_a",
+            "entry": "Djork-Arn\u00e9 Clevert, Thomas Unterthiner, and Sepp Hochreiter. Fast and accurate deep network learning by exponential linear units (elus). CoRR, abs/1511.07289, 2015. URL http://arxiv.org/abs/1511.07289.",
+            "url": "http://arxiv.org/abs/1511.07289",
+            "arxiv_url": "https://arxiv.org/pdf/1511.07289"
+        },
+        {
+            "id": "Fern_et+al_2018_a",
+            "entry": "Alan Fern, Murugeswari Issakkimuthu, and Prasad Tadepalli. Training deep reactive policies for probabilistic planning problems. In ICAPS, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fern%2C%20Alan%20Issakkimuthu%2C%20Murugeswari%20Tadepalli%2C%20Prasad%20Training%20deep%20reactive%20policies%20for%20probabilistic%20planning%20problems%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fern%2C%20Alan%20Issakkimuthu%2C%20Murugeswari%20Tadepalli%2C%20Prasad%20Training%20deep%20reactive%20policies%20for%20probabilistic%20planning%20problems%202018"
+        },
+        {
+            "id": "Ganin_et+al_2017_a",
+            "entry": "Yaroslav Ganin, Evgeniya Ustinova, Hana Ajakan, Pascal Germain, Hugo Larochelle, Fran\u00e7ois Laviolette, Mario Marchand, and Victor S. Lempitsky. Domain-adversarial training of neural networks. In Domain Adaptation in Computer Vision Applications., pages 189\u2013209. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ganin%2C%20Yaroslav%20Ustinova%2C%20Evgeniya%20Ajakan%2C%20Hana%20Germain%2C%20Pascal%20Domain-adversarial%20training%20of%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ganin%2C%20Yaroslav%20Ustinova%2C%20Evgeniya%20Ajakan%2C%20Hana%20Germain%2C%20Pascal%20Domain-adversarial%20training%20of%20neural%20networks%202017"
+        },
+        {
+            "id": "Garnelo_et+al_2016_a",
+            "entry": "Marta Garnelo, Kai Arulkumaran, and Murray Shanahan. Towards deep symbolic reinforcement learning. CoRR, abs/1609.05518, 2016. URL http://arxiv.org/abs/1609.05518.",
+            "url": "http://arxiv.org/abs/1609.05518",
+            "arxiv_url": "https://arxiv.org/pdf/1609.05518"
+        },
+        {
+            "id": "Goyal_2017_a",
+            "entry": "Palash Goyal and Emilio Ferrara. Graph embedding techniques, applications, and performance: A survey. CoRR, abs/1705.02801, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1705.02801"
+        },
+        {
+            "id": "Groshev_et+al_2018_a",
+            "entry": "Edward Groshev, Aviv Tamar, Maxwell Goldstein, Siddharth Srivastava, and Pieter Abbeel. Learning generalized reactive policies using deep neural networks. In ICAPS, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Groshev%2C%20Edward%20Tamar%2C%20Aviv%20Goldstein%2C%20Maxwell%20Srivastava%2C%20Siddharth%20Learning%20generalized%20reactive%20policies%20using%20deep%20neural%20networks%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Groshev%2C%20Edward%20Tamar%2C%20Aviv%20Goldstein%2C%20Maxwell%20Srivastava%2C%20Siddharth%20Learning%20generalized%20reactive%20policies%20using%20deep%20neural%20networks%202018"
+        },
+        {
+            "id": "Grzes_et+al_2014_a",
+            "entry": "Marek Grzes, Jesse Hoey, and Scott Sanner. International Probabilistic Planning Competition (IPPC) 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Marek%20Grzes%20Jesse%20Hoey%20and%20Scott%20Sanner%20International%20Probabilistic%20Planning%20Competition%20IPPC%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Marek%20Grzes%20Jesse%20Hoey%20and%20Scott%20Sanner%20International%20Probabilistic%20Planning%20Competition%20IPPC%202014"
+        },
+        {
+            "id": "I_2014_a",
+            "entry": "In ICAPS, 2014. URL https://cs.uwaterloo.ca/~mgrzes/IPPC_2014/.",
+            "url": "https://cs.uwaterloo.ca/~mgrzes/IPPC_2014/"
+        },
+        {
+            "id": "Guestrin_et+al_2001_a",
+            "entry": "Carlos Guestrin, Daphne Koller, and Ronald Parr. Max-norm projections for factored mdps. In Proceedings of the Seventeenth International Joint Conference on Artificial Intelligence, IJCAI 2001, Seattle, Washington, USA, August 4-10, 2001, pages 673\u2013682, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Guestrin%2C%20Carlos%20Koller%2C%20Daphne%20Parr%2C%20Ronald%20Max-norm%20projections%20for%20factored%20mdps%202001-08-04",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Guestrin%2C%20Carlos%20Koller%2C%20Daphne%20Parr%2C%20Ronald%20Max-norm%20projections%20for%20factored%20mdps%202001-08-04"
+        },
+        {
+            "id": "Higgins_et+al_2017_a",
+            "entry": "Irina Higgins, Arka Pal, Andrei A. Rusu, Lo\u00efc Matthey, Christopher Burgess, Alexander Pritzel, Matthew Botvinick, Charles Blundell, and Alexander Lerchner. DARLA: improving zero-shot transfer in reinforcement learning. In Proceedings of the 34th International Conference on Machine Learning, ICML 2017, Sydney, NSW, Australia, 6-11 August 2017, pages 1480\u20131490, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Higgins%2C%20Irina%20Pal%2C%20Arka%20Rusu%2C%20Andrei%20A.%20Matthey%2C%20Lo%C3%AFc%20DARLA%3A%20improving%20zero-shot%20transfer%20in%20reinforcement%20learning%202017-08",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Higgins%2C%20Irina%20Pal%2C%20Arka%20Rusu%2C%20Andrei%20A.%20Matthey%2C%20Lo%C3%AFc%20DARLA%3A%20improving%20zero-shot%20transfer%20in%20reinforcement%20learning%202017-08"
+        },
+        {
+            "id": "Kipf_2017_a",
+            "entry": "Thomas N. Kipf and Max Welling. Semi-supervised classification with graph convolutional networks. In ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kipf%2C%20Thomas%20N.%20Welling%2C%20Max%20Semi-supervised%20classification%20with%20graph%20convolutional%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kipf%2C%20Thomas%20N.%20Welling%2C%20Max%20Semi-supervised%20classification%20with%20graph%20convolutional%20networks%202017"
+        },
+        {
+            "id": "Kolobov_et+al_2012_a",
+            "entry": "Andrey Kolobov, Mausam, and Daniel S. Weld. A theory of goal-oriented mdps with dead ends. In Proceedings of the Twenty-Eighth Conference on Uncertainty in Artificial Intelligence, Catalina Island, CA, USA, August 14-18, 2012, pages 438\u2013447, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kolobov%2C%20Andrey%20Mausam%20Weld%2C%20Daniel%20S.%20A%20theory%20of%20goal-oriented%20mdps%20with%20dead%20ends%202012-08-14",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kolobov%2C%20Andrey%20Mausam%20Weld%2C%20Daniel%20S.%20A%20theory%20of%20goal-oriented%20mdps%20with%20dead%20ends%202012-08-14"
+        },
+        {
+            "id": "Littman_1997_a",
+            "entry": "Michael L. Littman. Probabilistic propositional planning: Representations and complexity. In Proceedings of the Fourteenth National Conference on Artificial Intelligence and Ninth Innovative Applications of Artificial Intelligence Conference, AAAI 97, IAAI 97, July 27-31, 1997, Providence, Rhode Island., pages 748\u2013754, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Littman%2C%20Michael%20L.%20Probabilistic%20propositional%20planning%3A%20Representations%20and%20complexity%201997-07-27",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Littman%2C%20Michael%20L.%20Probabilistic%20propositional%20planning%3A%20Representations%20and%20complexity%201997-07-27"
+        },
+        {
+            "id": "Matiisen_et+al_2017_a",
+            "entry": "Tambet Matiisen, Avital Oliver, Taco Cohen, and John Schulman. Teacher-student curriculum learning. CoRR, abs/1707.00183, 2017. URL http://arxiv.org/abs/1707.00183.",
+            "url": "http://arxiv.org/abs/1707.00183",
+            "arxiv_url": "https://arxiv.org/pdf/1707.00183"
+        },
+        {
+            "id": "Mausam_2012_a",
+            "entry": "Mausam and Andrey Kolobov. Planning with Markov Decision Processes: An AI Perspective. Morgan & Claypool Publishers, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mausam%20Kolobov%2C%20Andrey%20Planning%20with%20Markov%20Decision%20Processes%3A%20An%20AI%20Perspective%202012"
+        },
+        {
+            "id": "Mnih_et+al_2015_a",
+            "entry": "Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei A. Rusu, Joel Veness, Marc G. Bellemare, Alex Graves, Martin A. Riedmiller, Andreas Fidjeland, Georg Ostrovski, Stig Petersen, Charles Beattie, Amir Sadik, Ioannis Antonoglou, Helen King, Dharshan Kumaran, Daan Wierstra, Shane Legg, and Demis Hassabis. Human-level control through deep reinforcement learning. Nature, 518(7540):529\u2013533, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20Volodymyr%20Kavukcuoglu%2C%20Koray%20Silver%2C%20David%20Rusu%2C%20Andrei%20A.%20Human-level%20control%20through%20deep%20reinforcement%20learning%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20Volodymyr%20Kavukcuoglu%2C%20Koray%20Silver%2C%20David%20Rusu%2C%20Andrei%20A.%20Human-level%20control%20through%20deep%20reinforcement%20learning%202015"
+        },
+        {
+            "id": "Mnih_et+al_2016_a",
+            "entry": "Volodymyr Mnih, Adri\u00e0 Puigdom\u00e8nech Badia, Mehdi Mirza, Alex Graves, Timothy P. Lillicrap, Tim Harley, David Silver, and Koray Kavukcuoglu. Asynchronous methods for deep reinforcement learning. In Proceedings of the 33nd International Conference on Machine Learning, ICML 2016, New York City, NY, USA, June 19-24, 2016, pages 1928\u20131937, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20Volodymyr%20Badia%2C%20Adri%C3%A0%20Puigdom%C3%A8nech%20Mirza%2C%20Mehdi%20Graves%2C%20Alex%20Asynchronous%20methods%20for%20deep%20reinforcement%20learning%202016-06-19",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20Volodymyr%20Badia%2C%20Adri%C3%A0%20Puigdom%C3%A8nech%20Mirza%2C%20Mehdi%20Graves%2C%20Alex%20Asynchronous%20methods%20for%20deep%20reinforcement%20learning%202016-06-19"
+        },
+        {
+            "id": "Parisotto_et+al_2015_a",
+            "entry": "Emilio Parisotto, Lei Jimmy Ba, and Ruslan Salakhutdinov. Actor-mimic: Deep multitask and transfer reinforcement learning. CoRR, abs/1511.06342, 2015. URL http://arxiv.org/abs/1511.06342.",
+            "url": "http://arxiv.org/abs/1511.06342",
+            "arxiv_url": "https://arxiv.org/pdf/1511.06342"
+        },
+        {
+            "id": "Puterman_1994_a",
+            "entry": "M.L. Puterman. Markov Decision Processes. John Wiley & Sons, Inc., 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Puterman%2C%20M.L.%20Markov%20Decision%20Processes%201994"
+        }
+    ]
+}

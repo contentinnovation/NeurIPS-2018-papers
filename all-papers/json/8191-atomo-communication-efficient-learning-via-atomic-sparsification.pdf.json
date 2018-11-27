@@ -1,0 +1,399 @@
+{
+    "filename": "8191-atomo-communication-efficient-learning-via-atomic-sparsification.pdf",
+    "metadata": {
+        "date": 2018,
+        "title": "ATOMO: Communication-efficient Learning via Atomic Sparsification",
+        "author": "Hongyi Wang1\u2217, Scott Sievert2\u2217, Zachary Charles2, Shengchao Liu1, Stephen Wright1, Dimitris Papailiopoulos2",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8191-atomo-communication-efficient-learning-via-atomic-sparsification.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Distributed model training suffers from communication overheads due to frequent gradient updates transmitted between compute nodes. To mitigate these overheads, several studies propose the use of sparsified stochastic gradients. We argue that these are facets of a general sparsification method that can operate on any possible atomic decomposition. Notable examples include element-wise, singular value, and Fourier decompositions. We present ATOMO, a general framework for atomic sparsification of stochastic gradients. Given a gradient, an atomic decomposition, and a sparsity budget, ATOMO gives a random unbiased sparsification of the atoms minimizing variance. We show that recent methods such as QSGD and TernGrad are special cases of ATOMO and that sparsifiying the singular value decomposition of neural networks gradients, rather than their coordinates, can lead to significantly faster distributed training."
+    },
+    "keywords": [
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "low precision",
+            "url": "https://en.wikipedia.org/wiki/low_precision"
+        },
+        {
+            "term": "machine learning",
+            "url": "https://en.wikipedia.org/wiki/machine_learning"
+        },
+        {
+            "term": "ATOMO",
+            "url": "https://en.wikipedia.org/wiki/Atomo"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        },
+        {
+            "term": "singular value",
+            "url": "https://en.wikipedia.org/wiki/singular_value"
+        },
+        {
+            "term": "stochastic gradient descent",
+            "url": "https://en.wikipedia.org/wiki/stochastic_gradient_descent"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        },
+        {
+            "term": "singular value decomposition",
+            "url": "https://en.wikipedia.org/wiki/singular_value_decomposition"
+        },
+        {
+            "term": "convolutional neural network",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_network"
+        }
+    ],
+    "highlights": [
+        "Several machine learning frameworks such as TensorFlow [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>], MXNet [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>], and Caffe2[<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>], come with distributed implementations of popular training algorithms, such as mini-batch SGD",
+        "ATOMO applies to any atomic decomposition, which allows us to compare entry-wise against singular value sparsification for matrices",
+        "ATOMO applies to any atomic decomposition, including the entry-wise and the singular value decomposition of a matrix",
+        "We focus on the use ATOMO for sparsifying matrices, especially the gradients in neural network training",
+        "We show that applying ATOMO to the singular values of these matrices can lead to faster training than both vanilla SGD or QSGD, for the same communication budget",
+        "We present extensive experiments showing that ATOMO can lead to up to a 2\u00d7 speed-up in training time over QSGD and up to 3\u00d7 speed-up in training time over TernGrad"
+    ],
+    "key_statements": [
+        "Several machine learning frameworks such as TensorFlow [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>], MXNet [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>], and Caffe2[<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>], come with distributed implementations of popular training algorithms, such as mini-batch SGD",
+        "Communication bottlenecks are largely attributed to frequent gradient updates transmitted between compute nodes",
+        "We show that stochastic gradient sparsification and quantization are facets of a general approach that sparsifies a gradient in any possible atomic decomposition, including its entry-wise or singular value decomposition, its Fourier decomposition, and more",
+        "We develop ATOMO, a general framework for atomic sparsification of stochastic gradients",
+        "ATOMO sets up and optimally solves a meta-optimization that minimizes the variance of the sparsified gradient, subject to the constraints that it is sparse on the atomic basis, and",
+        "We show that ATOMO on the singular value decomposition of each layer\u2019s gradient, can lead to less",
+        "We present extensive experiments of a convolutional layer\u2019s gradishowing that using ATOMO with singular value decomposition sparsification can lead to up to 2\u00d7/3\u00d7 faster training time compared to QSGD/TernGrad",
+        "ATOMO applies to any atomic decomposition, which allows us to compare entry-wise against singular value sparsification for matrices",
+        "As we show using singular value sparsification can translate in to significantly reduced distributed training time",
+        "We present an empirical study of Spectral-ATOMO and compare it to the recently proposed QSGD [<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>], and TernGrad [<a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>], on a different neural network models and data sets, under real distributed environments",
+        "We observe that spectral-ATOMO provides a useful alternative to entry-wise sparsification methods, it reduces communication compared to vanilla mini-batch SGD, and can reduce training time compared to QSGD and TernGrad by up to a factor of 2\u00d7 and 3\u00d7 respectively",
+        "Implementation and setup We compare spectral-ATOMO2 with different sparsity budgets to bbit QSGD across a distributed cluster with a parameter server (PS), implemented in mpi4py [<a class=\"ref-link\" id=\"c49\" href=\"#r49\">49</a>] and PyTorch [<a class=\"ref-link\" id=\"c50\" href=\"#r50\">50</a>] and deployed on multiple types of instances in Amazon EC2 (e.g.m5.4xlarge, m5.2xlarge, and g2.2xlarge), both parameter server and compute nodes are of the same type of instance",
+        "End-to-end convergence performance We evaluate the end-to-end convergence performance on different datasets and neural networks, training with spectral-ATOMO, QSGD, and ordinary mini-batch SGD",
+        "We present and analyze ATOMO, a general sparsification method for distributed stochastic gradient based methods",
+        "ATOMO applies to any atomic decomposition, including the entry-wise and the singular value decomposition of a matrix",
+        "We focus on the use ATOMO for sparsifying matrices, especially the gradients in neural network training",
+        "We show that applying ATOMO to the singular values of these matrices can lead to faster training than both vanilla SGD or QSGD, for the same communication budget",
+        "We present extensive experiments showing that ATOMO can lead to up to a 2\u00d7 speed-up in training time over QSGD and up to 3\u00d7 speed-up in training time over TernGrad"
+    ],
+    "summary": [
+        "Several machine learning frameworks such as TensorFlow [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>], MXNet [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>], and Caffe2[<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>], come with distributed implementations of popular training algorithms, such as mini-batch SGD.",
+        "ATOMO sets up and optimally solves a meta-optimization that minimizes the variance of the sparsified gradient, subject to the constraints that it is sparse on the atomic basis, and",
+        "Faster training, for the same communication budget Figure 1: The singular values as that of QSGD or TernGrad.",
+        "We present extensive experiments of a convolutional layer\u2019s gradishowing that using ATOMO with SVD sparsification can lead to up to 2\u00d7/3\u00d7 faster training time compared to QSGD/TernGrad.",
+        "ATOMO applies to any atomic decomposition, which allows us to compare entry-wise against singular value sparsification for matrices.",
+        "To compare the variance of these two methods under the same communication cost, we want X to be s-balanced in its entry-wise decomposition.",
+        "We present an empirical study of Spectral-ATOMO and compare it to the recently proposed QSGD [<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>], and TernGrad [<a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>], on a different neural network models and data sets, under real distributed environments.",
+        "We observe that spectral-ATOMO provides a useful alternative to entry-wise sparsification methods, it reduces communication compared to vanilla mini-batch SGD, and can reduce training time compared to QSGD and TernGrad by up to a factor of 2\u00d7 and 3\u00d7 respectively.",
+        "On VGG11-BN trained on CIFAR-10, spectral-ATOMO with sparsity budget 3 achieves 3.96\u00d7 speedup over vanilla SGD, while 4-bit QSGD achieves 1.68\u00d7 on a cluster of 16, g2.2xlarge instances.",
+        "Implementation and setup We compare spectral-ATOMO2 with different sparsity budgets to bbit QSGD across a distributed cluster with a parameter server (PS), implemented in mpi4py [<a class=\"ref-link\" id=\"c49\" href=\"#r49\">49</a>] and PyTorch [<a class=\"ref-link\" id=\"c50\" href=\"#r50\">50</a>] and deployed on multiple types of instances in Amazon EC2 (e.g.m5.4xlarge, m5.2xlarge, and g2.2xlarge), both PS and compute nodes are of the same type of instance.",
+        "For QSGD, we use the bucketing and Elias recursive coding methods proposed in [<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>], with bucket size equal to the number of parameters in each layer of the neural network.",
+        "We observe that QSGD and ATOMO speed up model training significantly and achieve similar accuracy to vanilla mini-batch SGD.",
+        "ATOMO applies to any atomic decomposition, including the entry-wise and the SVD of a matrix.",
+        "ATOMO generalizes 1-bit QSGD and TernGrad, and provably minimizes the variance of the sparsified gradient subject to a sparsity constraint on the atomic decomposition.",
+        "We show that applying ATOMO to the singular values of these matrices can lead to faster training than both vanilla SGD or QSGD, for the same communication budget.",
+        "We present extensive experiments showing that ATOMO can lead to up to a 2\u00d7 speed-up in training time over QSGD and up to 3\u00d7 speed-up in training time over TernGrad"
+    ],
+    "headline": "We argue that these are facets of a general sparsification method that can operate on any possible atomic decomposition",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Mart\u00edn Abadi, Paul Barham, Jianmin Chen, Zhifeng Chen, Andy Davis, Jeffrey Dean, Matthieu Devin, Sanjay Ghemawat, Geoffrey Irving, Michael Isard, et al. TensorFlow: A system for large-scale machine learning. In OSDI, volume 16, pages 265\u2013283, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abadi%2C%20Mart%C3%ADn%20Barham%2C%20Paul%20Chen%2C%20Jianmin%20Chen%2C%20Zhifeng%20TensorFlow%3A%20A%20system%20for%20large-scale%20machine%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abadi%2C%20Mart%C3%ADn%20Barham%2C%20Paul%20Chen%2C%20Jianmin%20Chen%2C%20Zhifeng%20TensorFlow%3A%20A%20system%20for%20large-scale%20machine%20learning%202016"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Tianqi Chen, Mu Li, Yutian Li, Min Lin, Naiyan Wang, Minjie Wang, Tianjun Xiao, Bing Xu, Chiyuan Zhang, and Zheng Zhang. Mxnet: A flexible and efficient machine learning library for heterogeneous distributed systems. arXiv preprint arXiv:1512.01274, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1512.01274"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Yangqing Jia, Evan Shelhamer, Jeff Donahue, Sergey Karayev, Jonathan Long, Ross Girshick, Sergio Guadarrama, and Trevor Darrell. Caffe: Convolutional architecture for fast feature embedding. arXiv preprint arXiv:1408.5093, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1408.5093"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Jeffrey Dean, Greg Corrado, Rajat Monga, Kai Chen, Matthieu Devin, Mark Mao, Andrew Senior, Paul Tucker, Ke Yang, Quoc V Le, et al. Large scale distributed deep networks. In Advances in neural information processing systems, pages 1223\u20131231, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dean%2C%20Jeffrey%20Corrado%2C%20Greg%20Monga%2C%20Rajat%20Chen%2C%20Kai%20Large%20scale%20distributed%20deep%20networks%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dean%2C%20Jeffrey%20Corrado%2C%20Greg%20Monga%2C%20Rajat%20Chen%2C%20Kai%20Large%20scale%20distributed%20deep%20networks%202012"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Frank Seide, Hao Fu, Jasha Droppo, Gang Li, and Dong Yu. 1-bit stochastic gradient descent and its application to data-parallel distributed training of speech dnns. In Fifteenth Annual Conference of the International Speech Communication Association, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Seide%2C%20Frank%20Fu%2C%20Hao%20Droppo%2C%20Jasha%20Li%2C%20Gang%201-bit%20stochastic%20gradient%20descent%20and%20its%20application%20to%20data-parallel%20distributed%20training%20of%20speech%20dnns%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Seide%2C%20Frank%20Fu%2C%20Hao%20Droppo%2C%20Jasha%20Li%2C%20Gang%201-bit%20stochastic%20gradient%20descent%20and%20its%20application%20to%20data-parallel%20distributed%20training%20of%20speech%20dnns%202014"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Nikko Strom. Scalable distributed DNN training using commodity gpu cloud computing. In Sixteenth Annual Conference of the International Speech Communication Association, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Strom%2C%20Nikko%20Scalable%20distributed%20DNN%20training%20using%20commodity%20gpu%20cloud%20computing%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Strom%2C%20Nikko%20Scalable%20distributed%20DNN%20training%20using%20commodity%20gpu%20cloud%20computing%202015"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Hang Qi, Evan R. Sparks, and Ameet Talwalkar. Paleo: A performance model for deep neural networks. In Proceedings of the International Conference on Learning Representations, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Qi%2C%20Hang%20Sparks%2C%20Evan%20R.%20Talwalkar%2C%20Ameet%20Paleo%3A%20A%20performance%20model%20for%20deep%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Qi%2C%20Hang%20Sparks%2C%20Evan%20R.%20Talwalkar%2C%20Ameet%20Paleo%3A%20A%20performance%20model%20for%20deep%20neural%20networks%202017"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Demjan Grubic, Leo Tam, Dan Alistarh, and Ce Zhang. Synchronous multi-GPU deep learning with low-precision communication: An experimental study. 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Grubic%2C%20Demjan%20Tam%2C%20Leo%20Alistarh%2C%20Dan%20Zhang%2C%20Ce%20Synchronous%20multi-GPU%20deep%20learning%20with%20low-precision%20communication%3A%20An%20experimental%20study%202018"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. In Proceedings of the IEEE conference on computer vision and pattern recognition, pages 770\u2013778, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Gao Huang, Zhuang Liu, Kilian Q Weinberger, and Laurens van der Maaten. Densely connected convolutional networks. In Proceedings of the IEEE conference on computer vision and pattern recognition, volume 1, page 3, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huang%2C%20Gao%20Liu%2C%20Zhuang%20Weinberger%2C%20Kilian%20Q.%20van%20der%20Maaten%2C%20Laurens%20Densely%20connected%20convolutional%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huang%2C%20Gao%20Liu%2C%20Zhuang%20Weinberger%2C%20Kilian%20Q.%20van%20der%20Maaten%2C%20Laurens%20Densely%20connected%20convolutional%20networks%202017"
+        },
+        {
+            "id": "11",
+            "entry": "[11] H Brendan McMahan, Eider Moore, Daniel Ramage, Seth Hampson, et al. Communicationefficient learning of deep networks from decentralized data. arXiv preprint arXiv:1602.05629, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1602.05629"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Jakub Konecny, H Brendan McMahan, Felix X Yu, Peter Richt\u00e1rik, Ananda Theertha Suresh, and Dave Bacon. Federated learning: Strategies for improving communication efficiency. arXiv preprint arXiv:1610.05492, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1610.05492"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Christopher M De Sa, Ce Zhang, Kunle Olukotun, and Christopher R\u00e9. Taming the wild: A unified analysis of hogwild-style algorithms. In Advances in neural information processing systems, pages 2674\u20132682, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sa%2C%20Christopher%20M.De%20Zhang%2C%20Ce%20Olukotun%2C%20Kunle%20R%C3%A9%2C%20Christopher%20Taming%20the%20wild%3A%20A%20unified%20analysis%20of%20hogwild-style%20algorithms%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sa%2C%20Christopher%20M.De%20Zhang%2C%20Ce%20Olukotun%2C%20Kunle%20R%C3%A9%2C%20Christopher%20Taming%20the%20wild%3A%20A%20unified%20analysis%20of%20hogwild-style%20algorithms%202015"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Dan Alistarh, Demjan Grubic, Jerry Li, Ryota Tomioka, and Milan Vojnovic. Qsgd: Communication-efficient SGD via gradient quantization and encoding. In Advances in Neural Information Processing Systems, pages 1707\u20131718, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Alistarh%2C%20Dan%20Grubic%2C%20Demjan%20Li%2C%20Jerry%20Tomioka%2C%20Ryota%20Qsgd%3A%20Communication-efficient%20SGD%20via%20gradient%20quantization%20and%20encoding%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Alistarh%2C%20Dan%20Grubic%2C%20Demjan%20Li%2C%20Jerry%20Tomioka%2C%20Ryota%20Qsgd%3A%20Communication-efficient%20SGD%20via%20gradient%20quantization%20and%20encoding%202017"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Shuchang Zhou, Yuxin Wu, Zekun Ni, Xinyu Zhou, He Wen, and Yuheng Zou. DoReFa-Net: training low bitwidth convolutional neural networks with low bitwidth gradients. arXiv preprint arXiv:1606.06160, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.06160"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Wei Wen, Cong Xu, Feng Yan, Chunpeng Wu, Yandan Wang, Yiran Chen, and Hai Li. Terngrad: Ternary gradients to reduce communication in distributed deep learning. In Advances in Neural Information Processing Systems, pages 1508\u20131518, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wen%2C%20Wei%20Xu%2C%20Cong%20Yan%2C%20Feng%20Wu%2C%20Chunpeng%20Terngrad%3A%20Ternary%20gradients%20to%20reduce%20communication%20in%20distributed%20deep%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wen%2C%20Wei%20Xu%2C%20Cong%20Yan%2C%20Feng%20Wu%2C%20Chunpeng%20Terngrad%3A%20Ternary%20gradients%20to%20reduce%20communication%20in%20distributed%20deep%20learning%202017"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Christopher De Sa, Matthew Feldman, Christopher R\u00e9, and Kunle Olukotun. Understanding and optimizing asynchronous low-precision stochastic gradient descent. In Proceedings of the 44th Annual International Symposium on Computer Architecture, pages 561\u2013574. ACM, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sa%2C%20Christopher%20De%20Feldman%2C%20Matthew%20R%C3%A9%2C%20Christopher%20Olukotun%2C%20Kunle%20Understanding%20and%20optimizing%20asynchronous%20low-precision%20stochastic%20gradient%20descent%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sa%2C%20Christopher%20De%20Feldman%2C%20Matthew%20R%C3%A9%2C%20Christopher%20Olukotun%2C%20Kunle%20Understanding%20and%20optimizing%20asynchronous%20low-precision%20stochastic%20gradient%20descent%202017"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Hantian Zhang, Jerry Li, Kaan Kara, Dan Alistarh, Ji Liu, and Ce Zhang. Zipml: Training linear models with end-to-end low precision, and a little bit of deep learning. In International Conference on Machine Learning, pages 4035\u20134043, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Hantian%20Li%2C%20Jerry%20Kara%2C%20Kaan%20Alistarh%2C%20Dan%20Zipml%3A%20Training%20linear%20models%20with%20end-to-end%20low%20precision%2C%20and%20a%20little%20bit%20of%20deep%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Hantian%20Li%2C%20Jerry%20Kara%2C%20Kaan%20Alistarh%2C%20Dan%20Zipml%3A%20Training%20linear%20models%20with%20end-to-end%20low%20precision%2C%20and%20a%20little%20bit%20of%20deep%20learning%202017"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Mohammad Rastegari, Vicente Ordonez, Joseph Redmon, and Ali Farhadi. Xnor-net: Imagenet classification using binary convolutional neural networks. In European Conference on Computer Vision, pages 525\u2013542.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rastegari%2C%20Mohammad%20Ordonez%2C%20Vicente%20Redmon%2C%20Joseph%20Farhadi%2C%20Ali%20Xnor-net%3A%20Imagenet%20classification%20using%20binary%20convolutional%20neural%20networks",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rastegari%2C%20Mohammad%20Ordonez%2C%20Vicente%20Redmon%2C%20Joseph%20Farhadi%2C%20Ali%20Xnor-net%3A%20Imagenet%20classification%20using%20binary%20convolutional%20neural%20networks"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Christopher De Sa, Megan Leszczynski, Jian Zhang, Alana Marzoev, Christopher R Aberger, Kunle Olukotun, and Christopher R\u00e9. High-accuracy low-precision training. arXiv preprint arXiv:1803.03383, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.03383"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Jeremy Bernstein, Yu-Xiang Wang, Kamyar Azizzadenesheli, and Anima Anandkumar. signSGD: compressed optimisation for non-convex problems. arXiv preprint arXiv:1802.04434, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.04434"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Horia Mania, Xinghao Pan, Dimitris Papailiopoulos, Benjamin Recht, Kannan Ramchandran, and Michael I Jordan. Perturbed iterate analysis for asynchronous stochastic optimization. arXiv preprint arXiv:1507.06970, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1507.06970"
+        },
+        {
+            "id": "23",
+            "entry": "[23] R\u00e9mi Leblond, Fabian Pedregosa, and Simon Lacoste-Julien. ASAGA: asynchronous parallel SAGA. arXiv preprint arXiv:1606.04809, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.04809"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Alham Fikri Aji and Kenneth Heafield. Sparse communication for distributed gradient descent. arXiv preprint arXiv:1704.05021, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1704.05021"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Yujun Lin, Song Han, Huizi Mao, Yu Wang, and William J Dally. Deep gradient compression: Reducing the communication bandwidth for distributed training. arXiv preprint arXiv:1712.01887, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1712.01887"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Chia-Yu Chen, Jungwook Choi, Daniel Brand, Ankur Agrawal, Wei Zhang, and Kailash Gopalakrishnan. Adacomp: Adaptive residual gradient compression for data-parallel distributed training. arXiv preprint arXiv:1712.02679, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1712.02679"
+        },
+        {
+            "id": "27",
+            "entry": "[27] C\u00e8dric Renggli, Dan Alistarh, and Torsten Hoefler. SparCML: high-performance sparse communication for machine learning. arXiv preprint arXiv:1802.08021, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.08021"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Yusuke Tsuzuku, Hiroto Imachi, and Takuya Akiba. Variance-based gradient compression for efficient distributed deep learning. arXiv preprint arXiv:1802.06058, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.06058"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Jakub Konecnyand Peter Richt\u00e1rik. Randomized distributed mean estimation: Accuracy vs communication. arXiv preprint arXiv:1611.07555, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.07555"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Ananda Theertha Suresh, Felix X Yu, Sanjiv Kumar, and H Brendan McMahan. Distributed mean estimation with limited communication. arXiv preprint arXiv:1611.00429, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.00429"
+        },
+        {
+            "id": "31",
+            "entry": "[31] R Gitlin, J Mazo, and M Taylor. On the design of gradient algorithms for digitally implemented adaptive filters. IEEE Transactions on Circuit Theory, 20(2):125\u2013136, 1973.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gitlin%2C%20R.%20Mazo%2C%20J.%20Taylor%2C%20M.%20On%20the%20design%20of%20gradient%20algorithms%20for%20digitally%20implemented%20adaptive%20filters%201973",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gitlin%2C%20R.%20Mazo%2C%20J.%20Taylor%2C%20M.%20On%20the%20design%20of%20gradient%20algorithms%20for%20digitally%20implemented%20adaptive%20filters%201973"
+        },
+        {
+            "id": "32",
+            "entry": "[32] S Alexander. Transient weight misadjustment properties for the finite precision LMS algorithm. IEEE Transactions on Acoustics, Speech, and Signal Processing, 35(9):1250\u20131258, 1987.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Alexander%2C%20S.%20Transient%20weight%20misadjustment%20properties%20for%20the%20finite%20precision%20LMS%20algorithm%201987",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Alexander%2C%20S.%20Transient%20weight%20misadjustment%20properties%20for%20the%20finite%20precision%20LMS%20algorithm%201987"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Jos\u00e9 Carlos M Bermudez and Neil J Bershad. A nonlinear analytical model for the quantized LMS algorithm-the arbitrary step size case. IEEE Transactions on Signal Processing, 44(5):1175\u20131183, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bermudez%2C%20Jos%C3%A9%20Carlos%20M.%20Bershad%2C%20Neil%20J.%20A%20nonlinear%20analytical%20model%20for%20the%20quantized%20LMS%20algorithm-the%20arbitrary%20step%20size%20case%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bermudez%2C%20Jos%C3%A9%20Carlos%20M.%20Bershad%2C%20Neil%20J.%20A%20nonlinear%20analytical%20model%20for%20the%20quantized%20LMS%20algorithm-the%20arbitrary%20step%20size%20case%201996"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Jianqiao Wangni, Jialei Wang, Ji Liu, and Tong Zhang. Gradient sparsification for communication-efficient distributed optimization. arXiv preprint arXiv:1710.09854, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.09854"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Jian Xue, Jinyu Li, and Yifan Gong. Restructuring of deep neural network acoustic models with singular value decomposition. In Interspeech, pages 2365\u20132369, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xue%2C%20Jian%20Li%2C%20Jinyu%20Gong%2C%20Yifan%20Restructuring%20of%20deep%20neural%20network%20acoustic%20models%20with%20singular%20value%20decomposition%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xue%2C%20Jian%20Li%2C%20Jinyu%20Gong%2C%20Yifan%20Restructuring%20of%20deep%20neural%20network%20acoustic%20models%20with%20singular%20value%20decomposition%202013"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Tara N Sainath, Brian Kingsbury, Vikas Sindhwani, Ebru Arisoy, and Bhuvana Ramabhadran. Low-rank matrix factorization for deep neural network training with high-dimensional output targets. In Acoustics, Speech and Signal Processing (ICASSP), 2013 IEEE International Conference on, pages 6655\u20136659. IEEE, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sainath%2C%20Tara%20N.%20Kingsbury%2C%20Brian%20Sindhwani%2C%20Vikas%20Arisoy%2C%20Ebru%20Low-rank%20matrix%20factorization%20for%20deep%20neural%20network%20training%20with%20high-dimensional%20output%20targets%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sainath%2C%20Tara%20N.%20Kingsbury%2C%20Brian%20Sindhwani%2C%20Vikas%20Arisoy%2C%20Ebru%20Low-rank%20matrix%20factorization%20for%20deep%20neural%20network%20training%20with%20high-dimensional%20output%20targets%202013"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Max Jaderberg, Andrea Vedaldi, and Andrew Zisserman. Speeding up convolutional neural networks with low rank expansions. arXiv preprint arXiv:1405.3866, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1405.3866"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Simon Wiesler, Alexander Richard, Ralf Schluter, and Hermann Ney. Mean-normalized stochastic gradient for large-scale deep learning. In Acoustics, Speech and Signal Processing (ICASSP), 2014 IEEE International Conference on, pages 180\u2013184. IEEE, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wiesler%2C%20Simon%20Richard%2C%20Alexander%20Schluter%2C%20Ralf%20Ney%2C%20Hermann%20Mean-normalized%20stochastic%20gradient%20for%20large-scale%20deep%20learning%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wiesler%2C%20Simon%20Richard%2C%20Alexander%20Schluter%2C%20Ralf%20Ney%2C%20Hermann%20Mean-normalized%20stochastic%20gradient%20for%20large-scale%20deep%20learning%202014"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Andrew Cotter, Ohad Shamir, Nati Srebro, and Karthik Sridharan. Better mini-batch algorithms via accelerated gradient methods. In Advances in neural information processing systems, pages 1647\u20131655, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cotter%2C%20Andrew%20Shamir%2C%20Ohad%20Srebro%2C%20Nati%20Sridharan%2C%20Karthik%20Better%20mini-batch%20algorithms%20via%20accelerated%20gradient%20methods%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cotter%2C%20Andrew%20Shamir%2C%20Ohad%20Srebro%2C%20Nati%20Sridharan%2C%20Karthik%20Better%20mini-batch%20algorithms%20via%20accelerated%20gradient%20methods%202011"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Saeed Ghadimi and Guanghui Lan. Stochastic first-and zeroth-order methods for nonconvex stochastic programming. SIAM Journal on Optimization, 23(4):2341\u20132368, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ghadimi%2C%20Saeed%20Lan%2C%20Guanghui%20Stochastic%20first-and%20zeroth-order%20methods%20for%20nonconvex%20stochastic%20programming%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ghadimi%2C%20Saeed%20Lan%2C%20Guanghui%20Stochastic%20first-and%20zeroth-order%20methods%20for%20nonconvex%20stochastic%20programming%202013"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Benjamin Recht, Christopher Re, Stephen Wright, and Feng Niu. Hogwild: A lock-free approach to parallelizing stochastic gradient descent. In Advances in neural information processing systems, pages 693\u2013701, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Recht%2C%20Benjamin%20Re%2C%20Christopher%20Wright%2C%20Stephen%20Niu%2C%20Feng%20Hogwild%3A%20A%20lock-free%20approach%20to%20parallelizing%20stochastic%20gradient%20descent%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Recht%2C%20Benjamin%20Re%2C%20Christopher%20Wright%2C%20Stephen%20Niu%2C%20Feng%20Hogwild%3A%20A%20lock-free%20approach%20to%20parallelizing%20stochastic%20gradient%20descent%202011"
+        },
+        {
+            "id": "42",
+            "entry": "[42] S\u00e9bastien Bubeck et al. Convex optimization: Algorithms and complexity. Foundations and Trends R in Machine Learning, 8(3-4):231\u2013357, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bubeck%2C%20S%C3%A9bastien%20Convex%20optimization%3A%20Algorithms%20and%20complexity%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bubeck%2C%20S%C3%A9bastien%20Convex%20optimization%3A%20Algorithms%20and%20complexity%202015"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Christopher De Sa, Christopher Re, and Kunle Olukotun. Global convergence of stochastic gradient descent for some non-convex matrix problems. In International Conference on Machine Learning, pages 2332\u20132341, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sa%2C%20Christopher%20De%20Re%2C%20Christopher%20Olukotun%2C%20Kunle%20Global%20convergence%20of%20stochastic%20gradient%20descent%20for%20some%20non-convex%20matrix%20problems%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sa%2C%20Christopher%20De%20Re%2C%20Christopher%20Olukotun%2C%20Kunle%20Global%20convergence%20of%20stochastic%20gradient%20descent%20for%20some%20non-convex%20matrix%20problems%202015"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Sashank J Reddi, Ahmed Hefny, Suvrit Sra, Barnabas Poczos, and Alex Smola. Stochastic variance reduction for nonconvex optimization. In International conference on machine learning, pages 314\u2013323, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Reddi%2C%20Sashank%20J.%20Hefny%2C%20Ahmed%20Sra%2C%20Suvrit%20Poczos%2C%20Barnabas%20Stochastic%20variance%20reduction%20for%20nonconvex%20optimization%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Reddi%2C%20Sashank%20J.%20Hefny%2C%20Ahmed%20Sra%2C%20Suvrit%20Poczos%2C%20Barnabas%20Stochastic%20variance%20reduction%20for%20nonconvex%20optimization%202016"
+        },
+        {
+            "id": "45",
+            "entry": "[45] Hamed Karimi, Julie Nutini, and Mark Schmidt. Linear convergence of gradient and proximalgradient methods under the Polyak-\u0142ojasiewicz condition. In Joint European Conference on Machine Learning and Knowledge Discovery in Databases, pages 795\u2013811.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Karimi%2C%20Hamed%20Nutini%2C%20Julie%20Schmidt%2C%20Mark%20Linear%20convergence%20of%20gradient%20and%20proximalgradient%20methods%20under%20the%20Polyak-%C5%82ojasiewicz%20condition",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Karimi%2C%20Hamed%20Nutini%2C%20Julie%20Schmidt%2C%20Mark%20Linear%20convergence%20of%20gradient%20and%20proximalgradient%20methods%20under%20the%20Polyak-%C5%82ojasiewicz%20condition"
+        },
+        {
+            "id": "46",
+            "entry": "[46] Soham De, Abhay Yadav, David Jacobs, and Tom Goldstein. Big Batch SGD: Automated inference using adaptive batch sizes. arXiv preprint arXiv:1610.05792, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1610.05792"
+        },
+        {
+            "id": "47",
+            "entry": "[47] Dong Yin, Ashwin Pananjady, Max Lam, Dimitris Papailiopoulos, Kannan Ramchandran, and Peter Bartlett. Gradient diversity: a key ingredient for scalable distributed learning. In International Conference on Artificial Intelligence and Statistics, pages 1998\u20132007, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yin%2C%20Dong%20Pananjady%2C%20Ashwin%20Lam%2C%20Max%20Papailiopoulos%2C%20Dimitris%20Gradient%20diversity%3A%20a%20key%20ingredient%20for%20scalable%20distributed%20learning%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yin%2C%20Dong%20Pananjady%2C%20Ashwin%20Lam%2C%20Max%20Papailiopoulos%2C%20Dimitris%20Gradient%20diversity%3A%20a%20key%20ingredient%20for%20scalable%20distributed%20learning%201998"
+        },
+        {
+            "id": "48",
+            "entry": "[48] Venkat Chandrasekaran, Benjamin Recht, Pablo A Parrilo, and Alan S Willsky. The convex geometry of linear inverse problems. Foundations of Computational mathematics, 12(6):805\u2013 849, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chandrasekaran%2C%20Venkat%20Recht%2C%20Benjamin%20Parrilo%2C%20Pablo%20A.%20Willsky%2C%20Alan%20S.%20The%20convex%20geometry%20of%20linear%20inverse%20problems%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chandrasekaran%2C%20Venkat%20Recht%2C%20Benjamin%20Parrilo%2C%20Pablo%20A.%20Willsky%2C%20Alan%20S.%20The%20convex%20geometry%20of%20linear%20inverse%20problems%202012"
+        },
+        {
+            "id": "49",
+            "entry": "[49] Lisandro D Dalcin, Rodrigo R Paz, Pablo A Kler, and Alejandro Cosimo. Parallel distributed computing using python. Advances in Water Resources, 34(9):1124\u20131139, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dalcin%2C%20Lisandro%20D.%20Paz%2C%20Rodrigo%20R.%20Kler%2C%20Pablo%20A.%20Cosimo%2C%20Alejandro%20Parallel%20distributed%20computing%20using%20python%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dalcin%2C%20Lisandro%20D.%20Paz%2C%20Rodrigo%20R.%20Kler%2C%20Pablo%20A.%20Cosimo%2C%20Alejandro%20Parallel%20distributed%20computing%20using%20python%202011"
+        },
+        {
+            "id": "50",
+            "entry": "[50] Adam Paszke, Sam Gross, Soumith Chintala, Gregory Chanan, Edward Yang, Zachary DeVito, Zeming Lin, Alban Desmaison, Luca Antiga, and Adam Lerer. Automatic differentiation in PyTorch. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Paszke%2C%20Adam%20Gross%2C%20Sam%20Chintala%2C%20Soumith%20Chanan%2C%20Gregory%20Automatic%20differentiation%20in%20PyTorch%202017"
+        },
+        {
+            "id": "51",
+            "entry": "[51] Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. arXiv preprint arXiv:1409.1556, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1409.1556"
+        },
+        {
+            "id": "52",
+            "entry": "[52] Alex Krizhevsky and Geoffrey Hinton. Learning multiple layers of features from tiny images. 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20Alex%20Hinton%2C%20Geoffrey%20Learning%20multiple%20layers%20of%20features%20from%20tiny%20images%202009"
+        },
+        {
+            "id": "53",
+            "entry": "[53] Yuval Netzer, Tao Wang, Adam Coates, Alessandro Bissacco, Bo Wu, and Andrew Y Ng. Reading digits in natural images with unsupervised feature learning. In NIPS workshop on deep learning and unsupervised feature learning, volume 2011, page 5, 2011. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Netzer%2C%20Yuval%20Wang%2C%20Tao%20Coates%2C%20Adam%20Bissacco%2C%20Alessandro%20Reading%20digits%20in%20natural%20images%20with%20unsupervised%20feature%20learning%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Netzer%2C%20Yuval%20Wang%2C%20Tao%20Coates%2C%20Adam%20Bissacco%2C%20Alessandro%20Reading%20digits%20in%20natural%20images%20with%20unsupervised%20feature%20learning%202011"
+        }
+    ]
+}

@@ -1,0 +1,292 @@
+{
+    "filename": "7400-the-lingering-of-gradients-how-to-reuse-gradients-over-time.pdf",
+    "metadata": {
+        "title": "The Lingering of Gradients: How to Reuse Gradients Over Time",
+        "author": "Zeyuan Allen-Zhu, David Simchi-Levi, Xinshang Wang",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7400-the-lingering-of-gradients-how-to-reuse-gradients-over-time.pdf"
+        },
+        "abstract": "Classically, the time complexity of a first-order method is estimated by its number of gradient computations. In this paper, we study a more refined complexity by taking into account the \u201clingering\u201d of gradients: once a gradient is computed at xk, the additional time to compute gradients at xk+1, xk+2, . . . may be reduced. We show how this improves the running time of gradient descent and SVRG. For instance, if the \u201cadditional time\u201d scales linearly with respect to the traveled distance, then the \u201cconvergence rate\u201d of gradient descent can be improved from 1/T to exp(\u2212T 1/3). On the empirical side, we solve a hypothetical revenue management problem on the Yahoo! Front Page Today Module application with 4.6m users to 10\u22126 error (or 10\u221212 dual error) using 6 passes of the dataset."
+    },
+    "keywords": [
+        {
+            "term": "SVRG",
+            "url": "https://en.wikipedia.org/wiki/SVRG"
+        },
+        {
+            "term": "gradient descent",
+            "url": "https://en.wikipedia.org/wiki/gradient_descent"
+        },
+        {
+            "term": "convex programming",
+            "url": "https://en.wikipedia.org/wiki/convex_programming"
+        },
+        {
+            "term": "time complexity",
+            "url": "https://en.wikipedia.org/wiki/time_complexity"
+        },
+        {
+            "term": "convergence rate",
+            "url": "https://en.wikipedia.org/wiki/convergence_rate"
+        },
+        {
+            "term": "gradient method",
+            "url": "https://en.wikipedia.org/wiki/gradient_method"
+        },
+        {
+            "term": "additional time",
+            "url": "https://en.wikipedia.org/wiki/additional_time"
+        }
+    ],
+    "highlights": [
+        "First-order methods play a fundamental role in large-scale machine learning and optimization tasks",
+        "The performance of a first-order method is represented by its convergence rate: the relationship between \u03b5 versus T",
+        "The radius satisfies the condition that for every point y that is within distance \u03b4(x, i) from x, the stochastic gradient \u2207fi(y) is equal to \u2207fi(x)",
+        "We study convex problems where the stochastic gradients \u2207fi(x) can be reused when we move away from x",
+        "We model the number of stochastic gradients that can be changed as a function of how much distance we travel away from x, and show faster convergence for gradient descent",
+        "We show how to modify the SVRG method to use reuse stochastic gradients efficiently"
+    ],
+    "key_statements": [
+        "First-order methods play a fundamental role in large-scale machine learning and optimization tasks",
+        "The performance of a first-order method is represented by its convergence rate: the relationship between \u03b5 versus T",
+        "The radius satisfies the condition that for every point y that is within distance \u03b4(x, i) from x, the stochastic gradient \u2207fi(y) is equal to \u2207fi(x)",
+        "We study convex problems where the stochastic gradients \u2207fi(x) can be reused when we move away from x",
+        "We model the number of stochastic gradients that can be changed as a function of how much distance we travel away from x, and show faster convergence for gradient descent",
+        "We show how to modify the SVRG method to use reuse stochastic gradients efficiently"
+    ],
+    "summary": [
+        "First-order methods play a fundamental role in large-scale machine learning and optimization tasks.",
+        "The radius satisfies the condition that for every point y that is within distance \u03b4(x, i) from x, the stochastic gradient \u2207fi(y) is equal to \u2207fi(x).",
+        "If we denote by B(x, r) the set of indices j satisfying \u03b4(x, j) < r, and if we travel to some point y that is at most distance r from x, we only need to re-evaluate the gradients \u2207fj(y) for j \u2208 B(x, r).",
+        "We denote by Ttime the gradient complexity, which equals how many times \u2207fi(x) and \u03b4(x, i) are calculated, divided by n.",
+        "Hiding x0 \u2212x\u2217 , L, C in the big-O notion, and letting Ttime be the gradient complexity, we can modify GD so that it finds a point x with f (x) \u2212 f (x\u2217) \u2264 O \u03b1 + 2\u2212\u03a9(Ttime)1/3 .",
+        "In the setting of Theorem 3.5, given any T \u2265 1, one can choose S so that GDlin finds a point x in gradient complexity Ttime = O(T ) s.t. f (x) \u2212 f (x\u2217) \u2264 O",
+        "We use Assumption 1 to improve the running time of SVRG [<a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>, <a class=\"ref-link\" id=\"c36\" href=\"#r36\">36</a>], one of the most widely applied stochastic gradient methods in large-scale settings.",
+        "3Calculating those lingering radii \u03b4 require gradient complexity |\u039b | according to Assumption 1, and the time for sorting is negligible.",
+        "Our algorithm SVRGlin maintains disjoint subsets Hs \u2286 [n], where each Hs includes the set of the indices i whose gradients \u2207fi(x(s)) from epoch s can still be safely reused at present.",
+        "At the starting point x0 of an epoch s, we let Hs = [n]\\(H0 \u222a\u00b7 \u00b7 \u00b7\u222aHs\u22121) and re-calculate gradients \u2207fi(x0) only for i \u2208 Hs; the remaining ones can be loaded from the memory.",
+        "In Figure 3(a), we plot the optimization error of (2.2) as a function #grad/n, the number of stochastic gradient computations divided by n, known as #passes of dataset.",
+        "We study convex problems where the stochastic gradients \u2207fi(x) can be reused when we move away from x.",
+        "We model the number of stochastic gradients that can be changed as a function of how much distance we travel away from x, and show faster convergence for gradient descent.",
+        "We show how to modify the SVRG method to use reuse stochastic gradients efficiently."
+    ],
+    "headline": "We study a more refined complexity by taking into account the \u201clingering\u201d of gradients: once a gradient is computed at xk, the additional time to compute gradients at xk+1, xk+2, . . . may be reduced",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Shipra Agrawal and Nikhil R Devanur. Fast Algorithms for Online Stochastic Convex Programming. In SODA, pages 1405\u20131424, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Agrawal%2C%20Shipra%20Devanur%2C%20Nikhil%20R.%20Fast%20Algorithms%20for%20Online%20Stochastic%20Convex%20Programming%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Agrawal%2C%20Shipra%20Devanur%2C%20Nikhil%20R.%20Fast%20Algorithms%20for%20Online%20Stochastic%20Convex%20Programming%202015"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Shipra Agrawal, Zizhuo Wang, and Yinyu Ye. A dynamic near-optimal algorithm for online linear programming. Operations Research, 62(4):876\u2013890, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Agrawal%2C%20Shipra%20Wang%2C%20Zizhuo%20and%20Yinyu%20Ye.%20A%20dynamic%20near-optimal%20algorithm%20for%20online%20linear%20programming%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Agrawal%2C%20Shipra%20Wang%2C%20Zizhuo%20and%20Yinyu%20Ye.%20A%20dynamic%20near-optimal%20algorithm%20for%20online%20linear%20programming%202014"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Saeed Alaei, MohammadTaghi Hajiaghayi, and Vahid Liaghat. Online prophet-inequality matching with applications to ad allocation. In Proceedings of the 13th ACM Conference on Electronic Commerce, pages 18\u201335. ACM, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Alaei%2C%20Saeed%20Hajiaghayi%2C%20MohammadTaghi%20Liaghat%2C%20Vahid%20Online%20prophet-inequality%20matching%20with%20applications%20to%20ad%20allocation%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Alaei%2C%20Saeed%20Hajiaghayi%2C%20MohammadTaghi%20Liaghat%2C%20Vahid%20Online%20prophet-inequality%20matching%20with%20applications%20to%20ad%20allocation%202012"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Zeyuan Allen-Zhu and Yang Yuan. Improved SVRG for Non-Strongly-Convex or Sum-ofNon-Convex Objectives. In ICML, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Allen-Zhu%2C%20Zeyuan%20Yuan%2C%20Yang%20Improved%20SVRG%20for%20Non-Strongly-Convex%20or%20Sum-ofNon-Convex%20Objectives%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Allen-Zhu%2C%20Zeyuan%20Yuan%2C%20Yang%20Improved%20SVRG%20for%20Non-Strongly-Convex%20or%20Sum-ofNon-Convex%20Objectives%202016"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Zeyuan Allen-Zhu, Yang Yuan, and Karthik Sridharan. Exploiting the Structure: Stochastic Gradient Methods Using Raw Clusters. In NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Allen-Zhu%2C%20Zeyuan%20Yuan%2C%20Yang%20Sridharan%2C%20Karthik%20Exploiting%20the%20Structure%3A%20Stochastic%20Gradient%20Methods%20Using%20Raw%20Clusters%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Allen-Zhu%2C%20Zeyuan%20Yuan%2C%20Yang%20Sridharan%2C%20Karthik%20Exploiting%20the%20Structure%3A%20Stochastic%20Gradient%20Methods%20Using%20Raw%20Clusters%202016"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Wei Chu, Seung-Taek Park, Todd Beaupre, Nitin Motgi, Amit Phadke, Seinjuti Chakraborty, and Joe Zachariah. A Case Study of Behavior-driven Conjoint Analysis on Yahoo!: Front Page Today Module. In KDD, pages 1097\u20131104, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chu%2C%20Wei%20Park%2C%20Seung-Taek%20Beaupre%2C%20Todd%20Motgi%2C%20Nitin%20A%20Case%20Study%20of%20Behavior-driven%20Conjoint%20Analysis%20on%20Yahoo%21%3A%20Front%20Page%20Today%20Module%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chu%2C%20Wei%20Park%2C%20Seung-Taek%20Beaupre%2C%20Todd%20Motgi%2C%20Nitin%20A%20Case%20Study%20of%20Behavior-driven%20Conjoint%20Analysis%20on%20Yahoo%21%3A%20Front%20Page%20Today%20Module%202009"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Dragos Florin Ciocan and Vivek Farias. Model predictive control for dynamic resource allocation. Mathematics of Operations Research, 37(3):501\u2013525, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ciocan%2C%20Dragos%20Florin%20Farias%2C%20Vivek%20Model%20predictive%20control%20for%20dynamic%20resource%20allocation%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ciocan%2C%20Dragos%20Florin%20Farias%2C%20Vivek%20Model%20predictive%20control%20for%20dynamic%20resource%20allocation%202012"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Aaron Defazio, Francis Bach, and Simon Lacoste-Julien. SAGA: A Fast Incremental Gradient Method With Support for Non-Strongly Convex Composite Objectives. In NIPS, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Defazio%2C%20Aaron%20Bach%2C%20Francis%20Lacoste-Julien%2C%20Simon%20SAGA%3A%20A%20Fast%20Incremental%20Gradient%20Method%20With%20Support%20for%20Non-Strongly%20Convex%20Composite%20Objectives%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Defazio%2C%20Aaron%20Bach%2C%20Francis%20Lacoste-Julien%2C%20Simon%20SAGA%3A%20A%20Fast%20Incremental%20Gradient%20Method%20With%20Support%20for%20Non-Strongly%20Convex%20Composite%20Objectives%202014"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Nikhil R Devanur and Thomas P Hayes. The adwords problem: online keyword matching with budgeted bidders under random permutations. In Proceedings of the 10th ACM conference on Electronic commerce, pages 71\u201378. ACM, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Devanur%2C%20Nikhil%20R.%20Hayes%2C%20Thomas%20P.%20The%20adwords%20problem%3A%20online%20keyword%20matching%20with%20budgeted%20bidders%20under%20random%20permutations%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Devanur%2C%20Nikhil%20R.%20Hayes%2C%20Thomas%20P.%20The%20adwords%20problem%3A%20online%20keyword%20matching%20with%20budgeted%20bidders%20under%20random%20permutations%202009"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Nikhil R Devanur, Balasubramanian Sivan, and Yossi Azar. Asymptotically optimal algorithm for stochastic adwords. In Proceedings of the 13th ACM Conference on Electronic Commerce, pages 388\u2013404. ACM, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Devanur%2C%20Nikhil%20R.%20Sivan%2C%20Balasubramanian%20Azar%2C%20Yossi%20Asymptotically%20optimal%20algorithm%20for%20stochastic%20adwords%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Devanur%2C%20Nikhil%20R.%20Sivan%2C%20Balasubramanian%20Azar%2C%20Yossi%20Asymptotically%20optimal%20algorithm%20for%20stochastic%20adwords%202012"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Jon Feldman, Aranyak Mehta, Vahab Mirrokni, and S Muthukrishnan. Online Stochastic Matching: Beating 1-1/e. In FOCS, pages 117\u2013126, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Feldman%2C%20Jon%20Mehta%2C%20Aranyak%20Mirrokni%2C%20Vahab%20Muthukrishnan%2C%20S.%20Online%20Stochastic%20Matching%3A%20Beating%201-1/e%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Feldman%2C%20Jon%20Mehta%2C%20Aranyak%20Mirrokni%2C%20Vahab%20Muthukrishnan%2C%20S.%20Online%20Stochastic%20Matching%3A%20Beating%201-1/e%202009"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Jon Feldman, Monika Henzinger, Nitish Korula, Vahab Mirrokni, and Cliff Stein. Online stochastic packing applied to display ad allocation. Algorithms\u2013ESA 2010, pages 182\u2013194, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Feldman%2C%20Jon%20Henzinger%2C%20Monika%20Korula%2C%20Nitish%20Mirrokni%2C%20Vahab%20Online%20stochastic%20packing%20applied%20to%20display%20ad%20allocation%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Feldman%2C%20Jon%20Henzinger%2C%20Monika%20Korula%2C%20Nitish%20Mirrokni%2C%20Vahab%20Online%20stochastic%20packing%20applied%20to%20display%20ad%20allocation%202010"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Kris Johnson Ferreira, David Simchi-Levi, and He Wang. Online network revenue management using Thompson sampling. manuscript on SSRN, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ferreira%2C%20Kris%20Johnson%20Simchi-Levi%2C%20David%20Wang%2C%20He%20Online%20network%20revenue%20management%20using%20Thompson%20sampling.%20manuscript%20on%20SSRN%202016"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Bernhard Haeupler, Vahab S Mirrokni, and Morteza Zadimoghaddam. Online Stochastic Weighted Matching: Improved Approximation Algorithms. In WINE, volume 11, pages 170\u2013 181.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Haeupler%2C%20Bernhard%20Mirrokni%2C%20Vahab%20S.%20Zadimoghaddam%2C%20Morteza%20Online%20Stochastic%20Weighted%20Matching%3A%20Improved%20Approximation%20Algorithms",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Haeupler%2C%20Bernhard%20Mirrokni%2C%20Vahab%20S.%20Zadimoghaddam%2C%20Morteza%20Online%20Stochastic%20Weighted%20Matching%3A%20Improved%20Approximation%20Algorithms"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Reza Harikandeh, Mohamed Osama Ahmed, Alim Virani, Mark Schmidt, Jakub Konecny, and Scott Sallinen. Stop wasting my gradients: Practical SVRG. In NIPS, pages 2251\u20132259, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Harikandeh%2C%20Reza%20Ahmed%2C%20Mohamed%20Osama%20Virani%2C%20Alim%20Schmidt%2C%20Mark%20Stop%20wasting%20my%20gradients%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Harikandeh%2C%20Reza%20Ahmed%2C%20Mohamed%20Osama%20Virani%2C%20Alim%20Schmidt%2C%20Mark%20Stop%20wasting%20my%20gradients%202015"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Thomas Hofmann, Aurelien Lucchi, Simon Lacoste-Julien, and Brian McWilliams. Variance reduced stochastic gradient descent with neighbors. In NIPS 2015, pages 2296\u20132304, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hofmann%2C%20Thomas%20Lucchi%2C%20Aurelien%20Lacoste-Julien%2C%20Simon%20McWilliams%2C%20Brian%20Variance%20reduced%20stochastic%20gradient%20descent%20with%20neighbors%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hofmann%2C%20Thomas%20Lucchi%2C%20Aurelien%20Lacoste-Julien%2C%20Simon%20McWilliams%2C%20Brian%20Variance%20reduced%20stochastic%20gradient%20descent%20with%20neighbors%202015"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Patrick Jaillet and Xin Lu. Online Stochastic Matching: New Algorithms with Better Bounds. Mathematics of Operations Research, 39(3):624\u2013646, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jaillet%2C%20Patrick%20Lu%2C%20Xin%20Online%20Stochastic%20Matching%3A%20New%20Algorithms%20with%20Better%20Bounds%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jaillet%2C%20Patrick%20Lu%2C%20Xin%20Online%20Stochastic%20Matching%3A%20New%20Algorithms%20with%20Better%20Bounds%202014"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Stefanus Jasin and Sunil Kumar. A re-solving heuristic with bounded revenue loss for network revenue management with customer choice. Mathematics of Operations Research, 37(2):313\u2013 345, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jasin%2C%20Stefanus%20Kumar%2C%20Sunil%20A%20re-solving%20heuristic%20with%20bounded%20revenue%20loss%20for%20network%20revenue%20management%20with%20customer%20choice%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jasin%2C%20Stefanus%20Kumar%2C%20Sunil%20A%20re-solving%20heuristic%20with%20bounded%20revenue%20loss%20for%20network%20revenue%20management%20with%20customer%20choice%202012"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Rie Johnson and Tong Zhang. Accelerating stochastic gradient descent using predictive variance reduction. In Advances in Neural Information Processing Systems, NIPS 2013, pages 315\u2013323, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Johnson%2C%20Rie%20Zhang%2C%20Tong%20Accelerating%20stochastic%20gradient%20descent%20using%20predictive%20variance%20reduction%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Johnson%2C%20Rie%20Zhang%2C%20Tong%20Accelerating%20stochastic%20gradient%20descent%20using%20predictive%20variance%20reduction%202013"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Lihua Lei and Michael I. Jordan. Less than a single pass: Stochastically controlled stochastic gradient method. In AISTATS, pages 148\u2013156, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lei%2C%20Lihua%20Jordan%2C%20Michael%20I.%20Less%20than%20a%20single%20pass%3A%20Stochastically%20controlled%20stochastic%20gradient%20method%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lei%2C%20Lihua%20Jordan%2C%20Michael%20I.%20Less%20than%20a%20single%20pass%3A%20Stochastically%20controlled%20stochastic%20gradient%20method%202017"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Lihua Lei, Cheng Ju, Jianbo Chen, and Michael I Jordan. Nonconvex Finite-Sum Optimization Via SCSG Methods. In NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lei%2C%20Lihua%20Ju%2C%20Cheng%20Chen%2C%20Jianbo%20Jordan%2C%20Michael%20I.%20Nonconvex%20Finite-Sum%20Optimization%20Via%20SCSG%20Methods%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lei%2C%20Lihua%20Ju%2C%20Cheng%20Chen%2C%20Jianbo%20Jordan%2C%20Michael%20I.%20Nonconvex%20Finite-Sum%20Optimization%20Via%20SCSG%20Methods%202017"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Lihong Li, Wei Chu, John Langford, and Robert E. Schapire. A Contextual-bandit Approach to Personalized News Article Recommendation. In WWW, pages 661\u2013670, New York, NY, USA, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Lihong%20Chu%2C%20Wei%20Langford%2C%20John%20Schapire%2C%20Robert%20E.%20A%20Contextual-bandit%20Approach%20to%20Personalized%20News%20Article%20Recommendation%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20Lihong%20Chu%2C%20Wei%20Langford%2C%20John%20Schapire%2C%20Robert%20E.%20A%20Contextual-bandit%20Approach%20to%20Personalized%20News%20Article%20Recommendation%202010"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Mehrdad Mahdavi, Lijun Zhang, and Rong Jin. Mixed optimization for smooth functions. In Advances in Neural Information Processing Systems, pages 674\u2013682, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mahdavi%2C%20Mehrdad%20Zhang%2C%20Lijun%20Jin%2C%20Rong%20Mixed%20optimization%20for%20smooth%20functions%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mahdavi%2C%20Mehrdad%20Zhang%2C%20Lijun%20Jin%2C%20Rong%20Mixed%20optimization%20for%20smooth%20functions%202013"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Vahideh H Manshadi, Shayan Oveis Gharan, and Amin Saberi. Online stochastic matching: Online actions based on offline statistics. Mathematics of Operations Research, 37(4):559\u2013 573, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Manshadi%2C%20Vahideh%20H.%20Gharan%2C%20Shayan%20Oveis%20Saberi%2C%20Amin%20Online%20stochastic%20matching%3A%20Online%20actions%20based%20on%20offline%20statistics%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Manshadi%2C%20Vahideh%20H.%20Gharan%2C%20Shayan%20Oveis%20Saberi%2C%20Amin%20Online%20stochastic%20matching%3A%20Online%20actions%20based%20on%20offline%20statistics%202012"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Yurii Nesterov. Introductory Lectures on Convex Programming Volume: A Basic course, volume I. Kluwer Academic Publishers, 2004. ISBN 1402075537.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nesterov%2C%20Yurii%20Introductory%20Lectures%20on%20Convex%20Programming%20Volume%3A%20A%20Basic%20course%2C%20volume%20I%202004"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Martin I Reiman and Qiong Wang. An asymptotically optimal policy for a quantity-based network revenue management problem. Mathematics of Operations Research, 33(2):257\u2013282, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Reiman%2C%20Martin%20I.%20Wang%2C%20Qiong%20An%20asymptotically%20optimal%20policy%20for%20a%20quantity-based%20network%20revenue%20management%20problem%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Reiman%2C%20Martin%20I.%20Wang%2C%20Qiong%20An%20asymptotically%20optimal%20policy%20for%20a%20quantity-based%20network%20revenue%20management%20problem%202008"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Mark Schmidt, Nicolas Le Roux, and Francis Bach. Minimizing finite sums with the stochastic average gradient. ArXiv e-prints, abs/1309.2388, September 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1309.2388"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Shai Shalev-Shwartz. SDCA without Duality, Regularization, and Individual Convexity. In ICML, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shalev-Shwartz%2C%20Shai%20SDCA%20without%20Duality%2C%20Regularization%2C%20and%20Individual%20Convexity%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shalev-Shwartz%2C%20Shai%20SDCA%20without%20Duality%2C%20Regularization%2C%20and%20Individual%20Convexity%202016"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Shai Shalev-Shwartz and Tong Zhang. Proximal Stochastic Dual Coordinate Ascent. ArXiv e-prints, abs/1211.2717, 2012.",
+            "arxiv_url": "https://arxiv.org/pdf/1211.2717"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Shai Shalev-Shwartz and Tong Zhang. Stochastic dual coordinate ascent methods for regularized loss minimization. Journal of Machine Learning Research, 14:567\u2013599, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shalev-Shwartz%2C%20Shai%20Zhang%2C%20Tong%20Stochastic%20dual%20coordinate%20ascent%20methods%20for%20regularized%20loss%20minimization%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shalev-Shwartz%2C%20Shai%20Zhang%2C%20Tong%20Stochastic%20dual%20coordinate%20ascent%20methods%20for%20regularized%20loss%20minimization%202013"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Clifford Stein, Van-Anh Truong, and Xinshang Wang. Advance Service Reservations with Heterogeneous Customers. ArXiv e-prints, abs/1805.05554, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1805.05554"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Kalyan Talluri and Garrett van Ryzin. An Analysis of Bid-Price Controls for Network Revenue Management. Management Science, 44(11-part-1):1577\u20131593, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Talluri%2C%20Kalyan%20van%20Ryzin%2C%20Garrett%20An%20Analysis%20of%20Bid-Price%20Controls%20for%20Network%20Revenue%20Management%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Talluri%2C%20Kalyan%20van%20Ryzin%2C%20Garrett%20An%20Analysis%20of%20Bid-Price%20Controls%20for%20Network%20Revenue%20Management%201998"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Xinshang Wang, Van-Anh Truong, and David Bank. Online advance admission scheduling for services, with customer preferences. ArXiv e-prints, abs/1805.10412, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1805.10412"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Xinshang Wang, Van-Anh Truong, Shenghuo Zhu, and Qiong Zhang. Dynamic Optimization of Mobile Push Campaigns. Working paper, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xinshang%20Wang%20VanAnh%20Truong%20Shenghuo%20Zhu%20and%20Qiong%20Zhang%20Dynamic%20Optimization%20of%20Mobile%20Push%20Campaigns%20Working%20paper%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xinshang%20Wang%20VanAnh%20Truong%20Shenghuo%20Zhu%20and%20Qiong%20Zhang%20Dynamic%20Optimization%20of%20Mobile%20Push%20Campaigns%20Working%20paper%202016"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Lin Xiao and Tong Zhang. A Proximal Stochastic Gradient Method with Progressive Variance Reduction. SIAM Journal on Optimization, 24(4):2057\u2014-2075, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xiao%2C%20Lin%20Zhang%2C%20Tong%20A%20Proximal%20Stochastic%20Gradient%20Method%20with%20Progressive%20Variance%20Reduction%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xiao%2C%20Lin%20Zhang%2C%20Tong%20A%20Proximal%20Stochastic%20Gradient%20Method%20with%20Progressive%20Variance%20Reduction%202014"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Lijun Zhang, Mehrdad Mahdavi, and Rong Jin. Linear convergence with condition number independent access of full gradients. In Advances in Neural Information Processing Systems, pages 980\u2013988, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Lijun%20Mahdavi%2C%20Mehrdad%20Jin%2C%20Rong%20Linear%20convergence%20with%20condition%20number%20independent%20access%20of%20full%20gradients%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Lijun%20Mahdavi%2C%20Mehrdad%20Jin%2C%20Rong%20Linear%20convergence%20with%20condition%20number%20independent%20access%20of%20full%20gradients%202013"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Wenliang Zhong, Rong Jin, Cheng Yang, Xiaowei Yan, Qi Zhang, and Qiang Li. Stock Constrained Recommendation in Tmall. KDD, pages 2287\u20132296, 2015. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wenliang%20Zhong%20Rong%20Jin%20Cheng%20Yang%20Xiaowei%20Yan%20Qi%20Zhang%20and%20Qiang%20Li%20Stock%20Constrained%20Recommendation%20in%20Tmall%20KDD%20pages%2022872296%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wenliang%20Zhong%20Rong%20Jin%20Cheng%20Yang%20Xiaowei%20Yan%20Qi%20Zhang%20and%20Qiang%20Li%20Stock%20Constrained%20Recommendation%20in%20Tmall%20KDD%20pages%2022872296%202015"
+        }
+    ]
+}

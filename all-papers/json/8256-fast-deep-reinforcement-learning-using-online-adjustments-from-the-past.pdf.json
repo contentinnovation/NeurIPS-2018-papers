@@ -1,0 +1,276 @@
+{
+    "filename": "8256-fast-deep-reinforcement-learning-using-online-adjustments-from-the-past.pdf",
+    "metadata": {
+        "title": "Fast deep reinforcement learning using online adjustments from the past",
+        "author": "Steven Hansen, Alexander Pritzel, Pablo Sprechmann, Andre Barreto, Charles Blundell",
+        "date": 1995,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8256-fast-deep-reinforcement-learning-using-online-adjustments-from-the-past.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We propose Ephemeral Value Adjusments (EVA): a means of allowing deep reinforcement learning agents to rapidly adapt to experience in their replay buffer. EVA shifts the value predicted by a neural network with an estimate of the value function found by planning over experience tuples from the replay buffer near the current state. EVA combines a number of recent ideas around combining episodic memory-like structures into reinforcement learning agents: slot-based storage, content-based retrieval, and memory-based planning. We show that EVA is performant on a demonstration task and Atari games."
+    },
+    "keywords": [
+        {
+            "term": "q learning",
+            "url": "https://en.wikipedia.org/wiki/q_learning"
+        },
+        {
+            "term": "state st",
+            "url": "https://en.wikipedia.org/wiki/State_St"
+        },
+        {
+            "term": "value function",
+            "url": "https://en.wikipedia.org/wiki/value_function"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        },
+        {
+            "term": "episodic memory",
+            "url": "https://en.wikipedia.org/wiki/episodic_memory"
+        },
+        {
+            "term": "convolutional neural network",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_network"
+        }
+    ],
+    "highlights": [
+        "Deep Q-Network agents [<a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\">Mnih et al, 2015</a>, DQN] use Q-learning [<a class=\"ref-link\" id=\"cWatkins_1992_a\" href=\"#rWatkins_1992_a\">Watkins and Dayan, 1992</a>] to learn an action-value function Q\u03b8 to rank which action at is best to take in each state st at step t",
+        "The action-value function of a policy \u03c0 is defined as Q\u03c0(s, a) = E\u03c0 [ t \u03b3trt | s, a] [<a class=\"ref-link\" id=\"cSutton_1998_a\" href=\"#rSutton_1998_a\">Sutton and Barto, 1998</a>], where s and a are the initial state and action respectively, \u03b3 \u2208 [0, 1] is a discount factor, and the expectation denotes that the \u03c0 is followed thereafter",
+        "Q\u03b8 is parameterised by a convolutional neural network (CNN), with parameters collectively denoted by \u03b8, that takes a 2D pixel representation of the state st as input, and outputs a vector containing the value of each action at that state",
+        "The parametric component of Ephemeral Value Adjustment consists of the standard DQN-style architecture, Q\u03b8, a feedforward convolutional neural network: several convolution layers followed by two linear layers that produce action-value function estimates",
+        "In order to validate whether Ephemeral Value Adjustment leads to gains in complex domains we evaluated our approach on the Atari Learning Environment(ALE; Bellemare et al, 2013)",
+        "Despite only changing the value function underlying the behaviour policy, Ephemeral Value Adjustment improves the overall rate of learning"
+    ],
+    "key_statements": [
+        "Deep Q-Network agents [<a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\">Mnih et al, 2015</a>, DQN] use Q-learning [<a class=\"ref-link\" id=\"cWatkins_1992_a\" href=\"#rWatkins_1992_a\">Watkins and Dayan, 1992</a>] to learn an action-value function Q\u03b8 to rank which action at is best to take in each state st at step t",
+        "We argue that the majority of contemporary deep reinforcement learning systems fall into the latter category: slow, gradient-based updates combined with incremental updates from Bellman backups result in systems that are good at generalising, as evidenced by many successes [<a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\">Mnih et al, 2015</a>, <a class=\"ref-link\" id=\"cSilver_et+al_2016_a\" href=\"#rSilver_et+al_2016_a\">Silver et al, 2016</a>, Moravc\u00edk et al, 2017], but take many steps in an environment to achieve this feat",
+        "In this work we explore a method of allowing deep reinforcement learning agents to simultaneously: (i) learn the parameters of the value function approximation slowly, and adapt the value function quickly and locally within an episode",
+        "The action-value function of a policy \u03c0 is defined as Q\u03c0(s, a) = E\u03c0 [ t \u03b3trt | s, a] [<a class=\"ref-link\" id=\"cSutton_1998_a\" href=\"#rSutton_1998_a\">Sutton and Barto, 1998</a>], where s and a are the initial state and action respectively, \u03b3 \u2208 [0, 1] is a discount factor, and the expectation denotes that the \u03c0 is followed thereafter",
+        "The value function under the policy \u03c0 at state s is given by V \u03c0(s) = E\u03c0 [ t \u03b3trt | s] and is the expected return for following policy \u03c0 starting at state s",
+        "Q\u03b8 is parameterised by a convolutional neural network (CNN), with parameters collectively denoted by \u03b8, that takes a 2D pixel representation of the state st as input, and outputs a vector containing the value of each action at that state",
+        "Our agent consists of three components: a standard parametric reinforcement learner with its replay buffer augmented to maintains trajectory information, a trace computation algorithm that periodically plans over subsets of data in the replay buffer, a small value buffer which stores the value estimates resulting from the planning process",
+        "The parametric component of Ephemeral Value Adjustment consists of the standard DQN-style architecture, Q\u03b8, a feedforward convolutional neural network: several convolution layers followed by two linear layers that produce action-value function estimates",
+        "End end serve as a useful baseline, the n-step return just evaluates the policy defined by the sampled trajectory; only the initial parametric bootstrap involves an estimate of the optimal value function",
+        "kernel-based reinforcement learning can be made numerically identical to trajectory-centric planning by shrinking the kernel bandwidth and pseudo-state similarity.3",
+        "This work differs from these approaches in that, rather than using memory for local regression, memory is used as a form of local planning, which is made possible by exploiting the trajectory structure of the memories in the replay buffer",
+        "In order to validate whether Ephemeral Value Adjustment leads to gains in complex domains we evaluated our approach on the Atari Learning Environment(ALE; Bellemare et al, 2013)",
+        "Despite only changing the value function underlying the behaviour policy, Ephemeral Value Adjustment improves the overall rate of learning",
+        "The second is that this improved policy should fill the replay buffer with more useful data"
+    ],
+    "summary": [
+        "Deep Q-Network agents [<a class=\"ref-link\" id=\"cMnih_et+al_2015_a\" href=\"#rMnih_et+al_2015_a\">Mnih et al, 2015</a>, DQN] use Q-learning [<a class=\"ref-link\" id=\"cWatkins_1992_a\" href=\"#rWatkins_1992_a\">Watkins and Dayan, 1992</a>] to learn an action-value function Q\u03b8 to rank which action at is best to take in each state st at step t.",
+        "Our agent consists of three components: a standard parametric reinforcement learner with its replay buffer augmented to maintains trajectory information, a trace computation algorithm that periodically plans over subsets of data in the replay buffer, a small value buffer which stores the value estimates resulting from the planning process.",
+        "The parametric component of EVA consists of the standard DQN-style architecture, Q\u03b8, a feedforward convolutional neural network: several convolution layers followed by two linear layers that produce action-value function estimates.",
+        "There are several methods for estimating this value function, we shall describe n-step, trajectory-centric planning (TCP) and kernel-based RL (KBRL)",
+        "End end serve as a useful baseline, the n-step return just evaluates the policy defined by the sampled trajectory; only the initial parametric bootstrap involves an estimate of the optimal value function.",
+        "We propose using the parametric model for these off-trajectory value estimates, constructing the complete set of action-conditional value-estimates, called this trajectory-centric planning (TCP): QNP =",
+        "The trajectory-centric estimates for the k nearest neighbours are averaged with the parametric estimate on the basis of a hyper-parameter \u03bb, as shown in Algorithm 1 and represented graphically on Figure 1 (Left).",
+        "In the context of trajectory-centric planning, KBRL can be seen as an alternative way of dealing with counter-factual actions: estimate their effects using nearby transitions.",
+        "KBRL can be made numerically identical to trajectory-centric planning by shrinking the kernel bandwidth and pseudo-state similarity.3 With the appropriate values, this will result in value estimates being dominated by exact matches",
+        "This work differs from these approaches in that, rather than using memory for local regression, memory is used as a form of local planning, which is made possible by exploiting the trajectory structure of the memories in the replay buffer.",
+        "In the context of supervised learning, several works have looked at using non-parametric type of approaches to improve the performance of models using neural networks.",
+        "Evaluation of the full EVA algorithm Figure 2 (Center, Left) shows the performance of EVA on ful episodes using one and two coins evaluating different values of the mixing parameter \u03bb.",
+        "One would expect that after training, the parametric model would be able to consolidate the information available on the episodic memory and be capable of acting without relying on the planning process."
+    ],
+    "headline": "We propose Ephemeral Value Adjusments : a means of allowing deep reinforcement learning agents to rapidly adapt to experience in their replay buffer",
+    "reference_links": [
+        {
+            "id": "Mcclelland_et+al_1995_a",
+            "entry": "James L McClelland, Bruce L McNaughton, and Randall C O\u2019Reilly. Why there are complementary learning systems in the hippocampus and neocortex: insights from the successes and failures of connectionist models of learning and memory. Psychological review, 102(3):419, 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=McClelland%2C%20James%20L.%20McNaughton%2C%20Bruce%20L.%20O%E2%80%99Reilly%2C%20Randall%20C.%20Why%20there%20are%20complementary%20learning%20systems%20in%20the%20hippocampus%20and%20neocortex%3A%20insights%20from%20the%20successes%20and%20failures%20of%20connectionist%20models%20of%20learning%20and%20memory%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=McClelland%2C%20James%20L.%20McNaughton%2C%20Bruce%20L.%20O%E2%80%99Reilly%2C%20Randall%20C.%20Why%20there%20are%20complementary%20learning%20systems%20in%20the%20hippocampus%20and%20neocortex%3A%20insights%20from%20the%20successes%20and%20failures%20of%20connectionist%20models%20of%20learning%20and%20memory%201995"
+        },
+        {
+            "id": "Mnih_et+al_2015_a",
+            "entry": "Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei A Rusu, Joel Veness, Marc G Bellemare, Alex Graves, Martin Riedmiller, Andreas K Fidjeland, Georg Ostrovski, et al. Human-level control through deep reinforcement learning. Nature, 518(7540):529, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20Volodymyr%20Kavukcuoglu%2C%20Koray%20Silver%2C%20David%20Rusu%2C%20Andrei%20A.%20Human-level%20control%20through%20deep%20reinforcement%20learning%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20Volodymyr%20Kavukcuoglu%2C%20Koray%20Silver%2C%20David%20Rusu%2C%20Andrei%20A.%20Human-level%20control%20through%20deep%20reinforcement%20learning%202015"
+        },
+        {
+            "id": "Silver_et+al_2016_a",
+            "entry": "David Silver, Aja Huang, Chris J Maddison, Arthur Guez, Laurent Sifre, George Van Den Driessche, Julian Schrittwieser, Ioannis Antonoglou, Veda Panneershelvam, Marc Lanctot, et al. Mastering the game of go with deep neural networks and tree search. nature, 529(7587):484\u2013489, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silver%2C%20David%20Huang%2C%20Aja%20Maddison%2C%20Chris%20J.%20Guez%2C%20Arthur%20Mastering%20the%20game%20of%20go%20with%20deep%20neural%20networks%20and%20tree%20search%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silver%2C%20David%20Huang%2C%20Aja%20Maddison%2C%20Chris%20J.%20Guez%2C%20Arthur%20Mastering%20the%20game%20of%20go%20with%20deep%20neural%20networks%20and%20tree%20search%202016"
+        },
+        {
+            "id": "Moravc_et+al_2017_a",
+            "entry": "Matej Moravc\u00edk, Martin Schmid, Neil Burch, Viliam Lisy, Dustin Morrill, Nolan Bard, Trevor Davis, Kevin Waugh, Michael Johanson, and Michael Bowling. Deepstack: Expert-level artificial intelligence in heads-up no-limit poker. Science, 356(6337):508\u2013513, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Moravc%C3%ADk%2C%20Matej%20Schmid%2C%20Martin%20Burch%2C%20Neil%20Lisy%2C%20Viliam%20Deepstack%3A%20Expert-level%20artificial%20intelligence%20in%20heads-up%20no-limit%20poker%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Moravc%C3%ADk%2C%20Matej%20Schmid%2C%20Martin%20Burch%2C%20Neil%20Lisy%2C%20Viliam%20Deepstack%3A%20Expert-level%20artificial%20intelligence%20in%20heads-up%20no-limit%20poker%202017"
+        },
+        {
+            "id": "Sutton_1998_a",
+            "entry": "Richard S Sutton and Andrew G Barto. Reinforcement learning: An introduction. MIT press, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20Richard%20S.%20Barto%2C%20Andrew%20G.%20Reinforcement%20learning%3A%20An%20introduction%201998"
+        },
+        {
+            "id": "Blundell_et+al_0000_a",
+            "entry": "Charles Blundell, Benigno Uria, Alexander Pritzel, Yazhe Li, Avraham Ruderman, Joel Z Leibo, Jack Rae, Daan Wierstra, and Demis Hassabis. Model-free episodic control. arXiv preprint arXiv:1606.04460, 2016a.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.04460"
+        },
+        {
+            "id": "Pritzel_et+al_2017_a",
+            "entry": "Alexander Pritzel, Benigno Uria, Sriram Srinivasan, Adri\u00e0 Puigdom\u00e8nech, Oriol Vinyals, Demis Hassabis, Daan Wierstra, and Charles Blundell. Neural episodic control. ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pritzel%2C%20Alexander%20Uria%2C%20Benigno%20Srinivasan%2C%20Sriram%20Puigdom%C3%A8nech%2C%20Adri%C3%A0%20Neural%20episodic%20control%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pritzel%2C%20Alexander%20Uria%2C%20Benigno%20Srinivasan%2C%20Sriram%20Puigdom%C3%A8nech%2C%20Adri%C3%A0%20Neural%20episodic%20control%202017"
+        },
+        {
+            "id": "Dayan_2008_a",
+            "entry": "Peter Dayan and Nathaniel D Daw. Decision theory, reinforcement learning, and the brain. Cognitive, Affective, & Behavioral Neuroscience, 8(4):429\u2013453, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dayan%2C%20Peter%20Daw%2C%20Nathaniel%20D.%20Decision%20theory%2C%20reinforcement%20learning%2C%20and%20the%20brain%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dayan%2C%20Peter%20Daw%2C%20Nathaniel%20D.%20Decision%20theory%2C%20reinforcement%20learning%2C%20and%20the%20brain%202008"
+        },
+        {
+            "id": "Gershman_2017_a",
+            "entry": "Samuel J Gershman and Nathaniel D Daw. Reinforcement learning and episodic memory in humans and animals: an integrative framework. Annual review of psychology, 68:101\u2013128, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gershman%2C%20Samuel%20J.%20Daw%2C%20Nathaniel%20D.%20Reinforcement%20learning%20and%20episodic%20memory%20in%20humans%20and%20animals%3A%20an%20integrative%20framework%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gershman%2C%20Samuel%20J.%20Daw%2C%20Nathaniel%20D.%20Reinforcement%20learning%20and%20episodic%20memory%20in%20humans%20and%20animals%3A%20an%20integrative%20framework%202017"
+        },
+        {
+            "id": "Silver_et+al_2008_a",
+            "entry": "David Silver, Richard S Sutton, and Martin M\u00fcller. Sample-based learning and search with permanent and transient memories. In Proceedings of the 25th international conference on Machine learning, pages 968\u2013975. ACM, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silver%2C%20David%20Sutton%2C%20Richard%20S.%20M%C3%BCller%2C%20Martin%20Sample-based%20learning%20and%20search%20with%20permanent%20and%20transient%20memories%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silver%2C%20David%20Sutton%2C%20Richard%20S.%20M%C3%BCller%2C%20Martin%20Sample-based%20learning%20and%20search%20with%20permanent%20and%20transient%20memories%202008"
+        },
+        {
+            "id": "Espeholt_et+al_2018_a",
+            "entry": "Lasse Espeholt, Hubert Soyer, Remi Munos, Karen Simonyan, Volodymir Mnih, Tom Ward, Yotam Doron, Vlad Firoiu, Tim Harley, Iain Dunning, et al. Impala: Scalable distributed deep-rl with importance weighted actor-learner architectures. arXiv preprint arXiv:1802.01561, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.01561"
+        },
+        {
+            "id": "Barth-Maron_et+al_2018_a",
+            "entry": "Gabriel Barth-Maron, Matthew W Hoffman, David Budden, Will Dabney, Dan Horgan, Alistair Muldal, Nicolas Heess, and Timothy Lillicrap. Distributed distributional deterministic policy gradients. arXiv preprint arXiv:1804.08617, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1804.08617"
+        },
+        {
+            "id": "Watkins_1992_a",
+            "entry": "Christopher JCH Watkins and Peter Dayan. Q-learning. Machine learning, 8(3-4):279\u2013292, 1992.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Christopher%20JCH%20Watkins%20and%20Peter%20Dayan%20Qlearning%20Machine%20learning%20834279292%201992",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Christopher%20JCH%20Watkins%20and%20Peter%20Dayan%20Qlearning%20Machine%20learning%20834279292%201992"
+        },
+        {
+            "id": "Ormoneit_2002_a",
+            "entry": "Dirk Ormoneit and Saunak Sen. Kernel-based reinforcement learning. Machine learning, 49(2-3): 161\u2013178, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ormoneit%2C%20Dirk%20Sen%2C%20Saunak%20Kernel-based%20reinforcement%20learning%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ormoneit%2C%20Dirk%20Sen%2C%20Saunak%20Kernel-based%20reinforcement%20learning%202002"
+        },
+        {
+            "id": "Bram_2003_a",
+            "entry": "Bram Bakker, Viktor Zhumatiy, Gabriel Gruener, and J\u00fcrgen Schmidhuber. A robot that reinforcementlearns to identify and memorize important previous observations. In Intelligent Robots and Systems, 2003.(IROS 2003). Proceedings. 2003 IEEE/RSJ International Conference on, volume 1, pages 430\u2013435. IEEE, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bram%20Bakker%2C%20Viktor%20Zhumatiy%2C%20Gabriel%20Gruener%20Schmidhuber%2C%20J%C3%BCrgen%20A%20robot%20that%20reinforcementlearns%20to%20identify%20and%20memorize%20important%20previous%20observations%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bram%20Bakker%2C%20Viktor%20Zhumatiy%2C%20Gabriel%20Gruener%20Schmidhuber%2C%20J%C3%BCrgen%20A%20robot%20that%20reinforcementlearns%20to%20identify%20and%20memorize%20important%20previous%20observations%202003"
+        },
+        {
+            "id": "Hausknecht_2015_a",
+            "entry": "Matthew Hausknecht and Peter Stone. Deep recurrent q-learning for partially observable mdps. arXiv preprint arXiv:1507.06527, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1507.06527"
+        },
+        {
+            "id": "Graves_et+al_2016_a",
+            "entry": "Alex Graves, Greg Wayne, Malcolm Reynolds, Tim Harley, Ivo Danihelka, Agnieszka GrabskaBarwinska, Sergio G\u00f3mez Colmenarejo, Edward Grefenstette, Tiago Ramalho, John Agapiou, et al. Hybrid computing using a neural network with dynamic external memory. Nature, 538(7626): 471\u2013476, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Graves%2C%20Alex%20Wayne%2C%20Greg%20Reynolds%2C%20Malcolm%20Harley%2C%20Tim%20Hybrid%20computing%20using%20a%20neural%20network%20with%20dynamic%20external%20memory%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Graves%2C%20Alex%20Wayne%2C%20Greg%20Reynolds%2C%20Malcolm%20Harley%2C%20Tim%20Hybrid%20computing%20using%20a%20neural%20network%20with%20dynamic%20external%20memory%202016"
+        },
+        {
+            "id": "Oh_et+al_2016_a",
+            "entry": "Junhyuk Oh, Valliappa Chockalingam, Honglak Lee, et al. Control of memory, active perception, and action in minecraft. In Proceedings of The 33rd International Conference on Machine Learning, pages 2790\u20132799, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Oh%2C%20Junhyuk%20Chockalingam%2C%20Valliappa%20Lee%2C%20Honglak%20Control%20of%20memory%2C%20active%20perception%2C%20and%20action%20in%20minecraft%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Oh%2C%20Junhyuk%20Chockalingam%2C%20Valliappa%20Lee%2C%20Honglak%20Control%20of%20memory%2C%20active%20perception%2C%20and%20action%20in%20minecraft%202016"
+        },
+        {
+            "id": "Wayne_et+al_2018_a",
+            "entry": "Greg Wayne, Chia-Chun Hung, David Amos, Mehdi Mirza, Arun Ahuja, Agnieszka GrabskaBarwinska, Jack Rae, Piotr Mirowski, Joel Z Leibo, Adam Santoro, et al. Unsupervised predictive memory in a goal-directed agent. arXiv preprint arXiv:1803.10760, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.10760"
+        },
+        {
+            "id": "Mnih_et+al_2016_a",
+            "entry": "Volodymyr Mnih, Adria Puigdomenech Badia, Mehdi Mirza, Alex Graves, Timothy P Lillicrap, Tim Harley, David Silver, and Koray Kavukcuoglu. Asynchronous methods for deep reinforcement learning. In International Conference on Machine Learning, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20Volodymyr%20Badia%2C%20Adria%20Puigdomenech%20Mirza%2C%20Mehdi%20Graves%2C%20Alex%20Asynchronous%20methods%20for%20deep%20reinforcement%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20Volodymyr%20Badia%2C%20Adria%20Puigdomenech%20Mirza%2C%20Mehdi%20Graves%2C%20Alex%20Asynchronous%20methods%20for%20deep%20reinforcement%20learning%202016"
+        },
+        {
+            "id": "Schaul_et+al_2015_a",
+            "entry": "Tom Schaul, John Quan, Ioannis Antonoglou, and David Silver. Prioritized experience replay. CoRR, abs/1511.05952, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.05952"
+        },
+        {
+            "id": "Santamar_et+al_1997_a",
+            "entry": "Juan C Santamar\u00eda, Richard S Sutton, and Ashwin Ram. Experiments with reinforcement learning in problems with continuous state and action spaces. Adaptive behavior, 6(2):163\u2013217, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Santamar%C3%ADa%2C%20Juan%20C.%20Sutton%2C%20Richard%20S.%20Ram%2C%20Ashwin%20Experiments%20with%20reinforcement%20learning%20in%20problems%20with%20continuous%20state%20and%20action%20spaces%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Santamar%C3%ADa%2C%20Juan%20C.%20Sutton%2C%20Richard%20S.%20Ram%2C%20Ashwin%20Experiments%20with%20reinforcement%20learning%20in%20problems%20with%20continuous%20state%20and%20action%20spaces%201997"
+        },
+        {
+            "id": "Munos_1998_a",
+            "entry": "Remi Munos and Andrew W Moore. Barycentric interpolators for continuous space and time reinforcement learning. In NIPS, pages 1024\u20131030, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Munos%2C%20Remi%20Moore%2C%20Andrew%20W.%20Barycentric%20interpolators%20for%20continuous%20space%20and%20time%20reinforcement%20learning%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Munos%2C%20Remi%20Moore%2C%20Andrew%20W.%20Barycentric%20interpolators%20for%20continuous%20space%20and%20time%20reinforcement%20learning%201998"
+        },
+        {
+            "id": "Blundell_et+al_0000_b",
+            "entry": "Charles Blundell, Benigno Uria, Alexander Pritzel, Yazhe Li, Avraham Ruderman, Joel Z Leibo, Jack Rae, Daan Wierstra, and Demis Hassabis. Model-free episodic control. arXiv preprint arXiv:1606.04460, 2016b.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.04460"
+        },
+        {
+            "id": "Nishio_2018_a",
+            "entry": "Daichi Nishio and Satoshi Yamane. Faster deep q-learning using neural episodic control. arXiv preprint arXiv:1801.01968, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1801.01968"
+        },
+        {
+            "id": "Jain_2018_a",
+            "entry": "Mika Sarkin Jain and Jack Lindsey. Semiparametric reinforcement learning. ICLR 2018 Workshop, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jain%2C%20Mika%20Sarkin%20Lindsey%2C%20Jack%20Semiparametric%20reinforcement%20learning%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jain%2C%20Mika%20Sarkin%20Lindsey%2C%20Jack%20Semiparametric%20reinforcement%20learning%202018"
+        },
+        {
+            "id": "Brea_2017_a",
+            "entry": "Johanni Brea. Is prioritized sweeping the better episodic control? arXiv preprint arXiv:1711.06677, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.06677"
+        },
+        {
+            "id": "Savinov_et+al_2018_a",
+            "entry": "Nikolay Savinov, Alexey Dosovitskiy, and Vladlen Koltun. Semi-parametric topological memory for navigation. arXiv preprint arXiv:1803.00653, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.00653"
+        },
+        {
+            "id": "Xiao_et+al_2018_a",
+            "entry": "Chenjun Xiao, Jincheng Mei, and Martin M\u00fcller. Memory-augmented monte carlo tree search. AAAI, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xiao%2C%20Chenjun%20Mei%2C%20Jincheng%20M%C3%BCller%2C%20Martin%20Memory-augmented%20monte%20carlo%20tree%20search%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xiao%2C%20Chenjun%20Mei%2C%20Jincheng%20M%C3%BCller%2C%20Martin%20Memory-augmented%20monte%20carlo%20tree%20search%202018"
+        },
+        {
+            "id": "Kaiser_et+al_2016_a",
+            "entry": "Lukasz Kaiser, Ofir Nachum, Aurko Roy, and Samy Bengio. Learning to remember rare events. 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kaiser%2C%20Lukasz%20Nachum%2C%20Ofir%20Roy%2C%20Aurko%20Bengio%2C%20Samy%20Learning%20to%20remember%20rare%20events%202016"
+        },
+        {
+            "id": "Grave_et+al_2016_a",
+            "entry": "Edouard Grave, Armand Joulin, and Nicolas Usunier. Improving neural language models with a continuous cache. arXiv preprint arXiv:1612.04426, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1612.04426"
+        },
+        {
+            "id": "Merity_et+al_2016_a",
+            "entry": "Stephen Merity, Caiming Xiong, James Bradbury, and Richard Socher. Pointer sentinel mixture models. arXiv preprint arXiv:1609.07843, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.07843"
+        },
+        {
+            "id": "Sprechmann_et+al_2018_a",
+            "entry": "Pablo Sprechmann, Siddhant M Jayakumar, Jack W Rae, Alexander Pritzel, Adri\u00e0 Puigdom\u00e8nech Badia, Benigno Uria, Oriol Vinyals, Demis Hassabis, Razvan Pascanu, and Charles Blundell. Memory-based parameter adaptation. ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sprechmann%2C%20Pablo%20Jayakumar%2C%20Siddhant%20M.%20Rae%2C%20Jack%20W.%20Pritzel%2C%20Alexander%20Demis%20Hassabis%2C%20Razvan%20Pascanu%2C%20and%20Charles%20Blundell.%20Memory-based%20parameter%20adaptation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sprechmann%2C%20Pablo%20Jayakumar%2C%20Siddhant%20M.%20Rae%2C%20Jack%20W.%20Pritzel%2C%20Alexander%20Demis%20Hassabis%2C%20Razvan%20Pascanu%2C%20and%20Charles%20Blundell.%20Memory-based%20parameter%20adaptation%202018"
+        },
+        {
+            "id": "Stepleton_2017_a",
+            "entry": "Tom Stepleton. The pycolab game engine. https://github.com/deepmind/pycolab/tree/master/pycolab, 2017.",
+            "url": "https://github.com/deepmind/pycolab/tree/master/pycolab"
+        },
+        {
+            "id": "Bellemare_et+al_2013_a",
+            "entry": "Marc G Bellemare, Yavar Naddaf, Joel Veness, and Michael Bowling. The arcade learning environment: An evaluation platform for general agents. J. Artif. Intell. Res.(JAIR), 47:253\u2013279, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bellemare%2C%20Marc%20G.%20Naddaf%2C%20Yavar%20Veness%2C%20Joel%20Bowling%2C%20Michael%20The%20arcade%20learning%20environment%3A%20An%20evaluation%20platform%20for%20general%20agents%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bellemare%2C%20Marc%20G.%20Naddaf%2C%20Yavar%20Veness%2C%20Joel%20Bowling%2C%20Michael%20The%20arcade%20learning%20environment%3A%20An%20evaluation%20platform%20for%20general%20agents%202013"
+        }
+    ]
+}

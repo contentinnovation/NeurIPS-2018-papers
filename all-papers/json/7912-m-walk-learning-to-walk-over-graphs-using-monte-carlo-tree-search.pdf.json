@@ -1,0 +1,322 @@
+{
+    "filename": "7912-m-walk-learning-to-walk-over-graphs-using-monte-carlo-tree-search.pdf",
+    "metadata": {
+        "title": "M-Walk: Learning to Walk over Graphs using Monte Carlo Tree Search",
+        "author": "Yelong Shen, Jianshu Chen, Po-Sen Huang, Yuqing Guo, Jianfeng Gao",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7912-m-walk-learning-to-walk-over-graphs-using-monte-carlo-tree-search.pdf"
+        },
+        "abstract": "Learning to walk over a graph towards a target node for a given query and a source node is an important problem in applications such as knowledge base completion (KBC). It can be formulated as a reinforcement learning (RL) problem with a known state transition model. To overcome the challenge of sparse rewards, we develop a graph-walking agent called M-Walk, which consists of a deep recurrent neural network (RNN) and Monte Carlo Tree Search (MCTS). The RNN encodes the state (i.e., history of the walked path) and maps it separately to a policy and Q-values. In order to effectively train the agent from sparse rewards, we combine MCTS with the neural policy to generate trajectories yielding more positive rewards. From these trajectories, the network is improved in an off-policy manner using Q-learning, which modifies the RNN policy via parameter sharing. Our proposed RL algorithm repeatedly applies this policy-improvement step to learn the model. At test time, MCTS is combined with the neural policy to predict the target node. Experimental results on several graph-walking benchmarks show that M-Walk is able to learn better policies than other RL-based methods, which are mainly based on policy gradients. M-Walk also outperforms traditional KBC baselines."
+    },
+    "keywords": [
+        {
+            "term": "MCTS",
+            "url": "https://en.wikipedia.org/wiki/MCTS"
+        },
+        {
+            "term": "Markov Decision Process",
+            "url": "https://en.wikipedia.org/wiki/Markov_Decision_Process"
+        },
+        {
+            "term": "mean reciprocal rank",
+            "url": "https://en.wikipedia.org/wiki/mean_reciprocal_rank"
+        },
+        {
+            "term": "mean average precision",
+            "url": "https://en.wikipedia.org/wiki/mean_average_precision"
+        },
+        {
+            "term": "knowledge graph",
+            "url": "https://en.wikipedia.org/wiki/knowledge_graph"
+        },
+        {
+            "term": "fully connected network",
+            "url": "https://en.wikipedia.org/wiki/fully_connected_network"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "recurrent neural network",
+            "url": "https://en.wikipedia.org/wiki/recurrent_neural_network"
+        }
+    ],
+    "highlights": [
+        "We consider the problem of learning to walk over a graph in order to find a target node for a given source node and a query",
+        "In knowledge base completion tasks, G is a given knowledge graph, N is a collection of entities, and E is a set of relations that connect the entities",
+        "We developed an reinforcement learning-agent (M-Walk) that learns to walk over a graph towards a desired target node for given input query and source nodes",
+        "To learn from sparse rewards, we propose a new reinforcement learning algorithm, which alternates between an Monte Carlo Tree Search trajectory-generation step and a policy-improvement step, to iteratively refine the policy",
+        "The learned networks are combined with Monte Carlo Tree Search to search for the target node",
+        "Experimental results on several benchmarks demonstrate that our method learns better policies than other baseline methods, including reinforcement learning-based and traditional methods on knowledge base completion tasks"
+    ],
+    "key_statements": [
+        "We consider the problem of learning to walk over a graph in order to find a target node for a given source node and a query",
+        "A knowledge graph is a structured representation of world knowledge in the form of entities and their relations (e.g., Figure 1(a)), and has a wide range of downstream applications such as question answering",
+        "In knowledge base completion tasks, G is a given knowledge graph, N is a collection of entities, and E is a set of relations that connect the entities",
+        "We formulate the graph-walking problem as a Markov Decision Process (MDP), which is defined by the tuple (S, A, R, P), where S is the set of states, A is the set of actions, R is the reward function, and P is the state transition probability",
+        "We develop a novel reinforcement learning algorithm that uses Monte Carlo Tree Search to exploit the deterministic",
+        "Action or the maximum search horizon has been reached, Monte Carlo Tree Search completes one simulation and updates W (s, a) and N (s, a) using V\u2713 = Q\u2713. (See Figure 3(a) for an example and Appendix B.1 for more details.) The key idea of our method is that running multiple Monte Carlo Tree Search simulations generates a set of trajectories with more positive rewards, which can be viewed as being generated by an improved policy \u21e1\u2713",
+        "We evaluate and analyze the effectiveness of M-Walk on a synthetic Three Glass Puzzle task and two real-world knowledge base completion tasks",
+        "We performed extensive experimental analysis to understand the proposed M-Walk algorithm, including (i) the contributions of different components, its ability to overcome sparse rewards, hyperparameter analysis, its strengths and weaknesses compared to traditional knowledge base completion methods, and (v) its running time",
+        "In Table 3, we show the running time of M-Walk and MINERVA (TensorFlowgpu) for both training and testing on WN18RR with different values of search horizon and number of rollouts",
+        "We developed an reinforcement learning-agent (M-Walk) that learns to walk over a graph towards a desired target node for given input query and source nodes",
+        "To learn from sparse rewards, we propose a new reinforcement learning algorithm, which alternates between an Monte Carlo Tree Search trajectory-generation step and a policy-improvement step, to iteratively refine the policy",
+        "The learned networks are combined with Monte Carlo Tree Search to search for the target node",
+        "Experimental results on several benchmarks demonstrate that our method learns better policies than other baseline methods, including reinforcement learning-based and traditional methods on knowledge base completion tasks"
+    ],
+    "summary": [
+        "We consider the problem of learning to walk over a graph in order to find a target node for a given source node and a query.",
+        "M-Walk uses a novel recurrent neural network (RNN) architecture to encode the entire history of the trajectory into a vector representation, which is further used to model the policy and the Q-function.",
+        "We formulate the graph-walking problem as a Markov Decision Process (MDP), which is defined by the tuple (S, A, R, P), where S is the set of states, A is the set of actions, R is the reward function, and P is the state transition probability.",
+        "(See Figure 3(a) for an example and Appendix B.1 for more details.) The key idea of our method is that running multiple MCTS simulations generates a set of trajectories with more positive rewards, which can be viewed as being generated by an improved policy \u21e1\u2713.",
+        "We performed extensive experimental analysis to understand the proposed M-Walk algorithm, including (i) the contributions of different components, its ability to overcome sparse rewards, hyperparameter analysis, its strengths and weaknesses compared to traditional KBC methods, and (v) its running time.",
+        "We observed that the novel neural architecture of M-Walk contributes an overall 1% gain relative to MINERVA on NELL995, and it is still 1% worse than M-Walk, which uses MCTS for training and testing.",
+        "To further understand the contribution of MCTS, we created another method, Q-Walk, which uses the same model architecture as M-Walk except that it is trained by Q-learning only without MCTS.",
+        "Compared to the policy gradient method (PGWalk), and Q-learning method (Q-Walk) methods under the same model architecture, M-Walk with MCTS is able to generate trajectories with more positive rewards, and this continues to improve as training progresses.",
+        "In Table 3, we show the running time of M-Walk and MINERVA (TensorFlowgpu) for both training and testing on WN18RR with different values of search horizon and number of rollouts.",
+        "The work [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>] uses a new policy iteration method that combines the neural policy and value functions with MCTS during training.",
+        "Recent works [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>, <a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>, <a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>, <a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>, <a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>] have proposed approaches for injecting multi-step paths such as random walks through sequences of triples during training, further improving performance on KBC tasks.",
+        "We proposed a novel neural architecture that encodes the state into a vector representation, and maps it to Q-values and a policy.",
+        "To learn from sparse rewards, we propose a new reinforcement learning algorithm, which alternates between an MCTS trajectory-generation step and a policy-improvement step, to iteratively refine the policy.",
+        "In future work, we intend to improve this method by reducing such out-of-candidate-set errors"
+    ],
+    "headline": "To overcome the challenge of sparse rewards, we develop a graph-walking agent called M-Walk, which consists of a deep recurrent neural network  and Monte Carlo Tree Search ",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Irwan Bello, Hieu Pham, Quoc V Le, Mohammad Norouzi, and Samy Bengio. Neural combinatorial optimization with reinforcement learning. arXiv preprint arXiv:1611.09940, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.09940"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Antoine Bordes, Nicolas Usunier, Alberto Garcia-Duran, Jason Weston, and Oksana Yakhnenko. Translating embeddings for modeling multi-relational data. In Proc. NIPS, pages 2787\u20132795, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bordes%2C%20Antoine%20Usunier%2C%20Nicolas%20Garcia-Duran%2C%20Alberto%20Weston%2C%20Jason%20Translating%20embeddings%20for%20modeling%20multi-relational%20data%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bordes%2C%20Antoine%20Usunier%2C%20Nicolas%20Garcia-Duran%2C%20Alberto%20Weston%2C%20Jason%20Translating%20embeddings%20for%20modeling%20multi-relational%20data%202013"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Jianshu Chen, Chong Wang, Lin Xiao, Ji He, Lihong Li, and Li Deng. Q-LDA: Uncovering latent patterns in text-based sequential decision processes. In Proc. NIPS, pages 4984\u20134993, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Jianshu%20Wang%2C%20Chong%20Xiao%2C%20Lin%20He%2C%20Ji%20Q-LDA%3A%20Uncovering%20latent%20patterns%20in%20text-based%20sequential%20decision%20processes%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Jianshu%20Wang%2C%20Chong%20Xiao%2C%20Lin%20He%2C%20Ji%20Q-LDA%3A%20Uncovering%20latent%20patterns%20in%20text-based%20sequential%20decision%20processes%202017"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Kyunghyun Cho, Bart Van Merri\u00ebnboer, Caglar Gulcehre, Dzmitry Bahdanau, Fethi Bougares, Holger Schwenk, and Yoshua Bengio. Learning phrase representations using rnn encoderdecoder for statistical machine translation. Proc. EMNLP, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cho%2C%20Kyunghyun%20Merri%C3%ABnboer%2C%20Bart%20Van%20Gulcehre%2C%20Caglar%20Bahdanau%2C%20Dzmitry%20Learning%20phrase%20representations%20using%20rnn%20encoderdecoder%20for%20statistical%20machine%20translation%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cho%2C%20Kyunghyun%20Merri%C3%ABnboer%2C%20Bart%20Van%20Gulcehre%2C%20Caglar%20Bahdanau%2C%20Dzmitry%20Learning%20phrase%20representations%20using%20rnn%20encoderdecoder%20for%20statistical%20machine%20translation%202014"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Rajarshi Das, Shehzaad Dhuliawala, Manzil Zaheer, Luke Vilnis, Ishan Durugkar, Akshay Krishnamurthy, Alexander J. Smola, and Andrew McCallum. Go for a walk and arrive at the answer: Reasoning over paths in knowledge bases using reinforcement learning. In Proc. ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Das%2C%20Rajarshi%20Dhuliawala%2C%20Shehzaad%20Zaheer%2C%20Manzil%20Vilnis%2C%20Luke%20Go%20for%20a%20walk%20and%20arrive%20at%20the%20answer%3A%20Reasoning%20over%20paths%20in%20knowledge%20bases%20using%20reinforcement%20learning%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Das%2C%20Rajarshi%20Dhuliawala%2C%20Shehzaad%20Zaheer%2C%20Manzil%20Vilnis%2C%20Luke%20Go%20for%20a%20walk%20and%20arrive%20at%20the%20answer%3A%20Reasoning%20over%20paths%20in%20knowledge%20bases%20using%20reinforcement%20learning%202018"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Tim Dettmers, Minervini Pasquale, Stenetorp Pontus, and Sebastian Riedel. Convolutional 2D knowledge graph embeddings. In Proc. AAAI, February 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dettmers%2C%20Tim%20Pasquale%2C%20Minervini%20Pontus%2C%20Stenetorp%20Riedel%2C%20Sebastian%20Convolutional%202D%20knowledge%20graph%20embeddings%202018-02",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dettmers%2C%20Tim%20Pasquale%2C%20Minervini%20Pontus%2C%20Stenetorp%20Riedel%2C%20Sebastian%20Convolutional%202D%20knowledge%20graph%20embeddings%202018-02"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Jianfeng Gao, Michel Galley, and Lihong Li. Neural approaches to conversational AI. arXiv preprint arXiv:1809.08267, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1809.08267"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Matt Gardner, Partha Pratim Talukdar, Jayant Krishnamurthy, and Tom Mitchell. Incorporating vector space similarity in random walk inference over knowledge bases. In EMNLP, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gardner%2C%20Matt%20Talukdar%2C%20Partha%20Pratim%20Krishnamurthy%2C%20Jayant%20Mitchell%2C%20Tom%20Incorporating%20vector%20space%20similarity%20in%20random%20walk%20inference%20over%20knowledge%20bases%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gardner%2C%20Matt%20Talukdar%2C%20Partha%20Pratim%20Krishnamurthy%2C%20Jayant%20Mitchell%2C%20Tom%20Incorporating%20vector%20space%20similarity%20in%20random%20walk%20inference%20over%20knowledge%20bases%202014"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Shixiang Gu, Timothy Lillicrap, Zoubin Ghahramani, Richard E Turner, and Sergey Levine. Q-prop: Sample-efficient policy gradient with an off-policy critic. In Proc. ICLR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gu%2C%20Shixiang%20Lillicrap%2C%20Timothy%20Ghahramani%2C%20Zoubin%20Turner%2C%20Richard%20E.%20Q-prop%3A%20Sample-efficient%20policy%20gradient%20with%20an%20off-policy%20critic%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gu%2C%20Shixiang%20Lillicrap%2C%20Timothy%20Ghahramani%2C%20Zoubin%20Turner%2C%20Richard%20E.%20Q-prop%3A%20Sample-efficient%20policy%20gradient%20with%20an%20off-policy%20critic%202016"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Kelvin Guu, John Miller, and Percy Liang. Traversing knowledge graphs in vector space. In Proc. EMNLP, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Guu%2C%20Kelvin%20Miller%2C%20John%20Liang%2C%20Percy%20Traversing%20knowledge%20graphs%20in%20vector%20space%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Guu%2C%20Kelvin%20Miller%2C%20John%20Liang%2C%20Percy%20Traversing%20knowledge%20graphs%20in%20vector%20space%202015"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Peter E Hart, Nils J Nilsson, and Bertram Raphael. A formal basis for the heuristic determination of minimum cost paths. IEEE Trans. Systems Science and Cybernetics, 4(2):100\u2013107, 1968.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hart%2C%20Peter%20E.%20Nilsson%2C%20Nils%20J.%20Raphael%2C%20Bertram%20A%20formal%20basis%20for%20the%20heuristic%20determination%20of%20minimum%20cost%20paths%201968",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hart%2C%20Peter%20E.%20Nilsson%2C%20Nils%20J.%20Raphael%2C%20Bertram%20A%20formal%20basis%20for%20the%20heuristic%20determination%20of%20minimum%20cost%20paths%201968"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Matthew J. Hausknecht and Peter Stone. Deep recurrent Q-learning for partially observable MDPs. CoRR, abs/1507.06527, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1507.06527"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Ji He, Jianshu Chen, Xiaodong He, Jianfeng Gao, Lihong Li, Li Deng, and Mari Ostendorf. Deep reinforcement learning with a natural language action space. In Proc. ACL, pages 1621\u20131630, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Ji%20Chen%2C%20Jianshu%20He%2C%20Xiaodong%20Gao%2C%20Jianfeng%20Deep%20reinforcement%20learning%20with%20a%20natural%20language%20action%20space%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Ji%20Chen%2C%20Jianshu%20He%2C%20Xiaodong%20Gao%2C%20Jianfeng%20Deep%20reinforcement%20learning%20with%20a%20natural%20language%20action%20space%202016"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Sham M Kakade. A natural policy gradient. In Proc. NIPS, pages 1531\u20131538, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kakade%2C%20Sham%20M.%20A%20natural%20policy%20gradient%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kakade%2C%20Sham%20M.%20A%20natural%20policy%20gradient%202002"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Yankai Lin, Zhiyuan Liu, Huanbo Luan, Maosong Sun, Siwei Rao, and Song Liu. Modeling relation paths for representation learning of knowledge bases. In EMNLP, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20Yankai%20Liu%2C%20Zhiyuan%20Luan%2C%20Huanbo%20Sun%2C%20Maosong%20Modeling%20relation%20paths%20for%20representation%20learning%20of%20knowledge%20bases%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lin%2C%20Yankai%20Liu%2C%20Zhiyuan%20Luan%2C%20Huanbo%20Sun%2C%20Maosong%20Modeling%20relation%20paths%20for%20representation%20learning%20of%20knowledge%20bases%202015"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Yankai Lin, Zhiyuan Liu, Maosong Sun, Yang Liu, and Xuan Zhu. Learning entity and relation embeddings for knowledge graph completion. In AAAI, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20Yankai%20Liu%2C%20Zhiyuan%20Sun%2C%20Maosong%20Liu%2C%20Yang%20Learning%20entity%20and%20relation%20embeddings%20for%20knowledge%20graph%20completion%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lin%2C%20Yankai%20Liu%2C%20Zhiyuan%20Sun%2C%20Maosong%20Liu%2C%20Yang%20Learning%20entity%20and%20relation%20embeddings%20for%20knowledge%20graph%20completion%202015"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei A Rusu, Joel Veness, Marc G Bellemare, Alex Graves, Martin Riedmiller, Andreas K Fidjeland, Georg Ostrovski, et al. Human-level control through deep reinforcement learning. Nature, 518(7540):529, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20Volodymyr%20Kavukcuoglu%2C%20Koray%20Silver%2C%20David%20Rusu%2C%20Andrei%20A.%20Human-level%20control%20through%20deep%20reinforcement%20learning%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20Volodymyr%20Kavukcuoglu%2C%20Koray%20Silver%2C%20David%20Rusu%2C%20Andrei%20A.%20Human-level%20control%20through%20deep%20reinforcement%20learning%202015"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Arvind Neelakantan, Benjamin Roth, and Andrew McCallum. Compositional vector space models for knowledge base completion. In Proc. AAAI, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Neelakantan%2C%20Arvind%20Roth%2C%20Benjamin%20McCallum%2C%20Andrew%20Compositional%20vector%20space%20models%20for%20knowledge%20base%20completion%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Neelakantan%2C%20Arvind%20Roth%2C%20Benjamin%20McCallum%2C%20Andrew%20Compositional%20vector%20space%20models%20for%20knowledge%20base%20completion%202015"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Maximilian Nickel, Volker Tresp, and Hans-Peter Kriegel. A three-way model for collective learning on multi-relational data. In Proc. ICML, pages 809\u2013816, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nickel%2C%20Maximilian%20Tresp%2C%20Volker%20Kriegel%2C%20Hans-Peter%20A%20three-way%20model%20for%20collective%20learning%20on%20multi-relational%20data%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nickel%2C%20Maximilian%20Tresp%2C%20Volker%20Kriegel%2C%20Hans-Peter%20A%20three-way%20model%20for%20collective%20learning%20on%20multi-relational%20data%202011"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Oystein Ore. Graphs and Their Uses, volume 34. Cambridge University Press, 1990.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ore%2C%20Oystein%20Graphs%20and%20Their%20Uses%2C%20volume%2034%201990"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Christopher D. Rosin. Multi-armed bandits with episode context. Annals of Mathematics and Artificial Intelligence, 61(3):203\u2013230, Mar 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rosin%2C%20Christopher%20D.%20Multi-armed%20bandits%20with%20episode%20context%202011-03",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rosin%2C%20Christopher%20D.%20Multi-armed%20bandits%20with%20episode%20context%202011-03"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Yelong Shen, Jianshu Chen, Po-Sen Huang, Yuqing Guo, and Jianfeng Gao. ReinforceWalk: Learning to walk in graph with Monte Carlo tree search. In ICLR workshop, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shen%2C%20Yelong%20Chen%2C%20Jianshu%20Huang%2C%20Po-Sen%20Guo%2C%20Yuqing%20ReinforceWalk%3A%20Learning%20to%20walk%20in%20graph%20with%20Monte%20Carlo%20tree%20search%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shen%2C%20Yelong%20Chen%2C%20Jianshu%20Huang%2C%20Po-Sen%20Guo%2C%20Yuqing%20ReinforceWalk%3A%20Learning%20to%20walk%20in%20graph%20with%20Monte%20Carlo%20tree%20search%202018"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Yelong Shen, Po-Sen Huang, Ming-Wei Chang, and Jianfeng Gao. Modeling large-scale structured relationships with shared memory for knowledge base completion. In Proceedings of the 2nd Workshop on Representation Learning for NLP, pages 57\u201368, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shen%2C%20Yelong%20Huang%2C%20Po-Sen%20Chang%2C%20Ming-Wei%20Gao%2C%20Jianfeng%20Modeling%20large-scale%20structured%20relationships%20with%20shared%20memory%20for%20knowledge%20base%20completion%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shen%2C%20Yelong%20Huang%2C%20Po-Sen%20Chang%2C%20Ming-Wei%20Gao%2C%20Jianfeng%20Modeling%20large-scale%20structured%20relationships%20with%20shared%20memory%20for%20knowledge%20base%20completion%202017"
+        },
+        {
+            "id": "24",
+            "entry": "[24] David Silver, Aja Huang, Chris J Maddison, Arthur Guez, Laurent Sifre, George Van Den Driessche, Julian Schrittwieser, Ioannis Antonoglou, Veda Panneershelvam, Marc Lanctot, et al. Mastering the game of Go with deep neural networks and tree search. Nature, 529(7587):484\u2013489, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silver%2C%20David%20Huang%2C%20Aja%20Maddison%2C%20Chris%20J.%20Guez%2C%20Arthur%20Mastering%20the%20game%20of%20Go%20with%20deep%20neural%20networks%20and%20tree%20search%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silver%2C%20David%20Huang%2C%20Aja%20Maddison%2C%20Chris%20J.%20Guez%2C%20Arthur%20Mastering%20the%20game%20of%20Go%20with%20deep%20neural%20networks%20and%20tree%20search%202016"
+        },
+        {
+            "id": "25",
+            "entry": "[25] David Silver, Julian Schrittwieser, Karen Simonyan, Ioannis Antonoglou, Aja Huang, Arthur Guez, Thomas Hubert, Lucas Baker, Matthew Lai, Adrian Bolton, et al. Mastering the game of Go without human knowledge. Nature, 550(7676):354, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silver%2C%20David%20Schrittwieser%2C%20Julian%20Simonyan%2C%20Karen%20Antonoglou%2C%20Ioannis%20Mastering%20the%20game%20of%20Go%20without%20human%20knowledge%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silver%2C%20David%20Schrittwieser%2C%20Julian%20Simonyan%2C%20Karen%20Antonoglou%2C%20Ioannis%20Mastering%20the%20game%20of%20Go%20without%20human%20knowledge%202017"
+        },
+        {
+            "id": "26",
+            "entry": "[26] David Silver, Hado van Hasselt, Matteo Hessel, Tom Schaul, Arthur Guez, Tim Harley, Gabriel Dulac-Arnold, David Reichert, Neil Rabinowitz, Andre Barreto, and Thomas Degris. The predictron: End-to-end learning and planning. In Proc. ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silver%2C%20David%20van%20Hasselt%2C%20Hado%20Hessel%2C%20Matteo%20Schaul%2C%20Tom%20The%20predictron%3A%20End-to-end%20learning%20and%20planning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silver%2C%20David%20van%20Hasselt%2C%20Hado%20Hessel%2C%20Matteo%20Schaul%2C%20Tom%20The%20predictron%3A%20End-to-end%20learning%20and%20planning%202017"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Richard S Sutton and Andrew G Barto. Reinforcement Learning: An Introduction, volume 1. MIT press Cambridge, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20Richard%20S.%20Barto%2C%20Andrew%20G.%20Reinforcement%20Learning%3A%20An%20Introduction%2C%20volume%201%201998"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Richard S Sutton, David A McAllester, Satinder P Singh, and Yishay Mansour. Policy gradient methods for reinforcement learning with function approximation. In Proc. NIPS, pages 1057\u2013 1063, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20Richard%20S.%20McAllester%2C%20David%20A.%20Singh%2C%20Satinder%20P.%20Mansour%2C%20Yishay%20Policy%20gradient%20methods%20for%20reinforcement%20learning%20with%20function%20approximation%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutton%2C%20Richard%20S.%20McAllester%2C%20David%20A.%20Singh%2C%20Satinder%20P.%20Mansour%2C%20Yishay%20Policy%20gradient%20methods%20for%20reinforcement%20learning%20with%20function%20approximation%202000"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Kristina Toutanova and Danqi Chen. Observed versus latent features for knowledge base and text inference. In Proceedings of the 3rd Workshop on Continuous Vector Space Models and their Compositionality, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Toutanova%2C%20Kristina%20Chen%2C%20Danqi%20Observed%20versus%20latent%20features%20for%20knowledge%20base%20and%20text%20inference%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Toutanova%2C%20Kristina%20Chen%2C%20Danqi%20Observed%20versus%20latent%20features%20for%20knowledge%20base%20and%20text%20inference%202015"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Kristina Toutanova, Xi Victoria Lin, Scott Wen tau Yih, Hoifung Poon, and Chris Quirk. Compositional learning of embeddings for relation paths in knowledge bases and text. In Proc. ACL, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Toutanova%2C%20Kristina%20Lin%2C%20Xi%20Victoria%20tau%20Yih%2C%20Scott%20Wen%20Poon%2C%20Hoifung%20Compositional%20learning%20of%20embeddings%20for%20relation%20paths%20in%20knowledge%20bases%20and%20text%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Toutanova%2C%20Kristina%20Lin%2C%20Xi%20Victoria%20tau%20Yih%2C%20Scott%20Wen%20Poon%2C%20Hoifung%20Compositional%20learning%20of%20embeddings%20for%20relation%20paths%20in%20knowledge%20bases%20and%20text%202016"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Th\u00e9o Trouillon, Christopher R Dance, Johannes Welbl, Sebastian Riedel, \u00c9ric Gaussier, and Guillaume Bouchard. Knowledge graph completion via complex tensor factorization. Journal of Machine Learning Research, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Trouillon%2C%20Th%C3%A9o%20Dance%2C%20Christopher%20R.%20Welbl%2C%20Johannes%20Riedel%2C%20Sebastian%20Knowledge%20graph%20completion%20via%20complex%20tensor%20factorization%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Trouillon%2C%20Th%C3%A9o%20Dance%2C%20Christopher%20R.%20Welbl%2C%20Johannes%20Riedel%2C%20Sebastian%20Knowledge%20graph%20completion%20via%20complex%20tensor%20factorization%202017"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Th\u00e9o Trouillon, Johannes Welbl, Sebastian Riedel, \u00c9ric Gaussier, and Guillaume Bouchard. Complex embeddings for simple link prediction. In Proc. ICML, pages 2071\u20132080, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Trouillon%2C%20Th%C3%A9o%20Welbl%2C%20Johannes%20Riedel%2C%20Sebastian%20Gaussier%2C%20%C3%89ric%20Complex%20embeddings%20for%20simple%20link%20prediction%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Trouillon%2C%20Th%C3%A9o%20Welbl%2C%20Johannes%20Riedel%2C%20Sebastian%20Gaussier%2C%20%C3%89ric%20Complex%20embeddings%20for%20simple%20link%20prediction%202016"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Oriol Vinyals, Meire Fortunato, and Navdeep Jaitly. Pointer networks. In Proc. NIPS, pages 2692\u20132700, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vinyals%2C%20Oriol%20Fortunato%2C%20Meire%20Jaitly%2C%20Navdeep%20Pointer%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vinyals%2C%20Oriol%20Fortunato%2C%20Meire%20Jaitly%2C%20Navdeep%20Pointer%20networks%202015"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Theophane Weber, S\u00e9bastien Racani\u00e8re, David P. Reichert, Lars Buesing, Arthur Guez, Danilo Jimenez Rezende, Adri\u00e0 Puigdom\u00e8nech Badia, Oriol Vinyals, Nicolas Heess, Yujia Li, Razvan Pascanu, Peter Battaglia, David Silver, and Daan Wierstra. Imagination-augmented agents for deep reinforcement learning. In Proc. NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Weber%2C%20Theophane%20Racani%C3%A8re%2C%20S%C3%A9bastien%20Reichert%2C%20David%20P.%20Buesing%2C%20Lars%20Imagination-augmented%20agents%20for%20deep%20reinforcement%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Weber%2C%20Theophane%20Racani%C3%A8re%2C%20S%C3%A9bastien%20Reichert%2C%20David%20P.%20Buesing%2C%20Lars%20Imagination-augmented%20agents%20for%20deep%20reinforcement%20learning%202017"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Daan Wierstra, Alexander F\u00f6rster, Jan Peters, and J\u00fcrgen Schmidhuber. Recurrent policy gradients. Logic Journal of the IGPL, 18(5):620\u2013634, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Daan%20Wierstra%2C%20Alexander%20F%C3%B6rster%2C%20Jan%20Peters%20Schmidhuber%2C%20J%C3%BCrgen%20Recurrent%20policy%20gradients%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Daan%20Wierstra%2C%20Alexander%20F%C3%B6rster%2C%20Jan%20Peters%20Schmidhuber%2C%20J%C3%BCrgen%20Recurrent%20policy%20gradients%202010"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Ronald J Williams. Simple statistical gradient-following algorithms for connectionist reinforcement learning. In Reinforcement Learning, pages 5\u201332.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%2C%20Ronald%20J.%20Simple%20statistical%20gradient-following%20algorithms%20for%20connectionist%20reinforcement%20learning",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Williams%2C%20Ronald%20J.%20Simple%20statistical%20gradient-following%20algorithms%20for%20connectionist%20reinforcement%20learning"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Yuhuai Wu, Elman Mansimov, Roger B Grosse, Shun Liao, and Jimmy Ba. Scalable trust-region method for deep reinforcement learning using kronecker-factored approximation. In Proc. NIPS, pages 5285\u20135294, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20Yuhuai%20Mansimov%2C%20Elman%20Grosse%2C%20Roger%20B.%20Liao%2C%20Shun%20Scalable%20trust-region%20method%20for%20deep%20reinforcement%20learning%20using%20kronecker-factored%20approximation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20Yuhuai%20Mansimov%2C%20Elman%20Grosse%2C%20Roger%20B.%20Liao%2C%20Shun%20Scalable%20trust-region%20method%20for%20deep%20reinforcement%20learning%20using%20kronecker-factored%20approximation%202017"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Wenhan Xiong, Thien Hoang, and William Yang Wang. DeepPath: A reinforcement learning method for knowledge graph reasoning. In Proc. EMNLP, pages 575\u2013584, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xiong%2C%20Wenhan%20Hoang%2C%20Thien%20Wang%2C%20William%20Yang%20DeepPath%3A%20A%20reinforcement%20learning%20method%20for%20knowledge%20graph%20reasoning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xiong%2C%20Wenhan%20Hoang%2C%20Thien%20Wang%2C%20William%20Yang%20DeepPath%3A%20A%20reinforcement%20learning%20method%20for%20knowledge%20graph%20reasoning%202017"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Bishan Yang, Wen-tau Yih, Xiaodong He, Jianfeng Gao, and Li Deng. Embedding entities and relations for learning and inference in knowledge bases. In ICLR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yang%2C%20Bishan%20Yih%2C%20Wen-tau%20He%2C%20Xiaodong%20Gao%2C%20Jianfeng%20Embedding%20entities%20and%20relations%20for%20learning%20and%20inference%20in%20knowledge%20bases%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yang%2C%20Bishan%20Yih%2C%20Wen-tau%20He%2C%20Xiaodong%20Gao%2C%20Jianfeng%20Embedding%20entities%20and%20relations%20for%20learning%20and%20inference%20in%20knowledge%20bases%202015"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Fan Yang, Zhilin Yang, and William W Cohen. Differentiable learning of logical rules for knowledge base reasoning. In Proc. NIPS, pages 2316\u20132325, 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yang%2C%20Fan%20Yang%2C%20Zhilin%20Cohen%2C%20William%20W.%20Differentiable%20learning%20of%20logical%20rules%20for%20knowledge%20base%20reasoning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yang%2C%20Fan%20Yang%2C%20Zhilin%20Cohen%2C%20William%20W.%20Differentiable%20learning%20of%20logical%20rules%20for%20knowledge%20base%20reasoning%202017"
+        }
+    ]
+}

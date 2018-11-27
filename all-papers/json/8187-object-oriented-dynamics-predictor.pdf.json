@@ -1,0 +1,324 @@
+{
+    "filename": "8187-object-oriented-dynamics-predictor.pdf",
+    "metadata": {
+        "title": "Object-Oriented Dynamics Predictor",
+        "author": "Guangxiang Zhu, Zhiao Huang, Chongjie Zhang",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8187-object-oriented-dynamics-predictor.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Generalization has been one of the major challenges for learning dynamics models in model-based reinforcement learning. However, previous work on actionconditioned dynamics prediction focuses on learning the pixel-level motion and thus does not generalize well to novel environments with different object layouts. In this paper, we present a novel object-oriented framework, called object-oriented dynamics predictor (OODP), which decomposes the environment into objects and predicts the dynamics of objects conditioned on both actions and object-to-object relations. It is an end-to-end neural network and can be trained in an unsupervised manner. To enable the generalization ability of dynamics learning, we design a novel CNN-based relation mechanism that is class-specific (rather than objectspecific) and exploits the locality principle. Empirical results show that OODP significantly outperforms previous methods in terms of generalization over novel environments with various object layouts. OODP is able to learn from very few environments and accurately predict dynamics in a large number of unseen environments. In addition, OODP learns semantically and visually interpretable dynamics models."
+    },
+    "keywords": [
+        {
+            "term": "dynamic model",
+            "url": "https://en.wikipedia.org/wiki/dynamic_model"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "These models focus on learning pixel-level motions and their learned dynamics models does not generalize well to novel environments with different object layouts",
+        "We develop a novel object-oriented framework, called object-oriented dynamics predictor (OODP)",
+        "To enable the generalization ability over object layouts for dynamics learning, we develop a novel unsupervised end-to-end neural network framework, called Object-Oriented Dynamics Predictor (OODP)",
+        "Each object mask has its own dynamics learner, which forces Object Detector to act as a detector for the object of interest and as a classifier for distinguishing which kind of object has a specific effect on dynamics",
+        "One stream carries the pixels of dynamic objects which can be obtained by transforming the masked pixels of dynamic objects from the current frame",
+        "We present an object-oriented end-to-end neural network framework"
+    ],
+    "key_statements": [
+        "These models focus on learning pixel-level motions and their learned dynamics models does not generalize well to novel environments with different object layouts",
+        "We develop a novel object-oriented framework, called object-oriented dynamics predictor (OODP)",
+        "Object-Oriented Dynamics Predictor is able to learn from very few environments and accurately predict the dynamics of objects in a large number of unseen environments",
+        "To enable the generalization ability over object layouts for dynamics learning, we develop a novel unsupervised end-to-end neural network framework, called Object-Oriented Dynamics Predictor (OODP)",
+        "Each object mask has its own dynamics learner, which forces Object Detector to act as a detector for the object of interest and as a classifier for distinguishing which kind of object has a specific effect on dynamics",
+        "To reduce the uncertainty of the affiliation of each pixel I(u, v) and encourage the object masks to obtain more discrete attention distributions, we introduce a pixel-wise entropy loss to limit the entropy of the object masks, which is defined as, nO",
+        "In order to improve the computational efficiency and generalization ability, the Dynamics Net architecture incorporates a tailor module to exploit the locality principle and employs CNNs to learn the effects of object-to-object relations on the motions of dynamic objects",
+        "We describe the cropping process of the tailor module, which crops the object masks near to the dynamic object Dj",
+        "Background Extractor takes the current frame I(t) \u2208 RH\u00d7W \u00d73 as input and produces the background image Ib \u2208 RH\u00d7W \u00d73, whose pixels remain unchanged over times",
+        "One stream carries the pixels of dynamic objects which can be obtained by transforming the masked pixels of dynamic objects from the current frame",
+        "To interpret the intermediate representations learned by Object-Oriented Dynamics Predictor, we illustrate its object masks in unseen environments, as shown in Figure 5",
+        "To interpret the learned object dynamics behind frame prediction, we evaluate the root-mean-square errors (RMSEs) between the predicted and ground-truth motions",
+        "As shown in Figure 5, Object-Oriented Dynamics Predictor learns to decompose a novel scene into understandable objects and can reuse object-level knowledge acquired from training environments to predict the effects of actions.\n4.4",
+        "To demonstrate the robustness to object appearances, we evaluate the generalization performance of Object-Oriented Dynamics Predictor in testing environments including objects with appearance differences from those in training environments, as shown in Figure 6",
+        "We present an object-oriented end-to-end neural network framework"
+    ],
+    "summary": [
+        "These models focus on learning pixel-level motions and their learned dynamics models does not generalize well to novel environments with different object layouts.",
+        "OODP learns semantically and visually interpretable dynamics models, and demonstrates robustness to some changes of object appearance.",
+        "While approaches from object localization [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>] or disentangled representations learning [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>, <a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>] have been proposed for identifying objects, unlike our model, they cannot perform action-conditioned relational reasoning to enable generalized dynamics learning.",
+        "To enable the generalization ability over object layouts for dynamics learning, we develop a novel unsupervised end-to-end neural network framework, called Object-Oriented Dynamics Predictor (OODP).",
+        "In order to improve the computational efficiency and generalization ability, the Dynamics Net architecture incorporates a tailor module to exploit the locality principle and employs CNNs to learn the effects of object-to-object relations on the motions of dynamic objects.",
+        "We evaluate all models in k-to-m generalization problems (Figure 4), where they learn dynamics with k different training environments and are evaluated in m different unseen testing environments with different object layouts.",
+        "Truly achieving generalization to new scenes requires learners\u2019 full understanding of the object-level abstraction, object relationships and dynamics mechanism behind the images, which is quite different from the conventional video prediction task and crucially challenging for the existing learning models.",
+        "To demonstrate the generalization ability, we evaluate the prediction accuracy of the learned dynamics model in unseen environments with novel object layouts without re-training.",
+        "Unlike previous video prediction frameworks [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>, <a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>, <a class=\"ref-link\" id=\"c39\" href=\"#r39\">39</a>, <a class=\"ref-link\" id=\"c40\" href=\"#r40\">40</a>, <a class=\"ref-link\" id=\"c41\" href=\"#r41\">41</a>, <a class=\"ref-link\" id=\"c42\" href=\"#r42\">42</a>, <a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>], most of which use neural networks with uninterpretable hidden layers, our model has informative and meaningful intermediate layers containing the object-level representations and dynamics.",
+        "To interpret the intermediate representations learned by OODP, we illustrate its object masks in unseen environments, as shown in Figure 5.",
+        "As shown in Figure 5, OODP learns to decompose a novel scene into understandable objects and can reuse object-level knowledge acquired from training environments to predict the effects of actions.",
+        "As shown in Table 3, OODP provides still high prediction performance in all these testing environments, which indicates that it can still generalize to novel object layouts even when the object appearances have some differences.",
+        "As shown in Figure 7 and Table 4, in unseen environments, our learned object masks successfully capture the key objects and our model significantly outperforms other methods in terms of dynamics prediction."
+    ],
+    "headline": "We present a novel object-oriented framework, called object-oriented dynamics predictor , which decomposes the environment into objects and predicts the dynamics of objects conditioned on both actions and object-to-object relations",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei A Rusu, Joel Veness, Marc G Bellemare, Alex Graves, Martin Riedmiller, Andreas K Fidjeland, Georg Ostrovski, et al. Human-level control through deep reinforcement learning. Nature, 518(7540):529, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20Volodymyr%20Kavukcuoglu%2C%20Koray%20Silver%2C%20David%20Rusu%2C%20Andrei%20A.%20Human-level%20control%20through%20deep%20reinforcement%20learning%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20Volodymyr%20Kavukcuoglu%2C%20Koray%20Silver%2C%20David%20Rusu%2C%20Andrei%20A.%20Human-level%20control%20through%20deep%20reinforcement%20learning%202015"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Timothy P Lillicrap, Jonathan J Hunt, Alexander Pritzel, Nicolas Heess, Tom Erez, Yuval Tassa, David Silver, and Daan Wierstra. Continuous control with deep reinforcement learning. International Conference on Learning Representations, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lillicrap%2C%20Timothy%20P.%20Hunt%2C%20Jonathan%20J.%20Pritzel%2C%20Alexander%20Heess%2C%20Nicolas%20Continuous%20control%20with%20deep%20reinforcement%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lillicrap%2C%20Timothy%20P.%20Hunt%2C%20Jonathan%20J.%20Pritzel%2C%20Alexander%20Heess%2C%20Nicolas%20Continuous%20control%20with%20deep%20reinforcement%20learning%202016"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Volodymyr Mnih, Adria Puigdomenech Badia, Mehdi Mirza, Alex Graves, Timothy Lillicrap, Tim Harley, David Silver, and Koray Kavukcuoglu. Asynchronous methods for deep reinforcement learning. In International Conference on Machine Learning, pages 1928\u20131937, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20Volodymyr%20Badia%2C%20Adria%20Puigdomenech%20Mirza%2C%20Mehdi%20Graves%2C%20Alex%20Asynchronous%20methods%20for%20deep%20reinforcement%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20Volodymyr%20Badia%2C%20Adria%20Puigdomenech%20Mirza%2C%20Mehdi%20Graves%2C%20Alex%20Asynchronous%20methods%20for%20deep%20reinforcement%20learning%202016"
+        },
+        {
+            "id": "4",
+            "entry": "[4] John Schulman, Sergey Levine, Pieter Abbeel, Michael Jordan, and Philipp Moritz. Trust region policy optimization. In International Conference on Machine Learning, pages 1889\u20131897, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schulman%2C%20John%20Levine%2C%20Sergey%20Abbeel%2C%20Pieter%20Jordan%2C%20Michael%20Trust%20region%20policy%20optimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schulman%2C%20John%20Levine%2C%20Sergey%20Abbeel%2C%20Pieter%20Jordan%2C%20Michael%20Trust%20region%20policy%20optimization%202015"
+        },
+        {
+            "id": "5",
+            "entry": "[5] John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov. Proximal policy optimization algorithms. arXiv preprint arXiv:1707.06347, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.06347"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Sergey Levine and Vladlen Koltun. Guided policy search. In International Conference on Machine Learning, pages 1\u20139, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Levine%2C%20Sergey%20Koltun%2C%20Vladlen%20Guided%20policy%20search%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Levine%2C%20Sergey%20Koltun%2C%20Vladlen%20Guided%20policy%20search%202013"
+        },
+        {
+            "id": "7",
+            "entry": "[7] S\u00e9bastien Racani\u00e8re, Th\u00e9ophane Weber, David Reichert, Lars Buesing, Arthur Guez, Danilo Jimenez Rezende, Adri\u00e0 Puigdom\u00e8nech Badia, Oriol Vinyals, Nicolas Heess, Yujia Li, et al. Imagination-augmented agents for deep reinforcement learning. In Advances in Neural Information Processing Systems, pages 5694\u20135705, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Racani%C3%A8re%2C%20S%C3%A9bastien%20Weber%2C%20Th%C3%A9ophane%20Reichert%2C%20David%20Buesing%2C%20Lars%20Imagination-augmented%20agents%20for%20deep%20reinforcement%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Racani%C3%A8re%2C%20S%C3%A9bastien%20Weber%2C%20Th%C3%A9ophane%20Reichert%2C%20David%20Buesing%2C%20Lars%20Imagination-augmented%20agents%20for%20deep%20reinforcement%20learning%202017"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Silvia Chiappa, S\u00e9bastien Racaniere, Daan Wierstra, and Shakir Mohamed. Recurrent environment simulators. International Conference on Learning Representations, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chiappa%2C%20Silvia%20Racaniere%2C%20S%C3%A9bastien%20Wierstra%2C%20Daan%20Mohamed%2C%20Shakir%20Recurrent%20environment%20simulators%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chiappa%2C%20Silvia%20Racaniere%2C%20S%C3%A9bastien%20Wierstra%2C%20Daan%20Mohamed%2C%20Shakir%20Recurrent%20environment%20simulators%202017"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Chelsea Finn and Sergey Levine. Deep visual foresight for planning robot motion. In Robotics and Automation (ICRA), 2017 IEEE International Conference on, pages 2786\u20132793. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Finn%2C%20Chelsea%20Levine%2C%20Sergey%20Deep%20visual%20foresight%20for%20planning%20robot%20motion%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Finn%2C%20Chelsea%20Levine%2C%20Sergey%20Deep%20visual%20foresight%20for%20planning%20robot%20motion%202017"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Junhyuk Oh, Xiaoxiao Guo, Honglak Lee, Richard L Lewis, and Satinder Singh. Actionconditional video prediction using deep networks in atari games. In Advances in Neural Information Processing Systems, pages 2863\u20132871, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Oh%2C%20Junhyuk%20Guo%2C%20Xiaoxiao%20Lee%2C%20Honglak%20Lewis%2C%20Richard%20L.%20Actionconditional%20video%20prediction%20using%20deep%20networks%20in%20atari%20games%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Oh%2C%20Junhyuk%20Guo%2C%20Xiaoxiao%20Lee%2C%20Honglak%20Lewis%2C%20Richard%20L.%20Actionconditional%20video%20prediction%20using%20deep%20networks%20in%20atari%20games%202015"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Manuel Watter, Jost Springenberg, Joschka Boedecker, and Martin Riedmiller. Embed to control: A locally linear latent dynamics model for control from raw images. In Advances in neural information processing systems, pages 2746\u20132754, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Watter%2C%20Manuel%20Springenberg%2C%20Jost%20Boedecker%2C%20Joschka%20Riedmiller%2C%20Martin%20Embed%20to%20control%3A%20A%20locally%20linear%20latent%20dynamics%20model%20for%20control%20from%20raw%20images%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Watter%2C%20Manuel%20Springenberg%2C%20Jost%20Boedecker%2C%20Joschka%20Riedmiller%2C%20Martin%20Embed%20to%20control%3A%20A%20locally%20linear%20latent%20dynamics%20model%20for%20control%20from%20raw%20images%202015"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Chelsea Finn, Ian Goodfellow, and Sergey Levine. Unsupervised learning for physical interaction through video prediction. In Advances in Neural Information Processing Systems, pages 64\u201372, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Finn%2C%20Chelsea%20Goodfellow%2C%20Ian%20Levine%2C%20Sergey%20Unsupervised%20learning%20for%20physical%20interaction%20through%20video%20prediction%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Finn%2C%20Chelsea%20Goodfellow%2C%20Ian%20Levine%2C%20Sergey%20Unsupervised%20learning%20for%20physical%20interaction%20through%20video%20prediction%202016"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Jean Piaget. Piaget\u2019s theory. 1970.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Piaget%2C%20Jean%20Piaget%E2%80%99s%20theory%201970"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Renee Baillargeon, Elizabeth S Spelke, and Stanley Wasserman. Object permanence in fivemonth-old infants. Cognition, 20(3):191\u2013208, 1985.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Baillargeon%2C%20Renee%20Spelke%2C%20Elizabeth%20S.%20Wasserman%2C%20Stanley%20Object%20permanence%20in%20fivemonth-old%20infants%201985",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Baillargeon%2C%20Renee%20Spelke%2C%20Elizabeth%20S.%20Wasserman%2C%20Stanley%20Object%20permanence%20in%20fivemonth-old%20infants%201985"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Renee Baillargeon. Object permanence in 31/2-and 41/2-month-old infants. Developmental psychology, 23(5):655, 1987.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Baillargeon%2C%20Renee%20Object%20permanence%20in%2031/2-and%2041/2-month-old%20infants%201987",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Baillargeon%2C%20Renee%20Object%20permanence%20in%2031/2-and%2041/2-month-old%20infants%201987"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Elizabeth S Spelke. Where perceiving ends and thinking begins: The apprehension of objects in infancy. In Perceptual development in infancy, pages 209\u2013246. Psychology Press, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Spelke%2C%20Elizabeth%20S.%20Where%20perceiving%20ends%20and%20thinking%20begins%3A%20The%20apprehension%20of%20objects%20in%20infancy%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Spelke%2C%20Elizabeth%20S.%20Where%20perceiving%20ends%20and%20thinking%20begins%3A%20The%20apprehension%20of%20objects%20in%20infancy%202013"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Carlos Guestrin, Daphne Koller, Chris Gearhart, and Neal Kanodia. Generalizing plans to new environments in relational mdps. In Proceedings of the 18th international joint conference on Artificial intelligence, pages 1003\u20131010. Morgan Kaufmann Publishers Inc., 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Guestrin%2C%20Carlos%20Koller%2C%20Daphne%20Gearhart%2C%20Chris%20Kanodia%2C%20Neal%20Generalizing%20plans%20to%20new%20environments%20in%20relational%20mdps%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Guestrin%2C%20Carlos%20Koller%2C%20Daphne%20Gearhart%2C%20Chris%20Kanodia%2C%20Neal%20Generalizing%20plans%20to%20new%20environments%20in%20relational%20mdps%202003"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Carlos Diuk, Andre Cohen, and Michael L Littman. An object-oriented representation for efficient reinforcement learning. In Proceedings of the 25th international conference on Machine learning, pages 240\u2013247. ACM, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Diuk%2C%20Carlos%20Cohen%2C%20Andre%20Littman%2C%20Michael%20L.%20An%20object-oriented%20representation%20for%20efficient%20reinforcement%20learning%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Diuk%2C%20Carlos%20Cohen%2C%20Andre%20Littman%2C%20Michael%20L.%20An%20object-oriented%20representation%20for%20efficient%20reinforcement%20learning%202008"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Michael B Chang, Tomer Ullman, Antonio Torralba, and Joshua B Tenenbaum. A compositional object-based approach to learning physical dynamics. arXiv preprint arXiv:1612.00341, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1612.00341"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Peter Battaglia, Razvan Pascanu, Matthew Lai, Danilo Jimenez Rezende, et al. Interaction networks for learning about objects, relations and physics. In Advances in Neural Information Processing Systems, pages 4502\u20134510, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Battaglia%2C%20Peter%20Pascanu%2C%20Razvan%20Lai%2C%20Matthew%20Rezende%2C%20Danilo%20Jimenez%20Interaction%20networks%20for%20learning%20about%20objects%2C%20relations%20and%20physics%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Battaglia%2C%20Peter%20Pascanu%2C%20Razvan%20Lai%2C%20Matthew%20Rezende%2C%20Danilo%20Jimenez%20Interaction%20networks%20for%20learning%20about%20objects%2C%20relations%20and%20physics%202016"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Nicholas Watters, Daniel Zoran, Theophane Weber, Peter Battaglia, Razvan Pascanu, and Andrea Tacchetti. Visual interaction networks. In Advances in Neural Information Processing Systems, pages 4540\u20134548, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Watters%2C%20Nicholas%20Zoran%2C%20Daniel%20Weber%2C%20Theophane%20Battaglia%2C%20Peter%20Visual%20interaction%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Watters%2C%20Nicholas%20Zoran%2C%20Daniel%20Weber%2C%20Theophane%20Battaglia%2C%20Peter%20Visual%20interaction%20networks%202017"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Adam Santoro, David Raposo, David G Barrett, Mateusz Malinowski, Razvan Pascanu, Peter Battaglia, and Tim Lillicrap. A simple neural network module for relational reasoning. In Advances in neural information processing systems, pages 4974\u20134983, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Santoro%2C%20Adam%20Raposo%2C%20David%20Barrett%2C%20David%20G.%20Malinowski%2C%20Mateusz%20A%20simple%20neural%20network%20module%20for%20relational%20reasoning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Santoro%2C%20Adam%20Raposo%2C%20David%20Barrett%2C%20David%20G.%20Malinowski%2C%20Mateusz%20A%20simple%20neural%20network%20module%20for%20relational%20reasoning%202017"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Jiajun Wu, Erika Lu, Pushmeet Kohli, Bill Freeman, and Josh Tenenbaum. Learning to see physics via visual de-animation. In Advances in Neural Information Processing Systems, pages 152\u2013163, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20Jiajun%20Lu%2C%20Erika%20Kohli%2C%20Pushmeet%20Freeman%2C%20Bill%20Learning%20to%20see%20physics%20via%20visual%20de-animation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20Jiajun%20Lu%2C%20Erika%20Kohli%2C%20Pushmeet%20Freeman%2C%20Bill%20Learning%20to%20see%20physics%20via%20visual%20de-animation%202017"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Luis C Cobo, Charles L Isbell, and Andrea L Thomaz. Object focused q-learning for autonomous agents. In Proceedings of the 2013 international conference on Autonomous agents and multi-agent systems, pages 1061\u20131068. International Foundation for Autonomous Agents and Multiagent Systems, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cobo%2C%20Luis%20C.%20Isbell%2C%20Charles%20L.%20Thomaz%2C%20Andrea%20L.%20Object%20focused%20q-learning%20for%20autonomous%20agents%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cobo%2C%20Luis%20C.%20Isbell%2C%20Charles%20L.%20Thomaz%2C%20Andrea%20L.%20Object%20focused%20q-learning%20for%20autonomous%20agents%202013"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Suha Kwak, Minsu Cho, Ivan Laptev, Jean Ponce, and Cordelia Schmid. Unsupervised object discovery and tracking in video collections. In Proceedings of the IEEE international conference on computer vision, pages 3173\u20133181, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kwak%2C%20Suha%20Cho%2C%20Minsu%20Laptev%2C%20Ivan%20Ponce%2C%20Jean%20Unsupervised%20object%20discovery%20and%20tracking%20in%20video%20collections%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kwak%2C%20Suha%20Cho%2C%20Minsu%20Laptev%2C%20Ivan%20Ponce%2C%20Jean%20Unsupervised%20object%20discovery%20and%20tracking%20in%20video%20collections%202015"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Ruben Villegas, Jimei Yang, Seunghoon Hong, Xunyu Lin, and Honglak Lee. Decomposing motion and content for natural video sequence prediction. arXiv preprint arXiv:1706.08033, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.08033"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Emily L Denton et al. Unsupervised learning of disentangled representations from video. In Advances in Neural Information Processing Systems, pages 4414\u20134423, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Denton%2C%20Emily%20L.%20Unsupervised%20learning%20of%20disentangled%20representations%20from%20video%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Denton%2C%20Emily%20L.%20Unsupervised%20learning%20of%20disentangled%20representations%20from%20video%202017"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Max Jaderberg, Karen Simonyan, Andrew Zisserman, et al. Spatial transformer networks. In Advances in Neural Information Processing Systems, pages 2017\u20132025, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jaderberg%2C%20Max%20Simonyan%2C%20Karen%20Zisserman%2C%20Andrew%20Spatial%20transformer%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jaderberg%2C%20Max%20Simonyan%2C%20Karen%20Zisserman%2C%20Andrew%20Spatial%20transformer%20networks%202017"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Yann LeCun, L\u00e9on Bottou, Yoshua Bengio, and Patrick Haffner. Gradient-based learning applied to document recognition. Proceedings of the IEEE, 86(11):2278\u20132324, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=LeCun%2C%20Yann%20Bottou%2C%20L%C3%A9on%20Bengio%2C%20Yoshua%20Haffner%2C%20Patrick%20Gradient-based%20learning%20applied%20to%20document%20recognition%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=LeCun%2C%20Yann%20Bottou%2C%20L%C3%A9on%20Bengio%2C%20Yoshua%20Haffner%2C%20Patrick%20Gradient-based%20learning%20applied%20to%20document%20recognition%201998"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Vinod Nair and Geoffrey E Hinton. Rectified linear units improve restricted boltzmann machines. In Proceedings of the 27th international conference on machine learning (ICML-10), pages 807\u2013814, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nair%2C%20Vinod%20Hinton%2C%20Geoffrey%20E.%20Rectified%20linear%20units%20improve%20restricted%20boltzmann%20machines%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nair%2C%20Vinod%20Hinton%2C%20Geoffrey%20E.%20Rectified%20linear%20units%20improve%20restricted%20boltzmann%20machines%202010"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Matthew D Zeiler, Dilip Krishnan, Graham W Taylor, and Rob Fergus. Deconvolutional networks. In Computer Vision and Pattern Recognition (CVPR), 2010 IEEE Conference on, pages 2528\u20132535. IEEE, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zeiler%2C%20Matthew%20D.%20Krishnan%2C%20Dilip%20Taylor%2C%20Graham%20W.%20Fergus%2C%20Rob%20Deconvolutional%20networks%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zeiler%2C%20Matthew%20D.%20Krishnan%2C%20Dilip%20Taylor%2C%20Graham%20W.%20Fergus%2C%20Rob%20Deconvolutional%20networks%202010"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Viren Jain, Joseph F Murray, Fabian Roth, Srinivas Turaga, Valentin Zhigulin, Kevin L Briggman, Moritz N Helmstaedter, Winfried Denk, and H Sebastian Seung. Supervised learning of image restoration with convolutional networks. In Computer Vision, 2007. ICCV 2007. IEEE 11th International Conference on, pages 1\u20138. IEEE, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jain%2C%20Viren%20Murray%2C%20Joseph%20F.%20Roth%2C%20Fabian%20Turaga%2C%20Srinivas%20Supervised%20learning%20of%20image%20restoration%20with%20convolutional%20networks%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jain%2C%20Viren%20Murray%2C%20Joseph%20F.%20Roth%2C%20Fabian%20Turaga%2C%20Srinivas%20Supervised%20learning%20of%20image%20restoration%20with%20convolutional%20networks%202007"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Jost Tobias Springenberg, Alexey Dosovitskiy, Thomas Brox, and Martin Riedmiller. Striving for simplicity: The all convolutional net. arXiv preprint arXiv:1412.6806, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6806"
+        },
+        {
+            "id": "34",
+            "entry": "[34] BPL Lo and SA Velastin. Automatic congestion detection system for underground platforms. In Intelligent Multimedia, Video and Speech Processing, 2001. Proceedings of 2001 International Symposium on, pages 158\u2013161. IEEE, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lo%2C%20B.P.L.%20Velastin%2C%20S.A.%20Automatic%20congestion%20detection%20system%20for%20underground%20platforms%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lo%2C%20B.P.L.%20Velastin%2C%20S.A.%20Automatic%20congestion%20detection%20system%20for%20underground%20platforms%202001"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Norman Tasfi. Pygame learning environment. https://github.com/ntasfi/ PyGame-Learning-Environment, 2016.",
+            "url": "https://github.com/ntasfi/PyGame-Learning-Environment"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Quanshi Zhang, Ying Nian Wu, and Song-Chun Zhu. Interpretable convolutional neural networks. arXiv preprint arXiv:1710.00935, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.00935"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Quan-shi Zhang and Song-Chun Zhu. Visual interpretability for deep learning: a survey. Frontiers of Information Technology & Electronic Engineering, 19(1):27\u201339, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Quan-shi%20Zhu%2C%20Song-Chun%20Visual%20interpretability%20for%20deep%20learning%3A%20a%20survey%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Quan-shi%20Zhu%2C%20Song-Chun%20Visual%20interpretability%20for%20deep%20learning%3A%20a%20survey%202018"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Quanshi Zhang, Yu Yang, Ying Nian Wu, and Song-Chun Zhu. Interpreting cnns via decision trees. arXiv preprint arXiv:1802.00121, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.00121"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Nitish Srivastava, Elman Mansimov, and Ruslan Salakhudinov. Unsupervised learning of video representations using lstms. In International conference on machine learning, pages 843\u2013852, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Srivastava%2C%20Nitish%20Mansimov%2C%20Elman%20Salakhudinov%2C%20Ruslan%20Unsupervised%20learning%20of%20video%20representations%20using%20lstms%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Srivastava%2C%20Nitish%20Mansimov%2C%20Elman%20Salakhudinov%2C%20Ruslan%20Unsupervised%20learning%20of%20video%20representations%20using%20lstms%202015"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Michael Mathieu, Camille Couprie, and Yann LeCun. Deep multi-scale video prediction beyond mean square error. International Conference on Learning Representations, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mathieu%2C%20Michael%20Couprie%2C%20Camille%20LeCun%2C%20Yann%20Deep%20multi-scale%20video%20prediction%20beyond%20mean%20square%20error%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mathieu%2C%20Michael%20Couprie%2C%20Camille%20LeCun%2C%20Yann%20Deep%20multi-scale%20video%20prediction%20beyond%20mean%20square%20error%202016"
+        },
+        {
+            "id": "41",
+            "entry": "[41] William Lotter, Gabriel Kreiman, and David Cox. Unsupervised learning of visual structure using predictive generative networks. Computer Science, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lotter%2C%20William%20Kreiman%2C%20Gabriel%20Cox%2C%20David%20Unsupervised%20learning%20of%20visual%20structure%20using%20predictive%20generative%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lotter%2C%20William%20Kreiman%2C%20Gabriel%20Cox%2C%20David%20Unsupervised%20learning%20of%20visual%20structure%20using%20predictive%20generative%20networks%202015"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Marc Aurelio Ranzato, Arthur Szlam, Joan Bruna, Michael Mathieu, Ronan Collobert, and Sumit Chopra. Video (language) modeling: a baseline for generative models of natural videos. Eprint Arxiv, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ranzato%2C%20Marc%20Aurelio%20Szlam%2C%20Arthur%20Bruna%2C%20Joan%20Mathieu%2C%20Michael%20Video%20%28language%29%20modeling%3A%20a%20baseline%20for%20generative%20models%20of%20natural%20videos%202014"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Aviv Tamar, Yi Wu, Garrett Thomas, Sergey Levine, and Pieter Abbeel. Value iteration networks. In Advances in Neural Information Processing Systems, pages 2154\u20132162, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Aviv%20Tamar%20Yi%20Wu%20Garrett%20Thomas%20Sergey%20Levine%20and%20Pieter%20Abbeel%20Value%20iteration%20networks%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20pages%2021542162%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Aviv%20Tamar%20Yi%20Wu%20Garrett%20Thomas%20Sergey%20Levine%20and%20Pieter%20Abbeel%20Value%20iteration%20networks%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20pages%2021542162%202016"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Sudheendra Vijayanarasimhan, Susanna Ricco, Cordelia Schmid, Rahul Sukthankar, and Katerina Fragkiadaki. Sfm-net: Learning of structure and motion from video. arXiv preprint arXiv:1704.07804, 2017. ",
+            "arxiv_url": "https://arxiv.org/pdf/1704.07804"
+        }
+    ]
+}

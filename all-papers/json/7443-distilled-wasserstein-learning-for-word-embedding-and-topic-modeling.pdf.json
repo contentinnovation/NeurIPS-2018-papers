@@ -1,0 +1,322 @@
+{
+    "filename": "7443-distilled-wasserstein-learning-for-word-embedding-and-topic-modeling.pdf",
+    "metadata": {
+        "title": "Distilled Wasserstein Learning for Word Embedding and Topic Modeling",
+        "author": "Hongteng Xu, Wenlin Wang, Wei Liu, Lawrence Carin",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7443-distilled-wasserstein-learning-for-word-embedding-and-topic-modeling.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We propose a novel Wasserstein method with a distillation mechanism, yielding joint learning of word embeddings and topics. The proposed method is based on the fact that the Euclidean distance between word embeddings may be employed as the underlying distance in the Wasserstein topic model. The word distributions of topics, their optimal transports to the word distributions of documents, and the embeddings of words are learned in a unified framework. When learning the topic model, we leverage a distilled underlying distance matrix to update the topic distributions and smoothly calculate the corresponding optimal transports. Such a strategy provides the updating of word embeddings with robust guidance, improving the algorithmic convergence. As an application, we focus on patient admission records, in which the proposed method embeds the codes of diseases and procedures and learns the topics of admissions, obtaining superior performance on clinically-meaningful disease network construction, mortality prediction as a function of admission codes, and procedure recommendation."
+    },
+    "keywords": [
+        {
+            "term": "word embedding",
+            "url": "https://en.wikipedia.org/wiki/word_embedding"
+        },
+        {
+            "term": "MIMIC",
+            "url": "https://en.wikipedia.org/wiki/MIMIC"
+        },
+        {
+            "term": "topic modeling",
+            "url": "https://en.wikipedia.org/wiki/topic_modeling"
+        },
+        {
+            "term": "optimal transport",
+            "url": "https://en.wikipedia.org/wiki/optimal_transport"
+        },
+        {
+            "term": "latent Dirichlet allocation",
+            "url": "https://en.wikipedia.org/wiki/latent_Dirichlet_allocation"
+        },
+        {
+            "term": "unified framework",
+            "url": "https://en.wikipedia.org/wiki/unified_framework"
+        },
+        {
+            "term": "natural language processing",
+            "url": "https://en.wikipedia.org/wiki/natural_language_processing"
+        }
+    ],
+    "highlights": [
+        "Word embedding and topic modeling play important roles in natural language processing (NLP), as well as other applications with textual and sequential data",
+        "As shown in Fig. 1, the proposed method is based on a Wasserstein-distance model, in which (i) the Euclidean distance between international classification of diseases code embeddings works as the underlying distance ( referred to as the cost) of the Wasserstein distance between the distributions of the codes corresponding to different admissions [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>]; the topics are \u201cvertices\u201d of a geometry in the Wasserstein space and the admissions are the \u201cbarycenters\u201d of the geometry with different weights [<a class=\"ref-link\" id=\"c36\" href=\"#r36\">36</a>]",
+        "We have proposed a novel method to jointly learn the Euclidean word embeddings and a Wasserstein topic model in a unified framework",
+        "Testing on clinical admission records, our method shows the superiority over other competitive models for various tasks",
+        "The proposed learning method shows a potential for more-traditional textual data analysis, but its computational complexity is still too high for large-scale document applications"
+    ],
+    "key_statements": [
+        "Word embedding and topic modeling play important roles in natural language processing (NLP), as well as other applications with textual and sequential data",
+        "As shown in Fig. 1, the proposed method is based on a Wasserstein-distance model, in which (i) the Euclidean distance between international classification of diseases code embeddings works as the underlying distance ( referred to as the cost) of the Wasserstein distance between the distributions of the codes corresponding to different admissions [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>]; the topics are \u201cvertices\u201d of a geometry in the Wasserstein space and the admissions are the \u201cbarycenters\u201d of the geometry with different weights [<a class=\"ref-link\" id=\"c36\" href=\"#r36\">36</a>]",
+        "We have proposed a novel method to jointly learn the Euclidean word embeddings and a Wasserstein topic model in a unified framework",
+        "Testing on clinical admission records, our method shows the superiority over other competitive models for various tasks",
+        "The proposed learning method shows a potential for more-traditional textual data analysis, but its computational complexity is still too high for large-scale document applications"
+    ],
+    "summary": [
+        "Word embedding and topic modeling play important roles in natural language processing (NLP), as well as other applications with textual and sequential data.",
+        "We desire a model that jointly learns topics and word embeddings, and that for both does not consider the word (ICD code) order.",
+        "As shown in Fig. 1, the proposed method is based on a Wasserstein-distance model, in which (i) the Euclidean distance between ICD code embeddings works as the underlying distance of the Wasserstein distance between the distributions of the codes corresponding to different admissions [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>]; the topics are \u201cvertices\u201d of a geometry in the Wasserstein space and the admissions are the \u201cbarycenters\u201d of the geometry with different weights [<a class=\"ref-link\" id=\"c36\" href=\"#r36\">36</a>].",
+        "The proposed method unifies word embedding and topic modeling in a framework of Wasserstein learning.",
+        "We can calculate the optimal transport between different admissions and explain the transport by the distance of ICD code embeddings.",
+        "2 A Wasserstein Topic Model Based on Euclidean Word Embeddings",
+        "As shown in Fig. 1, using our model, we can calculate the Wasserstein distance between different admissions in the level of disease and obtain the optimal transport from one admission to another explicitly.",
+        "Given the word-document matrix Y and a predefined number of topics K, we wish to jointly learn the basis B, the weight matrix \u039b, and the model g\u03b8 of word embeddings.",
+        "Algorithm 1 Distilled Wasserstein Learning (DWL) for Joint Word Embedding and Topic Modeling",
+        "Inspired by recent model distillation methods in [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>, <a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>, <a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>], we use a smoothed underlying distance matrix to solve the \u201cvanishing gradient\u201d problem when updating B and \u039b.",
+        "Focusing on NLP tasks, the methods in [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>, <a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>] use the same framework as ours, computing underlying distances based on word embeddings and measuring the distance between documents in the Wasserstein space.",
+        "We learn the embeddings of the ICD codes and the topics of the admissions and test them on three tasks: mortality prediction, admission-type prediction, and procedure recommendation.",
+        "We compare the proposed method with the following baselines: (i) bag-of-words-based methods like TF-IDF [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>] and LDA [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>]; word/document embedding methods like Word2Vec [<a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>], Glove [<a class=\"ref-link\" id=\"c33\" href=\"#r33\">33</a>], and Doc2Vec [<a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>]; and the Wasserstein-distance-based method in [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>].",
+        "For our DWL method the model trained from scratch has comparable performance to that fine-tuned from Word2Vec\u2019s embeddings, which means that our method is robust to initialization when exploring clustering structure of admissions.",
+        "We have proposed a novel method to jointly learn the Euclidean word embeddings and a Wasserstein topic model in a unified framework.",
+        "An alternating optimization method was applied to iteratively update topics, their weights, and the embeddings of words.",
+        "We plan to further accelerate the learning method, e.g., by replacing the Sinkhorn-based updating precedure with its variants like the Greenkhorn-based updating method [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>]"
+    ],
+    "headline": "We propose a novel Wasserstein method with a distillation mechanism, yielding joint learning of word embeddings and topics",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] M. Agueh and G. Carlier. Barycenters in the Wasserstein space. SIAM Journal on Mathematical Analysis, 43(2):904\u2013924, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Agueh%2C%20M.%20Carlier%2C%20G.%20Barycenters%20in%20the%20Wasserstein%20space%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Agueh%2C%20M.%20Carlier%2C%20G.%20Barycenters%20in%20the%20Wasserstein%20space%202011"
+        },
+        {
+            "id": "2",
+            "entry": "[2] J. Altschuler, J. Weed, and P. Rigollet. Near-linear time approximation algorithms for optimal transport via Sinkhorn iteration. arXiv preprint arXiv:1705.09634, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1705.09634"
+        },
+        {
+            "id": "3",
+            "entry": "[3] M. Arjovsky, S. Chintala, and L. Bottou. Wasserstein gan. arXiv preprint arXiv:1701.07875, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1701.07875"
+        },
+        {
+            "id": "4",
+            "entry": "[4] J. M. Bajor, D. A. Mesa, T. J. Osterman, and T. A. Lasko. Embedding complexity in the data representation instead of in the model: A case study using heterogeneous medical data. arXiv preprint arXiv:1802.04233, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.04233"
+        },
+        {
+            "id": "5",
+            "entry": "[5] T. Baumel, J. Nassour-Kassis, M. Elhadad, and N. Elhadad. Multi-label classification of patient notes a case study on ICD code assignment. arXiv preprint arXiv:1709.09587, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1709.09587"
+        },
+        {
+            "id": "6",
+            "entry": "[6] M. Belkin and P. Niyogi. Laplacian Eigenmaps for dimensionality reduction and data representation. Neural computation, 15(6):1373\u20131396, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Belkin%2C%20M.%20Niyogi%2C%20P.%20Laplacian%20Eigenmaps%20for%20dimensionality%20reduction%20and%20data%20representation%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Belkin%2C%20M.%20Niyogi%2C%20P.%20Laplacian%20Eigenmaps%20for%20dimensionality%20reduction%20and%20data%20representation%202003"
+        },
+        {
+            "id": "7",
+            "entry": "[7] J.-D. Benamou, G. Carlier, M. Cuturi, L. Nenna, and G. Peyr\u00e9. Iterative Bregman projections for regularized transportation problems. SIAM Journal on Scientific Computing, 37(2):A1111\u2013 A1138, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Benamou%2C%20J.-D.%20Carlier%2C%20G.%20Cuturi%2C%20M.%20Nenna%2C%20L.%20Iterative%20Bregman%20projections%20for%20regularized%20transportation%20problems",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Benamou%2C%20J.-D.%20Carlier%2C%20G.%20Cuturi%2C%20M.%20Nenna%2C%20L.%20Iterative%20Bregman%20projections%20for%20regularized%20transportation%20problems"
+        },
+        {
+            "id": "8",
+            "entry": "[8] D. M. Blei, A. Y. Ng, and M. I. Jordan. Latent Dirichlet allocation. Journal of machine Learning research, 3(Jan):993\u20131022, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Blei%2C%20D.M.%20Ng%2C%20A.Y.%20Jordan%2C%20M.I.%20Latent%20Dirichlet%20allocation%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Blei%2C%20D.M.%20Ng%2C%20A.Y.%20Jordan%2C%20M.I.%20Latent%20Dirichlet%20allocation%202003"
+        },
+        {
+            "id": "9",
+            "entry": "[9] E. Boissard, T. Le Gouic, J.-M. Loubes, et al. Distribution\u2019s template estimate with Wasserstein metrics. Bernoulli, 21(2):740\u2013759, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Boissard%2C%20E.%20Gouic%2C%20T.Le%20Loubes%2C%20J.-M.%20Distribution%E2%80%99s%20template%20estimate%20with%20Wasserstein%20metrics%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Boissard%2C%20E.%20Gouic%2C%20T.Le%20Loubes%2C%20J.-M.%20Distribution%E2%80%99s%20template%20estimate%20with%20Wasserstein%20metrics%202015"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Z. Che, S. Purushotham, R. Khemani, and Y. Liu. Distilling knowledge from deep networks with applications to healthcare domain. arXiv preprint arXiv:1512.03542, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1512.03542"
+        },
+        {
+            "id": "11",
+            "entry": "[11] E. Choi, M. T. Bahadori, E. Searles, C. Coffey, M. Thompson, J. Bost, J. Tejedor-Sojo, and J. Sun. Multi-layer representation learning for medical concepts. In KDD, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Choi%2C%20E.%20Bahadori%2C%20M.T.%20Searles%2C%20E.%20Coffey%2C%20C.%20Multi-layer%20representation%20learning%20for%20medical%20concepts%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Choi%2C%20E.%20Bahadori%2C%20M.T.%20Searles%2C%20E.%20Coffey%2C%20C.%20Multi-layer%20representation%20learning%20for%20medical%20concepts%202016"
+        },
+        {
+            "id": "12",
+            "entry": "[12] N. Courty, R. Flamary, and M. Ducoffe. Learning Wasserstein embeddings. arXiv preprint arXiv:1710.07457, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.07457"
+        },
+        {
+            "id": "13",
+            "entry": "[13] M. Cuturi. Sinkhorn distances: Lightspeed computation of optimal transport. In Advances in neural information processing systems, pages 2292\u20132300, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cuturi%2C%20M.%20Sinkhorn%20distances%3A%20Lightspeed%20computation%20of%20optimal%20transport%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cuturi%2C%20M.%20Sinkhorn%20distances%3A%20Lightspeed%20computation%20of%20optimal%20transport%202013"
+        },
+        {
+            "id": "14",
+            "entry": "[14] M. Cuturi and A. Doucet. Fast computation of Wasserstein barycenters. In International Conference on Machine Learning, pages 685\u2013693, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cuturi%2C%20M.%20Doucet%2C%20A.%20Fast%20computation%20of%20Wasserstein%20barycenters%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cuturi%2C%20M.%20Doucet%2C%20A.%20Fast%20computation%20of%20Wasserstein%20barycenters%202014"
+        },
+        {
+            "id": "15",
+            "entry": "[15] R. Das, M. Zaheer, and C. Dyer. Gaussian LDA for topic models with word embeddings. In ACL (1), pages 795\u2013804, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Das%2C%20R.%20Zaheer%2C%20M.%20Dyer%2C%20C.%20Gaussian%20LDA%20for%20topic%20models%20with%20word%20embeddings%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Das%2C%20R.%20Zaheer%2C%20M.%20Dyer%2C%20C.%20Gaussian%20LDA%20for%20topic%20models%20with%20word%20embeddings%202015"
+        },
+        {
+            "id": "16",
+            "entry": "[16] A. Genevay, G. Peyr\u00e9, and M. Cuturi. Sinkhorn-AutoDiff: Tractable Wasserstein learning of generative models. arXiv preprint arXiv:1706.00292, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.00292"
+        },
+        {
+            "id": "17",
+            "entry": "[17] S. Gerard and J. M. Michael. Introduction to modern information retrieval. ISBN, 1983.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gerard%2C%20S.%20Michael%2C%20J.M.%20Introduction%20to%20modern%20information%20retrieval%201983",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gerard%2C%20S.%20Michael%2C%20J.M.%20Introduction%20to%20modern%20information%20retrieval%201983"
+        },
+        {
+            "id": "18",
+            "entry": "[18] S. Gupta, J. Hoffman, and J. Malik. Cross modal distillation for supervision transfer. In Computer Vision and Pattern Recognition (CVPR), 2016 IEEE Conference on, pages 2827\u2013 2836. IEEE, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gupta%2C%20S.%20Hoffman%2C%20J.%20Malik%2C%20J.%20Cross%20modal%20distillation%20for%20supervision%20transfer%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gupta%2C%20S.%20Hoffman%2C%20J.%20Malik%2C%20J.%20Cross%20modal%20distillation%20for%20supervision%20transfer%202016"
+        },
+        {
+            "id": "19",
+            "entry": "[19] H. Harutyunyan, H. Khachatrian, D. C. Kale, and A. Galstyan. Multitask learning and benchmarking with clinical time series data. arXiv preprint arXiv:1703.07771, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.07771"
+        },
+        {
+            "id": "20",
+            "entry": "[20] G. Hinton, O. Vinyals, and J. Dean. Distilling the knowledge in a neural network. arXiv preprint arXiv:1503.02531, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1503.02531"
+        },
+        {
+            "id": "21",
+            "entry": "[21] G. Huang, C. Guo, M. J. Kusner, Y. Sun, F. Sha, and K. Q. Weinberger. Supervised word mover\u2019s distance. In Advances in Neural Information Processing Systems, pages 4862\u20134870, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huang%2C%20G.%20Guo%2C%20C.%20Kusner%2C%20M.J.%20Sun%2C%20Y.%20Supervised%20word%20mover%E2%80%99s%20distance%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huang%2C%20G.%20Guo%2C%20C.%20Kusner%2C%20M.J.%20Sun%2C%20Y.%20Supervised%20word%20mover%E2%80%99s%20distance%202016"
+        },
+        {
+            "id": "22",
+            "entry": "[22] J. Huang, C. Osorio, and L. W. Sy. An empirical evaluation of deep learning for ICD-9 code assignment using MIMIC-III clinical notes. arXiv preprint arXiv:1802.02311, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.02311"
+        },
+        {
+            "id": "23",
+            "entry": "[23] H. Inan, K. Khosravi, and R. Socher. Tying word vectors and word classifiers: A loss framework for language modeling. arXiv preprint arXiv:1611.01462, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.01462"
+        },
+        {
+            "id": "24",
+            "entry": "[24] T. Joachims. Learning to classify text using support vector machines: Methods, theory and algorithms, volume 186. Kluwer Academic Publishers Norwell, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Joachims%2C%20T.%20Learning%20to%20classify%20text%20using%20support%20vector%20machines%3A%20Methods%2C%20theory%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Joachims%2C%20T.%20Learning%20to%20classify%20text%20using%20support%20vector%20machines%3A%20Methods%2C%20theory%202002"
+        },
+        {
+            "id": "25",
+            "entry": "[25] A. E. Johnson, T. J. Pollard, L. Shen, H. L. Li-wei, M. Feng, M. Ghassemi, B. Moody, P. Szolovits, L. A. Celi, and R. G. Mark. MIMIC-III, a freely accessible critical care database. Scientific data, 3:160035, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Johnson%2C%20A.E.%20Pollard%2C%20T.J.%20Shen%2C%20L.%20Li-wei%2C%20H.L.%20MIMIC-III%2C%20a%20freely%20accessible%20critical%20care%20database%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Johnson%2C%20A.E.%20Pollard%2C%20T.J.%20Shen%2C%20L.%20Li-wei%2C%20H.L.%20MIMIC-III%2C%20a%20freely%20accessible%20critical%20care%20database%202016"
+        },
+        {
+            "id": "26",
+            "entry": "[26] M. Kusner, Y. Sun, N. Kolkin, and K. Weinberger. From word embeddings to document distances. In International Conference on Machine Learning, pages 957\u2013966, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kusner%2C%20M.%20Sun%2C%20Y.%20Kolkin%2C%20N.%20Weinberger%2C%20K.%20From%20word%20embeddings%20to%20document%20distances%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kusner%2C%20M.%20Sun%2C%20Y.%20Kolkin%2C%20N.%20Weinberger%2C%20K.%20From%20word%20embeddings%20to%20document%20distances%202015"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Q. Le and T. Mikolov. Distributed representations of sentences and documents. In International Conference on Machine Learning, pages 1188\u20131196, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Le%2C%20Q.%20Mikolov%2C%20T.%20Distributed%20representations%20of%20sentences%20and%20documents%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Le%2C%20Q.%20Mikolov%2C%20T.%20Distributed%20representations%20of%20sentences%20and%20documents%202014"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Y. Liu, Z. Liu, T.-S. Chua, and M. Sun. Topical word embeddings. In AAAI, pages 2418\u20132424, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20Y.%20Liu%2C%20Z.%20Chua%2C%20T.-S.%20Sun%2C%20M.%20Topical%20word%20embeddings%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liu%2C%20Y.%20Liu%2C%20Z.%20Chua%2C%20T.-S.%20Sun%2C%20M.%20Topical%20word%20embeddings%202015"
+        },
+        {
+            "id": "29",
+            "entry": "[29] D. Lopez-Paz, L. Bottou, B. Sch\u00f6lkopf, and V. Vapnik. Unifying distillation and privileged information. arXiv preprint arXiv:1511.03643, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.03643"
+        },
+        {
+            "id": "30",
+            "entry": "[30] T. Mikolov, K. Chen, G. Corrado, and J. Dean. Efficient estimation of word representations in vector space. arXiv preprint arXiv:1301.3781, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1301.3781"
+        },
+        {
+            "id": "31",
+            "entry": "[31] J. Mullenbach, S. Wiegreffe, J. Duke, J. Sun, and J. Eisenstein. Explainable prediction of medical codes from clinical text. arXiv preprint arXiv:1802.05695, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.05695"
+        },
+        {
+            "id": "32",
+            "entry": "[32] A. Murom\u00e4gi, K. Sirts, and S. Laur. Linear ensembles of word embedding models. arXiv preprint arXiv:1704.01419, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1704.01419"
+        },
+        {
+            "id": "33",
+            "entry": "[33] J. Pennington, R. Socher, and C. Manning. Glove: Global vectors for word representation. In Proceedings of the 2014 conference on empirical methods in natural language processing (EMNLP), pages 1532\u20131543, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pennington%2C%20J.%20Socher%2C%20R.%20Manning%2C%20C.%20Glove%3A%20Global%20vectors%20for%20word%20representation%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pennington%2C%20J.%20Socher%2C%20R.%20Manning%2C%20C.%20Glove%3A%20Global%20vectors%20for%20word%20representation%202014"
+        },
+        {
+            "id": "34",
+            "entry": "[34] G. Pereyra, G. Tucker, J. Chorowski, \u0141. Kaiser, and G. Hinton. Regularizing neural networks by penalizing confident output distributions. arXiv preprint arXiv:1701.06548, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1701.06548"
+        },
+        {
+            "id": "35",
+            "entry": "[35] A. A. Rusu, N. C. Rabinowitz, G. Desjardins, H. Soyer, J. Kirkpatrick, K. Kavukcuoglu, R. Pascanu, and R. Hadsell. Progressive neural networks. arXiv preprint arXiv:1606.04671, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.04671"
+        },
+        {
+            "id": "36",
+            "entry": "[36] M. A. Schmitz, M. Heitz, N. Bonneel, F. Ngole, D. Coeurjolly, M. Cuturi, G. Peyr\u00e9, and J.-L. Starck. Wasserstein dictionary learning: Optimal transport-based unsupervised nonlinear dictionary learning. SIAM Journal on Imaging Sciences, 11(1):643\u2013678, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wasserstein%20dictionary%20learning%3A%20Optimal%20transport-based%20unsupervised%20nonlinear%20dictionary%20learning%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wasserstein%20dictionary%20learning%3A%20Optimal%20transport-based%20unsupervised%20nonlinear%20dictionary%20learning%202018"
+        },
+        {
+            "id": "37",
+            "entry": "[37] D. Shen, G. Wang, W. Wang, M. R. Min, Q. Su, Y. Zhang, C. Li, R. Henao, and L. Carin. Baseline needs more love: On simple word-embedding-based models and associated pooling mechanisms. In ACL, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shen%2C%20D.%20Wang%2C%20G.%20Wang%2C%20W.%20Min%2C%20M.R.%20Baseline%20needs%20more%20love%3A%20On%20simple%20word-embedding-based%20models%20and%20associated%20pooling%20mechanisms%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shen%2C%20D.%20Wang%2C%20G.%20Wang%2C%20W.%20Min%2C%20M.R.%20Baseline%20needs%20more%20love%3A%20On%20simple%20word-embedding-based%20models%20and%20associated%20pooling%20mechanisms%202018"
+        },
+        {
+            "id": "38",
+            "entry": "[38] B. Shi, W. Lam, S. Jameel, S. Schockaert, and K. P. Lai. Jointly learning word embeddings and latent topics. In Proceedings of the 40th International ACM SIGIR Conference on Research and Development in Information Retrieval, pages 375\u2013384. ACM, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shi%2C%20B.%20Lam%2C%20W.%20Jameel%2C%20S.%20Schockaert%2C%20S.%20Jointly%20learning%20word%20embeddings%20and%20latent%20topics%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shi%2C%20B.%20Lam%2C%20W.%20Jameel%2C%20S.%20Schockaert%2C%20S.%20Jointly%20learning%20word%20embeddings%20and%20latent%20topics%202017"
+        },
+        {
+            "id": "39",
+            "entry": "[39] H. Shi, P. Xie, Z. Hu, M. Zhang, and E. P. Xing. Towards automated ICD coding using deep learning. arXiv preprint arXiv:1711.04075, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.04075"
+        },
+        {
+            "id": "40",
+            "entry": "[40] C. Villani. Optimal transport: Old and new, volume 338. Springer Science & Business Media, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Villani%2C%20C.%20Optimal%20transport%3A%20Old%20and%20new%2C%20volume%20338%202008"
+        },
+        {
+            "id": "41",
+            "entry": "[41] W. Wang, Z. Gan, W. Wang, D. Shen, J. Huang, W. Ping, S. Satheesh, and L. Carin. Topic compositional neural language model. arXiv preprint arXiv:1712.09783, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1712.09783"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Y.-X. Wang and M. Hebert. Learning to learn: Model regression networks for easy small sample learning. In European Conference on Computer Vision, pages 616\u2013634.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Y.-X.%20Hebert%2C%20M.%20Learning%20to%20learn%3A%20Model%20regression%20networks%20for%20easy%20small%20sample%20learning",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Y.-X.%20Hebert%2C%20M.%20Learning%20to%20learn%3A%20Model%20regression%20networks%20for%20easy%20small%20sample%20learning"
+        },
+        {
+            "id": "43",
+            "entry": "[43] J. Ye, P. Wu, J. Z. Wang, and J. Li. Fast discrete distribution clustering using Wasserstein barycenter with sparse support. IEEE Transactions on Signal Processing, 65(9):2317\u20132332, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ye%2C%20J.%20Wu%2C%20P.%20Wang%2C%20J.Z.%20Li%2C%20J.%20Fast%20discrete%20distribution%20clustering%20using%20Wasserstein%20barycenter%20with%20sparse%20support%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ye%2C%20J.%20Wu%2C%20P.%20Wang%2C%20J.Z.%20Li%2C%20J.%20Fast%20discrete%20distribution%20clustering%20using%20Wasserstein%20barycenter%20with%20sparse%20support%202017"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Y. Zemel and V. M. Panaretos. Fr\u00e9chet means and Procrustes analysis in Wasserstein space. arXiv preprint arXiv:1701.06876, 2017. ",
+            "arxiv_url": "https://arxiv.org/pdf/1701.06876"
+        }
+    ]
+}

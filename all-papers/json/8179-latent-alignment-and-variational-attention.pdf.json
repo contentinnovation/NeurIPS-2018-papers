@@ -1,0 +1,566 @@
+{
+    "filename": "8179-latent-alignment-and-variational-attention.pdf",
+    "metadata": {
+        "title": "Latent Alignment and Variational Attention",
+        "author": "Yuntian Deng, Yoon Kim, Justin Chiu, Demi Guo, Alexander Rush",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8179-latent-alignment-and-variational-attention.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Neural attention has become central to many state-of-the-art models in natural language processing and related domains. Attention networks are an easy-to-train and effective method for softly simulating alignment; however, the approach does not marginalize over latent alignments in a probabilistic sense. This property makes it difficult to compare attention to other alignment approaches, to compose it with probabilistic models, and to perform posterior inference conditioned on observed data. A related latent approach, hard attention, fixes these issues, but is generally harder to train and less accurate. This work considers variational attention networks, alternatives to soft and hard attention for learning latent variable alignment models, with tighter approximation bounds based on amortized variational inference. We further propose methods for reducing the variance of gradients to make these approaches computationally feasible. Experiments show that for machine translation and visual question answering, inefficient exact latent variable models outperform standard neural attention, but these gains go away when using hard attention based training. On the other hand, variational attention retains most of the performance gain but with training speed comparable to neural attention."
+    },
+    "keywords": [
+        {
+            "term": "Neural machine translation",
+            "url": "https://en.wikipedia.org/wiki/Neural_machine_translation"
+        },
+        {
+            "term": "question answering",
+            "url": "https://en.wikipedia.org/wiki/question_answering"
+        },
+        {
+            "term": "evidence lower bound",
+            "url": "https://en.wikipedia.org/wiki/evidence_lower_bound"
+        },
+        {
+            "term": "machine translation",
+            "url": "https://en.wikipedia.org/wiki/machine_translation"
+        },
+        {
+            "term": "natural language",
+            "url": "https://en.wikipedia.org/wiki/natural_language"
+        },
+        {
+            "term": "variational inference",
+            "url": "https://en.wikipedia.org/wiki/variational_inference"
+        },
+        {
+            "term": "latent variable model",
+            "url": "https://en.wikipedia.org/wiki/latent_variable_model"
+        },
+        {
+            "term": "black box",
+            "url": "https://en.wikipedia.org/wiki/black_box"
+        }
+    ],
+    "highlights": [
+        "Latent Alignment and Neural Attention<br/><br/>We begin by introducing notation for latent alignment, and show how it relates to neural attention",
+        "We further show that with variational attention, alignment variables significantly surpass both soft and hard attention results without requiring much more difficult training",
+        "We further explore the impact of posterior inference on alignment decisions, and how latent variable models might be employed",
+        "We are careful to use alignment to refer to this probabilistic model (Section 2.1), and soft and hard attention to refer to two particular inference approaches used in the literature to estimate alignment models (Section 2.2).\n2.1",
+        "With the right choice of optimization strategy and inference network this form of variational attention can provide a general method for learning latent alignment models",
+        "Attention methods are ubiquitous tool for areas like natural language processing; they are difficult to use as latent variable models"
+    ],
+    "key_statements": [
+        "Latent Alignment and Neural Attention<br/><br/>We begin by introducing notation for latent alignment, and show how it relates to neural attention",
+        "We further show that with variational attention, alignment variables significantly surpass both soft and hard attention results without requiring much more difficult training",
+        "We further explore the impact of posterior inference on alignment decisions, and how latent variable models might be employed",
+        "In contrast to soft attention models, hard attention [<a class=\"ref-link\" id=\"c77\" href=\"#r77\">77</a>, <a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>] approaches use a single sample at training time instead of a distribution",
+        "We are careful to use alignment to refer to this probabilistic model (Section 2.1), and soft and hard attention to refer to two particular inference approaches used in the literature to estimate alignment models (Section 2.2).\n2.1",
+        "With the right choice of optimization strategy and inference network this form of variational attention can provide a general method for learning latent alignment models",
+        "Note that this only reflects a reasonable setting without exhaustive tuning, yet we show that we can train variational attention at scale",
+        "Attention methods are ubiquitous tool for areas like natural language processing; they are difficult to use as latent variable models"
+    ],
+    "summary": [
+        "Latent Alignment and Neural Attention<br/><br/>We begin by introducing notation for latent alignment, and show how it relates to neural attention.",
+        "Hard attention [<a class=\"ref-link\" id=\"c77\" href=\"#r77\">77</a>], makes this connection explicit by introducing a latent variable for alignment and optimizing a bound on the log marginal likelihood using policy gradients.",
+        "In contrast to soft attention models, hard attention [<a class=\"ref-link\" id=\"c77\" href=\"#r77\">77</a>, <a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>] approaches use a single sample at training time instead of a distribution.",
+        "Two notable exceptions are [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>, <a class=\"ref-link\" id=\"c40\" href=\"#r40\">40</a>]: both utilize amortized variational inference to learn a sampling distribution which is used obtain importance-sampled estimates of the log marginal likelihood [<a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>].",
+        "When training deep learning models with gradient methods, it can be difficult to use latent alignment directly.",
+        "We explore this technique for deep latent alignment models, and propose methods for variational attention that combine the benefits of soft and hard attention.",
+        "With the right choice of optimization strategy and inference network this form of variational attention can provide a general method for learning latent alignment models.",
+        "This weights gradients to q based on the ratio of the inference network alignment approach to a soft attention baseline.",
+        "This model is in some sense closer to the soft attention formulation which assigns mass to multiple indices, though fundamentally different in that we still formally treat alignment as a latent variable.",
+        "We initialize the latent alignment model by first minimizing the Jensen bound, Ez\u223cp(z | x,x)[log p(y | x, z)], and introducing the inference network.",
+        "Note that other alternatives exist, and we briefly discuss them here: 1) instead of the single-sample variational bound we can use a multiple-sample importance sampling based approach such as Reweighted Wake-Sleep (RWS) [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>] or VIMCO [<a class=\"ref-link\" id=\"c51\" href=\"#r51\">51</a>]; 2) instead of REINFORCE we can approximate sampling from the discrete categorical distribution with GumbelSoftmax [<a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>]; 3) instead of using an inference network we can directly apply Stochastic Variational Inference (SVI) [<a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>] to learn the local variational parameters in the posterior.",
+        "When training hard and variational attention with sampling both use the same baseline, i.e the output from soft attention.",
+        "On both experiments, exact marginal likelihood outperforms soft attention, indicating that when possible it is better to have latent alignments.",
+        "For NMT, on the IWSLT 2014 German-English task, variational attention with enumeration and sampling performs comparably to optimizing the log marginal likelihood, despite the fact that it is optimizing a lower bound.",
+        "This work explores alternative approaches to latent alignment, through variational attention with promising result.",
+        "Future work will experiment with scaling the method on larger-scale tasks and in more complex models, such as multi-hop attention models, transformer models, and structured models, as well as utilizing these latent variables for interpretability and as a way to incorporate prior knowledge"
+    ],
+    "headline": "We further propose methods for reducing the variance of gradients to make these approaches computationally feasible",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] David Alvarez-Melis and Tommi S Jaakkola. A Causal Framework for Explaining the Predictions of Black-Box Sequence-to-Sequence Models. In Proceddings of EMNLP, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Alvarez-Melis%2C%20David%20Jaakkola%2C%20Tommi%20S.%20A%20Causal%20Framework%20for%20Explaining%20the%20Predictions%20of%20Black-Box%20Sequence-to-Sequence%20Models%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Alvarez-Melis%2C%20David%20Jaakkola%2C%20Tommi%20S.%20A%20Causal%20Framework%20for%20Explaining%20the%20Predictions%20of%20Black-Box%20Sequence-to-Sequence%20Models%202017"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Peter Anderson, Xiaodong He, Chris Buehler, Damien Teney, Mark Johnson, Stephen Gould, and Lei Zhang. Bottom-up and Top-Down Attention for Image Captioning and Visual Question Answering. In Proceedings of CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Anderson%2C%20Peter%20He%2C%20Xiaodong%20Buehler%2C%20Chris%20Teney%2C%20Damien%20Bottom-up%20and%20Top-Down%20Attention%20for%20Image%20Captioning%20and%20Visual%20Question%20Answering%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Anderson%2C%20Peter%20He%2C%20Xiaodong%20Buehler%2C%20Chris%20Teney%2C%20Damien%20Bottom-up%20and%20Top-Down%20Attention%20for%20Image%20Captioning%20and%20Visual%20Question%20Answering%202018"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Jimmy Ba, Volodymyr Mnih, and Koray Kavukcuoglu. Multiple Object Recognition with Visual Attention. In Proceedings of ICLR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ba%2C%20Jimmy%20Mnih%2C%20Volodymyr%20Kavukcuoglu%2C%20Koray%20Multiple%20Object%20Recognition%20with%20Visual%20Attention%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ba%2C%20Jimmy%20Mnih%2C%20Volodymyr%20Kavukcuoglu%2C%20Koray%20Multiple%20Object%20Recognition%20with%20Visual%20Attention%202015"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Jimmy Ba, Ruslan R Salakhutdinov, Roger B Grosse, and Brendan J Frey. Learning Wake-Sleep Recurrent Attention Models. In Proceedings of NIPS, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ba%2C%20Jimmy%20Salakhutdinov%2C%20Ruslan%20R.%20Grosse%2C%20Roger%20B.%20Frey%2C%20Brendan%20J.%20Learning%20Wake-Sleep%20Recurrent%20Attention%20Models%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ba%2C%20Jimmy%20Salakhutdinov%2C%20Ruslan%20R.%20Grosse%2C%20Roger%20B.%20Frey%2C%20Brendan%20J.%20Learning%20Wake-Sleep%20Recurrent%20Attention%20Models%202015"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Dzmitry Bahdanau, Philemon Brakel, Kelvin Xu, Anirudh Goyal, Ryan Lowe, Joelle Pineau, Aaron Courville, and Yoshua Bengio. An Actor-Critic Algorithm for Sequence Prediction. In Proceedings of ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bahdanau%2C%20Dzmitry%20Brakel%2C%20Philemon%20Xu%2C%20Kelvin%20Goyal%2C%20Anirudh%20An%20Actor-Critic%20Algorithm%20for%20Sequence%20Prediction%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bahdanau%2C%20Dzmitry%20Brakel%2C%20Philemon%20Xu%2C%20Kelvin%20Goyal%2C%20Anirudh%20An%20Actor-Critic%20Algorithm%20for%20Sequence%20Prediction%202017"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio. Neural Machine Translation by Jointly Learning to Align and Translate. In Proceedings of ICLR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bahdanau%2C%20Dzmitry%20Cho%2C%20Kyunghyun%20Bengio%2C%20Yoshua%20Neural%20Machine%20Translation%20by%20Jointly%20Learning%20to%20Align%20and%20Translate%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bahdanau%2C%20Dzmitry%20Cho%2C%20Kyunghyun%20Bengio%2C%20Yoshua%20Neural%20Machine%20Translation%20by%20Jointly%20Learning%20to%20Align%20and%20Translate%202015"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Hareesh Bahuleyan, Lili Mou, Olga Vechtomova, and Pascal Poupart. Variational Attention for Sequenceto-Sequence Models. arXiv:1712.08207, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1712.08207"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Ondrej Bojar, Christian Buck, Rajen Chatterjee, Christian Federmann, Yvette Graham, Barry Haddow, Matthias Huck, Antonio Jimeno Yepes, Philipp Koehn, and Julia Kreutzer. Proceedings of the second conference on machine translation. In Proceedings of the Second Conference on Machine Translation. Association for Computational Linguistics, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ondrej%20Bojar%20Christian%20Buck%20Rajen%20Chatterjee%20Christian%20Federmann%20Yvette%20Graham%20Barry%20Haddow%20Matthias%20Huck%20Antonio%20Jimeno%20Yepes%20Philipp%20Koehn%20and%20Julia%20Kreutzer%20Proceedings%20of%20the%20second%20conference%20on%20machine%20translation%20In%20Proceedings%20of%20the%20Second%20Conference%20on%20Machine%20Translation%20Association%20for%20Computational%20Linguistics%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ondrej%20Bojar%20Christian%20Buck%20Rajen%20Chatterjee%20Christian%20Federmann%20Yvette%20Graham%20Barry%20Haddow%20Matthias%20Huck%20Antonio%20Jimeno%20Yepes%20Philipp%20Koehn%20and%20Julia%20Kreutzer%20Proceedings%20of%20the%20second%20conference%20on%20machine%20translation%20In%20Proceedings%20of%20the%20Second%20Conference%20on%20Machine%20Translation%20Association%20for%20Computational%20Linguistics%202017"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Jorg Bornschein, Andriy Mnih, Daniel Zoran, and Danilo J. Rezende. Variational Memory Addressing in Generative Models. In Proceedings of NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bornschein%2C%20Jorg%20Mnih%2C%20Andriy%20Zoran%2C%20Daniel%20Rezende%2C%20Danilo%20J.%20Variational%20Memory%20Addressing%20in%20Generative%20Models%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bornschein%2C%20Jorg%20Mnih%2C%20Andriy%20Zoran%2C%20Daniel%20Rezende%2C%20Danilo%20J.%20Variational%20Memory%20Addressing%20in%20Generative%20Models%202017"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Peter F Brown, Vincent J Della Pietra, Stephen A Della Pietra, and Robert L Mercer. The Mathematics of Statistical Machine Translation: Parameter Estimation. Computational linguistics, 19(2):263\u2013311, 1993.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Peter%20F%20Brown%20Vincent%20J%20Della%20Pietra%20Stephen%20A%20Della%20Pietra%20and%20Robert%20L%20Mercer%20The%20Mathematics%20of%20Statistical%20Machine%20Translation%20Parameter%20Estimation%20Computational%20linguistics%20192263311%201993",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Peter%20F%20Brown%20Vincent%20J%20Della%20Pietra%20Stephen%20A%20Della%20Pietra%20and%20Robert%20L%20Mercer%20The%20Mathematics%20of%20Statistical%20Machine%20Translation%20Parameter%20Estimation%20Computational%20linguistics%20192263311%201993"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Peter F. Brown, Vincent J. Della Pietra, Stephen A. Della Pietra, and Robert L. Mercer. The mathematics of statistical machine translation: Parameter estimation. Comput. Linguist., 19(2):263\u2013311, June 1993.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Brown%2C%20Peter%20F.%20Pietra%2C%20Vincent%20J.Della%20Pietra%2C%20Stephen%20A.Della%20Mercer%2C%20Robert%20L.%20The%20mathematics%20of%20statistical%20machine%20translation%3A%20Parameter%20estimation%201993-06",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Brown%2C%20Peter%20F.%20Pietra%2C%20Vincent%20J.Della%20Pietra%2C%20Stephen%20A.Della%20Mercer%2C%20Robert%20L.%20The%20mathematics%20of%20statistical%20machine%20translation%3A%20Parameter%20estimation%201993-06"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Yuri Burda, Roger Grosse, and Ruslan Salakhutdinov. Importance Weighted Autoencoders. In Proceedings of ICLR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Burda%2C%20Yuri%20Grosse%2C%20Roger%20Salakhutdinov%2C%20Ruslan%20Importance%20Weighted%20Autoencoders%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Burda%2C%20Yuri%20Grosse%2C%20Roger%20Salakhutdinov%2C%20Ruslan%20Importance%20Weighted%20Autoencoders%202015"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Mauro Cettolo, Jan Niehues, Sebastian Stuker, Luisa Bentivogli, and Marcello Federico. Report on the 11th IWSLT evaluation campaign. In Proceedings of IWSLT, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mauro%20Cettolo%20Jan%20Niehues%20Sebastian%20Stuker%20Luisa%20Bentivogli%20and%20Marcello%20Federico%20Report%20on%20the%2011th%20IWSLT%20evaluation%20campaign%20In%20Proceedings%20of%20IWSLT%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mauro%20Cettolo%20Jan%20Niehues%20Sebastian%20Stuker%20Luisa%20Bentivogli%20and%20Marcello%20Federico%20Report%20on%20the%2011th%20IWSLT%20evaluation%20campaign%20In%20Proceedings%20of%20IWSLT%202014"
+        },
+        {
+            "id": "14",
+            "entry": "[14] William Chan, Navdeep Jaitly, Quoc Le, and Oriol Vinyals. Listen, Attend and Spell. arXiv:1508.01211, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1508.01211"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Kyunghyun Cho, Aaron Courville, and Yoshua Bengio. Describing Multimedia Content using Attentionbased Encoder-Decoder Networks. In IEEE Transactions on Multimedia, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cho%2C%20Kyunghyun%20Courville%2C%20Aaron%20Bengio%2C%20Yoshua%20Describing%20Multimedia%20Content%20using%20Attentionbased%20Encoder-Decoder%20Networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cho%2C%20Kyunghyun%20Courville%2C%20Aaron%20Bengio%2C%20Yoshua%20Describing%20Multimedia%20Content%20using%20Attentionbased%20Encoder-Decoder%20Networks%202015"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Jan Chorowski, Dzmitry Bahdanau, Dmitriy Serdyuk, Kyunghyun Cho, and Yoshua Bengio. AttentionBased Models for Speech Recognition. In Proceedings of NIPS, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chorowski%2C%20Jan%20Bahdanau%2C%20Dzmitry%20Serdyuk%2C%20Dmitriy%20Cho%2C%20Kyunghyun%20AttentionBased%20Models%20for%20Speech%20Recognition%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chorowski%2C%20Jan%20Bahdanau%2C%20Dzmitry%20Serdyuk%2C%20Dmitriy%20Cho%2C%20Kyunghyun%20AttentionBased%20Models%20for%20Speech%20Recognition%202015"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Junyoung Chung, Kyle Kastner, Laurent Dinh, Kratarth Goel, Aaron Courville, and Yoshua Bengio. A Recurrent Latent Variable Model for Sequential Data. In Proceedings of NIPS, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chung%2C%20Junyoung%20Kastner%2C%20Kyle%20Dinh%2C%20Laurent%20Goel%2C%20Kratarth%20and%20Yoshua%20Bengio.%20A%20Recurrent%20Latent%20Variable%20Model%20for%20Sequential%20Data%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chung%2C%20Junyoung%20Kastner%2C%20Kyle%20Dinh%2C%20Laurent%20Goel%2C%20Kratarth%20and%20Yoshua%20Bengio.%20A%20Recurrent%20Latent%20Variable%20Model%20for%20Sequential%20Data%202015"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Trevor Cohn, Cong Duy Vu Hoang, Ekaterina Vymolova, Kaisheng Yao, Chris Dyer, and Gholamreza Haffari. Incorporating Structural Alignment Biases into an Attentional Neural Translation Model. In Proceedings of NAACL, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cohn%2C%20Trevor%20Hoang%2C%20Cong%20Duy%20Vu%20Vymolova%2C%20Ekaterina%20Yao%2C%20Kaisheng%20Incorporating%20Structural%20Alignment%20Biases%20into%20an%20Attentional%20Neural%20Translation%20Model%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cohn%2C%20Trevor%20Hoang%2C%20Cong%20Duy%20Vu%20Vymolova%2C%20Ekaterina%20Yao%2C%20Kaisheng%20Incorporating%20Structural%20Alignment%20Biases%20into%20an%20Attentional%20Neural%20Translation%20Model%202016"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Yuntian Deng, Anssi Kanervisto, Jeffrey Ling, and Alexander M Rush. Image-to-Markup Generation with Coarse-to-Fine Attention. In Proceedings of ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Deng%2C%20Yuntian%20Kanervisto%2C%20Anssi%20Ling%2C%20Jeffrey%20Rush%2C%20Alexander%20M.%20Image-to-Markup%20Generation%20with%20Coarse-to-Fine%20Attention%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Deng%2C%20Yuntian%20Kanervisto%2C%20Anssi%20Ling%2C%20Jeffrey%20Rush%2C%20Alexander%20M.%20Image-to-Markup%20Generation%20with%20Coarse-to-Fine%20Attention%202017"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Chris Dyer, Victor Chahuneau, and Noah A. Smith. A Simple, Fast, and Effective Reparameterization of IBM Model 2. In Proceedings of NAACL, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dyer%2C%20Chris%20Chahuneau%2C%20Victor%20Simple%2C%20Noah%20A.Smith%20A.%20Fast%20and%20Effective%20Reparameterization%20of%20IBM%20Model%202%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dyer%2C%20Chris%20Chahuneau%2C%20Victor%20Simple%2C%20Noah%20A.Smith%20A.%20Fast%20and%20Effective%20Reparameterization%20of%20IBM%20Model%202%202013"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Sergey Edunov, Myle Ott, Michael Auli, David Grangier, and Marc\u2019Aurelio Ranzato. Classical Structured Prediction Losses for Sequence to Sequence Learning. In Proceedings of NAACL, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Edunov%2C%20Sergey%20Ott%2C%20Myle%20Auli%2C%20Michael%20Grangier%2C%20David%20Classical%20Structured%20Prediction%20Losses%20for%20Sequence%20to%20Sequence%20Learning%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Edunov%2C%20Sergey%20Ott%2C%20Myle%20Auli%2C%20Michael%20Grangier%2C%20David%20Classical%20Structured%20Prediction%20Losses%20for%20Sequence%20to%20Sequence%20Learning%202018"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Marco Fraccaro, Soren Kaae Sonderby, Ulrich Paquet, and Ole Winther. Sequential Neural Models with Stochastic Layers. In Proceedings of NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fraccaro%2C%20Marco%20Sonderby%2C%20Soren%20Kaae%20Paquet%2C%20Ulrich%20Winther%2C%20Ole%20Sequential%20Neural%20Models%20with%20Stochastic%20Layers%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fraccaro%2C%20Marco%20Sonderby%2C%20Soren%20Kaae%20Paquet%2C%20Ulrich%20Winther%2C%20Ole%20Sequential%20Neural%20Models%20with%20Stochastic%20Layers%202016"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Anirudh Goyal, Alessandro Sordoni, Marc-Alexandre Cote, Nan Rosemary Ke, and Yoshua Bengio. Z-Forcing: Training Stochastic Recurrent Networks. In Proceedings of NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goyal%2C%20Anirudh%20Sordoni%2C%20Alessandro%20Cote%2C%20Marc-Alexandre%20Ke%2C%20Nan%20Rosemary%20Z-Forcing%3A%20Training%20Stochastic%20Recurrent%20Networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goyal%2C%20Anirudh%20Sordoni%2C%20Alessandro%20Cote%2C%20Marc-Alexandre%20Ke%2C%20Nan%20Rosemary%20Z-Forcing%3A%20Training%20Stochastic%20Recurrent%20Networks%202017"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Will Grathwohl, Dami Choi, Yuhuai Wu, Geoffrey Roeder, and David Duvenaud. Backpropagation through the Void: Optimizing control variates for black-box gradient estimation. In Proceedings of ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Grathwohl%2C%20Will%20Choi%2C%20Dami%20Wu%2C%20Yuhuai%20Roeder%2C%20Geoffrey%20Backpropagation%20through%20the%20Void%3A%20Optimizing%20control%20variates%20for%20black-box%20gradient%20estimation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Grathwohl%2C%20Will%20Choi%2C%20Dami%20Wu%2C%20Yuhuai%20Roeder%2C%20Geoffrey%20Backpropagation%20through%20the%20Void%3A%20Optimizing%20control%20variates%20for%20black-box%20gradient%20estimation%202018"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Jiatao Gu, Zhengdong Lu, Hang Li, and Victor OK Li. Incorporating Copying Mechanism in Sequence-toSequence Learning. 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gu%2C%20Jiatao%20Lu%2C%20Zhengdong%20Li%2C%20Hang%20Li%2C%20Victor%20O.K.%20Incorporating%20Copying%20Mechanism%20in%20Sequence-toSequence%20Learning%202016"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Caglar Gulcehre, Sarath Chandar, Kyunghyun Cho, and Yoshua Bengio. Dynamic Neural Turing Machine with Soft and Hard Addressing Schemes. arXiv:1607.00036, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1607.00036"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep Residual Learning for Image Recognition. In Proceedings of CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20Residual%20Learning%20for%20Image%20Recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20Residual%20Learning%20for%20Image%20Recognition%202016"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Matthew D Hoffman, David M Blei, Chong Wang, and John Paisley. Stochastic variational inference. The Journal of Machine Learning Research, 14(1):1303\u20131347, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hoffman%2C%20Matthew%20D.%20Blei%2C%20David%20M.%20Wang%2C%20Chong%20Paisley%2C%20John%20Stochastic%20variational%20inference%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hoffman%2C%20Matthew%20D.%20Blei%2C%20David%20M.%20Wang%2C%20Chong%20Paisley%2C%20John%20Stochastic%20variational%20inference%202013"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Po-Sen Huang, Chong Wang, Sitao Huang, Dengyong Zhou, and Li Deng. Towards neural phrase-based machine translation. In Proceedings of ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huang%2C%20Po-Sen%20Wang%2C%20Chong%20Huang%2C%20Sitao%20Zhou%2C%20Dengyong%20Towards%20neural%20phrase-based%20machine%20translation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huang%2C%20Po-Sen%20Wang%2C%20Chong%20Huang%2C%20Sitao%20Zhou%2C%20Dengyong%20Towards%20neural%20phrase-based%20machine%20translation%202018"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Eric Jang, Shixiang Gu, and Ben Poole. Categorical reparameterization with gumbel-softmax. arXiv preprint arXiv:1611.01144, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.01144"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Eric Jang, Shixiang Gu, and Ben Poole. Categorical Reparameterization with Gumbel-Softmax. In Proceedings of ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jang%2C%20Eric%20Gu%2C%20Shixiang%20Poole%2C%20Ben%20Categorical%20Reparameterization%20with%20Gumbel-Softmax%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jang%2C%20Eric%20Gu%2C%20Shixiang%20Poole%2C%20Ben%20Categorical%20Reparameterization%20with%20Gumbel-Softmax%202017"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Martin Jankowiak and Fritz Obermeyer. Pathwise Derivatives Beyond the Reparameterization Trick. In Proceedings of ICML, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jankowiak%2C%20Martin%20Obermeyer%2C%20Fritz%20Pathwise%20Derivatives%20Beyond%20the%20Reparameterization%20Trick%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jankowiak%2C%20Martin%20Obermeyer%2C%20Fritz%20Pathwise%20Derivatives%20Beyond%20the%20Reparameterization%20Trick%202018"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Yoon Kim, Carl Denton, Luong Hoang, and Alexander M. Rush. Structured Attention Networks. In Proceedings of ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kim%2C%20Yoon%20Denton%2C%20Carl%20Hoang%2C%20Luong%20Rush%2C%20Alexander%20M.%20Structured%20Attention%20Networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kim%2C%20Yoon%20Denton%2C%20Carl%20Hoang%2C%20Luong%20Rush%2C%20Alexander%20M.%20Structured%20Attention%20Networks%202017"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Yoon Kim, Sam Wiseman, Andrew C Miller, David Sontag, and Alexander M Rush. Semi-amortized variational autoencoders. arXiv preprint arXiv:1802.02550, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.02550"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Diederik P. Kingma and Jimmy Ba. Adam: A Method for Stochastic Optimization. In Proceedings of ICLR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Ba%2C%20Jimmy%20Adam%3A%20A%20Method%20for%20Stochastic%20Optimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Ba%2C%20Jimmy%20Adam%3A%20A%20Method%20for%20Stochastic%20Optimization%202015"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Diederik P. Kingma and Max Welling. Auto-Encoding Variational Bayes. In Proceedings of ICLR, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Welling%2C%20Max%20Auto-Encoding%20Variational%20Bayes%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Welling%2C%20Max%20Auto-Encoding%20Variational%20Bayes%202014"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Philipp Koehn, Hieu Hoang, Alexandra Birch, Chris Callison-Burch, Marcello Federico, Nicola Bertoldi, Brooke Cowan, Wade Shen, Christine Moran, Richard Zens, et al. Moses: Open source toolkit for statistical machine translation. In Proceedings of the 45th annual meeting of the ACL on interactive poster and demonstration sessions, pages 177\u2013180. Association for Computational Linguistics, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Koehn%2C%20Philipp%20Hoang%2C%20Hieu%20Birch%2C%20Alexandra%20Callison-Burch%2C%20Chris%20Moses%3A%20Open%20source%20toolkit%20for%20statistical%20machine%20translation%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Koehn%2C%20Philipp%20Hoang%2C%20Hieu%20Birch%2C%20Alexandra%20Callison-Burch%2C%20Chris%20Moses%3A%20Open%20source%20toolkit%20for%20statistical%20machine%20translation%202007"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Philipp Koehn and Rebecca Knowles. Six Challenges for Neural Machine Translation. arXiv:1706.03872, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.03872"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Rahul G. Krishnan, Uri Shalit, and David Sontag. Structured Inference Networks for Nonlinear State Space Models. In Proceedings of AAAI, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krishnan%2C%20Rahul%20G.%20Shalit%2C%20Uri%20Sontag%2C%20David%20Structured%20Inference%20Networks%20for%20Nonlinear%20State%20Space%20Models%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krishnan%2C%20Rahul%20G.%20Shalit%2C%20Uri%20Sontag%2C%20David%20Structured%20Inference%20Networks%20for%20Nonlinear%20State%20Space%20Models%202017"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Dieterich Lawson, Chung-Cheng Chiu, George Tucker, Colin Raffel, Kevin Swersky, and Navdeep Jaitly. Learning Hard Alignments in Variational Inference. In Proceedings of ICASSP, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dieterich%20Lawson%20ChungCheng%20Chiu%20George%20Tucker%20Colin%20Raffel%20Kevin%20Swersky%20and%20Navdeep%20Jaitly%20Learning%20Hard%20Alignments%20in%20Variational%20Inference%20In%20Proceedings%20of%20ICASSP%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dieterich%20Lawson%20ChungCheng%20Chiu%20George%20Tucker%20Colin%20Raffel%20Kevin%20Swersky%20and%20Navdeep%20Jaitly%20Learning%20Hard%20Alignments%20in%20Variational%20Inference%20In%20Proceedings%20of%20ICASSP%202018"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Jason Lee, Elman Mansimov, and Kyunghyun Cho. Deterministic Non-Autoregressive Neural Sequence Modeling by Iterative Refinement. arXiv:1802.06901, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.06901"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Tao Lei, Regina Barzilay, and Tommi Jaakkola. Rationalizing Neural Rredictions. In Proceedings of EMNLP, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tao%20Lei%20Regina%20Barzilay%20and%20Tommi%20Jaakkola%20Rationalizing%20Neural%20Rredictions%20In%20Proceedings%20of%20EMNLP%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tao%20Lei%20Regina%20Barzilay%20and%20Tommi%20Jaakkola%20Rationalizing%20Neural%20Rredictions%20In%20Proceedings%20of%20EMNLP%202016"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Yang Liu and Mirella Lapata. Learning Structured Text Representations. In Proceedings of TACL, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20Yang%20Lapata%2C%20Mirella%20Learning%20Structured%20Text%20Representations%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liu%2C%20Yang%20Lapata%2C%20Mirella%20Learning%20Structured%20Text%20Representations%202017"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Minh-Thang Luong, Hieu Pham, and Christopher D. Manning. Effective Approaches to Attention-based Neural Machine Translation. In Proceedings of EMNLP, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=MinhThang%20Luong%20Hieu%20Pham%20and%20Christopher%20D%20Manning%20Effective%20Approaches%20to%20Attentionbased%20Neural%20Machine%20Translation%20In%20Proceedings%20of%20EMNLP%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=MinhThang%20Luong%20Hieu%20Pham%20and%20Christopher%20D%20Manning%20Effective%20Approaches%20to%20Attentionbased%20Neural%20Machine%20Translation%20In%20Proceedings%20of%20EMNLP%202015"
+        },
+        {
+            "id": "45",
+            "entry": "[45] Xuezhe Ma, Yingkai Gao, Zhiting Hu, Yaoliang Yu, Yuntian Deng, and Eduard Hovy. Dropout with Expectation-linear Regularization. In Proceedings of ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ma%2C%20Xuezhe%20Gao%2C%20Yingkai%20Hu%2C%20Zhiting%20Yu%2C%20Yaoliang%20Dropout%20with%20Expectation-linear%20Regularization%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ma%2C%20Xuezhe%20Gao%2C%20Yingkai%20Hu%2C%20Zhiting%20Yu%2C%20Yaoliang%20Dropout%20with%20Expectation-linear%20Regularization%202017"
+        },
+        {
+            "id": "46",
+            "entry": "[46] Chris J. Maddison, Andriy Mnih, and Yee Whye Teh. The Concrete Distribution: A Continuous Relaxation of Discrete Random Variables. In Proceedings of ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chris%20J%20Maddison%20Andriy%20Mnih%20and%20Yee%20Whye%20Teh%20The%20Concrete%20Distribution%20A%20Continuous%20Relaxation%20of%20Discrete%20Random%20Variables%20In%20Proceedings%20of%20ICLR%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chris%20J%20Maddison%20Andriy%20Mnih%20and%20Yee%20Whye%20Teh%20The%20Concrete%20Distribution%20A%20Continuous%20Relaxation%20of%20Discrete%20Random%20Variables%20In%20Proceedings%20of%20ICLR%202017"
+        },
+        {
+            "id": "47",
+            "entry": "[47] Andr\u00e9 F. T. Martins and Ram\u00f3n Fernandez Astudillo. From Softmax to Sparsemax: A Sparse Model of Attention and Multi-Label Classification. In Proceedings of ICML, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Martins%2C%20Andr%C3%A9%20F.T.%20Astudillo%2C%20Ram%C3%B3n%20Fernandez%20From%20Softmax%20to%20Sparsemax%3A%20A%20Sparse%20Model%20of%20Attention%20and%20Multi-Label%20Classification%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Martins%2C%20Andr%C3%A9%20F.T.%20Astudillo%2C%20Ram%C3%B3n%20Fernandez%20From%20Softmax%20to%20Sparsemax%3A%20A%20Sparse%20Model%20of%20Attention%20and%20Multi-Label%20Classification%202016"
+        },
+        {
+            "id": "48",
+            "entry": "[48] Arthur Mensch and Mathieu Blondel. Differentiable Dynamic Programming for Structured Prediction and Attention. In Proceedings of ICML, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mensch%2C%20Arthur%20Blondel%2C%20Mathieu%20Differentiable%20Dynamic%20Programming%20for%20Structured%20Prediction%20and%20Attention%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mensch%2C%20Arthur%20Blondel%2C%20Mathieu%20Differentiable%20Dynamic%20Programming%20for%20Structured%20Prediction%20and%20Attention%202018"
+        },
+        {
+            "id": "49",
+            "entry": "[49] Andriy Mnih and Karol Gregor. Neural Variational Inference and Learning in Belief Networks. In Proceedings of ICML, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Andriy%20Mnih%20and%20Karol%20Gregor%20Neural%20Variational%20Inference%20and%20Learning%20in%20Belief%20Networks%20In%20Proceedings%20of%20ICML%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Andriy%20Mnih%20and%20Karol%20Gregor%20Neural%20Variational%20Inference%20and%20Learning%20in%20Belief%20Networks%20In%20Proceedings%20of%20ICML%202014"
+        },
+        {
+            "id": "50",
+            "entry": "[50] Andriy Mnih and Danilo J. Rezende. Variational Inference for Monte Carlo Objectives. In Proceedings of ICML, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20Andriy%20Rezende%2C%20Danilo%20J.%20Variational%20Inference%20for%20Monte%20Carlo%20Objectives%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20Andriy%20Rezende%2C%20Danilo%20J.%20Variational%20Inference%20for%20Monte%20Carlo%20Objectives%202016"
+        },
+        {
+            "id": "51",
+            "entry": "[51] Andriy Mnih and Danilo J Rezende. Variational inference for monte carlo objectives. arXiv preprint arXiv:1602.06725, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1602.06725"
+        },
+        {
+            "id": "52",
+            "entry": "[52] Volodymyr Mnih, Nicola Heess, Alex Graves, and Koray Kavukcuoglu. Recurrent Models of Visual Attention. In Proceedings of NIPS, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20Volodymyr%20Heess%2C%20Nicola%20Graves%2C%20Alex%20Kavukcuoglu%2C%20Koray%20Recurrent%20Models%20of%20Visual%20Attention%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20Volodymyr%20Heess%2C%20Nicola%20Graves%2C%20Alex%20Kavukcuoglu%2C%20Koray%20Recurrent%20Models%20of%20Visual%20Attention%202015"
+        },
+        {
+            "id": "53",
+            "entry": "[53] Vlad Niculae and Mathieu Blondel. A Regularized Framework for Sparse and Structured Neural Attention. In Proceedings of NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Niculae%2C%20Vlad%20Blondel%2C%20Mathieu%20A%20Regularized%20Framework%20for%20Sparse%20and%20Structured%20Neural%20Attention%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Niculae%2C%20Vlad%20Blondel%2C%20Mathieu%20A%20Regularized%20Framework%20for%20Sparse%20and%20Structured%20Neural%20Attention%202017"
+        },
+        {
+            "id": "54",
+            "entry": "[54] Vlad Niculae, Andr\u00e9 F. T. Martins, Mathieu Blondel, and Claire Cardie. SparseMAP: Differentiable Sparse Structured Inference. In Proceedings of ICML, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Niculae%2C%20Vlad%20Martins%2C%20Andr%C3%A9%20F.T.%20Blondel%2C%20Mathieu%20Cardie%2C%20Claire%20SparseMAP%3A%20Differentiable%20Sparse%20Structured%20Inference%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Niculae%2C%20Vlad%20Martins%2C%20Andr%C3%A9%20F.T.%20Blondel%2C%20Mathieu%20Cardie%2C%20Claire%20SparseMAP%3A%20Differentiable%20Sparse%20Structured%20Inference%202018"
+        },
+        {
+            "id": "55",
+            "entry": "[55] Roman Novak, Michael Auli, and David Grangier. Iterative Refinement for Machine Translation. arXiv:1610.06602, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1610.06602"
+        },
+        {
+            "id": "56",
+            "entry": "[56] Jeffrey Pennington, Richard Socher, and Christopher D. Manning. GloVe: Global Vectors for Word Representation. In Proceedings of EMNLP, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pennington%2C%20Jeffrey%20Socher%2C%20Richard%20Manning%2C%20Christopher%20D.%20GloVe%3A%20Global%20Vectors%20for%20Word%20Representation%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pennington%2C%20Jeffrey%20Socher%2C%20Richard%20Manning%2C%20Christopher%20D.%20GloVe%3A%20Global%20Vectors%20for%20Word%20Representation%202014"
+        },
+        {
+            "id": "57",
+            "entry": "[57] Colin Raffel, Minh-Thang Luong, Peter J Liu, Ron J Weiss, and Douglas Eck. Online and Linear-Time Attention by Enforcing Monotonic Alignments. In Proceedings of ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Raffel%2C%20Colin%20Luong%2C%20Minh-Thang%20Liu%2C%20Peter%20J.%20Weiss%2C%20Ron%20J.%20Online%20and%20Linear-Time%20Attention%20by%20Enforcing%20Monotonic%20Alignments%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Raffel%2C%20Colin%20Luong%2C%20Minh-Thang%20Liu%2C%20Peter%20J.%20Weiss%2C%20Ron%20J.%20Online%20and%20Linear-Time%20Attention%20by%20Enforcing%20Monotonic%20Alignments%202017"
+        },
+        {
+            "id": "58",
+            "entry": "[58] Rajesh Ranganath, Sean Gerrish, and David M. Blei. Black Box Variational Inference. In Proceedings of AISTATS, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ranganath%2C%20Rajesh%20Gerrish%2C%20Sean%20Blei%2C%20David%20M.%20Black%20Box%20Variational%20Inference%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ranganath%2C%20Rajesh%20Gerrish%2C%20Sean%20Blei%2C%20David%20M.%20Black%20Box%20Variational%20Inference%202014"
+        },
+        {
+            "id": "59",
+            "entry": "[59] Shaoqing Ren, Kaiming He, Ross Girshick, and Jian Sun. Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks. In Proceedings of NIPS, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ren%2C%20Shaoqing%20He%2C%20Kaiming%20Girshick%2C%20Ross%20Sun%2C%20Jian%20Faster%20R-CNN%3A%20Towards%20Real-Time%20Object%20Detection%20with%20Region%20Proposal%20Networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ren%2C%20Shaoqing%20He%2C%20Kaiming%20Girshick%2C%20Ross%20Sun%2C%20Jian%20Faster%20R-CNN%3A%20Towards%20Real-Time%20Object%20Detection%20with%20Region%20Proposal%20Networks%202015"
+        },
+        {
+            "id": "60",
+            "entry": "[60] Danilo Jimenez Rezende, Shakir Mohamed, and Daan Wierstra. Stochastic Backpropagation and Approximate Inference in Deep Generative Models. In Proceedings of ICML, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rezende%2C%20Danilo%20Jimenez%20Mohamed%2C%20Shakir%20Wierstra%2C%20Daan%20Stochastic%20Backpropagation%20and%20Approximate%20Inference%20in%20Deep%20Generative%20Models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rezende%2C%20Danilo%20Jimenez%20Mohamed%2C%20Shakir%20Wierstra%2C%20Daan%20Stochastic%20Backpropagation%20and%20Approximate%20Inference%20in%20Deep%20Generative%20Models%202014"
+        },
+        {
+            "id": "61",
+            "entry": "[61] Tim Rockt\u00e4schel, Edward Grefenstette, Karl Moritz Hermann, Tomas Kocisky, and Phil Blunsom. Reasoning about Entailment with Neural Attention. In Proceedings of ICLR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rockt%C3%A4schel%2C%20Tim%20Grefenstette%2C%20Edward%20Hermann%2C%20Karl%20Moritz%20Kocisky%2C%20Tomas%20Reasoning%20about%20Entailment%20with%20Neural%20Attention%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rockt%C3%A4schel%2C%20Tim%20Grefenstette%2C%20Edward%20Hermann%2C%20Karl%20Moritz%20Kocisky%2C%20Tomas%20Reasoning%20about%20Entailment%20with%20Neural%20Attention%202016"
+        },
+        {
+            "id": "62",
+            "entry": "[62] Alexander M. Rush, Sumit Chopra, and Jason Weston. A Neural Attention Model for Abstractive Sentence Summarization. In Proceedings of EMNLP, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rush%2C%20Alexander%20M.%20Chopra%2C%20Sumit%20Weston%2C%20Jason%20A%20Neural%20Attention%20Model%20for%20Abstractive%20Sentence%20Summarization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rush%2C%20Alexander%20M.%20Chopra%2C%20Sumit%20Weston%2C%20Jason%20A%20Neural%20Attention%20Model%20for%20Abstractive%20Sentence%20Summarization%202015"
+        },
+        {
+            "id": "63",
+            "entry": "[63] Rico Sennrich, Barry Haddow, and Alexandra Birch. Neural Machine Translation of Rare Words with Subword Units. In Proceedings of ACL, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rico%20Sennrich%20Barry%20Haddow%20and%20Alexandra%20Birch%20Neural%20Machine%20Translation%20of%20Rare%20Words%20with%20Subword%20Units%20In%20Proceedings%20of%20ACL%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rico%20Sennrich%20Barry%20Haddow%20and%20Alexandra%20Birch%20Neural%20Machine%20Translation%20of%20Rare%20Words%20with%20Subword%20Units%20In%20Proceedings%20of%20ACL%202016"
+        },
+        {
+            "id": "64",
+            "entry": "[64] Iulian Vlad Serban, Alessandro Sordoni, Laurent Charlin Ryan Lowe, Joelle Pineau, Aaron Courville, and Yoshua Bengio. A Hierarchical Latent Variable Encoder-Decoder Model for Generating Dialogues. In Proceedings of AAAI, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Serban%2C%20Iulian%20Vlad%20Sordoni%2C%20Alessandro%20Lowe%2C%20Laurent%20Charlin%20Ryan%20Pineau%2C%20Joelle%20and%20Yoshua%20Bengio.%20A%20Hierarchical%20Latent%20Variable%20Encoder-Decoder%20Model%20for%20Generating%20Dialogues%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Serban%2C%20Iulian%20Vlad%20Sordoni%2C%20Alessandro%20Lowe%2C%20Laurent%20Charlin%20Ryan%20Pineau%2C%20Joelle%20and%20Yoshua%20Bengio.%20A%20Hierarchical%20Latent%20Variable%20Encoder-Decoder%20Model%20for%20Generating%20Dialogues%202017"
+        },
+        {
+            "id": "65",
+            "entry": "[65] Bonggun Shin, Falgun H Chokshi, Timothy Lee, and Jinho D Choi. Classification of Radiology Reports Using Neural Attention Models. In Proceedings of IJCNN, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shin%2C%20Bonggun%20Chokshi%2C%20Falgun%20H.%20Lee%2C%20Timothy%20Choi%2C%20Jinho%20D.%20Classification%20of%20Radiology%20Reports%20Using%20Neural%20Attention%20Models%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shin%2C%20Bonggun%20Chokshi%2C%20Falgun%20H.%20Lee%2C%20Timothy%20Choi%2C%20Jinho%20D.%20Classification%20of%20Radiology%20Reports%20Using%20Neural%20Attention%20Models%202017"
+        },
+        {
+            "id": "66",
+            "entry": "[66] Akash Srivastava and Charles Sutton. Autoencoding Variational Inference for Topic Models. In Proceedings of ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Srivastava%2C%20Akash%20Sutton%2C%20Charles%20Autoencoding%20Variational%20Inference%20for%20Topic%20Models%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Srivastava%2C%20Akash%20Sutton%2C%20Charles%20Autoencoding%20Variational%20Inference%20for%20Topic%20Models%202017"
+        },
+        {
+            "id": "67",
+            "entry": "[67] Jinsong Su, Shan Wu, Deyi Xiong, Yaojie Lu, Xianpei Han, and Biao Zhang. Variational Recurrent Neural Machine Translation. In Proceedings of AAAI, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jinsong%20Su%20Shan%20Wu%20Deyi%20Xiong%20Yaojie%20Lu%20Xianpei%20Han%20and%20Biao%20Zhang%20Variational%20Recurrent%20Neural%20Machine%20Translation%20In%20Proceedings%20of%20AAAI%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jinsong%20Su%20Shan%20Wu%20Deyi%20Xiong%20Yaojie%20Lu%20Xianpei%20Han%20and%20Biao%20Zhang%20Variational%20Recurrent%20Neural%20Machine%20Translation%20In%20Proceedings%20of%20AAAI%202018"
+        },
+        {
+            "id": "68",
+            "entry": "[68] Sainbayar Sukhbaatar, Arthur Szlam, Jason Weston, and Rob Fergus. End-To-End Memory Networks. In Proceedings of NIPS, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sukhbaatar%2C%20Sainbayar%20Szlam%2C%20Arthur%20Weston%2C%20Jason%20Fergus%2C%20Rob%20End-To-End%20Memory%20Networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sukhbaatar%2C%20Sainbayar%20Szlam%2C%20Arthur%20Weston%2C%20Jason%20Fergus%2C%20Rob%20End-To-End%20Memory%20Networks%202015"
+        },
+        {
+            "id": "69",
+            "entry": "[69] Zhaopeng Tu, Zhengdong Lu, Yang Liu, Xiaohua Liu, and Hang Li. Modeling Coverage for Neural Machine Translation. In Proceedings of ACL, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhaopeng%20Tu%20Zhengdong%20Lu%20Yang%20Liu%20Xiaohua%20Liu%20and%20Hang%20Li%20Modeling%20Coverage%20for%20Neural%20Machine%20Translation%20In%20Proceedings%20of%20ACL%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhaopeng%20Tu%20Zhengdong%20Lu%20Yang%20Liu%20Xiaohua%20Liu%20and%20Hang%20Li%20Modeling%20Coverage%20for%20Neural%20Machine%20Translation%20In%20Proceedings%20of%20ACL%202016"
+        },
+        {
+            "id": "70",
+            "entry": "[70] George Tucker, Andriy Mnih, Chris J. Maddison, Dieterich Lawson, and Jascha Sohl-Dickstein. REBAR: Low-variance, Unbiased Gradient Estimates for Discrete Latent Variable Models. In Proceedings of NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tucker%2C%20George%20Mnih%2C%20Andriy%20Maddison%2C%20Chris%20J.%20Lawson%2C%20Dieterich%20REBAR%3A%20Low-variance%2C%20Unbiased%20Gradient%20Estimates%20for%20Discrete%20Latent%20Variable%20Models%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tucker%2C%20George%20Mnih%2C%20Andriy%20Maddison%2C%20Chris%20J.%20Lawson%2C%20Dieterich%20REBAR%3A%20Low-variance%2C%20Unbiased%20Gradient%20Estimates%20for%20Discrete%20Latent%20Variable%20Models%202017"
+        },
+        {
+            "id": "71",
+            "entry": "[71] Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, \u0141ukasz Kaiser, and Illia Polosukhin. Attention is All You Need. In Proceedings of NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vaswani%2C%20Ashish%20Shazeer%2C%20Noam%20Parmar%2C%20Niki%20Uszkoreit%2C%20Jakob%20Attention%20is%20All%20You%20Need%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vaswani%2C%20Ashish%20Shazeer%2C%20Noam%20Parmar%2C%20Niki%20Uszkoreit%2C%20Jakob%20Attention%20is%20All%20You%20Need%202017"
+        },
+        {
+            "id": "72",
+            "entry": "[72] Stephan Vogel, Hermann Ney, and Christoph Tillmann. HMM-based Word Alignment in Statistical Translation. In Proceedings of COLING, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vogel%2C%20Stephan%20Ney%2C%20Hermann%20Tillmann%2C%20Christoph%20HMM-based%20Word%20Alignment%20in%20Statistical%20Translation%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vogel%2C%20Stephan%20Ney%2C%20Hermann%20Tillmann%2C%20Christoph%20HMM-based%20Word%20Alignment%20in%20Statistical%20Translation%201996"
+        },
+        {
+            "id": "73",
+            "entry": "[73] Ronald J. Williams. Simple Statistical Gradient-following Algorithms for Connectionist Reinforcement Learning. Machine Learning, 8, 1992.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%2C%20Ronald%20J.%20Simple%20Statistical%20Gradient-following%20Algorithms%20for%20Connectionist%20Reinforcement%20Learning%201992",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Williams%2C%20Ronald%20J.%20Simple%20Statistical%20Gradient-following%20Algorithms%20for%20Connectionist%20Reinforcement%20Learning%201992"
+        },
+        {
+            "id": "74",
+            "entry": "[74] Sam Wiseman and Alexander M. Rush. Sequence-to-Sequence learning as Beam Search Optimization. In Proceedings of EMNLP, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wiseman%2C%20Sam%20Rush%2C%20Alexander%20M.%20Sequence-to-Sequence%20learning%20as%20Beam%20Search%20Optimization%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wiseman%2C%20Sam%20Rush%2C%20Alexander%20M.%20Sequence-to-Sequence%20learning%20as%20Beam%20Search%20Optimization%202016"
+        },
+        {
+            "id": "75",
+            "entry": "[75] Shijie Wu, Pamela Shapiro, and Ryan Cotterell. Hard Non-Monotonic Attention for Character-Level Transduction. In Proceedings of EMNLP, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20Shijie%20Shapiro%2C%20Pamela%20Cotterell%2C%20Ryan%20Hard%20Non-Monotonic%20Attention%20for%20Character-Level%20Transduction%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20Shijie%20Shapiro%2C%20Pamela%20Cotterell%2C%20Ryan%20Hard%20Non-Monotonic%20Attention%20for%20Character-Level%20Transduction%202018"
+        },
+        {
+            "id": "76",
+            "entry": "[76] Yonghui Wu, Mike Schuster, Zhifeng Chen, Quoc V. Le, Mohammad Norouzi, Wolfgang Macherey, Maxim Krikun, Yuan Cao, Klaus Macherey Qin Gao, Jeff Klingner, Apurva Shah, Melvin Johnson, Xiaobing Liu, Lukasz Kaiser, Stephan Gouws, Yoshikiyo Kato, Taku Kudo, Hideto Kazawa, Keith Stevens, Nishant Patil George Kurian, Wei Wang, Cliff Young, Jason Smith, Jason Riesa, Alex Rudnick, Oriol Vinyals, Greg Corrado, Macduff Hughes, and Jeffrey Dean. Google\u2019s Neural Machine Translation System: Bridging the Gap between Human and Machine Translation. arXiv:1609.08144, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.08144"
+        },
+        {
+            "id": "77",
+            "entry": "[77] Kelvin Xu, Jimmy Ba, Ryan Kiros, Kyunghyun Cho, Aaron Courville, Ruslan Salakhudinov, Rich Zemel, and Yoshua Bengio. Show, Attend and Tell: Neural Image Caption Generation with Visual Attention. In Proceedings of ICML, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kelvin%20Xu%20Jimmy%20Ba%20Ryan%20Kiros%20Kyunghyun%20Cho%20Aaron%20Courville%20Ruslan%20Salakhudinov%20Rich%20Zemel%20and%20Yoshua%20Bengio%20Show%20Attend%20and%20Tell%20Neural%20Image%20Caption%20Generation%20with%20Visual%20Attention%20In%20Proceedings%20of%20ICML%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kelvin%20Xu%20Jimmy%20Ba%20Ryan%20Kiros%20Kyunghyun%20Cho%20Aaron%20Courville%20Ruslan%20Salakhudinov%20Rich%20Zemel%20and%20Yoshua%20Bengio%20Show%20Attend%20and%20Tell%20Neural%20Image%20Caption%20Generation%20with%20Visual%20Attention%20In%20Proceedings%20of%20ICML%202015"
+        },
+        {
+            "id": "78",
+            "entry": "[78] Zichao Yang, Kiaodong He, Jianfeng Gao, Li Deng, and Alex Smola. Stacked Attention Networks for Image Question Answering. In Proceedings of CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yang%2C%20Zichao%20He%2C%20Kiaodong%20Gao%2C%20Jianfeng%20Deng%2C%20Li%20Stacked%20Attention%20Networks%20for%20Image%20Question%20Answering%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yang%2C%20Zichao%20He%2C%20Kiaodong%20Gao%2C%20Jianfeng%20Deng%2C%20Li%20Stacked%20Attention%20Networks%20for%20Image%20Question%20Answering%202016"
+        },
+        {
+            "id": "79",
+            "entry": "[79] Lei Yu, Phil Blunsom, Chris Dyer, Edward Grefenstette, and Tomas Kocisky. The Neural Noisy Channel. In Proceedings of ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lei%20Yu%20Phil%20Blunsom%20Chris%20Dyer%20Edward%20Grefenstette%20and%20Tomas%20Kocisky%20The%20Neural%20Noisy%20Channel%20In%20Proceedings%20of%20ICLR%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lei%20Yu%20Phil%20Blunsom%20Chris%20Dyer%20Edward%20Grefenstette%20and%20Tomas%20Kocisky%20The%20Neural%20Noisy%20Channel%20In%20Proceedings%20of%20ICLR%202017"
+        },
+        {
+            "id": "80",
+            "entry": "[80] Lei Yu, Jan Buys, and Phil Blunsom. Online Segment to Segment Neural Transduction. In Proceedings of EMNLP, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yu%2C%20Lei%20Buys%2C%20Jan%20Blunsom%2C%20Phil%20Online%20Segment%20to%20Segment%20Neural%20Transduction%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yu%2C%20Lei%20Buys%2C%20Jan%20Blunsom%2C%20Phil%20Online%20Segment%20to%20Segment%20Neural%20Transduction%202016"
+        },
+        {
+            "id": "81",
+            "entry": "[81] Biao Zhang, Deyi Xiong, Jinsong Su, Hong Duan, and Min Zhang. Variational Neural Machine Translation. In Proceedings of EMNLP, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Biao%20Zhang%20Deyi%20Xiong%20Jinsong%20Su%20Hong%20Duan%20and%20Min%20Zhang%20Variational%20Neural%20Machine%20Translation%20In%20Proceedings%20of%20EMNLP%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Biao%20Zhang%20Deyi%20Xiong%20Jinsong%20Su%20Hong%20Duan%20and%20Min%20Zhang%20Variational%20Neural%20Machine%20Translation%20In%20Proceedings%20of%20EMNLP%202016"
+        },
+        {
+            "id": "82",
+            "entry": "[82] Chen Zhu, Yanpeng Zhao, Shuaiyi Huang, Kewei Tu, and Yi Ma. Structured Attentions for Visual Question Answering. In Proceedings of ICCV, 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhu%2C%20Chen%20Zhao%2C%20Yanpeng%20Huang%2C%20Shuaiyi%20Tu%2C%20Kewei%20Structured%20Attentions%20for%20Visual%20Question%20Answering%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhu%2C%20Chen%20Zhao%2C%20Yanpeng%20Huang%2C%20Shuaiyi%20Tu%2C%20Kewei%20Structured%20Attentions%20for%20Visual%20Question%20Answering%202017"
+        }
+    ]
+}

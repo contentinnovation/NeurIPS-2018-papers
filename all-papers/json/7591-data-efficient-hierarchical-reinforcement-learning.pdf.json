@@ -1,0 +1,350 @@
+{
+    "filename": "7591-data-efficient-hierarchical-reinforcement-learning.pdf",
+    "metadata": {
+        "title": "Data-Efficient Hierarchical Reinforcement Learning",
+        "author": "Ofir Nachum, Shixiang (Shane) Gu, Honglak Lee, Sergey Levine",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7591-data-efficient-hierarchical-reinforcement-learning.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Hierarchical reinforcement learning (HRL) is a promising approach to extend traditional reinforcement learning (RL) methods to solve more complex tasks. Yet, the majority of current HRL methods require careful task-specific design and on-policy training, making them difficult to apply in real-world scenarios. In this paper, we study how we can develop HRL algorithms that are general, in that they do not make onerous additional assumptions beyond standard RL algorithms, and efficient, in the sense that they can be used with modest numbers of interaction samples, making them suitable for real-world problems such as robotic control. For generality, we develop a scheme where lower-level controllers are supervised with goals that are learned and proposed automatically by the higher-level controllers. To address efficiency, we propose to use off-policy experience for both higherand lower-level training. This poses a considerable challenge, since changes to the lower-level behaviors change the action space for the higher-level policy, and we introduce an off-policy correction to remedy this challenge. This allows us to take advantage of recent advances in off-policy model-free RL to learn both higherand lower-level policies using substantially fewer environment interactions than on-policy algorithms. We term the resulting HRL agent HIRO and find that it is generally applicable and highly sample-efficient. Our experiments show that HIRO can be used to learn highly complex behaviors for simulated robots, such as pushing objects and utilizing them to reach target locations,1 learning from only a few million samples, equivalent to a few days of real-time interaction. In comparisons with a number of prior HRL methods, we find that our approach substantially outperforms previous state-of-the-art techniques.2"
+    },
+    "keywords": [
+        {
+            "term": "high level",
+            "url": "https://en.wikipedia.org/wiki/high_level"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "real time",
+            "url": "https://en.wikipedia.org/wiki/real_time"
+        },
+        {
+            "term": "low level",
+            "url": "https://en.wikipedia.org/wiki/low_level"
+        },
+        {
+            "term": "real world",
+            "url": "https://en.wikipedia.org/wiki/real_world"
+        }
+    ],
+    "highlights": [
+        "We adopt the standard continuous control reinforcement learning setting, in which an agent interacts with an environment over periods of time according to a behavior policy \u03bc",
+        "Since the lower-level policy is changing underneath the higher-level policy, a sample observed for a certain high-level action in the past may not yield the same low-level behavior in the future, and not be a valid experience for training",
+        "While these tasks are unsolvable by existing non-Hierarchical reinforcement learning methods, we find that our Hierarchical reinforcement learning setup can learn successful policies",
+        "In Figure 4 we present results of our proposed Hierarchical reinforcement learning method (\u201cHIRO\u201d) compared with a number of variants to understand the importance of various design choices: With lower-level re-labelling",
+        "Our experiments show that our method outperforms prior Hierarchical reinforcement learning algorithms and can solve exceedingly complex tasks that combine locomotion and rudimentary object interaction",
+        "We note that our results are still far from perfect, and there is much work left for future research to improve the stability and performance of Hierarchical reinforcement learning methods on these tasks"
+    ],
+    "key_statements": [
+        "We adopt the standard continuous control reinforcement learning setting, in which an agent interacts with an environment over periods of time according to a behavior policy \u03bc",
+        "Since the lower-level policy is changing underneath the higher-level policy, a sample observed for a certain high-level action in the past may not yield the same low-level behavior in the future, and not be a valid experience for training",
+        "We are able to use past experience for training the higher-level policy, taking advantage of progress made in recent years to provide stable, robust, and general off-policy reinforcement learning methods [<a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>, <a class=\"ref-link\" id=\"c31\" href=\"#r31\">31</a>, <a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>]",
+        "While these tasks are unsolvable by existing non-Hierarchical reinforcement learning methods, we find that our Hierarchical reinforcement learning setup can learn successful policies",
+        "We adopt the standard continuous control reinforcement learning setting, in which an agent interacts with an environment over periods of time according to a behavior policy \u03bc",
+        "We present our framework for learning hierarchical policies, HIRO: HIerarchical Reinforcement learning with Off-policy correction",
+        "We extend the standard reinforcement learning setup to a hierarchical two-layer structure, with a lower-level policy \u03bclo and a higher-level policy \u03bchi",
+        "While a number of prior works have proposed two-level Hierarchical reinforcement learning architectures that involve some sort of goal setting, such designs in previous work generally require on-policy training [<a class=\"ref-link\" id=\"c48\" href=\"#r48\">48</a>]",
+        "In Figure 4 we present results of our proposed Hierarchical reinforcement learning method (\u201cHIRO\u201d) compared with a number of variants to understand the importance of various design choices: With lower-level re-labelling",
+        "We evaluate the ability of a single non-Hierarchical reinforcement learning policy to learn in these environments",
+        "Our experiments show that our method outperforms prior Hierarchical reinforcement learning algorithms and can solve exceedingly complex tasks that combine locomotion and rudimentary object interaction",
+        "We note that our results are still far from perfect, and there is much work left for future research to improve the stability and performance of Hierarchical reinforcement learning methods on these tasks"
+    ],
+    "summary": [
+        "We adopt the standard continuous control RL setting, in which an agent interacts with an environment over periods of time according to a behavior policy \u03bc.",
+        "Hierarchical reinforcement learning (HRL), in which multiple layers of policies are trained to perform decision-making and control at successively higher levels of temporal and behavioral abstraction, has long held the promise to learn such difficult tasks [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>, <a class=\"ref-link\" id=\"c32\" href=\"#r32\">32</a>, <a class=\"ref-link\" id=\"c43\" href=\"#r43\">43</a>, <a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>].",
+        "Since the lower-level policy is changing underneath the higher-level policy, a sample observed for a certain high-level action in the past may not yield the same low-level behavior in the future, and not be a valid experience for training.",
+        "We are able to use past experience for training the higher-level policy, taking advantage of progress made in recent years to provide stable, robust, and general off-policy RL methods [<a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>, <a class=\"ref-link\" id=\"c31\" href=\"#r31\">31</a>, <a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>].",
+        "Our method achieves generality by training the lower-level policy to reach goal states learned and instructed by the higher-levels.",
+        "We make use of parameterized reward functions to specify a potentially infinite set of lower-level policies, each of which is trained to match its observed states st to a desired goal.",
+        "The higher-level policy observes the state and produces a high-level action gt \u2208 Rds by either sampling from its policy gt \u223c \u03bchi when t \u2261 0, or otherwise using a fixed goal transition function gt = h.",
+        "The lower-level policy \u03bclo observes the state st and goal gt and produces a low-level atomic action at \u223c \u03bclo, which is applied to the environment.",
+        "At step t, the higher-level policy produces a goal gt, indicating its desire for the lower-level agent to take actions that yield it an observation st+c that is close to st + gt.",
+        "While a number of prior works have proposed two-level HRL architectures that involve some sort of goal setting, such designs in previous work generally require on-policy training [<a class=\"ref-link\" id=\"c48\" href=\"#r48\">48</a>].",
+        "This suggests that the choice of using goal observations as lower-level goals significantly improves HRL performance, by providing a strong supervision signal to the lower-level policy right from the beginning of training.",
+        "In Figure 4 we present results of our proposed HRL method (\u201cHIRO\u201d) compared with a number of variants to understand the importance of various design choices: With lower-level re-labelling.",
+        "We evaluate the benefit of recent proposals [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>] to increase the amount of data available to an agent trained using a parameterized reward by re-labeling experiences with randomly sampled goals.",
+        "We hypothesize that re-labeling goals randomly may make lower-level training more difficult, since the policy must learn to not only satisfy the goals provided by the higher-level agent, but instead almost any conceivable goal.",
+        "We note that our results are still far from perfect, and there is much work left for future research to improve the stability and performance of HRL methods on these tasks"
+    ],
+    "headline": "We study how we can develop Hierarchical reinforcement learning algorithms that are general, in that they do not make onerous additional assumptions beyond standard reinforcement learning algorithms, and efficient, in the sense that they can be used with modest numbers of interaction samples, making them suitable for real-world problems such as robotic control",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Marcin Andrychowicz, Filip Wolski, Alex Ray, Jonas Schneider, Rachel Fong, Peter Welinder, Bob McGrew, Josh Tobin, OpenAI Pieter Abbeel, and Wojciech Zaremba. Hindsight experience replay. In Advances in Neural Information Processing Systems, pages 5048\u20135058, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Andrychowicz%2C%20Marcin%20Wolski%2C%20Filip%20Ray%2C%20Alex%20Schneider%2C%20Jonas%20Hindsight%20experience%20replay%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Andrychowicz%2C%20Marcin%20Wolski%2C%20Filip%20Ray%2C%20Alex%20Schneider%2C%20Jonas%20Hindsight%20experience%20replay%202017"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Pierre-Luc Bacon, Jean Harb, and Doina Precup. The option-critic architecture. In AAAI, pages 1726\u20131734, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bacon%2C%20Pierre-Luc%20Harb%2C%20Jean%20Precup%2C%20Doina%20The%20option-critic%20architecture%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bacon%2C%20Pierre-Luc%20Harb%2C%20Jean%20Precup%2C%20Doina%20The%20option-critic%20architecture%202017"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Gabriel Barth-Maron, Matthew W Hoffman, David Budden, Will Dabney, Dan Horgan, Alistair Muldal, Nicolas Heess, and Timothy Lillicrap. Distributed distributional deterministic policy gradients. arXiv preprint arXiv:1804.08617, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1804.08617"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Andrew G Barto and Sridhar Mahadevan. Recent advances in hierarchical reinforcement learning. Discrete Event Dynamic Systems, 13(4):341\u2013379, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Barto%2C%20Andrew%20G.%20Mahadevan%2C%20Sridhar%20Recent%20advances%20in%20hierarchical%20reinforcement%20learning%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Barto%2C%20Andrew%20G.%20Mahadevan%2C%20Sridhar%20Recent%20advances%20in%20hierarchical%20reinforcement%20learning%202003"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Nuttapong Chentanez, Andrew G Barto, and Satinder P Singh. Intrinsically motivated reinforcement learning. In Advances in neural information processing systems, pages 1281\u20131288, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chentanez%2C%20Nuttapong%20Barto%2C%20Andrew%20G.%20Singh%2C%20Satinder%20P.%20Intrinsically%20motivated%20reinforcement%20learning%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chentanez%2C%20Nuttapong%20Barto%2C%20Andrew%20G.%20Singh%2C%20Satinder%20P.%20Intrinsically%20motivated%20reinforcement%20learning%202005"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Christian Daniel, Gerhard Neumann, and Jan Peters. Hierarchical relative entropy policy search. In Artificial Intelligence and Statistics, pages 273\u2013281, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Daniel%2C%20Christian%20Neumann%2C%20Gerhard%20Peters%2C%20Jan%20Hierarchical%20relative%20entropy%20policy%20search%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Daniel%2C%20Christian%20Neumann%2C%20Gerhard%20Peters%2C%20Jan%20Hierarchical%20relative%20entropy%20policy%20search%202012"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Peter Dayan and Geoffrey E Hinton. Feudal reinforcement learning. In Advances in neural information processing systems, pages 271\u2013278, 1993.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dayan%2C%20Peter%20Hinton%2C%20Geoffrey%20E.%20Feudal%20reinforcement%20learning%201993",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dayan%2C%20Peter%20Hinton%2C%20Geoffrey%20E.%20Feudal%20reinforcement%20learning%201993"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Thomas G Dietterich. Hierarchical reinforcement learning with the maxq value function decomposition. Journal of Artificial Intelligence Research, 13:227\u2013303, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dietterich%2C%20Thomas%20G.%20Hierarchical%20reinforcement%20learning%20with%20the%20maxq%20value%20function%20decomposition%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dietterich%2C%20Thomas%20G.%20Hierarchical%20reinforcement%20learning%20with%20the%20maxq%20value%20function%20decomposition%202000"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Yan Duan, Xi Chen, Rein Houthooft, John Schulman, and Pieter Abbeel. Benchmarking deep reinforcement learning for continuous control. In International Conference on Machine Learning, pages 1329\u20131338, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Duan%2C%20Yan%20Chen%2C%20Xi%20Houthooft%2C%20Rein%20Schulman%2C%20John%20Benchmarking%20deep%20reinforcement%20learning%20for%20continuous%20control%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Duan%2C%20Yan%20Chen%2C%20Xi%20Houthooft%2C%20Rein%20Schulman%2C%20John%20Benchmarking%20deep%20reinforcement%20learning%20for%20continuous%20control%202016"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Carlos Florensa, Yan Duan, and Pieter Abbeel. Stochastic neural networks for hierarchical reinforcement learning. arXiv preprint arXiv:1704.03012, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1704.03012"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Kevin Frans, Jonathan Ho, Xi Chen, Pieter Abbeel, and John Schulman. Meta learning shared hierarchies. International Conference on Learning Representations (ICLR), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Frans%2C%20Kevin%20Ho%2C%20Jonathan%20Chen%2C%20Xi%20Abbeel%2C%20Pieter%20Meta%20learning%20shared%20hierarchies%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Frans%2C%20Kevin%20Ho%2C%20Jonathan%20Chen%2C%20Xi%20Abbeel%2C%20Pieter%20Meta%20learning%20shared%20hierarchies%202018"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Scott Fujimoto, Herke van Hoof, and Dave Meger. Addressing function approximation error in actor-critic methods. arXiv preprint arXiv:1802.09477, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.09477"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Shixiang Gu, Ethan Holly, Timothy Lillicrap, and Sergey Levine. Deep reinforcement learning for robotic manipulation with asynchronous off-policy updates. In Robotics and Automation (ICRA), 2017 IEEE International Conference on, pages 3389\u20133396. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gu%2C%20Shixiang%20Holly%2C%20Ethan%20Lillicrap%2C%20Timothy%20Levine%2C%20Sergey%20Deep%20reinforcement%20learning%20for%20robotic%20manipulation%20with%20asynchronous%20off-policy%20updates%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gu%2C%20Shixiang%20Holly%2C%20Ethan%20Lillicrap%2C%20Timothy%20Levine%2C%20Sergey%20Deep%20reinforcement%20learning%20for%20robotic%20manipulation%20with%20asynchronous%20off-policy%20updates%202017"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Shixiang Gu, Tim Lillicrap, Richard E Turner, Zoubin Ghahramani, Bernhard Sch\u00f6lkopf, and Sergey Levine. Interpolated policy gradient: Merging on-policy and off-policy gradient estimation for deep reinforcement learning. In Advances in Neural Information Processing Systems, pages 3849\u20133858, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gu%2C%20Shixiang%20Lillicrap%2C%20Tim%20Turner%2C%20Richard%20E.%20Ghahramani%2C%20Zoubin%20Interpolated%20policy%20gradient%3A%20Merging%20on-policy%20and%20off-policy%20gradient%20estimation%20for%20deep%20reinforcement%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gu%2C%20Shixiang%20Lillicrap%2C%20Tim%20Turner%2C%20Richard%20E.%20Ghahramani%2C%20Zoubin%20Interpolated%20policy%20gradient%3A%20Merging%20on-policy%20and%20off-policy%20gradient%20estimation%20for%20deep%20reinforcement%20learning%202017"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Shixiang Gu, Timothy Lillicrap, Zoubin Ghahramani, Richard E Turner, and Sergey Levine. Q-prop: Sample-efficient policy gradient with an off-policy critic. arXiv preprint arXiv:1611.02247, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.02247"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Tuomas Haarnoja, Aurick Zhou, Pieter Abbeel, and Sergey Levine. Soft actor-critic: Offpolicy maximum entropy deep reinforcement learning with a stochastic actor. arXiv preprint arXiv:1801.01290, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1801.01290"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Jean Harb, Pierre-Luc Bacon, Martin Klissarov, and Doina Precup. When waiting is not an option: Learning options with a deliberation cost. arXiv preprint arXiv:1709.04571, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1709.04571"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Nicolas Heess, Srinivasan Sriram, Jay Lemmon, Josh Merel, Greg Wayne, Yuval Tassa, Tom Erez, Ziyu Wang, Ali Eslami, Martin Riedmiller, et al. Emergence of locomotion behaviours in rich environments. arXiv preprint arXiv:1707.02286, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.02286"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Nicolas Heess, Greg Wayne, Yuval Tassa, Timothy Lillicrap, Martin Riedmiller, and David Silver. Learning and transfer of modulated locomotor controllers. arXiv preprint arXiv:1610.05182, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1610.05182"
+        },
+        {
+            "id": "20",
+            "entry": "[20] David Held, Xinyang Geng, Carlos Florensa, and Pieter Abbeel. Automatic goal generation for reinforcement learning agents. arXiv preprint arXiv:1705.06366, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1705.06366"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Rein Houthooft, Xi Chen, Yan Duan, John Schulman, Filip De Turck, and Pieter Abbeel. Vime: Variational information maximizing exploration. In Advances in Neural Information Processing Systems, pages 1109\u20131117, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Houthooft%2C%20Rein%20Chen%2C%20Xi%20Duan%2C%20Yan%20Schulman%2C%20John%20Vime%3A%20Variational%20information%20maximizing%20exploration%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Houthooft%2C%20Rein%20Chen%2C%20Xi%20Duan%2C%20Yan%20Schulman%2C%20John%20Vime%3A%20Variational%20information%20maximizing%20exploration%202016"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Diederik P Kingma and Max Welling. Auto-encoding variational bayes. arXiv preprint arXiv:1312.6114, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.6114"
+        },
+        {
+            "id": "23",
+            "entry": "[23] George Konidaris and Andrew G Barto. Building portable options: Skill transfer in reinforcement learning. In IJCAI, volume 7, pages 895\u2013900, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Konidaris%2C%20George%20Barto%2C%20Andrew%20G.%20Building%20portable%20options%3A%20Skill%20transfer%20in%20reinforcement%20learning%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Konidaris%2C%20George%20Barto%2C%20Andrew%20G.%20Building%20portable%20options%3A%20Skill%20transfer%20in%20reinforcement%20learning%202007"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Tejas D Kulkarni, Karthik Narasimhan, Ardavan Saeedi, and Josh Tenenbaum. Hierarchical deep reinforcement learning: Integrating temporal abstraction and intrinsic motivation. In Advances in neural information processing systems, pages 3675\u20133683, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kulkarni%2C%20Tejas%20D.%20Narasimhan%2C%20Karthik%20Saeedi%2C%20Ardavan%20Tenenbaum%2C%20Josh%20Hierarchical%20deep%20reinforcement%20learning%3A%20Integrating%20temporal%20abstraction%20and%20intrinsic%20motivation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kulkarni%2C%20Tejas%20D.%20Narasimhan%2C%20Karthik%20Saeedi%2C%20Ardavan%20Tenenbaum%2C%20Josh%20Hierarchical%20deep%20reinforcement%20learning%3A%20Integrating%20temporal%20abstraction%20and%20intrinsic%20motivation%202016"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Sergey Levine, Shane Gu, and Vitchyr Pong. Temporal difference model learning: Model-free deep rl for model-based control. 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Levine%2C%20Sergey%20Gu%2C%20Shane%20Pong%2C%20Vitchyr%20Temporal%20difference%20model%20learning%3A%20Model-free%20deep%20rl%20for%20model-based%20control%202018"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Andrew Levy, Robert Platt, and Kate Saenko. Hierarchical actor-critic. arXiv preprint arXiv:1712.00948, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1712.00948"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Timothy P Lillicrap, Jonathan J Hunt, Alexander Pritzel, Nicolas Heess, Tom Erez, Yuval Tassa, David Silver, and Daan Wierstra. Continuous control with deep reinforcement learning. arXiv preprint arXiv:1509.02971, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1509.02971"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Sridhar Mahadevan and Mauro Maggioni. Proto-value functions: A laplacian framework for learning representation and control in markov decision processes. Journal of Machine Learning Research, 8(Oct):2169\u20132231, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mahadevan%2C%20Sridhar%20Maggioni%2C%20Mauro%20Proto-value%20functions%3A%20A%20laplacian%20framework%20for%20learning%20representation%20and%20control%20in%20markov%20decision%20processes%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mahadevan%2C%20Sridhar%20Maggioni%2C%20Mauro%20Proto-value%20functions%3A%20A%20laplacian%20framework%20for%20learning%20representation%20and%20control%20in%20markov%20decision%20processes%202007"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Shie Mannor, Ishai Menache, Amit Hoze, and Uri Klein. Dynamic abstraction in reinforcement learning via clustering. In Proceedings of the twenty-first international conference on Machine learning, page 71. ACM, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mannor%2C%20Shie%20Menache%2C%20Ishai%20Hoze%2C%20Amit%20Klein%2C%20Uri%20Dynamic%20abstraction%20in%20reinforcement%20learning%20via%20clustering%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mannor%2C%20Shie%20Menache%2C%20Ishai%20Hoze%2C%20Amit%20Klein%2C%20Uri%20Dynamic%20abstraction%20in%20reinforcement%20learning%20via%20clustering%202004"
+        },
+        {
+            "id": "30",
+            "entry": "[30] R\u00e9mi Munos, Tom Stepleton, Anna Harutyunyan, and Marc Bellemare. Safe and efficient off-policy reinforcement learning. In Advances in Neural Information Processing Systems, pages 1054\u20131062, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Munos%2C%20R%C3%A9mi%20Stepleton%2C%20Tom%20Harutyunyan%2C%20Anna%20Bellemare%2C%20Marc%20Safe%20and%20efficient%20off-policy%20reinforcement%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Munos%2C%20R%C3%A9mi%20Stepleton%2C%20Tom%20Harutyunyan%2C%20Anna%20Bellemare%2C%20Marc%20Safe%20and%20efficient%20off-policy%20reinforcement%20learning%202016"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Ofir Nachum, Mohammad Norouzi, Kelvin Xu, and Dale Schuurmans. Trust-pcl: An off-policy trust region method for continuous control. arXiv preprint arXiv:1707.01891, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.01891"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Ronald Parr and Stuart J Russell. Reinforcement learning with hierarchies of machines. In Advances in neural information processing systems, pages 1043\u20131049, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Parr%2C%20Ronald%20Russell%2C%20Stuart%20J.%20Reinforcement%20learning%20with%20hierarchies%20of%20machines%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Parr%2C%20Ronald%20Russell%2C%20Stuart%20J.%20Reinforcement%20learning%20with%20hierarchies%20of%20machines%201998"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Matthias Plappert, Marcin Andrychowicz, Alex Ray, Bob McGrew, Bowen Baker, Glenn Powell, Jonas Schneider, Josh Tobin, Maciek Chociej, Peter Welinder, et al. Multi-goal reinforcement learning: Challenging robotics environments and request for research. arXiv preprint arXiv:1802.09464, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.09464"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Vitchyr Pong, Shixiang Gu, Murtaza Dalal, and Sergey Levine. Temporal difference models: Model-free deep rl for model-based control. International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pong%2C%20Vitchyr%20Gu%2C%20Shixiang%20Dalal%2C%20Murtaza%20Levine%2C%20Sergey%20Temporal%20difference%20models%3A%20Model-free%20deep%20rl%20for%20model-based%20control%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pong%2C%20Vitchyr%20Gu%2C%20Shixiang%20Dalal%2C%20Murtaza%20Levine%2C%20Sergey%20Temporal%20difference%20models%3A%20Model-free%20deep%20rl%20for%20model-based%20control%202018"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Doina Precup. Temporal abstraction in reinforcement learning. University of Massachusetts Amherst, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Precup%2C%20Doina%20Temporal%20abstraction%20in%20reinforcement%20learning%202000"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Aravind Rajeswaran, Vikash Kumar, Abhishek Gupta, John Schulman, Emanuel Todorov, and Sergey Levine. Learning complex dexterous manipulation with deep reinforcement learning and demonstrations. arXiv preprint arXiv:1709.10087, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1709.10087"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Aravind Rajeswaran, Kendall Lowrey, Emanuel V Todorov, and Sham M Kakade. Towards generalization and simplicity in continuous control. In Advances in Neural Information Processing Systems, pages 6553\u20136564, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rajeswaran%2C%20Aravind%20Lowrey%2C%20Kendall%20Todorov%2C%20Emanuel%20V.%20Kakade%2C%20Sham%20M.%20Towards%20generalization%20and%20simplicity%20in%20continuous%20control%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rajeswaran%2C%20Aravind%20Lowrey%2C%20Kendall%20Todorov%2C%20Emanuel%20V.%20Kakade%2C%20Sham%20M.%20Towards%20generalization%20and%20simplicity%20in%20continuous%20control%202017"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Tom Schaul, Daniel Horgan, Karol Gregor, and David Silver. Universal value function approximators. In International Conference on Machine Learning, pages 1312\u20131320, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tom%20Schaul%20Daniel%20Horgan%20Karol%20Gregor%20and%20David%20Silver%20Universal%20value%20function%20approximators%20In%20International%20Conference%20on%20Machine%20Learning%20pages%2013121320%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tom%20Schaul%20Daniel%20Horgan%20Karol%20Gregor%20and%20David%20Silver%20Universal%20value%20function%20approximators%20In%20International%20Conference%20on%20Machine%20Learning%20pages%2013121320%202015"
+        },
+        {
+            "id": "39",
+            "entry": "[39] John Schulman, Sergey Levine, Pieter Abbeel, Michael Jordan, and Philipp Moritz. Trust region policy optimization. In International Conference on Machine Learning, pages 1889\u20131897, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schulman%2C%20John%20Levine%2C%20Sergey%20Abbeel%2C%20Pieter%20Jordan%2C%20Michael%20Trust%20region%20policy%20optimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schulman%2C%20John%20Levine%2C%20Sergey%20Abbeel%2C%20Pieter%20Jordan%2C%20Michael%20Trust%20region%20policy%20optimization%202015"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Olivier Sigaud and Freek Stulp. Policy search in continuous action domains: an overview. arXiv preprint arXiv:1803.04706, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.04706"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Martin Stolle and Doina Precup. Learning options in reinforcement learning. In International Symposium on abstraction, reformulation, and approximation, pages 212\u2013223.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Stolle%2C%20Martin%20Precup%2C%20Doina%20Learning%20options%20in%20reinforcement%20learning",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Stolle%2C%20Martin%20Precup%2C%20Doina%20Learning%20options%20in%20reinforcement%20learning"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Richard S Sutton, Joseph Modayil, Michael Delp, Thomas Degris, Patrick M Pilarski, Adam White, and Doina Precup. Horde: A scalable real-time architecture for learning knowledge from unsupervised sensorimotor interaction. In The 10th International Conference on Autonomous Agents and Multiagent Systems-Volume 2, pages 761\u2013768. International Foundation for Autonomous Agents and Multiagent Systems, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20Richard%20S.%20Modayil%2C%20Joseph%20Delp%2C%20Michael%20Degris%2C%20Thomas%20Horde%3A%20A%20scalable%20real-time%20architecture%20for%20learning%20knowledge%20from%20unsupervised%20sensorimotor%20interaction%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutton%2C%20Richard%20S.%20Modayil%2C%20Joseph%20Delp%2C%20Michael%20Degris%2C%20Thomas%20Horde%3A%20A%20scalable%20real-time%20architecture%20for%20learning%20knowledge%20from%20unsupervised%20sensorimotor%20interaction%202011"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Richard S Sutton, Doina Precup, and Satinder Singh. Between mdps and semi-mdps: A framework for temporal abstraction in reinforcement learning. Artificial intelligence, 112(12):181\u2013211, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20Richard%20S.%20Precup%2C%20Doina%20Singh%2C%20Satinder%20Between%20mdps%20and%20semi-mdps%3A%20A%20framework%20for%20temporal%20abstraction%20in%20reinforcement%20learning%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutton%2C%20Richard%20S.%20Precup%2C%20Doina%20Singh%2C%20Satinder%20Between%20mdps%20and%20semi-mdps%3A%20A%20framework%20for%20temporal%20abstraction%20in%20reinforcement%20learning%201999"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Chen Tessler, Shahar Givony, Tom Zahavy, Daniel J Mankowitz, and Shie Mannor. A deep hierarchical approach to lifelong learning in minecraft. In AAAI, volume 3, page 6, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tessler%2C%20Chen%20Givony%2C%20Shahar%20Zahavy%2C%20Tom%20Mankowitz%2C%20Daniel%20J.%20A%20deep%20hierarchical%20approach%20to%20lifelong%20learning%20in%20minecraft%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tessler%2C%20Chen%20Givony%2C%20Shahar%20Zahavy%2C%20Tom%20Mankowitz%2C%20Daniel%20J.%20A%20deep%20hierarchical%20approach%20to%20lifelong%20learning%20in%20minecraft%202017"
+        },
+        {
+            "id": "45",
+            "entry": "[45] Emanuel Todorov, Tom Erez, and Yuval Tassa. Mujoco: A physics engine for model-based control. In Intelligent Robots and Systems (IROS), 2012 IEEE/RSJ International Conference on, pages 5026\u20135033. IEEE, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Todorov%2C%20Emanuel%20Erez%2C%20Tom%20Tassa%2C%20Yuval%20Mujoco%3A%20A%20physics%20engine%20for%20model-based%20control%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Todorov%2C%20Emanuel%20Erez%2C%20Tom%20Tassa%2C%20Yuval%20Mujoco%3A%20A%20physics%20engine%20for%20model-based%20control%202012"
+        },
+        {
+            "id": "46",
+            "entry": "[46] Matej Vecer\u00edk, Todd Hester, Jonathan Scholz, Fumin Wang, Olivier Pietquin, Bilal Piot, Nicolas Heess, Thomas Roth\u00f6rl, Thomas Lampe, and Martin Riedmiller. Leveraging demonstrations for deep reinforcement learning on robotics problems with sparse rewards. arXiv preprint arXiv:1707.08817, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.08817"
+        },
+        {
+            "id": "47",
+            "entry": "[47] Alexander Vezhnevets, Volodymyr Mnih, Simon Osindero, Alex Graves, Oriol Vinyals, John Agapiou, et al. Strategic attentive writer for learning macro-actions. In Advances in neural information processing systems, pages 3486\u20133494, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vezhnevets%2C%20Alexander%20Mnih%2C%20Volodymyr%20Osindero%2C%20Simon%20Graves%2C%20Alex%20Strategic%20attentive%20writer%20for%20learning%20macro-actions%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vezhnevets%2C%20Alexander%20Mnih%2C%20Volodymyr%20Osindero%2C%20Simon%20Graves%2C%20Alex%20Strategic%20attentive%20writer%20for%20learning%20macro-actions%202016"
+        },
+        {
+            "id": "48",
+            "entry": "[48] Alexander Sasha Vezhnevets, Simon Osindero, Tom Schaul, Nicolas Heess, Max Jaderberg, David Silver, and Koray Kavukcuoglu. Feudal networks for hierarchical reinforcement learning. arXiv preprint arXiv:1703.01161, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.01161"
+        },
+        {
+            "id": "49",
+            "entry": "[49] Ziyu Wang, Victor Bapst, Nicolas Heess, Volodymyr Mnih, Remi Munos, Koray Kavukcuoglu, and Nando de Freitas. Sample efficient actor-critic with experience replay. International Conference on Learning Representations, 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Ziyu%20Bapst%2C%20Victor%20Heess%2C%20Nicolas%20Mnih%2C%20Volodymyr%20Sample%20efficient%20actor-critic%20with%20experience%20replay%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Ziyu%20Bapst%2C%20Victor%20Heess%2C%20Nicolas%20Mnih%2C%20Volodymyr%20Sample%20efficient%20actor-critic%20with%20experience%20replay%202017"
+        }
+    ]
+}

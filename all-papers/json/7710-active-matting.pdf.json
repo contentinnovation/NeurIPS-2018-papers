@@ -1,0 +1,214 @@
+{
+    "filename": "7710-active-matting.pdf",
+    "metadata": {
+        "title": "Xin Yang\u2217 Dalian University of Technology City University of Hong Kong xinyang@dlut.edu.cn",
+        "author": "Shaozhe Chen Dalian University of Technology csz@mail.dlut.edu.cn",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7710-active-matting.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Image matting is an ill-posed problem. It requires a user input trimap or some strokes to obtain an alpha matte of the foreground object. A fine user input is essential to obtain a good result, which is either time consuming or suitable for experienced users who know where to place the strokes. In this paper, we explore the intrinsic relationship between the user input and the matting algorithm to address the problem of where and when the user should provide the input. Our aim is to discover the most informative sequence of regions for user input in order to produce a good alpha matte with minimum labeling efforts. To this end, we propose an active matting method with recurrent reinforcement learning. The proposed framework involves human in the loop by sequentially detecting informative regions for trivial human judgement. Comparing to traditional matting algorithms, the proposed framework requires much less efforts, and can produce satisfactory results with just 10 regions. Through extensive experiments, we show that the proposed model reduces user efforts significantly and achieves comparable performance to dense trimaps in a user-friendly manner. We further show that the learned informative knowledge can be generalized across different matting algorithms."
+    },
+    "keywords": [
+        {
+            "term": "user input",
+            "url": "https://en.wikipedia.org/wiki/user_input"
+        },
+        {
+            "term": "alpha matte",
+            "url": "https://en.wikipedia.org/wiki/alpha_matte"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        }
+    ],
+    "highlights": [
+        "Alpha matting refers to accurately extracting a foreground object of interest from an input image",
+        "Alpha matting can be modeled by the following under-constrained equation: Iz = \u03b1zFz + (1 \u2212 \u03b1z)Bz, (1)",
+        "F and B refer to the output foreground and background images. \u03b1 is the alpha matte, whose values range between [0, 1] defining the opacity of the foreground",
+        "We propose an active model to learn to detect informative regions for alpha matting",
+        "The proposed network learns from the user feedbacks, and we adopt reinforcement learning to assign training reward for each detected informative region",
+        "We have constructed the following baselines in our experiments: B1: Since we sequentially generate the informative regions, and their effectiveness is measured by the Root Mean Square Error between the produced alpha matte and the ground truth matte, there must be an ideal sequence that would produce the minimum Root Mean Square Error at each step"
+    ],
+    "key_statements": [
+        "Alpha matting refers to accurately extracting a foreground object of interest from an input image",
+        "Alpha matting can be modeled by the following under-constrained equation: Iz = \u03b1zFz + (1 \u2212 \u03b1z)Bz, (1)",
+        "F and B refer to the output foreground and background images. \u03b1 is the alpha matte, whose values range between [0, 1] defining the opacity of the foreground",
+        "We propose an active matting model with a recurrent neural network to discover these informative regions",
+        "We propose an active model to learn to detect informative regions for alpha matting",
+        "Our model can actively suggest a small number of informative regions for the user to label.\n2",
+        "We propose a recurrent network with the reinforcement learning strategy",
+        "We have considered two key problems in our model design: how to detect the most informative region based on the previously suggested regions and user feedbacks, and how to allow the proposed method to work with arbitrary matting algorithms",
+        "The proposed network learns from the user feedbacks, and we adopt reinforcement learning to assign training reward for each detected informative region",
+        "We have constructed the following baselines in our experiments: B1: Since we sequentially generate the informative regions, and their effectiveness is measured by the Root Mean Square Error between the produced alpha matte and the ground truth matte, there must be an ideal sequence that would produce the minimum Root Mean Square Error at each step",
+        "We show that the proposed informative regions can achieve comparable results to the trimap-based method with less labeling efforts",
+        "We use shared matting [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>] for computing mattes during training, results show that our informative regions are general across different matting algorithms",
+        "We plan to develop a differentiable model using convolutional neural networks, instead of existing matting solvers, to fully exploit the information obtained from the proposed informative regions"
+    ],
+    "summary": [
+        "Alpha matting refers to accurately extracting a foreground object of interest from an input image.",
+        "We propose an active matting model with a recurrent neural network to discover these informative regions.",
+        "We propose an active model to learn to detect informative regions for alpha matting.",
+        "Our model can actively suggest a small number of informative regions for the user to label.",
+        "We have considered two key problems in our model design: how to detect the most informative region based on the previously suggested regions and user feedbacks, and how to allow the proposed method to work with arbitrary matting algorithms.",
+        "The proposed network learns from the user feedbacks, and we adopt reinforcement learning to assign training reward for each detected informative region.",
+        "The proposed active model needs to establish a connection between the matting solver, the suggested regions, and the ground truth matte.",
+        "To obtain supervision for the proposed model, each suggested region is fed to the matting solver, and its output matte is compared with the ground truth matte.",
+        "We have constructed the following baselines in our experiments: B1: Since we sequentially generate the informative regions, and their effectiveness is measured by the RMSE between the produced alpha matte and the ground truth matte, there must be an ideal sequence that would produce the minimum RMSE at each step.",
+        "Results show that the proposed 20 informative regions yield comparable matting performance to a fine-labelled trimap in terms of quality.",
+        "Our active model is free from trimaps, and it takes around 1 minute from feeding an image input to getting an alpha matte.",
+        "We show that the proposed informative regions can achieve comparable results to the trimap-based method with less labeling efforts.",
+        "We use shared matting [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>] for computing mattes during training, results show that our informative regions are general across different matting algorithms.",
+        "As shown in Figure 4, the active model proposes 10 regions to a user for labeling, and two users are asked to draw 10 scribbles on the image for comparison.",
+        "The proposed active model can accurately find the right region such that the matting algorithm [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>] can distinguish the foreground and background layers by color distributions.",
+        "Our model can actively find and propose informative regions for users to label the foreground or background layer.",
+        "We plan to develop a differentiable model using convolutional neural networks, instead of existing matting solvers, to fully exploit the information obtained from the proposed informative regions.",
+        "The proposed informative regions are general across different matting algorithms"
+    ],
+    "headline": "We explore the intrinsic relationship between the user input and the matting algorithm to address the problem of where and when the user should provide the input",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Mart\u00edn Abadi, Paul Barham, Jianmin Chen, Zhifeng Chen, Andy Davis, Jeffrey Dean, Matthieu Devin, Sanjay Ghemawat, Geoffrey Irving, Michael Isard, et al. Tensorflow: A system for large-scale machine learning. In OSDI, pages 265\u2013283, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abadi%2C%20Mart%C3%ADn%20Barham%2C%20Paul%20Chen%2C%20Jianmin%20Chen%2C%20Zhifeng%20Tensorflow%3A%20A%20system%20for%20large-scale%20machine%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abadi%2C%20Mart%C3%ADn%20Barham%2C%20Paul%20Chen%2C%20Jianmin%20Chen%2C%20Zhifeng%20Tensorflow%3A%20A%20system%20for%20large-scale%20machine%20learning%202016"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Yagiz Aksoy, Tunc Ozan Aydin, and Marc Pollefeys. Designing effective inter-pixel information flow for natural image matting. In IEEE CVPR, pages 29\u201337, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Aksoy%2C%20Yagiz%20Aydin%2C%20Tunc%20Ozan%20Pollefeys%2C%20Marc%20Designing%20effective%20inter-pixel%20information%20flow%20for%20natural%20image%20matting%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Aksoy%2C%20Yagiz%20Aydin%2C%20Tunc%20Ozan%20Pollefeys%2C%20Marc%20Designing%20effective%20inter-pixel%20information%20flow%20for%20natural%20image%20matting%202017"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Jimmy Ba, Volodymyr Mnih, and Koray Kavukcuoglu. Multiple object recognition with visual attention. arXiv:1412.7755, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.7755"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Qifeng Chen, Dingzeyu Li, and Chi-Keung Tang. KNN matting. IEEE TPAMI, pages 2175\u2013 2188, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Qifeng%20Li%2C%20Dingzeyu%20Tang%2C%20Chi-Keung%20KNN%20matting%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Qifeng%20Li%2C%20Dingzeyu%20Tang%2C%20Chi-Keung%20KNN%20matting%202013"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Donghyeon Cho, Yu-Wing Tai, and Inso Kweon. Natural image matting using deep convolutional neural networks. In ECCV, pages 626\u2013643, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cho%2C%20Donghyeon%20Tai%2C%20Yu-Wing%20Kweon%2C%20Inso%20Natural%20image%20matting%20using%20deep%20convolutional%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cho%2C%20Donghyeon%20Tai%2C%20Yu-Wing%20Kweon%2C%20Inso%20Natural%20image%20matting%20using%20deep%20convolutional%20neural%20networks%202016"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Yung-Yu Chuang, B. Curless, D. H. Salesin, and R. Szeliski. A bayesian approach to digital matting. In IEEE CVPR, pages 264\u2013271, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yung-Yu%20Chuang%2C%20B.Curless%20Salesin%2C%20D.H.%20Szeliski%2C%20R.%20A%20bayesian%20approach%20to%20digital%20matting%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yung-Yu%20Chuang%2C%20B.Curless%20Salesin%2C%20D.H.%20Szeliski%2C%20R.%20A%20bayesian%20approach%20to%20digital%20matting%202001"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Eduardo S. L. Gastal and Manuel M. Oliveira. Shared sampling for real-time alpha matting. Computer Graphics Forum, pages 575\u2013584, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gastal%2C%20Eduardo%20S.L.%20Oliveira%2C%20Manuel%20M.%20Shared%20sampling%20for%20real-time%20alpha%20matting%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gastal%2C%20Eduardo%20S.L.%20Oliveira%2C%20Manuel%20M.%20Shared%20sampling%20for%20real-time%20alpha%20matting%202010"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Yu Guan, Wei Chen, Xiao Liang, Zi\u2019ang Ding, and Qunsheng Peng. Easy matting-a stroke based approach for continuous image matting. Computer Graphics Forum, 25(3):567\u2013576, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Guan%2C%20Yu%20Chen%2C%20Wei%20Liang%2C%20Xiao%20Ding%2C%20Zi%E2%80%99ang%20Easy%20matting-a%20stroke%20based%20approach%20for%20continuous%20image%20matting%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Guan%2C%20Yu%20Chen%2C%20Wei%20Liang%2C%20Xiao%20Ding%2C%20Zi%E2%80%99ang%20Easy%20matting-a%20stroke%20based%20approach%20for%20continuous%20image%20matting%202006"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Kaiming He, Christoph Rhemann, Carsten Rother, Xiaoou Tang, and Jian Sun. A global sampling method for alpha matting. In IEEE CVPR, pages 2049\u20132056, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Kaiming%20Rhemann%2C%20Christoph%20Rother%2C%20Carsten%20Tang%2C%20Xiaoou%20A%20global%20sampling%20method%20for%20alpha%20matting%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Kaiming%20Rhemann%2C%20Christoph%20Rother%2C%20Carsten%20Tang%2C%20Xiaoou%20A%20global%20sampling%20method%20for%20alpha%20matting%202011"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Sepp Hochreiter and J\u00fcrgen Schmidhuber. Long short-term memory. Neural Computation, pages 1735\u20131780, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Long%20short-term%20memory%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Long%20short-term%20memory%201997"
+        },
+        {
+            "id": "11",
+            "entry": "[11] A. Levin, D. Lischinski, and Y. Weiss. A closed-form solution to natural image matting. IEEE TPAMI, pages 228\u2013242, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Levin%2C%20A.%20Lischinski%2C%20D.%20Weiss%2C%20Y.%20A%20closed-form%20solution%20to%20natural%20image%20matting%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Levin%2C%20A.%20Lischinski%2C%20D.%20Weiss%2C%20Y.%20A%20closed-form%20solution%20to%20natural%20image%20matting%202008"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Volodymyr Mnih, Nicolas Heess, Alex Graves, et al. Recurrent models of visual attention. In NIPS, pages 2204\u20132212, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20Volodymyr%20Heess%2C%20Nicolas%20Graves%2C%20Alex%20Recurrent%20models%20of%20visual%20attention%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20Volodymyr%20Heess%2C%20Nicolas%20Graves%2C%20Alex%20Recurrent%20models%20of%20visual%20attention%202014"
+        },
+        {
+            "id": "13",
+            "entry": "[13] C. Rhemann, C. Rother, A. Rav-Acha, and T. Sharp. High resolution matting via interactive trimap segmentation. In IEEE CVPR, pages 1\u20138, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rhemann%2C%20C.%20Rother%2C%20C.%20Rav-Acha%2C%20A.%20Sharp%2C%20T.%20High%20resolution%20matting%20via%20interactive%20trimap%20segmentation%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rhemann%2C%20C.%20Rother%2C%20C.%20Rav-Acha%2C%20A.%20Sharp%2C%20T.%20High%20resolution%20matting%20via%20interactive%20trimap%20segmentation%202008"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Christoph Rhemann, Carsten Rother, Jue Wang, Margrit Gelautz, Pushmeet Kohli, and Pamela Rott. A perceptually motivated online benchmark for image matting. In IEEE CVPR, pages 1826\u20131833, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rhemann%2C%20Christoph%20Rother%2C%20Carsten%20Wang%2C%20Jue%20Gelautz%2C%20Margrit%20A%20perceptually%20motivated%20online%20benchmark%20for%20image%20matting%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rhemann%2C%20Christoph%20Rother%2C%20Carsten%20Wang%2C%20Jue%20Gelautz%2C%20Margrit%20A%20perceptually%20motivated%20online%20benchmark%20for%20image%20matting%202009"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Carsten Rother, Vladimir Kolmogorov, and Andrew Blake. \"grabcut\": interactive foreground extraction using iterated graph cuts. In ACM SIGGRAPH, pages 309\u2013314, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rother%2C%20Carsten%20Kolmogorov%2C%20Vladimir%20Blake%2C%20Andrew%20%22grabcut%22%3A%20interactive%20foreground%20extraction%20using%20iterated%20graph%20cuts%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rother%2C%20Carsten%20Kolmogorov%2C%20Vladimir%20Blake%2C%20Andrew%20%22grabcut%22%3A%20interactive%20foreground%20extraction%20using%20iterated%20graph%20cuts%202004"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Ehsan Shahrian, Deepu Rajan, Brian Price, and Scott Cohen. Improving image matting using comprehensive sampling sets. In CVPR, pages 636\u2013643, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shahrian%2C%20Ehsan%20Rajan%2C%20Deepu%20Price%2C%20Brian%20Cohen%2C%20Scott%20Improving%20image%20matting%20using%20comprehensive%20sampling%20sets%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shahrian%2C%20Ehsan%20Rajan%2C%20Deepu%20Price%2C%20Brian%20Cohen%2C%20Scott%20Improving%20image%20matting%20using%20comprehensive%20sampling%20sets%202013"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Xiaoyong Shen, Xin Tao, Hongyun Gao, Chao Zhou, and Jiaya Jia. Deep automatic portrait matting. In ECCV, pages 92\u2013107, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shen%2C%20Xiaoyong%20Tao%2C%20Xin%20Gao%2C%20Hongyun%20Zhou%2C%20Chao%20Deep%20automatic%20portrait%20matting%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shen%2C%20Xiaoyong%20Tao%2C%20Xin%20Gao%2C%20Hongyun%20Zhou%2C%20Chao%20Deep%20automatic%20portrait%20matting%202016"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. arXiv:1409.1556, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1409.1556"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Jian Sun, Jiaya Jia, Chi-Keung Tang, and Heung-Yeung Shum. Poisson matting. In ACM SIGGRAPH, pages 315\u2013321, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sun%2C%20Jian%20Jia%2C%20Jiaya%20Chi-Keung%20Tang%2C%20and%20Heung-Yeung%20Shum.%20Poisson%20matting%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sun%2C%20Jian%20Jia%2C%20Jiaya%20Chi-Keung%20Tang%2C%20and%20Heung-Yeung%20Shum.%20Poisson%20matting%202004"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Richard Sutton, David McAllester, Satinder Singh, and Yishay Mansour. Policy gradient methods for reinforcement learning with function approximation. In NIPS, pages 1057\u20131063, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20Richard%20McAllester%2C%20David%20Singh%2C%20Satinder%20Mansour%2C%20Yishay%20Policy%20gradient%20methods%20for%20reinforcement%20learning%20with%20function%20approximation%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutton%2C%20Richard%20McAllester%2C%20David%20Singh%2C%20Satinder%20Mansour%2C%20Yishay%20Policy%20gradient%20methods%20for%20reinforcement%20learning%20with%20function%20approximation%202000"
+        },
+        {
+            "id": "21",
+            "entry": "[21] J. Wang and M. F. Cohen. An iterative optimization approach for unified image segmentation and matting. In IEEE ICCV, pages 936\u2013943, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20J.%20Cohen%2C%20M.F.%20An%20iterative%20optimization%20approach%20for%20unified%20image%20segmentation%20and%20matting%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20J.%20Cohen%2C%20M.F.%20An%20iterative%20optimization%20approach%20for%20unified%20image%20segmentation%20and%20matting%202005"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Ronald Williams. Simple statistical gradient-following algorithms for connectionist reinforcement learning. Machine learning, pages 229\u2013256, 1992.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%2C%20Ronald%20Simple%20statistical%20gradient-following%20algorithms%20for%20connectionist%20reinforcement%20learning%201992",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Williams%2C%20Ronald%20Simple%20statistical%20gradient-following%20algorithms%20for%20connectionist%20reinforcement%20learning%201992"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Yuanjie Zheng and Chandra Kambhamettu. Learning based digital matting. In IEEE ICCV, pages 889\u2013896, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zheng%2C%20Yuanjie%20Kambhamettu%2C%20Chandra%20Learning%20based%20digital%20matting%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zheng%2C%20Yuanjie%20Kambhamettu%2C%20Chandra%20Learning%20based%20digital%20matting%202009"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Q. Zhu, L. Shao, X. Li, and L. Wang. Targeting accurate object extraction from an image: A comprehensive study of natural image matting. IEEE TNNLS, pages 185\u2013207, 2015. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhu%2C%20Q.%20Shao%2C%20L.%20Li%2C%20X.%20Wang%2C%20L.%20Targeting%20accurate%20object%20extraction%20from%20an%20image%3A%20A%20comprehensive%20study%20of%20natural%20image%20matting%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhu%2C%20Q.%20Shao%2C%20L.%20Li%2C%20X.%20Wang%2C%20L.%20Targeting%20accurate%20object%20extraction%20from%20an%20image%3A%20A%20comprehensive%20study%20of%20natural%20image%20matting%202015"
+        }
+    ]
+}

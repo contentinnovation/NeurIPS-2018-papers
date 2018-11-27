@@ -1,0 +1,283 @@
+{
+    "filename": "7946-hierarchical-reinforcement-learning-for-zero-shot-generalization-with-subtask-dependencies.pdf",
+    "metadata": {
+        "title": "Hierarchical Reinforcement Learning for Zero-shot Generalization with Subtask Dependencies",
+        "author": "Sungryull Sohn, Junhyuk Oh, Honglak Lee",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7946-hierarchical-reinforcement-learning-for-zero-shot-generalization-with-subtask-dependencies.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We introduce a new RL problem where the agent is required to generalize to a previously-unseen environment characterized by a subtask graph which describes a set of subtasks and their dependencies. Unlike existing hierarchical multitask RL approaches that explicitly describe what the agent should do at a high level, our problem only describes properties of subtasks and relationships among them, which requires the agent to perform complex reasoning to find the optimal subtask to execute. To solve this problem, we propose a neural subtask graph solver (NSGS) which encodes the subtask graph using a recursive neural network embedding. To overcome the difficulty of training, we propose a novel non-parametric gradientbased policy, graph reward propagation, to pre-train our NSGS agent and further finetune it through actor-critic method. The experimental results on two 2D visual domains show that our agent can perform complex reasoning to find a near-optimal way of executing the subtask graph and generalize well to the unseen subtask graphs. In addition, we compare our agent with a Monte-Carlo tree search (MCTS) method showing that our method is much more efficient than MCTS, and the performance of NSGS can be further improved by combining it with MCTS."
+    },
+    "keywords": [
+        {
+            "term": "MCTS",
+            "url": "https://en.wikipedia.org/wiki/MCTS"
+        },
+        {
+            "term": "hierarchical task network",
+            "url": "https://en.wikipedia.org/wiki/hierarchical_task_network"
+        },
+        {
+            "term": "Markov Decision Process",
+            "url": "https://en.wikipedia.org/wiki/Markov_Decision_Process"
+        },
+        {
+            "term": "high level",
+            "url": "https://en.wikipedia.org/wiki/high_level"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "tree search",
+            "url": "https://en.wikipedia.org/wiki/tree_search"
+        },
+        {
+            "term": "Monte-Carlo tree search",
+            "url": "https://en.wikipedia.org/wiki/Monte-Carlo_tree_search"
+        },
+        {
+            "term": "convolutional neural network",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_network"
+        },
+        {
+            "term": "motion planning",
+            "url": "https://en.wikipedia.org/wiki/motion_planning"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Developing the ability to execute many different tasks depending on given task descriptions and generalize over unseen task descriptions is an important problem for building scalable reinforcement learning (RL) agents",
+        "Most of the prior works have focused on task descriptions which explicitly specify what the agent should do at a high level, which may not be readily available in real-world applications",
+        "Our contributions can be summarized as follows: (1) We propose a new challenging reinforcement learning problem and domain with a richer and more general form of graph-based task descriptions compared to the recent works on multitask reinforcement learning. (2) We propose a deep reinforcement learning architecture that can execute arbitrary unseen subtask graphs and observations",
+        "We introduced the subtask graph execution problem which is an effective and principled framework of describing complex tasks",
+        "To address the difficulty of dealing with complex subtask dependencies, we proposed a graph reward propagation policy derived from a differentiable form of subtask graph, which plays an important role in pre-training our neural subtask graph solver architecture",
+        "The empirical results showed that our agent can deal with long-term dependencies between subtasks and generalize well to unseen subtask graphs"
+    ],
+    "key_statements": [
+        "Developing the ability to execute many different tasks depending on given task descriptions and generalize over unseen task descriptions is an important problem for building scalable reinforcement learning (RL) agents",
+        "Most of the prior works have focused on task descriptions which explicitly specify what the agent should do at a high level, which may not be readily available in real-world applications",
+        "To further motivate the problem, let\u2019s consider a scenario in which an agent needs to generalize to a complex novel task by performing a composition of subtasks where the task description and dependencies among subtasks may change depending on the situation",
+        "We propose a new deep reinforcement learning architecture, called neural subtask graph solver (NSGS), which encodes a subtask graph using a recursive-reverse-recursive neural network (R3NN) [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>] to consider the long-term effect of each subtask",
+        "To address the difficulty of learning, we propose to pre-train the neural subtask graph solver to approximate our novel non-parametric policy called graph reward propagation policy",
+        "We show that our method is computationally much more efficient than Monte-Carlo tree search (MCTS) algorithm, and the performance of our neural subtask graph solver agent can be further improved by combining with Monte-Carlo tree search, achieving a near-optimal performance",
+        "Our contributions can be summarized as follows: (1) We propose a new challenging reinforcement learning problem and domain with a richer and more general form of graph-based task descriptions compared to the recent works on multitask reinforcement learning. (2) We propose a deep reinforcement learning architecture that can execute arbitrary unseen subtask graphs and observations",
+        "(3) We demonstrate that our method outperforms the state-of-the-art search-based method (e.g., Monte-Carlo tree search), which implies that our method can efficiently approximate the solution of an intractable search problem without performing any search",
+        "Our neural subtask graph solver (NSGS) is a neural network which consists of a task module and an observation module as shown in Figure 2",
+        "We propose graph reward propagation policy (GRProp), a non-parametric policy that propagates the reward information between related subtasks to model their dependencies",
+        "Since our graph reward propagation policy acts as a good initial policy, we train the neural subtask graph solver to approximate the graph reward propagation policy policy through policy distillation [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>, <a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>], and finetune it through actor-critic method with generalized advantage estimation (GAE) [<a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>] to maximize the reward",
+        "We investigated the following research questions: 1) Does graph reward propagation policy outperform other heuristic baselines? 2) Can neural subtask graph solver deal with complex subtask dependencies, delayed reward, and the stochasticity of the environment? 3) Can neural subtask graph solver generalize to unseen subtask graphs? 4) How does neural subtask graph solver perform compared to Monte-Carlo tree search? 5) Can neural subtask graph solver be used to improve Monte-Carlo tree search?\n5.1",
+        "Generalization Performance We considered two different types of generalization: a zero-shot setting where agent must immediately achieve good performance on unseen subtask graphs without learning, and an adaptation setting where agent can learn about task through the interaction with environment",
+        "We further investigated how well our neural subtask graph solver agent performs compared to conventional search-based methods and how our neural subtask graph solver agent can be combined with search-based methods to further improve the performance",
+        "We introduced the subtask graph execution problem which is an effective and principled framework of describing complex tasks",
+        "To address the difficulty of dealing with complex subtask dependencies, we proposed a graph reward propagation policy derived from a differentiable form of subtask graph, which plays an important role in pre-training our neural subtask graph solver architecture",
+        "The empirical results showed that our agent can deal with long-term dependencies between subtasks and generalize well to unseen subtask graphs",
+        "We showed that our agent can be used to effectively reduce the search space of Monte-Carlo tree search so that the agent can find a near-optimal solution with a small number of simulations",
+        "It will be very interesting future work to investigate how to extend to more challenging scenarios where the subtask graph is unknown and need to be estimated through experience"
+    ],
+    "summary": [
+        "Developing the ability to execute many different tasks depending on given task descriptions and generalize over unseen task descriptions is an important problem for building scalable reinforcement learning (RL) agents.",
+        "The agent should learn to act in the environment by figuring out the optimal sequence of subtasks that gives the maximum reward within a time budget just from properties and dependencies of subtasks.",
+        "The task of our problem is to execute given N subtasks in an optimal order to maximize reward within a time budget, where there are complex dependencies between subtasks defined by the subtask graph.",
+        "Reward: rt = ri if the agent executes the subtask i while it is eligible, and rt = 0 otherwise.",
+        "Task Module Given a subtask graph G, the remaining time steps stept \u2208 R, an eligibility vector et and a completion vector xt, we compute a context embedding using recursive-reverse-recursive neural network (R3NN) [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>] as follows: \u03c6ibot,o = b\u03b8o",
+        "4.2 Graph Reward Propagation Policy: Pre-training Neural Subtask Graph Solver",
+        "Generalization Performance We considered two different types of generalization: a zero-shot setting where agent must immediately achieve good performance on unseen subtask graphs without learning, and an adaptation setting where agent can learn about task through the interaction with environment.",
+        "Note that Independent agent was evaluated in adaptation setting only since it has no ability to generalize as it does not take subtask graph as input.",
+        "GRProp and NSGS agents avoid distractors and successfully execute subtask K by satisfying its preconditions.",
+        "Though the performance degrades as the subtask graph becomes larger as expected, NSGS generalizes well to larger subtask graphs and consistently outperforms all the other agents on Playground and Mining domains in zero-shot setting.",
+        "NSGS performs slightly better than zero-shot setting by fine-tuning on the subtask graphs in evaluation set.",
+        "NSGS and GRProp agents focus on executing subtask H in order to collect materials much faster in the long run.",
+        "Compared to GRProp, NSGS learns to consider observation and avoids subtasks with high cost.",
+        "This indicates that our NSGS agent implicitly performs long-term reasoning that is not achievable by a sophisticated MCTS, even though NSGS does not use any simulation and has never seen such subtask graphs during training.",
+        "To address the difficulty of dealing with complex subtask dependencies, we proposed a graph reward propagation policy derived from a differentiable form of subtask graph, which plays an important role in pre-training our neural subtask graph solver architecture.",
+        "The empirical results showed that our agent can deal with long-term dependencies between subtasks and generalize well to unseen subtask graphs.",
+        "It will be very interesting future work to investigate how to extend to more challenging scenarios where the subtask graph is unknown and need to be estimated through experience"
+    ],
+    "headline": "We introduce a new reinforcement learning problem where the agent is required to generalize to a previously-unseen environment characterized by a subtask graph which describes a set of subtasks and their dependencies",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Junhyuk Oh, Satinder Singh, Honglak Lee, and Pushmeet Kohli. Zero-shot task generalization with multi-task deep reinforcement learning. arXiv:1706.05064, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.05064"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Haonan Yu, Haichao Zhang, and Wei Xu. A deep compositional framework for human-like language acquisition in virtual environment. arXiv:1703.09831, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.09831"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Misha Denil, Sergio G\u00f3mez Colmenarejo, Serkan Cabi, David Saxton, and Nando de Freitas. Programmable agents. arXiv:1706.06383, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.06383"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Jacob Andreas, Dan Klein, and Sergey Levine. Modular multitask reinforcement learning with policy sketches. ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Andreas%2C%20Jacob%20Klein%2C%20Dan%20Levine%2C%20Sergey%20Modular%20multitask%20reinforcement%20learning%20with%20policy%20sketches%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Andreas%2C%20Jacob%20Klein%2C%20Dan%20Levine%2C%20Sergey%20Modular%20multitask%20reinforcement%20learning%20with%20policy%20sketches%202017"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Emilio Parisotto, Abdel-rahman Mohamed, Rishabh Singh, Lihong Li, Dengyong Zhou, and Pushmeet Kohli. Neuro-symbolic program synthesis. arXiv:1611.01855, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.01855"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Ronald Parr and Stuart J. Russell. Reinforcement learning with hierarchies of machines. NIPS, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Parr%2C%20Ronald%20Russell%2C%20Stuart%20J.%20Reinforcement%20learning%20with%20hierarchies%20of%20machines%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Parr%2C%20Ronald%20Russell%2C%20Stuart%20J.%20Reinforcement%20learning%20with%20hierarchies%20of%20machines%201997"
+        },
+        {
+            "id": "7",
+            "entry": "[7] David Andre and Stuart J. Russell. Programmable reinforcement learning agents. NIPS, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Andre%2C%20David%20Russell%2C%20Stuart%20J.%20Programmable%20reinforcement%20learning%20agents%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Andre%2C%20David%20Russell%2C%20Stuart%20J.%20Programmable%20reinforcement%20learning%20agents%202000"
+        },
+        {
+            "id": "8",
+            "entry": "[8] David Andre and Stuart J. Russell. State abstraction for programmable reinforcement learning agents. AAAI/IAAI, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Andre%2C%20David%20Russell%2C%20Stuart%20J.%20State%20abstraction%20for%20programmable%20reinforcement%20learning%20agents%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Andre%2C%20David%20Russell%2C%20Stuart%20J.%20State%20abstraction%20for%20programmable%20reinforcement%20learning%20agents%202002"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Richard S Sutton, Doina Precup, and Satinder Singh. Between mdps and semi-mdps: A framework for temporal abstraction in reinforcement learning. Artificial intelligence, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20Richard%20S.%20Precup%2C%20Doina%20Singh%2C%20Satinder%20Between%20mdps%20and%20semi-mdps%3A%20A%20framework%20for%20temporal%20abstraction%20in%20reinforcement%20learning.%20Artificial%20intelligence%201999"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Thomas G Dietterich. Hierarchical reinforcement learning with the maxq value function decomposition. JAIR, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dietterich%2C%20Thomas%20G.%20Hierarchical%20reinforcement%20learning%20with%20the%20maxq%20value%20function%20decomposition%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dietterich%2C%20Thomas%20G.%20Hierarchical%20reinforcement%20learning%20with%20the%20maxq%20value%20function%20decomposition%202000"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Doina Precup. Temporal abstraction in reinforcement learning. PhD thesis, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Precup%2C%20Doina%20Temporal%20abstraction%20in%20reinforcement%20learning%202000"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Mohammad Ghavamzadeh and Sridhar Mahadevan. Hierarchical policy gradient algorithms. ICML, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ghavamzadeh%2C%20Mohammad%20Mahadevan%2C%20Sridhar%20Hierarchical%20policy%20gradient%20algorithms%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ghavamzadeh%2C%20Mohammad%20Mahadevan%2C%20Sridhar%20Hierarchical%20policy%20gradient%20algorithms%202003"
+        },
+        {
+            "id": "13",
+            "entry": "[13] George Konidaris and Andrew G. Barto. Building portable options: Skill transfer in reinforcement learning. IJCAI, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Konidaris%2C%20George%20Barto%2C%20Andrew%20G.%20Building%20portable%20options%3A%20Skill%20transfer%20in%20reinforcement%20learning%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Konidaris%2C%20George%20Barto%2C%20Andrew%20G.%20Building%20portable%20options%3A%20Skill%20transfer%20in%20reinforcement%20learning%202007"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Earl D Sacerdoti. The nonlinear nature of plans. Technical report, Stanford Research Institute, Menlo Park, CA, 1975.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sacerdoti%2C%20Earl%20D.%20The%20nonlinear%20nature%20of%20plans%201975"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Kutluhan Erol. Hierarchical task network planning: formalization, analysis, and implementation. PhD thesis, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Erol%2C%20Kutluhan%20Hierarchical%20task%20network%20planning%3A%20formalization%2C%20analysis%2C%20and%20implementation%201996"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Kutluhan Erol, James A Hendler, and Dana S Nau. Umcp: A sound and complete procedure for hierarchical task-network planning. AIPS, 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Erol%2C%20Kutluhan%20Hendler%2C%20James%20A.%20Nau%2C%20Dana%20S.%20Umcp%3A%20A%20sound%20and%20complete%20procedure%20for%20hierarchical%20task-network%20planning%201994",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Erol%2C%20Kutluhan%20Hendler%2C%20James%20A.%20Nau%2C%20Dana%20S.%20Umcp%3A%20A%20sound%20and%20complete%20procedure%20for%20hierarchical%20task-network%20planning%201994"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Dana Nau, Yue Cao, Amnon Lotem, and Hector Munoz-Avila. Shop: Simple hierarchical ordered planner. IJCAI, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nau%2C%20Dana%20Cao%2C%20Yue%20Lotem%2C%20Amnon%20Munoz-Avila%2C%20Hector%20Shop%3A%20Simple%20hierarchical%20ordered%20planner%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nau%2C%20Dana%20Cao%2C%20Yue%20Lotem%2C%20Amnon%20Munoz-Avila%2C%20Hector%20Shop%3A%20Simple%20hierarchical%20ordered%20planner%201999"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Luis Castillo, Juan Fdez-Olivares, \u00d3scar Garc\u00eda-P\u00e9rez, and Francisco Palao. Temporal enhancements of an htn planner. CAEPIA, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Castillo%2C%20Luis%20Fdez-Olivares%2C%20Juan%20Garc%C3%ADa-P%C3%A9rez%2C%20%C3%93scar%20Palao%2C%20Francisco%20Temporal%20enhancements%20of%20an%20htn%20planner%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Castillo%2C%20Luis%20Fdez-Olivares%2C%20Juan%20Garc%C3%ADa-P%C3%A9rez%2C%20%C3%93scar%20Palao%2C%20Francisco%20Temporal%20enhancements%20of%20an%20htn%20planner%202005"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Takao Asano, Tetsuo Asano, Leonidas Guibas, John Hershberger, and Hiroshi Imai. Visibilitypolygon search and euclidean shortest paths. FOCS, 1985.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Asano%2C%20Takao%20Asano%2C%20Tetsuo%20Guibas%2C%20Leonidas%20Hershberger%2C%20John%20Visibilitypolygon%20search%20and%20euclidean%20shortest%20paths%201985",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Asano%2C%20Takao%20Asano%2C%20Tetsuo%20Guibas%2C%20Leonidas%20Hershberger%2C%20John%20Visibilitypolygon%20search%20and%20euclidean%20shortest%20paths%201985"
+        },
+        {
+            "id": "20",
+            "entry": "[20] John Canny. A voronoi method for the piano-movers problem. ICRA, 1985.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Canny%2C%20John%20A%20voronoi%20method%20for%20the%20piano-movers%20problem%201985",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Canny%2C%20John%20A%20voronoi%20method%20for%20the%20piano-movers%20problem%201985"
+        },
+        {
+            "id": "21",
+            "entry": "[21] John Canny. A new algebraic method for robot motion planning and real geometry. FOCS, 1987.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Canny%2C%20John%20A%20new%20algebraic%20method%20for%20robot%20motion%20planning%20and%20real%20geometry%201987",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Canny%2C%20John%20A%20new%20algebraic%20method%20for%20robot%20motion%20planning%20and%20real%20geometry%201987"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Bernard Faverjon and Pierre Tournassoud. A local based approach for path planning of manipulators with a high number of degrees of freedom. ICRA, 1987.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Faverjon%2C%20Bernard%20Tournassoud%2C%20Pierre%20A%20local%20based%20approach%20for%20path%20planning%20of%20manipulators%20with%20a%20high%20number%20of%20degrees%20of%20freedom%201987",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Faverjon%2C%20Bernard%20Tournassoud%2C%20Pierre%20A%20local%20based%20approach%20for%20path%20planning%20of%20manipulators%20with%20a%20high%20number%20of%20degrees%20of%20freedom%201987"
+        },
+        {
+            "id": "23",
+            "entry": "[23] J Mark Keil and Jorg-R Sack. Minimum decompositions of polygonal objects. Machine Intelligence and Pattern Recognition, 1985.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Keil%2C%20J.Mark%20Sack%2C%20Jorg-R.%20Minimum%20decompositions%20of%20polygonal%20objects%201985",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Keil%2C%20J.Mark%20Sack%2C%20Jorg-R.%20Minimum%20decompositions%20of%20polygonal%20objects%201985"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Bruno Da Silva, George Konidaris, and Andrew Barto. Learning parameterized skills. arXiv:1206.6398, 2012.",
+            "arxiv_url": "https://arxiv.org/pdf/1206.6398"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Martin Stolle and Doina Precup. Learning options in reinforcement learning. ISARA, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Stolle%2C%20Martin%20Precup%2C%20Doina%20Learning%20options%20in%20reinforcement%20learning%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Stolle%2C%20Martin%20Precup%2C%20Doina%20Learning%20options%20in%20reinforcement%20learning%202002"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Andrei A Rusu, Sergio Gomez Colmenarejo, Caglar Gulcehre, Guillaume Desjardins, James Kirkpatrick, Razvan Pascanu, Volodymyr Mnih, Koray Kavukcuoglu, and Raia Hadsell. Policy distillation. arXiv:1511.06295, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.06295"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Emilio Parisotto, Jimmy Ba, and Ruslan Salakhutdinov. Actor-mimic: Deep multitask and transfer reinforcement learning. ArXiv, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Parisotto%2C%20Emilio%20Ba%2C%20Jimmy%20Salakhutdinov%2C%20Ruslan%20Actor-mimic%3A%20Deep%20multitask%20and%20transfer%20reinforcement%20learning%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Parisotto%2C%20Emilio%20Ba%2C%20Jimmy%20Salakhutdinov%2C%20Ruslan%20Actor-mimic%3A%20Deep%20multitask%20and%20transfer%20reinforcement%20learning%202015"
+        },
+        {
+            "id": "28",
+            "entry": "[28] John Schulman, Philipp Moritz, Sergey Levine, Michael Jordan, and Pieter Abbeel. Highdimensional continuous control using generalized advantage estimation. arXiv:1506.02438, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1506.02438"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Sainbayar Sukhbaatar, Arthur Szlam, Gabriel Synnaeve, Soumith Chintala, and Rob Fergus. Mazebase: A sandbox for learning from games. arXiv:1511.07401, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.07401"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Mitchell Keith Bloch. Hierarchical reinforcement learning in the taxicab domain. Technical report, Center for Cognitive Architecture, University of Michigan, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bloch%2C%20Mitchell%20Keith%20Hierarchical%20reinforcement%20learning%20in%20the%20taxicab%20domain%202009"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Peter Auer, Nicolo Cesa-Bianchi, and Paul Fischer. Finite-time analysis of the multiarmed bandit problem. Machine learning, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Auer%2C%20Peter%20Cesa-Bianchi%2C%20Nicolo%20Fischer%2C%20Paul%20Finite-time%20analysis%20of%20the%20multiarmed%20bandit%20problem%202002"
+        },
+        {
+            "id": "32",
+            "entry": "[32] David Silver, Aja Huang, Chris J Maddison, Arthur Guez, Laurent Sifre, George Van Den Driessche, Julian Schrittwieser, Ioannis Antonoglou, Veda Panneershelvam, Marc Lanctot, et al. Mastering the game of go with deep neural networks and tree search. Nature, 2016. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silver%2C%20David%20Huang%2C%20Aja%20Maddison%2C%20Chris%20J.%20Guez%2C%20Arthur%20Mastering%20the%20game%20of%20go%20with%20deep%20neural%20networks%20and%20tree%20search%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silver%2C%20David%20Huang%2C%20Aja%20Maddison%2C%20Chris%20J.%20Guez%2C%20Arthur%20Mastering%20the%20game%20of%20go%20with%20deep%20neural%20networks%20and%20tree%20search%202016"
+        }
+    ]
+}

@@ -1,0 +1,211 @@
+{
+    "filename": "7684-submodular-field-grammars-representation-inference-and-application-to-image-parsing.pdf",
+    "metadata": {
+        "title": "Submodular Field Grammars: Representation, Inference, and Application to Image Parsing",
+        "author": "Abram L. Friesen, Pedro M. Domingos",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7684-submodular-field-grammars-representation-inference-and-application-to-image-parsing.pdf"
+        },
+        "abstract": "Natural scenes contain many layers of part-subpart structure, and distributions over them are thus naturally represented by stochastic image grammars, with one production per decomposition of a part. Unfortunately, in contrast to language grammars, where the number of possible split points for a production A \u2192 BC is linear in the length of A, in an image there are an exponential number of ways to split a region into subregions. This makes parsing intractable and requires image grammars to be severely restricted in practice, for example by allowing only rectangular regions. In this paper, we address this problem by associating with each production a submodular Markov random field whose labels are the subparts and whose labeling segments the current object into these subparts. We call the resulting model a submodular field grammar (SFG). Finding the MAP split of a region into subregions is now tractable, and by exploiting this we develop an efficient approximate algorithm for MAP parsing of images with SFGs. Empirically, we show promising improvements in accuracy when using SFGs for scene understanding, and demonstrate exponential improvements in inference time compared to traditional methods, while returning comparable minima."
+    },
+    "keywords": [
+        {
+            "term": "belief propagation",
+            "url": "https://en.wikipedia.org/wiki/belief_propagation"
+        },
+        {
+            "term": "natural language",
+            "url": "https://en.wikipedia.org/wiki/natural_language"
+        },
+        {
+            "term": "Markov random field",
+            "url": "https://en.wikipedia.org/wiki/Markov_random_field"
+        },
+        {
+            "term": "context-free grammar",
+            "url": "https://en.wikipedia.org/wiki/context-free_grammar"
+        }
+    ],
+    "highlights": [
+        "Understanding natural scenes is a challenging problem that requires simultaneously detecting, segmenting, and recognizing each object in a scene despite noise, distractors, and ambiguity",
+        "To extend context-free grammar to images, we introduce the notion of a region R \u2286 I, which specifies a subset of the pixels and can have arbitrary shape",
+        "We propose to construct a parse of the entire image as each production and use subregions of this parse to define the parse of each subregion, mirroring how distributions over subregions are defined in submodular field grammar",
+        "To evaluate the performance of submodular field grammar-PARSE, we programmatically generated submodular field grammar and compared the runtime of and minimum energy returned by submodular field grammar-PARSE to that of \u03b1-expansion and max-product belief propagation (BP), two standard Markov random field inference algorithms",
+        "This paper proposed submodular field grammars (SFGs), a novel stochastic image grammar formulation that combines the expressivity of image grammars with the efficient combinatorial optimization capabilities of submodular Markov random field",
+        "We showed (i) that submodular field grammar-PARSE achieves accuracies and energies comparable to \u03b1-expansion \u2013 which returns optima within a constant factor of the global optimum \u2013 while taking exponentially less time to do so and that submodular field grammar are able to represent the compositional structure of images to better parse and understand natural scenes"
+    ],
+    "key_statements": [
+        "Understanding natural scenes is a challenging problem that requires simultaneously detecting, segmenting, and recognizing each object in a scene despite noise, distractors, and ambiguity",
+        "To extend context-free grammar to images, we introduce the notion of a region R \u2286 I, which specifies a subset of the pixels and can have arbitrary shape",
+        "We propose to construct a parse of the entire image as each production and use subregions of this parse to define the parse of each subregion, mirroring how distributions over subregions are defined in submodular field grammar",
+        "To evaluate the performance of submodular field grammar-PARSE, we programmatically generated submodular field grammar and compared the runtime of and minimum energy returned by submodular field grammar-PARSE to that of \u03b1-expansion and max-product belief propagation (BP), two standard Markov random field inference algorithms",
+        "This paper proposed submodular field grammars (SFGs), a novel stochastic image grammar formulation that combines the expressivity of image grammars with the efficient combinatorial optimization capabilities of submodular Markov random field",
+        "We presented submodular field grammar-PARSE, a move-making algorithm that exploits submodularity to find the MAP parse of an submodular field grammar",
+        "We showed (i) that submodular field grammar-PARSE achieves accuracies and energies comparable to \u03b1-expansion \u2013 which returns optima within a constant factor of the global optimum \u2013 while taking exponentially less time to do so and that submodular field grammar are able to represent the compositional structure of images to better parse and understand natural scenes"
+    ],
+    "summary": [
+        "Understanding natural scenes is a challenging problem that requires simultaneously detecting, segmenting, and recognizing each object in a scene despite noise, distractors, and ambiguity.",
+        "Fusion requires finding the optimal labeling from an exponentially large set, two parse trees can be fused with a single graph cut by exploiting submodularity.",
+        "Proposition 2 shows that each iteration of SFG-PARSE has complexity O(|G|c(n)n), where n is the number of pixels and c(n) is the complexity of the graph-cut algorithm, which is low-order polynomial in n in the worst case, but nearly linear-time in practice [<a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>, <a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>].",
+        "Note that directly applying \u03b1-expansion to parsing an SFG requires optimizing an MRF with one label for each path in the grammar, which would take time exponential in the height of the grammar.",
+        "SFG-PARSE can be extended to productions with more than two subconstituents by replacing the internal graph cut used to fuse subtrees with a multi-label algorithm such as \u03b1-expansion.",
+        "To evaluate the performance of SFG-PARSE, we programmatically generated SFGs and compared the runtime of and minimum energy returned by SFG-PARSE to that of \u03b1-expansion and max-product belief propagation (BP), two standard MRF inference algorithms.",
+        "To evaluate SFGs as a model of natural scenes, we segmented images at multiple levels of granularity, used these segmentations to generate SFGs over the DeepLab features, and compared the segmentation accuracy resulting from parsing the generated SFGs using SFG-PARSE to that of using (a) DeepLab features alone and (b) a planar submodular MRF on the DeepLab features.",
+        "We compared the performance of SFG-PARSE to that of running \u03b1-expansion on a flat pairwise MRF containing one label for each possible parse path in the grammar and to running BP on a multi-level (3-D) pairwise MRF with the same height as the grammar.",
+        "To evaluate whether natural scenes exhibit the compositional part-subpart structure over arbitrarilyshaped regions that SFGs can capture but previous methods cannot, we generated grammars on SBD images where the semantic labels were the terminals.",
+        "After parsing each image with respect to its grammar, we computed the mean pixel accu-DeepLab DeepLab+MRF DeepLab+SFG",
+        "We showed (i) that SFG-PARSE achieves accuracies and energies comparable to \u03b1-expansion \u2013 which returns optima within a constant factor of the global optimum \u2013 while taking exponentially less time to do so and that SFGs are able to represent the compositional structure of images to better parse and understand natural scenes."
+    ],
+    "headline": "We address this problem by associating with each production a submodular Markov random field whose labels are the subparts and whose labeling segments the current object into these subparts",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Song-Chun Zhu and David Mumford. A stochastic grammar of images. Foundations and Trends in Computer Graphics and Vision, 2(4):259\u2013362, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhu%2C%20Song-Chun%20Mumford%2C%20David%20A%20stochastic%20grammar%20of%20images.%20Foundations%20and%20Trends%20in%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhu%2C%20Song-Chun%20Mumford%2C%20David%20A%20stochastic%20grammar%20of%20images.%20Foundations%20and%20Trends%20in%202006"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Hoifung Poon and Pedro Domingos. Sum-product networks: A new deep architecture. In Proceedings of the 27th Conference on Uncertainty in Artificial Intelligence, pages 337\u2013346. AUAI Press, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Poon%2C%20Hoifung%20Domingos%2C%20Pedro%20Sum-product%20networks%3A%20A%20new%20deep%20architecture%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Poon%2C%20Hoifung%20Domingos%2C%20Pedro%20Sum-product%20networks%3A%20A%20new%20deep%20architecture%202011"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Yibiao Zhao and Song-Chun Zhu. Image parsing via stochastic scene grammar. In Advances in Neural Information Processing Systems, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhao%2C%20Yibiao%20Zhu%2C%20Song-Chun%20Image%20parsing%20via%20stochastic%20scene%20grammar%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhao%2C%20Yibiao%20Zhu%2C%20Song-Chun%20Image%20parsing%20via%20stochastic%20scene%20grammar%202011"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Jamie Shotton, John Winn, Carsten Rother, and Antonio Criminisi. TextonBoost for image understanding: Multi-class object recognition and segmentation by jointly modeling texture, layout, and context. International Journal of Computer Vision, 81(1):2\u201323, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shotton%2C%20Jamie%20Winn%2C%20John%20Rother%2C%20Carsten%20Criminisi%2C%20Antonio%20TextonBoost%20for%20image%20understanding%3A%20Multi-class%20object%20recognition%20and%20segmentation%20by%20jointly%20modeling%20texture%2C%20layout%2C%20and%20context%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shotton%2C%20Jamie%20Winn%2C%20John%20Rother%2C%20Carsten%20Criminisi%2C%20Antonio%20TextonBoost%20for%20image%20understanding%3A%20Multi-class%20object%20recognition%20and%20segmentation%20by%20jointly%20modeling%20texture%2C%20layout%2C%20and%20context%202009"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Stephen Gould, Richard Fulton, and Daphne Koller. Decomposing a scene into geometric and semantically consistent regions. In Proceedings of the IEEE International Conference on Computer Vision, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gould%2C%20Stephen%20Fulton%2C%20Richard%20Koller%2C%20Daphne%20Decomposing%20a%20scene%20into%20geometric%20and%20semantically%20consistent%20regions%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gould%2C%20Stephen%20Fulton%2C%20Richard%20Koller%2C%20Daphne%20Decomposing%20a%20scene%20into%20geometric%20and%20semantically%20consistent%20regions%202009"
+        },
+        {
+            "id": "6",
+            "entry": "[6] M. Pawan Kumar and Daphne Koller. MAP estimation of semi-metric MRFs via hierarchical graph cuts. In Proceedings of the 25th Conference on Uncertainty in Artificial Intelligence, pages 313\u2013320, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kumar%2C%20M.Pawan%20Koller%2C%20Daphne%20MAP%20estimation%20of%20semi-metric%20MRFs%20via%20hierarchical%20graph%20cuts%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kumar%2C%20M.Pawan%20Koller%2C%20Daphne%20MAP%20estimation%20of%20semi-metric%20MRFs%20via%20hierarchical%20graph%20cuts%202009"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Andrew Delong, Lena Gorelick, Olga Veksler, and Yuri Boykov. Minimizing energies with hierarchical costs. International Journal of Computer Vision, 100(1):38\u201358, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Delong%2C%20Andrew%20Gorelick%2C%20Lena%20Veksler%2C%20Olga%20Boykov%2C%20Yuri%20Minimizing%20energies%20with%20hierarchical%20costs%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Delong%2C%20Andrew%20Gorelick%2C%20Lena%20Veksler%2C%20Olga%20Boykov%2C%20Yuri%20Minimizing%20energies%20with%20hierarchical%20costs%202012"
+        },
+        {
+            "id": "8",
+            "entry": "[8] V. Chandrasekaran, N. Srebro, and P. Harsha. Complexity of inference in graphical models. In Proceedings of the 24th Conference on Uncertainty in Artificial Intelligence, pages 70\u201378, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chandrasekaran%2C%20V.%20Srebro%2C%20N.%20Harsha%2C%20P.%20Complexity%20of%20inference%20in%20graphical%20models%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chandrasekaran%2C%20V.%20Srebro%2C%20N.%20Harsha%2C%20P.%20Complexity%20of%20inference%20in%20graphical%20models%202008"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Vladimir Kolmogorov and Ramin Zabih. What energy functions can be minimized via graph cuts? IEEE Transactions on Pattern Analysis and Machine Intelligence, 26(2):147\u2013159, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kolmogorov%2C%20Vladimir%20Zabih%2C%20Ramin%20What%20energy%20functions%20can%20be%20minimized%20via%20graph%20cuts%3F%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kolmogorov%2C%20Vladimir%20Zabih%2C%20Ramin%20What%20energy%20functions%20can%20be%20minimized%20via%20graph%20cuts%3F%202004"
+        },
+        {
+            "id": "10",
+            "entry": "[10] P. L. Hammer. Some network flow problems solved with pseudo-Boolean programming. Operations Research, 13:388\u2013399, 1965.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hammer%2C%20P.L.%20Some%20network%20flow%20problems%20solved%20with%20pseudo-Boolean%20programming%201965",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hammer%2C%20P.L.%20Some%20network%20flow%20problems%20solved%20with%20pseudo-Boolean%20programming%201965"
+        },
+        {
+            "id": "11",
+            "entry": "[11] D. M. Greig, B.T. Porteous, and A. H. Seheult. Exact maximum a posteriori estimation for binary images. Journal of the Royal Statistical Society. Series B (Methodological), 51(2):271\u2013279, 1989.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Greig%2C%20D.M.%20Porteous%2C%20B.T.%20Seheult%2C%20A.H.%20Exact%20maximum%20a%20posteriori%20estimation%20for%20binary%20images%201989",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Greig%2C%20D.M.%20Porteous%2C%20B.T.%20Seheult%2C%20A.H.%20Exact%20maximum%20a%20posteriori%20estimation%20for%20binary%20images%201989"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Yuri Boykov and Vladimir Kolmogorov. An experimental comparison of min-cut/max-flow algorithms for energy minimization in vision. IEEE Transactions on Pattern Analysis and Machine Intelligence, 26(9): 1124\u20131137, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Boykov%2C%20Yuri%20Kolmogorov%2C%20Vladimir%20An%20experimental%20comparison%20of%20min-cut/max-flow%20algorithms%20for%20energy%20minimization%20in%20vision%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Boykov%2C%20Yuri%20Kolmogorov%2C%20Vladimir%20An%20experimental%20comparison%20of%20min-cut/max-flow%20algorithms%20for%20energy%20minimization%20in%20vision%202004"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Yuri Boykov, Olga Veksler, and Ramin Zabih. Fast approximate energy minimization via graph cuts. IEEE Transactions on Pattern Analysis and Machine Intelligence, 23(11):1222\u20131239, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Boykov%2C%20Yuri%20Veksler%2C%20Olga%20Zabih%2C%20Ramin%20Fast%20approximate%20energy%20minimization%20via%20graph%20cuts%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Boykov%2C%20Yuri%20Veksler%2C%20Olga%20Zabih%2C%20Ramin%20Fast%20approximate%20energy%20minimization%20via%20graph%20cuts%202001"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Chris Russell, Lubor Ladick\u00fd, Pushmeet Kohli, and Philip H.S. Torr. Exact and approximate inference in associative hierarchical networks using graph cuts. The 26th Conference on Uncertainty in Artificial Intelligence, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Russell%2C%20Chris%20Ladick%C3%BD%2C%20Lubor%20Kohli%2C%20Pushmeet%20Torr%2C%20Philip%20H.S.%20Exact%20and%20approximate%20inference%20in%20associative%20hierarchical%20networks%20using%20graph%20cuts%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Russell%2C%20Chris%20Ladick%C3%BD%2C%20Lubor%20Kohli%2C%20Pushmeet%20Torr%2C%20Philip%20H.S.%20Exact%20and%20approximate%20inference%20in%20associative%20hierarchical%20networks%20using%20graph%20cuts%202010"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Victor Lempitsky, Andrea Vedaldi, and Andrew Zisserman. A pylon model for semantic segmentation. In Neural Information Processing Systems, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lempitsky%2C%20Victor%20Vedaldi%2C%20Andrea%20Zisserman%2C%20Andrew%20A%20pylon%20model%20for%20semantic%20segmentation%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lempitsky%2C%20Victor%20Vedaldi%2C%20Andrea%20Zisserman%2C%20Andrew%20A%20pylon%20model%20for%20semantic%20segmentation%202011"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Richard Socher, Cliff C. Lin, Chris Manning, and Andrew Y. Ng. Parsing natural scenes and natural language with recursive neural networks. In Proceedings of the 28th International Conference on Machine Learning, pages 129\u2013136, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Socher%2C%20Richard%20Lin%2C%20Cliff%20C.%20Manning%2C%20Chris%20Ng%2C%20Andrew%20Y.%20Parsing%20natural%20scenes%20and%20natural%20language%20with%20recursive%20neural%20networks%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Socher%2C%20Richard%20Lin%2C%20Cliff%20C.%20Manning%2C%20Chris%20Ng%2C%20Andrew%20Y.%20Parsing%20natural%20scenes%20and%20natural%20language%20with%20recursive%20neural%20networks%202011"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Abhishek Sharma, Oncel Tuzel, and Ming-Yu Liu. Recursive context propagation network for semantic scene labeling. In Advances in Neural Information Processing Systems, pages 2447\u20132455, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sharma%2C%20Abhishek%20Tuzel%2C%20Oncel%20Liu%2C%20Ming-Yu%20Recursive%20context%20propagation%20network%20for%20semantic%20scene%20labeling%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sharma%2C%20Abhishek%20Tuzel%2C%20Oncel%20Liu%2C%20Ming-Yu%20Recursive%20context%20propagation%20network%20for%20semantic%20scene%20labeling%202014"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Daniel S. Jurafsky and James H. Martin. Speech and Language Processing: An Introduction to Natural Language Processing, Computational Linguistics, and Speech Recognition. Prentice Hall, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jurafsky%2C%20Daniel%20S.%20Martin%2C%20James%20H.%20Speech%20and%20Language%20Processing%3A%20An%20Introduction%20to%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jurafsky%2C%20Daniel%20S.%20Martin%2C%20James%20H.%20Speech%20and%20Language%20Processing%3A%20An%20Introduction%20to%202000"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Robert Gens and Pedro Domingos. Learning the structure of sum-product networks. In Proceedings of the 30th International Conference on Machine Learning, pages 873\u2013880. Omnipress, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gens%2C%20Robert%20Domingos%2C%20Pedro%20Learning%20the%20structure%20of%20sum-product%20networks%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gens%2C%20Robert%20Domingos%2C%20Pedro%20Learning%20the%20structure%20of%20sum-product%20networks%202013"
+        },
+        {
+            "id": "20",
+            "entry": "[20] John Hopcroft and Jeffrey Ullman. Introduction to Automata Theory, Languages, and Computation. Addison-Wesley, Reading MA, 1979.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hopcroft%2C%20John%20Ullman%2C%20Jeffrey%20Introduction%20to%20Automata%20Theory%2C%20Languages%2C%20and%20Computation%201979"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Victor Lempitsky, Carsten Rother, Stefan Roth, and Andrew Blake. Fusion moves for Markov random field optimization. IEEE Transactions on Pattern Analysis and Machine Intelligence, 32(8):1392\u20131405, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lempitsky%2C%20Victor%20Rother%2C%20Carsten%20Roth%2C%20Stefan%20Blake%2C%20Andrew%20Fusion%20moves%20for%20Markov%20random%20field%20optimization%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lempitsky%2C%20Victor%20Rother%2C%20Carsten%20Roth%2C%20Stefan%20Blake%2C%20Andrew%20Fusion%20moves%20for%20Markov%20random%20field%20optimization%202010"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Vladimir Kolmogorov and Carsten Rother. Minimizing nonsubmodular functions with graph cuts - a review. IEEE transactions on pattern analysis and machine intelligence, 29(7):1274\u20139, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kolmogorov%2C%20Vladimir%20Rother%2C%20Carsten%20Minimizing%20nonsubmodular%20functions%20with%20graph%20cuts%20-%20a%20review%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kolmogorov%2C%20Vladimir%20Rother%2C%20Carsten%20Minimizing%20nonsubmodular%20functions%20with%20graph%20cuts%20-%20a%20review%202007"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Liang-Chieh Chen, George Papandreou, Iasonas Kokkinos, Kevin Murphy, and Alan L. Yuille. Semantic image segmentation with deep convolutional nets and fully connected CRFs. In Proceedings of the International Conference on Learning Representations, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Liang-Chieh%20Papandreou%2C%20George%20Kokkinos%2C%20Iasonas%20Murphy%2C%20Kevin%20Semantic%20image%20segmentation%20with%20deep%20convolutional%20nets%20and%20fully%20connected%20CRFs%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Liang-Chieh%20Papandreou%2C%20George%20Kokkinos%2C%20Iasonas%20Murphy%2C%20Kevin%20Semantic%20image%20segmentation%20with%20deep%20convolutional%20nets%20and%20fully%20connected%20CRFs%202015"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Liang-Chieh Chen, George Papandreou, Iasonas Kokkinos, Kevin Murphy, and Alan L. Yuille. DeepLab: Semantic image segmentation with deep convolutional nets, atrous convolution, and fully connected CRFs. arXiv preprint arXiv:1606.00915 [cs.CV], 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.00915"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Jamie Shotton, John Winn, Carsten Rother, and Antonio Criminisi. TextonBoost: Joint appearance, shape and context modeling for multi-class object recognition and segmentation. Proceedings European Conference on Computer Vision (ECCV), 3951, 2006. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shotton%2C%20Jamie%20Winn%2C%20John%20Rother%2C%20Carsten%20Criminisi%2C%20Antonio%20TextonBoost%3A%20Joint%20appearance%2C%20shape%20and%20context%20modeling%20for%20multi-class%20object%20recognition%20and%20segmentation%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shotton%2C%20Jamie%20Winn%2C%20John%20Rother%2C%20Carsten%20Criminisi%2C%20Antonio%20TextonBoost%3A%20Joint%20appearance%2C%20shape%20and%20context%20modeling%20for%20multi-class%20object%20recognition%20and%20segmentation%202006"
+        }
+    ]
+}

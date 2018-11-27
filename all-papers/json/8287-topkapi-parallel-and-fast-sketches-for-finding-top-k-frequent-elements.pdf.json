@@ -1,0 +1,171 @@
+{
+    "filename": "8287-topkapi-parallel-and-fast-sketches-for-finding-top-k-frequent-elements.pdf",
+    "metadata": {
+        "title": "Topkapi: Parallel and Fast Sketches for Finding Top-K Frequent Elements",
+        "author": "Ankush Mandal, He Jiang, Anshumali Shrivastava, Vivek Sarkar",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8287-topkapi-parallel-and-fast-sketches-for-finding-top-k-frequent-elements.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Identifying the top-K frequent items is one of the most common and important operations in large data processing systems. As a result, several solutions have been proposed to solve this problem approximately. In this paper, we identify that in modern distributed settings with both multi-node as well as multi-core parallelism, existing algorithms, although theoretically sound, are suboptimal from the performance perspective. In particular, for identifying top-K frequent items, Count-Min Sketch (CMS) has fantastic update time but lack the important property of reducibility which is needed for exploiting available massive data parallelism. On the other end, popular Frequent algorithm (FA) leads to reducible summaries but the update costs are significant. In this paper, we present Topkapi, a fast and parallel algorithm for finding top-K frequent items, which gives the best of both worlds, i.e., it is reducible as well as efficient update time similar to CMS. Topkapi possesses strong theoretical guarantees and leads to significant performance gains due to increased parallelism, relative to past work."
+    },
+    "keywords": [
+        {
+            "term": "Count-Min Sketch",
+            "url": "https://en.wikipedia.org/wiki/Count-Min_Sketch"
+        },
+        {
+            "term": "data stream",
+            "url": "https://en.wikipedia.org/wiki/data_stream"
+        },
+        {
+            "term": "multi core",
+            "url": "https://en.wikipedia.org/wiki/multi_core"
+        },
+        {
+            "term": "parallelism",
+            "url": "https://en.wikipedia.org/wiki/parallelism"
+        }
+    ],
+    "highlights": [
+        "Notations<br/><br/>We will refer the problem of finding the top-K most frequent items in the data stream as the \u201ctop-K problem\u201d",
+        "We show a theoretically sound and superior algorithm which combines both Count-Min Sketch and Frequent algorithm in a novel way that achieves the best-of-the-both worlds \u2013 logarithmic updates as well as reducibility needed for parallelism",
+        "With data parallelism, the algorithmic update time becomes a factor with a significant impact on performance. [17; 4; 5] discuss parallel counter-based Space Saving [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>] algorithm over CPU, GPU, and distributed environment respectively",
+        "We propose to associate a Frequent algorithm summary of size 1 to each counter of Count-Min Sketch",
+        "Figure 1a and Figure 1b represents the speedup of Topkapi over Frequent(FA) and Count-Min Sketch(CMS) for 16GB and 128GB data sizes respectively for 1 to 16 nodes with each node running 8 threads",
+        "In our experiments using 1 to 16 nodes (8 threads on each node) with 16GB data, we find that the execution time of this two-pass algorithm is on an average 0.97x of single-pass Count-Min Sketch+heap based approach"
+    ],
+    "key_statements": [
+        "Notations<br/><br/>We will refer the problem of finding the top-K most frequent items in the data stream as the \u201ctop-K problem\u201d",
+        "We show a theoretically sound and superior algorithm which combines both Count-Min Sketch and Frequent algorithm in a novel way that achieves the best-of-the-both worlds \u2013 logarithmic updates as well as reducibility needed for parallelism",
+        "With data parallelism, the algorithmic update time becomes a factor with a significant impact on performance. [17; 4; 5] discuss parallel counter-based Space Saving [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>] algorithm over CPU, GPU, and distributed environment respectively",
+        "We propose to associate a Frequent algorithm summary of size 1 to each counter of Count-Min Sketch",
+        "Scalability over Number of Nodes We present strong scaling performance results over varying number of nodes for two different data sizes: a) 16GB (Gutenberg dataset) and b) 128GB (Puma dataset)",
+        "Figure 1a and Figure 1b represents the speedup of Topkapi over Frequent(FA) and Count-Min Sketch(CMS) for 16GB and 128GB data sizes respectively for 1 to 16 nodes with each node running 8 threads",
+        "In our experiments using 1 to 16 nodes (8 threads on each node) with 16GB data, we find that the execution time of this two-pass algorithm is on an average 0.97x of single-pass Count-Min Sketch+heap based approach"
+    ],
+    "summary": [
+        "Notations<br/><br/>We will refer the problem of finding the top-K most frequent items in the data stream as the \u201ctop-K problem\u201d.",
+        "Sketch-based Algorithms: Instead of maintaining counters for a monitored set of words, sketchbased algorithms use lossy hashes to create a summary which can be used to estimate the frequency of any given item.",
+        "With data parallelism, the algorithmic update time becomes a factor with a significant impact on performance.",
+        "5 merge thread local summaryj \u2200j \u2208 {1, ..., T } to produce node final summaryi; 6 use parallel reduction strategy to merge node final summaryi \u2200i \u2208 {1, ..., N } to produce a final summary at root node; 7 construct CS using final summary at root node; 8 sort CS and report top-K words from root node in any small subsample of the stream.",
+        "It should be noted that only the sketch in CMS is reducible and the reduction is performed as Topkapi.",
+        "Figure 1a and Figure 1b represents the speedup of Topkapi over Frequent(FA) and Count-Min Sketch(CMS) for 16GB and 128GB data sizes respectively for 1 to 16 nodes with each node running 8 threads.",
+        "5.2.2 Scalability over Number of Threads Figure 1c represents the performance improvement of Topkapi over FA and CMS for 1 to 64 threads on a single node with 32 cores.",
+        "(e) Performance comparison with FA and CMS for (f) Execution time break down for Topkapi, FA, high number of threads (32 and 64) in distributed and CMS for 4 nodes and 1GB data size.",
+        "When we move to distributed setting with 2 or more nodes, it boils down to which factor has more impact - the performance gain from low overhead merging step or the performance degradation from high level of multi-threading.",
+        "The plot supports our analysis that FA, among all three algorithms, has the highest update time for the summary but lowest cost when it comes to merging summaries across nodes.",
+        "CMS has lowest update time for the summary because it involves only calculating the bucket through hashing and incrementing the respective counter.",
+        "Topkapi has quite low computational cost for merging summaries across nodes whereas CMS has the highest cost in this regard.",
+        "In our experiments using 1 to 16 nodes (8 threads on each node) with 16GB data, we find that the execution time of this two-pass algorithm is on an average 0.97x of single-pass CMS+heap based approach."
+    ],
+    "headline": "We identify that in modern distributed settings with both multi-node as well as multi-core parallelism, existing algorithms, theoretically sound, are suboptimal from the performance perspective",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Project Gutenberg. https://www.gutenberg.org/, 2017.",
+            "url": "https://www.gutenberg.org/"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Pankaj K. Agarwal, Graham Cormode, Zengfeng Huang, Jeff Phillips, Zhewei Wei, and Ke Yi. Mergeable summaries. In Proceedings of the 31st ACM SIGMOD-SIGACT-SIGAI Symposium on Principles of Database Systems, PODS \u201912, pages 23\u201334, New York, NY, USA, 2012. ACM. ISBN 978-1-4503-1248-6. doi: 10.1145/2213556.2213562. URL http://doi.acm.org/10.1145/2213556.2213562.",
+            "crossref": "https://dx.doi.org/10.1145/2213556.2213562",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1145/2213556.2213562"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Radu Berinde, Piotr Indyk, Graham Cormode, and Martin J. Strauss. Space-optimal heavy hitters with strong error bounds. ACM Trans. Database Syst., 35(4):26:1\u201326:28, 2010. ISSN 0362-5915. doi: 10.1145/1862919.1862923. URL http://doi.acm.org/10.1145/1862919.1862923.",
+            "crossref": "https://dx.doi.org/10.1145/1862919.1862923",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1145/1862919.1862923"
+        },
+        {
+            "id": "4",
+            "entry": "[4] M. Cafaro, I. Epicoco, G. Aloisio, and M. Pulimeno. Cuda based parallel implementations of space-saving on a gpu. In 2017 International Conference on High Performance Computing Simulation (HPCS), pages 707\u2013714, 2017. doi: 10.1109/HPCS.2017.108.",
+            "crossref": "https://dx.doi.org/10.1109/HPCS.2017.108",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1109/HPCS.2017.108"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Massimo Cafaro, Marco Pulimeno, and Piergiulio Tempesta. A parallel space saving algorithm for frequent items and the hurwitz zeta distribution. Information Sciences, 329: 1 \u2013 19, 2016. ISSN 0020-0255. doi: https://doi.org/10.1016/j.ins.2015.09.003. URL http://www.sciencedirect.com/science/article/pii/S002002551500657X. Special issue on Discovery Science.",
+            "crossref": "https://dx.doi.org/10.1016/j.ins.2015.09.003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1016/j.ins.2015.09.003"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Graham Cormode and Marios Hadjieleftheriou. Methods for finding frequent items in data streams. The VLDB Journal, 19(1):3\u201320, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cormode%2C%20Graham%20Hadjieleftheriou%2C%20Marios%20Methods%20for%20finding%20frequent%20items%20in%20data%20streams%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cormode%2C%20Graham%20Hadjieleftheriou%2C%20Marios%20Methods%20for%20finding%20frequent%20items%20in%20data%20streams%202010"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Graham Cormode and Shan Muthukrishnan. An improved data stream summary: the count-min sketch and its applications. Journal of Algorithms, 55(1):58\u201375, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cormode%2C%20Graham%20Muthukrishnan%2C%20Shan%20An%20improved%20data%20stream%20summary%3A%20the%20count-min%20sketch%20and%20its%20applications%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cormode%2C%20Graham%20Muthukrishnan%2C%20Shan%20An%20improved%20data%20stream%20summary%3A%20the%20count-min%20sketch%20and%20its%20applications%202005"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Erik D Demaine, Alejandro L\u00f3pez-Ortiz, and J Ian Munro. Frequency estimation of internet packet streams with limited space. In European Symposium on Algorithms, pages 348\u2013360.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Demaine%2C%20Erik%20D.%20L%C3%B3pez-Ortiz%2C%20Alejandro%20Munro%2C%20J.Ian%20Frequency%20estimation%20of%20internet%20packet%20streams%20with%20limited%20space",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Demaine%2C%20Erik%20D.%20L%C3%B3pez-Ortiz%2C%20Alejandro%20Munro%2C%20J.Ian%20Frequency%20estimation%20of%20internet%20packet%20streams%20with%20limited%20space"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Faraz Ahmad. Puma Dataset. https://engineering.purdue.edu/puma/datasets.htm.",
+            "url": "https://engineering.purdue.edu/puma/datasets.htm"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Richard M. Karp, Scott Shenker, and Christos H. Papadimitriou. A simple algorithm for finding frequent elements in streams and bags. ACM Trans. Database Syst., 28(1):51\u201355, mar 2003. ISSN 0362-5915. doi: 10.1145/762471.762473. URL http://doi.acm.org/10.1145/762471.762473.",
+            "crossref": "https://dx.doi.org/10.1145/762471.762473",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1145/762471.762473"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Gurmeet Singh Manku and Rajeev Motwani. Approximate frequency counts over data streams. In Proceedings of the 28th International Conference on Very Large Data Bases, VLDB \u201902, pages 346\u2013357. VLDB Endowment, 2002. URL http://dl.acm.org/citation.cfm?id=1287369.1287400.",
+            "url": "http://dl.acm.org/citation.cfm?id=1287369.1287400",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Manku%2C%20Gurmeet%20Singh%20Motwani%2C%20Rajeev%20Approximate%20frequency%20counts%20over%20data%20streams%202002"
+        },
+        {
+            "id": "12",
+            "entry": "[12] H Brendan McMahan, Gary Holt, David Sculley, Michael Young, Dietmar Ebner, Julian Grady, Lan Nie, Todd Phillips, Eugene Davydov, Daniel Golovin, et al. Ad click prediction: a view from the trenches. In Proceedings of the 19th ACM SIGKDD international conference on Knowledge discovery and data mining, pages 1222\u20131230. ACM, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=McMahan%2C%20H.Brendan%20Holt%2C%20Gary%20Sculley%2C%20David%20Young%2C%20Michael%20Ad%20click%20prediction%3A%20a%20view%20from%20the%20trenches%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=McMahan%2C%20H.Brendan%20Holt%2C%20Gary%20Sculley%2C%20David%20Young%2C%20Michael%20Ad%20click%20prediction%3A%20a%20view%20from%20the%20trenches%202013"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Ahmed Metwally, Divyakant Agrawal, and Amr El Abbadi. Efficient computation of frequent and top-k elements in data streams. In Proceedings of the 10th International Conference on Database Theory, ICDT\u201905, pages 398\u2013412. Springer-Verlag, 2005. doi: 10.1007/ 978-3-540-30570-5_27. URL http://dx.doi.org/10.1007/978-3-540-30570-5_27.",
+            "crossref": "https://dx.doi.org/10.1007/978-3-540-30570-5_27",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1007/978-3-540-30570-5_27"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Ahmed Metwally, Divyakant Agrawal, and Amr El Abbadi. An integrated efficient solution for computing frequent and top-k elements in data streams. ACM Trans. Database Syst., 31(3):1095\u20131133, 2006. ISSN 0362-5915. doi: 10.1145/1166074.1166084. URL http://doi.acm.org/10.1145/1166074.1166084.",
+            "crossref": "https://dx.doi.org/10.1145/1166074.1166084",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1145/1166074.1166084"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Pratanu Roy, Jens Teubner, and Gustavo Alonso. Efficient frequent item counting in multi-core hardware. In Proceedings of the 18th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, KDD \u201912, pages 1451\u20131459. ACM, 2012. doi: 10.1145/2339530. 2339757.",
+            "crossref": "https://dx.doi.org/10.1145/2339530.2339757",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1145/2339530.2339757"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Anshumali Shrivastava, Arnd Christian Konig, and Mikhail Bilenko. Time adaptive sketches (ada-sketches) for summarizing data streams. In Proceedings of the 2016 International Conference on Management of Data, pages 1417\u20131432. ACM, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shrivastava%2C%20Anshumali%20Konig%2C%20Arnd%20Christian%20Bilenko%2C%20Mikhail%20Time%20adaptive%20sketches%20%28ada-sketches%29%20for%20summarizing%20data%20streams%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shrivastava%2C%20Anshumali%20Konig%2C%20Arnd%20Christian%20Bilenko%2C%20Mikhail%20Time%20adaptive%20sketches%20%28ada-sketches%29%20for%20summarizing%20data%20streams%202016"
+        },
+        {
+            "id": "17",
+            "entry": "[17] X. Yang, J. Liu, and W. Zhou. A parallel frequent item counting algorithm. In 2016 8th International Conference on Intelligent Human-Machine Systems and Cybernetics (IHMSC), volume 02, pages 225\u2013230, 2016. doi: 10.1109/IHMSC.2016.123.",
+            "crossref": "https://dx.doi.org/10.1109/IHMSC.2016.123",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1109/IHMSC.2016.123"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Ke Yi and Qin Zhang. Optimal tracking of distributed heavy hitters and quantiles. Algorithmica, 65(1):206\u2013223, 2013. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yi%2C%20Ke%20Zhang%2C%20Qin%20Optimal%20tracking%20of%20distributed%20heavy%20hitters%20and%20quantiles%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yi%2C%20Ke%20Zhang%2C%20Qin%20Optimal%20tracking%20of%20distributed%20heavy%20hitters%20and%20quantiles%202013"
+        }
+    ]
+}

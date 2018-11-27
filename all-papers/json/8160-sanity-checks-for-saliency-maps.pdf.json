@@ -1,0 +1,316 @@
+{
+    "filename": "8160-sanity-checks-for-saliency-maps.pdf",
+    "metadata": {
+        "title": "Sanity Checks for Saliency Maps",
+        "author": "Julius Adebayo, Justin Gilmer, Michael Muelly, Ian Goodfellow, Moritz Hardt, Been Kim",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8160-sanity-checks-for-saliency-maps.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Saliency methods have emerged as a popular tool to highlight features in an input deemed relevant for the prediction of a learned model. Several saliency methods have been proposed, often guided by visual appeal on image data. In this work, we propose an actionable methodology to evaluate what kinds of explanations a given method can and cannot provide. We find that reliance, solely, on visual assessment can be misleading. Through extensive experiments we show that some existing saliency methods are independent both of the model and of the data generating process. Consequently, methods that fail the proposed tests are inadequate for tasks that are sensitive to either data or model, such as, finding outliers in the data, explaining the relationship between inputs and outputs that the model learned, and debugging the model. We interpret our findings through an analogy with edge detection in images, a technique that requires neither training data nor model. Theory in the case of a linear model and a single-layer convolutional neural network supports our experimental findings2."
+    },
+    "keywords": [
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "sanity check",
+            "url": "https://en.wikipedia.org/wiki/sanity_check"
+        },
+        {
+            "term": "black box",
+            "url": "https://en.wikipedia.org/wiki/black_box"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "As machine learning grows in complexity and impact, much hope rests on explanation methods as tools to elucidate important aspects of learned models [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>]",
+        "Our findings imply that the saliency methods that fail our tests are incapable of supporting tasks that require explanations that are faithful to the model or the data generating process.\n5",
+        "In Figure 1 we saw that edge detectors produce images that are strikingly similar to the outputs of some saliency methods",
+        "We envision these methods to serve as sanity checks in the design of new model explanations",
+        "We primarily focused on invariance under model randomization, and label randomization"
+    ],
+    "key_statements": [
+        "As machine learning grows in complexity and impact, much hope rests on explanation methods as tools to elucidate important aspects of learned models [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>]",
+        "The edge detector does not depend on model or training data, and yet produces results that bear visual similarity with saliency maps",
+        "Easy to implement tests for assessing the scope and quality of explanation methods: the model parameter randomization test, and the data randomization test",
+        "Our findings imply that the saliency methods that fail our tests are incapable of supporting tasks that require explanations that are faithful to the model or the data generating process.\n5",
+        "Our goal is not to exhaustively evaluate all prior explanation methods, but rather to highlight how our methods apply to several cases of interest",
+        "In Figures 3 and 4, we show the Spearman metrics as well as the structural similarity index and histogram of gradients similarity metrics",
+        "We find that integrated gradients and gradient input show a remarkable visual similarity to the original mask",
+        "It is not inconceivable that an analyst could confuse the integrated gradient and gradient input masks derived from a network trained on random labels as legitimate",
+        "We consider methods that approximate an element-wise product of input and gradient, as several local explanations do [<a class=\"ref-link\" id=\"c33\" href=\"#r33\">33</a>, <a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>]",
+        "To better understand our findings, we analyze the output of the saliency methods tested on two simple models: a linear model and a 1-layer sum pooling convolutional network",
+        "To understand why saliency methods applied to this simple architecture visually appear to be edge detectors, we consider the closed form of the gradient",
+        "In Figure 1 we saw that edge detectors produce images that are strikingly similar to the outputs of some saliency methods",
+        "In Figure 27 (In Appendix), we show a qualitative comparison of saliency maps of an input image with the same input image multiplied element-wise by the output of an edge detector",
+        "We envision these methods to serve as sanity checks in the design of new model explanations",
+        "We primarily focused on invariance under model randomization, and label randomization"
+    ],
+    "summary": [
+        "As machine learning grows in complexity and impact, much hope rests on explanation methods as tools to elucidate important aspects of learned models [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>].",
+        "The edge detector does not depend on model or training data, and yet produces results that bear visual similarity with saliency maps.",
+        "If the saliency method depends on the learned parameters of the model, we should expect its output to differ substantially between the two cases.",
+        "4. our findings imply that the saliency methods that fail our tests are incapable of supporting tasks that require explanations that are faithful to the model or the data generating process.",
+        "Our data randomization test evaluates the sensitivity of an explanation method to the relationship between instances and labels.",
+        "An explanation method insensitive to randomizing labels cannot possibly explain mechanisms that depend on the relationship between instances and labels present in the data generating process.",
+        "It is not inconceivable that an analyst could confuse the integrated gradient and gradient input masks derived from a network trained on random labels as legitimate.",
+        "We discuss the influence of the model architecture on explanations derived from NNs. Second, we consider methods that approximate an element-wise product of input and gradient, as several local explanations do [<a class=\"ref-link\" id=\"c33\" href=\"#r33\">33</a>, <a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>].",
+        "We consider a single 1-layer convolution with sum-pooling architecture, and show that saliency explanations for this model mostly capture edges.",
+        "This experiment indicates that methods that approximate the \u201cinput-times-gradient\u201d could conceivably mostly return the input, in cases where the gradients look visually noisy as they tend to do.",
+        "To better understand our findings, we analyze the output of the saliency methods tested on two simple models: a linear model and a 1-layer sum pooling convolutional network.",
+        "This network applies a single 3x3 convolutional filter to the input image, applies a ReLU non-linearity and sum-pools over the entire convolutional layer for the output.",
+        "To understand why saliency methods applied to this simple architecture visually appear to be edge detectors, we consider the closed form of the gradient",
+        "In Figure 1 we saw that edge detectors produce images that are strikingly similar to the outputs of some saliency methods.",
+        "While edge detection is a fundamental and useful image processing technique, it is typically not thought of as an explanation method, because it involves no model or training data.",
+        "Our results show that visual inspection of explanations alone can favor methods that may provide compelling pictures, but lack sensitivity to the model and the data generating process.",
+        "We hope that our paper is a stepping stone towards a more rigorous evaluation of new explanation methods, rather than a verdict on existing methods"
+    ],
+    "headline": "We propose an actionable methodology to evaluate what kinds of explanations a given method can and cannot provide",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Alfredo Vellido, Jos\u00e9 David Mart\u00edn-Guerrero, and Paulo JG Lisboa. Making machine learning models interpretable. In ESANN, volume 12, pages 163\u2013172.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vellido%2C%20Alfredo%20Mart%C3%ADn-Guerrero%2C%20Jos%C3%A9%20David%20Lisboa%2C%20Paulo%20J.G.%20Making%20machine%20learning%20models%20interpretable",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vellido%2C%20Alfredo%20Mart%C3%ADn-Guerrero%2C%20Jos%C3%A9%20David%20Lisboa%2C%20Paulo%20J.G.%20Making%20machine%20learning%20models%20interpretable"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Finale Doshi-Velez, Mason Kortz, Ryan Budish, Chris Bavitz, Sam Gershman, David O\u2019Brien, Stuart Schieber, James Waldo, David Weinberger, and Alexandra Wood. Accountability of ai under the law: The role of explanation. arXiv preprint arXiv:1711.01134, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.01134"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Bryce Goodman and Seth Flaxman. European union regulations on algorithmic decision-making and a\" right to explanation\". arXiv preprint arXiv:1606.08813, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.08813"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Gabriel Cadamuro, Ran Gilad-Bachrach, and Xiaojin Zhu. Debugging machine learning models. In ICML Workshop on Reliable Machine Learning in the Wild, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cadamuro%2C%20Gabriel%20Gilad-Bachrach%2C%20Ran%20Zhu%2C%20Xiaojin%20Debugging%20machine%20learning%20models%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cadamuro%2C%20Gabriel%20Gilad-Bachrach%2C%20Ran%20Zhu%2C%20Xiaojin%20Debugging%20machine%20learning%20models%202016"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Jorge Casillas, Oscar Cord\u00f3n, Francisco Herrera Triguero, and Luis Magdalena. Interpretability issues in fuzzy modeling, volume 128.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jorge%20Casillas%20Oscar%20Cord%C3%B3n%20Francisco%20Herrera%20Triguero%20and%20Luis%20Magdalena%20Interpretability%20issues%20in%20fuzzy%20modeling%20volume%20128",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jorge%20Casillas%20Oscar%20Cord%C3%B3n%20Francisco%20Herrera%20Triguero%20and%20Luis%20Magdalena%20Interpretability%20issues%20in%20fuzzy%20modeling%20volume%20128"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Himabindu Lakkaraju, Ece Kamar, Rich Caruana, and Jure Leskovec. Interpretable & explorable approximations of black box models. arXiv preprint arXiv:1707.01154, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.01154"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Fulton Wang and Cynthia Rudin. Causal falling rule lists. arXiv preprint arXiv:1510.05189, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1510.05189"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Karen Simonyan, Andrea Vedaldi, and Andrew Zisserman. Deep inside convolutional networks: Visualising image classification models and saliency maps. arXiv preprint arXiv:1312.6034, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.6034"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Jost Tobias Springenberg, Alexey Dosovitskiy, Thomas Brox, and Martin Riedmiller. Striving for simplicity: The all convolutional net. arXiv preprint arXiv:1412.6806, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6806"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Matthew D Zeiler and Rob Fergus. Visualizing and understanding convolutional networks. In European conference on computer vision, pages 818\u2013833.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zeiler%2C%20Matthew%20D.%20Fergus%2C%20Rob%20Visualizing%20and%20understanding%20convolutional%20networks",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zeiler%2C%20Matthew%20D.%20Fergus%2C%20Rob%20Visualizing%20and%20understanding%20convolutional%20networks"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Maximilian Alber Klaus-Robert M\u00fcller Dumitru Erhan Been Kim Sven D\u00e4hne Pieter-Jan Kindermans, Kristof T. Sch\u00fctt. Learning how to explain neural networks: Patternnet and patternattribution. International Conference on Learning Representations, 2018. URL https://openreview.net/forum?id= Hkn7CBaTW.",
+            "url": "https://openreview.net/forum?id=",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Maximilian%20Alber%20Klaus-Robert%20M%C3%BCller%20Dumitru%20Erhan%20Been%20Kim%20Sven%20D%C3%A4hne%20Pieter-Jan%20Kindermans%2C%20Kristof%20T.%20Sch%C3%BCtt.%20Learning%20how%20to%20explain%20neural%20networks%3A%20Patternnet%20and%20patternattribution%202018"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Luisa M Zintgraf, Taco S Cohen, Tameem Adel, and Max Welling. Visualizing deep neural network decisions: Prediction difference analysis. arXiv preprint arXiv:1702.04595, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1702.04595"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Avanti Shrikumar, Peyton Greenside, Anna Shcherbina, and Anshul Kundaje. Not just a black box: Learning important features through propagating activation differences. arXiv preprint arXiv:1605.01713, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1605.01713"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Mukund Sundararajan, Ankur Taly, and Qiqi Yan. Axiomatic attribution for deep networks. In Doina Precup and Yee Whye Teh, editors, Proceedings of the 34th International Conference on Machine Learning, volume 70 of Proceedings of Machine Learning Research, pages 3319\u20133328, International Convention Centre, Sydney, Australia, 06\u201311 Aug 2017. PMLR. URL http://proceedings.mlr.press/v70/sundararajan17a.html.",
+            "url": "http://proceedings.mlr.press/v70/sundararajan17a.html",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sundararajan%2C%20Mukund%20Taly%2C%20Ankur%20Yan%2C%20Qiqi%20Axiomatic%20attribution%20for%20deep%20networks%202017-08"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Marco Tulio Ribeiro, Sameer Singh, and Carlos Guestrin. Why should i trust you?: Explaining the predictions of any classifier. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, pages 1135\u20131144. ACM, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ribeiro%2C%20Marco%20Tulio%20Singh%2C%20Sameer%20Guestrin%2C%20Carlos%20Why%20should%20i%20trust%20you%3F%3A%20Explaining%20the%20predictions%20of%20any%20classifier%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ribeiro%2C%20Marco%20Tulio%20Singh%2C%20Sameer%20Guestrin%2C%20Carlos%20Why%20should%20i%20trust%20you%3F%3A%20Explaining%20the%20predictions%20of%20any%20classifier%202016"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Daniel Smilkov, Nikhil Thorat, Been Kim, Fernanda Vi\u00e9gas, and Martin Wattenberg. Smoothgrad: removing noise by adding noise. arXiv preprint arXiv:1706.03825, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.03825"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Piotr Dabkowski and Yarin Gal. Real time image saliency for black box classifiers. In Advances in Neural Information Processing Systems, pages 6970\u20136979, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dabkowski%2C%20Piotr%20Gal%2C%20Yarin%20Real%20time%20image%20saliency%20for%20black%20box%20classifiers%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dabkowski%2C%20Piotr%20Gal%2C%20Yarin%20Real%20time%20image%20saliency%20for%20black%20box%20classifiers%202017"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Scott M Lundberg and Su-In Lee. A unified approach to interpreting model predictions. In Advances in Neural Information Processing Systems, pages 4768\u20134777, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lundberg%2C%20Scott%20M.%20Lee%2C%20Su-In%20A%20unified%20approach%20to%20interpreting%20model%20predictions%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lundberg%2C%20Scott%20M.%20Lee%2C%20Su-In%20A%20unified%20approach%20to%20interpreting%20model%20predictions%202017"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Ramprasaath R Selvaraju, Abhishek Das, Ramakrishna Vedantam, Michael Cogswell, Devi Parikh, and Dhruv Batra. Grad-cam: Why did you say that? arXiv preprint arXiv:1611.07450, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.07450"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Ruth C Fong and Andrea Vedaldi. Interpretable explanations of black boxes by meaningful perturbation. arXiv preprint arXiv:1704.03296, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1704.03296"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Jianbo Chen, Le Song, Martin Wainwright, and Michael Jordan. Learning to explain: An informationtheoretic perspective on model interpretation. In Jennifer Dy and Andreas Krause, editors, Proceedings of the 35th International Conference on Machine Learning, volume 80 of Proceedings of Machine Learning Research, pages 883\u2013892, Stockholmsm\u00e4ssan, Stockholm Sweden, 10\u201315 Jul 2018. PMLR. URL http://proceedings.mlr.press/v80/chen18j.html.",
+            "url": "http://proceedings.mlr.press/v80/chen18j.html",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Jianbo%20Song%2C%20Le%20Wainwright%2C%20Martin%20Jordan%2C%20Michael%20Learning%20to%20explain%3A%20An%20informationtheoretic%20perspective%20on%20model%20interpretation%202018-07"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Dumitru Erhan, Yoshua Bengio, Aaron Courville, and Pascal Vincent. Visualizing higher-layer features of a deep network. University of Montreal, 1341(3):1, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Erhan%2C%20Dumitru%20Bengio%2C%20Yoshua%20Courville%2C%20Aaron%20Vincent%2C%20Pascal%20Visualizing%20higher-layer%20features%20of%20a%20deep%20network%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Erhan%2C%20Dumitru%20Bengio%2C%20Yoshua%20Courville%2C%20Aaron%20Vincent%2C%20Pascal%20Visualizing%20higher-layer%20features%20of%20a%20deep%20network%202009"
+        },
+        {
+            "id": "23",
+            "entry": "[23] David Baehrens, Timon Schroeter, Stefan Harmeling, Motoaki Kawanabe, Katja Hansen, and Klaus-Robert M\u00c3\u017eller. How to explain individual classification decisions. Journal of Machine Learning Research, 11 (Jun):1803\u20131831, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Baehrens%2C%20David%20Schroeter%2C%20Timon%20Harmeling%2C%20Stefan%20Kawanabe%2C%20Motoaki%20and%20Klaus-Robert%20M%C3%83%C5%BEller.%20How%20to%20explain%20individual%20classification%20decisions%202010-06-11",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Baehrens%2C%20David%20Schroeter%2C%20Timon%20Harmeling%2C%20Stefan%20Kawanabe%2C%20Motoaki%20and%20Klaus-Robert%20M%C3%83%C5%BEller.%20How%20to%20explain%20individual%20classification%20decisions%202010-06-11"
+        },
+        {
+            "id": "24",
+            "entry": "[24] A. C. \u00d6ztireli M. Gross M. Ancona, E. Ceolini. Towards better understanding of gradient-based attribution methods for deep neural networks. International Conference on Learning Representations (ICLR 2018), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ancona%2C%20A.C.%C3%96ztireli%20M.Gross%20M.%20Ceolini%2C%20E.%20Towards%20better%20understanding%20of%20gradient-based%20attribution%20methods%20for%20deep%20neural%20networks%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ancona%2C%20A.C.%C3%96ztireli%20M.Gross%20M.%20Ceolini%2C%20E.%20Towards%20better%20understanding%20of%20gradient-based%20attribution%20methods%20for%20deep%20neural%20networks%202018"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Amirata Ghorbani, Abubakar Abid, and James Zou. Interpretation of neural networks is fragile. arXiv preprint arXiv:1710.10547, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.10547"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Pieter-Jan Kindermans, Sara Hooker, Julius Adebayo, Maximilian Alber, Kristof T Sch\u00fctt, Sven D\u00e4hne, Dumitru Erhan, and Been Kim. The (un) reliability of saliency methods. arXiv preprint arXiv:1711.00867, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.00867"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Weili Nie, Yang Zhang, and Ankit Patel. A theoretical explanation for perplexing behaviors of backpropagation-based visualizations. In ICML, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nie%2C%20Weili%20Zhang%2C%20Yang%20Patel%2C%20Ankit%20A%20theoretical%20explanation%20for%20perplexing%20behaviors%20of%20backpropagation-based%20visualizations%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nie%2C%20Weili%20Zhang%2C%20Yang%20Patel%2C%20Ankit%20A%20theoretical%20explanation%20for%20perplexing%20behaviors%20of%20backpropagation-based%20visualizations%202018"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Aravindh Mahendran and Andrea Vedaldi. Salient deconvolutional networks. In European Conference on Computer Vision, pages 120\u2013135.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mahendran%2C%20Aravindh%20Vedaldi%2C%20Andrea%20Salient%20deconvolutional%20networks",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mahendran%2C%20Aravindh%20Vedaldi%2C%20Andrea%20Salient%20deconvolutional%20networks"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Wojciech Samek, Alexander Binder, Gr\u00e9goire Montavon, Sebastian Lapuschkin, and Klaus-Robert M\u00fcller. Evaluating the visualization of what a deep neural network has learned. IEEE transactions on neural networks and learning systems, 28(11):2660\u20132673, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Samek%2C%20Wojciech%20Binder%2C%20Alexander%20Montavon%2C%20Gr%C3%A9goire%20Lapuschkin%2C%20Sebastian%20Evaluating%20the%20visualization%20of%20what%20a%20deep%20neural%20network%20has%20learned%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Samek%2C%20Wojciech%20Binder%2C%20Alexander%20Montavon%2C%20Gr%C3%A9goire%20Lapuschkin%2C%20Sebastian%20Evaluating%20the%20visualization%20of%20what%20a%20deep%20neural%20network%20has%20learned%202017"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Gr\u00e9goire Montavon, Wojciech Samek, and Klaus-Robert M\u00fcller. Methods for interpreting and understanding deep neural networks. Digital Signal Processing, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Montavon%2C%20Gr%C3%A9goire%20Samek%2C%20Wojciech%20M%C3%BCller%2C%20Klaus-Robert%20Methods%20for%20interpreting%20and%20understanding%20deep%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Montavon%2C%20Gr%C3%A9goire%20Samek%2C%20Wojciech%20M%C3%BCller%2C%20Klaus-Robert%20Methods%20for%20interpreting%20and%20understanding%20deep%20neural%20networks%202017"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Chiyuan Zhang, Samy Bengio, Moritz Hardt, Benjamin Recht, and Oriol Vinyals. Understanding deep learning requires rethinking generalization. In In Proc. 5th ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Chiyuan%20Bengio%2C%20Samy%20Hardt%2C%20Moritz%20Recht%2C%20Benjamin%20Understanding%20deep%20learning%20requires%20rethinking%20generalization%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Chiyuan%20Bengio%2C%20Samy%20Hardt%2C%20Moritz%20Recht%2C%20Benjamin%20Understanding%20deep%20learning%20requires%20rethinking%20generalization%202017"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Qingjie Meng, Christian Baumgartner, Matthew Sinclair, James Housden, Martin Rajchl, Alberto Gomez, Benjamin Hou, Nicolas Toussaint, Jeremy Tan, Jacqueline Matthew, et al. Automatic shadow detection in 2d ultrasound. 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Qingjie%20Meng%20Christian%20Baumgartner%20Matthew%20Sinclair%20James%20Housden%20Martin%20Rajchl%20Alberto%20Gomez%20Benjamin%20Hou%20Nicolas%20Toussaint%20Jeremy%20Tan%20Jacqueline%20Matthew%20et%20al%20Automatic%20shadow%20detection%20in%202d%20ultrasound%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Qingjie%20Meng%20Christian%20Baumgartner%20Matthew%20Sinclair%20James%20Housden%20Martin%20Rajchl%20Alberto%20Gomez%20Benjamin%20Hou%20Nicolas%20Toussaint%20Jeremy%20Tan%20Jacqueline%20Matthew%20et%20al%20Automatic%20shadow%20detection%20in%202d%20ultrasound%202018"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Marco Ancona, Enea Ceolini, Cengiz \u00d6ztireli, and Markus Gross. Towards better understanding of gradient-based attribution methods for deep neural networks. In In Proc. 6th ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Marco%20Ancona%2C%20Enea%20Ceolini%2C%20Cengiz%20%C3%96ztireli%20Gross%2C%20Markus%20Towards%20better%20understanding%20of%20gradient-based%20attribution%20methods%20for%20deep%20neural%20networks%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Marco%20Ancona%2C%20Enea%20Ceolini%2C%20Cengiz%20%C3%96ztireli%20Gross%2C%20Markus%20Towards%20better%20understanding%20of%20gradient-based%20attribution%20methods%20for%20deep%20neural%20networks%202018"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Andrew M Saxe, Pang Wei Koh, Zhenghao Chen, Maneesh Bhand, Bipin Suresh, and Andrew Y Ng. On random weights and unsupervised feature learning. In ICML, pages 1089\u20131096, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Saxe%2C%20Andrew%20M.%20Koh%2C%20Pang%20Wei%20Chen%2C%20Zhenghao%20Bhand%2C%20Maneesh%20Bipin%20Suresh%2C%20and%20Andrew%20Y%20Ng.%20On%20random%20weights%20and%20unsupervised%20feature%20learning%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Saxe%2C%20Andrew%20M.%20Koh%2C%20Pang%20Wei%20Chen%2C%20Zhenghao%20Bhand%2C%20Maneesh%20Bipin%20Suresh%2C%20and%20Andrew%20Y%20Ng.%20On%20random%20weights%20and%20unsupervised%20feature%20learning%202011"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Guillaume Alain and Yoshua Bengio. Understanding intermediate layers using linear classifier probes. arXiv preprint arXiv:1610.01644, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1610.01644"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Dmitry Ulyanov, Andrea Vedaldi, and Victor Lempitsky. Deep image prior. arXiv preprint arXiv:1711.10925, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.10925"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Julius Adebayo, Justin Gilmer, Ian Goodfellow, and Been Kim. Local explanation methods for deep neural networks lack sensitivity to parameter values. 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Adebayo%2C%20Julius%20Gilmer%2C%20Justin%20Goodfellow%2C%20Ian%20Kim%2C%20Been%20Local%20explanation%20methods%20for%20deep%20neural%20networks%20lack%20sensitivity%20to%20parameter%20values%202018"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Junghoon Seo, Jeongyeol Choe, Jamyoung Koo, Seunghyeon Jeon, Beomsu Kim, and Taegyun Jeon. Noise-adding methods of saliency map as series of higher order partial derivative. arXiv preprint arXiv:1806.03000, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1806.03000"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jon Shlens, and Zbigniew Wojna. Rethinking the inception architecture for computer vision. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 2818\u20132826, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Szegedy%2C%20Christian%20Vanhoucke%2C%20Vincent%20Ioffe%2C%20Sergey%20Shlens%2C%20Jon%20Rethinking%20the%20inception%20architecture%20for%20computer%20vision%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Szegedy%2C%20Christian%20Vanhoucke%2C%20Vincent%20Ioffe%2C%20Sergey%20Shlens%2C%20Jon%20Rethinking%20the%20inception%20architecture%20for%20computer%20vision%202016"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Olga Russakovsky, Jia Deng, Hao Su, Jonathan Krause, Sanjeev Satheesh, Sean Ma, Zhiheng Huang, Andrej Karpathy, Aditya Khosla, Michael Bernstein, et al. Imagenet large scale visual recognition challenge. International Journal of Computer Vision, 115(3):211\u2013252, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Russakovsky%2C%20Olga%20Deng%2C%20Jia%20Su%2C%20Hao%20Krause%2C%20Jonathan%20Imagenet%20large%20scale%20visual%20recognition%20challenge%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Russakovsky%2C%20Olga%20Deng%2C%20Jia%20Su%2C%20Hao%20Krause%2C%20Jonathan%20Imagenet%20large%20scale%20visual%20recognition%20challenge%202015"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Yann LeCun. The mnist database of handwritten digits. http://yann.lecun.com/exdb/mnist/, 1998.",
+            "url": "http://yann.lecun.com/exdb/mnist/"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Han Xiao, Kashif Rasul, and Roland Vollgraf. Fashion-mnist: a novel image dataset for benchmarking machine learning algorithms. arXiv preprint arXiv:1708.07747, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1708.07747"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Christian Szegedy, Sergey Ioffe, Vincent Vanhoucke, and Alexander A Alemi. Inception-v4, inceptionresnet and the impact of residual connections on learning. In AAAI, volume 4, page 12, 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Szegedy%2C%20Christian%20Ioffe%2C%20Sergey%20Vanhoucke%2C%20Vincent%20Alemi%2C%20Alexander%20A.%20Inception-v4%2C%20inceptionresnet%20and%20the%20impact%20of%20residual%20connections%20on%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Szegedy%2C%20Christian%20Ioffe%2C%20Sergey%20Vanhoucke%2C%20Vincent%20Alemi%2C%20Alexander%20A.%20Inception-v4%2C%20inceptionresnet%20and%20the%20impact%20of%20residual%20connections%20on%20learning%202017"
+        }
+    ]
+}

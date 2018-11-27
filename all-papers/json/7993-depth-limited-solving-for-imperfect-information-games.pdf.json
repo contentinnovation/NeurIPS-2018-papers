@@ -1,0 +1,299 @@
+{
+    "filename": "7993-depth-limited-solving-for-imperfect-information-games.pdf",
+    "metadata": {
+        "title": "Depth-Limited Solving for Imperfect-Information Games",
+        "author": "Noam Brown, Tuomas Sandholm, Brandon Amos",
+        "date": 2017,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7993-depth-limited-solving-for-imperfect-information-games.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "A fundamental challenge in imperfect-information games is that states do not have well-defined values. As a result, depth-limited search algorithms used in singleagent settings and perfect-information games do not apply. This paper introduces a principled way to conduct depth-limited solving in imperfect-information games by allowing the opponent to choose among a number of strategies for the remainder of the game at the depth limit. Each one of these strategies results in a different set of values for leaf nodes. This forces an agent to be robust to the different strategies an opponent may employ. We demonstrate the effectiveness of this approach by building a master-level heads-up no-limit Texas hold\u2019em poker AI that defeats two prior top agents using only a 4-core CPU and 16 GB of memory. Developing such a powerful agent would have previously required a supercomputer."
+    },
+    "keywords": [
+        {
+            "term": "game tree",
+            "url": "https://en.wikipedia.org/wiki/game_tree"
+        },
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "real time",
+            "url": "https://en.wikipedia.org/wiki/real_time"
+        },
+        {
+            "term": "libratus",
+            "url": "https://en.wikipedia.org/wiki/libratus"
+        },
+        {
+            "term": "extensive form game",
+            "url": "https://en.wikipedia.org/wiki/extensive_form_game"
+        }
+    ],
+    "highlights": [
+        "Imperfect-information games model strategic interactions between agents with hidden information",
+        "The key breakthrough that led to superhuman performance was nested solving, in which the agent repeatedly calculates a finer-grained strategy in real time as play proceeds down the game tree [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>, <a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>, <a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>]",
+        "Real-time subgame solving was too expensive for Libratus in the first half of the game because the portion of the game tree Libratus solved in real time, known as the subgame, always extended to the end of the game",
+        "For the first half of the game Libratus pre-computed a finegrained strategy that was used as a lookup table",
+        "Our goal is to compute a better approximation in real time for just a depth-limited subgame S that we find ourselves in during play"
+    ],
+    "key_statements": [
+        "Imperfect-information games model strategic interactions between agents with hidden information",
+        "The key breakthrough that led to superhuman performance was nested solving, in which the agent repeatedly calculates a finer-grained strategy in real time as play proceeds down the game tree [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>, <a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>, <a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>]",
+        "Real-time subgame solving was too expensive for Libratus in the first half of the game because the portion of the game tree Libratus solved in real time, known as the subgame, always extended to the end of the game",
+        "For the first half of the game Libratus pre-computed a finegrained strategy that was used as a lookup table",
+        "Our goal is to compute a better approximation in real time for just a depth-limited subgame S that we find ourselves in during play"
+    ],
+    "summary": [
+        "Imperfect-information games model strategic interactions between agents with hidden information.",
+        "In perfect-information depth-limited subgames, the value substituted at leaf nodes is an estimate of the state\u2019s value when all players play an equilibrium [<a class=\"ref-link\" id=\"c35\" href=\"#r35\">35</a>, <a class=\"ref-link\" id=\"c33\" href=\"#r33\">33</a>].",
+        "In imperfect-information games, an optimal strategy cannot be determined in a subgame by knowing the values of states when all players play an equilibrium strategy.",
+        "(b) A depth-limited subgame of Rock-Paper-Scissors+ with state values determined from the equilibrium.",
+        "We describe our new method for depth-limited solving in imperfect-information games, which we refer to as multi-valued states.",
+        "Assume P1 has played according to Nash equilibrium strategy \u03c31\u2217 prior to reaching a depth-limited subgame S of a two-player zero-sum game.",
+        "Depth-limited solving makes nested solving feasible even in the early game, so it is possible to play without acting according to a precomputed strategy or using action translation.",
+        "Values for the states at the end of the first betting round within the action abstraction were determined using the self-generative method discussed in Section 4.",
+        "To determine a P2 strategy in response to the 0.75\u00d7 bet, we constructed a depth-limited subgame rooted after the 0.75\u00d7 bet with leaf nodes at the end of the first betting round.",
+        "To estimate the values of a state when the depth limit is reached on the second round, we sample rollouts of each of the stored best-response strategies.",
+        "It is possible to determine an optimal strategy in a subgame rooted at a joint belief state independently from the rest of the game.",
+        "Joint belief states have unique, well-defined values that are not influenced by the strategies played in disjoint portions of the game tree.",
+        "One way to do depth-limited subgame solving, other than the method we describe in this paper, is to learn a function that maps joint belief states to infoset values.",
+        "When conducting depth-limited solving, one could set the value of a leaf infoset based on the joint belief state at that leaf infoset.",
+        "One drawback is that because a player\u2019s belief distribution partly defines a joint belief state, the values of the leaf infosets must be recalculated each time the strategy in the subgame changes.",
+        "Monte Carlo algorithms, which are the preferred domain-independent method of solving imperfect-information games, may change the strategy millions of times in a subgame, making them incompatible with the joint belief state approach.",
+        "The multi-valued state approach requires knowledge of a blueprint strategy that is already an approximate Nash equilibrium.",
+        "In addition to using less resources, this approach broadens the applicability of nested real-time solving to longer games"
+    ],
+    "headline": "This paper introduces a principled way to conduct depth-limited solving in imperfect-information games by allowing the opponent to choose among a number of strategies for the remainder of the game at the depth limit",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Michael Bowling, Neil Burch, Michael Johanson, and Oskari Tammelin. Heads-up limit hold\u2019em poker is solved. Science, 347(6218):145\u2013149, January 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bowling%2C%20Michael%20Burch%2C%20Neil%20Johanson%2C%20Michael%20Tammelin%2C%20Oskari%20Heads-up%20limit%20hold%E2%80%99em%20poker%20is%20solved%202015-01",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bowling%2C%20Michael%20Burch%2C%20Neil%20Johanson%2C%20Michael%20Tammelin%2C%20Oskari%20Heads-up%20limit%20hold%E2%80%99em%20poker%20is%20solved%202015-01"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Noam Brown, Sam Ganzfried, and Tuomas Sandholm. Hierarchical abstraction, distributed equilibrium computation, and post-processing, with application to a champion no-limit texas hold\u2019em agent. In Proceedings of the 2015 International Conference on Autonomous Agents and Multiagent Systems, pages 7\u201315. International Foundation for Autonomous Agents and Multiagent Systems, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Brown%2C%20Noam%20Ganzfried%2C%20Sam%20Sandholm%2C%20Tuomas%20Hierarchical%20abstraction%2C%20distributed%20equilibrium%20computation%2C%20and%20post-processing%2C%20with%20application%20to%20a%20champion%20no-limit%20texas%20hold%E2%80%99em%20agent%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Brown%2C%20Noam%20Ganzfried%2C%20Sam%20Sandholm%2C%20Tuomas%20Hierarchical%20abstraction%2C%20distributed%20equilibrium%20computation%2C%20and%20post-processing%2C%20with%20application%20to%20a%20champion%20no-limit%20texas%20hold%E2%80%99em%20agent%202015"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Noam Brown and Tuomas Sandholm. Simultaneous abstraction and equilibrium finding in games. In Proceedings of the International Joint Conference on Artificial Intelligence (IJCAI), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Brown%2C%20Noam%20Sandholm%2C%20Tuomas%20Simultaneous%20abstraction%20and%20equilibrium%20finding%20in%20games%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Brown%2C%20Noam%20Sandholm%2C%20Tuomas%20Simultaneous%20abstraction%20and%20equilibrium%20finding%20in%20games%202015"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Noam Brown and Tuomas Sandholm. Baby Tartanian8: Winning agent from the 2016 annual computer poker competition. In Proceedings of the Twenty-Fifth International Joint Conference on Artificial Intelligence (IJCAI-16), pages 4238\u20134239, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Noam%20Brown%20and%20Tuomas%20Sandholm%20Baby%20Tartanian8%20Winning%20agent%20from%20the%202016%20annual%20computer%20poker%20competition%20In%20Proceedings%20of%20the%20TwentyFifth%20International%20Joint%20Conference%20on%20Artificial%20Intelligence%20IJCAI16%20pages%2042384239%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Noam%20Brown%20and%20Tuomas%20Sandholm%20Baby%20Tartanian8%20Winning%20agent%20from%20the%202016%20annual%20computer%20poker%20competition%20In%20Proceedings%20of%20the%20TwentyFifth%20International%20Joint%20Conference%20on%20Artificial%20Intelligence%20IJCAI16%20pages%2042384239%202016"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Noam Brown and Tuomas Sandholm. Safe and nested subgame solving for imperfectinformation games. In Advances in Neural Information Processing Systems, pages 689\u2013699, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Brown%2C%20Noam%20Sandholm%2C%20Tuomas%20Safe%20and%20nested%20subgame%20solving%20for%20imperfectinformation%20games%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Brown%2C%20Noam%20Sandholm%2C%20Tuomas%20Safe%20and%20nested%20subgame%20solving%20for%20imperfectinformation%20games%202017"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Noam Brown and Tuomas Sandholm. Superhuman AI for heads-up no-limit poker: Libratus beats top professionals. Science, page eaao1733, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Brown%2C%20Noam%20Sandholm%2C%20Tuomas%20Superhuman%20AI%20for%20heads-up%20no-limit%20poker%3A%20Libratus%20beats%20top%20professionals%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Brown%2C%20Noam%20Sandholm%2C%20Tuomas%20Superhuman%20AI%20for%20heads-up%20no-limit%20poker%3A%20Libratus%20beats%20top%20professionals%202017"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Neil Burch, Michael Johanson, and Michael Bowling. Solving imperfect information games using decomposition. In AAAI Conference on Artificial Intelligence (AAAI), pages 602\u2013608, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Burch%2C%20Neil%20Johanson%2C%20Michael%20Bowling%2C%20Michael%20Solving%20imperfect%20information%20games%20using%20decomposition%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Burch%2C%20Neil%20Johanson%2C%20Michael%20Bowling%2C%20Michael%20Solving%20imperfect%20information%20games%20using%20decomposition%202014"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Neil Burch, Martin Schmid, Matej Moravc\u00edk, and Michael Bowling. AIVAT: A new variance reduction technique for agent evaluation in imperfect information games. 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Burch%2C%20Neil%20Schmid%2C%20Martin%20Moravc%C3%ADk%2C%20Matej%20Bowling%2C%20Michael%20AIVAT%3A%20A%20new%20variance%20reduction%20technique%20for%20agent%20evaluation%20in%20imperfect%20information%20games%202016"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Murray Campbell, A Joseph Hoane, and Feng-Hsiung Hsu. Deep Blue. Artificial intelligence, 134(1-2):57\u201383, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Murray%20Campbell%2C%20A.Joseph%20Hoane%20Hsu%2C%20Feng-Hsiung%20Deep%20Blue%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Murray%20Campbell%2C%20A.Joseph%20Hoane%20Hsu%2C%20Feng-Hsiung%20Deep%20Blue%202002"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Jiri Cermak, Viliam Lisy, and Branislav Bosansky. Constructing imperfect recall abstractions to solve large extensive-form games. arXiv preprint arXiv:1803.05392, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.05392"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Sam Ganzfried and Tuomas Sandholm. Action translation in extensive-form games with large action spaces: axioms, paradoxes, and the pseudo-harmonic mapping. In Proceedings of the Twenty-Third international joint conference on Artificial Intelligence, pages 120\u2013128. AAAI Press, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ganzfried%2C%20Sam%20Sandholm%2C%20Tuomas%20Action%20translation%20in%20extensive-form%20games%20with%20large%20action%20spaces%3A%20axioms%2C%20paradoxes%2C%20and%20the%20pseudo-harmonic%20mapping%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ganzfried%2C%20Sam%20Sandholm%2C%20Tuomas%20Action%20translation%20in%20extensive-form%20games%20with%20large%20action%20spaces%3A%20axioms%2C%20paradoxes%2C%20and%20the%20pseudo-harmonic%20mapping%202013"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Sam Ganzfried and Tuomas Sandholm. Potential-aware imperfect-recall abstraction with earth mover\u2019s distance in imperfect-information games. In AAAI Conference on Artificial Intelligence (AAAI), 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ganzfried%2C%20Sam%20Sandholm%2C%20Tuomas%20Potential-aware%20imperfect-recall%20abstraction%20with%20earth%20mover%E2%80%99s%20distance%20in%20imperfect-information%20games%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ganzfried%2C%20Sam%20Sandholm%2C%20Tuomas%20Potential-aware%20imperfect-recall%20abstraction%20with%20earth%20mover%E2%80%99s%20distance%20in%20imperfect-information%20games%202014"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Sam Ganzfried and Tuomas Sandholm. Endgame solving in large imperfect-information games. In International Conference on Autonomous Agents and Multi-Agent Systems (AAMAS), pages 37\u201345, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ganzfried%2C%20Sam%20Sandholm%2C%20Tuomas%20Endgame%20solving%20in%20large%20imperfect-information%20games%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ganzfried%2C%20Sam%20Sandholm%2C%20Tuomas%20Endgame%20solving%20in%20large%20imperfect-information%20games%202015"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Andrew Gilpin, Tuomas Sandholm, and Troels Bjerre S\u00f8rensen. A heads-up no-limit Texas hold\u2019em poker player: discretized betting models and automatically generated equilibriumfinding programs. In Proceedings of the Seventh International Joint Conference on Autonomous Agents and Multiagent Systems-Volume 2, pages 911\u2013918. International Foundation for Autonomous Agents and Multiagent Systems, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gilpin%2C%20Andrew%20Sandholm%2C%20Tuomas%20S%C3%B8rensen%2C%20Troels%20Bjerre%20A%20heads-up%20no-limit%20Texas%20hold%E2%80%99em%20poker%20player%3A%20discretized%20betting%20models%20and%20automatically%20generated%20equilibriumfinding%20programs%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gilpin%2C%20Andrew%20Sandholm%2C%20Tuomas%20S%C3%B8rensen%2C%20Troels%20Bjerre%20A%20heads-up%20no-limit%20Texas%20hold%E2%80%99em%20poker%20player%3A%20discretized%20betting%20models%20and%20automatically%20generated%20equilibriumfinding%20programs%202008"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Peter E Hart, Nils J Nilsson, and Bertram Raphael. Correction to \"a formal basis for the heuristic determination of minimum cost paths\". ACM SIGART Bulletin, (37):28\u201329, 1972.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hart%2C%20Peter%20E.%20Nilsson%2C%20Nils%20J.%20Raphael%2C%20Bertram%20Correction%20to%20%22a%20formal%20basis%20for%20the%20heuristic%20determination%20of%20minimum%20cost%20paths%22%201972",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hart%2C%20Peter%20E.%20Nilsson%2C%20Nils%20J.%20Raphael%2C%20Bertram%20Correction%20to%20%22a%20formal%20basis%20for%20the%20heuristic%20determination%20of%20minimum%20cost%20paths%22%201972"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Johannes Heinrich and David Silver. Deep reinforcement learning from self-play in imperfectinformation games. arXiv preprint arXiv:1603.01121, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1603.01121"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Eric Jackson. A time and space efficient algorithm for approximately solving large imperfect information games. In AAAI Workshop on Computer Poker and Imperfect Information, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jackson%2C%20Eric%20A%20time%20and%20space%20efficient%20algorithm%20for%20approximately%20solving%20large%20imperfect%20information%20games%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jackson%2C%20Eric%20A%20time%20and%20space%20efficient%20algorithm%20for%20approximately%20solving%20large%20imperfect%20information%20games%202014"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Eric Jackson. Targeted CFR. In AAAI Workshop on Computer Poker and Imperfect Information, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jackson%2C%20Eric%20Targeted%20CFR%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jackson%2C%20Eric%20Targeted%20CFR%202017"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Michael Johanson, Nolan Bard, Neil Burch, and Michael Bowling. Finding optimal abstract strategies in extensive-form games. In Proceedings of the Twenty-Sixth AAAI Conference on Artificial Intelligence, pages 1371\u20131379. AAAI Press, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Johanson%2C%20Michael%20Bard%2C%20Nolan%20Burch%2C%20Neil%20Bowling%2C%20Michael%20Finding%20optimal%20abstract%20strategies%20in%20extensive-form%20games%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Johanson%2C%20Michael%20Bard%2C%20Nolan%20Burch%2C%20Neil%20Bowling%2C%20Michael%20Finding%20optimal%20abstract%20strategies%20in%20extensive-form%20games%202012"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Michael Johanson, Neil Burch, Richard Valenzano, and Michael Bowling. Evaluating state-space abstractions in extensive-form games. In Proceedings of the 2013 International Conference on Autonomous Agents and Multiagent Systems, pages 271\u2013278. International Foundation for Autonomous Agents and Multiagent Systems, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Johanson%2C%20Michael%20Burch%2C%20Neil%20Valenzano%2C%20Richard%20Bowling%2C%20Michael%20Evaluating%20state-space%20abstractions%20in%20extensive-form%20games%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Johanson%2C%20Michael%20Burch%2C%20Neil%20Valenzano%2C%20Richard%20Bowling%2C%20Michael%20Evaluating%20state-space%20abstractions%20in%20extensive-form%20games%202013"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Diederik P Kingma and Jimmy Ba. Adam: A method for stochastic optimization. arXiv preprint arXiv:1412.6980, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6980"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Marc Lanctot, Kevin Waugh, Martin Zinkevich, and Michael Bowling. Monte Carlo sampling for regret minimization in extensive games. In Proceedings of the Annual Conference on Neural Information Processing Systems (NIPS), pages 1078\u20131086, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lanctot%2C%20Marc%20Waugh%2C%20Kevin%20Zinkevich%2C%20Martin%20Bowling%2C%20Michael%20Monte%20Carlo%20sampling%20for%20regret%20minimization%20in%20extensive%20games%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lanctot%2C%20Marc%20Waugh%2C%20Kevin%20Zinkevich%2C%20Martin%20Bowling%2C%20Michael%20Monte%20Carlo%20sampling%20for%20regret%20minimization%20in%20extensive%20games%202009"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Marc Lanctot, Vinicius Zambaldi, Audrunas Gruslys, Angeliki Lazaridou, Julien Perolat, David Silver, Thore Graepel, et al. A unified game-theoretic approach to multiagent reinforcement learning. In Advances in Neural Information Processing Systems, pages 4193\u20134206, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lanctot%2C%20Marc%20Zambaldi%2C%20Vinicius%20Gruslys%2C%20Audrunas%20Lazaridou%2C%20Angeliki%20A%20unified%20game-theoretic%20approach%20to%20multiagent%20reinforcement%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lanctot%2C%20Marc%20Zambaldi%2C%20Vinicius%20Gruslys%2C%20Audrunas%20Lazaridou%2C%20Angeliki%20A%20unified%20game-theoretic%20approach%20to%20multiagent%20reinforcement%20learning%202017"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Shen Lin. Computer solutions of the traveling salesman problem. The Bell system technical journal, 44(10):2245\u20132269, 1965.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20Shen%20Computer%20solutions%20of%20the%20traveling%20salesman%20problem.%20The%20Bell%20system%20technical%201965",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lin%2C%20Shen%20Computer%20solutions%20of%20the%20traveling%20salesman%20problem.%20The%20Bell%20system%20technical%201965"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Viliam Lisy and Michael Bowling. Equilibrium approximation quality of current no-limit poker bots. arXiv preprint arXiv:1612.07547, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1612.07547"
+        },
+        {
+            "id": "26",
+            "entry": "[26] H Brendan McMahan, Geoffrey J Gordon, and Avrim Blum. Planning in the presence of cost functions controlled by an adversary. In Proceedings of the 20th International Conference on Machine Learning (ICML-03), pages 536\u2013543, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=McMahan%2C%20H.Brendan%20Gordon%2C%20Geoffrey%20J.%20Blum%2C%20Avrim%20Planning%20in%20the%20presence%20of%20cost%20functions%20controlled%20by%20an%20adversary%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=McMahan%2C%20H.Brendan%20Gordon%2C%20Geoffrey%20J.%20Blum%2C%20Avrim%20Planning%20in%20the%20presence%20of%20cost%20functions%20controlled%20by%20an%20adversary%202003"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Matej Moravc\u00edk, Martin Schmid, Neil Burch, Viliam Lis\u00fd, Dustin Morrill, Nolan Bard, Trevor Davis, Kevin Waugh, Michael Johanson, and Michael Bowling. Deepstack: Expert-level artificial intelligence in heads-up no-limit poker. Science, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Moravc%C3%ADk%2C%20Matej%20Schmid%2C%20Martin%20Burch%2C%20Neil%20Lis%C3%BD%2C%20Viliam%20Deepstack%3A%20Expert-level%20artificial%20intelligence%20in%20heads-up%20no-limit%20poker%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Moravc%C3%ADk%2C%20Matej%20Schmid%2C%20Martin%20Burch%2C%20Neil%20Lis%C3%BD%2C%20Viliam%20Deepstack%3A%20Expert-level%20artificial%20intelligence%20in%20heads-up%20no-limit%20poker%202017"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Matej Moravcik, Martin Schmid, Karel Ha, Milan Hladik, and Stephen Gaukrodger. Refining subgames in large imperfect information games. In AAAI Conference on Artificial Intelligence (AAAI), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Moravcik%2C%20Matej%20Schmid%2C%20Martin%20Ha%2C%20Karel%20Hladik%2C%20Milan%20Refining%20subgames%20in%20large%20imperfect%20information%20games%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Moravcik%2C%20Matej%20Schmid%2C%20Martin%20Ha%2C%20Karel%20Hladik%2C%20Milan%20Refining%20subgames%20in%20large%20imperfect%20information%20games%202016"
+        },
+        {
+            "id": "29",
+            "entry": "[29] John Nash. Equilibrium points in n-person games. Proceedings of the National Academy of Sciences, 36:48\u201349, 1950.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nash%2C%20John%20Equilibrium%20points%20in%20n-person%20games%201950",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nash%2C%20John%20Equilibrium%20points%20in%20n-person%20games%201950"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Allen Newell and George Ernst. The search for generality. In Proc. IFIP Congress, volume 65, pages 17\u201324, 1965.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Newell%2C%20Allen%20Ernst%2C%20George%20The%20search%20for%20generality%201965",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Newell%2C%20Allen%20Ernst%2C%20George%20The%20search%20for%20generality%201965"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Nils Nilsson. Problem-Solving Methods in Artificial Intelligence. McGraw-Hill, 1971.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nilsson%2C%20Nils%20Problem-Solving%20Methods%20in%20Artificial%20Intelligence%201971"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Adam Paszke, Sam Gross, Soumith Chintala, Gregory Chanan, Edward Yang, Zachary DeVito, Zeming Lin, Alban Desmaison, Luca Antiga, and Adam Lerer. Automatic differentiation in pytorch. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Paszke%2C%20Adam%20Gross%2C%20Sam%20Chintala%2C%20Soumith%20Chanan%2C%20Gregory%20Automatic%20differentiation%20in%20pytorch%202017"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Arthur L Samuel. Some studies in machine learning using the game of checkers. IBM Journal of research and development, 3(3):210\u2013229, 1959.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Samuel%2C%20Arthur%20L.%20Some%20studies%20in%20machine%20learning%20using%20the%20game%20of%20checkers%201959",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Samuel%2C%20Arthur%20L.%20Some%20studies%20in%20machine%20learning%20using%20the%20game%20of%20checkers%201959"
+        },
+        {
+            "id": "34",
+            "entry": "[34] David Schnizlein, Michael Bowling, and Duane Szafron. Probabilistic state translation in extensive games with large action sets. In Proceedings of the Twenty-First International Joint Conference on Artificial Intelligence, pages 278\u2013284, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schnizlein%2C%20David%20Bowling%2C%20Michael%20Szafron%2C%20Duane%20Probabilistic%20state%20translation%20in%20extensive%20games%20with%20large%20action%20sets%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schnizlein%2C%20David%20Bowling%2C%20Michael%20Szafron%2C%20Duane%20Probabilistic%20state%20translation%20in%20extensive%20games%20with%20large%20action%20sets%202009"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Claude E Shannon. Programming a computer for playing chess. The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science, 41(314):256\u2013275, 1950.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shannon%2C%20Claude%20E.%20Programming%20a%20computer%20for%20playing%20chess.%20The%20London%2C%20Edinburgh%2C%20and%20Dublin%201950",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shannon%2C%20Claude%20E.%20Programming%20a%20computer%20for%20playing%20chess.%20The%20London%2C%20Edinburgh%2C%20and%20Dublin%201950"
+        },
+        {
+            "id": "36",
+            "entry": "[36] David Silver, Aja Huang, Chris J Maddison, Arthur Guez, Laurent Sifre, George Van Den Driessche, Julian Schrittwieser, Ioannis Antonoglou, Veda Panneershelvam, Marc Lanctot, et al. Mastering the game of Go with deep neural networks and tree search. Nature, 529(7587):484\u2013489, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silver%2C%20David%20Huang%2C%20Aja%20Maddison%2C%20Chris%20J.%20Guez%2C%20Arthur%20Mastering%20the%20game%20of%20Go%20with%20deep%20neural%20networks%20and%20tree%20search%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silver%2C%20David%20Huang%2C%20Aja%20Maddison%2C%20Chris%20J.%20Guez%2C%20Arthur%20Mastering%20the%20game%20of%20Go%20with%20deep%20neural%20networks%20and%20tree%20search%202016"
+        },
+        {
+            "id": "37",
+            "entry": "[37] David Silver, Julian Schrittwieser, Karen Simonyan, Ioannis Antonoglou, Aja Huang, Arthur Guez, Thomas Hubert, Lucas Baker, Matthew Lai, Adrian Bolton, et al. Mastering the game of Go without human knowledge. Nature, 550(7676):354, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silver%2C%20David%20Schrittwieser%2C%20Julian%20Simonyan%2C%20Karen%20Antonoglou%2C%20Ioannis%20Mastering%20the%20game%20of%20Go%20without%20human%20knowledge%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silver%2C%20David%20Schrittwieser%2C%20Julian%20Simonyan%2C%20Karen%20Antonoglou%2C%20Ioannis%20Mastering%20the%20game%20of%20Go%20without%20human%20knowledge%202017"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Oskari Tammelin, Neil Burch, Michael Johanson, and Michael Bowling. Solving heads-up limit texas hold\u2019em. In Proceedings of the International Joint Conference on Artificial Intelligence (IJCAI), pages 645\u2013652, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tammelin%2C%20Oskari%20Burch%2C%20Neil%20Johanson%2C%20Michael%20Bowling%2C%20Michael%20Solving%20heads-up%20limit%20texas%20hold%E2%80%99em%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tammelin%2C%20Oskari%20Burch%2C%20Neil%20Johanson%2C%20Michael%20Bowling%2C%20Michael%20Solving%20heads-up%20limit%20texas%20hold%E2%80%99em%202015"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Gerald Tesauro. Programming backgammon using self-teaching neural nets. Artificial Intelligence, 134(1-2):181\u2013199, 2002. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tesauro%2C%20Gerald%20Programming%20backgammon%20using%20self-teaching%20neural%20nets%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tesauro%2C%20Gerald%20Programming%20backgammon%20using%20self-teaching%20neural%20nets%202002"
+        }
+    ]
+}

@@ -1,0 +1,314 @@
+{
+    "filename": "7977-forecasting-treatment-responses-over-time-using-recurrent-marginal-structural-networks.pdf",
+    "metadata": {
+        "title": "Forecasting Treatment Responses Over Time Using Recurrent Marginal Structural Networks",
+        "author": "Bryan Lim",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7977-forecasting-treatment-responses-over-time-using-recurrent-marginal-structural-networks.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Electronic health records provide a rich source of data for machine learning methods to learn dynamic treatment responses over time. However, any direct estimation is hampered by the presence of time-dependent confounding, where actions taken are dependent on time-varying variables related to the outcome of interest. Drawing inspiration from marginal structural models, a class of methods in epidemiology which use propensity weighting to adjust for time-dependent confounders, we introduce the Recurrent Marginal Structural Network - a sequence-to-sequence architecture for forecasting a patient\u2019s expected response to a series of planned treatments. Using simulations of a state-of-the-art pharmacokinetic-pharmacodynamic (PK-PD) model of tumor growth [<a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>], we demonstrate the ability of our network to accurately learn unbiased treatment responses from observational data \u2013 even under changes in the policy of treatment assignments \u2013 and performance gains over benchmarks."
+    },
+    "keywords": [
+        {
+            "term": "treatment effect",
+            "url": "https://en.wikipedia.org/wiki/treatment_effect"
+        },
+        {
+            "term": "marginal structural model",
+            "url": "https://en.wikipedia.org/wiki/marginal_structural_model"
+        }
+    ],
+    "highlights": [
+        "With the increasing prevalence of electronic health records, there has been much interest in the use of machine learning to estimate treatment effects directly from observational data [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>, <a class=\"ref-link\" id=\"c41\" href=\"#r41\">41</a>, <a class=\"ref-link\" id=\"c44\" href=\"#r44\">44</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>]",
+        "We propose a new deep learning model - which we refer to as Recurrent Marginal Structural Networks - to directly learn time-dependent treatment responses from observational data, based on in the marginal structural modeling framework",
+        "We use two sets of deep neural networks to build a Recurrent Marginal Structural Network (R-MSN) - 1) a set propensity networks to compute treatment probabilities used for IPTW, and 2) a prediction network used to determine the treatment response for a given set of planned interventions",
+        "We focus on the main comparisons of interest \u2013 1) linear models to provide a baseline on performance, 2) linear vs Marginal Structural Models to evaluate traditional methods for IPTWs, 3) Seq2Seq + logistic IPTWs vs Marginal Structural Models for the benefits of the Seq2Seq model, 4) Recurrent Marginal Structural Networks vs Seq2Seq + logistic to determine the improvements of our model and RNN-estimated IPTWs, and 5) Bayesian Treatment Response Curves/R-Bayesian Treatment Response Curves to benchmark against state-of-the-art methods",
+        "Multi-step Prediction Performance To evaluate the benefits of the sequence-to-sequence architecture, we report the normalized root-mean-squared errors for multi-step prediction in Table 1, using the best model of each category (R-MSN, Marginal Structural Models and R-Bayesian Treatment Response Curves)",
+        "This paper introduces Recurrent Marginal Structural Networks - a novel learning approach for predicting unbiased treatment responses over time, grounded in the framework of marginal structural models"
+    ],
+    "key_statements": [
+        "With the increasing prevalence of electronic health records, there has been much interest in the use of machine learning to estimate treatment effects directly from observational data [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>, <a class=\"ref-link\" id=\"c41\" href=\"#r41\">41</a>, <a class=\"ref-link\" id=\"c44\" href=\"#r44\">44</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>]",
+        "We propose a new deep learning model - which we refer to as Recurrent Marginal Structural Networks - to directly learn time-dependent treatment responses from observational data, based on in the marginal structural modeling framework",
+        "We use two sets of deep neural networks to build a Recurrent Marginal Structural Network (R-MSN) - 1) a set propensity networks to compute treatment probabilities used for IPTW, and 2) a prediction network used to determine the treatment response for a given set of planned interventions",
+        "We focus on the main comparisons of interest \u2013 1) linear models to provide a baseline on performance, 2) linear vs Marginal Structural Models to evaluate traditional methods for IPTWs, 3) Seq2Seq + logistic IPTWs vs Marginal Structural Models for the benefits of the Seq2Seq model, 4) Recurrent Marginal Structural Networks vs Seq2Seq + logistic to determine the improvements of our model and RNN-estimated IPTWs, and 5) Bayesian Treatment Response Curves/R-Bayesian Treatment Response Curves to benchmark against state-of-the-art methods",
+        "Multi-step Prediction Performance To evaluate the benefits of the sequence-to-sequence architecture, we report the normalized root-mean-squared errors for multi-step prediction in Table 1, using the best model of each category (R-MSN, Marginal Structural Models and R-Bayesian Treatment Response Curves)",
+        "This paper introduces Recurrent Marginal Structural Networks - a novel learning approach for predicting unbiased treatment responses over time, grounded in the framework of marginal structural models"
+    ],
+    "summary": [
+        "With the increasing prevalence of electronic health records, there has been much interest in the use of machine learning to estimate treatment effects directly from observational data [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>, <a class=\"ref-link\" id=\"c41\" href=\"#r41\">41</a>, <a class=\"ref-link\" id=\"c44\" href=\"#r44\">44</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>].",
+        "To the best of our knowledge, ours is the first deep learning method for time-dependent effects and establishes a framework to use existing RNN architectures for treatment response estimation.",
+        "We use two sets of deep neural networks to build a Recurrent Marginal Structural Network (R-MSN) - 1) a set propensity networks to compute treatment probabilities used for IPTW, and 2) a prediction network used to determine the treatment response for a given set of planned interventions.",
+        "One key difference between our model and standard sequence-to-sequence (e.g.[<a class=\"ref-link\" id=\"c36\" href=\"#r36\">36</a>]) is that the last unit of the encoder is used in making predictions for the first time step, in addition to the decoder units at further horizons.",
+        "Encoder The goal of the encoder is to learn good representations for the patient\u2019s current clinical state, and we do so with a standard LSTM that makes one-step-ahead predictions of the outcome (Yt+1) given observations of covariates and actual treatments.",
+        "The encoder was trained to forecast standard one-step-ahead treatment response according to the structure in Figure 3(b), using all available information on treatments and covariates until the current time step.",
+        "Treatment Assignment Policy To introduce time-dependent confounders, we assume that chemotherapy prescriptions Ac(t) \u2208 {0, 1} and radiotherapy prescriptions Ad(t) \u2208 {0, 1} are Bernoulli random variables, with probabilities pc(t) and pd(t) respectively that are a functions of the tumor diameter: pc(t) = \u03c3 \u03b3c Dmax",
+        "We evaluate the performance of R-MSNs against MSMs and Bayesian nonparametric models, focusing on its effectiveness in estimating unbiased treatment responses and its multi-step prediction performance.",
+        "Time-Dependent Confounding Adjustments To investigate how well models learn unbiased treatment responses from observational data, we trained all models on simulations with \u03b3c = \u03b3d = 10 and examine the root-mean-squared errors (RMSEs) of one-step-ahead predictions as \u03b3\u2217 is reduced.",
+        "While the R-BTRC does show improvements over MSMs for the unbiased treatment response, we observe a slight underperformance versus MSMs on the training policy itself, highlighting the advantages of R-MSNs. This paper introduces Recurrent Marginal Structural Networks - a novel learning approach for predicting unbiased treatment responses over time, grounded in the framework of marginal structural models.",
+        "Using tests on a medically realistic simulation model, the R-MSN demonstrated performance improvements over traditional methods in epidemiology and the state-ofthe-art models for joint treatment response prediction over multiple timesteps."
+    ],
+    "headline": "Drawing inspiration from marginal structural models, a class of methods in epidemiology which use propensity weighting to adjust for time-dependent confounders, we introduce the Recurrent Marginal Structural Network - a sequence-to-sequence architecture for forecasting a patient\u2019s expected response to a series of planned treatments",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Optimizing drug regimens in cancer chemotherapy: a simulation study using a pk\u2013pd model. Computers in Biology and Medicine, 31(3):157 \u2013 172, 2001. Goal-Oriented Model-Based drug Regimens.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20Optimizing%20drug%20regimens%20in%20cancer%20chemotherapy%3A%20a%20simulation%20study%20using%20a%20pk%E2%80%93pd%20model%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Optimizing%20drug%20regimens%20in%20cancer%20chemotherapy%3A%20a%20simulation%20study%20using%20a%20pk%E2%80%93pd%20model%202001"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Ahmed M. Alaa and Mihaela van der Schaar. Bayesian inference of individualized treatment effects using multi-task gaussian processes. In Proceedings of the thirty-first Conference on Neural Information Processing Systems, (NIPS), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Alaa%2C%20Ahmed%20M.%20van%20der%20Schaar%2C%20Mihaela%20Bayesian%20inference%20of%20individualized%20treatment%20effects%20using%20multi-task%20gaussian%20processes%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Alaa%2C%20Ahmed%20M.%20van%20der%20Schaar%2C%20Mihaela%20Bayesian%20inference%20of%20individualized%20treatment%20effects%20using%20multi-task%20gaussian%20processes%202017"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Ahmed M. Alaa, Michael Weisz, and Mihaela van der Schaar. Deep counterfactual networks with propensity dropout. In Proceedings of the 34th International Conference on Machine Learning (ICML), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Alaa%2C%20Ahmed%20M.%20Weisz%2C%20Michael%20van%20der%20Schaar%2C%20Mihaela%20Deep%20counterfactual%20networks%20with%20propensity%20dropout%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Alaa%2C%20Ahmed%20M.%20Weisz%2C%20Michael%20van%20der%20Schaar%2C%20Mihaela%20Deep%20counterfactual%20networks%20with%20propensity%20dropout%202017"
+        },
+        {
+            "id": "4",
+            "entry": "[4] H. Bartsch, H. Dally, O. Popanda, A. Risch, and P. Schmezer. Genetic risk profiles for cancer susceptibility and therapy response. Recent Results Cancer Res., 174:19\u201336, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bartsch%2C%20H.%20Dally%2C%20H.%20Popanda%2C%20O.%20Risch%2C%20A.%20Genetic%20risk%20profiles%20for%20cancer%20susceptibility%20and%20therapy%20response%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bartsch%2C%20H.%20Dally%2C%20H.%20Popanda%2C%20O.%20Risch%2C%20A.%20Genetic%20risk%20profiles%20for%20cancer%20susceptibility%20and%20therapy%20response%202007"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Letizia Carrara, Silvia Maria Lavezzi, Elisa Borella, Giuseppe De Nicolao, Paolo Magni, and Italo Poggesi. Current mathematical models for cancer drug discovery. Expert Opinion on Drug Discovery, 12(8):785\u2013799, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Carrara%2C%20Letizia%20Lavezzi%2C%20Silvia%20Maria%20Borella%2C%20Elisa%20Nicolao%2C%20Giuseppe%20De%20Current%20mathematical%20models%20for%20cancer%20drug%20discovery%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Carrara%2C%20Letizia%20Lavezzi%2C%20Silvia%20Maria%20Borella%2C%20Elisa%20Nicolao%2C%20Giuseppe%20De%20Current%20mathematical%20models%20for%20cancer%20drug%20discovery%202017"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Junyoung Chung, Kyle Kastner, Laurent Dinh, Kratarth Goel, Aaron Courville, and Yoshua Bengio. A recurrent latent variable model for sequential data. In Proceedings of the 28th International Conference on Neural Information Processing Systems - Volume 2, NIPS\u201915, pages 2980\u20132988, Cambridge, MA, USA, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chung%2C%20Junyoung%20Kastner%2C%20Kyle%20Dinh%2C%20Laurent%20Goel%2C%20Kratarth%20and%20Yoshua%20Bengio.%20A%20recurrent%20latent%20variable%20model%20for%20sequential%20data%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chung%2C%20Junyoung%20Kastner%2C%20Kyle%20Dinh%2C%20Laurent%20Goel%2C%20Kratarth%20and%20Yoshua%20Bengio.%20A%20recurrent%20latent%20variable%20model%20for%20sequential%20data%202015"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Djork-Arn\u00e9 Clevert, Thomas Unterthiner, and Sepp Hochreiter. Fast and accurate deep network learning by exponential linear units (ELUs). CoRR, abs/1511.07289, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.07289"
+        },
+        {
+            "id": "8",
+            "entry": "[8] R.M. Daniel, S.N. Cousens, B.L. De Stavola, M. G. Kenward, and J. A. C. Sterne. Methods for dealing with time-dependent confounding. Statistics in Medicine, 32(9):1584\u20131618, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Daniel%2C%20R.M.%20Cousens%2C%20S.N.%20Stavola%2C%20B.L.De%20Kenward%2C%20M.G.%20Methods%20for%20dealing%20with%20time-dependent%20confounding%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Daniel%2C%20R.M.%20Cousens%2C%20S.N.%20Stavola%2C%20B.L.De%20Kenward%2C%20M.G.%20Methods%20for%20dealing%20with%20time-dependent%20confounding%202012"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Mould DR, Walz A-C, Lave T, Gibbs JP, and Frame B. Developing exposure/response models for anticancer drug treatment: Special considerations. CPT: Pharmacometrics & Systems Pharmacology, 4(1):12\u201327.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mould%2C%20D.R.%20Walz%2C%20A.-C.%20Lave%2C%20T.%20Gibbs%2C%20J.P.%20Developing%20exposure/response%20models%20for%20anticancer%20drug%20treatment%3A%20Special%20considerations",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mould%2C%20D.R.%20Walz%2C%20A.-C.%20Lave%2C%20T.%20Gibbs%2C%20J.P.%20Developing%20exposure/response%20models%20for%20anticancer%20drug%20treatment%3A%20Special%20considerations"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Peter H. Egger and Maximilian von Ehrlich. Generalized propensity scores for multiple continuous treatment variables. Economics Letters, 119(1):32 \u2013 34, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Peter%2C%20H.%20Egger%20and%20Maximilian%20von%20Ehrlich.%20Generalized%20propensity%20scores%20for%20multiple%20continuous%20treatment%20variables%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Peter%2C%20H.%20Egger%20and%20Maximilian%20von%20Ehrlich.%20Generalized%20propensity%20scores%20for%20multiple%20continuous%20treatment%20variables%202013"
+        },
+        {
+            "id": "11",
+            "entry": "[11] M. J. Eigenmann, N. Frances, T. Lav\u00e9, and A.-C. Walz. Pkpd modeling of acquired resistance to anti-cancer drug treatment. Journal of Pharmacokinetics and Pharmacodynamics, 44(6):617\u2013630, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Eigenmann%2C%20M.J.%20Frances%2C%20N.%20Lav%C3%A9%2C%20T.%20Walz%2C%20A.-C.%20Pkpd%20modeling%20of%20acquired%20resistance%20to%20anti-cancer%20drug%20treatment%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Eigenmann%2C%20M.J.%20Frances%2C%20N.%20Lav%C3%A9%2C%20T.%20Walz%2C%20A.-C.%20Pkpd%20modeling%20of%20acquired%20resistance%20to%20anti-cancer%20drug%20treatment%202017"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Changran Geng, Harald Paganetti, and Clemens Grassberger. Prediction of treatment response for combined chemoand radiation therapy for non-small cell lung cancer patients using a bio-mathematical model. Scientific Reports, 7, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Geng%2C%20Changran%20Paganetti%2C%20Harald%20Grassberger%2C%20Clemens%20Prediction%20of%20treatment%20response%20for%20combined%20chemoand%20radiation%20therapy%20for%20non-small%20cell%20lung%20cancer%20patients%20using%20a%20bio-mathematical%20model%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Geng%2C%20Changran%20Paganetti%2C%20Harald%20Grassberger%2C%20Clemens%20Prediction%20of%20treatment%20response%20for%20combined%20chemoand%20radiation%20therapy%20for%20non-small%20cell%20lung%20cancer%20patients%20using%20a%20bio-mathematical%20model%202017"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Jason Hartford, Greg Lewis, Kevin Leyton-Brown, and Matt Taddy. Deep IV: A flexible approach for counterfactual prediction. In Proceedings of the 34th International Conference on Machine Learning (ICML), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hartford%2C%20Jason%20Lewis%2C%20Greg%20Leyton-Brown%2C%20Kevin%20Taddy%2C%20Matt%20Deep%20IV%3A%20A%20flexible%20approach%20for%20counterfactual%20prediction%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hartford%2C%20Jason%20Lewis%2C%20Greg%20Leyton-Brown%2C%20Kevin%20Taddy%2C%20Matt%20Deep%20IV%3A%20A%20flexible%20approach%20for%20counterfactual%20prediction%202017"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Miguel A. Hernan, Babette Brumback, and James M. Robins. Marginal structural models to estimate the joint causal effect of nonrandomized treatments. Journal of the American Statistical Association, 96(454):440\u2013448, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hernan%2C%20Miguel%20A.%20Brumback%2C%20Babette%20Robins%2C%20James%20M.%20Marginal%20structural%20models%20to%20estimate%20the%20joint%20causal%20effect%20of%20nonrandomized%20treatments%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hernan%2C%20Miguel%20A.%20Brumback%2C%20Babette%20Robins%2C%20James%20M.%20Marginal%20structural%20models%20to%20estimate%20the%20joint%20causal%20effect%20of%20nonrandomized%20treatments%202001"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Miguel A. Hernan and James M. Robins. Marginal structural models to estimate the causal effect of zidovudine on the survival of hiv-positive men. Epidemiology, 359:561\u2013570, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hernan%2C%20Miguel%20A.%20Robins%2C%20James%20M.%20Marginal%20structural%20models%20to%20estimate%20the%20causal%20effect%20of%20zidovudine%20on%20the%20survival%20of%20hiv-positive%20men%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hernan%2C%20Miguel%20A.%20Robins%2C%20James%20M.%20Marginal%20structural%20models%20to%20estimate%20the%20causal%20effect%20of%20zidovudine%20on%20the%20survival%20of%20hiv-positive%20men%202000"
+        },
+        {
+            "id": "16",
+            "entry": "[16] MA Hern\u00e1n and JM Robins. Causal Inference. Chapman & Hall/CRC, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hern%C3%A1n%2C%20M.A.%20Robins%2C%20J.M.%20Causal%20Inference%202018"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Sepp Hochreiter and J\u00fcrgen Schmidhuber. Long short-term memory. Neural Comput., 9(8):1735\u20131780, November 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Long%20short-term%20memory%201997-11",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Long%20short-term%20memory%201997-11"
+        },
+        {
+            "id": "18",
+            "entry": "[18] William Hoiles and Mihaela van der Schaar. A non-parametric learning method for confidently estimating patient\u2019s clinical state and dynamics. In Proceedings of the twenty-ninth Conference on Neural Information Processing Systems, (NIPS), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hoiles%2C%20William%20van%20der%20Schaar%2C%20Mihaela%20A%20non-parametric%20learning%20method%20for%20confidently%20estimating%20patient%E2%80%99s%20clinical%20state%20and%20dynamics%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hoiles%2C%20William%20van%20der%20Schaar%2C%20Mihaela%20A%20non-parametric%20learning%20method%20for%20confidently%20estimating%20patient%E2%80%99s%20clinical%20state%20and%20dynamics%202016"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Chanelle J. Howe, Stephen R. Cole, Shruti H. Mehta, and Gregory D. Kirk. Estimating the effects of multiple time-varying exposures using joint marginal structural models: alcohol consumption, injection drug use, and hiv acquisition. Epidemiology, 23(4):574\u2013582, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Howe%2C%20Chanelle%20J.%20Cole%2C%20Stephen%20R.%20Mehta%2C%20Shruti%20H.%20Kirk%2C%20Gregory%20D.%20Estimating%20the%20effects%20of%20multiple%20time-varying%20exposures%20using%20joint%20marginal%20structural%20models%3A%20alcohol%20consumption%2C%20injection%20drug%20use%2C%20and%20hiv%20acquisition%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Howe%2C%20Chanelle%20J.%20Cole%2C%20Stephen%20R.%20Mehta%2C%20Shruti%20H.%20Kirk%2C%20Gregory%20D.%20Estimating%20the%20effects%20of%20multiple%20time-varying%20exposures%20using%20joint%20marginal%20structural%20models%3A%20alcohol%20consumption%2C%20injection%20drug%20use%2C%20and%20hiv%20acquisition%202012"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Diederik P. Kingma and Jimmy Ba. Adam: A method for stochastic optimization. In International Conference on Learning Representations (ICLR), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Ba%2C%20Jimmy%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Ba%2C%20Jimmy%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202015"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Clovis Lusivika-Nzinga, Hana Selinger-Leneman, Sophie Grabar, Dominique Costagliola, and Fabrice Carrat. Performance of the marginal structural cox model for estimating individual and joined effects of treatments given in combination. BMC Medical Research Methodology, 17(1):160, Dec 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lusivika-Nzinga%2C%20Clovis%20Selinger-Leneman%2C%20Hana%20Grabar%2C%20Sophie%20Costagliola%2C%20Dominique%20Performance%20of%20the%20marginal%20structural%20cox%20model%20for%20estimating%20individual%20and%20joined%20effects%20of%20treatments%20given%20in%20combination%202017-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lusivika-Nzinga%2C%20Clovis%20Selinger-Leneman%2C%20Hana%20Grabar%2C%20Sophie%20Costagliola%2C%20Dominique%20Performance%20of%20the%20marginal%20structural%20cox%20model%20for%20estimating%20individual%20and%20joined%20effects%20of%20treatments%20given%20in%20combination%202017-12"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Mohammad Ali Mansournia, Mahyar Etminan, Goodarz Danaei, Jay S Kaufman, and Gary Collins. A primer on inverse probability of treatment weighting and marginal structural models. Emerging Adulthood, 4(1):40\u201359, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mansournia%2C%20Mohammad%20Ali%20Etminan%2C%20Mahyar%20Danaei%2C%20Goodarz%20Kaufman%2C%20Jay%20S.%20A%20primer%20on%20inverse%20probability%20of%20treatment%20weighting%20and%20marginal%20structural%20models%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mansournia%2C%20Mohammad%20Ali%20Etminan%2C%20Mahyar%20Danaei%2C%20Goodarz%20Kaufman%2C%20Jay%20S.%20A%20primer%20on%20inverse%20probability%20of%20treatment%20weighting%20and%20marginal%20structural%20models%202016"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Mohammad Ali Mansournia, Mahyar Etminan, Goodarz Danaei, Jay S Kaufman, and Gary Collins. Handling time varying confounding in observational research. BMJ, 359, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mansournia%2C%20Mohammad%20Ali%20Etminan%2C%20Mahyar%20Danaei%2C%20Goodarz%20Kaufman%2C%20Jay%20S.%20Handling%20time%20varying%20confounding%20in%20observational%20research%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mansournia%2C%20Mohammad%20Ali%20Etminan%2C%20Mahyar%20Danaei%2C%20Goodarz%20Kaufman%2C%20Jay%20S.%20Handling%20time%20varying%20confounding%20in%20observational%20research%202017"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Mohammad Alia Mansournia, Goodarzc Danaei, Mohammad Hosseind Forouzanfar, Mahmoodb Mahmoodi, Mohsene Jamali, Nasrinf Mansournia, and Kazemb Mohammad. Effect of physical activity on functional performance and knee pain in patients with osteoarthritis : Analysis with marginal structural models. Epidemiology, 23(4):631\u2013640, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mansournia%2C%20Mohammad%20Alia%20Danaei%2C%20Goodarzc%20Forouzanfar%2C%20Mohammad%20Hosseind%20Mahmoodi%2C%20Mahmoodb%20Effect%20of%20physical%20activity%20on%20functional%20performance%20and%20knee%20pain%20in%20patients%20with%20osteoarthritis%20%3A%20Analysis%20with%20marginal%20structural%20models%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mansournia%2C%20Mohammad%20Alia%20Danaei%2C%20Goodarzc%20Forouzanfar%2C%20Mohammad%20Hosseind%20Mahmoodi%2C%20Mahmoodb%20Effect%20of%20physical%20activity%20on%20functional%20performance%20and%20knee%20pain%20in%20patients%20with%20osteoarthritis%20%3A%20Analysis%20with%20marginal%20structural%20models%202012"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Charles E McCulloch and Shayle R. Searle. Generalized, Linear and Mixed Models. Wiley, New York, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=McCulloch%2C%20Charles%20E.%20Generalized%2C%20Shayle%20R.Searle%20Linear%20and%20Mixed%20Models%202001"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Kathleen M. Mortimer, Romain Neugebauer, Mark van der Laan, and Ira B. Tager. An application of modelfitting procedures for marginal structural models. American Journal of Epidemiology, 162(4):382\u2013388, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mortimer%2C%20Kathleen%20M.%20Neugebauer%2C%20Romain%20van%20der%20Laan%2C%20Mark%20Tager%2C%20Ira%20B.%20An%20application%20of%20modelfitting%20procedures%20for%20marginal%20structural%20models%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mortimer%2C%20Kathleen%20M.%20Neugebauer%2C%20Romain%20van%20der%20Laan%2C%20Mark%20Tager%2C%20Ira%20B.%20An%20application%20of%20modelfitting%20procedures%20for%20marginal%20structural%20models%202005"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Mihaela van der Schaar Onur Atan, James Jordon. Deep-treat: Learning optimal personalized treatments from observational data using neural networks. In AAAI, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=van%20der%20Schaar%20Onur%20Atan%2C%20Mihaela%20Jordon%2C%20James%20Deep-treat%3A%20Learning%20optimal%20personalized%20treatments%20from%20observational%20data%20using%20neural%20networks%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=van%20der%20Schaar%20Onur%20Atan%2C%20Mihaela%20Jordon%2C%20James%20Deep-treat%3A%20Learning%20optimal%20personalized%20treatments%20from%20observational%20data%20using%20neural%20networks%202018"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Mihaela van der Schaar Onur Atan, William Zame. Constructing effective personalized policies using counterfactual inference from biased data sets with many features. In Machine Learning, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=van%20der%20Schaar%20Onur%20Atan%2C%20Mihaela%20Zame%2C%20William%20Constructing%20effective%20personalized%20policies%20using%20counterfactual%20inference%20from%20biased%20data%20sets%20with%20many%20features%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=van%20der%20Schaar%20Onur%20Atan%2C%20Mihaela%20Zame%2C%20William%20Constructing%20effective%20personalized%20policies%20using%20counterfactual%20inference%20from%20biased%20data%20sets%20with%20many%20features%202018"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Kyungsoo Park. A review of modeling approaches to predict drug response in clinical oncology. Yonsei Medical Journal, 58(1):1\u20138, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Park%2C%20Kyungsoo%20A%20review%20of%20modeling%20approaches%20to%20predict%20drug%20response%20in%20clinical%20oncology%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Park%2C%20Kyungsoo%20A%20review%20of%20modeling%20approaches%20to%20predict%20drug%20response%20in%20clinical%20oncology%202017"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Thomas S. Richardson and Andrea Rotnitzky. Causal etiology of the research of james m. robins. Statistical Science, 29(4):459\u2013484, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Richardson%2C%20Thomas%20S.%20Rotnitzky%2C%20Andrea%20Causal%20etiology%20of%20the%20research%20of%20james%20m.%20robins%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Richardson%2C%20Thomas%20S.%20Rotnitzky%2C%20Andrea%20Causal%20etiology%20of%20the%20research%20of%20james%20m.%20robins%202014"
+        },
+        {
+            "id": "31",
+            "entry": "[31] James M. Robins, Miguel \u00c1ngel Hern\u00e1n, and Babette Brumback. Marginal structural models and causal inference in epidemiology. Epidemiology, 11(5):550\u2013560, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=James%20M.%20Robins%2C%20Miguel%20%C3%81ngel%20Hern%C3%A1n%20Brumback%2C%20Babette%20Marginal%20structural%20models%20and%20causal%20inference%20in%20epidemiology%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=James%20M.%20Robins%2C%20Miguel%20%C3%81ngel%20Hern%C3%A1n%20Brumback%2C%20Babette%20Marginal%20structural%20models%20and%20causal%20inference%20in%20epidemiology%202000"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Jason Roy, Kirsten J. Lum, and Michael J. Daniels. A bayesian nonparametric approach to marginal structural models for point treatments and a continuous or survival outcome. Biostatistics, 18(1):32\u201347, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Roy%2C%20Jason%20Lum%2C%20Kirsten%20J.%20Daniels%2C%20Michael%20J.%20A%20bayesian%20nonparametric%20approach%20to%20marginal%20structural%20models%20for%20point%20treatments%20and%20a%20continuous%20or%20survival%20outcome%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Roy%2C%20Jason%20Lum%2C%20Kirsten%20J.%20Daniels%2C%20Michael%20J.%20A%20bayesian%20nonparametric%20approach%20to%20marginal%20structural%20models%20for%20point%20treatments%20and%20a%20continuous%20or%20survival%20outcome%202017"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Peter Schulam and Suchi Saria. Reliable decision support using counterfactual models. In Proceedings of the thirty-first Conference on Neural Information Processing Systems, (NIPS), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schulam%2C%20Peter%20Saria%2C%20Suchi%20Reliable%20decision%20support%20using%20counterfactual%20models%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schulam%2C%20Peter%20Saria%2C%20Suchi%20Reliable%20decision%20support%20using%20counterfactual%20models%202017"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Ricardo Silva. Observational-interventional priors for dose-response learning. In Proceedings of the Thirtieth Conference on Neural Information Processing Systems, (NIPS), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silva%2C%20Ricardo%20Observational-interventional%20priors%20for%20dose-response%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silva%2C%20Ricardo%20Observational-interventional%20priors%20for%20dose-response%20learning%202016"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Hossein Soleimani, Adarsh Subbaswamy, and Suchi Saria. Treatment-response models for counterfactual reasoning with continuous-time, continuous-valued interventions. In Proceedings of the Thirty-Third Conference on Uncertainty in Artificial Intelligence (UAI), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Soleimani%2C%20Hossein%20Subbaswamy%2C%20Adarsh%20Saria%2C%20Suchi%20Treatment-response%20models%20for%20counterfactual%20reasoning%20with%20continuous-time%2C%20continuous-valued%20interventions%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Soleimani%2C%20Hossein%20Subbaswamy%2C%20Adarsh%20Saria%2C%20Suchi%20Treatment-response%20models%20for%20counterfactual%20reasoning%20with%20continuous-time%2C%20continuous-valued%20interventions%202017"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Ilya Sutskever, Oriol Vinyals, and Quoc V. Le. Sequence to sequence learning with neural networks. In Proceedings of the twenty-seventh Conference on Neural Information Processing Systems, (NIPS), 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutskever%2C%20Ilya%20Vinyals%2C%20Oriol%20Le%2C%20Quoc%20V.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutskever%2C%20Ilya%20Vinyals%2C%20Oriol%20Le%2C%20Quoc%20V.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Adith Swaminathan and Thorsten Joachims. Batch learning from logged bandit feedback through counterfactual risk minimization. Journal of Machine Learning Research, 16:1731\u20131755, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20Adith%20Swaminathan%20and%20Thorsten%20Joachims.%20Batch%20learning%20from%20logged%20bandit%20feedback%20through%20counterfactual%20risk%20minimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Adith%20Swaminathan%20and%20Thorsten%20Joachims.%20Batch%20learning%20from%20logged%20bandit%20feedback%20through%20counterfactual%20risk%20minimization%202015"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Adith Swaminathan and Thorsten Joachims. Counterfactual risk minimization: Learning from logged bandit feedback. CoRR, abs/1502.02362, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1502.02362"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Michalis K. Titsias. Variational learning of inducing variables in sparse gaussian processes. In Proceedings of the twelth International Conference on Artificial Intelligence and Statistic, (AISTATS), 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Titsias%2C%20Michalis%20K.%20Variational%20learning%20of%20inducing%20variables%20in%20sparse%20gaussian%20processes%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Titsias%2C%20Michalis%20K.%20Variational%20learning%20of%20inducing%20variables%20in%20sparse%20gaussian%20processes%202009"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Panagiotis J. Vlachostergios and Bishoy M. Faltas. Treatment resistance in urothelial carcinoma: an evolutionary perspective. Nature Review Clincal Oncology, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vlachostergios%2C%20Panagiotis%20J.%20Faltas%2C%20Bishoy%20M.%20Treatment%20resistance%20in%20urothelial%20carcinoma%3A%20an%20evolutionary%20perspective%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vlachostergios%2C%20Panagiotis%20J.%20Faltas%2C%20Bishoy%20M.%20Treatment%20resistance%20in%20urothelial%20carcinoma%3A%20an%20evolutionary%20perspective%202018"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Stefan Wager and Susan Athey. Estimation and inference of heterogeneous treatment effects using random forests. Journal of the American Statistical Association, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wager%2C%20Stefan%20Athey%2C%20Susan%20Estimation%20and%20inference%20of%20heterogeneous%20treatment%20effects%20using%20random%20forests%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wager%2C%20Stefan%20Athey%2C%20Susan%20Estimation%20and%20inference%20of%20heterogeneous%20treatment%20effects%20using%20random%20forests%202017"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Yongling Xiao, Michal Abrahamowicz, and Erica Moodie. Accuracy of conventional and marginal structural cox model estimators: A simulation study. The International Journal of Biostatistics, 6(2), 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xiao%2C%20Yongling%20Abrahamowicz%2C%20Michal%20Moodie%2C%20Erica%20Accuracy%20of%20conventional%20and%20marginal%20structural%20cox%20model%20estimators%3A%20A%20simulation%20study%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xiao%2C%20Yongling%20Abrahamowicz%2C%20Michal%20Moodie%2C%20Erica%20Accuracy%20of%20conventional%20and%20marginal%20structural%20cox%20model%20estimators%3A%20A%20simulation%20study%202010"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Yanbo Xu, Yanxun Xu, and Suchi Saria. A non-parametric bayesian approach for estimating treatmentresponse curves from sparse time series. In Proceedings of the 1st Machine Learning for Healthcare Conference (MLHC), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xu%2C%20Yanbo%20Xu%2C%20Yanxun%20Saria%2C%20Suchi%20A%20non-parametric%20bayesian%20approach%20for%20estimating%20treatmentresponse%20curves%20from%20sparse%20time%20series%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xu%2C%20Yanbo%20Xu%2C%20Yanxun%20Saria%2C%20Suchi%20A%20non-parametric%20bayesian%20approach%20for%20estimating%20treatmentresponse%20curves%20from%20sparse%20time%20series%202016"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Jinsung Yoon, James Jordon, and Mihaela van der Schaar. GANITE: Estimation of individualized treatment effects using generative adversarial nets. In International Conference on Learning Representations (ICLR), 2018. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yoon%2C%20Jinsung%20Jordon%2C%20James%20van%20der%20Schaar%2C%20Mihaela%20GANITE%3A%20Estimation%20of%20individualized%20treatment%20effects%20using%20generative%20adversarial%20nets%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yoon%2C%20Jinsung%20Jordon%2C%20James%20van%20der%20Schaar%2C%20Mihaela%20GANITE%3A%20Estimation%20of%20individualized%20treatment%20effects%20using%20generative%20adversarial%20nets%202018"
+        }
+    ]
+}

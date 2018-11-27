@@ -1,0 +1,389 @@
+{
+    "filename": "8189-scalable-end-to-end-autonomous-vehicle-testing-via-rare-event-simulation.pdf",
+    "metadata": {
+        "title": "Scalable End-to-End Autonomous Vehicle Testing via Rare-event Simulation",
+        "author": "Matthew O'Kelly, Aman Sinha, Hongseok Namkoong, Russ Tedrake, John C. Duchi",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8189-scalable-end-to-end-autonomous-vehicle-testing-via-rare-event-simulation.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "While recent developments in autonomous vehicle (AV) technology highlight substantial progress, we lack tools for rigorous and scalable testing. Real-world testing, the de facto evaluation environment, places the public in danger, and, due to the rare nature of accidents, will require billions of miles in order to statistically validate performance claims. We implement a simulation framework that can test an entire modern autonomous driving system, including, in particular, systems that employ deep-learning perception and control algorithms. Using adaptive importance-sampling methods to accelerate rare-event probability evaluation, we estimate the probability of an accident under a base distribution governing standard traffic behavior. We demonstrate our framework on a highway scenario, accelerating system evaluation by 2-20 times over naive Monte Carlo sampling methods and 10-300P times (where P is the number of processors) over real-world testing."
+    },
+    "keywords": [
+        {
+            "term": "rare event",
+            "url": "https://en.wikipedia.org/wiki/rare_event"
+        },
+        {
+            "term": "cross entropy method",
+            "url": "https://en.wikipedia.org/wiki/cross_entropy_method"
+        },
+        {
+            "term": "real world",
+            "url": "https://en.wikipedia.org/wiki/real_world"
+        },
+        {
+            "term": "autonomous driving",
+            "url": "https://en.wikipedia.org/wiki/autonomous_driving"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        },
+        {
+            "term": "autonomous vehicle",
+            "url": "https://en.wikipedia.org/wiki/autonomous_vehicle"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        }
+    ],
+    "highlights": [
+        "Recent breakthroughs in deep learning have accelerated the development of autonomous vehicles (AVs); many research prototypes operate on real roads alongside human drivers",
+        "While advances in computer-vision techniques have made human-level performance possible on narrow perception tasks such as object recognition, several fatal accidents involving autonomous vehicle underscore the importance of testing whether the perception and control pipeline\u2014when considered as a whole system\u2014can safely interact with humans",
+        "A recent study [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>] argues that autonomous vehicle need to drive \u201chundreds of millions of miles and, under some scenarios, hundreds of billions of miles to create enough data to clearly demonstrate their safety.\u201d Alteratively, formally verifying an autonomous vehicle algorithm\u2019s \u201ccorrectness\u201d [<a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>, <a class=\"ref-link\" id=\"c47\" href=\"#r47\">47</a>, <a class=\"ref-link\" id=\"c37\" href=\"#r37\">37</a>] is difficult since all driving policies are subject to crashes caused by other drivers [<a class=\"ref-link\" id=\"c49\" href=\"#r49\">49</a>]",
+        "We provide a concise but extensible language-agnostic interface to our benchmark world model so that common autonomous vehicle sensors such as cameras and lidar can provide the necessary inputs to induce vehicle actuation commands",
+        "Our framework offers significant speedups over real-world testing and allows efficient evaluation of black-box autonomous vehicle input/output behavior, providing a powerful tool to aid in the design of safe autonomous vehicle"
+    ],
+    "key_statements": [
+        "Recent breakthroughs in deep learning have accelerated the development of autonomous vehicles (AVs); many research prototypes operate on real roads alongside human drivers",
+        "While advances in computer-vision techniques have made human-level performance possible on narrow perception tasks such as object recognition, several fatal accidents involving autonomous vehicle underscore the importance of testing whether the perception and control pipeline\u2014when considered as a whole system\u2014can safely interact with humans",
+        "A recent study [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>] argues that autonomous vehicle need to drive \u201chundreds of millions of miles and, under some scenarios, hundreds of billions of miles to create enough data to clearly demonstrate their safety.\u201d Alteratively, formally verifying an autonomous vehicle algorithm\u2019s \u201ccorrectness\u201d [<a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>, <a class=\"ref-link\" id=\"c47\" href=\"#r47\">47</a>, <a class=\"ref-link\" id=\"c37\" href=\"#r37\">37</a>] is difficult since all driving policies are subject to crashes caused by other drivers [<a class=\"ref-link\" id=\"c49\" href=\"#r49\">49</a>]",
+        "We describe components of our open-source toolchain, a photo-realistic simulator equipped with our data-driven risk-based framework and cross-entropy search techniques",
+        "We provide a concise but extensible language-agnostic interface to our benchmark world model so that common autonomous vehicle sensors such as cameras and lidar can provide the necessary inputs to induce vehicle actuation commands",
+        "To highlight the modularity of our simulator, we evaluate the rare-event probability p\u03b3 on two different ego-vehicle policies",
+        "Verified subsystems provide evidence that the autonomous vehicle should drive safely even if the estimated distribution shifts, but verification techniques are limited by computational intractability as well as the need for both white-box models and the completeness of specifications that assign blame (e.g. [<a class=\"ref-link\" id=\"c49\" href=\"#r49\">49</a>])",
+        "Our framework offers significant speedups over real-world testing and allows efficient evaluation of black-box autonomous vehicle input/output behavior, providing a powerful tool to aid in the design of safe autonomous vehicle"
+    ],
+    "summary": [
+        "Recent breakthroughs in deep learning have accelerated the development of autonomous vehicles (AVs); many research prototypes operate on real roads alongside human drivers.",
+        "We use the cross-entropy algorithm [<a class=\"ref-link\" id=\"c44\" href=\"#r44\">44</a>] to iteratively approximate the optimal importance sampling distribution.",
+        "The use of adaptive-importance sampling methods motivates a unique simulator architecture (Section 3) which allows real-time updates of the policies of environment vehicles.",
+        "Cross-entropy method As an alternative to a naive Monte Carlo estimator, we consider importance sampling [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>], and we use a model-based optimization procedure to find a good importance-sampling distribution.",
+        "Two key considerations in our risk-based framework influence design choices for our simulation toolchain: (1) learning the base distribution P0 of nominal traffic behavior via data-driven modeling, and (2) testing the AV as a whole system.",
+        "Our importance sampling and cross-entropy methods use not just a single instance of model parameters \u03be, but rather a distribution over them to form a generative model of human driving behavior.",
+        "As \u03c1 approaches 0, the cross-entropy method learns importance samplers P\u03b8 that up-weight unsafe regions of X with lower f (x), increasing the frequency of sampling rare events \u2264 \u03b3).",
+        "We consistently observe that the cross-entropy method learns to sample significantly more rare events, despite the high-dimensional nature (d \u2248 500) of the problem.",
+        "For a given number of samples, the cross-entropy method with \u03c1 = 0.01 provides more precise estimates for the rare-event probability p\u03b3 \u2248 10\u22125 over naive Monte Carlo.",
+        "Based on our computational budget, we choose K = 20 and Nk = 1000 for the cross-entropy method to learn a good importance sampling distribution for the vision-based policy.",
+        "While this approach requires a learned model of the world P0\u2014a highly nontrivial statistical task in itself\u2014the adaptive importance sampling techniques we employ can still efficiently identify dangerous scenarios even when P0 is not completely accurate.",
+        "Verified subsystems provide evidence that the AV should drive safely even if the estimated distribution shifts, but verification techniques are limited by computational intractability as well as the need for both white-box models and the completeness of specifications that assign blame (e.g.",
+        "Our risk-based framework is most useful when the base distribution P0 is accurate, but even when P0 is misspecified, our adaptive importance sampling techniques can still efficiently identify dangerous scenarios, especially those that may be missed by verification methods attempting to assign blame.",
+        "Our framework offers significant speedups over real-world testing and allows efficient evaluation of black-box AV input/output behavior, providing a powerful tool to aid in the design of safe AVs. AS, HN, and JD were partially supported by the SAIL-Toyota Center for AI Research."
+    ],
+    "headline": "We demonstrate our framework on a highway scenario, accelerating system evaluation by 2-20 times over naive Monte Carlo sampling methods and 10-300P times  over real-world testing",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] H. Abbas, M. O\u2019Kelly, A. Rodionova, and R. Mangharam. Safe at any speed: A simulationbased test harness for autonomous vehicles. LNCS. Springer, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abbas%2C%20H.%20O%E2%80%99Kelly%2C%20M.%20Rodionova%2C%20A.%20Mangharam%2C%20R.%20Safe%20at%20any%20speed%3A%20A%20simulationbased%20test%20harness%20for%20autonomous%20vehicles%202018"
+        },
+        {
+            "id": "2",
+            "entry": "[2] M. Althoff and J. Dolan. Online verification of automated road vehicles using reachability analysis. Robotics, IEEE Transactions on, 30(4):903\u2013918, Aug 2014. ISSN 1552-3098. doi: 10.1109/TRO.2014.2312453.",
+            "crossref": "https://dx.doi.org/10.1109/TRO.2014.2312453",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1109/TRO.2014.2312453"
+        },
+        {
+            "id": "3",
+            "entry": "[3] S. Arora, A. Bhaskara, R. Ge, and T. Ma. Provable bounds for learning some deep representations. In International Conference on Machine Learning, pages 584\u2013592. , 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Arora%2C%20S.%20Bhaskara%2C%20A.%20Ge%2C%20R.%20Ma%2C%20T.%20Provable%20bounds%20for%20learning%20some%20deep%20representations%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Arora%2C%20S.%20Bhaskara%2C%20A.%20Ge%2C%20R.%20Ma%2C%20T.%20Provable%20bounds%20for%20learning%20some%20deep%20representations%202014"
+        },
+        {
+            "id": "4",
+            "entry": "[4] S. Asmussen and P. W. Glynn. Stochastic Simulation: Algorithms and Analysis. Springer, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Asmussen%2C%20S.%20Glynn%2C%20P.W.%20Stochastic%20Simulation%3A%20Algorithms%20and%20Analysis%202007"
+        },
+        {
+            "id": "5",
+            "entry": "[5] C. Baier, J.-P. Katoen, et al. Principles of model checking, volume 26202649. MIT press Cambridge, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Baier%2C%20C.%20Katoen%2C%20J.-P.%20Principles%20of%20model%20checking%2C%20volume%2026202649%202008"
+        },
+        {
+            "id": "6",
+            "entry": "[6] N. Baram, O. Anschel, I. Caspi, and S. Mannor. End-to-end differentiable adversarial imitation learning. In International Conference on Machine Learning, pages 390\u2013399, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Baram%2C%20N.%20Anschel%2C%20O.%20Caspi%2C%20I.%20Mannor%2C%20S.%20End-to-end%20differentiable%20adversarial%20imitation%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Baram%2C%20N.%20Anschel%2C%20O.%20Caspi%2C%20I.%20Mannor%2C%20S.%20End-to-end%20differentiable%20adversarial%20imitation%20learning%202017"
+        },
+        {
+            "id": "7",
+            "entry": "[7] P. L. Bartlett, D. J. Foster, and M. J. Telgarsky. Spectrally-normalized margin bounds for neural networks. In Advances in Neural Information Processing Systems, pages 6241\u20136250. , 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bartlett%2C%20P.L.%20Foster%2C%20D.J.%20Telgarsky%2C%20M.J.%20Spectrally-normalized%20margin%20bounds%20for%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bartlett%2C%20P.L.%20Foster%2C%20D.J.%20Telgarsky%2C%20M.J.%20Spectrally-normalized%20margin%20bounds%20for%20neural%20networks%202017"
+        },
+        {
+            "id": "8",
+            "entry": "[8] C. Blundell, J. Cornebise, K. Kavukcuoglu, and D. Wierstra. Weight uncertainty in neural networks. arXiv preprint arXiv:1505.05424, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1505.05424"
+        },
+        {
+            "id": "9",
+            "entry": "[9] M. Bojarski, D. Del Testa, D. Dworakowski, B. Firner, B. Flepp, P. Goyal, L. D. Jackel, M. Monfort, U. Muller, J. Zhang, et al. End to end learning for self-driving cars. arXiv preprint arXiv:1604.07316, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1604.07316"
+        },
+        {
+            "id": "10",
+            "entry": "[10] J.-F. Bonnefon, A. Shariff, and I. Rahwan. The social dilemma of autonomous vehicles. Science, 352(6293):1573\u20131576, 2016. ISSN 0036-8075. doi: 10.1126/science.aaf2654. URL http://science.sciencemag.org/content/352/6293/1573.",
+            "crossref": "https://dx.doi.org/10.1126/science.aaf2654",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1126/science.aaf2654"
+        },
+        {
+            "id": "11",
+            "entry": "[11] J. Bucklew. Introduction to rare event simulation. Springer Science & Business Media, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bucklew%2C%20J.%20Introduction%20to%20rare%20event%20simulation%202013"
+        },
+        {
+            "id": "12",
+            "entry": "[12] M. Cheah, S. A. Shaikh, J. Bryans, and H. N. Nguyen. Combining third party components securely in automotive systems. In IFIP International Conference on Information Security Theory and Practice, pages 262\u2013269.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cheah%2C%20M.%20Shaikh%2C%20S.A.%20Bryans%2C%20J.%20Nguyen%2C%20H.N.%20Combining%20third%20party%20components%20securely%20in%20automotive%20systems",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cheah%2C%20M.%20Shaikh%2C%20S.A.%20Bryans%2C%20J.%20Nguyen%2C%20H.N.%20Combining%20third%20party%20components%20securely%20in%20automotive%20systems"
+        },
+        {
+            "id": "13",
+            "entry": "[13] N. Cohen, O. Sharir, and A. Shashua. On the expressive power of deep learning: A tensor analysis. In Conference on Learning Theory, pages 698\u2013728. , 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cohen%2C%20N.%20Sharir%2C%20O.%20Shashua%2C%20A.%20On%20the%20expressive%20power%20of%20deep%20learning%3A%20A%20tensor%20analysis%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cohen%2C%20N.%20Sharir%2C%20O.%20Shashua%2C%20A.%20On%20the%20expressive%20power%20of%20deep%20learning%3A%20A%20tensor%20analysis%202016"
+        },
+        {
+            "id": "14",
+            "entry": "[14] A. Dosovitskiy, G. Ros, F. Codevilla, A. Lopez, and V. Koltun. CARLA: An open urban driving simulator. In Proceedings of the 1st Annual Conference on Robot Learning, pages 1\u201316, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dosovitskiy%2C%20A.%20Ros%2C%20G.%20Codevilla%2C%20F.%20Lopez%2C%20A.%20CARLA%3A%20An%20open%20urban%20driving%20simulator%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dosovitskiy%2C%20A.%20Ros%2C%20G.%20Codevilla%2C%20F.%20Lopez%2C%20A.%20CARLA%3A%20An%20open%20urban%20driving%20simulator%202017"
+        },
+        {
+            "id": "15",
+            "entry": "[15] J. Friedman, T. Hastie, and R. Tibshirani. Sparse inverse covariance estimation with the graphical lasso. Biostatistics, 9(3):432\u2013441, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Friedman%2C%20J.%20Hastie%2C%20T.%20Tibshirani%2C%20R.%20Sparse%20inverse%20covariance%20estimation%20with%20the%20graphical%20lasso%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Friedman%2C%20J.%20Hastie%2C%20T.%20Tibshirani%2C%20R.%20Sparse%20inverse%20covariance%20estimation%20with%20the%20graphical%20lasso%202008"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Y. Gal and Z. Ghahramani. Dropout as a bayesian approximation: Representing model uncertainty in deep learning. In International Conference on Machine Learningearning, pages 1050\u20131059, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gal%2C%20Y.%20Ghahramani%2C%20Z.%20Dropout%20as%20a%20bayesian%20approximation%3A%20Representing%20model%20uncertainty%20in%20deep%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gal%2C%20Y.%20Ghahramani%2C%20Z.%20Dropout%20as%20a%20bayesian%20approximation%3A%20Representing%20model%20uncertainty%20in%20deep%20learning%202016"
+        },
+        {
+            "id": "17",
+            "entry": "[17] E. Games. Unreal engine 4 documentation. com/latest/INT/index. html, 2015. URL https://docs.unrealengine.",
+            "url": "https://docs.unrealengine",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Games%2C%20E.%20Unreal%20engine%204%20documentation.%20com/latest/INT/index%202015"
+        },
+        {
+            "id": "18",
+            "entry": "[18] A. Graves. Practical variational inference for neural networks. In Advances in Neural Information Processing Systems, pages 2348\u20132356, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Graves%2C%20A.%20Practical%20variational%20inference%20for%20neural%20networks%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Graves%2C%20A.%20Practical%20variational%20inference%20for%20neural%20networks%202011"
+        },
+        {
+            "id": "19",
+            "entry": "[19] H. Heinecke, K.-P. Schnelle, H. Fennel, J. Bortolazzi, L. Lundh, J. Leflour, J.-L. Mat\u00e9, K. Nishikawa, and T. Scharnhorst. Automotive open system architecture-an industry-wide initiative to manage the complexity of emerging automotive e/e-architectures. Technical report, SAE Technical Paper, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Heinecke%2C%20H.%20Schnelle%2C%20K.-P.%20Fennel%2C%20H.%20Bortolazzi%2C%20J.%20Automotive%20open%20system%20architecture-an%20industry-wide%20initiative%20to%20manage%20the%20complexity%20of%20emerging%20automotive%20e/e-architectures%202004"
+        },
+        {
+            "id": "20",
+            "entry": "[20] T. A. Henzinger, P. W. Kopke, A. Puri, and P. Varaiya. What\u2019s decidable about hybrid automata? J. Comput. Syst. Sci., 57(1):94\u2013124, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Henzinger%2C%20T.A.%20Kopke%2C%20P.W.%20Puri%2C%20A.%20Varaiya%2C%20P.%20What%E2%80%99s%20decidable%20about%20hybrid%20automata%3F%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Henzinger%2C%20T.A.%20Kopke%2C%20P.W.%20Puri%2C%20A.%20Varaiya%2C%20P.%20What%E2%80%99s%20decidable%20about%20hybrid%20automata%3F%201998"
+        },
+        {
+            "id": "21",
+            "entry": "[21] P. Hintjens. ZeroMQ: messaging for many applications. \" O\u2019Reilly Media, Inc.\", 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hintjens%2C%20P.%20ZeroMQ%3A%20messaging%20for%20many%20applications.%20%22%20O%E2%80%99Reilly%20Media%2C%20Inc.%22%202013"
+        },
+        {
+            "id": "22",
+            "entry": "[22] J. Ho and S. Ermon. Generative adversarial imitation learning. In Advances in Neural Information Processing Systems, pages 4565\u20134573, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ho%2C%20J.%20Ermon%2C%20S.%20Generative%20adversarial%20imitation%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ho%2C%20J.%20Ermon%2C%20S.%20Generative%20adversarial%20imitation%20learning%202016"
+        },
+        {
+            "id": "23",
+            "entry": "[23] T. Homem-de Mello. A study on the cross-entropy method for rare-event probability estimation. INFORMS Journal on Computing, 19(3):381\u2013394, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=T.%20Homem-de%20Mello.%20A%20study%20on%20the%20cross-entropy%20method%20for%20rare-event%20probability%20estimation%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=T.%20Homem-de%20Mello.%20A%20study%20on%20the%20cross-entropy%20method%20for%20rare-event%20probability%20estimation%202007"
+        },
+        {
+            "id": "24",
+            "entry": "[24] J. Hu and P. Hu. On the performance of the cross-entropy method. In Simulation Conference (WSC), Proceedings of the 2009 Winter, pages 459\u2013468. IEEE, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hu%2C%20J.%20Hu%2C%20P.%20On%20the%20performance%20of%20the%20cross-entropy%20method%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hu%2C%20J.%20Hu%2C%20P.%20On%20the%20performance%20of%20the%20cross-entropy%20method%202009"
+        },
+        {
+            "id": "25",
+            "entry": "[25] J. Hu and P. Hu. Annealing adaptive search, cross-entropy, and stochastic approximation in global optimization. Naval Research Logistics (NRL), 58(5):457\u2013477, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hu%2C%20J.%20Hu%2C%20P.%20Annealing%20adaptive%20search%2C%20cross-entropy%2C%20and%20stochastic%20approximation%20in%20global%20optimization%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hu%2C%20J.%20Hu%2C%20P.%20Annealing%20adaptive%20search%2C%20cross-entropy%2C%20and%20stochastic%20approximation%20in%20global%20optimization%202011"
+        },
+        {
+            "id": "26",
+            "entry": "[26] J. Hu, P. Hu, and H. S. Chang. A stochastic approximation framework for a class of randomized optimization algorithms. IEEE Transactions on Automatic Control, 57(1):165\u2013178, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hu%2C%20J.%20Hu%2C%20P.%20Chang%2C%20H.S.%20A%20stochastic%20approximation%20framework%20for%20a%20class%20of%20randomized%20optimization%20algorithms%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hu%2C%20J.%20Hu%2C%20P.%20Chang%2C%20H.S.%20A%20stochastic%20approximation%20framework%20for%20a%20class%20of%20randomized%20optimization%20algorithms%202012"
+        },
+        {
+            "id": "27",
+            "entry": "[27] J. Hu, E. Zhou, and Q. Fan. Model-based annealing random search with stochastic averaging. ACM Transactions on Modeling and Computer Simulation (TOMACS), 24(4):21, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hu%2C%20J.%20Zhou%2C%20E.%20Fan%2C%20Q.%20Model-based%20annealing%20random%20search%20with%20stochastic%20averaging%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hu%2C%20J.%20Zhou%2C%20E.%20Fan%2C%20Q.%20Model-based%20annealing%20random%20search%20with%20stochastic%20averaging%202014"
+        },
+        {
+            "id": "28",
+            "entry": "[28] X. Huang, M. Kwiatkowska, S. Wang, and M. Wu. Safety verification of deep neural networks. In International Conference on Computer Aided Verification, pages 3\u201329.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huang%2C%20X.%20Kwiatkowska%2C%20M.%20Wang%2C%20S.%20Wu%2C%20M.%20Safety%20verification%20of%20deep%20neural%20networks",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huang%2C%20X.%20Kwiatkowska%2C%20M.%20Wang%2C%20S.%20Wu%2C%20M.%20Safety%20verification%20of%20deep%20neural%20networks"
+        },
+        {
+            "id": "29",
+            "entry": "[29] N. Kalra and S. M. Paddock. Driving to safety: How many miles of driving would it take to demonstrate autonomous vehicle reliability? Transportation Research Part A: Policy and Practice, 94:182\u2013193, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kalra%2C%20N.%20Paddock%2C%20S.M.%20Driving%20to%20safety%3A%20How%20many%20miles%20of%20driving%20would%20it%20take%20to%20demonstrate%20autonomous%20vehicle%20reliability%3F%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kalra%2C%20N.%20Paddock%2C%20S.M.%20Driving%20to%20safety%3A%20How%20many%20miles%20of%20driving%20would%20it%20take%20to%20demonstrate%20autonomous%20vehicle%20reliability%3F%202016"
+        },
+        {
+            "id": "30",
+            "entry": "[30] G. Katz, C. Barrett, D. Dill, K. Julian, and M. Kochenderfer. Reluplex: An efficient smt solver for verifying deep neural networks. arXiv:1702.01135 [cs.AI], 1:1, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1702.01135"
+        },
+        {
+            "id": "31",
+            "entry": "[31] D. P. Kingma, T. Salimans, and M. Welling. Variational dropout and the local reparameterization trick. In Advances in Neural Information Processing Systems, pages 2575\u20132583, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20D.P.%20Salimans%2C%20T.%20Welling%2C%20M.%20Variational%20dropout%20and%20the%20local%20reparameterization%20trick%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20D.P.%20Salimans%2C%20T.%20Welling%2C%20M.%20Variational%20dropout%20and%20the%20local%20reparameterization%20trick%202015"
+        },
+        {
+            "id": "32",
+            "entry": "[32] D. P. Kroese, R. Y. Rubinstein, and P. W. Glynn. The cross-entropy method for estimation. Handbook of Statistics: Machine Learning: Theory and Applications, 31:19\u201334, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kroese%2C%20D.P.%20Rubinstein%2C%20R.Y.%20Glynn%2C%20P.W.%20The%20cross-entropy%20method%20for%20estimation%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kroese%2C%20D.P.%20Rubinstein%2C%20R.Y.%20Glynn%2C%20P.W.%20The%20cross-entropy%20method%20for%20estimation%202013"
+        },
+        {
+            "id": "33",
+            "entry": "[33] A. Kuefler, J. Morton, T. Wheeler, and M. Kochenderfer. Imitating driver behavior with generative adversarial networks. In Intelligent Vehicles Symposium (IV), 2017 IEEE, pages 204\u2013211. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kuefler%2C%20A.%20Morton%2C%20J.%20Wheeler%2C%20T.%20Kochenderfer%2C%20M.%20Imitating%20driver%20behavior%20with%20generative%20adversarial%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kuefler%2C%20A.%20Morton%2C%20J.%20Wheeler%2C%20T.%20Kochenderfer%2C%20M.%20Imitating%20driver%20behavior%20with%20generative%20adversarial%20networks%202017"
+        },
+        {
+            "id": "34",
+            "entry": "[34] M. Kwiatkowska, G. Norman, and D. Parker. Prism 4.0: Verification of probabilistic real-time systems. In International conference on computer aided verification, pages 585\u2013591.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kwiatkowska%2C%20M.%20Norman%2C%20G.%20Parker%2C%20D.%20Prism%204.0%3A%20Verification%20of%20probabilistic%20real-time%20systems",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kwiatkowska%2C%20M.%20Norman%2C%20G.%20Parker%2C%20D.%20Prism%204.0%3A%20Verification%20of%20probabilistic%20real-time%20systems"
+        },
+        {
+            "id": "35",
+            "entry": "[35] J. Lygeros. Lecture notes on hybrid systems. In Notes for an ENSIETA workshop, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lygeros%2C%20J.%20Lecture%20notes%20on%20hybrid%20systems.%20In%20Notes%20for%20an%20ENSIETA%20workshop%202004"
+        },
+        {
+            "id": "36",
+            "entry": "[36] U. D. of Transportation FHWA. Ngsim \u2013 next generation simulation, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=D%2C%20U.%20of%20Transportation%20FHWA.%20Ngsim%20%E2%80%93%20next%20generation%20simulation%202008"
+        },
+        {
+            "id": "37",
+            "entry": "[37] M. O\u2019Kelly, H. Abbas, S. Gao, S. Shiraishi, S. Kato, and R. Mangharam. Apex: Autonomous vehicle plan verification and execution. volume 1, Apr 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=O%E2%80%99Kelly%2C%20M.%20Abbas%2C%20H.%20Gao%2C%20S.%20Shiraishi%2C%20S.%20Apex%3A%20Autonomous%20vehicle%20plan%20verification%20and%20execution%202016-04"
+        },
+        {
+            "id": "38",
+            "entry": "[38] I. Osband, C. Blundell, A. Pritzel, and B. Van Roy. Deep exploration via bootstrapped dqn. In Advances in neural information processing systems, pages 4026\u20134034, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Osband%2C%20I.%20Blundell%2C%20C.%20Pritzel%2C%20A.%20Roy%2C%20B.Van%20Deep%20exploration%20via%20bootstrapped%20dqn%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Osband%2C%20I.%20Blundell%2C%20C.%20Pritzel%2C%20A.%20Roy%2C%20B.Van%20Deep%20exploration%20via%20bootstrapped%20dqn%202016"
+        },
+        {
+            "id": "39",
+            "entry": "[39] C. Quiter and M. Ernst. Deepdrive. https://github.com/deepdrive/deepdrive, 2018.",
+            "url": "https://github.com/deepdrive/deepdrive"
+        },
+        {
+            "id": "40",
+            "entry": "[40] N. Roohi, R. Kaur, J. Weimer, O. Sokolsky, and I. Lee. Self-driving vehicle verification towards a benchmark. arXiv preprint arXiv:1806.08810, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1806.08810"
+        },
+        {
+            "id": "41",
+            "entry": "[41] S. Ross and D. Bagnell. Efficient reductions for imitation learning. In Proceedings of the thirteenth international conference on artificial intelligence and statistics, pages 661\u2013668, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ross%2C%20S.%20Bagnell%2C%20D.%20Efficient%20reductions%20for%20imitation%20learning%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ross%2C%20S.%20Bagnell%2C%20D.%20Efficient%20reductions%20for%20imitation%20learning%202010"
+        },
+        {
+            "id": "42",
+            "entry": "[42] S. Ross, G. Gordon, and D. Bagnell. A reduction of imitation learning and structured prediction to no-regret online learning. In Proceedings of the fourteenth international conference on artificial intelligence and statistics, pages 627\u2013635, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ross%2C%20S.%20Gordon%2C%20G.%20Bagnell%2C%20D.%20A%20reduction%20of%20imitation%20learning%20and%20structured%20prediction%20to%20no-regret%20online%20learning%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ross%2C%20S.%20Gordon%2C%20G.%20Bagnell%2C%20D.%20A%20reduction%20of%20imitation%20learning%20and%20structured%20prediction%20to%20no-regret%20online%20learning%202011"
+        },
+        {
+            "id": "44",
+            "entry": "[44] R. Y. Rubinstein and D. P. Kroese. The cross-entropy method: A unified approach to Monte Carlo simulation, randomized optimization and machine learning. Information Science & Statistics, Springer Verlag, NY, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rubinstein%2C%20R.Y.%20Kroese%2C%20D.P.%20The%20cross-entropy%20method%3A%20A%20unified%20approach%20to%20Monte%20Carlo%20simulation%2C%20randomized%20optimization%20and%20machine%20learning%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rubinstein%2C%20R.Y.%20Kroese%2C%20D.P.%20The%20cross-entropy%20method%3A%20A%20unified%20approach%20to%20Monte%20Carlo%20simulation%2C%20randomized%20optimization%20and%20machine%20learning%202004"
+        },
+        {
+            "id": "45",
+            "entry": "[45] S. Russell. Learning agents for uncertain environments. In Proceedings of the eleventh annual conference on Computational learning theory, pages 101\u2013103. ACM, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Russell%2C%20S.%20Learning%20agents%20for%20uncertain%20environments%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Russell%2C%20S.%20Learning%20agents%20for%20uncertain%20environments%201998"
+        },
+        {
+            "id": "46",
+            "entry": "[46] R. Schram, A. Williams, and M. van Ratingen. Implementation of autonomous emergency braking (aeb), the next step in euro ncap\u2019s safety assessment. ESV, Seoul, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schram%2C%20R.%20Williams%2C%20A.%20van%20Ratingen%2C%20M.%20Implementation%20of%20autonomous%20emergency%20braking%20%28aeb%29%2C%20the%20next%20step%20in%20euro%20ncap%E2%80%99s%20safety%20assessment%202013"
+        },
+        {
+            "id": "47",
+            "entry": "[47] S. A. Seshia, D. Sadigh, and S. S. Sastry. Formal methods for semi-autonomous driving. In Proceedings of the 52nd Annual Design Automation Conference, page 148. ACM, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Seshia%2C%20S.A.%20Sadigh%2C%20D.%20Sastry%2C%20S.S.%20Formal%20methods%20for%20semi-autonomous%20driving%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Seshia%2C%20S.A.%20Sadigh%2C%20D.%20Sastry%2C%20S.S.%20Formal%20methods%20for%20semi-autonomous%20driving%202015"
+        },
+        {
+            "id": "48",
+            "entry": "[48] S. Shah, D. Dey, C. Lovett, and A. Kapoor. Airsim: High-fidelity visual and physical simulation for autonomous vehicles. In Field and Service Robotics, 2017. URL https://arxiv.org/abs/1705.05065.",
+            "url": "https://arxiv.org/abs/1705.05065",
+            "arxiv_url": "https://arxiv.org/pdf/1705.05065"
+        },
+        {
+            "id": "49",
+            "entry": "[49] S. Shalev-Shwartz, S. Shammah, and A. Shashua. On a formal model of safe and scalable self-driving cars. arXiv preprint arXiv:1708.06374, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1708.06374"
+        },
+        {
+            "id": "50",
+            "entry": "[50] V. Tjeng and R. Tedrake. Verifying neural networks with mixed integer programming. arXiv:1711.07356 [cs.LG], 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.07356"
+        },
+        {
+            "id": "51",
+            "entry": "[51] C. E. Tuncali, T. P. Pavlic, and G. Fainekos. Utilizing s-taliro as an automatic test generation framework for autonomous vehicles. In Intelligent Transportation Systems (ITSC), 2016 IEEE 19th International Conference on, pages 1470\u20131475. IEEE, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tuncali%2C%20C.E.%20Pavlic%2C%20T.P.%20Fainekos%2C%20G.%20Utilizing%20s-taliro%20as%20an%20automatic%20test%20generation%20framework%20for%20autonomous%20vehicles%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tuncali%2C%20C.E.%20Pavlic%2C%20T.P.%20Fainekos%2C%20G.%20Utilizing%20s-taliro%20as%20an%20automatic%20test%20generation%20framework%20for%20autonomous%20vehicles%202016"
+        },
+        {
+            "id": "52",
+            "entry": "[52] K. Vogel. A comparison of headway and time to collision as safety indicators. Accident analysis & prevention, 35(3):427\u2013433, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vogel%2C%20K.%20A%20comparison%20of%20headway%20and%20time%20to%20collision%20as%20safety%20indicators%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vogel%2C%20K.%20A%20comparison%20of%20headway%20and%20time%20to%20collision%20as%20safety%20indicators%202003"
+        },
+        {
+            "id": "53",
+            "entry": "[53] Z. B. Zabinsky. Stochastic adaptive search for global optimization, volume 72. Springer Science & Business Media, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zabinsky%2C%20Z.B.%20Stochastic%20adaptive%20search%20for%20global%20optimization%2C%20volume%2072%202013"
+        },
+        {
+            "id": "54",
+            "entry": "[54] D. Zhao. Accelerated Evaluation of Automated Vehicles. Ph.D. thesis, Department of Mechanical Engineering, University of Michigan, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhao%2C%20D.%20Accelerated%20Evaluation%20of%20Automated%20Vehicles%202016"
+        },
+        {
+            "id": "55",
+            "entry": "[55] D. Zhao, X. Huang, H. Peng, H. Lam, and D. J. LeBlanc. Accelerated evaluation of automated vehicles in car-following maneuvers. IEEE Transactions on Intelligent Transportation Systems, 19(3):733\u2013744, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhao%2C%20D.%20Huang%2C%20X.%20Peng%2C%20H.%20Lam%2C%20H.%20Accelerated%20evaluation%20of%20automated%20vehicles%20in%20car-following%20maneuvers%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhao%2C%20D.%20Huang%2C%20X.%20Peng%2C%20H.%20Lam%2C%20H.%20Accelerated%20evaluation%20of%20automated%20vehicles%20in%20car-following%20maneuvers%202018"
+        },
+        {
+            "id": "56",
+            "entry": "[56] E. Zhou and J. Hu. Gradient-based adaptive stochastic search for non-differentiable optimization. IEEE Transactions on Automatic Control, 59(7):1818\u20131832, 2014. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhou%2C%20E.%20Hu%2C%20J.%20Gradient-based%20adaptive%20stochastic%20search%20for%20non-differentiable%20optimization%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhou%2C%20E.%20Hu%2C%20J.%20Gradient-based%20adaptive%20stochastic%20search%20for%20non-differentiable%20optimization%202014"
+        }
+    ]
+}

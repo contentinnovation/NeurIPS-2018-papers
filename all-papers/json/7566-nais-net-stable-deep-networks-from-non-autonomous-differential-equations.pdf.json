@@ -1,0 +1,378 @@
+{
+    "filename": "7566-nais-net-stable-deep-networks-from-non-autonomous-differential-equations.pdf",
+    "metadata": {
+        "title": "NAIS-Net: Stable Deep Networks from Non-Autonomous  Differential Equations",
+        "author": "Marco Ciccone, Marco Gallieri, Jonathan Masci, Christian Osendorfer, Faustino Gomez",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7566-nais-net-stable-deep-networks-from-non-autonomous-differential-equations.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "This paper introduces Non-Autonomous Input-Output Stable Network (NAIS-Net), a very deep architecture where each stacked processing block is derived from a time-invariant non-autonomous dynamical system. Non-autonomy is implemented by skip connections from the block input to each of the unrolled processing stages and allows stability to be enforced so that blocks can be unrolled adaptively to a pattern-dependent processing depth. NAIS-Net induces non-trivial, Lipschitz input-output maps, even for an infinite unroll length. We prove that the network is globally asymptotically stable so that for every initial condition there is exactly one input-dependent equilibrium assuming tanh units, and multiple stable equilibria for ReL units. An efficient implementation that enforces the stability under derived conditions for both fully-connected and convolutional layers is also presented. Experimental results show how NAIS-Net exhibits stability in practice, yielding a significant reduction in generalization gap compared to ResNets."
+    },
+    "keywords": [
+        {
+            "term": "batch normalization",
+            "url": "https://en.wikipedia.org/wiki/batch_normalization"
+        },
+        {
+            "term": "input output",
+            "url": "https://en.wikipedia.org/wiki/input_output"
+        },
+        {
+            "term": "recurrent neural network",
+            "url": "https://en.wikipedia.org/wiki/recurrent_neural_network"
+        },
+        {
+            "term": "ordinary differential equation",
+            "url": "https://en.wikipedia.org/wiki/ordinary_differential_equation"
+        },
+        {
+            "term": "dynamical system",
+            "url": "https://en.wikipedia.org/wiki/dynamical_system"
+        },
+        {
+            "term": "control theory",
+            "url": "https://en.wikipedia.org/wiki/control_theory"
+        },
+        {
+            "term": "NAIS",
+            "url": "https://en.wikipedia.org/wiki/NAIS"
+        },
+        {
+            "term": "residual network",
+            "url": "https://en.wikipedia.org/wiki/residual_network"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Representation learning is about finding a mapping from input patterns to encodings that disentangle the underlying variational factors of the input set",
+        "This paper introduces a novel network architecture, called the \u201cNon-Autonomous Input-Output Stable Network\u201d (NAIS-Net), that is derived from a dynamical system that is both time-invariant and non-autonomous.3",
+        "Theory, this property is central to stability analysis which investigates the properties of dynamical systems under which they converge to a single steady state without exhibiting chaos [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>, <a class=\"ref-link\" id=\"c42\" href=\"#r42\">42</a>, <a class=\"ref-link\" id=\"c39\" href=\"#r39\">39</a>]",
+        "Test accuracy for NAIS-NET was 97.28%, while RESNET-shared across all layers-batch normalization was second best with 96.69%, but without BatchNorm (RESNET-shared across all layers) it only achieved 95.86%",
+        "We presented NAIS-Net, a non-autonomous residual architecture that can be unrolled until the latent space representation converges to a stable input-dependent state",
+        "We derived stability conditions for the model and proposed two efficient reprojection algorithms, both for fully-connected and convolutional layers, to enforce the network parameters to stay within the set of feasible solutions during training"
+    ],
+    "key_statements": [
+        "Representation learning is about finding a mapping from input patterns to encodings that disentangle the underlying variational factors of the input set",
+        "This paper introduces a novel network architecture, called the \u201cNon-Autonomous Input-Output Stable Network\u201d (NAIS-Net), that is derived from a dynamical system that is both time-invariant and non-autonomous.3",
+        "NAIS-Nets can be 10 to 20 times deeper than the original ResNet without increasing the total number of network parameters, and, by stacking several stable NAIS-Net blocks, models that implement pattern-dependent processing depth can be trained without requiring any normalization at each step",
+        "Theory, this property is central to stability analysis which investigates the properties of dynamical systems under which they converge to a single steady state without exhibiting chaos [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>, <a class=\"ref-link\" id=\"c42\" href=\"#r42\">42</a>, <a class=\"ref-link\" id=\"c39\" href=\"#r39\">39</a>]",
+        "Theorem 1 below proves that the non-autonomuous residual network produces a bounded output given a bounded, possibly noisy, input, and that the network state converges to a constant value as the number of layers tends to infinity, if the following stability condition holds: Condition 1",
+        "Test accuracy for NAIS-NET was 97.28%, while RESNET-shared across all layers-batch normalization was second best with 96.69%, but without BatchNorm (RESNET-shared across all layers) it only achieved 95.86%",
+        "The loss at each iteration describes the trajectory of each sample in the latent space: the closer the sample to the correct steady state the closer the loss to zero",
+        "All variants initially refine their predictions at each iteration since the loss tends to decreases at each layer, but at different rates",
+        "Figure 3 shows how neuron activations in NAIS-Net converge to different steady state activations for different input patterns instead of all converging to zero as is the case with RESNET-shared across all layers-STABLE, confirming the results of [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>]",
+        "NAIS-Net is able to learn even with the stability constraint, showing that non-autonomy is key to obtaining representations that are stable and good for learning the task",
+        "Table 5.2 compares the performance on the two datasets, averaged over 5 runs",
+        "For CIFAR-10, NAIS-Net and ResNet performed and unrolling NAIS-Net for more than one iteration had little affect. This was not the case for CIFAR-100 where NAIS-NET10 improves over NAIS-NET1 by 1%",
+        "Mean accuracy is slightly lower than ResNet, the variance is considerably lower",
+        "Figure 4 shows that NAIS-Net is less prone to overfitting than a classic ResNet, reducing the generalization gap by 33%. This is a consequence of the stability constraint which imparts a degree of robust invariance to input perturbations",
+        "It is important to note that NAIS-Net can unroll up to 540 layers, and still train without any problems.\n5.3",
+        "Since NAIS-Net blocks are guaranteed to converge to a pattern-dependent steady state after an indeterminate number of iterations, processing depth can be controlled dynamically by terminating the unrolling process whenever the distance between a layer representation, x(i), and that of the\n10https://github.com/tensorflow/models/tree/master/official/resnet",
+        "The qualitative differences seen from low to high depth suggests that NAIS-Net is using processing depth as an additional degree of freedom so that, for a given training run, the network learns to use models of different complexity for different types of inputs within each class",
+        "We presented NAIS-Net, a non-autonomous residual architecture that can be unrolled until the latent space representation converges to a stable input-dependent state",
+        "We derived stability conditions for the model and proposed two efficient reprojection algorithms, both for fully-connected and convolutional layers, to enforce the network parameters to stay within the set of feasible solutions during training"
+    ],
+    "summary": [
+        "Representation learning is about finding a mapping from input patterns to encodings that disentangle the underlying variational factors of the input set.",
+        "NAIS-Nets can be 10 to 20 times deeper than the original ResNet without increasing the total number of network parameters, and, by stacking several stable NAIS-Net blocks, models that implement pattern-dependent processing depth can be trained without requiring any normalization at each step.",
+        "We provide stability conditions for both fully-connected and convolutional NAIS-Net layers.",
+        "Theorem 1 below proves that the non-autonomuous residual network produces a bounded output given a bounded, possibly noisy, input, and that the network state converges to a constant value as the number of layers tends to infinity, if the following stability condition holds: Condition 1.",
+        "(Asymptotic stability for shared weights) If Condition 1 holds, NAIS-Net with ReLU or tanh activations is Asymptotically Stable with respect to input dependent equilibrium points.",
+        "Experiments were conducted comparing NAIS-Net with ResNet, and variants thereof, using both fully-connected (MNIST, section 5.1) and convolutional (CIFAR-10/100, section 5.2) architectures to quantitatively assess the performance advantage of having a VDNN where stability is enforced.",
+        "For the MNIST dataset [<a class=\"ref-link\" id=\"c32\" href=\"#r32\">32</a>] a single-block NAIS-Net was compared with 9 different 30-layer ResNet variants each with a different combination of the following features: SH, NA, BN, Stable",
+        "Since NAIS-Net is time-invariant, non-autonomous, and input/output stable (i.e. SH-NA-STABLE), the chosen ResNet variants represent ablations of the these three features.",
+        "Figure 3 shows how neuron activations in NAIS-Net converge to different steady state activations for different input patterns instead of all converging to zero as is the case with RESNET-SH-STABLE, confirming the results of [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>].",
+        "Since NAIS-Net blocks are guaranteed to converge to a pattern-dependent steady state after an indeterminate number of iterations, processing depth can be controlled dynamically by terminating the unrolling process whenever the distance between a layer representation, x(i), and that of the",
+        "The qualitative differences seen from low to high depth suggests that NAIS-Net is using processing depth as an additional degree of freedom so that, for a given training run, the network learns to use models of different complexity for different types of inputs within each class.",
+        "We presented NAIS-Net, a non-autonomous residual architecture that can be unrolled until the latent space representation converges to a stable input-dependent state.",
+        "We derived stability conditions for the model and proposed two efficient reprojection algorithms, both for fully-connected and convolutional layers, to enforce the network parameters to stay within the set of feasible solutions during training.",
+        "The question of scalability to benchmarks such as ImageNet [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>] will be a main topic of future work"
+    ],
+    "headline": "This paper introduces Non-Autonomous Input-Output Stable Network , a very deep architecture where each stacked processing block is derived from a time-invariant non-autonomous dynamical system",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] U. M. Ascher and L. R. Petzold. Computer methods for ordinary differential equations and differentialalgebraic equations, volume 61.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ascher%2C%20U.M.%20Petzold%2C%20L.R.%20Computer%20methods%20for%20ordinary%20differential%20equations%20and%20differentialalgebraic",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ascher%2C%20U.M.%20Petzold%2C%20L.R.%20Computer%20methods%20for%20ordinary%20differential%20equations%20and%20differentialalgebraic"
+        },
+        {
+            "id": "2",
+            "entry": "[2] P. Baldi and K. Hornik. Universal approximation and learning of trajectories using oscillators. In Advances in Neural Information Processing Systems, pages 451\u2013457, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Baldi%2C%20P.%20Hornik%2C%20K.%20Universal%20approximation%20and%20learning%20of%20trajectories%20using%20oscillators%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Baldi%2C%20P.%20Hornik%2C%20K.%20Universal%20approximation%20and%20learning%20of%20trajectories%20using%20oscillators%201996"
+        },
+        {
+            "id": "3",
+            "entry": "[3] E. Battenberg, J. Chen, R. Child, A. Coates, Y. Gaur, Y. Li, H. Liu, S. Satheesh, D. Seetapun, A. Sriram, and Z. Zhu. Exploring neural transducers for end-to-end speech recognition. CoRR, abs/1707.07413, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.07413"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Y. Bengio, P. Simard, and P. Frasconi. Learning long-term dependencies with gradient descent is difficult. Neural Networks, 5(2):157\u2013166, 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bengio%2C%20Y.%20Simard%2C%20P.%20Frasconi%2C%20P.%20Learning%20long-term%20dependencies%20with%20gradient%20descent%20is%20difficult%201994",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bengio%2C%20Y.%20Simard%2C%20P.%20Frasconi%2C%20P.%20Learning%20long-term%20dependencies%20with%20gradient%20descent%20is%20difficult%201994"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Bo Chang, Lili Meng, Eldad Haber, Frederick Tung, and David Begert. Multi-level residual networks from dynamical systems view. arXiv preprint arXiv:1710.10348, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.10348"
+        },
+        {
+            "id": "6",
+            "entry": "[6] K. Cho, B. Van Merri\u00ebnboer, C. Gulcehre, Dzmitry Bahdanau, Fethi Bougares, Holger Schwenk, and Yoshua Bengio. Learning phrase representations using rnn encoder-decoder for statistical machine translation. arXiv preprint arXiv:1406.1078, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1406.1078"
+        },
+        {
+            "id": "7",
+            "entry": "[7] M. Cisse, P. Bojanowski, E. Grave, Y. Dauphin, and N. Usunier. Parseval networks: Improving robustness to adversarial examples. In Doina Precup and Yee Whye Teh, editors, Proceedings of the 34th International Conference on Machine Learning, volume 70, pages 854\u2013863, Sydney, Australia, 06\u201311 Aug 2017. PMLR.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cisse%2C%20M.%20Bojanowski%2C%20P.%20Grave%2C%20E.%20Dauphin%2C%20Y.%20Parseval%20networks%3A%20Improving%20robustness%20to%20adversarial%20examples%202017-08",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cisse%2C%20M.%20Bojanowski%2C%20P.%20Grave%2C%20E.%20Dauphin%2C%20Y.%20Parseval%20networks%3A%20Improving%20robustness%20to%20adversarial%20examples%202017-08"
+        },
+        {
+            "id": "8",
+            "entry": "[8] J. Deng, W. Dong, R. Socher, L. J. Li, K. Li, and L. Fei-Fei. ImageNet: A Large-Scale Hierarchical Image Database. In Conference on Computer Vision and Pattern Recognition (CVPR), 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Deng%2C%20J.%20Dong%2C%20W.%20Socher%2C%20R.%20Li%2C%20L.J.%20ImageNet%3A%20A%20Large-Scale%20Hierarchical%20Image%20Database%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Deng%2C%20J.%20Dong%2C%20W.%20Socher%2C%20R.%20Li%2C%20L.J.%20ImageNet%3A%20A%20Large-Scale%20Hierarchical%20Image%20Database%202009"
+        },
+        {
+            "id": "9",
+            "entry": "[9] K. Doya. Bifurcations in the learning of recurrent neural networks. In Circuits and Systems, 1992. ISCAS\u201992. Proceedings., 1992 IEEE International Symposium on, volume 6, pages 2777\u20132780. IEEE, 1992.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Doya%2C%20K.%20Bifurcations%20in%20the%20learning%20of%20recurrent%20neural%20networks%201992",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Doya%2C%20K.%20Bifurcations%20in%20the%20learning%20of%20recurrent%20neural%20networks%201992"
+        },
+        {
+            "id": "10",
+            "entry": "[10] M. Figurnov, A. Sobolev, and D. Vetrov. Probabilistic adaptive computation time. CoRR, abs/1712.00386, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1712.00386"
+        },
+        {
+            "id": "11",
+            "entry": "[11] A. Gomez, M. Ren, R. Urtasun, and R. B. Grosse. The reversible residual network: Backpropagation without storing activations. In NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gomez%2C%20A.%20Ren%2C%20M.%20Urtasun%2C%20R.%20Grosse%2C%20R.B.%20The%20reversible%20residual%20network%3A%20Backpropagation%20without%20storing%20activations%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gomez%2C%20A.%20Ren%2C%20M.%20Urtasun%2C%20R.%20Grosse%2C%20R.B.%20The%20reversible%20residual%20network%3A%20Backpropagation%20without%20storing%20activations%202017"
+        },
+        {
+            "id": "12",
+            "entry": "[12] A. Graves. Adaptive computation time for recurrent neural networks. CoRR, abs/1603.08983, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1603.08983"
+        },
+        {
+            "id": "13",
+            "entry": "[13] K. Greff, R. K. Srivastava, and J. Schmidhuber. Highway and residual networks learn unrolled iterative estimation. arXiv preprint arXiv:1612.07771, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1612.07771"
+        },
+        {
+            "id": "14",
+            "entry": "[14] K. Gregor and Y. LeCun. Learning fast approximations of sparse coding. In International Conference on Machine Learning (ICML), 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gregor%2C%20K.%20LeCun%2C%20Y.%20Learning%20fast%20approximations%20of%20sparse%20coding%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gregor%2C%20K.%20LeCun%2C%20Y.%20Learning%20fast%20approximations%20of%20sparse%20coding%202010"
+        },
+        {
+            "id": "15",
+            "entry": "[15] E. Haber and L. Ruthotto. Stable architectures for deep neural networks. arXiv preprint arXiv:1705.03341, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1705.03341"
+        },
+        {
+            "id": "16",
+            "entry": "[16] R. Haschke and J. J. Steil. Input space bifurcation manifolds of recurrent neural networks. Neurocomputing, 64:25\u201338, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Haschke%2C%20R.%20Steil%2C%20J.J.%20Input%20space%20bifurcation%20manifolds%20of%20recurrent%20neural%20networks%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Haschke%2C%20R.%20Steil%2C%20J.J.%20Input%20space%20bifurcation%20manifolds%20of%20recurrent%20neural%20networks%202005"
+        },
+        {
+            "id": "17",
+            "entry": "[17] K. He, X. Zhang, S. Ren, and J. Sun. Delving deep into rectifiers: Surpassing human-level performance on imagenet classification. arXiv preprint arXiv:1502.01852, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1502.01852"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 770\u2013778, Dec 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016-12"
+        },
+        {
+            "id": "19",
+            "entry": "[19] S. Hochreiter. Untersuchungen zu dynamischen neuronalen netzen. diploma thesis, 1991. Advisor:J. Schmidhuber.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hochreiter%2C%20S.%20Untersuchungen%20zu%20dynamischen%20neuronalen%20netzen.%20diploma%20thesis%201991"
+        },
+        {
+            "id": "20",
+            "entry": "[20] S. Hochreiter and J. Schmidhuber. Long short-term memory. Neural Computation, 9(8):1735\u20131780, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hochreiter%2C%20S.%20Schmidhuber%2C%20J.%20Long%20short-term%20memory%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hochreiter%2C%20S.%20Schmidhuber%2C%20J.%20Long%20short-term%20memory%201997"
+        },
+        {
+            "id": "21",
+            "entry": "[21] R. A. Horn and C. R. Johnson. Matrix Analysis. Cambridge University Press, New York, NY, USA, 2nd edition, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Horn%2C%20R.A.%20Johnson%2C%20C.R.%20Matrix%20Analysis%202012"
+        },
+        {
+            "id": "22",
+            "entry": "[22] G. Huang, Z. Liu, L. van der Maaten, and K. Q. Weinberger. Densely connected convolutional networks. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huang%2C%20G.%20Liu%2C%20Z.%20van%20der%20Maaten%2C%20L.%20Weinberger%2C%20K.Q.%20Densely%20connected%20convolutional%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huang%2C%20G.%20Liu%2C%20Z.%20van%20der%20Maaten%2C%20L.%20Weinberger%2C%20K.Q.%20Densely%20connected%20convolutional%20networks%202017"
+        },
+        {
+            "id": "23",
+            "entry": "[23] S. Jastrzebski, D. Arpit, N. Ballas, V. Verma, T. Che, and Y. Bengio. Residual connections encourage iterative inference. arXiv preprint arXiv:1710.04773, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.04773"
+        },
+        {
+            "id": "24",
+            "entry": "[24] S. Kanai, Y. Fujiwara, and S. Iwamura. Preventing gradient explosions in gated recurrent units. In I. Guyon, U. V. Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems 30, pages 435\u2013444. Curran Associates, Inc., 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kanai%2C%20S.%20Fujiwara%2C%20Y.%20Iwamura%2C%20S.%20Preventing%20gradient%20explosions%20in%20gated%20recurrent%20units%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kanai%2C%20S.%20Fujiwara%2C%20Y.%20Iwamura%2C%20S.%20Preventing%20gradient%20explosions%20in%20gated%20recurrent%20units%202017"
+        },
+        {
+            "id": "25",
+            "entry": "[25] H. K. Khalil. Nonlinear Systems. Pearson Education, 3rd edition, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Khalil%2C%20H.K.%20Nonlinear%20Systems.%20Pearson%20Education%202014"
+        },
+        {
+            "id": "26",
+            "entry": "[26] J. N. Knight. Stability analysis of recurrent neural networks with applications. Colorado State University, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Knight%2C%20J.N.%20Stability%20analysis%20of%20recurrent%20neural%20networks%20with%20applications%202008"
+        },
+        {
+            "id": "27",
+            "entry": "[27] A. Krizhevsky and G. Hinton. Learning multiple layers of features from tiny images. 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20A.%20Hinton%2C%20G.%20Learning%20multiple%20layers%20of%20features%20from%20tiny%20images%202009"
+        },
+        {
+            "id": "28",
+            "entry": "[28] A. Krizhevsky, I. Sutskever, and G. E. Hinton. ImageNet classification with deep convolutional neural networks. In Advances in Neural Information Processing Systems (NIPS), 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20A.%20Sutskever%2C%20I.%20Hinton%2C%20G.E.%20ImageNet%20classification%20with%20deep%20convolutional%20neural%20networks%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krizhevsky%2C%20A.%20Sutskever%2C%20I.%20Hinton%2C%20G.E.%20ImageNet%20classification%20with%20deep%20convolutional%20neural%20networks%202012"
+        },
+        {
+            "id": "29",
+            "entry": "[29] J.K. Lang and M. J. Witbrock. Learning to tell two spirals apart. In D. Touretzky, G. Hinton, and T. Sejnowski, editors, Proceedings of the Connectionist Models Summer School, pages 52\u201359, Mountain View, CA, 1988.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lang%2C%20J.K.%20Witbrock%2C%20M.J.%20Learning%20to%20tell%20two%20spirals%20apart%201988",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lang%2C%20J.K.%20Witbrock%2C%20M.J.%20Learning%20to%20tell%20two%20spirals%20apart%201988"
+        },
+        {
+            "id": "30",
+            "entry": "[30] G. Larsson, M. Maire, and G. Shakhnarovich. Fractalnet: Ultra-deep neural networks without residuals. arXiv preprint arXiv:1605.07648, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1605.07648"
+        },
+        {
+            "id": "31",
+            "entry": "[31] T. Laurent and J. von Brecht. A recurrent neural network without chaos. arXiv preprint arXiv:1612.06212, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1612.06212"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Yann LeCun. The MNIST database of handwritten digits. http://yann.lecun.com/exdb/mnist/, 1998.",
+            "url": "http://yann.lecun.com/exdb/mnist/"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Qianli Liao and Tomaso Poggio. Bridging the gaps between residual learning, recurrent neural networks and visual cortex. arXiv preprint arXiv:1604.03640, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1604.03640"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Y. Lu, A. Zhong, D. Bin, and Q. Li. Beyond finite layer neural networks: Bridging deep architectures and numerical differential equations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lu%2C%20Y.%20Zhong%2C%20A.%20Bin%2C%20D.%20Li%2C%20Q.%20Beyond%20finite%20layer%20neural%20networks%3A%20Bridging%20deep%20architectures%20and%20numerical%20differential%20equations%202018"
+        },
+        {
+            "id": "35",
+            "entry": "[35] T. Miyato, T. Kataoka, M. Koyama, and Y. Yoshida. Spectral normalization for generative adversarial networks. International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Miyato%2C%20T.%20Kataoka%2C%20T.%20Koyama%2C%20M.%20Yoshida%2C%20Y.%20Spectral%20normalization%20for%20generative%20adversarial%20networks%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Miyato%2C%20T.%20Kataoka%2C%20T.%20Koyama%2C%20M.%20Yoshida%2C%20Y.%20Spectral%20normalization%20for%20generative%20adversarial%20networks%202018"
+        },
+        {
+            "id": "36",
+            "entry": "[36] F. Monti, D. Boscaini, J. Masci, E. Rodol\u00e0, J. Svoboda, and M. M. Bronstein. Geometric deep learning on graphs and manifolds using mixture model cnns. In CVPR2017, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Monti%2C%20F.%20Boscaini%2C%20D.%20Masci%2C%20J.%20Rodol%C3%A0%2C%20E.%20Geometric%20deep%20learning%20on%20graphs%20and%20manifolds%20using%20mixture%20model%20cnns%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Monti%2C%20F.%20Boscaini%2C%20D.%20Masci%2C%20J.%20Rodol%C3%A0%2C%20E.%20Geometric%20deep%20learning%20on%20graphs%20and%20manifolds%20using%20mixture%20model%20cnns%202017"
+        },
+        {
+            "id": "37",
+            "entry": "[37] R. Pascanu, T. Mikolov, and Y. Bengio. On the difficulty of training recurrent neural networks. In International Conference on Machine Learning, pages 1310\u20131318, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pascanu%2C%20R.%20Mikolov%2C%20T.%20Bengio%2C%20Y.%20On%20the%20difficulty%20of%20training%20recurrent%20neural%20networks%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pascanu%2C%20R.%20Mikolov%2C%20T.%20Bengio%2C%20Y.%20On%20the%20difficulty%20of%20training%20recurrent%20neural%20networks%202013"
+        },
+        {
+            "id": "38",
+            "entry": "[38] J. Singh and N. Barabanov. Stability of discrete time recurrent neural networks and nonlinear optimization problems. Neural Networks, 74:58\u201372, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Singh%2C%20J.%20Barabanov%2C%20N.%20Stability%20of%20discrete%20time%20recurrent%20neural%20networks%20and%20nonlinear%20optimization%20problems%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Singh%2C%20J.%20Barabanov%2C%20N.%20Stability%20of%20discrete%20time%20recurrent%20neural%20networks%20and%20nonlinear%20optimization%20problems%202016"
+        },
+        {
+            "id": "39",
+            "entry": "[39] E. Sontag. Mathematical Control Theory: Deterministic Finite Dimensional Systems. Springer-Verlag, 2nd edition, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sontag%2C%20E.%20Mathematical%20Control%20Theory%3A%20Deterministic%20Finite%20Dimensional%20Systems%201998"
+        },
+        {
+            "id": "40",
+            "entry": "[40] R. K. Srivastava, K. Greff, and J. Schmidhuber. Highway networks. arXiv preprint arXiv:1505.00387, May 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1505.00387"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Jochen J Steil. Input Output Stability of Recurrent Neural Networks. Cuvillier G\u00f6ttingen, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Steil%2C%20Jochen%20J.%20Input%20Output%20Stability%20of%20Recurrent%20Neural%20Networks%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Steil%2C%20Jochen%20J.%20Input%20Output%20Stability%20of%20Recurrent%20Neural%20Networks%201999"
+        },
+        {
+            "id": "42",
+            "entry": "[42] S. H. Strogatz. Nonlinear dynamics and chaos: with applications to physics, biology, chemistry, and engineering. Westview Press, 2nd edition, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Strogatz%2C%20S.H.%20Nonlinear%20dynamics%20and%20chaos%3A%20with%20applications%20to%20physics%2C%20biology%2C%20chemistry%2C%20and%20engineering%202015"
+        },
+        {
+            "id": "43",
+            "entry": "[43] I. Sutskever, O. Vinyals, and Le. Q. V. Sequence to sequence learning with neural networks. CoRR, abs/1409.3215, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1409.3215"
+        },
+        {
+            "id": "44",
+            "entry": "[44] C. Szegedy, W. Zaremba, I. Sutskever, J. Bruna, D. Erhan, I. Goodfellow, and R. Fergus. Intriguing properties of neural networks. arXiv preprint arXiv:1312.6199, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.6199"
+        },
+        {
+            "id": "45",
+            "entry": "[45] C. Tallec and Y. Ollivier. Can recurrent neural networks warp time? International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tallec%2C%20C.%20Ollivier%2C%20Y.%20Can%20recurrent%20neural%20networks%20warp%20time%3F%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tallec%2C%20C.%20Ollivier%2C%20Y.%20Can%20recurrent%20neural%20networks%20warp%20time%3F%202018"
+        },
+        {
+            "id": "46",
+            "entry": "[46] A. Veit and S. Belongie. Convolutional networks with adaptive computation graphs. CoRR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Veit%2C%20A.%20Belongie%2C%20S.%20Convolutional%20networks%20with%20adaptive%20computation%20graphs%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Veit%2C%20A.%20Belongie%2C%20S.%20Convolutional%20networks%20with%20adaptive%20computation%20graphs%202017"
+        },
+        {
+            "id": "47",
+            "entry": "[47] E. Vorontsov, C. Trabelsi, S. Kadoury, and C. Pal. On orthogonality and learning recurrent networks with long term dependencies. arXiv preprint arXiv:1702.00071, 2017. Statistics, 5(1):1\u201311, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1702.00071"
+        },
+        {
+            "id": "49",
+            "entry": "[49] Y. Yoshida and T. Miyato. Spectral norm regularization for improving the generalizability of deep learning. arXiv preprint arXiv:1705.10941, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1705.10941"
+        },
+        {
+            "id": "50",
+            "entry": "[50] X. Zhang, Z. Li, C. C. Loy, and D. Lin. Polynet: A pursuit of structural diversity in very deep networks. In 2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pages 3900\u20133908. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20X.%20Li%2C%20Z.%20Loy%2C%20C.C.%20Lin%2C%20D.%20Polynet%3A%20A%20pursuit%20of%20structural%20diversity%20in%20very%20deep%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20X.%20Li%2C%20Z.%20Loy%2C%20C.C.%20Lin%2C%20D.%20Polynet%3A%20A%20pursuit%20of%20structural%20diversity%20in%20very%20deep%20networks%202017"
+        },
+        {
+            "id": "51",
+            "entry": "[51] S. Zheng, S. Jayasumana, B. Romera-Paredes, V. Vineet, Z. Su, D. Du, C. Huang, and P. H. S. Torr. Conditional random fields as recurrent neural networks. In Proceedings of the IEEE International Conference on Computer Vision, pages 1529\u20131537, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zheng%2C%20S.%20Jayasumana%2C%20S.%20Romera-Paredes%2C%20B.%20Vineet%2C%20V.%20Conditional%20random%20fields%20as%20recurrent%20neural%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zheng%2C%20S.%20Jayasumana%2C%20S.%20Romera-Paredes%2C%20B.%20Vineet%2C%20V.%20Conditional%20random%20fields%20as%20recurrent%20neural%20networks%202015"
+        },
+        {
+            "id": "52",
+            "entry": "[52] J. G. Zilly, R. K. Srivastava, J. Koutn\u00edk, and J. Schmidhuber. Recurrent highway networks. In ICML2017, pages 4189\u20134198. PMLR, 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zilly%2C%20J.G.%20Srivastava%2C%20R.K.%20Koutn%C3%ADk%2C%20J.%20Schmidhuber%2C%20J.%20Recurrent%20highway%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zilly%2C%20J.G.%20Srivastava%2C%20R.K.%20Koutn%C3%ADk%2C%20J.%20Schmidhuber%2C%20J.%20Recurrent%20highway%20networks%202017"
+        }
+    ]
+}

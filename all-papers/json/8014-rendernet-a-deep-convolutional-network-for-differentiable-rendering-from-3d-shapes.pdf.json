@@ -1,0 +1,303 @@
+{
+    "filename": "8014-rendernet-a-deep-convolutional-network-for-differentiable-rendering-from-3d-shapes.pdf",
+    "metadata": {
+        "title": "RenderNet: A deep convolutional network for differentiable rendering from 3D shapes",
+        "author": "Thu H. Nguyen-Phuoc, Chuan Li, Stephen Balaban, Yongliang Yang",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8014-rendernet-a-deep-convolutional-network-for-differentiable-rendering-from-3d-shapes.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Traditional computer graphics rendering pipelines are designed for procedurally generating 2D images from 3D shapes with high performance. The nondifferentiability due to discrete operations (such as visibility computation) makes it hard to explicitly correlate rendering parameters and the resulting image, posing a significant challenge for inverse rendering tasks. Recent work on differentiable rendering achieves differentiability either by designing surrogate gradients for non-differentiable operations or via an approximate but differentiable renderer. These methods, however, are still limited when it comes to handling occlusion, and restricted to particular rendering effects. We present RenderNet, a differentiable rendering convolutional network with a novel projection unit that can render 2D images from 3D shapes. Spatial occlusion and shading calculation are automatically encoded in the network. Our experiments show that RenderNet can successfully learn to implement different shaders, and can be used in inverse rendering tasks to estimate shape, pose, lighting and texture from a single image."
+    },
+    "keywords": [
+        {
+            "term": "multilayer perceptron",
+            "url": "https://en.wikipedia.org/wiki/multilayer_perceptron"
+        },
+        {
+            "term": "Ambient Occlusion",
+            "url": "https://en.wikipedia.org/wiki/Ambient_Occlusion"
+        },
+        {
+            "term": "convolutional neural network",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_network"
+        },
+        {
+            "term": "inverse rendering",
+            "url": "https://en.wikipedia.org/wiki/inverse_rendering"
+        }
+    ],
+    "highlights": [
+        "Rendering refers to the process of forming a realistic or stylized image from a description of the 3D virtual object, and the illumination condition of the surrounding scene",
+        "We propose RenderNet, a convolutional neural network (CNN) architecture that can be trained endto-end for rendering 3D objects, including object visibility computation and pixel color calculation",
+        "For the 3D shape, we use an encoding network to map the input to a latent shape vector",
+        "We presented RenderNet, a convolutional differentiable rendering network that can be trained end-to-end with a pixel-space regression loss",
+        "Despite the simplicity in the design of the network architecture and the projection unit, our experiments demonstrate that RenderNet successfully performs rendering and inverse rendering",
+        "As shown in Section 4.1, there is the potential to combine different shaders in one network that shares the same 3D convolutions and projection unit, instead of training different networks for different shaders. This opens up room for improvement and exploration, such as extending RenderNet to work with unlabelled data, using other losses like adversarial losses or perceptual losses, or combining RenderNet with other architectures, such as U-Net or a multi-scale architecture where the projection unit is used at different resolutions"
+    ],
+    "key_statements": [
+        "Rendering refers to the process of forming a realistic or stylized image from a description of the 3D virtual object, and the illumination condition of the surrounding scene",
+        "We propose RenderNet, a convolutional neural network (CNN) architecture that can be trained endto-end for rendering 3D objects, including object visibility computation and pixel color calculation",
+        "We demonstrate a number of rendering styles ranging from simple shaders such as Phong shading [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>], suggestive contour shading [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>], to more complex shaders such as a composite of contour shading and cartoon shading [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>] or ambient occlusion [<a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>], some of which are time-consuming and computationally expensive",
+        "While these methods yield impressive results, we argue that geometry-based methods, which make stronger assumptions about the 3D world and how it produces 2D images, will be able to perform better in certain tasks, such as out-of-plane rotation, image relighting, and shape texturing",
+        "To reconstruct 3D shapes from 2D images, we do MAP estimation using our trained rendering network as the likelihood function, in addition to a shape prior that is learned from a 3D shape dataset",
+        "For the 3D shape, we use an encoding network to map the input to a latent shape vector",
+        "We presented RenderNet, a convolutional differentiable rendering network that can be trained end-to-end with a pixel-space regression loss",
+        "Despite the simplicity in the design of the network architecture and the projection unit, our experiments demonstrate that RenderNet successfully performs rendering and inverse rendering",
+        "As shown in Section 4.1, there is the potential to combine different shaders in one network that shares the same 3D convolutions and projection unit, instead of training different networks for different shaders. This opens up room for improvement and exploration, such as extending RenderNet to work with unlabelled data, using other losses like adversarial losses or perceptual losses, or combining RenderNet with other architectures, such as U-Net or a multi-scale architecture where the projection unit is used at different resolutions"
+    ],
+    "summary": [
+        "Rendering refers to the process of forming a realistic or stylized image from a description of the 3D virtual object, and the illumination condition of the surrounding scene.",
+        "We propose RenderNet, a convolutional neural network (CNN) architecture that can be trained endto-end for rendering 3D objects, including object visibility computation and pixel color calculation.",
+        "Unlike non-learnt approaches in previous work, a learnt projection unit uses deep features instead of low-level primitives, making RenderNet generalize well to a variety of input geometries, robust to erroneous or low-resolution input, as well as enabling learning multi-style rendering with the same network architecture.",
+        "RenderNet is differentiable and can be integrated to other neural networks, benefiting various inverse rendering tasks, such as novel-view synthesis, pose prediction, or image-based 3D shape reconstruction, unlike previous image-based inverse rendering work that can recover only part of the full 3D shapes [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>, <a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>].",
+        "A novel convolutional neural network architecture that learns to render in different styles from a 3D voxel grid input.",
+        "To reconstruct 3D shapes from 2D images, we do MAP estimation using our trained rendering network as the likelihood function, in addition to a shape prior that is learned from a 3D shape dataset.",
+        "The reshaping step allows each unit of the MLP to access the features across different channels and the depth dimension of the input, enabling the network to learn the projection operation and visibility computation along the depth axis.",
+        "These networks are trained directly on shaded images with a binary cross-entropy loss, using the chair category from ShapeNet. RenderNet, on the other hand, first renders the normal map, and combines this with the lighting input to create the shaded image using the shading equation in Section 3.3.",
+        "Z,\u03b8,\u03c6,\u03b7 where I is the observed image and f is our pre-trained RenderNet. z is the shape to reconstruct, \u03b8 and \u03b7 are the pose and lighting parameters, and \u03c6 is the texture variable.",
+        "This corresponds to MAP estimation, where the prior term is the shape decoder and the likelihood term is given by RenderNet. Note that it is straightforward to extend this method to the multi-view reconstruction task by summing over multiple per-image losses with shared shape and appearance.",
+        "DC-IGN learns to decompose images into a graphics code Z, which is a disentangled representation containing a set of latent variables for shape, pose and lighting, allowing them to manipulate these properties to generate novel views or perform image relighting.",
+        "We presented RenderNet, a convolutional differentiable rendering network that can be trained end-to-end with a pixel-space regression loss."
+    ],
+    "headline": "We present RenderNet, a differentiable rendering convolutional network with a novel projection unit that can render 2D images from 3D shapes",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Danilo Jimenez Rezende, S. M. Ali Eslami, Shakir Mohamed, Peter Battaglia, Max Jaderberg, and Nicolas Heess. Unsupervised learning of 3d structure from images. In NIPS, pages 4996\u20135004. 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Danilo%20Jimenez%20Rezende%2C%20S.M.Ali%20Eslami%20Mohamed%2C%20Shakir%20Battaglia%2C%20Peter%20Jaderberg%2C%20Max%20Unsupervised%20learning%20of%203d%20structure%20from%20images%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Danilo%20Jimenez%20Rezende%2C%20S.M.Ali%20Eslami%20Mohamed%2C%20Shakir%20Battaglia%2C%20Peter%20Jaderberg%2C%20Max%20Unsupervised%20learning%20of%203d%20structure%20from%20images%202016"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Matthew M. Loper and Michael J. Black. OpenDR: An approximate differentiable renderer. In ECCV, pages 154\u2013169. 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Loper%2C%20Matthew%20M.%20Black%2C%20Michael%20J.%20OpenDR%3A%20An%20approximate%20differentiable%20renderer%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Loper%2C%20Matthew%20M.%20Black%2C%20Michael%20J.%20OpenDR%3A%20An%20approximate%20differentiable%20renderer%202014"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Hiroharu Kato, Yoshitaka Ushiku, and Tatsuya Harada. Neural 3d mesh renderer. In IEEE CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kato%2C%20Hiroharu%20Ushiku%2C%20Yoshitaka%20Harada%2C%20Tatsuya%20Neural%203d%20mesh%20renderer%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kato%2C%20Hiroharu%20Ushiku%2C%20Yoshitaka%20Harada%2C%20Tatsuya%20Neural%203d%20mesh%20renderer%202018"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Xinchen Yan, Jimei Yang, Ersin Yumer, Yijie Guo, and Honglak Lee. Perspective transformer nets: Learning single-view 3d object reconstruction without 3d supervision. In NIPS, pages 1696\u20131704. 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yan%2C%20Xinchen%20Yang%2C%20Jimei%20Yumer%2C%20Ersin%20Guo%2C%20Yijie%20Perspective%20transformer%20nets%3A%20Learning%20single-view%203d%20object%20reconstruction%20without%203d%20supervision%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yan%2C%20Xinchen%20Yang%2C%20Jimei%20Yumer%2C%20Ersin%20Guo%2C%20Yijie%20Perspective%20transformer%20nets%3A%20Learning%20single-view%203d%20object%20reconstruction%20without%203d%20supervision%202016"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Rui Zhu, Hamed Kiani Galoogahi, Chaoyang Wang, and Simon Lucey. Rethinking reprojection: Closing the loop for pose-aware shape reconstruction from a single image. In IEEE CVPR, pages 57\u201365, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhu%2C%20Rui%20Galoogahi%2C%20Hamed%20Kiani%20Wang%2C%20Chaoyang%20Lucey%2C%20Simon%20Rethinking%20reprojection%3A%20Closing%20the%20loop%20for%20pose-aware%20shape%20reconstruction%20from%20a%20single%20image%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhu%2C%20Rui%20Galoogahi%2C%20Hamed%20Kiani%20Wang%2C%20Chaoyang%20Lucey%2C%20Simon%20Rethinking%20reprojection%3A%20Closing%20the%20loop%20for%20pose-aware%20shape%20reconstruction%20from%20a%20single%20image%202017"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Jiajun Wu, Yifan Wang, Tianfan Xue, Xingyuan Sun, William T Freeman, and Joshua B Tenenbaum. MarrNet: 3D Shape Reconstruction via 2.5D Sketches. In NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20Jiajun%20Wang%2C%20Yifan%20Xue%2C%20Tianfan%20Sun%2C%20Xingyuan%20MarrNet%3A%203D%20Shape%20Reconstruction%20via%202.5D%20Sketches%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20Jiajun%20Wang%2C%20Yifan%20Xue%2C%20Tianfan%20Sun%2C%20Xingyuan%20MarrNet%3A%203D%20Shape%20Reconstruction%20via%202.5D%20Sketches%202017"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Shubham Tulsiani, Tinghui Zhou, Alexei A. Efros, and Jitendra Malik. Multi-view supervision for single-view reconstruction via differentiable ray consistency. In IEEE CVPR, pages 209\u2013217, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tulsiani%2C%20Shubham%20Zhou%2C%20Tinghui%20Efros%2C%20Alexei%20A.%20Malik%2C%20Jitendra%20Multi-view%20supervision%20for%20single-view%20reconstruction%20via%20differentiable%20ray%20consistency%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tulsiani%2C%20Shubham%20Zhou%2C%20Tinghui%20Efros%2C%20Alexei%20A.%20Malik%2C%20Jitendra%20Multi-view%20supervision%20for%20single-view%20reconstruction%20via%20differentiable%20ray%20consistency%202017"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Paul Henderson and Vittorio Ferrari. Learning to generate and reconstruct 3d meshes with only 2d supervision. In British Machine Vision Conference (BMVC), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Henderson%2C%20Paul%20Ferrari%2C%20Vittorio%20Learning%20to%20generate%20and%20reconstruct%203d%20meshes%20with%20only%202d%20supervision%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Henderson%2C%20Paul%20Ferrari%2C%20Vittorio%20Learning%20to%20generate%20and%20reconstruct%203d%20meshes%20with%20only%202d%20supervision%202018"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Kyle Genova, Forrester Cole, Aaron Maschinot, Aaron Sarna, Daniel Vlasic, and William T. Freeman. Unsupervised training for 3d morphable model regression. In The IEEE Conference on Computer Vision and Pattern Recognition (CVPR), June 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Genova%2C%20Kyle%20Cole%2C%20Forrester%20Maschinot%2C%20Aaron%20Sarna%2C%20Aaron%20Unsupervised%20training%20for%203d%20morphable%20model%20regression%202018-06",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Genova%2C%20Kyle%20Cole%2C%20Forrester%20Maschinot%2C%20Aaron%20Sarna%2C%20Aaron%20Unsupervised%20training%20for%203d%20morphable%20model%20regression%202018-06"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Abhijit Kundu, Yin Li, and James M. Rehg. 3d-rcnn: Instance-level 3d object reconstruction via renderand-compare. In CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kundu%2C%20Abhijit%20Li%2C%20Yin%20M%2C%20James%20Rehg.%203d-rcnn%3A%20Instance-level%203d%20object%20reconstruction%20via%20renderand-compare%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kundu%2C%20Abhijit%20Li%2C%20Yin%20M%2C%20James%20Rehg.%203d-rcnn%3A%20Instance-level%203d%20object%20reconstruction%20via%20renderand-compare%202018"
+        },
+        {
+            "id": "11",
+            "entry": "[11] E. Richardson, M. Sela, R. Or-El, and R. Kimmel. Learning detailed face reconstruction from a single image. In 2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pages 5553\u20135562, July 2017. doi: 10.1109/CVPR.2017.589.",
+            "crossref": "https://dx.doi.org/10.1109/CVPR.2017.589",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1109/CVPR.2017.589"
+        },
+        {
+            "id": "12",
+            "entry": "[12] JunYoung Gwak, Christopher B Choy, Manmohan Chandraker, Animesh Garg, and Silvio Savarese. Weakly supervised 3d reconstruction with adversarial constraint. In 3D Vision (3DV), 2017 Fifth International Conference on 3D Vision, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gwak%2C%20JunYoung%20Choy%2C%20Christopher%20B.%20Chandraker%2C%20Manmohan%20Garg%2C%20Animesh%20Weakly%20supervised%203d%20reconstruction%20with%20adversarial%20constraint%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gwak%2C%20JunYoung%20Choy%2C%20Christopher%20B.%20Chandraker%2C%20Manmohan%20Garg%2C%20Animesh%20Weakly%20supervised%203d%20reconstruction%20with%20adversarial%20constraint%202017"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Min Lin, Qiang Chen, and Shuicheng Yan. Network in network. In ICLR, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Min%20Lin%20Qiang%20Chen%20and%20Shuicheng%20Yan%20Network%20in%20network%20In%20ICLR%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Min%20Lin%20Qiang%20Chen%20and%20Shuicheng%20Yan%20Network%20in%20network%20In%20ICLR%202014"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Gao Huang, Zhuang Liu, Laurens van der Maaten, and Kilian Q Weinberger. Densely connected convolutional networks. In IEEE CVPR, pages 2261\u20132269, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huang%2C%20Gao%20Liu%2C%20Zhuang%20van%20der%20Maaten%2C%20Laurens%20Weinberger%2C%20Kilian%20Q.%20Densely%20connected%20convolutional%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huang%2C%20Gao%20Liu%2C%20Zhuang%20van%20der%20Maaten%2C%20Laurens%20Weinberger%2C%20Kilian%20Q.%20Densely%20connected%20convolutional%20networks%202017"
+        },
+        {
+            "id": "15",
+            "entry": "[15] O. Ronneberger, P.Fischer, and T. Brox. U-net: Convolutional networks for biomedical image segmentation. In Medical Image Computing and Computer-Assisted Intervention (MICCAI), volume 9351, pages 234\u2013241, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ronneberger%2C%20O.%20Fischer%2C%20P.%20Brox%2C%20T.%20U-net%3A%20Convolutional%20networks%20for%20biomedical%20image%20segmentation%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ronneberger%2C%20O.%20Fischer%2C%20P.%20Brox%2C%20T.%20U-net%3A%20Convolutional%20networks%20for%20biomedical%20image%20segmentation%202015"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Alexey Dosovitskiy, Jost Tobias Springenberg, Maxim Tatarchenko, and Thomas Brox. Learning to generate chairs, tables and cars with convolutional networks. 39(4):692\u2013705, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dosovitskiy%2C%20Alexey%20Springenberg%2C%20Jost%20Tobias%20Tatarchenko%2C%20Maxim%20Brox%2C%20Thomas%20Learning%20to%20generate%20chairs%2C%20tables%20and%20cars%20with%20convolutional%20networks%202017"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Ian Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, and Yoshua Bengio. Generative adversarial nets. In Z. Ghahramani, M. Welling, C. Cortes, N. D. Lawrence, and K. Q. Weinberger, editors, Advances in Neural Information Processing Systems 27, pages 2672\u20132680. Curran Associates, Inc., 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goodfellow%2C%20Ian%20Pouget-Abadie%2C%20Jean%20Mirza%2C%20Mehdi%20Xu%2C%20Bing%20Generative%20adversarial%20nets%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goodfellow%2C%20Ian%20Pouget-Abadie%2C%20Jean%20Mirza%2C%20Mehdi%20Xu%2C%20Bing%20Generative%20adversarial%20nets%202014"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Qifeng Chen and Vladlen Koltun. Photographic image synthesis with cascaded refinement networks. In IEEE ICCV, pages 1520\u20131529, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Qifeng%20Koltun%2C%20Vladlen%20Photographic%20image%20synthesis%20with%20cascaded%20refinement%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Qifeng%20Koltun%2C%20Vladlen%20Photographic%20image%20synthesis%20with%20cascaded%20refinement%20networks%202017"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Oliver Nalbach, Elena Arabadzhiyska, Dushyant Mehta, Hans-Peter Seidel, and Tobias Ritschel. Deep shading: Convolutional neural networks for screen-space shading. Computer Graphics Forum (Proc. EGSR), 36(4):65\u201378, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nalbach%2C%20Oliver%20Arabadzhiyska%2C%20Elena%20Mehta%2C%20Dushyant%20Seidel%2C%20Hans-Peter%20Deep%20shading%3A%20Convolutional%20neural%20networks%20for%20screen-space%20shading%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nalbach%2C%20Oliver%20Arabadzhiyska%2C%20Elena%20Mehta%2C%20Dushyant%20Seidel%2C%20Hans-Peter%20Deep%20shading%3A%20Convolutional%20neural%20networks%20for%20screen-space%20shading%202017"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Jonathan T Barron and Jitendra Malik. Shape, illumination, and reflectance from shading. TPAMI, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Barron%2C%20Jonathan%20T.%20Malik%2C%20Jitendra%20Shape%2C%20illumination%2C%20and%20reflectance%20from%20shading%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Barron%2C%20Jonathan%20T.%20Malik%2C%20Jitendra%20Shape%2C%20illumination%2C%20and%20reflectance%20from%20shading%202015"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Tatsunori Taniai and Takanori Maehara. Neural inverse rendering for general reflectance photometric stereo. In ICML, volume 80 of JMLR Workshop and Conference Proceedings, pages 4864\u20134873. JMLR.org, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Taniai%2C%20Tatsunori%20Maehara%2C%20Takanori%20Neural%20inverse%20rendering%20for%20general%20reflectance%20photometric%20stereo%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Taniai%2C%20Tatsunori%20Maehara%2C%20Takanori%20Neural%20inverse%20rendering%20for%20general%20reflectance%20photometric%20stereo%202018"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Maxim Tatarchenko, Alexey Dosovitskiy, and Thomas Brox. Octree generating networks: Efficient convolutional architectures for high-resolution 3d outputs. In IEEE ICCV, pages 2107\u20132115, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tatarchenko%2C%20Maxim%20Dosovitskiy%2C%20Alexey%20Brox%2C%20Thomas%20Octree%20generating%20networks%3A%20Efficient%20convolutional%20architectures%20for%20high-resolution%203d%20outputs%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tatarchenko%2C%20Maxim%20Dosovitskiy%2C%20Alexey%20Brox%2C%20Thomas%20Octree%20generating%20networks%3A%20Efficient%20convolutional%20architectures%20for%20high-resolution%203d%20outputs%202017"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Peng-Shuai Wang, Yang Liu, Yu-Xiao Guo, Chun-Yu Sun, and Xin Tong. O-cnn: Octree-based convolutional neural networks for 3d shape analysis. ACM TOG (Siggraph), 36(4):72:1\u201372:11, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Peng-Shuai%20Liu%2C%20Yang%20Guo%2C%20Yu-Xiao%20Sun%2C%20Chun-Yu%20O-cnn%3A%20Octree-based%20convolutional%20neural%20networks%20for%203d%20shape%20analysis%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Peng-Shuai%20Liu%2C%20Yang%20Guo%2C%20Yu-Xiao%20Sun%2C%20Chun-Yu%20O-cnn%3A%20Octree-based%20convolutional%20neural%20networks%20for%203d%20shape%20analysis%202017"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Bui Tuong Phong. Illumination for computer generated pictures. Commun. ACM, 18(6):311\u2013317, 1975.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Phong%2C%20Bui%20Tuong%20Illumination%20for%20computer%20generated%20pictures%201975",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Phong%2C%20Bui%20Tuong%20Illumination%20for%20computer%20generated%20pictures%201975"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Doug DeCarlo, Adam Finkelstein, Szymon Rusinkiewicz, and Anthony Santella. Suggestive contours for conveying shape. ACM TOG (Siggraph), 22(3):848\u2013855, July 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=DeCarlo%2C%20Doug%20Finkelstein%2C%20Adam%20Rusinkiewicz%2C%20Szymon%20Santella%2C%20Anthony%20Suggestive%20contours%20for%20conveying%20shape%202003-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=DeCarlo%2C%20Doug%20Finkelstein%2C%20Adam%20Rusinkiewicz%2C%20Szymon%20Santella%2C%20Anthony%20Suggestive%20contours%20for%20conveying%20shape%202003-07"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Holger Winnem\u00f6ller, Sven C. Olsen, and Bruce Gooch. Real-time video abstraction. ACM TOG (Siggraph), 25(3):1221\u20131226, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Winnem%C3%B6ller%2C%20Holger%20Olsen%2C%20Sven%20C.%20Gooch%2C%20Bruce%20Real-time%20video%20abstraction%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Winnem%C3%B6ller%2C%20Holger%20Olsen%2C%20Sven%20C.%20Gooch%2C%20Bruce%20Real-time%20video%20abstraction%202006"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Gavin Miller. Efficient algorithms for local and global accessibility shading. In Proc. ACM SIGGRAPH, pages 319\u2013326, 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Miller%2C%20Gavin%20Efficient%20algorithms%20for%20local%20and%20global%20accessibility%20shading%201994",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Miller%2C%20Gavin%20Efficient%20algorithms%20for%20local%20and%20global%20accessibility%20shading%201994"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Phillip Isola, Jun-Yan Zhu, Tinghui Zhou, and Alexei A. Efros. Image-to-image translation with conditional adversarial networks. In IEEE CVPR, pages 5967\u20135976, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Isola%2C%20Phillip%20Zhu%2C%20Jun-Yan%20Zhou%2C%20Tinghui%20Efros%2C%20Alexei%20A.%20Image-to-image%20translation%20with%20conditional%20adversarial%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Isola%2C%20Phillip%20Zhu%2C%20Jun-Yan%20Zhou%2C%20Tinghui%20Efros%2C%20Alexei%20A.%20Image-to-image%20translation%20with%20conditional%20adversarial%20networks%202017"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Tejas D Kulkarni, William F. Whitney, Pushmeet Kohli, and Josh Tenenbaum. Deep convolutional inverse graphics network. In NIPS, pages 2539\u20132547, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kulkarni%2C%20Tejas%20D.%20Whitney%2C%20William%20F.%20Kohli%2C%20Pushmeet%20Tenenbaum%2C%20Josh%20Deep%20convolutional%20inverse%20graphics%20network%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kulkarni%2C%20Tejas%20D.%20Whitney%2C%20William%20F.%20Kohli%2C%20Pushmeet%20Tenenbaum%2C%20Josh%20Deep%20convolutional%20inverse%20graphics%20network%202015"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Eunbyung Park, Jimei Yang, Ersin Yumer, Duygu Ceylan, and Alexander C. Berg. Transformationgrounded image generation network for novel 3d view synthesis. In IEEE CVPR, pages 702\u2013711, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Park%2C%20Eunbyung%20Yang%2C%20Jimei%20Yumer%2C%20Ersin%20Ceylan%2C%20Duygu%20Transformationgrounded%20image%20generation%20network%20for%20novel%203d%20view%20synthesis%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Park%2C%20Eunbyung%20Yang%2C%20Jimei%20Yumer%2C%20Ersin%20Ceylan%2C%20Duygu%20Transformationgrounded%20image%20generation%20network%20for%20novel%203d%20view%20synthesis%202017"
+        },
+        {
+            "id": "31",
+            "entry": "[31] K. Rematas, C. H. Nguyen, T. Ritschel, M. Fritz, and T. Tuytelaars. Novel views of objects from a single image. IEEE Trans. Pattern Anal. Mach. Intell., 39(8):1576\u20131590, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rematas%2C%20K.%20Nguyen%2C%20C.H.%20Ritschel%2C%20T.%20Fritz%2C%20M.%20Novel%20views%20of%20objects%20from%20a%20single%20image%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rematas%2C%20K.%20Nguyen%2C%20C.H.%20Ritschel%2C%20T.%20Fritz%2C%20M.%20Novel%20views%20of%20objects%20from%20a%20single%20image%202017"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Jimei Yang, Scott E Reed, Ming-Hsuan Yang, and Honglak Lee. Weakly-supervised disentangling with recurrent transformations for 3d view synthesis. In NIPS, pages 1099\u20131107. 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yang%2C%20Jimei%20Reed%2C%20Scott%20E.%20Yang%2C%20Ming-Hsuan%20Lee%2C%20Honglak%20Weakly-supervised%20disentangling%20with%20recurrent%20transformations%20for%203d%20view%20synthesis%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yang%2C%20Jimei%20Reed%2C%20Scott%20E.%20Yang%2C%20Ming-Hsuan%20Lee%2C%20Honglak%20Weakly-supervised%20disentangling%20with%20recurrent%20transformations%20for%203d%20view%20synthesis%202015"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Hao Su, Fan Wang, Li Yi, and Leonidas J. Guibas. 3d-assisted image feature synthesis for novel views of an object. CoRR, abs/1412.0003, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.0003"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Berthold K. P. Horn. Determining lightness from an image. Computer Graphics and Image Processing, 3 (4):277\u2013299, 1974.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Horn%2C%20Berthold%20K.P.%20Determining%20lightness%20from%20an%20image%201974",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Horn%2C%20Berthold%20K.P.%20Determining%20lightness%20from%20an%20image%201974"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Angel X. Chang, Thomas A. Funkhouser, Leonidas J. Guibas, Pat Hanrahan, Qi-Xing Huang, Zimo Li, Silvio Savarese, Manolis Savva, Shuran Song, Hao Su, Jianxiong Xiao, Li Yi, and Fisher Yu. Shapenet: An information-rich 3d model repository. CoRR, abs/1512.03012, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1512.03012"
+        },
+        {
+            "id": "36",
+            "entry": "[36] F. S. Nooruddin and G. Turk. Simplification and repair of polygonal models using volumetric techniques. IEEE Trans. on Vis. and Comp. Graphics, 9(2):191\u2013205, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nooruddin%2C%20F.S.%20Turk%2C%20G.%20Simplification%20and%20repair%20of%20polygonal%20models%20using%20volumetric%20techniques%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nooruddin%2C%20F.S.%20Turk%2C%20G.%20Simplification%20and%20repair%20of%20polygonal%20models%20using%20volumetric%20techniques%202003"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Pascal Paysan, Reinhard Knothe, Brian Amberg, Sami Romdhani, and Thomas Vetter. A 3d face model for pose and illumination invariant face recognition. In Proceedings of the 2009 Sixth IEEE International Conference on Advanced Video and Signal Based Surveillance, pages 296\u2013301, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Paysan%2C%20Pascal%20Knothe%2C%20Reinhard%20Amberg%2C%20Brian%20Romdhani%2C%20Sami%20A%203d%20face%20model%20for%20pose%20and%20illumination%20invariant%20face%20recognition%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Paysan%2C%20Pascal%20Knothe%2C%20Reinhard%20Amberg%2C%20Brian%20Romdhani%2C%20Sami%20A%203d%20face%20model%20for%20pose%20and%20illumination%20invariant%20face%20recognition%202009"
+        },
+        {
+            "id": "38",
+            "entry": "[38] K. He, X. Zhang, S. Ren, and J. Sun. Delving deep into rectifiers: Surpassing human-level performance on imagenet classification. In 2015 IEEE International Conference on Computer Vision (ICCV), pages 1026\u20131034, Dec 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Delving%20deep%20into%20rectifiers%3A%20Surpassing%20human-level%20performance%20on%20imagenet%20classification%202015-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Delving%20deep%20into%20rectifiers%3A%20Surpassing%20human-level%20performance%20on%20imagenet%20classification%202015-12"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Diederik P. Kingma and Jimm Ba. Adam: A method for stochastic optimization. In International Conference on Learning Representations (ICLR), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Ba%2C%20Jimm%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Ba%2C%20Jimm%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202015"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Rohit Girdhar, David F. Fouhey, Mikel Rodriguez, and Abhinav Gupta. Learning a predictable and generative vector representation for objects. In ECCV, pages 484\u2013499, 2016. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Girdhar%2C%20Rohit%20Fouhey%2C%20David%20F.%20Rodriguez%2C%20Mikel%20Gupta%2C%20Abhinav%20Learning%20a%20predictable%20and%20generative%20vector%20representation%20for%20objects%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Girdhar%2C%20Rohit%20Fouhey%2C%20David%20F.%20Rodriguez%2C%20Mikel%20Gupta%2C%20Abhinav%20Learning%20a%20predictable%20and%20generative%20vector%20representation%20for%20objects%202016"
+        }
+    ]
+}

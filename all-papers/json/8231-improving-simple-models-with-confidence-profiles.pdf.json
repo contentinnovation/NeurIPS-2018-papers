@@ -1,0 +1,246 @@
+{
+    "filename": "8231-improving-simple-models-with-confidence-profiles.pdf",
+    "metadata": {
+        "title": "Improving Simple Models with Confidence Profiles",
+        "author": "Amit Dhurandhar, Karthikeyan Shanmugam, Ronny Luss, Peder A. Olsen",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8231-improving-simple-models-with-confidence-profiles.pdf"
+        },
+        "abstract": "In this paper, we propose a new method called ProfWeight for transferring information from a pre-trained deep neural network that has a high test accuracy to a simpler interpretable model or a very shallow network of low complexity and a priori low test accuracy. We are motivated by applications in interpretability and model deployment in severely memory constrained environments (like sensors). Our method uses linear probes to generate confidence scores through flattened intermediate representations. Our transfer method involves a theoretically justified weighting of samples during the training of the simple model using confidence scores of these intermediate layers. The value of our method is first demonstrated on CIFAR-10, where our weighting method significantly improves (3-4%) networks with only a fraction of the number of Resnet blocks of a complex Resnet model. We further demonstrate operationally significant results on a real manufacturing problem, where we dramatically increase the test accuracy of a CART model (the domain standard) by roughly 13%."
+    },
+    "keywords": [
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "deep network",
+            "url": "https://en.wikipedia.org/wiki/deep_network"
+        },
+        {
+            "term": "area under the curve",
+            "url": "https://en.wikipedia.org/wiki/area_under_the_curve"
+        },
+        {
+            "term": "unmanned aerial vehicles",
+            "url": "https://en.wikipedia.org/wiki/unmanned_aerial_vehicles"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Complex models such as deep neural networks have shown remarkable success in applications such as computer vision, speech and time series analysis [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>, <a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>, <a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>, <a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>]",
+        "Results: From Table 1, it is clear that in all cases, the weights corresponding to the area under the curve of the probe confidence scores from unit 13 or 14 and upwards are among the best in terms of test accuracies",
+        "This is probably due to the complex model accuracy not being very high, having been trained on only 30000 examples. This might seem counterintuitive, but a highly accurate model will find almost all examples easy to classify at the last layer leading to confidence scores that are uniformly close to 1",
+        "Modeling and Results: We built a neural network (NN) with an input layer and five fully connected hidden layers of size 1024 each and a final softmax layer outputting the probabilities for the three classes",
+        "We tested by weighting instances based on the actual confidence scores outputted by the neural network and retraining CART",
+        "We compared with the decision tree extraction (DEx) method [<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>] which had a performance of 77.5%"
+    ],
+    "key_statements": [
+        "Complex models such as deep neural networks have shown remarkable success in applications such as computer vision, speech and time series analysis [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>, <a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>, <a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>, <a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>]",
+        "We propose a method where we add probes to the intermediate layers of a deep neural network",
+        "Results: From Table 1, it is clear that in all cases, the weights corresponding to the area under the curve of the probe confidence scores from unit 13 or 14 and upwards are among the best in terms of test accuracies",
+        "This is probably due to the complex model accuracy not being very high, having been trained on only 30000 examples. This might seem counterintuitive, but a highly accurate model will find almost all examples easy to classify at the last layer leading to confidence scores that are uniformly close to 1",
+        "Weighting with such scores is almost equivalent to no weighting at all. This is somewhat witnessed in the manufacturing example where the complex neural network had an accuracy in the 90s and ConfWeight did not enhance the CART model to the extent ProfWeight did",
+        "Modeling and Results: We built a neural network (NN) with an input layer and five fully connected hidden layers of size 1024 each and a final softmax layer outputting the probabilities for the three classes",
+        "The neural network had an accuracy of 91.2%",
+        "We tested by weighting instances based on the actual confidence scores outputted by the neural network and retraining CART",
+        "We compared with the decision tree extraction (DEx) method [<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>] which had a performance of 77.5%"
+    ],
+    "summary": [
+        "Complex models such as deep neural networks have shown remarkable success in applications such as computer vision, speech and time series analysis [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>, <a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>, <a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>, <a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>].",
+        "We consider functions of these confidence scores starting from an intermediate layer up to the final layer to weight samples during training of the simple model.",
+        "1m denotes a m dimensional vector of 1s.} 4) Let I \u2190 {u | eu \u2264 eS \u2212 \u03b1}{I contains indices of all probes that are more accurate than the simple model S by a margin \u03b1 on DS.} 5) Compute weights w using Algorithm 2 or 3 for AUC or neural network, respectively.",
+        "Algorithm 2 AUC Weight Computation Input: Neural network N , probes Pu, dataset DS, and index set I from Algorithm 1.",
+        "Given that the simple model may have a certain performance, we do not want to use very low level probe confidence scores to convey hardness of examples to it.",
+        "Learn weights for examples in the dataset as a function (AUC or neural network) of the simple model and the probes.",
+        "We lastly compare results with weighting instances just based on the output confidence scores of the complex neural network for the true label (ConfWeight).",
+        "This can be seen as a special case of our method where \u03b1 is set to the difference in errors between the simple model and the complex network.",
+        "Results: From Table 1, it is clear that in all cases, the weights corresponding to the AUC of the probe confidence scores from unit 13 or 14 and upwards are among the best in terms of test accuracies.",
+        "We are searching for just one set of weights which when applied to the original input the fixed simple model trained on it gives the best possible performance.",
+        "In this work we proposed a strategy to improve simple models, whose complexity is fixed, with the help of a high performing neural network.",
+        "The crux of the idea was to weight examples based on a function of the confidence scores based on intermediate representations of the neural network at various layers for the true label.",
+        "As observed in the experiments, our idea of weighting examples seems to have a lot of promise where we want to improve models trained using empirical risk minimization or in cases where we want to improve a small neural network that will respect certain power and memory constraints.",
+        "We would obtain soft predictions from the probes of the complex model for the small data samples and use ProfWeight with these scores to weight the smaller training set."
+    ],
+    "headline": "We propose a new method called ProfWeight for transferring information from a pre-trained deep neural network that has a high test accuracy to a simpler interpretable model or a very shallow network of low complexity and a priori low test accuracy",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] D. Agarwal, L. Li, and A. J. Smola. Linear-Time Estimators for Propensity Scores. In 14th Intl. Conference on Artificial Intelligence and Statistics (AISTATS), pages 93\u2013100, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Agarwal%2C%20D.%20Li%2C%20L.%20Smola%2C%20A.J.%20Linear-Time%20Estimators%20for%20Propensity%20Scores%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Agarwal%2C%20D.%20Li%2C%20L.%20Smola%2C%20A.J.%20Linear-Time%20Estimators%20for%20Propensity%20Scores%202011"
+        },
+        {
+            "id": "2",
+            "entry": "[2] R. B. Akshayvarun Subramanya, Suraj Srinivas. Confidence estimation in deep neural networks via density modelling. arXiv preprint arXiv:1707.07013, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.07013"
+        },
+        {
+            "id": "3",
+            "entry": "[3] G. Alain and Y. Bengio. Understanding intermediate layers using linear classifier probes. arXiv preprint arXiv:1610.01644, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1610.01644"
+        },
+        {
+            "id": "4",
+            "entry": "[4] L. J. Ba and R. Caurana. Do deep nets really need to be deep? CoRR, abs/1312.6184, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.6184"
+        },
+        {
+            "id": "5",
+            "entry": "[5] S. Bach, A. Binder, G. Montavon, F. Klauschen, K.-R. M\u00fcller, and W. Samek. On pixel-wise explanations for non-linear classifier decisions by layer-wise relevance propagation. PloS one, 10(7):e0130140, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=On%20pixel-wise%20explanations%20for%20non-linear%20classifier%20decisions%20by%20layer-wise%20relevance%20propagation%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=On%20pixel-wise%20explanations%20for%20non-linear%20classifier%20decisions%20by%20layer-wise%20relevance%20propagation%202015"
+        },
+        {
+            "id": "6",
+            "entry": "[6] O. Bastani, C. Kim, and H. Bastani. Interpreting blackbox models via model extraction. arXiv preprint arXiv:1705.08504, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1705.08504"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Y. Bengio, J. Louradour, R. Collobert, and J. Weston. Curriculum learning. In Proceedings of the 26th Annual International Conference on Machine Learning, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bengio%2C%20Y.%20Louradour%2C%20J.%20Collobert%2C%20R.%20Weston%2C%20J.%20Curriculum%20learning%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bengio%2C%20Y.%20Louradour%2C%20J.%20Collobert%2C%20R.%20Weston%2C%20J.%20Curriculum%20learning%202009"
+        },
+        {
+            "id": "8",
+            "entry": "[8] S. Boucheron, O. Bousquet, and G. Lugosi. Theory of classification: A survey of some recent advances. ESAIM: probability and statistics, 9:323\u2013375, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Boucheron%2C%20S.%20Bousquet%2C%20O.%20Lugosi%2C%20G.%20Theory%20of%20classification%3A%20A%20survey%20of%20some%20recent%20advances%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Boucheron%2C%20S.%20Bousquet%2C%20O.%20Lugosi%2C%20G.%20Theory%20of%20classification%3A%20A%20survey%20of%20some%20recent%20advances%202005"
+        },
+        {
+            "id": "9",
+            "entry": "[9] C. Bucilua, R. Caruana, and A. Niculescu-Mizil. Model compression. In Proceedings of the 12th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bucilua%2C%20C.%20Caruana%2C%20R.%20Niculescu-Mizil%2C%20A.%20Model%20compression%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bucilua%2C%20C.%20Caruana%2C%20R.%20Niculescu-Mizil%2C%20A.%20Model%20compression%202006"
+        },
+        {
+            "id": "10",
+            "entry": "[10] P.-L. Carrier and A. Courville. Challenges in representation learning: Facial expression recognition challenge. ICML, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Carrier%2C%20P.-L.%20Courville%2C%20A.%20Challenges%20in%20representation%20learning%3A%20Facial%20expression%20recognition%20challenge%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Carrier%2C%20P.-L.%20Courville%2C%20A.%20Challenges%20in%20representation%20learning%3A%20Facial%20expression%20recognition%20challenge%202013"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Y.-H. Chen, J. Emer, and V. Sze. Eyeriss: A spatial architecture for energy-efficient dataflow for convolutional neural networks. In 2016 ACM/IEEE 43rd Annual International Symposium on Computer Architecture, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Y.-H.%20Emer%2C%20J.%20Sze%2C%20V.%20Eyeriss%3A%20A%20spatial%20architecture%20for%20energy-efficient%20dataflow%20for%20convolutional%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Y.-H.%20Emer%2C%20J.%20Sze%2C%20V.%20Eyeriss%3A%20A%20spatial%20architecture%20for%20energy-efficient%20dataflow%20for%20convolutional%20neural%20networks%202016"
+        },
+        {
+            "id": "12",
+            "entry": "[12] A. Dhurandhar, V. Iyengar, R. Luss, and K. Shanmugam. Tip: Typifying the interpretability of procedures. arXiv preprint arXiv:1706.02952, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.02952"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Y. Freund and R. E. Schapire. Decision-theoretic generalization of on-line learning and an application to boosting. Journal of Computer and System Sciences, 55(1):119\u2013139, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Freund%2C%20Y.%20Schapire%2C%20R.E.%20Decision-theoretic%20generalization%20of%20on-line%20learning%20and%20an%20application%20to%20boosting%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Freund%2C%20Y.%20Schapire%2C%20R.E.%20Decision-theoretic%20generalization%20of%20on-line%20learning%20and%20an%20application%20to%20boosting%201997"
+        },
+        {
+            "id": "14",
+            "entry": "[14] J. D. Geoffrey Hinton, Oriol Vinyals. Distilling the knowledge in a neural network. In https://arxiv.org/abs/1503.02531, 2015.",
+            "url": "https://arxiv.org/abs/1503.02531",
+            "arxiv_url": "https://arxiv.org/pdf/1503.02531"
+        },
+        {
+            "id": "15",
+            "entry": "[15] I. Goodfellow, Y. Bengio, and A. Courville. Deep Learning. MIT Press, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goodfellow%2C%20I.%20Bengio%2C%20Y.%20Courville%2C%20A.%20Deep%20Learning%202016"
+        },
+        {
+            "id": "16",
+            "entry": "[16] L. Grippo and M. Sciandrone. On the convergence of the block nonlinear gauss-seidel method under convex constraints. Oper. Res. Lett., 26(3):127\u2013136, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Grippo%2C%20L.%20Sciandrone%2C%20M.%20On%20the%20convergence%20of%20the%20block%20nonlinear%20gauss-seidel%20method%20under%20convex%20constraints%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Grippo%2C%20L.%20Sciandrone%2C%20M.%20On%20the%20convergence%20of%20the%20block%20nonlinear%20gauss-seidel%20method%20under%20convex%20constraints%202000"
+        },
+        {
+            "id": "17",
+            "entry": "[17] C. Guo, G. Pleiss, Y. Sun, and K. Weinberger. On calibration of modern neural networks. Intl. Conference on Machine Learning (ICML), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Guo%2C%20C.%20Pleiss%2C%20G.%20Sun%2C%20Y.%20Weinberger%2C%20K.%20On%20calibration%20of%20modern%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Guo%2C%20C.%20Pleiss%2C%20G.%20Sun%2C%20Y.%20Weinberger%2C%20K.%20On%20calibration%20of%20modern%20neural%20networks%202017"
+        },
+        {
+            "id": "18",
+            "entry": "[18] K. He, X. Zhang, S. Ren, and J. Sun. Deep residual learning for image recognition. In Intl. Conference on Computer Vision and Pattern Recognition (CVPR), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%202015"
+        },
+        {
+            "id": "19",
+            "entry": "[19] A. Krizhevsky. Learning multiple layers of features from tiny images. In Tech. Report. 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20A.%20Learning%20multiple%20layers%20of%20features%20from%20tiny%20images.%20In%20Tech%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krizhevsky%2C%20A.%20Learning%20multiple%20layers%20of%20features%20from%20tiny%20images.%20In%20Tech%202009"
+        },
+        {
+            "id": "20",
+            "entry": "[20] M. Lindstrom. Small Data: The Tiny Clues that Uncover Huge Trends. St. Martin\u2019s Press, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lindstrom%2C%20M.%20Small%20Data%3A%20The%20Tiny%20Clues%20that%20Uncover%20Huge%20Trends%202016"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Z. C. Lipton. (deep learning\u2019s deep flaws)\u2019s deep flaws. In kdnuggets. 2015. https://www.kdnuggets.com/2015/01/deep-learning-flaws-universal-machine-learning.html.",
+            "url": "https://www.kdnuggets.com/2015/01/deep-learning-flaws-universal-machine-learning.html"
+        },
+        {
+            "id": "22",
+            "entry": "[22] D. Lopez-Paz, L. Bottou, B. Sch\u00f6lkopf, and V. Vapnik. Unifying distillation and privileged information. In International Conference on Learning Representations (ICLR 2016), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lopez-Paz%2C%20D.%20Bottou%2C%20L.%20Sch%C3%B6lkopf%2C%20B.%20Vapnik%2C%20V.%20Unifying%20distillation%20and%20privileged%20information%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lopez-Paz%2C%20D.%20Bottou%2C%20L.%20Sch%C3%B6lkopf%2C%20B.%20Vapnik%2C%20V.%20Unifying%20distillation%20and%20privileged%20information%202016"
+        },
+        {
+            "id": "23",
+            "entry": "[23] G. Montavon, W. Samek, and K.-R. M\u00fcller. Methods for interpreting and understanding deep neural networks. Digital Signal Processing, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Montavon%2C%20G.%20Samek%2C%20W.%20M%C3%BCller%2C%20K.-R.%20Methods%20for%20interpreting%20and%20understanding%20deep%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Montavon%2C%20G.%20Samek%2C%20W.%20M%C3%BCller%2C%20K.-R.%20Methods%20for%20interpreting%20and%20understanding%20deep%20neural%20networks%202017"
+        },
+        {
+            "id": "24",
+            "entry": "[24] B. Reagen, P. Whatmough, R. Adolf, S. Rama, H. Lee, S. K. Lee, J. Miguel, Hernandez-Lobato, G.-Y. Wei, and D. Brooks. Minerva: Enabling low-power, highly-accurate deep neural network accelerators. IEEE Explore, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Reagen%2C%20B.%20Whatmough%2C%20P.%20Adolf%2C%20R.%20Rama%2C%20S.%20Minerva%3A%20Enabling%20low-power%2C%20highly-accurate%20deep%20neural%20network%20accelerators%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Reagen%2C%20B.%20Whatmough%2C%20P.%20Adolf%2C%20R.%20Rama%2C%20S.%20Minerva%3A%20Enabling%20low-power%2C%20highly-accurate%20deep%20neural%20network%20accelerators%202016"
+        },
+        {
+            "id": "25",
+            "entry": "[25] M. Ribeiro, S. Singh, and C. Guestrin. \"why should i trust you?\u201d explaining the predictions of any classifier. In ACM SIGKDD Intl. Conference on Knowledge Discovery and Data Mining, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ribeiro%2C%20M.%20Singh%2C%20S.%20Guestrin%2C%20C.%20%22why%20should%20i%20trust%20you%3F%E2%80%9D%20explaining%20the%20predictions%20of%20any%20classifier%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ribeiro%2C%20M.%20Singh%2C%20S.%20Guestrin%2C%20C.%20%22why%20should%20i%20trust%20you%3F%E2%80%9D%20explaining%20the%20predictions%20of%20any%20classifier%202016"
+        },
+        {
+            "id": "26",
+            "entry": "[26] A. Romero, N. Ballas, S. E. Kahou, A. Chassang, C. Gatta, and Y. Bengio. Fitnets: Hints for thin deep nets. arXiv preprint arXiv:1412.6550, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6550"
+        },
+        {
+            "id": "27",
+            "entry": "[27] S.-I. L. Scott Lundberg. Unified framework for interpretable methods. In In Advances of Neural Inf. Proc. Systems, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lundberg%2C%20S.-I.L.Scott%20Unified%20framework%20for%20interpretable%20methods%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lundberg%2C%20S.-I.L.Scott%20Unified%20framework%20for%20interpretable%20methods%202017"
+        },
+        {
+            "id": "28",
+            "entry": "[28] R. R. Selvaraju, M. Cogswell, A. Das, R. Vedantam, D. Parikh, and D. Batra. Grad-cam: Visual explanations from deep networks via gradient-based localization. See https://arxiv.org/abs/1610.02391 v3, 2016.",
+            "url": "https://arxiv.org/abs/1610.02391",
+            "arxiv_url": "https://arxiv.org/pdf/1610.02391"
+        },
+        {
+            "id": "29",
+            "entry": "[29] K. Simonyan, A. Vedaldi, and A. Zisserman. Deep inside convolutional networks: Visualising image classification models and saliency maps. CoRR, abs/1312.6034, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.6034"
+        },
+        {
+            "id": "30",
+            "entry": "[30] S. Tan, R. Caruana, G. Hooker, and Y. Lou. Auditing black-box models using transparent model distillation with side information. CoRR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tan%2C%20S.%20Caruana%2C%20R.%20Hooker%2C%20G.%20Lou%2C%20Y.%20Auditing%20black-box%20models%20using%20transparent%20model%20distillation%20with%20side%20information%202017"
+        },
+        {
+            "id": "31",
+            "entry": "[31] S. Weiss, A. Dhurandhar, and R. Baseman. Improving quality control by early prediction of manufacturing outcomes. In ACM SIGKDD conference on Knowledge Discovery and Data Mining (KDD), 2013. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Weiss%2C%20S.%20Dhurandhar%2C%20A.%20Baseman%2C%20R.%20Improving%20quality%20control%20by%20early%20prediction%20of%20manufacturing%20outcomes%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Weiss%2C%20S.%20Dhurandhar%2C%20A.%20Baseman%2C%20R.%20Improving%20quality%20control%20by%20early%20prediction%20of%20manufacturing%20outcomes%202013"
+        }
+    ]
+}

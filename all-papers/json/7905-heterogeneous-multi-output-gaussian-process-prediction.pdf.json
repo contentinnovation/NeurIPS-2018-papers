@@ -1,0 +1,245 @@
+{
+    "filename": "7905-heterogeneous-multi-output-gaussian-process-prediction.pdf",
+    "metadata": {
+        "title": "Heterogeneous Multi-output Gaussian Process Prediction",
+        "author": "Pablo Moreno-Mu\u00f1oz, Antonio Art\u00e9s, Mauricio \u00c1lvarez",
+        "date": 2012,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7905-heterogeneous-multi-output-gaussian-process-prediction.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We present a novel extension of multi-output Gaussian processes for handling heterogeneous outputs. We assume that each output has its own likelihood function and use a vector-valued Gaussian process prior to jointly model the parameters in all likelihoods as latent functions. Our multi-output Gaussian process uses a covariance function with a linear model of coregionalisation form. Assuming conditional independence across the underlying latent functions together with an inducing variable framework, we are able to obtain tractable variational bounds amenable to stochastic variational inference. We illustrate the performance of the model on synthetic data and two real datasets: a human behavioral study and a demographic high-dimensional dataset."
+    },
+    "keywords": [
+        {
+            "term": "variational inference",
+            "url": "https://en.wikipedia.org/wiki/variational_inference"
+        },
+        {
+            "term": "linear model",
+            "url": "https://en.wikipedia.org/wiki/linear_model"
+        },
+        {
+            "term": "latent function",
+            "url": "https://en.wikipedia.org/wiki/latent_function"
+        },
+        {
+            "term": "covariance function",
+            "url": "https://en.wikipedia.org/wiki/covariance_function"
+        },
+        {
+            "term": "Gaussian process",
+            "url": "https://en.wikipedia.org/wiki/Gaussian_process"
+        }
+    ],
+    "highlights": [
+        "Multi-output Gaussian processes (MOGP) generalise the powerful Gaussian process (GP) predictive model to the vector-valued random field setup (<a class=\"ref-link\" id=\"cAlvarez_et+al_2012_a\" href=\"#rAlvarez_et+al_2012_a\"><a class=\"ref-link\" id=\"cAlvarez_et+al_2012_a\" href=\"#rAlvarez_et+al_2012_a\"><a class=\"ref-link\" id=\"cAlvarez_et+al_2012_a\" href=\"#rAlvarez_et+al_2012_a\">Alvarez et al, 2012</a></a></a>)",
+        "The main focus in the literature for Multi-output Gaussian processes has been on the definition of a suitable cross-covariance function between the multiple outputs that allows for the treatment of outputs as a single Gaussian process with a properly defined covariance function (<a class=\"ref-link\" id=\"cAlvarez_et+al_2012_a\" href=\"#rAlvarez_et+al_2012_a\">Alvarez et al, 2012</a>)",
+        "The unknown latent functions follow Gaussian process priors leading to straight-forward expressions to compute the cross-covariance functions among different outputs",
+        "More recent alternatives to build valid covariance functions for Multi-output Gaussian processes include the work by <a class=\"ref-link\" id=\"cUlrich_et+al_2015_a\" href=\"#rUlrich_et+al_2015_a\">Ulrich et al (2015</a>) and Parra and Tobar (2017), that build the cross-covariances in the spectral domain",
+        "In this paper we have introduced a novel extension of multi-output Gaussian Processes for handling heterogeneous observations",
+        "Our model is able to work on large scale datasets by using sparse approximations within stochastic variational inference"
+    ],
+    "key_statements": [
+        "Multi-output Gaussian processes (MOGP) generalise the powerful Gaussian process (GP) predictive model to the vector-valued random field setup (<a class=\"ref-link\" id=\"cAlvarez_et+al_2012_a\" href=\"#rAlvarez_et+al_2012_a\"><a class=\"ref-link\" id=\"cAlvarez_et+al_2012_a\" href=\"#rAlvarez_et+al_2012_a\"><a class=\"ref-link\" id=\"cAlvarez_et+al_2012_a\" href=\"#rAlvarez_et+al_2012_a\">Alvarez et al, 2012</a></a></a>)",
+        "The main focus in the literature for Multi-output Gaussian processes has been on the definition of a suitable cross-covariance function between the multiple outputs that allows for the treatment of outputs as a single Gaussian process with a properly defined covariance function (<a class=\"ref-link\" id=\"cAlvarez_et+al_2012_a\" href=\"#rAlvarez_et+al_2012_a\">Alvarez et al, 2012</a>)",
+        "The unknown latent functions follow Gaussian process priors leading to straight-forward expressions to compute the cross-covariance functions among different outputs",
+        "More recent alternatives to build valid covariance functions for Multi-output Gaussian processes include the work by <a class=\"ref-link\" id=\"cUlrich_et+al_2015_a\" href=\"#rUlrich_et+al_2015_a\">Ulrich et al (2015</a>) and Parra and Tobar (2017), that build the cross-covariances in the spectral domain",
+        "In this paper we have introduced a novel extension of multi-output Gaussian Processes for handling heterogeneous observations",
+        "Our model is able to work on large scale datasets by using sparse approximations within stochastic variational inference"
+    ],
+    "summary": [
+        "Multi-output Gaussian processes (MOGP) generalise the powerful Gaussian process (GP) predictive model to the vector-valued random field setup (<a class=\"ref-link\" id=\"cAlvarez_et+al_2012_a\" href=\"#rAlvarez_et+al_2012_a\"><a class=\"ref-link\" id=\"cAlvarez_et+al_2012_a\" href=\"#rAlvarez_et+al_2012_a\"><a class=\"ref-link\" id=\"cAlvarez_et+al_2012_a\" href=\"#rAlvarez_et+al_2012_a\">Alvarez et al, 2012</a></a></a>).",
+        "The unknown latent functions follow Gaussian process priors leading to straight-forward expressions to compute the cross-covariance functions among different outputs.",
+        "Each output is assumed to follow a Gaussian likelihood where the mean function is given by one of the outputs of the MOGP and the variance in that distribution is treated as an unknown parameter.",
+        "We are interested in the heterogeneous case for which the outputs are a mix of continuous, categorical, binary or discrete variables with different likelihood functions.",
+        "Consider a set of output functions Y = {yd(x)}dD=1, with x \u2208 Rp, that we want to jointly model using Gaussian processes.",
+        "We are interested in the heterogeneous case for which the outputs in Y are a mix of continuous, categorical, binary or discrete variables with several different distributions.",
+        "Most previous work has assumed that D = 1, and that the corresponding elements in \u03b8d(x), this is, the latent functions in f1(x) = [f1,1(x), \u00b7 \u00b7 \u00b7 , f1,J1 (x)] are drawn from independent Gaussian processes.",
+        "Given an heterogeneous dataset D = {X, y}, we would like to compute the posterior distribution for p(f |D), which is intractable in our model.",
+        "Instead of marginalising the latent functions U to obtain a variational lower bound, we keep their presence in a way that allows us to apply stochastic variational inference as in <a class=\"ref-link\" id=\"cHensman_et+al_2013_a\" href=\"#rHensman_et+al_2013_a\">Hensman et al (2013</a>); <a class=\"ref-link\" id=\"cSaul_et+al_2016_a\" href=\"#rSaul_et+al_2016_a\"><a class=\"ref-link\" id=\"cSaul_et+al_2016_a\" href=\"#rSaul_et+al_2016_a\">Saul et al (2016</a></a>).",
+        "We use variational inference to compute a lower bound L for the marginal log-likelihood log p(y), and for approximating the posterior distribution p(f , u|D).",
+        "Our model is different to <a class=\"ref-link\" id=\"cSaul_et+al_2016_a\" href=\"#rSaul_et+al_2016_a\"><a class=\"ref-link\" id=\"cSaul_et+al_2016_a\" href=\"#rSaul_et+al_2016_a\">Saul et al (2016</a></a>) since we allow for several dependent outputs, D > 1, and our scalable approach is more akin to applying SVI to the inducing variable approach of \u00c1lvarez et al (2010).",
+        "Nguyen and Bonilla (2014b) uses the same idea from \u00c1lvarez et al (2010) to provide scalability for multiple-output GP models conditioning the latent parameter functions fd,j(x) on the inducing variables u, but only considers the multivariate regression case.",
+        "There have been efforts for modeling heterogeneous data outside the label of multi-task learning including mixed graphical models (<a class=\"ref-link\" id=\"cYang_et+al_2014_a\" href=\"#rYang_et+al_2014_a\">Yang et al, 2014</a>), where varied types of data are assumed to be combinations of exponential families, and latent feature models (<a class=\"ref-link\" id=\"cValera_et+al_2017_a\" href=\"#rValera_et+al_2017_a\">Valera et al, 2017</a>) with heterogeneous observations being mappings of a set of Gaussian distributed variables.",
+        "Instead of typing hand-made definitions of heterogeneous likelihoods, we may consider to automatically discover them (Valera and Ghahramani, 2017) as an input block in a pipeline setup of our tool"
+    ],
+    "headline": "We present a novel extension of multi-output Gaussian processes for handling heterogeneous outputs",
+    "reference_links": [
+        {
+            "id": "Alvarez_2009_a",
+            "entry": "M. Alvarez and N. D. Lawrence. Sparse convolved Gaussian processes for multi-output regression. In NIPS 21, pages 57\u201364, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Alvarez%2C%20M.%20Lawrence%2C%20N.D.%20Sparse%20convolved%20Gaussian%20processes%20for%20multi-output%20regression%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Alvarez%2C%20M.%20Lawrence%2C%20N.D.%20Sparse%20convolved%20Gaussian%20processes%20for%20multi-output%20regression%202009"
+        },
+        {
+            "id": "Lvarez_et+al_2010_a",
+            "entry": "M. \u00c1lvarez, D. Luengo, M. Titsias, and N. Lawrence. Efficient multioutput Gaussian processes through variational inducing kernels. In AISTATS, pages 25\u201332, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=%C3%81lvarez%2C%20M.%20Luengo%2C%20D.%20Titsias%2C%20M.%20Lawrence%2C%20N.%20Efficient%20multioutput%20Gaussian%20processes%20through%20variational%20inducing%20kernels%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=%C3%81lvarez%2C%20M.%20Luengo%2C%20D.%20Titsias%2C%20M.%20Lawrence%2C%20N.%20Efficient%20multioutput%20Gaussian%20processes%20through%20variational%20inducing%20kernels%202010"
+        },
+        {
+            "id": "Alvarez_et+al_2012_a",
+            "entry": "M. A. Alvarez, L. Rosasco, N. D. Lawrence, et al. Kernels for vector-valued functions: A review. Foundations and Trends in Machine Learning, 4(3):195\u2013266, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Alvarez%2C%20M.A.%20Rosasco%2C%20L.%20Lawrence%2C%20N.D.%20Kernels%20for%20vector-valued%20functions%3A%20A%20review%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Alvarez%2C%20M.A.%20Rosasco%2C%20L.%20Lawrence%2C%20N.D.%20Kernels%20for%20vector-valued%20functions%3A%20A%20review%202012"
+        },
+        {
+            "id": "Beal_2003_a",
+            "entry": "M. J. Beal. Variational algorithms for approximate Bayesian inference. Ph. D. Thesis, University College London, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Beal%2C%20M.J.%20Variational%20algorithms%20for%20approximate%20Bayesian%20inference%202003"
+        },
+        {
+            "id": "Bonilla_et+al_2008_a",
+            "entry": "E. V. Bonilla, K. M. Chai, and C. Williams. Multi-task Gaussian process prediction. In NIPS 20, pages 153\u2013160, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bonilla%2C%20E.V.%20Chai%2C%20K.M.%20Williams%2C%20C.%20Multi-task%20Gaussian%20process%20prediction%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bonilla%2C%20E.V.%20Chai%2C%20K.M.%20Williams%2C%20C.%20Multi-task%20Gaussian%20process%20prediction%202008"
+        },
+        {
+            "id": "Chai_2012_a",
+            "entry": "K. M. A. Chai. Variational multinomial logit Gaussian process. Journal of Machine Learning Research, 13: 1745\u20131808, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chai%2C%20K.M.A.%20Variational%20multinomial%20logit%20Gaussian%20process%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chai%2C%20K.M.A.%20Variational%20multinomial%20logit%20Gaussian%20process%202012"
+        },
+        {
+            "id": "Dai_et+al_2017_a",
+            "entry": "Z. Dai, M. A. \u00c1lvarez, and N. Lawrence. Efficient modeling of latent information in supervised learning using Gaussian processes. In NIPS 30, pages 5131\u20135139, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dai%2C%20Z.%20%C3%81lvarez%2C%20M.A.%20Lawrence%2C%20N.%20Efficient%20modeling%20of%20latent%20information%20in%20supervised%20learning%20using%20Gaussian%20processes%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dai%2C%20Z.%20%C3%81lvarez%2C%20M.A.%20Lawrence%2C%20N.%20Efficient%20modeling%20of%20latent%20information%20in%20supervised%20learning%20using%20Gaussian%20processes%202017"
+        },
+        {
+            "id": "Dezfouli_2015_a",
+            "entry": "A. Dezfouli and E. V. Bonilla. Scalable inference for Gaussian process models with black-box likelihoods. In NIPS 28, pages 1414\u20131422. 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dezfouli%2C%20A.%20Bonilla%2C%20E.V.%20Scalable%20inference%20for%20Gaussian%20process%20models%20with%20black-box%20likelihoods%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dezfouli%2C%20A.%20Bonilla%2C%20E.V.%20Scalable%20inference%20for%20Gaussian%20process%20models%20with%20black-box%20likelihoods%202015"
+        },
+        {
+            "id": "Hadfield_2010_a",
+            "entry": "J. D. Hadfield et al. MCMC methods for multi-response generalized linear mixed models: the MCMCglmm R package. Journal of Statistical Software, 33(2):1\u201322, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hadfield%2C%20J.D.%20MCMC%20methods%20for%20multi-response%20generalized%20linear%20mixed%20models%3A%20the%20MCMCglmm%20R%20package%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hadfield%2C%20J.D.%20MCMC%20methods%20for%20multi-response%20generalized%20linear%20mixed%20models%3A%20the%20MCMCglmm%20R%20package%202010"
+        },
+        {
+            "id": "Han_et+al_2017_a",
+            "entry": "H. Han, A. K. Jain, S. Shan, and X. Chen. Heterogeneous face attribute estimation: A deep multi-task learning approach. IEEE transactions on pattern analysis and machine intelligence, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Han%2C%20H.%20Jain%2C%20A.K.%20Shan%2C%20S.%20Chen%2C%20X.%20Heterogeneous%20face%20attribute%20estimation%3A%20A%20deep%20multi-task%20learning%20approach%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Han%2C%20H.%20Jain%2C%20A.K.%20Shan%2C%20S.%20Chen%2C%20X.%20Heterogeneous%20face%20attribute%20estimation%3A%20A%20deep%20multi-task%20learning%20approach%202017"
+        },
+        {
+            "id": "Hensman_et+al_2013_a",
+            "entry": "J. Hensman, N. Fusi, and N. D. Lawrence. Gaussian processes for big data. In Uncertainty in Artificial Intelligence, pages 282\u2013290, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hensman%2C%20J.%20Fusi%2C%20N.%20Lawrence%2C%20N.D.%20Gaussian%20processes%20for%20big%20data%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hensman%2C%20J.%20Fusi%2C%20N.%20Lawrence%2C%20N.D.%20Gaussian%20processes%20for%20big%20data%202013"
+        },
+        {
+            "id": "Hensman_et+al_2015_a",
+            "entry": "J. Hensman, A. G. d. G. Matthews, and Z. Ghahramani. Scalable variational Gaussian process classification. In AISTATS, pages 351\u2013360, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hensman%2C%20J.%20d.%20G.%20Matthews%2C%20A.G.%20Ghahramani%2C%20Z.%20Scalable%20variational%20Gaussian%20process%20classification%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hensman%2C%20J.%20d.%20G.%20Matthews%2C%20A.G.%20Ghahramani%2C%20Z.%20Scalable%20variational%20Gaussian%20process%20classification%202015"
+        },
+        {
+            "id": "Higdon_2002_a",
+            "entry": "D. M. Higdon. Space and space-time modelling using process convolutions. In Quantitative methods for current environmental issues, pages 37\u201356, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Higdon%2C%20D.M.%20Space%20and%20space-time%20modelling%20using%20process%20convolutions.%20In%20Quantitative%20methods%20for%20current%20environmental%20issues%202002"
+        },
+        {
+            "id": "Hoffman_et+al_2013_a",
+            "entry": "M. D. Hoffman, D. M. Blei, C. Wang, and J. Paisley. Stochastic variational inference. Journal of Machine Learning Research, 14(1):1303\u20131347, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hoffman%2C%20M.D.%20Blei%2C%20D.M.%20Wang%2C%20C.%20Paisley%2C%20J.%20Stochastic%20variational%20inference%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hoffman%2C%20M.D.%20Blei%2C%20D.M.%20Wang%2C%20C.%20Paisley%2C%20J.%20Stochastic%20variational%20inference%202013"
+        },
+        {
+            "id": "Journel_1978_a",
+            "entry": "A. G. Journel and C. J. Huijbregts. Mining Geostatistics. Academic Press, London, 1978. M. L\u00e1zaro-Gredilla and M. Titsias. Variational heteroscedastic Gaussian process regression. In ICML, pages",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Journel%2C%20A.G.%20Huijbregts%2C%20C.J.%20Mining%20Geostatistics%201978",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Journel%2C%20A.G.%20Huijbregts%2C%20C.J.%20Mining%20Geostatistics%201978"
+        },
+        {
+            "id": "Li_et+al_2014_a",
+            "entry": "S. Li, Z.-Q. Liu, and A. B. Chan. Heterogeneous multi-task learning for human pose estimation with deep convolutional neural network. In CVPR, pages 482\u2013489, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20S.%20Liu%2C%20Z.-Q.%20Chan%2C%20A.B.%20Heterogeneous%20multi-task%20learning%20for%20human%20pose%20estimation%20with%20deep%20convolutional%20neural%20network%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20S.%20Liu%2C%20Z.-Q.%20Chan%2C%20A.B.%20Heterogeneous%20multi-task%20learning%20for%20human%20pose%20estimation%20with%20deep%20convolutional%20neural%20network%202014"
+        },
+        {
+            "id": "Nguyen_2014_a",
+            "entry": "T. V. Nguyen and E. V. Bonilla. Automated variational inference for Gaussian process models. In NIPS 27, pages 1404\u20131412. 2014a.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nguyen%2C%20T.V.%20Bonilla%2C%20E.V.%20Automated%20variational%20inference%20for%20Gaussian%20process%20models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nguyen%2C%20T.V.%20Bonilla%2C%20E.V.%20Automated%20variational%20inference%20for%20Gaussian%20process%20models%202014"
+        },
+        {
+            "id": "Nguyen_2017_a",
+            "entry": "T. V. Nguyen and E. V. Bonilla. Collaborative multi-output Gaussian processes. In UAI, 2014b. G. Parra and F. Tobar. Spectral mixture kernels for multi-output Gaussian processes. In NIPS 30, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nguyen%2C%20T.V.%20Bonilla%2C%20E.V.%20Collaborative%20multi-output%20Gaussian%20processes.%20In%20UAI%2C%202014b.%20G.%20Parra%20and%20F.%20Tobar.%20Spectral%20mixture%20kernels%20for%20multi-output%20Gaussian%20processes%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nguyen%2C%20T.V.%20Bonilla%2C%20E.V.%20Collaborative%20multi-output%20Gaussian%20processes.%20In%20UAI%2C%202014b.%20G.%20Parra%20and%20F.%20Tobar.%20Spectral%20mixture%20kernels%20for%20multi-output%20Gaussian%20processes%202017"
+        },
+        {
+            "id": "Pourmohamad_2016_a",
+            "entry": "T. Pourmohamad and H. K. H. Lee. Multivariate stochastic process models for correlated responses of mixed type. Bayesian Analysis, 11(3):797\u2013820, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pourmohamad%2C%20T.%20Lee%2C%20H.K.H.%20Multivariate%20stochastic%20process%20models%20for%20correlated%20responses%20of%20mixed%20type%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pourmohamad%2C%20T.%20Lee%2C%20H.K.H.%20Multivariate%20stochastic%20process%20models%20for%20correlated%20responses%20of%20mixed%20type%202016"
+        },
+        {
+            "id": "Saul_et+al_2016_a",
+            "entry": "A. D. Saul, J. Hensman, A. Vehtari, and N. D. Lawrence. Chained Gaussian processes. In AISTATS, pages 1431\u20131440, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Saul%2C%20A.D.%20Hensman%2C%20J.%20Vehtari%2C%20A.%20Lawrence%2C%20N.D.%20Chained%20Gaussian%20processes%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Saul%2C%20A.D.%20Hensman%2C%20J.%20Vehtari%2C%20A.%20Lawrence%2C%20N.D.%20Chained%20Gaussian%20processes%202016"
+        },
+        {
+            "id": "Skolidis_2011_a",
+            "entry": "G. Skolidis and G. Sanguinetti. Bayesian multitask classification with Gaussian process priors. IEEE Transactions on Neural Networks, 22(12), 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Skolidis%2C%20G.%20Sanguinetti%2C%20G.%20Bayesian%20multitask%20classification%20with%20Gaussian%20process%20priors%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Skolidis%2C%20G.%20Sanguinetti%2C%20G.%20Bayesian%20multitask%20classification%20with%20Gaussian%20process%20priors%202011"
+        },
+        {
+            "id": "Teh_et+al_2005_a",
+            "entry": "Y. Teh, M. Seeger, and M. Jordan. Semiparametric latent factor models. In AISTATS, pages 333\u2013340, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Teh%2C%20Y.%20Seeger%2C%20M.%20Jordan%2C%20M.%20Semiparametric%20latent%20factor%20models%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Teh%2C%20Y.%20Seeger%2C%20M.%20Jordan%2C%20M.%20Semiparametric%20latent%20factor%20models%202005"
+        },
+        {
+            "id": "Ulrich_et+al_2015_a",
+            "entry": "K. R. Ulrich, D. E. Carlson, K. Dzirasa, and L. Carin. GP kernels for cross-spectrum analysis. In NIPS 28, 2015. I. Valera and Z. Ghahramani. Automatic discovery of the statistical types of variables in a dataset. In ICML, pages 3521\u20133529, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ulrich%2C%20K.R.%20Carlson%2C%20D.E.%20Dzirasa%2C%20K.%20Carin%2C%20L.%20GP%20kernels%20for%20cross-spectrum%20analysis%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ulrich%2C%20K.R.%20Carlson%2C%20D.E.%20Dzirasa%2C%20K.%20Carin%2C%20L.%20GP%20kernels%20for%20cross-spectrum%20analysis%202015"
+        },
+        {
+            "id": "Valera_et+al_2017_a",
+            "entry": "I. Valera, M. F. Pradier, M. Lomeli, and Z. Ghahramani. General latent feature models for heterogeneous datasets. arXiv preprint arXiv:1706.03779, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.03779"
+        },
+        {
+            "id": "Vanhatalo_et+al_2013_a",
+            "entry": "J. Vanhatalo, J. Riihim\u00e4ki, J. Hartikainen, P. Jyl\u00e4nki, V. Tolvanen, and A. Vehtari. GPstuff: Bayesian modeling with Gaussian processes. Journal of Machine Learning Research, 14(1):1175\u20131179, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vanhatalo%2C%20J.%20Riihim%C3%A4ki%2C%20J.%20Hartikainen%2C%20J.%20Jyl%C3%A4nki%2C%20P.%20GPstuff%3A%20Bayesian%20modeling%20with%20Gaussian%20processes%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vanhatalo%2C%20J.%20Riihim%C3%A4ki%2C%20J.%20Hartikainen%2C%20J.%20Jyl%C3%A4nki%2C%20P.%20GPstuff%3A%20Bayesian%20modeling%20with%20Gaussian%20processes%202013"
+        },
+        {
+            "id": "Vanhatalo_et+al_2018_a",
+            "entry": "J. Vanhatalo, M. Hartmann, and L. Veneranta. Joint species distribution modeling with additive multivariate Gaussian process priors and heteregenous data. arXiv preprint arXiv:1809.02432, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1809.02432"
+        },
+        {
+            "id": "Wilson_2011_a",
+            "entry": "A. G. Wilson and Z. Ghahramani. Generalised Wishart processes. In UAI, pages 736\u2013744, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wilson%2C%20A.G.%20Ghahramani%2C%20Z.%20Generalised%20Wishart%20processes%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wilson%2C%20A.G.%20Ghahramani%2C%20Z.%20Generalised%20Wishart%20processes%202011"
+        },
+        {
+            "id": "Yang_et+al_2014_a",
+            "entry": "E. Yang, P. Ravikumar, G. I. Allen, Y. Baker, Y.-W. Wan, and Z. Liu. A general framework for mixed graphical models. arXiv preprint arXiv:1411.0288, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1411.0288"
+        },
+        {
+            "id": "Yang_et+al_2009_a",
+            "entry": "X. Yang, S. Kim, and E. P. Xing. Heterogeneous multitask learning with joint sparsity constraints. In NIPS 22, pages 2151\u20132159, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yang%2C%20X.%20Kim%2C%20S.%20Xing%2C%20E.P.%20Heterogeneous%20multitask%20learning%20with%20joint%20sparsity%20constraints%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yang%2C%20X.%20Kim%2C%20S.%20Xing%2C%20E.P.%20Heterogeneous%20multitask%20learning%20with%20joint%20sparsity%20constraints%202009"
+        },
+        {
+            "id": "Zhang_et+al_2012_a",
+            "entry": "D. Zhang, D. Shen, A. D. N. Initiative, et al. Multi-modal multi-task learning for joint prediction of multiple regression and classification variables in Alzheimer\u2019s disease. NeuroImage, 59(2):895\u2013907, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20D.%20Shen%2C%20D.%20Initiative%2C%20A.D.N.%20Multi-modal%20multi-task%20learning%20for%20joint%20prediction%20of%20multiple%20regression%20and%20classification%20variables%20in%20Alzheimer%E2%80%99s%20disease%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20D.%20Shen%2C%20D.%20Initiative%2C%20A.D.N.%20Multi-modal%20multi-task%20learning%20for%20joint%20prediction%20of%20multiple%20regression%20and%20classification%20variables%20in%20Alzheimer%E2%80%99s%20disease%202012"
+        }
+    ]
+}

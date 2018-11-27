@@ -1,0 +1,189 @@
+{
+    "filename": "7559-norm-ranging-lsh-for-maximum-inner-product-search.pdf",
+    "metadata": {
+        "title": "Norm-Ranging LSH for Maximum Inner Product Search",
+        "author": "Xiao Yan, Jinfeng Li, Xinyan Dai, Hongzhi Chen, James Cheng",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7559-norm-ranging-lsh-for-maximum-inner-product-search.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Neyshabur and Srebro proposed SIMPLE-LSH [2015], which is the state-of-the-art hashing based algorithm for maximum inner product search (MIPS). We found that the performance of SIMPLE-LSH, in both theory and practice, suffers from long tails in the 2-norm distribution of real datasets. We propose NORM-RANGING LSH, which addresses the excessive normalization problem caused by long tails by partitioning a dataset into sub-datasets and building a hash index for each sub-dataset independently. We prove that NORM-RANGING LSH achieves lower query time complexity than SIMPLE-LSH under mild conditions. We also show that the idea of dataset partitioning can improve another hashing based MIPS algorithm. Experiments show that NORM-RANGING LSH probes much less items than SIMPLE-LSH at the same recall, thus significantly benefiting MIPS based applications."
+    },
+    "keywords": [
+        {
+            "term": "long tail",
+            "url": "https://en.wikipedia.org/wiki/long_tail"
+        },
+        {
+            "term": "MIPS",
+            "url": "https://en.wikipedia.org/wiki/MIPS"
+        },
+        {
+            "term": "SIMPLE",
+            "url": "https://en.wikipedia.org/wiki/SIMPLE"
+        },
+        {
+            "term": "locality sensitive hashing",
+            "url": "https://en.wikipedia.org/wiki/locality_sensitive_hashing"
+        }
+    ],
+    "highlights": [
+        "As each sub-dataset is normalized by its own maximum 2-norm, which is usually significantly smaller than the maximum 2-norm in the entire dataset, NORM-RANGING locality sensitive hashing achieves lower query time complexity than SIMPLE-locality sensitive hashing",
+        "When we conduct Maximum inner product search on all the sub-datasets, the sub-dataset containing x will return an item having inner product cS0 with q with probability at least 1 \u2212 \u03b4 according to the guarantee of SIMPLE-locality sensitive hashing",
+        "Note that the 2-norm distributions of the Netflix and Yahoo!Music embeddings do not have long tail and the maximum 2-norm is close to the median, which helps verify the robustness of RANGE-locality sensitive hashing to different 2-norm distributions",
+        "SIMPLE-locality sensitive hashing, the state-of-the-art hashing method for Maximum inner product search, has critical performance limitations due to the long tail in the 2-norm distribution of real datasets",
+        "We proposed RANGE-locality sensitive hashing, which attains provably lower query time complexity than SIMPLE-locality sensitive hashing under mild conditions",
+        "The experimental results showed that RANGE-locality sensitive hashing significantly outperforms SIMPLE-locality sensitive hashing, and RANGE-locality sensitive hashing is robust to the shape of 2-norm distribution and different partitioning methods"
+    ],
+    "key_statements": [
+        "As each sub-dataset is normalized by its own maximum 2-norm, which is usually significantly smaller than the maximum 2-norm in the entire dataset, NORM-RANGING locality sensitive hashing achieves lower query time complexity than SIMPLE-locality sensitive hashing",
+        "When we conduct Maximum inner product search on all the sub-datasets, the sub-dataset containing x will return an item having inner product cS0 with q with probability at least 1 \u2212 \u03b4 according to the guarantee of SIMPLE-locality sensitive hashing",
+        "Note that the 2-norm distributions of the Netflix and Yahoo!Music embeddings do not have long tail and the maximum 2-norm is close to the median, which helps verify the robustness of RANGE-locality sensitive hashing to different 2-norm distributions",
+        "SIMPLE-locality sensitive hashing, the state-of-the-art hashing method for Maximum inner product search, has critical performance limitations due to the long tail in the 2-norm distribution of real datasets",
+        "We proposed RANGE-locality sensitive hashing, which attains provably lower query time complexity than SIMPLE-locality sensitive hashing under mild conditions",
+        "The experimental results showed that RANGE-locality sensitive hashing significantly outperforms SIMPLE-locality sensitive hashing, and RANGE-locality sensitive hashing is robust to the shape of 2-norm distribution and different partitioning methods",
+        "We showed that the idea of SIMPLE-locality sensitive hashing hashing is general and can be applied to boost the performance of L2-ALSH"
+    ],
+    "summary": [
+        "As each sub-dataset is normalized by its own maximum 2-norm, which is usually significantly smaller than the maximum 2-norm in the entire dataset, NORM-RANGING LSH achieves lower query time complexity than SIMPLE-LSH.",
+        "They apply the sign random projection in (4) to P (x) and P (q) to obtain an LSH for c-approximate MIPS with a query time complexity O and \u03c1 is given as: \u03c1",
+        "We plot in Figure 1(c) the distribution of the maximum inner product of the queries after the normalization process of SIMPLE-LSH.",
+        "To solve the excessive normalization problem of SIMPLE-LSH, RANGELSH partitions the items into m sub-datasets according to the percentiles of the 2-norm distribution so that each sub-dataset contains items with similar 2-norms.",
+        "Instead of using U , i.e., the maximum 2-norm in the entire dataset, SIMPLE-LSH uses the local maximum 2-norm Uj = maxx\u2208Sj x in each sub-dataset for normalization, so as to keep the inner products of the queries large.",
+        "When we conduct MIPS on all the sub-datasets, the sub-dataset containing x will return an item having inner product cS0 with q with probability at least 1 \u2212 \u03b4 according to the guarantee of SIMPLE-LSH.",
+        "For each sub-dataset Sj, it contains n1\u2212\u03b1 items and the query time complexity upper bound of c-approximate MIPS is O(n(1\u2212\u03b1)\u03c1j log n1\u2212\u03b1) with \u03c1j = G(c, S0/Uj).",
+        "Considering \u03c1j is an increasing function of Uj and there are at most n\u03b2 sub-datasets with Uj = U , the query time complexity of RANGE-LSH can be expressed as: n\u03b1 n\u03b1 f (n) = n\u03b1 + n(1\u2212\u03b1)\u03c1j log n1\u2212\u03b1 < n\u03b1 + n(1\u2212\u03b1)\u03c1j log n j=1 j=1 n\u03b1 \u2212n\u03b2",
+        "Multi-probing is challenging for RANGE-LSH as different sub-datasets use different normalization constants and buckets from different sub-datasets cannot be ranked according to their number of identical hashes.",
+        "This proves RANGE-LSH is general and robust to different partitioning methods as long as items with similar 2-norms are grouped into the same sub-dataset.",
+        "We show that the idea of RANGE-LSH, which partitions the original dataset into sub-datasets with similar 2-norms, can be applied to L2-ALSH [<a class=\"ref-link\" id=\"cShrivastava_2014_a\" href=\"#rShrivastava_2014_a\">Shrivastava and Li, 2014</a>] to obtain more favorable \u03c1 values than (7).",
+        "Similar to Theorem (1), it can be proved that dividing the dataset into sub-datasets results in an algorithm with lower query time complexity than the original L2-ALSH.",
+        "SIMPLE-LSH, the state-of-the-art hashing method for MIPS, has critical performance limitations due to the long tail in the 2-norm distribution of real datasets."
+    ],
+    "headline": "We found that the performance of SIMPLE-locality sensitive hashing, in both theory and practice, suffers from long tails in the 2-norm distribution of real datasets",
+    "reference_links": [
+        {
+            "id": "Andoni_2015_a",
+            "entry": "A. Andoni and I. P. Razenshteyn. Optimal data-dependent hashing for approximate near neighbors. In STOC, pages 793\u2013801, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Andoni%2C%20A.%20Razenshteyn%2C%20I.P.%20Optimal%20data-dependent%20hashing%20for%20approximate%20near%20neighbors%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Andoni%2C%20A.%20Razenshteyn%2C%20I.P.%20Optimal%20data-dependent%20hashing%20for%20approximate%20near%20neighbors%202015"
+        },
+        {
+            "id": "Andoni_et+al_2015_b",
+            "entry": "A. Andoni, P. Indyk, T. Laarhoven, I. P. Razenshteyn, and L. Schmidt. Practical and optimal LSH for angular distance. In NIPS, pages 1225\u20131233, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Andoni%2C%20A.%20Indyk%2C%20P.%20Laarhoven%2C%20T.%20Razenshteyn%2C%20I.P.%20Practical%20and%20optimal%20LSH%20for%20angular%20distance%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Andoni%2C%20A.%20Indyk%2C%20P.%20Laarhoven%2C%20T.%20Razenshteyn%2C%20I.P.%20Practical%20and%20optimal%20LSH%20for%20angular%20distance%202015"
+        },
+        {
+            "id": "Andoni_et+al_2018_a",
+            "entry": "A. Andoni, P. Indyk, and I. P. Razenshteyn. Approximate nearest neighbor search in high dimensions. CoRR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Andoni%2C%20A.%20Indyk%2C%20P.%20Razenshteyn%2C%20I.P.%20Approximate%20nearest%20neighbor%20search%20in%20high%20dimensions%202018"
+        },
+        {
+            "id": "Cai_2016_a",
+            "entry": "D. Cai. A revisit of hashing algorithms for approximate nearest neighbor search. CoRR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cai%2C%20D.%20A%20revisit%20of%20hashing%20algorithms%20for%20approximate%20nearest%20neighbor%20search%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cai%2C%20D.%20A%20revisit%20of%20hashing%20algorithms%20for%20approximate%20nearest%20neighbor%20search%202016"
+        },
+        {
+            "id": "Dean_et+al_2013_a",
+            "entry": "T. L. Dean, M. A. Ruzon, M. Segal, J. Shlens, S. Vijayanarasimhan, and J. Yagnik. Fast, accurate detection of 100, 000 object classes on a single machine. In CVPR, pages 1814\u20131821, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dean%2C%20T.L.%20Ruzon%2C%20M.A.%20Segal%2C%20M.%20Shlens%2C%20J.%20accurate%20detection%20of%20100%2C%20000%20object%20classes%20on%20a%20single%20machine%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dean%2C%20T.L.%20Ruzon%2C%20M.A.%20Segal%2C%20M.%20Shlens%2C%20J.%20accurate%20detection%20of%20100%2C%20000%20object%20classes%20on%20a%20single%20machine%202013"
+        },
+        {
+            "id": "Deng_et+al_2009_a",
+            "entry": "J. Deng, W. Dong, R. Socher, L. J. Li, K. Li, and F. F. Li. Imagenet: A large-scale hierarchical image database. In CVPR, pages 248\u2013255, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Deng%2C%20J.%20Dong%2C%20W.%20Socher%2C%20R.%20Li%2C%20L.J.%20Imagenet%3A%20A%20large-scale%20hierarchical%20image%20database%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Deng%2C%20J.%20Dong%2C%20W.%20Socher%2C%20R.%20Li%2C%20L.J.%20Imagenet%3A%20A%20large-scale%20hierarchical%20image%20database%202009"
+        },
+        {
+            "id": "Felzenszwalb_et+al_2010_a",
+            "entry": "P. F. Felzenszwalb, R. B. Girshick, D. A. McAllester, and D. Ramanan. Object detection with discriminatively trained part-based models. IEEE Trans. Pattern Anal. Mach. Intell., 32:1627\u2013 1645, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Felzenszwalb%2C%20P.F.%20Girshick%2C%20R.B.%20McAllester%2C%20D.A.%20Ramanan%2C%20D.%20Object%20detection%20with%20discriminatively%20trained%20part-based%20models%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Felzenszwalb%2C%20P.F.%20Girshick%2C%20R.B.%20McAllester%2C%20D.A.%20Ramanan%2C%20D.%20Object%20detection%20with%20discriminatively%20trained%20part-based%20models%202010"
+        },
+        {
+            "id": "Friedman_1974_a",
+            "entry": "J. H. Friedman and J. W. Tukey. A projection pursuit algorithm for exploratory data analysis. IEEE Trans. Computers, 23:881\u2013890, 1974.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Friedman%2C%20J.H.%20Tukey%2C%20J.W.%20A%20projection%20pursuit%20algorithm%20for%20exploratory%20data%20analysis%201974",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Friedman%2C%20J.H.%20Tukey%2C%20J.W.%20A%20projection%20pursuit%20algorithm%20for%20exploratory%20data%20analysis%201974"
+        },
+        {
+            "id": "Goemans_1995_a",
+            "entry": "M. X. Goemans and D. P. Williamson. Improved approximation algorithms for maximum cut and satisfiability problems using semidefinite programming. JACM, 42:1115\u20131145, 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goemans%2C%20M.X.%20Williamson%2C%20D.P.%20Improved%20approximation%20algorithms%20for%20maximum%20cut%20and%20satisfiability%20problems%20using%20semidefinite%20programming%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goemans%2C%20M.X.%20Williamson%2C%20D.P.%20Improved%20approximation%20algorithms%20for%20maximum%20cut%20and%20satisfiability%20problems%20using%20semidefinite%20programming%201995"
+        },
+        {
+            "id": "Gong_et+al_2013_a",
+            "entry": "Y. Gong, S. Lazebnik, A. Gordo, and F. Perronnin. Iterative quantization: A procrustean approach to learning binary codes for large-scale image retrieval. IEEE Trans. Pattern Anal. Mach. Intell., 35: 2916\u20132929, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gong%2C%20Y.%20Lazebnik%2C%20S.%20Gordo%2C%20A.%20Perronnin%2C%20F.%20Iterative%20quantization%3A%20A%20procrustean%20approach%20to%20learning%20binary%20codes%20for%20large-scale%20image%20retrieval%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gong%2C%20Y.%20Lazebnik%2C%20S.%20Gordo%2C%20A.%20Perronnin%2C%20F.%20Iterative%20quantization%3A%20A%20procrustean%20approach%20to%20learning%20binary%20codes%20for%20large-scale%20image%20retrieval%202013"
+        },
+        {
+            "id": "Indyk_1998_a",
+            "entry": "P. Indyk and R. Motwani. Approximate nearest neighbors: Towards removing the curse of dimensionality. In STOC, pages 604\u2013613, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Indyk%2C%20P.%20Motwani%2C%20R.%20Approximate%20nearest%20neighbors%3A%20Towards%20removing%20the%20curse%20of%20dimensionality%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Indyk%2C%20P.%20Motwani%2C%20R.%20Approximate%20nearest%20neighbors%3A%20Towards%20removing%20the%20curse%20of%20dimensionality%201998"
+        },
+        {
+            "id": "Koenigstein_et+al_2012_a",
+            "entry": "N. Koenigstein, P. Ram, and Y. Shavitt. Efficient retrieval of recommendations in a matrix factorization framework. In CIKM, pages 535\u2013544, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Koenigstein%2C%20N.%20Ram%2C%20P.%20Shavitt%2C%20Y.%20Efficient%20retrieval%20of%20recommendations%20in%20a%20matrix%20factorization%20framework%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Koenigstein%2C%20N.%20Ram%2C%20P.%20Shavitt%2C%20Y.%20Efficient%20retrieval%20of%20recommendations%20in%20a%20matrix%20factorization%20framework%202012"
+        },
+        {
+            "id": "Koren_et+al_2009_a",
+            "entry": "Y. Koren, R. M. Bell, and C. Volinsky. Matrix factorization techniques for recommender systems. IEEE Computer, 42:30\u201337, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Koren%2C%20Y.%20Bell%2C%20R.M.%20Volinsky%2C%20C.%20Matrix%20factorization%20techniques%20for%20recommender%20systems%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Koren%2C%20Y.%20Bell%2C%20R.M.%20Volinsky%2C%20C.%20Matrix%20factorization%20techniques%20for%20recommender%20systems%202009"
+        },
+        {
+            "id": "Lv_et+al_2007_a",
+            "entry": "Q. Lv, W. Josephson, Z. Wang, M. Charikar, and K. Li. Multi-probe LSH: efficient indexing for high-dimensional similarity search. In VLDB, pages 950\u2013961, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lv%2C%20Q.%20Josephson%2C%20W.%20Wang%2C%20Z.%20Charikar%2C%20M.%20Multi-probe%20LSH%3A%20efficient%20indexing%20for%20high-dimensional%20similarity%20search%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lv%2C%20Q.%20Josephson%2C%20W.%20Wang%2C%20Z.%20Charikar%2C%20M.%20Multi-probe%20LSH%3A%20efficient%20indexing%20for%20high-dimensional%20similarity%20search%202007"
+        },
+        {
+            "id": "Neyshabur_2015_a",
+            "entry": "B. Neyshabur and N. Srebro. On symmetric and asymmetric lshs for inner product search. In ICML, pages 1926\u20131934, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Neyshabur%2C%20B.%20Srebro%2C%20N.%20On%20symmetric%20and%20asymmetric%20lshs%20for%20inner%20product%20search%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Neyshabur%2C%20B.%20Srebro%2C%20N.%20On%20symmetric%20and%20asymmetric%20lshs%20for%20inner%20product%20search%202015"
+        },
+        {
+            "id": "Ram_2012_a",
+            "entry": "P. Ram and A. G. Gray. Maximum inner-product search using cone trees. In KDD, pages 931\u2013939, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ram%2C%20P.%20Gray%2C%20A.G.%20Maximum%20inner-product%20search%20using%20cone%20trees%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ram%2C%20P.%20Gray%2C%20A.G.%20Maximum%20inner-product%20search%20using%20cone%20trees%202012"
+        },
+        {
+            "id": "Shrivastava_2014_a",
+            "entry": "A. Shrivastava and P. Li. Asymmetric LSH (ALSH) for sublinear time maximum inner product search (MIPS). In NIPS, pages 2321\u20132329, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shrivastava%2C%20A.%20Li%2C%20P.%20Asymmetric%20LSH%20%28ALSH%29%20for%20sublinear%20time%20maximum%20inner%20product%20search%20%28MIPS%29%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shrivastava%2C%20A.%20Li%2C%20P.%20Asymmetric%20LSH%20%28ALSH%29%20for%20sublinear%20time%20maximum%20inner%20product%20search%20%28MIPS%29%202014"
+        },
+        {
+            "id": "Shrivastava_2015_a",
+            "entry": "A. Shrivastava and P. Li. Improved asymmetric locality sensitive hashing (ALSH) for maximum inner product search (MIPS). In UAI, pages 812\u2013821, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shrivastava%2C%20A.%20Li%2C%20P.%20Improved%20asymmetric%20locality%20sensitive%20hashing%20%28ALSH%29%20for%20maximum%20inner%20product%20search%20%28MIPS%29%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shrivastava%2C%20A.%20Li%2C%20P.%20Improved%20asymmetric%20locality%20sensitive%20hashing%20%28ALSH%29%20for%20maximum%20inner%20product%20search%20%28MIPS%29%202015"
+        },
+        {
+            "id": "Wang_et+al_2013_a",
+            "entry": "H. Wang, J. Cao, L. Shu, and D. Rafiei. Locality sensitive hashing revisited: filling the gap between theory and algorithm analysis. In CIKM, pages 1969\u20131978, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20H.%20Cao%2C%20J.%20Shu%2C%20L.%20Rafiei%2C%20D.%20Locality%20sensitive%20hashing%20revisited%3A%20filling%20the%20gap%20between%20theory%20and%20algorithm%20analysis%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20H.%20Cao%2C%20J.%20Shu%2C%20L.%20Rafiei%2C%20D.%20Locality%20sensitive%20hashing%20revisited%3A%20filling%20the%20gap%20between%20theory%20and%20algorithm%20analysis%202013"
+        },
+        {
+            "id": "Weber_et+al_1998_a",
+            "entry": "R. Weber, H. Schek, and S. Blott. A quantitative analysis and performance study for similarity-search methods in high-dimensional spaces. In VLDB, pages 194\u2013205, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Weber%2C%20R.%20Schek%2C%20H.%20Blott%2C%20S.%20A%20quantitative%20analysis%20and%20performance%20study%20for%20similarity-search%20methods%20in%20high-dimensional%20spaces%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Weber%2C%20R.%20Schek%2C%20H.%20Blott%2C%20S.%20A%20quantitative%20analysis%20and%20performance%20study%20for%20similarity-search%20methods%20in%20high-dimensional%20spaces%201998"
+        },
+        {
+            "id": "Yun_et+al_2013_a",
+            "entry": "H. Yun, H. F. Yu, C.J. Hsieh, S. V. N. Vishwanathan, and I. S. Dhillon. NOMAD: non-locking, stochastic multi-machine algorithm for asynchronous and decentralized matrix completion. CoRR, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yun%2C%20H.%20Yu%2C%20H.F.%20Hsieh%2C%20C.J.%20Vishwanathan%2C%20S.V.N.%20NOMAD%3A%20non-locking%2C%20stochastic%20multi-machine%20algorithm%20for%20asynchronous%20and%20decentralized%20matrix%20completion%202013"
+        }
+    ]
+}

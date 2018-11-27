@@ -1,0 +1,269 @@
+{
+    "filename": "8026-approximate-knowledge-compilation-by-online-collapsed-importance-sampling.pdf",
+    "metadata": {
+        "title": "Approximate Knowledge Compilation by Online Collapsed Importance Sampling",
+        "date": 2009,
+        "author": "Tal Friedman Computer Science Department",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8026-approximate-knowledge-compilation-by-online-collapsed-importance-sampling.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We introduce collapsed compilation, a novel approximate inference algorithm for discrete probabilistic graphical models. It is a collapsed sampling algorithm that incrementally selects which variable to sample next based on the partial compilation obtained so far. This online collapsing, together with knowledge compilation inference on the remaining variables, naturally exploits local structure and contextspecific independence in the distribution. These properties are used implicitly in exact inference, but are difficult to harness for approximate inference. Moreover, by having a partially compiled circuit available during sampling, collapsed compilation has access to a highly effective proposal distribution for importance sampling. Our experimental evaluation shows that collapsed compilation performs well on standard benchmarks. In particular, when the amount of exact inference is equally limited, collapsed compilation is competitive with the state of the art, and outperforms it on several benchmarks."
+    },
+    "keywords": [
+        {
+            "term": "approximate inference",
+            "url": "https://en.wikipedia.org/wiki/approximate_inference"
+        },
+        {
+            "term": "exact inference",
+            "url": "https://en.wikipedia.org/wiki/exact_inference"
+        },
+        {
+            "term": "graphical model",
+            "url": "https://en.wikipedia.org/wiki/graphical_model"
+        },
+        {
+            "term": "knowledge compilation",
+            "url": "https://en.wikipedia.org/wiki/knowledge_compilation"
+        },
+        {
+            "term": "probabilistic graphical model",
+            "url": "https://en.wikipedia.org/wiki/probabilistic_graphical_model"
+        },
+        {
+            "term": "importance sampling",
+            "url": "https://en.wikipedia.org/wiki/importance_sampling"
+        },
+        {
+            "term": "bayesian network",
+            "url": "https://en.wikipedia.org/wiki/bayesian_network"
+        },
+        {
+            "term": "dynamic bayesian network",
+            "url": "https://en.wikipedia.org/wiki/dynamic_bayesian_network"
+        }
+    ],
+    "highlights": [
+        "Modern probabilistic inference algorithms for discrete graphical models are designed to exploit key properties of the distribution",
+        "In addition to classical conditional independence, they exploit local structure in the individual factors, determinism coming from logical constraints (<a class=\"ref-link\" id=\"cDarwiche_2009_a\" href=\"#rDarwiche_2009_a\">Darwiche, 2009</a>), and the context-specific independencies that arise in such distributions (<a class=\"ref-link\" id=\"cBoutilier_et+al_1996_a\" href=\"#rBoutilier_et+al_1996_a\">Boutilier et al, 1996</a>)",
+        "In a setting where the amount of exact inference is fixed, we find that collapsed compilation is competitive with state-of-the-art approximate inference algorithms, outperforming them on several benchmarks.\n2 Online Collapsed Importance Sampling",
+        "Sample X according to its marginal probability in the current sentential decision diagram, corresponding to the partially compiled factor graph conditioned on prior instantiations.\n4",
+        "We have found that when restricting all methods to only do a fixed amount of exact inference, collapsed compilation has similar performance to both Samplesearch and edgedeletion belief propagation",
+        "We highlight DBN, where we see that collapsed compilation with the RBVar or MinEnt policies is the only method that manages to achieve reasonable approximate inference. This follows the intuition discussed in Section 2.2: a good choice of a few variables in a densely connected model can lead to relatively easy exact inference for a large chunk of the model"
+    ],
+    "key_statements": [
+        "Modern probabilistic inference algorithms for discrete graphical models are designed to exploit key properties of the distribution",
+        "In addition to classical conditional independence, they exploit local structure in the individual factors, determinism coming from logical constraints (<a class=\"ref-link\" id=\"cDarwiche_2009_a\" href=\"#rDarwiche_2009_a\">Darwiche, 2009</a>), and the context-specific independencies that arise in such distributions (<a class=\"ref-link\" id=\"cBoutilier_et+al_1996_a\" href=\"#rBoutilier_et+al_1996_a\">Boutilier et al, 1996</a>)",
+        "We show that the sampler corresponds to a classical collapsed importance sampler on an augmented graphical model and prove conditions for it to be asymptotically unbiased",
+        "In a setting where the amount of exact inference is fixed, we find that collapsed compilation is competitive with state-of-the-art approximate inference algorithms, outperforming them on several benchmarks.\n2 Online Collapsed Importance Sampling",
+        "That we have proposed online collapsed importance sampling and given background on knowledge compilation, we are ready to introduce collapsed compilation, an algorithm that uses knowledge compilation to do online collapsed importance sampling",
+        "Sample X according to its marginal probability in the current sentential decision diagram, corresponding to the partially compiled factor graph conditioned on prior instantiations.\n4",
+        "We have found that when restricting all methods to only do a fixed amount of exact inference, collapsed compilation has similar performance to both Samplesearch and edgedeletion belief propagation",
+        "We highlight DBN, where we see that collapsed compilation with the RBVar or MinEnt policies is the only method that manages to achieve reasonable approximate inference. This follows the intuition discussed in Section 2.2: a good choice of a few variables in a densely connected model can lead to relatively easy exact inference for a large chunk of the model",
+        "Another factor differentiating collapsed compilation from both edgedeletion belief propagation and Samplesearch is the lack of reliance on some type of belief propagation algorithm",
+        "Loopy belief propagation is a cornerstone of approximate inference in graphical models, but it is known to have problems converging to a good approximation on certain classes of models (<a class=\"ref-link\" id=\"cMurphy_et+al_1999_a\" href=\"#rMurphy_et+al_1999_a\">Murphy et al, 1999</a>)",
+        "We have presented online collapsed importance sampling, an asymptotically unbiased estimator that allows for doing collapsed importance sampling without choosing which variables to collapse a priori",
+        "Using techniques from knowledge compilation, we developed collapsed compilation, an implementation of online collapsed importance sampling that draws its proposal distribution from partial compilations of the distribution, and naturally exploits structure in the distribution"
+    ],
+    "summary": [
+        "Modern probabilistic inference algorithms for discrete graphical models are designed to exploit key properties of the distribution.",
+        "By setting a limit on the circuit size as we compile more factors into the model, we are able to sample exactly as many variables as needed to fit the arithmetic circuit into memory.",
+        "Algorithm 1 shows more precisely how online collapsed importance sampling generates a single sample, given a full set of variables , a variable selection",
+        "Our algorithm for online collapsed importance sampling raises two questions: does Equation 2 yield unbiased estimates, and how does one compute the proposal Q?",
+        "If we let \u21e1 be a policy that always returns the same variables in the same order, we recover classical offline collapsed importance sampling - and retain all of its properties.",
+        "We begin with a short review of how to perform exact inference on a probabilistic graphical model using knowledge compilation to arithmetic circuits (ACs).",
+        "We call such operations APPLY, and they are the key to using knowledge compilation for doing online collapsed importance sampling.",
+        "Becomes too large, we invoke online collapsed importance sampling to instantiate one of the variables.",
+        "3. Sample X according to its marginal probability in the current SDD, corresponding to the partially compiled factor graph conditioned on prior instantiations.",
+        "To obtain the importance weights, we compute the partition function on the final resulting circuit, which corresponds to the unnormalized probability of all sampled variables, that is, Pin Algorithm 1.",
+        "As discussed in Section 3, one requirement of online collapsed importance sampling is that we must provide a proposal distribution over any subset of variables, which in general is challenging.",
+        "Setting the threshold to be infinity leaves us with exact inference which is in general intractable, while setting the threshold to zero leaves us with importance sampling using what is likely a poor proposal distribution.",
+        "We have found that when restricting all methods to only do a fixed amount of exact inference, collapsed compilation has similar performance to both Samplesearch and EDBP.",
+        "We highlight DBN, where we see that collapsed compilation with the RBVar or MinEnt policies is the only method that manages to achieve reasonable approximate inference.",
+        "This follows the intuition discussed in Section 2.2: a good choice of a few variables in a densely connected model can lead to relatively easy exact inference for a large chunk of the model."
+    ],
+    "headline": "A novel approximate inference algorithm for discrete probabilistic graphical models",
+    "reference_links": [
+        {
+            "id": "Bekker_et+al_2015_a",
+            "entry": "Bekker, Jessa, Davis, Jesse, Choi, Arthur, Darwiche, Adnan, and Van den Broeck, Guy. Tractable learning for complex probability queries. In Advances in Neural Information Processing Systems, pp. 2242\u20132250, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bekker%2C%20Jessa%20Davis%2C%20Jesse%20Choi%2C%20Arthur%20Darwiche%2C%20Adnan%20Tractable%20learning%20for%20complex%20probability%20queries%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bekker%2C%20Jessa%20Davis%2C%20Jesse%20Choi%2C%20Arthur%20Darwiche%2C%20Adnan%20Tractable%20learning%20for%20complex%20probability%20queries%202015"
+        },
+        {
+            "id": "Bidyuk_2007_a",
+            "entry": "Bidyuk, Bozhena and Dechter, Rina. Cutset sampling for Bayesian networks. Journal of Artificial Intelligence Research (JAIR), 28:1\u201348, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bidyuk%2C%20Bozhena%20Dechter%2C%20Rina%20Cutset%20sampling%20for%20Bayesian%20networks%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bidyuk%2C%20Bozhena%20Dechter%2C%20Rina%20Cutset%20sampling%20for%20Bayesian%20networks%202007"
+        },
+        {
+            "id": "Boutilier_et+al_1996_a",
+            "entry": "Boutilier, Craig, Friedman, Nir, Goldszmidt, Moises, and Koller, Daphne. Context-specific independence in Bayesian networks. In Proceedings of UAI, pp. 115\u2013123, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Boutilier%2C%20Craig%20Friedman%2C%20Nir%20Goldszmidt%2C%20Moises%20Koller%2C%20Daphne%20Context-specific%20independence%20in%20Bayesian%20networks%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Boutilier%2C%20Craig%20Friedman%2C%20Nir%20Goldszmidt%2C%20Moises%20Koller%2C%20Daphne%20Context-specific%20independence%20in%20Bayesian%20networks%201996"
+        },
+        {
+            "id": "Chakraborty_et+al_2014_a",
+            "entry": "Chakraborty, Supratik, Fremont, Daniel J, Meel, Kuldeep S, Seshia, Sanjit A, and Vardi, Moshe Y. Distribution-aware sampling and weighted model counting for sat. In Proceedings of AAAI, volume 14, pp. 1722\u20131730, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chakraborty%2C%20Supratik%20Fremont%2C%20Daniel%20J.%20Meel%2C%20Kuldeep%20S.%20Seshia%2C%20Sanjit%20A.%20Distribution-aware%20sampling%20and%20weighted%20model%20counting%20for%20sat%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chakraborty%2C%20Supratik%20Fremont%2C%20Daniel%20J.%20Meel%2C%20Kuldeep%20S.%20Seshia%2C%20Sanjit%20A.%20Distribution-aware%20sampling%20and%20weighted%20model%20counting%20for%20sat%202014"
+        },
+        {
+            "id": "Chan_0000_a",
+            "entry": "Chan, Hei and Darwiche, Adnan. On the Robustness of Most Probable Explanations. In Proceedings of UAI, pp. 63\u201371, Arlington, Virginia, United States, 2006. AUAI Press.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chan%2C%20Hei%20Darwiche%2C%20Adnan%20On%20the%20Robustness%20of%20Most%20Probable%20Explanations",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chan%2C%20Hei%20Darwiche%2C%20Adnan%20On%20the%20Robustness%20of%20Most%20Probable%20Explanations"
+        },
+        {
+            "id": "Chavira_2008_a",
+            "entry": "Chavira, Mark and Darwiche, Adnan. On probabilistic inference by weighted model counting. Artificial Intelligence, 172:772\u2013799, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chavira%2C%20Mark%20Darwiche%2C%20Adnan%20On%20probabilistic%20inference%20by%20weighted%20model%20counting%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chavira%2C%20Mark%20Darwiche%2C%20Adnan%20On%20probabilistic%20inference%20by%20weighted%20model%20counting%202008"
+        },
+        {
+            "id": "Chavira_et+al_2006_a",
+            "entry": "Chavira, Mark, Darwiche, Adnan, and Jaeger, Manfred. Compiling relational Bayesian networks for exact inference. IJAR, 42(1-2):4\u201320, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chavira%2C%20Mark%20Darwiche%2C%20Adnan%20Jaeger%2C%20Manfred%20Compiling%20relational%20Bayesian%20networks%20for%20exact%20inference%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chavira%2C%20Mark%20Darwiche%2C%20Adnan%20Jaeger%2C%20Manfred%20Compiling%20relational%20Bayesian%20networks%20for%20exact%20inference%202006"
+        },
+        {
+            "id": "Choi_2006_a",
+            "entry": "Choi, Arthur and Darwiche, Adnan. An edge deletion semantics for belief propagation and its practical impact on approximation quality. In Proceedings of AAAI, volume 21, pp. 1107, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Choi%2C%20Arthur%20Darwiche%2C%20Adnan%20An%20edge%20deletion%20semantics%20for%20belief%20propagation%20and%20its%20practical%20impact%20on%20approximation%20quality%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Choi%2C%20Arthur%20Darwiche%2C%20Adnan%20An%20edge%20deletion%20semantics%20for%20belief%20propagation%20and%20its%20practical%20impact%20on%20approximation%20quality%202006"
+        },
+        {
+            "id": "Choi_2017_a",
+            "entry": "Choi, Arthur and Darwiche, Adnan. On relaxing determinism in arithmetic circuits. In ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Choi%2C%20Arthur%20Darwiche%2C%20Adnan%20On%20relaxing%20determinism%20in%20arithmetic%20circuits%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Choi%2C%20Arthur%20Darwiche%2C%20Adnan%20On%20relaxing%20determinism%20in%20arithmetic%20circuits%202017"
+        },
+        {
+            "id": "Choi_et+al_0000_a",
+            "entry": "Choi, Arthur, Chan, Hei, and Darwiche, Adnan. On Bayesian network approximation by edge deletion. In Proceedings of the Twenty-First Conference on Uncertainty in Artificial Intelligence, pp. 128\u2013135, Arlington, Virginia, United States, 2005. AUAI Press. ISBN 0-9749039-1-4.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Choi%2C%20Arthur%20Chan%2C%20Hei%20Darwiche%2C%20Adnan%20On%20Bayesian%20network%20approximation%20by%20edge%20deletion",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Choi%2C%20Arthur%20Chan%2C%20Hei%20Darwiche%2C%20Adnan%20On%20Bayesian%20network%20approximation%20by%20edge%20deletion"
+        },
+        {
+            "id": "Choi_et+al_2013_a",
+            "entry": "Choi, Arthur, Kisa, Doga, and Darwiche, Adnan. Compiling Probabilistic Graphical Models Using Sentential Decision Diagrams. In ECSQARU, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Choi%2C%20Arthur%20Kisa%2C%20Doga%20Darwiche%2C%20Adnan%20Compiling%20Probabilistic%20Graphical%20Models%20Using%20Sentential%20Decision%20Diagrams.%20In%20ECSQARU%202013"
+        },
+        {
+            "id": "Darwiche_1999_a",
+            "entry": "Darwiche, Adnan. Compiling Knowledge into Decomposable Negation Normal Form. In Proceedings of IJCAI, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Darwiche%2C%20Adnan%20Compiling%20Knowledge%20into%20Decomposable%20Negation%20Normal%20Form%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Darwiche%2C%20Adnan%20Compiling%20Knowledge%20into%20Decomposable%20Negation%20Normal%20Form%201999"
+        },
+        {
+            "id": "Darwiche_2001_a",
+            "entry": "Darwiche, Adnan. Decomposable negation normal form. J. ACM, 48:608\u2013647, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Darwiche%2C%20Adnan%20Decomposable%20negation%20normal%20form%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Darwiche%2C%20Adnan%20Decomposable%20negation%20normal%20form%202001"
+        },
+        {
+            "id": "Darwiche_2003_a",
+            "entry": "Darwiche, Adnan. A Differential Approach to Inference in Bayesian Networks. J. ACM, 50(3): 280\u2013305, May 2003. ISSN 0004-5411.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Darwiche%2C%20Adnan%20A%20Differential%20Approach%20to%20Inference%20in%20Bayesian%20Networks%202003-05",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Darwiche%2C%20Adnan%20A%20Differential%20Approach%20to%20Inference%20in%20Bayesian%20Networks%202003-05"
+        },
+        {
+            "id": "Darwiche_2009_a",
+            "entry": "Darwiche, Adnan. Modeling and reasoning with Bayesian networks. Cambridge University Press, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Darwiche%2C%20Adnan%20Modeling%20and%20reasoning%20with%20Bayesian%20networks%202009"
+        },
+        {
+            "id": "Darwiche_2011_a",
+            "entry": "Darwiche, Adnan. SDD: A New Canonical Representation of Propositional Knowledge Bases. In Proceedings of IJCAI, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Darwiche%2C%20Adnan%20SDD%3A%20A%20New%20Canonical%20Representation%20of%20Propositional%20Knowledge%20Bases%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Darwiche%2C%20Adnan%20SDD%3A%20A%20New%20Canonical%20Representation%20of%20Propositional%20Knowledge%20Bases%202011"
+        },
+        {
+            "id": "Raedt_et+al_2015_a",
+            "entry": "De Raedt, Luc and Kimmig, Angelika. Probabilistic (logic) programming concepts. Machine Learning, 100(1):5\u201347, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Raedt%2C%20De%20Luc%20Kimmig%2C%20Angelika%20Probabilistic%20%28logic%29%20programming%20concepts%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Raedt%2C%20De%20Luc%20Kimmig%2C%20Angelika%20Probabilistic%20%28logic%29%20programming%20concepts%202015"
+        },
+        {
+            "id": "Dechter_et+al_2002_a",
+            "entry": "Dechter, Rina, Kask, Kalev, and Mateescu, Robert. Iterative join-graph propagation. In Proceedings of the Eighteenth conference on Uncertainty in artificial intelligence, pp. 128\u2013136. Morgan Kaufmann Publishers Inc., 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dechter%2C%20Rina%20Kask%2C%20Kalev%20Mateescu%2C%20Robert%20Iterative%20join-graph%20propagation%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dechter%2C%20Rina%20Kask%2C%20Kalev%20Mateescu%2C%20Robert%20Iterative%20join-graph%20propagation%202002"
+        },
+        {
+            "id": "Ermon_et+al_2013_a",
+            "entry": "Ermon, Stefano, Gomes, Carla P, Sabharwal, Ashish, and Selman, Bart. Embed and project: Discrete sampling with universal hashing. In Advances in Neural Information Processing Systems, pp. 2085\u20132093, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ermon%2C%20Stefano%20Gomes%2C%20Carla%20P.%20Sabharwal%2C%20Ashish%20Selman%2C%20Bart%20Embed%20and%20project%3A%20Discrete%20sampling%20with%20universal%20hashing%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ermon%2C%20Stefano%20Gomes%2C%20Carla%20P.%20Sabharwal%2C%20Ashish%20Selman%2C%20Bart%20Embed%20and%20project%3A%20Discrete%20sampling%20with%20universal%20hashing%202013"
+        },
+        {
+            "id": "Gogate_2007_a",
+            "entry": ", 15(3):358\u2013401, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gogate%2C%20Vibhav%20Dechter%2C%20Rina%20Samplesearch%3A%20A%20scheme%20that%20searches%20for%20consistent%20samples%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gogate%2C%20Vibhav%20Dechter%2C%20Rina%20Samplesearch%3A%20A%20scheme%20that%20searches%20for%20consistent%20samples%202007"
+        },
+        {
+            "id": "Gogate_2011_a",
+            "entry": "Gogate, Vibhav and Dechter, Rina. Samplesearch: A scheme that searches for consistent samples. In Artificial Intelligence and Statistics, pp. 147\u2013154, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gogate%2C%20Vibhav%20Dechter%2C%20Rina%20Samplesearch%3A%20Importance%20sampling%20in%20presence%20of%20determinism%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gogate%2C%20Vibhav%20Dechter%2C%20Rina%20Samplesearch%3A%20Importance%20sampling%20in%20presence%20of%20determinism%202011"
+        },
+        {
+            "id": "Koller_2009_a",
+            "entry": "Gogate, Vibhav and Dechter, Rina. Samplesearch: Importance sampling in presence of determinism. Artificial Intelligence, 175(2):694\u2013729, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Koller%2C%20Daphne%20Friedman%2C%20Nir%20Probabilistic%20graphical%20models%3A%20principles%20and%20techniques%202009"
+        },
+        {
+            "id": "Lowd_2010_a",
+            "entry": "Koller, Daphne and Friedman, Nir. Probabilistic graphical models: principles and techniques. 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lowd%2C%20Daniel%20Domingos%2C%20Pedro%20Approximate%20inference%20by%20compilation%20to%20arithmetic%20circuits%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lowd%2C%20Daniel%20Domingos%2C%20Pedro%20Approximate%20inference%20by%20compilation%20to%20arithmetic%20circuits%202010"
+        },
+        {
+            "id": "Murphy_et+al_1999_a",
+            "entry": "Lowd, Daniel and Domingos, Pedro. Approximate inference by compilation to arithmetic circuits. In NIPS, pp. 1477\u20131485, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Murphy%2C%20Kevin%20P.%20Weiss%2C%20Yair%20Jordan%2C%20Michael%20I.%20Loopy%20belief%20propagation%20for%20approximate%20inference%3A%20An%20empirical%20study%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Murphy%2C%20Kevin%20P.%20Weiss%2C%20Yair%20Jordan%2C%20Michael%20I.%20Loopy%20belief%20propagation%20for%20approximate%20inference%3A%20An%20empirical%20study%201999"
+        },
+        {
+            "id": "Tokdar_2010_a",
+            "entry": "Murphy, Kevin P, Weiss, Yair, and Jordan, Michael I. Loopy belief propagation for approximate inference: An empirical study. In Proceedings of UAI, pp. 467\u2013475. Morgan Kaufmann Publishers Inc., 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tokdar%2C%20Surya%20T.%20Kass%2C%20Robert%20E.%20Importance%20sampling%3A%20a%20review%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tokdar%2C%20Surya%20T.%20Kass%2C%20Robert%20E.%20Importance%20sampling%3A%20a%20review%202010"
+        },
+        {
+            "id": "Den_2013_a",
+            "entry": "Tokdar, Surya T and Kass, Robert E. Importance sampling: a review. Wiley Interdisciplinary Reviews: Computational Statistics, 2(1):54\u201360, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=den%20Broeck%2C%20Van%20Guy%20Lifted%20Inference%20and%20Learning%20in%20Statistical%20Relational%20Models%202013-01"
+        },
+        {
+            "id": "Den_et+al_2015_a",
+            "entry": "Van den Broeck, Guy. Lifted Inference and Learning in Statistical Relational Models. PhD thesis, KU Leuven, January 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=den%20Broeck%2C%20Van%20Guy%20Darwiche%2C%20Adnan%20On%20the%20role%20of%20canonicity%20in%20knowledge%20compilation%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=den%20Broeck%2C%20Van%20Guy%20Darwiche%2C%20Adnan%20On%20the%20role%20of%20canonicity%20in%20knowledge%20compilation%202015"
+        },
+        {
+            "id": "Den_et+al_2017_a",
+            "entry": "Van den Broeck, Guy and Darwiche, Adnan. On the role of canonicity in knowledge compilation. In Proceedings of the 29th Conference on Artificial Intelligence (AAAI), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=den%20Broeck%2C%20Van%20Guy%20Suciu%2C%20Dan%20Query%20Processing%20on%20Probabilistic%20Data%3A%20A%20Survey.%20Foundations%20and%20Trends%20in%20Databases%202017"
+        },
+        {
+            "id": "Van_0000_a",
+            "entry": "Van den Broeck, Guy and Suciu, Dan. Query Processing on Probabilistic Data: A Survey. Foundations and Trends in Databases. Now Publishers, 2017. doi: 10.1561/1900000052.",
+            "crossref": "https://dx.doi.org/10.1561/1900000052",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1561/1900000052"
+        },
+        {
+            "id": ",_2015_a",
+            "entry": ", Proceedings of IJCAI",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Proceedings%20of%20IJCAI"
+        },
+        {
+            "id": "Vlasselaer_et+al_2016_a",
+            "entry": "pp. 1852\u20131858, July 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vlasselaer%2C%20Jonas%20Meert%2C%20Wannes%20den%20Broeck%2C%20Van%20Guy%20Exploiting%20local%20and%20repeated%20structure%20in%20dynamic%20Bayesian%20networks%202016-03",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vlasselaer%2C%20Jonas%20Meert%2C%20Wannes%20den%20Broeck%2C%20Van%20Guy%20Exploiting%20local%20and%20repeated%20structure%20in%20dynamic%20Bayesian%20networks%202016-03"
+        }
+    ]
+}

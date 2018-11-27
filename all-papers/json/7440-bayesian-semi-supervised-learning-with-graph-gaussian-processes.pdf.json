@@ -1,0 +1,363 @@
+{
+    "filename": "7440-bayesian-semi-supervised-learning-with-graph-gaussian-processes.pdf",
+    "metadata": {
+        "title": "Bayesian Semi-supervised Learning with Graph Gaussian Processes",
+        "author": "Yin Cheng Ng, Nicol\u00f2 Colombo, Ricardo Silva",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7440-bayesian-semi-supervised-learning-with-graph-gaussian-processes.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We propose a data-efficient Gaussian process-based Bayesian approach to the semisupervised learning problem on graphs. The proposed model shows extremely competitive performance when compared to the state-of-the-art graph neural networks on semi-supervised learning benchmark experiments, and outperforms the neural networks in active learning experiments where labels are scarce. Furthermore, the model does not require a validation data set for early stopping to control over-fitting. Our model can be viewed as an instance of empirical distribution regression weighted locally by network connectivity. We further motivate the intuitive construction of the model with a Bayesian linear model interpretation where the node features are filtered by an operator related to the graph Laplacian. The method can be easily implemented by adapting off-the-shelf scalable variational inference algorithms for Gaussian processes."
+    },
+    "keywords": [
+        {
+            "term": "active learning",
+            "url": "https://en.wikipedia.org/wiki/active_learning"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        },
+        {
+            "term": "Evidence Lower Bound",
+            "url": "https://en.wikipedia.org/wiki/Evidence_Lower_Bound"
+        },
+        {
+            "term": "convolutional neural network",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_network"
+        },
+        {
+            "term": "term frequency-inverse document frequency",
+            "url": "https://en.wikipedia.org/wiki/term_frequency-inverse_document_frequency"
+        },
+        {
+            "term": "graph laplacian",
+            "url": "https://en.wikipedia.org/wiki/Graph_Laplacian"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "We briefly review key concepts in Gaussian processes and the relevant variational approximation technique",
+        "The proposed graph Gaussian process is related to the embedding based models in that it can be viewed as a Gaussian process f (x) classifer that takes empirical kernel mean embeddings extracted from the 1-hop neighbourhood sub-graphs as inputs to predict node labels",
+        "We present two sets of experiments to benchmark the predictive performance of the graph Gaussian process against existing models under two different settings",
+        "In Section 5.1, we demonstrate that the graph Gaussian process is a viable and extremely competitive alternative to the graph convolutional neural network (GCN) in settings where there are sufficient labelled data points",
+        "We propose a Gaussian process model that is data-efficient for semi-supervised learning problems on graphs",
+        "We show that the proposed model is competitive with the state-ofthe-art deep learning models, and outperforms when the number of labels is small"
+    ],
+    "key_statements": [
+        "We briefly review key concepts in Gaussian processes and the relevant variational approximation technique",
+        "We propose a new Gaussian process model for graph-based semi-supervised learning problems that can generalize well with few labels, bridging the gap between the simpler models and the more data intensive graph neural networks",
+        "The alternative formulation views the graph Gaussian process as a Bayesian linear model on feature maps of the nodes that have been transformed by a function related to the graph Laplacian L",
+        "The proposed graph Gaussian process is related to the embedding based models in that it can be viewed as a Gaussian process f (x) classifer that takes empirical kernel mean embeddings extracted from the 1-hop neighbourhood sub-graphs as inputs to predict node labels",
+        "We present two sets of experiments to benchmark the predictive performance of the graph Gaussian process against existing models under two different settings",
+        "In Section 5.1, we demonstrate that the graph Gaussian process is a viable and extremely competitive alternative to the graph convolutional neural network (GCN) in settings where there are sufficient labelled data points",
+        "We propose a Gaussian process model that is data-efficient for semi-supervised learning problems on graphs",
+        "We show that the proposed model is competitive with the state-ofthe-art deep learning models, and outperforms when the number of labels is small",
+        "The construction of our model is motivated by distribution regression using the empirical kernel mean embeddings, and can be viewed under the framework of filtering in the graph spectrum"
+    ],
+    "summary": [
+        "We briefly review key concepts in Gaussian processes and the relevant variational approximation technique.",
+        "We construct the GGP prior from a Gaussian process distributed latent function f (x) : RD\u00d71 \u2192\u2212 R, f (x) \u223c GP 0, k\u03b8(x, x ) , where the key assumption is that the likelihood parameter hn for data point n is an average of the values of f over its 1-hop neighbourhood N e(n) as given by A: hn",
+        "Equation 12 can be viewed as the inner product between the empirical kernel mean embeddings that correspond to the bags of node features observed in the 1-hop neighborhood sub-graphs of node m and n, relating the proposed model to the Gaussian process distribution regression model presented in e.g.",
+        "The alternative formulation views the GGP as a Bayesian linear model on feature maps of the nodes that have been transformed by a function related to the graph Laplacian L.",
+        "Implementing the GGP with its variational inference algorithm amounts to implementing a new kernel function that follows Equation 12 in the GPflow Python package.1 We introduce a set of M inducing random variables u = [f (z1), .",
+        "The GGP differs from the previously proposed GP models in that the local neighbourhood structures of the graph and the node features are directly used in the specification of the covariance function, resulting in a simple model that is highly effective.",
+        "The proposed GGP is related to the embedding based models in that it can be viewed as a GP classifer that takes empirical kernel mean embeddings extracted from the 1-hop neighbourhood sub-graphs as inputs to predict node labels.",
+        "In Section 5.1, we demonstrate that the GGP is a viable and extremely competitive alternative to the graph convolutional neural network (GCN) in settings where there are sufficient labelled data points.",
+        "A subset of unlabelled data points are selected sequentially to be queried according to an acquisition function, with the goal of maximizing the accuracy of the predictive model using significantly fewer labels than would be required if the labelled set were sampled uniformly at random [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>].",
+        "The SOPT acquisition function is model agnostic in that it only requires the Laplacian matrix of the observed graph and the indices of the labelled nodes in order to identify the node to query, such that the predictive accuracy of the active learner is maximally increased.",
+        "The spectral view offers a new potential research direction that can be explored in future work"
+    ],
+    "headline": "We propose a data-efficient Gaussian process-based Bayesian approach to the semisupervised learning problem on graphs",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] James Atwood and Don Towsley. Diffusion-convolutional neural networks. In Advances in Neural Information Processing Systems, pages 1993\u20132001, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Atwood%2C%20James%20Towsley%2C%20Don%20Diffusion-convolutional%20neural%20networks%201993",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Atwood%2C%20James%20Towsley%2C%20Don%20Diffusion-convolutional%20neural%20networks%201993"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Maria-Florina Balcan, Steve Hanneke, and Jennifer Wortman Vaughan. The true sample complexity of active learning. Machine learning, 80(2-3):111\u2013139, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Balcan%2C%20Maria-Florina%20Hanneke%2C%20Steve%20Vaughan%2C%20Jennifer%20Wortman%20The%20true%20sample%20complexity%20of%20active%20learning%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Balcan%2C%20Maria-Florina%20Hanneke%2C%20Steve%20Vaughan%2C%20Jennifer%20Wortman%20The%20true%20sample%20complexity%20of%20active%20learning%202010"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Mikhail Belkin, Partha Niyogi, and Vikas Sindhwani. Manifold regularization: A geometric framework for learning from labeled and unlabeled examples. Journal of machine learning research, 7(Nov):2399\u20132434, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Belkin%2C%20Mikhail%20Niyogi%2C%20Partha%20Sindhwani%2C%20Vikas%20Manifold%20regularization%3A%20A%20geometric%20framework%20for%20learning%20from%20labeled%20and%20unlabeled%20examples%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Belkin%2C%20Mikhail%20Niyogi%2C%20Partha%20Sindhwani%2C%20Vikas%20Manifold%20regularization%3A%20A%20geometric%20framework%20for%20learning%20from%20labeled%20and%20unlabeled%20examples%202006"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Michael M Bronstein, Joan Bruna, Yann LeCun, Arthur Szlam, and Pierre Vandergheynst. Geometric deep learning: going beyond euclidean data. IEEE Signal Processing Magazine, 34(4):18\u201342, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bronstein%2C%20Michael%20M.%20Bruna%2C%20Joan%20LeCun%2C%20Yann%20Szlam%2C%20Arthur%20Geometric%20deep%20learning%3A%20going%20beyond%20euclidean%20data%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bronstein%2C%20Michael%20M.%20Bruna%2C%20Joan%20LeCun%2C%20Yann%20Szlam%2C%20Arthur%20Geometric%20deep%20learning%3A%20going%20beyond%20euclidean%20data%202017"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Joan Bruna, Wojciech Zaremba, Arthur Szlam, and Yann LeCun. Spectral networks and locally connected networks on graphs. arXiv preprint arXiv:1312.6203, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.6203"
+        },
+        {
+            "id": "6",
+            "entry": "[6] M Yu Byron, John P Cunningham, Gopal Santhanam, Stephen I Ryu, Krishna V Shenoy, and Maneesh Sahani. Gaussian-process factor analysis for low-dimensional single-trial analysis of neural population activity. In Advances in neural information processing systems, pages 1881\u20131888, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Byron%2C%20M.Yu%20Cunningham%2C%20John%20P.%20Santhanam%2C%20Gopal%20Ryu%2C%20Stephen%20I.%20Gaussian-process%20factor%20analysis%20for%20low-dimensional%20single-trial%20analysis%20of%20neural%20population%20activity%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Byron%2C%20M.Yu%20Cunningham%2C%20John%20P.%20Santhanam%2C%20Gopal%20Ryu%2C%20Stephen%20I.%20Gaussian-process%20factor%20analysis%20for%20low-dimensional%20single-trial%20analysis%20of%20neural%20population%20activity%202009"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Olivier Chapelle, Bernhard Scholkopf, and Alexander Zien. Semi-supervised learning (chapelle, o. et al., eds.; 2006)[book reviews]. IEEE Transactions on Neural Networks, 20(3):542\u2013542, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chapelle%2C%20Olivier%20Scholkopf%2C%20Bernhard%20Zien%2C%20Alexander%20Semi-supervised%20learning%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chapelle%2C%20Olivier%20Scholkopf%2C%20Bernhard%20Zien%2C%20Alexander%20Semi-supervised%20learning%202009"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Wei Chu, Vikas Sindhwani, Zoubin Ghahramani, and S Sathiya Keerthi. Relational learning with gaussian processes. In Advances in Neural Information Processing Systems, pages 289\u2013296, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chu%2C%20Wei%20Sindhwani%2C%20Vikas%20Ghahramani%2C%20Zoubin%20Keerthi%2C%20S.Sathiya%20Relational%20learning%20with%20gaussian%20processes%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chu%2C%20Wei%20Sindhwani%2C%20Vikas%20Ghahramani%2C%20Zoubin%20Keerthi%2C%20S.Sathiya%20Relational%20learning%20with%20gaussian%20processes%202007"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Fan R. K. Chung. Spectral Graph Theory. American Mathematical Society, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chung%2C%20Fan%20R.K.%20Spectral%20Graph%20Theory%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chung%2C%20Fan%20R.K.%20Spectral%20Graph%20Theory%201997"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Andreas Damianou and Neil Lawrence. Deep gaussian processes. In Artificial Intelligence and Statistics, pages 207\u2013215, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Damianou%2C%20Andreas%20Lawrence%2C%20Neil%20Deep%20gaussian%20processes%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Damianou%2C%20Andreas%20Lawrence%2C%20Neil%20Deep%20gaussian%20processes%202013"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Gautam Dasarathy, Robert Nowak, and Xiaojin Zhu. S2: An efficient graph based active learning algorithm with application to nonparametric classification. In Conference on Learning Theory, pages 503\u2013522, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dasarathy%2C%20Gautam%20Nowak%2C%20Robert%20Zhu%2C%20Xiaojin%20S2%3A%20An%20efficient%20graph%20based%20active%20learning%20algorithm%20with%20application%20to%20nonparametric%20classification%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dasarathy%2C%20Gautam%20Nowak%2C%20Robert%20Zhu%2C%20Xiaojin%20S2%3A%20An%20efficient%20graph%20based%20active%20learning%20algorithm%20with%20application%20to%20nonparametric%20classification%202015"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Micha\u00ebl Defferrard, Xavier Bresson, and Pierre Vandergheynst. Convolutional neural networks on graphs with fast localized spectral filtering. In Advances in Neural Information Processing Systems, pages 3844\u20133852, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Defferrard%2C%20Micha%C3%ABl%20Bresson%2C%20Xavier%20Vandergheynst%2C%20Pierre%20Convolutional%20neural%20networks%20on%20graphs%20with%20fast%20localized%20spectral%20filtering%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Defferrard%2C%20Micha%C3%ABl%20Bresson%2C%20Xavier%20Vandergheynst%2C%20Pierre%20Convolutional%20neural%20networks%20on%20graphs%20with%20fast%20localized%20spectral%20filtering%202016"
+        },
+        {
+            "id": "13",
+            "entry": "[13] David Duvenaud. Automatic model construction with Gaussian processes. PhD thesis, University of Cambridge, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Duvenaud%2C%20David%20Automatic%20model%20construction%20with%20Gaussian%20processes%202014"
+        },
+        {
+            "id": "14",
+            "entry": "[14] David K Duvenaud, Hannes Nickisch, and Carl E Rasmussen. Additive gaussian processes. In Advances in neural information processing systems, pages 226\u2013234, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Duvenaud%2C%20David%20K.%20Nickisch%2C%20Hannes%20Rasmussen%2C%20Carl%20E.%20Additive%20gaussian%20processes%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Duvenaud%2C%20David%20K.%20Nickisch%2C%20Hannes%20Rasmussen%2C%20Carl%20E.%20Additive%20gaussian%20processes%202011"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Seth R Flaxman, Yu-Xiang Wang, and Alexander J Smola. Who supported Obama in 2012?: Ecological inference through distribution regression. In Proceedings of the 21th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, pages 289\u2013298. ACM, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Seth%20R%20Flaxman%20YuXiang%20Wang%20and%20Alexander%20J%20Smola%20Who%20supported%20Obama%20in%202012%20Ecological%20inference%20through%20distribution%20regression%20In%20Proceedings%20of%20the%2021th%20ACM%20SIGKDD%20International%20Conference%20on%20Knowledge%20Discovery%20and%20Data%20Mining%20pages%20289298%20ACM%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Seth%20R%20Flaxman%20YuXiang%20Wang%20and%20Alexander%20J%20Smola%20Who%20supported%20Obama%20in%202012%20Ecological%20inference%20through%20distribution%20regression%20In%20Proceedings%20of%20the%2021th%20ACM%20SIGKDD%20International%20Conference%20on%20Knowledge%20Discovery%20and%20Data%20Mining%20pages%20289298%20ACM%202015"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Mark Girolami and Simon Rogers. Variational bayesian multinomial probit regression with gaussian process priors. Neural Computation, 18(8):1790\u20131817, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Girolami%2C%20Mark%20Rogers%2C%20Simon%20Variational%20bayesian%20multinomial%20probit%20regression%20with%20gaussian%20process%20priors%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Girolami%2C%20Mark%20Rogers%2C%20Simon%20Variational%20bayesian%20multinomial%20probit%20regression%20with%20gaussian%20process%20priors%202006"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Anna Goldenberg, Alice X Zheng, Stephen E Fienberg, Edoardo M Airoldi, et al. A survey of statistical network models. Foundations and Trends R in Machine Learning, 2(2):129\u2013233, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goldenberg%2C%20Anna%20Zheng%2C%20Alice%20X.%20Fienberg%2C%20Stephen%20E.%20Airoldi%2C%20Edoardo%20M.%20A%20survey%20of%20statistical%20network%20models%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goldenberg%2C%20Anna%20Zheng%2C%20Alice%20X.%20Fienberg%2C%20Stephen%20E.%20Airoldi%2C%20Edoardo%20M.%20A%20survey%20of%20statistical%20network%20models%202010"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Marco Gori, Gabriele Monfardini, and Franco Scarselli. A new model for learning in graph domains. In Neural Networks, 2005. IJCNN\u201905. Proceedings. 2005 IEEE International Joint Conference on, volume 2, pages 729\u2013734. IEEE, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gori%2C%20Marco%20Monfardini%2C%20Gabriele%20Scarselli%2C%20Franco%20A%20new%20model%20for%20learning%20in%20graph%20domains%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gori%2C%20Marco%20Monfardini%2C%20Gabriele%20Scarselli%2C%20Franco%20A%20new%20model%20for%20learning%20in%20graph%20domains%202005"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Aditya Grover and Jure Leskovec. node2vec: Scalable feature learning for networks. In Proceedings of the 22nd ACM SIGKDD international conference on Knowledge discovery and data mining, pages 855\u2013864. ACM, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Grover%2C%20Aditya%20Leskovec%2C%20Jure%20node2vec%3A%20Scalable%20feature%20learning%20for%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Grover%2C%20Aditya%20Leskovec%2C%20Jure%20node2vec%3A%20Scalable%20feature%20learning%20for%20networks%202016"
+        },
+        {
+            "id": "20",
+            "entry": "[20] James Hensman, Alexander G Matthews, Maurizio Filippone, and Zoubin Ghahramani. Mcmc for variationally sparse gaussian processes. In Advances in Neural Information Processing Systems, pages 1648\u20131656, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hensman%2C%20James%20Matthews%2C%20Alexander%20G.%20Filippone%2C%20Maurizio%20Ghahramani%2C%20Zoubin%20Mcmc%20for%20variationally%20sparse%20gaussian%20processes%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hensman%2C%20James%20Matthews%2C%20Alexander%20G.%20Filippone%2C%20Maurizio%20Ghahramani%2C%20Zoubin%20Mcmc%20for%20variationally%20sparse%20gaussian%20processes%202015"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Daniel Hern\u00e1ndez-Lobato, Jos\u00e9 M Hern\u00e1ndez-Lobato, and Pierre Dupont. Robust multi-class gaussian process classification. In Advances in neural information processing systems, pages 280\u2013288, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hern%C3%A1ndez-Lobato%2C%20Daniel%20Hern%C3%A1ndez-Lobato%2C%20Jos%C3%A9%20M.%20Dupont%2C%20Pierre%20Robust%20multi-class%20gaussian%20process%20classification%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hern%C3%A1ndez-Lobato%2C%20Daniel%20Hern%C3%A1ndez-Lobato%2C%20Jos%C3%A9%20M.%20Dupont%2C%20Pierre%20Robust%20multi-class%20gaussian%20process%20classification%202011"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Kwang-Sung Jun and Robert Nowak. Graph-based active learning: A new look at expected error minimization. In Signal and Information Processing (GlobalSIP), 2016 IEEE Global Conference on, pages 1325\u20131329. IEEE, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jun%2C%20Kwang-Sung%20Nowak%2C%20Robert%20Graph-based%20active%20learning%3A%20A%20new%20look%20at%20expected%20error%20minimization%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jun%2C%20Kwang-Sung%20Nowak%2C%20Robert%20Graph-based%20active%20learning%3A%20A%20new%20look%20at%20expected%20error%20minimization%202016"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Hyun-Chul Kim and Zoubin Ghahramani. Bayesian gaussian process classification with the em-ep algorithm. IEEE Transactions on Pattern Analysis and Machine Intelligence, 28(12):1948\u2013 1959, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kim%2C%20Hyun-Chul%20Ghahramani%2C%20Zoubin%20Bayesian%20gaussian%20process%20classification%20with%20the%20em-ep%20algorithm%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kim%2C%20Hyun-Chul%20Ghahramani%2C%20Zoubin%20Bayesian%20gaussian%20process%20classification%20with%20the%20em-ep%20algorithm%202006"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Diederik P Kingma and Jimmy Ba. Adam: A method for stochastic optimization. arXiv preprint arXiv:1412.6980, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6980"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Thomas N Kipf and Max Welling. Semi-supervised classification with graph convolutional networks. arXiv preprint arXiv:1609.02907, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.02907"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Yujia Li, Daniel Tarlow, Marc Brockschmidt, and Richard Zemel. Gated graph sequence neural networks. arXiv preprint arXiv:1511.05493, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.05493"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Qing Lu and Lise Getoor. Link-based classification. In Proceedings of the 20th International Conference on Machine Learning (ICML-03), pages 496\u2013503, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lu%2C%20Qing%20Getoor%2C%20Lise%20Link-based%20classification%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lu%2C%20Qing%20Getoor%2C%20Lise%20Link-based%20classification%202003"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Yifei Ma, Roman Garnett, and Jeff Schneider. \u03c3-optimality for active learning on gaussian random fields. In Advances in Neural Information Processing Systems, pages 2751\u20132759, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ma%2C%20Yifei%20Garnett%2C%20Roman%20Schneider%2C%20Jeff%20%CF%83-optimality%20for%20active%20learning%20on%20gaussian%20random%20fields%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ma%2C%20Yifei%20Garnett%2C%20Roman%20Schneider%2C%20Jeff%20%CF%83-optimality%20for%20active%20learning%20on%20gaussian%20random%20fields%202013"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Oisin Mac Aodha, Neill D.F. Campbell, Jan Kautz, and Gabriel J. Brostow. Hierarchical Subquery Evaluation for Active Learning on a Graph. In CVPR, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Aodha%2C%20Oisin%20Mac%20Campbell%2C%20Neill%20D.F.%20Kautz%2C%20Jan%20Brostow%2C%20Gabriel%20J.%20Hierarchical%20Subquery%20Evaluation%20for%20Active%20Learning%20on%20a%20Graph%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Aodha%2C%20Oisin%20Mac%20Campbell%2C%20Neill%20D.F.%20Kautz%2C%20Jan%20Brostow%2C%20Gabriel%20J.%20Hierarchical%20Subquery%20Evaluation%20for%20Active%20Learning%20on%20a%20Graph%202014"
+        },
+        {
+            "id": "30",
+            "entry": "[30] A Matthews. Scalable Gaussian process inference using variational methods. PhD thesis, PhD thesis. University of Cambridge, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Matthews%2C%20A.%20Scalable%20Gaussian%20process%20inference%20using%20variational%20methods%202016"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Federico Monti, Davide Boscaini, Jonathan Masci, Emanuele Rodol\u00e0, Jan Svoboda, and Michael M. Bronstein. Geometric deep learning on graphs and manifolds using mixture model cnns. In 2017 IEEE Conference on Computer Vision and Pattern Recognition, CVPR 2017, Honolulu, HI, USA, July 21-26, 2017, pages 5425\u20135434. IEEE Computer Society, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Monti%2C%20Federico%20Boscaini%2C%20Davide%20Masci%2C%20Jonathan%20Rodol%C3%A0%2C%20Emanuele%20Geometric%20deep%20learning%20on%20graphs%20and%20manifolds%20using%20mixture%20model%20cnns%202017-07-21",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Monti%2C%20Federico%20Boscaini%2C%20Davide%20Masci%2C%20Jonathan%20Rodol%C3%A0%2C%20Emanuele%20Geometric%20deep%20learning%20on%20graphs%20and%20manifolds%20using%20mixture%20model%20cnns%202017-07-21"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Krikamol Muandet, Kenji Fukumizu, Bharath Sriperumbudur, Bernhard Sch\u00f6lkopf, et al. Kernel mean embedding of distributions: A review and beyond. Foundations and Trends R in Machine Learning, 10(1-2):1\u2013141, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Muandet%2C%20Krikamol%20Fukumizu%2C%20Kenji%20Sriperumbudur%2C%20Bharath%20Sch%C3%B6lkopf%2C%20Bernhard%20Kernel%20mean%20embedding%20of%20distributions%3A%20A%20review%20and%20beyond%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Muandet%2C%20Krikamol%20Fukumizu%2C%20Kenji%20Sriperumbudur%2C%20Bharath%20Sch%C3%B6lkopf%2C%20Bernhard%20Kernel%20mean%20embedding%20of%20distributions%3A%20A%20review%20and%20beyond%202017"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Bryan Perozzi, Rami Al-Rfou, and Steven Skiena. Deepwalk: Online learning of social representations. In Proceedings of the 20th ACM SIGKDD international conference on Knowledge discovery and data mining, pages 701\u2013710. ACM, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Perozzi%2C%20Bryan%20Al-Rfou%2C%20Rami%20Skiena%2C%20Steven%20Deepwalk%3A%20Online%20learning%20of%20social%20representations%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Perozzi%2C%20Bryan%20Al-Rfou%2C%20Rami%20Skiena%2C%20Steven%20Deepwalk%3A%20Online%20learning%20of%20social%20representations%202014"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Hugh Salimbeni and Marc Deisenroth. Doubly stochastic variational inference for deep gaussian processes. In Advances in Neural Information Processing Systems, pages 4588\u20134599, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Salimbeni%2C%20Hugh%20Deisenroth%2C%20Marc%20Doubly%20stochastic%20variational%20inference%20for%20deep%20gaussian%20processes%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Salimbeni%2C%20Hugh%20Deisenroth%2C%20Marc%20Doubly%20stochastic%20variational%20inference%20for%20deep%20gaussian%20processes%202017"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Aliaksei Sandryhaila and Jose MF Moura. Big data analysis with signal processing on graphs: Representation and processing of massive data sets with irregular structure. IEEE Signal Processing Magazine, 31(5):80\u201390, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sandryhaila%2C%20Aliaksei%20Moura%2C%20Jose%20M.F.%20Big%20data%20analysis%20with%20signal%20processing%20on%20graphs%3A%20Representation%20and%20processing%20of%20massive%20data%20sets%20with%20irregular%20structure%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sandryhaila%2C%20Aliaksei%20Moura%2C%20Jose%20M.F.%20Big%20data%20analysis%20with%20signal%20processing%20on%20graphs%3A%20Representation%20and%20processing%20of%20massive%20data%20sets%20with%20irregular%20structure%202014"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Franco Scarselli, Marco Gori, Ah Chung Tsoi, Markus Hagenbuchner, and Gabriele Monfardini. The graph neural network model. IEEE Transactions on Neural Networks, 20(1):61\u201380, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Scarselli%2C%20Franco%20Gori%2C%20Marco%20Tsoi%2C%20Ah%20Chung%20Hagenbuchner%2C%20Markus%20The%20graph%20neural%20network%20model%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Scarselli%2C%20Franco%20Gori%2C%20Marco%20Tsoi%2C%20Ah%20Chung%20Hagenbuchner%2C%20Markus%20The%20graph%20neural%20network%20model%202009"
+        },
+        {
+            "id": "37",
+            "entry": "[37] David I Shuman, Sunil K Narang, Pascal Frossard, Antonio Ortega, and Pierre Vandergheynst. The emerging field of signal processing on graphs: Extending high-dimensional data analysis to networks and other irregular domains. IEEE Signal Processing Magazine, 30(3):83\u201398, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shuman%2C%20David%20I.%20Narang%2C%20Sunil%20K.%20Frossard%2C%20Pascal%20Ortega%2C%20Antonio%20The%20emerging%20field%20of%20signal%20processing%20on%20graphs%3A%20Extending%20high-dimensional%20data%20analysis%20to%20networks%20and%20other%20irregular%20domains%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shuman%2C%20David%20I.%20Narang%2C%20Sunil%20K.%20Frossard%2C%20Pascal%20Ortega%2C%20Antonio%20The%20emerging%20field%20of%20signal%20processing%20on%20graphs%3A%20Extending%20high-dimensional%20data%20analysis%20to%20networks%20and%20other%20irregular%20domains%202013"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Ricardo Silva, Wei Chu, and Zoubin Ghahramani. Hidden common cause relations in relational learning. In Advances in neural information processing systems, pages 1345\u20131352, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silva%2C%20Ricardo%20Chu%2C%20Wei%20Ghahramani%2C%20Zoubin%20Hidden%20common%20cause%20relations%20in%20relational%20learning%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silva%2C%20Ricardo%20Chu%2C%20Wei%20Ghahramani%2C%20Zoubin%20Hidden%20common%20cause%20relations%20in%20relational%20learning%202008"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Alexander J Smola and Risi Kondor. Kernels and regularization on graphs. In Learning theory and kernel machines, pages 144\u2013158.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Smola%2C%20Alexander%20J.%20Kondor%2C%20Risi%20Kernels%20and%20regularization%20on%20graphs",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Smola%2C%20Alexander%20J.%20Kondor%2C%20Risi%20Kernels%20and%20regularization%20on%20graphs"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Karen Sparck Jones. A statistical interpretation of term specificity and its application in retrieval. Journal of documentation, 28(1):11\u201321, 1972.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jones%2C%20Karen%20Sparck%20A%20statistical%20interpretation%20of%20term%20specificity%20and%20its%20application%20in%20retrieval%201972",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jones%2C%20Karen%20Sparck%20A%20statistical%20interpretation%20of%20term%20specificity%20and%20its%20application%20in%20retrieval%201972"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Zolt\u00e1n Szab\u00f3, Bharath K Sriperumbudur, Barnab\u00e1s P\u00f3czos, and Arthur Gretton. Learning theory for distribution regression. The Journal of Machine Learning Research, 17(1):5272\u20135311, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Szab%C3%B3%2C%20Zolt%C3%A1n%20Sriperumbudur%2C%20Bharath%20K.%20P%C3%B3czos%2C%20Barnab%C3%A1s%20Gretton%2C%20Arthur%20Learning%20theory%20for%20distribution%20regression%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Szab%C3%B3%2C%20Zolt%C3%A1n%20Sriperumbudur%2C%20Bharath%20K.%20P%C3%B3czos%2C%20Barnab%C3%A1s%20Gretton%2C%20Arthur%20Learning%20theory%20for%20distribution%20regression%202016"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Mark van der Wilk, Carl Edward Rasmussen, and James Hensman. Convolutional gaussian processes. In Advances in Neural Information Processing Systems, pages 2845\u20132854, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=van%20der%20Wilk%2C%20Mark%20Rasmussen%2C%20Carl%20Edward%20Hensman%2C%20James%20Convolutional%20gaussian%20processes%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=van%20der%20Wilk%2C%20Mark%20Rasmussen%2C%20Carl%20Edward%20Hensman%2C%20James%20Convolutional%20gaussian%20processes%202017"
+        },
+        {
+            "id": "43",
+            "entry": "[43] S Vichy N Vishwanathan, Nicol N Schraudolph, Risi Kondor, and Karsten M Borgwardt. Graph kernels. Journal of Machine Learning Research, 11(Apr):1201\u20131242, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=S%20Vichy%20N%20Vishwanathan%20Nicol%20N%20Schraudolph%20Risi%20Kondor%20and%20Karsten%20M%20Borgwardt%20Graph%20kernels%20Journal%20of%20Machine%20Learning%20Research%2011Apr12011242%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=S%20Vichy%20N%20Vishwanathan%20Nicol%20N%20Schraudolph%20Risi%20Kondor%20and%20Karsten%20M%20Borgwardt%20Graph%20kernels%20Journal%20of%20Machine%20Learning%20Research%2011Apr12011242%202010"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Jason Weston, Fr\u00e9d\u00e9ric Ratle, Hossein Mobahi, and Ronan Collobert. Deep learning via semisupervised embedding. In Neural Networks: Tricks of the Trade, pages 639\u2013655.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jason%20Weston%2C%20Fr%C3%A9d%C3%A9ric%20Ratle%2C%20Hossein%20Mobahi%20Collobert%2C%20Ronan%20Deep%20learning%20via%20semisupervised%20embedding",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jason%20Weston%2C%20Fr%C3%A9d%C3%A9ric%20Ratle%2C%20Hossein%20Mobahi%20Collobert%2C%20Ronan%20Deep%20learning%20via%20semisupervised%20embedding"
+        },
+        {
+            "id": "45",
+            "entry": "[45] Christopher KI Williams and Carl Edward Rasmussen. Gaussian processes for machine learning. the MIT Press, 2(3):4, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%2C%20Christopher%20K.I.%20Rasmussen%2C%20Carl%20Edward%20Gaussian%20processes%20for%20machine%20learning%202006"
+        },
+        {
+            "id": "46",
+            "entry": "[46] Zhilin Yang, William W. Cohen, and Ruslan Salakhutdinov. Revisiting semi-supervised learning with graph embeddings. In Proceedings of the 33rd International Conference on International Conference on Machine Learning - Volume 48, ICML\u201916, pages 40\u201348. JMLR.org, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yang%2C%20Zhilin%20Cohen%2C%20William%20W.%20Salakhutdinov%2C%20Ruslan%20Revisiting%20semi-supervised%20learning%20with%20graph%20embeddings%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yang%2C%20Zhilin%20Cohen%2C%20William%20W.%20Salakhutdinov%2C%20Ruslan%20Revisiting%20semi-supervised%20learning%20with%20graph%20embeddings%202016"
+        },
+        {
+            "id": "47",
+            "entry": "[47] Xiaojin Zhu. Semi-supervised learning literature survey. Technical Report 1530, Computer Sciences, University of Wisconsin-Madison, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhu%2C%20Xiaojin%20Semi-supervised%20learning%20literature%20survey%202005"
+        },
+        {
+            "id": "48",
+            "entry": "[48] Xiaojin Zhu, Zoubin Ghahramani, and John D Lafferty. Semi-supervised learning using gaussian fields and harmonic functions. In Proceedings of the 20th International conference on Machine learning (ICML-03), pages 912\u2013919, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhu%2C%20Xiaojin%20Ghahramani%2C%20Zoubin%20Lafferty%2C%20John%20D.%20Semi-supervised%20learning%20using%20gaussian%20fields%20and%20harmonic%20functions%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhu%2C%20Xiaojin%20Ghahramani%2C%20Zoubin%20Lafferty%2C%20John%20D.%20Semi-supervised%20learning%20using%20gaussian%20fields%20and%20harmonic%20functions%202003"
+        },
+        {
+            "id": "49",
+            "entry": "[49] Xiaojin Zhu, John D Lafferty, and Zoubin Ghahramani. Semi-supervised learning: From gaussian fields to gaussian processes. Technical report, Carnegie Mellon University, Computer Science Department, 2003. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhu%2C%20Xiaojin%20Lafferty%2C%20John%20D.%20Ghahramani%2C%20Zoubin%20Semi-supervised%20learning%3A%20From%20gaussian%20fields%20to%20gaussian%20processes%202003"
+        }
+    ]
+}

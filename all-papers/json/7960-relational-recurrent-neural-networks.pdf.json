@@ -1,0 +1,320 @@
+{
+    "filename": "7960-relational-recurrent-neural-networks.pdf",
+    "metadata": {
+        "title": "Relational recurrent neural networks",
+        "author": "Adam Santoro, Ryan Faulkner, David Raposo, Jack Rae, Mike Chrzanowski, Theophane Weber, Daan Wierstra, Oriol Vinyals, Razvan Pascanu, Timothy Lillicrap",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7960-relational-recurrent-neural-networks.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Memory-based neural networks model temporal data by leveraging an ability to remember information for long periods. It is unclear, however, whether they also have an ability to perform complex relational reasoning with the information they remember. Here, we first confirm our intuitions that standard memory architectures may struggle at tasks that heavily involve an understanding of the ways in which entities are connected \u2013 i.e., tasks involving relational reasoning. We then improve upon these deficits by using a new memory module \u2013 a Relational Memory Core (RMC) \u2013 which employs multi-head dot product attention to allow memories to interact. Finally, we test the RMC on a suite of tasks that may profit from more capable relational reasoning across sequential information, and show large gains in RL domains (e.g. Mini PacMan), program evaluation, and language modeling, achieving state-of-the-art results on the WikiText-103, Project Gutenberg, and GigaWord datasets."
+    },
+    "keywords": [
+        {
+            "term": "language modeling",
+            "url": "https://en.wikipedia.org/wiki/language_modeling"
+        },
+        {
+            "term": "memory system",
+            "url": "https://en.wikipedia.org/wiki/memory_system"
+        },
+        {
+            "term": "recurrent neural network",
+            "url": "https://en.wikipedia.org/wiki/recurrent_neural_network"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Humans use sophisticated memory systems to access and reason about important information regardless of when it was initially perceived [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>]",
+        "N th Farthest. This task revealed a stark difference between our LSTM and DNC baselines and Relational Memory Core when training on 16-dimensional vector inputs",
+        "The Relational Memory Core achieved similar performance when the difficulty of the task was increased by using 32-dimensional vectors, placing a greater demand on high-fidelity memory storage",
+        "We evaluated a number of baselines alongside the Relational Memory Core including an LSTM [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c37\" href=\"#r37\">37</a>], DNC [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>], and a bank of LSTMs resembling Recurrent Entity Networks [<a class=\"ref-link\" id=\"c38\" href=\"#r38\">38</a>] (EntNet) - the configurations for each of these is described in the appendix",
+        "We hypothesized that memory-memory interactions may be underlie such computations, and proposed intuitions for the specific memory mechanisms that may better equip a model for complex relational reasoning",
+        "Our results show that explicit modeling of memory interactions improves performance in a reinforcement learning task, alongside program evaluation, comparative reasoning, and language modeling, demonstrating the value of instilling a capacity for relational reasoning in recurrent neural networks"
+    ],
+    "key_statements": [
+        "Humans use sophisticated memory systems to access and reason about important information regardless of when it was initially perceived [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>]",
+        "N th Farthest. This task revealed a stark difference between our LSTM and DNC baselines and Relational Memory Core when training on 16-dimensional vector inputs",
+        "The Relational Memory Core achieved similar performance when the difficulty of the task was increased by using 32-dimensional vectors, placing a greater demand on high-fidelity memory storage",
+        "We evaluated a number of baselines alongside the Relational Memory Core including an LSTM [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c37\" href=\"#r37\">37</a>], DNC [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>], and a bank of LSTMs resembling Recurrent Entity Networks [<a class=\"ref-link\" id=\"c38\" href=\"#r38\">38</a>] (EntNet) - the configurations for each of these is described in the appendix",
+        "We hypothesized that memory-memory interactions may be underlie such computations, and proposed intuitions for the specific memory mechanisms that may better equip a model for complex relational reasoning",
+        "We do not necessarily claim that a single memory slot is best for language modeling, rather, we emphasize an interesting trade-off between number of memories and individual memory size, which may be a task specific ratio that can be tuned",
+        "Our results show that explicit modeling of memory interactions improves performance in a reinforcement learning task, alongside program evaluation, comparative reasoning, and language modeling, demonstrating the value of instilling a capacity for relational reasoning in recurrent neural networks"
+    ],
+    "summary": [
+        "Humans use sophisticated memory systems to access and reason about important information regardless of when it was initially perceived [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>].",
+        "Increased capacity for relational reasoning across time: partially observed reinforcement learning tasks, program evaluation, and language modeling on the Wikitext-103, Project Gutenberg, and GigaWord datasets.",
+        "We implement this producing h sets of queries, keys, and values, using unique parameters to compute a linear projection from the original memory for each head h.",
+        "We use the same attention operation to efficiently compute memory interactions and to incorporate new information.",
+        "A model must compute all pairwise distance relations to the reference vector m, which might lie in memory, or might not have even been provided as input yet.",
+        "As a sequential reasoning task, language modeling allows us to assess the RMC\u2019s ability to process information over time on a large quantity of natural data, and compare it to well-tuned models.",
+        "This task revealed a stark difference between our LSTM and DNC baselines and RMC when training on 16-dimensional vector inputs.",
+        "Before m is seen the model seems to shuttle input information into one or two memory slots, as shown by the high attention weights from these slots\u2019 queries to the input key.",
+        "The results of the RMC outperform all equivalent tasks from [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>] which use teacher forcing even when evaluating model performance.",
+        "For all three language modeling tasks we observe lower perplexity when using the relational memory core, with a drop of 1.4 \u2212 5.4 perplexity over the best published results.",
+        "We hypothesized that memory-memory interactions may be underlie such computations, and proposed intuitions for the specific memory mechanisms that may better equip a model for complex relational reasoning.",
+        "By explicitly allowing memories to interact either with each other, with the input, or both via MHDPA, we demonstrated improved performance on tasks demanding relational reasoning across time.",
+        "Our model has multiple mechanisms for forming and allowing for interactions between memory vectors: slicing the memory matrix row-wise into slots, and column-wise into heads.",
+        "We do not necessarily claim that a single memory slot is best for language modeling, rather, we emphasize an interesting trade-off between number of memories and individual memory size, which may be a task specific ratio that can be tuned.",
+        "Our results show that explicit modeling of memory interactions improves performance in a reinforcement learning task, alongside program evaluation, comparative reasoning, and language modeling, demonstrating the value of instilling a capacity for relational reasoning in recurrent neural networks."
+    ],
+    "headline": "In practice we did not find output gates necessary \u2013 please see the url in the footnote for our Tensorflow implementation of this model in the Sonnet library 2, and for the exact formulation we used, including our choice for the g\u03c8 function ",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Daniel L Schacter and Endel Tulving. Memory systems 1994. Mit Press, 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schacter%2C%20Daniel%20L.%20Tulving%2C%20Endel%20Memory%20systems%201994"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Barbara J Knowlton, Robert G Morrison, John E Hummel, and Keith J Holyoak. A neurocomputational system for relational reasoning. Trends in cognitive sciences, 16(7):373\u2013381, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Knowlton%2C%20Barbara%20J.%20Morrison%2C%20Robert%20G.%20Hummel%2C%20John%20E.%20Holyoak%2C%20Keith%20J.%20A%20neurocomputational%20system%20for%20relational%20reasoning%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Knowlton%2C%20Barbara%20J.%20Morrison%2C%20Robert%20G.%20Hummel%2C%20John%20E.%20Holyoak%2C%20Keith%20J.%20A%20neurocomputational%20system%20for%20relational%20reasoning%202012"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Sepp Hochreiter and Jurgen Schmidhuber. Long short term memory. Neural Computation, Volume 9, Issue 8 November 15, 1997, p.1735-1780, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20Jurgen%20Long%20short%20term%20memory%201997-11-08",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20Jurgen%20Long%20short%20term%20memory%201997-11-08"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Alex Graves, Greg Wayne, and Ivo Danihelka. Neural turing machines. arXiv preprint arXiv:1410.5401, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1410.5401"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Alex Graves, Greg Wayne, Malcolm Reynolds, Tim Harley, Ivo Danihelka, Agnieszka Grabska-Barwinska, Sergio G\u00f3mez Colmenarejo, Edward Grefenstette, Tiago Ramalho, John Agapiou, et al. Hybrid computing using a neural network with dynamic external memory. Nature, 538(7626):471, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Graves%2C%20Alex%20Wayne%2C%20Greg%20Reynolds%2C%20Malcolm%20Harley%2C%20Tim%20Hybrid%20computing%20using%20a%20neural%20network%20with%20dynamic%20external%20memory%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Graves%2C%20Alex%20Wayne%2C%20Greg%20Reynolds%2C%20Malcolm%20Harley%2C%20Tim%20Hybrid%20computing%20using%20a%20neural%20network%20with%20dynamic%20external%20memory%202016"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Adam Santoro, Sergey Bartunov, Matthew Botvinick, Daan Wierstra, and Timothy Lillicrap. Metalearning with memory-augmented neural networks. In International conference on machine learning, pages 1842\u20131850, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Santoro%2C%20Adam%20Bartunov%2C%20Sergey%20Botvinick%2C%20Matthew%20Wierstra%2C%20Daan%20Metalearning%20with%20memory-augmented%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Santoro%2C%20Adam%20Bartunov%2C%20Sergey%20Botvinick%2C%20Matthew%20Wierstra%2C%20Daan%20Metalearning%20with%20memory-augmented%20neural%20networks%202016"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Sainbayar Sukhbaatar, Jason Weston, Rob Fergus, et al. End-to-end memory networks. In Advances in neural information processing systems, pages 2440\u20132448, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sukhbaatar%2C%20Sainbayar%20Weston%2C%20Jason%20Fergus%2C%20Rob%20End-to-end%20memory%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sukhbaatar%2C%20Sainbayar%20Weston%2C%20Jason%20Fergus%2C%20Rob%20End-to-end%20memory%20networks%202015"
+        },
+        {
+            "id": "8",
+            "entry": "[8] James A Waltz, Barbara J Knowlton, Keith J Holyoak, Kyle B Boone, Fred S Mishkin, Marcia de Menezes Santos, Carmen R Thomas, and Bruce L Miller. A system for relational reasoning in human prefrontal cortex. Psychological science, 10(2):119\u2013125, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Waltz%2C%20James%20A.%20Knowlton%2C%20Barbara%20J.%20Holyoak%2C%20Keith%20J.%20Boone%2C%20Kyle%20B.%20A%20system%20for%20relational%20reasoning%20in%20human%20prefrontal%20cortex%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Waltz%2C%20James%20A.%20Knowlton%2C%20Barbara%20J.%20Holyoak%2C%20Keith%20J.%20Boone%2C%20Kyle%20B.%20A%20system%20for%20relational%20reasoning%20in%20human%20prefrontal%20cortex%201999"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Justin Gilmer, Samuel S Schoenholz, Patrick F Riley, Oriol Vinyals, and George E Dahl. Neural message passing for quantum chemistry. arXiv preprint arXiv:1704.01212, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1704.01212"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Franco Scarselli, Marco Gori, Ah Chung Tsoi, Markus Hagenbuchner, and Gabriele Monfardini. The graph neural network model. IEEE Transactions on Neural Networks, 20(1):61\u201380, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Scarselli%2C%20Franco%20Gori%2C%20Marco%20Tsoi%2C%20Ah%20Chung%20Hagenbuchner%2C%20Markus%20The%20graph%20neural%20network%20model%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Scarselli%2C%20Franco%20Gori%2C%20Marco%20Tsoi%2C%20Ah%20Chung%20Hagenbuchner%2C%20Markus%20The%20graph%20neural%20network%20model%202009"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Yujia Li, Daniel Tarlow, Marc Brockschmidt, and Richard S. Zemel. Gated graph sequence neural networks. ICLR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Yujia%20Tarlow%2C%20Daniel%20Brockschmidt%2C%20Marc%20Zemel%2C%20Richard%20S.%20Gated%20graph%20sequence%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20Yujia%20Tarlow%2C%20Daniel%20Brockschmidt%2C%20Marc%20Zemel%2C%20Richard%20S.%20Gated%20graph%20sequence%20neural%20networks%202016"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Peter Battaglia, Razvan Pascanu, Matthew Lai, Danilo Jimenez Rezende, et al. Interaction networks for learning about objects, relations and physics. In Advances in neural information processing systems, pages 4502\u20134510, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Battaglia%2C%20Peter%20Pascanu%2C%20Razvan%20Lai%2C%20Matthew%20Rezende%2C%20Danilo%20Jimenez%20Interaction%20networks%20for%20learning%20about%20objects%2C%20relations%20and%20physics%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Battaglia%2C%20Peter%20Pascanu%2C%20Razvan%20Lai%2C%20Matthew%20Rezende%2C%20Danilo%20Jimenez%20Interaction%20networks%20for%20learning%20about%20objects%2C%20relations%20and%20physics%202016"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Thomas N Kipf and Max Welling. Semi-supervised classification with graph convolutional networks. arXiv preprint arXiv:1609.02907, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.02907"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Petar Velickovic, Guillem Cucurull, Arantxa Casanova, Adriana Romero, Pietro Li\u00f2, and Yoshua Bengio. Graph attention networks. In International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Petar%20Velickovic%20Guillem%20Cucurull%20Arantxa%20Casanova%20Adriana%20Romero%20Pietro%20Li%C3%B2%20and%20Yoshua%20Bengio%20Graph%20attention%20networks%20In%20International%20Conference%20on%20Learning%20Representations%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Petar%20Velickovic%20Guillem%20Cucurull%20Arantxa%20Casanova%20Adriana%20Romero%20Pietro%20Li%C3%B2%20and%20Yoshua%20Bengio%20Graph%20attention%20networks%20In%20International%20Conference%20on%20Learning%20Representations%202018"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Adam Santoro, David Raposo, David G Barrett, Mateusz Malinowski, Razvan Pascanu, Peter Battaglia, and Tim Lillicrap. A simple neural network module for relational reasoning. In Advances in neural information processing systems, pages 4974\u20134983, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Santoro%2C%20Adam%20Raposo%2C%20David%20Barrett%2C%20David%20G.%20Malinowski%2C%20Mateusz%20A%20simple%20neural%20network%20module%20for%20relational%20reasoning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Santoro%2C%20Adam%20Raposo%2C%20David%20Barrett%2C%20David%20G.%20Malinowski%2C%20Mateusz%20A%20simple%20neural%20network%20module%20for%20relational%20reasoning%202017"
+        },
+        {
+            "id": "16",
+            "entry": "[16] David Raposo, Adam Santoro, David Barrett, Razvan Pascanu, Timothy Lillicrap, and Peter Battaglia. Discovering objects and their relations from entangled scene representations. arXiv preprint arXiv:1702.05068, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1702.05068"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Han Hu, Jiayuan Gu, Zheng Zhang, Jifeng Dai, and Yichen Wei. Relation networks for object detection. arXiv preprint arXiv:1711.11575, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.11575"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Xiaolong Wang, Ross Girshick, Abhinav Gupta, and Kaiming He. Non-local neural networks. arXiv preprint arXiv:1711.07971, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.07971"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Ding Liu, Bihan Wen, Yuchen Fan, Chen Change Loy, and Thomas S Huang. Non-local recurrent network for image restoration. arXiv preprint arXiv:1806.02919, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1806.02919"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Juan Pavez, H\u00e9ctor Allende, and H\u00e9ctor Allende-Cid. Working memory networks: Augmenting memory networks with a relational reasoning module. arXiv preprint arXiv:1805.09354, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1805.09354"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio. Neural machine translation by jointly learning to align and translate. ICLR, abs/1409.0473, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bahdanau%2C%20Dzmitry%20Cho%2C%20Kyunghyun%20Bengio%2C%20Yoshua%20Neural%20machine%20translation%20by%20jointly%20learning%20to%20align%20and%20translate%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bahdanau%2C%20Dzmitry%20Cho%2C%20Kyunghyun%20Bengio%2C%20Yoshua%20Neural%20machine%20translation%20by%20jointly%20learning%20to%20align%20and%20translate%202015"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, \u0141ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In Advances in Neural Information Processing Systems, pages 6000\u20136010, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ashish%20Vaswani%20Noam%20Shazeer%20Niki%20Parmar%20Jakob%20Uszkoreit%20Llion%20Jones%20Aidan%20N%20Gomez%20%C5%81ukasz%20Kaiser%20and%20Illia%20Polosukhin%20Attention%20is%20all%20you%20need%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20pages%2060006010%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ashish%20Vaswani%20Noam%20Shazeer%20Niki%20Parmar%20Jakob%20Uszkoreit%20Llion%20Jones%20Aidan%20N%20Gomez%20%C5%81ukasz%20Kaiser%20and%20Illia%20Polosukhin%20Attention%20is%20all%20you%20need%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20pages%2060006010%202017"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Alex Graves. Generating sequences with recurrent neural networks. CoRR, abs/1308.0850, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1308.0850"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Felix A Gers, J\u00fcrgen Schmidhuber, and Fred Cummins. Learning to forget: Continual prediction with lstm. 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gers%2C%20Felix%20A.%20Schmidhuber%2C%20J%C3%BCrgen%20Cummins%2C%20Fred%20Learning%20to%20forget%3A%20Continual%20prediction%20with%20lstm%201999"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Wojciech Zaremba and Ilya Sutskever. Learning to execute. arXiv preprint arXiv:1410.4615v3, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1410.4615v3"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Th\u00e9ophane Weber, S\u00e9bastien Racani\u00e8re, David P Reichert, Lars Buesing, Arthur Guez, Danilo Jimenez Rezende, Adria Puigdom\u00e8nech Badia, Oriol Vinyals, Nicolas Heess, Yujia Li, et al. Imagination-augmented agents for deep reinforcement learning. arXiv preprint arXiv:1707.06203, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.06203"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Kyunghyun Cho, Bart Van Merri\u00ebnboer, Caglar Gulcehre, Dzmitry Bahdanau, Fethi Bougares, Holger Schwenk, and Yoshua Bengio. Learning phrase representations using rnn encoder-decoder for statistical machine translation. arXiv preprint arXiv:1406.1078, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1406.1078"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Dzmitry Bahdanau, Jan Chorowski, Dmitriy Serdyuk, Philemon Brakel, and Yoshua Bengio. End-to-end attention-based large vocabulary speech recognition. In Acoustics, Speech and Signal Processing (ICASSP), 2016 IEEE International Conference on, pages 4945\u20134949. IEEE, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bahdanau%2C%20Dzmitry%20Chorowski%2C%20Jan%20Serdyuk%2C%20Dmitriy%20Brakel%2C%20Philemon%20End-to-end%20attention-based%20large%20vocabulary%20speech%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bahdanau%2C%20Dzmitry%20Chorowski%2C%20Jan%20Serdyuk%2C%20Dmitriy%20Brakel%2C%20Philemon%20End-to-end%20attention-based%20large%20vocabulary%20speech%20recognition%202016"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Djoerd Hiemstra. Using language models for information retrieval. 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hiemstra%2C%20Djoerd%20Using%20language%20models%20for%20information%20retrieval%202001"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Zhilin Yang, Zihang Dai, Ruslan Salakhutdinov, and William W Cohen. Breaking the softmax bottleneck: a high-rank rnn language model. arXiv preprint arXiv:1711.03953, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.03953"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Mitchell P Marcus, Mary Ann Marcinkiewicz, and Beatrice Santorini. Building a large annotated corpus of english: The penn treebank. Computational linguistics, 19(2):313\u2013330, 1993.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Marcus%2C%20Mitchell%20P.%20Marcinkiewicz%2C%20Mary%20Ann%20Santorini%2C%20Beatrice%20Building%20a%20large%20annotated%20corpus%20of%20english%3A%20The%20penn%20treebank%201993",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Marcus%2C%20Mitchell%20P.%20Marcinkiewicz%2C%20Mary%20Ann%20Santorini%2C%20Beatrice%20Building%20a%20large%20annotated%20corpus%20of%20english%3A%20The%20penn%20treebank%201993"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Jack W Rae, Chris Dyer, Peter Dayan, and Timothy P Lillicrap. Fast parametric learning with activation memorization. arXiv preprint arXiv:1803.10049, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.10049"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Stephen Merity, Caiming Xiong, James Bradbury, and Richard Socher. Pointer sentinel mixture models. arXiv preprint arXiv:1609.07843, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.07843"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Rafal Jozefowicz, Oriol Vinyals, Mike Schuster, Noam Shazeer, and Yonghui Wu. Exploring the limits of language modeling. arXiv preprint arXiv:1602.02410, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1602.02410"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Ciprian Chelba, Tomas Mikolov, Mike Schuster, Qi Ge, Thorsten Brants, Phillipp Koehn, and Tony Robinson. One billion word benchmark for measuring progress in statistical language modeling. arXiv preprint arXiv:1312.3005, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.3005"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Robert Parker, David Graff, Junbo Kong, Ke Chen, and Kazuaki Maeda. English gigaword fifth edition ldc2011t07. dvd. Philadelphia: Linguistic Data Consortium, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Parker%2C%20Robert%20Graff%2C%20David%20Kong%2C%20Junbo%20Chen%2C%20Ke%20English%20gigaword%20fifth%20edition%20ldc2011t07.%20dvd%202011"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Razvan Pascanu, Caglar Gulcehre, Kyunghyun Cho, and Yoshua Bengio. How to construct deep recurrent neural networks. arXiv preprint arXiv:1312.6026, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.6026"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Mikael Henaff, Jason Weston, Arthur Szlam, Antoine Bordes, and Yann LeCun. Tracking the world state with recurrent entity networks. In Fifth International Conference on Learning Representations, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Henaff%2C%20Mikael%20Weston%2C%20Jason%20Szlam%2C%20Arthur%20Bordes%2C%20Antoine%20Tracking%20the%20world%20state%20with%20recurrent%20entity%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Henaff%2C%20Mikael%20Weston%2C%20Jason%20Szlam%2C%20Arthur%20Bordes%2C%20Antoine%20Tracking%20the%20world%20state%20with%20recurrent%20entity%20networks%202017"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Navdeep Jaitly Noam Shazeer Samy Bengio, Oriol Vinyals. Scheduled sampling for sequence prediction with recurrent neural networks. In Advances in Neural Information Processing Systems 28, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20Navdeep%20Jaitly%20Noam%20Shazeer%20Samy%20Bengio%2C%20Oriol%20Vinyals.%20Scheduled%20sampling%20for%20sequence%20prediction%20with%20recurrent%20neural%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Navdeep%20Jaitly%20Noam%20Shazeer%20Samy%20Bengio%2C%20Oriol%20Vinyals.%20Scheduled%20sampling%20for%20sequence%20prediction%20with%20recurrent%20neural%20networks%202015"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Edouard Grave, Armand Joulin, and Nicolas Usunier. Improving neural language models with a continuous cache. arXiv preprint arXiv:1612.04426, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1612.04426"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Shaojie Bai, J Zico Kolter, and Vladlen Koltun. Convolutional sequence modeling revisited. 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shaojie%20Bai%2C%20J.Zico%20Kolter%20Koltun%2C%20Vladlen%20Convolutional%20sequence%20modeling%20revisited%202018"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Yann N Dauphin, Angela Fan, Michael Auli, and David Grangier. Language modeling with gated convolutional networks. arXiv preprint arXiv:1612.08083, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1612.08083"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Stephen Merity, Nitish Shirish Keskar, James Bradbury, and Richard Socher. Scalable language modeling: Wikitext-103 on a single gpu in 12 hours. 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Merity%2C%20Stephen%20Keskar%2C%20Nitish%20Shirish%20Bradbury%2C%20James%20Socher%2C%20Richard%20Scalable%20language%20modeling%3A%20Wikitext-103%20on%20a%20single%20gpu%20in%2012%20hours%202018"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Diederik P Kingma and Jimmy Ba. Adam: A method for stochastic optimization. arXiv preprint arXiv:1412.6980, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6980"
+        },
+        {
+            "id": "45",
+            "entry": "[45] Ilya Sutskever, Oriol Vinyals, and Quoc V. Le. Sequence to sequence learning with neural networks. In Advances in neural information processing systems 27, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutskever%2C%20Ilya%20Vinyals%2C%20Oriol%20Le%2C%20Quoc%20V.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutskever%2C%20Ilya%20Vinyals%2C%20Oriol%20Le%2C%20Quoc%20V.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014"
+        },
+        {
+            "id": "46",
+            "entry": "[46] Vinicius Zambaldi, David Raposo, Adam Santoro, Victor Bapst, Yujia Li, Igor Babuschkin, Karl Tuyls, David Reichert, Timothy Lillicrap, Edward Lockhart, et al. Relational deep reinforcement learning. arXiv preprint arXiv:1806.01830, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1806.01830"
+        },
+        {
+            "id": "47",
+            "entry": "[47] Lasse Espeholt, Hubert Soyer, Remi Munos, Karen Simonyan, Volodymir Mnih, Tom Ward, Yotam Doron, Vlad Firoiu, Tim Harley, Iain Dunning, et al. Importance weighted actor-learner architectures: Scalable distributed deep-rl with importance weighted actor-learner architectures. arXiv preprint arXiv:1802.01561, 2018. ",
+            "arxiv_url": "https://arxiv.org/pdf/1802.01561"
+        }
+    ]
+}

@@ -1,0 +1,271 @@
+{
+    "filename": "7928-a-probabilistic-u-net-for-segmentation-of-ambiguous-images.pdf",
+    "metadata": {
+        "title": "A Probabilistic U-Net for Segmentation of Ambiguous Images",
+        "author": "Simon Kohl, Bernardino Romera-Paredes, Clemens Meyer, Jeffrey De Fauw, Joseph R. Ledsam, Klaus Maier-Hein, S. M. Ali Eslami, Danilo Jimenez Rezende, Olaf Ronneberger",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7928-a-probabilistic-u-net-for-segmentation-of-ambiguous-images.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Many real-world vision problems suffer from inherent ambiguities. In clinical applications for example, it might not be clear from a CT scan alone which particular region is cancer tissue. Therefore a group of graders typically produces a set of diverse but plausible segmentations. We consider the task of learning a distribution over segmentations given an input. To this end we propose a generative segmentation model based on a combination of a U-Net with a conditional variational autoencoder that is capable of efficiently producing an unlimited number of plausible hypotheses. We show on a lung abnormalities segmentation task and on a Cityscapes segmentation task that our model reproduces the possible segmentation variants as well as the frequencies with which they occur, doing so significantly better than published approaches. These models could have a high impact in real-world applications, such as being used as clinical decision-making algorithms accounting for multiple plausible semantic segmentation hypotheses to provide possible diagnoses and recommend further actions to resolve the present ambiguities."
+    },
+    "keywords": [
+        {
+            "term": "generative model",
+            "url": "https://en.wikipedia.org/wiki/generative_model"
+        },
+        {
+            "term": "generative adversarial networks",
+            "url": "https://en.wikipedia.org/wiki/generative_adversarial_networks"
+        },
+        {
+            "term": "hypothesis",
+            "url": "https://en.wikipedia.org/wiki/hypothesis"
+        },
+        {
+            "term": "ground truth",
+            "url": "https://en.wikipedia.org/wiki/ground_truth"
+        }
+    ],
+    "highlights": [
+        "The semantic segmentation task assigns a class label to each pixel in an image",
+        "We demonstrate these features on a lung abnormalities segmentation task, where each lesion has been segmented independently by four experts, and on the Cityscapes dataset, where we artificially flip labels with a certain frequency during training",
+        "Our proposed network architecture is a combination of a conditional variational auto encoder [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>, <a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>, <a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>] with a U-Net [<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>], with the objective of learning a conditional density model over segmentations, conditioned on the image",
+        "As in the previous experiment, in this task we use a similar setting for the training processes of all approaches, which we present in detail in subsection H.2",
+        "On this task the Probabilistic U-Net is able to significantly outperform the considered baselines, indicating its capability to model the joint likelihood of segmentation variants"
+    ],
+    "key_statements": [
+        "The semantic segmentation task assigns a class label to each pixel in an image",
+        "We demonstrate these features on a lung abnormalities segmentation task, where each lesion has been segmented independently by four experts, and on the Cityscapes dataset, where we artificially flip labels with a certain frequency during training",
+        "Our proposed network architecture is a combination of a conditional variational auto encoder [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>, <a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>, <a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>] with a U-Net [<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>], with the objective of learning a conditional density model over segmentations, conditioned on the image",
+        "As in the previous experiment, in this task we use a similar setting for the training processes of all approaches, which we present in detail in subsection H.2",
+        "On this task the Probabilistic U-Net is able to significantly outperform the considered baselines, indicating its capability to model the joint likelihood of segmentation variants"
+    ],
+    "summary": [
+        "The semantic segmentation task assigns a class label to each pixel in an image.",
+        "Our proposed network architecture is a combination of a conditional variational auto encoder [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>, <a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>, <a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>] with a U-Net [<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>], with the objective of learning a conditional density model over segmentations, conditioned on the image.",
+        "In order to grasp some intuition about the kind of samples produced by each model, we show in Fig. 3a, as well as in Appendix F, representative results for the baseline methods and our proposed Probabilistic U-Net. Fig.",
+        "The energy distance on the 1992 images large lung abnormalities test set, decreases for all models as more samples are drawn indicating an improved matching of the ground-truth distribution as well as enhanced sample diversity.",
+        "Fig. 4b shows that the Probabilistic U-Net on the Cityscapes task outperforms the baseline methods when sampling 4, 8 and 16 times in terms of the energy distance.",
+        "In Fig. 5 we report the mode-wise frequencies for all 32 modes in the Cityscape task and show that the Probabilistic U-Net is the only model in this comparison that is able to closely capture the frequencies of a large combinatorial space of hypotheses including very rare modes, supplying calibrated likelihoods of modes.",
+        "Our first set of experiments demonstrates that our proposed architecture provides consistent segmentation maps that closely match the multi-modal ground-truth distributions given by the expert graders in the lung abnormalities task and by the combinatorial ground-truth segmentation modes in the Cityscapes task.",
+        "On this task the Probabilistic U-Net is able to significantly outperform the considered baselines, indicating its capability to model the joint likelihood of segmentation variants.",
+        "The Image2Image VAE shares similarities with our model, but as its prior is fixed and not conditioned on the input image, it can not learn to capture variant frequencies by allocating corresponding probability mass to the respective latent space regions.",
+        "This design choice in the Image2Image VAE requires the model to carry the latent information all the way through the U-Net core, while simultaneously performing the recognition required for segmentation, which might complicate training.",
+        "Our design choice of late injection has the additional advantage that we can produce a large set of samples for a given image at a very low computational cost: for each new sample from the latent space only the network part after the injection needs to be re-executed to produce the corresponding segmentation map.",
+        "Aside from the ability to capture arbitrary modes with their corresponding probability conditioned on the input, our proposed Probabilistic U-Net allows to inspect its latent space."
+    ],
+    "headline": "To this end we propose a generative segmentation model based on a combination of a U-Net with a conditional variational autoencoder that is capable of efficiently producing an unlimited number of plausible hypotheses",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Lee, S., Prakash, S.P.S., Cogswell, M., Ranjan, V., Crandall, D., Batra, D.: Stochastic multiple choice learning for training diverse deep ensembles. In: Advances in Neural Information Processing Systems. (2016) 2119\u20132127",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lee%2C%20S.%20Prakash%2C%20S.P.S.%20Cogswell%2C%20M.%20Ranjan%2C%20V.%20D.%3A%20Stochastic%20multiple%20choice%20learning%20for%20training%20diverse%20deep%20ensembles%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lee%2C%20S.%20Prakash%2C%20S.P.S.%20Cogswell%2C%20M.%20Ranjan%2C%20V.%20D.%3A%20Stochastic%20multiple%20choice%20learning%20for%20training%20diverse%20deep%20ensembles%202016"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Kingma, D.P., Welling, M.: Auto-encoding variational bayes. In: Proceedings of the 2nd international conference on Learning Representations (ICLR). (2013)",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20D.P.%20Welling%20M.%3A%20Auto-encoding%20variational%20bayes%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20D.P.%20Welling%20M.%3A%20Auto-encoding%20variational%20bayes%202013"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Jimenez Rezende, D., Mohamed, S., Wierstra, D.: Stochastic backpropagation and approximate inference in deep generative models. In: Proceedings of the 31st International Conference on Machine Learning (ICML). (2014)",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jimenez%20Rezende%2C%20D.%20Mohamed%2C%20S.%20Wierstra%20D.%3A%20Stochastic%20backpropagation%20and%20approximate%20inference%20in%20deep%20generative%20models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jimenez%20Rezende%2C%20D.%20Mohamed%2C%20S.%20Wierstra%20D.%3A%20Stochastic%20backpropagation%20and%20approximate%20inference%20in%20deep%20generative%20models%202014"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Kingma, D.P., Jimenez Rezende, D., Mohamed, S., Welling, M.: Semi-supervised learning with deep generative models. In: Neural Information Processing Systems (NIPS). (2014)",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20D.P.%20Jimenez%20Rezende%2C%20D.%20Mohamed%2C%20S.%20Welling%20M.%3A%20Semi-supervised%20learning%20with%20deep%20generative%20models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20D.P.%20Jimenez%20Rezende%2C%20D.%20Mohamed%2C%20S.%20Welling%20M.%3A%20Semi-supervised%20learning%20with%20deep%20generative%20models%202014"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Sohn, K., Lee, H., Yan, X.: Learning structured output representation using deep conditional generative models. In: Advances in Neural Information Processing Systems. (2015) 3483\u20133491",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sohn%2C%20K.%20Lee%2C%20H.%20Yan%20X.%3A%20Learning%20structured%20output%20representation%20using%20deep%20conditional%20generative%20models%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sohn%2C%20K.%20Lee%2C%20H.%20Yan%20X.%3A%20Learning%20structured%20output%20representation%20using%20deep%20conditional%20generative%20models%202015"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Ronneberger, O., Fischer, P., Brox, T.: U-net: Convolutional networks for biomedical image segmentation. In: Medical Image Computing and Computer-Assisted Intervention (MICCAI) 2015. Volume 9351 of LNCS., Springer (2015) 234\u2013241",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ronneberger%2C%20O.%20Fischer%2C%20P.%20Brox%20T.%3A%20U-net%3A%20Convolutional%20networks%20for%20biomedical%20image%20segmentation%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ronneberger%2C%20O.%20Fischer%2C%20P.%20Brox%20T.%3A%20U-net%3A%20Convolutional%20networks%20for%20biomedical%20image%20segmentation%202015"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Kendall, A., Badrinarayanan, V., Cipolla, R.: Bayesian segnet: Model uncertainty in deep convolutional encoder-decoder architectures for scene understanding. arXiv preprint arXiv:1511.02680 (2015)",
+            "arxiv_url": "https://arxiv.org/pdf/1511.02680"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Kendall, A., Gal, Y.: What uncertainties do we need in bayesian deep learning for computer vision? In: Advances in Neural Information Processing Systems. (2017) 5580\u20135590",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kendall%2C%20A.%20Gal%20Y.%3A%20What%20uncertainties%20do%20we%20need%20in%20bayesian%20deep%20learning%20for%20computer%20vision%3F%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kendall%2C%20A.%20Gal%20Y.%3A%20What%20uncertainties%20do%20we%20need%20in%20bayesian%20deep%20learning%20for%20computer%20vision%3F%202017"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Lakshminarayanan, B., Pritzel, A., Blundell, C.: Simple and scalable predictive uncertainty estimation using deep ensembles. In: Advances in Neural Information Processing Systems. (2017) 6405\u20136416",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lakshminarayanan%2C%20B.%20Pritzel%2C%20A.%20Blundell%20C.%3A%20Simple%20and%20scalable%20predictive%20uncertainty%20estimation%20using%20deep%20ensembles%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lakshminarayanan%2C%20B.%20Pritzel%2C%20A.%20Blundell%20C.%3A%20Simple%20and%20scalable%20predictive%20uncertainty%20estimation%20using%20deep%20ensembles%202017"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Guzman-Rivera, A., Batra, D., Kohli, P.: Multiple choice learning: Learning to produce multiple structured outputs. In: Advances in Neural Information Processing Systems. (2012) 1799\u20131807",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Guzman-Rivera%2C%20A.%20Batra%2C%20D.%20Kohli%20P.%3A%20Multiple%20choice%20learning%3A%20Learning%20to%20produce%20multiple%20structured%20outputs%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Guzman-Rivera%2C%20A.%20Batra%2C%20D.%20Kohli%20P.%3A%20Multiple%20choice%20learning%3A%20Learning%20to%20produce%20multiple%20structured%20outputs%202012"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Lee, S., Purushwalkam, S., Cogswell, M., Crandall, D., Batra, D.: Why m heads are better than one: Training a diverse ensemble of deep networks. arXiv preprint arXiv:1511.06314 (2015)",
+            "arxiv_url": "https://arxiv.org/pdf/1511.06314"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Rupprecht, C., Laina, I., DiPietro, R., Baust, M., Tombari, F., Navab, N., Hager, G.D.: Learning in an uncertain world: Representing ambiguity through multiple hypotheses. In: International Conference on Computer Vision (ICCV). (2017)",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rupprecht%2C%20C.%20Laina%2C%20I.%20DiPietro%2C%20R.%20Baust%2C%20M.%20D.%3A%20Learning%20in%20an%20uncertain%20world%3A%20Representing%20ambiguity%20through%20multiple%20hypotheses%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rupprecht%2C%20C.%20Laina%2C%20I.%20DiPietro%2C%20R.%20Baust%2C%20M.%20D.%3A%20Learning%20in%20an%20uncertain%20world%3A%20Representing%20ambiguity%20through%20multiple%20hypotheses%202017"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Ilg, E., \u00c7i\u00e7ek, \u00d6., Galesso, S., Klein, A., Makansi, O., Hutter, F., Brox, T.: Uncertainty estimates for optical flow with multi-hypotheses networks. arXiv preprint arXiv:1802.07095 (2018)",
+            "arxiv_url": "https://arxiv.org/pdf/1802.07095"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Chen, C., Kolmogorov, V., Zhu, Y., Metaxas, D., Lampert, C.: Computing the m most probable modes of a graphical model. In: Artificial Intelligence and Statistics. (2013) 161\u2013169",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20C.%20Kolmogorov%2C%20V.%20Zhu%2C%20Y.%20Metaxas%2C%20D.%20C.%3A%20Computing%20the%20m%20most%20probable%20modes%20of%20a%20graphical%20model%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20C.%20Kolmogorov%2C%20V.%20Zhu%2C%20Y.%20Metaxas%2C%20D.%20C.%3A%20Computing%20the%20m%20most%20probable%20modes%20of%20a%20graphical%20model%202013"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Batra, D., Yadollahpour, P., Guzman-Rivera, A., Shakhnarovich, G.: Diverse m-best solutions in markov random fields. In: European Conference on Computer Vision, Springer (2012) 1\u201316",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Batra%2C%20D.%20Yadollahpour%2C%20P.%20Guzman-Rivera%2C%20A.%20Shakhnarovich%20G.%3A%20Diverse%20m-best%20solutions%20in%20markov%20random%20fields%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Batra%2C%20D.%20Yadollahpour%2C%20P.%20Guzman-Rivera%2C%20A.%20Shakhnarovich%20G.%3A%20Diverse%20m-best%20solutions%20in%20markov%20random%20fields%202012"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Kirillov, A., Savchynskyy, B., Schlesinger, D., Vetrov, D., Rother, C.: Inferring m-best diverse labelings in a single one. In: Proceedings of the IEEE International Conference on Computer Vision. (2015) 1814\u20131822",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kirillov%2C%20A.%20Savchynskyy%2C%20B.%20Schlesinger%2C%20D.%20Vetrov%2C%20D.%20C.%3A%20Inferring%20m-best%20diverse%20labelings%20in%20a%20single%20one%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kirillov%2C%20A.%20Savchynskyy%2C%20B.%20Schlesinger%2C%20D.%20Vetrov%2C%20D.%20C.%3A%20Inferring%20m-best%20diverse%20labelings%20in%20a%20single%20one%202015"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Kirillov, A., Shlezinger, D., Vetrov, D.P., Rother, C., Savchynskyy, B.: M-best-diverse labelings for submodular energies and beyond. In: Advances in Neural Information Processing Systems. (2015) 613\u2013621",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kirillov%2C%20A.%20Shlezinger%2C%20D.%20Vetrov%2C%20D.P.%20Rother%2C%20C.%20B.%3A%20M-best-diverse%20labelings%20for%20submodular%20energies%20and%20beyond%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kirillov%2C%20A.%20Shlezinger%2C%20D.%20Vetrov%2C%20D.P.%20Rother%2C%20C.%20B.%3A%20M-best-diverse%20labelings%20for%20submodular%20energies%20and%20beyond%202015"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Kirillov, A., Shekhovtsov, A., Rother, C., Savchynskyy, B.: Joint m-best-diverse labelings as a parametric submodular minimization. In: Advances in Neural Information Processing Systems. (2016) 334\u2013342",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kirillov%2C%20A.%20Shekhovtsov%2C%20A.%20Rother%2C%20C.%20Savchynskyy%20B.%3A%20Joint%20m-best-diverse%20labelings%20as%20a%20parametric%20submodular%20minimization%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kirillov%2C%20A.%20Shekhovtsov%2C%20A.%20Rother%2C%20C.%20Savchynskyy%20B.%3A%20Joint%20m-best-diverse%20labelings%20as%20a%20parametric%20submodular%20minimization%202016"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Isola, P., Zhu, J.Y., Zhou, T., Efros, A.A.: Image-to-image translation with conditional adversarial networks. arXiv preprint (2017)",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Isola%2C%20P.%20Zhu%2C%20J.Y.%20Zhou%2C%20T.%20Efros%2C%20A.%20A.%3A%20Image-to-image%20translation%20with%20conditional%20adversarial%20networks%202017"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Goodfellow, I.: Nips 2016 tutorial: Generative adversarial networks. arXiv preprint arXiv:1701.00160 (2016)",
+            "arxiv_url": "https://arxiv.org/pdf/1701.00160"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Zhu, J.Y., Zhang, R., Pathak, D., Darrell, T., Efros, A.A., Wang, O., Shechtman, E.: Toward multimodal image-to-image translation. In: Advances in Neural Information Processing Systems. (2017) 465\u2013476",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhu%2C%20J.Y.%20Zhang%2C%20R.%20Pathak%2C%20D.%20Darrell%2C%20T.%20E.%3A%20Toward%20multimodal%20image-to-image%20translation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhu%2C%20J.Y.%20Zhang%2C%20R.%20Pathak%2C%20D.%20Darrell%2C%20T.%20E.%3A%20Toward%20multimodal%20image-to-image%20translation%202017"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Esser, P., Sutter, E., Ommer, B.: A variational u-net for conditional appearance and shape generation. arXiv preprint arXiv:1804.04694 (2018)",
+            "arxiv_url": "https://arxiv.org/pdf/1804.04694"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Bouchacourt, D., Mudigonda, P.K., Nowozin, S.: Disco nets: Dissimilarity coefficients networks. In: Advances in Neural Information Processing Systems. (2016) 352\u2013360",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bouchacourt%2C%20D.%20Mudigonda%2C%20P.K.%20Nowozin%20S.%3A%20Disco%20nets%3A%20Dissimilarity%20coefficients%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bouchacourt%2C%20D.%20Mudigonda%2C%20P.K.%20Nowozin%20S.%3A%20Disco%20nets%3A%20Dissimilarity%20coefficients%20networks%202016"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Rao, C.R.: Diversity and dissimilarity coefficients: a unified approach. Theoretical population biology 21(1) (1982) 24\u201343",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rao%2C%20C.%20R.%3A%20Diversity%20and%20dissimilarity%20coefficients%3A%20a%20unified%20approach.%20Theoretical%20population%201982",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rao%2C%20C.%20R.%3A%20Diversity%20and%20dissimilarity%20coefficients%3A%20a%20unified%20approach.%20Theoretical%20population%201982"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Higgins, I., Matthey, L., Pal, A., Burgess, C., Glorot, X., Botvinick, M., Mohamed, S., Lerchner, A.: beta-vae: Learning basic visual concepts with a constrained variational framework. In: International Conference on Learning Representations. (2017)",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Higgins%2C%20I.%20Matthey%2C%20L.%20Pal%2C%20A.%20Burgess%2C%20C.%20A.%3A%20beta-vae%3A%20Learning%20basic%20visual%20concepts%20with%20a%20constrained%20variational%20framework%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Higgins%2C%20I.%20Matthey%2C%20L.%20Pal%2C%20A.%20Burgess%2C%20C.%20A.%3A%20beta-vae%3A%20Learning%20basic%20visual%20concepts%20with%20a%20constrained%20variational%20framework%202017"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Bellemare, M.G., Danihelka, I., Dabney, W., Mohamed, S., Lakshminarayanan, B., Hoyer, S., Munos, R.: The cramer distance as a solution to biased wasserstein gradients. arXiv preprint arXiv:1705.10743 (2017)",
+            "arxiv_url": "https://arxiv.org/pdf/1705.10743"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Salimans, T., Zhang, H., Radford, A., Metaxas, D.: Improving gans using optimal transport. arXiv preprint arXiv:1803.05573 (2018)",
+            "arxiv_url": "https://arxiv.org/pdf/1803.05573"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Sz\u00e9kely, G.J., Rizzo, M.L.: Energy statistics: A class of statistics based on distances. Journal of statistical planning and inference 143(8) (2013) 1249\u20131272",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sz%C3%A9kely%2C%20G.J.%20Rizzo%2C%20M.%20L.%3A%20Energy%20statistics%3A%20A%20class%20of%20statistics%20based%20on%20distances%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sz%C3%A9kely%2C%20G.J.%20Rizzo%2C%20M.%20L.%3A%20Energy%20statistics%3A%20A%20class%20of%20statistics%20based%20on%20distances%202013"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Klebanov, L.B., Bene\u0161, V., Saxl, I.: N-distances and their applications. Charles University in Prague, the Karolinum Press (2005)",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Klebanov%2C%20L.B.%20Bene%C5%A1%2C%20V.%20Saxl%20I.%3A%20N-distances%20and%20their%20applications.%20Charles%20University%20in%20Prague%202005"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Kosub, S.: A note on the triangle inequality for the jaccard distance. arXiv preprint arXiv:1612.02696 (2016)",
+            "arxiv_url": "https://arxiv.org/pdf/1612.02696"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Lipkus, A.H.: A proof of the triangle inequality for the tanimoto distance. Journal of Mathematical Chemistry 26(1-3) (1999) 263\u2013265",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lipkus%2C%20A.%20H.%3A%20A%20proof%20of%20the%20triangle%20inequality%20for%20the%20tanimoto%20distance%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lipkus%2C%20A.%20H.%3A%20A%20proof%20of%20the%20triangle%20inequality%20for%20the%20tanimoto%20distance%201999"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Armato, I., Samuel, G., McLennan, G., Bidaut, L., McNitt-Gray, M.F., Meyer, C.R., Reeves, A.P., Clarke, L.P.: Data from lidc-idri. the cancer imaging archive. http://doi.org/10.7937/K9/TCIA.2015. LO9QL9SX (2015)",
+            "crossref": "https://dx.doi.org/10.7937/K9/TCIA.2015"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Armato, S.G., McLennan, G., Bidaut, L., McNitt-Gray, M.F., Meyer, C.R., Reeves, A.P., Zhao, B., Aberle, D.R., Henschke, C.I., Hoffman, E.A., et al.: The lung image database consortium (lidc) and image database resource initiative (idri): a completed reference database of lung nodules on ct scans. Medical physics 38(2) (2011) 915\u2013931",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Armato%2C%20S.G.%20McLennan%2C%20G.%20Bidaut%2C%20L.%20McNitt-Gray%2C%20M.F.%20et%20al.%3A%20The%20lung%20image%20database%20consortium%20%28lidc%29%20and%20image%20database%20resource%20initiative%20%28idri%29%3A%20a%20completed%20reference%20database%20of%20lung%20nodules%20on%20ct%20scans%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Armato%2C%20S.G.%20McLennan%2C%20G.%20Bidaut%2C%20L.%20McNitt-Gray%2C%20M.F.%20et%20al.%3A%20The%20lung%20image%20database%20consortium%20%28lidc%29%20and%20image%20database%20resource%20initiative%20%28idri%29%3A%20a%20completed%20reference%20database%20of%20lung%20nodules%20on%20ct%20scans%202011"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Clark, K., Vendt, B., Smith, K., Freymann, J., Kirby, J., Koppel, P., Moore, S., Phillips, S., Maffitt, D., Pringle, M., et al.: The cancer imaging archive (tcia): maintaining and operating a public information repository. Journal of digital imaging 26(6) (2013) 1045\u20131057",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Clark%2C%20K.%20Vendt%2C%20B.%20Smith%2C%20K.%20Freymann%2C%20J.%20et%20al.%3A%20The%20cancer%20imaging%20archive%20%28tcia%29%3A%20maintaining%20and%20operating%20a%20public%20information%20repository%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Clark%2C%20K.%20Vendt%2C%20B.%20Smith%2C%20K.%20Freymann%2C%20J.%20et%20al.%3A%20The%20cancer%20imaging%20archive%20%28tcia%29%3A%20maintaining%20and%20operating%20a%20public%20information%20repository%202013"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Cordts, M., Omran, M., Ramos, S., Rehfeld, T., Enzweiler, M., Benenson, R., Franke, U., Roth, S., Schiele, B.: The cityscapes dataset for semantic urban scene understanding. In: Proceedings of the IEEE conference on computer vision and pattern recognition. (2016) 3213\u20133223",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cordts%2C%20M.%20Omran%2C%20M.%20Ramos%2C%20S.%20Rehfeld%2C%20T.%20B.%3A%20The%20cityscapes%20dataset%20for%20semantic%20urban%20scene%20understanding%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cordts%2C%20M.%20Omran%2C%20M.%20Ramos%2C%20S.%20Rehfeld%2C%20T.%20B.%3A%20The%20cityscapes%20dataset%20for%20semantic%20urban%20scene%20understanding%202016"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Salimans, T., Goodfellow, I., Zaremba, W., Cheung, V., Radford, A., Chen, X.: Improved techniques for training gans. In: Advances in Neural Information Processing Systems. (2016) 2234\u20132242",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Salimans%2C%20T.%20Goodfellow%2C%20I.%20Zaremba%2C%20W.%20Cheung%2C%20V.%20X.%3A%20Improved%20techniques%20for%20training%20gans%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Salimans%2C%20T.%20Goodfellow%2C%20I.%20Zaremba%2C%20W.%20Cheung%2C%20V.%20X.%3A%20Improved%20techniques%20for%20training%20gans%202016"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Kingma, D.P., Ba, J.: Adam: A method for stochastic optimization. arXiv preprint arXiv:1412.6980 (2014) ",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6980"
+        }
+    ]
+}

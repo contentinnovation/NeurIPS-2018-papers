@@ -1,0 +1,404 @@
+{
+    "filename": "8001-learning-loop-invariants-for-program-verification.pdf",
+    "metadata": {
+        "title": "Learning Loop Invariants for Program Verification",
+        "author": "Xujie Si, Hanjun Dai, Mukund Raghothaman, Mayur Naik, Le Song",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8001-learning-loop-invariants-for-program-verification.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "A fundamental problem in program verification concerns inferring loop invariants. The problem is undecidable and even practical instances are challenging. Inspired by how human experts construct loop invariants, we propose a reasoning framework CODE2INV that constructs the solution by multi-step decision making and querying an external program graph memory block. By training with reinforcement learning, CODE2INV captures rich program features and avoids the need for ground truth solutions as supervision. Compared to previous learning tasks in domains with graph-structured data, it addresses unique challenges, such as a binary objective function and an extremely sparse reward that is given by an automated theorem prover only after the complete loop invariant is proposed. We evaluate CODE2INV on a suite of 133 benchmark problems and compare it to three state-of-the-art systems. It solves 106 problems compared to 73 by a stochastic search-based system, 77 by a heuristic search-based system, and 100 by a decision tree learning-based system. Moreover, the strategy learned can be generalized to new programs: compared to solving new instances from scratch, the pre-trained agent is more sample efficient in finding solutions."
+    },
+    "keywords": [
+        {
+            "term": "program synthesis",
+            "url": "https://en.wikipedia.org/wiki/program_synthesis"
+        },
+        {
+            "term": "static single assignment",
+            "url": "https://en.wikipedia.org/wiki/static_single_assignment"
+        },
+        {
+            "term": "loop invariant",
+            "url": "https://en.wikipedia.org/wiki/loop_invariant"
+        },
+        {
+            "term": "program verification",
+            "url": "https://en.wikipedia.org/wiki/program_verification"
+        },
+        {
+            "term": "program correctness",
+            "url": "https://en.wikipedia.org/wiki/program_correctness"
+        },
+        {
+            "term": "theorem prover",
+            "url": "https://en.wikipedia.org/wiki/theorem_prover"
+        },
+        {
+            "term": "conjunctive normal form",
+            "url": "https://en.wikipedia.org/wiki/conjunctive_normal_form"
+        },
+        {
+            "term": "decision tree",
+            "url": "https://en.wikipedia.org/wiki/decision_tree"
+        },
+        {
+            "term": "disjunctive normal form",
+            "url": "https://en.wikipedia.org/wiki/disjunctive_normal_form"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "abstract syntax tree",
+            "url": "https://en.wikipedia.org/wiki/abstract_syntax_tree"
+        }
+    ],
+    "highlights": [
+        "We formally define the loop invariant inference and learning problems by introducing Hoare logic [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>], which comprises a set of axioms and inference rules for proving program correctness assertions",
+        "As shown in Figure 3, these modules together build up the network that constructs loop invariants from programs, while being jointly trained with reinforcement learning described in Section 4",
+        "We compare CODE2INV with three state-of-the-art solvers: C2I [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>], which is based on stochastic search; LOOPINVGEN [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>], which searches a conjunctive normal form over predicates synthesized by an underlying engine, ESCHER [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>]; and ICE-DT [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>], which learns a decision tree over manually designed features",
+        "For most of the instances that CODE2INV fails to solve, we observe that the loop invariant can be expressed in a compact disjunctive normal form (DNF) representation, which is more suited for the decision tree learning approach with hand-crafted features",
+        "We studied the problem of learning loop invariants for program verification"
+    ],
+    "key_statements": [
+        "We formally define the loop invariant inference and learning problems by introducing Hoare logic [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>], which comprises a set of axioms and inference rules for proving program correctness assertions",
+        "We propose CODE2INV, an end-to-end learning-based approach to infer loop invariants",
+        "We evaluate CODE2INV on a suite of 133 benchmark problems from recent works [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>, <a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>] and the 2017 syntax-guided synthesis program synthesis competition [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>]",
+        "We formally define the loop invariant inference and learning problems by introducing Hoare logic [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>], which comprises a set of axioms and inference rules for proving program correctness assertions",
+        "We can formally state the loop invariant inference problem: Problem 1 (Loop Invariant Inference): Given a pre-condition P , a post-condition Q and a program S containing a single loop, can we find a predicate I such that {P } S {Q} is valid?",
+        "We propose to use a neural network to mimic the reasoning used by human experts as described above",
+        "As shown in Figure 3, these modules together build up the network that constructs loop invariants from programs, while being jointly trained with reinforcement learning described in Section 4",
+        "We describe our setup of the environment which is important to properly train a reinforcement learning agent",
+        "We evaluate CODE2INV on a suite of 133 benchmark programs from recent works [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>, <a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>] and the 2017 syntax-guided synthesis competition [<a class=\"ref-link\" id=\"c31\" href=\"#r31\">31</a>].2",
+        "We compare CODE2INV with three state-of-the-art solvers: C2I [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>], which is based on stochastic search; LOOPINVGEN [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>], which searches a conjunctive normal form over predicates synthesized by an underlying engine, ESCHER [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>]; and ICE-DT [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>], which learns a decision tree over manually designed features",
+        "While it cannot outperform existing state-of-the-art solvers based on absolute running times, we believe its speed can be greatly improved by (1) pre-training on similar programs, which we show in Section 5.3; and (2) an optimized implementation that takes advantage of GPUs or TPUs",
+        "CODE2INV is most related to C2Isince both use accumulated counterexamples to adjust the sample distribution of loop invariants",
+        "We address the question: given an agent that is pre-trained on programs Ptrain = {pi} \u223c P, can the agent solve new programs Ptest = {pi} \u223c P faster than solving from scratch? We prepare the training and testing data as follows",
+        "For most of the instances that CODE2INV fails to solve, we observe that the loop invariant can be expressed in a compact disjunctive normal form (DNF) representation, which is more suited for the decision tree learning approach with hand-crafted features",
+        "The reduction of loop invariants from disjunctive normal form to conjunctive normal form could incur an exponential blowup in size",
+        "We studied the problem of learning loop invariants for program verification"
+    ],
+    "summary": [
+        "We formally define the loop invariant inference and learning problems by introducing Hoare logic [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>], which comprises a set of axioms and inference rules for proving program correctness assertions.",
+        "We propose CODE2INV, an end-to-end learning-based approach to infer loop invariants.",
+        "A structured external memory representation which encodes the program; a multi-step autoregressive model for incremental loop invariant construction; and an attention component that mimics the varying focus in each step.",
+        "As shown in Figure 3, these modules together build up the network that constructs loop invariants from programs, while being jointly trained with reinforcement learning described in Section 4.",
+        "We seek to learn a policy \u03c0(T |G) that proposes a correct loop invariant T for a program graph G.",
+        "We compare CODE2INV with three state-of-the-art solvers: C2I [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>], which is based on stochastic search; LOOPINVGEN [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>], which searches a conjunctive normal form over predicates synthesized by an underlying engine, ESCHER [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>]; and ICE-DT [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>], which learns a decision tree over manually designed features.",
+        "While it cannot outperform existing state-of-the-art solvers based on absolute running times, we believe its speed can be greatly improved by (1) pre-training on similar programs, which we show in Section 5.3; and (2) an optimized implementation that takes advantage of GPUs or TPUs. CODE2INV is most related to C2Isince both use accumulated counterexamples to adjust the sample distribution of loop invariants.",
+        "We take the programs solved by CODE2INV as the initial set and augment it by creating 100 variations for each of them by introducing confounding variables and statements in such a way that any valid loop invariant for the original program is still valid.",
+        "This result suggests an interesting future research direction: how to design a learning agent to effectively figure out loop invariant related variables from a potentially large number of confounding variables.",
+        "For most of the instances that CODE2INV fails to solve, we observe that the loop invariant can be expressed in a compact disjunctive normal form (DNF) representation, which is more suited for the decision tree learning approach with hand-crafted features.",
+        "Drawing inspiration from both programming languages and embedding methods, we build up an efficient learning agent that can perform end-to-end reasoning, in a way that mimics human experts.",
+        "We are concerned with general loop invariant generation, and our approach employs graph embedding directly on the program\u2019s AST and learns a generation policy without using ground truth as supervision.",
+        "We plan to extend the framework to discover loop invariants for larger programs which present more confounding variables, as well as to discover other kinds of program correctness properties such as ranking functions for proving program termination [<a class=\"ref-link\" id=\"c50\" href=\"#r50\">50</a>] and separation predicates for proving correctness of pointer-manipulating programs [<a class=\"ref-link\" id=\"c51\" href=\"#r51\">51</a>]"
+    ],
+    "headline": "Inspired by how human experts construct loop invariants, we propose a reasoning framework CODE2INV that constructs the solution by multi-step decision making and querying an external program graph memory block",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Manuel Fahndrich and Francesco Logozzo. Static contract checking with abstract interpretation. In Proceedings of the 2010 International Conference on Formal Verification of Object-Oriented Software, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fahndrich%2C%20Manuel%20Logozzo%2C%20Francesco%20Static%20contract%20checking%20with%20abstract%20interpretation%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fahndrich%2C%20Manuel%20Logozzo%2C%20Francesco%20Static%20contract%20checking%20with%20abstract%20interpretation%202010"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Andrew W. Appel. Verified Software Toolchain. In Proceedings of the 20th European Symposium on Programming (ESOP), 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Andrew%20W%20Appel%20Verified%20Software%20Toolchain%20In%20Proceedings%20of%20the%2020th%20European%20Symposium%20on%20Programming%20ESOP%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Andrew%20W%20Appel%20Verified%20Software%20Toolchain%20In%20Proceedings%20of%20the%2020th%20European%20Symposium%20on%20Programming%20ESOP%202011"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Pranav Garg, Daniel Neider, P. Madhusudan, and Dan Roth. Learning invariants using decision trees and implication counterexamples. In Proceedings of the ACM Symposium on Principles of Programming Languages (POPL), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Garg%2C%20Pranav%20Daniel%20Neider%2C%20P.Madhusudan%20Roth%2C%20Dan%20Learning%20invariants%20using%20decision%20trees%20and%20implication%20counterexamples%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Garg%2C%20Pranav%20Daniel%20Neider%2C%20P.Madhusudan%20Roth%2C%20Dan%20Learning%20invariants%20using%20decision%20trees%20and%20implication%20counterexamples%202016"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Irwan Bello, Hieu Pham, Quoc V. Le, Mohammad Norouzi, and Samy Bengio. Neural combinatorial optimization with reinforcement learning. CoRR, abs/1611.09940, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.09940"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Elias B. Khalil, Hanjun Dai, Yuyu Zhang, Bistra Dilkina, and Le Song. Learning combinatorial optimization algorithms over graphs. In Proceedings of the Conference on Neural Information Processing Systems (NIPS), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Khalil%2C%20Elias%20B.%20Dai%2C%20Hanjun%20Zhang%2C%20Yuyu%20Dilkina%2C%20Bistra%20Learning%20combinatorial%20optimization%20algorithms%20over%20graphs%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Khalil%2C%20Elias%20B.%20Dai%2C%20Hanjun%20Zhang%2C%20Yuyu%20Dilkina%2C%20Bistra%20Learning%20combinatorial%20optimization%20algorithms%20over%20graphs%202017"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Leonardo de Moura and Nikolaj Bj\u00f8rner. Z3: An efficient SMT solver. In Proceedings of the 14th International Conference on Tools and Algorithms for the Construction and Analysis of Systems (TACAS), 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=de%20Moura%2C%20Leonardo%20Bj%C3%B8rner%2C%20Nikolaj%20Z3%3A%20An%20efficient%20SMT%20solver%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=de%20Moura%2C%20Leonardo%20Bj%C3%B8rner%2C%20Nikolaj%20Z3%3A%20An%20efficient%20SMT%20solver%202008"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Isil Dillig, Thomas Dillig, Boyang Li, and Ken McMillan. Inductive invariant generation via abductive inference. In Proceedings of the ACM Conference on Object-Oriented Programming Systems, Languages and Applications (OOPSLA), 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dillig%2C%20Isil%20Dillig%2C%20Thomas%20Li%2C%20Boyang%20McMillan%2C%20Ken%20Inductive%20invariant%20generation%20via%20abductive%20inference%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dillig%2C%20Isil%20Dillig%2C%20Thomas%20Li%2C%20Boyang%20McMillan%2C%20Ken%20Inductive%20invariant%20generation%20via%20abductive%20inference%202013"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Saswat Padhi, Rahul Sharma, and Todd Millstein. Data-driven precondition inference with learned features. In Proceedings of the ACM Conference on Programming Language Design and Implementation (PLDI), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Padhi%2C%20Saswat%20Sharma%2C%20Rahul%20Millstein%2C%20Todd%20Data-driven%20precondition%20inference%20with%20learned%20features%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Padhi%2C%20Saswat%20Sharma%2C%20Rahul%20Millstein%2C%20Todd%20Data-driven%20precondition%20inference%20with%20learned%20features%202016"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Rajeev Alur, Rastislav Bodik, Garvit Juniwal, Milo M. K. Martin, Mukund Raghothaman, Sanjit A. Seshia, Rishabh Singh, Armando Solar-Lezama, Emina Torlak, and Abhishek Udupa. Syntax-guided synthesis. In Proceedings of Formal Methods in Computer-Aided Design (FMCAD), 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Alur%2C%20Rajeev%20Bodik%2C%20Rastislav%20Juniwal%2C%20Garvit%20Martin%2C%20Milo%20M.K.%20Syntax-guided%20synthesis%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Alur%2C%20Rajeev%20Bodik%2C%20Rastislav%20Juniwal%2C%20Garvit%20Martin%2C%20Milo%20M.K.%20Syntax-guided%20synthesis%202013"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Rahul Sharma and Alex Aiken. From invariant checking to invariant inference using randomized search. In Proceedings of the International Conference on Computer Aided Verification (CAV), 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sharma%2C%20Rahul%20Aiken%2C%20Alex%20From%20invariant%20checking%20to%20invariant%20inference%20using%20randomized%20search%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sharma%2C%20Rahul%20Aiken%2C%20Alex%20From%20invariant%20checking%20to%20invariant%20inference%20using%20randomized%20search%202014"
+        },
+        {
+            "id": "11",
+            "entry": "[11] C. A. R. Hoare. An axiomatic basis for computer programming. Communications of the ACM, 12(10), October 1969.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hoare%2C%20C.A.R.%20An%20axiomatic%20basis%20for%20computer%20programming%201969-10",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hoare%2C%20C.A.R.%20An%20axiomatic%20basis%20for%20computer%20programming%201969-10"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Michael A. Col\u00f3n, Sriram Sankaranarayanan, and Henny B. Sipma. Linear invariant generation using nonlinear constraint solving. In Proceedings of the International Conference on Computer Aided Verification (CAV), 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Col%C3%B3n%2C%20Michael%20A.%20Sankaranarayanan%2C%20Sriram%20Sipma%2C%20Henny%20B.%20Linear%20invariant%20generation%20using%20nonlinear%20constraint%20solving%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Col%C3%B3n%2C%20Michael%20A.%20Sankaranarayanan%2C%20Sriram%20Sipma%2C%20Henny%20B.%20Linear%20invariant%20generation%20using%20nonlinear%20constraint%20solving%202003"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Sriram Sankaranarayanan, Henny B. Sipma, and Zohar Manna. Non-linear loop invariant generation using Gr\u00f6bner bases. In Proceedings of the ACM Symposium on Principles of Programming Languages (POPL), 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sankaranarayanan%2C%20Sriram%20Sipma%2C%20Henny%20B.%20Manna%2C%20Zohar%20Non-linear%20loop%20invariant%20generation%20using%20Gr%C3%B6bner%20bases%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sankaranarayanan%2C%20Sriram%20Sipma%2C%20Henny%20B.%20Manna%2C%20Zohar%20Non-linear%20loop%20invariant%20generation%20using%20Gr%C3%B6bner%20bases%202004"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Sumit Gulwani and Nebojsa Jojic. Program verification as probabilistic inference. In Proceedings of the ACM Symposium on Principles of Programming Languages (POPL), 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gulwani%2C%20Sumit%20Jojic%2C%20Nebojsa%20Program%20verification%20as%20probabilistic%20inference%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gulwani%2C%20Sumit%20Jojic%2C%20Nebojsa%20Program%20verification%20as%20probabilistic%20inference%202007"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Rahul Sharma, Saurabh Gupta, Bharath Hariharan, Alex Aiken, Percy Liang, and Aditya V. Nori. A data driven approach for algebraic loop invariants. In Proceedings of the European Symposium on Programming (ESOP), 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sharma%2C%20Rahul%20Gupta%2C%20Saurabh%20Hariharan%2C%20Bharath%20Aiken%2C%20Alex%20A%20data%20driven%20approach%20for%20algebraic%20loop%20invariants%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sharma%2C%20Rahul%20Gupta%2C%20Saurabh%20Hariharan%2C%20Bharath%20Aiken%2C%20Alex%20A%20data%20driven%20approach%20for%20algebraic%20loop%20invariants%202013"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Rahul Sharma, Isil Dillig, Thomas Dillig, and Alex Aiken. Simplifying loop invariant generation using splitter predicates. In Proceedings of the International Conference on Computer Aided Verification (CAV), 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sharma%2C%20Rahul%20Dillig%2C%20Isil%20Dillig%2C%20Thomas%20Aiken%2C%20Alex%20Simplifying%20loop%20invariant%20generation%20using%20splitter%20predicates%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sharma%2C%20Rahul%20Dillig%2C%20Isil%20Dillig%2C%20Thomas%20Aiken%2C%20Alex%20Simplifying%20loop%20invariant%20generation%20using%20splitter%20predicates%202011"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Aws Albarghouthi, Sumit Gulwani, and Zachary Kincaid. Recursive program synthesis. In Proceedings of the International Conference on Computer Aided Verification (CAV), 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Albarghouthi%2C%20Aws%20Gulwani%2C%20Sumit%20Kincaid%2C%20Zachary%20Recursive%20program%20synthesis%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Albarghouthi%2C%20Aws%20Gulwani%2C%20Sumit%20Kincaid%2C%20Zachary%20Recursive%20program%20synthesis%202013"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Pranav Garg, Christof L\u00f6ding, P. Madhusudan, and Daniel Neider. Ice: A robust framework for learning invariants. In Proceedings of the International Conference on Computer Aided Verification (CAV), 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Garg%2C%20Pranav%20Christof%20L%C3%B6ding%2C%20P.Madhusudan%20Neider%2C%20Daniel%20Ice%3A%20A%20robust%20framework%20for%20learning%20invariants%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Garg%2C%20Pranav%20Christof%20L%C3%B6ding%2C%20P.Madhusudan%20Neider%2C%20Daniel%20Ice%3A%20A%20robust%20framework%20for%20learning%20invariants%202014"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Sainbayar Sukhbaatar, Jason Weston, Rob Fergus, et al. End-to-end memory networks. In Proceedings of the Conference on Neural Information Processing Systems (NIPS), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sukhbaatar%2C%20Sainbayar%20Weston%2C%20Jason%20Fergus%2C%20Rob%20End-to-end%20memory%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sukhbaatar%2C%20Sainbayar%20Weston%2C%20Jason%20Fergus%2C%20Rob%20End-to-end%20memory%20networks%202015"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Alexander Miller, Adam Fisch, Jesse Dodge, Amir-Hossein Karimi, Antoine Bordes, and Jason Weston. Key-value memory networks for directly reading documents. In Proceedings of the Conference on Empirical Methods in Natural Language Processing (EMNLP), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Miller%2C%20Alexander%20Fisch%2C%20Adam%20Dodge%2C%20Jesse%20Karimi%2C%20Amir-Hossein%20Key-value%20memory%20networks%20for%20directly%20reading%20documents%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Miller%2C%20Alexander%20Fisch%2C%20Adam%20Dodge%2C%20Jesse%20Karimi%2C%20Amir-Hossein%20Key-value%20memory%20networks%20for%20directly%20reading%20documents%202016"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Miltiadis Allamanis, Marc Brockschmidt, and Mahmoud Khademi. Learning to represent programs with graphs. In Proceedings of the International Conference on Learning Representations (ICLR), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Allamanis%2C%20Miltiadis%20Brockschmidt%2C%20Marc%20Khademi%2C%20Mahmoud%20Learning%20to%20represent%20programs%20with%20graphs%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Allamanis%2C%20Miltiadis%20Brockschmidt%2C%20Marc%20Khademi%2C%20Mahmoud%20Learning%20to%20represent%20programs%20with%20graphs%202018"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Ron Cytron, Jeanne Ferrante, Barry K. Rosen, Mark N. Wegman, and F. Kenneth Zadeck. Efficiently computing static single assignment form and the control dependence graph. ACM Trans. Program. Lang. Syst., 13(4), 1991.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cytron%2C%20Ron%20Ferrante%2C%20Jeanne%20Rosen%2C%20Barry%20K.%20Wegman%2C%20Mark%20N.%20Efficiently%20computing%20static%20single%20assignment%20form%20and%20the%20control%20dependence%20graph%201991",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cytron%2C%20Ron%20Ferrante%2C%20Jeanne%20Rosen%2C%20Barry%20K.%20Wegman%2C%20Mark%20N.%20Efficiently%20computing%20static%20single%20assignment%20form%20and%20the%20control%20dependence%20graph%201991"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Franco Scarselli, Marco Gori, Ah Chung Tsoi, Markus Hagenbuchner, and Gabriele Monfardini. The graph neural network model. IEEE Transactions on Neural Networks, 20(1):61\u201380, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Scarselli%2C%20Franco%20Gori%2C%20Marco%20Tsoi%2C%20Ah%20Chung%20Hagenbuchner%2C%20Markus%20The%20graph%20neural%20network%20model%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Scarselli%2C%20Franco%20Gori%2C%20Marco%20Tsoi%2C%20Ah%20Chung%20Hagenbuchner%2C%20Markus%20The%20graph%20neural%20network%20model%202009"
+        },
+        {
+            "id": "24",
+            "entry": "[24] David K Duvenaud, Dougal Maclaurin, Jorge Iparraguirre, Rafael Bombarell, Timothy Hirzel, Al\u00e1n AspuruGuzik, and Ryan P Adams. Convolutional networks on graphs for learning molecular fingerprints. In Proceedings of the Conference on Neural Information Processing Systems (NIPS), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Duvenaud%2C%20David%20K.%20Maclaurin%2C%20Dougal%20Iparraguirre%2C%20Jorge%20Bombarell%2C%20Rafael%20Convolutional%20networks%20on%20graphs%20for%20learning%20molecular%20fingerprints%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Duvenaud%2C%20David%20K.%20Maclaurin%2C%20Dougal%20Iparraguirre%2C%20Jorge%20Bombarell%2C%20Rafael%20Convolutional%20networks%20on%20graphs%20for%20learning%20molecular%20fingerprints%202015"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Hanjun Dai, Bo Dai, and Le Song. Discriminative embeddings of latent variable models for structured data. In Proceedings of the International Conference on Machine Learning (ICML), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dai%2C%20Hanjun%20Dai%2C%20Bo%20Song%2C%20Le%20Discriminative%20embeddings%20of%20latent%20variable%20models%20for%20structured%20data%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dai%2C%20Hanjun%20Dai%2C%20Bo%20Song%2C%20Le%20Discriminative%20embeddings%20of%20latent%20variable%20models%20for%20structured%20data%202016"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Emilio Parisotto, Abdel-rahman Mohamed, Rishabh Singh, Lihong Li, Dengyong Zhou, and Pushmeet Kohli. Neuro-symbolic program synthesis. arXiv preprint arXiv:1611.01855, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.01855"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Matt J Kusner, Brooks Paige, and Jos\u00e9 Miguel Hern\u00e1ndez-Lobato. Grammar variational autoencoder. In Proceedings of the International Conference on Machine Learning (ICML), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Matt%20J%20Kusner%2C%20Brooks%20Paige%20Hern%C3%A1ndez-Lobato%2C%20Jos%C3%A9%20Miguel%20Grammar%20variational%20autoencoder%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Matt%20J%20Kusner%2C%20Brooks%20Paige%20Hern%C3%A1ndez-Lobato%2C%20Jos%C3%A9%20Miguel%20Grammar%20variational%20autoencoder%202017"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Hanjun Dai, Yingtao Tian, Bo Dai, Steven Skiena, and Le Song. Syntax-directed variational autoencoder for structured data. In Proceedings of the International Conference on Learning Representations (ICLR), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dai%2C%20Hanjun%20Tian%2C%20Yingtao%20Dai%2C%20Bo%20Skiena%2C%20Steven%20Syntax-directed%20variational%20autoencoder%20for%20structured%20data%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dai%2C%20Hanjun%20Tian%2C%20Yingtao%20Dai%2C%20Bo%20Skiena%2C%20Steven%20Syntax-directed%20variational%20autoencoder%20for%20structured%20data%202018"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Kai Sheng Tai, Richard Socher, and Christopher D Manning. Improved semantic representations from tree-structured long short-term memory networks. In Proceedings of the Association for Computational Linguistics (ACL), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tai%2C%20Kai%20Sheng%20Socher%2C%20Richard%20Manning%2C%20Christopher%20D.%20Improved%20semantic%20representations%20from%20tree-structured%20long%20short-term%20memory%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tai%2C%20Kai%20Sheng%20Socher%2C%20Richard%20Manning%2C%20Christopher%20D.%20Improved%20semantic%20representations%20from%20tree-structured%20long%20short-term%20memory%20networks%202015"
+        },
+        {
+            "id": "30",
+            "entry": "[30] David Silver, Julian Schrittwieser, Karen Simonyan, Ioannis Antonoglou, Aja Huang, Arthur Guez, Thomas Hubert, Lucas Baker, Matthew Lai, Adrian Bolton, et al. Mastering the game of Go without human knowledge. Nature, 550(7676):354\u2013359, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silver%2C%20David%20Schrittwieser%2C%20Julian%20Simonyan%2C%20Karen%20Antonoglou%2C%20Ioannis%20Mastering%20the%20game%20of%20Go%20without%20human%20knowledge%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silver%2C%20David%20Schrittwieser%2C%20Julian%20Simonyan%2C%20Karen%20Antonoglou%2C%20Ioannis%20Mastering%20the%20game%20of%20Go%20without%20human%20knowledge%202017"
+        },
+        {
+            "id": "31",
+            "entry": "[31] SyGuS Competition, 2017. http://sygus.seas.upenn.edu/SyGuS-COMP2017.html.",
+            "url": "http://sygus.seas.upenn.edu/SyGuS-COMP2017.html"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Zohar Manna and Richard J. Waldinger. Toward automatic program synthesis. In Communications of the ACM, 1971.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Manna%2C%20Zohar%20Waldinger%2C%20Richard%20J.%20Toward%20automatic%20program%20synthesis%201971",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Manna%2C%20Zohar%20Waldinger%2C%20Richard%20J.%20Toward%20automatic%20program%20synthesis%201971"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Sumit Gulwani, Susmit Jha, Ashish Tiwari, and Ramarathnam Venkatesan. Synthesis of loop-free programs. In Proceedings of the ACM Conference on Programming Language Design and Implementation (PLDI), 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gulwani%2C%20Sumit%20Jha%2C%20Susmit%20Tiwari%2C%20Ashish%20Venkatesan%2C%20Ramarathnam%20Synthesis%20of%20loop-free%20programs%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gulwani%2C%20Sumit%20Jha%2C%20Susmit%20Tiwari%2C%20Ashish%20Venkatesan%2C%20Ramarathnam%20Synthesis%20of%20loop-free%20programs%202011"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Rajeev Alur, Arjun Radhakrishna, and Abhishek Udupa. Scaling enumerative program synthesis via divide and conquer. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Alur%2C%20Rajeev%20Radhakrishna%2C%20Arjun%20Udupa%2C%20Abhishek%20Scaling%20enumerative%20program%20synthesis%20via%20divide%20and%20conquer%202017"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Eric Schkufza, Rahul Sharma, and Alex Aiken. Stochastic superoptimization. 2013. ISBN 978-1-45031870-9.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schkufza%2C%20Eric%20Sharma%2C%20Rahul%20Aiken%2C%20Alex%20Stochastic%20superoptimization%202013"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Pavol Bielik, Veselin Raychev, and Martin Vechev. Phog: Probabilistic model for code. In Proceedings of the International Conference on Machine Learning (ICML), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bielik%2C%20Pavol%20Raychev%2C%20Veselin%20Vechev%2C%20Martin%20Phog%3A%20Probabilistic%20model%20for%20code%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bielik%2C%20Pavol%20Raychev%2C%20Veselin%20Vechev%2C%20Martin%20Phog%3A%20Probabilistic%20model%20for%20code%202016"
+        },
+        {
+            "id": "37",
+            "entry": "[37] C.J. Maddison and D. Tarlow. Structured generative models of natural source code. In Proceedings of the International Conference on Machine Learning (ICML), 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Maddison%2C%20C.J.%20Tarlow%2C%20D.%20Structured%20generative%20models%20of%20natural%20source%20code%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Maddison%2C%20C.J.%20Tarlow%2C%20D.%20Structured%20generative%20models%20of%20natural%20source%20code%202014"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Anh Tuan Nguyen and Tien N. Nguyen. Graph-based statistical language model for code. In Proceedings of the International Conference on Software Engineering (ICSE), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nguyen%2C%20Anh%20Tuan%20Nguyen%2C%20Tien%20N.%20Graph-based%20statistical%20language%20model%20for%20code%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nguyen%2C%20Anh%20Tuan%20Nguyen%2C%20Tien%20N.%20Graph-based%20statistical%20language%20model%20for%20code%202015"
+        },
+        {
+            "id": "39",
+            "entry": "[39] M. Balog, A. L. Gaunt, M. Brockschmidt, S. Nowozin, and D. Tarlow. Deepcoder: Learning to write programs. In Proceedings of the International Conference on Learning Representations (ICLR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Balog%2C%20M.%20Gaunt%2C%20A.L.%20Brockschmidt%2C%20M.%20Nowozin%2C%20S.%20Deepcoder%3A%20Learning%20to%20write%20programs%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Balog%2C%20M.%20Gaunt%2C%20A.L.%20Brockschmidt%2C%20M.%20Nowozin%2C%20S.%20Deepcoder%3A%20Learning%20to%20write%20programs%202017"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Vijayaraghavan Murali, Letao Qi, Swarat Chaudhuri, and Chris Jermaine. Neural sketch learning for conditional program generation. In Proceedings of the International Conference on Learning Representations (ICLR), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Murali%2C%20Vijayaraghavan%20Qi%2C%20Letao%20Chaudhuri%2C%20Swarat%20Jermaine%2C%20Chris%20Neural%20sketch%20learning%20for%20conditional%20program%20generation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Murali%2C%20Vijayaraghavan%20Qi%2C%20Letao%20Chaudhuri%2C%20Swarat%20Jermaine%2C%20Chris%20Neural%20sketch%20learning%20for%20conditional%20program%20generation%202018"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Jacob Devlin, Jonathan Uesato, Surya Bhupatiraju, Rishabh Singh, Abdel rahman Mohamed, and Pushmeet Kohli. Robustfill: Neural program learning under noisy i/o. In Proceedings of the International Conference on Machine Learning (ICML), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Devlin%2C%20Jacob%20Uesato%2C%20Jonathan%20Bhupatiraju%2C%20Surya%20Singh%2C%20Rishabh%20Robustfill%3A%20Neural%20program%20learning%20under%20noisy%20i/o%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Devlin%2C%20Jacob%20Uesato%2C%20Jonathan%20Bhupatiraju%2C%20Surya%20Singh%2C%20Rishabh%20Robustfill%3A%20Neural%20program%20learning%20under%20noisy%20i/o%202017"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Emilio Parisotto, Abdel-rahman Mohamed, Rishabh Singh, Lihong Li, Dengyong Zhou, and Pushmeet Kohli. Neuro-symbolic program synthesis. Proceedings of the International Conference on Learning Representations (ICLR), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Parisotto%2C%20Emilio%20Mohamed%2C%20Abdel-rahman%20Singh%2C%20Rishabh%20Li%2C%20Lihong%20Neuro-symbolic%20program%20synthesis%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Parisotto%2C%20Emilio%20Mohamed%2C%20Abdel-rahman%20Singh%2C%20Rishabh%20Li%2C%20Lihong%20Neuro-symbolic%20program%20synthesis%202016"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Chen Liang, Jonathan Berant, Quoc Le, Kenneth D Forbus, and Ni Lao. Neural symbolic machines: Learning semantic parsers on freebase with weak supervision. arXiv preprint arXiv:1611.00020, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.00020"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Xinyun Chen, Chang Liu, and Dawn Song. Towards synthesizing complex programs from input-output examples. In International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Xinyun%20Liu%2C%20Chang%20Song%2C%20Dawn%20Towards%20synthesizing%20complex%20programs%20from%20input-output%20examples%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Xinyun%20Liu%2C%20Chang%20Song%2C%20Dawn%20Towards%20synthesizing%20complex%20programs%20from%20input-output%20examples%202018"
+        },
+        {
+            "id": "45",
+            "entry": "[45] Rudy Bunel, Matthew Hausknecht, Jacob Devlin, Rishabh Singh, and Pushmeet Kohli. Leveraging grammar and reinforcement learning for neural program synthesis. In International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bunel%2C%20Rudy%20Hausknecht%2C%20Matthew%20Devlin%2C%20Jacob%20Singh%2C%20Rishabh%20Leveraging%20grammar%20and%20reinforcement%20learning%20for%20neural%20program%20synthesis%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bunel%2C%20Rudy%20Hausknecht%2C%20Matthew%20Devlin%2C%20Jacob%20Singh%2C%20Rishabh%20Leveraging%20grammar%20and%20reinforcement%20learning%20for%20neural%20program%20synthesis%202018"
+        },
+        {
+            "id": "46",
+            "entry": "[46] Marc Brockschmidt, Yuxin Chen, Pushmeet Kohli, Siddharth Krishna, and Daniel Tarlow. Learning shape analysis. In Proceedings of the Static Analysis Symposium (SAS), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Brockschmidt%2C%20Marc%20Chen%2C%20Yuxin%20Kohli%2C%20Pushmeet%20Krishna%2C%20Siddharth%20Learning%20shape%20analysis%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Brockschmidt%2C%20Marc%20Chen%2C%20Yuxin%20Kohli%2C%20Pushmeet%20Krishna%2C%20Siddharth%20Learning%20shape%20analysis%202017"
+        },
+        {
+            "id": "47",
+            "entry": "[47] Dimitar Bounov, Anthony DeRossi, Massimiliano Menarini, William G. Griswold, and Sorin Lerner. Inferring loop invariants through gamification. In Proceedings of the 2018 CHI Conference on Human Factors in Computing Systems, CHI \u201918, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bounov%2C%20Dimitar%20DeRossi%2C%20Anthony%20Menarini%2C%20Massimiliano%20Griswold%2C%20William%20G.%20Inferring%20loop%20invariants%20through%20gamification%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bounov%2C%20Dimitar%20DeRossi%2C%20Anthony%20Menarini%2C%20Massimiliano%20Griswold%2C%20William%20G.%20Inferring%20loop%20invariants%20through%20gamification%202018"
+        },
+        {
+            "id": "48",
+            "entry": "[48] Elias Boutros Khalil, Pierre Le Bodic, Le Song, George L Nemhauser, and Bistra N Dilkina. Learning to branch in mixed integer programming. 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Khalil%2C%20Elias%20Boutros%20Pierre%20Le%20Bodic%2C%20Le%20Song%2C%20George%20L%20Nemhauser%2C%20and%20Bistra%20N%20Dilkina.%20Learning%20to%20branch%20in%20mixed%20integer%20programming%202016"
+        },
+        {
+            "id": "49",
+            "entry": "[49] Daniel Selsam, Matthew Lamm, Benedikt Bunz, Percy Liang, Leonardo de Moura, and David L Dill. Learning a sat solver from single-bit supervision. arXiv preprint arXiv:1802.03685, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.03685"
+        },
+        {
+            "id": "50",
+            "entry": "[50] Byron Cook, Andreas Podelski, and Andrey Rybalchenko. Proving program termination. Communications of the ACM, 54(5), 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cook%2C%20Byron%20Podelski%2C%20Andreas%20Rybalchenko%2C%20Andrey%20Proving%20program%20termination%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cook%2C%20Byron%20Podelski%2C%20Andreas%20Rybalchenko%2C%20Andrey%20Proving%20program%20termination%202011"
+        },
+        {
+            "id": "51",
+            "entry": "[51] John C. Reynolds. Separation logic: A logic for shared mutable data structures. In Proceedings of the IEEE Symposium on Logic in Computer Science (LICS), 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Reynolds%2C%20John%20C.%20Separation%20logic%3A%20A%20logic%20for%20shared%20mutable%20data%20structures%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Reynolds%2C%20John%20C.%20Separation%20logic%3A%20A%20logic%20for%20shared%20mutable%20data%20structures%202002"
+        },
+        {
+            "id": "52",
+            "entry": "[52] Mukund Raghothaman and Abhishek Udupa. Language to specify syntax-guided synthesis problems. 2014. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Raghothaman%2C%20Mukund%20Udupa%2C%20Abhishek%20Language%20to%20specify%20syntax-guided%20synthesis%20problems%202014"
+        }
+    ]
+}

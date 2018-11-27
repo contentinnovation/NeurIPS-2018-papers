@@ -1,0 +1,199 @@
+{
+    "filename": "7845-learning-to-infer-graphics-programs-from-hand-drawn-images.pdf",
+    "metadata": {
+        "title": "Learning to Infer Graphics Programs from Hand-Drawn Images",
+        "author": "Kevin Ellis, Daniel Ritchie, Armando Solar-Lezama, Josh Tenenbaum",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7845-learning-to-infer-graphics-programs-from-hand-drawn-images.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We introduce a model that learns to convert simple hand drawings into graphics programs written in a subset of LATEX. The model combines techniques from deep learning and program synthesis. We learn a convolutional neural network that proposes plausible drawing primitives that explain an image. These drawing primitives are a specification (spec) of what the graphics program needs to draw. We learn a model that uses program synthesis techniques to recover a graphics program from that spec. These programs have constructs like variable bindings, iterative loops, or simple kinds of conditionals. With a graphics program in hand, we can correct errors made by the deep network and extrapolate drawings."
+    },
+    "keywords": [
+        {
+            "term": "program synthesis",
+            "url": "https://en.wikipedia.org/wiki/program_synthesis"
+        },
+        {
+            "term": "sequential search",
+            "url": "https://en.wikipedia.org/wiki/sequential_search"
+        },
+        {
+            "term": "Domain Specific Language",
+            "url": "https://en.wikipedia.org/wiki/Domain_Specific_Language"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        }
+    ],
+    "highlights": [
+        "Human vision is rich \u2013 we infer shape, objects, parts of objects, and relations between objects \u2013 and vision is abstract: we can perceive the radial symmetry of a spiral staircase, the iterated repetition in the Ising model, see the forest for the trees, and the recursion within the trees",
+        "Deep Learning: Our neural network combines the architectural ideas of Attend-Infer-Repeat [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>] \u2013 which learns to decompose an image into its constituent objects \u2013 with the training regime and Sequential Monte Carlo inference of Neurally Guided Procedural Modeling [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>] \u2013 which learns to control procedural graphics programs",
+        "We have presented a system for inferring graphics programs which generate LATEX-style figures from hand-drawn images using a combination of learning, stochastic search, and program synthesis"
+    ],
+    "key_statements": [
+        "Human vision is rich \u2013 we infer shape, objects, parts of objects, and relations between objects \u2013 and vision is abstract: we can perceive the radial symmetry of a spiral staircase, the iterated repetition in the Ising model, see the forest for the trees, and the recursion within the trees",
+        "Deep Learning: Our neural network combines the architectural ideas of Attend-Infer-Repeat [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>] \u2013 which learns to decompose an image into its constituent objects \u2013 with the training regime and Sequential Monte Carlo inference of Neurally Guided Procedural Modeling [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>] \u2013 which learns to control procedural graphics programs",
+        "We have presented a system for inferring graphics programs which generate LATEX-style figures from hand-drawn images using a combination of learning, stochastic search, and program synthesis"
+    ],
+    "summary": [
+        "Human vision is rich \u2013 we infer shape, objects, parts of objects, and relations between objects \u2013 and vision is abstract: we can perceive the radial symmetry of a spiral staircase, the iterated repetition in the Ising model, see the forest for the trees, and the recursion within the trees.",
+        "This two-step factoring can be framed as probabilistic inference in a generative model where a latent program is executed to produce a set of drawing commands, which are rendered to form an image (Fig. 2).",
+        "Our network constructs the spec one drawing command at a time, conditioned on what it has drawn so far (Fig. 3).",
+        "We trained our network by sampling specs S and target images I for randomly generated scenes1 and maximizing P\u03b8[S|I], the likelihood of S given I, with respect to model parameters \u03b8, by gradient ascent.",
+        "We describe how to learn to synthesize programs much faster (Sec. 3.1), timing out on 2% of the drawings and solving 58% of problems within a minute.",
+        "We use a bias-optimal search algorithm (c.f. Schmidhuber 2004 [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>]): Table 3: Drawings, their specs, and programs synthesized from those specs.",
+        "Our new approach is to learn Pbias[\u00b7] by picking the policy minimizing the expected bias-optimal time to solve a training corpus, D, of graphics program synthesis problems: LOSS(\u03b8; D) = ES\u223cD",
+        "To generate a training corpus for learning a policy, we synthesized minimum cost programs for each drawing and for each \u03c3, minimized 3 using gradient descent while annealing a softened minimum to the hard minimization equation 3.",
+        "We compare synthesis times for our learned search policy with 4 alternatives: Sketch, which poses the entire problem wholesale to the Sketch program synthesizer; DC, a DeepCoder\u2013style model that learns to predict which program components are likely to be useful [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>]; End\u2013to-End, which trains a recurrent neural network to regress directly from images to programs; and an Oracle, a policy which always picks the quickest to search \u03c3 containing a minimum cost program.",
+        "The prior probability of a program is learned by optimizing the parameters of the prior so as to maximize the likelihood of the ground truth specs; see supple-Figure 9: Left: hand drawings.",
+        "TerpreT [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>] systematically compares constraint-based program synthesis techniques against gradient-based search methods, like those used to train Differentiable Neural Computers [<a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>].",
+        "Deep Learning: Our neural network combines the architectural ideas of Attend-Infer-Repeat [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>] \u2013 which learns to decompose an image into its constituent objects \u2013 with the training regime and SMC inference of Neurally Guided Procedural Modeling [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>] \u2013 which learns to control procedural graphics programs.",
+        "We have presented a system for inferring graphics programs which generate LATEX-style figures from hand-drawn images using a combination of learning, stochastic search, and program synthesis."
+    ],
+    "headline": "We introduce a model that learns to convert simple hand drawings into graphics programs written in a subset of LATEX",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Armando Solar Lezama. Program Synthesis By Sketching. PhD thesis, EECS Department, University of California, Berkeley, Dec 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lezama%2C%20Armando%20Solar%20Program%20Synthesis%20By%20Sketching%202008-12"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Brooks Paige and Frank Wood. Inference networks for sequential monte carlo in graphical models. In International Conference on Machine Learning, pages 3040\u20133049, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Paige%2C%20Brooks%20Wood%2C%20Frank%20Inference%20networks%20for%20sequential%20monte%20carlo%20in%20graphical%20models%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Paige%2C%20Brooks%20Wood%2C%20Frank%20Inference%20networks%20for%20sequential%20monte%20carlo%20in%20graphical%20models%202016"
+        },
+        {
+            "id": "3",
+            "entry": "[3] J\u00fcrgen Schmidhuber. Optimal ordered problem solver. Machine Learning, 54(3):211\u2013254, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schmidhuber%2C%20J%C3%BCrgen%20Optimal%20ordered%20problem%20solver%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schmidhuber%2C%20J%C3%BCrgen%20Optimal%20ordered%20problem%20solver%202004"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Daniel Ritchie, Anna Thomas, Pat Hanrahan, and Noah Goodman. Neurally-guided procedural models: Amortized inference for procedural graphics programs using neural networks. In NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ritchie%2C%20Daniel%20Thomas%2C%20Anna%20Hanrahan%2C%20Pat%20Goodman%2C%20Noah%20Neurally-guided%20procedural%20models%3A%20Amortized%20inference%20for%20procedural%20graphics%20programs%20using%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ritchie%2C%20Daniel%20Thomas%2C%20Anna%20Hanrahan%2C%20Pat%20Goodman%2C%20Noah%20Neurally-guided%20procedural%20models%3A%20Amortized%20inference%20for%20procedural%20graphics%20programs%20using%20neural%20networks%202016"
+        },
+        {
+            "id": "5",
+            "entry": "[5] SM Eslami, N Heess, and T Weber. Attend, infer, repeat: Fast scene understanding with generative models. In NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Eslami%2C%20S.M.%20Heess%2C%20N.%20Weber%2C%20T.%20Attend%2C%20infer%2C%20repeat%3A%20Fast%20scene%20understanding%20with%20generative%20models%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Eslami%2C%20S.M.%20Heess%2C%20N.%20Weber%2C%20T.%20Attend%2C%20infer%2C%20repeat%3A%20Fast%20scene%20understanding%20with%20generative%20models%202016"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Jiajun Wu, Joshua B Tenenbaum, and Pushmeet Kohli. Neural scene de-rendering. In CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jiajun%20Wu%20Joshua%20B%20Tenenbaum%20and%20Pushmeet%20Kohli%20Neural%20scene%20derendering%20In%20CVPR%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jiajun%20Wu%20Joshua%20B%20Tenenbaum%20and%20Pushmeet%20Kohli%20Neural%20scene%20derendering%20In%20CVPR%202017"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Max Jaderberg, Karen Simonyan, Andrew Zisserman, et al. Spatial transformer networks. In NIPS, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jaderberg%2C%20Max%20Simonyan%2C%20Karen%20Zisserman%2C%20Andrew%20Spatial%20transformer%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jaderberg%2C%20Max%20Simonyan%2C%20Karen%20Zisserman%2C%20Andrew%20Spatial%20transformer%20networks%202015"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Arnaud Doucet, Nando De Freitas, and Neil Gordon, editors. Sequential Monte Carlo Methods in Practice. Springer, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20Sequential%20Monte%20Carlo%20Methods%20in%20Practice%202001"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Oriol Vinyals, Alexander Toshev, Samy Bengio, and Dumitru Erhan. Show and tell: A neural image caption generator. In Proceedings of the IEEE conference on computer vision and pattern recognition, pages 3156\u20133164, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vinyals%2C%20Oriol%20Toshev%2C%20Alexander%20Bengio%2C%20Samy%20Erhan%2C%20Dumitru%20Show%20and%20tell%3A%20A%20neural%20image%20caption%20generator%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vinyals%2C%20Oriol%20Toshev%2C%20Alexander%20Bengio%2C%20Samy%20Erhan%2C%20Dumitru%20Show%20and%20tell%3A%20A%20neural%20image%20caption%20generator%202015"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Ian Goodfellow, Yoshua Bengio, and Aaron Courville. Deep Learning. MIT Press.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goodfellow%2C%20Ian%20Bengio%2C%20Yoshua%20Courville%2C%20Aaron%20Deep%20Learning"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Oleksandr Polozov and Sumit Gulwani. Flashmeta: A framework for inductive program synthesis. ACM SIGPLAN Notices, 50(10):107\u2013126, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Polozov%2C%20Oleksandr%20Gulwani%2C%20Sumit%20Flashmeta%3A%20A%20framework%20for%20inductive%20program%20synthesis%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Polozov%2C%20Oleksandr%20Gulwani%2C%20Sumit%20Flashmeta%3A%20A%20framework%20for%20inductive%20program%20synthesis%202015"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Leonid Anatolevich Levin. Universal sequential search problems. Problemy Peredachi Informatsii, 9(3):115\u2013116, 1973.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Levin%2C%20Leonid%20Anatolevich%20Universal%20sequential%20search%20problems.%20Problemy%20Peredachi%201973",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Levin%2C%20Leonid%20Anatolevich%20Universal%20sequential%20search%20problems.%20Problemy%20Peredachi%201973"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Matej Balog, Alexander L. Gaunt, Marc Brockschmidt, Sebastian Nowozin, and Daniel Tarlow. DeepCoder: Learning to write programs. arXiv preprint arXiv:1611.01989, November 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.01989"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Raymond J Solomonoff. Optimum sequential search. 1984.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Solomonoff%2C%20Raymond%20J.%20Optimum%20sequential%20search%201984"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Alexander L Gaunt, Marc Brockschmidt, Rishabh Singh, Nate Kushman, Pushmeet Kohli, Jonathan Taylor, and Daniel Tarlow. Terpret: A probabilistic programming language for program induction. arXiv preprint arXiv:1608.04428, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1608.04428"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Alex Graves, Greg Wayne, Malcolm Reynolds, Tim Harley, Ivo Danihelka, Agnieszka Grabska-Barwinska, Sergio G\u00f3mez Colmenarejo, Edward Grefenstette, Tiago Ramalho, John Agapiou, et al. Hybrid computing using a neural network with dynamic external memory. Nature, 538(7626):471\u2013476, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Graves%2C%20Alex%20Wayne%2C%20Greg%20Reynolds%2C%20Malcolm%20Harley%2C%20Tim%20Hybrid%20computing%20using%20a%20neural%20network%20with%20dynamic%20external%20memory%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Graves%2C%20Alex%20Wayne%2C%20Greg%20Reynolds%2C%20Malcolm%20Harley%2C%20Tim%20Hybrid%20computing%20using%20a%20neural%20network%20with%20dynamic%20external%20memory%202016"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Ashwin Kalyan, Abhishek Mohta, Oleksandr Polozov, Dhruv Batra, Prateek Jain, and Sumit Gulwani. Neural-guided deductive search for real-time program synthesis from examples. ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kalyan%2C%20Ashwin%20Mohta%2C%20Abhishek%20Polozov%2C%20Oleksandr%20Batra%2C%20Dhruv%20Neural-guided%20deductive%20search%20for%20real-time%20program%20synthesis%20from%20examples%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kalyan%2C%20Ashwin%20Mohta%2C%20Abhishek%20Polozov%2C%20Oleksandr%20Batra%2C%20Dhruv%20Neural-guided%20deductive%20search%20for%20real-time%20program%20synthesis%20from%20examples%202018"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Yaroslav Ganin, Tejas Kulkarni, Igor Babuschkin, SM Eslami, and Oriol Vinyals. Synthesizing programs for images using reinforced adversarial learning. ICML, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ganin%2C%20Yaroslav%20Kulkarni%2C%20Tejas%20Igor%20Babuschkin%2C%20S.M.Eslami%20Vinyals%2C%20Oriol%20Synthesizing%20programs%20for%20images%20using%20reinforced%20adversarial%20learning%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ganin%2C%20Yaroslav%20Kulkarni%2C%20Tejas%20Igor%20Babuschkin%2C%20S.M.Eslami%20Vinyals%2C%20Oriol%20Synthesizing%20programs%20for%20images%20using%20reinforced%20adversarial%20learning%202018"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Yuntian Deng, Anssi Kanervisto, Jeffrey Ling, and Alexander M. Rush. Image-to-markup generation with coarse-to-fine attention. In ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Deng%2C%20Yuntian%20Kanervisto%2C%20Anssi%20Ling%2C%20Jeffrey%20Rush%2C%20Alexander%20M.%20Image-to-markup%20generation%20with%20coarse-to-fine%20attention%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Deng%2C%20Yuntian%20Kanervisto%2C%20Anssi%20Ling%2C%20Jeffrey%20Rush%2C%20Alexander%20M.%20Image-to-markup%20generation%20with%20coarse-to-fine%20attention%202017"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Tony Beltramelli. pix2code: Generating code from a graphical user interface screenshot. CoRR, abs/1705.07962, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1705.07962"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Brian Hempel and Ravi Chugh. Semi-automated svg programming via direct manipulation. In Proceedings of the 29th Annual Symposium on User Interface Software and Technology, UIST \u201916, pages 379\u2013390, New York, NY, USA, 2016. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hempel%2C%20Brian%20Chugh%2C%20Ravi%20Semi-automated%20svg%20programming%20via%20direct%20manipulation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hempel%2C%20Brian%20Chugh%2C%20Ravi%20Semi-automated%20svg%20programming%20via%20direct%20manipulation%202016"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Haibin Huang, Evangelos Kalogerakis, Ersin Yumer, and Radomir Mech. Shape synthesis from sketches via procedural models and convolutional networks. IEEE transactions on visualization and computer graphics, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huang%2C%20Haibin%20Kalogerakis%2C%20Evangelos%20Yumer%2C%20Ersin%20Mech%2C%20Radomir%20Shape%20synthesis%20from%20sketches%20via%20procedural%20models%20and%20convolutional%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huang%2C%20Haibin%20Kalogerakis%2C%20Evangelos%20Yumer%2C%20Ersin%20Mech%2C%20Radomir%20Shape%20synthesis%20from%20sketches%20via%20procedural%20models%20and%20convolutional%20networks%202017"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Gen Nishida, Ignacio Garcia-Dorado, Daniel G. Aliaga, Bedrich Benes, and Adrien Bousseau. Interactive sketching of urban procedural models. ACM Trans. Graph., 35(4), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nishida%20Garcia-Dorado%2C%20Ignacio%20Aliaga%2C%20Daniel%20G.%20Benes%2C%20Bedrich%20Interactive%20sketching%20of%20urban%20procedural%20models%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nishida%20Garcia-Dorado%2C%20Ignacio%20Aliaga%2C%20Daniel%20G.%20Benes%2C%20Bedrich%20Interactive%20sketching%20of%20urban%20procedural%20models%202016"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Kenneth Forbus, Jeffrey Usher, Andrew Lovett, Kate Lockwood, and Jon Wetzel. Cogsketch: Sketch understanding for cognitive science research and for education. Topics in Cognitive Science, 3(4):648\u2013666, 2011. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Forbus%2C%20Kenneth%20Usher%2C%20Jeffrey%20Lovett%2C%20Andrew%20Lockwood%2C%20Kate%20Cogsketch%3A%20Sketch%20understanding%20for%20cognitive%20science%20research%20and%20for%20education%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Forbus%2C%20Kenneth%20Usher%2C%20Jeffrey%20Lovett%2C%20Andrew%20Lockwood%2C%20Kate%20Cogsketch%3A%20Sketch%20understanding%20for%20cognitive%20science%20research%20and%20for%20education%202011"
+        }
+    ]
+}

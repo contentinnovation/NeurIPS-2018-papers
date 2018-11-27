@@ -1,0 +1,249 @@
+{
+    "filename": "7370-uncertainty-aware-attention-for-reliable-interpretation-and-prediction.pdf",
+    "metadata": {
+        "title": "Uncertainty-Aware Attention for Reliable Interpretation and Prediction",
+        "author": "Jay Heo, Hae Beom Lee, Saehoon Kim, Juho Lee, Kwang Joon Kim, Eunho Yang, Sung Ju Hwang",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7370-uncertainty-aware-attention-for-reliable-interpretation-and-prediction.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Attention mechanism is effective in both focusing the deep learning models on relevant features and interpreting them. However, attentions may be unreliable since the networks that generate them are often trained in a weakly-supervised manner. To overcome this limitation, we introduce the notion of input-dependent uncertainty to the attention mechanism, such that it generates attention for each feature with varying degrees of noise based on the given input, to learn larger variance on instances it is uncertain about. We learn this Uncertainty-aware Attention (UA) mechanism using variational inference, and validate it on various risk prediction tasks from electronic health records on which our model significantly outperforms existing attention models. The analysis of the learned attentions shows that our model generates attentions that comply with clinicians\u2019 interpretation, and provide richer interpretation via learned variance. Further evaluation of both the accuracy of the uncertainty calibration and the prediction performance with \u201cI don\u2019t know\u201d decision show that UA yields networks with high reliability as well."
+    },
+    "keywords": [
+        {
+            "term": "evidence lower bound",
+            "url": "https://en.wikipedia.org/wiki/evidence_lower_bound"
+        },
+        {
+            "term": "NIPS",
+            "url": "https://en.wikipedia.org/wiki/NIPS"
+        },
+        {
+            "term": "machine translation",
+            "url": "https://en.wikipedia.org/wiki/machine_translation"
+        },
+        {
+            "term": "predictive model",
+            "url": "https://en.wikipedia.org/wiki/predictive_model"
+        },
+        {
+            "term": "National Research Foundation of Korea",
+            "url": "https://en.wikipedia.org/wiki/National_Research_Foundation_of_Korea"
+        },
+        {
+            "term": "electronic health record",
+            "url": "https://en.wikipedia.org/wiki/electronic_health_record"
+        },
+        {
+            "term": "real world",
+            "url": "https://en.wikipedia.org/wiki/real_world"
+        },
+        {
+            "term": "variational inference",
+            "url": "https://en.wikipedia.org/wiki/variational_inference"
+        }
+    ],
+    "highlights": [
+        "For many real-world safety-critical tasks, achieving high reliablity may be the most important objective when learning predictive models for them, since incorrect predictions could potentially lead to severe consequences",
+        "While having achieved impressive performances on multitudes of real-world tasks such as visual recognition [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>], machine translation [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>] and risk prediction for healthcare [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>], may be still susceptible to such critical mistakes since most do not have any notion of predictive uncertainty, often leading to overconfident models [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>, <a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>] that are prone to making mistakes",
+        "For further validation on prediction reliability, we evaluate it for the uncertainty calibration performance, and prediction under the scenario where the model can defer the decision by saying \u201cI don\u2019t know\u201d, whose results show that uncertainty-aware attention yields significantly better calibrated networks that can better avoid making incorrect predictions on instances that it is uncertain, compared to baseline attention models",
+        "Prediction with \u201cI don\u2019t know\" option We further evaluate the reliability of our predictive model by allowing it to say I don\u2019t know (IDK), where the model can refrain from making a hard decision of yes or no when it is uncertain about its prediction",
+        "We proposed uncertainty-aware attention (UA) mechanism that can enhance reliability of both interpretations and predictions of general deep neural networks",
+        "Further analysis of prediction reliability shows that our model is accurately calibrated and can defer predictions when making prediction with \u201cI don\u2019t know\u201d option.\n4RETAIN-SA is not compared since it largely underperforms all others and is not a meaningful baseline"
+    ],
+    "key_statements": [
+        "For many real-world safety-critical tasks, achieving high reliablity may be the most important objective when learning predictive models for them, since incorrect predictions could potentially lead to severe consequences",
+        "While having achieved impressive performances on multitudes of real-world tasks such as visual recognition [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>], machine translation [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>] and risk prediction for healthcare [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>], may be still susceptible to such critical mistakes since most do not have any notion of predictive uncertainty, often leading to overconfident models [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>, <a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>] that are prone to making mistakes",
+        "To tackle this limitation of conventional attention mechanisms, we propose to allow the attention model to output uncertainty on each feature and further leverage them when making final predictions",
+        "For further validation on prediction reliability, we evaluate it for the uncertainty calibration performance, and prediction under the scenario where the model can defer the decision by saying \u201cI don\u2019t know\u201d, whose results show that uncertainty-aware attention yields significantly better calibrated networks that can better avoid making incorrect predictions on instances that it is uncertain, compared to baseline attention models",
+        "We propose a novel variational attention model with instance-dependent modeling of variance, that captures input-level uncertainty and use it to attenuate attention strengths",
+        "We show that our uncertainty-aware attention yields accurate calibration of model uncertainty as well as attentions that aligns well with human interpretations",
+        "We describe our uncertainty-aware attention model",
+        "Baselines We describe our uncertainty-calibrated attention models and relevant baselines.\n1) RETAIN-DA: The recurrent attention model in [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>], which uses deterministic soft attention.\n2) RETAIN-SA: RETAIN model with the stochastic hard attention proposed by [<a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>], that models the attention weights with multinoulli distribution, which is learned by variational inference.\n3) uncertainty-aware attention-independent: The input-independent version of our uncertainty-aware attention model in (2) whose variance is modeled indepently of the input.\n4) uncertainty-aware attention: Our input-dependent uncertainty-aware attention model in (1). 5) uncertainty-aware attention+: The same as uncertainty-aware attention, but with additional modeling of input-adaptive noise at the final prediction as done in [<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>], to account for output uncertainty as well.\n5.1",
+        "We further compared uncertainty-aware attention against RETAIN-DA for Table 2: Percentage of features seaccuracy of the attentions, using variables selected meaningful lected from each model that match the by the clinicians as ground truth labels (avg. 132 variables per features selected by the clinicians",
+        "Record), from electronic health records for a male and a female patient randomly selected from 10 age groups (40s-80s), on PhysioNet-Mortality",
+        "Prediction with \u201cI don\u2019t know\" option We further evaluate the reliability of our predictive model by allowing it to say I don\u2019t know (IDK), where the model can refrain from making a hard decision of yes or no when it is uncertain about its prediction",
+        "Note that we use RETAIN-DA with MC-Dropout [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>] as our baseline for this experiment, since RETAIN-DA is deterministic and cannot output uncertainty 4 We report the performance of RETAIN + DA, uncertainty-aware attention, and uncertainty-aware attention+ for all tasks by plotting the ratio of incorrect predictions as a function of the ratio of correct predictions, by varying the threshold on the model confidence (See Figure 3)",
+        "We proposed uncertainty-aware attention (UA) mechanism that can enhance reliability of both interpretations and predictions of general deep neural networks",
+        "Further analysis of prediction reliability shows that our model is accurately calibrated and can defer predictions when making prediction with \u201cI don\u2019t know\u201d option.\n4RETAIN-SA is not compared since it largely underperforms all others and is not a meaningful baseline"
+    ],
+    "summary": [
+        "For many real-world safety-critical tasks, achieving high reliablity may be the most important objective when learning predictive models for them, since incorrect predictions could potentially lead to severe consequences.",
+        "To tackle this limitation of conventional attention mechanisms, we propose to allow the attention model to output uncertainty on each feature and further leverage them when making final predictions.",
+        "We validate UA on tasks such as sepsis prediction in ICU and disease risk prediction from electronic health records (EHR) that have large degree of uncertainties in the input, on which our model outperforms the baseline attention models by large margins.",
+        "For further validation on prediction reliability, we evaluate it for the uncertainty calibration performance, and prediction under the scenario where the model can defer the decision by saying \u201cI don\u2019t know\u201d, whose results show that UA yields significantly better calibrated networks that can better avoid making incorrect predictions on instances that it is uncertain, compared to baseline attention models.",
+        "RETAIN obtains state-of-the-art performance on risk prediction tasks from electronic health records, and is able to provide useful interpretations via learned attentions.",
+        "The previous example shows another advantage of our model: it provides a richer interpretations of why the model has made such predictions, compared to ones provided by deterministic or stochastic model without input-dependent modeling of uncertainty.",
+        "We further compared UA against RETAIN-DA for Table 2: Percentage of features seaccuracy of the attentions, using variables selected meaningful lected from each model that match the by the clinicians as ground truth labels, from EHRs for a male and a female patient randomly selected from 10 age groups (40s-80s), on PhysioNet-Mortality.",
+        "We measure the uncertainty of each prediction by sampling the variance of the prediction using both MC-dropout and stochastic Gaussian noise over 30 runs, and predict the label for the instances with standard deviation larger than some set threshold as IDK.",
+        "Note that we use RETAIN-DA with MC-Dropout [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>] as our baseline for this experiment, since RETAIN-DA is deterministic and cannot output uncertainty 4 We report the performance of RETAIN + DA, UA, and UA+ for all tasks by plotting the ratio of incorrect predictions as a function of the ratio of correct predictions, by varying the threshold on the model confidence (See Figure 3).",
+        "We proposed uncertainty-aware attention (UA) mechanism that can enhance reliability of both interpretations and predictions of general deep neural networks.",
+        "UA generates attention weights following Gaussian distribution with learned mean and variance, that are decoupled and trained in input-adaptive manner.",
+        "Further analysis of prediction reliability shows that our model is accurately calibrated and can defer predictions when making prediction with \u201cI don\u2019t know\u201d option"
+    ],
+    "headline": "We introduce the notion of input-dependent uncertainty to the attention mechanism, such that it generates attention for each feature with varying degrees of noise based on the given input, to learn larger variance on instances it is uncertain about",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] M. S. Ayhan and P. Berens. Test-time Data Augmentation for Estimation of Heteroscedastic Aleatoric Uncertainty in Deep Neural Networks. MIDL, Mar. 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ayhan%2C%20M.S.%20Berens%2C%20P.%20Test-time%20Data%20Augmentation%20for%20Estimation%20of%20Heteroscedastic%20Aleatoric%20Uncertainty%20in%20Deep%20Neural%20Networks%202018-03",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ayhan%2C%20M.S.%20Berens%2C%20P.%20Test-time%20Data%20Augmentation%20for%20Estimation%20of%20Heteroscedastic%20Aleatoric%20Uncertainty%20in%20Deep%20Neural%20Networks%202018-03"
+        },
+        {
+            "id": "2",
+            "entry": "[2] D. Bahdanau, K. Cho, and Y. Bengio. Neural machine translation by jointly learning to align and translate. ICLR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bahdanau%2C%20D.%20Cho%2C%20K.%20Bengio%2C%20Y.%20Neural%20machine%20translation%20by%20jointly%20learning%20to%20align%20and%20translate%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bahdanau%2C%20D.%20Cho%2C%20K.%20Bengio%2C%20Y.%20Neural%20machine%20translation%20by%20jointly%20learning%20to%20align%20and%20translate%202015"
+        },
+        {
+            "id": "3",
+            "entry": "[3] E. Choi, M. T. Bahadori, J. Sun, J. Kulas, A. Schuetz, and W. Stewart. Retain: An interpretable predictive model for healthcare using reverse time attention mechanism. In NIPS. 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Choi%2C%20E.%20Bahadori%2C%20M.T.%20Sun%2C%20J.%20Kulas%2C%20J.%20Retain%3A%20An%20interpretable%20predictive%20model%20for%20healthcare%20using%20reverse%20time%20attention%20mechanism.%20In%20NIPS%202016"
+        },
+        {
+            "id": "4",
+            "entry": "[4] J. Futoma, S. Hariharan, and K. A. Heller. Learning to detect sepsis with a multitask gaussian process RNN classifier. In ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Futoma%2C%20J.%20Hariharan%2C%20S.%20Heller%2C%20K.A.%20Learning%20to%20detect%20sepsis%20with%20a%20multitask%20gaussian%20process%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Futoma%2C%20J.%20Hariharan%2C%20S.%20Heller%2C%20K.A.%20Learning%20to%20detect%20sepsis%20with%20a%20multitask%20gaussian%20process%202017"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Y. Gal and Z. Ghahramani. A Theoretically Grounded Application of Dropout in Recurrent Neural Networks. ArXiv e-prints.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gal%2C%20Y.%20Ghahramani%2C%20Z.%20A%20Theoretically%20Grounded%20Application%20of%20Dropout%20in%20Recurrent%20Neural%20Networks.%20ArXiv%20e-prints"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Y. Gal and Z. Ghahramani. Bayesian Convolutional Neural Networks with Bernoulli Approximate Variational Inference. ArXiv e-prints, June 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gal%2C%20Y.%20Ghahramani%2C%20Z.%20Bayesian%20Convolutional%20Neural%20Networks%20with%20Bernoulli%20Approximate%20Variational%20Inference.%20ArXiv%20e-prints%202015-06"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Y. Gal and Z. Ghahramani. Dropout as a bayesian approximation: Representing model uncertainty in deep learning. In ICML, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gal%2C%20Y.%20Ghahramani%2C%20Z.%20Dropout%20as%20a%20bayesian%20approximation%3A%20Representing%20model%20uncertainty%20in%20deep%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gal%2C%20Y.%20Ghahramani%2C%20Z.%20Dropout%20as%20a%20bayesian%20approximation%3A%20Representing%20model%20uncertainty%20in%20deep%20learning%202016"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Y. Gal, J. Hron, and A. Kendall. Concrete dropout. In I. Guyon, U. V. Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Y%20Gal%20J%20Hron%20and%20A%20Kendall%20Concrete%20dropout%20In%20I%20Guyon%20U%20V%20Luxburg%20S%20Bengio%20H%20Wallach%20R%20Fergus%20S%20Vishwanathan%20and%20R%20Garnett%20editors%20NIPS%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Y%20Gal%20J%20Hron%20and%20A%20Kendall%20Concrete%20dropout%20In%20I%20Guyon%20U%20V%20Luxburg%20S%20Bengio%20H%20Wallach%20R%20Fergus%20S%20Vishwanathan%20and%20R%20Garnett%20editors%20NIPS%202017"
+        },
+        {
+            "id": "9",
+            "entry": "[9] C. Guo, G. Pleiss, Y. Sun, and K. Q. Weinberger. On calibration of modern neural networks. In ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Guo%2C%20C.%20Pleiss%2C%20G.%20Sun%2C%20Y.%20Weinberger%2C%20K.Q.%20On%20calibration%20of%20modern%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Guo%2C%20C.%20Pleiss%2C%20G.%20Sun%2C%20Y.%20Weinberger%2C%20K.Q.%20On%20calibration%20of%20modern%20neural%20networks%202017"
+        },
+        {
+            "id": "10",
+            "entry": "[10] K. He, X. Zhang, S. Ren, and J. Sun. Deep Residual Learning for Image Recognition. In CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20Residual%20Learning%20for%20Image%20Recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20Residual%20Learning%20for%20Image%20Recognition%202016"
+        },
+        {
+            "id": "11",
+            "entry": "[11] D. J. S. L. A. C. Ivanovitch Silva, Galan Moody and R. G. Mark. Predicting in-hospital mortality of icu patients: The physionet/computing in cardiology challenge 2012. In In CinC, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silva%2C%20D.J.S.L.A.C.Ivanovitch%20Moody%2C%20Galan%20Mark%2C%20R.G.%20Predicting%20in-hospital%20mortality%20of%20icu%20patients%3A%20The%20physionet/computing%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silva%2C%20D.J.S.L.A.C.Ivanovitch%20Moody%2C%20Galan%20Mark%2C%20R.G.%20Predicting%20in-hospital%20mortality%20of%20icu%20patients%3A%20The%20physionet/computing%202012"
+        },
+        {
+            "id": "12",
+            "entry": "[12] A. E. Johnson, T. J. Pollard, L. Shen, L. wei H. Lehman, M. Feng, M. Ghassemi, B. Moody, P. Szolovits, L. A. Celi, and R. G. Mark. Mimic-iii, a freely accessible critical care database.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Johnson%2C%20A.E.%20Pollard%2C%20T.J.%20Shen%2C%20L.%20wei%20H.%20Lehman%2C%20L.%20a%20freely%20accessible%20critical%20care%20database"
+        },
+        {
+            "id": "13",
+            "entry": "[13] A. Kendall, V. Badrinarayanan, and R. Cipolla. Bayesian SegNet: Model Uncertainty in Deep Convolutional Encoder-Decoder Architectures for Scene Understanding. ArXiv e-prints, Nov. 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kendall%2C%20A.%20Badrinarayanan%2C%20V.%20Cipolla%2C%20R.%20Bayesian%20SegNet%3A%20Model%20Uncertainty%20in%20Deep%20Convolutional%20Encoder-Decoder%20Architectures%20for%20Scene%20Understanding.%20ArXiv%20e-prints%202015-11"
+        },
+        {
+            "id": "14",
+            "entry": "[14] A. Kendall and Y. Gal. What Uncertainties Do We Need in Bayesian Deep Learning for Computer Vision? In NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kendall%2C%20A.%20Gal%2C%20Y.%20What%20Uncertainties%20Do%20We%20Need%20in%20Bayesian%20Deep%20Learning%20for%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kendall%2C%20A.%20Gal%2C%20Y.%20What%20Uncertainties%20Do%20We%20Need%20in%20Bayesian%20Deep%20Learning%20for%202017"
+        },
+        {
+            "id": "15",
+            "entry": "[15] D. P. Kingma, T. Salimans, and M. Welling. Variational Dropout and the Local Reparameterization Trick. ArXiv e-prints, June 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20D.P.%20Salimans%2C%20T.%20Welling%2C%20M.%20Variational%20Dropout%20and%20the%20Local%20Reparameterization%20Trick.%20ArXiv%20e-prints%202015-06"
+        },
+        {
+            "id": "16",
+            "entry": "[16] D. P. Kingma and M. Welling. Auto encoding variational bayes. In ICLR. 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20D.P.%20Welling%2C%20M.%20Auto%20encoding%20variational%20bayes%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20D.P.%20Welling%2C%20M.%20Auto%20encoding%20variational%20bayes%202014"
+        },
+        {
+            "id": "17",
+            "entry": "[17] A. Krizhevsky, I. Sutskever, and G. E. Hinton. ImageNet Classification with Deep Convolutional Neural Networks. In NIPS, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20A.%20Sutskever%2C%20I.%20Hinton%2C%20G.E.%20ImageNet%20Classification%20with%20Deep%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krizhevsky%2C%20A.%20Sutskever%2C%20I.%20Hinton%2C%20G.E.%20ImageNet%20Classification%20with%20Deep%202012"
+        },
+        {
+            "id": "18",
+            "entry": "[18] B. Lakshminarayanan, A. Pritzel, and C. Blundell. Simple and scalable predictive uncertainty estimation using deep ensembles. In NIPS, pages 6405\u20136416, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lakshminarayanan%2C%20B.%20Pritzel%2C%20A.%20Blundell%2C%20C.%20Simple%20and%20scalable%20predictive%20uncertainty%20estimation%20using%20deep%20ensembles%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lakshminarayanan%2C%20B.%20Pritzel%2C%20A.%20Blundell%2C%20C.%20Simple%20and%20scalable%20predictive%20uncertainty%20estimation%20using%20deep%20ensembles%202017"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Y. Lecun, L. Bottou, Y. Bengio, and P. Haffner. Gradient-based learning applied to document recognition. In Proceedings of the IEEE, pages 2278\u20132324, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lecun%2C%20Y.%20Bottou%2C%20L.%20Bengio%2C%20Y.%20Haffner%2C%20P.%20Gradient-based%20learning%20applied%20to%20document%20recognition%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lecun%2C%20Y.%20Bottou%2C%20L.%20Bengio%2C%20Y.%20Haffner%2C%20P.%20Gradient-based%20learning%20applied%20to%20document%20recognition%201998"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Y. LeCun and C. Cortes. MNIST handwritten digit database. 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=LeCun%2C%20Y.%20Cortes%2C%20C.%20MNIST%20handwritten%20digit%20database%202010"
+        },
+        {
+            "id": "21",
+            "entry": "[21] C. J. Maddison, A. Mnih, and Y. Whye Teh. The Concrete Distribution: A Continuous Relaxation of Discrete Random Variables. ArXiv e-prints, Nov. 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Maddison%2C%20C.J.%20Mnih%2C%20A.%20Y.%20Whye%20Teh.%20The%20Concrete%20Distribution%3A%20A%20Continuous%20Relaxation%20of%20Discrete%20Random%20Variables.%20ArXiv%20e-prints%202016-11"
+        },
+        {
+            "id": "22",
+            "entry": "[22] M. P. Naeini, G. F. Cooper, and M. Hauskrecht. Obtaining well calibrated probabilities using bayesian binning. In AAAI, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Naeini%2C%20M.P.%20Cooper%2C%20G.F.%20Hauskrecht%2C%20M.%20Obtaining%20well%20calibrated%20probabilities%20using%20bayesian%20binning%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Naeini%2C%20M.P.%20Cooper%2C%20G.F.%20Hauskrecht%2C%20M.%20Obtaining%20well%20calibrated%20probabilities%20using%20bayesian%20binning%202015"
+        },
+        {
+            "id": "23",
+            "entry": "[23] K. Sohn, H. Lee, and X. Yan. Learning structured output representation using deep conditional generative models. In NIPS. 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sohn%2C%20K.%20Lee%2C%20H.%20Yan%2C%20X.%20Learning%20structured%20output%20representation%20using%20deep%20conditional%20generative%20models.%20In%20NIPS%202015"
+        },
+        {
+            "id": "24",
+            "entry": "[24] N. Srivastava, G. Hinton, A. Krizhevsky, I. Sutskever, and R. Salakhutdinov. Dropout: A simple way to prevent neural networks from overfitting. Journal of Machine Learning Research, 15:1929\u20131958, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Srivastava%2C%20N.%20Hinton%2C%20G.%20Krizhevsky%2C%20A.%20Sutskever%2C%20I.%20Dropout%3A%20A%20simple%20way%20to%20prevent%20neural%20networks%20from%20overfitting%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Srivastava%2C%20N.%20Hinton%2C%20G.%20Krizhevsky%2C%20A.%20Sutskever%2C%20I.%20Dropout%3A%20A%20simple%20way%20to%20prevent%20neural%20networks%20from%20overfitting%202014"
+        },
+        {
+            "id": "25",
+            "entry": "[25] S. Sukhbaatar, A. Szlam, J. Weston, and R. Fergus. End-to-end memory networks. In NIPS, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sukhbaatar%2C%20S.%20Szlam%2C%20A.%20Weston%2C%20J.%20Fergus%2C%20R.%20End-to-end%20memory%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sukhbaatar%2C%20S.%20Szlam%2C%20A.%20Weston%2C%20J.%20Fergus%2C%20R.%20End-to-end%20memory%20networks%202015"
+        },
+        {
+            "id": "26",
+            "entry": "[26] R. Tanno, D. E. Worrall, A. Ghosh, E. Kaden, S. N. Sotiropoulos, A. Criminisi, and D. C. Alexander. Bayesian Image Quality Transfer with CNNs: Exploring Uncertainty in dMRI Super-Resolution. ArXiv e-prints, May 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tanno%2C%20R.%20Worrall%2C%20D.E.%20Ghosh%2C%20A.%20Kaden%2C%20E.%20Bayesian%20Image%20Quality%20Transfer%20with%20CNNs%3A%20Exploring%20Uncertainty%20in%20dMRI%20Super-Resolution.%20ArXiv%20e-prints%202017-05"
+        },
+        {
+            "id": "27",
+            "entry": "[27] J. van der Westhuizen and J. Lasenby. Bayesian LSTMs in medicine. ArXiv e-prints, June 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=van%20der%20Westhuizen%2C%20J.%20Lasenby%2C%20J.%20Bayesian%20LSTMs%20in%20medicine.%20ArXiv%20e-prints%202017-06"
+        },
+        {
+            "id": "28",
+            "entry": "[28] K. Xu, J. L. Ba, R. Kiros, K. Cho, A. Courville, R. Salakhutdinov, R. S. Zemel, and Y. Bengio. Show, attend and tell: Neural image caption generation with visual attention. In ICML, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xu%2C%20K.%20Ba%2C%20J.L.%20Kiros%2C%20R.%20Cho%2C%20K.%20attend%20and%20tell%3A%20Neural%20image%20caption%20generation%20with%20visual%20attention%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xu%2C%20K.%20Ba%2C%20J.L.%20Kiros%2C%20R.%20Cho%2C%20K.%20attend%20and%20tell%3A%20Neural%20image%20caption%20generation%20with%20visual%20attention%202015"
+        },
+        {
+            "id": "29",
+            "entry": "[29] L. Zhu and N. Laptev. Deep and Confident Prediction for Time Series at Uber. ArXiv e-prints, Sept. 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhu%2C%20L.%20Laptev%2C%20N.%20Deep%20and%20Confident%20Prediction%20for%20Time%20Series%20at%20Uber.%20ArXiv%20e-prints%202017-09"
+        }
+    ]
+}

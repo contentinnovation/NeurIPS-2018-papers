@@ -1,0 +1,269 @@
+{
+    "filename": "7921-bayesian-adversarial-learning.pdf",
+    "metadata": {
+        "title": "Bayesian Adversarial Learning",
+        "author": "Nanyang Ye, Zhanxing Zhu",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7921-bayesian-adversarial-learning.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Deep neural networks have been known to be vulnerable to adversarial attacks, raising lots of security concerns in the practical deployment. Popular defensive approaches can be formulated as a (distributionally) robust optimization problem, which minimizes a \u201cpoint estimate\u201d of worst-case loss derived from either perdatum perturbation or adversary data-generating distribution within certain predefined constraints. This point estimate ignores potential test adversaries that are beyond the pre-defined constraints. The model robustness might deteriorate sharply in the scenario of stronger test adversarial data. In this work, a novel robust training framework is proposed to alleviate this issue, Bayesian Robust Learning, in which a distribution is put on the adversarial data-generating distribution to account for the uncertainty of the adversarial data-generating process. The uncertainty directly helps to consider the potential adversaries that are stronger than the point estimate in the cases of distributionally robust optimization. The uncertainty of model parameters is also incorporated to accommodate the full Bayesian framework. We design a scalable Markov Chain Monte Carlo sampling strategy to obtain the posterior distribution over model parameters. Various experiments are conducted to verify the superiority of BAL over existing adversarial training methods. The code for BAL is available at https://tinyurl.com/ycxsaewr."
+    },
+    "keywords": [
+        {
+            "term": "Markov Chain Monte Carlo",
+            "url": "https://en.wikipedia.org/wiki/Markov_Chain_Monte_Carlo"
+        },
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "computer vision",
+            "url": "https://en.wikipedia.org/wiki/computer_vision"
+        },
+        {
+            "term": "traffic sign recognition",
+            "url": "https://en.wikipedia.org/wiki/traffic_sign_recognition"
+        },
+        {
+            "term": "model parameter",
+            "url": "https://en.wikipedia.org/wiki/model_parameter"
+        },
+        {
+            "term": "posterior distribution",
+            "url": "https://en.wikipedia.org/wiki/posterior_distribution"
+        },
+        {
+            "term": "robust optimization",
+            "url": "https://en.wikipedia.org/wiki/robust_optimization"
+        },
+        {
+            "term": "empirical risk minimization",
+            "url": "https://en.wikipedia.org/wiki/empirical_risk_minimization"
+        },
+        {
+            "term": "monte carlo",
+            "url": "https://en.wikipedia.org/wiki/monte_carlo"
+        },
+        {
+            "term": "point estimate",
+            "url": "https://en.wikipedia.org/wiki/point_estimate"
+        },
+        {
+            "term": "adversarial learning",
+            "url": "https://en.wikipedia.org/wiki/adversarial_learning"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "The resurgence of deep neural networks has achieved various breakthroughs in different domains, including computer vision, natural language processing and game playing",
+        "We propose a particular instantiation of Bayesian Adversarial Learning targeting on providing stronger robustness to adversarial examples and better generalization performance than existing approaches",
+        "For sampling the posterior of model parameters, we find that the naive stochastic gradient Hamiltonian Monte Carlo (SGHMC, [<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>]) sampler cannot efficiently explore the target density due to the high correlation between parameters",
+        "We have proposed an adversarial training method, Bayesian Adversarial Learning, a full Bayesian treatment over adversarial training",
+        "We have shown that the proposed Bayesian Adversarial Learning has achieved the best performance in adversarial training for MNIST classification and a practical safety-critical problem, e.g., traffic sign recognition",
+        "The performance of Bayesian Adversarial Learning could always be better than the random guessing method even with the strong Carlini-Wagner attacks, which is important for safety-critical systems in real-world scenarios"
+    ],
+    "key_statements": [
+        "The resurgence of deep neural networks has achieved various breakthroughs in different domains, including computer vision, natural language processing and game playing",
+        "In order to overcome this issue, we introduce a novel framework for robust learning, Bayesian Adversarial Learning (BAL), a fully Bayesian treatment over the adversarial training",
+        "We propose a particular instantiation of Bayesian Adversarial Learning targeting on providing stronger robustness to adversarial examples and better generalization performance than existing approaches",
+        "For sampling the posterior of model parameters, we find that the naive stochastic gradient Hamiltonian Monte Carlo (SGHMC, [<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>]) sampler cannot efficiently explore the target density due to the high correlation between parameters",
+        "For other adversarial training methods and empirical risk minimization, to fully explore the parameter space, we use the Adam optimizer for minimizing the loss on adversarial examples generated by FGSM, IFGSM, PGD and WRM",
+        "The reason for this efficient training strategy is that we found the results obtained from training with a large number epochs from scratch, are similar with that of training a small number of epochs initialized with empirical risk minimization",
+        "We have proposed an adversarial training method, Bayesian Adversarial Learning, a full Bayesian treatment over adversarial training",
+        "We have shown that the proposed Bayesian Adversarial Learning has achieved the best performance in adversarial training for MNIST classification and a practical safety-critical problem, e.g., traffic sign recognition",
+        "The performance of Bayesian Adversarial Learning could always be better than the random guessing method even with the strong Carlini-Wagner attacks, which is important for safety-critical systems in real-world scenarios"
+    ],
+    "summary": [
+        "The resurgence of deep neural networks has achieved various breakthroughs in different domains, including computer vision, natural language processing and game playing.",
+        "Given the data generator\u2019s perturbed data, the learner samples its model parameter \u03b8 from the following energy-based conditional distribution, p(\u03b8|D) \u221d exp{\u2212L(D; \u03b8)}p(\u03b8|\u03b2), (2)",
+        "Through the Bayesian adversarial learning, we aim at obtaining a robust posterior over the learner\u2019s parameter \u03b8 given the observed data, p(\u03b8|D).",
+        "This distinguishes from the existing robust training approaches solving a \u201cpoint estimate\u201d of either worst-case per-datum perturbation or adversary data-generating distribution.",
+        "We propose a particular instantiation of BAL targeting on providing stronger robustness to adversarial examples and better generalization performance than existing approaches.",
+        "Given the generated data set X , the learner provides its optimal response by sampling the following the conditional distribution, N",
+        "BAL is a fully Bayesian approach for improving the robustness of neural network, implicitly forming an infinitely large ensemble by integrating over the model parameters.",
+        "Bayesian neural network (BNN, [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>] constructs a posterior distribution over model parameters, recently used a defensive method for adversarial attacks in [<a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>].",
+        "Our BAL framework can be adopted to achieve robust supervised and semi-supervised models through configuring an appropriate data generation distribution p(x|x).",
+        "Take training a robust VAE as an example, we can specify the data generator by sampling from the following distribution, p(x|x) \u221d exp { (z, fenc(x; \u03b8)) \u2212 \u03b1c(x, x)} , (11)",
+        "The comparing methods include standard empirical risk minimization (ERM), adversarial training with fast gradient sign method (FGSM, [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>]), iterative FGSM (IFGSM, [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>]) and the projected gradient method (PGD, [<a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>]), WRM [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>], Bayesian Neural Network (BNN) and our proposed BAL.",
+        "For other adversarial training methods and ERM, to fully explore the parameter space, we use the Adam optimizer for minimizing the loss on adversarial examples generated by FGSM, IFGSM, PGD and WRM.",
+        "To further evaluate the BAL, we run a much stronger Carlini-Wagner L2 attack [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>] on adversarially trained models to avoid over-fitting the FGSM adversarial examples.",
+        "To evaluate our method on more realistic safety-critical problems, we consider the robust learning for traffic sign recognition based on spatial transform neural networks (STN, [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>]).",
+        "We have shown that the proposed BAL has achieved the best performance in adversarial training for MNIST classification and a practical safety-critical problem, e.g., traffic sign recognition.",
+        "The performance of BAL could always be better than the random guessing method even with the strong Carlini-Wagner attacks, which is important for safety-critical systems in real-world scenarios.",
+        "We will explore more efficient scalable samplers for Bayesian adversarial learning"
+    ],
+    "headline": "In order to overcome this issue, we introduce a novel framework for robust learning, Bayesian Adversarial Learning , a fully Bayesian treatment over the adversarial training",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Naveed Akhtar and Ajmal Mian. Threat of adversarial attacks on deep learning in computer vision: A survey. arXiv preprint arXiv:1801.00553, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1801.00553"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Aharon Ben-Tal and Arkadi Nemirovski. Robust convex optimization. Mathematics of operations research, 23(4):769\u2013805, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ben-Tal%2C%20Aharon%20Nemirovski%2C%20Arkadi%20Robust%20convex%20optimization%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ben-Tal%2C%20Aharon%20Nemirovski%2C%20Arkadi%20Robust%20convex%20optimization%201998"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Michael Br\u00fcckner, Christian Kanzow, and Tobias Scheffer. Static prediction games for adversarial learning problems. Journal of Machine Learning Research, 13(Sep):2617\u20132654, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Br%C3%BCckner%2C%20Michael%20Kanzow%2C%20Christian%20Scheffer%2C%20Tobias%20Static%20prediction%20games%20for%20adversarial%20learning%20problems%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Br%C3%BCckner%2C%20Michael%20Kanzow%2C%20Christian%20Scheffer%2C%20Tobias%20Static%20prediction%20games%20for%20adversarial%20learning%20problems%202012"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Samuel Rota Bul\u00f2, Battista Biggio, Ignazio Pillai, Marcello Pelillo, and Fabio Roli. Randomized prediction games for adversarial machine learning. IEEE transactions on neural networks and learning systems, 28(11):2466\u20132478, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bul%C3%B2%2C%20Samuel%20Rota%20Biggio%2C%20Battista%20Pillai%2C%20Ignazio%20Pelillo%2C%20Marcello%20Randomized%20prediction%20games%20for%20adversarial%20machine%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bul%C3%B2%2C%20Samuel%20Rota%20Biggio%2C%20Battista%20Pillai%2C%20Ignazio%20Pelillo%2C%20Marcello%20Randomized%20prediction%20games%20for%20adversarial%20machine%20learning%202017"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Nicholas Carlini and David Wagner. Towards evaluating the robustness of neural networks. In Security and Privacy (SP), 2017 IEEE Symposium on, pages 39\u201357. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Carlini%2C%20Nicholas%20Wagner%2C%20David%20Towards%20evaluating%20the%20robustness%20of%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Carlini%2C%20Nicholas%20Wagner%2C%20David%20Towards%20evaluating%20the%20robustness%20of%20neural%20networks%202017"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Tianqi Chen, Emily Fox, and Carlos Guestrin. Stochastic gradient Hamiltonian Monte Carlo. In International Conference on Machine Learning, pages 1683\u20131691, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Tianqi%20Fox%2C%20Emily%20Guestrin%2C%20Carlos%20Stochastic%20gradient%20Hamiltonian%20Monte%20Carlo%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Tianqi%20Fox%2C%20Emily%20Guestrin%2C%20Carlos%20Stochastic%20gradient%20Hamiltonian%20Monte%20Carlo%202014"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Erick Delage and Yinyu Ye. Distributionally robust optimization under moment uncertainty with application to data-driven problems. Operations research, 58(3):595\u2013612, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Delage%2C%20Erick%20Ye%2C%20Yinyu%20Distributionally%20robust%20optimization%20under%20moment%20uncertainty%20with%20application%20to%20data-driven%20problems%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Delage%2C%20Erick%20Ye%2C%20Yinyu%20Distributionally%20robust%20optimization%20under%20moment%20uncertainty%20with%20application%20to%20data-driven%20problems%202010"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Ian J Goodfellow, Jonathon Shlens, and Christian Szegedy. Explaining and harnessing adversarial examples. arXiv preprint arXiv:1412.6572, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6572"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Michael Gro\u00dfhans, Christoph Sawade, Michael Br\u00fcckner, and Tobias Scheffer. Bayesian games for adversarial regression problems. In International Conference on Machine Learning, pages 55\u201363, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gro%C3%9Fhans%2C%20Michael%20Sawade%2C%20Christoph%20Br%C3%BCckner%2C%20Michael%20Scheffer%2C%20Tobias%20Bayesian%20games%20for%20adversarial%20regression%20problems%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gro%C3%9Fhans%2C%20Michael%20Sawade%2C%20Christoph%20Br%C3%BCckner%2C%20Michael%20Scheffer%2C%20Tobias%20Bayesian%20games%20for%20adversarial%20regression%20problems%202013"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Warren He, James Wei, Xinyun Chen, Nicholas Carlini, and Dawn Song. Adversarial example defenses: Ensembles of weak defenses are not strong. arXiv preprint arXiv:1706.04701, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.04701"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Max Jaderberg, Karen Simonyan, Andrew Zisserman, and koray kavukcuoglu. Spatial transformer networks. In C. Cortes, N. D. Lawrence, D. D. Lee, M. Sugiyama, and R. Garnett, editors, Advances in Neural Information Processing Systems 28, pages 2017\u20132025. Curran Associates, Inc., 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jaderberg%2C%20Max%20Simonyan%2C%20Karen%20Zisserman%2C%20Andrew%20koray%20kavukcuoglu%20Spatial%20transformer%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jaderberg%2C%20Max%20Simonyan%2C%20Karen%20Zisserman%2C%20Andrew%20koray%20kavukcuoglu%20Spatial%20transformer%20networks%202015"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Diederik P Kingma and Max Welling. Auto-encoding variational Bayes. In International Conference on Learning Representations, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Welling%2C%20Max%20Auto-encoding%20variational%20Bayes%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Welling%2C%20Max%20Auto-encoding%20variational%20Bayes%202014"
+        },
+        {
+            "id": "13",
+            "entry": "[13] J Zico Kolter and Eric Wong. Provable defenses against adversarial examples via the convex outer adversarial polytope. arXiv preprint arXiv:1711.00851, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.00851"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Jernej Kos, Ian Fischer, and Dawn Song. Adversarial examples for generative models. arXiv preprint arXiv:1702.06832, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1702.06832"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Alexey Kurakin, Ian Goodfellow, and Samy Bengio. Adversarial machine learning at scale. arXiv preprint arXiv:1611.01236, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.01236"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Anders Boesen Lindbo Larsen, S\u00f8ren Kaae S\u00f8nderby, Hugo Larochelle, and Ole Winther. Autoencoding beyond pixels using a learned similarity metric. In International Conference on Machine Learning, pages 1558\u20131566, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Larsen%2C%20Anders%20Boesen%20Lindbo%20S%C3%B8nderby%2C%20S%C3%B8ren%20Kaae%20Larochelle%2C%20Hugo%20Winther%2C%20Ole%20Autoencoding%20beyond%20pixels%20using%20a%20learned%20similarity%20metric%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Larsen%2C%20Anders%20Boesen%20Lindbo%20S%C3%B8nderby%2C%20S%C3%B8ren%20Kaae%20Larochelle%2C%20Hugo%20Winther%2C%20Ole%20Autoencoding%20beyond%20pixels%20using%20a%20learned%20similarity%20metric%202016"
+        },
+        {
+            "id": "17",
+            "entry": "[17] David JC MacKay. A practical bayesian framework for backpropagation networks. Neural computation, 4(3):448\u2013472, 1992.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=MacKay%2C%20David%20J.C.%20A%20practical%20bayesian%20framework%20for%20backpropagation%20networks%201992",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=MacKay%2C%20David%20J.C.%20A%20practical%20bayesian%20framework%20for%20backpropagation%20networks%201992"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Aleksander Madry, Aleksandar Makelov, Ludwig Schmidt, Dimitris Tsipras, and Adrian Vladu. Towards deep learning models resistant to adversarial attacks. arXiv preprint arXiv:1706.06083, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.06083"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Hippolyt Ritter, Aleksandar Botev, and David Barber. A scalable laplace approximation for neural networks. In International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ritter%2C%20Hippolyt%20Botev%2C%20Aleksandar%20Barber%2C%20David%20A%20scalable%20laplace%20approximation%20for%20neural%20networks%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ritter%2C%20Hippolyt%20Botev%2C%20Aleksandar%20Barber%2C%20David%20A%20scalable%20laplace%20approximation%20for%20neural%20networks%202018"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Yunus Saatci and Andrew G Wilson. Bayesian gan. In I. Guyon, U. V. Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems 30, pages 3622\u20133631. Curran Associates, Inc., 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yunus%20Saatci%20and%20Andrew%20G%20Wilson%20Bayesian%20gan%20In%20I%20Guyon%20U%20V%20Luxburg%20S%20Bengio%20H%20Wallach%20R%20Fergus%20S%20Vishwanathan%20and%20R%20Garnett%20editors%20Advances%20in%20Neural%20Information%20Processing%20Systems%2030%20pages%2036223631%20Curran%20Associates%20Inc%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yunus%20Saatci%20and%20Andrew%20G%20Wilson%20Bayesian%20gan%20In%20I%20Guyon%20U%20V%20Luxburg%20S%20Bengio%20H%20Wallach%20R%20Fergus%20S%20Vishwanathan%20and%20R%20Garnett%20editors%20Advances%20in%20Neural%20Information%20Processing%20Systems%2030%20pages%2036223631%20Curran%20Associates%20Inc%202017"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Uri Shaham, Yutaro Yamada, and Sahand Negahban. Understanding adversarial training: Increasing local stability of neural nets through robust optimization. arXiv preprint arXiv:1511.05432, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.05432"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Aman Sinha, Hongseok Namkoong, and John Duchi. Certifying some distributional robustness with principled adversarial training. In International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sinha%2C%20Aman%20Namkoong%2C%20Hongseok%20Duchi%2C%20John%20Certifying%20some%20distributional%20robustness%20with%20principled%20adversarial%20training%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sinha%2C%20Aman%20Namkoong%2C%20Hongseok%20Duchi%2C%20John%20Certifying%20some%20distributional%20robustness%20with%20principled%20adversarial%20training%202018"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Jost Tobias Springenberg, Aaron Klein, Stefan Falkner, and Frank Hutter. Bayesian optimization with robust bayesian neural networks. In D. D. Lee, M. Sugiyama, U. V. Luxburg, I. Guyon, and R. Garnett, editors, Advances in Neural Information Processing Systems 29, pages 4134\u20134142. Curran Associates, Inc., 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Springenberg%2C%20Jost%20Tobias%20Klein%2C%20Aaron%20Falkner%2C%20Stefan%20Hutter%2C%20Frank%20Bayesian%20optimization%20with%20robust%20bayesian%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Springenberg%2C%20Jost%20Tobias%20Klein%2C%20Aaron%20Falkner%2C%20Stefan%20Hutter%2C%20Frank%20Bayesian%20optimization%20with%20robust%20bayesian%20neural%20networks%202016"
+        },
+        {
+            "id": "24",
+            "entry": "[24] J. Stallkamp, M. Schlipsing, J. Salmen, and C. Igel. Man vs. computer: Benchmarking machine learning algorithms for traffic sign recognition. Neural Networks, (0):\u2013, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Stallkamp%2C%20J.%20Schlipsing%2C%20M.%20Salmen%2C%20J.%20Igel%2C%20C.%20Man%20vs.%20computer%3A%20Benchmarking%20machine%20learning%20algorithms%20for%20traffic%20sign%20recognition%202012"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Christian Szegedy, Wojciech Zaremba, Ilya Sutskever, Joan Bruna, Dumitru Erhan, Ian Goodfellow, and Rob Fergus. Intriguing properties of neural networks. arXiv preprint arXiv:1312.6199, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.6199"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Florian Tram\u00e8r, Alexey Kurakin, Nicolas Papernot, Dan Boneh, and Patrick McDaniel. Ensemble adversarial training: Attacks and defenses. arXiv preprint arXiv:1705.07204, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1705.07204"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Max Welling and Yee Whye Teh. Bayesian learning via stochastic gradient langevin dynamics. In Lise Getoor and Tobias Scheffer, editors, ICML, pages 681\u2013688. Omnipress, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Welling%2C%20Max%20Teh%2C%20Yee%20Whye%20Bayesian%20learning%20via%20stochastic%20gradient%20langevin%20dynamics%202011"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Chaowei Xiao, Bo Li, Jun-Yan Zhu, Warren He, Mingyan Liu, and Dawn Song. Generating adversarial examples with adversarial networks. arXiv preprint arXiv:1801.02610, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1801.02610"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Chaowei Xiao, Jun-Yan Zhu, Bo Li, Warren He, Mingyan Liu, and Dawn Song. Spatially transformed adversarial examples. In International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xiao%2C%20Chaowei%20Zhu%2C%20Jun-Yan%20Li%2C%20Bo%20He%2C%20Warren%20Spatially%20transformed%20adversarial%20examples%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xiao%2C%20Chaowei%20Zhu%2C%20Jun-Yan%20Li%2C%20Bo%20He%2C%20Warren%20Spatially%20transformed%20adversarial%20examples%202018"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Han Xiao, Kashif Rasul, and Roland Vollgraf. Fashion-mnist: a novel image dataset for benchmarking machine learning algorithms. CoRR, abs/1708.07747, 2017. ",
+            "arxiv_url": "https://arxiv.org/pdf/1708.07747"
+        }
+    ]
+}

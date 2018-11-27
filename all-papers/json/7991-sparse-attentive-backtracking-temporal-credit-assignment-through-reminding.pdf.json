@@ -1,0 +1,296 @@
+{
+    "filename": "7991-sparse-attentive-backtracking-temporal-credit-assignment-through-reminding.pdf",
+    "metadata": {
+        "title": "Sparse Attentive Backtracking: Temporal Credit Assignment Through Reminding",
+        "author": "Nan Rosemary Ke, Anirudh Goyal ALIAS PARTH GOYAL, Olexa Bilaniuk, Jonathan Binas, Michael C. Mozer, Chris Pal, Yoshua Bengio",
+        "date": 2008,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7991-sparse-attentive-backtracking-temporal-credit-assignment-through-reminding.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Learning long-term dependencies in extended temporal sequences requires credit assignment to events far back in the past. The most common method for training recurrent neural networks, back-propagation through time (BPTT), requires credit information to be propagated backwards through every single step of the forward computation, potentially over thousands or millions of time steps. This becomes computationally expensive or even infeasible when used with long sequences. Importantly, biological brains are unlikely to perform such detailed reverse replay over very long sequences of internal states (consider days, months, or years.) However, humans are often reminded of past memories or mental states which are associated with the current mental state. We consider the hypothesis that such memory associations between past and present could be used for credit assignment through arbitrarily long sequences, propagating the credit assigned to the current state to the associated past state. Based on this principle, we study a novel algorithm which only back-propagates through a few of these temporal skip connections, realized by a learned attention mechanism that associates current states with relevant past states. We demonstrate in experiments that our method matches or outperforms regular BPTT and truncated BPTT in tasks involving particularly longterm dependencies, but without requiring the biologically implausible backward replay through the whole history of states. Additionally, we demonstrate that the proposed method transfers to longer sequences significantly better than LSTMs trained with BPTT and LSTMs trained with full self-attention."
+    },
+    "keywords": [
+        {
+            "term": "recurrent neural network",
+            "url": "https://en.wikipedia.org/wiki/recurrent_neural_network"
+        },
+        {
+            "term": "Penn TreeBank",
+            "url": "https://en.wikipedia.org/wiki/Penn_Treebank"
+        },
+        {
+            "term": "neural machine translation",
+            "url": "https://en.wikipedia.org/wiki/neural_machine_translation"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        },
+        {
+            "term": "backpropagation through time",
+            "url": "https://en.wikipedia.org/wiki/backpropagation_through_time"
+        }
+    ],
+    "highlights": [
+        "Humans have a remarkable ability to remember events from the distant past which are associated with the current mental state (<a class=\"ref-link\" id=\"cCiaramelli_et+al_2008_a\" href=\"#rCiaramelli_et+al_2008_a\"><a class=\"ref-link\" id=\"cCiaramelli_et+al_2008_a\" href=\"#rCiaramelli_et+al_2008_a\">Ciaramelli et al, 2008</a></a>)",
+        "What are the alternatives to backpropagation through time? One approach we explore here exploits associative reminding of past events which may be triggered by the current state and added to it, making it possible to propagate gradients with respect to the current state into approximate gradients in the state corresponding to the recalled event",
+        "Inspired by the ability of brains to selectively reactivate memories of the past based on the current context, we propose here a novel solution called Sparse Attentive Backtracking (SAB) that incorporates a differentiable, sparse attention mechanism to select from past states",
+        "By considering how brains could perform long-term temporal credit assignment, we developed an alternative to the traditional method of training recurrent neural networks by unfolding of the computational graph and backpropagation through time",
+        "We explored the hypothesis that a reminding process which uses the current state to evoke a relevant state arbitrarily far back in the past could be used to effectively teleport credit backwards in time to the computations performed to obtain the past state",
+        "We developed a novel temporal architecture and credit assignment mechanism called Sparse Attentive Backtracking for Sparse Attentive Backtracking, which aims to combine the strengths of full backpropagation through time and truncated backpropagation through time"
+    ],
+    "key_statements": [
+        "Humans have a remarkable ability to remember events from the distant past which are associated with the current mental state (<a class=\"ref-link\" id=\"cCiaramelli_et+al_2008_a\" href=\"#rCiaramelli_et+al_2008_a\"><a class=\"ref-link\" id=\"cCiaramelli_et+al_2008_a\" href=\"#rCiaramelli_et+al_2008_a\">Ciaramelli et al, 2008</a></a>)",
+        "What are the alternatives to backpropagation through time? One approach we explore here exploits associative reminding of past events which may be triggered by the current state and added to it, making it possible to propagate gradients with respect to the current state into approximate gradients in the state corresponding to the recalled event",
+        "Inspired by the ability of brains to selectively reactivate memories of the past based on the current context, we propose here a novel solution called Sparse Attentive Backtracking (SAB) that incorporates a differentiable, sparse attention mechanism to select from past states",
+        "In this work we propose and explore what one might regard as a form of dynamic skip connection, modulated by an attention mechanism corresponding to a reminding process, which matches the current state with an older state that is retrieved from memory",
+        "Sparse Attentive Backtracking networks\u2019 twin paths during the forward pass allow gradient to flow not just from h(t) to h(t\u22121), but to the at-most ktop memories m(i) retrieved by the attention mechanism Learning to deliver gradient directly where it is needed (1) avoids competition for the limited informationcarrying capacity of the sequential path, (2) is a simple form of credit assignment, (3) and imposes a trade-off that is absent in previous, dense self-attentive mechanisms: opening a connection to an interesting or useful timestep must be made at the price of excluding others",
+        "Baselines We compare Sparse Attentive Backtracking to two baseline models for all tasks: 1) an LSTM trained both using full backpropagation through time and truncated BPTT with various truncation lengths; 2) an LSTM augmented with full self-attention trained using full backpropagation through time",
+        "Comparison to LSTM + self attention While Sparse Attentive Backtracking is trained with truncated BPTT, Here we argue, that training the vanilla LSTM and self attention with truncation works less well on a more challenging Text8 language modelling dataset",
+        "This task involves predicting the label of the image after being given it as a sequence of pixels. This task is relatively difficult compared to other tasks, as sequences are substantially longer Our method outperforms Transformers and LSTMs trained with backpropagation through time (Table 5)",
+        "Transfer learning (Q2) We examine the generalization ability of Sparse Attentive Backtracking compared to full backpropagation through time trained LSTM and LSTM with full self-attention",
+        "We evaluate Sparse Attentive Backtracking on language modeling, with the Penn TreeBank (PTB) (<a class=\"ref-link\" id=\"cMarcus_et+al_1993_a\" href=\"#rMarcus_et+al_1993_a\">Marcus et al, 1993</a>) and Text8 <a class=\"ref-link\" id=\"cMahoney_2011_a\" href=\"#rMahoney_2011_a\">Mahoney (2011</a>) datasets",
+        "We found that on Penn TreeBank, Sparse Attentive Backtracking with ktrunc = 20, ktop = 10 performs almost as well as full backpropagation through time",
+        "By considering how brains could perform long-term temporal credit assignment, we developed an alternative to the traditional method of training recurrent neural networks by unfolding of the computational graph and backpropagation through time",
+        "We explored the hypothesis that a reminding process which uses the current state to evoke a relevant state arbitrarily far back in the past could be used to effectively teleport credit backwards in time to the computations performed to obtain the past state",
+        "We developed a novel temporal architecture and credit assignment mechanism called Sparse Attentive Backtracking for Sparse Attentive Backtracking, which aims to combine the strengths of full backpropagation through time and truncated backpropagation through time"
+    ],
+    "summary": [
+        "Humans have a remarkable ability to remember events from the distant past which are associated with the current mental state (<a class=\"ref-link\" id=\"cCiaramelli_et+al_2008_a\" href=\"#rCiaramelli_et+al_2008_a\"><a class=\"ref-link\" id=\"cCiaramelli_et+al_2008_a\" href=\"#rCiaramelli_et+al_2008_a\">Ciaramelli et al, 2008</a></a>).",
+        "Here SAB: the principle of learned, dynamic, sparse access to, and replay of, relevant past states for credit assignment in neural network models, such as RNNs. In the limit of maximum sparsity, SAB degenerates to the use of a regular static neural network.",
+        "We augment a unidirectional LSTM with the memory of every katt\u2019th hidden state from the past, with a modified hard self-attention mechanism limited to selecting at most ktop memories at every timestep.",
+        "SAB networks\u2019 twin paths during the forward pass allow gradient to flow not just from h(t) to h(t\u22121), but to the at-most ktop memories m(i) retrieved by the attention mechanism Learning to deliver gradient directly where it is needed (1) avoids competition for the limited informationcarrying capacity of the sequential path, (2) is a simple form of credit assignment, (3) and imposes a trade-off that is absent in previous, dense self-attentive mechanisms: opening a connection to an interesting or useful timestep must be made at the price of excluding others.",
+        "Baselines We compare SAB to two baseline models for all tasks: 1) an LSTM trained both using full BPTT and TBPTT with various truncation lengths; 2) an LSTM augmented with full self-attention trained using full BPTT.",
+        "SAB outperforms all LSTM baselines and matches the performance of LSTMs with full self-attention trained using BPTT on the copy memory task.",
+        "Transfer learning (Q2) We examine the generalization ability of SAB compared to full BPTT trained LSTM and LSTM with full self-attention.",
+        "The experiment is set up as follows: For the copy task of length T = 100, we train SAB, LSTM trained with BPTT, LSTM and full self-attention to convergence.",
+        "Comparison to Transformer (Q3) We test how SAB compares to the Transformer model (<a class=\"ref-link\" id=\"cVaswani_et+al_2017_a\" href=\"#rVaswani_et+al_2017_a\">Vaswani et al, 2017</a>), based a self-attention mechanism.",
+        "By considering how brains could perform long-term temporal credit assignment, we developed an alternative to the traditional method of training recurrent neural networks by unfolding of the computational graph and BPTT.",
+        "We developed a novel temporal architecture and credit assignment mechanism called SAB for Sparse Attentive Backtracking, which aims to combine the strengths of full backpropagation through time and truncated backpropagation through time.",
+        "SAB determines the relevance of past hidden states to the current state through a generic, flexible mapping, whereas humans perform similarity-based retrieval.",
+        "This allows the RNN to learn long-term dependencies, as with full backpropagation through time, while still allowing it to only backtrack for a few steps, as with truncated backpropagation through time, making it possible to update weights as frequently as needed rather than having to wait for the end of very long sequences"
+    ],
+    "headline": "We study a novel algorithm which only back-propagates through a few of these temporal skip connections, realized by a learned attention mechanism that associates current states with relevant past states",
+    "reference_links": [
+        {
+            "id": "Ambrose_et+al_2016_a",
+            "entry": "Ambrose, R Ellen, Pfeiffer, Brad E, and Foster, David J. Reverse replay of hippocampal place cells is uniquely modulated by changing reward. Neuron, 91(5):1124 \u2013 1136, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ambrose%2C%20R.Ellen%20Pfeiffer%2C%20Brad%20E.%20Foster%2C%20David%20J.%20Reverse%20replay%20of%20hippocampal%20place%20cells%20is%20uniquely%20modulated%20by%20changing%20reward%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ambrose%2C%20R.Ellen%20Pfeiffer%2C%20Brad%20E.%20Foster%2C%20David%20J.%20Reverse%20replay%20of%20hippocampal%20place%20cells%20is%20uniquely%20modulated%20by%20changing%20reward%202016"
+        },
+        {
+            "id": "Arjovsky_et+al_2016_a",
+            "entry": "Arjovsky, Martin, Shah, Amar, and Bengio, Yoshua. Unitary evolution recurrent neural networks. In International Conference on Machine Learning, pp. 1120\u20131128, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Arjovsky%2C%20Martin%20Shah%2C%20Amar%20Bengio%2C%20Yoshua%20Unitary%20evolution%20recurrent%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Arjovsky%2C%20Martin%20Shah%2C%20Amar%20Bengio%2C%20Yoshua%20Unitary%20evolution%20recurrent%20neural%20networks%202016"
+        },
+        {
+            "id": "Bahdanau_et+al_2014_a",
+            "entry": "Bahdanau, Dzmitry, Cho, Kyunghyun, and Bengio, Yoshua. Neural machine translation by jointly learning to align and translate. arXiv preprint arXiv:1409.0473, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1409.0473"
+        },
+        {
+            "id": "Benjamin_2010_a",
+            "entry": "Benjamin, Aaron S and Ross, Brian H. The causes and consequences of reminding. In Benjamin, A. S. (ed.), Successful remembering and successful forgetting: A Festschrift in honor of Robert A. Bjork. Psychology Press, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Benjamin%2C%20Aaron%20S.%20Ross%2C%20Brian%20H.%20The%20causes%20and%20consequences%20of%20reminding%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Benjamin%2C%20Aaron%20S.%20Ross%2C%20Brian%20H.%20The%20causes%20and%20consequences%20of%20reminding%202010"
+        },
+        {
+            "id": "Berntsen_et+al_2013_a",
+            "entry": "Berntsen, Dorthe, Staugaard, S\u00f8ren Risl\u00f8v, and S\u00f8rensen, Louise Maria Torp. Why am i remembering this now? predicting the occurrence of involuntary (spontaneous) episodic memories. Journal of Experimental Psychology: General, 142(2):426, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Berntsen%2C%20Dorthe%20Staugaard%2C%20S%C3%B8ren%20Risl%C3%B8v%20S%C3%B8rensen%2C%20Louise%20Maria%20Torp%20Why%20am%20i%20remembering%20this%20now%3F%20predicting%20the%20occurrence%20of%20involuntary%20%28spontaneous%29%20episodic%20memories%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Berntsen%2C%20Dorthe%20Staugaard%2C%20S%C3%B8ren%20Risl%C3%B8v%20S%C3%B8rensen%2C%20Louise%20Maria%20Torp%20Why%20am%20i%20remembering%20this%20now%3F%20predicting%20the%20occurrence%20of%20involuntary%20%28spontaneous%29%20episodic%20memories%202013"
+        },
+        {
+            "id": "Chan_et+al_2016_a",
+            "entry": "Chan, William, Jaitly, Navdeep, Le, Quoc, and Vinyals, Oriol. Listen, attend and spell: A neural network for large vocabulary conversational speech recognition. In Acoustics, Speech and Signal Processing (ICASSP), 2016 IEEE International Conference on, pp. 4960\u20134964. IEEE, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chan%2C%20William%20Jaitly%2C%20Navdeep%20Le%2C%20Quoc%20Vinyals%2C%20Oriol%20Listen%20attend%20and%20spell%3A%20A%20neural%20network%20for%20large%20vocabulary%20conversational%20speech%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chan%2C%20William%20Jaitly%2C%20Navdeep%20Le%2C%20Quoc%20Vinyals%2C%20Oriol%20Listen%20attend%20and%20spell%3A%20A%20neural%20network%20for%20large%20vocabulary%20conversational%20speech%20recognition%202016"
+        },
+        {
+            "id": "Chung_et+al_2016_a",
+            "entry": "Chung, Junyoung, Ahn, Sungjin, and Bengio, Yoshua. Hierarchical multiscale recurrent neural networks. arXiv preprint arXiv:1609.01704, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.01704"
+        },
+        {
+            "id": "Ciaramelli_et+al_2008_a",
+            "entry": "Ciaramelli, Elisa, Grady, Cheryl L, and Moscovitch, Morris. Top-down and bottom-up attention to memory: A hypothesis on the role of the posterior parietal cortex in memory retrieval. Neuropsychologia, 46(7):1828\u20131851, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ciaramelli%2C%20Elisa%20Grady%2C%20Cheryl%20L.%20Moscovitch%2C%20Morris%20Top-down%20and%20bottom-up%20attention%20to%20memory%3A%20A%20hypothesis%20on%20the%20role%20of%20the%20posterior%20parietal%20cortex%20in%20memory%20retrieval%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ciaramelli%2C%20Elisa%20Grady%2C%20Cheryl%20L.%20Moscovitch%2C%20Morris%20Top-down%20and%20bottom-up%20attention%20to%20memory%3A%20A%20hypothesis%20on%20the%20role%20of%20the%20posterior%20parietal%20cortex%20in%20memory%20retrieval%202008"
+        },
+        {
+            "id": "Cooijmans_et+al_2016_a",
+            "entry": "Cooijmans, Tim, Ballas, Nicolas, Laurent, C\u00e9sar, G\u00fcl\u00e7ehre, \u00c7aglar, and Courville, Aaron. Recurrent batch normalization. arXiv preprint arXiv:1603.09025, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1603.09025"
+        },
+        {
+            "id": "Davidson_et+al_2009_a",
+            "entry": "Davidson, Thomas J, Kloosterman, Fabian, and Wilson, Matthew A. Hippocampal replay of extended experience. Neuron, 63(4):497\u2013507, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Davidson%2C%20Thomas%20J.%20Kloosterman%2C%20Fabian%20Wilson%2C%20Matthew%20A.%20Hippocampal%20replay%20of%20extended%20experience%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Davidson%2C%20Thomas%20J.%20Kloosterman%2C%20Fabian%20Wilson%2C%20Matthew%20A.%20Hippocampal%20replay%20of%20extended%20experience%202009"
+        },
+        {
+            "id": "Hihi_et+al_1996_a",
+            "entry": "El Hihi, Salah and Bengio, Yoshua. Hierarchical recurrent neural networks for long-term dependencies. In Advances in neural information processing systems, pp. 493\u2013499, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hihi%2C%20El%20Salah%20Bengio%2C%20Yoshua%20Hierarchical%20recurrent%20neural%20networks%20for%20long-term%20dependencies%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hihi%2C%20El%20Salah%20Bengio%2C%20Yoshua%20Hierarchical%20recurrent%20neural%20networks%20for%20long-term%20dependencies%201996"
+        },
+        {
+            "id": "Forbus_et+al_1995_a",
+            "entry": "Forbus, Kenneth D, Gentner, Dedre, and Law, Keith. Mac/fac: A model of similarity-based retrieval. Cognitive Science, 19:141\u2013205, 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Forbus%2C%20Kenneth%20D.%20Gentner%2C%20Dedre%20Law%2C%20Keith%20Mac/fac%3A%20A%20model%20of%20similarity-based%20retrieval%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Forbus%2C%20Kenneth%20D.%20Gentner%2C%20Dedre%20Law%2C%20Keith%20Mac/fac%3A%20A%20model%20of%20similarity-based%20retrieval%201995"
+        },
+        {
+            "id": "Foster_2006_a",
+            "entry": "Foster, David J and Wilson, Matthew A. Reverse replay of behavioural sequences in hippocampal place cells during the awake state. Nature, 440(7084):680\u2013683, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Foster%2C%20David%20J.%20Wilson%2C%20Matthew%20A.%20Reverse%20replay%20of%20behavioural%20sequences%20in%20hippocampal%20place%20cells%20during%20the%20awake%20state%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Foster%2C%20David%20J.%20Wilson%2C%20Matthew%20A.%20Reverse%20replay%20of%20behavioural%20sequences%20in%20hippocampal%20place%20cells%20during%20the%20awake%20state%202006"
+        },
+        {
+            "id": "Graves_et+al_2016_a",
+            "entry": "Graves, Alex, Wayne, Greg, Reynolds, Malcolm, Harley, Tim, Danihelka, Ivo, Grabska-Barwinska, Agnieszka, Colmenarejo, Sergio G\u00f3mez, Grefenstette, Edward, Ramalho, Tiago, Agapiou, John, et al. Hybrid computing using a neural network with dynamic external memory. Nature, 538 (7626):471, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Graves%2C%20Alex%20Wayne%2C%20Greg%20Reynolds%2C%20Malcolm%20Harley%2C%20Tim%20Hybrid%20computing%20using%20a%20neural%20network%20with%20dynamic%20external%20memory%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Graves%2C%20Alex%20Wayne%2C%20Greg%20Reynolds%2C%20Malcolm%20Harley%2C%20Tim%20Hybrid%20computing%20using%20a%20neural%20network%20with%20dynamic%20external%20memory%202016"
+        },
+        {
+            "id": "Gupta_et+al_2010_a",
+            "entry": "Gupta, Anoopum S, van der Meer, Matthijs AA, Touretzky, David S, and Redish, A David. Hippocampal replay is not a simple function of experience. Neuron, 65(5):695\u2013705, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gupta%2C%20Anoopum%20S.%20van%20der%20Meer%20AA%2C%20Matthijs%20Touretzky%2C%20David%20S.%20Hippocampal%20replay%20is%20not%20a%20simple%20function%20of%20experience%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gupta%2C%20Anoopum%20S.%20van%20der%20Meer%20AA%2C%20Matthijs%20Touretzky%2C%20David%20S.%20Hippocampal%20replay%20is%20not%20a%20simple%20function%20of%20experience%202010"
+        },
+        {
+            "id": "He_et+al_2016_a",
+            "entry": "He, Kaiming, Zhang, Xiangyu, Ren, Shaoqing, and Sun, Jian. Deep residual learning for image recognition. In Proceedings of the IEEE conference on computer vision and pattern recognition, pp. 770\u2013778, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016"
+        },
+        {
+            "id": "Hochreiter_1997_a",
+            "entry": "Hochreiter, Sepp and Schmidhuber, J\u00fcrgen. Long short-term memory. Neural computation, 9(8): 1735\u20131780, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Long%20short-term%20memory%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Long%20short-term%20memory%201997"
+        },
+        {
+            "id": "Huang_et+al_2016_a",
+            "entry": "Huang, Gao, Liu, Zhuang, Weinberger, Kilian Q, and van der Maaten, Laurens. Densely connected convolutional networks. arXiv preprint arXiv:1608.06993, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1608.06993"
+        },
+        {
+            "id": "K_et+al_2018_a",
+            "entry": "K\u00e1d\u00e1r, Akos, C\u00f4t\u00e9, Marc-Alexandre, Chrupa\u0142a, Grzegorz, and Alishahi, Afra. Revisiting the hierarchical multiscale lstm. arXiv preprint arXiv:1807.03595, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1807.03595"
+        },
+        {
+            "id": "Ke_et+al_2018_a",
+            "entry": "Ke, Nan Rosemary, Zolna, Konrad, Sordoni, Alessandro, Lin, Zhouhan, Trischler, Adam, Bengio, Yoshua, Pineau, Joelle, Charlin, Laurent, and Pal, Chris. Focused hierarchical rnns for conditional sequence processing. arXiv preprint arXiv:1806.04342, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1806.04342"
+        },
+        {
+            "id": "Kingma_2014_a",
+            "entry": "Kingma, Diederik and Ba, Jimmy. Adam: A method for stochastic optimization. arXiv preprint arXiv:1412.6980, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6980"
+        },
+        {
+            "id": "Koutnik_et+al_2014_a",
+            "entry": "Koutnik, Jan, Greff, Klaus, Gomez, Faustino, and Schmidhuber, Juergen. A clockwork rnn. arXiv preprint arXiv:1402.3511, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1402.3511"
+        },
+        {
+            "id": "Lee_et+al_2014_a",
+            "entry": "Lee, Dong-Hyun, Zhang, Saizheng, Biard, Antoine, and Bengio, Yoshua. Target propagation. CoRR, abs/1412.7525, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.7525"
+        },
+        {
+            "id": "Lu_et+al_2017_a",
+            "entry": "Lu, Jiasen, Xiong, Caiming, Parikh, Devi, and Socher, Richard. Knowing when to look: Adaptive attention via a visual sentinel for image captioning. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), volume 6, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lu%2C%20Jiasen%20Xiong%2C%20Caiming%20Parikh%2C%20Devi%20Socher%2C%20Richard%20Knowing%20when%20to%20look%3A%20Adaptive%20attention%20via%20a%20visual%20sentinel%20for%20image%20captioning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lu%2C%20Jiasen%20Xiong%2C%20Caiming%20Parikh%2C%20Devi%20Socher%2C%20Richard%20Knowing%20when%20to%20look%3A%20Adaptive%20attention%20via%20a%20visual%20sentinel%20for%20image%20captioning%202017"
+        },
+        {
+            "id": "Luong_et+al_2015_a",
+            "entry": "Luong, Minh-Thang, Pham, Hieu, and Manning, Christopher D. Effective approaches to attentionbased neural machine translation. arXiv preprint arXiv:1508.04025, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1508.04025"
+        },
+        {
+            "id": "Mahoney_2011_a",
+            "entry": "Mahoney, Matt. Large text compression benchmark. URL: http://www.mattmahoney.net/text/text.html, 2011.",
+            "url": "http://www.mattmahoney.net/text/text.html"
+        },
+        {
+            "id": "Marcus_et+al_1993_a",
+            "entry": "Marcus, Mitchell P, Marcinkiewicz, Mary Ann, and Santorini, Beatrice. Building a large annotated corpus of english: The penn treebank. Computational linguistics, 19(2):313\u2013330, 1993.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Marcus%2C%20Mitchell%20P.%20Marcinkiewicz%2C%20Mary%20Ann%20Santorini%2C%20Beatrice%20Building%20a%20large%20annotated%20corpus%20of%20english%3A%20The%20penn%20treebank%201993",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Marcus%2C%20Mitchell%20P.%20Marcinkiewicz%2C%20Mary%20Ann%20Santorini%2C%20Beatrice%20Building%20a%20large%20annotated%20corpus%20of%20english%3A%20The%20penn%20treebank%201993"
+        },
+        {
+            "id": "Miao_et+al_2015_a",
+            "entry": "Miao, Yajie, Gowayyed, Mohammad, and Metze, Florian. Eesen: End-to-end speech recognition using deep rnn models and wfst-based decoding. In Automatic Speech Recognition and Understanding (ASRU), 2015 IEEE Workshop on, pp. 167\u2013174. IEEE, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Miao%2C%20Yajie%20Gowayyed%2C%20Mohammad%20Metze%2C%20Florian%20Eesen%3A%20End-to-end%20speech%20recognition%20using%20deep%20rnn%20models%20and%20wfst-based%20decoding%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Miao%2C%20Yajie%20Gowayyed%2C%20Mohammad%20Metze%2C%20Florian%20Eesen%3A%20End-to-end%20speech%20recognition%20using%20deep%20rnn%20models%20and%20wfst-based%20decoding%202015"
+        },
+        {
+            "id": "Mikolov_et+al_2012_a",
+            "entry": "Mikolov, Tom\u00e1\u0161, Sutskever, Ilya, Deoras, Anoop, Le, Hai-Son, Kombrink, Stefan, and Cernocky, Jan. Subword language modeling with neural networks. preprint (http://www.fit.vutbr.cz/imikolov/rnnlm/char.pdf), 8, 2012.",
+            "url": "http://www.fit.vutbr.cz/imikolov/rnnlm/char.pdf"
+        },
+        {
+            "id": "Mozer_et+al_2017_a",
+            "entry": "Mozer, Michael C, Kazakov, Denis, and Lindsey, Robert V. Discrete event, continuous time rnns. arXiv preprint arXiv:1710.04110, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.04110"
+        },
+        {
+            "id": "Novick_1988_a",
+            "entry": "Novick, Laura R. Analogical transfer, problem similarity, and expertise. Journal of Experimental Psychology: Learning, Memory, and Cognition, 14(3):510, 1988.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Novick%2C%20Laura%20R.%20Analogical%20transfer%2C%20problem%20similarity%2C%20and%20expertise%201988",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Novick%2C%20Laura%20R.%20Analogical%20transfer%2C%20problem%20similarity%2C%20and%20expertise%201988"
+        },
+        {
+            "id": "Ollivier_et+al_2015_a",
+            "entry": "Ollivier, Yann, Tallec, Corentin, and Charpiat, Guillaume. Training recurrent networks online without backtracking. arXiv preprint arXiv:1507.07680, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1507.07680"
+        },
+        {
+            "id": "Read_1991_a",
+            "entry": "Read, Stephen J and Ian, L. Expectation failures in reminding and explanation. Journal of Experimental Social Psychology, 27:1\u201325, 1991.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Read%2C%20Stephen%20J.%20Ian%2C%20L.%20Expectation%20failures%20in%20reminding%20and%20explanation%201991",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Read%2C%20Stephen%20J.%20Ian%2C%20L.%20Expectation%20failures%20in%20reminding%20and%20explanation%201991"
+        },
+        {
+            "id": "Scellier_2016_a",
+            "entry": "Scellier, Benjamin and Bengio, Yoshua. Towards a biologically plausible backprop. CoRR, abs/1602.05179, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1602.05179"
+        },
+        {
+            "id": "Vaswani_et+al_2017_a",
+            "entry": "Vaswani, Ashish, Shazeer, Noam, Parmar, Niki, Uszkoreit, Jakob, Jones, Llion, Gomez, Aidan N, Kaiser, \u0141ukasz, and Polosukhin, Illia. Attention is all you need. In Advances in Neural Information Processing Systems, pp. 6000\u20136010, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vaswani%20Ashish%20Shazeer%20Noam%20Parmar%20Niki%20Uszkoreit%20Jakob%20Jones%20Llion%20Gomez%20Aidan%20N%20Kaiser%20%C5%81ukasz%20and%20Polosukhin%20Illia%20Attention%20is%20all%20you%20need%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20pp%2060006010%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vaswani%20Ashish%20Shazeer%20Noam%20Parmar%20Niki%20Uszkoreit%20Jakob%20Jones%20Llion%20Gomez%20Aidan%20N%20Kaiser%20%C5%81ukasz%20and%20Polosukhin%20Illia%20Attention%20is%20all%20you%20need%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20pp%2060006010%202017"
+        },
+        {
+            "id": "Vinyals_et+al_2015_a",
+            "entry": "Vinyals, Oriol, Toshev, Alexander, Bengio, Samy, and Erhan, Dumitru. Show and tell: A neural image caption generator. In Proceedings of the IEEE conference on computer vision and pattern recognition, pp. 3156\u20133164, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vinyals%2C%20Oriol%20Toshev%2C%20Alexander%20Bengio%2C%20Samy%20Erhan%2C%20Dumitru%20Show%20and%20tell%3A%20A%20neural%20image%20caption%20generator%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vinyals%2C%20Oriol%20Toshev%2C%20Alexander%20Bengio%2C%20Samy%20Erhan%2C%20Dumitru%20Show%20and%20tell%3A%20A%20neural%20image%20caption%20generator%202015"
+        },
+        {
+            "id": "Wharton_et+al_1996_a",
+            "entry": "Wharton, Charles M, Holyoak, Keith J, and Lange, Trent E. Remote analogical reminding. Memory & Cognition, 24:629\u2013643, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wharton%2C%20Charles%20M.%20Holyoak%2C%20Keith%20J.%20Lange%2C%20Trent%20E.%20Remote%20analogical%20reminding.%20Memory%20%26%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wharton%2C%20Charles%20M.%20Holyoak%2C%20Keith%20J.%20Lange%2C%20Trent%20E.%20Remote%20analogical%20reminding.%20Memory%20%26%201996"
+        },
+        {
+            "id": "Whittington_2017_a",
+            "entry": "Whittington, James CR and Bogacz, Rafal. An approximation of the error backpropagation algorithm in a predictive coding network with local hebbian synaptic plasticity. Neural computation, 29(5): 1229\u20131262, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Whittington%2C%20James%20C.R.%20Bogacz%2C%20Rafal%20An%20approximation%20of%20the%20error%20backpropagation%20algorithm%20in%20a%20predictive%20coding%20network%20with%20local%20hebbian%20synaptic%20plasticity%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Whittington%2C%20James%20C.R.%20Bogacz%2C%20Rafal%20An%20approximation%20of%20the%20error%20backpropagation%20algorithm%20in%20a%20predictive%20coding%20network%20with%20local%20hebbian%20synaptic%20plasticity%202017"
+        },
+        {
+            "id": "Williams_1990_a",
+            "entry": "Williams, Ronald J and Peng, Jing. An efficient gradient-based algorithm for on-line training of recurrent network trajectories. Neural computation, 2(4):490\u2013501, 1990.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%2C%20Ronald%20J.%20Peng%2C%20Jing%20An%20efficient%20gradient-based%20algorithm%20for%20on-line%20training%20of%20recurrent%20network%20trajectories%201990",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Williams%2C%20Ronald%20J.%20Peng%2C%20Jing%20An%20efficient%20gradient-based%20algorithm%20for%20on-line%20training%20of%20recurrent%20network%20trajectories%201990"
+        }
+    ]
+}

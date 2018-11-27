@@ -1,0 +1,319 @@
+{
+    "filename": "8178-improving-explorability-in-variational-inference-with-annealed-variational-objectives.pdf",
+    "metadata": {
+        "date": 2018,
+        "title": "Improving Explorability in Variational Inference with Annealed Variational Objectives",
+        "author": "Chin-Wei Huang\u2020,?,1 Shawn Tan\u2020,2 Alexandre Lacoste?,3 Aaron Courville\u2020k,4 \u2020MILA, University of Montreal ?Element AI kCIFAR Fellow",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8178-improving-explorability-in-variational-inference-with-annealed-variational-objectives.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Despite the advances in the representational capacity of approximate distributions for variational inference, the optimization process can still limit the density that is ultimately learned. We demonstrate the drawbacks of biasing the true posterior to be unimodal, and introduce Annealed Variational Objectives (AVO) into the training of hierarchical variational methods. Inspired by Annealed Importance Sampling, the proposed method facilitates learning by incorporating energy tempering into the optimization objective. In our experiments, we demonstrate our method\u2019s robustness to deterministic warm up, and the benefits of encouraging exploration in the latent space."
+    },
+    "keywords": [
+        {
+            "term": "Markov Chain Monte Carlo",
+            "url": "https://en.wikipedia.org/wiki/Markov_Chain_Monte_Carlo"
+        },
+        {
+            "term": "variational inference",
+            "url": "https://en.wikipedia.org/wiki/variational_inference"
+        },
+        {
+            "term": "variational method",
+            "url": "https://en.wikipedia.org/wiki/variational_method"
+        },
+        {
+            "term": "latent variable model",
+            "url": "https://en.wikipedia.org/wiki/latent_variable_model"
+        },
+        {
+            "term": "deterministic annealing",
+            "url": "https://en.wikipedia.org/wiki/deterministic_annealing"
+        }
+    ],
+    "highlights": [
+        "The rationale behind this annealing is that the first term in the parenthesis over-regularizes the model by forcing the approximate posterior q(z) to be like the prior p(z), and by reducing this prior contrastive coefficient early on during the training we allow the decoder to make better use of the latent code to represent the underlying structure of the data",
+        "We introduce Annealed Variational Objectives (AVO) in Section 4, which aims to satisfy the criteria the alpha and beta annealing schemes seek to achieve separately",
+        "Eq[log p\u2713(x, z)] = log p\u2713(x) + Eq[log p\u2713(z|x)]. Maximizing expected complete data log likelihood increases the marginal likelihood of the data while biasing the true posterior to be more like the auxiliary distribution",
+        "In practice naive implementation of this objective can be computationally expensive, so we select the loss function stochastically in the amortized Variational Inference experiments, which we found helps to make progress in improving the model p\u2713(x, z)",
+        "We find that Hierarchical Variational Inference\u2019s approximate posterior trained with Annealed Variational Objectives tends to have smaller variational gap, and better test likelihood",
+        "We find that despite the representational capacity of the chosen family of approximate distributions in Variational Inference, the density that can be represented is still limited by the optimization process"
+    ],
+    "key_statements": [
+        "The rationale behind this annealing is that the first term in the parenthesis over-regularizes the model by forcing the approximate posterior q(z) to be like the prior p(z), and by reducing this prior contrastive coefficient early on during the training we allow the decoder to make better use of the latent code to represent the underlying structure of the data",
+        "We introduce Annealed Variational Objectives (AVO) in Section 4, which aims to satisfy the criteria the alpha and beta annealing schemes seek to achieve separately",
+        "Eq[log p\u2713(x, z)] = log p\u2713(x) + Eq[log p\u2713(z|x)]. Maximizing expected complete data log likelihood increases the marginal likelihood of the data while biasing the true posterior to be more like the auxiliary distribution",
+        "Inspired by Annealed importance sampling and alpha-annealing, we propose to integrate energy tempering into the optimization objective of the variational distribution",
+        "In practice naive implementation of this objective can be computationally expensive, so we select the loss function stochastically in the amortized Variational Inference experiments, which we found helps to make progress in improving the model p\u2713(x, z)",
+        "We find that Hierarchical Variational Inference\u2019s approximate posterior trained with Annealed Variational Objectives tends to have smaller variational gap, and better test likelihood",
+        "It is worth noting that in the MNIST case, smaller variational gap translates into smaller generalization gap and better test likelihood, while the same is not true in the OMNIGLOT example, which corroborates our finding in Section 5.1 that true posterior can be biased towards approximate posterior, resulting in a smaller variatinal gap (8.58) but a worse density model (6.70)",
+        "We find that despite the representational capacity of the chosen family of approximate distributions in Variational Inference, the density that can be represented is still limited by the optimization process"
+    ],
+    "summary": [
+        "The rationale behind this annealing is that the first term in the parenthesis over-regularizes the model by forcing the approximate posterior q(z) to be like the prior p(z), and by reducing this prior contrastive coefficient early on during the training we allow the decoder to make better use of the latent code to represent the underlying structure of the data.",
+        "When exact inference is not possible, we need to approximate the true posterior, usually by sampling from a Markov chain in MCMC or from a variational distribution in VI.",
+        "Maximizing ECLL increases the marginal likelihood of the data while biasing the true posterior to be more like the auxiliary distribution.",
+        "We design a set of intermediate target densities as ft = fT\u21b5t f01 \u21b5t , for t 2 [0, T ], where ft / ft, fT is the true posterior we want to approximate, and f0 is the initial distribution z0 is sampled from.",
+        "Inspired by AIS and alpha-annealing, we propose to integrate energy tempering into the optimization objective of the variational distribution.",
+        "In the case of amortized VI, we set f0 to be the prior distribution of the VAE, so each intermediate target has a more widely distributed density function, which facilitates exploration of the transition operators.",
+        "Since the correctness of the marginal qT trained with AVO depends on the optimality of each transition operator, when used for amortized VI each update will not necessarily improve the marginal to be a better approximate posterior.",
+        "To demonstrate the biasing effect of the approximate posterior in amortized VI, we utilize a toy example in the form of the following data distribution: z \u21e0 N (0, 1), \u270f1, \u270f2 \u21e0 N (0, \"), (5)",
+        "With 500 samples per data point in this case, we are effectively training the generative model with a non-parametric posterior that can perfectly fit the true posterior.",
+        "We find that HVI\u2019s approximate posterior trained with AVO tends to have smaller variational gap, and better test likelihood.",
+        "It is worth noting that in the MNIST case, smaller variational gap translates into smaller generalization gap and better test likelihood, while the same is not true in the OMNIGLOT example, which corroborates our finding in Section 5.1 that true posterior can be biased towards approximate posterior, resulting in a smaller variatinal gap (8.58) but a worse density model (6.70).",
+        "Our method is orthogonal to finding a more rich family of variational distributions, and sheds light on an important optimization issue that has far been neglected in the amortized VI literature"
+    ],
+    "headline": "We demonstrate the drawbacks of biasing the true posterior to be unimodal, and introduce Annealed Variational Objectives  into the training of hierarchical variational methods",
+    "reference_links": [
+        {
+            "id": "Abrol_et+al_2014_a",
+            "entry": "Abrol, F., Mandt, S., Ranganath, R., and Blei, D. (2014). Deterministic annealing for stochastic variational inference. stat, 1050:7.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abrol%2C%20F.%20Mandt%2C%20S.%20Ranganath%2C%20R.%20Blei%2C%20D.%20Deterministic%20annealing%20for%20stochastic%20variational%20inference%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abrol%2C%20F.%20Mandt%2C%20S.%20Ranganath%2C%20R.%20Blei%2C%20D.%20Deterministic%20annealing%20for%20stochastic%20variational%20inference%202014"
+        },
+        {
+            "id": "Agakov_2004_a",
+            "entry": "Agakov, F. V. and Barber, D. (2004). An auxiliary variational method. In Neural Information Processing.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Agakov%2C%20F.V.%20Barber%2C%20D.%20An%20auxiliary%20variational%20method%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Agakov%2C%20F.V.%20Barber%2C%20D.%20An%20auxiliary%20variational%20method%202004"
+        },
+        {
+            "id": "Berg_et+al_2018_a",
+            "entry": "Berg, R. v. d., Hasenclever, L., Tomczak, J. M., and Welling, M. (2018). Sylvester normalizing flows for variational inference. arXiv preprint arXiv:1803.05649.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.05649"
+        },
+        {
+            "id": "Bowman_et+al_2016_a",
+            "entry": "Bowman, S. R., Vilnis, L., Vinyals, O., Dai, A. M., Jozefowicz, R., and Bengio, S. (2016). Generating sentences from a continuous space. In SIGNLL Conference on Computational Natural Language Learning (CONLL).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bowman%2C%20S.R.%20Vilnis%2C%20L.%20Vinyals%2C%20O.%20Dai%2C%20A.M.%20Generating%20sentences%20from%20a%20continuous%20space%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bowman%2C%20S.R.%20Vilnis%2C%20L.%20Vinyals%2C%20O.%20Dai%2C%20A.M.%20Generating%20sentences%20from%20a%20continuous%20space%202016"
+        },
+        {
+            "id": "Burda_et+al_2016_a",
+            "entry": "Burda, Y., Grosse, R., and Salakhutdinov, R. (2016). Importance weighted autoencoders. In International Conference on Learning Representations.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Burda%2C%20Y.%20Grosse%2C%20R.%20Salakhutdinov%2C%20R.%20Importance%20weighted%20autoencoders%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Burda%2C%20Y.%20Grosse%2C%20R.%20Salakhutdinov%2C%20R.%20Importance%20weighted%20autoencoders%202016"
+        },
+        {
+            "id": "Chung_et+al_2015_a",
+            "entry": "Chung, J., Kastner, K., Dinh, L., Goel, K., Courville, A. C., and Bengio, Y. (2015). A recurrent latent variable model for sequential data. In Advances in neural information processing systems.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chung%2C%20J.%20Kastner%2C%20K.%20Dinh%2C%20L.%20Goel%2C%20K.%20A%20recurrent%20latent%20variable%20model%20for%20sequential%20data.%20In%20Advances%20in%20neural%20information%20processing%20systems%202015"
+        },
+        {
+            "id": "Clevert_et+al_2016_a",
+            "entry": "Clevert, D.-A., Unterthiner, T., and Hochreiter, S. (2016). Fast and accurate deep network learning by exponential linear units (elus). International Conference on Learning Representations.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Clevert%2C%20D.-A.%20Unterthiner%2C%20T.%20Hochreiter%2C%20S.%20Fast%20and%20accurate%20deep%20network%20learning%20by%20exponential%20linear%20units%20%28elus%29.%20International%20Conference%20on%20Learning%20Representations%202016"
+        },
+        {
+            "id": "Cremer_et+al_2018_a",
+            "entry": "Cremer, C., Li, X., and Duvenaud, D. (2018). Inference suboptimality in variational autoencoders. In International Conference on Machine Learning.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cremer%2C%20C.%20Li%2C%20X.%20Duvenaud%2C%20D.%20Inference%20suboptimality%20in%20variational%20autoencoders%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cremer%2C%20C.%20Li%2C%20X.%20Duvenaud%2C%20D.%20Inference%20suboptimality%20in%20variational%20autoencoders%202018"
+        },
+        {
+            "id": "Dieng_et+al_2017_a",
+            "entry": "Dieng, A. B., Tran, D., Ranganath, R., Paisley, J., and Blei, D. (2017). Variational inference via upper bound minimization. In Advances in Neural Information Processing Systems.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dieng%2C%20A.B.%20Tran%2C%20D.%20Ranganath%2C%20R.%20Paisley%2C%20J.%20Variational%20inference%20via%20upper%20bound%20minimization%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dieng%2C%20A.B.%20Tran%2C%20D.%20Ranganath%2C%20R.%20Paisley%2C%20J.%20Variational%20inference%20via%20upper%20bound%20minimization%202017"
+        },
+        {
+            "id": "Edwards_2017_a",
+            "entry": "Edwards, H. and Storkey, A. (2017). Towards a neural statistician. In International Conference on Learning Representations.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Edwards%2C%20H.%20Storkey%2C%20A.%20Towards%20a%20neural%20statistician%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Edwards%2C%20H.%20Storkey%2C%20A.%20Towards%20a%20neural%20statistician%202017"
+        },
+        {
+            "id": "Fraccaro_et+al_2016_a",
+            "entry": "Fraccaro, M., S\u00f8nderby, S. K., Paquet, U., and Winther, O. (2016). Sequential neural models with stochastic layers. In Advances in neural information processing systems, pages 2199\u20132207.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fraccaro%2C%20M.%20S%C3%B8nderby%2C%20S.K.%20Paquet%2C%20U.%20Winther%2C%20O.%20Sequential%20neural%20models%20with%20stochastic%20layers%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fraccaro%2C%20M.%20S%C3%B8nderby%2C%20S.K.%20Paquet%2C%20U.%20Winther%2C%20O.%20Sequential%20neural%20models%20with%20stochastic%20layers%202016"
+        },
+        {
+            "id": "Gulrajani_et+al_2017_a",
+            "entry": "Gulrajani, I., Kumar, K., Ahmed, F., Taiga, A. A., Visin, F., Vazquez, D., and Courville, A. (2017). Pixelvae: A latent variable model for natural images. In International Conference on Learning Representations.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gulrajani%2C%20I.%20Kumar%2C%20K.%20Ahmed%2C%20F.%20Taiga%2C%20A.A.%20Pixelvae%3A%20A%20latent%20variable%20model%20for%20natural%20images%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gulrajani%2C%20I.%20Kumar%2C%20K.%20Ahmed%2C%20F.%20Taiga%2C%20A.A.%20Pixelvae%3A%20A%20latent%20variable%20model%20for%20natural%20images%202017"
+        },
+        {
+            "id": "Huang_et+al_2018_a",
+            "entry": "Huang, C.-W., Krueger, D., Lacoste, A., and Courville, A. (2018). Neural autoregressive flows. In International Conference on Machine Learning.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huang%2C%20C.-W.%20Krueger%2C%20D.%20Lacoste%2C%20A.%20Courville%2C%20A.%20Neural%20autoregressive%20flows%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huang%2C%20C.-W.%20Krueger%2C%20D.%20Lacoste%2C%20A.%20Courville%2C%20A.%20Neural%20autoregressive%20flows%202018"
+        },
+        {
+            "id": "Husz_2017_a",
+            "entry": "Husz\u00e1r, F. (2017). Variational inference using implicit distributions. arXiv preprint arXiv:1702.08235.",
+            "arxiv_url": "https://arxiv.org/pdf/1702.08235"
+        },
+        {
+            "id": "Karl_et+al_2016_a",
+            "entry": "Karl, M., Soelch, M., Bayer, J., and van der Smagt, P. (2016). Deep variational bayes filters: Unsupervised learning of state space models from raw data. In International Conference on Learning Representations.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Karl%2C%20M.%20Soelch%2C%20M.%20Bayer%2C%20J.%20van%20der%20Smagt%2C%20P.%20Deep%20variational%20bayes%20filters%3A%20Unsupervised%20learning%20of%20state%20space%20models%20from%20raw%20data%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Karl%2C%20M.%20Soelch%2C%20M.%20Bayer%2C%20J.%20van%20der%20Smagt%2C%20P.%20Deep%20variational%20bayes%20filters%3A%20Unsupervised%20learning%20of%20state%20space%20models%20from%20raw%20data%202016"
+        },
+        {
+            "id": "Katahira_et+al_2008_a",
+            "entry": "Katahira, K., Watanabe, K., and Okada, M. (2008). Deterministic annealing variant of variational bayes method. In Journal of Physics: Conference Series, volume 95, page 012015. IOP Publishing.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Katahira%2C%20K.%20Watanabe%2C%20K.%20Okada%2C%20M.%20Deterministic%20annealing%20variant%20of%20variational%20bayes%20method%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Katahira%2C%20K.%20Watanabe%2C%20K.%20Okada%2C%20M.%20Deterministic%20annealing%20variant%20of%20variational%20bayes%20method%202008"
+        },
+        {
+            "id": "Kim_et+al_2018_a",
+            "entry": "Kim, Y., Wiseman, S., Miller, A. C., Sontag, D., and Rush, A. M. (2018). Semi-amortized variational autoencoders. In International Conference on Machine Learning.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kim%2C%20Y.%20Wiseman%2C%20S.%20Miller%2C%20A.C.%20Sontag%2C%20D.%20Semi-amortized%20variational%20autoencoders%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kim%2C%20Y.%20Wiseman%2C%20S.%20Miller%2C%20A.C.%20Sontag%2C%20D.%20Semi-amortized%20variational%20autoencoders%202018"
+        },
+        {
+            "id": "Kingma_et+al_2016_a",
+            "entry": "Kingma, D. P., Salimans, T., Jozefowicz, R., Chen, X., Sutskever, I., and Welling, M. (2016). Improved variational inference with inverse autoregressive flow. In Advances in Neural Information Processing Systems.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20D.P.%20Salimans%2C%20T.%20Jozefowicz%2C%20R.%20Chen%2C%20X.%20Improved%20variational%20inference%20with%20inverse%20autoregressive%20flow%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20D.P.%20Salimans%2C%20T.%20Jozefowicz%2C%20R.%20Chen%2C%20X.%20Improved%20variational%20inference%20with%20inverse%20autoregressive%20flow%202016"
+        },
+        {
+            "id": "Kingma_2014_a",
+            "entry": "Kingma, D. P. and Welling, M. (2014). Auto-encoding variational bayes. In International Conference on Learning Representations.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20D.P.%20Welling%2C%20M.%20Auto-encoding%20variational%20bayes%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20D.P.%20Welling%2C%20M.%20Auto-encoding%20variational%20bayes%202014"
+        },
+        {
+            "id": "Krishnan_et+al_2017_a",
+            "entry": "Krishnan, R. G., Liang, D., and Hoffman, M. (2017). On the challenges of learning with inference networks on sparse, high-dimensional data. arXiv preprint arXiv:1710.06085.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.06085"
+        },
+        {
+            "id": "Krueger_et+al_2017_a",
+            "entry": "Krueger, D., Huang, C.-W., Islam, R., Turner, R., Lacoste, A., and Courville, A. (2017). Bayesian hypernetworks. arXiv preprint arXiv:1710.04759.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.04759"
+        },
+        {
+            "id": "Larochelle_2011_a",
+            "entry": "Larochelle, H. and Murray, I. (2011). The neural autoregressive distribution estimator. In International Conference on Artificial Intelligence and Statistics.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Larochelle%2C%20H.%20Murray%2C%20I.%20The%20neural%20autoregressive%20distribution%20estimator%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Larochelle%2C%20H.%20Murray%2C%20I.%20The%20neural%20autoregressive%20distribution%20estimator%202011"
+        },
+        {
+            "id": "Li_2016_a",
+            "entry": "Li, Y. and Turner, R. E. (2016). R\u00e9nyi divergence variational inference. In Advances in Neural Information Processing Systems.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Y.%20Turner%2C%20R.E.%20R%C3%A9nyi%20divergence%20variational%20inference%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20Y.%20Turner%2C%20R.E.%20R%C3%A9nyi%20divergence%20variational%20inference%202016"
+        },
+        {
+            "id": "Maal_et+al_2016_a",
+            "entry": "Maal\u00f8e, L., S\u00f8nderby, C. K., S\u00f8nderby, S. K., and Winther, O. (2016). Auxiliary deep generative models. In International Conference on Machine Learning.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Maal%C3%B8e%2C%20L.%20S%C3%B8nderby%2C%20C.K.%20S%C3%B8nderby%2C%20S.K.%20Winther%2C%20O.%20Auxiliary%20deep%20generative%20models%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Maal%C3%B8e%2C%20L.%20S%C3%B8nderby%2C%20C.K.%20S%C3%B8nderby%2C%20S.K.%20Winther%2C%20O.%20Auxiliary%20deep%20generative%20models%202016"
+        },
+        {
+            "id": "Mandt_et+al_2016_a",
+            "entry": "Mandt, S., McInerney, J., Abrol, F., Ranganath, R., and Blei, D. (2016). Variational tempering. In International Conference on Artificial Intelligence and Statistics.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mandt%2C%20S.%20McInerney%2C%20J.%20Abrol%2C%20F.%20Ranganath%2C%20R.%20Variational%20tempering%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mandt%2C%20S.%20McInerney%2C%20J.%20Abrol%2C%20F.%20Ranganath%2C%20R.%20Variational%20tempering%202016"
+        },
+        {
+            "id": "Marino_et+al_2018_a",
+            "entry": "Marino, J., Yue, Y., and Mandt, S. (2018). Iterative amortized inference. In International Conference on Machine Learning.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Marino%2C%20J.%20Yue%2C%20Y.%20Mandt%2C%20S.%20Iterative%20amortized%20inference%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Marino%2C%20J.%20Yue%2C%20Y.%20Mandt%2C%20S.%20Iterative%20amortized%20inference%202018"
+        },
+        {
+            "id": "Mescheder_et+al_2017_a",
+            "entry": "Mescheder, L., Nowozin, S., and Geiger, A. (2017). Adversarial variational bayes: Unifying variational autoencoders and generative adversarial networks. In International Conference on Machine Learning.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mescheder%2C%20L.%20Nowozin%2C%20S.%20Geiger%2C%20A.%20Adversarial%20variational%20bayes%3A%20Unifying%20variational%20autoencoders%20and%20generative%20adversarial%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mescheder%2C%20L.%20Nowozin%2C%20S.%20Geiger%2C%20A.%20Adversarial%20variational%20bayes%3A%20Unifying%20variational%20autoencoders%20and%20generative%20adversarial%20networks%202017"
+        },
+        {
+            "id": "Nair_2010_a",
+            "entry": "Nair, V. and Hinton, G. E. (2010). Rectified linear units improve restricted boltzmann machines. In International Conference on Machine Learning.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nair%2C%20V.%20Hinton%2C%20G.E.%20Rectified%20linear%20units%20improve%20restricted%20boltzmann%20machines%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nair%2C%20V.%20Hinton%2C%20G.E.%20Rectified%20linear%20units%20improve%20restricted%20boltzmann%20machines%202010"
+        },
+        {
+            "id": "Neal_2001_a",
+            "entry": "Neal, R. M. (2001). Annealed importance sampling. Statistics and computing, 11(2).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Neal%2C%20R.M.%20Annealed%20importance%20sampling%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Neal%2C%20R.M.%20Annealed%20importance%20sampling%202001"
+        },
+        {
+            "id": "Nowozin_2018_a",
+            "entry": "Nowozin, S. (2018). Debiasing evidence approximations: On importance-weighted autoencoders and jackknife variational inference. In International Conference on Learning Representations.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nowozin%2C%20S.%20Debiasing%20evidence%20approximations%3A%20On%20importance-weighted%20autoencoders%20and%20jackknife%20variational%20inference%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nowozin%2C%20S.%20Debiasing%20evidence%20approximations%3A%20On%20importance-weighted%20autoencoders%20and%20jackknife%20variational%20inference%202018"
+        },
+        {
+            "id": "Raiko_et+al_2007_a",
+            "entry": "Raiko, T., Valpola, H., Harva, M., and Karhunen, J. (2007). Building blocks for variational bayesian learning of latent variable models. Journal of Machine Learning Research.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Raiko%2C%20T.%20Valpola%2C%20H.%20Harva%2C%20M.%20Karhunen%2C%20J.%20Building%20blocks%20for%20variational%20bayesian%20learning%20of%20latent%20variable%20models%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Raiko%2C%20T.%20Valpola%2C%20H.%20Harva%2C%20M.%20Karhunen%2C%20J.%20Building%20blocks%20for%20variational%20bayesian%20learning%20of%20latent%20variable%20models%202007"
+        },
+        {
+            "id": "Rainforth_et+al_2018_a",
+            "entry": "Rainforth, T., Kosiorek, A. R., Le, T. A., Maddison, C. J., Igl, M., Wood, F., and Teh, Y. W. (2018). Tighter variational bounds are not necessarily better. In International Conference on Machine Learning.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rainforth%2C%20T.%20Kosiorek%2C%20A.R.%20Le%2C%20T.A.%20Maddison%2C%20C.J.%20Tighter%20variational%20bounds%20are%20not%20necessarily%20better%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rainforth%2C%20T.%20Kosiorek%2C%20A.R.%20Le%2C%20T.A.%20Maddison%2C%20C.J.%20Tighter%20variational%20bounds%20are%20not%20necessarily%20better%202018"
+        },
+        {
+            "id": "Ranganath_et+al_2016_a",
+            "entry": "Ranganath, R., Tran, D., and Blei, D. (2016). Hierarchical variational models. In International Conference on Machine Learning.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ranganath%2C%20R.%20Tran%2C%20D.%20Blei%2C%20D.%20Hierarchical%20variational%20models%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ranganath%2C%20R.%20Tran%2C%20D.%20Blei%2C%20D.%20Hierarchical%20variational%20models%202016"
+        },
+        {
+            "id": "Rezende_2015_a",
+            "entry": "Rezende, D. J. and Mohamed, S. (2015). Variational inference with normalizing flows. In International Conference on Machine Learning.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rezende%2C%20D.J.%20Mohamed%2C%20S.%20Variational%20inference%20with%20normalizing%20flows%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rezende%2C%20D.J.%20Mohamed%2C%20S.%20Variational%20inference%20with%20normalizing%20flows%202015"
+        },
+        {
+            "id": "Rezende_et+al_2014_a",
+            "entry": "Rezende, D. J., Mohamed, S., and Wierstra, D. (2014). Stochastic backpropagation and approximate inference in deep generative models. In International Conference on Machine Learning.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rezende%2C%20D.J.%20Mohamed%2C%20S.%20Wierstra%2C%20D.%20Stochastic%20backpropagation%20and%20approximate%20inference%20in%20deep%20generative%20models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rezende%2C%20D.J.%20Mohamed%2C%20S.%20Wierstra%2C%20D.%20Stochastic%20backpropagation%20and%20approximate%20inference%20in%20deep%20generative%20models%202014"
+        },
+        {
+            "id": "Salimans_et+al_2015_a",
+            "entry": "Salimans, T., Kingma, D., and Welling, M. (2015). Markov chain monte carlo and variational inference: Bridging the gap. In International Conference on Machine Learning.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Salimans%2C%20T.%20Kingma%2C%20D.%20Welling%2C%20M.%20Markov%20chain%20monte%20carlo%20and%20variational%20inference%3A%20Bridging%20the%20gap%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Salimans%2C%20T.%20Kingma%2C%20D.%20Welling%2C%20M.%20Markov%20chain%20monte%20carlo%20and%20variational%20inference%3A%20Bridging%20the%20gap%202015"
+        },
+        {
+            "id": "Salimans_2016_a",
+            "entry": "Salimans, T. and Kingma, D. P. (2016). Weight normalization: A simple reparameterization to accelerate training of deep neural networks. In Advances in Neural Information Processing Systems.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Salimans%2C%20T.%20Kingma%2C%20D.P.%20Weight%20normalization%3A%20A%20simple%20reparameterization%20to%20accelerate%20training%20of%20deep%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Salimans%2C%20T.%20Kingma%2C%20D.P.%20Weight%20normalization%3A%20A%20simple%20reparameterization%20to%20accelerate%20training%20of%20deep%20neural%20networks%202016"
+        },
+        {
+            "id": "Shabanian_et+al_2017_a",
+            "entry": "Shabanian, S., Arpit, D., Trischler, A., and Bengio, Y. (2017). Variational bi-lstms. arXiv preprint arXiv:1711.05717.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.05717"
+        },
+        {
+            "id": "Shi_et+al_2018_a",
+            "entry": "Shi, J., Sun, S., and Zhu, J. (2018). Kernel implicit variational inference. In International Conference on Learning Representations.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shi%2C%20J.%20Sun%2C%20S.%20Zhu%2C%20J.%20Kernel%20implicit%20variational%20inference%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shi%2C%20J.%20Sun%2C%20S.%20Zhu%2C%20J.%20Kernel%20implicit%20variational%20inference%202018"
+        },
+        {
+            "id": "S_et+al_2016_a",
+            "entry": "S\u00f8nderby, C. K., Raiko, T., Maal\u00f8e, L., S\u00f8nderby, S. K., and Winther, O. (2016). Ladder variational autoencoders. In Advances in neural information processing systems, pages 3738\u20133746.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=S%C3%B8nderby%2C%20C.K.%20Raiko%2C%20T.%20Maal%C3%B8e%2C%20L.%20S%C3%B8nderby%2C%20S.K.%20Ladder%20variational%20autoencoders%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=S%C3%B8nderby%2C%20C.K.%20Raiko%2C%20T.%20Maal%C3%B8e%2C%20L.%20S%C3%B8nderby%2C%20S.K.%20Ladder%20variational%20autoencoders%202016"
+        },
+        {
+            "id": "Tomczak_2016_a",
+            "entry": "Tomczak, J. M. and Welling, M. (2016). Improving variational auto-encoders using householder flow. arXiv preprint arXiv:1611.09630.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.09630"
+        },
+        {
+            "id": "Tomczak_2017_a",
+            "entry": "Tomczak, J. M. and Welling, M. (2017). Improving variational auto-encoders using convex combination linear inverse autoregressive flow. In Benelearn.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tomczak%2C%20J.M.%20Welling%2C%20M.%20Improving%20variational%20auto-encoders%20using%20convex%20combination%20linear%20inverse%20autoregressive%20flow.%20In%20Benelearn%202017"
+        },
+        {
+            "id": "Turner_2011_a",
+            "entry": "Turner, R. E. and Sahani, M. (2011). Two problems with variational expectation maximisation for time-series models. Bayesian Time series models, 1(3.1):3\u20131.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Turner%2C%20R.E.%20Sahani%2C%20M.%20Two%20problems%20with%20variational%20expectation%20maximisation%20for%20time-series%20models%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Turner%2C%20R.E.%20Sahani%2C%20M.%20Two%20problems%20with%20variational%20expectation%20maximisation%20for%20time-series%20models%202011"
+        }
+    ]
+}

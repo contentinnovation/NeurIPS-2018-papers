@@ -1,0 +1,335 @@
+{
+    "filename": "8011-a-general-method-for-amortizing-variational-filtering.pdf",
+    "metadata": {
+        "title": "A General Method for Amortizing Variational Filtering",
+        "author": "Joseph Marino, Milan Cvitkovic, Yisong Yue",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8011-a-general-method-for-amortizing-variational-filtering.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We introduce the variational filtering EM algorithm, a simple, general-purpose method for performing variational inference in dynamical latent variable models using information from only past and present variables, i.e. filtering. The algorithm is derived from the variational objective in the filtering setting and consists of an optimization procedure at each time step. By performing each inference optimization procedure with an iterative amortized inference model, we obtain a computationally efficient implementation of the algorithm, which we call amortized variational filtering. We present experiments demonstrating that this general-purpose method improves performance across several deep dynamical latent variable models."
+    },
+    "keywords": [
+        {
+            "term": "variational inference",
+            "url": "https://en.wikipedia.org/wiki/variational_inference"
+        },
+        {
+            "term": "expectation maximization",
+            "url": "https://en.wikipedia.org/wiki/expectation_maximization"
+        },
+        {
+            "term": "gradient descent",
+            "url": "https://en.wikipedia.org/wiki/gradient_descent"
+        },
+        {
+            "term": "graphical model",
+            "url": "https://en.wikipedia.org/wiki/graphical_model"
+        },
+        {
+            "term": "unsupervised learning",
+            "url": "https://en.wikipedia.org/wiki/unsupervised_learning"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Section 2.1 provides the general form of a dynamical latent variable model",
+        "We introduce variational filtering expectation maximization, an algorithm for performing filtering variational inference and learning that is rigorously derived from the variational objective",
+        "The main contributions of this paper are the variational filtering expectation maximization algorithm and its amortized implementation, amortized variational filtering. This general-purpose filtering algorithm is widely applicable to dynamical latent variable models, as we demonstrate in our experiments",
+        "We introduced the variational filtering expectation maximization algorithm for filtering in dynamical latent variable models",
+        "Numerous methods have been proposed for filtering in deep dynamical latent variable models, with each method hand\u2013 designed for each model",
+        "Amortized variational filtering is a simple, theoreticallymotivated, and general filtering method that we have shown performs on-par with or better than multiple existing state-of-the-art methods"
+    ],
+    "key_statements": [
+        "Section 2.1 provides the general form of a dynamical latent variable model",
+        "We introduce variational filtering expectation maximization, an algorithm for performing filtering variational inference and learning that is rigorously derived from the variational objective",
+        "The main contributions of this paper are the variational filtering expectation maximization algorithm and its amortized implementation, amortized variational filtering. This general-purpose filtering algorithm is widely applicable to dynamical latent variable models, as we demonstrate in our experiments",
+        "amortized variational filtering optimizes each approximate posterior through a model that learns to perform iterative updates (Eq 13)",
+        "Additional inference iterations may lead to further improvement in performance [<a class=\"ref-link\" id=\"c32\" href=\"#r32\">32</a>]",
+        "Figure 4b shows average relative improvement over the prior estimate for a single model trained with 8 inference iterations",
+        "We observe that training with additional inference iterations empirically leads to improved performance (Figure 4a), with each iteration providing diminishing improvement during inference (Figure 4b)",
+        "We introduced the variational filtering expectation maximization algorithm for filtering in dynamical latent variable models",
+        "Numerous methods have been proposed for filtering in deep dynamical latent variable models, with each method hand\u2013 designed for each model",
+        "Amortized variational filtering is a simple, theoreticallymotivated, and general filtering method that we have shown performs on-par with or better than multiple existing state-of-the-art methods"
+    ],
+    "summary": [
+        "Section 2.1 provides the general form of a dynamical latent variable model.",
+        "The variational objective in the filtering setting results in a sequence of inference optimization objectives, with one at each time-step.",
+        "Deep latent variable models are often trained efficiently by amortizing inference optimization (Section 2.3).",
+        "Iterative inference models [<a class=\"ref-link\" id=\"c32\" href=\"#r32\">32</a>] directly account for these priors, instead performing inference optimization by iteratively encoding approximate posterior estimates and gradients: \u03bbq \u2190 f\u03c6.",
+        "Amortized variational inference [<a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>, <a class=\"ref-link\" id=\"c37\" href=\"#r37\">37</a>] has enabled many recently proposed probabilistic deep dynamical latent variable models, with applications to video [<a class=\"ref-link\" id=\"c42\" href=\"#r42\">42</a>, <a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>, <a class=\"ref-link\" id=\"c43\" href=\"#r43\">43</a>, <a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>, <a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>, <a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>, <a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>, <a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>, <a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>], speech [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>, <a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>, <a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>, <a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>], handwriting [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>], music [<a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>], etc.",
+        "Section 3.1 describes variational filtering EM (Algorithm 1), a general algorithm for performing filtering variational inference in dynamical latent variable models.",
+        "To perform filtering variational inference, we must find the set of T terms in q(z\u2264T |x\u2264T ) that minimize the filtering free energy summation.",
+        "This algorithm sequentially optimizes each of the approximate posterior terms to perform filtering inference.",
+        "After inferring an optimal approximate posterior, learning can be performed by minimizing the total filtering free energy w.r.t. the model parameters, \u03b8.",
+        "We empirically evaluate amortized variational filtering using multiple deep dynamical latent Gaussian model architectures on a variety of sequence data sets.",
+        "AVF optimizes each approximate posterior through a model that learns to perform iterative updates (Eq 13).",
+        "In Figure 4a, we plot the average free energy per step on validation sequences for models trained with varying numbers of inference iterations.",
+        "The iterative inference model uses the approximate posterior gradients to update the estimate, improving the output reconstruction.",
+        "Tables 1, 2, and 3 present quantitative comparisons of average filtering free energy per step between AVF and baseline filtering methods for TIMIT, KTH Actions, and the polyphonic music data sets respectively.",
+        "We note that VRNN with AVF using 2 inference iterations resulted in a final test performance of 1,071 nats per step, outperforming the baseline method.",
+        "From comparing the results above, we see that AVF is a general filtering procedure that performs well across multiple models and data sets, despite using a relatively simple inference model structure.",
+        "Variational filtering inference can be expressed as a sequence of optimization objectives, linked across steps through previous latent samples.",
+        "Using iterative inference models to perform inference optimization, we arrived at an efficient implementation of the algorithm: amortized variational filtering.",
+        "Amortized variational filtering is a simple, theoreticallymotivated, and general filtering method that we have shown performs on-par with or better than multiple existing state-of-the-art methods"
+    ],
+    "headline": "We introduce the variational filtering expectation maximization algorithm, a simple, general-purpose method for performing variational inference in dynamical latent variable models using information from only past and present variables, i.e. filtering",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Marcin Andrychowicz, Misha Denil, Sergio Gomez, Matthew W Hoffman, David Pfau, Tom Schaul, and Nando de Freitas. Learning to learn by gradient descent by gradient descent. In Advances in Neural Information Processing Systems, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Andrychowicz%2C%20Marcin%20Denil%2C%20Misha%20Gomez%2C%20Sergio%20Hoffman%2C%20Matthew%20W.%20Learning%20to%20learn%20by%20gradient%20descent%20by%20gradient%20descent%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Andrychowicz%2C%20Marcin%20Denil%2C%20Misha%20Gomez%2C%20Sergio%20Hoffman%2C%20Matthew%20W.%20Learning%20to%20learn%20by%20gradient%20descent%20by%20gradient%20descent%202016"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Jimmy Lei Ba, Jamie Ryan Kiros, and Geoffrey E Hinton. Layer normalization. In NIPS Deep Learning Symposium, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ba%2C%20Jimmy%20Lei%20Kiros%2C%20Jamie%20Ryan%20Hinton%2C%20Geoffrey%20E.%20Layer%20normalization%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ba%2C%20Jimmy%20Lei%20Kiros%2C%20Jamie%20Ryan%20Hinton%2C%20Geoffrey%20E.%20Layer%20normalization%202016"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Mohammad Babaeizadeh, Chelsea Finn, Dumitru Erhan, Roy H Campbell, and Sergey Levine. Stochastic variational video prediction. In International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Babaeizadeh%2C%20Mohammad%20Finn%2C%20Chelsea%20Erhan%2C%20Dumitru%20Campbell%2C%20Roy%20H.%20Stochastic%20variational%20video%20prediction%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Babaeizadeh%2C%20Mohammad%20Finn%2C%20Chelsea%20Erhan%2C%20Dumitru%20Campbell%2C%20Roy%20H.%20Stochastic%20variational%20video%20prediction%202018"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Justin Bayer and Christian Osendorfer. Learning stochastic recurrent networks. In NIPS 2014 Workshop on Advances in Variational Inference, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bayer%2C%20Justin%20Osendorfer%2C%20Christian%20Learning%20stochastic%20recurrent%20networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bayer%2C%20Justin%20Osendorfer%2C%20Christian%20Learning%20stochastic%20recurrent%20networks%202014"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Nicolas Boulanger-Lewandowski, Yoshua Bengio, and Pascal Vincent. Modeling temporal dependencies in high-dimensional sequences: Application to polyphonic music generation and transcription. In International Conference on Machine Learning, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Boulanger-Lewandowski%2C%20Nicolas%20Bengio%2C%20Yoshua%20Vincent%2C%20Pascal%20Modeling%20temporal%20dependencies%20in%20high-dimensional%20sequences%3A%20Application%20to%20polyphonic%20music%20generation%20and%20transcription%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Boulanger-Lewandowski%2C%20Nicolas%20Bengio%2C%20Yoshua%20Vincent%2C%20Pascal%20Modeling%20temporal%20dependencies%20in%20high-dimensional%20sequences%3A%20Application%20to%20polyphonic%20music%20generation%20and%20transcription%202012"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Junyoung Chung, Caglar Gulcehre, KyungHyun Cho, and Yoshua Bengio. Empirical evaluation of gated recurrent neural networks on sequence modeling. arXiv preprint arXiv:1412.3555, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.3555"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Junyoung Chung, Kyle Kastner, Laurent Dinh, Kratarth Goel, Aaron C Courville, and Yoshua Bengio. A recurrent latent variable model for sequential data. In Advances in Neural Information Processing Systems, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chung%2C%20Junyoung%20Kastner%2C%20Kyle%20Dinh%2C%20Laurent%20Goel%2C%20Kratarth%20and%20Yoshua%20Bengio.%20A%20recurrent%20latent%20variable%20model%20for%20sequential%20data%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chung%2C%20Junyoung%20Kastner%2C%20Kyle%20Dinh%2C%20Laurent%20Goel%2C%20Kratarth%20and%20Yoshua%20Bengio.%20A%20recurrent%20latent%20variable%20model%20for%20sequential%20data%202015"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Peter Dayan, Geoffrey E Hinton, Radford M Neal, and Richard S Zemel. The helmholtz machine. Neural computation, 7(5):889\u2013904, 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dayan%2C%20Peter%20Hinton%2C%20Geoffrey%20E.%20Neal%2C%20Radford%20M.%20Zemel%2C%20Richard%20S.%20The%20helmholtz%20machine%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dayan%2C%20Peter%20Hinton%2C%20Geoffrey%20E.%20Neal%2C%20Radford%20M.%20Zemel%2C%20Richard%20S.%20The%20helmholtz%20machine%201995"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Emily Denton and Rob Fergus. Stochastic video generation with a learned prior. In International Conference on Machine Learning, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Denton%2C%20Emily%20Fergus%2C%20Rob%20Stochastic%20video%20generation%20with%20a%20learned%20prior%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Denton%2C%20Emily%20Fergus%2C%20Rob%20Stochastic%20video%20generation%20with%20a%20learned%20prior%202018"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Chelsea Finn, Ian Goodfellow, and Sergey Levine. Unsupervised learning for physical interaction through video prediction. In Advances in Neural Information Processing Systems, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Finn%2C%20Chelsea%20Goodfellow%2C%20Ian%20Levine%2C%20Sergey%20Unsupervised%20learning%20for%20physical%20interaction%20through%20video%20prediction%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Finn%2C%20Chelsea%20Goodfellow%2C%20Ian%20Levine%2C%20Sergey%20Unsupervised%20learning%20for%20physical%20interaction%20through%20video%20prediction%202016"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Marco Fraccaro, Simon Kamronn, Ulrich Paquet, and Ole Winther. A disentangled recognition and nonlinear dynamics model for unsupervised learning. In Advances in Neural Information Processing Systems, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fraccaro%2C%20Marco%20Kamronn%2C%20Simon%20Paquet%2C%20Ulrich%20Winther%2C%20Ole%20A%20disentangled%20recognition%20and%20nonlinear%20dynamics%20model%20for%20unsupervised%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fraccaro%2C%20Marco%20Kamronn%2C%20Simon%20Paquet%2C%20Ulrich%20Winther%2C%20Ole%20A%20disentangled%20recognition%20and%20nonlinear%20dynamics%20model%20for%20unsupervised%20learning%202017"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Marco Fraccaro, S\u00f8ren Kaae S\u00f8nderby, Ulrich Paquet, and Ole Winther. Sequential neural models with stochastic layers. In Advances in Neural Information Processing Systems, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fraccaro%2C%20Marco%20S%C3%B8nderby%2C%20S%C3%B8ren%20Kaae%20Paquet%2C%20Ulrich%20Winther%2C%20Ole%20Sequential%20neural%20models%20with%20stochastic%20layers%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fraccaro%2C%20Marco%20S%C3%B8nderby%2C%20S%C3%B8ren%20Kaae%20Paquet%2C%20Ulrich%20Winther%2C%20Ole%20Sequential%20neural%20models%20with%20stochastic%20layers%202016"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Karl Friston. A theory of cortical responses. Philosophical Transactions of the Royal Society of London B: Biological Sciences, 360(1456):815\u2013836, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Friston%2C%20Karl%20A%20theory%20of%20cortical%20responses%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Friston%2C%20Karl%20A%20theory%20of%20cortical%20responses%202005"
+        },
+        {
+            "id": "14",
+            "entry": "[14] J. S. Garofolo, L. F. Lamel, W. M. Fisher, J. G. Fiscus, D. S. Pallett, and N. L. Dahlgren. Darpa timit acoustic phonetic continuous speech corpus, 1993.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Garofolo%2C%20J.S.%20Lamel%2C%20L.F.%20Fisher%2C%20W.M.%20Fiscus%2C%20J.G.%20Darpa%20timit%20acoustic%20phonetic%20continuous%20speech%20corpus%201993"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Mevlana Gemici, Chia-Chun Hung, Adam Santoro, Greg Wayne, Shakir Mohamed, Danilo J Rezende, David Amos, and Timothy Lillicrap. Generative temporal models with memory. arXiv preprint arXiv:1702.04649, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1702.04649"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Samuel Gershman and Noah Goodman. Amortized inference in probabilistic reasoning. In Cognitive Science Society, volume 36, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gershman%2C%20Samuel%20Goodman%2C%20Noah%20Amortized%20inference%20in%20probabilistic%20reasoning%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gershman%2C%20Samuel%20Goodman%2C%20Noah%20Amortized%20inference%20in%20probabilistic%20reasoning%202014"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Anirudh Goyal, Alessandro Sordoni, Marc-Alexandre C\u00f4t\u00e9, Nan Ke, and Yoshua Bengio. Zforcing: Training stochastic recurrent networks. In Advances in Neural Information Processing Systems, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goyal%2C%20Anirudh%20Sordoni%2C%20Alessandro%20C%C3%B4t%C3%A9%2C%20Marc-Alexandre%20Ke%2C%20Nan%20Zforcing%3A%20Training%20stochastic%20recurrent%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goyal%2C%20Anirudh%20Sordoni%2C%20Alessandro%20C%C3%B4t%C3%A9%2C%20Marc-Alexandre%20Ke%2C%20Nan%20Zforcing%3A%20Training%20stochastic%20recurrent%20networks%202017"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Karol Gregor, Ivo Danihelka, Andriy Mnih, Charles Blundell, and Daan Wierstra. Deep autoregressive networks. In International Conference on Machine Learning, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gregor%2C%20Karol%20Danihelka%2C%20Ivo%20Mnih%2C%20Andriy%20Blundell%2C%20Charles%20Deep%20autoregressive%20networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gregor%2C%20Karol%20Danihelka%2C%20Ivo%20Mnih%2C%20Andriy%20Blundell%2C%20Charles%20Deep%20autoregressive%20networks%202014"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Jiawei He, Andreas Lehrmann, Joseph Marino, Greg Mori, and Leonid Sigal. Probabilistic video generation using holistic attribute control. In European Conference on Computer Vision, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Jiawei%20Lehrmann%2C%20Andreas%20Marino%2C%20Joseph%20Mori%2C%20Greg%20Probabilistic%20video%20generation%20using%20holistic%20attribute%20control%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Jiawei%20Lehrmann%2C%20Andreas%20Marino%2C%20Joseph%20Mori%2C%20Greg%20Probabilistic%20video%20generation%20using%20holistic%20attribute%20control%202018"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Mikael Henaff, Junbo Zhao, and Yann LeCun. Prediction under uncertainty with error-encoding networks. arXiv preprint arXiv:1711.04994, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.04994"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Matthew D Hoffman, David M Blei, Chong Wang, and John Paisley. Stochastic variational inference. The Journal of Machine Learning Research, 14(1):1303\u20131347, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hoffman%2C%20Matthew%20D.%20Blei%2C%20David%20M.%20Wang%2C%20Chong%20Paisley%2C%20John%20Stochastic%20variational%20inference%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hoffman%2C%20Matthew%20D.%20Blei%2C%20David%20M.%20Wang%2C%20Chong%20Paisley%2C%20John%20Stochastic%20variational%20inference%202013"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Wei-Ning Hsu, Yu Zhang, and James Glass. Unsupervised learning of disentangled and interpretable representations from sequential data. In Advances in Neural Information Processing Systems, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hsu%2C%20Wei-Ning%20Zhang%2C%20Yu%20Glass%2C%20James%20Unsupervised%20learning%20of%20disentangled%20and%20interpretable%20representations%20from%20sequential%20data%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hsu%2C%20Wei-Ning%20Zhang%2C%20Yu%20Glass%2C%20James%20Unsupervised%20learning%20of%20disentangled%20and%20interpretable%20representations%20from%20sequential%20data%202017"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Matthew Johnson, David K Duvenaud, Alex Wiltschko, Ryan P Adams, and Sandeep R Datta. Composing graphical models with neural networks for structured representations and fast inference. In Advances in Neural Information Processing Systems, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Johnson%2C%20Matthew%20Duvenaud%2C%20David%20K.%20Wiltschko%2C%20Alex%20Adams%2C%20Ryan%20P.%20Composing%20graphical%20models%20with%20neural%20networks%20for%20structured%20representations%20and%20fast%20inference%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Johnson%2C%20Matthew%20Duvenaud%2C%20David%20K.%20Wiltschko%2C%20Alex%20Adams%2C%20Ryan%20P.%20Composing%20graphical%20models%20with%20neural%20networks%20for%20structured%20representations%20and%20fast%20inference%202016"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Michael I Jordan, Zoubin Ghahramani, Tommi S Jaakkola, and Lawrence K Saul. An introduction to variational methods for graphical models. NATO ASI SERIES D BEHAVIOURAL AND SOCIAL SCIENCES, 89:105\u2013162, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jordan%2C%20Michael%20I.%20Ghahramani%2C%20Zoubin%20Jaakkola%2C%20Tommi%20S.%20Saul%2C%20Lawrence%20K.%20An%20introduction%20to%20variational%20methods%20for%20graphical%20models.%20NATO%20ASI%20SERIES%20D%20BEHAVIOURAL%20AND%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jordan%2C%20Michael%20I.%20Ghahramani%2C%20Zoubin%20Jaakkola%2C%20Tommi%20S.%20Saul%2C%20Lawrence%20K.%20An%20introduction%20to%20variational%20methods%20for%20graphical%20models.%20NATO%20ASI%20SERIES%20D%20BEHAVIOURAL%20AND%201998"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Rudolph Emil Kalman et al. A new approach to linear filtering and prediction problems. Journal of basic Engineering, 82(1):35\u201345, 1960.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kalman%2C%20Rudolph%20Emil%20A%20new%20approach%20to%20linear%20filtering%20and%20prediction%20problems%201960",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kalman%2C%20Rudolph%20Emil%20A%20new%20approach%20to%20linear%20filtering%20and%20prediction%20problems%201960"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Maximilian Karl, Maximilian Soelch, Justin Bayer, and Patrick van der Smagt. Deep variational bayes filters: Unsupervised learning of state space models from raw data. In International Conference on Learning Representations, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Karl%2C%20Maximilian%20Soelch%2C%20Maximilian%20Bayer%2C%20Justin%20van%20der%20Smagt%2C%20Patrick%20Deep%20variational%20bayes%20filters%3A%20Unsupervised%20learning%20of%20state%20space%20models%20from%20raw%20data%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Karl%2C%20Maximilian%20Soelch%2C%20Maximilian%20Bayer%2C%20Justin%20van%20der%20Smagt%2C%20Patrick%20Deep%20variational%20bayes%20filters%3A%20Unsupervised%20learning%20of%20state%20space%20models%20from%20raw%20data%202017"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Diederik P Kingma and Max Welling. Stochastic gradient vb and the variational auto-encoder. In International Conference on Learning Representations, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Welling%2C%20Max%20Stochastic%20gradient%20vb%20and%20the%20variational%20auto-encoder%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Welling%2C%20Max%20Stochastic%20gradient%20vb%20and%20the%20variational%20auto-encoder%202014"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Tuan Anh Le, Maximilian Igl, Tom Jin, Tom Rainforth, and Frank Wood. Auto-encoding sequential monte carlo. In International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Le%2C%20Tuan%20Anh%20Igl%2C%20Maximilian%20Jin%2C%20Tom%20Rainforth%2C%20Tom%20Auto-encoding%20sequential%20monte%20carlo%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Le%2C%20Tuan%20Anh%20Igl%2C%20Maximilian%20Jin%2C%20Tom%20Rainforth%2C%20Tom%20Auto-encoding%20sequential%20monte%20carlo%202018"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Yingzhen Li and Stephan Mandt. A deep generative model for disentangled representations of sequential data. In International Conference on Machine Learning, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Yingzhen%20Mandt%2C%20Stephan%20A%20deep%20generative%20model%20for%20disentangled%20representations%20of%20sequential%20data%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20Yingzhen%20Mandt%2C%20Stephan%20A%20deep%20generative%20model%20for%20disentangled%20representations%20of%20sequential%20data%202018"
+        },
+        {
+            "id": "30",
+            "entry": "[30] William Lotter, Gabriel Kreiman, and David Cox. Deep predictive coding networks for video prediction and unsupervised learning. In International Conference on Learning Representations, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lotter%2C%20William%20Kreiman%2C%20Gabriel%20Cox%2C%20David%20Deep%20predictive%20coding%20networks%20for%20video%20prediction%20and%20unsupervised%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lotter%2C%20William%20Kreiman%2C%20Gabriel%20Cox%2C%20David%20Deep%20predictive%20coding%20networks%20for%20video%20prediction%20and%20unsupervised%20learning%202017"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Chris J Maddison, John Lawson, George Tucker, Nicolas Heess, Mohammad Norouzi, Andriy Mnih, Arnaud Doucet, and Yee Teh. Filtering variational objectives. In Advances in Neural Information Processing Systems, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Maddison%2C%20Chris%20J.%20Lawson%2C%20John%20Tucker%2C%20George%20Heess%2C%20Nicolas%20Filtering%20variational%20objectives%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Maddison%2C%20Chris%20J.%20Lawson%2C%20John%20Tucker%2C%20George%20Heess%2C%20Nicolas%20Filtering%20variational%20objectives%202017"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Joseph Marino, Yisong Yue, and Stephan Mandt. Iterative amortized inference. In International Conference on Machine Learning, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Marino%2C%20Joseph%20Yue%2C%20Yisong%20Mandt%2C%20Stephan%20Iterative%20amortized%20inference%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Marino%2C%20Joseph%20Yue%2C%20Yisong%20Mandt%2C%20Stephan%20Iterative%20amortized%20inference%202018"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Christian Naesseth, Scott Linderman, Rajesh Ranganath, and David Blei. Variational sequential monte carlo. In International Conference on Artificial Intelligence and Statistics, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Naesseth%2C%20Christian%20Linderman%2C%20Scott%20Ranganath%2C%20Rajesh%20Blei%2C%20David%20Variational%20sequential%20monte%20carlo%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Naesseth%2C%20Christian%20Linderman%2C%20Scott%20Ranganath%2C%20Rajesh%20Blei%2C%20David%20Variational%20sequential%20monte%20carlo%202018"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Radford M Neal and Geoffrey E Hinton. A view of the em algorithm that justifies incremental, sparse, and other variants. In Learning in graphical models, pages 355\u2013368.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Neal%2C%20Radford%20M.%20Hinton%2C%20Geoffrey%20E.%20A%20view%20of%20the%20em%20algorithm%20that%20justifies%20incremental%2C%20sparse%2C%20and%20other%20variants.%20In%20Learning%20in%20graphical%20models"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Rajesh Ranganath, Sean Gerrish, and David Blei. Black box variational inference. In Artificial Intelligence and Statistics, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ranganath%2C%20Rajesh%20Gerrish%2C%20Sean%20Blei%2C%20David%20Black%20box%20variational%20inference%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ranganath%2C%20Rajesh%20Gerrish%2C%20Sean%20Blei%2C%20David%20Black%20box%20variational%20inference%202014"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Rajesh PN Rao and Dana H Ballard. Predictive coding in the visual cortex: a functional interpretation of some extra-classical receptive-field effects. Nature neuroscience, 2(1), 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rao%2C%20Rajesh%20P.N.%20Ballard%2C%20Dana%20H.%20Predictive%20coding%20in%20the%20visual%20cortex%3A%20a%20functional%20interpretation%20of%20some%20extra-classical%20receptive-field%20effects%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rao%2C%20Rajesh%20P.N.%20Ballard%2C%20Dana%20H.%20Predictive%20coding%20in%20the%20visual%20cortex%3A%20a%20functional%20interpretation%20of%20some%20extra-classical%20receptive-field%20effects%201999"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Danilo Jimenez Rezende, Shakir Mohamed, and Daan Wierstra. Stochastic backpropagation and approximate inference in deep generative models. In International Conference on Machine Learning, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rezende%2C%20Danilo%20Jimenez%20Mohamed%2C%20Shakir%20Wierstra%2C%20Daan%20Stochastic%20backpropagation%20and%20approximate%20inference%20in%20deep%20generative%20models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rezende%2C%20Danilo%20Jimenez%20Mohamed%2C%20Shakir%20Wierstra%2C%20Daan%20Stochastic%20backpropagation%20and%20approximate%20inference%20in%20deep%20generative%20models%202014"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Simo S\u00e4rkk\u00e4. Bayesian filtering and smoothing, volume 3. Cambridge University Press, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=S%C3%A4rkk%C3%A4%2C%20Simo%20Bayesian%20filtering%20and%20smoothing%2C%20volume%203%202013"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Christian Schuldt, Ivan Laptev, and Barbara Caputo. Recognizing human actions: a local svm approach. In International Conference on Pattern Recognition, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schuldt%2C%20Christian%20Laptev%2C%20Ivan%20Caputo%2C%20Barbara%20Recognizing%20human%20actions%3A%20a%20local%20svm%20approach%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schuldt%2C%20Christian%20Laptev%2C%20Ivan%20Caputo%2C%20Barbara%20Recognizing%20human%20actions%3A%20a%20local%20svm%20approach%202004"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Casper Kaae S\u00f8nderby, Tapani Raiko, Lars Maal\u00f8e, S\u00f8ren Kaae S\u00f8nderby, and Ole Winther. Ladder variational autoencoders. In Advances in Neural Information Processing Systems, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=S%C3%B8nderby%2C%20Casper%20Kaae%20Raiko%2C%20Tapani%20Maal%C3%B8e%2C%20Lars%20S%C3%B8nderby%2C%20S%C3%B8ren%20Kaae%20Ladder%20variational%20autoencoders%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=S%C3%B8nderby%2C%20Casper%20Kaae%20Raiko%2C%20Tapani%20Maal%C3%B8e%2C%20Lars%20S%C3%B8nderby%2C%20S%C3%B8ren%20Kaae%20Ladder%20variational%20autoencoders%202016"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Nitish Srivastava, Elman Mansimov, and Ruslan Salakhudinov. Unsupervised learning of video representations using lstms. In International Conference on Machine Learning, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Srivastava%2C%20Nitish%20Mansimov%2C%20Elman%20Salakhudinov%2C%20Ruslan%20Unsupervised%20learning%20of%20video%20representations%20using%20lstms%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Srivastava%2C%20Nitish%20Mansimov%2C%20Elman%20Salakhudinov%2C%20Ruslan%20Unsupervised%20learning%20of%20video%20representations%20using%20lstms%202015"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Jacob Walker, Carl Doersch, Abhinav Gupta, and Martial Hebert. An uncertain future: Forecasting from static images using variational autoencoders. In European Conference on Computer Vision, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Walker%2C%20Jacob%20Doersch%2C%20Carl%20Gupta%2C%20Abhinav%20Hebert%2C%20Martial%20An%20uncertain%20future%3A%20Forecasting%20from%20static%20images%20using%20variational%20autoencoders%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Walker%2C%20Jacob%20Doersch%2C%20Carl%20Gupta%2C%20Abhinav%20Hebert%2C%20Martial%20An%20uncertain%20future%3A%20Forecasting%20from%20static%20images%20using%20variational%20autoencoders%202016"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Tianfan Xue, Jiajun Wu, Katherine Bouman, and Bill Freeman. Visual dynamics: Probabilistic future frame synthesis via cross convolutional networks. In Advances in Neural Information Processing Systems, 2016. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xue%2C%20Tianfan%20Wu%2C%20Jiajun%20Bouman%2C%20Katherine%20Freeman%2C%20Bill%20Visual%20dynamics%3A%20Probabilistic%20future%20frame%20synthesis%20via%20cross%20convolutional%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xue%2C%20Tianfan%20Wu%2C%20Jiajun%20Bouman%2C%20Katherine%20Freeman%2C%20Bill%20Visual%20dynamics%3A%20Probabilistic%20future%20frame%20synthesis%20via%20cross%20convolutional%20networks%202016"
+        }
+    ]
+}

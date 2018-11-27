@@ -1,0 +1,309 @@
+{
+    "filename": "7312-sigsoftmax-reanalysis-of-the-softmax-bottleneck.pdf",
+    "metadata": {
+        "title": "Sigsoftmax: Reanalysis of the Softmax Bottleneck",
+        "author": "Sekitoshi Kanai, Yasuhiro Fujiwara, Yuki Yamanaka, Shuichi Adachi",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7312-sigsoftmax-reanalysis-of-the-softmax-bottleneck.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Softmax is an output activation function for modeling categorical probability distributions in many applications of deep learning. However, a recent study revealed that softmax can be a bottleneck of representational capacity of neural networks in language modeling (the softmax bottleneck). In this paper, we propose an output activation function for breaking the softmax bottleneck without additional parameters. We re-analyze the softmax bottleneck from the perspective of the output set of log-softmax and identify the cause of the softmax bottleneck. On the basis of this analysis, we propose sigsoftmax, which is composed of a multiplication of an exponential function and sigmoid function. Sigsoftmax can break the softmax bottleneck. The experiments on language modeling demonstrate that sigsoftmax and mixture of sigsoftmax outperform softmax and mixture of softmax, respectively."
+    },
+    "keywords": [
+        {
+            "term": "activation function",
+            "url": "https://en.wikipedia.org/wiki/activation_function"
+        },
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "pattern recognition",
+            "url": "https://en.wikipedia.org/wiki/pattern_recognition"
+        },
+        {
+            "term": "rectified linear unit",
+            "url": "https://en.wikipedia.org/wiki/rectified_linear_unit"
+        },
+        {
+            "term": "recurrent neural network",
+            "url": "https://en.wikipedia.org/wiki/recurrent_neural_network"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        },
+        {
+            "term": "stochastic gradient descent",
+            "url": "https://en.wikipedia.org/wiki/stochastic_gradient_descent"
+        },
+        {
+            "term": "long short-term memory",
+            "url": "https://en.wikipedia.org/wiki/long_short-term_memory"
+        },
+        {
+            "term": "language modeling",
+            "url": "https://en.wikipedia.org/wiki/language_modeling"
+        },
+        {
+            "term": "image recognition",
+            "url": "https://en.wikipedia.org/wiki/image_recognition"
+        },
+        {
+            "term": "speech recognition",
+            "url": "https://en.wikipedia.org/wiki/speech_recognition"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Deep neural networks are used in many recent applications such as image recognition [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>], speech recognition [<a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>], and natural language processing [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>, <a class=\"ref-link\" id=\"c32\" href=\"#r32\">32</a>, <a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>]",
+        "Various model architectures are built in the above applications, softmax is commonly used as an output activation function for modeling categorical probability distributions [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>, <a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>, <a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>, <a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>, <a class=\"ref-link\" id=\"c32\" href=\"#r32\">32</a>, <a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>, <a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>]",
+        "We proposed sigsoftmax, which can break the softmax bottleneck and has more representational power than softmax without additional parameters",
+        "Since sigsoftmax has the desirable properties for output activation functions, it has the potential to replace softmax in many applications",
+        "Breaking the softmax bottleneck is the necessary conditions in order to fit the model to the true distribution",
+        "We will investigate the sufficient conditions in order to fit the model to the distribution"
+    ],
+    "key_statements": [
+        "Deep neural networks are used in many recent applications such as image recognition [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>], speech recognition [<a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>], and natural language processing [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>, <a class=\"ref-link\" id=\"c32\" href=\"#r32\">32</a>, <a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>]",
+        "High representational capacity and generalization performance of deep neural networks are achieved by many layers, activation functions and regularization methods [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>, <a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>, <a class=\"ref-link\" id=\"c31\" href=\"#r31\">31</a>, <a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>, <a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>]",
+        "Various model architectures are built in the above applications, softmax is commonly used as an output activation function for modeling categorical probability distributions [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>, <a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>, <a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>, <a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>, <a class=\"ref-link\" id=\"c32\" href=\"#r32\">32</a>, <a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>, <a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>]",
+        "We propose a novel output activation function for breaking the softmax bottleneck without additional parameters",
+        "As an alternative activation function to softmax, we explore the output functions composed of rectified linear unit (ReLU) and sigmoid functions",
+        "Theorem 2 shows that the log-softmax has at most d + 1 linearly independent output vectors, even if the various inputs are applied to the model",
+        "We examined the rank of Asince\n3https://github.com/salesforce/awd-lstm-lm (Note that Merity et al [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>] further tuned some hyper-parameters to obtain results better than those in the original paper in their code.); https://github.com/benkrause/dynamic-evaluation; https://github.com/zihangdai/mos\n402 402 g: rectified linear unit\n8243 31400 g: Sigmoid\n9986 19834 the rank of the matrix is N if the matrix is composed of N linearly independent vectors",
+        "We investigated the range of log-softmax and identified the cause of the softmax bottleneck",
+        "We proposed sigsoftmax, which can break the softmax bottleneck and has more representational power than softmax without additional parameters",
+        "Since sigsoftmax has the desirable properties for output activation functions, it has the potential to replace softmax in many applications",
+        "Breaking the softmax bottleneck is the necessary conditions in order to fit the model to the true distribution",
+        "We will investigate the sufficient conditions in order to fit the model to the distribution"
+    ],
+    "summary": [
+        "Deep neural networks are used in many recent applications such as image recognition [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>], speech recognition [<a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>], and natural language processing [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>, <a class=\"ref-link\" id=\"c32\" href=\"#r32\">32</a>, <a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>].",
+        "They showed that the representational capacity of the softmax-based model is restricted by the length of the hidden vector in the output layer.",
+        "We propose a novel output activation function for breaking the softmax bottleneck without additional parameters.",
+        "To train the softmax-based models, negative log-likelihood is used as a loss function.",
+        "Theorem 2 shows that the log-softmax has at most d + 1 linearly independent output vectors, even if the various inputs are applied to the model.",
+        "If the vectors of true log probabilities logP \u2217(y|x) have more than d + 1 linearly independent vectors, the softmax-based model cannot completely represent the true probabilities.",
+        "The above analysis shows that the softmax bottleneck occurs because the output of log-softmax is the linear combination of the input z and vector 1 as eq (5).",
+        "Our analysis provides new insights that the range of log-softmax is a subset of the less dimensional vector space the dimension of a vector space is strongly related to the rank of a matrix.",
+        "As the alternative function to softmax, a new output function f (z) and its g(z) should have all of the following properties: Nonlinearity of log(g(z)) As mentioned in Secs.",
+        "We propose a new output activation function that can break the softmax bottleneck, and satisfies all the above properties.",
+        "Since log-sigsoftmax is composed of a nonlinear function, its output vectors can be greater than d + 1 linearly independent vectors.",
+        "Theorem 3 shows that sigsoftmax can break the softmax bottleneck; even if the vectors of the true log probabilities are more than d + 1 linearly independent vectors, the sigsoftmax-based model can learn the true probabilities.",
+        "The representational powers of sigsoftmax and softmax are difficult to compare only by using the theorem based on the vector space.",
+        "The dimension of the input space S was at most 401, and log-softmax output vectors are theoretically at most 402 linearly independent vectors from Theorem 2.",
+        "The number of linearly independent output vectors of sigsoftmax, ReLU and sigmoid-based functions are not bounded by 402.",
+        "Sigsoftmax, ReLU and sigmoid-based functions can break the softmax bottleneck.",
+        "We proposed sigsoftmax, which can break the softmax bottleneck and has more representational power than softmax without additional parameters.",
+        "Since sigsoftmax has the desirable properties for output activation functions, it has the potential to replace softmax in many applications.",
+        "We will investigate the sufficient conditions in order to fit the model to the distribution"
+    ],
+    "headline": "We propose an output activation function for breaking the softmax bottleneck without additional parameters",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Christopher M Bishop. Neural Networks for Pattern Recognition. Oxford university press, 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bishop%2C%20Christopher%20M.%20Neural%20Networks%20for%20Pattern%20Recognition%201995"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Christopher M Bishop. Pattern Recognition and Machine Learning. Springer-Verlag New York, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bishop%2C%20Christopher%20M.%20Pattern%20Recognition%20and%20Machine%20Learning%202006"
+        },
+        {
+            "id": "3",
+            "entry": "[3] John S Bridle. Training stochastic model recognition algorithms as networks can lead to maximum mutual information estimation of parameters. In Proc. NIPS, pages 211\u2013217, 1990.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bridle%2C%20John%20S.%20Training%20stochastic%20model%20recognition%20algorithms%20as%20networks%20can%20lead%20to%20maximum%20mutual%20information%20estimation%20of%20parameters%201990",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bridle%2C%20John%20S.%20Training%20stochastic%20model%20recognition%20algorithms%20as%20networks%20can%20lead%20to%20maximum%20mutual%20information%20estimation%20of%20parameters%201990"
+        },
+        {
+            "id": "4",
+            "entry": "[4] John S Bridle. Probabilistic interpretation of feedforward classification network outputs, with relationships to statistical pattern recognition. In Neurocomputing, pages 227\u2013236.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bridle%2C%20John%20S.%20Probabilistic%20interpretation%20of%20feedforward%20classification%20network%20outputs%2C%20with%20relationships%20to%20statistical%20pattern%20recognition",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bridle%2C%20John%20S.%20Probabilistic%20interpretation%20of%20feedforward%20classification%20network%20outputs%2C%20with%20relationships%20to%20statistical%20pattern%20recognition"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Ciprian Chelba, Tomas Mikolov, Mike Schuster, Qi Ge, Thorsten Brants, Phillipp Koehn, and Tony Robinson. One billion word benchmark for measuring progress in statistical language modeling. Technical report, Google, 2013. URL http://arxiv.org/abs/1312.3005.",
+            "url": "http://arxiv.org/abs/1312.3005",
+            "arxiv_url": "https://arxiv.org/pdf/1312.3005"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Binghui Chen, Weihong Deng, and Junping Du. Noisy softmax: Improving the generalization ability of dcnn via postponing the early softmax saturation. In Proc. CVPR, pages 5372\u20135381, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Binghui%20Deng%2C%20Weihong%20Du%2C%20Junping%20Noisy%20softmax%3A%20Improving%20the%20generalization%20ability%20of%20dcnn%20via%20postponing%20the%20early%20softmax%20saturation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Binghui%20Deng%2C%20Weihong%20Du%2C%20Junping%20Noisy%20softmax%3A%20Improving%20the%20generalization%20ability%20of%20dcnn%20via%20postponing%20the%20early%20softmax%20saturation%202017"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Kyunghyun Cho, Bart Van Merri\u00ebnboer, Caglar Gulcehre, Dzmitry Bahdanau, Fethi Bougares, Holger Schwenk, and Yoshua Bengio. Learning phrase representations using rnn encoder\u2013 decoder for statistical machine translation. In Proc. EMNLP, pages 1724\u20131734. ACL, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cho%2C%20Kyunghyun%20Merri%C3%ABnboer%2C%20Bart%20Van%20Gulcehre%2C%20Caglar%20Bahdanau%2C%20Dzmitry%20Learning%20phrase%20representations%20using%20rnn%20encoder%E2%80%93%20decoder%20for%20statistical%20machine%20translation%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cho%2C%20Kyunghyun%20Merri%C3%ABnboer%2C%20Bart%20Van%20Gulcehre%2C%20Caglar%20Bahdanau%2C%20Dzmitry%20Learning%20phrase%20representations%20using%20rnn%20encoder%E2%80%93%20decoder%20for%20statistical%20machine%20translation%202014"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Alexandre de Br\u00e9bisson and Pascal Vincent. An exploration of softmax alternatives belonging to the spherical loss family. In Proc. ICLR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=de%20Br%C3%A9bisson%2C%20Alexandre%20Vincent%2C%20Pascal%20An%20exploration%20of%20softmax%20alternatives%20belonging%20to%20the%20spherical%20loss%20family%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=de%20Br%C3%A9bisson%2C%20Alexandre%20Vincent%2C%20Pascal%20An%20exploration%20of%20softmax%20alternatives%20belonging%20to%20the%20spherical%20loss%20family%202016"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Xavier Glorot and Yoshua Bengio. Understanding the difficulty of training deep feedforward neural networks. In Proc. AISTATS, pages 249\u2013256, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Glorot%2C%20Xavier%20Bengio%2C%20Yoshua%20Understanding%20the%20difficulty%20of%20training%20deep%20feedforward%20neural%20networks%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Glorot%2C%20Xavier%20Bengio%2C%20Yoshua%20Understanding%20the%20difficulty%20of%20training%20deep%20feedforward%20neural%20networks%202010"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Ian Goodfellow, Yoshua Bengio, and Aaron Courville. Deep learning. MIT press, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goodfellow%2C%20Ian%20Bengio%2C%20Yoshua%20Courville%2C%20Aaron%20Deep%20learning%202016"
+        },
+        {
+            "id": "11",
+            "entry": "[11] \u00c9douard Grave, Armand Joulin, Moustapha Ciss\u00e9, David Grangier, and Herv\u00e9 J\u00e9gou. Efficient softmax approximation for GPUs. In Proc. ICML, pages 1302\u20131310, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Grave%2C%20%C3%89douard%20Joulin%2C%20Armand%20Ciss%C3%A9%2C%20Moustapha%20Grangier%2C%20David%20Efficient%20softmax%20approximation%20for%20GPUs%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Grave%2C%20%C3%89douard%20Joulin%2C%20Armand%20Ciss%C3%A9%2C%20Moustapha%20Grangier%2C%20David%20Efficient%20softmax%20approximation%20for%20GPUs%202017"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Alex Graves, Abdel-rahman Mohamed, and Geoffrey Hinton. Speech recognition with deep recurrent neural networks. In Proc. ICASSP, pages 6645\u20136649. IEEE, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Graves%2C%20Alex%20Mohamed%2C%20Abdel-rahman%20Hinton%2C%20Geoffrey%20Speech%20recognition%20with%20deep%20recurrent%20neural%20networks%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Graves%2C%20Alex%20Mohamed%2C%20Abdel-rahman%20Hinton%2C%20Geoffrey%20Speech%20recognition%20with%20deep%20recurrent%20neural%20networks%202013"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. In Proc. CVPR, pages 770\u2013778, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Sergey Ioffe and Christian Szegedy. Batch normalization: Accelerating deep network training by reducing internal covariate shift. In Proc. ICML, pages 448\u2013456, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ioffe%2C%20Sergey%20Szegedy%2C%20Christian%20Batch%20normalization%3A%20Accelerating%20deep%20network%20training%20by%20reducing%20internal%20covariate%20shift%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ioffe%2C%20Sergey%20Szegedy%2C%20Christian%20Batch%20normalization%3A%20Accelerating%20deep%20network%20training%20by%20reducing%20internal%20covariate%20shift%202015"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Sekitoshi Kanai, Yasuhiro Fujiwara, and Sotetsu Iwamura. Preventing gradient explosions in gated recurrent units. In Proc. NIPS, pages 435\u2013444, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kanai%2C%20Sekitoshi%20Fujiwara%2C%20Yasuhiro%20Iwamura%2C%20Sotetsu%20Preventing%20gradient%20explosions%20in%20gated%20recurrent%20units%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kanai%2C%20Sekitoshi%20Fujiwara%2C%20Yasuhiro%20Iwamura%2C%20Sotetsu%20Preventing%20gradient%20explosions%20in%20gated%20recurrent%20units%202017"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Ben Krause, Emmanuel Kahembwe, Iain Murray, and Steve Renals. Dynamic evaluation of neural sequence models. arXiv preprint arXiv:1709.07432, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1709.07432"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Alex Krizhevsky, Ilya Sutskever, and Geoffrey E Hinton. Imagenet classification with deep convolutional neural networks. In Proc. NIPS, pages 1097\u20131105, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Hinton%2C%20Geoffrey%20E.%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Hinton%2C%20Geoffrey%20E.%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Matt Mahoney. Large text compression benchmark. 2011. URL http://www.mattmahoney.net/text/text.html.",
+            "url": "http://www.mattmahoney.net/text/text.html"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Mitchell P Marcus, Mary Ann Marcinkiewicz, and Beatrice Santorini. Building a large annotated corpus of english: The penn treebank. Computational linguistics, 19(2):313\u2013330, 1993.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Marcus%2C%20Mitchell%20P.%20Marcinkiewicz%2C%20Mary%20Ann%20Santorini%2C%20Beatrice%20Building%20a%20large%20annotated%20corpus%20of%20english%3A%20The%20penn%20treebank%201993",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Marcus%2C%20Mitchell%20P.%20Marcinkiewicz%2C%20Mary%20Ann%20Santorini%2C%20Beatrice%20Building%20a%20large%20annotated%20corpus%20of%20english%3A%20The%20penn%20treebank%201993"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Andre Martins and Ramon Astudillo. From softmax to sparsemax: A sparse model of attention and multi-label classification. In Proc. ICML, pages 1614\u20131623, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Martins%2C%20Andre%20Astudillo%2C%20Ramon%20From%20softmax%20to%20sparsemax%3A%20A%20sparse%20model%20of%20attention%20and%20multi-label%20classification%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Martins%2C%20Andre%20Astudillo%2C%20Ramon%20From%20softmax%20to%20sparsemax%3A%20A%20sparse%20model%20of%20attention%20and%20multi-label%20classification%202016"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Roland Memisevic, Christopher Zach, Marc Pollefeys, and Geoffrey E Hinton. Gated softmax classification. In Proc. NIPS, pages 1603\u20131611, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Memisevic%2C%20Roland%20Zach%2C%20Christopher%20Pollefeys%2C%20Marc%20Hinton%2C%20Geoffrey%20E.%20Gated%20softmax%20classification%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Memisevic%2C%20Roland%20Zach%2C%20Christopher%20Pollefeys%2C%20Marc%20Hinton%2C%20Geoffrey%20E.%20Gated%20softmax%20classification%202010"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Stephen Merity, Caiming Xiong, James Bradbury, and Richard Socher. Pointer sentinel mixture models. In Proc. ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Merity%2C%20Stephen%20Xiong%2C%20Caiming%20Bradbury%2C%20James%20Socher%2C%20Richard%20Pointer%20sentinel%20mixture%20models%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Merity%2C%20Stephen%20Xiong%2C%20Caiming%20Bradbury%2C%20James%20Socher%2C%20Richard%20Pointer%20sentinel%20mixture%20models%202017"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Stephen Merity, Nitish Shirish Keskar, and Richard Socher. Regularizing and optimizing lstm language models. In Proc. ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Merity%2C%20Stephen%20Keskar%2C%20Nitish%20Shirish%20Socher%2C%20Richard%20Regularizing%20and%20optimizing%20lstm%20language%20models%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Merity%2C%20Stephen%20Keskar%2C%20Nitish%20Shirish%20Socher%2C%20Richard%20Regularizing%20and%20optimizing%20lstm%20language%20models%202018"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Tomas Mikolov. Statistical language models based on neural networks. PhD thesis, Brno University of Technology, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mikolov%2C%20Tomas%20Statistical%20language%20models%20based%20on%20neural%20networks%202012"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Payman Mohassel and Yupeng Zhang. Secureml: A system for scalable privacy-preserving machine learning. In Security and Privacy (SP), 2017 IEEE Symposium on, pages 19\u201338. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mohassel%2C%20Payman%20Zhang%2C%20Yupeng%20Secureml%3A%20A%20system%20for%20scalable%20privacy-preserving%20machine%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mohassel%2C%20Payman%20Zhang%2C%20Yupeng%20Secureml%3A%20A%20system%20for%20scalable%20privacy-preserving%20machine%20learning%202017"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Vinod Nair and Geoffrey E Hinton. Rectified linear units improve restricted boltzmann machines. In Proc. ICML, pages 807\u2013814. Omnipress, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nair%2C%20Vinod%20Hinton%2C%20Geoffrey%20E.%20Rectified%20linear%20units%20improve%20restricted%20boltzmann%20machines%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nair%2C%20Vinod%20Hinton%2C%20Geoffrey%20E.%20Rectified%20linear%20units%20improve%20restricted%20boltzmann%20machines%202010"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Yann Ollivier. Riemannian metrics for neural networks i: feedforward networks. arXiv preprint arXiv:1303.0818, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1303.0818"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Razvan Pascanu, Tomas Mikolov, and Yoshua Bengio. On the difficulty of training recurrent neural networks. In Proc. ICML, pages 1310\u20131318, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pascanu%2C%20Razvan%20Mikolov%2C%20Tomas%20Bengio%2C%20Yoshua%20On%20the%20difficulty%20of%20training%20recurrent%20neural%20networks%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pascanu%2C%20Razvan%20Mikolov%2C%20Tomas%20Bengio%2C%20Yoshua%20On%20the%20difficulty%20of%20training%20recurrent%20neural%20networks%202013"
+        },
+        {
+            "id": "29",
+            "entry": "[29] William H Press, Saul A Teukolsky, William T Vetterling, and Brian P Flannery. Numerical Recipes 3rd Edition: The Art of Scientific Computing. Cambridge University Press, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Press%2C%20William%20H.%20Teukolsky%2C%20Saul%20A.%20Vetterling%2C%20William%20T.%20Flannery%2C%20Brian%20P.%20Numerical%20RecipesThe%20Art%20of%20Scientific%20Computing%202007"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Kyuhong Shim, Minjae Lee, Iksoo Choi, Yoonho Boo, and Wonyong Sung. SVD-softmax: Fast softmax approximation on large vocabulary neural networks. In Proc. NIPS, pages 5469\u20135479, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shim%2C%20Kyuhong%20Lee%2C%20Minjae%20Choi%2C%20Iksoo%20Boo%2C%20Yoonho%20SVD-softmax%3A%20Fast%20softmax%20approximation%20on%20large%20vocabulary%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shim%2C%20Kyuhong%20Lee%2C%20Minjae%20Choi%2C%20Iksoo%20Boo%2C%20Yoonho%20SVD-softmax%3A%20Fast%20softmax%20approximation%20on%20large%20vocabulary%20neural%20networks%202017"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Nitish Srivastava, Geoffrey E Hinton, Alex Krizhevsky, Ilya Sutskever, and Ruslan Salakhutdinov. Dropout: a simple way to prevent neural networks from overfitting. Journal of Machine Learning Research, 15(1):1929\u20131958, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Srivastava%2C%20Nitish%20Hinton%2C%20Geoffrey%20E.%20Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Dropout%3A%20a%20simple%20way%20to%20prevent%20neural%20networks%20from%20overfitting%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Srivastava%2C%20Nitish%20Hinton%2C%20Geoffrey%20E.%20Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Dropout%3A%20a%20simple%20way%20to%20prevent%20neural%20networks%20from%20overfitting%202014"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Ilya Sutskever, Oriol Vinyals, and Quoc V Le. Sequence to sequence learning with neural networks. In Proc. NIPS, pages 3104\u20133112. 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutskever%2C%20Ilya%20Vinyals%2C%20Oriol%20Le%2C%20Quoc%20V.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutskever%2C%20Ilya%20Vinyals%2C%20Oriol%20Le%2C%20Quoc%20V.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Michalis K. Titsias. One-vs-each approximation to softmax for scalable estimation of probabilities. In Proc. NIPS, pages 4161\u20134169, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Titsias%2C%20Michalis%20K.%20One-vs-each%20approximation%20to%20softmax%20for%20scalable%20estimation%20of%20probabilities%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Titsias%2C%20Michalis%20K.%20One-vs-each%20approximation%20to%20softmax%20for%20scalable%20estimation%20of%20probabilities%202016"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Zhilin Yang, Zihang Dai, Ruslan Salakhutdinov, and William W Cohen. Breaking the softmax bottleneck: a high-rank rnn language model. In Proc. ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yang%2C%20Zhilin%20Dai%2C%20Zihang%20Salakhutdinov%2C%20Ruslan%20Cohen%2C%20William%20W.%20Breaking%20the%20softmax%20bottleneck%3A%20a%20high-rank%20rnn%20language%20model%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yang%2C%20Zhilin%20Dai%2C%20Zihang%20Salakhutdinov%2C%20Ruslan%20Cohen%2C%20William%20W.%20Breaking%20the%20softmax%20bottleneck%3A%20a%20high-rank%20rnn%20language%20model%202018"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Wojciech Zaremba, Ilya Sutskever, and Oriol Vinyals. Recurrent neural network regularization. arXiv preprint arXiv:1409.2329, 2014. ",
+            "arxiv_url": "https://arxiv.org/pdf/1409.2329"
+        }
+    ]
+}

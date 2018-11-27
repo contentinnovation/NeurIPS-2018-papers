@@ -1,0 +1,397 @@
+{
+    "filename": "8221-backpropagation-with-callbacks-foundations-for-efficient-and-expressive-differentiable-programming.pdf",
+    "metadata": {
+        "title": "Backpropagation with Callbacks: Foundations for Efficient and Expressive Differentiable Programming",
+        "author": "Fei Wang, James Decker, Xilun Wu, Gregory Essertel, Tiark Rompf",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8221-backpropagation-with-callbacks-foundations-for-efficient-and-expressive-differentiable-programming.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Training of deep learning models depends on gradient descent and end-to-end differentiation. Under the slogan of differentiable programming, there is an increasing demand for efficient automatic gradient computation for emerging network architectures that incorporate dynamic control flow, especially in NLP. In this paper we propose an implementation of backpropagation using functions with callbacks, where the forward pass is executed as a sequence of function calls, and the backward pass as a corresponding sequence of function returns. A key realization is that this technique of chaining callbacks is well known in the programming languages community as continuation-passing style (CPS). Any program can be converted to this form using standard techniques, and hence, any program can be mechanically converted to compute gradients. Our approach achieves the same flexibility as other reverse-mode automatic differentiation (AD) techniques, but it can be implemented without any auxiliary data structures besides the function call stack, and it can easily be combined with graph construction and native code generation techniques through forms of multi-stage programming, leading to a highly efficient implementation that combines the performance benefits of define-then-run software frameworks such as TensorFlow with the expressiveness of define-by-run frameworks such as PyTorch."
+    },
+    "keywords": [
+        {
+            "term": "multi stage",
+            "url": "https://en.wikipedia.org/wiki/multi_stage"
+        },
+        {
+            "term": "code generation",
+            "url": "https://en.wikipedia.org/wiki/code_generation"
+        },
+        {
+            "term": "POPL",
+            "url": "https://en.wikipedia.org/wiki/POPL"
+        },
+        {
+            "term": "continuation-passing style",
+            "url": "https://en.wikipedia.org/wiki/continuation-passing_style"
+        },
+        {
+            "term": "gradient descent",
+            "url": "https://en.wikipedia.org/wiki/gradient_descent"
+        },
+        {
+            "term": "NIPS",
+            "url": "https://en.wikipedia.org/wiki/NIPS"
+        },
+        {
+            "term": "automatic differentiation",
+            "url": "https://en.wikipedia.org/wiki/automatic_differentiation"
+        },
+        {
+            "term": "Convolutional Neural Network",
+            "url": "https://en.wikipedia.org/wiki/Convolutional_Neural_Network"
+        },
+        {
+            "term": "Recurrent Neural Network",
+            "url": "https://en.wikipedia.org/wiki/Recurrent_Neural_Network"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        }
+    ],
+    "highlights": [
+        "Differentiable programming (<a class=\"ref-link\" id=\"cOlah_2015_a\" href=\"#rOlah_2015_a\"><a class=\"ref-link\" id=\"cOlah_2015_a\" href=\"#rOlah_2015_a\">Olah, 2015</a></a>; LeCun, 2018) refers to a programming model where neural networks are truly functional blocks with data-dependent branches and recursion, while at the same time being trainable with backpropagation and gradient descent (Rumelhart et al, 1986)",
+        "Differentiable programming (<a class=\"ref-link\" id=\"cOlah_2015_a\" href=\"#rOlah_2015_a\">Olah, 2015</a>; LeCun, 2018) refers to a programming model where neural networks are truly functional blocks with data-dependent branches and recursion, while at the same time being trainable with backpropagation and gradient descent (Rumelhart et al, 1986)",
+        "Implementing Reverse-Mode automated differentiation with Continuations. This idea of introducing callbacks for every function result is a well-known program transformation, named continuation-passing style (CPS), which has been studied in the PL community for more than 50 years",
+        "The rules in Figure 3 transform direct-style programs to continuation-passing style, where the continuations are always maintained as tail calls, which never return to the callers",
+        "We show a simple TensorFlow graph construction example and corresponding Lightweight Modular Staging code generation in Figure 5",
+        "Aside from high-level optimizations among tensor operations that can be added in staging, our approach may benefit from general compiler optimizations as well, since the program after continuation-passing style transformation is no different from normal programs that are free of automated differentiation logic.\n4 Evaluation and Case Studies"
+    ],
+    "key_statements": [
+        "Differentiable programming (<a class=\"ref-link\" id=\"cOlah_2015_a\" href=\"#rOlah_2015_a\"><a class=\"ref-link\" id=\"cOlah_2015_a\" href=\"#rOlah_2015_a\">Olah, 2015</a></a>; LeCun, 2018) refers to a programming model where neural networks are truly functional blocks with data-dependent branches and recursion, while at the same time being trainable with backpropagation and gradient descent (Rumelhart et al, 1986)",
+        "Differentiable programming (<a class=\"ref-link\" id=\"cOlah_2015_a\" href=\"#rOlah_2015_a\">Olah, 2015</a>; LeCun, 2018) refers to a programming model where neural networks are truly functional blocks with data-dependent branches and recursion, while at the same time being trainable with backpropagation and gradient descent (Rumelhart et al, 1986)",
+        "Implementing Reverse-Mode automated differentiation with Continuations. This idea of introducing callbacks for every function result is a well-known program transformation, named continuation-passing style (CPS), which has been studied in the PL community for more than 50 years",
+        "The rules in Figure 3 transform direct-style programs to continuation-passing style, where the continuations are always maintained as tail calls, which never return to the callers",
+        "We show a simple TensorFlow graph construction example and corresponding Lightweight Modular Staging code generation in Figure 5",
+        "Aside from high-level optimizations among tensor operations that can be added in staging, our approach may benefit from general compiler optimizations as well, since the program after continuation-passing style transformation is no different from normal programs that are free of automated differentiation logic.\n4 Evaluation and Case Studies",
+        "As a new deep learning framework that provides reverse-mode automated differentiation with a tensor API, our evaluation focuses on expressivity and efficiency, rather than model generalization.3",
+        "For vanilla Recurrent Neural Network and Long Short-Term Memory, we evaluated at batch size 20"
+    ],
+    "summary": [
+        "Differentiable programming (<a class=\"ref-link\" id=\"cOlah_2015_a\" href=\"#rOlah_2015_a\"><a class=\"ref-link\" id=\"cOlah_2015_a\" href=\"#rOlah_2015_a\">Olah, 2015</a></a>; LeCun, 2018) refers to a programming model where neural networks are truly functional blocks with data-dependent branches and recursion, while at the same time being trainable with backpropagation and gradient descent (Rumelhart et al, 1986).",
+        "Using delimited continuations and shift/reset control operators (<a class=\"ref-link\" id=\"cDanvy_1990_a\" href=\"#rDanvy_1990_a\">Danvy and Filinski, 1990</a>), we can make the callbacks implicit, too, and provide an implementation of reverse-mode AD solely through operator overloading.",
+        "Our approach can further be combined with existing graph construction and native code generation techniques to provide an expressive define--run computation model, including in-graph functions and recursion.",
+        "By utilizing Lightweight Modular Staging (LMS) (<a class=\"ref-link\" id=\"cRompf_2010_a\" href=\"#rRompf_2010_a\">Rompf and Odersky, 2010</a>), we create a highly efficient and expressive framework dubbed Lantern which supports both unrestricted control flow as found in PyTorch, as well as the computation graph reification in, e.g., TensorFlow.",
+        "This idea of introducing callbacks for every function result is a well-known program transformation, named continuation-passing style (CPS), which has been studied in the PL community for more than 50 years.",
+        "The rules in Figure 3 transform direct-style programs to CPS, where the continuations are always maintained as tail calls, which never return to the callers.",
+        "We apply delimited continuations using shift/reset operators, which hide the nonlocal transformations from the developer, so that reverse-mode AD can be implemented purely via operator overloading.",
+        "TensorFlow and other define--run frameworks benefit from separating graph construction and graph execution into two stages, so that graph transformations/optimizations can be performed to target hardware-specific code (i.e., GPUs or TPUs).",
+        "We show a simple TensorFlow graph construction example and corresponding LMS code generation in Figure 5.",
+        "With the requisite implementations in place, we have established an expressive framework capable of supporting branches, loops, and recursion, similar to the define-by-run style of PyTorch.",
+        "Aside from high-level optimizations among tensor operations that can be added in staging, our approach may benefit from general compiler optimizations as well, since the program after CPS transformation is no different from normal programs that are free of AD logic.",
+        "Each TensorR object contains a value x and a gradient d, and operations on TensorR are implemented with shift operators providing access to delimited continuations.",
+        "Even with such a naive backend implementation, Lantern demonstrates potential for being both expressive and efficient, at least for some small/medium-sized models running on a single CPU, as shown by comparing with PyTorch, TensorFlow, and DyNet (<a class=\"ref-link\" id=\"cNeubig_et+al_2017_a\" href=\"#rNeubig_et+al_2017_a\">Neubig et al, 2017</a>).",
+        "As a new deep learning framework that provides reverse-mode AD with a tensor API, our evaluation focuses on expressivity and efficiency, rather than model generalization.3",
+        "AutoGraph (<a class=\"ref-link\" id=\"cMoldovan_et+al_2018_a\" href=\"#rMoldovan_et+al_2018_a\">Moldovan et al, 2018</a>), directly stages Python functions into an intermediate representation and subsequently dispatches to different define--run frameworks as back-ends including TensorFlow and Lantern."
+    ],
+    "headline": "In this paper we propose an implementation of backpropagation using functions with callbacks, where the forward pass is executed as a sequence of function calls, and the backward pass as a corresponding sequence of function returns",
+    "reference_links": [
+        {
+            "id": "Abadi_et+al_2015_a",
+            "entry": "Mart\u00edn Abadi, Ashish Agarwal, Paul Barham, Eugene Brevdo, Zhifeng Chen, Craig Citro, Greg S. Corrado, Andy Davis, Jeffrey Dean, Matthieu Devin, Sanjay Ghemawat, Ian Goodfellow, Andrew Harp, Geoffrey Irving, Michael Isard, Yangqing Jia, Rafal Jozefowicz, Lukasz Kaiser, Manjunath Kudlur, Josh Levenberg, Dandelion Man\u00e9, Rajat Monga, Sherry Moore, Derek Murray, Chris Olah, Mike Schuster, Jonathon Shlens, Benoit Steiner, Ilya Sutskever, Kunal Talwar, Paul Tucker, Vincent Vanhoucke, Vijay Vasudevan, Fernanda Vi\u00e9gas, Oriol Vinyals, Pete Warden, Martin Wattenberg, Martin Wicke, Yuan Yu, and Xiaoqiang Zheng. 2015. TensorFlow: Large-Scale Machine Learning on Heterogeneous Systems. (2015). https://www.tensorflow.org/ Software available from tensorflow.org.",
+            "url": "https://www.tensorflow.org/Software"
+        },
+        {
+            "id": "Ackermann_et+al_2012_a",
+            "entry": "Stefan Ackermann, Vojin Jovanovic, Tiark Rompf, and Martin Odersky. 2012. Jet: An Embedded DSL for High Performance Big Data Processing (BigData). http://infoscience.epfl.ch/record/181673/files/paper.pdf.",
+            "url": "http://infoscience.epfl.ch/record/181673/files/paper.pdf"
+        },
+        {
+            "id": "Amin_2018_a",
+            "entry": "Nada Amin and Tiark Rompf. 2018. Collapsing towers of interpreters. PACMPL 2, POPL (2018), 52:1\u201352:33.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Amin%2C%20Nada%20Rompf%2C%20Tiark%20Collapsing%20towers%20of%20interpreters.%20PACMPL%202%2C%20POPL%202018"
+        },
+        {
+            "id": "Appel_1992_a",
+            "entry": "Andrew W. Appel. 1992. Compiling with Continuations. Cambridge University Press.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Appel%2C%20Andrew%20W.%20Compiling%20with%20Continuations%201992"
+        },
+        {
+            "id": "Baydin_et+al_2016_a",
+            "entry": "Atilim G\u00fcnes Baydin, Barak A. Pearlmutter, and Jeffrey Mark Siskind. 2016. DiffSharp: An AD Library for .NET Languages. CoRR abs/1611.03423 (2016).",
+            "arxiv_url": "https://arxiv.org/pdf/1611.03423"
+        },
+        {
+            "id": "Breuleux_2017_a",
+            "entry": "Olivier Breuleux and Bart van Merri\u00ebnboer. 2017. Automatic Differentiation in Myia. In NIPS AutoDiff Workshop.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Olivier%20Breuleux%20and%20Bart%20van%20Merri%C3%ABnboer%202017%20Automatic%20Differentiation%20in%20Myia%20In%20NIPS%20AutoDiff%20Workshop",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Olivier%20Breuleux%20and%20Bart%20van%20Merri%C3%ABnboer%202017%20Automatic%20Differentiation%20in%20Myia%20In%20NIPS%20AutoDiff%20Workshop"
+        },
+        {
+            "id": "Chuang_2013_a",
+            "entry": "Jason Chuang. 2013. Stanford Sentiment Treebank. (2013). https://nlp.stanford.edu/",
+            "url": "https://nlp.stanford.edu/",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jason%20Chuang%202013%20Stanford%20Sentiment%20Treebank%202013%20httpsnlpstanfordedu"
+        },
+        {
+            "id": "Clinger_et+al_1999_a",
+            "entry": "William D. Clinger, Anne Hartheimer, and Eric Ost. 1999. Implementation Strategies for First-Class Continuations. Higher-Order and Symbolic Computation 12, 1 (1999), 7\u201345.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Clinger%2C%20William%20D.%20Hartheimer%2C%20Anne%20Ost%2C%20Eric%20Implementation%20Strategies%20for%20First-Class%20Continuations%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Clinger%2C%20William%20D.%20Hartheimer%2C%20Anne%20Ost%2C%20Eric%20Implementation%20Strategies%20for%20First-Class%20Continuations%201999"
+        },
+        {
+            "id": "Danvy_1990_a",
+            "entry": "Olivier Danvy and Andrzej Filinski. 1990. Abstracting Control. In LISP and Functional Programming. 151\u2013160.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Olivier%20Danvy%20and%20Andrzej%20Filinski%201990%20Abstracting%20Control%20In%20LISP%20and%20Functional%20Programming%20151160",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Olivier%20Danvy%20and%20Andrzej%20Filinski%201990%20Abstracting%20Control%20In%20LISP%20and%20Functional%20Programming%20151160"
+        },
+        {
+            "id": "Danvy_2005_a",
+            "entry": "Olivier Danvy and Mayer Goldberg. 2005. There and back again. Fundamenta Informaticae 66, 4 (2005), 397\u2013413.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Danvy%2C%20Olivier%20Goldberg%2C%20Mayer%20There%20and%20back%20again%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Danvy%2C%20Olivier%20Goldberg%2C%20Mayer%20There%20and%20back%20again%202005"
+        },
+        {
+            "id": "Distributed_2018_a",
+            "entry": "Distributed (Deep) Machine Learning Community. 2018. NNVM: Open Compiler for AI Frameworks. (2018). https://github.com/dmlc/nnvm",
+            "url": "https://github.com/dmlc/nnvm"
+        },
+        {
+            "id": "Elliott_2018_a",
+            "entry": "Conal Elliott. 2018. The Simple Essence of Automatic Differentiation. PACMPL 2, ICFP (2018).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Elliott%2C%20Conal%20The%20Simple%20Essence%20of%20Automatic%20Differentiation%202018"
+        },
+        {
+            "id": "Elliott_2009_a",
+            "entry": "Conal M. Elliott. 2009. Beautiful differentiation. In ICFP. ACM, 191\u2013202.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Elliott%2C%20Conal%20M.%20Beautiful%20differentiation%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Elliott%2C%20Conal%20M.%20Beautiful%20differentiation%202009"
+        },
+        {
+            "id": "Essertel_et+al_2018_a",
+            "entry": "Gr\u00e9gory M. Essertel, Ruby Y. Tahboub, James M. Decker, Kevin J. Brown, Kunle Olukotun, and Tiark Rompf. 2018. Flare: Optimizing Apache Spark with Native Compilation for Scale-Up Architectures and Medium-Size Data. In OSDI. USENIX Association, 799\u2013815.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Essertel%2C%20Gr%C3%A9gory%20M.%20Tahboub%2C%20Ruby%20Y.%20Decker%2C%20James%20M.%20Brown%2C%20Kevin%20J.%20Flare%3A%20Optimizing%20Apache%20Spark%20with%20Native%20Compilation%20for%20Scale-Up%20Architectures%20and%20Medium-Size%20Data%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Essertel%2C%20Gr%C3%A9gory%20M.%20Tahboub%2C%20Ruby%20Y.%20Decker%2C%20James%20M.%20Brown%2C%20Kevin%20J.%20Flare%3A%20Optimizing%20Apache%20Spark%20with%20Native%20Compilation%20for%20Scale-Up%20Architectures%20and%20Medium-Size%20Data%202018"
+        },
+        {
+            "id": "Felleisen_1988_a",
+            "entry": "Matthias Felleisen. 1988. The Theory and Practice of First-Class Prompts. In POPL. ACM Press, 180\u2013190.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Matthias%20Felleisen%201988%20The%20Theory%20and%20Practice%20of%20FirstClass%20Prompts%20In%20POPL%20ACM%20Press%20180190"
+        },
+        {
+            "id": "Fischer_1972_a",
+            "entry": "Michael J. Fischer. 1972. Lambda Calculus Schemata. In Proceedings of ACM Conference on Proving Assertions About Programs. ACM, New York, NY, USA.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fischer%2C%20Michael%20J.%20Lambda%20Calculus%20Schemata%201972",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fischer%2C%20Michael%20J.%20Lambda%20Calculus%20Schemata%201972"
+        },
+        {
+            "id": "Fischer_1993_a",
+            "entry": "Michael J. Fischer. 1993. Lambda-Calculus Schemata. Lisp and Symbolic Computation 6, 3-4 (1993), 259\u2013288.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Michael%20J%20Fischer%201993%20LambdaCalculus%20Schemata%20Lisp%20and%20Symbolic%20Computation%206%2034%201993%20259288",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Michael%20J%20Fischer%201993%20LambdaCalculus%20Schemata%20Lisp%20and%20Symbolic%20Computation%206%2034%201993%20259288"
+        },
+        {
+            "id": "J_1986_a",
+            "entry": "Ulrik J\u00f8rring and William L. Scherlis. 1986. Compilers and Staging Transformations. In POPL. ACM Press, 86\u201396.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=J%C3%B8rring%2C%20Ulrik%20Scherlis%2C%20William%20L.%20Compilers%20and%20Staging%20Transformations.%20In%20POPL%201986"
+        },
+        {
+            "id": "Karczmarczuk_2001_a",
+            "entry": "Jerzy Karczmarczuk. 2001. Functional Differentiation of Computer Programs. Higher-Order and Symbolic Computation 14, 1 (2001), 35\u201357.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Karczmarczuk%2C%20Jerzy%20Functional%20Differentiation%20of%20Computer%20Programs%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Karczmarczuk%2C%20Jerzy%20Functional%20Differentiation%20of%20Computer%20Programs%202001"
+        },
+        {
+            "id": "Kossakowski_et+al_2012_a",
+            "entry": "Grzegorz Kossakowski, Nada Amin, Tiark Rompf, and Martin Odersky. 2012. JavaScript as an Embedded DSL. In ECOOP. 409\u2013434.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Grzegorz%20Kossakowski%20Nada%20Amin%20Tiark%20Rompf%20and%20Martin%20Odersky%202012%20JavaScript%20as%20an%20Embedded%20DSL%20In%20ECOOP%20409434",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Grzegorz%20Kossakowski%20Nada%20Amin%20Tiark%20Rompf%20and%20Martin%20Odersky%202012%20JavaScript%20as%20an%20Embedded%20DSL%20In%20ECOOP%20409434"
+        },
+        {
+            "id": "Lecun_2018_a",
+            "entry": "Yann LeCun. 2018. Deep Learning est mort. Vive Differentiable Programming! https://www.facebook.com/yann.lecun/posts/10155003011462143. (2018).",
+            "url": "https://www.facebook.com/yann.lecun/posts/10155003011462143"
+        },
+        {
+            "id": "Looks_et+al_2017_a",
+            "entry": "Moshe Looks, Marcello Herreshoff, DeLesley Hutchins, and Peter Norvig. 2017. Deep Learning with Dynamic Computation Graphs. ICLR (2017).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Looks%2C%20Moshe%20Herreshoff%2C%20Marcello%20Hutchins%2C%20DeLesley%20Norvig%2C%20Peter%20Deep%20Learning%20with%20Dynamic%20Computation%20Graphs%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Looks%2C%20Moshe%20Herreshoff%2C%20Marcello%20Hutchins%2C%20DeLesley%20Norvig%2C%20Peter%20Deep%20Learning%20with%20Dynamic%20Computation%20Graphs%202017"
+        },
+        {
+            "id": "Moldovan_et+al_2018_a",
+            "entry": "Dan Moldovan, James M Decker, Fei Wang, Andrew A Johnson, Brian K Lee, Zachary Nado, D Sculley, Tiark Rompf, and Alexander B Wiltschko. 2018. AutoGraph: Imperative-style Coding with Graph-based Performance. ArXiv e-prints (2018). arXiv:cs.MS/1810.08061",
+            "arxiv_url": "https://arxiv.org/pdf/1810.08061"
+        },
+        {
+            "id": "Neubig_et+al_2017_a",
+            "entry": "Graham Neubig, Yoav Goldberg, and Chris Dyer. 2017. On-the-fly Operation Batching in Dynamic Computation Graphs. In NIPS. 3974\u20133984.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Neubig%2C%20Graham%20Goldberg%2C%20Yoav%20Dyer%2C%20Chris%20On-the-fly%20Operation%20Batching%20in%20Dynamic%20Computation%20Graphs.%20In%20NIPS.%203974%E2%80%933984%202017"
+        },
+        {
+            "id": "Ofenbeck_et+al_2017_a",
+            "entry": "Georg Ofenbeck, Tiark Rompf, and Markus P\u00fcschel. 2017. Staging for generic programming in space and time. In GPCE. ACM, 15\u201328.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ofenbeck%2C%20Georg%20Rompf%2C%20Tiark%20P%C3%BCschel%2C%20Markus%20Staging%20for%20generic%20programming%20in%20space%20and%20time%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ofenbeck%2C%20Georg%20Rompf%2C%20Tiark%20P%C3%BCschel%2C%20Markus%20Staging%20for%20generic%20programming%20in%20space%20and%20time%202017"
+        },
+        {
+            "id": "Ofenbeck_et+al_2013_a",
+            "entry": "Georg Ofenbeck, Tiark Rompf, Alen Stojanov, Martin Odersky, and Markus P\u00fcschel. 2013. Spiral in scala: towards the systematic construction of generators for performance libraries. In GPCE. ACM, 125\u2013134.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ofenbeck%2C%20Georg%20Rompf%2C%20Tiark%20Stojanov%2C%20Alen%20Odersky%2C%20Martin%20Spiral%20in%20scala%3A%20towards%20the%20systematic%20construction%20of%20generators%20for%20performance%20libraries%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ofenbeck%2C%20Georg%20Rompf%2C%20Tiark%20Stojanov%2C%20Alen%20Odersky%2C%20Martin%20Spiral%20in%20scala%3A%20towards%20the%20systematic%20construction%20of%20generators%20for%20performance%20libraries%202013"
+        },
+        {
+            "id": "Olah_2015_a",
+            "entry": "Christopher Olah. 2015. Neural Networks, Types, and Functional Programming. http://colah.github.io/posts/2015-09-NN-Types-FP/. (2015).",
+            "url": "http://colah.github.io/posts/2015-09-NN-Types-FP/"
+        },
+        {
+            "id": "Paszke_et+al_2017_a",
+            "entry": "Adam Paszke, Sam Gross, Soumith Chintala, and Gregory Chanan. 2017. PyTorch: Tensors and dynamic neural networks in Python with strong GPU acceleration. (2017). www.pytorch.org",
+            "url": "http://www.pytorch.org"
+        },
+        {
+            "id": "Pearlmutter_2008_a",
+            "entry": "Barak A. Pearlmutter and Jeffrey Mark Siskind. 2008. Reverse-mode AD in a functional framework: Lambda the ultimate backpropagator. ACM Trans. Program. Lang. Syst. 30, 2 (2008), 7:1\u20137:36.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pearlmutter%2C%20Barak%20A.%20Siskind%2C%20Jeffrey%20Mark%20Reverse-mode%20AD%20in%20a%20functional%20framework%3A%20Lambda%20the%20ultimate%20backpropagator%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pearlmutter%2C%20Barak%20A.%20Siskind%2C%20Jeffrey%20Mark%20Reverse-mode%20AD%20in%20a%20functional%20framework%3A%20Lambda%20the%20ultimate%20backpropagator%202008"
+        },
+        {
+            "id": "Reynolds_1993_a",
+            "entry": "John C. Reynolds. 1993. The Discoveries of Continuations. Lisp and Symbolic Computation 6, 3-4 (1993), 233\u2013248.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Reynolds%2C%20John%20C.%20The%20Discoveries%20of%20Continuations%201993",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Reynolds%2C%20John%20C.%20The%20Discoveries%20of%20Continuations%201993"
+        },
+        {
+            "id": "Rompf_2012_a",
+            "entry": "Tiark Rompf. 2012. Lightweight Modular Staging and Embedded Compilers: Abstraction Without Regret for High-Level High-Performance Programming. Ph.D. Dissertation. EPFL.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rompf%2C%20Tiark%20Lightweight%20Modular%20Staging%20and%20Embedded%20Compilers%3A%20Abstraction%20Without%20Regret%20for%20High-Level%20High-Performance%20Programming%202012"
+        },
+        {
+            "id": "Rompf_2016_a",
+            "entry": "Tiark Rompf. 2016a. The Essence of Multi-stage Evaluation in LMS. In A List of Successes That Can Change the World (Lecture Notes in Computer Science), Vol. 9600.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rompf%2C%20Tiark%20The%20Essence%20of%20Multi-stage%20Evaluation%20in%20LMS%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rompf%2C%20Tiark%20The%20Essence%20of%20Multi-stage%20Evaluation%20in%20LMS%202016"
+        },
+        {
+            "id": "Rompf_2016_b",
+            "entry": "Tiark Rompf. 2016b. Reflections on LMS: exploring front-end alternatives. In Scala Symposium. ACM, 41\u201350.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rompf%2C%20Tiark%20Reflections%20on%20LMS%3A%20exploring%20front-end%20alternatives%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rompf%2C%20Tiark%20Reflections%20on%20LMS%3A%20exploring%20front-end%20alternatives%202016"
+        },
+        {
+            "id": "Rompf_2015_a",
+            "entry": "Tiark Rompf and Nada Amin. 2015. Functional pearl: a SQL to C compiler in 500 lines of code. In ICFP. ACM, 2\u20139.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rompf%2C%20Tiark%20Amin%2C%20Nada%20Functional%20pearl%3A%20a%20SQL%20to%20C%20compiler%20in%20500%20lines%20of%20code%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rompf%2C%20Tiark%20Amin%2C%20Nada%20Functional%20pearl%3A%20a%20SQL%20to%20C%20compiler%20in%20500%20lines%20of%20code%202015"
+        },
+        {
+            "id": "Rompf_et+al_2012_b",
+            "entry": "Tiark Rompf, Nada Amin, Adriaan Moors, Philipp Haller, and Martin Odersky. 2012. ScalaVirtualized: linguistic reuse for deep embeddings. Higher-Order and Symbolic Computation 25, 1 (2012), 165\u2013207.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rompf%2C%20Tiark%20Amin%2C%20Nada%20Moors%2C%20Adriaan%20Haller%2C%20Philipp%20ScalaVirtualized%3A%20linguistic%20reuse%20for%20deep%20embeddings%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rompf%2C%20Tiark%20Amin%2C%20Nada%20Moors%2C%20Adriaan%20Haller%2C%20Philipp%20ScalaVirtualized%3A%20linguistic%20reuse%20for%20deep%20embeddings%202012"
+        },
+        {
+            "id": "Rompf_et+al_2015_b",
+            "entry": "Tiark Rompf, Kevin J. Brown, HyoukJoong Lee, Arvind K. Sujeeth, Manohar Jonnalagedda, Nada Amin, Georg Ofenbeck, Alen Stojanov, Yannis Klonatos, Mohammad Dashti, Christoph Koch, Markus P\u00fcschel, and Kunle Olukotun. 2015. Go Meta! A Case for Generative Programming and DSLs in Performance Critical Systems. In SNAPL (LIPIcs), Vol. 32. Schloss Dagstuhl Leibniz-Zentrum fuer Informatik, 238\u2013261.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rompf%2C%20Tiark%20Brown%2C%20Kevin%20J.%20Lee%2C%20HyoukJoong%20Sujeeth%2C%20Arvind%20K.%20Go%20Meta%21%20A%20Case%20for%20Generative%20Programming%20and%20DSLs%20in%20Performance%20Critical%20Systems%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rompf%2C%20Tiark%20Brown%2C%20Kevin%20J.%20Lee%2C%20HyoukJoong%20Sujeeth%2C%20Arvind%20K.%20Go%20Meta%21%20A%20Case%20for%20Generative%20Programming%20and%20DSLs%20in%20Performance%20Critical%20Systems%202015"
+        },
+        {
+            "id": "Rompf_et+al_2009_a",
+            "entry": "Tiark Rompf, Ingo Maier, and Martin Odersky. 2009. Implementing first-class polymorphic delimited continuations by a type-directed selective CPS-transform. In ICFP. ACM, 317\u2013328.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rompf%2C%20Tiark%20Maier%2C%20Ingo%20Odersky%2C%20Martin%20Implementing%20first-class%20polymorphic%20delimited%20continuations%20by%20a%20type-directed%20selective%20CPS-transform%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rompf%2C%20Tiark%20Maier%2C%20Ingo%20Odersky%2C%20Martin%20Implementing%20first-class%20polymorphic%20delimited%20continuations%20by%20a%20type-directed%20selective%20CPS-transform%202009"
+        },
+        {
+            "id": "Rompf_2010_a",
+            "entry": "Tiark Rompf and Martin Odersky. 2010. Lightweight modular staging: a pragmatic approach to runtime code generation and compiled DSLs. In GPCE. ACM, 127\u2013136.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rompf%2C%20Tiark%20Odersky%2C%20Martin%20Lightweight%20modular%20staging%3A%20a%20pragmatic%20approach%20to%20runtime%20code%20generation%20and%20compiled%20DSLs%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rompf%2C%20Tiark%20Odersky%2C%20Martin%20Lightweight%20modular%20staging%3A%20a%20pragmatic%20approach%20to%20runtime%20code%20generation%20and%20compiled%20DSLs%202010"
+        },
+        {
+            "id": "Rompf_2012_c",
+            "entry": "Tiark Rompf and Martin Odersky. 2012. Lightweight modular staging: a pragmatic approach to runtime code generation and compiled DSLs. Commun. ACM 55, 6 (2012), 121\u2013130.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rompf%2C%20Tiark%20Odersky%2C%20Martin%20Lightweight%20modular%20staging%3A%20a%20pragmatic%20approach%20to%20runtime%20code%20generation%20and%20compiled%20DSLs%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rompf%2C%20Tiark%20Odersky%2C%20Martin%20Lightweight%20modular%20staging%3A%20a%20pragmatic%20approach%20to%20runtime%20code%20generation%20and%20compiled%20DSLs%202012"
+        },
+        {
+            "id": "Rompf_et+al_2013_a",
+            "entry": "Tiark Rompf, Arvind K. Sujeeth, Nada Amin, Kevin Brown, Vojin Jovanovic, HyoukJoong Lee, Manohar Jonnalagedda, Kunle Olukotun, and Martin Odersky. 2013. Optimizing Data Structures in High-Level Programs (POPL).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rompf%2C%20Tiark%20Sujeeth%2C%20Arvind%20K.%20Amin%2C%20Nada%20Brown%2C%20Kevin%20Optimizing%20Data%20Structures%20in%20High-Level%20Programs%20%28POPL%29%202013"
+        },
+        {
+            "id": "Rumelhart_1986_a",
+            "entry": "David E Rumelhart, Geoffrey E Hinton, and Ronald J Williams. 1986. Learning representations by back-propagating errors. Nature 323, 6088 (1986), 533.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20Learning%20representations%20by%20back-propagating%20errors%201986",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Learning%20representations%20by%20back-propagating%20errors%201986"
+        },
+        {
+            "id": "Siskind_2008_a",
+            "entry": "Jeffrey Mark Siskind and Barak A. Pearlmutter. 2008. Nesting forward-mode AD in a functional framework. Higher-Order and Symbolic Computation 21, 4 (2008), 361\u2013376.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Siskind%2C%20Jeffrey%20Mark%20Pearlmutter%2C%20Barak%20A.%20Nesting%20forward-mode%20AD%20in%20a%20functional%20framework%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Siskind%2C%20Jeffrey%20Mark%20Pearlmutter%2C%20Barak%20A.%20Nesting%20forward-mode%20AD%20in%20a%20functional%20framework%202008"
+        },
+        {
+            "id": "Speelpenning_1980_a",
+            "entry": "Bert Speelpenning. 1980. Compiling fast partial derivatives of functions given by algorithms. Ph.D. Dissertation.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Speelpenning%2C%20Bert%20Compiling%20fast%20partial%20derivatives%20of%20functions%20given%20by%20algorithms%201980"
+        },
+        {
+            "id": "Stojanov_et+al_2018_a",
+            "entry": "Alen Stojanov, Ivaylo Toskov, Tiark Rompf, and Markus P\u00fcschel. 2018. SIMD intrinsics on managed language runtimes. In CGO. ACM, 2\u201315.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Stojanov%2C%20Alen%20Toskov%2C%20Ivaylo%20Rompf%2C%20Tiark%20P%C3%BCschel%2C%20Markus%20SIMD%20intrinsics%20on%20managed%20language%20runtimes%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Stojanov%2C%20Alen%20Toskov%2C%20Ivaylo%20Rompf%2C%20Tiark%20P%C3%BCschel%2C%20Markus%20SIMD%20intrinsics%20on%20managed%20language%20runtimes%202018"
+        },
+        {
+            "id": "Sujeeth_et+al_2014_a",
+            "entry": "Arvind K. Sujeeth, Kevin J. Brown, HyoukJoong Lee, Tiark Rompf, Hassan Chafi, Martin Odersky, and Kunle Olukotun. 2014. Delite: A Compiler Architecture for Performance-Oriented Embedded Domain-Specific Languages. ACM Trans. Embedded Comput. Syst. 13, 4s (2014), 134:1\u2013134:25.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sujeeth%2C%20Arvind%20K.%20Brown%2C%20Kevin%20J.%20Lee%2C%20HyoukJoong%20Rompf%2C%20Tiark%20Delite%3A%20A%20Compiler%20Architecture%20for%20Performance-Oriented%20Embedded%20Domain-Specific%20Languages%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sujeeth%2C%20Arvind%20K.%20Brown%2C%20Kevin%20J.%20Lee%2C%20HyoukJoong%20Rompf%2C%20Tiark%20Delite%3A%20A%20Compiler%20Architecture%20for%20Performance-Oriented%20Embedded%20Domain-Specific%20Languages%202014"
+        },
+        {
+            "id": "Sujeeth_et+al_2011_a",
+            "entry": "Arvind K. Sujeeth, HyoukJoong Lee, Kevin J. Brown, Tiark Rompf, Hassan Chafi, Michael Wu, Anand R. Atreya, Martin Odersky, and Kunle Olukotun. 2011. OptiML: An Implicitly Parallel Domain-Specific Language for Machine Learning. In ICML. Omnipress, 609\u2013616.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sujeeth%2C%20Arvind%20K.%20Lee%2C%20HyoukJoong%20Brown%2C%20Kevin%20J.%20Rompf%2C%20Tiark%20OptiML%3A%20An%20Implicitly%20Parallel%20Domain-Specific%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sujeeth%2C%20Arvind%20K.%20Lee%2C%20HyoukJoong%20Brown%2C%20Kevin%20J.%20Rompf%2C%20Tiark%20OptiML%3A%20An%20Implicitly%20Parallel%20Domain-Specific%202011"
+        },
+        {
+            "id": "Taha_2000_a",
+            "entry": "Walid Taha and Tim Sheard. 2000. MetaML and multi-stage programming with explicit annotations. Theor. Comput. Sci. 248, 1-2 (2000), 211\u2013242.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Taha%2C%20Walid%20Sheard%2C%20Tim%20MetaML%20and%20multi-stage%20programming%20with%20explicit%20annotations%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Taha%2C%20Walid%20Sheard%2C%20Tim%20MetaML%20and%20multi-stage%20programming%20with%20explicit%20annotations%202000"
+        },
+        {
+            "id": "Tahboub_et+al_2018_a",
+            "entry": "Ruby Y. Tahboub, Gr\u00e9gory M. Essertel, and Tiark Rompf. 2018. How to Architect a Query Compiler, Revisited. In SIGMOD Conference. ACM, 307\u2013322.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tahboub%2C%20Ruby%20Y.%20Essertel%2C%20Gr%C3%A9gory%20M.%20Rompf%2C%20Tiark%20How%20to%20Architect%20a%20Query%20Compiler%2C%20Revisited%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tahboub%2C%20Ruby%20Y.%20Essertel%2C%20Gr%C3%A9gory%20M.%20Rompf%2C%20Tiark%20How%20to%20Architect%20a%20Query%20Compiler%2C%20Revisited%202018"
+        },
+        {
+            "id": "Tai_et+al_2015_a",
+            "entry": "Kai Sheng Tai, Richard Socher, and Christopher D. Manning. 2015. Improved Semantic Representations From Tree-Structured Long Short-Term Memory Networks. In ACL (1). The Association for Computer Linguistics, 1556\u20131566.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tai%2C%20Kai%20Sheng%20Socher%2C%20Richard%20Manning%2C%20Christopher%20D.%20Improved%20Semantic%20Representations%20From%20Tree-Structured%20Long%20Short-Term%20Memory%20Networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tai%2C%20Kai%20Sheng%20Socher%2C%20Richard%20Manning%2C%20Christopher%20D.%20Improved%20Semantic%20Representations%20From%20Tree-Structured%20Long%20Short-Term%20Memory%20Networks%202015"
+        },
+        {
+            "id": "Team_2018_a",
+            "entry": "TensorFlow team. 2018. XLA Overview. (2018). https://www.tensorflow.org/performance/",
+            "url": "https://www.tensorflow.org/performance/"
+        },
+        {
+            "id": "Van_et+al_2018_a",
+            "entry": "Bart van Merrienboer, Dan Moldovan, and Alexander Wiltschko. 2018. Tangent: Automatic differentiation using source-code transformation for dynamically typed array programming. In NIPS.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=van%20Merrienboer%2C%20Bart%20Moldovan%2C%20Dan%20Wiltschko%2C%20Alexander%20Tangent%3A%20Automatic%20differentiation%20using%20source-code%20transformation%20for%20dynamically%20typed%20array%20programming.%20In%20NIPS%202018"
+        },
+        {
+            "id": "Van_1966_a",
+            "entry": "Adriaan van Wijngaarden. 1966. Recursive definition of syntax and semantics. Formal Language Description Languages for Computer Programming (1966), 13\u201324.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=van%20Wijngaarden%2C%20Adriaan%20Recursive%20definition%20of%20syntax%20and%20semantics.%20Formal%20Language%20Description%20Languages%20for%201966",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=van%20Wijngaarden%2C%20Adriaan%20Recursive%20definition%20of%20syntax%20and%20semantics.%20Formal%20Language%20Description%20Languages%20for%201966"
+        },
+        {
+            "id": "Wang_2018_a",
+            "entry": "Fei Wang and Tiark Rompf. 2018. A Language and Compiler View on Differentiable Programming. ICLR Workshop Track (2018). https://openreview.net/forum?id=SJxJtYkPG",
+            "url": "https://openreview.net/forum?id=SJxJtYkPG",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Fei%20Rompf%2C%20Tiark%20A%20Language%20and%20Compiler%20View%20on%20Differentiable%20Programming%202018"
+        },
+        {
+            "id": "R_1964_a",
+            "entry": "R. E. Wengert. 1964. A simple automatic derivative evaluation program. Commun. ACM 7, 8 (1964), 463\u2013464.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=1964%2C%20R.%20E.%20Wengert.%20A%20simple%20automatic%20derivative%20evaluation%20program%201964",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=1964%2C%20R.%20E.%20Wengert.%20A%20simple%20automatic%20derivative%20evaluation%20program%201964"
+        }
+    ]
+}

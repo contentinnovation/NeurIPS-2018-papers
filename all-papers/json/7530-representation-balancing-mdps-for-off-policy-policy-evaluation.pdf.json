@@ -1,0 +1,223 @@
+{
+    "filename": "7530-representation-balancing-mdps-for-off-policy-policy-evaluation.pdf",
+    "metadata": {
+        "title": "Representation Balancing MDPs for Off-policy Policy Evaluation",
+        "author": "Yao Liu, Omer Gottesman, Aniruddh Raghu, Matthieu Komorowski, Aldo A. Faisal, Finale Doshi-Velez, Emma Brunskill",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7530-representation-balancing-mdps-for-off-policy-policy-evaluation.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We study the problem of off-policy policy evaluation (OPPE) in RL. In contrast to prior work, we consider how to estimate both the individual policy value and average policy value accurately. We draw inspiration from recent work in causal reasoning, and propose a new finite sample generalization error bound for value estimates from MDP models. Using this upper bound as an objective, we develop a learning algorithm of an MDP model with a balanced representation, and show that our approach can yield substantially lower MSE in common synthetic benchmarks and a HIV treatment simulation domain."
+    },
+    "keywords": [
+        {
+            "term": "importance sampling",
+            "url": "https://en.wikipedia.org/wiki/importance_sampling"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "mean squared error",
+            "url": "https://en.wikipedia.org/wiki/mean_squared_error"
+        },
+        {
+            "term": "causal reasoning",
+            "url": "https://en.wikipedia.org/wiki/causal_reasoning"
+        }
+    ],
+    "highlights": [
+        "Off-policy policy evaluation is the task of estimating the performance of some evaluation policy given data gathered under a different behavior policy",
+        "Off-policy batch policy evaluation is challenging because the distribution of the data under the behavior policy will in general be different than the distribution under the desired evaluation policy",
+        "In this paper we propose a new upper bound on the mean squared error of the individual evaluation policy values inspired by recent work in treatment effect estimation, and use this as a loss function for fitting models",
+        "One interesting issue for our method is the effect of the hyper-parameter \u21b5 on the quality of estimator",
+        "We find that our method outperforms prior work for a large range of alphas, for both domains",
+        "In both domains we observe that the effect of Integral Probability Metric adjustment is less than the effect of \"marginal\" importance sampling re-weighting, which matches the results in Shalit et al.\u2019s work in the binary action bandit case [<a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>]"
+    ],
+    "key_statements": [
+        "Off-policy policy evaluation is the task of estimating the performance of some evaluation policy given data gathered under a different behavior policy",
+        "Off-policy evaluation relates to other fields that study counterfactual reasoning, including causal reasoning, statistics and economics",
+        "Off-policy batch policy evaluation is challenging because the distribution of the data under the behavior policy will in general be different than the distribution under the desired evaluation policy",
+        "At a given state, the behavior policy may select a different action than the one preferred by the evaluation policy\u2014for example, a clinician may chose to amputate a limb, whereas we may be interested in what might have happened if the clinician had not",
+        "The distribution of future states\u2014not just the immediate outcomes\u2014is determined by the behavior policy. This challenge is unique to sequential decision processes and is not covered by most causal reasoning work: for example, the resulting series of a patient\u2019s health states observed after amputating a patient\u2019s limb is likely to be significantly different than if the limb was not amputated",
+        "We address the question of building model-based estimators for Off-policy policy evaluation that both do have theoretical guarantees and yield better empirical performance that model-based approaches that ignore the data distribution mismatch",
+        "In this paper we develop an upper bound of the mean squared error for individual policy value estimates",
+        "We build on this work to introduce a new bound on the mean squared error for individual policy values, and a new loss function for fitting a model-based Off-policy policy evaluation estimator",
+        "In contrast to most other Off-policy policy evaluation theoretical analyses (e.g. [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>, <a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>, <a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>]), we provide a finite sample generalization error instead of asymptotic consistency",
+        "We demonstrate that our resulting models can yield substantially lower mean squared error estimators than prior model-based and importance sampling-based estimators on a classic benchmark RL task",
+        "Our goal is to learn a MDP model Mc that directly minimizes a good upper bound of the mean squared error for the individual evaluation policy \u21e1 values: Es0 [VMc\u21e1 (s0)",
+        "In this paper we propose a new upper bound on the mean squared error of the individual evaluation policy values inspired by recent work in treatment effect estimation, and use this as a loss function for fitting models",
+        "The third term is an empirical estimate of Integral Probability Metric, which we described in Theorem 1",
+        "Based on our generalization bound above, we propose an algorithm to learn an MDP model for Off-policy policy evaluation, minimizing the following objective function: L(Mc",
+        "We report mean and individual mean squared error, corresponding to mean squared error of average policy value and individual policy value, [Es0 Vb (s0) Es0 V (s0)]2 and Es0 [Vb (s0) V (s0)]2 respectively",
+        "One interesting issue for our method is the effect of the hyper-parameter \u21b5 on the quality of estimator",
+        "We find that our method outperforms prior work for a large range of alphas, for both domains",
+        "In both domains we observe that the effect of Integral Probability Metric adjustment is less than the effect of \"marginal\" importance sampling re-weighting, which matches the results in Shalit et al.\u2019s work in the binary action bandit case [<a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>]",
+        "In this work we give an MDP model learning method for the individual Off-policy policy evaluation problem in RL, based on a new finite sample generalization bound of mean squared error for the model value estimator",
+        "We show our method results in substantially smaller mean squared error estimates compared to state-of-the-art baselines in common benchmark control tasks and on a more challenging HIV simulator"
+    ],
+    "summary": [
+        "Off-policy policy evaluation is the task of estimating the performance of some evaluation policy given data gathered under a different behavior policy.",
+        "Recent work [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>, <a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>] on CATE1 has obtained very promising results by learning a model to predict individual outcomes using a loss function that explicitly accounts for the data distribution shift between the treatment and control policies.",
+        "We build on this work to introduce a new bound on the MSE for individual policy values, and a new loss function for fitting a model-based OPPE estimator.",
+        "Our goal is to learn a MDP model Mc that directly minimizes a good upper bound of the MSE for the individual evaluation policy \u21e1 values: Es0 [VMc\u21e1 (s0)",
+        "From the Simulation Lemma this minimizes an upper bound of MSE of behavior policy value, but the resulting model may not be a good one for estimating the evaluation policy value.",
+        "In this paper we propose a new upper bound on the MSE of the individual evaluation policy values inspired by recent work in treatment effect estimation, and use this as a loss function for fitting models.",
+        "We can treat this as a contextual bandit problem, and we build on the method in Shalit et al.\u2019s work [<a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>] about binary action bandits to bound the distribution mismatch by a representation distance penalty term; additional care is required due to the sequential setting since the states are influenced by the policy.",
+        "This theorem bounds the MSE for the individual evaluation policy value by a loss on the distribution of the behavior policy, with the cost of an additional representation distribution metric.",
+        "One natural approach might be to use the right hand side of Equation 3 as a loss, and try to directly optimize a representation and model that minimizes this upper bound on the mean squared error in the individual value estimates.",
+        "Based on our generalization bound above, we propose an algorithm to learn an MDP model for OPPE, minimizing the following objective function: L(Mc",
+        "The long horizon setting (H>100) is challenging for IS-based OPPE estimators due to the deterministic evaluation policy and long horizon, which will give the IS weights high variance.",
+        "In this work we give an MDP model learning method for the individual OPPE problem in RL, based on a new finite sample generalization bound of MSE for the model value estimator.",
+        "We show our method results in substantially smaller MSE estimates compared to state-of-the-art baselines in common benchmark control tasks and on a more challenging HIV simulator."
+    ],
+    "headline": "We study the problem of off-policy policy evaluation  in RL",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] A. M. Alaa and M. van der Schaar. Bayesian inference of individualized treatment effects using multi-task gaussian processes. In Advances in Neural Information Processing Systems, pages 3424\u20133432, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Alaa%2C%20A.M.%20van%20der%20Schaar%2C%20M.%20Bayesian%20inference%20of%20individualized%20treatment%20effects%20using%20multi-task%20gaussian%20processes%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Alaa%2C%20A.M.%20van%20der%20Schaar%2C%20M.%20Bayesian%20inference%20of%20individualized%20treatment%20effects%20using%20multi-task%20gaussian%20processes%202017"
+        },
+        {
+            "id": "2",
+            "entry": "[2] O. Atan, W. R. Zame, and M. van der Schaar. Learning optimal policies from observational data. arXiv preprint arXiv:1802.08679, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.08679"
+        },
+        {
+            "id": "3",
+            "entry": "[3] G. Brockman, V. Cheung, L. Pettersson, J. Schneider, J. Schulman, J. Tang, and W. Zaremba. Openai gym. arXiv preprint arXiv:1606.01540, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.01540"
+        },
+        {
+            "id": "4",
+            "entry": "[4] C. Cortes, Y. Mansour, and M. Mohri. Learning bounds for importance weighting. In Advances in neural information processing systems, pages 442\u2013450, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cortes%2C%20C.%20Mansour%2C%20Y.%20Mohri%2C%20M.%20Learning%20bounds%20for%20importance%20weighting%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cortes%2C%20C.%20Mansour%2C%20Y.%20Mohri%2C%20M.%20Learning%20bounds%20for%20importance%20weighting%202010"
+        },
+        {
+            "id": "5",
+            "entry": "[5] M. Dud\u00edk, J. Langford, and L. Li. Doubly robust policy evaluation and learning. In Proceedings of the 28th International Conference on International Conference on Machine Learning, pages 1097\u20131104. Omnipress, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dud%C3%ADk%2C%20M.%20Langford%2C%20J.%20Li%2C%20L.%20Doubly%20robust%20policy%20evaluation%20and%20learning%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dud%C3%ADk%2C%20M.%20Langford%2C%20J.%20Li%2C%20L.%20Doubly%20robust%20policy%20evaluation%20and%20learning%202011"
+        },
+        {
+            "id": "6",
+            "entry": "[6] D. Ernst, G.-B. Stan, J. Goncalves, and L. Wehenkel. Clinical data based optimal sti strategies for hiv: a reinforcement learning approach. In Decision and Control, 2006 45th IEEE Conference on, pages 667\u2013672. IEEE, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ernst%2C%20D.%20Stan%2C%20G.-B.%20Goncalves%2C%20J.%20Wehenkel%2C%20L.%20Clinical%20data%20based%20optimal%20sti%20strategies%20for%20hiv%3A%20a%20reinforcement%20learning%20approach%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ernst%2C%20D.%20Stan%2C%20G.-B.%20Goncalves%2C%20J.%20Wehenkel%2C%20L.%20Clinical%20data%20based%20optimal%20sti%20strategies%20for%20hiv%3A%20a%20reinforcement%20learning%20approach%202006"
+        },
+        {
+            "id": "7",
+            "entry": "[7] M. Farajtabar, Y. Chow, and M. Ghavamzadeh. More robust doubly robust off-policy evaluation. In Proceedings of the 35th International Conference on Machine Learning, pages 1447\u20131456, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Farajtabar%2C%20M.%20Chow%2C%20Y.%20Ghavamzadeh%2C%20M.%20More%20robust%20doubly%20robust%20off-policy%20evaluation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Farajtabar%2C%20M.%20Chow%2C%20Y.%20Ghavamzadeh%2C%20M.%20More%20robust%20doubly%20robust%20off-policy%20evaluation%202018"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Z. Guo, P. S. Thomas, and E. Brunskill. Using options and covariance testing for long horizon off-policy policy evaluation. In Advances in Neural Information Processing Systems, pages 2492\u20132501, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Guo%2C%20Z.%20Thomas%2C%20P.S.%20Brunskill%2C%20E.%20Using%20options%20and%20covariance%20testing%20for%20long%20horizon%20off-policy%20policy%20evaluation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Guo%2C%20Z.%20Thomas%2C%20P.S.%20Brunskill%2C%20E.%20Using%20options%20and%20covariance%20testing%20for%20long%20horizon%20off-policy%20policy%20evaluation%202017"
+        },
+        {
+            "id": "9",
+            "entry": "[9] J. P. Hanna, P. Stone, and S. Niekum. Bootstrapping with models: Confidence intervals for off-policy evaluation. In Proceedings of the 16th Conference on Autonomous Agents and MultiAgent Systems, pages 538\u2013546. International Foundation for Autonomous Agents and Multiagent Systems, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hanna%2C%20J.P.%20Stone%2C%20P.%20Niekum%2C%20S.%20Bootstrapping%20with%20models%3A%20Confidence%20intervals%20for%20off-policy%20evaluation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hanna%2C%20J.P.%20Stone%2C%20P.%20Niekum%2C%20S.%20Bootstrapping%20with%20models%3A%20Confidence%20intervals%20for%20off-policy%20evaluation%202017"
+        },
+        {
+            "id": "10",
+            "entry": "[10] N. Jiang and L. Li. Doubly robust off-policy value evaluation for reinforcement learning. In Proceedings of the 33rd International Conference on International Conference on Machine Learning-Volume 48, pages 652\u2013661. JMLR. org, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jiang%2C%20N.%20Li%2C%20L.%20Doubly%20robust%20off-policy%20value%20evaluation%20for%20reinforcement%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jiang%2C%20N.%20Li%2C%20L.%20Doubly%20robust%20off-policy%20value%20evaluation%20for%20reinforcement%20learning%202016"
+        },
+        {
+            "id": "11",
+            "entry": "[11] F. Johansson, U. Shalit, and D. Sontag. Learning representations for counterfactual inference. In International Conference on Machine Learning, pages 3020\u20133029, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Johansson%2C%20F.%20Shalit%2C%20U.%20Sontag%2C%20D.%20Learning%20representations%20for%20counterfactual%20inference%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Johansson%2C%20F.%20Shalit%2C%20U.%20Sontag%2C%20D.%20Learning%20representations%20for%20counterfactual%20inference%202016"
+        },
+        {
+            "id": "12",
+            "entry": "[12] F. D. Johansson, N. Kallus, U. Shalit, and D. Sontag. Learning weighted representations for generalization across designs. arXiv preprint arXiv:1802.08598, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.08598"
+        },
+        {
+            "id": "13",
+            "entry": "[13] M. Kearns and S. Singh. Near-optimal reinforcement learning in polynomial time. Machine learning, 49(2-3):209\u2013232, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kearns%2C%20M.%20Singh%2C%20S.%20Near-optimal%20reinforcement%20learning%20in%20polynomial%20time%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kearns%2C%20M.%20Singh%2C%20S.%20Near-optimal%20reinforcement%20learning%20in%20polynomial%20time%202002"
+        },
+        {
+            "id": "14",
+            "entry": "[14] S. K\u00fcnzel, J. Sekhon, P. Bickel, and B. Yu. Meta-learners for estimating heterogeneous treatment effects using machine learning. arXiv preprint arXiv:1706.03461, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.03461"
+        },
+        {
+            "id": "15",
+            "entry": "[15] T. Mandel, Y.-E. Liu, S. Levine, E. Brunskill, and Z. Popovic. Offline policy evaluation across representations with applications to educational games. In Proceedings of the 2014 international conference on Autonomous agents and multi-agent systems, pages 1077\u20131084. International Foundation for Autonomous Agents and Multiagent Systems, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mandel%2C%20T.%20Liu%2C%20Y.-E.%20Levine%2C%20S.%20Brunskill%2C%20E.%20Offline%20policy%20evaluation%20across%20representations%20with%20applications%20to%20educational%20games%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mandel%2C%20T.%20Liu%2C%20Y.-E.%20Levine%2C%20S.%20Brunskill%2C%20E.%20Offline%20policy%20evaluation%20across%20representations%20with%20applications%20to%20educational%20games%202014"
+        },
+        {
+            "id": "16",
+            "entry": "[16] D. Precup, R. S. Sutton, and S. P. Singh. Eligibility traces for off-policy policy evaluation. In ICML, pages 759\u2013766.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Precup%2C%20D.%20Sutton%2C%20R.S.%20Singh%2C%20S.P.%20Eligibility%20traces%20for%20off-policy%20policy%20evaluation",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Precup%2C%20D.%20Sutton%2C%20R.S.%20Singh%2C%20S.P.%20Eligibility%20traces%20for%20off-policy%20policy%20evaluation"
+        },
+        {
+            "id": "17",
+            "entry": "[17] J. M. Robins, A. Rotnitzky, and L. P. Zhao. Estimation of regression coefficients when some regressors are not always observed. Journal of the American statistical Association, 89(427):846\u2013866, 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Robins%2C%20J.M.%20Rotnitzky%2C%20A.%20Zhao%2C%20L.P.%20Estimation%20of%20regression%20coefficients%20when%20some%20regressors%20are%20not%20always%20observed%201994",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Robins%2C%20J.M.%20Rotnitzky%2C%20A.%20Zhao%2C%20L.P.%20Estimation%20of%20regression%20coefficients%20when%20some%20regressors%20are%20not%20always%20observed%201994"
+        },
+        {
+            "id": "18",
+            "entry": "[18] P. Schulam and S. Saria. Reliable decision support using counterfactual models. In Advances in Neural Information Processing Systems, pages 1697\u20131708, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schulam%2C%20P.%20Saria%2C%20S.%20Reliable%20decision%20support%20using%20counterfactual%20models%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schulam%2C%20P.%20Saria%2C%20S.%20Reliable%20decision%20support%20using%20counterfactual%20models%202017"
+        },
+        {
+            "id": "19",
+            "entry": "[19] U. Shalit, F. D. Johansson, and D. Sontag. Estimating individual treatment effect: generalization bounds and algorithms. In International Conference on Machine Learning, pages 3076\u20133085, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shalit%2C%20U.%20Johansson%2C%20F.D.%20Sontag%2C%20D.%20Estimating%20individual%20treatment%20effect%3A%20generalization%20bounds%20and%20algorithms%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shalit%2C%20U.%20Johansson%2C%20F.D.%20Sontag%2C%20D.%20Estimating%20individual%20treatment%20effect%3A%20generalization%20bounds%20and%20algorithms%202017"
+        },
+        {
+            "id": "20",
+            "entry": "[20] B. K. Sriperumbudur, K. Fukumizu, A. Gretton, B. Sch\u00f6lkopf, and G. R. Lanckriet. On integral probability metrics, -divergences and binary classification. arXiv preprint arXiv:0901.2698, 2009.",
+            "arxiv_url": "https://arxiv.org/pdf/0901.2698"
+        },
+        {
+            "id": "21",
+            "entry": "[21] B. K. Sriperumbudur, K. Fukumizu, A. Gretton, B. Sch\u00f6lkopf, G. R. Lanckriet, et al. On the empirical estimation of integral probability metrics. Electronic Journal of Statistics, 6:1550\u20131599, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sriperumbudur%2C%20B.K.%20Fukumizu%2C%20K.%20Gretton%2C%20A.%20Sch%C3%B6lkopf%2C%20B.%20On%20the%20empirical%20estimation%20of%20integral%20probability%20metrics%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sriperumbudur%2C%20B.K.%20Fukumizu%2C%20K.%20Gretton%2C%20A.%20Sch%C3%B6lkopf%2C%20B.%20On%20the%20empirical%20estimation%20of%20integral%20probability%20metrics%202012"
+        },
+        {
+            "id": "22",
+            "entry": "[22] P. Thomas and E. Brunskill. Data-efficient off-policy policy evaluation for reinforcement learning. In International Conference on Machine Learning, pages 2139\u20132148, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Thomas%2C%20P.%20Brunskill%2C%20E.%20Data-efficient%20off-policy%20policy%20evaluation%20for%20reinforcement%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Thomas%2C%20P.%20Brunskill%2C%20E.%20Data-efficient%20off-policy%20policy%20evaluation%20for%20reinforcement%20learning%202016"
+        },
+        {
+            "id": "23",
+            "entry": "[23] P. S. Thomas, G. Theocharous, and M. Ghavamzadeh. High-confidence off-policy evaluation. In AAAI, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Thomas%2C%20P.S.%20Theocharous%2C%20G.%20Ghavamzadeh%2C%20M.%20High-confidence%20off-policy%20evaluation%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Thomas%2C%20P.S.%20Theocharous%2C%20G.%20Ghavamzadeh%2C%20M.%20High-confidence%20off-policy%20evaluation%202015"
+        },
+        {
+            "id": "24",
+            "entry": "[24] S. Wager and S. Athey. Estimation and inference of heterogeneous treatment effects using random forests. Journal of the American Statistical Association, just-accepted, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wager%2C%20S.%20Athey%2C%20S.%20Estimation%20and%20inference%20of%20heterogeneous%20treatment%20effects%20using%20random%20forests%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wager%2C%20S.%20Athey%2C%20S.%20Estimation%20and%20inference%20of%20heterogeneous%20treatment%20effects%20using%20random%20forests%202017"
+        },
+        {
+            "id": "25",
+            "entry": "[25] J. Yoon, J. Jordon, and M. van der Schaar. Ganite: Estimation of individualized treatment effects using generative adversarial nets. ICLR, 2018. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yoon%2C%20J.%20Jordon%2C%20J.%20van%20der%20Schaar%2C%20M.%20Ganite%3A%20Estimation%20of%20individualized%20treatment%20effects%20using%20generative%20adversarial%20nets%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yoon%2C%20J.%20Jordon%2C%20J.%20van%20der%20Schaar%2C%20M.%20Ganite%3A%20Estimation%20of%20individualized%20treatment%20effects%20using%20generative%20adversarial%20nets%202018"
+        }
+    ]
+}

@@ -1,0 +1,314 @@
+{
+    "filename": "7669-meta-learning-mcmc-proposals.pdf",
+    "metadata": {
+        "title": "Meta-Learning MCMC Proposals",
+        "author": "Tongzhou Wang, YI WU, Dave Moore, Stuart J. Russell",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7669-meta-learning-mcmc-proposals.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Effective implementations of sampling-based probabilistic inference often require manually constructed, model-specific proposals. Inspired by recent progresses in meta-learning for training learning agents that can generalize to unseen environments, we propose a meta-learning approach to building effective and generalizable MCMC proposals. We parametrize the proposal as a neural network to provide fast approximations to block Gibbs conditionals. The learned neural proposals generalize to occurrences of common structural motifs across different models, allowing for the construction of a library of learned inference primitives that can accelerate inference on unseen models with no model-specific training required. We explore several applications including open-universe Gaussian mixture models, in which our learned proposals outperform a hand-tuned sampler, and a real-world named entity recognition task, in which our sampler yields higher final F1 scores than classical single-site Gibbs sampling."
+    },
+    "keywords": [
+        {
+            "term": "probabilistic programming language",
+            "url": "https://en.wikipedia.org/wiki/probabilistic_programming_language"
+        },
+        {
+            "term": "probability distribution",
+            "url": "https://en.wikipedia.org/wiki/probability_distribution"
+        },
+        {
+            "term": "conditional probability tables",
+            "url": "https://en.wikipedia.org/wiki/Conditional_Probability_Table"
+        },
+        {
+            "term": "Bayesian networks",
+            "url": "https://en.wikipedia.org/wiki/Bayesian_networks"
+        },
+        {
+            "term": "Markov random field",
+            "url": "https://en.wikipedia.org/wiki/Markov_random_field"
+        },
+        {
+            "term": "gradient descent",
+            "url": "https://en.wikipedia.org/wiki/gradient_descent"
+        },
+        {
+            "term": "mixture model",
+            "url": "https://en.wikipedia.org/wiki/mixture_model"
+        },
+        {
+            "term": "Conditional Random Fields",
+            "url": "https://en.wikipedia.org/wiki/Conditional_Random_Field"
+        },
+        {
+            "term": "Named entity recognition",
+            "url": "https://en.wikipedia.org/wiki/Named_entity_recognition"
+        },
+        {
+            "term": "MCMC",
+            "url": "https://en.wikipedia.org/wiki/MCMC"
+        },
+        {
+            "term": "markov chain monte carlo",
+            "url": "https://en.wikipedia.org/wiki/markov_chain_monte_carlo"
+        },
+        {
+            "term": "real world",
+            "url": "https://en.wikipedia.org/wiki/real_world"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        },
+        {
+            "term": "structural motif",
+            "url": "https://en.wikipedia.org/wiki/structural_motif"
+        }
+    ],
+    "highlights": [
+        "Our approach applies to arbitrary probabilistic programs, for simplicity we focus on models represented as factor graphs",
+        "For open-universe Gaussian mixture models, we show that a simple learned block proposal yields performance comparable to a model-specific hand-tuned sampler, and generalizes to models more than those it was trained on",
+        "Our approach differs in that we focus on MCMC inference, allowing modular proposals for subsets of model variables that may depend on latent quantities, and exploit recurring structural motifs to generalize to new models with no additional training",
+        "Our approach applies to arbitrary probabilistic programs, for simplicity we focus on models represented as factor graphs",
+        "This paper proposes and explores the novel idea of meta-learning generalizable approximate block Gibbs proposals",
+        "Experiments show that the neural block sampling approach outperforms standard single-site Gibbs in both convergence speed and sample quality and achieve comparable performance against model-specialized methods"
+    ],
+    "key_statements": [
+        "Our approach applies to arbitrary probabilistic programs, for simplicity we focus on models represented as factor graphs",
+        "For open-universe Gaussian mixture models, we show that a simple learned block proposal yields performance comparable to a model-specific hand-tuned sampler, and generalizes to models more than those it was trained on",
+        "Our approach differs in that we focus on MCMC inference, allowing modular proposals for subsets of model variables that may depend on latent quantities, and exploit recurring structural motifs to generalize to new models with no additional training",
+        "Our approach applies to arbitrary probabilistic programs, for simplicity we focus on models represented as factor graphs",
+        "This paper proposes and explores the novel idea of meta-learning generalizable approximate block Gibbs proposals",
+        "Experiments show that the neural block sampling approach outperforms standard single-site Gibbs in both convergence speed and sample quality and achieve comparable performance against model-specialized methods"
+    ],
+    "summary": [
+        "Our approach applies to arbitrary probabilistic programs, for simplicity we focus on models represented as factor graphs.",
+        "We exploit this by training a meta-proposal to approximate block-Gibbs conditionals for models containing a given motif, with the model parameters provided as an additional input.",
+        "Approach first (1) generates different instantiations of a particular motif by randomizing its model parameters, and (2) meta-train a neural proposal \u201cclose to\u201d the true Gibbs conditionals for all the instantiations.",
+        "Our approach differs in that we focus on MCMC inference, allowing modular proposals for subsets of model variables that may depend on latent quantities, and exploit recurring structural motifs to generalize to new models with no additional training.",
+        "We propose a meta-learning approach, using a neural network to approximate the Gibbs proposal for a recurring structural motif in graphical models, and to speed up inference on unseen models without extra tuning.",
+        "Our goal is to learn a Gibbs-like block proposal q(Bi|Ci; \u03a8i) for all possible instantiations (Bi, Ci, \u03a8i) of a structural motif that is close to the true conditional in the sense that",
+        "The function q\u03b8 represents proposals for a structural motif (B, C) by taking in current values of Ci and local parameters \u03a8i, and outputting a distribution over Bi. The goal is to optimize \u03b8 so that q\u03b8 is close to the true conditional.",
+        "We evaluate our method of learning neural block proposals against single-site Gibbs sampler as well as several model-specific MCMC methods.",
+        "To test the generalizability of our trained proposal, we generate random binary grid instantiations using distributions with various pdeterm and \u03b1 values, and compute the KL divergences between the true conditionals and our proposal outputs on 1000 sampled instantiations from each distribution.",
+        "In order to apply the trained proposal to differently sized GMMs, we choose the motif to propose q\u03b8 for two arbitrary mixtures and conditioned on all other variables excluding z, and instead consider the model with z variables collapsed.",
+        "Experiments show that the neural block sampling approach outperforms standard single-site Gibbs in both convergence speed and sample quality and achieve comparable performance against model-specialized methods.",
+        "In will be an interesting system design problem to investigate, when given a library of trained block proposals, how an inference system in a probabilistic programming language can automatically detect the common structural motifs and apply appropriate samplers to help convergence for more general real-world applications."
+    ],
+    "headline": "Inspired by recent progresses in meta-learning for training learning agents that can generalize to unseen environments, we propose a meta-learning approach to building effective and generalizable MCMC proposals",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Christophe Andrieu, Nando De Freitas, Arnaud Doucet, and Michael I Jordan. An introduction to MCMC for machine learning. Machine learning, 50(1):5\u201343, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Andrieu%2C%20Christophe%20Freitas%2C%20Nando%20De%20Doucet%2C%20Arnaud%20Jordan%2C%20Michael%20I.%20An%20introduction%20to%20MCMC%20for%20machine%20learning%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Andrieu%2C%20Christophe%20Freitas%2C%20Nando%20De%20Doucet%2C%20Arnaud%20Jordan%2C%20Michael%20I.%20An%20introduction%20to%20MCMC%20for%20machine%20learning%202003"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Marcin Andrychowicz, Misha Denil, Sergio G\u00f3mez, Matthew W Hoffman, David Pfau, Tom Schaul, and Nando de Freitas. Learning to learn by gradient descent by gradient descent. In D. D. Lee, M. Sugiyama, U. V. Luxburg, I. Guyon, and R. Garnett, editors, Advances in Neural Information Processing Systems 29, pages 3981\u20133989. Curran Associates, Inc., 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Andrychowicz%2C%20Marcin%20Denil%2C%20Misha%20G%C3%B3mez%2C%20Sergio%20Hoffman%2C%20Matthew%20W.%20Learning%20to%20learn%20by%20gradient%20descent%20by%20gradient%20descent%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Andrychowicz%2C%20Marcin%20Denil%2C%20Misha%20G%C3%B3mez%2C%20Sergio%20Hoffman%2C%20Matthew%20W.%20Learning%20to%20learn%20by%20gradient%20descent%20by%20gradient%20descent%202016"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Taylor Berg-Kirkpatrick, Jacob Andreas, and Dan Klein. Unsupervised transcription of piano music. In Advances in neural information processing systems, pages 1538\u20131546, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Berg-Kirkpatrick%2C%20Taylor%20Andreas%2C%20Jacob%20Klein%2C%20Dan%20Unsupervised%20transcription%20of%20piano%20music%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Berg-Kirkpatrick%2C%20Taylor%20Andreas%2C%20Jacob%20Klein%2C%20Dan%20Unsupervised%20transcription%20of%20piano%20music%202014"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Christopher M Bishop. Mixture density networks. 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bishop%2C%20Christopher%20M.%20Mixture%20density%20networks%201994"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Yuri Burda, Roger Grosse, and Ruslan Salakhutdinov. Importance weighted autoencoders. arXiv preprint arXiv:1509.00519, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1509.00519"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Djork-Arn\u00e9 Clevert, Thomas Unterthiner, and Sepp Hochreiter. Fast and accurate deep network learning by exponential linear units (elus). arXiv preprint arXiv:1511.07289, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.07289"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Yan Duan, John Schulman, Xi Chen, Peter L Bartlett, Ilya Sutskever, and Pieter Abbeel. Rl2: Fast reinforcement learning via slow reinforcement learning. arXiv preprint arXiv:1611.02779, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.02779"
+        },
+        {
+            "id": "8",
+            "entry": "[8] John Duchi, Elad Hazan, and Yoram Singer. Adaptive subgradient methods for online learning and stochastic optimization. Journal of Machine Learning Research, 12(Jul):2121\u20132159, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Duchi%2C%20John%20Hazan%2C%20Elad%20Singer%2C%20Yoram%20Adaptive%20subgradient%20methods%20for%20online%20learning%20and%20stochastic%20optimization%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Duchi%2C%20John%20Hazan%2C%20Elad%20Singer%2C%20Yoram%20Adaptive%20subgradient%20methods%20for%20online%20learning%20and%20stochastic%20optimization%202011"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Chelsea Finn, Pieter Abbeel, and Sergey Levine. Model-agnostic meta-learning for fast adaptation of deep networks. arXiv preprint arXiv:1703.03400, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.03400"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Roger Grosse, Ruslan R Salakhutdinov, William T Freeman, and Joshua B Tenenbaum. Exploiting compositionality to explore a large space of model structures. In 28th Conference on Uncertainly in Artificial Intelligence, pages 15\u201317. AUAI Press, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Grosse%2C%20Roger%20Salakhutdinov%2C%20Ruslan%20R.%20Freeman%2C%20William%20T.%20Tenenbaum%2C%20Joshua%20B.%20Exploiting%20compositionality%20to%20explore%20a%20large%20space%20of%20model%20structures%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Grosse%2C%20Roger%20Salakhutdinov%2C%20Ruslan%20R.%20Freeman%2C%20William%20T.%20Tenenbaum%2C%20Joshua%20B.%20Exploiting%20compositionality%20to%20explore%20a%20large%20space%20of%20model%20structures%202012"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Shixiang Gu, Zoubin Ghahramani, and Richard E Turner. Neural adaptive sequential Monte Carlo. In Advances in Neural Information Processing Systems, pages 2629\u20132637, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shixiang%20Gu%20Zoubin%20Ghahramani%20and%20Richard%20E%20Turner%20Neural%20adaptive%20sequential%20Monte%20Carlo%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20pages%2026292637%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shixiang%20Gu%20Zoubin%20Ghahramani%20and%20Richard%20E%20Turner%20Neural%20adaptive%20sequential%20Monte%20Carlo%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20pages%2026292637%202015"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Nicolas Heess, Daniel Tarlow, and John Winn. Learning to pass expectation propagation messages. In Advances in Neural Information Processing Systems, pages 3219\u20133227, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Heess%2C%20Nicolas%20Tarlow%2C%20Daniel%20Winn%2C%20John%20Learning%20to%20pass%20expectation%20propagation%20messages%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Heess%2C%20Nicolas%20Tarlow%2C%20Daniel%20Winn%2C%20John%20Learning%20to%20pass%20expectation%20propagation%20messages%202013"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Sonia Jain and Radford M Neal. A split-merge Markov chain Monte Carlo procedure for the Dirichlet process mixture model. Journal of Computational and Graphical Statistics, 13(1): 158\u2013182, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jain%2C%20Sonia%20Neal%2C%20Radford%20M.%20A%20split-merge%20Markov%20chain%20Monte%20Carlo%20procedure%20for%20the%20Dirichlet%20process%20mixture%20model%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jain%2C%20Sonia%20Neal%2C%20Radford%20M.%20A%20split-merge%20Markov%20chain%20Monte%20Carlo%20procedure%20for%20the%20Dirichlet%20process%20mixture%20model%202004"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Charles Kemp and Joshua B Tenenbaum. The discovery of structural form. Proceedings of the National Academy of Sciences, 105(31):10687\u201310692, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kemp%2C%20Charles%20Tenenbaum%2C%20Joshua%20B.%20The%20discovery%20of%20structural%20form%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kemp%2C%20Charles%20Tenenbaum%2C%20Joshua%20B.%20The%20discovery%20of%20structural%20form%202008"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Diederik P Kingma and Max Welling. Auto-encoding variational Bayes. arXiv preprint arXiv:1312.6114, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.6114"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Daphne Koller and Nir Friedman. Probabilistic graphical models: principles and techniques. MIT press, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Koller%2C%20Daphne%20Friedman%2C%20Nir%20Probabilistic%20graphical%20models%3A%20principles%20and%20techniques%202009"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Tejas D Kulkarni, Pushmeet Kohli, Joshua B Tenenbaum, and Vikash Mansinghka. Picture: A probabilistic programming language for scene perception. In Proceedings of the ieee conference on computer vision and pattern recognition, pages 4390\u20134399, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kulkarni%2C%20Tejas%20D.%20Kohli%2C%20Pushmeet%20Tenenbaum%2C%20Joshua%20B.%20Mansinghka%2C%20Vikash%20Picture%3A%20A%20probabilistic%20programming%20language%20for%20scene%20perception%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kulkarni%2C%20Tejas%20D.%20Kohli%2C%20Pushmeet%20Tenenbaum%2C%20Joshua%20B.%20Mansinghka%2C%20Vikash%20Picture%3A%20A%20probabilistic%20programming%20language%20for%20scene%20perception%202015"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Brenden M Lake, Ruslan Salakhutdinov, and Joshua B Tenenbaum. Human-level concept learning through probabilistic program induction. Science, 350(6266):1332\u20131338, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lake%2C%20Brenden%20M.%20Salakhutdinov%2C%20Ruslan%20Tenenbaum%2C%20Joshua%20B.%20Human-level%20concept%20learning%20through%20probabilistic%20program%20induction%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lake%2C%20Brenden%20M.%20Salakhutdinov%2C%20Ruslan%20Tenenbaum%2C%20Joshua%20B.%20Human-level%20concept%20learning%20through%20probabilistic%20program%20induction%202015"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Tuan Anh Le, Atilim Gunes Baydin, and Frank Wood. Inference compilation and universal probabilistic programming. In Artificial Intelligence and Statistics, pages 1338\u20131348, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Le%2C%20Tuan%20Anh%20Baydin%2C%20Atilim%20Gunes%20Wood%2C%20Frank%20Inference%20compilation%20and%20universal%20probabilistic%20programming%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Le%2C%20Tuan%20Anh%20Baydin%2C%20Atilim%20Gunes%20Wood%2C%20Frank%20Inference%20compilation%20and%20universal%20probabilistic%20programming%202017"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Ke Li and Jitendra Malik. Learning to optimize neural nets. arXiv preprint arXiv:1703.00441, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.00441"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Percy Liang, Hal Daum\u00e9 III, and Dan Klein. Structure compilation: trading structure for features. In Proceedings of the 25th international conference on Machine learning, pages 592\u2013599. ACM, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liang%2C%20Percy%20Daum%C3%A9%2C%20III%2C%20Hal%20Klein%2C%20Dan%20Structure%20compilation%3A%20trading%20structure%20for%20features%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liang%2C%20Percy%20Daum%C3%A9%2C%20III%2C%20Hal%20Klein%2C%20Dan%20Structure%20compilation%3A%20trading%20structure%20for%20features%202008"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Robert Mateescu, Kalev Kask, Vibhav Gogate, and Rina Dechter. Join-graph propagation algorithms. Journal of Artificial Intelligence Research, 37(1):279\u2013328, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mateescu%2C%20Robert%20Kask%2C%20Kalev%20Gogate%2C%20Vibhav%20Dechter%2C%20Rina%20Join-graph%20propagation%20algorithms%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mateescu%2C%20Robert%20Kask%2C%20Kalev%20Gogate%2C%20Vibhav%20Dechter%2C%20Rina%20Join-graph%20propagation%20algorithms%202010"
+        },
+        {
+            "id": "23",
+            "entry": "[23] David A. Moore and Stuart J. Russell. Signal-based Bayesian seismic monitoring. Artificial Intelligence and Statistics (AISTATS), April 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Moore%2C%20David%20A.%20Russell%2C%20Stuart%20J.%20Signal-based%20Bayesian%20seismic%20monitoring%202017-04",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Moore%2C%20David%20A.%20Russell%2C%20Stuart%20J.%20Signal-based%20Bayesian%20seismic%20monitoring%202017-04"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Radford M Neal et al. Mcmc using hamiltonian dynamics. Handbook of Markov Chain Monte Carlo, 2(11), 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Neal%2C%20Radford%20M.%20Mcmc%20using%20hamiltonian%20dynamics.%20Handbook%20of%20Markov%20Chain%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Neal%2C%20Radford%20M.%20Mcmc%20using%20hamiltonian%20dynamics.%20Handbook%20of%20Markov%20Chain%202011"
+        },
+        {
+            "id": "25",
+            "entry": "[25] B. Paige and F. Wood. Inference networks for sequential Monte Carlo in graphical models. In Proceedings of the 33rd International Conference on Machine Learning, volume 48 of JMLR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Paige%2C%20B.%20Wood%2C%20F.%20Inference%20networks%20for%20sequential%20Monte%20Carlo%20in%20graphical%20models%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Paige%2C%20B.%20Wood%2C%20F.%20Inference%20networks%20for%20sequential%20Monte%20Carlo%20in%20graphical%20models%202016"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Daniel Ritchie, Sharon Lin, Noah D Goodman, and Pat Hanrahan. Generating design suggestions under tight constraints with gradient-based probabilistic programming. In Computer Graphics Forum, volume 34, pages 515\u2013526. Wiley Online Library, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ritchie%2C%20Daniel%20Lin%2C%20Sharon%20Goodman%2C%20Noah%20D.%20Hanrahan%2C%20Pat%20Generating%20design%20suggestions%20under%20tight%20constraints%20with%20gradient-based%20probabilistic%20programming%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ritchie%2C%20Daniel%20Lin%2C%20Sharon%20Goodman%2C%20Noah%20D.%20Hanrahan%2C%20Pat%20Generating%20design%20suggestions%20under%20tight%20constraints%20with%20gradient-based%20probabilistic%20programming%202015"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Daniel Ritchie, Anna Thomas, Pat Hanrahan, and Noah Goodman. Neurally-guided procedural models: Amortized inference for procedural graphics programs using neural networks. In D. D. Lee, M. Sugiyama, U. V. Luxburg, I. Guyon, and R. Garnett, editors, Advances in Neural Information Processing Systems 29, pages 622\u2013630. Curran Associates, Inc., 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ritchie%2C%20Daniel%20Thomas%2C%20Anna%20Hanrahan%2C%20Pat%20Goodman%2C%20Noah%20Neurally-guided%20procedural%20models%3A%20Amortized%20inference%20for%20procedural%20graphics%20programs%20using%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ritchie%2C%20Daniel%20Thomas%2C%20Anna%20Hanrahan%2C%20Pat%20Goodman%2C%20Noah%20Neurally-guided%20procedural%20models%3A%20Amortized%20inference%20for%20procedural%20graphics%20programs%20using%20neural%20networks%202016"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Stephane Ross, Daniel Munoz, Martial Hebert, and J Andrew Bagnell. Learning messagepassing inference machines for structured prediction. In Computer Vision and Pattern Recognition (CVPR), 2011 IEEE Conference on, pages 2737\u20132744. IEEE, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ross%2C%20Stephane%20Munoz%2C%20Daniel%20Hebert%2C%20Martial%20Bagnell%2C%20J.Andrew%20Learning%20messagepassing%20inference%20machines%20for%20structured%20prediction%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ross%2C%20Stephane%20Munoz%2C%20Daniel%20Hebert%2C%20Martial%20Bagnell%2C%20J.Andrew%20Learning%20messagepassing%20inference%20machines%20for%20structured%20prediction%202011"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Jiaming Song, Shengjia Zhao, and Stefano Ermon. A-NICE-MC: Adversarial training for MCMC. arXiv preprint arXiv:1706.07561, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.07561"
+        },
+        {
+            "id": "30",
+            "entry": "[30] David J Spiegelhalter, Andrew Thomas, Nicky G Best, Wally Gilks, and D Lunn. BUGS: Bayesian inference using Gibbs sampling. Version 0.5,(version ii) http://www.mrc-bsu.cam.ac.uk/bugs, 19, 1996.",
+            "url": "http://www.mrc-bsu.cam.ac.uk/bugs"
+        },
+        {
+            "id": "31",
+            "entry": "[31] David H Stern, Ralf Herbrich, and Thore Graepel. Matchbox: large scale online Bayesian recommendations. In Proceedings of the 18th international conference on World wide web, pages 111\u2013120. ACM, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Stern%2C%20David%20H.%20Herbrich%2C%20Ralf%20Graepel%2C%20Thore%20Matchbox%3A%20large%20scale%20online%20Bayesian%20recommendations%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Stern%2C%20David%20H.%20Herbrich%2C%20Ralf%20Graepel%2C%20Thore%20Matchbox%3A%20large%20scale%20online%20Bayesian%20recommendations%202009"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Andreas Stuhlm\u00fcller, Jacob Taylor, and Noah Goodman. Learning stochastic inverses. In Neural Information Processing Systems, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Stuhlm%C3%BCller%2C%20Andreas%20Taylor%2C%20Jacob%20Goodman%2C%20Noah%20Learning%20stochastic%20inverses%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Stuhlm%C3%BCller%2C%20Andreas%20Taylor%2C%20Jacob%20Goodman%2C%20Noah%20Learning%20stochastic%20inverses%202013"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Josh Tobin, Rachel Fong, Alex Ray, Jonas Schneider, Wojciech Zaremba, and Pieter Abbeel. Domain randomization for transferring deep neural networks from simulation to the real world. In Intelligent Robots and Systems (IROS), 2017 IEEE/RSJ International Conference on, pages 23\u201330. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tobin%2C%20Josh%20Fong%2C%20Rachel%20Ray%2C%20Alex%20Schneider%2C%20Jonas%20Domain%20randomization%20for%20transferring%20deep%20neural%20networks%20from%20simulation%20to%20the%20real%20world%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tobin%2C%20Josh%20Fong%2C%20Rachel%20Ray%2C%20Alex%20Schneider%2C%20Jonas%20Domain%20randomization%20for%20transferring%20deep%20neural%20networks%20from%20simulation%20to%20the%20real%20world%202017"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Daniel Turek, Perry de Valpine, Christopher J Paciorek, Clifford Anderson-Bergman, et al. Automated parameter blocking for efficient Markov chain Monte Carlo sampling. Bayesian Analysis, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Turek%2C%20Daniel%20de%20Valpine%2C%20Perry%20Paciorek%2C%20Christopher%20J.%20Anderson-Bergman%2C%20Clifford%20Automated%20parameter%20blocking%20for%20efficient%20Markov%20chain%20Monte%20Carlo%20sampling%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Turek%2C%20Daniel%20de%20Valpine%2C%20Perry%20Paciorek%2C%20Christopher%20J.%20Anderson-Bergman%2C%20Clifford%20Automated%20parameter%20blocking%20for%20efficient%20Markov%20chain%20Monte%20Carlo%20sampling%202016"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Deepak Venugopal and Vibhav Gogate. Dynamic blocking and collapsing for Gibbs sampling. In Uncertainty in Artificial Intelligence, page 664.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Venugopal%2C%20Deepak%20Gogate%2C%20Vibhav%20Dynamic%20blocking%20and%20collapsing%20for%20Gibbs%20sampling",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Venugopal%2C%20Deepak%20Gogate%2C%20Vibhav%20Dynamic%20blocking%20and%20collapsing%20for%20Gibbs%20sampling"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Wei Wang and Stuart J Russell. A smart-dumb/dumb-smart algorithm for efficient split-merge MCMC. In UAI, pages 902\u2013911, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Wei%20Russell%2C%20Stuart%20J.%20A%20smart-dumb/dumb-smart%20algorithm%20for%20efficient%20split-merge%20MCMC%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Wei%20Russell%2C%20Stuart%20J.%20A%20smart-dumb/dumb-smart%20algorithm%20for%20efficient%20split-merge%20MCMC%202015"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Yi Wu, Yuxin Wu, Georgia Gkioxari, and Yuandong Tian. Building generalizable agents with a realistic and rich 3d environment. arXiv preprint arXiv:1801.02209, 2018. ",
+            "arxiv_url": "https://arxiv.org/pdf/1801.02209"
+        }
+    ]
+}

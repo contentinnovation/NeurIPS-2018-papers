@@ -1,0 +1,279 @@
+{
+    "filename": "8201-using-large-ensembles-of-control-variates-for-variational-inference.pdf",
+    "metadata": {
+        "title": "Using Large Ensembles of Control Variates for Variational Inference",
+        "author": "Tomas Geffner, Justin Domke",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8201-using-large-ensembles-of-control-variates-for-variational-inference.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Variational inference is increasingly being addressed with stochastic optimization. In this setting, the gradient\u2019s variance plays a crucial role in the optimization procedure, since high variance gradients lead to poor convergence. A popular approach used to reduce gradient\u2019s variance involves the use of control variates. Despite the good results obtained, control variates developed for variational inference are typically looked at in isolation. In this paper we clarify the large number of control variates that are available by giving a systematic view of how they are derived. We also present a Bayesian risk minimization framework in which the quality of a procedure for combining control variates is quantified by its effect on optimization convergence rates, which leads to a very simple combination rule. Results show that combining a large number of control variates this way significantly improves the convergence of inference over using the typical gradient estimators or a reduced number of control variates."
+    },
+    "keywords": [
+        {
+            "term": "Score function",
+            "url": "https://en.wikipedia.org/wiki/Score_function"
+        },
+        {
+            "term": "Closed form",
+            "url": "https://en.wikipedia.org/wiki/Closed_form"
+        },
+        {
+            "term": "large number",
+            "url": "https://en.wikipedia.org/wiki/large_number"
+        },
+        {
+            "term": "generative model",
+            "url": "https://en.wikipedia.org/wiki/generative_model"
+        },
+        {
+            "term": "exponential family",
+            "url": "https://en.wikipedia.org/wiki/exponential_family"
+        },
+        {
+            "term": "variational inference",
+            "url": "https://en.wikipedia.org/wiki/variational_inference"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "Control variates",
+            "url": "https://en.wikipedia.org/wiki/Control_variates"
+        }
+    ],
+    "highlights": [
+        "Variational Inference (VI) [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>, <a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>] is a framework for approximate probabilistic inference",
+        "We present a systematic view of existing Control variates, which starts by splitting the exact gradient into four terms (Eq 2)",
+        "We first present a unified view that attempts to explain how most control variates used for variational inference are derived, which sheds light on the large number of Control variates available",
+        "We propose a combination algorithm to use multiple control variates in concert",
+        "Given a set of control variates, the combination algorithm provides a simple and effective combination rule that leads to gradients with less variance than those obtained using a reduced number of Control variates",
+        "The algorithm assumes that a fixed set of control variates to be used is given, and minimizes the final gradient\u2019s variance using them, without analyzing how favorable using all the Control variates is"
+    ],
+    "key_statements": [
+        "Variational Inference (VI) [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>, <a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>] is a framework for approximate probabilistic inference",
+        "Variational Inference has been able to address a wider range of problems by adopting a \"black box\" [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>] view based on only evaluating the value or gradient of the target distribution",
+        "The target can be optimized via stochastic gradient descent",
+        "It is desirable to reduce the variance of the gradient estimate, since this governs convergence",
+        "We present a systematic view of existing Control variates, which starts by splitting the exact gradient into four terms (Eq 2)",
+        "We demonstrate practicality on logistic regression problems, where careful combination of many Control variates improves performance",
+        "In Section 3, we propose a systematic view of how to generate many existing control variates",
+        "The previous section used that the difference of two unbiased estimators of a term has expectation zero, and so is a control variate",
+        "Paisley et al [<a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>] approximate the data term with either a Taylor approximation in z or a bound and define a control variate as the difference between E[f(Z)] computed exactly and its estimator using the score function method, which greatly reduces the variance of their gradient estimate, obtained with the score function method",
+        "They use this control variate together with a base gradient estimate obtained via reparameterization",
+        "It includes control variates based on the difference of two estimates of an approximate general term, despite neither being Closed form",
+        "These two ideas are used in the control variate introduced by Tucker et al [<a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>], which use a continuous relaxation [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>] to approximate the distribution qw, and construct a control variate by taking the difference between the Score function and RP estimates of the resulting term based on the relaxation",
+        "As in Table 1 it can be seen that for a given learning rate the gradients that combine more control variates are better suited for optimization and display a strictly dominant performance",
+        "We applied SGD with a low-variance gradient, and a learning rate of 0.08 and same initialization as in the previous section, and selected the parameters found after 25 iterations",
+        "We first present a unified view that attempts to explain how most control variates used for variational inference are derived, which sheds light on the large number of Control variates available",
+        "We propose a combination algorithm to use multiple control variates in concert",
+        "Given a set of control variates, the combination algorithm provides a simple and effective combination rule that leads to gradients with less variance than those obtained using a reduced number of Control variates",
+        "The algorithm assumes that a fixed set of control variates to be used is given, and minimizes the final gradient\u2019s variance using them, without analyzing how favorable using all the Control variates is"
+    ],
+    "summary": [
+        "Variational Inference (VI) [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>, <a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>] is a framework for approximate probabilistic inference.",
+        "Several methods have been developed to improve gradient estimates, including Rao-Blackwellization [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>], control variates [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>, <a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>, <a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>, <a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>, <a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>, <a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>, <a class=\"ref-link\" id=\"c33\" href=\"#r33\">33</a>], closed-form solutions for certain expectations [<a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>], discarding terms [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>], and different estimators.",
+        "The previous section used that the difference of two unbiased estimators of a term has expectation zero, and so is a control variate.",
+        "Paisley et al [<a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>] approximate the data term with either a Taylor approximation in z or a bound and define a control variate as the difference between E[f(Z)] computed exactly and its estimator using the score function method, which greatly reduces the variance of their gradient estimate, obtained with the score function method.",
+        "They use this control variate together with a base gradient estimate obtained via reparameterization.",
+        "Since the outer expectation usually remains intractable, a final control variate is obtained by applying one of the estimation methods described in Sec. 3.1 (SF, RP, etc) to both fD(z) and ED fD(z) and taking the difference.",
+        "It includes control variates based on the difference of two estimates of an approximate general term, despite neither being CF.",
+        "These two ideas are used in the control variate introduced by Tucker et al [<a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>], which use a continuous relaxation [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>] to approximate the distribution qw, and construct a control variate by taking the difference between the SF and RP estimates of the resulting term based on the relaxation.",
+        "Given some observed gradients h1, ..., hM and control variates C1, ..., CM , to estimate a\u2217 using empirical expectations in place of the true ones.",
+        "We tried several control variates and the combination algorithm on a Bayesian binary logistic regression model with a standard Gaussian prior, using three well known datasets: ionosphere, australian, and sonar.",
+        "As base gradient we use what seems to be the most common estimator, with reparameterization (RP1) to estimate the data term g1 and the prior term g2, and a closed form expression for the variational/entropy term g3.",
+        "As in Table 1 it can be seen that for a given learning rate the gradients that combine more control variates are better suited for optimization and display a strictly dominant performance.",
+        "We applied SGD with a low-variance gradient, and a learning rate of 0.08 and same initialization as in the previous section, and selected the parameters found after 25 iterations.",
+        "This work focuses on how to obtain low variance gradients given a fixed set of control variates.",
+        "We leave the development of such algorithm for future work"
+    ],
+    "headline": "We present a Bayesian risk minimization framework in which the quality of a procedure for combining control variates is quantified by its effect on optimization convergence rates, which leads to a very simple combination rule",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Alekh Agarwal, Peter L. Bartlett, Pradeep Ravikumar, and Martin J. Wainwright. Informationtheoretic lower bounds on the oracle complexity of stochastic convex optimization. IEEE Trans. Information Theory, 58(5):3235\u20133249, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Agarwal%2C%20Alekh%20Bartlett%2C%20Peter%20L.%20Ravikumar%2C%20Pradeep%20Wainwright%2C%20Martin%20J.%20Informationtheoretic%20lower%20bounds%20on%20the%20oracle%20complexity%20of%20stochastic%20convex%20optimization%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Agarwal%2C%20Alekh%20Bartlett%2C%20Peter%20L.%20Ravikumar%2C%20Pradeep%20Wainwright%2C%20Martin%20J.%20Informationtheoretic%20lower%20bounds%20on%20the%20oracle%20complexity%20of%20stochastic%20convex%20optimization%202012"
+        },
+        {
+            "id": "2",
+            "entry": "[2] David M Blei, Alp Kucukelbir, and Jon D McAuliffe. Variational inference: A review for statisticians. Journal of the American Statistical Association, 112(518):859\u2013877, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Blei%2C%20David%20M.%20Kucukelbir%2C%20Alp%20McAuliffe%2C%20Jon%20D.%20Variational%20inference%3A%20A%20review%20for%20statisticians%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Blei%2C%20David%20M.%20Kucukelbir%2C%20Alp%20McAuliffe%2C%20Jon%20D.%20Variational%20inference%3A%20A%20review%20for%20statisticians%202017"
+        },
+        {
+            "id": "3",
+            "entry": "[3] David M Blei, Andrew Y Ng, and Michael I Jordan. Latent dirichlet allocation. Journal of machine Learning research, 3(Jan):993\u20131022, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Blei%2C%20David%20M.%20Andrew%20Y%20Ng%2C%20and%20Michael%20I%20Jordan.%20Latent%20dirichlet%20allocation%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Blei%2C%20David%20M.%20Andrew%20Y%20Ng%2C%20and%20Michael%20I%20Jordan.%20Latent%20dirichlet%20allocation%202003"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Edward Challis and David Barber. Concave gaussian variational approximations for inference in large-scale bayesian linear models. In Proceedings of the Fourteenth International Conference on Artificial Intelligence and Statistics, pages 199\u2013207, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Challis%2C%20Edward%20Barber%2C%20David%20Concave%20gaussian%20variational%20approximations%20for%20inference%20in%20large-scale%20bayesian%20linear%20models%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Challis%2C%20Edward%20Barber%2C%20David%20Concave%20gaussian%20variational%20approximations%20for%20inference%20in%20large-scale%20bayesian%20linear%20models%202011"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Otto Fabius and Joost R van Amersfoort. Variational recurrent auto-encoders. arXiv preprint arXiv:1412.6581, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6581"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Thomas Furmston and David Barber. Variational methods for reinforcement learning. In Proceedings of the Thirteenth International Conference on Artificial Intelligence and Statistics, pages 241\u2013248, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Furmston%2C%20Thomas%20Barber%2C%20David%20Variational%20methods%20for%20reinforcement%20learning%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Furmston%2C%20Thomas%20Barber%2C%20David%20Variational%20methods%20for%20reinforcement%20learning%202010"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Will Grathwohl, Dami Choi, Yuhuai Wu, Geoff Roeder, and David Duvenaud. Backpropagation through the void: Optimizing control variates for black-box gradient estimation. arXiv preprint arXiv:1711.00123, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.00123"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Matthew D Hoffman, David M Blei, Chong Wang, and John Paisley. Stochastic variational inference. The Journal of Machine Learning Research, 14(1):1303\u20131347, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hoffman%2C%20Matthew%20D.%20Blei%2C%20David%20M.%20Wang%2C%20Chong%20Paisley%2C%20John%20Stochastic%20variational%20inference%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hoffman%2C%20Matthew%20D.%20Blei%2C%20David%20M.%20Wang%2C%20Chong%20Paisley%2C%20John%20Stochastic%20variational%20inference%202013"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Eric Jang, Shixiang Gu, and Ben Poole. Categorical reparameterization with gumbel-softmax. arXiv preprint arXiv:1611.01144, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.01144"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Michael I. Jordan. The exponential family: Conjugate priors. https://people.eecs.berkeley.edu/~jordan/courses/260-spring10/other-readings/chapter9.pdf.",
+            "url": "https://people.eecs.berkeley.edu/~jordan/courses/260-spring10/other-readings/chapter9.pdf"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Michael I Jordan, Zoubin Ghahramani, Tommi S Jaakkola, and Lawrence K Saul. An introduction to variational methods for graphical models. Machine learning, 37(2):183\u2013233, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jordan%2C%20Michael%20I.%20Ghahramani%2C%20Zoubin%20Jaakkola%2C%20Tommi%20S.%20Saul%2C%20Lawrence%20K.%20An%20introduction%20to%20variational%20methods%20for%20graphical%20models%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jordan%2C%20Michael%20I.%20Ghahramani%2C%20Zoubin%20Jaakkola%2C%20Tommi%20S.%20Saul%2C%20Lawrence%20K.%20An%20introduction%20to%20variational%20methods%20for%20graphical%20models%201999"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Diederik P Kingma, Tim Salimans, and Max Welling. Variational dropout and the local reparameterization trick. In Advances in Neural Information Processing Systems, pages 2575\u2013 2583, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Salimans%2C%20Tim%20Welling%2C%20Max%20Variational%20dropout%20and%20the%20local%20reparameterization%20trick%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Salimans%2C%20Tim%20Welling%2C%20Max%20Variational%20dropout%20and%20the%20local%20reparameterization%20trick%202015"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Diederik P Kingma and Max Welling. Auto-encoding variational bayes. arXiv preprint arXiv:1312.6114, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.6114"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Steven Cheng-Xian Li and Benjamin M. Marlin. A scalable end-to-end gaussian process adapter for irregularly sampled time series classification. In Advances in Neural Information Processing Systems, pages 1804\u20131812, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Steven%20Cheng-Xian%20Marlin%2C%20Benjamin%20M.%20A%20scalable%20end-to-end%20gaussian%20process%20adapter%20for%20irregularly%20sampled%20time%20series%20classification%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20Steven%20Cheng-Xian%20Marlin%2C%20Benjamin%20M.%20A%20scalable%20end-to-end%20gaussian%20process%20adapter%20for%20irregularly%20sampled%20time%20series%20classification%202016"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Percy Liang, Slav Petrov, Michael Jordan, and Dan Klein. The infinite pcfg using hierarchical dirichlet processes. In Proceedings of the 2007 Joint Conference on Empirical Methods in Natural Language Processing and Computational Natural Language Learning (EMNLPCoNLL), 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liang%2C%20Percy%20Petrov%2C%20Slav%20Jordan%2C%20Michael%20Klein%2C%20Dan%20The%20infinite%20pcfg%20using%20hierarchical%20dirichlet%20processes%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liang%2C%20Percy%20Petrov%2C%20Slav%20Jordan%2C%20Michael%20Klein%2C%20Dan%20The%20infinite%20pcfg%20using%20hierarchical%20dirichlet%20processes%202007"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Chris J Maddison, Andriy Mnih, and Yee Whye Teh. The concrete distribution: A continuous relaxation of discrete random variables. arXiv preprint arXiv:1611.00712, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.00712"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Andrew C Miller, Nicholas J Foti, Alexander D\u2019Amour, and Ryan P Adams. Reducing reparameterization gradient variance. arXiv preprint arXiv:1705.07880, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1705.07880"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Andriy Mnih and Karol Gregor. Neural variational inference and learning in belief networks. arXiv preprint arXiv:1402.0030, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1402.0030"
+        },
+        {
+            "id": "19",
+            "entry": "[19] John Paisley, David Blei, and Michael Jordan. Variational bayesian inference with stochastic search. arXiv preprint arXiv:1206.6430, 2012.",
+            "arxiv_url": "https://arxiv.org/pdf/1206.6430"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Rajesh Ranganath, Sean Gerrish, and David Blei. Black box variational inference. In Artificial Intelligence and Statistics, pages 814\u2013822, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ranganath%2C%20Rajesh%20Gerrish%2C%20Sean%20Blei%2C%20David%20Black%20box%20variational%20inference%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ranganath%2C%20Rajesh%20Gerrish%2C%20Sean%20Blei%2C%20David%20Black%20box%20variational%20inference%202014"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Rajesh Ranganath, Linpeng Tang, Laurent Charlin, and David Blei. Deep exponential families. In Artificial Intelligence and Statistics, pages 762\u2013771, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ranganath%2C%20Rajesh%20Tang%2C%20Linpeng%20Charlin%2C%20Laurent%20Blei%2C%20David%20Deep%20exponential%20families%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ranganath%2C%20Rajesh%20Tang%2C%20Linpeng%20Charlin%2C%20Laurent%20Blei%2C%20David%20Deep%20exponential%20families%202015"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Danilo Jimenez Rezende, Shakir Mohamed, and Daan Wierstra. Stochastic backpropagation and approximate inference in deep generative models. arXiv preprint arXiv:1401.4082, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1401.4082"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Geoffrey Roeder, Yuhuai Wu, and David Duvenaud. Sticking the landing: An asymptotically zero-variance gradient estimator for variational inference. arXiv preprint arXiv:1703.09194, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.09194"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Francisco Ruiz, Titsias Michalis, and David Blei. The generalized reparameterization gradient. In Advances in Neural Information Processing Systems, pages 460\u2013468, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ruiz%2C%20Francisco%20Michalis%2C%20Titsias%20Blei%2C%20David%20The%20generalized%20reparameterization%20gradient%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ruiz%2C%20Francisco%20Michalis%2C%20Titsias%20Blei%2C%20David%20The%20generalized%20reparameterization%20gradient%202016"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Francisco JR Ruiz, Michalis K Titsias, and David M Blei. Overdispersed black-box variational inference. arXiv preprint arXiv:1603.01140, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1603.01140"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Michalis Titsias and Miguel L\u00e1zaro-Gredilla. Doubly stochastic variational bayes for nonconjugate inference. In Proceedings of the 31st International Conference on Machine Learning (ICML-14), pages 1971\u20131979, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Titsias%2C%20Michalis%20L%C3%A1zaro-Gredilla%2C%20Miguel%20Doubly%20stochastic%20variational%20bayes%20for%20nonconjugate%20inference%201971",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Titsias%2C%20Michalis%20L%C3%A1zaro-Gredilla%2C%20Miguel%20Doubly%20stochastic%20variational%20bayes%20for%20nonconjugate%20inference%201971"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Michalis Titsias and Miguel L\u00e1zaro-Gredilla. Local expectation gradients for black box variational inference. In Advances in neural information processing systems, pages 2638\u20132646, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Titsias%2C%20Michalis%20L%C3%A1zaro-Gredilla%2C%20Miguel%20Local%20expectation%20gradients%20for%20black%20box%20variational%20inference%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Titsias%2C%20Michalis%20L%C3%A1zaro-Gredilla%2C%20Miguel%20Local%20expectation%20gradients%20for%20black%20box%20variational%20inference%202015"
+        },
+        {
+            "id": "28",
+            "entry": "[28] George Tucker, Andriy Mnih, Chris J Maddison, John Lawson, and Jascha Sohl-Dickstein. Rebar: Low-variance, unbiased gradient estimates for discrete latent variable models. In Advances in Neural Information Processing Systems, pages 2627\u20132636, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tucker%2C%20George%20Mnih%2C%20Andriy%20Maddison%2C%20Chris%20J.%20Lawson%2C%20John%20Rebar%3A%20Low-variance%2C%20unbiased%20gradient%20estimates%20for%20discrete%20latent%20variable%20models%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tucker%2C%20George%20Mnih%2C%20Andriy%20Maddison%2C%20Chris%20J.%20Lawson%2C%20John%20Rebar%3A%20Low-variance%2C%20unbiased%20gradient%20estimates%20for%20discrete%20latent%20variable%20models%202017"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Martin J Wainwright, Michael I Jordan, et al. Graphical models, exponential families, and variational inference. Foundations and Trends R in Machine Learning, 1(1\u20132):1\u2013305, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20Graphical%20models%2C%20exponential%20families%2C%20and%20variational%20inference%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Graphical%20models%2C%20exponential%20families%2C%20and%20variational%20inference%202008"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Chong Wang, Xi Chen, Alexander J Smola, and Eric P Xing. Variance reduction for stochastic gradient optimization. In Advances in Neural Information Processing Systems, pages 181\u2013189, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Chong%20Chen%2C%20Xi%20Smola%2C%20Alexander%20J.%20and%20Eric%20P%20Xing.%20Variance%20reduction%20for%20stochastic%20gradient%20optimization%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Chong%20Chen%2C%20Xi%20Smola%2C%20Alexander%20J.%20and%20Eric%20P%20Xing.%20Variance%20reduction%20for%20stochastic%20gradient%20optimization%202013"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Ronald J Williams. Simple statistical gradient-following algorithms for connectionist reinforcement learning. Machine learning, 8(3-4):229\u2013256, 1992.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%2C%20Ronald%20J.%20Simple%20statistical%20gradient-following%20algorithms%20for%20connectionist%20reinforcement%20learning%201992",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Williams%2C%20Ronald%20J.%20Simple%20statistical%20gradient-following%20algorithms%20for%20connectionist%20reinforcement%20learning%201992"
+        },
+        {
+            "id": "32",
+            "entry": "[32] John Winn and Christopher M Bishop. Variational message passing. Journal of Machine Learning Research, 6(Apr):661\u2013694, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Winn%2C%20John%20Bishop%2C%20Christopher%20M.%20Variational%20message%20passing%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Winn%2C%20John%20Bishop%2C%20Christopher%20M.%20Variational%20message%20passing%202005"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Cheng Zhang, Judith Butepage, Hedvig Kjellstrom, and Stephan Mandt. Advances in variational inference. arXiv preprint arXiv:1711.05597, 2017. ",
+            "arxiv_url": "https://arxiv.org/pdf/1711.05597"
+        }
+    ]
+}

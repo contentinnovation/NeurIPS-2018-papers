@@ -1,0 +1,219 @@
+{
+    "filename": "7941-model-agnostic-private-learning.pdf",
+    "metadata": {
+        "title": "Model-Agnostic Private Learning",
+        "author": "Raef Bassily\u2217",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7941-model-agnostic-private-learning.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We design differentially private learning algorithms that are agnostic to the learning model assuming access to a limited amount of unlabeled public data. First, we provide a new differentially private algorithm for answering a sequence of m online classification queries (given by a sequence of m unlabeled public feature vectors) based on a private training set. Our algorithm follows the paradigm of subsample-and-aggregate, in which any generic non-private learner is trained on disjoint subsets of the private training set, and then for each classification query, the votes of the resulting classifiers ensemble are aggregated in a differentially private fashion. Our private aggregation is based on a novel combination of the distance-to-instability framework [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>], and the sparse-vector technique [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>, <a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>]. We show that our algorithm makes a conservative use of the privacy budget. In particular, if the underlying non-private learner yields a classification error of at most \u03b1 \u2208 (0, 1), then our construction answers more queries, by at least a factor of 1/\u03b1 in some cases, than what is implied by a straightforward application of the advanced composition theorem for differential privacy. Next, we apply the knowledge transfer technique to construct a private learner that outputs a classifier, which can be used to answer an unlimited number of queries. In the PAC model, we analyze our construction and prove upper bounds on the sample complexity for both the realizable and the non-realizable cases. Similar to non-private sample complexity, our bounds are completely characterized by the VC dimension of the concept class."
+    },
+    "keywords": [
+        {
+            "term": "upper bound",
+            "url": "https://en.wikipedia.org/wiki/upper_bound"
+        },
+        {
+            "term": "knowledge transfer",
+            "url": "https://en.wikipedia.org/wiki/knowledge_transfer"
+        },
+        {
+            "term": "differential privacy",
+            "url": "https://en.wikipedia.org/wiki/differential_privacy"
+        },
+        {
+            "term": "private training",
+            "url": "https://en.wikipedia.org/wiki/private_training"
+        },
+        {
+            "term": "sample complexity",
+            "url": "https://en.wikipedia.org/wiki/sample_complexity"
+        }
+    ],
+    "highlights": [
+        "The main goal in the standard setting of differentially private learning is to design a differentially private learner that, given a private training set as input, outputs a model that is safe to publish",
+        "We prove explicit sample complexity bounds for the final private learner in both PAC and agnostic PAC settings",
+        "Our final construction can be viewed as a private learner in the less restrictive setting of labelprivate learning where the learner is only required to protect the privacy of the labels in the training set",
+        "Note that any construction for our original setting can be used as a label-private learner by splitting the training set into two parts and throwing away the labels of one of them",
+        "Our construction can be directly used as a label-private learner by splitting the training set into two parts and discarding the labels in one of them"
+    ],
+    "key_statements": [
+        "The main goal in the standard setting of differentially private learning is to design a differentially private learner that, given a private training set as input, outputs a model that is safe to publish",
+        "We prove explicit sample complexity bounds for the final private learner in both PAC and agnostic PAC settings",
+        "Our final construction can be viewed as a private learner in the less restrictive setting of labelprivate learning where the learner is only required to protect the privacy of the labels in the training set",
+        "Note that any construction for our original setting can be used as a label-private learner by splitting the training set into two parts and throwing away the labels of one of them",
+        "Comparison to prior work on label privacy: Our results apply to the setting of label-private learning, where the learner is only required to protect the privacy of the labels in the training set",
+        "Our construction can be directly used as a label-private learner by splitting the training set into two parts and discarding the labels in one of them"
+    ],
+    "summary": [
+        "The main goal in the standard setting of differentially private learning is to design a differentially private learner that, given a private training set as input, outputs a model that is safe to publish.",
+        "We want to be able to use such an algorithm together with the public unlabeled data to construct a differentially private learner that outputs a classifier, which can be used to answer as many classification queries as we wish.",
+        "Given a PAC learner for a class H of VCdimension V , a private training set of size n, and assuming realizability, our private construction (Algorithm 2) answers a sequence of up to \u03a9 (n/V ) binary classification queries such that, with high probability, the misclassification rate is O(V /n).",
+        "We use these newly labeled public data for training a non-private learner to output a classifier.",
+        "We instantiate the distance to instability framework (Algorithm 1) with the subsample and aggregate framework [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>, <a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>], and combine it with the sparse vector technique [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>] to obtain a construction for privately answering classification queries with a conservative use of the privacy budget (Algorithm 2 below).",
+        "Input: Private dataset: D, sequence of online unlabeled public data Q = {x1, \u00b7 \u00b7 \u00b7 , xm}, oracle access to a non-private learner \u0398 : U \u2217 \u2192 H for a hypothesis class H, cutoff parameter: T , privacy para\u221ameters , \u03b4 > 0, failure probability: \u03b2 1: c \u2190 0, \u03bb \u2190 32T log(2/\u03b4)/ , and k \u2190 34 2\u03bb \u00b7 log (4mT / min (\u03b4, \u03b2/2))",
+        "If \u0398 is an (\u03b1, \u03b2/k, n/k)-agnostic PAC learner (Definition 2.1), where k is as defined in AbinClas, i) with probability at least 1 \u2212 2\u03b2, AbinClas does not halt before answering all the m queries in Q, and outputs \u22a5 for at most T queries; and ii) the misclassification rate of AbinClas is at most T /m = O(\u03b3 + \u03b1).",
+        "By a standard argument, \u0398 is (\u03b1, \u03b2, n/k)-agnostic PAC learner with \u03b1 = OkV /n , and it has a misclassification rate of \u2248 \u03b3 + OkV /n when trained on a dataset of size n/k.",
+        "For up to m = \u03a9min 1/\u03b3, n/V queries, the setting of T becomes T = O(1), and Theorem 3.2 implies AbinClas yields a misclassification rate O(\u03b3) + O V / n , which is essentially the same as the optimal non-private rate.",
+        "The idea is based on a knowledge transfer technique: we use our private construction above to generate labels for sufficient number of unlabeled domain points."
+    ],
+    "headline": "We provide a new differentially private algorithm for answering a sequence of m online classification queries  based on a private training set",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Martin Abadi, Andy Chu, Ian Goodfellow, H Brendan McMahan, Ilya Mironov, Kunal Talwar, and Li Zhang. Deep learning with differential privacy. In Proceedings of the 2016 ACM SIGSAC Conference on Computer and Communications Security, pages 308\u2013318. ACM, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abadi%2C%20Martin%20Chu%2C%20Andy%20Ian%20Goodfellow%2C%20H.Brendan%20McMahan%20Mironov%2C%20Ilya%20Deep%20learning%20with%20differential%20privacy%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abadi%2C%20Martin%20Chu%2C%20Andy%20Ian%20Goodfellow%2C%20H.Brendan%20McMahan%20Mironov%2C%20Ilya%20Deep%20learning%20with%20differential%20privacy%202016"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Raef Bassily, Adam Smith, and Abhradeep Thakurta. Private empirical risk minimization: Efficient algorithms and tight error bounds. In Foundations of Computer Science (FOCS), 2014 IEEE 55th Annual Symposium on, pages 464\u2013473. IEEE, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bassily%2C%20Raef%20Smith%2C%20Adam%20Thakurta%2C%20Abhradeep%20Private%20empirical%20risk%20minimization%3A%20Efficient%20algorithms%20and%20tight%20error%20bounds%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bassily%2C%20Raef%20Smith%2C%20Adam%20Thakurta%2C%20Abhradeep%20Private%20empirical%20risk%20minimization%3A%20Efficient%20algorithms%20and%20tight%20error%20bounds%202014"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Raef Bassily, Om Thakkar, and Abhradeep Thakurta. Model-agnostic private learning via stability. arXiv preprint arXiv:1803.05101, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.05101"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Amos Beimel, Shiva Prasad Kasiviswanathan, and Kobbi Nissim. Bounds on the Sample Complexity for Private Learning and Private Data Release. In TCC, pages 437\u2013454.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Beimel%2C%20Amos%20Kasiviswanathan%2C%20Shiva%20Prasad%20Nissim%2C%20Kobbi%20Bounds%20on%20the%20Sample%20Complexity%20for%20Private%20Learning%20and%20Private%20Data%20Release",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Beimel%2C%20Amos%20Kasiviswanathan%2C%20Shiva%20Prasad%20Nissim%2C%20Kobbi%20Bounds%20on%20the%20Sample%20Complexity%20for%20Private%20Learning%20and%20Private%20Data%20Release"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Amos Beimel, Kobbi Nissim, and Uri Stemmer. Characterizing the sample complexity of private learners. In ITCS. ACM, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Beimel%2C%20Amos%20Nissim%2C%20Kobbi%20Stemmer%2C%20Uri%20Characterizing%20the%20sample%20complexity%20of%20private%20learners.%20In%20ITCS%202013"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Amos Beimel, Kobbi Nissim, and Uri Stemmer. Private learning and sanitization: Pure vs. approximate differential privacy. Theory of Computing, 12(1):1\u201361, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Beimel%2C%20Amos%20Nissim%2C%20Kobbi%20Stemmer%2C%20Uri%20Private%20learning%20and%20sanitization%3A%20Pure%20vs.%20approximate%20differential%20privacy%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Beimel%2C%20Amos%20Nissim%2C%20Kobbi%20Stemmer%2C%20Uri%20Private%20learning%20and%20sanitization%3A%20Pure%20vs.%20approximate%20differential%20privacy%202016"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Stephane Boucheron, Olivier Bousquet, and Gabor Lugosi. Theory of classification: A survey of some recent advances. ESAIM: probability and statistics, 9:323\u2013375, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Boucheron%2C%20Stephane%20Bousquet%2C%20Olivier%20Lugosi%2C%20Gabor%20Theory%20of%20classification%3A%20A%20survey%20of%20some%20recent%20advances%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Boucheron%2C%20Stephane%20Bousquet%2C%20Olivier%20Lugosi%2C%20Gabor%20Theory%20of%20classification%3A%20A%20survey%20of%20some%20recent%20advances%202005"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Leo Breiman. Bagging predictors. Machine learning, 24(2):123\u2013140, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Breiman%2C%20Leo%20Bagging%20predictors%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Breiman%2C%20Leo%20Bagging%20predictors%201996"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Mark Bun, Kobbi Nissim, Uri Stemmer, and Salil P. Vadhan. Differentially private release and learning of threshold functions. In Venkatesan Guruswami, editor, IEEE 56th Annual Symposium on Foundations of Computer Science, FOCS 2015, Berkeley, CA, USA, 17-20 October, 2015, pages 634\u2013649. IEEE Computer Society, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bun%2C%20Mark%20Nissim%2C%20Kobbi%20Stemmer%2C%20Uri%20Vadhan%2C%20Salil%20P.%20Differentially%20private%20release%20and%20learning%20of%20threshold%20functions%202015-10-17",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bun%2C%20Mark%20Nissim%2C%20Kobbi%20Stemmer%2C%20Uri%20Vadhan%2C%20Salil%20P.%20Differentially%20private%20release%20and%20learning%20of%20threshold%20functions%202015-10-17"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Kamalika Chaudhuri and Daniel Hsu. Sample complexity bounds for differentially private learning. In Proceedings of the 24th Annual Conference on Learning Theory, pages 155\u2013186, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chaudhuri%2C%20Kamalika%20Hsu%2C%20Daniel%20Sample%20complexity%20bounds%20for%20differentially%20private%20learning%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chaudhuri%2C%20Kamalika%20Hsu%2C%20Daniel%20Sample%20complexity%20bounds%20for%20differentially%20private%20learning%202011"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Kamalika Chaudhuri, Claire Monteleoni, and Anand D. Sarwate. Differentially private empirical risk minimization. JMLR, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chaudhuri%2C%20Kamalika%20Monteleoni%2C%20Claire%20Sarwate%2C%20Anand%20D.%20Differentially%20private%20empirical%20risk%20minimization%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chaudhuri%2C%20Kamalika%20Monteleoni%2C%20Claire%20Sarwate%2C%20Anand%20D.%20Differentially%20private%20empirical%20risk%20minimization%202011"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Cynthia Dwork and Vitaly Feldman. Privacy-preserving prediction. arXiv preprint arXiv:1803.10266, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.10266"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Cynthia Dwork, Krishnaram Kenthapadi, Frank McSherry, Ilya Mironov, and Moni Naor. Our data, ourselves: Privacy via distributed noise generation. In EUROCRYPT, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dwork%2C%20Cynthia%20Kenthapadi%2C%20Krishnaram%20McSherry%2C%20Frank%20Mironov%2C%20Ilya%20Our%20data%2C%20ourselves%3A%20Privacy%20via%20distributed%20noise%20generation%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dwork%2C%20Cynthia%20Kenthapadi%2C%20Krishnaram%20McSherry%2C%20Frank%20Mironov%2C%20Ilya%20Our%20data%2C%20ourselves%3A%20Privacy%20via%20distributed%20noise%20generation%202006"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Cynthia Dwork, Frank McSherry, Kobbi Nissim, and Adam Smith. Calibrating noise to sensitivity in private data analysis. In Theory of Cryptography Conference, pages 265\u2013284.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dwork%2C%20Cynthia%20McSherry%2C%20Frank%20Nissim%2C%20Kobbi%20Smith%2C%20Adam%20Calibrating%20noise%20to%20sensitivity%20in%20private%20data%20analysis",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dwork%2C%20Cynthia%20McSherry%2C%20Frank%20Nissim%2C%20Kobbi%20Smith%2C%20Adam%20Calibrating%20noise%20to%20sensitivity%20in%20private%20data%20analysis"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Cynthia Dwork, Moni Naor, Omer Reingold, Guy Rothblum, and Salil Vadhan. On the complexity of differentially private data release: efficient algorithms and hardness results. In STOC, pages 381\u2013390, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dwork%2C%20Cynthia%20Naor%2C%20Moni%20Reingold%2C%20Omer%20Rothblum%2C%20Guy%20On%20the%20complexity%20of%20differentially%20private%20data%20release%3A%20efficient%20algorithms%20and%20hardness%20results%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dwork%2C%20Cynthia%20Naor%2C%20Moni%20Reingold%2C%20Omer%20Rothblum%2C%20Guy%20On%20the%20complexity%20of%20differentially%20private%20data%20release%3A%20efficient%20algorithms%20and%20hardness%20results%202009"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Cynthia Dwork, Aaron Roth, et al. The algorithmic foundations of differential privacy. Foundations and Trends in Theoretical Computer Science, 9(3-4):211\u2013407, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dwork%2C%20Cynthia%20Roth%2C%20Aaron%20The%20algorithmic%20foundations%20of%20differential%20privacy%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dwork%2C%20Cynthia%20Roth%2C%20Aaron%20The%20algorithmic%20foundations%20of%20differential%20privacy%202014"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Jihun Hamm, Yingjun Cao, and Mikhail Belkin. Learning privately from multiparty data. In International Conference on Machine Learning, pages 555\u2013563, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hamm%2C%20Jihun%20Cao%2C%20Yingjun%20Belkin%2C%20Mikhail%20Learning%20privately%20from%20multiparty%20data%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hamm%2C%20Jihun%20Cao%2C%20Yingjun%20Belkin%2C%20Mikhail%20Learning%20privately%20from%20multiparty%20data%202016"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Moritz Hardt and Guy N. Rothblum. A multiplicative weights mechanism for privacypreserving data analysis. In FOCS, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hardt%2C%20Moritz%20Rothblum%2C%20Guy%20N.%20A%20multiplicative%20weights%20mechanism%20for%20privacypreserving%20data%20analysis%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hardt%2C%20Moritz%20Rothblum%2C%20Guy%20N.%20A%20multiplicative%20weights%20mechanism%20for%20privacypreserving%20data%20analysis%202010"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Shiva Prasad Kasiviswanathan, Homin K. Lee, Kobbi Nissim, Sofya Raskhodnikova, and Adam Smith. What can we learn privately? In FOCS, pages 531\u2013540. IEEE Computer Society, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kasiviswanathan%2C%20Shiva%20Prasad%20Lee%2C%20Homin%20K.%20Nissim%2C%20Kobbi%20Raskhodnikova%2C%20Sofya%20What%20can%20we%20learn%20privately%3F%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kasiviswanathan%2C%20Shiva%20Prasad%20Lee%2C%20Homin%20K.%20Nissim%2C%20Kobbi%20Raskhodnikova%2C%20Sofya%20What%20can%20we%20learn%20privately%3F%202008"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Michael J. Kearns and Umesh V. Vazirani. An Introduction to Computational Learning Theory. MIT Press, Cambridge, MA, USA, 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kearns%2C%20Michael%20J.%20Vazirani%2C%20Umesh%20V.%20An%20Introduction%20to%20Computational%20Learning%20Theory%201994"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Daniel Kifer, Adam Smith, and Abhradeep Thakurta. Private convex empirical risk minimization and high-dimensional regression. Journal of Machine Learning Research, 1:41, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kifer%2C%20Daniel%20Smith%2C%20Adam%20Thakurta%2C%20Abhradeep%20Private%20convex%20empirical%20risk%20minimization%20and%20high-dimensional%20regression%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kifer%2C%20Daniel%20Smith%2C%20Adam%20Thakurta%2C%20Abhradeep%20Private%20convex%20empirical%20risk%20minimization%20and%20high-dimensional%20regression%202012"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Kobbi Nissim, Sofya Raskhodnikova, and Adam Smith. Smooth sensitivity and sampling in private data analysis. In STOC, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nissim%2C%20Kobbi%20Raskhodnikova%2C%20Sofya%20Smith%2C%20Adam%20Smooth%20sensitivity%20and%20sampling%20in%20private%20data%20analysis%202007"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Nicolas Papernot, Mart\u0131n Abadi, Ulfar Erlingsson, Ian Goodfellow, and Kunal Talwar. Semisupervised knowledge transfer for deep learning from private training data. stat, 1050, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Papernot%2C%20Nicolas%20Abadi%2C%20Mart%C4%B1n%20Erlingsson%2C%20Ulfar%20Goodfellow%2C%20Ian%20Semisupervised%20knowledge%20transfer%20for%20deep%20learning%20from%20private%20training%20data%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Papernot%2C%20Nicolas%20Abadi%2C%20Mart%C4%B1n%20Erlingsson%2C%20Ulfar%20Goodfellow%2C%20Ian%20Semisupervised%20knowledge%20transfer%20for%20deep%20learning%20from%20private%20training%20data%202017"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Nicolas Papernot, Shuang Song, Ilya Mironov, Ananth Raghunathan, Kunal Talwar, and Ulfar Erlingsson. Scalable private learning with pate. arXiv preprint arXiv:1802.08908, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.08908"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Shai Shalev-Shwartz and Shai Ben-David. Understanding machine learning: From theory to algorithms. Cambridge university press, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shalev-Shwartz%2C%20Shai%20Ben-David%2C%20Shai%20Understanding%20machine%20learning%3A%20From%20theory%20to%20algorithms%202014"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Adam Smith and Abhradeep Thakurta. Differentially private feature selection via stability arguments, and the robustness of the lasso. In COLT, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Smith%2C%20Adam%20Thakurta%2C%20Abhradeep%20Differentially%20private%20feature%20selection%20via%20stability%20arguments%2C%20and%20the%20robustness%20of%20the%20lasso%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Smith%2C%20Adam%20Thakurta%2C%20Abhradeep%20Differentially%20private%20feature%20selection%20via%20stability%20arguments%2C%20and%20the%20robustness%20of%20the%20lasso%202013"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Kunal Talwar, Abhradeep Thakurta, and Li Zhang. Nearly optimal private lasso. In NIPS, 2015. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Talwar%2C%20Kunal%20Thakurta%2C%20Abhradeep%20Zhang%2C%20Li%20Nearly%20optimal%20private%20lasso%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Talwar%2C%20Kunal%20Thakurta%2C%20Abhradeep%20Zhang%2C%20Li%20Nearly%20optimal%20private%20lasso%202015"
+        }
+    ]
+}

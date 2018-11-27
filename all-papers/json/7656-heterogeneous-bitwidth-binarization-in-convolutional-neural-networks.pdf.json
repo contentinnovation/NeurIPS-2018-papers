@@ -1,0 +1,153 @@
+{
+    "filename": "7656-heterogeneous-bitwidth-binarization-in-convolutional-neural-networks.pdf",
+    "metadata": {
+        "title": "Heterogeneous Bitwidth Binarization in Convolutional Neural Networks",
+        "author": "Joshua Fromm, Shwetak Patel, Matthai Philipose",
+        "date": 2015,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7656-heterogeneous-bitwidth-binarization-in-convolutional-neural-networks.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Recent work has shown that fast, compact low-bitwidth neural networks can be surprisingly accurate. These networks use homogeneous binarization: all parameters in each layer or (more commonly) the whole model have the same low bitwidth (e.g., 2 bits). However, modern hardware allows efficient designs where each arithmetic instruction can have a custom bitwidth, motivating heterogeneous binarization, where every parameter in the network may have a different bitwidth. In this paper, we show that it is feasible and useful to select bitwidths at the parameter granularity during training. For instance a heterogeneously quantized version of modern networks such as AlexNet and MobileNet, with the right mix of 1-, 2-and 3-bit parameters that average to just 1.4 bits can equal the accuracy of homogeneous 2-bit versions of these networks. Further, we provide analyses to show that the heterogeneously binarized systems yield FPGA-and ASIC-based implementations that are correspondingly more efficient in both circuit area and energy efficiency than their homogeneous counterparts."
+    },
+    "keywords": [
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "vector quantization",
+            "url": "https://en.wikipedia.org/wiki/vector_quantization"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        },
+        {
+            "term": "convolutional neural network",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_network"
+        }
+    ],
+    "highlights": [
+        "With Convolutional Neural Networks (CNNs) outperforming humans in vision classification tasks (<a class=\"ref-link\" id=\"cSzegedy_et+al_2015_a\" href=\"#rSzegedy_et+al_2015_a\"><a class=\"ref-link\" id=\"cSzegedy_et+al_2015_a\" href=\"#rSzegedy_et+al_2015_a\">Szegedy et al, 2015</a></a>), it is clear that Convolutional Neural Networks will be a mainstay of AI applications",
+        "We introduce Heterogeneous Bitwidth Neural Networks (HBNNs), which allow each individual parameter to have its own bitwidth, giving a fractional average bitwidth to the model",
+        "We present Heterogeneous Bitwidth Neural Networks (HBNNs), a new type of binary network that is not restricted to integer bitwidths",
+        "We introduce middle-out bit selection as the top performing technique for determining where to place bits in a heterogeneous bitwidth tensor",
+        "On the ImageNet dataset with AlexNet and MobileNet models, we perform extensive experiments to validate the effectiveness of Heterogeneous Bitwidth Neural Networks compared to the state of the art and full precision accuracy"
+    ],
+    "key_statements": [
+        "With Convolutional Neural Networks (CNNs) outperforming humans in vision classification tasks (<a class=\"ref-link\" id=\"cSzegedy_et+al_2015_a\" href=\"#rSzegedy_et+al_2015_a\"><a class=\"ref-link\" id=\"cSzegedy_et+al_2015_a\" href=\"#rSzegedy_et+al_2015_a\">Szegedy et al, 2015</a></a>), it is clear that Convolutional Neural Networks will be a mainstay of AI applications",
+        "We introduce Heterogeneous Bitwidth Neural Networks (HBNNs), which allow each individual parameter to have its own bitwidth, giving a fractional average bitwidth to the model",
+        "We present Heterogeneous Bitwidth Neural Networks (HBNNs), a new type of binary network that is not restricted to integer bitwidths",
+        "We introduce middle-out bit selection as the top performing technique for determining where to place bits in a heterogeneous bitwidth tensor",
+        "On the ImageNet dataset with AlexNet and MobileNet models, we perform extensive experiments to validate the effectiveness of Heterogeneous Bitwidth Neural Networks compared to the state of the art and full precision accuracy"
+    ],
+    "summary": [
+        "With Convolutional Neural Networks (CNNs) outperforming humans in vision classification tasks (<a class=\"ref-link\" id=\"cSzegedy_et+al_2015_a\" href=\"#rSzegedy_et+al_2015_a\"><a class=\"ref-link\" id=\"cSzegedy_et+al_2015_a\" href=\"#rSzegedy_et+al_2015_a\">Szegedy et al, 2015</a></a>), it is clear that CNNs will be a mainstay of AI applications.",
+        "If values that benefit from not taking a step can be targeted and assigned fewer bits, the overall approximation accuracy will improve despite there being a lower average bitwidth.",
+        "Middle-Out sorting performs significantly better than other heuristics and yields an accuracy comparable to 2-bit integer binarization despite using on average 1.4 bits.",
+        "We test a \u201cpoor man\u2019s\u201d approach to HBNNs, where we fix up front the number of bits each layer is allowed, require all values in a layer to have its associated bitwidth, and train as with conventional homogeneous binarization.",
+        "We suspected that the choice of this distribution would have a significant impact on the accuracy of trained HBNNs, and performed a hyperparameter sweep by varying DistF romAvg in Algorithm 1 when training AlexNet on ImageNet as described .",
+        "Dong et al (2017) were able to binarize the weights of an AlexNet-BN model to 2 bits and achieve nearly full precision accuracy.",
+        "We perform a sweep of AlexNet-BN models binarized with fractional bitwidths using middle-out selection with the goal of achieving comparable accuracy using fewer than two bits.",
+        "We perform another sweep on AlexNet-BN with all layers but the input and output fully binarized and compare the accuracy of HBNNs to several recent results.",
+        "We perform a similar sweep of binarization parameters on MobileNet, a state of the art architecture that has unusually high accuracy for its low number of parameters (<a class=\"ref-link\" id=\"cHoward_et+al_2017_a\" href=\"#rHoward_et+al_2017_a\">Howard et al, 2017</a>).",
+        "We perform a sweep of many different binarization bitwidths for both the depth-wise weights and input activations of MobileNet, with results shown in rows 17-24 of Table 1.",
+        "Just as in the AlexNet case, we find that MobileNet with an average of 1.4 bits achieves over 10% higher accuracy than 1-bit binarization.",
+        "Binarization typically provides a significant speed up by packing bits into 64-bit integers, allowing a CPU or GPU to perform a single xnor operation in lieu of 64 floating-point multiplications.",
+        "There have been several recent binary convolutional neural network implementations on FGPAs and ASICs that provide a baseline we can use to estimate the performance of HBNNs on ZC706 FPGA platforms (<a class=\"ref-link\" id=\"cUmuroglu_et+al_2017_a\" href=\"#rUmuroglu_et+al_2017_a\">Umuroglu et al, 2017</a>) and on ASIC hardware (<a class=\"ref-link\" id=\"cAlemdar_et+al_2017_a\" href=\"#rAlemdar_et+al_2017_a\">Alemdar et al, 2017</a>).",
+        "On the ImageNet dataset with AlexNet and MobileNet models, we perform extensive experiments to validate the effectiveness of HBNNs compared to the state of the art and full precision accuracy.",
+        "The results of these experiments are highly compelling, with HBNNs matching or outperforming competing binarization techniques while using fewer average bits"
+    ],
+    "headline": "We show that it is feasible and useful to select bitwidths at the parameter granularity during training",
+    "reference_links": [
+        {
+            "id": "Alemdar_et+al_2017_a",
+            "entry": "Alemdar, Hande, Leroy, Vincent, Prost-Boucle, Adrien, and P\u00e9trot, Fr\u00e9d\u00e9ric. Ternary neural networks for resource-efficient ai applications. In Neural Networks (IJCNN), 2017 International Joint Conference on, pp. 2547\u20132554. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Alemdar%2C%20Hande%20Leroy%2C%20Vincent%20Prost-Boucle%2C%20Adrien%20P%C3%A9trot%2C%20Fr%C3%A9d%C3%A9ric%20Ternary%20neural%20networks%20for%20resource-efficient%20ai%20applications%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Alemdar%2C%20Hande%20Leroy%2C%20Vincent%20Prost-Boucle%2C%20Adrien%20P%C3%A9trot%2C%20Fr%C3%A9d%C3%A9ric%20Ternary%20neural%20networks%20for%20resource-efficient%20ai%20applications%202017"
+        },
+        {
+            "id": "Chen_et+al_2015_a",
+            "entry": "Chen, Wenlin, Wilson, James, Tyree, Stephen, Weinberger, Kilian, and Chen, Yixin. Compressing neural networks with the hashing trick. In International Conference on Machine Learning, pp. 2285\u20132294, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Wenlin%20Wilson%2C%20James%20Tyree%2C%20Stephen%20Weinberger%2C%20Kilian%20Compressing%20neural%20networks%20with%20the%20hashing%20trick%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Wenlin%20Wilson%2C%20James%20Tyree%2C%20Stephen%20Weinberger%2C%20Kilian%20Compressing%20neural%20networks%20with%20the%20hashing%20trick%202015"
+        },
+        {
+            "id": "Courbariaux_et+al_2015_a",
+            "entry": "Courbariaux, Matthieu, Bengio, Yoshua, and David, Jean-Pierre. Binaryconnect: Training deep neural networks with binary weights during propagations. In Advances in Neural Information Processing Systems, pp. 3123\u20133131, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Courbariaux%2C%20Matthieu%20Bengio%2C%20Yoshua%20David%2C%20Jean-Pierre%20Binaryconnect%3A%20Training%20deep%20neural%20networks%20with%20binary%20weights%20during%20propagations%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Courbariaux%2C%20Matthieu%20Bengio%2C%20Yoshua%20David%2C%20Jean-Pierre%20Binaryconnect%3A%20Training%20deep%20neural%20networks%20with%20binary%20weights%20during%20propagations%202015"
+        },
+        {
+            "id": "Courbariaux_et+al_2016_a",
+            "entry": "Courbariaux, Matthieu, Hubara, Itay, Soudry, Daniel, El-Yaniv, Ran, and Bengio, Yoshua. Binarized neural networks: Training deep neural networks with weights and activations constrained to+ 1 or-1. arXiv preprint arXiv:1602.02830, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1602.02830"
+        },
+        {
+            "id": "Dong_et+al_2017_a",
+            "entry": "Dong, Yinpeng, Ni, Renkun, Li, Jianguo, Chen, Yurong, Zhu, Jun, and Su, Hang. Learning accurate low-bit deep neural networks with stochastic quantization. arXiv preprint arXiv:1708.01001, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1708.01001"
+        },
+        {
+            "id": "Ehliar_2014_a",
+            "entry": "Ehliar, Andreas. Area efficient floating-point adder and multiplier with ieee-754 compatible semantics. In Field-Programmable Technology (FPT), 2014 International Conference on, pp. 131\u2013138. IEEE, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ehliar%2C%20Andreas%20Area%20efficient%20floating-point%20adder%20and%20multiplier%20with%20ieee-754%20compatible%20semantics%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ehliar%2C%20Andreas%20Area%20efficient%20floating-point%20adder%20and%20multiplier%20with%20ieee-754%20compatible%20semantics%202014"
+        },
+        {
+            "id": "Gong_et+al_2014_a",
+            "entry": "Gong, Yunchao, Liu, Liu, Yang, Ming, and Bourdev, Lubomir. Compressing deep convolutional networks using vector quantization. arXiv preprint arXiv:1412.6115, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6115"
+        },
+        {
+            "id": "Han_et+al_2015_a",
+            "entry": "Han, Song, Mao, Huizi, and Dally, William J. Deep compression: Compressing deep neural networks with pruning, trained quantization and huffman coding. arXiv preprint arXiv:1510.00149, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1510.00149"
+        },
+        {
+            "id": "Howard_et+al_2017_a",
+            "entry": "Howard, Andrew G, Zhu, Menglong, Chen, Bo, Kalenichenko, Dmitry, Wang, Weijun, Weyand, Tobias, Andreetto, Marco, and Adam, Hartwig. Mobilenets: Efficient convolutional neural networks for mobile vision applications. arXiv preprint arXiv:1704.04861, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1704.04861"
+        },
+        {
+            "id": "Hubara_et+al_2016_a",
+            "entry": "Hubara, Itay, Courbariaux, Matthieu, Soudry, Daniel, El-Yaniv, Ran, and Bengio, Yoshua. Quantized neural networks: Training neural networks with low precision weights and activations. arXiv preprint arXiv:1609.07061, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.07061"
+        },
+        {
+            "id": "Krizhevsky_et+al_2012_a",
+            "entry": "Krizhevsky, Alex, Sutskever, Ilya, and Hinton, Geoffrey E. Imagenet classification with deep convolutional neural networks. In Advances in neural information processing systems, pp. 1097\u2013 1105, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Hinton%2C%20Geoffrey%20E.%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Hinton%2C%20Geoffrey%20E.%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012"
+        },
+        {
+            "id": "Li_et+al_2016_a",
+            "entry": "Li, Fengfu, Zhang, Bo, and Liu, Bin. Ternary weight networks. arXiv preprint arXiv:1605.04711, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1605.04711"
+        },
+        {
+            "id": "Szegedy_et+al_2015_a",
+            "entry": "Szegedy, Christian, Liu, Wei, Jia, Yangqing, Sermanet, Pierre, Reed, Scott, Anguelov, Dragomir, Erhan, Dumitru, Vanhoucke, Vincent, and Rabinovich, Andrew. Going deeper with convolutions. In Proceedings of the IEEE conference on computer vision and pattern recognition, pp. 1\u20139, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Szegedy%2C%20Christian%20Liu%2C%20Wei%20Jia%2C%20Yangqing%20Sermanet%2C%20Pierre%20Going%20deeper%20with%20convolutions%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Szegedy%2C%20Christian%20Liu%2C%20Wei%20Jia%2C%20Yangqing%20Sermanet%2C%20Pierre%20Going%20deeper%20with%20convolutions%202015"
+        },
+        {
+            "id": "Tang_et+al_2017_a",
+            "entry": "Tang, Wei, Hua, Gang, and Wang, Liang. How to train a compact binary neural network with high accuracy? In AAAI, pp. 2625\u20132631, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tang%2C%20Wei%20Hua%2C%20Gang%20Wang%2C%20Liang%20How%20to%20train%20a%20compact%20binary%20neural%20network%20with%20high%20accuracy%3F%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tang%2C%20Wei%20Hua%2C%20Gang%20Wang%2C%20Liang%20How%20to%20train%20a%20compact%20binary%20neural%20network%20with%20high%20accuracy%3F%202017"
+        },
+        {
+            "id": "Umuroglu_et+al_2017_a",
+            "entry": "Umuroglu, Yaman, Fraser, Nicholas J, Gambardella, Giulio, Blott, Michaela, Leong, Philip, Jahre, Magnus, and Vissers, Kees. Finn: A framework for fast, scalable binarized neural network inference. In Proceedings of the 2017 ACM/SIGDA International Symposium on Field-Programmable Gate Arrays, pp. 65\u201374. ACM, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Umuroglu%2C%20Yaman%20Fraser%2C%20Nicholas%20J.%20Gambardella%2C%20Giulio%20Blott%2C%20Michaela%20Finn%3A%20A%20framework%20for%20fast%2C%20scalable%20binarized%20neural%20network%20inference%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Umuroglu%2C%20Yaman%20Fraser%2C%20Nicholas%20J.%20Gambardella%2C%20Giulio%20Blott%2C%20Michaela%20Finn%3A%20A%20framework%20for%20fast%2C%20scalable%20binarized%20neural%20network%20inference%202017"
+        },
+        {
+            "id": "Zhou_et+al_2016_a",
+            "entry": "Zhou, Shuchang, Wu, Yuxin, Ni, Zekun, Zhou, Xinyu, Wen, He, and Zou, Yuheng. Dorefa-net: Training low bitwidth convolutional neural networks with low bitwidth gradients. arXiv preprint arXiv:1606.06160, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.06160"
+        }
+    ]
+}

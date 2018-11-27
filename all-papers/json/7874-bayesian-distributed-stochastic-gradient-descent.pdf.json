@@ -1,0 +1,184 @@
+{
+    "filename": "7874-bayesian-distributed-stochastic-gradient-descent.pdf",
+    "metadata": {
+        "title": "Bayesian Distributed Stochastic Gradient Descent",
+        "author": "Michael Teng, Frank Wood",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7874-bayesian-distributed-stochastic-gradient-descent.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We introduce Bayesian distributed stochastic gradient descent (BDSGD), a highthroughput algorithm for training deep neural networks on parallel computing clusters. This algorithm uses amortized inference in a deep generative model to perform joint posterior predictive inference of mini-batch gradient computation times in a compute cluster specific manner. Specifically, our algorithm mitigates the straggler effect in synchronous, gradient-based optimization by choosing an optimal cutoff beyond which mini-batch gradient messages from slow workers are ignored. The principle novel contribution and finding of this work goes beyond this by demonstrating that using the predicted run-times from a generative model of cluster worker performance improves over the static-cutoff prior art, leading to higher gradient computation throughput on large compute clusters. In our experiments we show that eagerly discarding the mini-batch gradient computations of stragglers not only increases throughput but sometimes also increases the overall rate of convergence as a function of wall-clock time by virtue of eliminating idleness."
+    },
+    "keywords": [
+        {
+            "term": "gradient descent",
+            "url": "https://en.wikipedia.org/wiki/gradient_descent"
+        },
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "generative model",
+            "url": "https://en.wikipedia.org/wiki/generative_model"
+        },
+        {
+            "term": "stochastic gradient descent",
+            "url": "https://en.wikipedia.org/wiki/stochastic_gradient_descent"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        },
+        {
+            "term": "order statistic",
+            "url": "https://en.wikipedia.org/wiki/order_statistic"
+        }
+    ],
+    "highlights": [
+        "We use unbiased estimates of gradients to update parameter settings",
+        "To train the Bayesian distributed stochastic gradient descent generative models used, we first train the neural network architecture of interest using fully synchronous stochastic gradient descent and use the recorded worker runtimes during each stochastic gradient descent iteration to learn a corresponding generative model of that particular neural network\u2019s gradient computation times on the cluster",
+        "From one of the fully synchronous stochastic gradient descent runs used to gather runtime data for Bayesian distributed stochastic gradient descent model learning, we find that 40 of the workers localized to one machine node experience a temporary 2\u00d7 slowdown in gradient computation times, which we believe to have been caused by another job batched onto the node",
+        "In the final row of Figure 5, we demonstrate the ability for Bayesian distributed stochastic gradient descent prediction to be robust to the scenario in which performing amortized inference in the generative model exceeds the time it takes for workers to finish their gradient computations",
+        "We have presented a principled approach to achieving higher throughput in synchronous distributed gradient descent",
+        "Our primary contributions include describing how a model of worker runtimes can be used to predict order statistics that allow for a near optimal choice of straggler cutoff that maximizes gradient computation throughput"
+    ],
+    "key_statements": [
+        "We use unbiased estimates of gradients to update parameter settings",
+        "In this work we focus on parallel stochastic gradient descent (SGD)",
+        "To train the Bayesian distributed stochastic gradient descent generative models used, we first train the neural network architecture of interest using fully synchronous stochastic gradient descent and use the recorded worker runtimes during each stochastic gradient descent iteration to learn a corresponding generative model of that particular neural network\u2019s gradient computation times on the cluster",
+        "Bayesian distributed stochastic gradient descent model-based estimates of expected runtimes are sufficient to derive a straggler cutoff from their order statistics that leads to increased throughput and/or faster training times in real world situations.\n4.1",
+        "From one of the fully synchronous stochastic gradient descent runs used to gather runtime data for Bayesian distributed stochastic gradient descent model learning, we find that 40 of the workers localized to one machine node experience a temporary 2\u00d7 slowdown in gradient computation times, which we believe to have been caused by another job batched onto the node",
+        "For generative models of these neural network models on this cluster, we empirically find that training the latent variable model to directly emit sorted runtime order statistics is both faster to train and more accurate",
+        "In the final row of Figure 5, we demonstrate the ability for Bayesian distributed stochastic gradient descent prediction to be robust to the scenario in which performing amortized inference in the generative model exceeds the time it takes for workers to finish their gradient computations",
+        "We have presented a principled approach to achieving higher throughput in synchronous distributed gradient descent",
+        "Our primary contributions include describing how a model of worker runtimes can be used to predict order statistics that allow for a near optimal choice of straggler cutoff that maximizes gradient computation throughput",
+        "While the focus throughout has been on on vanilla stochastic gradient descent, it should be clear that our method and algorithm can be nearly trivially extended to most optimizers of choice so long as they are stochastic in their operation on the training set"
+    ],
+    "summary": [
+        "We use unbiased estimates of gradients to update parameter settings.",
+        "The idea of using amortized inference in a deep state space model to predict compute cluster worker run-times, in particular for use in a distributed synchronous gradient descent algorithm.",
+        "Setting the cutoff optimally and dynamically requires a model which is able to learn and predict the joint ordered run-times of all cluster workers.",
+        "While some clusters may approximate the strong assumptions required to use the Elfving formula for cutoff prediction, most compute clusters will emit joint order statistics of non-Gaussian distributed correlated random variables, for which no analytic expression exists.",
+        "The remaining tasks are to, given a set of training data, i.e. fully observed SGD runtimes specific to a cluster, learn \u03b8 and train an amortized inference network to perform realtime inference in said model.",
+        "Because we push estimates of the approximate posterior through the generative model, we have a predictive run-time distribution for the current iteration of SGD before receiving actual updates from any worker.",
+        "To train the BDSGD generative models used, we first train the neural network architecture of interest using fully synchronous SGD and use the recorded worker runtimes during each SGD iteration to learn a corresponding generative model of that particular neural network\u2019s gradient computation times on the cluster.",
+        "BDSGD model-based estimates of expected runtimes are sufficient to derive a straggler cutoff from their order statistics that leads to increased throughput and/or faster training times in real world situations.",
+        "On one cluster comprised of four nodes of 40 logical Intel Xeon processors, we benchmark Elfving and BDSGD cutoff predictors against the fully synchronous and fully asynchronous SGD with a 158-worker model by using each method to train a 2-layer CNN on MNIST classification.",
+        "From one of the fully synchronous SGD runs used to gather runtime data for BDSGD model learning, we find that 40 of the workers localized to one machine node experience a temporary 2\u00d7 slowdown in gradient computation times, which we believe to have been caused by another job batched onto the node.",
+        "In the final row of Figure 5, we demonstrate the ability for BDSGD prediction to be robust to the scenario in which performing amortized inference in the generative model exceeds the time it takes for workers to finish their gradient computations.",
+        "Our primary contributions include describing how a model of worker runtimes can be used to predict order statistics that allow for a near optimal choice of straggler cutoff that maximizes gradient computation throughput."
+    ],
+    "headline": "We introduce Bayesian distributed stochastic gradient descent , a highthroughput algorithm for training deep neural networks on parallel computing clusters",
+    "reference_links": [
+        {
+            "id": "Chen_et+al_2016_a",
+            "entry": "Jianmin Chen, Xinghao Pan, Rajat Monga, Samy Bengio, and Rafal Jozefowicz. Revisiting distributed synchronous SGD. arXiv preprint arXiv:1604.00981, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1604.00981"
+        },
+        {
+            "id": "Codreanu_et+al_2017_a",
+            "entry": "Valeriu Codreanu, Damian Podareanu, and Vikram Saletore. Scale out for large minibatch SGD: Residual network training on ImageNet-1k with improved accuracy and reduced time to train. arXiv preprint arXiv:1711.04291, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.04291"
+        },
+        {
+            "id": "Dean_et+al_2012_a",
+            "entry": "Jeffrey Dean, Greg Corrado, Rajat Monga, Kai Chen, Matthieu Devin, Mark Mao, Andrew Senior, Paul Tucker, Ke Yang, Quoc V Le, et al. Large scale distributed deep networks. In Advances in neural information processing systems, pages 1223\u20131231, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dean%2C%20Jeffrey%20Corrado%2C%20Greg%20Monga%2C%20Rajat%20Chen%2C%20Kai%20Large%20scale%20distributed%20deep%20networks%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dean%2C%20Jeffrey%20Corrado%2C%20Greg%20Monga%2C%20Rajat%20Chen%2C%20Kai%20Large%20scale%20distributed%20deep%20networks%202012"
+        },
+        {
+            "id": "Ergen_2017_a",
+            "entry": "Tolga Ergen and Suleyman S Kozat. Online training of LSTM networks in distributed systems for variable length data sequences. IEEE Transactions on Neural Networks and Learning Systems, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ergen%2C%20Tolga%20Kozat%2C%20Suleyman%20S.%20Online%20training%20of%20LSTM%20networks%20in%20distributed%20systems%20for%20variable%20length%20data%20sequences%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ergen%2C%20Tolga%20Kozat%2C%20Suleyman%20S.%20Online%20training%20of%20LSTM%20networks%20in%20distributed%20systems%20for%20variable%20length%20data%20sequences%202017"
+        },
+        {
+            "id": "Hoffer_et+al_2017_a",
+            "entry": "Elad Hoffer, Itay Hubara, and Daniel Soudry. Train longer, generalize better: closing the generalization gap in large batch training of neural networks. In Advances in Neural Information Processing Systems, pages 1729\u20131739, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hoffer%2C%20Elad%20Hubara%2C%20Itay%20Soudry%2C%20Daniel%20Train%20longer%2C%20generalize%20better%3A%20closing%20the%20generalization%20gap%20in%20large%20batch%20training%20of%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hoffer%2C%20Elad%20Hubara%2C%20Itay%20Soudry%2C%20Daniel%20Train%20longer%2C%20generalize%20better%3A%20closing%20the%20generalization%20gap%20in%20large%20batch%20training%20of%20neural%20networks%202017"
+        },
+        {
+            "id": "Kingma_2014_a",
+            "entry": "Diederik P Kingma and Jimmy Ba. Adam: A method for stochastic optimization. arXiv preprint arXiv:1412.6980, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6980"
+        },
+        {
+            "id": "Kingma_2013_a",
+            "entry": "Diederik P Kingma and Max Welling. Auto-encoding variational Bayes. arXiv preprint arXiv:1312.6114, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.6114"
+        },
+        {
+            "id": "Krishnan_et+al_2017_a",
+            "entry": "Rahul G Krishnan, Uri Shalit, and David Sontag. Structured Inference Networks for Nonlinear State Space Models. In AAAI, pages 2101\u20132109, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krishnan%2C%20Rahul%20G.%20Shalit%2C%20Uri%20Sontag%2C%20David%20Structured%20Inference%20Networks%20for%20Nonlinear%20State%20Space%20Models%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krishnan%2C%20Rahul%20G.%20Shalit%2C%20Uri%20Sontag%2C%20David%20Structured%20Inference%20Networks%20for%20Nonlinear%20State%20Space%20Models%202017"
+        },
+        {
+            "id": "Le_et+al_2017_a",
+            "entry": "T.A. Le, A.G. Baydin, and F. Wood. Inference Compilation and Universal Probabilistic Programming. In 20th International Conference on Artificial Intelligence and Statistics, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=TA%20Le%20AG%20Baydin%20and%20F%20Wood%20Inference%20Compilation%20and%20Universal%20Probabilistic%20Programming%20In%2020th%20International%20Conference%20on%20Artificial%20Intelligence%20and%20Statistics%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=TA%20Le%20AG%20Baydin%20and%20F%20Wood%20Inference%20Compilation%20and%20Universal%20Probabilistic%20Programming%20In%2020th%20International%20Conference%20on%20Artificial%20Intelligence%20and%20Statistics%202017"
+        },
+        {
+            "id": "Masters_2018_a",
+            "entry": "Dominic Masters and Carlo Luschi. Revisiting small batch training for deep neural networks. arXiv preprint arXiv:1804.07612, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1804.07612"
+        },
+        {
+            "id": "Mcmahan_2014_a",
+            "entry": "Brendan McMahan and Matthew Streeter. Delay-tolerant algorithms for asynchronous distributed online learning. In Advances in Neural Information Processing Systems, pages 2915\u20132923, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=McMahan%2C%20Brendan%20Streeter%2C%20Matthew%20Delay-tolerant%20algorithms%20for%20asynchronous%20distributed%20online%20learning%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=McMahan%2C%20Brendan%20Streeter%2C%20Matthew%20Delay-tolerant%20algorithms%20for%20asynchronous%20distributed%20online%20learning%202014"
+        },
+        {
+            "id": "Recht_et+al_2011_a",
+            "entry": "Benjamin Recht, Christopher Re, Stephen Wright, and Feng Niu. Hogwild: A lock-free approach to parallelizing stochastic gradient descent. In Advances in neural information processing systems, pages 693\u2013701, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Recht%2C%20Benjamin%20Re%2C%20Christopher%20Wright%2C%20Stephen%20Niu%2C%20Feng%20Hogwild%3A%20A%20lock-free%20approach%20to%20parallelizing%20stochastic%20gradient%20descent%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Recht%2C%20Benjamin%20Re%2C%20Christopher%20Wright%2C%20Stephen%20Niu%2C%20Feng%20Hogwild%3A%20A%20lock-free%20approach%20to%20parallelizing%20stochastic%20gradient%20descent%202011"
+        },
+        {
+            "id": "Rezende_2015_a",
+            "entry": "Danilo Jimenez Rezende and Shakir Mohamed. Variational inference with normalizing flows. arXiv preprint arXiv:1505.05770, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1505.05770"
+        },
+        {
+            "id": "Ritchie_et+al_2016_a",
+            "entry": "Daniel Ritchie, Paul Horsfall, and Noah D Goodman. Deep amortized inference for probabilistic programs. arXiv preprint arXiv:1610.05735, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1610.05735"
+        },
+        {
+            "id": "Royston_1982_a",
+            "entry": "JP Royston. Algorithm AS 177: Expected normal order statistics (exact and approximate). Journal of the royal statistical society. Series C (Applied statistics), 31(2):161\u2013165, 1982.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Royston%2C%20J.P.%20Algorithm%20AS%20177%3A%20Expected%20normal%20order%20statistics%20%28exact%20and%20approximate%29%201982",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Royston%2C%20J.P.%20Algorithm%20AS%20177%3A%20Expected%20normal%20order%20statistics%20%28exact%20and%20approximate%29%201982"
+        },
+        {
+            "id": "Smith_et+al_2017_a",
+            "entry": "Samuel L Smith, Pieter-Jan Kindermans, and Quoc V Le. Don\u2019t decay the learning rate, increase the batch size. arXiv preprint arXiv:1711.00489, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.00489"
+        },
+        {
+            "id": "You_et+al_0000_a",
+            "entry": "Yang You, Igor Gitman, and Boris Ginsburg. Scaling SGD batch size to 32k for ImageNet training. arXiv preprint arXiv:1708.03888, 2017a.",
+            "arxiv_url": "https://arxiv.org/pdf/1708.03888"
+        },
+        {
+            "id": "You_et+al_0000_b",
+            "entry": "Yang You, Zhao Zhang, C Hsieh, James Demmel, and Kurt Keutzer. ImageNet training in minutes. CoRR, abs/1709.05011, 2017b.",
+            "arxiv_url": "https://arxiv.org/pdf/1709.05011"
+        },
+        {
+            "id": "Zagoruyko_2016_a",
+            "entry": "Sergey Zagoruyko and Nikos Komodakis. Wide residual networks. arXiv preprint arXiv:1605.07146, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1605.07146"
+        },
+        {
+            "id": "Zhang_et+al_2015_a",
+            "entry": "Sixin Zhang, Anna E Choromanska, and Yann LeCun. Deep learning with elastic averaging SGD. In Advances in Neural Information Processing Systems, pages 685\u2013693, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Sixin%20Choromanska%2C%20Anna%20E.%20LeCun%2C%20Yann%20Deep%20learning%20with%20elastic%20averaging%20SGD%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Sixin%20Choromanska%2C%20Anna%20E.%20LeCun%2C%20Yann%20Deep%20learning%20with%20elastic%20averaging%20SGD%202015"
+        }
+    ]
+}

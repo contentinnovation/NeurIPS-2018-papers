@@ -1,0 +1,245 @@
+{
+    "filename": "7649-faster-neural-networks-straight-from-jpeg.pdf",
+    "metadata": {
+        "title": "Faster Neural Networks Straight from JPEG",
+        "author": "Lionel Gueguen, Alex Sergeev, Ben Kadlec, Rosanne Liu, Jason Yosinski",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7649-faster-neural-networks-straight-from-jpeg.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "The simple, elegant approach of training convolutional neural networks (CNNs) directly from RGB pixels has enjoyed overwhelming empirical success. But could more performance be squeezed out of networks by using different input representations? In this paper we propose and explore a simple idea: train CNNs directly on the blockwise discrete cosine transform (DCT) coefficients computed and available in the middle of the JPEG codec. Intuitively, when processing JPEG images using CNNs, it seems unnecessary to decompress a blockwise frequency representation to an expanded pixel representation, shuffle it from CPU to GPU, and then process it with a CNN that will learn something similar to a transform back to frequency representation in its first layers. Why not skip both steps and feed the frequency domain into the network directly? In this paper, we modify libjpeg to produce DCT coefficients directly, modify a ResNet-50 network to accommodate the differently sized and strided input, and evaluate performance on ImageNet. We find networks that are both faster and more accurate, as well as networks with about the same accuracy but 1.77x faster than ResNet-50.",
+        "doc_ids": [
+            "ISO/IEC 10918"
+        ]
+    },
+    "keywords": [
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "convolutional neural networks",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_networks"
+        },
+        {
+            "term": "graphics processing unit",
+            "url": "https://en.wikipedia.org/wiki/graphics_processing_unit"
+        },
+        {
+            "term": "frames per second",
+            "url": "https://en.wikipedia.org/wiki/frames_per_second"
+        },
+        {
+            "term": "Single Instruction Multiple Data",
+            "url": "https://en.wikipedia.org/wiki/Single_Instruction_Multiple_Data"
+        },
+        {
+            "term": "discrete cosine transform",
+            "url": "https://en.wikipedia.org/wiki/discrete_cosine_transform"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "The amazing progress toward training neural networks, particularly convolutional neural networks [<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>], to attain good performance on a variety of tasks [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>, <a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>, <a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>, <a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>] has led to the widespread adoption of such models in both academia and industry",
+        "We propose and explore a simple idea for accelerating neural network training and inference in the common scenario where networks are applied to images encoded in the JPEG format",
+        "Images would typically be decoded from a compressed format to an array of RGB pixels and fed into a neural network",
+        "Inference time measurements are calculated by running the inference on 20 batches of size 1024 \u21e5 224 \u21e5 224 \u21e5 3 on the 128 graphics processing unit where the overall time is collected, and the effective number of images per second per graphics processing unit is calculated",
+        "We proposed and tested the simple idea of training convolutional neural networks directly on the blockwise discrete cosine transform (DCT) coefficients computed as part of the JPEG codec",
+        "Results are compelling: at a similar performance to a ResNet-50 baseline, we observed speedups of 1.77x, and at performance significantly better than the baseline, we obtained speedups of 1.3x. This simple change of input representation may be an effective method of accelerating processing in a wide range of speed-sensitive applications, from processing large data sets in data-centers to processing JPEG images locally on mobile devices"
+    ],
+    "key_statements": [
+        "The amazing progress toward training neural networks, particularly convolutional neural networks [<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>], to attain good performance on a variety of tasks [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>, <a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>, <a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>, <a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>] has led to the widespread adoption of such models in both academia and industry",
+        "We propose and explore a simple idea for accelerating neural network training and inference in the common scenario where networks are applied to images encoded in the JPEG format",
+        "Images would typically be decoded from a compressed format to an array of RGB pixels and fed into a neural network",
+        "We review the JPEG codec in more detail, giving intuition for steps in the process that have features appropriate for neural network training (Sec. 2)",
+        "We describe transforms that facilitate the adoption of discrete cosine transform coefficients by a conventional convolutional neural networks architecture such as ResNet-50 [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>]",
+        "We examine the representation size resulting from the discrete cosine transform operation, and when compared with the same set of parameters of a ResNet-50 at various blocks, we find that the spatial dimensions of DY matches the activation dimensions of Block 3, while the spatial dimensions of DCr and DCb matches those from Block 4",
+        "Inference time measurements are calculated by running the inference on 20 batches of size 1024 \u21e5 224 \u21e5 224 \u21e5 3 on the 128 graphics processing unit where the overall time is collected, and the effective number of images per second per graphics processing unit is calculated",
+        "We proposed and tested the simple idea of training convolutional neural networks directly on the blockwise discrete cosine transform (DCT) coefficients computed as part of the JPEG codec",
+        "Results are compelling: at a similar performance to a ResNet-50 baseline, we observed speedups of 1.77x, and at performance significantly better than the baseline, we obtained speedups of 1.3x. This simple change of input representation may be an effective method of accelerating processing in a wide range of speed-sensitive applications, from processing large data sets in data-centers to processing JPEG images locally on mobile devices"
+    ],
+    "summary": [
+        "The amazing progress toward training neural networks, particularly convolutional neural networks [<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>], to attain good performance on a variety of tasks [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>, <a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>, <a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>, <a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>] has led to the widespread adoption of such models in both academia and industry.",
+        "As explained in Fig. S1 for details, because the spatial size is smaller than in a standard ResNet, we use a larger number of channels in the early blocks.",
+        "As we will observe in Sec. 5 and Fig. 5, many of the networks taking DCT as input perform with lower error and/or higher speed than the baseline ResNet-50 RGB.",
+        "The network shares similarities with the UpSampling architecture, where the RGB signal is transformed with a small number of convolutions to a representation size of 28 \u21e5 28 \u21e5 512.",
+        "4.3 Learning the DCT Transform A final set of four experiments \u2014 shown in Fig. 5 as four \u201cYCbCr pixels, DCT layer\u201d diamonds \u2014 address whether we can obtain a similar benefit to the DCT architectures but starting from RGB pixels by using convolutional layers designed to replicate, exactly or approximately, the DCT transform.",
+        "This is interesting because it departs from network design rules of thumb currently in vogue: first layer filters are large instead of small, hard-coded instead of learned, run on YCbCr space instead of RGB, and process channels depthwise instead of together.",
+        "A limitation of using a JPEG representation during training is that to do data augmentation e.g. via random crops, one must decompress the image, transform it, and re-encode it before accessing the DCT coefficients.",
+        "Both ResNet baselines achieve a top-5 error rate of 7.35% at an inference speed of 208 FPS on an NVIDIA Pascal GPU, while the best DCT network achieves it at 6.98% with 268 FPS.",
+        "The first category contains those where DCT coefficients are directly connected with the ResNet-50 architecture; this includes UpSampling, DownSampling, and Late-Concat.",
+        "A third category attempts to further improve the RFA architectures, by (1) learning the upsampling operation with Deconvolution-RFA, and (2) reducing the number of channels with Late-Concat-RFA-Thinner.",
+        "In analyzing results from RGB network controls, we observe a continual increase in inference speed and GFLOPS coupled with an increase in error rates, as the network size is reduced.",
+        "The Deconvolution-RFA architecture achieves the smallest top-5 error rate overall, while still improving inference speed by 30% over the baseline.",
+        "These results show that learning the DCT filters is hard with one convolution layer and produce sub-performant networks.",
+        "We proposed and tested the simple idea of training CNNs directly on the blockwise discrete cosine transform (DCT) coefficients computed as part of the JPEG codec.",
+        "This simple change of input representation may be an effective method of accelerating processing in a wide range of speed-sensitive applications, from processing large data sets in data-centers to processing JPEG images locally on mobile devices"
+    ],
+    "headline": "Could more performance be squeezed out of networks by using different input representations? In this paper we propose and explore a simple idea: train convolutional neural networks directly on the blockwise discrete cosine transform  coefficients computed and available in the middle of the JPEG codec",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Amir Adler, Michael Elad, and Michael Zibulevsky. Compressed learning: A deep neural network approach. arXiv preprint arXiv:1610.09615, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1610.09615"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Andrew Brock, Theodore Lim, JM Ritchie, and Nick Weston. Neural photo editing with introspective adversarial networks. In 5th International Conference on Learning Representations, Toulon, France, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Brock%2C%20Andrew%20Theodore%20Lim%2C%20J.M.Ritchie%20Weston%2C%20Nick%20Neural%20photo%20editing%20with%20introspective%20adversarial%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Brock%2C%20Andrew%20Theodore%20Lim%2C%20J.M.Ritchie%20Weston%2C%20Nick%20Neural%20photo%20editing%20with%20introspective%20adversarial%20networks%202017"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Francois Chollet. Xception: Deep learning with depthwise separable convolutions. CoRR, abs/1610.02357, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1610.02357"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Jia Deng, Wei Dong, Richard Socher, Li-Jia Li, Kai Li, and Li Fei-Fei. Imagenet: A large-scale hierarchical image database. In Computer Vision and Pattern Recognition, 2009. CVPR 2009. IEEE Conference on, pages 248\u2013255. IEEE, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Deng%2C%20Jia%20Dong%2C%20Wei%20Socher%2C%20Richard%20Li%2C%20Li-Jia%20Imagenet%3A%20A%20large-scale%20hierarchical%20image%20database%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Deng%2C%20Jia%20Dong%2C%20Wei%20Socher%2C%20Richard%20Li%2C%20Li-Jia%20Imagenet%3A%20A%20large-scale%20hierarchical%20image%20database%202009"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Guocan Feng and Jianmin Jiang. Jpeg compressed image retrieval via statistical features. Pattern Recognition, 36(4):977\u2013985, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Feng%2C%20Guocan%20Jiang%2C%20Jianmin%20Jpeg%20compressed%20image%20retrieval%20via%20statistical%20features%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Feng%2C%20Guocan%20Jiang%2C%20Jianmin%20Jpeg%20compressed%20image%20retrieval%20via%20statistical%20features%202003"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Dan Fu and Gabriel Guimaraes. Using compression to speed up image classification in artificial neural networks. 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fu%2C%20Dan%20Guimaraes%2C%20Gabriel%20Using%20compression%20to%20speed%20up%20image%20classification%20in%20artificial%20neural%20networks%202016"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Lionel Gueguen and Mihai Datcu. A similarity metric for retrieval of compressed objects: Application for mining satellite image time series. IEEE Transactions on Knowledge and Data Engineering, 20(4):562\u2013575, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gueguen%2C%20Lionel%20Datcu%2C%20Mihai%20A%20similarity%20metric%20for%20retrieval%20of%20compressed%20objects%3A%20Application%20for%20mining%20satellite%20image%20time%20series%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gueguen%2C%20Lionel%20Datcu%2C%20Mihai%20A%20similarity%20metric%20for%20retrieval%20of%20compressed%20objects%3A%20Application%20for%20mining%20satellite%20image%20time%20series%202008"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Ziad M Hafed and Martin D Levine. Face recognition using the discrete cosine transform. International journal of computer vision, 43(3):167\u2013188, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hafed%2C%20Ziad%20M.%20Levine%2C%20Martin%20D.%20Face%20recognition%20using%20the%20discrete%20cosine%20transform%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hafed%2C%20Ziad%20M.%20Levine%2C%20Martin%20D.%20Face%20recognition%20using%20the%20discrete%20cosine%20transform%202001"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Song Han, Huizi Mao, and William J. Dally. Deep compression: Compressing deep neural network with pruning, trained quantization and huffman coding. CoRR, abs/1510.00149, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1510.00149"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. CoRR, abs/1512.03385, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1512.03385"
+        },
+        {
+            "id": "11",
+            "entry": "[11] G. Hudson, A. Lger, B. Niss, and I. Sebestyn. Jpeg at 25: Still going strong. IEEE MultiMedia, 24(2):96\u2013103, Apr 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hudson%2C%20G.%20Lger%2C%20A.%20Niss%2C%20B.%20Sebestyn%2C%20I.%20Jpeg%20at%2025%3A%20Still%20going%20strong%202017-04",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hudson%2C%20G.%20Lger%2C%20A.%20Niss%2C%20B.%20Sebestyn%2C%20I.%20Jpeg%20at%2025%3A%20Still%20going%20strong%202017-04"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Forrest N. Iandola, Matthew W. Moskewicz, Khalid Ashraf, Song Han, William J. Dally, and Kurt Keutzer. Squeezenet: Alexnet-level accuracy with 50x fewer parameters and <1mb model size. CoRR, abs/1602.07360, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1602.07360"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Alex Krizhevsky, Ilya Sutskever, and Geoff Hinton. Imagenet classification with deep convolutional neural networks. In Advances in Neural Information Processing Systems 25, pages 1106\u20131114, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Hinton%2C%20Geoff%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Hinton%2C%20Geoff%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Y. Lecun, L. Bottou, Y. Bengio, and P. Haffner. Gradient-based learning applied to document recognition. Proceedings of the IEEE, 86(11):2278\u20132324, Nov 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lecun%2C%20Y.%20Bottou%2C%20L.%20Bengio%2C%20Y.%20Haffner%2C%20P.%20Gradient-based%20learning%20applied%20to%20document%20recognition%201998-11",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lecun%2C%20Y.%20Bottou%2C%20L.%20Bengio%2C%20Y.%20Haffner%2C%20P.%20Gradient-based%20learning%20applied%20to%20document%20recognition%201998-11"
+        },
+        {
+            "id": "15",
+            "entry": "[15] libjpeg. Jpeg library. http://libjpeg.sourceforge.net/, 2018.[Online; accessed February 6, 2018].",
+            "url": "http://libjpeg.sourceforge.net/"
+        },
+        {
+            "id": "16",
+            "entry": "[16] libjpeg-turbo. Jpeg library turbo, 2018. [Online; accessed February 6, 2018].",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=libjpeg-turbo%20Jpeg%20library%202018"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Shizhong Liu and A. C. Bovik. Efficient dct-domain blind measurement and reduction of blocking artifacts. IEEE Transactions on Circuits and Systems for Video Technology, 12(12):1139\u2013 1149, Dec 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20Shizhong%20Bovik%2C%20A.C.%20Efficient%20dct-domain%20blind%20measurement%20and%20reduction%20of%20blocking%20artifacts%201149-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liu%2C%20Shizhong%20Bovik%2C%20A.C.%20Efficient%20dct-domain%20blind%20measurement%20and%20reduction%20of%20blocking%20artifacts%201149-12"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Mrinal K Mandal, F Idris, and Sethuraman Panchanathan. A critical evaluation of image and video indexing techniques in the compressed domain. Image and Vision Computing, 17(7):513\u2013529, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mandal%2C%20Mrinal%20K.%20Idris%2C%20F.%20Panchanathan%2C%20Sethuraman%20A%20critical%20evaluation%20of%20image%20and%20video%20indexing%20techniques%20in%20the%20compressed%20domain%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mandal%2C%20Mrinal%20K.%20Idris%2C%20F.%20Panchanathan%2C%20Sethuraman%20A%20critical%20evaluation%20of%20image%20and%20video%20indexing%20techniques%20in%20the%20compressed%20domain%201999"
+        },
+        {
+            "id": "19",
+            "entry": "[19] V. Mnih, K. Kavukcuoglu, D. Silver, A. Graves, I. Antonoglou, D. Wierstra, and M. Riedmiller. Playing Atari with Deep Reinforcement Learning. ArXiv e-prints, December 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20V.%20Kavukcuoglu%2C%20K.%20Silver%2C%20D.%20Graves%2C%20A.%20Playing%20Atari%20with%20Deep%20Reinforcement%20Learning.%20ArXiv%20e-prints%202013-12"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Shaoqing Ren, Kaiming He, Ross Girshick, and Jian Sun. Faster r-cnn: Towards real-time object detection with region proposal networks. In Advances in neural information processing systems, pages 91\u201399, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ren%2C%20Shaoqing%20He%2C%20Kaiming%20Girshick%2C%20Ross%20Sun%2C%20Jian%20Faster%20r-cnn%3A%20Towards%20real-time%20object%20detection%20with%20region%20proposal%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ren%2C%20Shaoqing%20He%2C%20Kaiming%20Girshick%2C%20Ross%20Sun%2C%20Jian%20Faster%20r-cnn%3A%20Towards%20real-time%20object%20detection%20with%20region%20proposal%20networks%202015"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Alex Sergeev and Mike Del Balso. Meet Horovod: Uber\u2019s open source distributed deep learning framework for TensorFlow, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sergeev%2C%20Alex%20Balso%2C%20Mike%20Del%20Meet%20Horovod%3A%20Uber%E2%80%99s%20open%20source%20distributed%20deep%20learning%20framework%20for%20TensorFlow%202017"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Bo Shen and Ishwar K Sethi. Direct feature extraction from compressed images. In Storage and Retrieval for Still Image and Video Databases IV, volume 2670, pages 404\u2013415. International Society for Optics and Photonics, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shen%2C%20Bo%20Sethi%2C%20Ishwar%20K.%20Direct%20feature%20extraction%20from%20compressed%20images.%20In%20Storage%20and%20Retrieval%20for%20Still%20Image%20and%20Video%20Databases%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shen%2C%20Bo%20Sethi%2C%20Ishwar%20K.%20Direct%20feature%20extraction%20from%20compressed%20images.%20In%20Storage%20and%20Retrieval%20for%20Still%20Image%20and%20Video%20Databases%201996"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Martin Srom. gpujpeg, 2018. [Online; accessed February 6, 2018].",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Martin%20Srom%20gpujpeg%202018%20Online%20accessed%20February%206%202018"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Robert Torfason, Fabian Mentzer, Eirikur Agustsson, Michael Tschannen, Radu Timofte, and Luc Van Gool. Towards image understanding from deep compression without decoding. arXiv preprint arXiv:1803.06131, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.06131"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Matej Ulicny and Rozenn Dahyot. On using cnn with dct based image data. In Proceedings of the 19th Irish Machine Vision and Image Processing conference IMVIP, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ulicny%2C%20Matej%20Dahyot%2C%20Rozenn%20On%20using%20cnn%20with%20dct%20based%20image%20data%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ulicny%2C%20Matej%20Dahyot%2C%20Rozenn%20On%20using%20cnn%20with%20dct%20based%20image%20data%202017"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Wikipedia. Jpeg, 2018. [Online; accessed February 6, 2018].",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wikipedia%20Jpeg%202018%20Online%20accessed%20February%206%202018"
+        },
+        {
+            "id": "27",
+            "entry": "[27] J. Yosinski, J. Clune, Y. Bengio, and H. Lipson. How transferable are features in deep neural networks? In Z. Ghahramani, M. Welling, C. Cortes, N.D. Lawrence, and K.Q. Weinberger, editors, Advances in Neural Information Processing Systems 27, pages 3320\u20133328. Curran Associates, Inc., December 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yosinski%2C%20J.%20Clune%2C%20J.%20Bengio%2C%20Y.%20Lipson%2C%20H.%20How%20transferable%20are%20features%20in%20deep%20neural%20networks%3F%202014-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yosinski%2C%20J.%20Clune%2C%20J.%20Bengio%2C%20Y.%20Lipson%2C%20H.%20How%20transferable%20are%20features%20in%20deep%20neural%20networks%3F%202014-12"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Jason Yosinski, Jeff Clune, Anh Nguyen, Thomas Fuchs, and Hod Lipson. Understanding neural networks through deep visualization. In Deep Learning Workshop, International Conference on Machine Learning (ICML), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yosinski%2C%20Jason%20Clune%2C%20Jeff%20Nguyen%2C%20Anh%20Fuchs%2C%20Thomas%20Understanding%20neural%20networks%20through%20deep%20visualization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yosinski%2C%20Jason%20Clune%2C%20Jeff%20Nguyen%2C%20Anh%20Fuchs%2C%20Thomas%20Understanding%20neural%20networks%20through%20deep%20visualization%202015"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Matthew D Zeiler and Rob Fergus. Visualizing and understanding convolutional neural networks. arXiv preprint arXiv:1311.2901, 2013. ",
+            "arxiv_url": "https://arxiv.org/pdf/1311.2901"
+        }
+    ]
+}

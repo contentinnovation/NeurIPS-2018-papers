@@ -1,0 +1,290 @@
+{
+    "filename": "7779-generalizing-to-unseen-domains-via-adversarial-data-augmentation.pdf",
+    "metadata": {
+        "title": "Generalizing to Unseen Domains via Adversarial Data Augmentation",
+        "author": "Riccardo Volpi, Hongseok Namkoong, Ozan Sener, John C. Duchi, Vittorio Murino, Silvio Savarese",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7779-generalizing-to-unseen-domains-via-adversarial-data-augmentation.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We are concerned with learning models that generalize well to different unseen domains. We consider a worst-case formulation over data distributions that are near the source domain in the feature space. Only using training data from a single source distribution, we propose an iterative procedure that augments the dataset with examples from a fictitious target domain that is \"hard\" under the current model. We show that our iterative scheme is an adaptive data augmentation method where we append adversarial examples at each iteration. For softmax losses, we show that our method is a data-dependent regularization scheme that behaves differently from classical regularizers that regularize towards zero (e.g., ridge or lasso). On digit recognition and semantic segmentation tasks, our method learns models improve performance across a range of a priori unknown target domains."
+    },
+    "keywords": [
+        {
+            "term": "domain adaptation",
+            "url": "https://en.wikipedia.org/wiki/domain_adaptation"
+        },
+        {
+            "term": "iterative procedure",
+            "url": "https://en.wikipedia.org/wiki/iterative_procedure"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "In many modern applications of machine learning, we wish to learn a system that can perform uniformly well across multiple populations",
+        "We evaluate our method for both classification and semantic segmentation settings, following the evaluation scenarios of domain adaptation techniques [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>, <a class=\"ref-link\" id=\"c39\" href=\"#r39\">39</a>, <a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>], though in our case the target domains are unknown at training time",
+        "We report a comparison between models trained with Empirical Risk Minimization and models trained with our method (Algorithm 1 with K = 1)",
+        "We study a new adversarial data augmentation procedure that learns to better generalize across unseen data distributions, and define an ensemble method to exploit this technique in a classification framework",
+        "This is in contrast to domain adaptation algorithms, which require a sufficient number of samples from a known, a priori fixed target distribution",
+        "Our experimental results show that our iterative procedure provides broad generalization behavior on digit recognition and cross-season and cross-weather semantic segmentation tasks"
+    ],
+    "key_statements": [
+        "In many modern applications of machine learning, we wish to learn a system that can perform uniformly well across multiple populations",
+        "Iterative Procedure We propose an iterative training procedure where two phases are alternated: a maximization phase where new data points are learned by computing the inner maximization problem (5) and a minimization phase, where the model parameters are updated according to stochastic gradients of the loss evaluated on the adversarial examples generated from the maximization phase",
+        "We evaluate our method for both classification and semantic segmentation settings, following the evaluation scenarios of domain adaptation techniques [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>, <a class=\"ref-link\" id=\"c39\" href=\"#r39\">39</a>, <a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>], though in our case the target domains are unknown at training time",
+        "We further report in Appendix B a comparison between our method and an unsupervised domain adaptation algorithm (ADDA [<a class=\"ref-link\" id=\"c39\" href=\"#r39\">39</a>]), and results associated with different values of the hyperparameters \u03b3 and K",
+        "We report a comparison between models trained with Empirical Risk Minimization and models trained with our method (Algorithm 1 with K = 1)",
+        "The main reason for this choice is the fact that the heuristics developed to choose the correct model at test time in effect cannot be applied in a straightforward fashion to a semantic segmentation problem",
+        "We study a new adversarial data augmentation procedure that learns to better generalize across unseen data distributions, and define an ensemble method to exploit this technique in a classification framework",
+        "This is in contrast to domain adaptation algorithms, which require a sufficient number of samples from a known, a priori fixed target distribution",
+        "Our experimental results show that our iterative procedure provides broad generalization behavior on digit recognition and cross-season and cross-weather semantic segmentation tasks",
+        "Quantifying the behavior of data-dependent regularization schemes presented in Section 3 would help us better understand adversarial training methods in general"
+    ],
+    "summary": [
+        "In many modern applications of machine learning, we wish to learn a system that can perform uniformly well across multiple populations.",
+        "A number of authors have proposed domain adaptation methods in settings where a fully labeled source dataset and an unlabeled set of examples from fixed target distributions are available.",
+        "\u0398 \u2208 \u0398 is the model, (X, Y ) \u2208 X \u00d7 Y is a source data point with its labeling, : X \u00d7 Y \u2192 R is the loss function, and D(P, Q) is a distance metric on the space of probability distributions.",
+        "We propose an iterative procedure that aims to solve the problem (1) for a small value of \u03c1 at a time, and does stochastic gradient updates to the model \u03b8 with respect to these fictitious worst-case target distributions (Section 2).",
+        "We observe that our method allows to learn models that improve performance across a priori unknown target distributions that have varying distance from the original source domain.",
+        "We adapt this idea in our setting, learning ensemble of models trained with our method and choosing at test time the model with the greatest maximum softmax value.",
+        "Iterative Procedure We propose an iterative training procedure where two phases are alternated: a maximization phase where new data points are learned by computing the inner maximization problem (5) and a minimization phase, where the model parameters are updated according to stochastic gradients of the loss evaluated on the adversarial examples generated from the maximization phase.",
+        "In our iterative algorithm (Algorithm 1), the maximization phase (8) was a key step that augmented the dataset with adversarially perturbed data points, which was followed by standard stochastic gradient updates to the model parameters.",
+        "We evaluate our method for both classification and semantic segmentation settings, following the evaluation scenarios of domain adaptation techniques [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>, <a class=\"ref-link\" id=\"c39\" href=\"#r39\">39</a>, <a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>], though in our case the target domains are unknown at training time.",
+        "We use 10, 000 digit samples for training and evaluate our models on the respective test sets of the different target domains, using accuracy as a metric.",
+        "Figure 1a shows performances of models trained with our method using different values of the hyperparameter \u03b3 and with ERM.",
+        "On USPS, our method causes accuracy to drop since MNIST and USPS are very similar datasets, the image domain that USPS belongs to is not explored by our algorithm during the training procedure, which optimizes for worst case performance.",
+        "We study a new adversarial data augmentation procedure that learns to better generalize across unseen data distributions, and define an ensemble method to exploit this technique in a classification framework.",
+        "Quantifying the behavior of data-dependent regularization schemes presented in Section 3 would help us better understand adversarial training methods in general"
+    ],
+    "headline": "Using training data from a single source distribution, we propose an iterative procedure that augments the dataset with examples from a fictitious target domain that is \"hard\" under the current model",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Shai Ben-David, John Blitzer, Koby Crammer, and Fernando Pereira. Analysis of representations for domain adaptation. In B. Sch\u00f6lkopf, J. C. Platt, and T. Hoffman, editors, Advances in Neural Information Processing Systems 19, pages 137\u2013144. MIT Press, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ben-David%2C%20Shai%20Blitzer%2C%20John%20Crammer%2C%20Koby%20Pereira%2C%20Fernando%20Analysis%20of%20representations%20for%20domain%20adaptation%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ben-David%2C%20Shai%20Blitzer%2C%20John%20Crammer%2C%20Koby%20Pereira%2C%20Fernando%20Analysis%20of%20representations%20for%20domain%20adaptation%202007"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Jose Blanchet and Karthyek Murthy. Quantifying distributional model risk via optimal transport. arXiv:1604.01446 [math.PR], 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1604.01446"
+        },
+        {
+            "id": "3",
+            "entry": "[3] John Blitzer, Ryan McDonald, and Fernando Pereira. Domain adaptation with structural correspondence learning. In Proceedings of the 2006 Conference on Empirical Methods in Natural Language Processing, EMNLP \u201906, pages 120\u2013128, Stroudsburg, PA, USA, 2006. Association for Computational Linguistics.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Blitzer%2C%20John%20McDonald%2C%20Ryan%20Pereira%2C%20Fernando%20Domain%20adaptation%20with%20structural%20correspondence%20learning%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Blitzer%2C%20John%20McDonald%2C%20Ryan%20Pereira%2C%20Fernando%20Domain%20adaptation%20with%20structural%20correspondence%20learning%202006"
+        },
+        {
+            "id": "4",
+            "entry": "[4] J Fr\u00e9d\u00e9ric Bonnans and Alexander Shapiro. Perturbation analysis of optimization problems. Springer Science & Business Media, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bonnans%2C%20J.Fr%C3%A9d%C3%A9ric%20Shapiro%2C%20Alexander%20Perturbation%20analysis%20of%20optimization%20problems%202013"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Stephen Boyd and Lieven Vandenberghe. Convex Optimization. Cambridge University Press, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Boyd%2C%20Stephen%20Vandenberghe%2C%20Lieven%20Convex%20Optimization%202004"
+        },
+        {
+            "id": "6",
+            "entry": "[6] J. S. Denker, W. R. Gardner, H. P. Graf, D. Henderson, R. E. Howard, W. Hubbard, L. D. Jackel, H. S. Baird, and I. Guyon. Advances in neural information processing systems 1. chapter Neural Network Recognizer for Hand-written Zip Code Digits, pages 323\u2013331. 1989.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Denker%2C%20J.S.%20Gardner%2C%20W.R.%20Graf%2C%20H.P.%20Henderson%2C%20D.%20Advances%20in%20neural%20information%20processing%20systems%201.%20chapter%20Neural%20Network%20Recognizer%20for%20Hand-written%20Zip%20Code%20Digits%201989"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Alexey Dosovitskiy and Thomas Brox. Generating images with perceptual similarity metrics based on deep networks. In Advances in Neural Information Processing Systems, pages 658\u2013666, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dosovitskiy%2C%20Alexey%20Brox%2C%20Thomas%20Generating%20images%20with%20perceptual%20similarity%20metrics%20based%20on%20deep%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dosovitskiy%2C%20Alexey%20Brox%2C%20Thomas%20Generating%20images%20with%20perceptual%20similarity%20metrics%20based%20on%20deep%20networks%202016"
+        },
+        {
+            "id": "8",
+            "entry": "[8] M. Everingham, L. Van Gool, C. K. I. Williams, J. Winn, and A. Zisserman. The PASCAL Visual Object Classes Challenge 2008 (VOC2008) Results. http://www.pascalnetwork.org/challenges/VOC/voc2008/workshop/index.html.",
+            "url": "http://www.pascalnetwork.org/challenges/VOC/voc2008/workshop/index.html"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Yaroslav Ganin and Victor S. Lempitsky. Unsupervised domain adaptation by backpropagation. In Proceedings of the 32nd International Conference on Machine Learning, ICML 2015, Lille, France, 6-11 July 2015, pages 1180\u20131189, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ganin%2C%20Yaroslav%20Lempitsky%2C%20Victor%20S.%20Unsupervised%20domain%20adaptation%20by%20backpropagation%202015-07-06",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ganin%2C%20Yaroslav%20Lempitsky%2C%20Victor%20S.%20Unsupervised%20domain%20adaptation%20by%20backpropagation%202015-07-06"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Ian Goodfellow, Jonathon Shlens, and Christian Szegedy. Explaining and harnessing adversarial examples. In International Conference on Learning Representations, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goodfellow%2C%20Ian%20Shlens%2C%20Jonathon%20Szegedy%2C%20Christian%20Explaining%20and%20harnessing%20adversarial%20examples%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goodfellow%2C%20Ian%20Shlens%2C%20Jonathon%20Szegedy%2C%20Christian%20Explaining%20and%20harnessing%20adversarial%20examples%202015"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. CoRR, abs/1512.03385, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1512.03385"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Christina Heinze-Deml and Nicolai Meinshausen. Conditional variance penalties and domain shift robustness. arXiv preprint arXiv:1710.11469, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.11469"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Dan Hendrycks and Kevin Gimpel. A baseline for detecting misclassified and out-of-distribution examples in neural networks. CoRR, abs/1610.02136, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1610.02136"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Judy Hoffman, Dequan Wang, Fisher Yu, and Trevor Darrell. Fcns in the wild: Pixel-level adversarial and constraint-based adaptation. CoRR, abs/1612.02649, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1612.02649"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Hal Daum\u00e9 III and Daniel Marcu. Domain adaptation for statistical classifiers. CoRR, abs/1109.6341, 2011.",
+            "arxiv_url": "https://arxiv.org/pdf/1109.6341"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Justin Johnson, Alexandre Alahi, and Li Fei-Fei. Perceptual losses for real-time style transfer and super-resolution. In European Conference on Computer Vision, pages 694\u2013711.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Johnson%2C%20Justin%20Alahi%2C%20Alexandre%20Fei-Fei%2C%20Li%20Perceptual%20losses%20for%20real-time%20style%20transfer%20and%20super-resolution",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Johnson%2C%20Justin%20Alahi%2C%20Alexandre%20Fei-Fei%2C%20Li%20Perceptual%20losses%20for%20real-time%20style%20transfer%20and%20super-resolution"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Diederik P. Kingma and Jimmy Ba. Adam: A method for stochastic optimization. CoRR, abs/1412.6980, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6980"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Yann LeCun, Bernhard E. Boser, John S. Denker, Donnie Henderson, Richard E. Howard, Wayne E. Hubbard, and Lawrence D. Jackel. Backpropagation applied to handwritten zip code recognition. Neural Computation, 1(4):541\u2013551, 1989.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=LeCun%2C%20Yann%20Boser%2C%20Bernhard%20E.%20Denker%2C%20John%20S.%20Henderson%2C%20Donnie%20Backpropagation%20applied%20to%20handwritten%20zip%20code%20recognition%201989",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=LeCun%2C%20Yann%20Boser%2C%20Bernhard%20E.%20Denker%2C%20John%20S.%20Henderson%2C%20Donnie%20Backpropagation%20applied%20to%20handwritten%20zip%20code%20recognition%201989"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Yann LeCun, L\u00e9on Bottou, Yoshua Bengio, and Patrick Haffner. Gradient-based learning applied to document recognition. In Proceedings of the IEEE, pages 2278\u20132324, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=LeCun%2C%20Yann%20Bottou%2C%20L%C3%A9on%20Bengio%2C%20Yoshua%20Haffner%2C%20Patrick%20Gradient-based%20learning%20applied%20to%20document%20recognition%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=LeCun%2C%20Yann%20Bottou%2C%20L%C3%A9on%20Bengio%2C%20Yoshua%20Haffner%2C%20Patrick%20Gradient-based%20learning%20applied%20to%20document%20recognition%201998"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Jaeho Lee and Maxim Raginsky. Minimax statistical learning and domain adaptation with wasserstein distances. arXiv preprint arXiv:1705.07815, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1705.07815"
+        },
+        {
+            "id": "21",
+            "entry": "[21] K Levenberg. A method for the solution of certain problems in least squares. quart. appl. math. 2. 1944.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Levenberg%2C%20K.%20A%20method%20for%20the%20solution%20of%20certain%20problems%20in%20least%20squares.%20quart%201944",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Levenberg%2C%20K.%20A%20method%20for%20the%20solution%20of%20certain%20problems%20in%20least%20squares.%20quart%201944"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Da Li, Yongxin Yang, Yi-Zhe Song, and Timothy M. Hospedales. Deeper, broader and artier domain generalization. CoRR, abs/1710.03077, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.03077"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Jonathan Long, Evan Shelhamer, and Trevor Darrell. Fully convolutional networks for semantic segmentation. CoRR, abs/1411.4038, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1411.4038"
+        },
+        {
+            "id": "24",
+            "entry": "[24] M. Mancini, S. R. Bul\u00f2, B. Caputo, and E. Ricci. Robust place categorization with deep domain generalization. IEEE Robotics and Automation Letters, 3(3):2093\u20132100, July 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mancini%2C%20M.%20Bul%C3%B2%2C%20S.R.%20Caputo%2C%20B.%20Ricci%2C%20E.%20Robust%20place%20categorization%20with%20deep%20domain%20generalization%202018-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mancini%2C%20M.%20Bul%C3%B2%2C%20S.R.%20Caputo%2C%20B.%20Ricci%2C%20E.%20Robust%20place%20categorization%20with%20deep%20domain%20generalization%202018-07"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Donald W Marquardt. An algorithm for least-squares estimation of nonlinear parameters. Journal of the society for Industrial and Applied Mathematics, 11(2):431\u2013441, 1963.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Marquardt%2C%20Donald%20W.%20An%20algorithm%20for%20least-squares%20estimation%20of%20nonlinear%20parameters%201963",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Marquardt%2C%20Donald%20W.%20An%20algorithm%20for%20least-squares%20estimation%20of%20nonlinear%20parameters%201963"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Pietro Morerio, Jacopo Cavazza, and Vittorio Murino. Minimal-entropy correlation alignment for unsupervised deep domain adaptation. International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Morerio%2C%20Pietro%20Cavazza%2C%20Jacopo%20Murino%2C%20Vittorio%20Minimal-entropy%20correlation%20alignment%20for%20unsupervised%20deep%20domain%20adaptation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Morerio%2C%20Pietro%20Cavazza%2C%20Jacopo%20Murino%2C%20Vittorio%20Minimal-entropy%20correlation%20alignment%20for%20unsupervised%20deep%20domain%20adaptation%202018"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Saeid Motiian, Marco Piccirilli, Donald A. Adjeroh, and Gianfranco Doretto. Unified deep supervised domain adaptation and generalization. In The IEEE International Conference on Computer Vision (ICCV), Oct 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Motiian%2C%20Saeid%20Piccirilli%2C%20Marco%20Adjeroh%2C%20Donald%20A.%20Doretto%2C%20Gianfranco%20Unified%20deep%20supervised%20domain%20adaptation%20and%20generalization%202017-10",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Motiian%2C%20Saeid%20Piccirilli%2C%20Marco%20Adjeroh%2C%20Donald%20A.%20Doretto%2C%20Gianfranco%20Unified%20deep%20supervised%20domain%20adaptation%20and%20generalization%202017-10"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Krikamol Muandet, David Balduzzi, and Bernhard Sch\u00f6lkopf. Domain generalization via invariant feature representation. In Sanjoy Dasgupta and David McAllester, editors, Proceedings of the 30th International Conference on Machine Learning, volume 28 of Proceedings of Machine Learning Research, pages 10\u201318, Atlanta, Georgia, USA, 17\u201319 Jun 2013. PMLR.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Muandet%2C%20Krikamol%20Balduzzi%2C%20David%20Sch%C3%B6lkopf%2C%20Bernhard%20Domain%20generalization%20via%20invariant%20feature%20representation%202013-06-17",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Muandet%2C%20Krikamol%20Balduzzi%2C%20David%20Sch%C3%B6lkopf%2C%20Bernhard%20Domain%20generalization%20via%20invariant%20feature%20representation%202013-06-17"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Yurii Nesterov and Boris T Polyak. Cubic regularization of newton method and its global performance. Mathematical Programming, 108(1):177\u2013205, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nesterov%2C%20Yurii%20Polyak%2C%20Boris%20T.%20Cubic%20regularization%20of%20newton%20method%20and%20its%20global%20performance%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nesterov%2C%20Yurii%20Polyak%2C%20Boris%20T.%20Cubic%20regularization%20of%20newton%20method%20and%20its%20global%20performance%202006"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Yuval Netzer, Tao Wang, Adam Coates, Alessandro Bissacco, Bo Wu, and Andrew Y. Ng. Reading digits in natural images with unsupervised feature learning. In NIPS Workshop on Deep Learning and Unsupervised Feature Learning 2011, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Netzer%2C%20Yuval%20Wang%2C%20Tao%20Coates%2C%20Adam%20Bissacco%2C%20Alessandro%20Reading%20digits%20in%20natural%20images%20with%20unsupervised%20feature%20learning%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Netzer%2C%20Yuval%20Wang%2C%20Tao%20Coates%2C%20Adam%20Bissacco%2C%20Alessandro%20Reading%20digits%20in%20natural%20images%20with%20unsupervised%20feature%20learning%202011"
+        },
+        {
+            "id": "31",
+            "entry": "[31] German Ros, Laura Sellart, Joanna Materzynska, David Vazquez, and Antonio M. Lopez. The synthia dataset: A large collection of synthetic images for semantic segmentation of urban scenes. In The IEEE Conference on Computer Vision and Pattern Recognition (CVPR), June 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ros%2C%20German%20Sellart%2C%20Laura%20Materzynska%2C%20Joanna%20Vazquez%2C%20David%20The%20synthia%20dataset%3A%20A%20large%20collection%20of%20synthetic%20images%20for%20semantic%20segmentation%20of%20urban%20scenes%202016-06",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ros%2C%20German%20Sellart%2C%20Laura%20Materzynska%2C%20Joanna%20Vazquez%2C%20David%20The%20synthia%20dataset%3A%20A%20large%20collection%20of%20synthetic%20images%20for%20semantic%20segmentation%20of%20urban%20scenes%202016-06"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Kate Saenko, Brian Kulis, Mario Fritz, and Trevor Darrell. Adapting visual category models to new domains. In Proceedings of the 11th European Conference on Computer Vision: Part IV, ECCV\u201910, pages 213\u2013226, Berlin, Heidelberg, 2010. Springer-Verlag.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Saenko%2C%20Kate%20Kulis%2C%20Brian%20Fritz%2C%20Mario%20Darrell%2C%20Trevor%20Adapting%20visual%20category%20models%20to%20new%20domains",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Saenko%2C%20Kate%20Kulis%2C%20Brian%20Fritz%2C%20Mario%20Darrell%2C%20Trevor%20Adapting%20visual%20category%20models%20to%20new%20domains"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Shiv Shankar, Vihari Piratla, Soumen Chakrabarti, Siddhartha Chaudhuri, Preethi Jyothi, and Sunita Sarawagi. Generalizing across domains via cross-gradient training. In International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shankar%2C%20Shiv%20Piratla%2C%20Vihari%20Chakrabarti%2C%20Soumen%20Chaudhuri%2C%20Siddhartha%20Generalizing%20across%20domains%20via%20cross-gradient%20training%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shankar%2C%20Shiv%20Piratla%2C%20Vihari%20Chakrabarti%2C%20Soumen%20Chaudhuri%2C%20Siddhartha%20Generalizing%20across%20domains%20via%20cross-gradient%20training%202018"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Aman Sinha, Hongseok Namkoong, and John Duchi. Certifiable distributional robustness with principled adversarial training. In International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sinha%2C%20Aman%20Namkoong%2C%20Hongseok%20Duchi%2C%20John%20Certifiable%20distributional%20robustness%20with%20principled%20adversarial%20training%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sinha%2C%20Aman%20Namkoong%2C%20Hongseok%20Duchi%2C%20John%20Certifiable%20distributional%20robustness%20with%20principled%20adversarial%20training%202018"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Nitish Srivastava, Geoffrey Hinton, Alex Krizhevsky, Ilya Sutskever, and Ruslan Salakhutdinov. Dropout: A simple way to prevent neural networks from overfitting. J. Mach. Learn. Res., 15(1), January 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Srivastava%2C%20Nitish%20Hinton%2C%20Geoffrey%20Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Dropout%3A%20A%20simple%20way%20to%20prevent%20neural%20networks%20from%20overfitting%202014-01",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Srivastava%2C%20Nitish%20Hinton%2C%20Geoffrey%20Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Dropout%3A%20A%20simple%20way%20to%20prevent%20neural%20networks%20from%20overfitting%202014-01"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Baochen Sun and Kate Saenko. Deep CORAL: correlation alignment for deep domain adaptation. In ECCV Workshops, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sun%2C%20Baochen%20Saenko%2C%20Kate%20Deep%20CORAL%3A%20correlation%20alignment%20for%20deep%20domain%20adaptation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sun%2C%20Baochen%20Saenko%2C%20Kate%20Deep%20CORAL%3A%20correlation%20alignment%20for%20deep%20domain%20adaptation%202016"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Joshua Tobin, Rachel Fong, Alex Ray, Jonas Schneider, Wojciech Zaremba, and Pieter Abbeel. Domain randomization for transferring deep neural networks from simulation to the real world. CoRR, abs/1703.06907, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.06907"
+        },
+        {
+            "id": "38",
+            "entry": "[38] A. Torralba and A. A. Efros. Unbiased look at dataset bias. In Proceedings of the 2011 IEEE Conference on Computer Vision and Pattern Recognition, CVPR \u201911, pages 1521\u20131528, Washington, DC, USA, 2011. IEEE Computer Society.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Torralba%2C%20A.%20Efros%2C%20A.A.%20Unbiased%20look%20at%20dataset%20bias%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Torralba%2C%20A.%20Efros%2C%20A.A.%20Unbiased%20look%20at%20dataset%20bias%202011"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Eric Tzeng, Judy Hoffman, Kate Saenko, and Trevor Darrell. Adversarial discriminative domain adaptation. In The IEEE Conference on Computer Vision and Pattern Recognition (CVPR), July 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tzeng%2C%20Eric%20Hoffman%2C%20Judy%20Saenko%2C%20Kate%20Darrell%2C%20Trevor%20Adversarial%20discriminative%20domain%20adaptation%202017-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tzeng%2C%20Eric%20Hoffman%2C%20Judy%20Saenko%2C%20Kate%20Darrell%2C%20Trevor%20Adversarial%20discriminative%20domain%20adaptation%202017-07"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Riccardo Volpi, Pietro Morerio, Silvio Savarese, and Vittorio Murino. Adversarial feature augmentation for unsupervised domain adaptation. In The IEEE Conference on Computer Vision and Pattern Recognition (CVPR), June 2018. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Volpi%2C%20Riccardo%20Morerio%2C%20Pietro%20Savarese%2C%20Silvio%20Murino%2C%20Vittorio%20Adversarial%20feature%20augmentation%20for%20unsupervised%20domain%20adaptation%202018-06",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Volpi%2C%20Riccardo%20Morerio%2C%20Pietro%20Savarese%2C%20Silvio%20Murino%2C%20Vittorio%20Adversarial%20feature%20augmentation%20for%20unsupervised%20domain%20adaptation%202018-06"
+        }
+    ]
+}

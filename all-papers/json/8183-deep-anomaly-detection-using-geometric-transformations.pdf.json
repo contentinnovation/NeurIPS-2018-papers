@@ -1,0 +1,306 @@
+{
+    "filename": "8183-deep-anomaly-detection-using-geometric-transformations.pdf",
+    "metadata": {
+        "title": "Deep Anomaly Detection Using Geometric Transformations",
+        "author": "Izhak Golan, Ran El-Yaniv",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8183-deep-anomaly-detection-using-geometric-transformations.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We consider the problem of anomaly detection in images, and present a new detection technique. Given a sample of images, all known to belong to a \u201cnormal\u201d class (e.g., dogs), we show how to train a deep neural model that can detect out-of-distribution images (i.e., non-dog objects). The main idea behind our scheme is to train a multi-class model to discriminate between dozens of geometric transformations applied on all the given images. The auxiliary expertise learned by the model generates feature detectors that effectively identify, at test time, anomalous images based on the softmax activation statistics of the model when applied on transformed images. We present extensive experiments using the proposed detector, which indicate that our technique consistently improves all known algorithms by a wide margin."
+    },
+    "keywords": [
+        {
+            "term": "anomaly detection",
+            "url": "https://en.wikipedia.org/wiki/anomaly_detection"
+        },
+        {
+            "term": "kernel density estimation",
+            "url": "https://en.wikipedia.org/wiki/kernel_density_estimation"
+        },
+        {
+            "term": "Principal Component Analysis",
+            "url": "https://en.wikipedia.org/wiki/Principal_Component_Analysis"
+        },
+        {
+            "term": "novelty detection",
+            "url": "https://en.wikipedia.org/wiki/novelty_detection"
+        },
+        {
+            "term": "active learning",
+            "url": "https://en.wikipedia.org/wiki/active_learning"
+        },
+        {
+            "term": "Receiver Operating Characteristic",
+            "url": "https://en.wikipedia.org/wiki/Receiver_Operating_Characteristic"
+        },
+        {
+            "term": "generative adversarial network",
+            "url": "https://en.wikipedia.org/wiki/generative_adversarial_network"
+        },
+        {
+            "term": "geometric transformation",
+            "url": "https://en.wikipedia.org/wiki/geometric_transformation"
+        }
+    ],
+    "highlights": [
+        "Future machine learning applications such as self-driving cars or domestic robots will, inevitably, encounter various kinds of risks including statistical uncertainties",
+        "The table is composed of four blocks, with each block containing several anomaly detection problems derived from the same dataset",
+        "We presented a novel method for anomaly detection of images, which learns a meaningful representation of the learned training data in a fully discriminative fashion",
+        "The proposed method is computationally efficient, and as simple to implement as a multi-class classification task",
+        "Unlike best-known methods so far, our approach completely alleviates the need for a generative component",
+        "Our method significantly advances the state-of-the-art by offering a dramatic improvement over the best available anomaly detection methods"
+    ],
+    "key_statements": [
+        "Future machine learning applications such as self-driving cars or domestic robots will, inevitably, encounter various kinds of risks including statistical uncertainties",
+        "The well-known problem of anomaly/novelty detection highlights some of these risks, and its resolution is of the utmost importance to mission critical machine learning applications",
+        "While anomaly detection has long been considered in the literature, conclusive understanding of this problem in the context of deep neural models is sorely lacking",
+        "In machine vision applications, presently available novelty detection methods can suffer from poor performance in some problems, as demonstrated by our experiments",
+        "The proposed method is based on the observation that learning to discriminate between many types of geometric transformations applied to normal images, encourages learning of features that are useful for detecting novelties",
+        "It is very important to note that in both these variants of one-class support vector machine, we provide the one-class support vector machine with an unfair significant advantage by optimizing its hyperparameters in hindsight; i.e., the one-class support vector machine hyperparameters (\u03bd and \u03b3) were optimized to maximize AUROC and taken to be the best performing values among those in the parameter grid: \u03bd \u2208 {0.1, 0.2, . . . , 0.9}, \u03b3 \u2208 {2\u22127, 2\u22126, . . . , 22}",
+        "Note that the hyperparameter optimization procedure has been provided with a two-class classification problem",
+        "The convolutional autoencoder is chosen to have a similar architecture to that of DCGAN [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>], where the encoder is adapted from the discriminator, and the decoder is adapted from the generator",
+        "The table is composed of four blocks, with each block containing several anomaly detection problems derived from the same dataset",
+        "The first row contains the results for an anomaly detection problem where the normal class is class 0 in CIFAR-10, and the anomalous instances are images from all other classes in CIFAR-10",
+        "We presented a novel method for anomaly detection of images, which learns a meaningful representation of the learned training data in a fully discriminative fashion",
+        "The proposed method is computationally efficient, and as simple to implement as a multi-class classification task",
+        "Unlike best-known methods so far, our approach completely alleviates the need for a generative component",
+        "Our method significantly advances the state-of-the-art by offering a dramatic improvement over the best available anomaly detection methods",
+        "It is important to develop a theory that grounds the use of geometric transformations"
+    ],
+    "summary": [
+        "Future machine learning applications such as self-driving cars or domestic robots will, inevitably, encounter various kinds of risks including statistical uncertainties.",
+        "The first scheme consists of methods that analyze errors in reconstruction, which is based either on autoencoders or generative adversarial models (GANs) trained over the normal class.",
+        "The proposed method is based on the observation that learning to discriminate between many types of geometric transformations applied to normal images, encourages learning of features that are useful for detecting novelties.",
+        "We train a multi-class neural classifier over a self-labeled dataset, which is created from the normal instances and their transformed versions, obtained by applying numerous geometric transformations.",
+        "This discriminative model is applied on transformed instances of the test example, and the distribution of softmax response values of the \u201cnormal\u201d train images is used for effective detection of novelties.",
+        "The intuition behind our method is that by training the classifier to distinguish between transformed images, it must learn salient geometrical features, some of which are likely to be unique to the single class.",
+        "We create a self-labeled dataset of images from our initial training set S, by using a class of geometric transformations T .",
+        "We use this set to straightforwardly learn a deep k-class classification model, f\u03b8, which we train over the self-labeled dataset ST using the standard cross-entropy loss function.",
+        "The set S is considered to be the set of \u201cnormal\u201d samples based on which the model must learn a normality score function.",
+        "The normality score function is applied on all images in the test set, containing both anomalies and normal samples, in order to evaluate the model\u2019s performance.",
+        "The first row contains the results for an anomaly detection problem where the normal class is class 0 in CIFAR-10, and the anomalous instances are images from all other classes in CIFAR-10.",
+        "When testing the parameters 16, 8 with our method on the CIFAR-10 dataset, anomaly detection results improved.",
+        "We only utilize the transformations softmax layer output as described in section 4.2, but use the simplified normality score.",
+        "We train a neural classifier to discriminate between two transformations, where the normal class is taken to be images of a single digit from the MNIST [<a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>] training set.",
+        "When presented with the test set containing \u20183\u2019 as anomalies, our method did not perform well, achieving an AUROC of 0.646.",
+        "We presented a novel method for anomaly detection of images, which learns a meaningful representation of the learned training data in a fully discriminative fashion.",
+        "It would be interesting to attempt using our techniques to leverage dep uncertainty estimation [<a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>, <a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>], and deep active learning [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>]"
+    ],
+    "headline": "Given a sample of images, all known to belong to a \u201cnormal\u201d class , we show how to train a deep neural model that can detect out-of-distribution images ",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] J. An and S. Cho. Variational autoencoder based anomaly detection using reconstruction probability. SNU Data Mining Center, Tech. Rep., 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=An%2C%20J.%20Cho%2C%20S.%20Variational%20autoencoder%20based%20anomaly%20detection%20using%20reconstruction%20probability%202015"
+        },
+        {
+            "id": "2",
+            "entry": "[2] G. Blanchard, G. Lee, and C. Scott. Semi-supervised novelty detection. Journal of Machine Learning Research, 11(Nov):2973\u20133009, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Blanchard%2C%20G.%20Lee%2C%20G.%20Scott%2C%20C.%20Semi-supervised%20novelty%20detection%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Blanchard%2C%20G.%20Lee%2C%20G.%20Scott%2C%20C.%20Semi-supervised%20novelty%20detection%202010"
+        },
+        {
+            "id": "3",
+            "entry": "[3] E. Burnaev, P. Erofeev, and D. Smolyakov. Model selection for anomaly detection. In Eighth International Conference on Machine Vision (ICMV 2015), volume 9875, page 987525. International Society for Optics and Photonics, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Burnaev%2C%20E.%20Erofeev%2C%20P.%20Smolyakov%2C%20D.%20Model%20selection%20for%20anomaly%20detection%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Burnaev%2C%20E.%20Erofeev%2C%20P.%20Smolyakov%2C%20D.%20Model%20selection%20for%20anomaly%20detection%202015"
+        },
+        {
+            "id": "4",
+            "entry": "[4] E. J. Cand\u00e8s, X. Li, Y. Ma, and J. Wright. Robust principal component analysis? Journal of the ACM (JACM), 58(3):11, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cand%C3%A8s%2C%20E.J.%20Li%2C%20X.%20Ma%2C%20Y.%20Wright%2C%20J.%20Robust%20principal%20component%20analysis%3F%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cand%C3%A8s%2C%20E.J.%20Li%2C%20X.%20Ma%2C%20Y.%20Wright%2C%20J.%20Robust%20principal%20component%20analysis%3F%202011"
+        },
+        {
+            "id": "5",
+            "entry": "[5] V. Chandola, A. Banerjee, and V. Kumar. Anomaly detection: A survey. ACM Computing Surveys (CSUR), 41(3):15, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chandola%2C%20V.%20Banerjee%2C%20A.%20Kumar%2C%20V.%20Anomaly%20detection%3A%20A%20survey%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chandola%2C%20V.%20Banerjee%2C%20A.%20Kumar%2C%20V.%20Anomaly%20detection%3A%20A%20survey%202009"
+        },
+        {
+            "id": "6",
+            "entry": "[6] J. Davis and M. Goadrich. The relationship between precision-recall and roc curves. In Proceedings of the 23rd international conference on Machine learning, pages 233\u2013240. ACM, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Davis%2C%20J.%20Goadrich%2C%20M.%20The%20relationship%20between%20precision-recall%20and%20roc%20curves%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Davis%2C%20J.%20Goadrich%2C%20M.%20The%20relationship%20between%20precision-recall%20and%20roc%20curves%202006"
+        },
+        {
+            "id": "7",
+            "entry": "[7] L. Deecke, R. Vandermeulen, L. Ruff, S. Mandt, and M. Kloft. Anomaly detection with generative adversarial networks, 2018. URL https://openreview.net/forum?id=S1EfylZ0Z.",
+            "url": "https://openreview.net/forum?id=S1EfylZ0Z"
+        },
+        {
+            "id": "8",
+            "entry": "[8] R. El-Yaniv and M. Nisenson. Optimal single-class classification strategies. In Advances in Neural Information Processing Systems, pages 377\u2013384, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=El-Yaniv%2C%20R.%20Nisenson%2C%20M.%20Optimal%20single-class%20classification%20strategies%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=El-Yaniv%2C%20R.%20Nisenson%2C%20M.%20Optimal%20single-class%20classification%20strategies%202007"
+        },
+        {
+            "id": "9",
+            "entry": "[9] J. Elson, J. J. Douceur, J. Howell, and J. Saul. Asirra: A captcha that exploits interest-aligned manual image categorization. In Proceedings of 14th ACM Conference on Computer and Communications Security (CCS). Association for Computing Machinery, Inc., October 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Elson%2C%20J.%20Douceur%2C%20J.J.%20Howell%2C%20J.%20Saul%2C%20J.%20Asirra%3A%20A%20captcha%20that%20exploits%20interest-aligned%20manual%20image%20categorization%202007-10",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Elson%2C%20J.%20Douceur%2C%20J.J.%20Howell%2C%20J.%20Saul%2C%20J.%20Asirra%3A%20A%20captcha%20that%20exploits%20interest-aligned%20manual%20image%20categorization%202007-10"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Y. Geifman and R. El-Yaniv. Deep active learning over the long tail. CoRR, 2017. URL http://arxiv.org/abs/1711.00941.",
+            "url": "http://arxiv.org/abs/1711.00941",
+            "arxiv_url": "https://arxiv.org/pdf/1711.00941"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Y. Geifman and R. El-Yaniv. Selective classification for deep neural networks. In Advances in Neural Information Processing Systems (NIPS), pages 4878\u20134887. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Geifman%2C%20Y.%20El-Yaniv%2C%20R.%20Selective%20classification%20for%20deep%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Geifman%2C%20Y.%20El-Yaniv%2C%20R.%20Selective%20classification%20for%20deep%20neural%20networks%202017"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Y. Geifman, G. Uziel, and R. El-Yaniv. Boosting uncertainty estimation for deep neural classifiers. CoRR, 2018. URL http://arxiv.org/abs/1805.08206.",
+            "url": "http://arxiv.org/abs/1805.08206",
+            "arxiv_url": "https://arxiv.org/pdf/1805.08206"
+        },
+        {
+            "id": "13",
+            "entry": "[13] I. Goodfellow, J. Pouget-Abadie, M. Mirza, B. Xu, D. Warde-Farley, S. Ozair, A. Courville, and Y. Bengio. Generative adversarial nets. In Advances in Neural Information Processing Systems, pages 2672\u20132680, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goodfellow%2C%20I.%20Pouget-Abadie%2C%20J.%20Mirza%2C%20M.%20Xu%2C%20B.%20Generative%20adversarial%20nets%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goodfellow%2C%20I.%20Pouget-Abadie%2C%20J.%20Mirza%2C%20M.%20Xu%2C%20B.%20Generative%20adversarial%20nets%202014"
+        },
+        {
+            "id": "14",
+            "entry": "[14] T. Iwata and M. Yamada. Multi-view anomaly detection via robust probabilistic latent variable models. In Advances In Neural Information Processing Systems, pages 1136\u20131144, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Iwata%2C%20T.%20Yamada%2C%20M.%20Multi-view%20anomaly%20detection%20via%20robust%20probabilistic%20latent%20variable%20models%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Iwata%2C%20T.%20Yamada%2C%20M.%20Multi-view%20anomaly%20detection%20via%20robust%20probabilistic%20latent%20variable%20models%202016"
+        },
+        {
+            "id": "16",
+            "entry": "[16] J. Kim and C. D. Scott. Robust kernel density estimation. Journal of Machine Learning Research, 13(Sep):2529\u20132565, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kim%2C%20J.%20Scott%2C%20C.D.%20Robust%20kernel%20density%20estimation%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kim%2C%20J.%20Scott%2C%20C.D.%20Robust%20kernel%20density%20estimation%202012"
+        },
+        {
+            "id": "17",
+            "entry": "[17] D. P. Kingma and J. Ba. Adam: A method for stochastic optimization. arXiv preprint arXiv:1412.6980, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6980"
+        },
+        {
+            "id": "18",
+            "entry": "[18] A. Krizhevsky and G. Hinton. Learning multiple layers of features from tiny images. Master\u2019s thesis, Department of Computer Science, University of Toronto, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20A.%20Hinton%2C%20G.%20Learning%20multiple%20layers%20of%20features%20from%20tiny%20images%202009"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Y. LeCun, C. Cortes, and C. Burges. Mnist handwritten digit database. AT&T Labs [Online]. Available: http://yann.lecun.com/exdb/mnist, 2, 2010.",
+            "url": "http://yann.lecun.com/exdb/mnist"
+        },
+        {
+            "id": "20",
+            "entry": "[20] S. Liang, Y. Li, and R. Srikant. Enhancing the reliability of out-of-distribution image detection in neural networks. In International Conference on Learning Representations, 2018. URL https://openreview.net/forum?id=H1VGkIxRZ.",
+            "url": "https://openreview.net/forum?id=H1VGkIxRZ",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liang%2C%20S.%20Li%2C%20Y.%20Srikant%2C%20R.%20Enhancing%20the%20reliability%20of%20out-of-distribution%20image%20detection%20in%20neural%20networks%202018"
+        },
+        {
+            "id": "21",
+            "entry": "[21] T. Minka. Estimating a dirichlet distribution, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Minka%2C%20T.%20Estimating%20a%20dirichlet%20distribution%202000"
+        },
+        {
+            "id": "22",
+            "entry": "[22] E. Parzen. On estimation of a probability density function and mode. The Annals of Mathematical Statistics, 33(3):1065\u20131076, 1962.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Parzen%2C%20E.%20On%20estimation%20of%20a%20probability%20density%20function%20and%20mode%201962",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Parzen%2C%20E.%20On%20estimation%20of%20a%20probability%20density%20function%20and%20mode%201962"
+        },
+        {
+            "id": "23",
+            "entry": "[23] A. Radford, L. Metz, and S. Chintala. Unsupervised representation learning with deep convolutional generative adversarial networks. arXiv preprint arXiv:1511.06434, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.06434"
+        },
+        {
+            "id": "24",
+            "entry": "[24] L. Ruff, N. G\u00f6rnitz, L. Deecke, S. A. Siddiqui, R. Vandermeulen, A. Binder, E. M\u00fcller, and M. Kloft. Deep one-class classification. In International Conference on Machine Learning, pages 4390\u20134399, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ruff%2C%20L.%20G%C3%B6rnitz%2C%20N.%20Deecke%2C%20L.%20Siddiqui%2C%20S.A.%20Deep%20one-class%20classification%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ruff%2C%20L.%20G%C3%B6rnitz%2C%20N.%20Deecke%2C%20L.%20Siddiqui%2C%20S.A.%20Deep%20one-class%20classification%202018"
+        },
+        {
+            "id": "25",
+            "entry": "[25] T. Schlegl, P. Seeb\u00f6ck, S. M. Waldstein, U. Schmidt-Erfurth, and G. Langs. Unsupervised anomaly detection with generative adversarial networks to guide marker discovery. In International Conference on Information Processing in Medical Imaging, pages 146\u2013157.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Unsupervised%20anomaly%20detection%20with%20generative%20adversarial%20networks%20to%20guide%20marker%20discovery",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Unsupervised%20anomaly%20detection%20with%20generative%20adversarial%20networks%20to%20guide%20marker%20discovery"
+        },
+        {
+            "id": "26",
+            "entry": "[26] B. Sch\u00f6lkopf, R. C. Williamson, A. J. Smola, J. Shawe-Taylor, and J. C. Platt. Support vector method for novelty detection. In Advances in Neural Information Processing Systems, pages 582\u2013588, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sch%C3%B6lkopf%2C%20B.%20Williamson%2C%20R.C.%20Smola%2C%20A.J.%20Shawe-Taylor%2C%20J.%20Platt.%20Support%20vector%20method%20for%20novelty%20detection%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sch%C3%B6lkopf%2C%20B.%20Williamson%2C%20R.C.%20Smola%2C%20A.J.%20Shawe-Taylor%2C%20J.%20Platt.%20Support%20vector%20method%20for%20novelty%20detection%202000"
+        },
+        {
+            "id": "27",
+            "entry": "[27] D. M. Tax and R. P. Duin. Support vector data description. Machine learning, 54(1):45\u201366, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tax%2C%20D.M.%20Duin%2C%20R.P.%20Support%20vector%20data%20description%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tax%2C%20D.M.%20Duin%2C%20R.P.%20Support%20vector%20data%20description%202004"
+        },
+        {
+            "id": "28",
+            "entry": "[28] A. Taylor, S. Leblanc, and N. Japkowicz. Anomaly detection in automobile control network data with long short-term memory networks. In Data Science and Advanced Analytics (DSAA), 2016 IEEE International Conference on, pages 130\u2013139. IEEE, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Taylor%2C%20A.%20Leblanc%2C%20S.%20Japkowicz%2C%20N.%20Anomaly%20detection%20in%20automobile%20control%20network%20data%20with%20long%20short-term%20memory%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Taylor%2C%20A.%20Leblanc%2C%20S.%20Japkowicz%2C%20N.%20Anomaly%20detection%20in%20automobile%20control%20network%20data%20with%20long%20short-term%20memory%20networks%202016"
+        },
+        {
+            "id": "29",
+            "entry": "[29] P. Vincent. A connection between score matching and denoising autoencoders. Neural Computation, 23(7):1661\u20131674, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vincent%2C%20P.%20A%20connection%20between%20score%20matching%20and%20denoising%20autoencoders%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vincent%2C%20P.%20A%20connection%20between%20score%20matching%20and%20denoising%20autoencoders%202011"
+        },
+        {
+            "id": "30",
+            "entry": "[30] S. Wang, Q. Liu, E. Zhu, F. Porikli, and J. Yin. Hyperparameter selection of one-class support vector machine by self-adaptive data shifting. Pattern Recognition, 74:198\u2013211, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20S.%20Liu%2C%20Q.%20Zhu%2C%20E.%20Porikli%2C%20F.%20Hyperparameter%20selection%20of%20one-class%20support%20vector%20machine%20by%20self-adaptive%20data%20shifting%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20S.%20Liu%2C%20Q.%20Zhu%2C%20E.%20Porikli%2C%20F.%20Hyperparameter%20selection%20of%20one-class%20support%20vector%20machine%20by%20self-adaptive%20data%20shifting%202018"
+        },
+        {
+            "id": "31",
+            "entry": "[31] N. Wicker, J. Muller, R. K. R. Kalathur, and O. Poch. A maximum likelihood approximation method for dirichlet\u2019s parameter estimation. Computational statistics & data analysis, 52(3): 1315\u20131322, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wicker%2C%20N.%20Muller%2C%20J.%20Kalathur%2C%20R.K.R.%20Poch%2C%20O.%20A%20maximum%20likelihood%20approximation%20method%20for%20dirichlet%E2%80%99s%20parameter%20estimation%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wicker%2C%20N.%20Muller%2C%20J.%20Kalathur%2C%20R.K.R.%20Poch%2C%20O.%20A%20maximum%20likelihood%20approximation%20method%20for%20dirichlet%E2%80%99s%20parameter%20estimation%202008"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Y. Xia, X. Cao, F. Wen, G. Hua, and J. Sun. Learning discriminative reconstructions for unsupervised outlier removal. In Proceedings of the IEEE International Conference on Computer Vision, pages 1511\u20131519, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xia%2C%20Y.%20Cao%2C%20X.%20Wen%2C%20F.%20Hua%2C%20G.%20Learning%20discriminative%20reconstructions%20for%20unsupervised%20outlier%20removal%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xia%2C%20Y.%20Cao%2C%20X.%20Wen%2C%20F.%20Hua%2C%20G.%20Learning%20discriminative%20reconstructions%20for%20unsupervised%20outlier%20removal%202015"
+        },
+        {
+            "id": "33",
+            "entry": "[33] H. Xiao, K. Rasul, and R. Vollgraf. Fashion-mnist: a novel image dataset for benchmarking machine learning algorithms, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xiao%2C%20H.%20Rasul%2C%20K.%20Vollgraf%2C%20R.%20Fashion-mnist%3A%20a%20novel%20image%20dataset%20for%20benchmarking%20machine%20learning%20algorithms%202017"
+        },
+        {
+            "id": "34",
+            "entry": "[34] J. Yosinski, J. Clune, A. Nguyen, T. Fuchs, and H. Lipson. Understanding neural networks through deep visualization. arXiv preprint arXiv:1506.06579, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1506.06579"
+        },
+        {
+            "id": "35",
+            "entry": "[35] S. Zagoruyko and N. Komodakis. Wide residual networks. In BMVC, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zagoruyko%2C%20S.%20Komodakis%2C%20N.%20Wide%20residual%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zagoruyko%2C%20S.%20Komodakis%2C%20N.%20Wide%20residual%20networks%202016"
+        },
+        {
+            "id": "36",
+            "entry": "[36] S. Zhai, Y. Cheng, W. Lu, and Z. Zhang. Deep structured energy based models for anomaly detection. In Proceedings of the 33rd International Conference on Machine Learning - Volume 48, ICML\u201916, pages 1100\u20131109. JMLR.org, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhai%2C%20S.%20Cheng%2C%20Y.%20Lu%2C%20W.%20Zhang%2C%20Z.%20Deep%20structured%20energy%20based%20models%20for%20anomaly%20detection%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhai%2C%20S.%20Cheng%2C%20Y.%20Lu%2C%20W.%20Zhang%2C%20Z.%20Deep%20structured%20energy%20based%20models%20for%20anomaly%20detection%202016"
+        },
+        {
+            "id": "37",
+            "entry": "[37] A. Zimek, E. Schubert, and H.-P. Kriegel. A survey on unsupervised outlier detection in high-dimensional numerical data. Statistical Analysis and Data Mining: The ASA Data Science Journal, 5(5):363\u2013387, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zimek%2C%20A.%20Schubert%2C%20E.%20Kriegel%2C%20H.-P.%20A%20survey%20on%20unsupervised%20outlier%20detection%20in%20high-dimensional%20numerical%20data%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zimek%2C%20A.%20Schubert%2C%20E.%20Kriegel%2C%20H.-P.%20A%20survey%20on%20unsupervised%20outlier%20detection%20in%20high-dimensional%20numerical%20data%202012"
+        },
+        {
+            "id": "38",
+            "entry": "[38] B. Zong, Q. Song, M. R. Min, W. Cheng, C. Lumezanu, D. Cho, and H. Chen. Deep autoencoding gaussian mixture model for unsupervised anomaly detection. In International Conference on Learning Representations, 2018. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zong%2C%20B.%20Song%2C%20Q.%20Min%2C%20M.R.%20Cheng%2C%20W.%20Deep%20autoencoding%20gaussian%20mixture%20model%20for%20unsupervised%20anomaly%20detection%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zong%2C%20B.%20Song%2C%20Q.%20Min%2C%20M.R.%20Cheng%2C%20W.%20Deep%20autoencoding%20gaussian%20mixture%20model%20for%20unsupervised%20anomaly%20detection%202018"
+        }
+    ]
+}

@@ -1,0 +1,186 @@
+{
+    "filename": "7606-latent-gaussian-activity-propagation-using-smoothness-and-structure-to-separate-and-localize-sounds-in-large-noisy-environments.pdf",
+    "metadata": {
+        "title": "Latent Gaussian Activity Propagation: Using Smoothness and Structure to Separate and Localize Sounds in Large Noisy Environments",
+        "author": "Daniel Johnson, Daniel Gorelik, Ross E. Mawhorter, Kyle Suver, Weiqing Gu, Steven Xing, Cody Gabriel, Peter Sankhagowit",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7606-latent-gaussian-activity-propagation-using-smoothness-and-structure-to-separate-and-localize-sounds-in-large-noisy-environments.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We present an approach for simultaneously separating and localizing multiple sound sources using recorded microphone data. Inspired by topic models, our approach is based on a probabilistic model of inter-microphone phase differences, and poses separation and localization as a Bayesian inference problem. We assume sound activity is locally smooth across time, frequency, and location, and use the known position of the microphones to obtain a consistent separation. We compare the performance of our method against existing algorithms on simulated anechoic voice data and find that it obtains high performance across a variety of input conditions."
+    },
+    "keywords": [
+        {
+            "term": "blind source separation",
+            "url": "https://en.wikipedia.org/wiki/blind_source_separation"
+        },
+        {
+            "term": "fourier transform",
+            "url": "https://en.wikipedia.org/wiki/fourier_transform"
+        },
+        {
+            "term": "sound source",
+            "url": "https://en.wikipedia.org/wiki/Sound_Source"
+        },
+        {
+            "term": "STFT",
+            "url": "https://en.wikipedia.org/wiki/STFT"
+        },
+        {
+            "term": "phase difference",
+            "url": "https://en.wikipedia.org/wiki/phase_difference"
+        },
+        {
+            "term": "maximum a posteriori",
+            "url": "https://en.wikipedia.org/wiki/maximum_a_posteriori"
+        }
+    ],
+    "highlights": [
+        "Our approach \u2013 along with many other source separation algorithms \u2013 uses the Short-Time Fourier Transform (STFT) representation to analyze the different sounds present in a signal",
+        "The Short-Time Fourier Transform is the result of applying the Fourier Transform to short overlapping time windows, and gives a representation of what frequencies are present in a signal in those windows",
+        "We enable the garbage source to handle the additional microphone noise, and group Short-Time Fourier Transform bins into rectangular regions consisting of 8 timesteps and 2 frequencies for computational efficiency",
+        "We have described a Bayesian method for sound separation and localization that incorporates known microphone positions and smoothness assumptions to improve separation quality",
+        "This method is robust to a variety of input conditions, and can combine information from distant microphones even in the presence of significant time delays",
+        "Apart from the smoothness assumption, the method does not depend on source statistics"
+    ],
+    "key_statements": [
+        "Our approach \u2013 along with many other source separation algorithms \u2013 uses the Short-Time Fourier Transform (STFT) representation to analyze the different sounds present in a signal",
+        "The Short-Time Fourier Transform is the result of applying the Fourier Transform to short overlapping time windows, and gives a representation of what frequencies are present in a signal in those windows",
+        "The first step in this approach is to run an incremental distributed expectation-maximization (IDEM) algorithm to find the maximum likelihood estimate of the location distribution of the sources, using the known configuration of microphones to model the possible phase differences associated with each spatial position",
+        "We model each time-frequency bin as being assigned a latent dominating source and location that determines the distribution of each observed phase difference",
+        "We focus on approximating the maximum a posteriori (MAP) estimate of the parameters, i.e., the most likely separation given our observations",
+        "We enable the garbage source to handle the additional microphone noise, and group Short-Time Fourier Transform bins into rectangular regions consisting of 8 timesteps and 2 frequencies for computational efficiency",
+        "We have described a Bayesian method for sound separation and localization that incorporates known microphone positions and smoothness assumptions to improve separation quality",
+        "This method is robust to a variety of input conditions, and can combine information from distant microphones even in the presence of significant time delays",
+        "Apart from the smoothness assumption, the method does not depend on source statistics"
+    ],
+    "summary": [
+        "Our approach \u2013 along with many other source separation algorithms \u2013 uses the Short-Time Fourier Transform (STFT) representation to analyze the different sounds present in a signal.",
+        "We model the phase differences between the microphones in each pair as arising from a latent source activity array.",
+        "A Gaussian process prior is used to ensure that it is locally smooth across time, frequency, and spatial extent, and microphone locations are handled using a set of propagation transformations.",
+        "The Model-based EM Source Separation and Localization (MESSL) algorithm, proposed by <a class=\"ref-link\" id=\"cMandel_et+al_2009_a\" href=\"#rMandel_et+al_2009_a\">Mandel et al [2009</a>], builds upon DUET by using a probabilistic model that predicts phase differences given true source delays, and separates sounds by performing maximum-likelihood estimation of",
+        "The first step in this approach is to run an incremental distributed expectation-maximization (IDEM) algorithm to find the maximum likelihood estimate of the location distribution of the sources, using the known configuration of microphones to model the possible phase differences associated with each spatial position.",
+        "We model each time-frequency bin as being assigned a latent dominating source and location that determines the distribution of each observed phase difference.",
+        "Using this model, which we call Latent Gaussian Activity Propagation (LGAP), sounds can be separated by performing Bayesian inference on the latent source and location assignments.",
+        "Given a set of known phase observations , we can separate and localize the sounds by performing Bayesian inference on the assignments sm,t,f andm,t,f for each of our data points.",
+        "We compute the likelihood of each phase observation under a set of von Mises distributions centered at each peak, smooth these likelihoods over time and frequency using a Gaussian blur, and initialize \u21b5 from the logarithm of these smoothed likelihoods.",
+        "We enable the garbage source to handle the additional microphone noise, and group STFT bins into rectangular regions consisting of 8 timesteps and 2 frequencies for computational efficiency.",
+        "DALAS [<a class=\"ref-link\" id=\"cDorfan_et+al_2015_a\" href=\"#rDorfan_et+al_2015_a\">Dorfan et al, 2015</a>]: For consistency with our method, we modify DALAS to use an identical von Mises distribution of phase offsets for each location, and select a fixed number of sources to separate instead of choosing it dynamically.",
+        "Independent tied-microphone model: A simple baseline, based on the DUET algorithm, that assumes that the corresponding time-frequency bin for each microphone pair was generated by a single locationm,t,f = `t,f, and that these locations were independently chosen and uniformly distributed.",
+        "This suggests that, when propagation delays are small and there are only a few events, independent consideration of the phase shifts at each time-frequency bin is sufficient to obtain good source masks and location estimates.",
+        "It has the potential to be used for a variety of applications, and is particularly suited to capturing audio events that are distributed across large real-world environments"
+    ],
+    "headline": "We present an approach for simultaneously separating and localizing multiple sound sources using recorded microphone data",
+    "reference_links": [
+        {
+            "id": "Aarabi_2002_a",
+            "entry": "Parham Aarabi. Self-localizing dynamic microphone arrays. IEEE Transactions on Systems, Man, and Cybernetics, Part C (Applications and Reviews), 32(4):474\u2013484, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Aarabi%2C%20Parham%20Self-localizing%20dynamic%20microphone%20arrays%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Aarabi%2C%20Parham%20Self-localizing%20dynamic%20microphone%20arrays%202002"
+        },
+        {
+            "id": "Bagchi_2015_a",
+            "entry": "Deblin Bagchi, Michael I Mandel, Zhongqiu Wang, Yanzhang He, Andrew Plummer, and Eric FoslerLussier. Combining spectral feature mapping and multi-channel model-based source separation for noise-robust automatic speech recognition. In Automatic Speech Recognition and Understanding (ASRU), 2015 IEEE Workshop on, pages 496\u2013503. IEEE, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bagchi%2C%20Deblin%20Michael%20I%20Mandel%2C%20Zhongqiu%20Wang%2C%20Yanzhang%20He%2C%20Andrew%20Plummer%2C%20and%20Eric%20FoslerLussier.%20Combining%20spectral%20feature%20mapping%20and%20multi-channel%20model-based%20source%20separation%20for%20noise-robust%20automatic%20speech%20recognition%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bagchi%2C%20Deblin%20Michael%20I%20Mandel%2C%20Zhongqiu%20Wang%2C%20Yanzhang%20He%2C%20Andrew%20Plummer%2C%20and%20Eric%20FoslerLussier.%20Combining%20spectral%20feature%20mapping%20and%20multi-channel%20model-based%20source%20separation%20for%20noise-robust%20automatic%20speech%20recognition%202015"
+        },
+        {
+            "id": "Bell_1995_a",
+            "entry": "Anthony J Bell and Terrence J Sejnowski. An information-maximization approach to blind separation and blind deconvolution. Neural computation, 7(6):1129\u20131159, 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bell%2C%20Anthony%20J.%20Sejnowski%2C%20Terrence%20J.%20An%20information-maximization%20approach%20to%20blind%20separation%20and%20blind%20deconvolution%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bell%2C%20Anthony%20J.%20Sejnowski%2C%20Terrence%20J.%20An%20information-maximization%20approach%20to%20blind%20separation%20and%20blind%20deconvolution%201995"
+        },
+        {
+            "id": "Dietz_2010_a",
+            "entry": "Laura Dietz. Directed factor graph notation for generative models. Max Planck Institute for Informatics, Tech. Rep, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dietz%2C%20Laura%20Directed%20factor%20graph%20notation%20for%20generative%20models%202010"
+        },
+        {
+            "id": "Dorfan_et+al_2015_a",
+            "entry": "Yuval Dorfan, Dani Cherkassky, and Sharon Gannot. Speaker localization and separation using incremental distributed expectation-maximization. In Signal Processing Conference (EUSIPCO), 2015 23rd European, pages 1256\u20131260. IEEE, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dorfan%2C%20Yuval%20Cherkassky%2C%20Dani%20Gannot%2C%20Sharon%20Speaker%20localization%20and%20separation%20using%20incremental%20distributed%20expectation-maximization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dorfan%2C%20Yuval%20Cherkassky%2C%20Dani%20Gannot%2C%20Sharon%20Speaker%20localization%20and%20separation%20using%20incremental%20distributed%20expectation-maximization%202015"
+        },
+        {
+            "id": "Emiya_et+al_2011_a",
+            "entry": "Valentin Emiya, Emmanuel Vincent, Niklas Harlander, and Volker Hohmann. Subjective and objective quality assessment of audio source separation. IEEE Transactions on Audio, Speech, and Language Processing, 19(7):2046\u20132057, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Emiya%2C%20Valentin%20Vincent%2C%20Emmanuel%20Harlander%2C%20Niklas%20Hohmann%2C%20Volker%20Subjective%20and%20objective%20quality%20assessment%20of%20audio%20source%20separation%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Emiya%2C%20Valentin%20Vincent%2C%20Emmanuel%20Harlander%2C%20Niklas%20Hohmann%2C%20Volker%20Subjective%20and%20objective%20quality%20assessment%20of%20audio%20source%20separation%202011"
+        },
+        {
+            "id": "Habets_2007_a",
+            "entry": "Emanu\u00ebl AP Habets and Sharon Gannot. Generating sensor signals in isotropic noise fields. The Journal of the Acoustical Society of America, 122(6):3464\u20133470, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Habets%2C%20Emanu%C3%ABl%20A.P.%20Gannot%2C%20Sharon%20Generating%20sensor%20signals%20in%20isotropic%20noise%20fields%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Habets%2C%20Emanu%C3%ABl%20A.P.%20Gannot%2C%20Sharon%20Generating%20sensor%20signals%20in%20isotropic%20noise%20fields%202007"
+        },
+        {
+            "id": "Hyvaerinen_et+al_2004_a",
+            "entry": "Aapo Hyv\u00e4rinen, Juha Karhunen, and Erkki Oja. Independent component analysis, volume 46. John Wiley & Sons, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hyv%C3%A4rinen%2C%20Aapo%20Karhunen%2C%20Juha%20Oja%2C%20Erkki%20Independent%20component%20analysis%2C%20volume%2046%202004"
+        },
+        {
+            "id": "Jourjine_et+al_2000_a",
+            "entry": "Alexander Jourjine, Scott Rickard, and Ozgur Yilmaz. Blind separation of disjoint orthogonal signals: Demixing n sources from 2 mixtures. In Acoustics, Speech, and Signal Processing, 2000. ICASSP\u201900. Proceedings. 2000 IEEE International Conference on, volume 5, pages 2985\u20132988. IEEE, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jourjine%2C%20Alexander%20Rickard%2C%20Scott%20Yilmaz%2C%20Ozgur%20Blind%20separation%20of%20disjoint%20orthogonal%20signals%3A%20Demixing%20n%20sources%20from%202%20mixtures%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jourjine%2C%20Alexander%20Rickard%2C%20Scott%20Yilmaz%2C%20Ozgur%20Blind%20separation%20of%20disjoint%20orthogonal%20signals%3A%20Demixing%20n%20sources%20from%202%20mixtures%202000"
+        },
+        {
+            "id": "Lewis_2012_a",
+            "entry": "Jerad Lewis. Microphone array beamforming. Analog Devices, AN1140, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lewis%2C%20Jerad%20Microphone%20array%20beamforming%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lewis%2C%20Jerad%20Microphone%20array%20beamforming%202012"
+        },
+        {
+            "id": "Mandel_2032_a",
+            "entry": "Michael I Mandel and Nicoleta Roman. Enforcing consistency in spectral masks using Markov random fields. In Signal Processing Conference (EUSIPCO), 2015 23rd European, pages 2028\u2013 2032. IEEE, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mandel%2C%20Michael%20I.%20Roman%2C%20Nicoleta%20Enforcing%20consistency%20in%20spectral%20masks%20using%20Markov%20random%20fields%202032",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mandel%2C%20Michael%20I.%20Roman%2C%20Nicoleta%20Enforcing%20consistency%20in%20spectral%20masks%20using%20Markov%20random%20fields%202032"
+        },
+        {
+            "id": "Mandel_et+al_2009_a",
+            "entry": "Michael I Mandel, Ron J Weiss, and Daniel P W Ellis. Model-based expectation-maximization source separation and localization. IEEE Transactions on Audio, Speech, and Language Processing, 17 (8), 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mandel%2C%20Michael%20I.%20Weiss%2C%20Ron%20J.%20Ellis%2C%20Daniel%20P.W.%20Model-based%20expectation-maximization%20source%20separation%20and%20localization%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mandel%2C%20Michael%20I.%20Weiss%2C%20Ron%20J.%20Ellis%2C%20Daniel%20P.W.%20Model-based%20expectation-maximization%20source%20separation%20and%20localization%202009"
+        },
+        {
+            "id": "Oldfield_et+al_2015_a",
+            "entry": "Robert Oldfield, Ben Shirley, and Jens Spille. Object-based audio for interactive football broadcast. Multimedia Tools and Applications, 74(8):2717\u20132741, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Oldfield%2C%20Robert%20Shirley%2C%20Ben%20Spille%2C%20Jens%20Object-based%20audio%20for%20interactive%20football%20broadcast.%20Multimedia%20Tools%20and%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Oldfield%2C%20Robert%20Shirley%2C%20Ben%20Spille%2C%20Jens%20Object-based%20audio%20for%20interactive%20football%20broadcast.%20Multimedia%20Tools%20and%202015"
+        },
+        {
+            "id": "Rickard_2007_a",
+            "entry": "Scott Rickard. The DUET Blind Source Separation Algorithm, pages 217\u2013241. Springer Netherlands, Dordrecht, 2007. ISBN 978-1-4020-6479-1. doi: 10.1007/978-1-4020-6479-1_8. URL https://doi.org/10.1007/978-1-4020-6479-1_8.",
+            "crossref": "https://dx.doi.org/10.1007/978-1-4020-6479-1_8"
+        },
+        {
+            "id": "Srinivasan_et+al_2006_a",
+            "entry": "Soundararajan Srinivasan, Nicoleta Roman, and DeLiang Wang. Binary and ratio time-frequency masks for robust speech recognition. Speech Communication, 48(11):1486\u20131501, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Srinivasan%2C%20Soundararajan%20Roman%2C%20Nicoleta%20Wang%2C%20DeLiang%20Binary%20and%20ratio%20time-frequency%20masks%20for%20robust%20speech%20recognition%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Srinivasan%2C%20Soundararajan%20Roman%2C%20Nicoleta%20Wang%2C%20DeLiang%20Binary%20and%20ratio%20time-frequency%20masks%20for%20robust%20speech%20recognition%202006"
+        },
+        {
+            "id": "Emmanuel_2006_a",
+            "entry": "Emmanuel Vincent, R\u00e9mi Gribonval, and C\u00e9dric F\u00e9votte. Performance measurement in blind audio source separation. IEEE transactions on audio, speech, and language processing, 14(4):1462\u20131469, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Emmanuel%20Vincent%2C%20R%C3%A9mi%20Gribonval%20F%C3%A9votte%2C%20C%C3%A9dric%20Performance%20measurement%20in%20blind%20audio%20source%20separation%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Emmanuel%20Vincent%2C%20R%C3%A9mi%20Gribonval%20F%C3%A9votte%2C%20C%C3%A9dric%20Performance%20measurement%20in%20blind%20audio%20source%20separation%202006"
+        },
+        {
+            "id": "Virtanen_2007_a",
+            "entry": "Tuomas Virtanen. Monaural sound source separation by nonnegative matrix factorization with temporal continuity and sparseness criteria. IEEE transactions on audio, speech, and language processing, 15(3):1066\u20131074, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Virtanen%2C%20Tuomas%20Monaural%20sound%20source%20separation%20by%20nonnegative%20matrix%20factorization%20with%20temporal%20continuity%20and%20sparseness%20criteria%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Virtanen%2C%20Tuomas%20Monaural%20sound%20source%20separation%20by%20nonnegative%20matrix%20factorization%20with%20temporal%20continuity%20and%20sparseness%20criteria%202007"
+        },
+        {
+            "id": "Wang_2017_a",
+            "entry": "DeLiang Wang and Jitong Chen. Supervised speech separation based on deep learning: An overview. arXiv preprint arXiv:1708.07524, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1708.07524"
+        },
+        {
+            "id": "Yeredor_2001_a",
+            "entry": "Arie Yeredor. Blind source separation with pure delay mixtures. In Proc. ICA, pages 522\u2013527, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yeredor%2C%20Arie%20Blind%20source%20separation%20with%20pure%20delay%20mixtures%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yeredor%2C%20Arie%20Blind%20source%20separation%20with%20pure%20delay%20mixtures%202001"
+        }
+    ]
+}

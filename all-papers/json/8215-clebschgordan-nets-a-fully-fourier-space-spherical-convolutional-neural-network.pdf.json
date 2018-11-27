@@ -1,0 +1,247 @@
+{
+    "filename": "8215-clebschgordan-nets-a-fully-fourier-space-spherical-convolutional-neural-network.pdf",
+    "metadata": {
+        "title": "Clebsch\u2013Gordan Nets: a Fully Fourier Space Spherical Convolutional Neural Network",
+        "author": "Risi Kondor, Zhen Lin, Shubhendu Trivedi",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8215-clebschgordan-nets-a-fully-fourier-space-spherical-convolutional-neural-network.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Recent work by Cohen et al. [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>] has achieved state-of-the-art results for learning spherical images in a rotation invariant way by using ideas from group representation theory and noncommutative harmonic analysis. In this paper we propose a generalization of this work that generally exhibits improved performace, but from an implementation point of view is actually simpler. An unusual feature of the proposed architecture is that it uses the Clebsch\u2013Gordan transform as its only source of nonlinearity, thus avoiding repeated forward and backward Fourier transforms. The underlying ideas of the paper generalize to constructing neural networks that are invariant to the action of other compact groups."
+    },
+    "keywords": [
+        {
+            "term": "fourier space",
+            "url": "https://en.wikipedia.org/wiki/fourier_space"
+        },
+        {
+            "term": "compact group",
+            "url": "https://en.wikipedia.org/wiki/compact_group"
+        },
+        {
+            "term": "convolutional neural network",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_network"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        }
+    ],
+    "highlights": [
+        "Despite the many recent breakthroughs in deep learning, we still do not have a satisfactory understanding of how deep neural networks are able to achieve such spectacular perfomance on a wide range of learning problems",
+        "Fundamentally, each layer of a Convolutional Neural Networks realizes two simple operations: a linear one consisting of convolving the previous layer\u2019s activations with a learnable filter, and a nonlinear but pointwise one, such as a ReLU operator2. This architecture is sufficient to guarantee translation equivariance, meaning that if the input image is translated by some vector t, the activation pattern in each higher layer of the network will translate by the same amount",
+        "Equivariance is crucial to image recognition for two closely related reasons: (a) It guarantees that exactly the same filters are applied to each part the input image regardless of position. (b) Assuming that at the very top of the network, we add some layer that is translation invariant, the entire network will be invariant, ensuring that it can detect any given object well regardless of its location",
+        "In the present paper we propose a spherical Convolutional Neural Networks that differs from [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>] in two fundamental ways: 1",
+        "While the CG transform is not currently available as a differentiable operator in any of the major deep learning software frameworks, we have developed and will publicly release a C++ PyTorch extension for it",
+        "We have presented an SO(3)-equivariant neural network architecture for spherical data that operates completely in Fourier space, circumventing a major drawback of earlier models that need to switch back and forth between Fourier space and \u201creal\u201d space"
+    ],
+    "key_statements": [
+        "Despite the many recent breakthroughs in deep learning, we still do not have a satisfactory understanding of how deep neural networks are able to achieve such spectacular perfomance on a wide range of learning problems",
+        "Fundamentally, each layer of a Convolutional Neural Networks realizes two simple operations: a linear one consisting of convolving the previous layer\u2019s activations with a learnable filter, and a nonlinear but pointwise one, such as a ReLU operator2. This architecture is sufficient to guarantee translation equivariance, meaning that if the input image is translated by some vector t, the activation pattern in each higher layer of the network will translate by the same amount",
+        "Equivariance is crucial to image recognition for two closely related reasons: (a) It guarantees that exactly the same filters are applied to each part the input image regardless of position. (b) Assuming that at the very top of the network, we add some layer that is translation invariant, the entire network will be invariant, ensuring that it can detect any given object well regardless of its location",
+        "In the present paper we propose a spherical Convolutional Neural Networks that differs from [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>] in two fundamental ways: 1",
+        "While the CG transform is not currently available as a differentiable operator in any of the major deep learning software frameworks, we have developed and will publicly release a C++ PyTorch extension for it",
+        "We have presented an SO(3)-equivariant neural network architecture for spherical data that operates completely in Fourier space, circumventing a major drawback of earlier models that need to switch back and forth between Fourier space and \u201creal\u201d space"
+    ],
+    "summary": [
+        "Despite the many recent breakthroughs in deep learning, we still do not have a satisfactory understanding of how deep neural networks are able to achieve such spectacular perfomance on a wide range of learning problems.",
+        "One potential drawback of Spherical CNNs of the form proposed in [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>], is that the nonlinear transform in each layer still needs to be computed in \u201creal space\u201d.",
+        "Spherical CNNs are not the only context in which the idea of Fourier space neural networks has recently appeared [<a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>, <a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>, <a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>, <a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>].",
+        "While retaining the connection to noncommutative Fourier analysis, we relax the requirement that the activation of each layer of the network needs to be a function on SO(3), requiring only that it be expressible as a collection of some number of SO(3)\u2013covariant vectors corresponding to different irreducible representations of the group.",
+        "2. Rather than a pointwise nonlinearity in real space, our network takes the tensor (Kronecker) product of the activations in each layer followed by decomposing the result into irreducible fragments using the so-called Clebsch\u2013Gordan decomposition.",
+        "Noncommutative harmonic analysis [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>, <a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>] tells us that functions on the rotation group admit a type of generalized Fourier transform.",
+        "The starting point for our Generalized Spherical CNNs is the Fourier space correlation formula (10).",
+        "We use the term \u201ccovariant\u201d if the actions are qualitively different, as in the case of rotations of functions on the sphere and the corresonding transformations (15) of the irreducible fragments in a neural network.",
+        "What the (16) lacks in interpretability it makes up for in terms of generality, since it provides an extremely simple and flexible way of inducing SO(3)\u2013covariant linear transformations in neural networks.",
+        "Whereas in conventional neural networks the linear transformation always precedes the nonlinear operation, in Clebsch\u2013Gordan networks it is natural to design each layer so as to perform the CG-transform first, and the convolution like step (16), which will limit the number of fragments.",
+        "Note that in contrast to other architectures such as [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>] that involve repeated forward and backward transforms, thanks to their fully Fourier nature, for Clebsch\u2013Gordan nets, in both training and testing, the elements of F0S are guaranteed to be invariant to rotations of arbitrary magnitude not just approximately, but in the exact sense, up to limitations of finite precision arithmetic.",
+        "We have presented an SO(3)-equivariant neural network architecture for spherical data that operates completely in Fourier space, circumventing a major drawback of earlier models that need to switch back and forth between Fourier space and \u201creal\u201d space.",
+        "While the specific focus is on spheres and SO(3)-equivariance, the approach is more widely applicable, suggesting a general formalism for designing fully Fourier neural networks that are equivariant to the action of any compact continuous group."
+    ],
+    "headline": "In this paper we propose a generalization of this work that generally exhibits improved performace, but from an implementation point of view is simpler",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] T. S. Cohen, M. Geiger, J. K\u00f6hler, and M. Welling. Spherical CNNs. International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cohen%2C%20T.S.%20Geiger%2C%20M.%20K%C3%B6hler%2C%20J.%20Welling%2C%20M.%20Spherical%20CNNs%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cohen%2C%20T.S.%20Geiger%2C%20M.%20K%C3%B6hler%2C%20J.%20Welling%2C%20M.%20Spherical%20CNNs%202018"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Y LeCun, B Boser, J. S. Denker, D. Henderson, R. E. Howard, W. Hubbard, and L. D. Jackel. Backpropagation applied to handwritten zip code recognition. Neural Computation, 1:541\u2013551, 1989.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=LeCun%2C%20Y.%20Boser%2C%20B.%20Denker%2C%20J.S.%20Henderson%2C%20D.%20Backpropagation%20applied%20to%20handwritten%20zip%20code%20recognition%201989",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=LeCun%2C%20Y.%20Boser%2C%20B.%20Denker%2C%20J.S.%20Henderson%2C%20D.%20Backpropagation%20applied%20to%20handwritten%20zip%20code%20recognition%201989"
+        },
+        {
+            "id": "3",
+            "entry": "[3] R. Gens. Deep Symmetry Networks. NIPS 2014, pages 1\u20139, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gens%2C%20R.%20Deep%20Symmetry%20Networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gens%2C%20R.%20Deep%20Symmetry%20Networks%202014"
+        },
+        {
+            "id": "4",
+            "entry": "[4] T. S. Cohen and M. Welling. Group equivariant convolutional networks. Proceedings of The 33rd International Conference on Machine Learning, 48:2990\u20132999, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cohen%2C%20T.S.%20Welling%2C%20M.%20Group%20equivariant%20convolutional%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cohen%2C%20T.S.%20Welling%2C%20M.%20Group%20equivariant%20convolutional%20networks%202016"
+        },
+        {
+            "id": "5",
+            "entry": "[5] T. S. Cohen and M. Welling. Steerable cnns. In ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cohen%2C%20T.S.%20Welling%2C%20M.%20Steerable%20cnns%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cohen%2C%20T.S.%20Welling%2C%20M.%20Steerable%20cnns%202017"
+        },
+        {
+            "id": "6",
+            "entry": "[6] S. Ravanbakhsh, J. Schneider, and B. Poczos. Equivariance through parameter-sharing. In Proceedings of International Conference on Machine Learning, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ravanbakhsh%2C%20S.%20Schneider%2C%20J.%20Poczos%2C%20B.%20Equivariance%20through%20parameter-sharing%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ravanbakhsh%2C%20S.%20Schneider%2C%20J.%20Poczos%2C%20B.%20Equivariance%20through%20parameter-sharing%202017"
+        },
+        {
+            "id": "7",
+            "entry": "[7] R. Kondor and S. Trivedi. On the generalization of equivariance and convolution in neural networks to the action of compact groups. 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kondor%2C%20R.%20Trivedi%2C%20S.%20On%20the%20generalization%20of%20equivariance%20and%20convolution%20in%20neural%20networks%20to%20the%20action%20of%20compact%20groups%202018"
+        },
+        {
+            "id": "8",
+            "entry": "[8] C. Esteves, C. Allen-Blanchette, A. Makadia, and K. Daniilidis. Learning SO(3) Equivariant Representations with Spherical CNNs. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Esteves%2C%20C.%20Allen-Blanchette%2C%20C.%20Makadia%2C%20A.%20Daniilidis%2C%20K.%20Learning%20SO%283%29%20Equivariant%20Representations%20with%20Spherical%20CNNs%202017"
+        },
+        {
+            "id": "9",
+            "entry": "[9] L. Zelnik-Manor, G. Peters, and P. Perona. Squaring the Circles in Panoramas. Ieee Iccv, pages 1292\u20131299, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zelnik-Manor%2C%20L.%20Peters%2C%20G.%20Perona%2C%20P.%20Squaring%20the%20Circles%20in%20Panoramas%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zelnik-Manor%2C%20L.%20Peters%2C%20G.%20Perona%2C%20P.%20Squaring%20the%20Circles%20in%20Panoramas%202005"
+        },
+        {
+            "id": "10",
+            "entry": "[10] J. Cruz-Mota, I. Bogdanova, B. Paquier, M. Bierlaire, and J-P Thiran. Scale invariant feature transform on the sphere: Theory and applications. International Journal of Computer Vision, 98(2):217\u2013241, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cruz-Mota%2C%20J.%20Bogdanova%2C%20I.%20Paquier%2C%20B.%20Bierlaire%2C%20M.%20Scale%20invariant%20feature%20transform%20on%20the%20sphere%3A%20Theory%20and%20applications%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cruz-Mota%2C%20J.%20Bogdanova%2C%20I.%20Paquier%2C%20B.%20Bierlaire%2C%20M.%20Scale%20invariant%20feature%20transform%20on%20the%20sphere%3A%20Theory%20and%20applications%202012"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Y-C Su, D. Jayaraman, and K. Grauman. Pano2vid: Automatic cinematography for watching 360 videos. Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics), 10114 LNCS(1):154\u2013171, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Su%2C%20Y.-C.%20Jayaraman%2C%20D.%20Grauman%2C%20K.%20Pano2vid%3A%20Automatic%20cinematography%20for%20watching%20360%20videos%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Su%2C%20Y.-C.%20Jayaraman%2C%20D.%20Grauman%2C%20K.%20Pano2vid%3A%20Automatic%20cinematography%20for%20watching%20360%20videos%202017"
+        },
+        {
+            "id": "12",
+            "entry": "[12] W-S Lai, Y. Huang, N. Joshi, C. Buehler, M-H Yang, and S-B Kang. Semantic-driven Generation of Hyperlapse from 360 @BULLET Video. pages 1\u201312.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lai%2C%20W.-S.%20Huang%2C%20Y.%20Joshi%2C%20N.%20Buehler%2C%20C.%20Semantic-driven%20Generation%20of%20Hyperlapse%20from%20360%20%40BULLET%20Video"
+        },
+        {
+            "id": "13",
+            "entry": "[13] R. Khasanova and P. Frossard. Graph-Based Classification of Omnidirectional Images. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Khasanova%2C%20R.%20Frossard%2C%20P.%20Graph-Based%20Classification%20of%20Omnidirectional%20Images%202017"
+        },
+        {
+            "id": "14",
+            "entry": "[14] W. Boomsma and J. Frellsen. Spherical convolutions and their application in molecular modelling. (Nips):3436\u20133446, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Boomsma%2C%20W.%20Frellsen%2C%20J.%20Spherical%20convolutions%20and%20their%20application%20in%20molecular%20modelling.%20%28Nips%29%202017"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Y-C Su and K. Grauman. Making 360$\u02c6{}$ Video Watchable in 2D: Learning Videography for Click Free Viewing. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Su%2C%20Y.-C.%20Grauman%2C%20K.%20Making%20360%24%CB%86%7B%7D%24%20Video%20Watchable%20in%202D%3A%20Learning%20Videography%20for%20Click%20Free%20Viewing%202017"
+        },
+        {
+            "id": "16",
+            "entry": "[16] D. M. Healey, D. N. Rockmore, and S. B. Moore. An fft for the 2-sphere and applications. In 1996 IEEE International Conference on Acoustics, Speech, and Signal Processing Conference Proceedings, volume 3, pages 1323\u20131326 vol. 3, May 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Healey%2C%20D.M.%20Rockmore%2C%20D.N.%20Moore%2C%20S.B.%20An%20fft%20for%20the%202-sphere%20and%20applications%201996-05",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Healey%2C%20D.M.%20Rockmore%2C%20D.N.%20Moore%2C%20S.B.%20An%20fft%20for%20the%202-sphere%20and%20applications%201996-05"
+        },
+        {
+            "id": "17",
+            "entry": "[17] P. J. Kostelec and D. N. Rockmore. Ffts on the rotation group. Journal of Fourier Analysis and Applications, 14(2):145\u2013179, Apr 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kostelec%2C%20P.J.%20Rockmore%2C%20D.N.%20Ffts%20on%20the%20rotation%20group%202008-04",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kostelec%2C%20P.J.%20Rockmore%2C%20D.N.%20Ffts%20on%20the%20rotation%20group%202008-04"
+        },
+        {
+            "id": "18",
+            "entry": "[18] D. E. Worrall, S. J. Garbin, D. Turmukhambetov, and G. J. Brostow. Harmonic Networks: Deep Translation and Rotation Equivariance. 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Worrall%2C%20D.E.%20Garbin%2C%20S.J.%20Turmukhambetov%2C%20D.%20Brostow%2C%20G.J.%20Harmonic%20Networks%3A%20Deep%20Translation%20and%20Rotation%20Equivariance%202016"
+        },
+        {
+            "id": "19",
+            "entry": "[19] C. Esteves, C. Allen-Blanchette, X. Zhou, and K. Daniilidis. Polar Transformer Networks. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=C%20Esteves%20C%20AllenBlanchette%20X%20Zhou%20and%20K%20Daniilidis%20Polar%20Transformer%20Networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=C%20Esteves%20C%20AllenBlanchette%20X%20Zhou%20and%20K%20Daniilidis%20Polar%20Transformer%20Networks%202017"
+        },
+        {
+            "id": "20",
+            "entry": "[20] J-P. Serre. Linear Representations of Finite Groups, volume 42 of Graduate Texts in Mathamatics. Springer-Verlag, 1977.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Serre%2C%20J.-P.%20Linear%20Representations%20of%20Finite%20Groups%2C%20volume%2042%20of%20Graduate%20Texts%20in%20Mathamatics%201977"
+        },
+        {
+            "id": "21",
+            "entry": "[21] N. Thomas, T. Smidt, S. Kearnes, L. Yang, L. Li, K. Kohlhoff, and P. Riley. Tensor field networks: Rotationand translation-equivariant neural networks for 3d point clouds. arXiv:1802.08219 [cs], Feb 2018. arXiv: 1802.08219.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.08219"
+        },
+        {
+            "id": "22",
+            "entry": "[22] R. Kondor. N-body networks: a covariant hierarchical neural network architecture for learning atomic potentials. CoRR, abs/1803.01588, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.01588"
+        },
+        {
+            "id": "23",
+            "entry": "[23] J. Masci, D. Boscaini, M. M. Bronstein, and P. Vandergheynst. Geodesic convolutional neural networks on riemannian manifolds. 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Masci%2C%20J.%20Boscaini%2C%20D.%20Bronstein%2C%20M.M.%20Vandergheynst%2C%20P.%20Geodesic%20convolutional%20neural%20networks%20on%20riemannian%20manifolds%202015"
+        },
+        {
+            "id": "24",
+            "entry": "[24] F. Monti, D. Boscaini, J. Masci, E. Rodola, J. Svoboda, and M. M. Bronstein. Geometric deep learning on graphs and manifolds using mixture model cnns. 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Monti%2C%20F.%20Boscaini%2C%20D.%20Masci%2C%20J.%20Rodola%2C%20E.%20Geometric%20deep%20learning%20on%20graphs%20and%20manifolds%20using%20mixture%20model%20cnns%202016"
+        },
+        {
+            "id": "25",
+            "entry": "[25] B. Gutman, Y. Wang, T. Chan, P. M. Thompson, and A. W. Toga. Shape Registration with Spherical Cross Correlation. 2nd MICCAI Workshop on Mathematical Foundations of Computational Anatomy, pages 56\u201367, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gutman%2C%20B.%20Wang%2C%20Y.%20Chan%2C%20T.%20Thompson%2C%20P.M.%20Shape%20Registration%20with%20Spherical%20Cross%20Correlation%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gutman%2C%20B.%20Wang%2C%20Y.%20Chan%2C%20T.%20Thompson%2C%20P.M.%20Shape%20Registration%20with%20Spherical%20Cross%20Correlation%202008"
+        },
+        {
+            "id": "26",
+            "entry": "[26] A. Terras. Fourier analysis on finite groups and applications, volume 43 of London Mathematical Society Student Texts. Cambridge Univ. Press, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Terras%2C%20A.%20Fourier%20analysis%20on%20finite%20groups%20and%20applications%2C%20volume%2043%20of%20London%20Mathematical%20Society%20Student%20Texts%201999"
+        },
+        {
+            "id": "27",
+            "entry": "[27] P. Diaconis. Group Representation in Probability and Statistics, volume 11 of IMS Lecture Series. Institute of Mathematical Statistics, 1988.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=P%20Diaconis%20Group%20Representation%20in%20Probability%20and%20Statistics%20volume%2011%20of%20IMS%20Lecture%20Series%20Institute%20of%20Mathematical%20Statistics%201988",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=P%20Diaconis%20Group%20Representation%20in%20Probability%20and%20Statistics%20volume%2011%20of%20IMS%20Lecture%20Series%20Institute%20of%20Mathematical%20Statistics%201988"
+        },
+        {
+            "id": "28",
+            "entry": "[28] G. Montavon, K. Hansen, S. Fazli, M. Rupp, F. Biegler, A. Ziehe, A. Tkatchenko, O.A. von Lilienfeld, and K. M\u00fcller. Learning invariant representations of molecules for atomization energy prediction. In NIPS, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Montavon%2C%20G.%20Hansen%2C%20K.%20Fazli%2C%20S.%20Rupp%2C%20M.%20Learning%20invariant%20representations%20of%20molecules%20for%20atomization%20energy%20prediction%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Montavon%2C%20G.%20Hansen%2C%20K.%20Fazli%2C%20S.%20Rupp%2C%20M.%20Learning%20invariant%20representations%20of%20molecules%20for%20atomization%20energy%20prediction%202012"
+        },
+        {
+            "id": "29",
+            "entry": "[29] A. Raj, A. Kumar, Y. Mroueh, and P.T. Fletcher et al. Local group invariant representations via orbit embeddings. 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Raj%2C%20A.%20Kumar%2C%20A.%20Mroueh%2C%20Y.%20Fletcher%2C%20P.T.%20Local%20group%20invariant%20representations%20via%20orbit%20embeddings%202016"
+        },
+        {
+            "id": "30",
+            "entry": "[30] L. C. Blum and J.-L. Reymond. 970 million druglike small molecules for virtual screening in the chemical universe database gdb-13. Journal of the American Chemical Society, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Blum%2C%20L.C.%20J.-L.%20Reymond.%20970%20million%20druglike%20small%20molecules%20for%20virtual%20screening%20in%20the%20chemical%20universe%20database%20gdb-13%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Blum%2C%20L.C.%20J.-L.%20Reymond.%20970%20million%20druglike%20small%20molecules%20for%20virtual%20screening%20in%20the%20chemical%20universe%20database%20gdb-13%202009"
+        },
+        {
+            "id": "31",
+            "entry": "[31] M. Rupp, A. Tkatchenko, K.-R. M\u00fcller, and O. A. von Lilienfeld. Fast and accurate modeling of molecular atomization energies with machine learning. Physical Review Letters, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=M.%20Rupp%2C%20A.%20Tkatchenko%2C%20K.-R.%20M%C3%BCller%20von%20Lilienfeld%2C%20O.%20A.%20Fast%20and%20accurate%20modeling%20of%20molecular%20atomization%20energies%20with%20machine%20learning%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=M.%20Rupp%2C%20A.%20Tkatchenko%2C%20K.-R.%20M%C3%BCller%20von%20Lilienfeld%2C%20O.%20A.%20Fast%20and%20accurate%20modeling%20of%20molecular%20atomization%20energies%20with%20machine%20learning%202012"
+        },
+        {
+            "id": "32",
+            "entry": "[32] M. Savva, F. Yu, H. Su, A. Kanezaki, T. Furuya, R. Ohbuchi, Z. Zhou, R. Yu, S. Bai, X. Bai, M. Aono, A. Tatsuma, S. Thermos, A. Axenopoulos, G. Th. Papadopoulos, P. Daras, X. Deng, Z. Lian, B. Li, H. Johan, Y. Lu, and S. Mk. Large-scale 3d shape retrieval from shapenet core55. Eurographics Workshop on 3D Object Retrieval, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Savva%2C%20M.%20Yu%2C%20F.%20Su%2C%20H.%20Kanezaki%2C%20A.%20Large-scale%203d%20shape%20retrieval%20from%20shapenet%20core55.%20Eurographics%20Workshop%20on%203D%20Object%20Retrieval%202017"
+        },
+        {
+            "id": "33",
+            "entry": "[33] A. X. Chang, T. Funkhouser, L. Guibas, P. Hanrahan, Q. Huang, Z. Li, S. Savarese, M. Savva, S. Song, H. Su, J. Xiao, L. Yi, and F. Yu. Shapenet: An information-rich 3d model repository. 2015. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chang%2C%20A.X.%20Funkhouser%2C%20T.%20Guibas%2C%20L.%20Hanrahan%2C%20P.%20Shapenet%3A%20An%20information-rich%203d%20model%20repository%202015"
+        }
+    ]
+}

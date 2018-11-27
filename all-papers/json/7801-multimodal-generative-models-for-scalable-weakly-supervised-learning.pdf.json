@@ -1,0 +1,279 @@
+{
+    "filename": "7801-multimodal-generative-models-for-scalable-weakly-supervised-learning.pdf",
+    "metadata": {
+        "title": "Multimodal Generative Models for Scalable Weakly-Supervised Learning",
+        "author": "Mike Wu, Noah Goodman",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7801-multimodal-generative-models-for-scalable-weakly-supervised-learning.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Multiple modalities often co-occur when describing natural phenomena. Learning a joint representation of these modalities should yield deeper and more useful representations. Previous generative approaches to multi-modal input either do not learn a joint distribution or require additional computation to handle missing data. Here, we introduce a multimodal variational autoencoder (MVAE) that uses a product-of-experts inference network and a sub-sampled training paradigm to solve the multi-modal inference problem. Notably, our model shares parameters to efficiently learn under any combination of missing modalities. We apply the MVAE on four datasets and match state-of-the-art performance using many fewer parameters. In addition, we show that the MVAE is directly applicable to weaklysupervised learning, and is robust to incomplete supervision. We then consider two case studies, one of learning image transformations\u2014edge detection, colorization, segmentation\u2014as a set of modalities, followed by one of machine translation between two languages. We find appealing results across this range of tasks."
+    },
+    "keywords": [
+        {
+            "term": "MVAE",
+            "url": "https://en.wikipedia.org/wiki/Mvae"
+        },
+        {
+            "term": "evidence lower bound",
+            "url": "https://en.wikipedia.org/wiki/evidence_lower_bound"
+        },
+        {
+            "term": "inference network",
+            "url": "https://en.wikipedia.org/wiki/inference_network"
+        },
+        {
+            "term": "product of experts",
+            "url": "https://en.wikipedia.org/wiki/product_of_experts"
+        },
+        {
+            "term": "generative model",
+            "url": "https://en.wikipedia.org/wiki/generative_model"
+        },
+        {
+            "term": "joint distribution",
+            "url": "https://en.wikipedia.org/wiki/joint_distribution"
+        },
+        {
+            "term": "restricted Boltzmann machine",
+            "url": "https://en.wikipedia.org/wiki/restricted_Boltzmann_machine"
+        },
+        {
+            "term": "machine translation",
+            "url": "https://en.wikipedia.org/wiki/machine_translation"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        }
+    ],
+    "highlights": [
+        "Learning from diverse modalities has the potential to yield more generalizable representations",
+        "We propose a novel multimodal variational autoencoder (MVAE) to learn a joint distribution under weak supervision",
+        "We compare the performance of the multimodal variational autoencoder against a suite of baseline models: (1) supervised neural network using the same architectures as in the multimodal variational autoencoder; (2) logistic regression on raw pixels; (3) an autoencoder trained on the full set of images, followed by logistic regression on a subset of paired examples; we do something similar for (4) variational autoencoder and (5) restricted Boltzmann machine, where the internal latent state is used as input to the logistic regression; (6) we train the joint multi-modal VAE (\u03b1 = 0.01 as suggested in [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>]) on the subset of paired examples",
+        "We introduced a multi-modal variational autoencoder with a new training paradigm that learns a joint distribution and is robust to missing data",
+        "By optimizing the evidence lower bound with multi-modal and uni-modal examples, we fully utilize the product-of-experts structure to share inference network parameters in a fashion that scales to an arbitrary number of modalities",
+        "We find that the multimodal variational autoencoder matches the state-of-the-art on four bi-modal datasets, and shows promise on two real world datasets"
+    ],
+    "key_statements": [
+        "Learning from diverse modalities has the potential to yield more generalizable representations",
+        "While fully-supervised deep learning approaches can learn to bridge modalities, generative approaches promise to capture the joint distribution across modalities and flexibly support missing data",
+        "We propose a novel multimodal variational autoencoder (MVAE) to learn a joint distribution under weak supervision",
+        "We report experiments to measure the quality of the multimodal variational autoencoder, comparing with previous models",
+        "We show that the multimodal variational autoencoder is able to support heavy encoders with thousands of parameters, matching state-of-the-art performance",
+        "We show that the multimodal variational autoencoder can jointly learn these transformations by modeling them as modalities",
+        "We investigate how the multimodal variational autoencoder performs under incomplete supervision by reducing the number of multi-modal examples",
+        "We find that the multimodal variational autoencoder is able to capture a good joint representation when only a small percentage of examples are multi-modal",
+        "The evidence lower bound is defined via an inference network, q\u03c6(z|x), which serves as a tractable importance distribution: evidence lower bound(x) Eq\u03c6(z|x)[\u03bb log p\u03b8(x|z)] \u2212 \u03b2 KL[q\u03c6(z|x), p(z)]",
+        "We compare the performance of the multimodal variational autoencoder against a suite of baseline models: (1) supervised neural network using the same architectures as in the multimodal variational autoencoder; (2) logistic regression on raw pixels; (3) an autoencoder trained on the full set of images, followed by logistic regression on a subset of paired examples; we do something similar for (4) variational autoencoder and (5) restricted Boltzmann machine, where the internal latent state is used as input to the logistic regression; (6) we train the joint multi-modal VAE (\u03b1 = 0.01 as suggested in [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>]) on the subset of paired examples",
+        "We find that the multimodal variational autoencoder surpasses all the baselines on a middle region when there are enough paired examples to sufficiently train the deep networks but not enough paired examples to learn a supervised network",
+        "We introduced a multi-modal variational autoencoder with a new training paradigm that learns a joint distribution and is robust to missing data",
+        "By optimizing the evidence lower bound with multi-modal and uni-modal examples, we fully utilize the product-of-experts structure to share inference network parameters in a fashion that scales to an arbitrary number of modalities",
+        "We find that the multimodal variational autoencoder matches the state-of-the-art on four bi-modal datasets, and shows promise on two real world datasets"
+    ],
+    "summary": [
+        "Learning from diverse modalities has the potential to yield more generalizable representations.",
+        "While the inference networks can be best trained separately, the generative model requires joint observations.",
+        "Given a complete dataset, with no missing modalities, optimizing Eqn 2 has an unfortunate consequence: we never train the individual inference networks and do not know how to use them if presented with missing data at test time.",
+        "The JMVAE trains a new inference network for each multi-modal subset, which we have previously argued in Sec. 2 to be intractable in the general setting.",
+        "Because training is separated, the model has to fit 2 new inference networks to handle all combinations of missing data in stage two.",
+        "Table 2 shows test log-likelihoods for each model and dataset.2 We see that MVAE performs on par with the state-of-the-art (JMVAE) while using far fewer parameters.",
+        "MVAE performs best, slightly beating even the image-only VAE, indicating that solving the harder multi-modal problem does not sacrifice any uni-modal model capacity and perhaps helps.",
+        "The MVAE always produces lower variance than other methods that capture the joint distribution, and often lower than conditional or single-modality models.",
+        "We find that increasing k has little effect on data log-likelihood but reduces the variance of the importance distribution defined by the inference networks.",
+        "We compare the performance of the MVAE against a suite of baseline models: (1) supervised neural network using the same architectures as in the MVAE; (2) logistic regression on raw pixels; (3) an autoencoder trained on the full set of images, followed by logistic regression on a subset of paired examples; we do something similar for (4) VAEs and (5) RBMs, where the internal latent state is used as input to the logistic regression; (6) we train the JMVAE (\u03b1 = 0.01 as suggested in [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>]) on the subset of paired examples.",
+        "These results suggest that the MVAE can effectively learn the joint distribution by bootstrapping from a larger set of uni-modal data.",
+        "Many of the popular translation models [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>] are fully supervised with millions of parameters and trained on datasets with tens of millions of paired examples.",
+        "We introduced a multi-modal variational autoencoder with a new training paradigm that learns a joint distribution and is robust to missing data.",
+        "By optimizing the ELBO with multi-modal and uni-modal examples, we fully utilize the product-of-experts structure to share inference network parameters in a fashion that scales to an arbitrary number of modalities.",
+        "We find that the MVAE matches the state-of-the-art on four bi-modal datasets, and shows promise on two real world datasets"
+    ],
+    "headline": "We introduce a multimodal variational autoencoder  that uses a product-of-experts inference network and a sub-sampled training paradigm to solve the multi-modal inference problem",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Mikel Artetxe, Gorka Labaka, Eneko Agirre, and Kyunghyun Cho. Unsupervised neural machine translation. arXiv preprint arXiv:1710.11041, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.11041"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Samuel R Bowman, Luke Vilnis, Oriol Vinyals, Andrew M Dai, Rafal Jozefowicz, and Samy Bengio. Generating sentences from a continuous space. arXiv preprint arXiv:1511.06349, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.06349"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Gary Bradski and Adrian Kaehler. Opencv. Dr. Dobb\u2019s journal of software tools, 3, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gary%20Bradski%20and%20Adrian%20Kaehler%20Opencv%20Dr%20Dobbs%20journal%20of%20software%20tools%203%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gary%20Bradski%20and%20Adrian%20Kaehler%20Opencv%20Dr%20Dobbs%20journal%20of%20software%20tools%203%202000"
+        },
+        {
+            "id": "4",
+            "entry": "[4] John Canny. A computational approach to edge detection. In Readings in Computer Vision, pages 184\u2013203.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Canny%2C%20John%20A%20computational%20approach%20to%20edge%20detection",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Canny%2C%20John%20A%20computational%20approach%20to%20edge%20detection"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Yanshuai Cao and David J Fleet. Generalized product of experts for automatic and principled fusion of gaussian process predictions. arXiv preprint arXiv:1410.7827, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1410.7827"
+        },
+        {
+            "id": "6",
+            "entry": "[6] SM Ali Eslami, Nicolas Heess, Theophane Weber, Yuval Tassa, David Szepesvari, Geoffrey E Hinton, et al. Attend, infer, repeat: Fast scene understanding with generative models. In Advances in Neural Information Processing Systems, pages 3225\u20133233, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Eslami%2C%20S.M.Ali%20Heess%2C%20Nicolas%20Weber%2C%20Theophane%20Tassa%2C%20Yuval%20repeat%3A%20Fast%20scene%20understanding%20with%20generative%20models%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Eslami%2C%20S.M.Ali%20Heess%2C%20Nicolas%20Weber%2C%20Theophane%20Tassa%2C%20Yuval%20repeat%3A%20Fast%20scene%20understanding%20with%20generative%20models%202016"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Irina Higgins, Loic Matthey, Arka Pal, Christopher Burgess, Xavier Glorot, Matthew Botvinick, Shakir Mohamed, and Alexander Lerchner. beta-vae: Learning basic visual concepts with a constrained variational framework. 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Higgins%2C%20Irina%20Matthey%2C%20Loic%20Pal%2C%20Arka%20Burgess%2C%20Christopher%20beta-vae%3A%20Learning%20basic%20visual%20concepts%20with%20a%20constrained%20variational%20framework%202016"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Geoffrey E Hinton. Training products of experts by minimizing contrastive divergence. Training, 14(8), 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hinton%2C%20Geoffrey%20E.%20Training%20products%20of%20experts%20by%20minimizing%20contrastive%20divergence%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hinton%2C%20Geoffrey%20E.%20Training%20products%20of%20experts%20by%20minimizing%20contrastive%20divergence%202006"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Davis E King. Dlib-ml: A machine learning toolkit. Journal of Machine Learning Research, 10(Jul):1755\u2013 1758, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=King%2C%20Davis%20E.%20Dlib-ml%3A%20A%20machine%20learning%20toolkit%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=King%2C%20Davis%20E.%20Dlib-ml%3A%20A%20machine%20learning%20toolkit%202009"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Diederik P Kingma, Shakir Mohamed, Danilo Jimenez Rezende, and Max Welling. Semi-supervised learning with deep generative models. In Advances in Neural Information Processing Systems, pages 3581\u20133589, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Mohamed%2C%20Shakir%20Rezende%2C%20Danilo%20Jimenez%20Welling%2C%20Max%20Semi-supervised%20learning%20with%20deep%20generative%20models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Mohamed%2C%20Shakir%20Rezende%2C%20Danilo%20Jimenez%20Welling%2C%20Max%20Semi-supervised%20learning%20with%20deep%20generative%20models%202014"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Diederik P Kingma and Max Welling. Auto-encoding variational bayes. arXiv preprint arXiv:1312.6114, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.6114"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Guillaume Lample, Ludovic Denoyer, and Marc\u2019Aurelio Ranzato. Unsupervised machine translation using monolingual corpora only. arXiv preprint arXiv:1711.00043, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.00043"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Hugo Larochelle and Iain Murray. The neural autoregressive distribution estimator. In Proceedings of the Fourteenth International Conference on Artificial Intelligence and Statistics, pages 29\u201337, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Larochelle%2C%20Hugo%20Murray%2C%20Iain%20The%20neural%20autoregressive%20distribution%20estimator%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Larochelle%2C%20Hugo%20Murray%2C%20Iain%20The%20neural%20autoregressive%20distribution%20estimator%202011"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Yann LeCun, L\u00e9on Bottou, Yoshua Bengio, and Patrick Haffner. Gradient-based learning applied to document recognition. Proceedings of the IEEE, 86(11):2278\u20132324, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=LeCun%2C%20Yann%20Bottou%2C%20L%C3%A9on%20Bengio%2C%20Yoshua%20Haffner%2C%20Patrick%20Gradient-based%20learning%20applied%20to%20document%20recognition%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=LeCun%2C%20Yann%20Bottou%2C%20L%C3%A9on%20Bengio%2C%20Yoshua%20Haffner%2C%20Patrick%20Gradient-based%20learning%20applied%20to%20document%20recognition%201998"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Ziwei Liu, Ping Luo, Xiaogang Wang, and Xiaoou Tang. Deep learning face attributes in the wild. In Proceedings of International Conference on Computer Vision (ICCV), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20Ziwei%20Luo%2C%20Ping%20Wang%2C%20Xiaogang%20Tang%2C%20Xiaoou%20Deep%20learning%20face%20attributes%20in%20the%20wild%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liu%2C%20Ziwei%20Luo%2C%20Ping%20Wang%2C%20Xiaogang%20Tang%2C%20Xiaoou%20Deep%20learning%20face%20attributes%20in%20the%20wild%202015"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Jiquan Ngiam, Aditya Khosla, Mingyu Kim, Juhan Nam, Honglak Lee, and Andrew Y Ng. Multimodal deep learning. In Proceedings of the 28th international conference on machine learning (ICML-11), pages 689\u2013696, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ngiam%2C%20Jiquan%20Khosla%2C%20Aditya%20Kim%2C%20Mingyu%20Nam%2C%20Juhan%20and%20Andrew%20Y%20Ng.%20Multimodal%20deep%20learning%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ngiam%2C%20Jiquan%20Khosla%2C%20Aditya%20Kim%2C%20Mingyu%20Nam%2C%20Juhan%20and%20Andrew%20Y%20Ng.%20Multimodal%20deep%20learning%202011"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Gaurav Pandey and Ambedkar Dukkipati. Variational methods for conditional multimodal deep learning. In Neural Networks (IJCNN), 2017 International Joint Conference on, pages 308\u2013315. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pandey%2C%20Gaurav%20Dukkipati%2C%20Ambedkar%20Variational%20methods%20for%20conditional%20multimodal%20deep%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pandey%2C%20Gaurav%20Dukkipati%2C%20Ambedkar%20Variational%20methods%20for%20conditional%20multimodal%20deep%20learning%202017"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Yunchen Pu, Zhe Gan, Ricardo Henao, Xin Yuan, Chunyuan Li, Andrew Stevens, and Lawrence Carin. Variational autoencoder for deep learning of images, labels and captions. In Advances in neural information processing systems, pages 2352\u20132360, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pu%2C%20Yunchen%20Gan%2C%20Zhe%20Henao%2C%20Ricardo%20Yuan%2C%20Xin%20Variational%20autoencoder%20for%20deep%20learning%20of%20images%2C%20labels%20and%20captions%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pu%2C%20Yunchen%20Gan%2C%20Zhe%20Henao%2C%20Ricardo%20Yuan%2C%20Xin%20Variational%20autoencoder%20for%20deep%20learning%20of%20images%2C%20labels%20and%20captions%202016"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Sujith Ravi and Kevin Knight. Deciphering foreign language. In Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies-Volume 1, pages 12\u201321. Association for Computational Linguistics, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ravi%2C%20Sujith%20Knight%2C%20Kevin%20Deciphering%20foreign%20language%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ravi%2C%20Sujith%20Knight%2C%20Kevin%20Deciphering%20foreign%20language%202011"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Sara Sabour, Nicholas Frosst, and Geoffrey E Hinton. Dynamic routing between capsules. In Advances in Neural Information Processing Systems, pages 3859\u20133869, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sabour%2C%20Sara%20Frosst%2C%20Nicholas%20Hinton%2C%20Geoffrey%20E.%20Dynamic%20routing%20between%20capsules%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sabour%2C%20Sara%20Frosst%2C%20Nicholas%20Hinton%2C%20Geoffrey%20E.%20Dynamic%20routing%20between%20capsules%202017"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Kihyuk Sohn, Honglak Lee, and Xinchen Yan. Learning structured output representation using deep conditional generative models. In Advances in Neural Information Processing Systems, pages 3483\u20133491, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sohn%2C%20Kihyuk%20Lee%2C%20Honglak%20Yan%2C%20Xinchen%20Learning%20structured%20output%20representation%20using%20deep%20conditional%20generative%20models%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sohn%2C%20Kihyuk%20Lee%2C%20Honglak%20Yan%2C%20Xinchen%20Learning%20structured%20output%20representation%20using%20deep%20conditional%20generative%20models%202015"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Nitish Srivastava and Ruslan R Salakhutdinov. Multimodal learning with deep boltzmann machines. In Advances in neural information processing systems, pages 2222\u20132230, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Srivastava%2C%20Nitish%20Salakhutdinov%2C%20Ruslan%20R.%20Multimodal%20learning%20with%20deep%20boltzmann%20machines%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Srivastava%2C%20Nitish%20Salakhutdinov%2C%20Ruslan%20R.%20Multimodal%20learning%20with%20deep%20boltzmann%20machines%202012"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Masahiro Suzuki, Kotaro Nakayama, and Yutaka Matsuo. Joint multimodal learning with deep generative models. arXiv preprint arXiv:1611.01891, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.01891"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Stefan Van der Walt, Johannes L Sch\u00f6nberger, Juan Nunez-Iglesias, Fran\u00e7ois Boulogne, Joshua D Warner, Neil Yager, Emmanuelle Gouillart, and Tony Yu. scikit-image: image processing in python. PeerJ, 2:e453, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=der%20Walt%2C%20Stefan%20Van%20Sch%C3%B6nberger%2C%20Johannes%20L.%20Nunez-Iglesias%2C%20Juan%20Boulogne%2C%20Fran%C3%A7ois%20scikit-image%3A%20image%20processing%20in%20python%202014"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, \u0141ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In Advances in Neural Information Processing Systems, pages 5998\u20136008, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ashish%20Vaswani%20Noam%20Shazeer%20Niki%20Parmar%20Jakob%20Uszkoreit%20Llion%20Jones%20Aidan%20N%20Gomez%20%C5%81ukasz%20Kaiser%20and%20Illia%20Polosukhin%20Attention%20is%20all%20you%20need%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20pages%2059986008%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ashish%20Vaswani%20Noam%20Shazeer%20Niki%20Parmar%20Jakob%20Uszkoreit%20Llion%20Jones%20Aidan%20N%20Gomez%20%C5%81ukasz%20Kaiser%20and%20Illia%20Polosukhin%20Attention%20is%20all%20you%20need%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20pages%2059986008%202017"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Ramakrishna Vedantam, Ian Fischer, Jonathan Huang, and Kevin Murphy. Generative models of visually grounded imagination. arXiv preprint arXiv:1705.10762, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1705.10762"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Pascal Vincent, Hugo Larochelle, Yoshua Bengio, and Pierre-Antoine Manzagol. Extracting and composing robust features with denoising autoencoders. In Proceedings of the 25th international conference on Machine learning, pages 1096\u20131103. ACM, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vincent%2C%20Pascal%20Larochelle%2C%20Hugo%20Bengio%2C%20Yoshua%20Manzagol%2C%20Pierre-Antoine%20Extracting%20and%20composing%20robust%20features%20with%20denoising%20autoencoders%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vincent%2C%20Pascal%20Larochelle%2C%20Hugo%20Bengio%2C%20Yoshua%20Manzagol%2C%20Pierre-Antoine%20Extracting%20and%20composing%20robust%20features%20with%20denoising%20autoencoders%202008"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Oriol Vinyals, Alexander Toshev, Samy Bengio, and Dumitru Erhan. Show and tell: A neural image caption generator. In Computer Vision and Pattern Recognition (CVPR), 2015 IEEE Conference on, pages 3156\u20133164. IEEE, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vinyals%2C%20Oriol%20Toshev%2C%20Alexander%20Bengio%2C%20Samy%20Erhan%2C%20Dumitru%20Show%20and%20tell%3A%20A%20neural%20image%20caption%20generator%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vinyals%2C%20Oriol%20Toshev%2C%20Alexander%20Bengio%2C%20Samy%20Erhan%2C%20Dumitru%20Show%20and%20tell%3A%20A%20neural%20image%20caption%20generator%202015"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Weiran Wang, Xinchen Yan, Honglak Lee, and Karen Livescu. Deep variational canonical correlation analysis. arXiv preprint arXiv:1610.03454, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1610.03454"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Han Xiao, Kashif Rasul, and Roland Vollgraf. Fashion-mnist: a novel image dataset for benchmarking machine learning algorithms. arXiv preprint arXiv:1708.07747, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1708.07747"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Kelvin Xu, Jimmy Ba, Ryan Kiros, Kyunghyun Cho, Aaron Courville, Ruslan Salakhudinov, Rich Zemel, and Yoshua Bengio. Show, attend and tell: Neural image caption generation with visual attention. In International Conference on Machine Learning, pages 2048\u20132057, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xu%2C%20Kelvin%20Ba%2C%20Jimmy%20Kiros%2C%20Ryan%20Cho%2C%20Kyunghyun%20attend%20and%20tell%3A%20Neural%20image%20caption%20generation%20with%20visual%20attention%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xu%2C%20Kelvin%20Ba%2C%20Jimmy%20Kiros%2C%20Ryan%20Cho%2C%20Kyunghyun%20attend%20and%20tell%3A%20Neural%20image%20caption%20generation%20with%20visual%20attention%202015"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Ilker Yildirim. From perception to conception: learning multisensory representations. University of Rochester, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yildirim%2C%20Ilker%20From%20perception%20to%20conception%3A%20learning%20multisensory%20representations%202014"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Shengjia Zhao, Jiaming Song, and Stefano Ermon. Towards deeper understanding of variational autoencoding models. arXiv preprint arXiv:1702.08658, 2017. ",
+            "arxiv_url": "https://arxiv.org/pdf/1702.08658"
+        }
+    ]
+}

@@ -1,0 +1,272 @@
+{
+    "filename": "7951-mapping-images-to-scene-graphs-with-permutation-invariant-structured-prediction.pdf",
+    "metadata": {
+        "title": "Mapping Images to Scene Graphs with Permutation-Invariant Structured Prediction",
+        "author": "Roei Herzig, Moshiko Raboh, Gal Chechik, Jonathan Berant, Amir Globerson",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7951-mapping-images-to-scene-graphs-with-permutation-invariant-structured-prediction.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Machine understanding of complex images is a key goal of artificial intelligence. One challenge underlying this task is that visual scenes contain multiple interrelated objects, and that global context plays an important role in interpreting the scene. A natural modeling framework for capturing such effects is structured prediction, which optimizes over complex labels, while modeling within-label interactions. However, it is unclear what principles should guide the design of a structured prediction model that utilizes the power of deep learning components. Here we propose a design principle for such architectures that follows from a natural requirement of permutation invariance. We prove a necessary and sufficient characterization for architectures that follow this invariance, and discuss its implication on model design. Finally, we show that the resulting model achieves new state-of-the-art results on the Visual Genome scene-graph labeling benchmark, outperforming all recent approaches."
+    },
+    "keywords": [
+        {
+            "term": "belief propagation",
+            "url": "https://en.wikipedia.org/wiki/belief_propagation"
+        },
+        {
+            "term": "graphical model",
+            "url": "https://en.wikipedia.org/wiki/graphical_model"
+        },
+        {
+            "term": "structured prediction",
+            "url": "https://en.wikipedia.org/wiki/structured_prediction"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        },
+        {
+            "term": "conditional random field",
+            "url": "https://en.wikipedia.org/wiki/conditional_random_field"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        }
+    ],
+    "highlights": [
+        "Understanding the semantics of a complex visual scene is a fundamental problem in machine perception",
+        "While numerous inference algorithms exist for this setup, including belief propagation (BP) and mean field, here we develop a framework for a deep labeling algorithm",
+        "We evaluated our approach on Visual Genome (VG) [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>], a dataset with 108,077 images annotated with bounding boxes, entities and relations",
+        "All graph-permutation invariant variants performs well, with LINGUISTIC outperforming all baselines for SGCls and being comparable to the state-of-the-art model for PredCls",
+        "We presented a deep learning approach to structured prediction, which constrains the architecture to be invariant to structurally identical inputs",
+        "There may be cases where the invariant structure is unknown and should be discovered from data, which is related to work on lifting graphical models [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>]"
+    ],
+    "key_statements": [
+        "Understanding the semantics of a complex visual scene is a fundamental problem in machine perception",
+        "We describe a model that satisfies the permutation invariance property, and show that it achieves state-of-the-art results on the competitive Visual Genome benchmark [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>], demonstrating the power of our new design principle",
+        "It is worthwhile to rethink the architecture of structured prediction models, and consider models that map inputs x to outputs y directly without explicitly maximizing a score function",
+        "We present such an approach and consider a natural question: what should be the properties of a deep neural network used for structured prediction.\n3 Permutation-Invariant Structured Prediction",
+        "While numerous inference algorithms exist for this setup, including belief propagation (BP) and mean field, here we develop a framework for a deep labeling algorithm",
+        "We show that any F satisfying the conditions of Theorem 1 is graph-permutation invariant",
+        "Attention can be naturally implemented in our graph-permutation invariant characterization, and we provide a full derivation for this implementation in the appendix",
+        "We evaluated our approach on Visual Genome (VG) [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>], a dataset with 108,077 images annotated with bounding boxes, entities and relations",
+        "We compare four variants of our graph-permutation invariant approach with the reported results of four baselines that are currently the state-of-the-art on various scene graph prediction problems: 1) LU ET AL., 2016 [<a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>]: This work leverages word embeddings to fine-tune the likelihood of predicted relations.\n2) XU ET AL, 2017 [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>]: This model passes messages between entities and relations, and iteratively refines the feature map used for prediction.\n3) NEWELL & DENG, 2017 [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>]: The PIXEL2GRAPH model uses associative embeddings [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>] to produce a full graph from the image.\n4) YANG ET AL., 2018 [<a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>]: The GRAPH R-CNN model uses object-relation regularities to sparsify and reason over scene graphs.\n5) ZELLERS ET AL., 2017 [<a class=\"ref-link\" id=\"c32\" href=\"#r32\">32</a>]: The NEURALMOTIF method encodes global context for",
+        "All graph-permutation invariant variants performs well, with LINGUISTIC outperforming all baselines for SGCls and being comparable to the state-of-the-art model for PredCls",
+        "We presented a deep learning approach to structured prediction, which constrains the architecture to be invariant to structurally identical inputs",
+        "There may be cases where the invariant structure is unknown and should be discovered from data, which is related to work on lifting graphical models [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>]"
+    ],
+    "summary": [
+        "Understanding the semantics of a complex visual scene is a fundamental problem in machine perception.",
+        "Structured prediction models typically define a score function s(x, y) that quantifies how well a label assignment y is compatible with an input x.",
+        "Scored-based methods in structured prediction define a function s(x, y) that quantifies the degree to which y is compatible with x, and infer a label by maximizing s(x, y) [e.g., see 2, 7, 16, 20, 28].",
+        "It is worthwhile to rethink the architecture of structured prediction models, and consider models that map inputs x to outputs y directly without explicitly maximizing a score function.",
+        "We can view inference as a black-box that takes node-dependent and edge-dependent inputs and returns a label y, even without an explicit score function s(x, y).",
+        "A graph labeling function F : (V, E) \u2192 Y is a function whose input is an ordered set of node features V = [z1, .",
+        "We provide our key definition of a function whose output is invariant to permutations of the input.",
+        "This results in a recurrent architecture, which we use in our scene graph model.",
+        "The invariance we consider is much less restrictive: the architecture does not need to be invariant to all permutations of singleton and pairwise features, just those consistent with a graph re-labeling.",
+        "NeuralMotif [<a class=\"ref-link\" id=\"c32\" href=\"#r32\">32</a>], currently the state-of-the-art model for scene graph prediction on Visual Genome, employs an RNN that provides global context by sequentially reading the independent predictions for each entity and relation and refines those predictions.",
+        "We evaluate the GPI approach on the motivating task of this paper, inferring scene graphs from images (Figure 1).",
+        "The input is an image annotated with a set of bounding boxes for the entities in the image.2 The goal is to label each bounding box with the correct entity category and every pair of entities with their relation, such that they form a coherent scene graph.",
+        "The network \u03b1ent takes as input the outputs of \u03c6ent for all neighbors of an entity, and uses the attention mechanism described above to output a vector of dimension n2.",
+        "We compare four variants of our GPI approach with the reported results of four baselines that are currently the state-of-the-art on various scene graph prediction problems: 1) LU ET AL., 2016 [<a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>]: This work leverages word embeddings to fine-tune the likelihood of predicted relations.",
+        "Capturing high-order motifs in scene graphs, and the BASELINE outputs the entities and relations distributions without using the global context.",
+        "It would be interesting to explore algorithms that discover and use such symmetries for deep structured prediction"
+    ],
+    "headline": "We propose a design principle for such architectures that follows from a natural requirement of permutation invariance",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] D. Bahdanau, K. Cho, and Y. Bengio. Neural machine translation by jointly learning to align and translate. In International Conference on Learning Representations (ICLR), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bahdanau%2C%20D.%20Cho%2C%20K.%20Bengio%2C%20Y.%20Neural%20machine%20translation%20by%20jointly%20learning%20to%20align%20and%20translate%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bahdanau%2C%20D.%20Cho%2C%20K.%20Bengio%2C%20Y.%20Neural%20machine%20translation%20by%20jointly%20learning%20to%20align%20and%20translate%202015"
+        },
+        {
+            "id": "2",
+            "entry": "[2] David Belanger, Bishan Yang, and Andrew McCallum. End-to-end learning for structured prediction energy networks. In Doina Precup and Yee Whye Teh, editors, Proceedings of the 34th International Conference on Machine Learning, volume 70, pages 429\u2013439. PMLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Belanger%2C%20David%20Yang%2C%20Bishan%20McCallum%2C%20Andrew%20End-to-end%20learning%20for%20structured%20prediction%20energy%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Belanger%2C%20David%20Yang%2C%20Bishan%20McCallum%2C%20Andrew%20End-to-end%20learning%20for%20structured%20prediction%20energy%20networks%202017"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Irwan Bello, Hieu Pham, Quoc V Le, Mohammad Norouzi, and Samy Bengio. Neural combinatorial optimization with reinforcement learning. arXiv preprint arXiv:1611.09940, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.09940"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Hung Hai Bui, Tuyen N. Huynh, and Sebastian Riedel. Automorphism groups of graphical models and lifted variational inference. In Proceedings of the Twenty-Ninth Conference on Uncertainty in Artificial Intelligence, UAI\u201913, pages 132\u2013141, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bui%2C%20Hung%20Hai%20Huynh%2C%20Tuyen%20N.%20Riedel%2C%20Sebastian%20Automorphism%20groups%20of%20graphical%20models%20and%20lifted%20variational%20inference%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bui%2C%20Hung%20Hai%20Huynh%2C%20Tuyen%20N.%20Riedel%2C%20Sebastian%20Automorphism%20groups%20of%20graphical%20models%20and%20lifted%20variational%20inference%202013"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Danqi Chen and Christopher Manning. A fast and accurate dependency parser using neural networks. In Proceedings of the 2014 conference on empirical methods in natural language processing (EMNLP), pages 740\u2013750, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Danqi%20Manning%2C%20Christopher%20A%20fast%20and%20accurate%20dependency%20parser%20using%20neural%20networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Danqi%20Manning%2C%20Christopher%20A%20fast%20and%20accurate%20dependency%20parser%20using%20neural%20networks%202014"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Liang Chieh Chen, George Papandreou, Iasonas Kokkinos, Kevin Murphy, and Alan L Yuille. Semantic image segmentation with deep convolutional nets and fully connected CRFs. In Proceedings of the Second International Conference on Learning Representations, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Liang%20Chieh%20Papandreou%2C%20George%20Kokkinos%2C%20Iasonas%20Murphy%2C%20Kevin%20Semantic%20image%20segmentation%20with%20deep%20convolutional%20nets%20and%20fully%20connected%20CRFs%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Liang%20Chieh%20Papandreou%2C%20George%20Kokkinos%2C%20Iasonas%20Murphy%2C%20Kevin%20Semantic%20image%20segmentation%20with%20deep%20convolutional%20nets%20and%20fully%20connected%20CRFs%202014"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Liang Chieh Chen, Alexander G Schwing, Alan L Yuille, and Raquel Urtasun. Learning deep structured models. In Proc. ICML, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Liang%20Chieh%20Schwing%2C%20Alexander%20G.%20Yuille%2C%20Alan%20L.%20Urtasun%2C%20Raquel%20Learning%20deep%20structured%20models%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Liang%20Chieh%20Schwing%2C%20Alexander%20G.%20Yuille%2C%20Alan%20L.%20Urtasun%2C%20Raquel%20Learning%20deep%20structured%20models%202015"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Clement Farabet, Camille Couprie, Laurent Najman, and Yann LeCun. Learning hierarchical features for scene labeling. IEEE transactions on pattern analysis and machine intelligence, 35(8):1915\u20131929, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Farabet%2C%20Clement%20Couprie%2C%20Camille%20Najman%2C%20Laurent%20LeCun%2C%20Yann%20Learning%20hierarchical%20features%20for%20scene%20labeling%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Farabet%2C%20Clement%20Couprie%2C%20Camille%20Najman%2C%20Laurent%20LeCun%2C%20Yann%20Learning%20hierarchical%20features%20for%20scene%20labeling%202013"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Justin Gilmer, Samuel S Schoenholz, Patrick F Riley, Oriol Vinyals, and George E Dahl. Neural message passing for quantum chemistry. arXiv preprint arXiv:1704.01212, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1704.01212"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Michael Gygli, Mohammad Norouzi, and Anelia Angelova. Deep value networks learn to evaluate and iteratively refine structured outputs. In Doina Precup and Yee Whye Teh, editors, Proceedings of the 34th International Conference on Machine Learning, volume 70 of Proceedings of Machine Learning Research, pages 1341\u20131351, International Convention Centre, Sydney, Australia, 2017. PMLR.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gygli%2C%20Michael%20Norouzi%2C%20Mohammad%20Angelova%2C%20Anelia%20Deep%20value%20networks%20learn%20to%20evaluate%20and%20iteratively%20refine%20structured%20outputs%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gygli%2C%20Michael%20Norouzi%2C%20Mohammad%20Angelova%2C%20Anelia%20Deep%20value%20networks%20learn%20to%20evaluate%20and%20iteratively%20refine%20structured%20outputs%202017"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Justin Johnson, Agrim Gupta, and Li Fei-Fei. Image generation from scene graphs. arXiv preprint arXiv:1804.01622, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1804.01622"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Justin Johnson, Ranjay Krishna, Michael Stark, Li-Jia Li, David A. Shamma, Michael S. Bernstein, and Fei-Fei Li. Image retrieval using scene graphs. In Proc. Conf. Comput. Vision Pattern Recognition, pages 3668\u20133678, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Johnson%2C%20Justin%20Krishna%2C%20Ranjay%20Stark%2C%20Michael%20Li%2C%20Li-Jia%20Image%20retrieval%20using%20scene%20graphs%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Johnson%2C%20Justin%20Krishna%2C%20Ranjay%20Stark%2C%20Michael%20Li%2C%20Li-Jia%20Image%20retrieval%20using%20scene%20graphs%202015"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Elias Khalil, Hanjun Dai, Yuyu Zhang, Bistra Dilkina, and Le Song. Learning combinatorial optimization algorithms over graphs. In Advances in Neural Information Processing Systems, pages 6351\u20136361, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Khalil%2C%20Elias%20Dai%2C%20Hanjun%20Zhang%2C%20Yuyu%20Dilkina%2C%20Bistra%20Learning%20combinatorial%20optimization%20algorithms%20over%20graphs%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Khalil%2C%20Elias%20Dai%2C%20Hanjun%20Zhang%2C%20Yuyu%20Dilkina%2C%20Bistra%20Learning%20combinatorial%20optimization%20algorithms%20over%20graphs%202017"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Diederik P. Kingma and Jimmy Ba. Adam: A method for stochastic optimization. arXiv preprint arXiv: 1412.6980, abs/1412.6980, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6980"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Ranjay Krishna, Yuke Zhu, Oliver Groth, Justin Johnson, Kenji Hata, Joshua Kravitz, Stephanie Chen, Yannis Kalantidis, Li-Jia Li, David A Shamma, et al. Visual genome: Connecting language and vision using crowdsourced dense image annotations. International Journal of Computer Vision, 123(1):32\u201373, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krishna%2C%20Ranjay%20Zhu%2C%20Yuke%20Groth%2C%20Oliver%20Johnson%2C%20Justin%20Visual%20genome%3A%20Connecting%20language%20and%20vision%20using%20crowdsourced%20dense%20image%20annotations%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krishna%2C%20Ranjay%20Zhu%2C%20Yuke%20Groth%2C%20Oliver%20Johnson%2C%20Justin%20Visual%20genome%3A%20Connecting%20language%20and%20vision%20using%20crowdsourced%20dense%20image%20annotations%202017"
+        },
+        {
+            "id": "16",
+            "entry": "[16] J. Lafferty, A. McCallum, and F. Pereira. Conditional random fields: Probabilistic models for segmenting and labeling sequence data. In Proceedings of the 18th International Conference on Machine Learning, pages 282\u2013289, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lafferty%2C%20J.%20McCallum%2C%20A.%20Pereira%2C%20F.%20Conditional%20random%20fields%3A%20Probabilistic%20models%20for%20segmenting%20and%20labeling%20sequence%20data%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lafferty%2C%20J.%20McCallum%2C%20A.%20Pereira%2C%20F.%20Conditional%20random%20fields%3A%20Probabilistic%20models%20for%20segmenting%20and%20labeling%20sequence%20data%202001"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Wentong Liao, Michael Ying Yang, Hanno Ackermann, and Bodo Rosenhahn. On support relations and semantic scene graphs. arXiv preprint arXiv:1609.05834, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.05834"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Guosheng Lin, Chunhua Shen, Ian Reid, and Anton van den Hengel. Deeply learning the messages in message passing inference. In Advances in Neural Information Processing Systems, pages 361\u2013369, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20Guosheng%20Shen%2C%20Chunhua%20Reid%2C%20Ian%20van%20den%20Hengel%2C%20Anton%20Deeply%20learning%20the%20messages%20in%20message%20passing%20inference%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lin%2C%20Guosheng%20Shen%2C%20Chunhua%20Reid%2C%20Ian%20van%20den%20Hengel%2C%20Anton%20Deeply%20learning%20the%20messages%20in%20message%20passing%20inference%202015"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Cewu Lu, Ranjay Krishna, Michael S. Bernstein, and Fei-Fei Li. Visual relationship detection with language priors. In European Conf. Comput. Vision, pages 852\u2013869, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lu%2C%20Cewu%20Krishna%2C%20Ranjay%20Bernstein%2C%20Michael%20S.%20Li%2C%20Fei-Fei%20Visual%20relationship%20detection%20with%20language%20priors%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lu%2C%20Cewu%20Krishna%2C%20Ranjay%20Bernstein%2C%20Michael%20S.%20Li%2C%20Fei-Fei%20Visual%20relationship%20detection%20with%20language%20priors%202016"
+        },
+        {
+            "id": "20",
+            "entry": "[20] O. Meshi, D. Sontag, T. Jaakkola, and A. Globerson. Learning efficiently with approximate inference via dual losses. In Proceedings of the 27th International Conference on Machine Learning, pages 783\u2013790, New York, NY, USA, 2010. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Meshi%2C%20O.%20Sontag%2C%20D.%20Jaakkola%2C%20T.%20Globerson%2C%20A.%20Learning%20efficiently%20with%20approximate%20inference%20via%20dual%20losses%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Meshi%2C%20O.%20Sontag%2C%20D.%20Jaakkola%2C%20T.%20Globerson%2C%20A.%20Learning%20efficiently%20with%20approximate%20inference%20via%20dual%20losses%202010"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Alejandro Newell and Jia Deng. Pixels to graphs by associative embedding. In Advances in Neural Information Processing Systems 30 (to appear), pages 1172\u20131180. Curran Associates, Inc., 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Newell%2C%20Alejandro%20Deng%2C%20Jia%20Pixels%20to%20graphs%20by%20associative%20embedding%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Newell%2C%20Alejandro%20Deng%2C%20Jia%20Pixels%20to%20graphs%20by%20associative%20embedding%202017"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Alejandro Newell, Zhiao Huang, and Jia Deng. Associative embedding: End-to-end learning for joint detection and grouping. In Neural Inform. Process. Syst., pages 2274\u20132284. Curran Associates, Inc., 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Newell%2C%20Alejandro%20Huang%2C%20Zhiao%20Deng%2C%20Jia%20Associative%20embedding%3A%20End-to-end%20learning%20for%20joint%20detection%20and%20grouping%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Newell%2C%20Alejandro%20Huang%2C%20Zhiao%20Deng%2C%20Jia%20Associative%20embedding%3A%20End-to-end%20learning%20for%20joint%20detection%20and%20grouping%202017"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Wenzhe Pei, Tao Ge, and Baobao Chang. An effective neural network model for graphbased dependency parsing. In Proceedings of the 53rd Annual Meeting of the Association for Computationa Linguistics, pages 313\u2013322, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pei%2C%20Wenzhe%20Ge%2C%20Tao%20Chang%2C%20Baobao%20An%20effective%20neural%20network%20model%20for%20graphbased%20dependency%20parsing%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pei%2C%20Wenzhe%20Ge%2C%20Tao%20Chang%2C%20Baobao%20An%20effective%20neural%20network%20model%20for%20graphbased%20dependency%20parsing%202015"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Bryan A. Plummer, Arun Mallya, Christopher M. Cervantes, Julia Hockenmaier, and Svetlana Lazebnik. Phrase localization and visual relationship detection with comprehensive imagelanguage cues. In ICCV, pages 1946\u20131955, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Plummer%2C%20Bryan%20A.%20Mallya%2C%20Arun%20Cervantes%2C%20Christopher%20M.%20Hockenmaier%2C%20Julia%20Phrase%20localization%20and%20visual%20relationship%20detection%20with%20comprehensive%20imagelanguage%20cues%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Plummer%2C%20Bryan%20A.%20Mallya%2C%20Arun%20Cervantes%2C%20Christopher%20M.%20Hockenmaier%2C%20Julia%20Phrase%20localization%20and%20visual%20relationship%20detection%20with%20comprehensive%20imagelanguage%20cues%202017"
+        },
+        {
+            "id": "25",
+            "entry": "[25] David Raposo, Adam Santoro, David Barrett, Razvan Pascanu, Timothy Lillicrap, and Peter Battaglia. Discovering objects and their relations from entangled scene representations. arXiv preprint arXiv:1702.05068, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1702.05068"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Alexander G Schwing and Raquel Urtasun. Fully connected deep structured networks. ArXiv e-prints, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schwing%2C%20Alexander%20G.%20Urtasun%2C%20Raquel%20Fully%20connected%20deep%20structured%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schwing%2C%20Alexander%20G.%20Urtasun%2C%20Raquel%20Fully%20connected%20deep%20structured%20networks%202015"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Evan Shelhamer, Jonathan Long, and Trevor Darrell. Fully convolutional networks for semantic segmentation. Proc. Conf. Comput. Vision Pattern Recognition, 39(4):640\u2013651, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shelhamer%2C%20Evan%20Long%2C%20Jonathan%20Darrell%2C%20Trevor%20Fully%20convolutional%20networks%20for%20semantic%20segmentation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shelhamer%2C%20Evan%20Long%2C%20Jonathan%20Darrell%2C%20Trevor%20Fully%20convolutional%20networks%20for%20semantic%20segmentation%202017"
+        },
+        {
+            "id": "28",
+            "entry": "[28] B. Taskar, C. Guestrin, and D. Koller. Max margin Markov networks. In S. Thrun, L. Saul, and B. Sch\u00f6lkopf, editors, Advances in Neural Information Processing Systems 16, pages 25\u201332. MIT Press, Cambridge, MA, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Taskar%2C%20B.%20Guestrin%2C%20C.%20Koller%2C%20D.%20Max%20margin%20Markov%20networks%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Taskar%2C%20B.%20Guestrin%2C%20C.%20Koller%2C%20D.%20Max%20margin%20Markov%20networks%202004"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Danfei Xu, Yuke Zhu, Christopher B. Choy, and Li Fei-Fei. Scene Graph Generation by Iterative Message Passing. In Proc. Conf. Comput. Vision Pattern Recognition, pages 3097\u20133106, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xu%2C%20Danfei%20Zhu%2C%20Yuke%20Choy%2C%20Christopher%20B.%20Fei-Fei%2C%20Li%20Scene%20Graph%20Generation%20by%20Iterative%20Message%20Passing%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xu%2C%20Danfei%20Zhu%2C%20Yuke%20Choy%2C%20Christopher%20B.%20Fei-Fei%2C%20Li%20Scene%20Graph%20Generation%20by%20Iterative%20Message%20Passing%202017"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Jianwei Yang, Jiasen Lu, Stefan Lee, Dhruv Batra, and Devi Parikh. Graph R-CNN for scene graph generation. In European Conf. Comput. Vision, pages 690\u2013706, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yang%2C%20Jianwei%20Lu%2C%20Jiasen%20Lee%2C%20Stefan%20Batra%2C%20Dhruv%20Graph%20R-CNN%20for%20scene%20graph%20generation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yang%2C%20Jianwei%20Lu%2C%20Jiasen%20Lee%2C%20Stefan%20Batra%2C%20Dhruv%20Graph%20R-CNN%20for%20scene%20graph%20generation%202018"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Manzil Zaheer, Satwik Kottur, Siamak Ravanbakhsh, Barnabas Poczos, Ruslan R Salakhutdinov, and Alexander J Smola. Deep sets. In Advances in Neural Information Processing Systems 30, pages 3394\u20133404. Curran Associates, Inc., 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zaheer%2C%20Manzil%20Kottur%2C%20Satwik%20Ravanbakhsh%2C%20Siamak%20Poczos%2C%20Barnabas%20Deep%20sets%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zaheer%2C%20Manzil%20Kottur%2C%20Satwik%20Ravanbakhsh%2C%20Siamak%20Poczos%2C%20Barnabas%20Deep%20sets%202017"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Rowan Zellers, Mark Yatskar, Sam Thomson, and Yejin Choi. Neural motifs: Scene graph parsing with global context. arXiv preprint arXiv:1711.06640, abs/1711.06640, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.06640"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Shuai Zheng, Sadeep Jayasumana, Bernardino Romera-Paredes, Vibhav Vineet, Zhizhong Su, Dalong Du, Chang Huang, and Philip HS Torr. Conditional random fields as recurrent neural networks. In Proceedings of the IEEE International Conference on Computer Vision, pages 1529\u20131537, 2015. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zheng%2C%20Shuai%20Jayasumana%2C%20Sadeep%20Romera-Paredes%2C%20Bernardino%20Vineet%2C%20Vibhav%20Conditional%20random%20fields%20as%20recurrent%20neural%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zheng%2C%20Shuai%20Jayasumana%2C%20Sadeep%20Romera-Paredes%2C%20Bernardino%20Vineet%2C%20Vibhav%20Conditional%20random%20fields%20as%20recurrent%20neural%20networks%202015"
+        }
+    ]
+}

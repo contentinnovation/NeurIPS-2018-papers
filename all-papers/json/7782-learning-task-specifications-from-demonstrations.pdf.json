@@ -1,0 +1,271 @@
+{
+    "filename": "7782-learning-task-specifications-from-demonstrations.pdf",
+    "metadata": {
+        "title": "Learning Task Specifications from Demonstrations",
+        "author": "Marcell Vazquez-Chanlatte, Susmit Jha, Ashish Tiwari, Mark K. Ho, Sanjit Seshia",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7782-learning-task-specifications-from-demonstrations.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Real-world applications often naturally decompose into several sub-tasks. In many settings (e.g., robotics) demonstrations provide a natural way to specify the sub-tasks. However, most methods for learning from demonstrations either do not provide guarantees that the artifacts learned for the sub-tasks can be safely recombined or limit the types of composition available. Motivated by this deficit, we consider the problem of inferring Boolean non-Markovian rewards (also known as logical trace properties or specifications) from demonstrations provided by an agent operating in an uncertain, stochastic environment. Crucially, specifications admit well-defined composition rules that are typically easy to interpret. In this paper, we formulate the specification inference task as a maximum a posteriori (MAP) probability inference problem, apply the principle of maximum entropy to derive an analytic demonstration likelihood model and give an efficient approach to search for the most likely specification in a large candidate pool of specifications. In our experiments, we demonstrate how learning specifications can help avoid common problems that often arise due to ad-hoc reward composition."
+    },
+    "keywords": [
+        {
+            "term": "concept class",
+            "url": "https://en.wikipedia.org/wiki/concept_class"
+        },
+        {
+            "term": "maximum entropy",
+            "url": "https://en.wikipedia.org/wiki/maximum_entropy"
+        },
+        {
+            "term": "finite set",
+            "url": "https://en.wikipedia.org/wiki/finite_set"
+        },
+        {
+            "term": "National Science Foundation",
+            "url": "https://en.wikipedia.org/wiki/National_Science_Foundation"
+        },
+        {
+            "term": "Linear Temporal Logic",
+            "url": "https://en.wikipedia.org/wiki/Linear_Temporal_Logic"
+        },
+        {
+            "term": "Directed Acyclic Graph",
+            "url": "https://en.wikipedia.org/wiki/Directed_Acyclic_Graph"
+        },
+        {
+            "term": "maximum a posteriori",
+            "url": "https://en.wikipedia.org/wiki/maximum_a_posteriori"
+        },
+        {
+            "term": "probabilistic automaton",
+            "url": "https://en.wikipedia.org/wiki/probabilistic_automaton"
+        }
+    ],
+    "highlights": [
+        "We seek to learn specifications from demonstrations provided by a teacher who executes a sequence of actions that probabilistically changes the system state",
+        "In Sec 3, we introduce the problem of specification inference from demonstrations, and inspired by Maximum Entropy Inverse Reinforcement Learning [<a class=\"ref-link\" id=\"c35\" href=\"#r35\">35</a>], develop a model of the posterior probability of a specification given a sequence of demonstrations",
+        "A probabilistic automaton is a tuple M = (S, s0, A, \u03b4), where S is the finite set of states, s0 \u2208 S is the initial state, A is the finite set of actions, and \u03b4 : S \u00d7 A \u00d7 S \u2192 [0, 1] specifies the transition probability of going from s to s given action a, i.e. \u03b4(s, a, s ) = Pr(s | s, a) and Pr(s | s, a) = 1 for all states s.\n1Probabilistic Automata are often constructed as a Markov Decision Process, M , without its Markovian reward map R, denoted M \\ R",
+        "To learn these specifications from demonstrations, we applied the principle of maximum entropy to derive a novel model for the likelihood of a specification given the demonstrations",
+        "We developed an algorithm to efficiently search for the most probable specification in a candidate pool of specifications in which some subset relations between specifications are known",
+        "Future work includes extending the formalism to infinite horizon specifications, continuous dynamics, characterizing the optimal set of teacher demonstrations under our posterior model [<a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>], efficiently marginalizing over the whole concept class and exploring alternative data driven methods for generating concept classes"
+    ],
+    "key_statements": [
+        "We seek to learn specifications from demonstrations provided by a teacher who executes a sequence of actions that probabilistically changes the system state",
+        "In Sec 3, we introduce the problem of specification inference from demonstrations, and inspired by Maximum Entropy Inverse Reinforcement Learning [<a class=\"ref-link\" id=\"c35\" href=\"#r35\">35</a>], develop a model of the posterior probability of a specification given a sequence of demonstrations",
+        "A probabilistic automaton is a tuple M = (S, s0, A, \u03b4), where S is the finite set of states, s0 \u2208 S is the initial state, A is the finite set of actions, and \u03b4 : S \u00d7 A \u00d7 S \u2192 [0, 1] specifies the transition probability of going from s to s given action a, i.e. \u03b4(s, a, s ) = Pr(s | s, a) and Pr(s | s, a) = 1 for all states s.\n1Probabilistic Automata are often constructed as a Markov Decision Process, M , without its Markovian reward map R, denoted M \\ R",
+        "To learn these specifications from demonstrations, we applied the principle of maximum entropy to derive a novel model for the likelihood of a specification given the demonstrations",
+        "We developed an algorithm to efficiently search for the most probable specification in a candidate pool of specifications in which some subset relations between specifications are known",
+        "Future work includes extending the formalism to infinite horizon specifications, continuous dynamics, characterizing the optimal set of teacher demonstrations under our posterior model [<a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>], efficiently marginalizing over the whole concept class and exploring alternative data driven methods for generating concept classes"
+    ],
+    "summary": [
+        "We seek to learn specifications from demonstrations provided by a teacher who executes a sequence of actions that probabilistically changes the system state.",
+        "We argue that non-Markovian Boolean specifications provide a powerful, flexible, and transferable formalism for task representations when learning from demonstrations.",
+        "Consider the problem of temporal specifications: reward functions are typically Markovian, so requirements like those in Ex 1 cannot be directly expressed in the task representation.",
+        "Quantitative Markovian rewards are limited as a task representation when learning tasks containing temporal specifications or compositionality from demonstrations.",
+        "In Sec 5, we demonstrate how due to their inherent composability, learning specifications can avoid common bugs that often occur due to ad-hoc reward composition.",
+        "Where Pr(\u03c6 | M, X) denotes the probability that the teacher demonstrated \u03c6 given the observed traces, X, and the dynamics, M .",
+        "Given a demonstrator who on average satisfies the specification \u03c6 with probability \u03c6, we approximate the likelihood function by: Pr \u03be | M, \u03c6, \u03c6 = w(\u03be, M ) \u00b7 exp)",
+        "Observe that under (9), the specification inference problem (2) reduces to maximizing the information gain over random actions.",
+        "We begin with the observation that adding a trace to a specification cannot lower its probability of satisfaction under random actions.",
+        "Given candidate specifications \u03a6 and a subset of demonstrations S \u2286 X define, \u03a6S =def {\u03c6 \u2208 \u03a6 : \u03c6 \u2229 X = S}",
+        "Recalling that N\u03c6 increases on paths from false to true, we arrive at the following simple algorithm which takes as input the demonstrations and the lattice \u03c6 encoded as a directed acyclic graph rooted at false.",
+        "We illustrate how learning specifications rather than Markovian rewards enables the robot to safely compose the new constraint with its existing knowledge to perform the joint task in a manner that is robust to changes in the task.",
+        "Motivated by the problem of compositionally learning from demonstrations, we developed a technique for learning binary non-Markovian rewards, which we referred to as specifications.",
+        "In our experiment, we gave a concrete instance where using traditional learning composite reward functions is non-obvious and error-prone, but inferring specifications enables trivial composition.",
+        "Future work includes extending the formalism to infinite horizon specifications, continuous dynamics, characterizing the optimal set of teacher demonstrations under our posterior model [<a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>], efficiently marginalizing over the whole concept class and exploring alternative data driven methods for generating concept classes."
+    ],
+    "headline": "We demonstrate how learning specifications can help avoid common problems that often arise due to ad-hoc reward composition",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] D. Amodei, C. Olah, J. Steinhardt, P. Christiano, J. Schulman, and D. Man\u00e9. Concrete problems in AI safety. arXiv preprint arXiv:1606.06565, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.06565"
+        },
+        {
+            "id": "2",
+            "entry": "[2] F. Bacchus, S. Dalmao, and T. Pitassi. Algorithms and complexity results for #SAT and Bayesian inference. In Foundations of computer science, 2003. proceedings. 44th annual ieee symposium on, pages 340\u2013351. IEEE, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bacchus%2C%20F.%20Dalmao%2C%20S.%20Pitassi%2C%20T.%20Algorithms%20and%20complexity%20results%20for%20%23SAT%20and%20Bayesian%20inference%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bacchus%2C%20F.%20Dalmao%2C%20S.%20Pitassi%2C%20T.%20Algorithms%20and%20complexity%20results%20for%20%23SAT%20and%20Bayesian%20inference%202003"
+        },
+        {
+            "id": "3",
+            "entry": "[3] R. E. Bryant. Symbolic boolean manipulation with ordered binary-decision diagrams. ACM Computing Surveys (CSUR), 24(3):293\u2013318, 1992.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bryant%2C%20R.E.%20Symbolic%20boolean%20manipulation%20with%20ordered%20binary-decision%20diagrams%201992",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bryant%2C%20R.E.%20Symbolic%20boolean%20manipulation%20with%20ordered%20binary-decision%20diagrams%201992"
+        },
+        {
+            "id": "4",
+            "entry": "[4] S. Chakraborty, K. S. Meel, and M. Y. Vardi. Algorithmic improvements in approximate counting for probabilistic inference: From linear to logarithmic sat calls. Proceedings of the 25th International Joint Conference on Artificial Intelligence (IJCAI-16), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chakraborty%2C%20S.%20Meel%2C%20K.S.%20Vardi%2C%20M.Y.%20Algorithmic%20improvements%20in%20approximate%20counting%20for%20probabilistic%20inference%3A%20From%20linear%20to%20logarithmic%20sat%20calls%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chakraborty%2C%20S.%20Meel%2C%20K.S.%20Vardi%2C%20M.Y.%20Algorithmic%20improvements%20in%20approximate%20counting%20for%20probabilistic%20inference%3A%20From%20linear%20to%20logarithmic%20sat%20calls%202016"
+        },
+        {
+            "id": "5",
+            "entry": "[5] M. Chavira and A. Darwiche. On probabilistic inference by weighted model counting. Artificial Intelligence, 172(6-7):772\u2013799, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chavira%2C%20M.%20Darwiche%2C%20A.%20On%20probabilistic%20inference%20by%20weighted%20model%20counting%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chavira%2C%20M.%20Darwiche%2C%20A.%20On%20probabilistic%20inference%20by%20weighted%20model%20counting%202008"
+        },
+        {
+            "id": "6",
+            "entry": "[6] N. Christofides. Graph theory: An algorithmic approach (Computer science and applied mathematics). Academic Press, Inc., 1975.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Christofides%2C%20N.%20Graph%20theory%3A%20An%20algorithmic%20approach%20%28Computer%20science%20and%20applied%20mathematics%29%201975"
+        },
+        {
+            "id": "8",
+            "entry": "[8] C. Finn, S. Levine, and P. Abbeel. Guided cost learning: Deep inverse optimal control via policy optimization. In International Conference on Machine Learning, pages 49\u201358, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Finn%2C%20C.%20Levine%2C%20S.%20Abbeel%2C%20P.%20Guided%20cost%20learning%3A%20Deep%20inverse%20optimal%20control%20via%20policy%20optimization%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Finn%2C%20C.%20Levine%2C%20S.%20Abbeel%2C%20P.%20Guided%20cost%20learning%3A%20Deep%20inverse%20optimal%20control%20via%20policy%20optimization%202016"
+        },
+        {
+            "id": "9",
+            "entry": "[9] S. Ghosh, S. Jha, A. Tiwari, P. Lincoln, and X. Zhu. Model, data and reward repair: Trusted machine learning for Markov Decision Processes. In 2018 48th Annual IEEE/IFIP International Conference on Dependable Systems and Networks Workshops (DSN-W), pages 194\u2013199. IEEE, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ghosh%2C%20S.%20Jha%2C%20S.%20Tiwari%2C%20A.%20Lincoln%2C%20P.%20data%20and%20reward%20repair%3A%20Trusted%20machine%20learning%20for%20Markov%20Decision%20Processes%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ghosh%2C%20S.%20Jha%2C%20S.%20Tiwari%2C%20A.%20Lincoln%2C%20P.%20data%20and%20reward%20repair%3A%20Trusted%20machine%20learning%20for%20Markov%20Decision%20Processes%202018"
+        },
+        {
+            "id": "10",
+            "entry": "[10] T. Haarnoja, V. Pong, A. Zhou, M. Dalal, P. Abbeel, and S. Levine. Composable deep reinforcement learning for robotic manipulation. arXiv preprint arXiv:1803.06773, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.06773"
+        },
+        {
+            "id": "11",
+            "entry": "[11] M. K. Ho, M. L. Littman, F. Cushman, and J. L. Austerweil. Teaching with Rewards and Punishments: Reinforcement or Communication? In D. Noelle, R. Dale, A. S. Warlaumont, J. Yoshimi, T. Matlock, C. D. Jennings, and P. P. Maglio, editors, Proceedings of the 37th Annual Conference of the Cognitive Science Society, pages 920\u2013925, Austin, TX, 2015. Cognitive Science Society.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ho%2C%20M.K.%20Littman%2C%20M.L.%20Cushman%2C%20F.%20Austerweil%2C%20J.L.%20Teaching%20with%20Rewards%20and%20Punishments%3A%20Reinforcement%20or%20Communication%3F%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ho%2C%20M.K.%20Littman%2C%20M.L.%20Cushman%2C%20F.%20Austerweil%2C%20J.L.%20Teaching%20with%20Rewards%20and%20Punishments%3A%20Reinforcement%20or%20Communication%3F%202015"
+        },
+        {
+            "id": "12",
+            "entry": "[12] E. T. Jaynes. Information theory and statistical mechanics. Physical review, 106(4):620, 1957.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jaynes%2C%20E.T.%20Information%20theory%20and%20statistical%20mechanics%201957",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jaynes%2C%20E.T.%20Information%20theory%20and%20statistical%20mechanics%201957"
+        },
+        {
+            "id": "13",
+            "entry": "[13] S. Jha and V. Raman. Automated synthesis of safe autonomous vehicle control under perception uncertainty. In NASA Formal Methods Symposium, pages 117\u2013132.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jha%2C%20S.%20Raman%2C%20V.%20Automated%20synthesis%20of%20safe%20autonomous%20vehicle%20control%20under%20perception%20uncertainty",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jha%2C%20S.%20Raman%2C%20V.%20Automated%20synthesis%20of%20safe%20autonomous%20vehicle%20control%20under%20perception%20uncertainty"
+        },
+        {
+            "id": "14",
+            "entry": "[14] S. Jha, V. Raman, D. Sadigh, and S. A. Seshia. Safe autonomy under perception uncertainty using chance-constrained temporal logic. Journal of Automated Reasoning, 60(1):43\u201362, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jha%2C%20S.%20Raman%2C%20V.%20Sadigh%2C%20D.%20Seshia%2C%20S.A.%20Safe%20autonomy%20under%20perception%20uncertainty%20using%20chance-constrained%20temporal%20logic%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jha%2C%20S.%20Raman%2C%20V.%20Sadigh%2C%20D.%20Seshia%2C%20S.A.%20Safe%20autonomy%20under%20perception%20uncertainty%20using%20chance-constrained%20temporal%20logic%202018"
+        },
+        {
+            "id": "15",
+            "entry": "[15] S. Jha, A. Tiwari, S. A. Seshia, T. Sahai, and N. Shankar. TeLEx: Passive STL learning using only positive examples. In International Conference on Runtime Verification, pages 208\u2013224.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jha%2C%20S.%20Tiwari%2C%20A.%20Seshia%2C%20S.A.%20Sahai%2C%20T.%20TeLEx%3A%20Passive%20STL%20learning%20using%20only%20positive%20examples",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jha%2C%20S.%20Tiwari%2C%20A.%20Seshia%2C%20S.A.%20Sahai%2C%20T.%20TeLEx%3A%20Passive%20STL%20learning%20using%20only%20positive%20examples"
+        },
+        {
+            "id": "16",
+            "entry": "[16] D. Kasenberg and M. Scheutz. Interpretable apprenticeship learning with temporal logic specifications. arXiv preprint arXiv:1710.10532, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.10532"
+        },
+        {
+            "id": "17",
+            "entry": "[17] H. Kress-Gazit, G. E. Fainekos, and G. J. Pappas. Temporal-logic-based reactive mission and motion planning. IEEE Transactions on Robotics, 25(6):1370\u20131381, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kress-Gazit%2C%20H.%20Fainekos%2C%20G.E.%20Pappas%2C%20G.J.%20Temporal-logic-based%20reactive%20mission%20and%20motion%20planning%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kress-Gazit%2C%20H.%20Fainekos%2C%20G.E.%20Pappas%2C%20G.J.%20Temporal-logic-based%20reactive%20mission%20and%20motion%20planning%202009"
+        },
+        {
+            "id": "18",
+            "entry": "[18] S. Levine. Reinforcement learning and control as probabilistic inference: Tutorial and review. CoRR, abs/1805.00909, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1805.00909"
+        },
+        {
+            "id": "19",
+            "entry": "[19] S. Levine, Z. Popovic, and V. Koltun. Nonlinear inverse reinforcement learning with gaussian processes. In J. Shawe-Taylor, R. S. Zemel, P. L. Bartlett, F. Pereira, and K. Q. Weinberger, editors, Advances in Neural Information Processing Systems 24, pages 19\u201327. Curran Associates, Inc., 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Levine%2C%20S.%20Popovic%2C%20Z.%20Koltun%2C%20V.%20Nonlinear%20inverse%20reinforcement%20learning%20with%20gaussian%20processes%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Levine%2C%20S.%20Popovic%2C%20Z.%20Koltun%2C%20V.%20Nonlinear%20inverse%20reinforcement%20learning%20with%20gaussian%20processes%202011"
+        },
+        {
+            "id": "20",
+            "entry": "[20] W. Li. Specification Mining: New Formalisms, Algorithms and Applications. PhD thesis, EECS Department, University of California, Berkeley, Mar 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20W.%20Specification%20Mining%3A%20New%20Formalisms%2C%20Algorithms%20and%20Applications%202014-03"
+        },
+        {
+            "id": "21",
+            "entry": "[21] M. L. Littman, U. Topcu, J. Fu, C. Isbell, M. Wen, and J. MacGlashan. Environment-Independent Task Specifications via GLTL. arXiv:1704.04341 [cs], Apr. 2017. arXiv: 1704.04341.",
+            "arxiv_url": "https://arxiv.org/pdf/1704.04341"
+        },
+        {
+            "id": "22",
+            "entry": "[22] N. Metropolis and S. Ulam. The Monte Carlo method. Journal of the American statistical association, 44(247):335\u2013341, 1949.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Metropolis%2C%20N.%20Ulam%2C%20S.%20The%20Monte%20Carlo%20method%201949",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Metropolis%2C%20N.%20Ulam%2C%20S.%20The%20Monte%20Carlo%20method%201949"
+        },
+        {
+            "id": "23",
+            "entry": "[23] A. Y. Ng, S. J. Russell, et al. Algorithms for inverse reinforcement learning. In ICML, pages 663\u2013670, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ng%2C%20A.Y.%20Russell%2C%20S.J.%20Algorithms%20for%20inverse%20reinforcement%20learning%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ng%2C%20A.Y.%20Russell%2C%20S.J.%20Algorithms%20for%20inverse%20reinforcement%20learning%202000"
+        },
+        {
+            "id": "24",
+            "entry": "[24] J. Pineau, G. Gordon, S. Thrun, et al. Point-based value iteration: An anytime algorithm for POMDPs. In IJCAI, volume 3, pages 1025\u20131032, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pineau%2C%20J.%20Gordon%2C%20G.%20Thrun%2C%20S.%20Point-based%20value%20iteration%3A%20An%20anytime%20algorithm%20for%20POMDPs%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pineau%2C%20J.%20Gordon%2C%20G.%20Thrun%2C%20S.%20Point-based%20value%20iteration%3A%20An%20anytime%20algorithm%20for%20POMDPs%202003"
+        },
+        {
+            "id": "25",
+            "entry": "[25] A. Pnueli. The temporal logic of programs. In Foundations of Computer Science, 1977., 18th Annual Symposium on, pages 46\u201357. IEEE, 1977.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pnueli%2C%20A.%20The%20temporal%20logic%20of%20programs%201977",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pnueli%2C%20A.%20The%20temporal%20logic%20of%20programs%201977"
+        },
+        {
+            "id": "26",
+            "entry": "[26] D. Ramachandran and E. Amir. Bayesian inverse reinforcement learning. IJCAI, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ramachandran%2C%20D.%20Amir%2C%20E.%20Bayesian%20inverse%20reinforcement%20learning%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ramachandran%2C%20D.%20Amir%2C%20E.%20Bayesian%20inverse%20reinforcement%20learning%202007"
+        },
+        {
+            "id": "27",
+            "entry": "[27] V. Raman, A. Donz\u00e9, D. Sadigh, R. M. Murray, and S. A. Seshia. Reactive synthesis from signal temporal logic specifications. In Proceedings of the 18th International Conference on Hybrid Systems: Computation and Control, pages 239\u2013248. ACM, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Reactive%20synthesis%20from%20signal%20temporal%20logic%20specifications%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Reactive%20synthesis%20from%20signal%20temporal%20logic%20specifications%202015"
+        },
+        {
+            "id": "28",
+            "entry": "[28] I. Saha, R. Ramaithitima, V. Kumar, G. J. Pappas, and S. A. Seshia. Automated composition of motion primitives for multi-robot systems from safe LTL specifications. In Intelligent Robots and Systems (IROS 2014), 2014 IEEE/RSJ International Conference on, pages 1525\u20131532. IEEE, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Saha%2C%20I.%20Ramaithitima%2C%20R.%20Kumar%2C%20V.%20Pappas%2C%20G.J.%20Automated%20composition%20of%20motion%20primitives%20for%20multi-robot%20systems%20from%20safe%20LTL%20specifications%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Saha%2C%20I.%20Ramaithitima%2C%20R.%20Kumar%2C%20V.%20Pappas%2C%20G.J.%20Automated%20composition%20of%20motion%20primitives%20for%20multi-robot%20systems%20from%20safe%20LTL%20specifications%202014"
+        },
+        {
+            "id": "29",
+            "entry": "[29] S. A. Seshia, D. Sadigh, and S. S. Sastry. Towards Verified Artificial Intelligence. ArXiv e-prints, July 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Seshia%2C%20S.A.%20Sadigh%2C%20D.%20Sastry%2C%20S.S.%20Towards%20Verified%20Artificial%20Intelligence.%20ArXiv%20e-prints%202016-07"
+        },
+        {
+            "id": "30",
+            "entry": "[30] E. Todorov. Linearly-solvable Markov decision problems. In Advances in neural information processing systems, pages 1369\u20131376, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Todorov%2C%20E.%20Linearly-solvable%20Markov%20decision%20problems%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Todorov%2C%20E.%20Linearly-solvable%20Markov%20decision%20problems%202007"
+        },
+        {
+            "id": "31",
+            "entry": "[31] E. Todorov. General duality between optimal control and estimation. In Decision and Control, 2008. CDC 2008. 47th IEEE Conference on, pages 4286\u20134292. IEEE, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Todorov%2C%20E.%20General%20duality%20between%20optimal%20control%20and%20estimation.%20In%20Decision%20and%20Control%202008"
+        },
+        {
+            "id": "33",
+            "entry": "[33] M. Vazquez-Chanlatte, J. V. Deshmukh, X. Jin, and S. A. Seshia. Logical clustering and learning for time-series data. In International Conference on Computer Aided Verification, pages 305\u2013325.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vazquez-Chanlatte%2C%20M.%20Deshmukh%2C%20J.V.%20Jin%2C%20X.%20Seshia%2C%20S.A.%20Logical%20clustering%20and%20learning%20for%20time-series%20data",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vazquez-Chanlatte%2C%20M.%20Deshmukh%2C%20J.V.%20Jin%2C%20X.%20Seshia%2C%20S.A.%20Logical%20clustering%20and%20learning%20for%20time-series%20data"
+        },
+        {
+            "id": "34",
+            "entry": "[34] M. Vazquez-Chanlatte, M. K. Ho, T. L. Griffiths, and S. A. Seshia. Communicating Compositional and Temporal Specifications by Demonstrations, extended abstract. In Symposium on Cyber-Physical Human Systems (CPHS), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vazquez-Chanlatte%2C%20M.%20Ho%2C%20M.K.%20Griffiths%2C%20T.L.%20Seshia%2C%20S.A.%20Communicating%20Compositional%20and%20Temporal%20Specifications%20by%20Demonstrations%2C%20extended%20abstract%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vazquez-Chanlatte%2C%20M.%20Ho%2C%20M.K.%20Griffiths%2C%20T.L.%20Seshia%2C%20S.A.%20Communicating%20Compositional%20and%20Temporal%20Specifications%20by%20Demonstrations%2C%20extended%20abstract%202018"
+        },
+        {
+            "id": "35",
+            "entry": "[35] B. D. Ziebart, A. L. Maas, J. A. Bagnell, and A. K. Dey. Maximum entropy inverse reinforcement learning. In AAAI, volume 8, pages 1433\u20131438. Chicago, IL, USA, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ziebart%2C%20B.D.%20Maas%2C%20A.L.%20Bagnell%2C%20J.A.%20Dey%2C%20A.K.%20Maximum%20entropy%20inverse%20reinforcement%20learning%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ziebart%2C%20B.D.%20Maas%2C%20A.L.%20Bagnell%2C%20J.A.%20Dey%2C%20A.K.%20Maximum%20entropy%20inverse%20reinforcement%20learning%202008"
+        }
+    ]
+}

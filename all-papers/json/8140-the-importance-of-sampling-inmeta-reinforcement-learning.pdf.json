@@ -1,0 +1,293 @@
+{
+    "filename": "8140-the-importance-of-sampling-inmeta-reinforcement-learning.pdf",
+    "metadata": {
+        "title": "The Importance of Sampling inMeta-Reinforcement Learning",
+        "author": "Bradly Stadie, Ge Yang, Rein Houthooft, Peter Chen, Yan Duan, Yuhuai Wu, Pieter Abbeel, Ilya Sutskever",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8140-the-importance-of-sampling-inmeta-reinforcement-learning.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We interpret meta-reinforcement learning as the problem of learning how to quickly find a good sampling distribution in a new environment. This interpretation leads to the development of two new meta-reinforcement learning algorithms: E-MAML and E-RL2. Results are presented on a new environment we call \u2018Krazy World\u2019: a difficult high-dimensional gridworld which is designed to highlight the importance of correctly differentiating through sampling distributions in meta-reinforcement learning. Further results are presented on a set of maze environments. We show E-MAML and E-RL2 deliver better performance than baseline algorithms on both tasks."
+    },
+    "keywords": [
+        {
+            "term": "artificial curiosity",
+            "url": "https://en.wikipedia.org/wiki/artificial_curiosity"
+        },
+        {
+            "term": "high dimensional",
+            "url": "https://en.wikipedia.org/wiki/high_dimensional"
+        },
+        {
+            "term": "polynomial time",
+            "url": "https://en.wikipedia.org/wiki/polynomial_time"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "Markov decision process",
+            "url": "https://en.wikipedia.org/wiki/Markov_decision_process"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Reinforcement learning can be thought of as a procedure wherein an agent bias its sampling process towards areas with higher rewards. This sampling process is embodied as the policy \u03c0, which is responsible for outputting an action a conditioned on past environmental states {s}",
+        "In the context of gradient based algorithms, this means that one principled approach for learning an optimal sampling strategy is to differentiate the meta RL agent\u2019s per-task sampling process with respect to the goal of maximizing the reward attained by the agent post-adaptation",
+        "We compute a policy gradient update to move the RNN parameters in a direction which maximizes the returns over the k trials performed for each Markov decision process",
+        "Inspired by our derivation of E-Model-agnostic meta-learning, we attempt to make RL2 better account for the impact of its initial sampling distribution on its final returns",
+        "We considered the importance of sampling in meta reinforcement learning"
+    ],
+    "key_statements": [
+        "Reinforcement learning can be thought of as a procedure wherein an agent bias its sampling process towards areas with higher rewards. This sampling process is embodied as the policy \u03c0, which is responsible for outputting an action a conditioned on past environmental states {s}",
+        "In the context of gradient based algorithms, this means that one principled approach for learning an optimal sampling strategy is to differentiate the meta RL agent\u2019s per-task sampling process with respect to the goal of maximizing the reward attained by the agent post-adaptation",
+        "We compute a policy gradient update to move the RNN parameters in a direction which maximizes the returns over the k trials performed for each Markov decision process",
+        "Inspired by our derivation of E-Model-agnostic meta-learning, we attempt to make RL2 better account for the impact of its initial sampling distribution on its final returns",
+        "When we manually examined the RL2 trajectories to figure out why, we saw the agent consistently finding a single goal square and refusing to explore any further",
+        "We considered the importance of sampling in meta reinforcement learning"
+    ],
+    "summary": [
+        "Reinforcement learning can be thought of as a procedure wherein an agent bias its sampling process towards areas with higher rewards.",
+        "In the context of gradient based algorithms, this means that one principled approach for learning an optimal sampling strategy is to differentiate the meta RL agent\u2019s per-task sampling process with respect to the goal of maximizing the reward attained by the agent post-adaptation.",
+        "We derive an algorithm for gradient-based meta-learning that explicitly optimizes the pertask sampling distributions during adaptation with respect to the expected future returns produced by it post-adaptation self.",
+        "In an environment where policy gradients require over 100,000 samples to produce good returns, an ideal meta RL algorithm should solve these tasks by collecting less than 10 trajectories.",
+        "Require: Task distribution: P (T ) Require: \u03b1, \u03b2 learning step size hyperparameters Require: ninner, nmeta number of gradient updates for per-task and meta learning 1: function U k(\u03c6, L, \u03c4[0,\u00b7\u00b7\u00b7 ,k\u22121]) 2: for i in [0, \u00b7 \u00b7 \u00b7, k-1] do",
+        "Model-agnostic meta-learning (MAML) treats the graph as if the first policy gradient update is deterministic.",
+        "Performing a policy gradient update on the RNN will correspond to optimizing the meta objective (1).",
+        "We compute a policy gradient update to move the RNN parameters in a direction which maximizes the returns over the k trials performed for each MDP.",
+        "Inspired by our derivation of E-MAML, we attempt to make RL2 better account for the impact of its initial sampling distribution on its final returns.",
+        "The hope is that zeroing the return contributions from Explore-rollouts will encourage the RNN to account for the impact of casting a wider sampling distribution on the final meta-reward.",
+        "The center and ing for this impact, the agent will not receive the right worlds show how these dynamics will change gradient of the per-task episodes with respect to and need to be re-identified every time a new task the meta-update.",
+        "The mazes are not rendered, and this task is done with state space Figure 3: Meta learning curves on Krazy World.",
+        "Our meta learning algorithms should have a large gap between their initial policy, which is largely exploratory, and their updated policy, which should often solve the problem entirely.",
+        "It is likely that future work in this area will focus on meta-learning a curiosity signal which is robust and transfers across tasks, or learning an explicit exploration policy.",
+        "For each environment in the test set, we optimize for 5 million steps using the Q-Learning algorithm from Open-AI baselines."
+    ],
+    "headline": "We show E-Model-agnostic meta-learning and E-RL2 deliver better performance than baseline algorithms on both tasks",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Bacon, P. and Precup, D. The option-critic architecture. In NIPS Deep RL Workshop, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bacon%2C%20P.%20Precup%2C%20D.%20The%20option-critic%20architecture%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bacon%2C%20P.%20Precup%2C%20D.%20The%20option-critic%20architecture%202015"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Barto and Mahadevan. Recent advances in hierarchical reinforcement learning. Discrete Event Dynamic Systems, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Barto%20Mahadevan%20Recent%20advances%20in%20hierarchical%20reinforcement%20learning%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Barto%20Mahadevan%20Recent%20advances%20in%20hierarchical%20reinforcement%20learning%202003"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Bellemare, M., Srinivasan, S., Ostrovski, G., Schaul, T., Saxton, D., and Munos, R. Unifying count based exploration and intrinsic motivation. NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bellemare%2C%20M.%20Srinivasan%2C%20S.%20Ostrovski%2C%20G.%20Schaul%2C%20T.%20Unifying%20count%20based%20exploration%20and%20intrinsic%20motivation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bellemare%2C%20M.%20Srinivasan%2C%20S.%20Ostrovski%2C%20G.%20Schaul%2C%20T.%20Unifying%20count%20based%20exploration%20and%20intrinsic%20motivation%202016"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Brafman, R. I. and Tennenholtz, M. R-max - a general polynomial time algorithm for nearoptimal reinforcement learning. Journal of Machine Learning Research, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Brafman%2C%20R.I.%20Tennenholtz%2C%20M.%20R-max%20-%20a%20general%20polynomial%20time%20algorithm%20for%20nearoptimal%20reinforcement%20learning%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Brafman%2C%20R.I.%20Tennenholtz%2C%20M.%20R-max%20-%20a%20general%20polynomial%20time%20algorithm%20for%20nearoptimal%20reinforcement%20learning%202002"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Carmel, D. and Markovitch, S. Exploration strategies for model-based learning in multi-agent systems. Autonomous Agents and Multi-Agent Systems, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Carmel%2C%20D.%20Markovitch%2C%20S.%20Exploration%20strategies%20for%20model-based%20learning%20in%20multi-agent%20systems%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Carmel%2C%20D.%20Markovitch%2C%20S.%20Exploration%20strategies%20for%20model-based%20learning%20in%20multi-agent%20systems%201999"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Finn, C., Abbeel, P., and Levine, S. Model-agnostic metalearning for fast adaptation of deep networks. ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Finn%2C%20C.%20Abbeel%2C%20P.%20Levine%2C%20S.%20Model-agnostic%20metalearning%20for%20fast%20adaptation%20of%20deep%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Finn%2C%20C.%20Abbeel%2C%20P.%20Levine%2C%20S.%20Model-agnostic%20metalearning%20for%20fast%20adaptation%20of%20deep%20networks%202017"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Graziano, Vincent, Glasmachers, Tobias, Schaul, Tom, Pape, Leo, Cuccu, Giuseppe, Leitner, Jurgen, and Schmidhuber, J\u00fcrgen. Artificial Curiosity for Autonomous Space Exploration. Acta Futura, 1(1):41\u201351, 2011. doi: 10.2420/AF04.2011.41. URL http://dx.doi.org/10.2420/AF04.2011.41.",
+            "crossref": "https://dx.doi.org/10.2420/AF04.2011.41",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.2420/AF04.2011.41"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Houthooft, R., Chen, X., Duan, Y., Schulman, J., De Turck, F., and Abbeel, P. Vime: Variational information maximizing exploration. NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Houthooft%2C%20R.%20Chen%2C%20X.%20Duan%2C%20Y.%20Schulman%2C%20J.%20Vime%3A%20Variational%20information%20maximizing%20exploration%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Houthooft%2C%20R.%20Chen%2C%20X.%20Duan%2C%20Y.%20Schulman%2C%20J.%20Vime%3A%20Variational%20information%20maximizing%20exploration%202016"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Kearns, M. J. and Singh, S. P. Near-optimal reinforcement learning in polynomial time. Machine Learning, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kearns%2C%20M.J.%20Singh%2C%20S.P.%20Near-optimal%20reinforcement%20learning%20in%20polynomial%20time%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kearns%2C%20M.J.%20Singh%2C%20S.P.%20Near-optimal%20reinforcement%20learning%20in%20polynomial%20time%202002"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Kolter, J. Z. and Ng, A. Y. Near-bayesian exploration in polynomial time. ICML, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kolter%2C%20J.Z.%20Ng%2C%20A.Y.%20Near-bayesian%20exploration%20in%20polynomial%20time%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kolter%2C%20J.Z.%20Ng%2C%20A.Y.%20Near-bayesian%20exploration%20in%20polynomial%20time%202009"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Kompella, Stollenga, Luciw, and Schmidhuber. Exploring the predictable. Advances in Evolutionary Computing, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kompella%2C%20Stollenga%20Luciw%20Schmidhuber%20Exploring%20the%20predictable%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kompella%2C%20Stollenga%20Luciw%20Schmidhuber%20Exploring%20the%20predictable%202002"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Koutn\u00edk, Jan, Cuccu, Giuseppe, Schmidhuber, J\u00fcrgen, and Gomez, Faustino. Evolving largescale neural networks for vision-based reinforcement learning. GECCO 2013, 15:1061\u20131068, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Koutn%C3%ADk%2C%20Jan%20Cuccu%2C%20Giuseppe%20Schmidhuber%2C%20J%C3%BCrgen%20Gomez%2C%20Faustino%20Evolving%20largescale%20neural%20networks%20for%20vision-based%20reinforcement%20learning%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Koutn%C3%ADk%2C%20Jan%20Cuccu%2C%20Giuseppe%20Schmidhuber%2C%20J%C3%BCrgen%20Gomez%2C%20Faustino%20Evolving%20largescale%20neural%20networks%20for%20vision-based%20reinforcement%20learning%202013"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Lillicrap, T., Hunt, J., Pritzel, A., Heess, N., Erez, T., Tassa, Y., Silver, D., and Wierstra, D. Continuous control with deep reinforcement learning. arXiv:1509.02971, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1509.02971"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Mnih, Volodymyr, Kavukcuoglu, Koray, Silver, David, Rusu, Andrei A, Veness, Joel, Bellemare, Marc G, Graves, Alex, Riedmiller, Martin, Fidjeland, Andreas K, Ostrovski, Georg, et al. Human-level control through deep reinforcement learning. Nature, 518(7540):529\u2013533, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20Volodymyr%20Kavukcuoglu%2C%20Koray%20Silver%2C%20David%20Rusu%2C%20Andrei%20A.%20Human-level%20control%20through%20deep%20reinforcement%20learning%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20Volodymyr%20Kavukcuoglu%2C%20Koray%20Silver%2C%20David%20Rusu%2C%20Andrei%20A.%20Human-level%20control%20through%20deep%20reinforcement%20learning%202015"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Mnih, Volodymyr, Badia, Adria Puigdomenech, Mirza, Mehdi, Graves, Alex, Lillicrap, Timothy P, Harley, Tim, Silver, David, and Kavukcuoglu, Koray. Asynchronous methods for deep reinforcement learning. arXiv:1602.01783, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1602.01783"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Ngo, Hung, Luciw, Matthew, Forster, Alexander, and Schmidhuber, Juergen. Learning skills from play: Artificial curiosity on a Katana robot arm. Proceedings of the International Joint Conference on Neural Networks, pp. 10\u201315, 2012. ISSN 2161-4393. doi: 10.1109/IJCNN.2012. 6252824.",
+            "crossref": "https://dx.doi.org/10.1109/IJCNN.2012.6252824",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1109/IJCNN.2012.6252824"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Osband, I., Blundell, C., Pritzel, A., and Van Roy, B. Deep exploration via bootstrapped dqn. NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Osband%2C%20I.%20Blundell%2C%20C.%20Pritzel%2C%20A.%20Van%20Roy%2C%20B.%20Deep%20exploration%20via%20bootstrapped%20dqn%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Osband%2C%20I.%20Blundell%2C%20C.%20Pritzel%2C%20A.%20Van%20Roy%2C%20B.%20Deep%20exploration%20via%20bootstrapped%20dqn%202016"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Ostrovski, G., Bellemare, M. G., Oord, A. v. d., and Munos, R. Count-based exploration with neural density models. arXiv:1703.01310, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.01310"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Rusu, A. A., Rabinowitz, N. C., Desjardins, G., Soyer, H., Kirkpatrick, J., Kavukcuoglu, K., Pascanu, R., and Hadsell, R. Progressive neural networks. CoRR, vol. abs/1606.04671, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.04671"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Schmidhuber. Evolutionary principles in self-referential learning, or on learning how to learn: The meta-meta-... hook. Diploma thesis, TUM, 1987.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schmidhuber%20Evolutionary%20principles%20in%20self-referential%20learning%2C%20or%20on%20learning%20how%20to%20learn%3A%20The%20meta-meta-%201987"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Schmidhuber. G\u00f6del machines: Fully self-referential optimal universal self-improvers. Artificial General Intelligence, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schmidhuber%20G%C3%B6del%20machines%3A%20Fully%20self-referential%20optimal%20universal%20self-improvers%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schmidhuber%20G%C3%B6del%20machines%3A%20Fully%20self-referential%20optimal%20universal%20self-improvers%202006"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Schmidhuber, J. Continual curiosity-driven skill acquisition from high-dimensional video inputs for humanoid robots. Artificial Intelligence, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schmidhuber%2C%20J.%20Continual%20curiosity-driven%20skill%20acquisition%20from%20high-dimensional%20video%20inputs%20for%20humanoid%20robots%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schmidhuber%2C%20J.%20Continual%20curiosity-driven%20skill%20acquisition%20from%20high-dimensional%20video%20inputs%20for%20humanoid%20robots%202015"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Schmidhuber, J., Zhao, J., and Schraudolph, N. Reinforcement learning with self-modifying policies. Learning to learn, Kluwer, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schmidhuber%2C%20J.%20Zhao%2C%20J.%20Schraudolph%2C%20N.%20Reinforcement%20learning%20with%20self-modifying%20policies%201997"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Schmidhuber, Juergen. On Learning to Think: Algorithmic Information Theory for Novel Combinations of Reinforcement Learning Controllers and Recurrent Neural World Models. pp. 1\u201336, 2015. ISSN 10450823. doi: 1511.09249v1. URL http://arxiv.org/abs/1511.09249.",
+            "url": "http://arxiv.org/abs/1511.09249",
+            "arxiv_url": "https://arxiv.org/pdf/1511.09249"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Schmidhuber, J\u00fcrgen. A Possibility for Implementing Curiosity and Boredom in Model-Building Neural Controllers. Meyer, J.A. and Wilson, S.W. (eds) : From Animals to animats, pp. 222\u2013227, 1991.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schmidhuber%2C%20J%C3%BCrgen%20A%20Possibility%20for%20Implementing%20Curiosity%20and%20Boredom%20in%20Model-Building%20Neural%20Controllers%201991",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schmidhuber%2C%20J%C3%BCrgen%20A%20Possibility%20for%20Implementing%20Curiosity%20and%20Boredom%20in%20Model-Building%20Neural%20Controllers%201991"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Schulman, J., Wolski, F., Dhariwal, P., Radford, A., and Klimov, O. Proximal policy optimization algorithms. arXiv:1707.06347, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.06347"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Schulman, John, Heess, Nicolas, Weber, Theophane, and Abbeel, Pieter. Gradient estimation using stochastic computation graphs. In Advances in Neural Information Processing Systems, pp. 3528\u20133536, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schulman%2C%20John%20Heess%2C%20Nicolas%20Weber%2C%20Theophane%20Abbeel%2C%20Pieter%20Gradient%20estimation%20using%20stochastic%20computation%20graphs%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schulman%2C%20John%20Heess%2C%20Nicolas%20Weber%2C%20Theophane%20Abbeel%2C%20Pieter%20Gradient%20estimation%20using%20stochastic%20computation%20graphs%202015"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Schulman, John, Levine, Sergey, Moritz, Philipp, Jordan, Michael I., and Abbeel, Pieter. Trust region policy optimization. Arxiv preprint 1502.05477, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1502.05477"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Silver, Yand, and Li. Lifelong machine learning systems: Beyond learning algorithms. DAAAI Spring Symposium-Technical Report, 2013., 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silver%2C%20Yand%20Li%20Lifelong%20machine%20learning%20systems%3A%20Beyond%20learning%20algorithms.%20DAAAI%20Spring%20Symposium-Technical%20Report%202013"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Stadie, Bradly C., Levine, S., and Abbeel, P. Incentivizing exploration in reinforcement learning with deep predictive models. arXiv:1507.00814, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1507.00814"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Storck, Jan, Hochreiter, Sepp, and Schmidhuber, J\u00fcrgen. Reinforcement driven information acquisition in non-deterministic environments. Proceedings of the International . . . , 2:159\u2013164, 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Storck%2C%20Jan%20Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Reinforcement%20driven%20information%20acquisition%20in%20non-deterministic%20environments.%20Proceedings%20of%20the%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Storck%2C%20Jan%20Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Reinforcement%20driven%20information%20acquisition%20in%20non-deterministic%20environments.%20Proceedings%20of%20the%201995"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Sun, Yi, Gomez, Faustino, and Schmidhuber, J\u00fcrgen. Planning to be surprised: Optimal Bayesian exploration in dynamic environments. Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics), 6830 LNAI:41\u201351, 2011. ISSN 03029743. doi: 10.1007/978-3-642-22887-2_5.",
+            "crossref": "https://dx.doi.org/10.1007/978-3-642-22887-2_5",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1007/978-3-642-22887-2_5"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Tang, H., Houthooft, R., Foote, D., Stooke, A., Chen, X., Duan, Y., Schulman, J., De Turck, F., and Abbeel, P. exploration: A study of count-based exploration for deep reinforcement learning. arXiv:1611.04717, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.04717"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Taylor and Stone. Transfer learning for reinforcement learning domains: A survey. DAAAI Spring Symposium-Technical Report, 2013., 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Taylor%20Stone%20Transfer%20learning%20for%20reinforcement%20learning%20domains%3A%20A%20survey.%20DAAAI%20Spring%20Symposium-Technical%20Report%202013"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Tessler, C. Givony, S., Zahavy, T., Mankowitz, D.J., and Mannor, S. A deep hierarchical approach to lifelong learning in minecraft. arXiv:1604.07255, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1604.07255"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Thrun. Is learning the n-th thing any easier than learning the first? NIPS, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Thrun%20Is%20learning%20the%20n-th%20thing%20any%20easier%20than%20learning%20the%20first%3F%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Thrun%20Is%20learning%20the%20n-th%20thing%20any%20easier%20than%20learning%20the%20first%3F%201996"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Vezhnevets, A. S., Osindero, S., Schaul, T., Heess, N., Jaderberg, M., Silver, D., and Kavukcuoglu, K. Feudal networks for hierarchical reinforcement learning. arXiv preprint arXiv:1703.01161, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.01161"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Wiering and Schmidhuber. Hq-learning. Adaptive Behavior, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wiering%20and%20Schmidhuber%20Hqlearning%20Adaptive%20Behavior%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wiering%20and%20Schmidhuber%20Hqlearning%20Adaptive%20Behavior%201997"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Williams, Ronald J. Simple statistical gradient-following algorithms for connectionist reinforcement learning. Machine Learning 8, 3-4 (1992), 229\u2013256, 1992. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%2C%20Ronald%20J.%20Simple%20statistical%20gradient-following%20algorithms%20for%20connectionist%20reinforcement%20learning%201992",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Williams%2C%20Ronald%20J.%20Simple%20statistical%20gradient-following%20algorithms%20for%20connectionist%20reinforcement%20learning%201992"
+        }
+    ]
+}

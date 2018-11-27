@@ -1,0 +1,158 @@
+{
+    "filename": "7892-neural-ordinary-differential-equations.pdf",
+    "metadata": {
+        "title": "Neural Ordinary Differential Equations",
+        "date": 2017,
+        "author": "Ricky T. Q. Chen*, Yulia Rubanova*, Jesse Bettencourt*, David Duvenaud University of Toronto, Vector Institute Toronto, Canada",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7892-neural-ordinary-differential-equations.pdf"
+        },
+        "abstract": "We introduce a new family of deep neural network models. Instead of specifying a discrete sequence of hidden layers, we parameterize the derivative of the hidden state using a neural network. The output of the network is computed using a blackbox differential equation solver. These continuous-depth models have constant memory cost, adapt their evaluation strategy to each input, and can explicitly trade numerical precision for speed. We demonstrate these properties in continuous-depth residual networks and continuous-time latent variable models. We also construct continuous normalizing flows, a generative model that can train by maximum likelihood, without partitioning or ordering the data dimensions. For training, we show how to scalably backpropagate through any ODE solver, without access to its internal operations. This allows end-to-end training of ODEs within larger models."
+    },
+    "keywords": [
+        {
+            "term": "differential equation",
+            "url": "https://en.wikipedia.org/wiki/differential_equation"
+        },
+        {
+            "term": "ordinary differential equation",
+            "url": "https://en.wikipedia.org/wiki/ordinary_differential_equation"
+        },
+        {
+            "term": "time series",
+            "url": "https://en.wikipedia.org/wiki/time_series"
+        },
+        {
+            "term": "residual network",
+            "url": "https://en.wikipedia.org/wiki/residual_network"
+        },
+        {
+            "term": "continuous time",
+            "url": "https://en.wikipedia.org/wiki/continuous_time"
+        },
+        {
+            "term": "Gaussian Processes",
+            "url": "https://en.wikipedia.org/wiki/Gaussian_Processes"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        },
+        {
+            "term": "recurrent neural network",
+            "url": "https://en.wikipedia.org/wiki/recurrent_neural_network"
+        },
+        {
+            "term": "gaussian process",
+            "url": "https://en.wikipedia.org/wiki/gaussian_process"
+        }
+    ],
+    "highlights": [
+        "We parameterize the continuous dynamics of hidden units using an ordinary differential equation (ODE) specified by a neural network: Figure 1: Left: A Residual network defines a discrete sequence of finite transformations",
+        "What happens as we add more layers and take smaller steps? In the limit, we parameterize the continuous dynamics of hidden units using an ordinary differential equation (ODE) specified by a neural network: Figure 1: Left: A Residual network defines a discrete sequence of finite transformations",
+        "For the experiments we evaluated the hidden state dynamics and their derivatives on the GPU using Tensorflow, which were called from the Fortran ordinary differential equation solvers, which were called from Python",
+        "While use of vector-Jacobian products for solving the adjoint method has been explored in optimal control (<a class=\"ref-link\" id=\"cAndersson_2013_a\" href=\"#rAndersson_2013_a\">Andersson, 2013</a>), we explore a fully general integration of black-box ordinary differential equation solvers into automatic differentiation (Baydin et al, 2018) and highlight its potential in deep learning and generative modeling",
+        "We investigated the use of black-box ordinary differential equation solvers as a model component, developing new models for time-series modeling, supervised learning, and density estimation",
+        "We derived an instantaneous version of the change of variables formula, and developed continuous-time normalizing flows, which can scale to large layer sizes"
+    ],
+    "key_statements": [
+        "We parameterize the continuous dynamics of hidden units using an ordinary differential equation (ODE) specified by a neural network: Figure 1: Left: A Residual network defines a discrete sequence of finite transformations",
+        "What happens as we add more layers and take smaller steps? In the limit, we parameterize the continuous dynamics of hidden units using an ordinary differential equation (ODE) specified by a neural network: Figure 1: Left: A Residual network defines a discrete sequence of finite transformations",
+        "ordinary differential equation initial value problem at some time T. This value can be computed by a black-box differential equation solver, which evaluates the hidden unit dynamics f wherever necessary to determine the solution with the desired accuracy",
+        "Defining and evaluating models using ordinary differential equation solvers has several benefits: Memory efficiency In Section 2, we show how to compute gradients of a scalar-valued loss with respect to all inputs of any ordinary differential equation solver, without backpropagating through the operations of the solver",
+        "For the experiments we evaluated the hidden state dynamics and their derivatives on the GPU using Tensorflow, which were called from the Fortran ordinary differential equation solvers, which were called from Python",
+        "We find that ordinary differential equation-Nets and RK-Nets can achieve around the same performance as the ResNet, while using fewer parameters",
+        "While the continuous normalizing flows transformations are smooth and interpretable, we find that NF transformations are very unintuitive and this model has difficulty fitting the two moons dataset in Figure 5b.\n5 A generative latent function time-series model",
+        "We present a continuous-time, generative approach to modeling time series",
+        "We investigate the ability of the latent ordinary differential equation model to fit and extrapolate time series",
+        "We report pre-RNN\n0.3937 0.3202 0.1813 dictive root-mean-squared error (RMSE) on 100 Latent ordinary differential equation 0.1642 0.1502 0.1346 time points extending beyond those that were used for training",
+        "We demonstrate these same properties in more generality by directly using an ordinary differential equation solver",
+        "By providing a generic vector-Jacobian product, we allow an ordinary differential equation solver to be trained end-to-end with any other differentiable model components",
+        "While use of vector-Jacobian products for solving the adjoint method has been explored in optimal control (<a class=\"ref-link\" id=\"cAndersson_2013_a\" href=\"#rAndersson_2013_a\">Andersson, 2013</a>), we explore a fully general integration of black-box ordinary differential equation solvers into automatic differentiation (Baydin et al, 2018) and highlight its potential in deep learning and generative modeling",
+        "We investigated the use of black-box ordinary differential equation solvers as a model component, developing new models for time-series modeling, supervised learning, and density estimation",
+        "We derived an instantaneous version of the change of variables formula, and developed continuous-time normalizing flows, which can scale to large layer sizes"
+    ],
+    "summary": [
+        "We parameterize the continuous dynamics of hidden units using an ordinary differential equation (ODE) specified by a neural network: Figure 1: Left: A Residual network defines a discrete sequence of finite transformations.",
+        "This value can be computed by a black-box differential equation solver, which evaluates the hidden unit dynamics f wherever necessary to determine the solution with the desired accuracy.",
+        "For the experiments we evaluated the hidden state dynamics and their derivatives on the GPU using Tensorflow, which were called from the Fortran ODE solvers, which were called from Python",
+        "Maximum Likelihood Training A useful property of continuous-time normalizing flows is that we can compute the reverse transformation for about the same cost as the forward pass, which cannot be said for normalizing flows.",
+        "The likelihood of a set of independent observation times in the interval [tstart, tend] is given by an t inhomogeneous Poisson process (Palm, 1943): Figure 7: Fitting a latent ODE dytend log p(t1 .",
+        "0.3937 0.3202 0.1813 dictive root-mean-squared error (RMSE) on 100 Latent ODE 0.1642 0.1502 0.1346 time points extending beyond those that were used for training.",
+        "Figure 9 shows that the latent trajectories change smoothly as a function of the initial point z(t0), switching from a clockwise to a counter-clockwise spiral.",
+        "One can still batch together evaluations through the ODE solver by (b) Latent Neural Ordinary Differential Equation concatenating the states of each batch element together, creating a combined ODE with dimension D \u00d7 K.",
+        "Library (Farrell et al, 2013) implements adjoint computation for general ODE and PDE solutions, but only by backpropagating through the individual operations of the forward solver.",
+        "By providing a generic vector-Jacobian product, we allow an ODE solver to be trained end-to-end with any other differentiable model components.",
+        "While use of vector-Jacobian products for solving the adjoint method has been explored in optimal control (<a class=\"ref-link\" id=\"cAndersson_2013_a\" href=\"#rAndersson_2013_a\">Andersson, 2013</a>), we explore a fully general integration of black-box ODE solvers into automatic differentiation (Baydin et al, 2018) and highlight its potential in deep learning and generative modeling.",
+        "We investigated the use of black-box ODE solvers as a model component, developing new models for time-series modeling, supervised learning, and density estimation.",
+        "We derived an instantaneous version of the change of variables formula, and developed continuous-time normalizing flows, which can scale to large layer sizes."
+    ],
+    "headline": "We introduce a new family of deep neural network models",
+    "reference_links": [
+        {
+            "id": "Lvarez_2011_a",
+            "entry": "Mauricio A \u00c1lvarez and Neil D Lawrence. Computationally efficient convolved multiple output Gaussian processes. Journal of Machine Learning Research, 12(May):1459\u20131500, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=%C3%81lvarez%2C%20Mauricio%20A.%20Lawrence%2C%20Neil%20D.%20Computationally%20efficient%20convolved%20multiple%20output%20Gaussian%20processes%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=%C3%81lvarez%2C%20Mauricio%20A.%20Lawrence%2C%20Neil%20D.%20Computationally%20efficient%20convolved%20multiple%20output%20Gaussian%20processes%202011"
+        },
+        {
+            "id": "Amos_2017_a",
+            "entry": "Brandon Amos and J Zico Kolter. OptNet: Differentiable optimization as a layer in neural networks. In International Conference on Machine Learning, pages 136\u2013145, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Amos%2C%20Brandon%20Kolter%2C%20J.Zico%20OptNet%3A%20Differentiable%20optimization%20as%20a%20layer%20in%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Amos%2C%20Brandon%20Kolter%2C%20J.Zico%20OptNet%3A%20Differentiable%20optimization%20as%20a%20layer%20in%20neural%20networks%202017"
+        },
+        {
+            "id": "Andersson_2013_a",
+            "entry": "Joel Andersson. A general-purpose software framework for dynamic optimization. PhD thesis, 2013. Atilim Gunes Baydin, Barak A Pearlmutter, Alexey Andreyevich Radul, and Jeffrey Mark Siskind.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Andersson%2C%20Joel%20A%20general-purpose%20software%20framework%20for%20dynamic%20optimization%202013"
+        },
+        {
+            "id": "Van_et+al_2018_a",
+            "entry": "Automatic differentiation in machine learning: a survey. Journal of machine learning research, 18 (153):1\u2013153, 2018. Rianne van den Berg, Leonard Hasenclever, Jakub M Tomczak, and Max Welling. Sylvester normalizing flows for variational inference. arXiv preprint arXiv:1803.05649, 2018. Bob Carpenter, Matthew D Hoffman, Marcus Brubaker, Daniel Lee, Peter Li, and Michael Betancourt. The Stan math library: Reverse-mode automatic differentiation in c++. arXiv preprint arXiv:1509.07164, 2015. Bo Chang, Lili Meng, Eldad Haber, Lars Ruthotto, David Begert, and Elliot Holtham. Reversible architectures for arbitrarily deep residual neural networks. arXiv preprint arXiv:1709.03698, 2017. Bo Chang, Lili Meng, Eldad Haber, Frederick Tung, and David Begert. Multi-level residual networks from dynamical systems view. In International Conference on Learning Representations, 2018. URL",
+            "arxiv_url": "https://arxiv.org/pdf/1803.05649"
+        },
+        {
+            "id": "Che_et+al_2018_a",
+            "entry": ". Zhengping Che, Sanjay Purushotham, Kyunghyun Cho, David Sontag, and Yan Liu. Recurrent neural networks for multivariate time series with missing values. Scientific Reports, 8(1):6085, 2018. URL",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Che%2C%20Zhengping%20Purushotham%2C%20Sanjay%20Cho%2C%20Kyunghyun%20Sontag%2C%20David%20Recurrent%20neural%20networks%20for%20multivariate%20time%20series%20with%20missing%20values%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Che%2C%20Zhengping%20Purushotham%2C%20Sanjay%20Cho%2C%20Kyunghyun%20Sontag%2C%20David%20Recurrent%20neural%20networks%20for%20multivariate%20time%20series%20with%20missing%20values%202018"
+        },
+        {
+            "id": "Choi_et+al_2016_a",
+            "entry": ". Edward Choi, Mohammad Taha Bahadori, Andy Schuetz, Walter F. Stewart, and Jimeng Sun. Doctor AI: Predicting clinical events via recurrent neural networks. In Proceedings of the 1st Machine Learning for Healthcare Conference, volume 56 of Proceedings of Machine Learning Research, pages 301\u2013318. PMLR, 18\u201319 Aug 2016. URL",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Choi%2C%20Edward%20Bahadori%2C%20Mohammad%20Taha%20Schuetz%2C%20Andy%20Stewart%2C%20Walter%20F.%20Doctor%20AI%3A%20Predicting%20clinical%20events%20via%20recurrent%20neural%20networks%202016-08-18",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Choi%2C%20Edward%20Bahadori%2C%20Mohammad%20Taha%20Schuetz%2C%20Andy%20Stewart%2C%20Walter%20F.%20Doctor%20AI%3A%20Predicting%20clinical%20events%20via%20recurrent%20neural%20networks%202016-08-18"
+        },
+        {
+            "id": "Dinh_1955_a",
+            "entry": ". Earl A Coddington and Norman Levinson. Theory of ordinary differential equations. Tata McGrawHill Education, 1955. Laurent Dinh, David Krueger, and Yoshua Bengio. NICE: Non-linear independent components estimation. arXiv preprint arXiv:1410.8516, 2014. Nan Du, Hanjun Dai, Rakshit Trivedi, Utkarsh Upadhyay, Manuel Gomez-Rodriguez, and Le Song. Recurrent marked temporal point processes: Embedding event history to vector. In International Conference on Knowledge Discovery and Data Mining, pages 1555\u20131564. ACM, 2016. Patrick Farrell, David Ham, Simon Funke, and Marie Rognes. Automated derivation of the adjoint of high-level transient finite element programs. SIAM Journal on Scientific Computing, 2013. Michael Figurnov, Maxwell D Collins, Yukun Zhu, Li Zhang, Jonathan Huang, Dmitry Vetrov, and Ruslan Salakhutdinov. Spatially adaptive computation time for residual networks. arXiv preprint, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1410.8516"
+        },
+        {
+            "id": "Futoma_et+al_2017_a",
+            "entry": "J. Futoma, S. Hariharan, and K. Heller. Learning to Detect Sepsis with a Multitask Gaussian Process RNN Classifier. ArXiv e-prints, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Futoma%2C%20J.%20Hariharan%2C%20S.%20Heller%2C%20K.%20Learning%20to%20Detect%20Sepsis%20with%20a%20Multitask%20Gaussian%20Process%20RNN%20Classifier.%20ArXiv%20e-prints%202017"
+        },
+        {
+            "id": "Gomez_et+al_2017_a",
+            "entry": "Aidan N Gomez, Mengye Ren, Raquel Urtasun, and Roger B Grosse. The reversible residual network: Backpropagation without storing activations. In Advances in Neural Information Processing Systems, pages 2211\u20132221, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gomez%2C%20Aidan%20N.%20Ren%2C%20Mengye%20Urtasun%2C%20Raquel%20Grosse%2C%20Roger%20B.%20The%20reversible%20residual%20network%3A%20Backpropagation%20without%20storing%20activations%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gomez%2C%20Aidan%20N.%20Ren%2C%20Mengye%20Urtasun%2C%20Raquel%20Grosse%2C%20Roger%20B.%20The%20reversible%20residual%20network%3A%20Backpropagation%20without%20storing%20activations%202017"
+        },
+        {
+            "id": "Graves_2016_a",
+            "entry": "Alex Graves. Adaptive computation time for recurrent neural networks. arXiv preprint arXiv:1603.08983, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1603.08983"
+        },
+        {
+            "id": "Ha_et+al_2016_a",
+            "entry": "David Ha, Andrew Dai, and Quoc V Le. Hypernetworks. arXiv preprint arXiv:1609.09106, 2016. Eldad Haber and Lars Ruthotto. Stable architectures for deep neural networks. Inverse Problems, 34 (1):014004, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.09106"
+        },
+        {
+            "id": "Long_et+al_2017_a",
+            "entry": ". Z. Long, Y. Lu, X. Ma, and B. Dong. PDE-Net: Learning PDEs from Data. ArXiv e-prints, 2017. Yiping Lu, Aoxiao Zhong, Quanzheng Li, and Bin Dong. Beyond finite layer neural networks: Bridging deep architectures and numerical differential equations. arXiv preprint arXiv:1710.10121, 2017. Dougal Maclaurin, David Duvenaud, and Ryan P Adams. Autograd: Reverse-mode differentiation of native Python. In ICML workshop on Automatic Machine Learning, 2015. Hongyuan Mei and Jason M Eisner. The neural Hawkes process: A neurally self-modulating multivariate point process. In Advances in Neural Information Processing Systems, pages 6757\u2013 6767, 2017. Valdemar Melicher, Tom Haber, and Wim Vanroose. Fast derivatives of likelihood functionals for ODE based models using adjoint-state method. Computational Statistics, 32(4):1621\u20131643, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.10121"
+        }
+    ]
+}

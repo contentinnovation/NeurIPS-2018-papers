@@ -1,0 +1,194 @@
+{
+    "filename": "7699-importance-weighting-and-variational-inference.pdf",
+    "metadata": {
+        "date": 2018,
+        "title": "Importance Weighting and Variational Inference",
+        "author": "Justin Domke and Daniel Sheldon",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7699-importance-weighting-and-variational-inference.pdf"
+        },
+        "abstract": "Recent work used importance sampling ideas for better variational bounds on likelihoods. We clarify the applicability of these ideas to pure probabilistic inference, by showing the resulting Importance Weighted Variational Inference (IWVI) technique is an instance of augmented variational inference, thus identifying the looseness in previous work. Experiments confirm IWVI\u2019s practicality for probabilistic inference. As a second contribution, we investigate inference with elliptical distributions, which improves accuracy in low dimensions, and convergence in high dimensions."
+    },
+    "keywords": [
+        {
+            "term": "importance sampling",
+            "url": "https://en.wikipedia.org/wiki/importance_sampling"
+        },
+        {
+            "term": "evidence lower bound\u201d",
+            "url": "https://en.wikipedia.org/wiki/evidence_lower_bound"
+        },
+        {
+            "term": "Variational inference",
+            "url": "https://en.wikipedia.org/wiki/Variational_inference"
+        }
+    ],
+    "highlights": [
+        "Probabilistic modeling is used to reason about the world by formulating a joint model p(z, x) for unobserved variables z and observed variables x, and querying the posterior distribution p(z | x) to learn about hidden quantities given evidence x",
+        "We show that not only does Importance Weighted Variational Inference\u201d significantly tighten bounds on log p(x), but, by using q this way at test time, it significantly reduces estimation error for posterior expectations",
+        "Previous work has connected Importance Weighted Variational Inference\u201d and normalized importance sampling by showing that the importance weighted evidence lower bound\u201d is a lower bound of the evidence lower bound\u201d applied to the normalized importance sampling distribution [<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>]",
+        "We show how to use elliptical distributions and reparameterization to achieve a form of defensive sampling with almost no additional overhead to black-box Variational inference (BBVI). \u201cElliptical Variational inference\u201d provides small improvements over Gaussian black-box VI in terms of evidence lower bound\u201d and posterior expectations",
+        "We review the idea and draw novel connections to augmented Variational inference that make it clear how adapt apply these ideas to probabilistic inference",
+        "While Eq 2 makes clear that optimizing the importance weighted evidence lower bound\u201d tightens a bound on log p(x), it isn\u2019t obvious what connection this has to probabilistic inference"
+    ],
+    "key_statements": [
+        "Probabilistic modeling is used to reason about the world by formulating a joint model p(z, x) for unobserved variables z and observed variables x, and querying the posterior distribution p(z | x) to learn about hidden quantities given evidence x",
+        "The evidence lower bound\u201d is closely related to importance sampling",
+        "We show that not only does Importance Weighted Variational Inference\u201d significantly tighten bounds on log p(x), but, by using q this way at test time, it significantly reduces estimation error for posterior expectations",
+        "Previous work has connected Importance Weighted Variational Inference\u201d and normalized importance sampling by showing that the importance weighted evidence lower bound\u201d is a lower bound of the evidence lower bound\u201d applied to the normalized importance sampling distribution [<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>]",
+        "We show how to use elliptical distributions and reparameterization to achieve a form of defensive sampling with almost no additional overhead to black-box Variational inference (BBVI). \u201cElliptical Variational inference\u201d provides small improvements over Gaussian black-box VI in terms of evidence lower bound\u201d and posterior expectations",
+        "We review the idea and draw novel connections to augmented Variational inference that make it clear how adapt apply these ideas to probabilistic inference",
+        "While Eq 2 makes clear that optimizing the importance weighted evidence lower bound\u201d tightens a bound on log p(x), it isn\u2019t obvious what connection this has to probabilistic inference",
+        "On these higher dimensional problems, we found that when the step-size was perfectly tuned and optimization had many iterations, both methods performed in terms of the importance weighted evidence lower bound\u201d"
+    ],
+    "summary": [
+        "Probabilistic modeling is used to reason about the world by formulating a joint model p(z, x) for unobserved variables z and observed variables x, and querying the posterior distribution p(z | x) to learn about hidden quantities given evidence x.",
+        "The ELBO is closely related to importance sampling.",
+        "By switching to the one-dimensional random variable RM , we derived the IW-ELBO, which gives a tighter bound on log p(x).",
+        "We are left uncertain exactly in what sense q \"is close to\" p, and how we should use q to approximate p, say, for computing posterior expectations.",
+        "We show that not only does IWVI significantly tighten bounds on log p(x), but, by using q this way at test time, it significantly reduces estimation error for posterior expectations.",
+        "Previous work has connected IWVI and NIS by showing that the importance weighted ELBO is a lower bound of the ELBO applied to the NIS distribution [<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>].",
+        "Defensive importance sampling uses a widely dispersed q distribution to reduce variance by avoiding situations where q places essentially no mass in an area with p has density.",
+        "Ideas from importance sampling have been applied to obtain tighter ELBOs for learning in VAEs [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>].",
+        "This leads to a tighter \u201cimportance weighted ELBO\u201d (IW-ELBO) lower bound on log p(x), namely",
+        "While Eq 2 makes clear that optimizing the IW-ELBO tightens a bound on log p(x), it isn\u2019t obvious what connection this has to probabilistic inference.",
+        "We will call the process of maximizing the IW-ELBO \u201cImportance Weighted Variational Inference\u201d (IWVI).",
+        "(Burda et al used \u201cImportance Weighted Auto-encoder\u201d for optimizing Eq 5 as a bound on the likelihood of a variational auto-encoder, but this terminology ties the idea to a particular model, and is not suggestive of the probabilistic inference setting.)",
+        "The usual NIS distribution draws a batch of size M , and \u201cselects\u201d a single variable with probability in proportion to its importance weight.",
+        "They showed that the IW-ELBO lower bounds the ELBO between the NIS distribution and p, without quantifying the gap in the second inequality.",
+        "Rainforth et al [18, Theorem 1 in Appendix] provide a related asymptotic for errors in gradient variance, assuming at least the third moment exists.",
+        "This same idea can be applied more broadly: for any elliptical distribution, provided the density generator g is independent of w, the reparameterization in Eq 14 will be valid, provided that \u270f comes from the corresponding spherical distribution.",
+        "We suspect this is because when w is far from optimal, both the IW-ELBO and gradient variance is better with E-IWVI."
+    ],
+    "headline": "We investigate inference with elliptical distributions, which improves accuracy in low dimensions, and convergence in high dimensions",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Felix V. Agakov and David Barber. An auxiliary variational method. In Neural Information Processing, Lecture Notes in Computer Science, pages 561\u2013566. Springer, Berlin, Heidelberg, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Agakov%2C%20Felix%20V.%20Barber%2C%20David%20An%20auxiliary%20variational%20method%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Agakov%2C%20Felix%20V.%20Barber%2C%20David%20An%20auxiliary%20variational%20method%202004"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Philip Bachman and Doina Precup. Training deep generative models: Variations on a theme. In NIPS Workshop: Advances in Approximate Bayesian Inference, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bachman%2C%20Philip%20Precup%2C%20Doina%20Training%20deep%20generative%20models%3A%20Variations%20on%20a%20theme%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bachman%2C%20Philip%20Precup%2C%20Doina%20Training%20deep%20generative%20models%3A%20Variations%20on%20a%20theme%202015"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Robert Bamler, Cheng Zhang, Manfred Opper, and Stephan Mandt. Perturbative black box variational inference. In NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bamler%2C%20Robert%20Zhang%2C%20Cheng%20Opper%2C%20Manfred%20Mandt%2C%20Stephan%20Perturbative%20black%20box%20variational%20inference%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bamler%2C%20Robert%20Zhang%2C%20Cheng%20Opper%2C%20Manfred%20Mandt%2C%20Stephan%20Perturbative%20black%20box%20variational%20inference%202017"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Peter J Bickel and Kjell A Doksum. Mathematical statistics: basic ideas and selected topics, volume I, volume 117. CRC Press, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=and%2C%20Peter%20J%20Bickel%20Kjell%20A%20Doksum.%20Mathematical%20statistics%3A%20basic%20ideas%20and%20selected%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=and%2C%20Peter%20J%20Bickel%20Kjell%20A%20Doksum.%20Mathematical%20statistics%3A%20basic%20ideas%20and%20selected%202015"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Yuri Burda, Roger Grosse, and Ruslan Salakhutdinov. Importance weighted autoencoders. 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Burda%2C%20Yuri%20Grosse%2C%20Roger%20Salakhutdinov%2C%20Ruslan%20Importance%20weighted%20autoencoders%202015"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Chris Cremer, Quaid Morris, and David Duvenaud. Reinterpreting importance-weighted autoencoders. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cremer%2C%20Chris%20Morris%2C%20Quaid%20Duvenaud%2C%20David%20Reinterpreting%20importance-weighted%20autoencoders%202017"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Adji Bousso Dieng, Dustin Tran, Rajesh Ranganath, John Paisley, and David Blei. Variational inference via upper bound minimization. In NIPS, pages 2729\u20132738. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dieng%2C%20Adji%20Bousso%20Tran%2C%20Dustin%20Ranganath%2C%20Rajesh%20Paisley%2C%20John%20Variational%20inference%20via%20upper%20bound%20minimization%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dieng%2C%20Adji%20Bousso%20Tran%2C%20Dustin%20Ranganath%2C%20Rajesh%20Paisley%2C%20John%20Variational%20inference%20via%20upper%20bound%20minimization%202017"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Kaitai Fang, Samuel Kotz, and Kai Wang Ng. Symmetric multivariate and related distributions. Number 36 in Monographs on statistics and applied probability. Chapman and Hall, 1990.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fang%2C%20Kaitai%20Kotz%2C%20Samuel%20Ng%2C%20Kai%20Wang%20Symmetric%20multivariate%20and%20related%20distributions.%20Number%2036%20in%20Monographs%20on%20statistics%20and%20applied%20probability%201990"
+        },
+        {
+            "id": "9",
+            "entry": "[9] W. R. Gilks, A. Thomas, and D. J. Spiegelhalter. A language and program for complex bayesian modelling. 43(1):169\u2013177, 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gilks%2C%20W.R.%20Thomas%2C%20A.%20Spiegelhalter%2C%20D.J.%20A%20language%20and%20program%20for%20complex%20bayesian%20modelling%201994"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Diederik P. Kingma and Max Welling. Auto-encoding variational bayes. In ICLR.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Welling%2C%20Max%20Auto-encoding%20variational%20bayes.%20In%20ICLR"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Alp Kucukelbir, Dustin Tran, Rajesh Ranganath, Andrew Gelman, and David M. Blei. Automatic differentiation variational inference. 18(14):1\u201345, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kucukelbir%2C%20Alp%20Tran%2C%20Dustin%20Ranganath%2C%20Rajesh%20Gelman%2C%20Andrew%20Automatic%20differentiation%20variational%20inference%202017"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Tuan Anh Le, Maximilian Igl, Tom Rainforth, Tom Jin, and Frank Wood. Auto-Encoding Sequential Monte Carlo. In ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Le%2C%20Tuan%20Anh%20Igl%2C%20Maximilian%20Rainforth%2C%20Tom%20Jin%2C%20Tom%20Auto-Encoding%20Sequential%20Monte%20Carlo%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Le%2C%20Tuan%20Anh%20Igl%2C%20Maximilian%20Rainforth%2C%20Tom%20Jin%2C%20Tom%20Auto-Encoding%20Sequential%20Monte%20Carlo%202018"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Chris J Maddison, John Lawson, George Tucker, Nicolas Heess, Mohammad Norouzi, Andriy Mnih, Arnaud Doucet, and Yee Teh. Filtering variational objectives. In NIPS, pages 6576\u20136586. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Maddison%2C%20Chris%20J.%20Lawson%2C%20John%20Tucker%2C%20George%20Heess%2C%20Nicolas%20Filtering%20variational%20objectives%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Maddison%2C%20Chris%20J.%20Lawson%2C%20John%20Tucker%2C%20George%20Heess%2C%20Nicolas%20Filtering%20variational%20objectives%202017"
+        },
+        {
+            "id": "14",
+            "entry": "[14] J\u00f3zef Marcinkiewicz and Antoni Zygmund. Quelques th\u00e9oremes sur les fonctions ind\u00e9pendantes. Fund. Math, 29:60\u201390, 1937.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Marcinkiewicz%2C%20J%C3%B3zef%20Zygmund%2C%20Antoni%20Quelques%20th%C3%A9oremes%20sur%20les%20fonctions%20ind%C3%A9pendantes%201937",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Marcinkiewicz%2C%20J%C3%B3zef%20Zygmund%2C%20Antoni%20Quelques%20th%C3%A9oremes%20sur%20les%20fonctions%20ind%C3%A9pendantes%201937"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Minka, Thomas. Expectation propagation for approximate bayesian inference. In UAI, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Minka%2C%20Thomas%20Expectation%20propagation%20for%20approximate%20bayesian%20inference%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Minka%2C%20Thomas%20Expectation%20propagation%20for%20approximate%20bayesian%20inference%202001"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Christian A. Naesseth, Scott W. Linderman, Rajesh Ranganath, and David M. Blei. Variational sequential monte carlo. In AISTATS, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Naesseth%2C%20Christian%20A.%20Linderman%2C%20Scott%20W.%20Ranganath%2C%20Rajesh%20Blei%2C%20David%20M.%20Variational%20sequential%20monte%20carlo%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Naesseth%2C%20Christian%20A.%20Linderman%2C%20Scott%20W.%20Ranganath%2C%20Rajesh%20Blei%2C%20David%20M.%20Variational%20sequential%20monte%20carlo%202018"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Art Owen. Monte Carlo theory, methods and examples. 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Owen%2C%20Art%20Monte%20Carlo%20theory%2C%20methods%20and%20examples%202013"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Tom Rainforth, Adam R. Kosiorek, Tuan Anh Le, Chris J. Maddison, Maximilian Igl, Frank Wood, and Yee Whye Teh. Tighter variational bounds are not necessarily better.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rainforth%2C%20Tom%20Kosiorek%2C%20Adam%20R.%20Le%2C%20Tuan%20Anh%20Maddison%2C%20Chris%20J.%20and%20Yee%20Whye%20Teh.%20Tighter%20variational%20bounds%20are%20not%20necessarily%20better"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Rajesh Ranganath, Sean Gerrish, and David M. Blei. Black box variational inference. In AISTATS, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ranganath%2C%20Rajesh%20Gerrish%2C%20Sean%20Blei%2C%20David%20M.%20Black%20box%20variational%20inference%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ranganath%2C%20Rajesh%20Gerrish%2C%20Sean%20Blei%2C%20David%20M.%20Black%20box%20variational%20inference%202014"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Francisco J. R. Ruiz, Michalis K. Titsias, and David M. Blei. Overdispersed black-box variational inference. In UAI, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ruiz%2C%20Francisco%20J.R.%20Titsias%2C%20Michalis%20K.%20Blei%2C%20David%20M.%20Overdispersed%20black-box%20variational%20inference%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ruiz%2C%20Francisco%20J.R.%20Titsias%2C%20Michalis%20K.%20Blei%2C%20David%20M.%20Overdispersed%20black-box%20variational%20inference%202016"
+        },
+        {
+            "id": "21",
+            "entry": "[21] L. K. Saul, T. Jaakkola, and M. I. Jordan. Mean field theory for sigmoid belief networks. Journal of Artificial Intelligence Research, 4:61\u201376, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Saul%2C%20L.K.%20Jaakkola%2C%20T.%20Jordan%2C%20M.I.%20Mean%20field%20theory%20for%20sigmoid%20belief%20networks%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Saul%2C%20L.K.%20Jaakkola%2C%20T.%20Jordan%2C%20M.I.%20Mean%20field%20theory%20for%20sigmoid%20belief%20networks%201996"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Stan Development Team. Modeling language user\u2019s guide and reference manual, version 2.17.0, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Team%2C%20Stan%20Development%20Modeling%20language%20user%E2%80%99s%20guide%20and%20reference%20manual%2C%20version%202.17.0%202017"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Tom Minka. Divergence measures and message passing. 2005. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Minka%2C%20Tom%20Divergence%20measures%20and%20message%20passing%202005"
+        }
+    ]
+}

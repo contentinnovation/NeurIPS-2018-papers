@@ -1,0 +1,424 @@
+{
+    "filename": "7868-navigating-with-graph-representations-for-fast-and-scalable-decoding-of-neural-language-models.pdf",
+    "metadata": {
+        "title": "Navigating with Graph Representations for Fast and Scalable Decoding of Neural Language Models",
+        "author": "Minjia Zhang, Wenhan Wang, Xiaodong Liu, Jianfeng Gao, Yuxiong He",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7868-navigating-with-graph-representations-for-fast-and-scalable-decoding-of-neural-language-models.pdf"
+        },
+        "abstract": "Neural language models (NLMs) have recently gained a renewed interest by achieving state-of-the-art performance across many natural language processing (NLP) tasks. However, NLMs are very computationally demanding largely due to the computational cost of the decoding process, which consists of a softmax layer over a large vocabulary. We observe that in the decoding of many NLP tasks, only the probabilities of the top-K hypotheses need to be calculated preciously and K is often much smaller than the vocabulary size. This paper proposes a novel softmax layer approximation algorithm, called Fast Graph Decoder (FGD), which quickly identifies, for a given context, a set of K words that are most likely to occur according to a NLM. We demonstrate that FGD reduces the decoding time by an order of magnitude while attaining close to the full softmax baseline accuracy on neural machine translation and language modeling tasks. We also prove the theoretical guarantee on the softmax approximation quality."
+    },
+    "keywords": [
+        {
+            "term": "language model",
+            "url": "https://en.wikipedia.org/wiki/language_model"
+        },
+        {
+            "term": "k word",
+            "url": "https://en.wikipedia.org/wiki/k_word"
+        },
+        {
+            "term": "vocabulary size",
+            "url": "https://en.wikipedia.org/wiki/vocabulary_size"
+        },
+        {
+            "term": "natural language processing",
+            "url": "https://en.wikipedia.org/wiki/natural_language_processing"
+        },
+        {
+            "term": "stochastic gradient descent",
+            "url": "https://en.wikipedia.org/wiki/stochastic_gradient_descent"
+        },
+        {
+            "term": "language modeling",
+            "url": "https://en.wikipedia.org/wiki/language_modeling"
+        },
+        {
+            "term": "recurrent neural networks",
+            "url": "https://en.wikipedia.org/wiki/recurrent_neural_networks"
+        },
+        {
+            "term": "small world graph",
+            "url": "https://en.wikipedia.org/wiki/small_world_graph"
+        },
+        {
+            "term": "neural machine translation",
+            "url": "https://en.wikipedia.org/wiki/neural_machine_translation"
+        },
+        {
+            "term": "inner product",
+            "url": "https://en.wikipedia.org/wiki/inner_product"
+        },
+        {
+            "term": "machine translation",
+            "url": "https://en.wikipedia.org/wiki/machine_translation"
+        },
+        {
+            "term": "speech recognition",
+            "url": "https://en.wikipedia.org/wiki/speech_recognition"
+        }
+    ],
+    "highlights": [
+        "Drawing inspiration from biology and neurophysiology, recent progress on many natural language processing (NLP) tasks has been remarkable with deep neural network based approaches, including machine translation [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>\u2013<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>], sentence summarization [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>], speech recognition [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>\u2013<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>], and conversational agents [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>\u2013<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>]",
+        "We believe that if we can represent the vocabulary using a similar small world graph, we can significantly improve the decoding efficiency of Neural language models because softmax only needs to explicitly compute the probabilities of K words, where K is much smaller than the vocabulary size",
+        "We propose a Fast Graph Decoder (FGD) to approximate the softmax layer of a Neural language models in the decoding process",
+        "To create similarity relationship between words represented with a metric, we present a new method called Inner Product Preserving Transformation (IPPT) to convert the word embedding vectors to higher dimensional vectors",
+        "We propose a novel decoding algorithm, called Fast Graph Decoder (FGD), which quickly navigates, for a given context, on a small world graph representation of word embeddings to search for a set of K words that are most likely to be the words to predict according to Neural language models",
+        "On neural machine translation and neural language modeling tasks, we demonstrate that Fast Graph Decoder reduces the decoding time by an order of magnitude (e.g., 14X speedup comparing with the full softmax baseline) while attaining similar accuracy"
+    ],
+    "key_statements": [
+        "Drawing inspiration from biology and neurophysiology, recent progress on many natural language processing (NLP) tasks has been remarkable with deep neural network based approaches, including machine translation [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>\u2013<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>], sentence summarization [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>], speech recognition [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>\u2013<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>], and conversational agents [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>\u2013<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>]",
+        "The softmax layer consists of an inner product operator that projects the context vector into a vocabulary-sized vector of logits, followed by a softmax function that transforms these logits into a vector of probabilities",
+        "We believe that if we can represent the vocabulary using a similar small world graph, we can significantly improve the decoding efficiency of Neural language models because softmax only needs to explicitly compute the probabilities of K words, where K is much smaller than the vocabulary size",
+        "We propose a Fast Graph Decoder (FGD) to approximate the softmax layer of a Neural language models in the decoding process",
+        "We prove that finding the top-K hypotheses in the softmax layer is equivalent to finding the K nearest neighbors using Fast Graph Decoder in the small world graph, and the latter can be performed approximately using efficient graph navigating methods",
+        "To create similarity relationship between words represented with a metric, we present a new method called Inner Product Preserving Transformation (IPPT) to convert the word embedding vectors to higher dimensional vectors",
+        "We demonstrate empirically the effectiveness of our approach in Section 4 and provide a theoretically derived error bound of softmax approximation with top-K word hypotheses toward a probability distribution in Appendix C",
+        "Language Modeling. This section evaluates the impact of vocabulary sizes and word embedding dimensions on Fast Graph Decoder using language models 5 trained on WikiText-2 [<a class=\"ref-link\" id=\"c47\" href=\"#r47\">47</a>]",
+        "Figure 4 shows the decoding time of varying vocabulary sizes on the full softmax baseline and Fast Graph Decoder",
+        "We propose a novel decoding algorithm, called Fast Graph Decoder (FGD), which quickly navigates, for a given context, on a small world graph representation of word embeddings to search for a set of K words that are most likely to be the words to predict according to Neural language models",
+        "On neural machine translation and neural language modeling tasks, we demonstrate that Fast Graph Decoder reduces the decoding time by an order of magnitude (e.g., 14X speedup comparing with the full softmax baseline) while attaining similar accuracy"
+    ],
+    "summary": [
+        "Drawing inspiration from biology and neurophysiology, recent progress on many natural language processing (NLP) tasks has been remarkable with deep neural network based approaches, including machine translation [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>\u2013<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>], sentence summarization [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>], speech recognition [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>\u2013<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>], and conversational agents [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>\u2013<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>].",
+        "We believe that if we can represent the vocabulary using a similar small world graph, we can significantly improve the decoding efficiency of NLMs because softmax only needs to explicitly compute the probabilities of K words, where K is much smaller than the vocabulary size.",
+        "At each decoding step, we identify for a given context (e.g., a partial hypothesis in the beam search) the top-K hypotheses and compute their probabilities in the softmax layer of the NLM.",
+        "We prove that finding the top-K hypotheses in the softmax layer is equivalent to finding the K nearest neighbors using FGD in the small world graph, and the latter can be performed approximately using efficient graph navigating methods.",
+        "These results motivate us to investigate the use of the small world graph to develop fast decoding methods for NLM with large vocabularies.",
+        "We can build a small world graph in RD+2 to equivalently solve the top-K maximum subset of inner product search problem.",
+        "We demonstrate empirically the effectiveness of our approach in Section 4 and provide a theoretically derived error bound of softmax approximation with top-K word hypotheses toward a probability distribution in Appendix C.",
+        "It includes two steps: it first estimates the probability of each word using a small part of the softmax layer weight matrix, and performs a refinement on top-V most likely words based on the previous estimated results.",
+        "Table 1 shows that, when ef Search is equal or larger than 50, FGD obtains the BLEU scores close to the full softmax baseline under all beam sizes without and statistically significant difference.",
+        "This section evaluates the impact of vocabulary sizes and word embedding dimensions on FGD using language models 5 trained on WikiText-2 [<a class=\"ref-link\" id=\"c47\" href=\"#r47\">47</a>].",
+        "Figure 4 shows the decoding time of varying vocabulary sizes on the full softmax baseline and FGD.",
+        "We propose a novel decoding algorithm, called Fast Graph Decoder (FGD), which quickly navigates, for a given context, on a small world graph representation of word embeddings to search for a set of K words that are most likely to be the words to predict according to NLMs. On neural machine translation and neural language modeling tasks, we demonstrate that FGD reduces the decoding time by an order of magnitude (e.g., 14X speedup comparing with the full softmax baseline) while attaining similar accuracy.",
+        "We like to explore how to speed up NLMs training with large vocabularies"
+    ],
+    "headline": "This paper proposes a novel softmax layer approximation algorithm, called Fast Graph Decoder , which quickly identifies, for a given context, a set of K words that are most likely to occur according to a Neural language models",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Kyunghyun Cho, Bart van Merri\u00ebnboer, \u00c7aglar G\u00fcl\u00e7ehre, Dzmitry Bahdanau, Fethi Bougares, Holger Schwenk, and Yoshua Bengio. Learning Phrase Representations using RNN Encoder\u2013Decoder for Statistical Machine Translation. In Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing, EMNLP\u2019 14, pages 1724\u20131734, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cho%2C%20Kyunghyun%20van%20Merri%C3%ABnboer%2C%20Bart%20G%C3%BCl%C3%A7ehre%2C%20%C3%87aglar%20Bahdanau%2C%20Dzmitry%20Learning%20Phrase%20Representations%20using%20RNN%20Encoder%E2%80%93Decoder%20for%20Statistical%20Machine%20Translation%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cho%2C%20Kyunghyun%20van%20Merri%C3%ABnboer%2C%20Bart%20G%C3%BCl%C3%A7ehre%2C%20%C3%87aglar%20Bahdanau%2C%20Dzmitry%20Learning%20Phrase%20Representations%20using%20RNN%20Encoder%E2%80%93Decoder%20for%20Statistical%20Machine%20Translation%202014"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio. Neural Machine Translation by Jointly Learning to Align and Translate. arXiv preprint arXiv:1409.0473, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1409.0473"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Ilya Sutskever, Oriol Vinyals, and Quoc V. Le. Sequence to Sequence Learning with Neural Networks. In Advances in Neural Information Processing Systems 27: Annual Conference on Neural Information Processing Systems, NIPS \u201914, pages 3104\u20133112, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutskever%2C%20Ilya%20Vinyals%2C%20Oriol%20Le%2C%20Quoc%20V.%20Sequence%20to%20Sequence%20Learning%20with%20Neural%20Networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutskever%2C%20Ilya%20Vinyals%2C%20Oriol%20Le%2C%20Quoc%20V.%20Sequence%20to%20Sequence%20Learning%20with%20Neural%20Networks%202014"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Alexander M. Rush, Sumit Chopra, and Jason Weston. A Neural Attention Model for Abstractive Sentence Summarization. In Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing, EMNLP \u201915, pages 379\u2013389, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rush%2C%20Alexander%20M.%20Chopra%2C%20Sumit%20Weston%2C%20Jason%20A%20Neural%20Attention%20Model%20for%20Abstractive%20Sentence%20Summarization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rush%2C%20Alexander%20M.%20Chopra%2C%20Sumit%20Weston%2C%20Jason%20A%20Neural%20Attention%20Model%20for%20Abstractive%20Sentence%20Summarization%202015"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Alex Graves, Abdel-rahman Mohamed, and Geoffrey E. Hinton. Speech Recognition with Deep Recurrent Neural Networks. In IEEE International Conference on Acoustics, Speech and Signal Processing, ICASSP \u201913, pages 6645\u20136649, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Graves%2C%20Alex%20Mohamed%2C%20Abdel-rahman%20Hinton%2C%20Geoffrey%20E.%20Speech%20Recognition%20with%20Deep%20Recurrent%20Neural%20Networks%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Graves%2C%20Alex%20Mohamed%2C%20Abdel-rahman%20Hinton%2C%20Geoffrey%20E.%20Speech%20Recognition%20with%20Deep%20Recurrent%20Neural%20Networks%202013"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Awni Y. Hannun, Carl Case, Jared Casper, Bryan Catanzaro, Greg Diamos, Erich Elsen, Ryan Prenger, Sanjeev Satheesh, Shubho Sengupta, Adam Coates, and Andrew Y. Ng. Deep Speech: Scaling up end-to-end speech recognition. arXiv preprint arXiv:1412.5567, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.5567"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Geoffrey Zweig, Chengzhu Yu, Jasha Droppo, and Andreas Stolcke. Advances in all-neural speech recognition. In 2017 IEEE International Conference on Acoustics, Speech and Signal Processing, ICASSP \u201917, pages 4805\u20134809, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zweig%2C%20Geoffrey%20Yu%2C%20Chengzhu%20Droppo%2C%20Jasha%20Stolcke%2C%20Andreas%20Advances%20in%20all-neural%20speech%20recognition%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zweig%2C%20Geoffrey%20Yu%2C%20Chengzhu%20Droppo%2C%20Jasha%20Stolcke%2C%20Andreas%20Advances%20in%20all-neural%20speech%20recognition%202017"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Jianfeng Gao, Michel Galley, and Lihong Li. Neural approaches to conversational ai. arXiv preprint arXiv:1809.08267, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1809.08267"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Jiwei Li, Will Monroe, Alan Ritter, Dan Jurafsky, Michel Galley, and Jianfeng Gao. Deep Reinforcement Learning for Dialogue Generation. In Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing, EMNLP \u201916, pages 1192\u20131202, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Jiwei%20Monroe%2C%20Will%20Ritter%2C%20Alan%20Jurafsky%2C%20Dan%20Deep%20Reinforcement%20Learning%20for%20Dialogue%20Generation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20Jiwei%20Monroe%2C%20Will%20Ritter%2C%20Alan%20Jurafsky%2C%20Dan%20Deep%20Reinforcement%20Learning%20for%20Dialogue%20Generation%202016"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Oriol Vinyals and Quoc V. Le. A Neural Conversational Model. arXiv preprint arXiv:1506.05869, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1506.05869"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Alessandro Sordoni, Michel Galley, Michael Auli, Chris Brockett, Yangfeng Ji, Margaret Mitchell, JianYun Nie, Jianfeng Gao, and Bill Dolan. A neural network approach to context-sensitive generation of conversational responses. In NAACL-HLT, May 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sordoni%2C%20Alessandro%20Galley%2C%20Michel%20Auli%2C%20Michael%20Brockett%2C%20Chris%20A%20neural%20network%20approach%20to%20context-sensitive%20generation%20of%20conversational%20responses.%20In%20NAACL-HLT%202015-05"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Alexander M. Rush, Sumit Chopra, and Jason Weston. A Neural Attention Model for Abstractive Sentence Summarization. In Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing, EMNLP \u201915, pages 379\u2013389, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rush%2C%20Alexander%20M.%20Chopra%2C%20Sumit%20Weston%2C%20Jason%20A%20Neural%20Attention%20Model%20for%20Abstractive%20Sentence%20Summarization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rush%2C%20Alexander%20M.%20Chopra%2C%20Sumit%20Weston%2C%20Jason%20A%20Neural%20Attention%20Model%20for%20Abstractive%20Sentence%20Summarization%202015"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Katja Filippova, Enrique Alfonseca, Carlos A. Colmenares, Lukasz Kaiser, and Oriol Vinyals. Sentence Compression by Deletion with LSTMs. In Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing, EMNLP \u201915, pages 360\u2013368, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Filippova%2C%20Katja%20Alfonseca%2C%20Enrique%20Colmenares%2C%20Carlos%20A.%20Kaiser%2C%20Lukasz%20Sentence%20Compression%20by%20Deletion%20with%20LSTMs%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Filippova%2C%20Katja%20Alfonseca%2C%20Enrique%20Colmenares%2C%20Carlos%20A.%20Kaiser%2C%20Lukasz%20Sentence%20Compression%20by%20Deletion%20with%20LSTMs%202015"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Iulian Vlad Serban, Alessandro Sordoni, Yoshua Bengio, Aaron C Courville, and Joelle Pineau. Building End-To-End Dialogue Systems Using Generative Hierarchical Neural Network Models. volume 16 of AAAI \u201916, pages 3776\u20133784, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Serban%2C%20Iulian%20Vlad%20Sordoni%2C%20Alessandro%20Bengio%2C%20Yoshua%20Courville%2C%20Aaron%20C.%20Building%20End-To-End%20Dialogue%20Systems%20Using%20Generative%20Hierarchical%20Neural%20Network%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Serban%2C%20Iulian%20Vlad%20Sordoni%2C%20Alessandro%20Bengio%2C%20Yoshua%20Courville%2C%20Aaron%20C.%20Building%20End-To-End%20Dialogue%20Systems%20Using%20Generative%20Hierarchical%20Neural%20Network%202016"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Sepp Hochreiter and J\u00fcrgen Schmidhuber. Long Short-Term Memory. Neural Computation, 9(8):1735\u2013 1780, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Long%20Short-Term%20Memory%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Long%20Short-Term%20Memory%201997"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Junyoung Chung, \u00c7aglar G\u00fcl\u00e7ehre, KyungHyun Cho, and Yoshua Bengio. Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling. arXiv preprint arXiv:1412.3555, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.3555"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Tomas Mikolov, Martin Karafi\u00e1t, Luk\u00e1s Burget, Jan Cernock\u00fd, and Sanjeev Khudanpur. Recurrent Neural Network Based Language Model. In 11th Annual Conference of the International Speech Communication Association, INTERSPEECH \u201910, pages 1045\u20131048, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tomas%20Mikolov%20Martin%20Karafi%C3%A1t%20Luk%C3%A1s%20Burget%20Jan%20Cernock%C3%BD%20and%20Sanjeev%20Khudanpur%20Recurrent%20Neural%20Network%20Based%20Language%20Model%20In%2011th%20Annual%20Conference%20of%20the%20International%20Speech%20Communication%20Association%20INTERSPEECH%2010%20pages%2010451048%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tomas%20Mikolov%20Martin%20Karafi%C3%A1t%20Luk%C3%A1s%20Burget%20Jan%20Cernock%C3%BD%20and%20Sanjeev%20Khudanpur%20Recurrent%20Neural%20Network%20Based%20Language%20Model%20In%2011th%20Annual%20Conference%20of%20the%20International%20Speech%20Communication%20Association%20INTERSPEECH%2010%20pages%2010451048%202010"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Yoshua Bengio, R\u00e9jean Ducharme, Pascal Vincent, and Christian Janvin. A Neural Probabilistic Language Model. The Journal of Machine Learning Research, 3:1137\u20131155, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bengio%2C%20Yoshua%20Ducharme%2C%20R%C3%A9jean%20Vincent%2C%20Pascal%20Janvin%2C%20Christian%20A%20Neural%20Probabilistic%20Language%20Model%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bengio%2C%20Yoshua%20Ducharme%2C%20R%C3%A9jean%20Vincent%2C%20Pascal%20Janvin%2C%20Christian%20A%20Neural%20Probabilistic%20Language%20Model%202003"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Rafal J\u00f3zefowicz, Oriol Vinyals, Mike Schuster, Noam Shazeer, and Yonghui Wu. Exploring the Limits of Language Modeling. CoRR, arXiv preprint abs/1602.02410, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1602.02410"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Frederic Morin and Yoshua Bengio. Hierarchical Probabilistic Neural Network Language Model. In Proceedings of the Tenth International Workshop on Artificial Intelligence and Statistics, AISTATS \u201905.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Frederic%20Morin%20and%20Yoshua%20Bengio%20Hierarchical%20Probabilistic%20Neural%20Network%20Language%20Model%20In%20Proceedings%20of%20the%20Tenth%20International%20Workshop%20on%20Artificial%20Intelligence%20and%20Statistics%20AISTATS%2005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Frederic%20Morin%20and%20Yoshua%20Bengio%20Hierarchical%20Probabilistic%20Neural%20Network%20Language%20Model%20In%20Proceedings%20of%20the%20Tenth%20International%20Workshop%20on%20Artificial%20Intelligence%20and%20Statistics%20AISTATS%2005"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Tomas Mikolov, Ilya Sutskever, Kai Chen, Gregory S. Corrado, and Jeffrey Dean. Distributed Representations of Words and Phrases and their Compositionality. In Advances in Neural Information Processing Systems 26: 27th Annual Conference on Neural Information Processing Systems, NIPS \u201913.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mikolov%2C%20Tomas%20Sutskever%2C%20Ilya%20Chen%2C%20Kai%20Corrado%2C%20Gregory%20S.%20Distributed%20Representations%20of%20Words%20and%20Phrases%20and%20their%20Compositionality",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mikolov%2C%20Tomas%20Sutskever%2C%20Ilya%20Chen%2C%20Kai%20Corrado%2C%20Gregory%20S.%20Distributed%20Representations%20of%20Words%20and%20Phrases%20and%20their%20Compositionality"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Andriy Mnih and Yee Whye Teh. A fast and simple algorithm for training neural probabilistic language models. In Proceedings of the 29th International Conference on Machine Learning, ICML \u201912.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20Andriy%20Mnih%20and%20Yee%20Whye%20Teh.%20A%20fast%20and%20simple%20algorithm%20for%20training%20neural%20probabilistic%20language%20models",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Andriy%20Mnih%20and%20Yee%20Whye%20Teh.%20A%20fast%20and%20simple%20algorithm%20for%20training%20neural%20probabilistic%20language%20models"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Wenlin Chen, David Grangier, and Michael Auli. Strategies for Training Large Vocabulary Neural Language Models. In Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics, ACL \u201916, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Wenlin%20Grangier%2C%20David%20Auli%2C%20Michael%20Strategies%20for%20Training%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Wenlin%20Grangier%2C%20David%20Auli%2C%20Michael%20Strategies%20for%20Training%202016"
+        },
+        {
+            "id": "24",
+            "entry": "[24] S\u00e9bastien Jean, KyungHyun Cho, Roland Memisevic, and Yoshua Bengio. On Using Very Large Target Vocabulary for Neural Machine Translation. In Proceedings of the 53rd Annual Meeting of the Association for Computational Linguistics and the 7th International Joint Conference on Natural Language Processing of the Asian Federation of Natural Language Processing, ACL, pages 1\u201310, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jean%2C%20S%C3%A9bastien%20Cho%2C%20KyungHyun%20Memisevic%2C%20Roland%20Bengio%2C%20Yoshua%20On%20Using%20Very%20Large%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jean%2C%20S%C3%A9bastien%20Cho%2C%20KyungHyun%20Memisevic%2C%20Roland%20Bengio%2C%20Yoshua%20On%20Using%20Very%20Large%202015"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Kyuhong Shim, Minjae Lee, Iksoo Choi, Yoonho Boo, and Wonyong Sung. SVD-Softmax: Fast Softmax Approximation on Large Vocabulary Neural Networks. In Advances in Neural Information Processing Systems 30: Annual Conference on Neural Information Processing Systems 2017, NIPS \u201917, pages 5469\u20135479, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shim%2C%20Kyuhong%20Lee%2C%20Minjae%20Choi%2C%20Iksoo%20Boo%2C%20Yoonho%20SVD-Softmax%3A%20Fast%20Softmax%20Approximation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shim%2C%20Kyuhong%20Lee%2C%20Minjae%20Choi%2C%20Iksoo%20Boo%2C%20Yoonho%20SVD-Softmax%3A%20Fast%20Softmax%20Approximation%202017"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Zhilin Yang, Zihang Dai, Ruslan Salakhutdinov, and William W. Cohen. Breaking the Softmax Bottleneck: A High-Rank RNN Language Model. CoRR, arXiv preprint abs/1711.03953, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.03953"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Jacob Devlin, Rabih Zbib, Zhongqiang Huang, Thomas Lamar, Richard M. Schwartz, and John Makhoul. Fast and Robust Neural Network Joint Models for Statistical Machine Translation. In Proceedings of the 52nd Annual Meeting of the Association for Computational Linguistics, ACL \u201914.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Devlin%2C%20Jacob%20Zbib%2C%20Rabih%20Huang%2C%20Zhongqiang%20Lamar%2C%20Thomas%20Fast%20and%20Robust%20Neural%20Network%20Joint%20Models%20for%20Statistical%20Machine%20Translation",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Devlin%2C%20Jacob%20Zbib%2C%20Rabih%20Huang%2C%20Zhongqiang%20Lamar%2C%20Thomas%20Fast%20and%20Robust%20Neural%20Network%20Joint%20Models%20for%20Statistical%20Machine%20Translation"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Ramon Ferrer i Cancho and Richard V Sol\u00e9. The small world of human language. Proceedings of the Royal Society of London B: Biological Sciences, 268(1482):2261\u20132265, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=i%20Cancho%2C%20Ramon%20Ferrer%20Sol%C3%A9%2C%20Richard%20V.%20The%20small%20world%20of%20human%20language%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=i%20Cancho%2C%20Ramon%20Ferrer%20Sol%C3%A9%2C%20Richard%20V.%20The%20small%20world%20of%20human%20language%202001"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Adilson E Motter, Alessandro PS De Moura, Ying-Cheng Lai, and Partha Dasgupta. Topology of the Conceptual Network of Language. Physical Review E, 65(6):065102, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Motter%2C%20Adilson%20E.%20Moura%2C%20Alessandro%20P.S.De%20Lai%2C%20Ying-Cheng%20Dasgupta%2C%20Partha%20Topology%20of%20the%20Conceptual%20Network%20of%20Language%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Motter%2C%20Adilson%20E.%20Moura%2C%20Alessandro%20P.S.De%20Lai%2C%20Ying-Cheng%20Dasgupta%2C%20Partha%20Topology%20of%20the%20Conceptual%20Network%20of%20Language%202002"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Sergey N Dorogovtsev and Jos\u00e9 Fernando F Mendes. Language as an Evolving Word Web. Proceedings of the Royal Society of London B: Biological Sciences, 268(1485):2603\u20132606, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20Sergey%20N%20Dorogovtsev%20and%20Jos%C3%A9%20Fernando%20F%20Mendes.%20Language%20as%20an%20Evolving%20Word%20Web.%20Proceedings%20of%20the%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Sergey%20N%20Dorogovtsev%20and%20Jos%C3%A9%20Fernando%20F%20Mendes.%20Language%20as%20an%20Evolving%20Word%20Web.%20Proceedings%20of%20the%202001"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Jeffrey Travers and Stanley Milgram. The Small World Problem. Phychology Today, 1(1):61\u201367, 1967.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Travers%2C%20Jeffrey%20Milgram%2C%20Stanley%20The%20Small%20World%20Problem%201967",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Travers%2C%20Jeffrey%20Milgram%2C%20Stanley%20The%20Small%20World%20Problem%201967"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Mark EJ Newman. Models of the Small World. Journal of Statistical Physics, 101(3-4):819\u2013841, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Newman%2C%20Mark%20E.J.%20Models%20of%20the%20Small%20World%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Newman%2C%20Mark%20E.J.%20Models%20of%20the%20Small%20World%202000"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Mung Chiang and Tao Zhang. Fog and IoT: An Overview of Research Opportunities. IEEE Internet of Things Journal, 3(6):854\u2013864, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chiang%2C%20Mung%20Zhang%2C%20Tao%20Fog%20and%20IoT%3A%20An%20Overview%20of%20Research%20Opportunities%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chiang%2C%20Mung%20Zhang%2C%20Tao%20Fog%20and%20IoT%3A%20An%20Overview%20of%20Research%20Opportunities%202016"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Yury Malkov, Alexander Ponomarenko, Andrey Logvinov, and Vladimir Krylov. Approximate nearest neighbor algorithm based on navigable small world graphs. Information Systems, pages 61\u201368, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Malkov%2C%20Yury%20Ponomarenko%2C%20Alexander%20Logvinov%2C%20Andrey%20Krylov%2C%20Vladimir%20Approximate%20nearest%20neighbor%20algorithm%20based%20on%20navigable%20small%20world%20graphs%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Malkov%2C%20Yury%20Ponomarenko%2C%20Alexander%20Logvinov%2C%20Andrey%20Krylov%2C%20Vladimir%20Approximate%20nearest%20neighbor%20algorithm%20based%20on%20navigable%20small%20world%20graphs%202014"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Yury A. Malkov and D. A. Yashunin. Efficient and robust approximate nearest neighbor search using Hierarchical Navigable Small World graphs. CoRR, arXiv preprint abs/1603.09320, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1603.09320"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Jon Kleinberg. The Small-world Phenomenon: An Algorithmic Perspective. In Proceedings of the 32 Annual ACM Symposium on Theory of Computing, STOC \u201900, pages 163\u2013170, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kleinberg%2C%20Jon%20The%20Small-world%20Phenomenon%3A%20An%20Algorithmic%20Perspective%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kleinberg%2C%20Jon%20The%20Small-world%20Phenomenon%3A%20An%20Algorithmic%20Perspective%202000"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Duncan J. Watts. Small Worlds: The Dynamics of Networks Between Order and Randomness. 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Watts%2C%20Duncan%20J.%20Small%20Worlds%3A%20The%20Dynamics%20of%20Networks%20Between%20Order%20and%20Randomness%201999"
+        },
+        {
+            "id": "38",
+            "entry": "[38] James R Munkres. Elements of Algebraic Topology. CRC Press, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Munkres%2C%20James%20R.%20Elements%20of%20Algebraic%20Topology%202018"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Leonid Boytsov and Bilegsaikhan Naidan. Engineering Efficient and Effective Non-metric Space Library. In Similarity Search and Applications - 6th International Conference, SISAP \u201913, pages 280\u2013293, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Boytsov%2C%20Leonid%20Naidan%2C%20Bilegsaikhan%20Engineering%20Efficient%20and%20Effective%20Non-metric%20Space%20Library%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Boytsov%2C%20Leonid%20Naidan%2C%20Bilegsaikhan%20Engineering%20Efficient%20and%20Effective%20Non-metric%20Space%20Library%202013"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Kishore Papineni, Salim Roukos, Todd Ward, and Wei-Jing Zhu. BLEU: A Method for Automatic Evaluation of Machine Translation. In Proceedings of the 40th Annual Meeting on Association for Computational Linguistics, ACL \u201902, pages 311\u2013318, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Papineni%2C%20Kishore%20Roukos%2C%20Salim%20Ward%2C%20Todd%20Zhu%2C%20Wei-Jing%20BLEU%3A%20A%20Method%20for%20Automatic%20Evaluation%20of%20Machine%20Translation%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Papineni%2C%20Kishore%20Roukos%2C%20Salim%20Ward%2C%20Todd%20Zhu%2C%20Wei-Jing%20BLEU%3A%20A%20Method%20for%20Automatic%20Evaluation%20of%20Machine%20Translation%202002"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Thang Luong, Hieu Pham, and Christopher D. Manning. Effective Approaches to Attention-based Neural Machine Translation. In Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing, EMNLP, pages 1412\u20131421, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Thang%20Luong%20Hieu%20Pham%20and%20Christopher%20D%20Manning%20Effective%20Approaches%20to%20Attentionbased%20Neural%20Machine%20Translation%20In%20Proceedings%20of%20the%202015%20Conference%20on%20Empirical%20Methods%20in%20Natural%20Language%20Processing%20EMNLP%20pages%2014121421%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Thang%20Luong%20Hieu%20Pham%20and%20Christopher%20D%20Manning%20Effective%20Approaches%20to%20Attentionbased%20Neural%20Machine%20Translation%20In%20Proceedings%20of%20the%202015%20Conference%20on%20Empirical%20Methods%20in%20Natural%20Language%20Processing%20EMNLP%20pages%2014121421%202015"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Guillaume Klein, Yoon Kim, Yuntian Deng, Jean Senellart, and Alexander M Rush. OpenNMT: OpenSource Toolkit for Neural Machine Translation. arXiv preprint arXiv:1701.02810, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1701.02810"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Mauro Cettolo, Jan Niehues, Sebastian St\u00fcker, Luisa Bentivogli, and Marcello Federico. Report on the 11th IWSLT evaluation campaign, IWSLT 2014. In Proceedings of the International Workshop on Spoken Language Translation, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mauro%20Cettolo%20Jan%20Niehues%20Sebastian%20St%C3%BCker%20Luisa%20Bentivogli%20and%20Marcello%20Federico%20Report%20on%20the%2011th%20IWSLT%20evaluation%20campaign%20IWSLT%202014%20In%20Proceedings%20of%20the%20International%20Workshop%20on%20Spoken%20Language%20Translation%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mauro%20Cettolo%20Jan%20Niehues%20Sebastian%20St%C3%BCker%20Luisa%20Bentivogli%20and%20Marcello%20Federico%20Report%20on%20the%2011th%20IWSLT%20evaluation%20campaign%20IWSLT%202014%20In%20Proceedings%20of%20the%20International%20Workshop%20on%20Spoken%20Language%20Translation%202014"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Nitish Srivastava, Geoffrey E. Hinton, Alex Krizhevsky, Ilya Sutskever, and Ruslan Salakhutdinov. Dropout: A Simple Way to Prevent Neural Networks from Overfitting. Journal of Machine Learning Research, 15(1):1929\u20131958, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Srivastava%2C%20Nitish%20Hinton%2C%20Geoffrey%20E.%20Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Dropout%3A%20A%20Simple%20Way%20to%20Prevent%20Neural%20Networks%20from%20Overfitting%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Srivastava%2C%20Nitish%20Hinton%2C%20Geoffrey%20E.%20Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Dropout%3A%20A%20Simple%20Way%20to%20Prevent%20Neural%20Networks%20from%20Overfitting%202014"
+        },
+        {
+            "id": "45",
+            "entry": "[45] Philipp Koehn, Hieu Hoang, Alexandra Birch, Chris Callison-Burch, Marcello Federico, Nicola Bertoldi, Brooke Cowan, Wade Shen, Christine Moran, Richard Zens, Chris Dyer, Ondrej Bojar, Alexandra Constantin, and Evan Herbst. Moses: Open Source Toolkit for Statistical Machine Translation. In Proceedings of the 45th Annual Meeting of the ACL on Interactive Poster and Demonstration Sessions, ACL \u201907, pages 177\u2013180, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Philipp%20Koehn%20Hieu%20Hoang%20Alexandra%20Birch%20Chris%20CallisonBurch%20Marcello%20Federico%20Nicola%20Bertoldi%20Brooke%20Cowan%20Wade%20Shen%20Christine%20Moran%20Richard%20Zens%20Chris%20Dyer%20Ondrej%20Bojar%20Alexandra%20Constantin%20and%20Evan%20Herbst%20Moses%20Open%20Source%20Toolkit%20for%20Statistical%20Machine%20Translation%20In%20Proceedings%20of%20the%2045th%20Annual%20Meeting%20of%20the%20ACL%20on%20Interactive%20Poster%20and%20Demonstration%20Sessions%20ACL%2007%20pages%20177180%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Philipp%20Koehn%20Hieu%20Hoang%20Alexandra%20Birch%20Chris%20CallisonBurch%20Marcello%20Federico%20Nicola%20Bertoldi%20Brooke%20Cowan%20Wade%20Shen%20Christine%20Moran%20Richard%20Zens%20Chris%20Dyer%20Ondrej%20Bojar%20Alexandra%20Constantin%20and%20Evan%20Herbst%20Moses%20Open%20Source%20Toolkit%20for%20Statistical%20Machine%20Translation%20In%20Proceedings%20of%20the%2045th%20Annual%20Meeting%20of%20the%20ACL%20on%20Interactive%20Poster%20and%20Demonstration%20Sessions%20ACL%2007%20pages%20177180%202007"
+        },
+        {
+            "id": "46",
+            "entry": "[46] Yonghui Wu, Mike Schuster, Zhifeng Chen, Quoc V Le, Mohammad Norouzi, Wolfgang Macherey, Maxim Krikun, Yuan Cao, Qin Gao, Klaus Macherey, et al. Google\u2019s neural machine translation system: Bridging the gap between human and machine translation. arXiv preprint arXiv:1609.08144, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.08144"
+        },
+        {
+            "id": "47",
+            "entry": "[47] Stephen Merity, Caiming Xiong, James Bradbury, and Richard Socher. Pointer Sentinel Mixture Models. CoRR, arXiv preprint abs/1609.07843, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.07843"
+        },
+        {
+            "id": "48",
+            "entry": "[48] L\u00e9on Bottou. Large-scale machine learning with stochastic gradient descent. In Proceedings of COMPSTAT\u20192010, pages 177\u2013186.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bottou%2C%20L%C3%A9on%20Large-scale%20machine%20learning%20with%20stochastic%20gradient%20descent",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bottou%2C%20L%C3%A9on%20Large-scale%20machine%20learning%20with%20stochastic%20gradient%20descent"
+        },
+        {
+            "id": "49",
+            "entry": "[49] Razvan Pascanu, Tomas Mikolov, and Yoshua Bengio. On the difficulty of training recurrent neural networks. In Proceedings of the 30th International Conference on Machine Learning, ICML, pages 1310\u20131318, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pascanu%2C%20Razvan%20Mikolov%2C%20Tomas%20Bengio%2C%20Yoshua%20On%20the%20difficulty%20of%20training%20recurrent%20neural%20networks%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pascanu%2C%20Razvan%20Mikolov%2C%20Tomas%20Bengio%2C%20Yoshua%20On%20the%20difficulty%20of%20training%20recurrent%20neural%20networks%202013"
+        },
+        {
+            "id": "50",
+            "entry": "[50] James Bradbury, Stephen Merity, Caiming Xiong, and Richard Socher. Quasi-Recurrent Neural Networks. arXiv preprint arXiv: abs/1611.01576, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.01576"
+        },
+        {
+            "id": "51",
+            "entry": "[51] Tao Lei, Yu Zhang, and Yoav Artzi. Training RNNs as Fast as CNNs. arXiv preprint arXiv: abs/1709.02755, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1709.02755"
+        },
+        {
+            "id": "52",
+            "entry": "[52] Stephen Merity, Nitish Shirish Keskar, and Richard Socher. Regularizing and Optimizing LSTM Language Models. arXiv preprint arXiv: abs/1708.02182, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1708.02182"
+        },
+        {
+            "id": "53",
+            "entry": "[53] Stephen Merity, Nitish Shirish Keskar, and Richard Socher. An Analysis of Neural Language Modeling at Multiple Scales. abs/1803.08240, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Merity%2C%20Stephen%20Keskar%2C%20Nitish%20Shirish%20Socher%2C%20Richard%20An%20Analysis%20of%20Neural%20Language%20Modeling%20at%20Multiple%20Scales%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Merity%2C%20Stephen%20Keskar%2C%20Nitish%20Shirish%20Socher%2C%20Richard%20An%20Analysis%20of%20Neural%20Language%20Modeling%20at%20Multiple%20Scales%202018"
+        },
+        {
+            "id": "54",
+            "entry": "[54] Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, and Illia Polosukhin. Attention is All you Need. In Advances in Neural Information Processing Systems 30: Annual Conference on Neural Information Processing Systems, pages 6000\u20136010, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vaswani%2C%20Ashish%20Shazeer%2C%20Noam%20Parmar%2C%20Niki%20Uszkoreit%2C%20Jakob%20Attention%20is%20All%20you%20Need%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vaswani%2C%20Ashish%20Shazeer%2C%20Noam%20Parmar%2C%20Niki%20Uszkoreit%2C%20Jakob%20Attention%20is%20All%20you%20Need%202017"
+        },
+        {
+            "id": "55",
+            "entry": "[55] Jiatao Gu, James Bradbury, Caiming Xiong, Victor O. K. Li, and Richard Socher. Non-Autoregressive Neural Machine Translation. arXiv preprint arXiv: abs/1711.02281, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.02281"
+        },
+        {
+            "id": "56",
+            "entry": "[56] Aurko Roy, Ashish Vaswani, Arvind Neelakantan, and Niki Parmar. Theory and Experiments on Vector Quantized Autoencoders. arXiv preprint arXiv: abs/1805.11063, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1805.11063"
+        },
+        {
+            "id": "57",
+            "entry": "[57] Laurens van der Maaten and Geoffrey Hinton. Visualizing Data using t-SNE. Journal of machine learning research, 9(Nov):2579\u20132605, 2008. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=van%20der%20Maaten%2C%20Laurens%20Hinton%2C%20Geoffrey%20Visualizing%20Data%20using%20t-SNE%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=van%20der%20Maaten%2C%20Laurens%20Hinton%2C%20Geoffrey%20Visualizing%20Data%20using%20t-SNE%202008"
+        }
+    ]
+}

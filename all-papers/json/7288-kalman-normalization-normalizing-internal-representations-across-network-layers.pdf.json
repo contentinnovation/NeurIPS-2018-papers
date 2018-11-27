@@ -1,0 +1,286 @@
+{
+    "filename": "7288-kalman-normalization-normalizing-internal-representations-across-network-layers.pdf",
+    "metadata": {
+        "title": "Kalman Normalization: Normalizing Internal Representations Across Network Layers",
+        "author": "Guangrun Wang Sun Yat-sen University wanggrun@mail2.sysu.edu.cn",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7288-kalman-normalization-normalizing-internal-representations-across-network-layers.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "As an indispensable component, Batch Normalization (BN) has successfully improved the training of deep neural networks (DNNs) with mini-batches, by normalizing the distribution of the internal representation for each hidden layer. However, the effectiveness of BN would diminish with the scenario of micro-batch (e.g. less than 4 samples in a mini-batch), since the estimated statistics in a mini-batch are not reliable with insufficient samples. This limits BN\u2019s room in training larger models on segmentation, detection, and video-related problems, which require small batches constrained by memory consumption. In this paper, we present a novel normalization method, called Kalman Normalization (KN), for improving and accelerating the training of DNNs, particularly under the context of microbatches. Specifically, unlike the existing solutions treating each hidden layer as an isolated system, KN treats all the layers in a network as a whole system, and estimates the statistics of a certain layer by considering the distributions of all its preceding layers, mimicking the merits of Kalman Filtering. On ResNet50 trained in ImageNet, KN has 3.4% lower error than its BN counterpart when using a batch size of 4; Even when using typical batch sizes, KN still maintains an advantage over BN while other BN variants suffer a performance degradation. Moreover, KN can be naturally generalized to many existing normalization variants to obtain gains, e.g.equipping Group Normalization [<a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>] with Group Kalman Normalization (GKN). KN can outperform BN and its variants for large scale object detection and segmentation task in COCO 2017."
+    },
+    "keywords": [
+        {
+            "term": "batch normalization",
+            "url": "https://en.wikipedia.org/wiki/batch_normalization"
+        },
+        {
+            "term": "Natural Science Foundation of China",
+            "url": "https://en.wikipedia.org/wiki/Natural_Science_Foundation_of_China"
+        },
+        {
+            "term": "deep neural networks",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_networks"
+        },
+        {
+            "term": "object detection",
+            "url": "https://en.wikipedia.org/wiki/object_detection"
+        },
+        {
+            "term": "Singular Value Decomposition",
+            "url": "https://en.wikipedia.org/wiki/Singular_Value_Decomposition"
+        },
+        {
+            "term": "internal representation",
+            "url": "https://en.wikipedia.org/wiki/internal_representation"
+        },
+        {
+            "term": "Average Precision",
+            "url": "https://en.wikipedia.org/wiki/Average_Precision"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Batch Normalization (BN) [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>] has recently become a standard and crucial component for improving the training of deep neural networks (DNNs), which is successfully employed to harness several state-of-the-art architectures[<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>, <a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>]",
+        "All of these methods estimated the statistics of the hidden layers separately, whereas Kalman Normalization treats the entire network as a whole to achieve better estimations",
+        "We note that under such setting the validation accuracy of all normalization methods are lower than the baseline that normalized over batch size of 32 (76.8 vs 76.1 for Kalman Normalization), and training converges slowly",
+        "This paper presented a novel normalization method, called Kalman Normalization(KN), to normalize the hidden representation of a deep neural network",
+        "Unlike previous methods that normalized each hidden layer independently, Kalman Normalization treats the entire network as a whole",
+        "Extensive experiments suggest that Kalman Normalization is capable of strengthening several state-of-the-art neural networks by improving their training stability and convergence speed"
+    ],
+    "key_statements": [
+        "Batch Normalization (BN) [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>] has recently become a standard and crucial component for improving the training of deep neural networks (DNNs), which is successfully employed to harness several state-of-the-art architectures[<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>, <a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>]",
+        "In the training and inference of deep neural networks, batch normalization normalizes the internal representations of each hidden layer by subtracting the mean and dividing the standard deviation, as illustrated in Fig. 1 (a)",
+        "The significance of batch normalization has been demonstrated in many previous works, its drawback cannot be neglected, i.e.its effectiveness diminishing when small mini-batch is presented in training",
+        "We present a new normalization method, called Kalman Normalization (KN), for improving and accelerating training of deep neural networks particularly under the context of micro-batches",
+        "All of these methods estimated the statistics of the hidden layers separately, whereas Kalman Normalization treats the entire network as a whole to achieve better estimations",
+        "We note that under such setting the validation accuracy of all normalization methods are lower than the baseline that normalized over batch size of 32 (76.8 vs 76.1 for Kalman Normalization), and training converges slowly",
+        "We found Group Normalization is 0.6% mask Average Precision worse than Kalman Normalization",
+        "batch normalization treats each hidden layer as an isolated system, the gap between the population variance and the batch sample variance amplifies as the network becomes deeper",
+        "This paper presented a novel normalization method, called Kalman Normalization(KN), to normalize the hidden representation of a deep neural network",
+        "Unlike previous methods that normalized each hidden layer independently, Kalman Normalization treats the entire network as a whole",
+        "Extensive experiments suggest that Kalman Normalization is capable of strengthening several state-of-the-art neural networks by improving their training stability and convergence speed",
+        "Kalman Normalization can handle the training with mini-batches of very small sizes"
+    ],
+    "summary": [
+        "Batch Normalization (BN) [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>] has recently become a standard and crucial component for improving the training of deep neural networks (DNNs), which is successfully employed to harness several state-of-the-art architectures[<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>, <a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>].",
+        "Prior to normalizing the distribution of a layer, BN first estimates its statistics, including the means and variances.",
+        "These estimations are combined with the observed batch sample means and variances calculated within a mini-batch.",
+        "2) The proposed method enables training networks with mini-batches of very small sizes, and the resulting models perform substantially better than those using the existing BN methods.",
+        "The estimation of true value of the k-th layer\u2019s hidden neurons xk|k and their variances \u03a3k|k can be obtained by a standard Kalman filtering process:",
+        "Y is convolved with the transition matrix Ak to obtain Aky. the intermediate estimations \u03bck|k\u22121 and \u03a3k|k\u22121 are obtained by calculating the mean and the variance of Aky. In training of KN, we employ \u03bck|k and \u03a3k|k to normalize the hidden representation.",
+        "Data parallelism with a large batch size is still a micro-batch training scenario, since statistical estimation in BN need to be performed in each single GPU separately.",
+        "Typically batch size of 32 samples/GPU is used to train a ImageNet model.",
+        "We note that under such setting the validation accuracy of all normalization methods are lower than the baseline that normalized over batch size of 32 (76.8 vs 76.1 for KN), and training converges slowly.",
+        "1) val performance using online mean/variance All approaches fail to estimate the population statistics for at 120k steps, which is not converged.",
+        "As is discussed in Section 1, the networks are trained using batch sample statistics, while are tested based on population statistics appropriated by moving averages.",
+        "Our focus is on the behaviors of extremely small batch size, but not on pushing the state-of-the-art results, so we use simple architecture summarized in the following table, where a fully connected layer with 1,000 output channels is omitted.",
+        "KN enlarges the effective batch size to handle the micro-batch training by implicitly using the feature maps of all preceding layers.",
+        "BN treats each hidden layer as an isolated system, the gap between the population variance and the batch sample variance amplifies as the network becomes deeper.",
+        "90.9 using batch mean/variance achieves the same Table 7: CIFAR-10 val set, bs = batchsize, Inception.",
+        "We can observe that the performance of the micro-batch training (91.0%, batchsize = 2) is very encouraging compared to that of the typical size (92.1%, batchsize = 128).",
+        "KN can handle the training with mini-batches of very small sizes"
+    ],
+    "headline": "We present a novel normalization method, called Kalman Normalization , for improving and accelerating the training of deep neural networks, particularly under the context of microbatches",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Arpit, Devansh, Zhou, Yingbo, Kota, Bhargava, and Govindaraju, Venu. Normalization propagation: A parametric technique for removing internal covariate shift in deep networks. In International Conference on Machine Learning, pp. 1168\u20131176, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Arpit%2C%20Devansh%20Zhou%2C%20Yingbo%20Kota%2C%20Bhargava%20Govindaraju%2C%20Venu%20Normalization%20propagation%3A%20A%20parametric%20technique%20for%20removing%20internal%20covariate%20shift%20in%20deep%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Arpit%2C%20Devansh%20Zhou%2C%20Yingbo%20Kota%2C%20Bhargava%20Govindaraju%2C%20Venu%20Normalization%20propagation%3A%20A%20parametric%20technique%20for%20removing%20internal%20covariate%20shift%20in%20deep%20networks%202016"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Ba, Jimmy Lei, Kiros, Jamie Ryan, and Hinton, Geoffrey E. Layer normalization. arXiv preprint arXiv:1607.06450, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1607.06450"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Chen, Liang-Chieh, Papandreou, George, Kokkinos, Iasonas, Murphy, Kevin, and Yuille, Alan L. Deeplab: Semantic image segmentation with deep convolutional nets, atrous convolution, and fully connected crfs. IEEE transactions on pattern analysis and machine intelligence, 40(4):834\u2013848, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Liang-Chieh%20Papandreou%2C%20George%20Kokkinos%2C%20Iasonas%20Murphy%2C%20Kevin%20Deeplab%3A%20Semantic%20image%20segmentation%20with%20deep%20convolutional%20nets%2C%20atrous%20convolution%2C%20and%20fully%20connected%20crfs%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Liang-Chieh%20Papandreou%2C%20George%20Kokkinos%2C%20Iasonas%20Murphy%2C%20Kevin%20Deeplab%3A%20Semantic%20image%20segmentation%20with%20deep%20convolutional%20nets%2C%20atrous%20convolution%2C%20and%20fully%20connected%20crfs%202018"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Cooijmans, Tim, Ballas, Nicolas, Laurent, C\u00e9sar, G\u00fcl\u00e7ehre, \u00c7aglar, and Courville, Aaron. Recurrent batch normalization. arXiv preprint arXiv:1603.09025, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1603.09025"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Desjardins, Guillaume, Simonyan, Karen, Pascanu, Razvan, and Kavukcuoglu, Koray. Natural neural networks. In NIPS, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Desjardins%20Guillaume%20Simonyan%20Karen%20Pascanu%20Razvan%20and%20Kavukcuoglu%20Koray%20Natural%20neural%20networks%20In%20NIPS%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Desjardins%20Guillaume%20Simonyan%20Karen%20Pascanu%20Razvan%20and%20Kavukcuoglu%20Koray%20Natural%20neural%20networks%20In%20NIPS%202015"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Everingham, Mark, Eslami, SM Ali, Van Gool, Luc, Williams, Christopher KI, Winn, John, and Zisserman, Andrew. The pascal visual object classes challenge: A retrospective. International journal of computer vision, 111(1):98\u2013136, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Everingham%2C%20Mark%20Eslami%2C%20S.M.Ali%20Gool%2C%20Van%20Luc%2C%20Williams%20The%20pascal%20visual%20object%20classes%20challenge%3A%20A%20retrospective%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Everingham%2C%20Mark%20Eslami%2C%20S.M.Ali%20Gool%2C%20Van%20Luc%2C%20Williams%20The%20pascal%20visual%20object%20classes%20challenge%3A%20A%20retrospective%202015"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Girshick, Ross. Fast r-cnn. arXiv preprint arXiv:1504.08083, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1504.08083"
+        },
+        {
+            "id": "8",
+            "entry": "[8] He, Kaiming, Zhang, Xiangyu, Ren, Shaoqing, and Sun, Jian. Deep residual learning for image recognition. In Proceedings of the IEEE conference on computer vision and pattern recognition, pp. 770\u2013778, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016"
+        },
+        {
+            "id": "9",
+            "entry": "[9] He, Kaiming, Gkioxari, Georgia, Doll\u00e1r, Piotr, and Girshick, Ross. Mask r-cnn. In Computer Vision (ICCV), 2017 IEEE International Conference on, pp. 2980\u20132988. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%20Kaiming%20Gkioxari%20Georgia%20Doll%C3%A1r%20Piotr%20and%20Girshick%20Ross%20Mask%20rcnn%20In%20Computer%20Vision%20ICCV%202017%20IEEE%20International%20Conference%20on%20pp%2029802988%20IEEE%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%20Kaiming%20Gkioxari%20Georgia%20Doll%C3%A1r%20Piotr%20and%20Girshick%20Ross%20Mask%20rcnn%20In%20Computer%20Vision%20ICCV%202017%20IEEE%20International%20Conference%20on%20pp%2029802988%20IEEE%202017"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Huang, Lei, Liu, Xianglong, Lang, Bo, Yu, Adams Wei, and Li, Bo. Orthogonal weight normalization: Solution to optimization over multiple dependent stiefel manifolds in deep neural networks. arXiv preprint arXiv:1709.06079, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1709.06079"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Huang, Lei, Yang, Dawei, Lang, Bo, and Deng, Jia. Decorrelated batch normalization. In IEEE CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huang%2C%20Lei%20Yang%2C%20Dawei%20Lang%2C%20Bo%20Deng%2C%20Jia%20Decorrelated%20batch%20normalization%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huang%2C%20Lei%20Yang%2C%20Dawei%20Lang%2C%20Bo%20Deng%2C%20Jia%20Decorrelated%20batch%20normalization%202018"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Ioffe, Sergey. Batch renormalization: Towards reducing minibatch dependence in batch-normalized models. arXiv preprint arXiv:1702.03275, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1702.03275"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Ioffe, Sergey and Szegedy, Christian. Batch normalization: Accelerating deep network training by reducing internal covariate shift. In International Conference on Machine Learning, pp. 448\u2013456, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ioffe%2C%20Sergey%20Szegedy%2C%20Christian%20Batch%20normalization%3A%20Accelerating%20deep%20network%20training%20by%20reducing%20internal%20covariate%20shift%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ioffe%2C%20Sergey%20Szegedy%2C%20Christian%20Batch%20normalization%3A%20Accelerating%20deep%20network%20training%20by%20reducing%20internal%20covariate%20shift%202015"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Kalman, Rudolph Emil et al. A new approach to linear filtering and prediction problems. Journal of basic Engineering, 82(1):35\u201345, 1960.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kalman%2C%20Rudolph%20Emil%20A%20new%20approach%20to%20linear%20filtering%20and%20prediction%20problems%201960",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kalman%2C%20Rudolph%20Emil%20A%20new%20approach%20to%20linear%20filtering%20and%20prediction%20problems%201960"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Krizhevsky, Alex and Hinton, Geoffrey. Learning multiple layers of features from tiny images. 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20Alex%20Hinton%2C%20Geoffrey%20Learning%20multiple%20layers%20of%20features%20from%20tiny%20images%202009"
+        },
+        {
+            "id": "16",
+            "entry": "[16] LeCun, Yann A, Bottou, L\u00e9on, Orr, Genevieve B, and M\u00fcller, Klaus-Robert. Efficient backprop. In Neural networks: Tricks of the trade, pp. 9\u201348.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=LeCun%20Yann%20A%20Bottou%20L%C3%A9on%20Orr%20Genevieve%20B%20and%20M%C3%BCller%20KlausRobert%20Efficient%20backprop%20In%20Neural%20networks%20Tricks%20of%20the%20trade%20pp%20948",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=LeCun%20Yann%20A%20Bottou%20L%C3%A9on%20Orr%20Genevieve%20B%20and%20M%C3%BCller%20KlausRobert%20Efficient%20backprop%20In%20Neural%20networks%20Tricks%20of%20the%20trade%20pp%20948"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Luo, Ping. Eigennet: Towards fast and structural learning of deep neural networks. In IJCAI, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Luo%2C%20Ping%20Eigennet%3A%20Towards%20fast%20and%20structural%20learning%20of%20deep%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Luo%2C%20Ping%20Eigennet%3A%20Towards%20fast%20and%20structural%20learning%20of%20deep%20neural%20networks%202017"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Luo, Ping. Learning deep architectures via generalized whitened neural networks. In ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Luo%2C%20Ping%20Learning%20deep%20architectures%20via%20generalized%20whitened%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Luo%2C%20Ping%20Learning%20deep%20architectures%20via%20generalized%20whitened%20neural%20networks%202017"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Nair, Vinod and Hinton, Geoffrey E. Rectified linear units improve restricted boltzmann machines. In Proceedings of the 27th international conference on machine learning (ICML-10), pp. 807\u2013814, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nair%2C%20Vinod%20Hinton%2C%20Geoffrey%20E.%20Rectified%20linear%20units%20improve%20restricted%20boltzmann%20machines%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nair%2C%20Vinod%20Hinton%2C%20Geoffrey%20E.%20Rectified%20linear%20units%20improve%20restricted%20boltzmann%20machines%202010"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Netzer, Yuval, Wang, Tao, Coates, Adam, Bissacco, Alessandro, Wu, Bo, and Ng, Andrew Y. Reading digits in natural images with unsupervised feature learning. In NIPS workshop on deep learning and unsupervised feature learning, volume 2011, pp. 5, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Netzer%2C%20Yuval%20Wang%2C%20Tao%20Coates%2C%20Adam%20Bissacco%2C%20Alessandro%20Reading%20digits%20in%20natural%20images%20with%20unsupervised%20feature%20learning%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Netzer%2C%20Yuval%20Wang%2C%20Tao%20Coates%2C%20Adam%20Bissacco%2C%20Alessandro%20Reading%20digits%20in%20natural%20images%20with%20unsupervised%20feature%20learning%202011"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Povey, Daniel, Zhang, Xiaohui, and Khudanpur, Sanjeev. Parallel training of deep neural networks with natural gradient and parameter averaging. arXiv preprint, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Povey%2C%20Daniel%20Zhang%2C%20Xiaohui%20Khudanpur%2C%20Sanjeev%20Parallel%20training%20of%20deep%20neural%20networks%20with%20natural%20gradient%20and%20parameter%20averaging.%20arXiv%20p%202014"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Raiko, Tapani, Valpola, Harri, and LeCun, Yann. Deep learning made easier by linear transformations in perceptrons. In Artificial Intelligence and Statistics, pp. 924\u2013932, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Raiko%2C%20Tapani%20Valpola%2C%20Harri%20LeCun%2C%20Yann%20Deep%20learning%20made%20easier%20by%20linear%20transformations%20in%20perceptrons%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Raiko%2C%20Tapani%20Valpola%2C%20Harri%20LeCun%2C%20Yann%20Deep%20learning%20made%20easier%20by%20linear%20transformations%20in%20perceptrons%202012"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Ren, Shaoqing, He, Kaiming, Girshick, Ross, and Sun, Jian. Faster r-cnn: towards real-time object detection with region proposal networks. IEEE transactions on pattern analysis and machine intelligence, 39(6):1137\u20131149, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ren%2C%20Shaoqing%20He%2C%20Kaiming%20Girshick%2C%20Ross%20Sun%2C%20Jian%20Faster%20r-cnn%3A%20towards%20real-time%20object%20detection%20with%20region%20proposal%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ren%2C%20Shaoqing%20He%2C%20Kaiming%20Girshick%2C%20Ross%20Sun%2C%20Jian%20Faster%20r-cnn%3A%20towards%20real-time%20object%20detection%20with%20region%20proposal%20networks%202017"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Russakovsky, Olga, Deng, Jia, Su, Hao, Krause, Jonathan, Satheesh, Sanjeev, Ma, Sean, Huang, Zhiheng, Karpathy, Andrej, Khosla, Aditya, Bernstein, Michael, et al. Imagenet large scale visual recognition challenge. International Journal of Computer Vision, 115(3):211\u2013252, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Russakovsky%2C%20Olga%20Deng%2C%20Jia%20Su%2C%20Hao%20Krause%2C%20Jonathan%20Imagenet%20large%20scale%20visual%20recognition%20challenge%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Russakovsky%2C%20Olga%20Deng%2C%20Jia%20Su%2C%20Hao%20Krause%2C%20Jonathan%20Imagenet%20large%20scale%20visual%20recognition%20challenge%202015"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Salimans, Tim and Kingma, Diederik P. Weight normalization: A simple reparameterization to accelerate training of deep neural networks. In Advances in Neural Information Processing Systems, pp. 901\u2013909, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Salimans%2C%20Tim%20Kingma%2C%20Diederik%20P.%20Weight%20normalization%3A%20A%20simple%20reparameterization%20to%20accelerate%20training%20of%20deep%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Salimans%2C%20Tim%20Kingma%2C%20Diederik%20P.%20Weight%20normalization%3A%20A%20simple%20reparameterization%20to%20accelerate%20training%20of%20deep%20neural%20networks%202016"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Salimans, Tim, Goodfellow, Ian, Zaremba, Wojciech, Cheung, Vicki, Radford, Alec, and Chen, Xi. Improved techniques for training gans. In Advances in Neural Information Processing Systems, pp. 2234\u20132242, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Salimans%2C%20Tim%20Goodfellow%2C%20Ian%20Zaremba%2C%20Wojciech%20Cheung%2C%20Vicki%20Improved%20techniques%20for%20training%20gans%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Salimans%2C%20Tim%20Goodfellow%2C%20Ian%20Zaremba%2C%20Wojciech%20Cheung%2C%20Vicki%20Improved%20techniques%20for%20training%20gans%202016"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Szegedy, Christian, Liu, Wei, Jia, Yangqing, Sermanet, Pierre, Reed, Scott, Anguelov, Dragomir, Erhan, Dumitru, Vanhoucke, Vincent, and Rabinovich, Andrew. Going deeper with convolutions. In Proceedings of the IEEE conference on computer vision and pattern recognition, pp. 1\u20139, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Szegedy%2C%20Christian%20Liu%2C%20Wei%20Jia%2C%20Yangqing%20Sermanet%2C%20Pierre%20Going%20deeper%20with%20convolutions%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Szegedy%2C%20Christian%20Liu%2C%20Wei%20Jia%2C%20Yangqing%20Sermanet%2C%20Pierre%20Going%20deeper%20with%20convolutions%202015"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Tran, Du, Bourdev, Lubomir, Fergus, Rob, Torresani, Lorenzo, and Paluri, Manohar. Learning spatiotemporal features with 3d convolutional networks. In Computer Vision (ICCV), 2015 IEEE International Conference on, pp. 4489\u20134497. IEEE, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tran%2C%20Du%20Bourdev%2C%20Lubomir%20Fergus%2C%20Rob%20Torresani%2C%20Lorenzo%20Learning%20spatiotemporal%20features%20with%203d%20convolutional%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tran%2C%20Du%20Bourdev%2C%20Lubomir%20Fergus%2C%20Rob%20Torresani%2C%20Lorenzo%20Learning%20spatiotemporal%20features%20with%203d%20convolutional%20networks%202015"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Ulyanov, D., Vedaldi, A., and Lempitsky., V. Instance normalization: The missing ingredient for fast stylization. arXiv preprint arXiv:1607.08022, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1607.08022"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Wan, Eric A and Van Der Merwe, Rudolph. The unscented kalman filter for nonlinear estimation. In Adaptive Systems for Signal Processing, Communications, and Control Symposium 2000. AS-SPCC. The IEEE 2000, pp. 153\u2013158.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wan%2C%20Eric%20A.%20Merwe%2C%20Van%20Der%20Rudolph%20The%20unscented%20kalman%20filter%20for%20nonlinear%20estimation%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wan%2C%20Eric%20A.%20Merwe%2C%20Van%20Der%20Rudolph%20The%20unscented%20kalman%20filter%20for%20nonlinear%20estimation%202000"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Wang, Guangcong, Xie, Xiaohua, Lai, Jianhuang, and Zhuo, Jiaxuan. Deep growing learning. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pp. 2812\u20132820, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Guangcong%20Xie%2C%20Xiaohua%20Lai%2C%20Jianhuang%20Zhuo%2C%20Jiaxuan%20Deep%20growing%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Guangcong%20Xie%2C%20Xiaohua%20Lai%2C%20Jianhuang%20Zhuo%2C%20Jiaxuan%20Deep%20growing%20learning%202017"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Wang, Guangrun, Luo, Ping, Lin, Liang, and Wang, Xiaogang. Learning object interactions and descriptions for semantic image segmentation. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pp. 5859\u20135867, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Guangrun%20Luo%2C%20Ping%20Lin%2C%20Liang%20Wang%2C%20Xiaogang%20Learning%20object%20interactions%20and%20descriptions%20for%20semantic%20image%20segmentation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Guangrun%20Luo%2C%20Ping%20Lin%2C%20Liang%20Wang%2C%20Xiaogang%20Learning%20object%20interactions%20and%20descriptions%20for%20semantic%20image%20segmentation%202017"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Wiesler, Simon, Richard, Alexander, Schluter, Ralf, and Ney, Hermann. Mean-normalized stochastic gradient for large-scale deep learning. In Acoustics, Speech and Signal Processing (ICASSP), 2014 IEEE International Conference on, pp. 180\u2013184. IEEE, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wiesler%2C%20Simon%20Richard%2C%20Alexander%20Schluter%2C%20Ralf%20Ney%2C%20Hermann%20Mean-normalized%20stochastic%20gradient%20for%20large-scale%20deep%20learning%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wiesler%2C%20Simon%20Richard%2C%20Alexander%20Schluter%2C%20Ralf%20Ney%2C%20Hermann%20Mean-normalized%20stochastic%20gradient%20for%20large-scale%20deep%20learning%202014"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Wu, Yuxin and He, Kaiming. Group normalization. arXiv preprint arXiv:1803.08494, 2018. ",
+            "arxiv_url": "https://arxiv.org/pdf/1803.08494"
+        }
+    ]
+}

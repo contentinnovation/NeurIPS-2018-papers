@@ -1,0 +1,406 @@
+{
+    "filename": "7362-pointcnn-convolution-on-x-transformed-points.pdf",
+    "metadata": {
+        "title": "PointCNN: Convolution On X-Transformed Points",
+        "author": "Yangyan Li, Rui Bu, Mingchao Sun, Wei Wu, Xinhan Di, Baoquan Chen",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7362-pointcnn-convolution-on-x-transformed-points.pdf"
+        },
+        "abstract": "We present a simple and general framework for feature learning from point clouds. The key to the success of CNNs is the convolution operator that is capable of leveraging spatially-local correlation in data represented densely in grids (e.g. images). However, point clouds are irregular and unordered, thus directly convolving kernels against features associated with the points, will result in desertion of shape information and variance to point ordering. To address these problems, we propose to learn an X -transformation from the input points, to simultaneously promote two causes. The first is the weighting of the input features associated with the points, and the second is the permutation of the points into a latent and potentially canonical order. Element-wise product and sum operations of the typical convolution operator are subsequently applied on the X -transformed features. The proposed method is a generalization of typical CNNs to feature learning from point clouds, thus we call it PointCNN. Experiments show that PointCNN achieves on par or better performance than state-of-the-art methods on multiple challenging benchmark datasets and tasks."
+    },
+    "keywords": [
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "deep network",
+            "url": "https://en.wikipedia.org/wiki/deep_network"
+        },
+        {
+            "term": "point cloud",
+            "url": "https://en.wikipedia.org/wiki/point_cloud"
+        },
+        {
+            "term": "convolutional neural network",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_network"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        },
+        {
+            "term": "convolution operator",
+            "url": "https://en.wikipedia.org/wiki/convolution_operator"
+        }
+    ],
+    "highlights": [
+        "Spatially-local correlation is a ubiquitous property of various types of data that is independent of the data representation",
+        "For data represented in point cloud form, which is irregular and unordered, the convolution operator is ill-suited for leveraging spatially-local correlation in the data",
+        "We summarize our 3D point cloud classification results on ModelNet40 and ScanNet in Table 1, and compare to several neural network methods designed for point clouds",
+        "We proposed PointCNN, which is a generalization of CNN into leveraging spatially-local correlation from data represented in point cloud",
+        "While X -Conv is empirically demonstrated to be effective in practice, a rigorous understanding of it, especially when being composited into a deep neural network, is still an open problem for future work"
+    ],
+    "key_statements": [
+        "Spatially-local correlation is a ubiquitous property of various types of data that is independent of the data representation",
+        "For data that is represented in regular domains, such as images, the convolution operator has been shown to be effective in exploiting that correlation as the key contributor to the success of CNNs on a variety of tasks [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>]",
+        "For data represented in point cloud form, which is irregular and unordered, the convolution operator is ill-suited for leveraging spatially-local correlation in the data",
+        "We propose to randomly sample and shuffle the input points, such that both the neighboring point sets and order may differ from batch to batch",
+        "We summarize our 3D point cloud classification results on ModelNet40 and ScanNet in Table 1, and compare to several neural network methods designed for point clouds",
+        "As shown in Table 6, we summarize our running statistics based with the model for classification with batch size 16, 1024 input points on nVidia Tesla P100 GPU, in comparison with several other methods",
+        "We proposed PointCNN, which is a generalization of CNN into leveraging spatially-local correlation from data represented in point cloud",
+        "While X -Conv is empirically demonstrated to be effective in practice, a rigorous understanding of it, especially when being composited into a deep neural network, is still an open problem for future work"
+    ],
+    "summary": [
+        "Spatially-local correlation is a ubiquitous property of various types of data that is independent of the data representation.",
+        "Sparse data in irregular domains can be represented as graphs, or meshes, and a line of work have been proposed for feature learning from such representations [<a class=\"ref-link\" id=\"c31\" href=\"#r31\">31</a>, <a class=\"ref-link\" id=\"c55\" href=\"#r55\">55</a>, <a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>].",
+        "Following the hierarchical construction of grid-based CNNs, we would like to apply X -Conv on F1 to obtain a higher level representation F2 = {(p2,i, f2,i) : f2,i 2 RC2 , i = 1, 2, ..., N2}, where {p2,i} is a set of representative points of",
+        "We denote a representative point in {p2,i} as p, the features with p as f and its K neighbors in {p1,i} as N, the X -Conv input for this specific p is S = { : pi 2 N}.",
+        "For an input point cloud without any additional features, i.e., F is empty, the first X -Conv layer uses only F .",
+        "The process of assembling a deep network with X -Conv layers highly resembles that of grid-based CNNs. Figure 4a depicts a simple PointCNN with two X -Conv layers that gradually transform the input points into fewer representation points, but each with richer features.",
+        "We propose PointCNN with denser connections (Figure 4b), where more representative points are kept in the X -Conv layers.",
+        "In the second X -Conv layer of PointCNN in Figure 4b, dilation rate D = 2 is used, all the four remaining representative points \u201csee\u201d the entire shape, and all of them are suitable for making predictions.",
+        "The global coordinates of the representative points matter, they are lifted into feature space RCg with M LPg(\u00b7) and concatenated into X -Conv for further processing by follow-up layers.",
+        "For MNIST data, PointCNN achieved comparable performance with other methods, indicating its effective learning of the digits\u2019 shape information.",
+        "For CIFAR10 data, where there is mostly no \u201cshape\u201d information, PointCNN has to learn mostly from the spatially-local correlation in the RGB features, and it performed reasonably well on this task, though there is a large gap between",
+        "With the qualitative visualization and quantitative investigation, we conclude that though the \u201cconcentration\u201d is far from reaching a point, the improvement is significant, and it explains the performance of PointCNN in feature learning.",
+        "We proposed PointCNN, which is a generalization of CNN into leveraging spatially-local correlation from data represented in point cloud.",
+        "The core of PointCNN is the X -Conv operator that weights and permutes input points and features before they are processed by a typical convolution.",
+        "We open source our code at https://github.com/yangyanli/PointCNN to encourage further development"
+    ],
+    "headline": "We present a simple and general framework for feature learning from point clouds",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Mart\u00edn Abadi and et al. TensorFlow: Large-scale machine learning on heterogeneous systems, 2015. Software available from tensorflow.org.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=and%2C%20Mart%C3%ADn%20Abadi%20TensorFlow%3A%20Large-scale%20machine%20learning%20on%20heterogeneous%20systems%202015"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Iro Armeni, Ozan Sener, Amir R. Zamir, Helen Jiang, Ioannis Brilakis, Martin Fischer, and Silvio Savarese. 3d semantic parsing of large-scale indoor spaces. In CVPR, pages 1534\u20131543, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Armeni%2C%20Iro%20Sener%2C%20Ozan%20Zamir%2C%20Amir%20R.%20Jiang%2C%20Helen%203d%20semantic%20parsing%20of%20large-scale%20indoor%20spaces%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Armeni%2C%20Iro%20Sener%2C%20Ozan%20Zamir%2C%20Amir%20R.%20Jiang%2C%20Helen%203d%20semantic%20parsing%20of%20large-scale%20indoor%20spaces%202016"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Matan Atzmon, Haggai Maron, and Yaron Lipman. Point convolutional neural networks by extension operators. ACM Trans. Graph., 37(4):71:1\u201371:12, July 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Atzmon%2C%20Matan%20Maron%2C%20Haggai%20Lipman%2C%20Yaron%20Point%20convolutional%20neural%20networks%20by%20extension%20operators%202018-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Atzmon%2C%20Matan%20Maron%2C%20Haggai%20Lipman%2C%20Yaron%20Point%20convolutional%20neural%20networks%20by%20extension%20operators%202018-07"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Yizhak Ben-Shabat, Michael Lindenbaum, and Anath Fischer. 3d point cloud classification and segmentation using 3d modified fisher vector representation for convolutional neural networks. arXiv preprint arXiv:1711.08241, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.08241"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Michael M. Bronstein, Joan Bruna, Yann LeCun, Arthur Szlam, and Pierre Vandergheynst. Geometric deep learning: going beyond euclidean data. IEEE Signal Processing Magazine, 34(4):18\u201342, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bronstein%2C%20Michael%20M.%20Bruna%2C%20Joan%20LeCun%2C%20Yann%20Szlam%2C%20Arthur%20Geometric%20deep%20learning%3A%20going%20beyond%20euclidean%20data%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bronstein%2C%20Michael%20M.%20Bruna%2C%20Joan%20LeCun%2C%20Yann%20Szlam%2C%20Arthur%20Geometric%20deep%20learning%3A%20going%20beyond%20euclidean%20data%202017"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Fran\u00e7ois Chollet. Xception: Deep learning with depthwise separable convolutions. arXiv preprint arXiv:1610.02357, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1610.02357"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Djork-Arn\u00e9 Clevert, Thomas Unterthiner, and Sepp Hochreiter. Fast and accurate deep network learning by exponential linear units (elus). In ICLR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Clevert%2C%20Djork-Arn%C3%A9%20Unterthiner%2C%20Thomas%20Hochreiter%2C%20Sepp%20Fast%20and%20accurate%20deep%20network%20learning%20by%20exponential%20linear%20units%20%28elus%29%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Clevert%2C%20Djork-Arn%C3%A9%20Unterthiner%2C%20Thomas%20Hochreiter%2C%20Sepp%20Fast%20and%20accurate%20deep%20network%20learning%20by%20exponential%20linear%20units%20%28elus%29%202016"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Rodrigo Santa Cruz, Basura Fernando, Anoop Cherian, and Stephen Gould. Deeppermnet: Visual permutation learning. In CVPR, July 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cruz%2C%20Rodrigo%20Santa%20Fernando%2C%20Basura%20Cherian%2C%20Anoop%20Gould%2C%20Stephen%20Deeppermnet%3A%20Visual%20permutation%20learning%202017-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cruz%2C%20Rodrigo%20Santa%20Fernando%2C%20Basura%20Cherian%2C%20Anoop%20Gould%2C%20Stephen%20Deeppermnet%3A%20Visual%20permutation%20learning%202017-07"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Angela Dai, Angel X. Chang, Manolis Savva, Maciej Halber, Thomas Funkhouser, and Matthias Nie\u00dfner. Scannet: Richly-annotated 3d reconstructions of indoor scenes. In CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dai%2C%20Angela%20Chang%2C%20Angel%20X.%20Savva%2C%20Manolis%20Halber%2C%20Maciej%20Scannet%3A%20Richly-annotated%203d%20reconstructions%20of%20indoor%20scenes%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dai%2C%20Angela%20Chang%2C%20Angel%20X.%20Savva%2C%20Manolis%20Halber%2C%20Maciej%20Scannet%3A%20Richly-annotated%203d%20reconstructions%20of%20indoor%20scenes%202017"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Sander Dieleman, Jeffrey De Fauw, and Koray Kavukcuoglu. Exploiting cyclic symmetry in convolutional neural networks. In Proceedings of the 33rd International Conference on International Conference on Machine Learning - Volume 48, ICML\u201916, pages 1889\u20131898. JMLR.org, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dieleman%2C%20Sander%20Fauw%2C%20Jeffrey%20De%20Kavukcuoglu%2C%20Koray%20Exploiting%20cyclic%20symmetry%20in%20convolutional%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dieleman%2C%20Sander%20Fauw%2C%20Jeffrey%20De%20Kavukcuoglu%2C%20Koray%20Exploiting%20cyclic%20symmetry%20in%20convolutional%20neural%20networks%202016"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Mathias Eitz, James Hays, and Marc Alexa. How do humans sketch objects? ToG, 31(4):44:1\u201344:10, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Eitz%2C%20Mathias%20Hays%2C%20James%20Alexa%2C%20Marc%20How%20do%20humans%20sketch%20objects%3F%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Eitz%2C%20Mathias%20Hays%2C%20James%20Alexa%2C%20Marc%20How%20do%20humans%20sketch%20objects%3F%202012"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Benjamin Graham, Martin Engelcke, and Laurens van der Maaten. 3d semantic segmentation with submanifold sparse convolutional networks. arXiv preprint arXiv:1711.10275, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.10275"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Benjamin Graham and Laurens van der Maaten. Submanifold sparse convolutional networks. arXiv preprint arXiv:1706.01307, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.01307"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Fabian Groh, Patrick Wieschollek, and Hendrik P. A. Lensch. Flex-convolution (deep learning beyond grid-worlds). arXiv preprint arXiv:1803.07289, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.07289"
+        },
+        {
+            "id": "15",
+            "entry": "[15] David Ha and Douglas Eck. A neural representation of sketch drawings. arXiv preprint arXiv:1704.03477, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1704.03477"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Geoffrey E Hinton, Alex Krizhevsky, and Sida D Wang. Transforming auto-encoders. In International Conference on Artificial Neural Networks, pages 44\u201351.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hinton%2C%20Geoffrey%20E.%20Krizhevsky%2C%20Alex%20Wang%2C%20Sida%20D.%20Transforming%20auto-encoders",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hinton%2C%20Geoffrey%20E.%20Krizhevsky%2C%20Alex%20Wang%2C%20Sida%20D.%20Transforming%20auto-encoders"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Binh-Son Hua, Minh-Khoi Tran, and Sai-Kit Yeung. Point-wise convolutional neural network. In CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hua%2C%20Binh-Son%20Tran%2C%20Minh-Khoi%20Yeung%2C%20Sai-Kit%20Point-wise%20convolutional%20neural%20network%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hua%2C%20Binh-Son%20Tran%2C%20Minh-Khoi%20Yeung%2C%20Sai-Kit%20Point-wise%20convolutional%20neural%20network%202018"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Qiangui Huang, Weiyue Wang, and Ulrich Neumann. Recurrent slice networks for 3d segmentation on point clouds. In CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huang%2C%20Qiangui%20Wang%2C%20Weiyue%20Neumann%2C%20Ulrich%20Recurrent%20slice%20networks%20for%203d%20segmentation%20on%20point%20clouds%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huang%2C%20Qiangui%20Wang%2C%20Weiyue%20Neumann%2C%20Ulrich%20Recurrent%20slice%20networks%20for%203d%20segmentation%20on%20point%20clouds%202018"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Sergey Ioffe and Christian Szegedy. Batch normalization: Accelerating deep network training by reducing internal covariate shift. In International Conference on Machine Learning, pages 448\u2013456, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ioffe%2C%20Sergey%20Szegedy%2C%20Christian%20Batch%20normalization%3A%20Accelerating%20deep%20network%20training%20by%20reducing%20internal%20covariate%20shift%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ioffe%2C%20Sergey%20Szegedy%2C%20Christian%20Batch%20normalization%3A%20Accelerating%20deep%20network%20training%20by%20reducing%20internal%20covariate%20shift%202015"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Max Jaderberg, Karen Simonyan, Andrew Zisserman, et al. Spatial transformer networks. In Advances in Neural Information Processing Systems, pages 2017\u20132025, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jaderberg%2C%20Max%20Simonyan%2C%20Karen%20Zisserman%2C%20Andrew%20Spatial%20transformer%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jaderberg%2C%20Max%20Simonyan%2C%20Karen%20Zisserman%2C%20Andrew%20Spatial%20transformer%20networks%202017"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Diederik P. Kingma and Jimmy Ba. Adam: A method for stochastic optimization. In ICLR, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Ba%2C%20Jimmy%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Ba%2C%20Jimmy%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202014"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Roman Klokov and Victor Lempitsky. Escape from cells: Deep kd-networks for the recognition of 3d point cloud models. In ICCV, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Klokov%2C%20Roman%20Lempitsky%2C%20Victor%20Escape%20from%20cells%3A%20Deep%20kd-networks%20for%20the%20recognition%20of%203d%20point%20cloud%20models%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Klokov%2C%20Roman%20Lempitsky%2C%20Victor%20Escape%20from%20cells%3A%20Deep%20kd-networks%20for%20the%20recognition%20of%203d%20point%20cloud%20models%202017"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Alex Krizhevsky, Ilya Sutskever, and Geoffrey E. Hinton. Imagenet classification with deep convolutional neural networks. In NIPS, pages 1097\u20131105, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Hinton%2C%20Geoffrey%20E.%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Hinton%2C%20Geoffrey%20E.%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Lo\u00efc Landrieu and Martin Simonovsky. Large-scale point cloud semantic segmentation with superpoint graphs. CoRR, abs/1711.09869, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.09869"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Yann LeCun, Yoshua Bengio, and Geoffrey Hinton. Deep learning. Nature, 521(7553):436\u2013444, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=LeCun%2C%20Yann%20Bengio%2C%20Yoshua%20Hinton%2C%20Geoffrey%20Deep%20learning%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=LeCun%2C%20Yann%20Bengio%2C%20Yoshua%20Hinton%2C%20Geoffrey%20Deep%20learning%202015"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Yann LeCun, L\u00e9on Bottou, Yoshua Bengio, and Patrick Haffner. Gradient-based learning applied to document recognition. Proceedings of the IEEE, 86(11):2278\u20132324, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=LeCun%2C%20Yann%20Bottou%2C%20L%C3%A9on%20Bengio%2C%20Yoshua%20Haffner%2C%20Patrick%20Gradient-based%20learning%20applied%20to%20document%20recognition%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=LeCun%2C%20Yann%20Bottou%2C%20L%C3%A9on%20Bengio%2C%20Yoshua%20Haffner%2C%20Patrick%20Gradient-based%20learning%20applied%20to%20document%20recognition%201998"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Jiaxin Li, Ben M. Chen, and Gim Hee Lee. So-net: Self-organizing network for point cloud analysis. In CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Jiaxin%20Chen%2C%20Ben%20M.%20Lee%2C%20Gim%20Hee%20So-net%3A%20Self-organizing%20network%20for%20point%20cloud%20analysis%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20Jiaxin%20Chen%2C%20Ben%20M.%20Lee%2C%20Gim%20Hee%20So-net%3A%20Self-organizing%20network%20for%20point%20cloud%20analysis%202018"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Yangyan Li, S\u00f6ren Pirk, Hao Su, Charles R Qi, and Leonidas J Guibas. Fpnn: Field probing neural networks for 3d data. In NIPS, pages 307\u2013315, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Yangyan%20Pirk%2C%20S%C3%B6ren%20Su%2C%20Hao%20Qi%2C%20Charles%20R.%20Fpnn%3A%20Field%20probing%20neural%20networks%20for%203d%20data%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20Yangyan%20Pirk%2C%20S%C3%B6ren%20Su%2C%20Hao%20Qi%2C%20Charles%20R.%20Fpnn%3A%20Field%20probing%20neural%20networks%20for%203d%20data%202016"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Min Lin, Qiang Chen, and Shuicheng Yan. Network in network. In ICLR, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Min%20Lin%20Qiang%20Chen%20and%20Shuicheng%20Yan%20Network%20in%20network%20In%20ICLR%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Min%20Lin%20Qiang%20Chen%20and%20Shuicheng%20Yan%20Network%20in%20network%20In%20ICLR%202014"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Haggai Maron, Meirav Galun, Noam Aigerman, Miri Trope, Nadav Dym, Ersin Yumer, Vladimir G. Kim, and Yaron Lipman. Convolutional neural networks on surfaces via seamless toric covers. ACM Trans. Graph., 36(4):71:1\u201371:10, July 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Maron%2C%20Haggai%20Galun%2C%20Meirav%20Aigerman%2C%20Noam%20Trope%2C%20Miri%20Convolutional%20neural%20networks%20on%20surfaces%20via%20seamless%20toric%20covers%202017-07-10",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Maron%2C%20Haggai%20Galun%2C%20Meirav%20Aigerman%2C%20Noam%20Trope%2C%20Miri%20Convolutional%20neural%20networks%20on%20surfaces%20via%20seamless%20toric%20covers%202017-07-10"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Federico Monti, Davide Boscaini, Jonathan Masci, Emanuele Rodol\u00e0, Jan Svoboda, and Michael M. Bronstein. Geometric deep learning on graphs and manifolds using mixture model cnns. In CVPR, July 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Monti%2C%20Federico%20Boscaini%2C%20Davide%20Masci%2C%20Jonathan%20Rodol%C3%A0%2C%20Emanuele%20Geometric%20deep%20learning%20on%20graphs%20and%20manifolds%20using%20mixture%20model%20cnns%202017-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Monti%2C%20Federico%20Boscaini%2C%20Davide%20Masci%2C%20Jonathan%20Rodol%C3%A0%2C%20Emanuele%20Geometric%20deep%20learning%20on%20graphs%20and%20manifolds%20using%20mixture%20model%20cnns%202017-07"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Hyeonwoo Noh, Seunghoon Hong, and Bohyung Han. Learning deconvolution network for semantic segmentation. In ICCV, ICCV \u201915, pages 1520\u20131528, Washington, DC, USA, 2015. IEEE Computer Society.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Noh%2C%20Hyeonwoo%20Hong%2C%20Seunghoon%20Han%2C%20Bohyung%20Learning%20deconvolution%20network%20for%20semantic%20segmentation%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Noh%2C%20Hyeonwoo%20Hong%2C%20Seunghoon%20Han%2C%20Bohyung%20Learning%20deconvolution%20network%20for%20semantic%20segmentation%202015"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Charles R. Qi, Hao Su, Kaichun Mo, and Leonidas J. Guibas. Pointnet: Deep learning on point sets for 3d classification and segmentation. In CVPR, pages 77\u201385, July 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Qi%2C%20Charles%20R.%20Su%2C%20Hao%20Mo%2C%20Kaichun%20Guibas%2C%20Leonidas%20J.%20Pointnet%3A%20Deep%20learning%20on%20point%20sets%20for%203d%20classification%20and%20segmentation%202017-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Qi%2C%20Charles%20R.%20Su%2C%20Hao%20Mo%2C%20Kaichun%20Guibas%2C%20Leonidas%20J.%20Pointnet%3A%20Deep%20learning%20on%20point%20sets%20for%203d%20classification%20and%20segmentation%202017-07"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Charles R. Qi, Hao Su, Matthias Nie\u00dfner, Angela Dai, Mengyuan Yan, and Leonidas J. Guibas. Volumetric and multi-view cnns for object classification on 3d data. In CVPR, pages 5648\u20135656, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Qi%2C%20Charles%20R.%20Su%2C%20Hao%20Nie%C3%9Fner%2C%20Matthias%20Dai%2C%20Angela%20Volumetric%20and%20multi-view%20cnns%20for%20object%20classification%20on%203d%20data%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Qi%2C%20Charles%20R.%20Su%2C%20Hao%20Nie%C3%9Fner%2C%20Matthias%20Dai%2C%20Angela%20Volumetric%20and%20multi-view%20cnns%20for%20object%20classification%20on%203d%20data%202016"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Charles R Qi, Li Yi, Hao Su, and Leonidas J Guibas. Pointnet++: Deep hierarchical feature learning on point sets in a metric space. In NIPS, pages 5105\u20135114, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Qi%2C%20Charles%20R.%20Yi%2C%20Li%20Su%2C%20Hao%20Guibas%2C%20Leonidas%20J.%20Pointnet%2B%2B%3A%20Deep%20hierarchical%20feature%20learning%20on%20point%20sets%20in%20a%20metric%20space%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Qi%2C%20Charles%20R.%20Yi%2C%20Li%20Su%2C%20Hao%20Guibas%2C%20Leonidas%20J.%20Pointnet%2B%2B%3A%20Deep%20hierarchical%20feature%20learning%20on%20point%20sets%20in%20a%20metric%20space%202017"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Siamak Ravanbakhsh, Jeff Schneider, and Barnabas Poczos. Deep learning with sets and point clouds. arXiv preprint arXiv:1611.04500, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.04500"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Gernot Riegler, Ali Osman Ulusoys, and Andreas Geiger. Octnet: Learning deep 3d representations at high resolutions. In CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Riegler%2C%20Gernot%20Ulusoys%2C%20Ali%20Osman%20Geiger%2C%20Andreas%20Octnet%3A%20Learning%20deep%203d%20representations%20at%20high%20resolutions%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Riegler%2C%20Gernot%20Ulusoys%2C%20Ali%20Osman%20Geiger%2C%20Andreas%20Octnet%3A%20Learning%20deep%203d%20representations%20at%20high%20resolutions%202017"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Olaf Ronneberger, Philipp Fischer, and Thomas Brox. U-net: Convolutional networks for biomedical image segmentation. In Nassir Navab, Joachim Hornegger, William M. Wells, and Alejandro F. Frangi, editors, MICCAI, pages 234\u2013241, Cham, 2015. Springer International Publishing.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ronneberger%2C%20Olaf%20Fischer%2C%20Philipp%20Brox%2C%20Thomas%20U-net%3A%20Convolutional%20networks%20for%20biomedical%20image%20segmentation%202015"
+        },
+        {
+            "id": "39",
+            "entry": "[39] David E. Rumelhart, Geoffrey E. Hinton, and Ronald J. Williams. Parallel distributed processing: Explorations in the microstructure of cognition, vol. 1. chapter Learning Internal Representations by Error Propagation, pages 318\u2013362. MIT Press, Cambridge, MA, USA, 1986.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rumelhart%2C%20David%20E.%20Hinton%2C%20Geoffrey%20E.%20Williams%2C%20Ronald%20J.%20Parallel%20distributed%20processing%3A%20Explorations%20in%20the%20microstructure%20of%20cognition%201986",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rumelhart%2C%20David%20E.%20Hinton%2C%20Geoffrey%20E.%20Williams%2C%20Ronald%20J.%20Parallel%20distributed%20processing%3A%20Explorations%20in%20the%20microstructure%20of%20cognition%201986"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Sara Sabour, Nicholas Frosst, and Geoffrey E. Hinton. Dynamic routing between capsules. In NIPS, pages 3859\u20133869, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sabour%2C%20Sara%20Frosst%2C%20Nicholas%20Hinton%2C%20Geoffrey%20E.%20Dynamic%20routing%20between%20capsules%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sabour%2C%20Sara%20Frosst%2C%20Nicholas%20Hinton%2C%20Geoffrey%20E.%20Dynamic%20routing%20between%20capsules%202017"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Tianjia Shao, Yin Yang, Yanlin Weng, Qiming Hou, and Kun Zhou. H-CNN: spatial hashing based CNN for 3d shape analysis. arXiv preprint arXiv:1803.11385, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.11385"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Yiru Shen, Chen Feng, Yaoqing Yang, and Dong Tian. Mining point cloud local structures by kernel correlation and graph pooling. In CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shen%2C%20Yiru%20Feng%2C%20Chen%20Yang%2C%20Yaoqing%20Tian%2C%20Dong%20Mining%20point%20cloud%20local%20structures%20by%20kernel%20correlation%20and%20graph%20pooling%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shen%2C%20Yiru%20Feng%2C%20Chen%20Yang%2C%20Yaoqing%20Tian%2C%20Dong%20Mining%20point%20cloud%20local%20structures%20by%20kernel%20correlation%20and%20graph%20pooling%202018"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Hang Su, Varun Jampani, Deqing Sun, Subhransu Maji, Evangelos Kalogerakis, Ming-Hsuan Yang, and Jan Kautz. Splatnet: Sparse lattice networks for point cloud processing. In CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Su%2C%20Hang%20Jampani%2C%20Varun%20Sun%2C%20Deqing%20Maji%2C%20Subhransu%20Splatnet%3A%20Sparse%20lattice%20networks%20for%20point%20cloud%20processing%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Su%2C%20Hang%20Jampani%2C%20Varun%20Sun%2C%20Deqing%20Maji%2C%20Subhransu%20Splatnet%3A%20Sparse%20lattice%20networks%20for%20point%20cloud%20processing%202018"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Maxim Tatarchenko, Jaesik Park, Vladlen Koltun, and Qian-Yi Zhou. Tangent convolutions for dense prediction in 3d. In CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tatarchenko%2C%20Maxim%20Park%2C%20Jaesik%20Koltun%2C%20Vladlen%20Zhou%2C%20Qian-Yi%20Tangent%20convolutions%20for%20dense%20prediction%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tatarchenko%2C%20Maxim%20Park%2C%20Jaesik%20Koltun%2C%20Vladlen%20Zhou%2C%20Qian-Yi%20Tangent%20convolutions%20for%20dense%20prediction%202018"
+        },
+        {
+            "id": "45",
+            "entry": "[45] Lyne P. Tchapmi, Christopher B. Choy, Iro Armeni, JunYoung Gwak, and Silvio Savarese. Segcloud: Semantic segmentation of 3d point clouds. In 3DV, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tchapmi%2C%20Lyne%20P.%20Choy%2C%20Christopher%20B.%20Armeni%2C%20Iro%20Gwak%2C%20JunYoung%20Segcloud%3A%20Semantic%20segmentation%20of%203d%20point%20clouds%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tchapmi%2C%20Lyne%20P.%20Choy%2C%20Christopher%20B.%20Armeni%2C%20Iro%20Gwak%2C%20JunYoung%20Segcloud%3A%20Semantic%20segmentation%20of%203d%20point%20clouds%202017"
+        },
+        {
+            "id": "46",
+            "entry": "[46] Chu Wang, Babak Samari, and Kaleem Siddiqi. Local spectral graph convolution for point set feature learning. arXiv preprint arXiv:1803.05827, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.05827"
+        },
+        {
+            "id": "47",
+            "entry": "[47] Peng-Shuai Wang, Yang Liu, Yu-Xiao Guo, Chun-Yu Sun, and Xin Tong. O-cnn: Octree-based convolutional neural networks for 3d shape analysis. ACM Trans. Graph., 36(4):72:1\u201372:11, July 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Peng-Shuai%20Liu%2C%20Yang%20Guo%2C%20Yu-Xiao%20Sun%2C%20Chun-Yu%20O-cnn%3A%20Octree-based%20convolutional%20neural%20networks%20for%203d%20shape%20analysis%202017-07-11",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Peng-Shuai%20Liu%2C%20Yang%20Guo%2C%20Yu-Xiao%20Sun%2C%20Chun-Yu%20O-cnn%3A%20Octree-based%20convolutional%20neural%20networks%20for%203d%20shape%20analysis%202017-07-11"
+        },
+        {
+            "id": "48",
+            "entry": "[48] Shenlong Wang, Simon Suo, Wei-Chiu Ma, Andrei Pokrovsky, and Raquel Urtasun. Deep parametric continuous convolutional neural networks. In CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Shenlong%20Suo%2C%20Simon%20Ma%2C%20Wei-Chiu%20Pokrovsky%2C%20Andrei%20Deep%20parametric%20continuous%20convolutional%20neural%20networks%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Shenlong%20Suo%2C%20Simon%20Ma%2C%20Wei-Chiu%20Pokrovsky%2C%20Andrei%20Deep%20parametric%20continuous%20convolutional%20neural%20networks%202018"
+        },
+        {
+            "id": "49",
+            "entry": "[49] Weiyue Wang, Ronald Yu, Qiangui Huang, and Ulrich Neumann. SGPN: similarity group proposal network for 3d point cloud instance segmentation. In CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Weiyue%20Yu%2C%20Ronald%20Huang%2C%20Qiangui%20Neumann%2C%20Ulrich%20SGPN%3A%20similarity%20group%20proposal%20network%20for%203d%20point%20cloud%20instance%20segmentation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Weiyue%20Yu%2C%20Ronald%20Huang%2C%20Qiangui%20Neumann%2C%20Ulrich%20SGPN%3A%20similarity%20group%20proposal%20network%20for%203d%20point%20cloud%20instance%20segmentation%202018"
+        },
+        {
+            "id": "50",
+            "entry": "[50] Yue Wang, Yongbin Sun, Ziwei Liu, Sanjay E. Sarma, Michael M. Bronstein, and Justin M. Solomon. Dynamic graph cnn for learning on point clouds. arXiv preprint arXiv:1801.07829, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1801.07829"
+        },
+        {
+            "id": "51",
+            "entry": "[51] Shihao Wu, Hui Huang, Minglun Gong, Matthias Zwicker, and Daniel Cohen-Or. Deep points consolidation. ToG, 34(6):176:1\u2013176:13, October 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20Shihao%20Huang%2C%20Hui%20Gong%2C%20Minglun%20Zwicker%2C%20Matthias%20Deep%20points%20consolidation%202015-10-13",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20Shihao%20Huang%2C%20Hui%20Gong%2C%20Minglun%20Zwicker%2C%20Matthias%20Deep%20points%20consolidation%202015-10-13"
+        },
+        {
+            "id": "52",
+            "entry": "[52] Zhirong Wu, Shuran Song, Aditya Khosla, Fisher Yu, Linguang Zhang, Xiaoou Tang, and Jianxiong Xiao. 3d shapenets: A deep representation for volumetric shapes. In CVPR, pages 1912\u20131920, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20Zhirong%20Song%2C%20Shuran%20Aditya%20Khosla%2C%20Fisher%20Yu%2C%20Linguang%20Zhang%2C%20Xiaoou%20Tang%2C%20and%20Jianxiong%20Xiao.%203d%20shapenets%3A%20A%20deep%20representation%20for%20volumetric%20shapes%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20Zhirong%20Song%2C%20Shuran%20Aditya%20Khosla%2C%20Fisher%20Yu%2C%20Linguang%20Zhang%2C%20Xiaoou%20Tang%2C%20and%20Jianxiong%20Xiao.%203d%20shapenets%3A%20A%20deep%20representation%20for%20volumetric%20shapes%202015"
+        },
+        {
+            "id": "53",
+            "entry": "[53] Yifan Xu, Tianqi Fan, Mingye Xu, Long Zeng, and Yu Qiao. Spidercnn: Deep learning on point sets with parameterized convolutional filters. arXiv preprint arXiv:1803.11527, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.11527"
+        },
+        {
+            "id": "54",
+            "entry": "[54] Li Yi, Vladimir G. Kim, Duygu Ceylan, I-Chao Shen, Mengyan Yan, Hao Su, Cewu Lu, Qixing Huang, Alla Sheffer, and Leonidas Guibas. A scalable active framework for region annotation in 3d shape collections. ToG, 35(6):210:1\u2013210:12, November 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yi%2C%20Li%20Kim%2C%20Vladimir%20G.%20Duygu%20Ceylan%2C%20I.-Chao%20Shen%20Yan%2C%20Mengyan%20and%20Leonidas%20Guibas.%20A%20scalable%20active%20framework%20for%20region%20annotation%20in%203d%20shape%20collections%202016-11",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yi%2C%20Li%20Kim%2C%20Vladimir%20G.%20Duygu%20Ceylan%2C%20I.-Chao%20Shen%20Yan%2C%20Mengyan%20and%20Leonidas%20Guibas.%20A%20scalable%20active%20framework%20for%20region%20annotation%20in%203d%20shape%20collections%202016-11"
+        },
+        {
+            "id": "55",
+            "entry": "[55] Li Yi, Hao Su, Xingwen Guo, and Leonidas Guibas. Syncspeccnn: Synchronized spectral cnn for 3d shape segmentation. In CVPR, pages 6584\u20136592, July 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yi%2C%20Li%20Su%2C%20Hao%20Guo%2C%20Xingwen%20Guibas%2C%20Leonidas%20Syncspeccnn%3A%20Synchronized%20spectral%20cnn%20for%203d%20shape%20segmentation%202017-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yi%2C%20Li%20Su%2C%20Hao%20Guo%2C%20Xingwen%20Guibas%2C%20Leonidas%20Syncspeccnn%3A%20Synchronized%20spectral%20cnn%20for%203d%20shape%20segmentation%202017-07"
+        },
+        {
+            "id": "56",
+            "entry": "[56] Li Yi, Hao Su, Lin Shao, Manolis Savva, Haibin Huang, Yang Zhou, Benjamin Graham, Martin Engelcke, Roman Klokov, Victor Lempitsky, et al. Large-scale 3d shape reconstruction and segmentation from shapenet core55. arXiv preprint arXiv:1710.06104, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.06104"
+        },
+        {
+            "id": "57",
+            "entry": "[57] Qian Yu, Yongxin Yang, Feng Liu, Yi-Zhe Song, Tao Xiang, and Timothy M. Hospedales. Sketch-a-net: A deep neural network that beats humans. IJCV, 122(3):411\u2013425, May 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yu%2C%20Qian%20Yang%2C%20Yongxin%20Liu%2C%20Feng%20Song%2C%20Yi-Zhe%20Hospedales.%20Sketch-a-net%3A%20A%20deep%20neural%20network%20that%20beats%20humans%202017-05",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yu%2C%20Qian%20Yang%2C%20Yongxin%20Liu%2C%20Feng%20Song%2C%20Yi-Zhe%20Hospedales.%20Sketch-a-net%3A%20A%20deep%20neural%20network%20that%20beats%20humans%202017-05"
+        },
+        {
+            "id": "58",
+            "entry": "[58] Manzil Zaheer, Satwik Kottur, Siamak Ravanbakhsh, Barnabas Poczos, Ruslan R. Salakhutdinov, and Alexander J Smola. Deep sets. In I. Guyon, U. V. Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, NIPS, pages 3394\u20133404. 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Manzil%20Zaheer%20Satwik%20Kottur%20Siamak%20Ravanbakhsh%20Barnabas%20Poczos%20Ruslan%20R%20Salakhutdinov%20and%20Alexander%20J%20Smola%20Deep%20sets%20In%20I%20Guyon%20U%20V%20Luxburg%20S%20Bengio%20H%20Wallach%20R%20Fergus%20S%20Vishwanathan%20and%20R%20Garnett%20editors%20NIPS%20pages%2033943404%202017"
+        }
+    ]
+}

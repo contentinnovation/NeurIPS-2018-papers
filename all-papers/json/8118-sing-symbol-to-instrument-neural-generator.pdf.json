@@ -1,0 +1,237 @@
+{
+    "filename": "8118-sing-symbol-to-instrument-neural-generator.pdf",
+    "metadata": {
+        "title": "SING: Symbol-to-Instrument Neural Generator",
+        "author": "Alexandre Defossez, Neil Zeghidour, Nicolas Usunier, Leon Bottou, Francis Bach",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8118-sing-symbol-to-instrument-neural-generator.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Recent progress in deep learning for audio synthesis opens the way to models that directly produce the waveform, shifting away from the traditional paradigm of relying on vocoders or MIDI synthesizers for speech or music generation. Despite their successes, current state-of-the-art neural audio synthesizers such as WaveNet and SampleRNN [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>, <a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>] suffer from prohibitive training and inference times because they are based on autoregressive models that generate audio samples one at a time at a rate of 16kHz. In this work, we study the more computationally efficient alternative of generating the waveform frame-by-frame with large strides. We present SING, a lightweight neural audio synthesizer for the original task of generating musical notes given desired instrument, pitch and velocity. Our model is trained end-to-end to generate notes from nearly 1000 instruments with a single decoder, thanks to a new loss function that minimizes the distances between the log spectrograms of the generated and target waveforms. On the generalization task of synthesizing notes for pairs of pitch and instrument not seen during training, SING produces audio with significantly improved perceptual quality compared to a state-of-the-art autoencoder based on WaveNet [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>] as measured by a Mean Opinion Score (MOS), and is about 32 times faster for training and 2, 500 times faster for inference."
+    },
+    "keywords": [
+        {
+            "term": "audio synthesis",
+            "url": "https://en.wikipedia.org/wiki/audio_synthesis"
+        },
+        {
+            "term": "mean square error",
+            "url": "https://en.wikipedia.org/wiki/mean_square_error"
+        },
+        {
+            "term": "SING",
+            "url": "https://en.wikipedia.org/wiki/SING"
+        },
+        {
+            "term": "musical note",
+            "url": "https://en.wikipedia.org/wiki/musical_note"
+        },
+        {
+            "term": "Mean Opinion Score",
+            "url": "https://en.wikipedia.org/wiki/Mean_Opinion_Score"
+        },
+        {
+            "term": "audio sample",
+            "url": "https://en.wikipedia.org/wiki/audio_sample"
+        },
+        {
+            "term": "autoregressive model",
+            "url": "https://en.wikipedia.org/wiki/autoregressive_model"
+        },
+        {
+            "term": "speech synthesis",
+            "url": "https://en.wikipedia.org/wiki/speech_synthesis"
+        },
+        {
+            "term": "Short Term Fourier Transform",
+            "url": "https://en.wikipedia.org/wiki/Short_Term_Fourier_Transform"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        }
+    ],
+    "highlights": [
+        "The recent progress in deep learning for sequence generation has led to the emergence of audio synthesis systems that directly generate the waveform, reaching state-of-the-art perceptual quality in speech synthesis, and promising results for music generation",
+        "A commonality between the state-ofthe-art neural audio synthesis models is the use of discretized sample values, so that an audio sample is predicted by a categorical distribution trained with a classification loss [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>, <a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>, <a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>]",
+        "Another significant commonality is the use of autoregressive models that generate samples one-by-one, which leads to prohibitive training and inference times [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>, <a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>], or requires specialized implementations and low-level code optimizations to run in real time [<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>]",
+        "We introduced a simple model architecture, SING, based on LSTM and convolutional layers to generate waveforms",
+        "We introduced a spectral loss on the generated waveform as a way of using time-frequency based metrics without requiring a post-processing step to recover the phase of a power spectrogram",
+        "We experimentally validated that SING was able to embed music notes into a small dimension vector space where the pitch, instrument and velocity were disentangled when trained with this spectral loss, as well as synthesizing pairs of instruments and pitches that were not present in the training set"
+    ],
+    "key_statements": [
+        "The recent progress in deep learning for sequence generation has led to the emergence of audio synthesis systems that directly generate the waveform, reaching state-of-the-art perceptual quality in speech synthesis, and promising results for music generation",
+        "A commonality between the state-ofthe-art neural audio synthesis models is the use of discretized sample values, so that an audio sample is predicted by a categorical distribution trained with a classification loss [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>, <a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>, <a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>]",
+        "Another significant commonality is the use of autoregressive models that generate samples one-by-one, which leads to prohibitive training and inference times [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>, <a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>], or requires specialized implementations and low-level code optimizations to run in real time [<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>]",
+        "We study an alternative to both the modeling of audio samples as a categorical distribution and the autoregressive approach",
+        "We develop and evaluate this method on the challenging task of generating musical notes based on the desired instrument, pitch, and velocity, using the large-scale NSynth dataset [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>]",
+        "A first type of approaches model power spectrograms given by the Short Term Fourier Transform [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>, <a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>, <a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>], and generate the waveform through a post-processing that is not part of the training using a phase reconstruction algorithm such as the Griffin-Lim algorithm [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>]",
+        "The model of [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>], which we use as baseline in our experiments on perceptual quality, is an autoencoder of musical notes based on WaveNet [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>] that compresses the signal to generate high-level representations that transfer to music classification tasks, but contrarily to our synthesizer, it cannot be used to generate waveforms from desired properties of the instrument, pitch and velocity without some input signal",
+        "We first experimented with an autoregressive model where the previous output was concatenated with those embeddings, we achieved much better performance and faster training by feeding the LSTM with only on the 4 vectors at each time step",
+        "We provided both the performance of the complete model as well as that of the autoencoder used for the initial training of SING",
+        "We perform experiments on Amazon Mechanical Turk [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>] to get a Mean Opinion Score for the ground truth samples, and for the waveforms generated by SING and the Wavenet baseline",
+        "We report the Mean Opinion Score for the ground-truth audio and each of the 2 models in Table 2, along with the 95% confidence interval",
+        "We introduced a simple model architecture, SING, based on LSTM and convolutional layers to generate waveforms",
+        "We introduced a spectral loss on the generated waveform as a way of using time-frequency based metrics without requiring a post-processing step to recover the phase of a power spectrogram",
+        "We experimentally validated that SING was able to embed music notes into a small dimension vector space where the pitch, instrument and velocity were disentangled when trained with this spectral loss, as well as synthesizing pairs of instruments and pitches that were not present in the training set"
+    ],
+    "summary": [
+        "The recent progress in deep learning for sequence generation has led to the emergence of audio synthesis systems that directly generate the waveform, reaching state-of-the-art perceptual quality in speech synthesis, and promising results for music generation.",
+        "A first type of approaches model power spectrograms given by the STFT [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>, <a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>, <a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>], and generate the waveform through a post-processing that is not part of the training using a phase reconstruction algorithm such as the Griffin-Lim algorithm [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>].",
+        "Our approach is different since we model the waveform as a continuous signal and use the spectral loss between generated and target waveforms and model audio frames of 1024 samples, rather than performing classification on individual samples.",
+        "The model of [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>], which we use as baseline in our experiments on perceptual quality, is an autoencoder of musical notes based on WaveNet [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>] that compresses the signal to generate high-level representations that transfer to music classification tasks, but contrarily to our synthesizer, it cannot be used to generate waveforms from desired properties of the instrument, pitch and velocity without some input signal.",
+        "The model is trained to recover a waveform x sampled at 16,000 Hz from the training set based on the one-hot encoded instrument I, pitch P and velocity V .",
+        "We first experimented with an autoregressive model where the previous output was concatenated with those embeddings, we achieved much better performance and faster training by feeding the LSTM with only on the 4 vectors at each time step.",
+        "We observe that we have a drop in quality between the train and test set, our model is still able to generalize to unseen combinations of pitch and instrument.",
+        "On Figure 2, we represented the rainbowgrams for a particular example from the test set as well as its reconstruction by the Wavenet-autoencoder, SING trained with the spectral and waveform loss and SING without time embedding.",
+        "We perform experiments on Amazon Mechanical Turk [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>] to get a Mean Opinion Score for the ground truth samples, and for the waveforms generated by SING and the Wavenet baseline.",
+        "We introduced a simple model architecture, SING, based on LSTM and convolutional layers to generate waveforms.",
+        "We introduced a spectral loss on the generated waveform as a way of using time-frequency based metrics without requiring a post-processing step to recover the phase of a power spectrogram.",
+        "We experimentally validated that SING was able to embed music notes into a small dimension vector space where the pitch, instrument and velocity were disentangled when trained with this spectral loss, as well as synthesizing pairs of instruments and pitches that were not present in the training set."
+    ],
+    "headline": "We study the more computationally efficient alternative of generating the waveform frame-by-frame with large strides",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Michael Buhrmester, Tracy Kwang, and Samuel D Gosling. Amazon\u2019s mechanical turk: A new source of inexpensive, yet high-quality, data? Perspectives on psychological science, 6(1):3\u20135, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Buhrmester%2C%20Michael%20Kwang%2C%20Tracy%20Gosling%2C%20Samuel%20D.%20Amazon%E2%80%99s%20mechanical%20turk%3A%20A%20new%20source%20of%20inexpensive%2C%20yet%20high-quality%2C%20data%3F%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Buhrmester%2C%20Michael%20Kwang%2C%20Tracy%20Gosling%2C%20Samuel%20D.%20Amazon%E2%80%99s%20mechanical%20turk%3A%20A%20new%20source%20of%20inexpensive%2C%20yet%20high-quality%2C%20data%3F%202011"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Hugo Caracalla and Axel Roebel. Gradient conversion between time and frequency domains using wirtinger calculus. In DAFx 2017, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Caracalla%2C%20Hugo%20Roebel%2C%20Axel%20Gradient%20conversion%20between%20time%20and%20frequency%20domains%20using%20wirtinger%20calculus%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Caracalla%2C%20Hugo%20Roebel%2C%20Axel%20Gradient%20conversion%20between%20time%20and%20frequency%20domains%20using%20wirtinger%20calculus%202017"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Kemal Ebcioglu. An expert system for harmonizing four-part chorales. Computer Music Journal, 12(3):43\u201351, 1988.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ebcioglu%2C%20Kemal%20An%20expert%20system%20for%20harmonizing%20four-part%20chorales%201988",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ebcioglu%2C%20Kemal%20An%20expert%20system%20for%20harmonizing%20four-part%20chorales%201988"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Jesse Engel, Cinjon Resnick, Adam Roberts, Sander Dieleman, Douglas Eck, Karen Simonyan, and Mohammad Norouzi. Neural audio synthesis of musical notes with wavenet autoencoders. Technical Report 1704.01279, arXiv, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Engel%2C%20Jesse%20Resnick%2C%20Cinjon%20Roberts%2C%20Adam%20Dieleman%2C%20Sander%20Neural%20audio%20synthesis%20of%20musical%20notes%20with%20wavenet%20autoencoders%202017"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Jonas Gehring, Michael Auli, David Grangier, Denis Yarats, and Yann N Dauphin. Convolutional sequence to sequence learning. arXiv preprint arXiv:1705.03122, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1705.03122"
+        },
+        {
+            "id": "6",
+            "entry": "[6] JL Goldstein. Auditory nonlinearity. The Journal of the Acoustical Society of America, 41(3):676\u2013699, 1967.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goldstein%2C%20J.L.%20Auditory%20nonlinearity%201967",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goldstein%2C%20J.L.%20Auditory%20nonlinearity%201967"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Daniel Griffin and Jae Lim. Signal estimation from modified short-time fourier transform. IEEE Transactions on Acoustics, Speech, and Signal Processing, 32(2):236\u2013243, 1984.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Griffin%2C%20Daniel%20Lim%2C%20Jae%20Signal%20estimation%20from%20modified%20short-time%20fourier%20transform%201984",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Griffin%2C%20Daniel%20Lim%2C%20Jae%20Signal%20estimation%20from%20modified%20short-time%20fourier%20transform%201984"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Ga\u00ebtan Hadjeres, Fran\u00e7ois Pachet, and Frank Nielsen. Deepbach: a steerable model for bach chorales generation. Technical Report 1612.01010, arXiv, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hadjeres%2C%20Ga%C3%ABtan%20Pachet%2C%20Fran%C3%A7ois%20Nielsen%2C%20Frank%20Deepbach%3A%20a%20steerable%20model%20for%20bach%20chorales%20generation%202016"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Albert Haque, Michelle Guo, and Prateek Verma. Conditional end-to-end audio transforms. Technical Report 1804.00047, arXiv, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Haque%2C%20Albert%20Guo%2C%20Michelle%20Verma%2C%20Prateek%20Conditional%20end-to-end%20audio%20transforms%202018"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Dorien Herremans. Morpheus: automatic music generation with recurrent pattern constraints and tension profiles. 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Herremans%2C%20Dorien%20Morpheus%3A%20automatic%20music%20generation%20with%20recurrent%20pattern%20constraints%20and%20tension%20profiles%202016"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Geoffrey Hinton, Oriol Vinyals, and Jeff Dean. Distilling the knowledge in a neural network. Technical Report 1503.02531, arXiv, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hinton%2C%20Geoffrey%20Vinyals%2C%20Oriol%20Dean%2C%20Jeff%20Distilling%20the%20knowledge%20in%20a%20neural%20network%202015"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Sepp Hochreiter and J\u00fcrgen Schmidhuber. Long short-term memory. Neural computation, 9(8):1735\u20131780, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Long%20short-term%20memory%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Long%20short-term%20memory%201997"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Fumitada Itakura. Analysis synthesis telephony based on the maximum likelihood method. In The 6th international congress on acoustics, 1968, pages 280\u2013292, 1968.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Itakura%2C%20Fumitada%20Analysis%20synthesis%20telephony%20based%20on%20the%20maximum%20likelihood%20method%201968",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Itakura%2C%20Fumitada%20Analysis%20synthesis%20telephony%20based%20on%20the%20maximum%20likelihood%20method%201968"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Nal Kalchbrenner, Erich Elsen, Karen Simonyan, Seb Noury, Norman Casagrande, Edward Lockhart, Florian Stimberg, Aaron van den Oord, Sander Dieleman, and Koray Kavukcuoglu. Efficient neural audio synthesis. Technical Report 1802.08435, arXiv, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kalchbrenner%2C%20Nal%20Elsen%2C%20Erich%20Simonyan%2C%20Karen%20Noury%2C%20Seb%20Efficient%20neural%20audio%20synthesis%202018"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Diederik P Kingma and Jimmy Ba. Adam: A method for stochastic optimization. In International Conference on Learning Representations, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Ba%2C%20Jimmy%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Ba%2C%20Jimmy%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202015"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Neil A Macmillan and C Douglas Creelman. Detection theory: A user\u2019s guide. Psychology press, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Macmillan%2C%20Neil%20A.%20Creelman%2C%20C.Douglas%20Detection%20theory%3A%20A%20user%E2%80%99s%20guide%202004"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Soroush Mehri, Kundan Kumar, Ishaan Gulrajani, Rithesh Kumar, Shubham Jain, Jose Sotelo, Aaron Courville, and Yoshua Bengio. Samplernn: An unconditional end-to-end neural audio generation model. Technical Report 1612.07837, arXiv, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mehri%2C%20Soroush%20Kumar%2C%20Kundan%20Gulrajani%2C%20Ishaan%20Kumar%2C%20Rithesh%20Samplernn%3A%20An%20unconditional%20end-to-end%20neural%20audio%20generation%20model%202016"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Aaron van den Oord, Yazhe Li, Igor Babuschkin, Karen Simonyan, Oriol Vinyals, Koray Kavukcuoglu, George van den Driessche, Edward Lockhart, Luis C Cobo, Florian Stimberg, et al. Parallel wavenet: Fast high-fidelity speech synthesis. Technical Report 1711.10433, arXiv, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=van%20den%20Oord%2C%20Aaron%20Li%2C%20Yazhe%20Babuschkin%2C%20Igor%20Simonyan%2C%20Karen%20Parallel%20wavenet%3A%20Fast%20high-fidelity%20speech%20synthesis%202017"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Wei Ping, Kainan Peng, Andrew Gibiansky, S Arik, Ajay Kannan, Sharan Narang, Jonathan Raiman, and John Miller. Deep voice 3: Scaling text-to-speech with convolutional sequence learning. In Proc. 6th International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ping%2C%20Wei%20Peng%2C%20Kainan%20Andrew%20Gibiansky%2C%20S.Arik%20Kannan%2C%20Ajay%20Deep%20voice%203%3A%20Scaling%20text-to-speech%20with%20convolutional%20sequence%20learning%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ping%2C%20Wei%20Peng%2C%20Kainan%20Andrew%20Gibiansky%2C%20S.Arik%20Kannan%2C%20Ajay%20Deep%20voice%203%3A%20Scaling%20text-to-speech%20with%20convolutional%20sequence%20learning%202018"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Fl\u00e1vio Ribeiro, Dinei Flor\u00eancio, Cha Zhang, and Michael Seltzer. Crowdmos: An approach for crowdsourcing mean opinion score studies. In Acoustics, Speech and Signal Processing (ICASSP), 2011 IEEE International Conference on, pages 2416\u20132419. IEEE, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ribeiro%2C%20Fl%C3%A1vio%20Flor%C3%AAncio%2C%20Dinei%20Zhang%2C%20Cha%20Seltzer%2C%20Michael%20Crowdmos%3A%20An%20approach%20for%20crowdsourcing%20mean%20opinion%20score%20studies%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ribeiro%2C%20Fl%C3%A1vio%20Flor%C3%AAncio%2C%20Dinei%20Zhang%2C%20Cha%20Seltzer%2C%20Michael%20Crowdmos%3A%20An%20approach%20for%20crowdsourcing%20mean%20opinion%20score%20studies%202011"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Jose Sotelo, Soroush Mehri, Kundan Kumar, Joao Felipe Santos, Kyle Kastner, Aaron Courville, and Yoshua Bengio. Char2wav: End-to-end speech synthesis. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sotelo%2C%20Jose%20Mehri%2C%20Soroush%20Kumar%2C%20Kundan%20Santos%2C%20Joao%20Felipe%20Char2wav%3A%20End-to-end%20speech%20synthesis%202017"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Sainbayar Sukhbaatar, Jason Weston, Rob Fergus, et al. End-to-end memory networks. In Advances in neural information processing systems, pages 2440\u20132448, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sukhbaatar%2C%20Sainbayar%20Weston%2C%20Jason%20Fergus%2C%20Rob%20End-to-end%20memory%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sukhbaatar%2C%20Sainbayar%20Weston%2C%20Jason%20Fergus%2C%20Rob%20End-to-end%20memory%20networks%202015"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Yaniv Taigman, Lior Wolf, Adam Polyak, and Eliya Nachmani. Voice synthesis for in-the-wild speakers via a phonological loop. Technical Report 1707.06588, arXiv, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Taigman%2C%20Yaniv%20Wolf%2C%20Lior%20Polyak%2C%20Adam%20Nachmani%2C%20Eliya%20Voice%20synthesis%20for%20in-the-wild%20speakers%20via%20a%20phonological%20loop%202017"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Aaron Van Den Oord, Sander Dieleman, Heiga Zen, Karen Simonyan, Oriol Vinyals, Alex Graves, Nal Kalchbrenner, Andrew Senior, and Koray Kavukcuoglu. Wavenet: A generative model for raw audio. Technical Report 1609.03499, arXiv, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Oord%2C%20Aaron%20Van%20Den%20Dieleman%2C%20Sander%20Zen%2C%20Heiga%20Simonyan%2C%20Karen%20Wavenet%3A%20A%20generative%20model%20for%20raw%20audio%202016"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Yuxuan Wang, RJ Skerry-Ryan, Daisy Stanton, Yonghui Wu, Ron J Weiss, Navdeep Jaitly, Zongheng Yang, Ying Xiao, Zhifeng Chen, Samy Bengio, et al. Tacotron: Towards end-to-end speech synthesis. Technical Report 1703.10135, arXiv, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yuxuan%20Wang%2C%20R.J.Skerry-Ryan%20Stanton%2C%20Daisy%20Wu%2C%20Yonghui%20Weiss%2C%20Ron%20J.%20Tacotron%3A%20Towards%20end-to-end%20speech%20synthesis%202017"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Ronald J Williams and David Zipser. Gradient-based learning algorithms for recurrent networks and their computational complexity. Backpropagation: Theory, architectures, and applications, 1:433\u2013486, 1995. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%2C%20Ronald%20J.%20Zipser%2C%20David%20Gradient-based%20learning%20algorithms%20for%20recurrent%20networks%20and%20their%20computational%20complexity%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Williams%2C%20Ronald%20J.%20Zipser%2C%20David%20Gradient-based%20learning%20algorithms%20for%20recurrent%20networks%20and%20their%20computational%20complexity%201995"
+        }
+    ]
+}

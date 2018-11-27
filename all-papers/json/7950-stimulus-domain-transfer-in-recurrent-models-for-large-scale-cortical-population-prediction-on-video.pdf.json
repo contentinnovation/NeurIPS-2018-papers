@@ -1,0 +1,331 @@
+{
+    "filename": "7950-stimulus-domain-transfer-in-recurrent-models-for-large-scale-cortical-population-prediction-on-video.pdf",
+    "metadata": {
+        "title": "Stimulus domain transfer in recurrent models for large scale cortical population prediction on video",
+        "author": "Fabian Sinz, Alexander S. Ecker, Paul Fahey, Edgar Walker, Erick Cobos, Emmanouil Froudarakis, Dimitri Yatsenko, Zachary Pitkow, Jacob Reimer, Andreas Tolias",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7950-stimulus-domain-transfer-in-recurrent-models-for-large-scale-cortical-population-prediction-on-video.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "To better understand the representations in visual cortex, we need to generate better predictions of neural activity in awake animals presented with their ecological input: natural video. Despite recent advances in models for static images, models for predicting responses to natural video are scarce and standard linear-nonlinear models perform poorly. We developed a new deep recurrent network architecture that predicts inferred spiking activity of thousands of mouse V1 neurons simultaneously recorded with two-photon microscopy, while accounting for confounding factors such as the animal\u2019s gaze position and brain state changes related to running state and pupil dilation. Powerful system identification models provide an opportunity to gain insight into cortical functions through in silico experiments that can subsequently be tested in the brain. However, in many cases this approach requires that the model is able to generalize to stimulus statistics that it was not trained on, such as band-limited noise and other parameterized stimuli. We investigated these domain transfer properties in our model and find that our model trained on natural images is able to correctly predict the orientation tuning of neurons in responses to artificial noise stimuli. Finally, we show that we can fully generalize from movies to noise and maintain high predictive performance on both stimulus domains by fine-tuning only the final layer\u2019s weights on a network otherwise trained on natural movies. The converse, however, is not true."
+    },
+    "keywords": [
+        {
+            "term": "cortical neuron",
+            "url": "https://en.wikipedia.org/wiki/cortical_neuron"
+        },
+        {
+            "term": "Intelligence Advanced Research Projects Activity",
+            "url": "https://en.wikipedia.org/wiki/Intelligence_Advanced_Research_Projects_Activity"
+        },
+        {
+            "term": "domain transfer",
+            "url": "https://en.wikipedia.org/wiki/domain_transfer"
+        },
+        {
+            "term": "eye movement",
+            "url": "https://en.wikipedia.org/wiki/eye_movement"
+        },
+        {
+            "term": "visual cortex",
+            "url": "https://en.wikipedia.org/wiki/visual_cortex"
+        },
+        {
+            "term": "network architecture",
+            "url": "https://en.wikipedia.org/wiki/network_architecture"
+        },
+        {
+            "term": "convolutional neural network",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_network"
+        },
+        {
+            "term": "system identification",
+            "url": "https://en.wikipedia.org/wiki/system_identification"
+        }
+    ],
+    "highlights": [
+        "The visual cortex represents natural stimuli in a complex and highly nonlinear way [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>]",
+        "This task is particularly challenging because a substantial portion of the response variability in cortical neurons is not driven by the stimulus, but by other factors such as eye movements under free-viewing conditions and brain state changes [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>\u2013<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>]",
+        "We make three contributions towards this goal: (i) we propose a novel recurrent neural network architecture that can simultaneously predict the responses of thousands of cortical neurons while accounting for neural variability caused by eye movements or brain state changes related to measurable factors such as running state or pupil dilations; we demonstrate that training our model on natural movies allows some extent of domain transfer and recovers neurons\u2019 tuning properties, such as orientation tuning, direction tuning, and receptive field structure, under artificial stimuli; and we analyze the limits of domain transfer to show that models trained directly on the target domain always outperform those trained on other domains in terms of predictive performance",
+        "We considered all neurons whose direction tuning functions had an R2 > 0.005 and an orientation selectivity index orientation selectivity index> 0.2 (R2 > 0.002 and DSI> 0.1 for direction selectivity; {D,O}SI=/ for rp, ra are the mean responses in the preferred and anti-preferred orientation/direction), and models trained on noise and natural movies, as well as with and without shifter and modulator networks (Figure 3c)",
+        "We show curves for neurons that were best predicted on natural images, among all neurons that exhibited direction tuning with R2 > 0.005 and an orientation selectivity index (OSI) > 0.2",
+        "We presented a novel recurrent network architecture that can fit the responses of thousands of neurons to movies"
+    ],
+    "key_statements": [
+        "The visual cortex represents natural stimuli in a complex and highly nonlinear way [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>]",
+        "This task is particularly challenging because a substantial portion of the response variability in cortical neurons is not driven by the stimulus, but by other factors such as eye movements under free-viewing conditions and brain state changes [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>\u2013<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>]",
+        "We make three contributions towards this goal: (i) we propose a novel recurrent neural network architecture that can simultaneously predict the responses of thousands of cortical neurons while accounting for neural variability caused by eye movements or brain state changes related to measurable factors such as running state or pupil dilations; we demonstrate that training our model on natural movies allows some extent of domain transfer and recovers neurons\u2019 tuning properties, such as orientation tuning, direction tuning, and receptive field structure, under artificial stimuli; and we analyze the limits of domain transfer to show that models trained directly on the target domain always outperform those trained on other domains in terms of predictive performance",
+        "Readout We model the neural response as an instantaneous affine function of the hidden state of the Gated Recurrent Unit at time t followed by an ELU nonlinearity and an offset of 1 to make the response positive",
+        "Modulator To account for fluctuations in neural responses unrelated to the visual stimulus, we use variables known to correlate with brain state\u2014pupil dilations and absolute running speed of the animal [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>, <a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>, <a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>]\u2014to predict, per timepoint, a neuron-specific multiplicative gain factor applied to the output of the readout layer",
+        "We compared our recurrent network to a linear-nonlinear model consisting of a 3D convolutional layer with filter size 13 and 36 channels, a batch norm layer, and the same readout, shifter, and modulator architecture as the recurrent model to allow it to account for variability unrelated to visual stimulus",
+        "Even though the linear-nonlinear network had on the same order of parameter and used the same shifter or modulator components, our recurrent network consistently performed better (Figure 2a)",
+        "We considered all neurons whose direction tuning functions had an R2 > 0.005 and an orientation selectivity index orientation selectivity index> 0.2 (R2 > 0.002 and DSI> 0.1 for direction selectivity; {D,O}SI=/ for rp, ra are the mean responses in the preferred and anti-preferred orientation/direction), and models trained on noise and natural movies, as well as with and without shifter and modulator networks (Figure 3c)",
+        "We show curves for neurons that were best predicted on natural images, among all neurons that exhibited direction tuning with R2 > 0.005 and an orientation selectivity index (OSI) > 0.2",
+        "We presented a novel recurrent network architecture that can fit the responses of thousands of neurons to movies",
+        "We demonstrated that both these factors can increase the prediction performance of the network and the ability to transfer neural properties between stimulus domains"
+    ],
+    "summary": [
+        "The visual cortex represents natural stimuli in a complex and highly nonlinear way [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>].",
+        "In order to understand these representations, we need predictive models that can account for neural responses to natural movies.",
+        "Modulator To account for fluctuations in neural responses unrelated to the visual stimulus, we use variables known to correlate with brain state\u2014pupil dilations and absolute running speed of the animal [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>, <a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>, <a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>]\u2014to predict, per timepoint, a neuron-specific multiplicative gain factor applied to the output of the readout layer.",
+        "We compared our recurrent network to a linear-nonlinear model consisting of a 3D convolutional layer with filter size 13 and 36 channels, a batch norm layer, and the same readout, shifter, and modulator architecture as the recurrent model to allow it to account for variability unrelated to visual stimulus.",
+        "In the following two sections, we explore to what extent a model trained on natural videos can predict neural responses and tuning properties determined by noise stimuli.",
+        "Figure 3a shows a selection of receptive fields for neurons with the best prediction scores on natural movies, along with the receptive field of the real neuron and the model trained on noise movies.",
+        "We computed direction tuning curves for the real neurons and their respective model neurons in models trained on noise and natural movies (Figure 3b).",
+        "We considered all neurons whose direction tuning functions had an R2 > 0.005 and an orientation selectivity index OSI> 0.2 (R2 > 0.002 and DSI> 0.1 for direction selectivity; {D,O}SI=/ for rp, ra are the mean responses in the preferred and anti-preferred orientation/direction), and models trained on noise and natural movies, as well as with and without shifter and modulator networks (Figure 3c).",
+        "For orientation selectivity models on natural movies without shifter and modulator components exhibit a larger variance (p < 0.03, p < 0.0015, p < 10\u221211 for the three scans using Levene\u2019 test) and slight biases in the median of the distribution.",
+        "One possible reason for this could be that a network core trained on natural movies does not provide the right features to predict responses to noise.",
+        "(c-d) Difference in preferred orientation and direction between neurons and model neurons trained on either natural or noise movies for model with shifter and modulators, and without.",
+        "We demonstrated that this network trained on natural movies captures neuronal tuning properties determined on noise.",
+        "To the best of our knowledge, this network is state-of-the-art in predicting neural responses to natural video"
+    ],
+    "headline": "We developed a new deep recurrent network architecture that predicts inferred spiking activity of thousands of mouse V1 neurons simultaneously recorded with two-photon microscopy, while accounting for confounding factors such as the animal\u2019s gaze position and brain state changes related to running state and pupil dilation",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] S. V. David, W. E. Vinje, and J. L. Gallant. Natural Stimulus Statistics Alter the Receptive Field Structure of V1 Neurons. Journal of Neuroscience, 24(31):6991\u20137006, 2004. ISSN 0270-6474. doi: 10.1523/JNEUROSCI.1422-04.2004.",
+            "crossref": "https://dx.doi.org/10.1523/JNEUROSCI.1422-04.2004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1523/JNEUROSCI.1422-04.2004"
+        },
+        {
+            "id": "2",
+            "entry": "[2] J. Fournier, C. Monier, M. Pananceau, and Y. Fr\u00e9gnac. Adaptation of the simple or complex nature of V1 receptive fields to visual statistics. Nature Neuroscience, 14(8):1053\u20131060, 2011. doi: 10.1038/nn.2861.",
+            "crossref": "https://dx.doi.org/10.1038/nn.2861",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1038/nn.2861"
+        },
+        {
+            "id": "3",
+            "entry": "[3] C. Stringer, M. Pachitariu, Ni. Steinmetz, C. Reddy, M. Carandini, and K. D. Harris. Spontaneous behaviors drive multidimensional , brain-wide neural activity. Technical report, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Stringer%2C%20C.%20Pachitariu%2C%20M.%20Ni.%20Steinmetz%2C%20C.Reddy%20Carandini%2C%20M.%20Spontaneous%20behaviors%20drive%20multidimensional%20%2C%20brain-wide%20neural%20activity%202018"
+        },
+        {
+            "id": "4",
+            "entry": "[4] J. Reimer, E. Froudarakis, C. R. Cadwell, D. Yatsenko, G. H. Denfield, and A. S. Tolias. Pupil Fluctuations Track Fast Switching of Cortical States during Quiet Wakefulness. Neuron, 84(2): 355\u2013362, 2014. ISSN 08966273. doi: 10.1016/j.neuron.2014.09.033.",
+            "crossref": "https://dx.doi.org/10.1016/j.neuron.2014.09.033",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1016/j.neuron.2014.09.033"
+        },
+        {
+            "id": "5",
+            "entry": "[5] M. J. McGinley, M. Vinck, J. Reimer, R. Batista-Brito, E. Zagha, C. R. Cadwell, Andreas S. Tolias, J. A. Cardin, and D. A. McCormick. Waking state: rapid variations modulate neural and behavioral responses. Neuron, 87(6):1143\u20131161, 2015. ISSN 08966273. doi: 10.1016/j.neuron. 2015.09.012.",
+            "crossref": "https://dx.doi.org/10.1016/j.neuron.2015.09.012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1016/j.neuron.2015.09.012"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Cristopher M. Niell and Michael P. Stryker. Modulation of Visual Responses by Behavioral State in Mouse Visual Cortex. Neuron, 65(4):472\u2013479, 2010. ISSN 08966273. doi: 10.1016/j. neuron.2010.01.033.",
+            "crossref": "https://dx.doi.org/10.1016/j.neuron.2010.01.033",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1016/j.neuron.2010.01.033"
+        },
+        {
+            "id": "7",
+            "entry": "[7] A. Paszke, S. Gross, S. Chintala, G. Chanan, E Yang, Z. DeVito, Z. Lin, A. Desmaison, K. Antiga, and A. Lerer. Automatic differentiation in pytorch. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Paszke%2C%20A.%20Gross%2C%20S.%20Chintala%2C%20S.%20Chanan%2C%20G.%20Automatic%20differentiation%20in%20pytorch%202017"
+        },
+        {
+            "id": "8",
+            "entry": "[8] A. S. Ecker, P. Berens, R. J. Cotton, M. Subramaniyan, G. H. Denfield, C. R. Cadwell, S. M. Smirnakis, M. Bethge, and A. S. Tolias. State dependence of noise correlations in macaque primary visual cortex. Neuron, 82(1):235\u201348, apr 2014. ISSN 1097-4199. doi: 10.1016/j.neuron. 2014.02.006. URL http://www.cell.com/article/S0896627314001044/fulltext.",
+            "crossref": "https://dx.doi.org/10.1016/j.neuron.2014.02.006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1016/j.neuron.2014.02.006"
+        },
+        {
+            "id": "9",
+            "entry": "[9] J. F A Poulet and C. C H Petersen. Internal brain state regulates membrane potential synchrony in barrel cortex of behaving mice. Nature, 454(7206):881\u2013885, 2008. ISSN 00280836. doi: 10.1038/nature07150.",
+            "crossref": "https://dx.doi.org/10.1038/nature07150",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1038/nature07150"
+        },
+        {
+            "id": "10",
+            "entry": "[10] S. A. Cadena, G. H. Denfield, E. Y. Walker, L. A. Gatys, A. S. Tolias, M. Bethge, and A. S. Ecker. Deep convolutional models improve predictions of macaque v1 responses to natural images. bioRxiv, 2017. doi: 10.1101/201764.",
+            "crossref": "https://dx.doi.org/10.1101/201764"
+        },
+        {
+            "id": "11",
+            "entry": "[11] William F. Kindel, Elijah D. Christensen, and Joel Zylberberg. Using deep learning to reveal the neural code for images in primary visual cortex. arXiv:1706.06208 [cs, q-bio], 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.06208"
+        },
+        {
+            "id": "12",
+            "entry": "[12] D. Klindt, A. S. Ecker, T. Euler, and M. Bethge. Neural system identification for large populations separating \u201cwhat\u201d and \u201cwhere\u201d. In Advances in Neural Information Processing Systems 30, Sep 2017. in press.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Klindt%2C%20D.%20Ecker%2C%20A.S.%20Euler%2C%20T.%20Bethge%2C%20M.%20Neural%20system%20identification%20for%20large%20populations%20separating%20%E2%80%9Cwhat%E2%80%9D%20and%20%E2%80%9Cwhere%E2%80%9D%202017-09-30",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Klindt%2C%20D.%20Ecker%2C%20A.S.%20Euler%2C%20T.%20Bethge%2C%20M.%20Neural%20system%20identification%20for%20large%20populations%20separating%20%E2%80%9Cwhat%E2%80%9D%20and%20%E2%80%9Cwhere%E2%80%9D%202017-09-30"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Yimeng Zhang, Tai Sing Lee, Ming Li, Fang Liu, and Shiming Tang. Convolutional neural network models of V1 responses to complex patterns. bioRxiv, page 296301, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Yimeng%20Lee%2C%20Tai%20Sing%20Li%2C%20Ming%20Liu%2C%20Fang%20Convolutional%20neural%20network%20models%20of%20V1%20responses%20to%20complex%20patterns%202018"
+        },
+        {
+            "id": "14",
+            "entry": "[14] K Cho, B. von Merrienboer, C. Gulcehre, D. Bahdanau, F. Bougares, H. Schwenk, and Y. Bengio. Learning Phrase Representations using RNN Encoder\u2013Decoder for Statistical Machine Translation. Technical report, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cho%2C%20K.%20von%20Merrienboer%2C%20B.%20Gulcehre%2C%20C.%20Bahdanau%2C%20D.%20Learning%20Phrase%20Representations%20using%20RNN%20Encoder%E2%80%93Decoder%20for%20Statistical%20Machine%20Translation%202014"
+        },
+        {
+            "id": "15",
+            "entry": "[15] S. Ioffe and C. Szegedy. Batch Normalization : Accelerating Deep Network Training by Reducing Internal Covariate Shift. Technical report, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ioffe%2C%20S.%20C.%20Szegedy.%20Batch%20Normalization%20%3A%20Accelerating%20Deep%20Network%20Training%20by%20Reducing%20Internal%20Covariate%20Shift%202015"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Djork-Arn\u00e9 Clevert, Thomas Unterthiner, and Sepp Hochreiter. Fast and Accurate Deep Network Learning by Exponential Linear Units (ELUs). pages 1\u201314, 2015. ISSN 09226389. doi: 10.3233/978-1-61499-672-9-1760.",
+            "crossref": "https://dx.doi.org/10.3233/978-1-61499-672-9-1760"
+        },
+        {
+            "id": "17",
+            "entry": "[17] G. Huang, Z. Liu, K. Q. Weinberger, and L. van der Maaten. Densely Connected Convolutional Networks. In CVPR, 2017. doi: 10.1109/CVPR.2017.243.",
+            "crossref": "https://dx.doi.org/10.1109/CVPR.2017.243",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1109/CVPR.2017.243"
+        },
+        {
+            "id": "18",
+            "entry": "[18] M. Pachitariu and M. Sahani. Learning visual motion in recurrent neural networks. In F. Pereira, C. J. C. Burges, L. Bottou, and K. Q. Weinberger, editors, Advances in Neural Information Processing Systems 25, pages 1322\u20131330. Curran Associates, Inc., 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pachitariu%2C%20M.%20Sahani%2C%20M.%20Learning%20visual%20motion%20in%20recurrent%20neural%20networks%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pachitariu%2C%20M.%20Sahani%2C%20M.%20Learning%20visual%20motion%20in%20recurrent%20neural%20networks%202012"
+        },
+        {
+            "id": "19",
+            "entry": "[19] M. Jaderberg, K. Simonyan, A. Zisserman, and K. Kavukcuoglu. Spatial transformer networks. In C. Cortes, N. D. Lawrence, D. D. Lee, M. Sugiyama, and R. Garnett, editors, Advances in Neural Information Processing Systems 28, pages 2017\u20132025. Curran Associates, Inc., 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jaderberg%2C%20M.%20Simonyan%2C%20K.%20Zisserman%2C%20A.%20Kavukcuoglu%2C%20K.%20Spatial%20transformer%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jaderberg%2C%20M.%20Simonyan%2C%20K.%20Zisserman%2C%20A.%20Kavukcuoglu%2C%20K.%20Spatial%20transformer%20networks%202015"
+        },
+        {
+            "id": "20",
+            "entry": "[20] D. Zoccolan, B. Graham, and D. Cox. A self-calibrating, camera-based eye tracker for the recording of rodent eye movements. Frontiers in Neuroscience, 4:193, 2010. ISSN 1662-453X. doi: 10.3389/fnins.2010.00193.",
+            "crossref": "https://dx.doi.org/10.3389/fnins.2010.00193",
+            "arxiv_url": "https://arxiv.org/pdf/2010.00193"
+        },
+        {
+            "id": "21",
+            "entry": "[21] J.S Stahl, A.M van Alphen, and C.I De Zeeuw. A comparison of video and magnetic search coil recordings of mouse eye movements. 99(1):101\u2013110. ISSN 0165-0270. doi: 10.1016/ S0165-0270(00)00218-1.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Stahl%2C%20J.S.%20van%20Alphen%2C%20A.M.%20C.%20I%20De%20Zeeuw.%20A%20comparison%20of%20video%20and%20magnetic%20search%20coil%20recordings%20of%20mouse%20eye%20movements",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Stahl%2C%20J.S.%20van%20Alphen%2C%20A.M.%20C.%20I%20De%20Zeeuw.%20A%20comparison%20of%20video%20and%20magnetic%20search%20coil%20recordings%20of%20mouse%20eye%20movements"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Bart van Alphen, Beerend H. J. Winkelman, and Maarten A. Frens. Three-dimensional optokinetic eye movements in the c57bl/6j mouse. 51(1):623\u2013630. doi: 10.1167/iovs.09-4072.",
+            "crossref": "https://dx.doi.org/10.1167/iovs.09-4072"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Y. Fu, J. M. Tucciarone, J. S. Espinosa, N. Sheng, D. P. Darcy, R. A. Nicoll, Z. J. Huang, and M. P. Stryker. A cortical circuit for gain control by behavioral state. Cell, 156(6):1139\u20131152, 2014. ISSN 10974172. doi: 10.1016/j.cell.2014.01.050.",
+            "crossref": "https://dx.doi.org/10.1016/j.cell.2014.01.050",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1016/j.cell.2014.01.050"
+        },
+        {
+            "id": "24",
+            "entry": "[24] S. V. David and J. L. Gallant. Predicting neuronal responses during natural vision. Network: Computation in Neural Systems, 16(2-3):239\u2013260, 2005. ISSN 0954898X. doi: 10.1080/ 09548980500464030.",
+            "crossref": "https://dx.doi.org/10.1080/09548980500464030",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1080/09548980500464030"
+        },
+        {
+            "id": "25",
+            "entry": "[25] S. Nishimoto and J. L. Gallant. A Three-Dimensional Spatiotemporal Receptive Field Model Explains Responses of Area MT Neurons to Naturalistic Movies. Journal of Neuroscience, 31 (41):14551\u201314564, 2011. ISSN 0270-6474. doi: 10.1523/JNEUROSCI.6801-10.2011.",
+            "crossref": "https://dx.doi.org/10.1523/JNEUROSCI.6801-10.2011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1523/JNEUROSCI.6801-10.2011"
+        },
+        {
+            "id": "26",
+            "entry": "[26] R. Prenger, M. C. K. Wu, S. V. David, and J. L. Gallant. Nonlinear V1 responses to natural scenes revealed by neural network analysis. Neural Networks, 17(5-6):663\u2013679, 2004. ISSN 08936080. doi: 10.1016/j.neunet.2004.03.008.",
+            "crossref": "https://dx.doi.org/10.1016/j.neunet.2004.03.008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1016/j.neunet.2004.03.008"
+        },
+        {
+            "id": "27",
+            "entry": "[27] B. Lau, G. B. Stanley, and Y. Dan. Computational subunits of visual cortical neurons revealed by artificial neural networks. Proceedings of the National Academy of Sciences, 99(13):8974\u20138979, 2002. ISSN 0027-8424. doi: 10.1073/pnas.122173799.",
+            "crossref": "https://dx.doi.org/10.1073/pnas.122173799",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1073/pnas.122173799"
+        },
+        {
+            "id": "28",
+            "entry": "[28] B. Vintch, J. A. Movshon, and E. P. Simoncelli. A Convolutional Subunit Model for Neuronal Responses in Macaque V1. The Journal of neuroscience : the official journal of the Society for Neuroscience, 35(44):14829\u201341, 2015. ISSN 1529-2401. doi: 10.1523/JNEUROSCI.2815-13. 2015.",
+            "crossref": "https://dx.doi.org/10.1523/JNEUROSCI.2815-13.2015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1523/JNEUROSCI.2815-13.2015"
+        },
+        {
+            "id": "29",
+            "entry": "[29] E. Batty, J. Merel, N. Brackbill, A. Heitman, A. Sher, A. Litke, E. J. Chichilnisky, and L. Paninski. Multilayer network models of primate retinal ganglion cells. Number Nips, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Batty%2C%20E.%20Merel%2C%20J.%20Brackbill%2C%20N.%20Heitman%2C%20A.%20Multilayer%20network%20models%20of%20primate%20retinal%20ganglion%20cells%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Batty%2C%20E.%20Merel%2C%20J.%20Brackbill%2C%20N.%20Heitman%2C%20A.%20Multilayer%20network%20models%20of%20primate%20retinal%20ganglion%20cells%202016"
+        },
+        {
+            "id": "30",
+            "entry": "[30] D. Sussillo, R. Jozefowicz, L. F. Abbott, and C. Pandarinath. LFADS - Latent Factor Analysis via Dynamical Systems. Technical report, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sussillo%2C%20D.%20Jozefowicz%2C%20R.%20Abbott%2C%20L.F.%20Pandarinath%2C%20C.%20LFADS%20-%20Latent%20Factor%20Analysis%20via%20Dynamical%20Systems%202016"
+        },
+        {
+            "id": "31",
+            "entry": "[31] S. R. Lehky, T. J. Sejnowski, and R. Desimone. Predicting responses of nonlinear neurons in monkey striate cortex to complex patterns. The Journal of Neuroscience, 12(9):3568\u20133581, 1992. ISSN 0270-6474.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lehky%2C%20S.R.%20Sejnowski%2C%20T.J.%20Desimone%2C%20R.%20Predicting%20responses%20of%20nonlinear%20neurons%20in%20monkey%20striate%20cortex%20to%20complex%20patterns%201992",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lehky%2C%20S.R.%20Sejnowski%2C%20T.J.%20Desimone%2C%20R.%20Predicting%20responses%20of%20nonlinear%20neurons%20in%20monkey%20striate%20cortex%20to%20complex%20patterns%201992"
+        },
+        {
+            "id": "32",
+            "entry": "[32] J. Antol\u00edk, S. B. Hofer, J. A. Bednar, and T. D. Mrsic-flogel. Model Constrained by Visual Hierarchy Improves Prediction of Neural Responses to Natural Scenes. PLoS Comput Biol, pages 1\u201322, 2016. ISSN 1553-7358. doi: 10.1371/journal.pcbi.1004927.",
+            "crossref": "https://dx.doi.org/10.1371/journal.pcbi.1004927",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1371/journal.pcbi.1004927"
+        },
+        {
+            "id": "33",
+            "entry": "[33] D. Zipser and R.A. A. Andersen. A back-propagation programmed network that simulates response properties of a subset of posterior parietal neurons. Nature, 331(6158):679\u2013684, 1988. ISSN 0028-0836. doi: 10.1038/331679a0.",
+            "crossref": "https://dx.doi.org/10.1038/331679a0",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1038/331679a0"
+        },
+        {
+            "id": "34",
+            "entry": "[34] E. A. Pnevmatikakis, Y. Gao, D. Soudry, D. Pfau, C. Lacefield, K. Pskanzer, R. Bruno, R. Yuste, and L. Paninski. Simultaneous Denoising, Deconvolution, and Demixing of Calcium Imaging Data Eftychios. Neuron, 89:285\u2013299, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pnevmatikakis%2C%20E.A.%20Gao%2C%20Y.%20Soudry%2C%20D.%20Pfau%2C%20D.%20Simultaneous%20Denoising%2C%20Deconvolution%2C%20and%20Demixing%20of%20Calcium%20Imaging%20Data%20Eftychios%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pnevmatikakis%2C%20E.A.%20Gao%2C%20Y.%20Soudry%2C%20D.%20Pfau%2C%20D.%20Simultaneous%20Denoising%2C%20Deconvolution%2C%20and%20Demixing%20of%20Calcium%20Imaging%20Data%20Eftychios%202016"
+        },
+        {
+            "id": "35",
+            "entry": "[35] N. J. Sofroniew, D. Flickinger, J. King, and K. Svoboda. A large field of view two-photon mesoscope with subcellular resolution for in vivo imaging. eLife, 5(JUN2016):1\u201320, 2016. ISSN 2050084X. doi: 10.7554/eLife.14472.",
+            "crossref": "https://dx.doi.org/10.7554/eLife.14472",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.7554/eLife.14472"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Andrej Karpathy, George Toderici, Sanketh Shetty, Thomas Leung, Rahul Sukthankar, and Li Fei-Fei. Large-scale video classification with convolutional neural networks. In CVPR, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Karpathy%2C%20Andrej%20Toderici%2C%20George%20Shetty%2C%20Sanketh%20Leung%2C%20Thomas%20Large-scale%20video%20classification%20with%20convolutional%20neural%20networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Karpathy%2C%20Andrej%20Toderici%2C%20George%20Shetty%2C%20Sanketh%20Leung%2C%20Thomas%20Large-scale%20video%20classification%20with%20convolutional%20neural%20networks%202014"
+        },
+        {
+            "id": "37",
+            "entry": "[37] D. Yatsenko, J. Reimer, A. S. Ecker, E. Y. Walker, F. Sinz, P. Berens, A. Hoenselaar, R. J. Cotton, A. S. Siapas, and A. S. Tolias. DataJoint: managing big scientific data using MATLAB or Python. Technical report, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yatsenko%2C%20D.%20Reimer%2C%20J.%20Ecker%2C%20A.S.%20Walker%2C%20E.Y.%20DataJoint%3A%20managing%20big%20scientific%20data%20using%20MATLAB%20or%20Python%202015"
+        },
+        {
+            "id": "38",
+            "entry": "[38] St\u00e9fan van der Walt, S Chris Colbert, and Gael Varoquaux. The numpy array: a structure for efficient numerical computation. Computing in Science & Engineering, 13(2):22\u201330, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=St%C3%A9fan%20van%20der%20Walt%2C%20S.Chris%20Colbert%20Varoquaux%2C%20Gael%20The%20numpy%20array%3A%20a%20structure%20for%20efficient%20numerical%20computation%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=St%C3%A9fan%20van%20der%20Walt%2C%20S.Chris%20Colbert%20Varoquaux%2C%20Gael%20The%20numpy%20array%3A%20a%20structure%20for%20efficient%20numerical%20computation%202011"
+        },
+        {
+            "id": "39",
+            "entry": "[39] John D Hunter. Matplotlib: A 2d graphics environment. Computing in science & engineering, 9(3):90\u201395, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hunter%2C%20John%20D.%20Matplotlib%3A%20A%202d%20graphics%20environment%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hunter%2C%20John%20D.%20Matplotlib%3A%20A%202d%20graphics%20environment%202007"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Michael Waskom, Olga Botvinnik, Drew O\u2019Kane, Paul Hobson, Saulius Lukauskas, David C Gemperline, Tom Augspurger, Yaroslav Halchenko, John B. Cole, Jordi Warmenhoven, Julian de Ruiter, Cameron Pye, Stephan Hoyer, Jake Vanderplas, Santi Villalba, Gero Kunter, Eric Quintero, Pete Bachant, Marcel Martin, Kyle Meyer, Alistair Miles, Yoav Ram, Tal Yarkoni, Mike Lee Williams, Constantine Evans, Clark Fitzgerald, Brian, Chris Fonnesbeck, Antony Lee, and Adel Qalieh. mwaskom/seaborn: v0.8.1 (september 2017), September 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Michael%20Waskom%20Olga%20Botvinnik%20Drew%20OKane%20Paul%20Hobson%20Saulius%20Lukauskas%20David%20C%20Gemperline%20Tom%20Augspurger%20Yaroslav%20Halchenko%20John%20B%20Cole%20Jordi%20Warmenhoven%20Julian%20de%20Ruiter%20Cameron%20Pye%20Stephan%20Hoyer%20Jake%20Vanderplas%20Santi%20Villalba%20Gero%20Kunter%20Eric%20Quintero%20Pete%20Bachant%20Marcel%20Martin%20Kyle%20Meyer%20Alistair%20Miles%20Yoav%20Ram%20Tal%20Yarkoni%20Mike%20Lee%20Williams%20Constantine%20Evans%20Clark%20Fitzgerald%20Brian%20Chris%20Fonnesbeck%20Antony%20Lee%20and%20Adel%20Qalieh%20mwaskomseaborn%20v081%20september%202017%20September%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Michael%20Waskom%20Olga%20Botvinnik%20Drew%20OKane%20Paul%20Hobson%20Saulius%20Lukauskas%20David%20C%20Gemperline%20Tom%20Augspurger%20Yaroslav%20Halchenko%20John%20B%20Cole%20Jordi%20Warmenhoven%20Julian%20de%20Ruiter%20Cameron%20Pye%20Stephan%20Hoyer%20Jake%20Vanderplas%20Santi%20Villalba%20Gero%20Kunter%20Eric%20Quintero%20Pete%20Bachant%20Marcel%20Martin%20Kyle%20Meyer%20Alistair%20Miles%20Yoav%20Ram%20Tal%20Yarkoni%20Mike%20Lee%20Williams%20Constantine%20Evans%20Clark%20Fitzgerald%20Brian%20Chris%20Fonnesbeck%20Antony%20Lee%20and%20Adel%20Qalieh%20mwaskomseaborn%20v081%20september%202017%20September%202017"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Thomas Kluyver, Benjamin Ragan-Kelley, Fernando P\u00e9rez, Brian Granger, Matthias Bussonnier, Jonathan Frederic, Kyle Kelley, Jessica Hamrick, Jason Grout, Sylvain Corlay, Paul Ivanov, Dami\u00e1n Avila, Safia Abdalla, and Carol Willing. Jupyter notebooks \u2013 a publishing format for reproducible computational workflows. In F. Loizides and B. Schmidt, editors, Positioning and Power in Academic Publishing: Players, Agents and Agendas, pages 87 \u2013 90. IOS Press, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kluyver%2C%20Thomas%20Ragan-Kelley%2C%20Benjamin%20P%C3%A9rez%2C%20Fernando%20Granger%2C%20Brian%20Jupyter%20notebooks%20%E2%80%93%20a%20publishing%20format%20for%20reproducible%20computational%20workflows%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kluyver%2C%20Thomas%20Ragan-Kelley%2C%20Benjamin%20P%C3%A9rez%2C%20Fernando%20Granger%2C%20Brian%20Jupyter%20notebooks%20%E2%80%93%20a%20publishing%20format%20for%20reproducible%20computational%20workflows%202016"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Dirk Merkel. Docker: Lightweight linux containers for consistent development and deployment. Linux J., 2014(239), March 2014. ISSN 1075-3583.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Merkel%2C%20Dirk%20Docker%3A%20Lightweight%20linux%20containers%20for%20consistent%20development%20and%20deployment%202014-03",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Merkel%2C%20Dirk%20Docker%3A%20Lightweight%20linux%20containers%20for%20consistent%20development%20and%20deployment%202014-03"
+        },
+        {
+            "id": "43",
+            "entry": "[43] D. P. Kingma and J. Ba. Adam: A method for stochastic optimization. arXiv preprint arXiv:1412.6980, 2014. ",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6980"
+        }
+    ]
+}

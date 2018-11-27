@@ -1,0 +1,200 @@
+{
+    "filename": "7508-modular-networks-learning-to-decompose-neural-computation.pdf",
+    "metadata": {
+        "title": "Modular Networks: Learning to Decompose Neural Computation",
+        "author": "Louis Kirsch, Julius Kunze, David Barber",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7508-modular-networks-learning-to-decompose-neural-computation.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Scaling model capacity has been vital in the success of deep learning. For a typical network, necessary compute resources and training time grow dramatically with model size. Conditional computation is a promising way to increase the number of parameters with a relatively small increase in resources. We propose a training algorithm that flexibly chooses neural modules based on the data to be processed. Both the decomposition and modules are learned end-to-end. In contrast to existing approaches, training does not rely on regularization to enforce diversity in module use. We apply modular networks both to image recognition and language modeling tasks, where we achieve superior performance compared to several baselines. Introspection reveals that modules specialize in interpretable contexts."
+    },
+    "keywords": [
+        {
+            "term": "neural networks",
+            "url": "https://en.wikipedia.org/wiki/neural_networks"
+        },
+        {
+            "term": "neural computation",
+            "url": "https://en.wikipedia.org/wiki/neural_computation"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "language modeling",
+            "url": "https://en.wikipedia.org/wiki/language_modeling"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        }
+    ],
+    "highlights": [
+        "When enough data and training time is available, increasing the number of network parameters typically improves prediction accuracy [<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>, <a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>, <a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>]",
+        "While the largest artificial neural networks currently only have a few billion parameters [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>], the usefulness of much larger scales is suggested by the fact that human brain has evolved to have an estimated 150 trillion synapses [<a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>] under tight energy constraints",
+        "Typically all parts of a network need to be executed for every data input",
+        "We propose a novel way of training neural networks by automatically decomposing the functionality needed for solving a given task into reusable modules",
+        "Figure 2 visualizes the above clustering process for a simple feed-forward neural network composed of 6 modular layers with K = 1 modules being selected at each layer out of a possible M = 3 modules",
+        "We introduced a novel method to decompose neural computation into modules, learning both the decomposition as well as the modules jointly"
+    ],
+    "key_statements": [
+        "When enough data and training time is available, increasing the number of network parameters typically improves prediction accuracy [<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>, <a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>, <a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>]",
+        "While the largest artificial neural networks currently only have a few billion parameters [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>], the usefulness of much larger scales is suggested by the fact that human brain has evolved to have an estimated 150 trillion synapses [<a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>] under tight energy constraints",
+        "Typically all parts of a network need to be executed for every data input",
+        "We propose a novel way of training neural networks by automatically decomposing the functionality needed for solving a given task into reusable modules",
+        "Figure 2 visualizes the above clustering process for a simple feed-forward neural network composed of 6 modular layers with K = 1 modules being selected at each layer out of a possible M = 3 modules",
+        "We introduced a novel method to decompose neural computation into modules, learning both the decomposition as well as the modules jointly",
+        "We have introduced a simple and effective way to learn such networks, opening up a range of possibilities for their future application in areas such as transfer learning, reinforcement learning and lifelong learning"
+    ],
+    "summary": [
+        "When enough data and training time is available, increasing the number of network parameters typically improves prediction accuracy [<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>, <a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>, <a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>].",
+        "In each partial M-step the module parameters \u03b8 are adjusted to learn the functionality required by the respective datapoints assigned to them.",
+        "By optimizing the parameters \u03c6 we train the controller to predict the current optimal module selection an\u2217 for each datapoint.",
+        "Figure 2 visualizes the above clustering process for a simple feed-forward neural network composed of 6 modular layers with K = 1 modules being selected at each layer out of a possible M = 3 modules.",
+        "Related work [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>, <a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>] uses two different training approaches that can be applied to our modular architecture.",
+        "Alternative training methods for our modular networks are noisy top-k gating [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>], as well as REINFORCE [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>] to which we will compare our approach.",
+        "In the case of our toy example, we use a single modular layer, L = 1, with a pool of two modules, M = 2, where one module is selected per data point, K = 1.",
+        "Our modular networks successfully decompose the problem into modules yielding perfect training and generalization performance.",
+        "We compare the EM-based modular networks approach to unregularized REINFORCE and noisy top-k, as well as a baseline without modularity, that uses the same K modules for all datapoints.",
+        "Apart from the controller network, the baseline with three static modules performs three times the computation and achieves worse test perplexity compared to a single intelligently selected module using our method.",
+        "Compared to the REINFORCE and noisy-top-k training methods, our approach has lower test perplexities for each module configuration.",
+        "All modules are effectively being used at the end of training, as shown by a large batch module selection entropy in Figure 4b.",
+        "The optimization is generally less noisy compared to the alternative approaches and the method quickly reaches a deterministic module selection.",
+        "Figure 5 shows how the module selection changes over the course of training for a single batch.",
+        "Our modular networks use a different training algorithm, generalized Viterbi EM, enabling the training of modules without any artificial regularization.",
+        "Our method produces fully deterministic module choices instead of mixtures, does not require any regularization to make use of all modules, and results in less noisy training.",
+        "We applied our method in language modeling and image classification, showing how to learn modules for these different tasks."
+    ],
+    "headline": "We propose a training algorithm that flexibly chooses neural modules based on the data to be processed",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] D. Amodei et al. \u201cDeep Speech 2: End-to-End Speech Recognition in English and Mandarin\u201d. In: ICML (2015).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Amodei%2C%20D.%20Deep%20Speech%202%3A%20End-to-End%20Speech%20Recognition%20in%20English%20and%20Mandarin%202015"
+        },
+        {
+            "id": "2",
+            "entry": "[2] E. Bengio. \u201cOn Reinforcement Learning for Deep Neural Architectures: Conditional Computation with Stochastic Computation Policies\u201d. PhD thesis. McGill University Libraries, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bengio%2C%20E.%20On%20Reinforcement%20Learning%20for%20Deep%20Neural%20Architectures%3A%20Conditional%20Computation%20with%20Stochastic%20Computation%20Policies%202017"
+        },
+        {
+            "id": "3",
+            "entry": "[3] E. Bengio et al. \u201cConditional Computation in Neural Networks for Faster Models\u201d. In: ICLR Workshop (2016).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bengio%2C%20E.%20Conditional%20Computation%20in%20Neural%20Networks%20for%20Faster%20Models%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bengio%2C%20E.%20Conditional%20Computation%20in%20Neural%20Networks%20for%20Faster%20Models%202016"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Y. Bengio, N. L\u00e9onard, and A. Courville. \u201cEstimating or propagating gradients through stochastic neurons for conditional computation\u201d. In: arXiv preprint arXiv:1308.3432 (2013).",
+            "arxiv_url": "https://arxiv.org/pdf/1308.3432"
+        },
+        {
+            "id": "5",
+            "entry": "[5] K. Cho et al. \u201cLearning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation\u201d. In: Conference on Empirical Methods in Natural Language Processing (2014).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cho%2C%20K.%20Learning%20Phrase%20Representations%20using%20RNN%20Encoder-Decoder%20for%20Statistical%20Machine%20Translation%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cho%2C%20K.%20Learning%20Phrase%20Representations%20using%20RNN%20Encoder-Decoder%20for%20Statistical%20Machine%20Translation%202014"
+        },
+        {
+            "id": "6",
+            "entry": "[6] I. Clavera, D. Held, and P. Abbeel. \u201cPolicy transfer via modularity and reward guiding\u201d. IEEE International Conference on Intelligent Robots and Systems. Vol. 2017-Septe. 2017, pp. 1537\u20131544.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Clavera%2C%20I.%20Held%2C%20D.%20Abbeel%2C%20P.%20Policy%20transfer%20via%20modularity%20and%20reward%20guiding%202017-09",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Clavera%2C%20I.%20Held%2C%20D.%20Abbeel%2C%20P.%20Policy%20transfer%20via%20modularity%20and%20reward%20guiding%202017-09"
+        },
+        {
+            "id": "7",
+            "entry": "[7] J. Clune, Mouret J-B., and H. Lipson. \u201cThe evolutionary origins of modularity\u201d. In: Proceedings of the Royal Society of London B: Biological Sciences 280.1755 (2013).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Clune%2C%20J.%20J-B.%2C%20Mouret%20Lipson%2C%20H.%20The%20evolutionary%20origins%20of%20modularity%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Clune%2C%20J.%20J-B.%2C%20Mouret%20Lipson%2C%20H.%20The%20evolutionary%20origins%20of%20modularity%202013"
+        },
+        {
+            "id": "8",
+            "entry": "[8] A. Coates et al. \u201cDeep learning with COTS HPC systems\u201d. In: ICML (2013), pp. 1337\u20131345.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Coates%2C%20A.%20Deep%20learning%20with%20COTS%20HPC%20systems%202013"
+        },
+        {
+            "id": "9",
+            "entry": "[9] D. Eigen, M. Ranzato, and I. Sutskever. \u201cLearning Factored Representations in a Deep Mixture of Experts\u201d. In: ICLR Workshop (2013).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Eigen%2C%20D.%20Ranzato%2C%20M.%20Sutskever%2C%20I.%20Learning%20Factored%20Representations%20in%20a%20Deep%20Mixture%20of%20Experts%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Eigen%2C%20D.%20Ranzato%2C%20M.%20Sutskever%2C%20I.%20Learning%20Factored%20Representations%20in%20a%20Deep%20Mixture%20of%20Experts%202013"
+        },
+        {
+            "id": "10",
+            "entry": "[10] R. A. Jacobs et al. \u201cAdaptive Mixtures of Local Experts\u201d. In: Neural Computation 3.1 (1991), pp. 79\u201387.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jacobs%2C%20R.A.%20Adaptive%20Mixtures%20of%20Local%20Experts%201991",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jacobs%2C%20R.A.%20Adaptive%20Mixtures%20of%20Local%20Experts%201991"
+        },
+        {
+            "id": "11",
+            "entry": "[11] M. I. Jordan and R. A. Jacobs. \u201cHierarchical Mixtures of Experts and the EM Algorithm\u201d. In: Neural Computation 6.2 (1994), pp. 181\u2013214.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jordan%2C%20M.I.%20Jacobs%2C%20R.A.%20Hierarchical%20Mixtures%20of%20Experts%20and%20the%20EM%20Algorithm%201994",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jordan%2C%20M.I.%20Jacobs%2C%20R.A.%20Hierarchical%20Mixtures%20of%20Experts%20and%20the%20EM%20Algorithm%201994"
+        },
+        {
+            "id": "12",
+            "entry": "[12] A. Krizhevsky and G. Hinton. \u201cLearning Multiple Layers of Features from Tiny Images\u201d. MSc thesis. University of Toronto, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20A.%20Hinton%2C%20G.%20%E2%80%9CLearning%20Multiple%20Layers%20of%20Features%20from%20Tiny%20Images%E2%80%9D.%20MSc%20thesis%202009"
+        },
+        {
+            "id": "13",
+            "entry": "[13] A. Krizhevsky, I. Sutskever, and G. E. Hinton. \u201cImageNet classification with deep convolutional neural networks\u201d. In: NIPS (2012), pp. 1097\u20131105.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20A.%20Sutskever%2C%20I.%20Hinton%2C%20G.E.%20ImageNet%20classification%20with%20deep%20convolutional%20neural%20networks%202012"
+        },
+        {
+            "id": "14",
+            "entry": "[14] L. Li, Z. Ding, and D. Huang. \u201cRecognizing location names from Chinese texts based on Max-Margin Markov network\u201d. In: International Conference on Natural Language Processing and Knowledge Engineering (2008).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20L.%20Ding%2C%20Z.%20Huang%2C%20D.%20Recognizing%20location%20names%20from%20Chinese%20texts%20based%20on%20Max-Margin%20Markov%20network%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20L.%20Ding%2C%20Z.%20Huang%2C%20D.%20Recognizing%20location%20names%20from%20Chinese%20texts%20based%20on%20Max-Margin%20Markov%20network%202008"
+        },
+        {
+            "id": "15",
+            "entry": "[15] R. M. Neal and G. E. Hinton. \u201cLearning in Graphical Models\u201d. In: ed. by M. I. Jordan. Cambridge, MA, USA: MIT Press, 1999. Chap. A View of, pp. 355\u2013368.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Neal%2C%20R.M.%20Hinton%2C%20G.E.%20Learning%20in%20Graphical%20Models"
+        },
+        {
+            "id": "16",
+            "entry": "[16] B. Pakkenberg et al. \u201cAging and the human neocortex\u201d. In: Experimental gerontology 38.1-2 (2003), pp. 95\u201399.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pakkenberg%2C%20B.%20Aging%20and%20the%20human%20neocortex%202003"
+        },
+        {
+            "id": "17",
+            "entry": "[17] M. Ramezani et al. \u201cJoint sparse representation of brain activity patterns in multi-task fMRI data\u201d. In: IEEE Transactions on Medical Imaging 34.1 (2015), pp. 2\u201312.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ramezani%2C%20M.%20Joint%20sparse%20representation%20of%20brain%20activity%20patterns%20in%20multi-task%20fMRI%20data%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ramezani%2C%20M.%20Joint%20sparse%20representation%20of%20brain%20activity%20patterns%20in%20multi-task%20fMRI%20data%202015"
+        },
+        {
+            "id": "18",
+            "entry": "[18] C. Rosenbaum, T. Klinger, and M. Riemer. \u201cRouting Networks: Adaptive Selection of Nonlinear Functions for Multi-Task Learning\u201d. ICLR. 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rosenbaum%2C%20C.%20Klinger%2C%20T.%20Riemer%2C%20M.%20Routing%20Networks%3A%20Adaptive%20Selection%20of%20Nonlinear%20Functions%20for%20Multi-Task%20Learning%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rosenbaum%2C%20C.%20Klinger%2C%20T.%20Riemer%2C%20M.%20Routing%20Networks%3A%20Adaptive%20Selection%20of%20Nonlinear%20Functions%20for%20Multi-Task%20Learning%202018"
+        },
+        {
+            "id": "19",
+            "entry": "[19] H. Sahni et al. \u201cLearning to Compose Skills\u201d. In: NIPS Workshop (2017).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sahni%2C%20H.%20Learning%20to%20Compose%20Skills%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sahni%2C%20H.%20Learning%20to%20Compose%20Skills%202017"
+        },
+        {
+            "id": "20",
+            "entry": "[20] N. Shazeer et al. \u201cOutrageously Large Neural Networks: The Sparsely-Gated Mixture-ofExperts Layer\u201d. In: ICLR (2017).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shazeer%2C%20N.%20Outrageously%20Large%20Neural%20Networks%3A%20The%20Sparsely-Gated%20Mixture-ofExperts%20Layer%202017"
+        },
+        {
+            "id": "21",
+            "entry": "[21] O. Sporns and R. F. Betzel. \u201cModular Brain Networks\u201d. In: Annual Review of Psychology 67.1 (2016), pp. 613\u2013640.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sporns%2C%20O.%20Betzel%2C%20R.F.%20Modular%20Brain%20Networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sporns%2C%20O.%20Betzel%2C%20R.F.%20Modular%20Brain%20Networks%202016"
+        },
+        {
+            "id": "22",
+            "entry": "[22] P. Sternberg. \u201cModular processes in mind and brain\u201d. In: Cognitive Neurophysiologogy 28.4 & 4 (2011), pp. 156\u2013208.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sternberg%2C%20P.%20%E2%80%9CModular%20processes%20in%20mind%20and%20brain%E2%80%9D.%20In%3A%20Cognitive%20Neurophysiologogy%2028.4%20%26%204%202011"
+        },
+        {
+            "id": "23",
+            "entry": "[23] R. J. Williams. \u201cSimple Statistical Gradient-Following Algorithms for Connectionist Reinforcement Learning\u201d. In: Machine Learning 8 (1992), pp. 229\u2013256. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%2C%20R.J.%20Simple%20Statistical%20Gradient-Following%20Algorithms%20for%20Connectionist%20Reinforcement%20Learning%201992"
+        }
+    ]
+}

@@ -1,0 +1,290 @@
+{
+    "filename": "8271-dropblock-a-regularization-method-for-convolutional-networks.pdf",
+    "metadata": {
+        "title": "DropBlock: A regularization method for convolutional networks",
+        "author": "Golnaz Ghiasi, Tsung-Yi Lin, Quoc V. Le",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8271-dropblock-a-regularization-method-for-convolutional-networks.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Deep neural networks often work well when they are over-parameterized and trained with a massive amount of noise and regularization, such as weight decay and dropout. Although dropout is widely used as a regularization technique for fully connected layers, it is often less effective for convolutional layers. This lack of success of dropout for convolutional layers is perhaps due to the fact that activation units in convolutional layers are spatially correlated so information can still flow through convolutional networks despite dropout. Thus a structured form of dropout is needed to regularize convolutional networks. In this paper, we introduce DropBlock, a form of structured dropout, where units in a contiguous region of a feature map are dropped together. We found that applying DropbBlock in skip connections in addition to the convolution layers increases the accuracy. Also, gradually increasing number of dropped units during training leads to better accuracy and more robust to hyperparameter choices. Extensive experiments show that DropBlock works better than dropout in regularizing convolutional networks. On ImageNet classification, ResNet-50 architecture with DropBlock achieves 78.13% accuracy, which is more than 1.6% improvement on the baseline. On COCO detection, DropBlock improves Average Precision of RetinaNet from 36.8% to 38.4%."
+    },
+    "keywords": [
+        {
+            "term": "COCO",
+            "url": "https://en.wikipedia.org/wiki/COCO"
+        },
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "Tensor Processing Units",
+            "url": "https://en.wikipedia.org/wiki/Tensor_Processing_Unit"
+        },
+        {
+            "term": "weight decay",
+            "url": "https://en.wikipedia.org/wiki/weight_decay"
+        },
+        {
+            "term": "convolutional neural network",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_network"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Deep neural nets work well when they have a large number of parameters and are trained with a massive amount of regularization and noise, such as weight decay and dropout [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>]",
+        "We introduce DropBlock to regularize training Convolutional Neural Network",
+        "DropBlock is a form of structured dropout that drops spatially correlated information",
+        "We demonstrate DropBlock is a more effective regularizer compared to dropout in ImageNet classification and COCO detection",
+        "DropBlock consistently outperforms dropout in an extensive experiment setup",
+        "Our experiments show that applying DropBlock in skip connections in addition to the convolution layers increases the accuracy"
+    ],
+    "key_statements": [
+        "Deep neural nets work well when they have a large number of parameters and are trained with a massive amount of regularization and noise, such as weight decay and dropout [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>]",
+        "We introduce DropBlock to regularize training Convolutional Neural Network",
+        "DropBlock is a form of structured dropout that drops spatially correlated information",
+        "We demonstrate DropBlock is a more effective regularizer compared to dropout in ImageNet classification and COCO detection",
+        "DropBlock consistently outperforms dropout in an extensive experiment setup",
+        "The class activation mapping suggests the model can learn more spatially distributed representations regularized by DropBlock",
+        "Our experiments show that applying DropBlock in skip connections in addition to the convolution layers increases the accuracy"
+    ],
+    "summary": [
+        "Deep neural nets work well when they have a large number of parameters and are trained with a massive amount of regularization and noise, such as weight decay and dropout [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>].",
+        "We apply DropBlock to ResNet-50 [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>] with extensive experiments for image classification.",
+        "We apply different regularization techniques on ResNet-50 and compare the results with DropBlock.",
+        "We compared with Cutout [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>] which is a data augmentation method and randomly drops a fixed size block from the input images.",
+        "Based on the experiments in the last section, we used keep_prob of 0.9 and set block_size = 11 which is the width of the last feature map.",
+        "DropBlock demonstrates strong empirical results on improving ImageNet classification accuracy compared to dropout.",
+        "We study the problem by applying DropBlock with block_size of 1 and 7 during inference and observing the differences in performance.",
+        "We first took the model trained without any regularization and tested it with DropBlock with block_size = 1 and block_size = 7.",
+        "The accuracy drops more quickly with decreasing keep_prob, for block_size = 1 in comparison with block_size = 7 which suggests DropBlock is more effective to remove semantic information than dropout.",
+        "We show that model trained with large block size, which removes more semantic information, results in stronger regularization.",
+        "The performance of model trained with block_size = 1 reduced more quickly with decreasing keep_prob when applying block_size = 7 during inference.",
+        "We hypothesize model trained with DropBlock needs to learn spatially distributed representations because DropBlock is effective in removing semantic information in a contiguous region.",
+        "Models trained with DropBlock learn spatially distributed representations that induce high class activations on multiple regions, whereas model without regularization tends to focus on one or few regions.",
+        "We apply DropBlock to ResNet in ResNet-FPN and use the best keep_prob we found for ImageNet classification training.",
+        "We tried DropBlock with keep_prob = 0.9, which is the identical hyperparamters as training image classification model, and experimented with different block_size.",
+        "The implementation uses the ResNet-FPN backbone model to extract multiscale features and attaches fully convolution networks on top to predict segmentation.",
+        "Following the experiments for object detection, we study the effect of DropBlock for training model from random initialization.",
+        "We introduce DropBlock to regularize training CNNs. DropBlock is a form of structured dropout that drops spatially correlated information.",
+        "We demonstrate DropBlock is a more effective regularizer compared to dropout in ImageNet classification and COCO detection.",
+        "The class activation mapping suggests the model can learn more spatially distributed representations regularized by DropBlock.",
+        "Our experiments show that applying DropBlock in skip connections in addition to the convolution layers increases the accuracy."
+    ],
+    "headline": "We introduce DropBlock, a form of structured dropout, where units in a contiguous region of a feature map are dropped together",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Nitish Srivastava, Geoffrey Hinton, Alex Krizhevsky, Ilya Sutskever, and Ruslan Salakhutdinov. Dropout: A simple way to prevent neural networks from overfitting. The Journal of Machine Learning Research, 15(1):1929\u20131958, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Srivastava%2C%20Nitish%20Hinton%2C%20Geoffrey%20Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Dropout%3A%20A%20simple%20way%20to%20prevent%20neural%20networks%20from%20overfitting%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Srivastava%2C%20Nitish%20Hinton%2C%20Geoffrey%20Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Dropout%3A%20A%20simple%20way%20to%20prevent%20neural%20networks%20from%20overfitting%202014"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Alex Krizhevsky, Ilya Sutskever, and Geoffrey E. Hinton. Imagenet classification with deep convolutional neural networks. In Advances in Neural Information Processing Systems, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Hinton%2C%20Geoffrey%20E.%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Hinton%2C%20Geoffrey%20E.%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Sergey Ioffe and Christian Szegedy. Batch normalization: Accelerating deep network training by reducing internal covariate shift. CoRR, abs/1502.03167, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1502.03167"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. In CVPR, pages 770\u2013778, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Christian Szegedy, Sergey Ioffe, Vincent Vanhoucke, and Alexander A Alemi. Inception-v4, inceptionresnet and the impact of residual connections on learning. In AAAI, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Szegedy%2C%20Christian%20Ioffe%2C%20Sergey%20Vanhoucke%2C%20Vincent%20Alemi%2C%20Alexander%20A.%20Inception-v4%2C%20inceptionresnet%20and%20the%20impact%20of%20residual%20connections%20on%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Szegedy%2C%20Christian%20Ioffe%2C%20Sergey%20Vanhoucke%2C%20Vincent%20Alemi%2C%20Alexander%20A.%20Inception-v4%2C%20inceptionresnet%20and%20the%20impact%20of%20residual%20connections%20on%20learning%202017"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Saining Xie, Ross Girshick, Piotr Doll\u00e1r, Zhuowen Tu, and Kaiming He. Aggregated residual transformations for deep neural networks. In CVPR, pages 5987\u20135995, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xie%2C%20Saining%20Girshick%2C%20Ross%20Doll%C3%A1r%2C%20Piotr%20Tu%2C%20Zhuowen%20Aggregated%20residual%20transformations%20for%20deep%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xie%2C%20Saining%20Girshick%2C%20Ross%20Doll%C3%A1r%2C%20Piotr%20Tu%2C%20Zhuowen%20Aggregated%20residual%20transformations%20for%20deep%20neural%20networks%202017"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Dongyoon Han, Jiwhan Kim, and Junmo Kim. Deep pyramidal residual networks. In CVPR, pages 6307\u20136315. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Han%2C%20Dongyoon%20Kim%2C%20Jiwhan%20Kim%2C%20Junmo%20Deep%20pyramidal%20residual%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Han%2C%20Dongyoon%20Kim%2C%20Jiwhan%20Kim%2C%20Junmo%20Deep%20pyramidal%20residual%20networks%202017"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Barret Zoph, Vijay Vasudevan, Jonathon Shlens, and Quoc V Le. Learning transferable architectures for scalable image recognition. In CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zoph%2C%20Barret%20Vasudevan%2C%20Vijay%20Shlens%2C%20Jonathon%20Le%2C%20Quoc%20V.%20Learning%20transferable%20architectures%20for%20scalable%20image%20recognition%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zoph%2C%20Barret%20Vasudevan%2C%20Vijay%20Shlens%2C%20Jonathon%20Le%2C%20Quoc%20V.%20Learning%20transferable%20architectures%20for%20scalable%20image%20recognition%202017"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Jie Hu, Li Shen, and Gang Sun. Squeeze-and-excitation networks. In CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hu%2C%20Jie%20Shen%2C%20Li%20Sun%2C%20Gang%20Squeeze-and-excitation%20networks%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hu%2C%20Jie%20Shen%2C%20Li%20Sun%2C%20Gang%20Squeeze-and-excitation%20networks%202018"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Esteban Real, Alok Aggarwal, Yanping Huang, and Quoc V Le. Regularized evolution for image classifier architecture search. CoRR, abs/1802.01548, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.01548"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. Advances in Neural Information Processing Systems, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Simonyan%2C%20Karen%20Zisserman%2C%20Andrew%20Very%20deep%20convolutional%20networks%20for%20large-scale%20image%20recognition%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Simonyan%2C%20Karen%20Zisserman%2C%20Andrew%20Very%20deep%20convolutional%20networks%20for%20large-scale%20image%20recognition%202015"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott Reed, Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, Andrew Rabinovich, et al. Going deeper with convolutions. In CVPR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Szegedy%2C%20Christian%20Liu%2C%20Wei%20Jia%2C%20Yangqing%20Sermanet%2C%20Pierre%20Going%20deeper%20with%20convolutions%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Szegedy%2C%20Christian%20Liu%2C%20Wei%20Jia%2C%20Yangqing%20Sermanet%2C%20Pierre%20Going%20deeper%20with%20convolutions%202015"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jon Shlens, and Zbigniew Wojna. Rethinking the inception architecture for computer vision. In CVPR, pages 2818\u20132826, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Szegedy%2C%20Christian%20Vanhoucke%2C%20Vincent%20Ioffe%2C%20Sergey%20Shlens%2C%20Jon%20Rethinking%20the%20inception%20architecture%20for%20computer%20vision%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Szegedy%2C%20Christian%20Vanhoucke%2C%20Vincent%20Ioffe%2C%20Sergey%20Shlens%2C%20Jon%20Rethinking%20the%20inception%20architecture%20for%20computer%20vision%202016"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Li Wan, Matthew Zeiler, Sixin Zhang, Yann Le Cun, and Rob Fergus. Regularization of neural networks using dropconnect. In International Conference on Machine Learning, pages 1058\u20131066, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wan%2C%20Li%20Zeiler%2C%20Matthew%20Zhang%2C%20Sixin%20Cun%2C%20Yann%20Le%20Regularization%20of%20neural%20networks%20using%20dropconnect%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wan%2C%20Li%20Zeiler%2C%20Matthew%20Zhang%2C%20Sixin%20Cun%2C%20Yann%20Le%20Regularization%20of%20neural%20networks%20using%20dropconnect%202013"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Ian J Goodfellow, David Warde-Farley, Mehdi Mirza, Aaron Courville, and Yoshua Bengio. Maxout networks. In International Conference on Machine Learning, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ian%20J%20Goodfellow%20David%20WardeFarley%20Mehdi%20Mirza%20Aaron%20Courville%20and%20Yoshua%20Bengio%20Maxout%20networks%20In%20International%20Conference%20on%20Machine%20Learning%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ian%20J%20Goodfellow%20David%20WardeFarley%20Mehdi%20Mirza%20Aaron%20Courville%20and%20Yoshua%20Bengio%20Maxout%20networks%20In%20International%20Conference%20on%20Machine%20Learning%202013"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Gao Huang, Yu Sun, Zhuang Liu, Daniel Sedra, and Kilian Q Weinberger. Deep networks with stochastic depth. In ECCV, pages 646\u2013661.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huang%2C%20Gao%20Sun%2C%20Yu%20Liu%2C%20Zhuang%20Sedra%2C%20Daniel%20Deep%20networks%20with%20stochastic%20depth",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huang%2C%20Gao%20Sun%2C%20Yu%20Liu%2C%20Zhuang%20Sedra%2C%20Daniel%20Deep%20networks%20with%20stochastic%20depth"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Gustav Larsson, Michael Maire, and Gregory Shakhnarovich. Fractalnet: Ultra-deep neural networks without residuals. International Conference on Learning Representations, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Larsson%2C%20Gustav%20Maire%2C%20Michael%20Shakhnarovich%2C%20Gregory%20Fractalnet%3A%20Ultra-deep%20neural%20networks%20without%20residuals%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Larsson%2C%20Gustav%20Maire%2C%20Michael%20Shakhnarovich%2C%20Gregory%20Fractalnet%3A%20Ultra-deep%20neural%20networks%20without%20residuals%202017"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Xavier Gastaldi. Shake-shake regularization. CoRR, abs/1705.07485, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1705.07485"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Yoshihiro Yamada, Masakazu Iwamura, and Koichi Kise. Shakedrop regularization. CoRR, abs/1802.02375, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.02375"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Jonathan Tompson, Ross Goroshin, Arjun Jain, Yann LeCun, and Christoph Bregler. Efficient object localization using convolutional networks. In CVPR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tompson%2C%20Jonathan%20Goroshin%2C%20Ross%20Jain%2C%20Arjun%20LeCun%2C%20Yann%20Efficient%20object%20localization%20using%20convolutional%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tompson%2C%20Jonathan%20Goroshin%2C%20Ross%20Jain%2C%20Arjun%20LeCun%2C%20Yann%20Efficient%20object%20localization%20using%20convolutional%20networks%202015"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Yarin Gal and Zoubin Ghahramani. A theoretically grounded application of dropout in recurrent neural networks. In Advances in Neural Information Processing Systems, pages 1019\u20131027, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gal%2C%20Yarin%20Ghahramani%2C%20Zoubin%20A%20theoretically%20grounded%20application%20of%20dropout%20in%20recurrent%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gal%2C%20Yarin%20Ghahramani%2C%20Zoubin%20A%20theoretically%20grounded%20application%20of%20dropout%20in%20recurrent%20neural%20networks%202016"
+        },
+        {
+            "id": "22",
+            "entry": "[22] David Krueger, Tegan Maharaj, J\u00e1nos Kram\u00e1r, Mohammad Pezeshki, Nicolas Ballas, Nan Rosemary Ke, Anirudh Goyal, Yoshua Bengio, Hugo Larochelle, Aaron C. Courville, and Chris Pal. Zoneout: Regularizing rnns by randomly preserving hidden activations. CoRR, abs/1606.01305, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.01305"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Terrance DeVries and Graham W Taylor. Improved regularization of convolutional neural networks with cutout. CoRR, abs/1708.04552, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1708.04552"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Tsung-Yi Lin, Priyal Goyal, Ross Girshick, Kaiming He, and Piotr Doll\u00e1r. Focal loss for dense object detection. In ICCV, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20Tsung-Yi%20Goyal%2C%20Priyal%20Girshick%2C%20Ross%20He%2C%20Kaiming%20Focal%20loss%20for%20dense%20object%20detection%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lin%2C%20Tsung-Yi%20Goyal%2C%20Priyal%20Girshick%2C%20Ross%20He%2C%20Kaiming%20Focal%20loss%20for%20dense%20object%20detection%202017"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Jia Deng, Wei Dong, Richard Socher, Li-Jia Li, Kai Li, and Li Fei-Fei. Imagenet: A large-scale hierarchical image database. In CVPR, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Deng%2C%20Jia%20Dong%2C%20Wei%20Socher%2C%20Richard%20Li%2C%20Li-Jia%20Imagenet%3A%20A%20large-scale%20hierarchical%20image%20database%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Deng%2C%20Jia%20Dong%2C%20Wei%20Socher%2C%20Richard%20Li%2C%20Li-Jia%20Imagenet%3A%20A%20large-scale%20hierarchical%20image%20database%202009"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Gao Huang, Zhuang Liu, Kilian Q Weinberger, and Laurens van der Maaten. Densely connected convolutional networks. In CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huang%2C%20Gao%20Liu%2C%20Zhuang%20Weinberger%2C%20Kilian%20Q.%20van%20der%20Maaten%2C%20Laurens%20Densely%20connected%20convolutional%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huang%2C%20Gao%20Liu%2C%20Zhuang%20Weinberger%2C%20Kilian%20Q.%20van%20der%20Maaten%2C%20Laurens%20Densely%20connected%20convolutional%20networks%202017"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Ekin D Cubuk, Barret Zoph, Dandelion Mane, Vijay Vasudevan, and Quoc V Le. Autoaugment: Learning augmentation policies from data. CoRR, abs/1805.09501, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1805.09501"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, and Zbigniew Wojna. Rethinking the inception architecture for computer vision. In CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Szegedy%2C%20Christian%20Vanhoucke%2C%20Vincent%20Ioffe%2C%20Sergey%20Shlens%2C%20Jonathon%20Rethinking%20the%20inception%20architecture%20for%20computer%20vision%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Szegedy%2C%20Christian%20Vanhoucke%2C%20Vincent%20Ioffe%2C%20Sergey%20Shlens%2C%20Jonathon%20Rethinking%20the%20inception%20architecture%20for%20computer%20vision%202016"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Bolei Zhou, Aditya Khosla, Agata Lapedriza, Aude Oliva, and Antonio Torralba. Learning deep features for discriminative localization. In CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhou%2C%20Bolei%20Khosla%2C%20Aditya%20Lapedriza%2C%20Agata%20Oliva%2C%20Aude%20Learning%20deep%20features%20for%20discriminative%20localization%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhou%2C%20Bolei%20Khosla%2C%20Aditya%20Lapedriza%2C%20Agata%20Oliva%2C%20Aude%20Learning%20deep%20features%20for%20discriminative%20localization%202018"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Tsung-Yi Lin, Michael Maire, Serge Belongie, James Hays, Pietro Perona, Deva Ramanan, Piotr Doll\u00e1r, and C. Lawrence Zitnick. Microsoft COCO: Common objects in context. In ECCV, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=TsungYi%20Lin%20Michael%20Maire%20Serge%20Belongie%20James%20Hays%20Pietro%20Perona%20Deva%20Ramanan%20Piotr%20Doll%C3%A1r%20and%20C%20Lawrence%20Zitnick%20Microsoft%20COCO%20Common%20objects%20in%20context%20In%20ECCV%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=TsungYi%20Lin%20Michael%20Maire%20Serge%20Belongie%20James%20Hays%20Pietro%20Perona%20Deva%20Ramanan%20Piotr%20Doll%C3%A1r%20and%20C%20Lawrence%20Zitnick%20Microsoft%20COCO%20Common%20objects%20in%20context%20In%20ECCV%202014"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Tsung-Yi Lin, Piotr Doll\u00e1r, Ross Girshick, Kaiming He, Bharath Hariharan, and Serge Belongie. Feature pyramid networks for object detection. In CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20Tsung-Yi%20Doll%C3%A1r%2C%20Piotr%20Girshick%2C%20Ross%20He%2C%20Kaiming%20Feature%20pyramid%20networks%20for%20object%20detection%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lin%2C%20Tsung-Yi%20Doll%C3%A1r%2C%20Piotr%20Girshick%2C%20Ross%20He%2C%20Kaiming%20Feature%20pyramid%20networks%20for%20object%20detection%202017"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Xiaolong Wang, Abhinav Shrivastava, and Abhinav Gupta. A-Fast-RCNN: Hard positive generation via adversary for object detection. In CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Xiaolong%20Shrivastava%2C%20Abhinav%20Gupta%2C%20Abhinav%20A-Fast-RCNN%3A%20Hard%20positive%20generation%20via%20adversary%20for%20object%20detection%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Xiaolong%20Shrivastava%2C%20Abhinav%20Gupta%2C%20Abhinav%20A-Fast-RCNN%3A%20Hard%20positive%20generation%20via%20adversary%20for%20object%20detection%202017"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Zhiqiang Shen, Zhuang Liu, Jianguo Li, Yu-Gang Jiang, Yurong Chen, and Xiangyang Xue. DSOD: Learning deeply supervised object detectors from scratch. In ICCV, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shen%2C%20Zhiqiang%20Liu%2C%20Zhuang%20Li%2C%20Jianguo%20Jiang%2C%20Yu-Gang%20DSOD%3A%20Learning%20deeply%20supervised%20object%20detectors%20from%20scratch%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shen%2C%20Zhiqiang%20Liu%2C%20Zhuang%20Li%2C%20Jianguo%20Jiang%2C%20Yu-Gang%20DSOD%3A%20Learning%20deeply%20supervised%20object%20detectors%20from%20scratch%202017"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Chao Peng, Tete Xiao, Zeming Li, Yuning Jiang, Xiangyu Zhang, Kai Jia, Gang Yu, and Jian Sun. MegDet: A large mini-batch object detector. In CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Peng%2C%20Chao%20Xiao%2C%20Tete%20Li%2C%20Zeming%20Jiang%2C%20Yuning%20MegDet%3A%20A%20large%20mini-batch%20object%20detector%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Peng%2C%20Chao%20Xiao%2C%20Tete%20Li%2C%20Zeming%20Jiang%2C%20Yuning%20MegDet%3A%20A%20large%20mini-batch%20object%20detector%202018"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Yuxin Wu and Kaiming He. Group normalization. In ECCV, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yuxin%20Wu%20and%20Kaiming%20He%20Group%20normalization%20In%20ECCV%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yuxin%20Wu%20and%20Kaiming%20He%20Group%20normalization%20In%20ECCV%202018"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Bharath Hariharan, Pablo Arbelaez, Lubomir Bourdev, Subhransu Maji, and Jitendra Malik. Semantic contours from inverse detectors. In ICCV, 2011. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hariharan%2C%20Bharath%20Arbelaez%2C%20Pablo%20Bourdev%2C%20Lubomir%20Maji%2C%20Subhransu%20Semantic%20contours%20from%20inverse%20detectors%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hariharan%2C%20Bharath%20Arbelaez%2C%20Pablo%20Bourdev%2C%20Lubomir%20Maji%2C%20Subhransu%20Semantic%20contours%20from%20inverse%20detectors%202011"
+        }
+    ]
+}

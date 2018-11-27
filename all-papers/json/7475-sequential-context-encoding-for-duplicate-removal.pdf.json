@@ -1,0 +1,286 @@
+{
+    "filename": "7475-sequential-context-encoding-for-duplicate-removal.pdf",
+    "metadata": {
+        "title": "Sequential Context Encoding for Duplicate Removal",
+        "author": "Lu Qi, Shu Liu, Jianping Shi, Jiaya Jia",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7475-sequential-context-encoding-for-duplicate-removal.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Duplicate removal is a critical step to accomplish a reasonable amount of predictions in prevalent proposal-based object detection frameworks. Albeit simple and effective, most previous algorithms utilize a greedy process without making sufficient use of properties of input data. In this work, we design a new two-stage framework to effectively select the appropriate proposal candidate for each object. The first stage suppresses most of easy negative object proposals, while the second stage selects true positives in the reduced proposal set. These two stages share the same network structure, i.e., an encoder and a decoder formed as recurrent neural networks (RNN) with global attention and context gate. The encoder scans proposal candidates in a sequential manner to capture the global context information, which is then fed to the decoder to extract optimal proposals. In our extensive experiments, the proposed method outperforms other alternatives by a large margin."
+    },
+    "keywords": [
+        {
+            "term": "convolutional neural networks",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_networks"
+        },
+        {
+            "term": "relation network",
+            "url": "https://en.wikipedia.org/wiki/relation_network"
+        },
+        {
+            "term": "spatial memory",
+            "url": "https://en.wikipedia.org/wiki/spatial_memory"
+        },
+        {
+            "term": "region of interest",
+            "url": "https://en.wikipedia.org/wiki/region_of_interest"
+        },
+        {
+            "term": "recurrent neural networks",
+            "url": "https://en.wikipedia.org/wiki/recurrent_neural_networks"
+        },
+        {
+            "term": "neural machine translation",
+            "url": "https://en.wikipedia.org/wiki/neural_machine_translation"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Object detection is a fundamentally important task in computer vision and has been intensively studied",
+        "With convolutional neural networks (CNNs) [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>], most high-performing object detection systems [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>, <a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>, <a class=\"ref-link\" id=\"c32\" href=\"#r32\">32</a>, <a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>, <a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>, <a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>, <a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>] follow the proposal-base object detection framework, which first gathers a lot of object proposals and conducts classification and regression to infer the label and location of objects in the given image",
+        "The two stages are with the same network structure, including encoder and decoder as recurrent neural networks, along with context gate and global attention modules",
+        "We have presented a new approach for duplicate removal that is important in object detection",
+        "We applied recurrent neural networks with global attention and context gate structure to sequentially encode context information existing in all object proposals",
+        "Extensive experiments and ablation studies were conducted and the consistent improvement manifests the effectiveness of our approach"
+    ],
+    "key_statements": [
+        "Object detection is a fundamentally important task in computer vision and has been intensively studied",
+        "With convolutional neural networks (CNNs) [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>], most high-performing object detection systems [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>, <a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>, <a class=\"ref-link\" id=\"c32\" href=\"#r32\">32</a>, <a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>, <a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>, <a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>, <a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>] follow the proposal-base object detection framework, which first gathers a lot of object proposals and conducts classification and regression to infer the label and location of objects in the given image",
+        "non-maximum suppression [<a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>], which iteratively selects proposals according to the prediction score and suppresses overlapped proposals, is still a popular and default solution",
+        "The two stages are with the same network structure, including encoder and decoder as recurrent neural networks, along with context gate and global attention modules",
+        "In terms of the importance of duplicate removal, we explore performance drop for different detection methods without the final candidate selection, which set the final prediction as proposals when class labels and scores are higher than a threshold",
+        "The reason that our final model performs best is that global attention can capture the relation for all proposal candidates",
+        "We have presented a new approach for duplicate removal that is important in object detection",
+        "We applied recurrent neural networks with global attention and context gate structure to sequentially encode context information existing in all object proposals",
+        "Extensive experiments and ablation studies were conducted and the consistent improvement manifests the effectiveness of our approach"
+    ],
+    "summary": [
+        "Object detection is a fundamentally important task in computer vision and has been intensively studied.",
+        "Due to the enormous difference between proposal candidate and ground truth object numbers, our model is divided into two stages and performs in a way like boosting [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>].",
+        "The two stages are with the same network structure, including encoder and decoder as RNNs, along with context gate and global attention modules.",
+        "In terms of the importance of duplicate removal, we explore performance drop for different detection methods without the final candidate selection, which set the final prediction as proposals when class labels and scores are higher than a threshold.",
+        "For each ground truth object, like NMS, we only select the proposal candidate with the largest score and satisfying the overlap threshold.",
+        "These stages share the same network structure, including feature embedding, encoder, decoder, global attention, context gate, and final decision, for convenience.",
+        "The encoder RNN extracts middle-grade features to obtain the global context information of all proposals, stored in the final hidden state of the encoder.",
+        "To make our network better capture the quality information from the detection network, we rank proposal candidates in a descending order according to their class scores.",
+        "Different from that of [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>], we use L = \u2212log(1 \u2212 s1) instead of L = \u2212log(1 \u2212 s0 \u00b7 s1), where s1 denotes the output score of our model and s0 denotes the prediction score of the proposal candidate from the detection network.",
+        "Training with s0 may prevent our model from making right prediction for proposal candidates mis-classified by detection network.",
+        "S0 \u00b7 s1 is the final prediction score in inference to make use of information from both detection network and our model.",
+        "The reason that our final model performs best is that global attention can capture the relation for all proposal candidates.",
+        "Context gate makes our model memorize the low-grade feature in high layers while the loss function is only based on the output score of our network rather than the origin score from detection network.",
+        "For FPN and Mask R-CNN, our model trained with single head corresponding to IoU threshold (0.5) increases more than one point and 0.9 point even for the strong baseline, PANet with DCN, which generates more discriminative proposals.",
+        "With multi-heads trained on samples assigned with multiple thresholds, our model further improves the performance by 0.3, accomplishing a new state-of-the-art result.",
+        "We applied RNN with global attention and context gate structure to sequentially encode context information existing in all object proposals.",
+        "We plan to connect our framework to object detection networks to enable joint training for even better performance in future work"
+    ],
+    "headline": "We surprisingly found that it is very useful to improve candidate selection",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] T. Bagautdinov, A. Alahi, F. Fleuret, P. Fua, and S. Savarese. Social scene understanding: Endto-end multi-person action localization and collective activity recognition. In CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bagautdinov%2C%20T.%20Alahi%2C%20A.%20Fleuret%2C%20F.%20Fua%2C%20P.%20Social%20scene%20understanding%3A%20Endto-end%20multi-person%20action%20localization%20and%20collective%20activity%20recognition%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bagautdinov%2C%20T.%20Alahi%2C%20A.%20Fleuret%2C%20F.%20Fua%2C%20P.%20Social%20scene%20understanding%3A%20Endto-end%20multi-person%20action%20localization%20and%20collective%20activity%20recognition%202017"
+        },
+        {
+            "id": "2",
+            "entry": "[2] D. Bahdanau, K. Cho, and Y. Bengio. Neural machine translation by jointly learning to align and translate. arXiv:1409.0473, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1409.0473"
+        },
+        {
+            "id": "3",
+            "entry": "[3] N. Bodla, B. Singh, R. Chellappa, and L. S. Davis. Soft-nms - improving object detection with one line of code. In CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bodla%2C%20N.%20Singh%2C%20B.%20Chellappa%2C%20R.%20Davis%2C%20L.S.%20Soft-nms%20-%20improving%20object%20detection%20with%20one%20line%20of%20code%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bodla%2C%20N.%20Singh%2C%20B.%20Chellappa%2C%20R.%20Davis%2C%20L.S.%20Soft-nms%20-%20improving%20object%20detection%20with%20one%20line%20of%20code%202017"
+        },
+        {
+            "id": "4",
+            "entry": "[4] X. Chen and A. Gupta. Spatial memory for context reasoning in object detection. In ICCV, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20X.%20Gupta%2C%20A.%20Spatial%20memory%20for%20context%20reasoning%20in%20object%20detection%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20X.%20Gupta%2C%20A.%20Spatial%20memory%20for%20context%20reasoning%20in%20object%20detection%202017"
+        },
+        {
+            "id": "5",
+            "entry": "[5] J. Chorowski, D. Bahdanau, K. Cho, and Y. Bengio. End-to-end continuous speech recognition using attention-based recurrent nn: First results. arXiv:1412.1602, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.1602"
+        },
+        {
+            "id": "6",
+            "entry": "[6] J. Chung, C. Gulcehre, K. Cho, and Y. Bengio. Empirical evaluation of gated recurrent neural networks on sequence modeling. arXiv:1412.3555, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.3555"
+        },
+        {
+            "id": "7",
+            "entry": "[7] J. Dai, Y. Li, K. He, and J. Sun. R-FCN: object detection via region-based fully convolutional networks. In NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dai%2C%20J.%20Li%2C%20Y.%20He%2C%20K.%20Sun%2C%20J.%20R-FCN%3A%20object%20detection%20via%20region-based%20fully%20convolutional%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dai%2C%20J.%20Li%2C%20Y.%20He%2C%20K.%20Sun%2C%20J.%20R-FCN%3A%20object%20detection%20via%20region-based%20fully%20convolutional%20networks%202016"
+        },
+        {
+            "id": "8",
+            "entry": "[8] J. Dai, H. Qi, Y. Xiong, Y. Li, G. Zhang, H. Hu, and Y. Wei. Deformable convolutional networks. In ICCV, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=J%20Dai%20H%20Qi%20Y%20Xiong%20Y%20Li%20G%20Zhang%20H%20Hu%20and%20Y%20Wei%20Deformable%20convolutional%20networks%20In%20ICCV%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=J%20Dai%20H%20Qi%20Y%20Xiong%20Y%20Li%20G%20Zhang%20H%20Hu%20and%20Y%20Wei%20Deformable%20convolutional%20networks%20In%20ICCV%202017"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Z. Deng, A. Vahdat, H. Hu, and G. Mori. Structure inference machines: Recurrent neural networks for analyzing relations in group activity recognition. In CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Deng%2C%20Z.%20Vahdat%2C%20A.%20Hu%2C%20H.%20Mori%2C%20G.%20Structure%20inference%20machines%3A%20Recurrent%20neural%20networks%20for%20analyzing%20relations%20in%20group%20activity%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Deng%2C%20Z.%20Vahdat%2C%20A.%20Hu%2C%20H.%20Mori%2C%20G.%20Structure%20inference%20machines%3A%20Recurrent%20neural%20networks%20for%20analyzing%20relations%20in%20group%20activity%20recognition%202016"
+        },
+        {
+            "id": "10",
+            "entry": "[10] C. Desai, D. Ramanan, and C. C. Fowlkes. Discriminative models for multi-class object layout. International journal of computer vision, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Desai%2C%20C.%20Ramanan%2C%20D.%20Fowlkes%2C%20C.C.%20Discriminative%20models%20for%20multi-class%20object%20layout%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Desai%2C%20C.%20Ramanan%2C%20D.%20Fowlkes%2C%20C.C.%20Discriminative%20models%20for%20multi-class%20object%20layout%202011"
+        },
+        {
+            "id": "11",
+            "entry": "[11] J. Donahue, L. Anne Hendricks, S. Guadarrama, M. Rohrbach, S. Venugopalan, K. Saenko, and T. Darrell. Long-term recurrent convolutional networks for visual recognition and description. In CVPR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Donahue%2C%20J.%20Hendricks%2C%20L.Anne%20Guadarrama%2C%20S.%20Rohrbach%2C%20M.%20Long-term%20recurrent%20convolutional%20networks%20for%20visual%20recognition%20and%20description.%20In%20CVPR%202015"
+        },
+        {
+            "id": "12",
+            "entry": "[12] P. F. Felzenszwalb, R. B. Girshick, D. McAllester, and D. Ramanan. Object detection with discriminatively trained part-based models. PAMI, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Felzenszwalb%2C%20P.F.%20Girshick%2C%20R.B.%20McAllester%2C%20D.%20Ramanan%2C%20D.%20Object%20detection%20with%20discriminatively%20trained%20part-based%20models%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Felzenszwalb%2C%20P.F.%20Girshick%2C%20R.B.%20McAllester%2C%20D.%20Ramanan%2C%20D.%20Object%20detection%20with%20discriminatively%20trained%20part-based%20models%202010"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Y. Freund and R. E. Schapire. A decision-theoretic generalization of on-line learning and an application to boosting. Journal of computer and system sciences, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Freund%2C%20Y.%20Schapire%2C%20R.E.%20A%20decision-theoretic%20generalization%20of%20on-line%20learning%20and%20an%20application%20to%20boosting%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Freund%2C%20Y.%20Schapire%2C%20R.E.%20A%20decision-theoretic%20generalization%20of%20on-line%20learning%20and%20an%20application%20to%20boosting%201997"
+        },
+        {
+            "id": "14",
+            "entry": "[14] S. Gidaris and N. Komodakis. Object detection via a multi-region and semantic segmentationaware cnn model. In CVPR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gidaris%2C%20S.%20Komodakis%2C%20N.%20Object%20detection%20via%20a%20multi-region%20and%20semantic%20segmentationaware%20cnn%20model%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gidaris%2C%20S.%20Komodakis%2C%20N.%20Object%20detection%20via%20a%20multi-region%20and%20semantic%20segmentationaware%20cnn%20model%202015"
+        },
+        {
+            "id": "15",
+            "entry": "[15] R. Girshick, J. Donahue, T. Darrell, and J. Malik. Rich feature hierarchies for accurate object detection and semantic segmentation. In CVPR, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Girshick%2C%20R.%20Donahue%2C%20J.%20Darrell%2C%20T.%20Malik%2C%20J.%20Rich%20feature%20hierarchies%20for%20accurate%20object%20detection%20and%20semantic%20segmentation%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Girshick%2C%20R.%20Donahue%2C%20J.%20Darrell%2C%20T.%20Malik%2C%20J.%20Rich%20feature%20hierarchies%20for%20accurate%20object%20detection%20and%20semantic%20segmentation%202014"
+        },
+        {
+            "id": "16",
+            "entry": "[16] R. B. Girshick. Fast R-CNN. In ICCV, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=R%20B%20Girshick%20Fast%20RCNN%20In%20ICCV%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=R%20B%20Girshick%20Fast%20RCNN%20In%20ICCV%202015"
+        },
+        {
+            "id": "17",
+            "entry": "[17] K. Goel, R. Vohra, and J. Sahoo. Polyphonic music generation by modeling temporal dependencies using a rnn-dbn. In ANN, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goel%2C%20K.%20Vohra%2C%20R.%20Sahoo%2C%20J.%20Polyphonic%20music%20generation%20by%20modeling%20temporal%20dependencies%20using%20a%20rnn-dbn%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goel%2C%20K.%20Vohra%2C%20R.%20Sahoo%2C%20J.%20Polyphonic%20music%20generation%20by%20modeling%20temporal%20dependencies%20using%20a%20rnn-dbn%202014"
+        },
+        {
+            "id": "18",
+            "entry": "[18] A. Graves, A.-r. Mohamed, and G. Hinton. Speech recognition with deep recurrent neural networks. In ICASSP, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Graves%2C%20A.%20Mohamed%2C%20A.-r%20Hinton%2C%20G.%20Speech%20recognition%20with%20deep%20recurrent%20neural%20networks%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Graves%2C%20A.%20Mohamed%2C%20A.-r%20Hinton%2C%20G.%20Speech%20recognition%20with%20deep%20recurrent%20neural%20networks%202013"
+        },
+        {
+            "id": "19",
+            "entry": "[19] K. He, G. Gkioxari, P. Doll\u00e1r, and R. B. Girshick. Mask R-CNN. In ICCV, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=K%20He%20G%20Gkioxari%20P%20Doll%C3%A1r%20and%20R%20B%20Girshick%20Mask%20RCNN%20In%20ICCV%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=K%20He%20G%20Gkioxari%20P%20Doll%C3%A1r%20and%20R%20B%20Girshick%20Mask%20RCNN%20In%20ICCV%202017"
+        },
+        {
+            "id": "20",
+            "entry": "[20] K. He, X. Zhang, S. Ren, and J. Sun. Spatial pyramid pooling in deep convolutional networks for visual recognition. In ECCV, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Spatial%20pyramid%20pooling%20in%20deep%20convolutional%20networks%20for%20visual%20recognition%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Spatial%20pyramid%20pooling%20in%20deep%20convolutional%20networks%20for%20visual%20recognition%202014"
+        },
+        {
+            "id": "21",
+            "entry": "[21] J. H. Hosang, R. Benenson, and B. Schiele. Learning non-maximum suppression. In CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hosang%2C%20J.H.%20Benenson%2C%20R.%20Schiele%2C%20B.%20Learning%20non-maximum%20suppression%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hosang%2C%20J.H.%20Benenson%2C%20R.%20Schiele%2C%20B.%20Learning%20non-maximum%20suppression%202017"
+        },
+        {
+            "id": "22",
+            "entry": "[22] H. Hu, J. Gu, Z. Zhang, J. Dai, and Y. Wei. Relation networks for object detection. CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hu%2C%20H.%20Gu%2C%20J.%20Zhang%2C%20Z.%20Dai%2C%20J.%20Relation%20networks%20for%20object%20detection%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hu%2C%20H.%20Gu%2C%20J.%20Zhang%2C%20Z.%20Dai%2C%20J.%20Relation%20networks%20for%20object%20detection%202018"
+        },
+        {
+            "id": "23",
+            "entry": "[23] T. Lin, P. Doll\u00e1r, R. B. Girshick, K. He, B. Hariharan, and S. J. Belongie. Feature pyramid networks for object detection. In CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Feature%20pyramid%20networks%20for%20object%20detection%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Feature%20pyramid%20networks%20for%20object%20detection%202017"
+        },
+        {
+            "id": "24",
+            "entry": "[24] T.-Y. Lin, P. Goyal, R. Girshick, K. He, and P. Doll\u00e1r. Focal loss for dense object detection. In",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20T.-Y.%20Goyal%2C%20P.%20Girshick%2C%20R.%20He%2C%20K.%20Focal%20loss%20for%20dense%20object%20detection",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lin%2C%20T.-Y.%20Goyal%2C%20P.%20Girshick%2C%20R.%20He%2C%20K.%20Focal%20loss%20for%20dense%20object%20detection"
+        },
+        {
+            "id": "25",
+            "entry": "[25] T.-Y. Lin, M. Maire, S. Belongie, J. Hays, P. Perona, D. Ramanan, P. Doll\u00e1r, and C. L. Zitnick. Microsoft coco: Common objects in context. In ECCV, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=TY%20Lin%20M%20Maire%20S%20Belongie%20J%20Hays%20P%20Perona%20D%20Ramanan%20P%20Doll%C3%A1r%20and%20C%20L%20Zitnick%20Microsoft%20coco%20Common%20objects%20in%20context%20In%20ECCV%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=TY%20Lin%20M%20Maire%20S%20Belongie%20J%20Hays%20P%20Perona%20D%20Ramanan%20P%20Doll%C3%A1r%20and%20C%20L%20Zitnick%20Microsoft%20coco%20Common%20objects%20in%20context%20In%20ECCV%202014"
+        },
+        {
+            "id": "26",
+            "entry": "[26] S. Liu, C. Lu, and J. Jia. Box aggregation for proposal decimation: Last mile of object detection.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20S.%20Lu%2C%20C.%20Jia%2C%20J.%20Box%20aggregation%20for%20proposal%20decimation%3A%20Last%20mile%20of%20object%20detection"
+        },
+        {
+            "id": "27",
+            "entry": "[27] S. Liu, L. Qi, H. Qin, J. Shi, and J. Jia. Path aggregation network for instance segmentation.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20S.%20Qi%2C%20L.%20Qin%2C%20H.%20Shi%2C%20J.%20Path%20aggregation%20network%20for%20instance%20segmentation"
+        },
+        {
+            "id": "28",
+            "entry": "[28] W. Liu, D. Anguelov, D. Erhan, C. Szegedy, S. Reed, C.-Y. Fu, and A. C. Berg. Ssd: Single shot multibox detector. In ECCV, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=W%20Liu%20D%20Anguelov%20D%20Erhan%20C%20Szegedy%20S%20Reed%20CY%20Fu%20and%20A%20C%20Berg%20Ssd%20Single%20shot%20multibox%20detector%20In%20ECCV%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=W%20Liu%20D%20Anguelov%20D%20Erhan%20C%20Szegedy%20S%20Reed%20CY%20Fu%20and%20A%20C%20Berg%20Ssd%20Single%20shot%20multibox%20detector%20In%20ECCV%202016"
+        },
+        {
+            "id": "29",
+            "entry": "[29] M.-T. Luong, H. Pham, and C. D. Manning. Effective approaches to attention-based neural machine translation. arXiv:1508.04025, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1508.04025"
+        },
+        {
+            "id": "30",
+            "entry": "[30] V. Mnih, N. Heess, A. Graves, et al. Recurrent models of visual attention. In NIPS, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20V.%20Heess%2C%20N.%20Graves%2C%20A.%20Recurrent%20models%20of%20visual%20attention%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20V.%20Heess%2C%20N.%20Graves%2C%20A.%20Recurrent%20models%20of%20visual%20attention%202014"
+        },
+        {
+            "id": "31",
+            "entry": "[31] J. Redmon, S. Divvala, R. Girshick, and A. Farhadi. You only look once: Unified, real-time object detection. In CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Redmon%2C%20J.%20Divvala%2C%20S.%20Girshick%2C%20R.%20Farhadi%2C%20A.%20You%20only%20look%20once%3A%20Unified%2C%20real-time%20object%20detection%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Redmon%2C%20J.%20Divvala%2C%20S.%20Girshick%2C%20R.%20Farhadi%2C%20A.%20You%20only%20look%20once%3A%20Unified%2C%20real-time%20object%20detection%202016"
+        },
+        {
+            "id": "32",
+            "entry": "[32] S. Ren, K. He, R. B. Girshick, and J. Sun. Faster R-CNN: towards real-time object detection with region proposal networks. In NIPS, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ren%2C%20S.%20He%2C%20K.%20Girshick%2C%20R.B.%20Sun%2C%20J.%20Faster%20R-CNN%3A%20towards%20real-time%20object%20detection%20with%20region%20proposal%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ren%2C%20S.%20He%2C%20K.%20Girshick%2C%20R.B.%20Sun%2C%20J.%20Faster%20R-CNN%3A%20towards%20real-time%20object%20detection%20with%20region%20proposal%20networks%202015"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Z. Tu, Y. Liu, Z. Lu, X. Liu, and H. Li. Context gates for neural machine translation. arXiv:1608.06043, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1608.06043"
+        },
+        {
+            "id": "34",
+            "entry": "[34] A. Vaswani, N. Shazeer, N. Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, \u0141. Kaiser, and I. Polosukhin. Attention is all you need. In NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=A%20Vaswani%20N%20Shazeer%20N%20Parmar%20J%20Uszkoreit%20L%20Jones%20A%20N%20Gomez%20%C5%81%20Kaiser%20and%20I%20Polosukhin%20Attention%20is%20all%20you%20need%20In%20NIPS%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=A%20Vaswani%20N%20Shazeer%20N%20Parmar%20J%20Uszkoreit%20L%20Jones%20A%20N%20Gomez%20%C5%81%20Kaiser%20and%20I%20Polosukhin%20Attention%20is%20all%20you%20need%20In%20NIPS%202017"
+        },
+        {
+            "id": "35",
+            "entry": "[35] P. Viola and M. Jones. Rapid object detection using a boosted cascade of simple features. In CVPR, 2001. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Viola%2C%20P.%20Jones%2C%20M.%20Rapid%20object%20detection%20using%20a%20boosted%20cascade%20of%20simple%20features%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Viola%2C%20P.%20Jones%2C%20M.%20Rapid%20object%20detection%20using%20a%20boosted%20cascade%20of%20simple%20features%202001"
+        }
+    ]
+}

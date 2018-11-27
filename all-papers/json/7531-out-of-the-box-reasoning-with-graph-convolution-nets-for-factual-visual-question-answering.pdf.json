@@ -1,0 +1,465 @@
+{
+    "filename": "7531-out-of-the-box-reasoning-with-graph-convolution-nets-for-factual-visual-question-answering.pdf",
+    "metadata": {
+        "title": "Out of the Box: Reasoning with Graph Convolution Nets for Factual Visual Question Answering",
+        "author": "Medhini Narasimhan, Svetlana Lazebnik, Alexander Schwing",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7531-out-of-the-box-reasoning-with-graph-convolution-nets-for-factual-visual-question-answering.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Accurately answering a question about a given image requires combining observations with general knowledge. While this is effortless for humans, reasoning with general knowledge remains an algorithmic challenge. To advance research in this direction a novel \u2018fact-based\u2019 visual question answering (FVQA) task has been introduced recently along with a large set of curated facts which link two entities, i.e., two possible answers, via a relation. Given a question-image pair, deep network techniques have been employed to successively reduce the large set of facts until one of the two entities of the final remaining fact is predicted as the answer. We observe that a successive process which considers one fact at a time to form a local decision is sub-optimal. Instead, we develop an entity graph and use a graph convolutional network to \u2018reason\u2019 about the correct answer by jointly considering all entities. We show on the challenging FVQA dataset that this leads to an improvement in accuracy of around 7% compared to the state of the art."
+    },
+    "keywords": [
+        {
+            "term": "question answering",
+            "url": "https://en.wikipedia.org/wiki/question_answering"
+        },
+        {
+            "term": "Visual Concepts",
+            "url": "https://en.wikipedia.org/wiki/Visual_Concepts"
+        },
+        {
+            "term": "deep network",
+            "url": "https://en.wikipedia.org/wiki/deep_network"
+        },
+        {
+            "term": "general knowledge",
+            "url": "https://en.wikipedia.org/wiki/general_knowledge"
+        },
+        {
+            "term": "knowledge base",
+            "url": "https://en.wikipedia.org/wiki/knowledge_base"
+        },
+        {
+            "term": "multi-layer perceptron",
+            "url": "https://en.wikipedia.org/wiki/multi-layer_perceptron"
+        },
+        {
+            "term": "Ask Me Anything",
+            "url": "https://en.wikipedia.org/wiki/Ask_Me_Anything"
+        }
+    ],
+    "highlights": [
+        "When answering questions about images, we combine the visualized situation with general knowledge that is available to us",
+        "A significant amount of research has investigated algorithms for visual question answering (VQA) [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>, <a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>, <a class=\"ref-link\" id=\"c32\" href=\"#r32\">32</a>, <a class=\"ref-link\" id=\"c43\" href=\"#r43\">43</a>, <a class=\"ref-link\" id=\"c44\" href=\"#r44\">44</a>, <a class=\"ref-link\" id=\"c63\" href=\"#r63\">63</a>], visual question generation (VQG) [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>, <a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>, <a class=\"ref-link\" id=\"c36\" href=\"#r36\">36</a>, <a class=\"ref-link\" id=\"c49\" href=\"#r49\">49</a>], and visual dialog [<a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>,<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>,<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>], paving the way to autonomy for artificial agents operating in the real world",
+        "We develop a visual question answering algorithm based on graph convolutional nets which benefits from general knowledge encoded in the form of a knowledge base",
+        "We evaluate our method on the dataset released as part of the fact-based\u2019 visual question answering work, referred to as the fact-based\u2019 visual question answering dataset [<a class=\"ref-link\" id=\"c50\" href=\"#r50\">50</a>], which is a subset of three structured databases \u2013 DBpedia [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>], ConceptNet [<a class=\"ref-link\" id=\"c45\" href=\"#r45\">45</a>], and WebChild [<a class=\"ref-link\" id=\"c47\" href=\"#r47\">47</a>]",
+        "Our approach has the following advantages: 1) Unlike fact-based\u2019 visual question answering and AHAB, we avoid the step of query construction and do not use the ground truth visual concept or answer type information which makes it possible to incorporate any fact space into our model.\n2) We use GloVe embeddings for retrieving and representing facts which works well with synonyms and homographs.\n3) In contrast to Straight to the Facts, which uses a deep network to arrive at the right fact, we use a GraphConvolution Net which operates on a subgraph of relevant facts while retaining the graphical structure of the knowledge base which allows for reasoning using message passing.\n4) Unlike previous works, we have reduced the reliance on the knowledge of the ground truth fact at training time.\n3 Visual Question Answering with Knowledge Bases",
+        "We developed a method for \u2018reasoning\u2019 in factual visual question answering using graph convolution nets"
+    ],
+    "key_statements": [
+        "When answering questions about images, we combine the visualized situation with general knowledge that is available to us",
+        "A significant amount of research has investigated algorithms for visual question answering (VQA) [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>, <a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>, <a class=\"ref-link\" id=\"c32\" href=\"#r32\">32</a>, <a class=\"ref-link\" id=\"c43\" href=\"#r43\">43</a>, <a class=\"ref-link\" id=\"c44\" href=\"#r44\">44</a>, <a class=\"ref-link\" id=\"c63\" href=\"#r63\">63</a>], visual question generation (VQG) [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>, <a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>, <a class=\"ref-link\" id=\"c36\" href=\"#r36\">36</a>, <a class=\"ref-link\" id=\"c49\" href=\"#r49\">49</a>], and visual dialog [<a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>,<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>,<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>], paving the way to autonomy for artificial agents operating in the real world",
+        "We demonstrate the proposed algorithm on the fact-based\u2019 visual question answering dataset [<a class=\"ref-link\" id=\"c50\" href=\"#r50\">50</a>], outperforming the state of the art by around 7%",
+        "We develop a visual question answering algorithm based on graph convolutional nets which benefits from general knowledge encoded in the form of a knowledge base",
+        "We evaluate our method on the dataset released as part of the fact-based\u2019 visual question answering work, referred to as the fact-based\u2019 visual question answering dataset [<a class=\"ref-link\" id=\"c50\" href=\"#r50\">50</a>], which is a subset of three structured databases \u2013 DBpedia [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>], ConceptNet [<a class=\"ref-link\" id=\"c45\" href=\"#r45\">45</a>], and WebChild [<a class=\"ref-link\" id=\"c47\" href=\"#r47\">47</a>]",
+        "Our approach has the following advantages: 1) Unlike fact-based\u2019 visual question answering and AHAB, we avoid the step of query construction and do not use the ground truth visual concept or answer type information which makes it possible to incorporate any fact space into our model.\n2) We use GloVe embeddings for retrieving and representing facts which works well with synonyms and homographs.\n3) In contrast to Straight to the Facts, which uses a deep network to arrive at the right fact, we use a GraphConvolution Net which operates on a subgraph of relevant facts while retaining the graphical structure of the knowledge base which allows for reasoning using message passing.\n4) Unlike previous works, we have reduced the reliance on the knowledge of the ground truth fact at training time.\n3 Visual Question Answering with Knowledge Bases",
+        "To jointly \u2018reason\u2019 about a set of answers for a given question-image pair, we develop a graph convolution net (GCN) based approach for visual question answering with knowledge bases",
+        "To jointly assess the suitability of all candidate entities in E, we develop a GraphConvolution Net (GCN) based approach which is augmented by a multi-layer perceptron (MLP)",
+        "Q, Visual Concepts, Entity denote question, visual concept, and entity embeddings respectively. \u201811\u2019 is the model discussed in Sec. 3 where the entities are first filtered by the predicted relation and each node of the graph is represented by a concatenation of the question, visual concept, and entity embeddings. \u201812\u2019 uses the top three relations predicted by the question-relation LSTM net and retains all the entities which are connected by these three relations. \u201813\u2019 uses the ground truth relation for every question",
+        "We developed a method for \u2018reasoning\u2019 in factual visual question answering using graph convolution nets"
+    ],
+    "summary": [
+        "When answering questions about images, we combine the visualized situation with general knowledge that is available to us.",
+        "We propose a model that retrieves the most relevant facts to a question-answer pair based on GloVe features.",
+        "Our approach has the following advantages: 1) Unlike FVQA and AHAB, we avoid the step of query construction and do not use the ground truth visual concept or answer type information which makes it possible to incorporate any fact space into our model.",
+        "To jointly \u2018reason\u2019 about a set of answers for a given question-image pair, we develop a graph convolution net (GCN) based approach for visual question answering with knowledge bases.",
+        "Given an image I and a corresponding question Q, the task is to predict an answer A while using an external knowledge base KB which consists of facts, fi, i.e., KB = {f1, f2, .",
+        "To predict the answer we use a GCN to compute representations of nodes in a graph, where the nodes correspond to the unique entities e \u2208 E = {x(f ) : f \u2208 frel} \u222a {y(f ) : f \u2208 frel}, i.e., either x or y in the fact space frel.",
+        "In the following we first discuss retrieval of the most relevant facts for a given question-image pair before detailing our GCN approach for extracting the answer from this reduced fact space.",
+        "To retrieve a set of relevant facts frel for a given question-image pair, we pursue a score based approach.",
+        "We first compute the cosine similarity of the GloVe embeddings of the words in the fact with the words in the question and the words of the visual concepts detected in the image.",
+        "The answer prediction model parameters consists of weights from the question embedding, entity embedding, GCN, and MLP.",
+        "Factual visual question answering dataset: To evaluate our model, We use the publicly available FVQA [<a class=\"ref-link\" id=\"c50\" href=\"#r50\">50</a>] knowledge base and dataset.",
+        "\u201811\u2019 is the model discussed in Sec. 3 where the entities are first filtered by the predicted relation and each node of the graph is represented by a concatenation of the question, visual concept, and entity embeddings.",
+        "When the number of facts retrieved is large and the matrix is less sparse, the 1 layer GCN model makes a wrong prediction.",
+        "We indicate the question corresponding to the image, the supporting fact, relation, and answer detected by our model.",
+        "Predicting the correct answer involves three main steps: (1) Selecting the right supporting fact in the Top-100 facts, f100; (2) Predicting the right relation; (3) Selecting the right entity in the GCN.",
+        "We thank Arun Mallya and Aditya Deshpande for their help"
+    ],
+    "headline": "We develop an entity graph and use a graph convolutional network to \u2018reason\u2019 about the correct answer by jointly considering all entities",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] J. Andreas, M. Rohrbach, T. Darrell, and D. Klein. Deep compositional question answering with neural module networks. In CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Andreas%2C%20J.%20Rohrbach%2C%20M.%20Darrell%2C%20T.%20Klein%2C%20D.%20Deep%20compositional%20question%20answering%20with%20neural%20module%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Andreas%2C%20J.%20Rohrbach%2C%20M.%20Darrell%2C%20T.%20Klein%2C%20D.%20Deep%20compositional%20question%20answering%20with%20neural%20module%20networks%202016"
+        },
+        {
+            "id": "2",
+            "entry": "[2] S. Antol, A. Agrawal, J. Lu, M. Mitchell, D. Batra, C. L. Zitnick, and D. Parikh. VQA: Visual Question Answering. In ICCV, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Antol%2C%20S.%20Agrawal%2C%20A.%20Lu%2C%20J.%20Mitchell%2C%20M.%20VQA%3A%20Visual%20Question%20Answering%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Antol%2C%20S.%20Agrawal%2C%20A.%20Lu%2C%20J.%20Mitchell%2C%20M.%20VQA%3A%20Visual%20Question%20Answering%202015"
+        },
+        {
+            "id": "3",
+            "entry": "[3] S. Auer, C. Bizer, G. Kobilarov, J. Lehmann, R. Cyganiak, and Z. Ives. Dbpedia: A nucleus for a web of open data. In ISWC/ASWC, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Auer%2C%20S.%20Bizer%2C%20C.%20Kobilarov%2C%20G.%20Lehmann%2C%20J.%20Dbpedia%3A%20A%20nucleus%20for%20a%20web%20of%20open%20data%202007"
+        },
+        {
+            "id": "4",
+            "entry": "[4] H. Ben-younes, R. Cadene, M. Cord, and N. Thome. Mutan: Multimodal tucker fusion for visual question answering. In ICCV, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ben-younes%2C%20H.%20Cadene%2C%20R.%20Cord%2C%20M.%20N.%20Thome.%20Mutan%3A%20Multimodal%20tucker%20fusion%20for%20visual%20question%20answering%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ben-younes%2C%20H.%20Cadene%2C%20R.%20Cord%2C%20M.%20N.%20Thome.%20Mutan%3A%20Multimodal%20tucker%20fusion%20for%20visual%20question%20answering%202017"
+        },
+        {
+            "id": "5",
+            "entry": "[5] J. Berant, A. Chou, R. Frostig, and P. Liang. Semantic Parsing on Freebase from Question-Answer Pairs. In EMNLP, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Berant%2C%20J.%20Chou%2C%20A.%20Frostig%2C%20R.%20Liang%2C%20P.%20Semantic%20Parsing%20on%20Freebase%20from%20Question-Answer%20Pairs%202013"
+        },
+        {
+            "id": "6",
+            "entry": "[6] J. Berant and P. Liang. Semantic parsing via paraphrasing. In ACL, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Berant%2C%20J.%20Liang%2C%20P.%20Semantic%20parsing%20via%20paraphrasing%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Berant%2C%20J.%20Liang%2C%20P.%20Semantic%20parsing%20via%20paraphrasing%202014"
+        },
+        {
+            "id": "7",
+            "entry": "[7] A. Bordes, S. Chopra, and J. Weston. Question answering with sub-graph embeddings. In EMNLP, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bordes%2C%20A.%20Chopra%2C%20S.%20Weston%2C%20J.%20Question%20answering%20with%20sub-graph%20embeddings%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bordes%2C%20A.%20Chopra%2C%20S.%20Weston%2C%20J.%20Question%20answering%20with%20sub-graph%20embeddings%202014"
+        },
+        {
+            "id": "8",
+            "entry": "[8] A. Bordes, N. Usunier, S. Chopra, and J. Weston. Large-scale simple question answering with memory networks. In ICLR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bordes%2C%20A.%20Usunier%2C%20N.%20Chopra%2C%20S.%20Weston%2C%20J.%20Large-scale%20simple%20question%20answering%20with%20memory%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bordes%2C%20A.%20Usunier%2C%20N.%20Chopra%2C%20S.%20Weston%2C%20J.%20Large-scale%20simple%20question%20answering%20with%20memory%20networks%202015"
+        },
+        {
+            "id": "9",
+            "entry": "[9] A. Bordes, J. Weston, and N. Usunier. Open question answering with weakly supervised embedding models. In ECML, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bordes%2C%20A.%20Weston%2C%20J.%20Usunier%2C%20N.%20Open%20question%20answering%20with%20weakly%20supervised%20embedding%20models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bordes%2C%20A.%20Weston%2C%20J.%20Usunier%2C%20N.%20Open%20question%20answering%20with%20weakly%20supervised%20embedding%20models%202014"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Q. Cai and A. Yates. Large-scale Semantic Parsing via Schema Matching and Lexicon Extension. In ACL, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cai%2C%20Q.%20Yates%2C%20A.%20Large-scale%20Semantic%20Parsing%20via%20Schema%20Matching%20and%20Lexicon%20Extension%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cai%2C%20Q.%20Yates%2C%20A.%20Large-scale%20Semantic%20Parsing%20via%20Schema%20Matching%20and%20Lexicon%20Extension%202013"
+        },
+        {
+            "id": "11",
+            "entry": "[11] A. Das, H. Agrawal, C. L. Zitnick, D. Parikh, and D. Batra. Human attention in visual question answering: Do humans and deep networks look at the same regions? In EMNLP, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Das%2C%20A.%20Agrawal%2C%20H.%20Zitnick%2C%20C.L.%20Parikh%2C%20D.%20Human%20attention%20in%20visual%20question%20answering%3A%20Do%20humans%20and%20deep%20networks%20look%20at%20the%20same%20regions%3F%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Das%2C%20A.%20Agrawal%2C%20H.%20Zitnick%2C%20C.L.%20Parikh%2C%20D.%20Human%20attention%20in%20visual%20question%20answering%3A%20Do%20humans%20and%20deep%20networks%20look%20at%20the%20same%20regions%3F%202016"
+        },
+        {
+            "id": "12",
+            "entry": "[12] A. Das, S. Kottur, K. Gupta, A. Singh, D. Yadav, J. M. Moura, D. Parikh, and D. Batra. Visual Dialog. In",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=A%20Das%20S%20Kottur%20K%20Gupta%20A%20Singh%20D%20Yadav%20J%20M%20Moura%20D%20Parikh%20and%20D%20Batra%20Visual%20Dialog%20In",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=A%20Das%20S%20Kottur%20K%20Gupta%20A%20Singh%20D%20Yadav%20J%20M%20Moura%20D%20Parikh%20and%20D%20Batra%20Visual%20Dialog%20In"
+        },
+        {
+            "id": "13",
+            "entry": "[13] A. Das, S. Kottur, J. M. Moura, S. Lee, and D. Batra. Learning cooperative visual dialog agents with deep reinforcement learning. arXiv:1703.06585, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.06585"
+        },
+        {
+            "id": "14",
+            "entry": "[14] L. Dong, F. Wei, M. Zhou, and K. Xu. Question answering over freebase with multi-column convolutional neural networks. In ACL, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dong%2C%20L.%20Wei%2C%20F.%20Zhou%2C%20M.%20Xu%2C%20K.%20Question%20answering%20over%20freebase%20with%20multi-column%20convolutional%20neural%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dong%2C%20L.%20Wei%2C%20F.%20Zhou%2C%20M.%20Xu%2C%20K.%20Question%20answering%20over%20freebase%20with%20multi-column%20convolutional%20neural%20networks%202015"
+        },
+        {
+            "id": "15",
+            "entry": "[15] A. Fader, L. Zettlemoyer, and O. Etzioni. Open question answering over curated and extracted knowledge bases. In KDD, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fader%2C%20A.%20Zettlemoyer%2C%20L.%20Etzioni%2C%20O.%20Open%20question%20answering%20over%20curated%20and%20extracted%20knowledge%20bases%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fader%2C%20A.%20Zettlemoyer%2C%20L.%20Etzioni%2C%20O.%20Open%20question%20answering%20over%20curated%20and%20extracted%20knowledge%20bases%202014"
+        },
+        {
+            "id": "16",
+            "entry": "[16] A. Fukui, D. H. Park, D. Yang, A. Rohrbach, T. Darrell, and M. Rohrbach. Multimodal compact bilinear pooling for visual question answering and visual grounding. In EMNLP, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fukui%2C%20A.%20Park%2C%20D.H.%20Yang%2C%20D.%20Rohrbach%2C%20A.%20Multimodal%20compact%20bilinear%20pooling%20for%20visual%20question%20answering%20and%20visual%20grounding%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fukui%2C%20A.%20Park%2C%20D.H.%20Yang%2C%20D.%20Rohrbach%2C%20A.%20Multimodal%20compact%20bilinear%20pooling%20for%20visual%20question%20answering%20and%20visual%20grounding%202016"
+        },
+        {
+            "id": "17",
+            "entry": "[17] H. Gao, J. Mao, J. Zhou, Z. Huang, L. Wang, and W. Xu. Are you talking to a machine? Dataset and Methods for Multilingual Image Question Answering. In NIPS, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gao%2C%20H.%20Mao%2C%20J.%20Zhou%2C%20J.%20Huang%2C%20Z.%20Are%20you%20talking%20to%20a%20machine%3F%20Dataset%20and%20Methods%20for%20Multilingual%20Image%20Question%20Answering%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gao%2C%20H.%20Mao%2C%20J.%20Zhou%2C%20J.%20Huang%2C%20Z.%20Are%20you%20talking%20to%20a%20machine%3F%20Dataset%20and%20Methods%20for%20Multilingual%20Image%20Question%20Answering%202015"
+        },
+        {
+            "id": "18",
+            "entry": "[18] D. Gordon, A. Kembhavi, M. Rastegari, J. Redmon, D. Fox, and A. Farhadi. Iqa: Visual question answering in interactive environments. In CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gordon%2C%20D.%20Kembhavi%2C%20A.%20Rastegari%2C%20M.%20Redmon%2C%20J.%20Iqa%3A%20Visual%20question%20answering%20in%20interactive%20environments%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gordon%2C%20D.%20Kembhavi%2C%20A.%20Rastegari%2C%20M.%20Redmon%2C%20J.%20Iqa%3A%20Visual%20question%20answering%20in%20interactive%20environments%202018"
+        },
+        {
+            "id": "19",
+            "entry": "[19] A. Jabri, A. Joulin, and L. van der Maaten. Revisiting Visual Question Answering Baselines. In ECCV, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jabri%2C%20A.%20Joulin%2C%20A.%20van%20der%20Maaten%2C%20L.%20Revisiting%20Visual%20Question%20Answering%20Baselines%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jabri%2C%20A.%20Joulin%2C%20A.%20van%20der%20Maaten%2C%20L.%20Revisiting%20Visual%20Question%20Answering%20Baselines%202016"
+        },
+        {
+            "id": "20",
+            "entry": "[20] U. Jain, S. Lazebnik, and A. G. Schwing. Two can play this Game: Visual Dialog with Discriminative Question Generation and Answering. In CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jain%2C%20U.%20Lazebnik%2C%20S.%20Schwing%2C%20A.G.%20Two%20can%20play%20this%20Game%3A%20Visual%20Dialog%20with%20Discriminative%20Question%20Generation%20and%20Answering%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jain%2C%20U.%20Lazebnik%2C%20S.%20Schwing%2C%20A.G.%20Two%20can%20play%20this%20Game%3A%20Visual%20Dialog%20with%20Discriminative%20Question%20Generation%20and%20Answering%202018"
+        },
+        {
+            "id": "21",
+            "entry": "[21] U. Jain, Z. Zhang, and A. G. Schwing. Creativity: Generating Diverse Questions using Variational Autoencoders. In CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jain%2C%20U.%20Zhang%2C%20Z.%20Schwing%2C%20A.G.%20Creativity%3A%20Generating%20Diverse%20Questions%20using%20Variational%20Autoencoders%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jain%2C%20U.%20Zhang%2C%20Z.%20Schwing%2C%20A.G.%20Creativity%3A%20Generating%20Diverse%20Questions%20using%20Variational%20Autoencoders%202017"
+        },
+        {
+            "id": "22",
+            "entry": "[22] A. Jiang, F. Wang, F. Porikli, and Y. Li. Compositional memory for visual question answering. arXiv:1511.05676, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.05676"
+        },
+        {
+            "id": "23",
+            "entry": "[23] J. Johnson, B. Hariharan, L. van der Maaten, L. Fei-Fei, C. L. Zitnick, and R. Girshick. Clevr: A diagnostic dataset for compositional language and elementary visual reasoning. In CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Johnson%2C%20J.%20Hariharan%2C%20B.%20van%20der%20Maaten%2C%20L.%20Fei-Fei%2C%20L.%20Clevr%3A%20A%20diagnostic%20dataset%20for%20compositional%20language%20and%20elementary%20visual%20reasoning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Johnson%2C%20J.%20Hariharan%2C%20B.%20van%20der%20Maaten%2C%20L.%20Fei-Fei%2C%20L.%20Clevr%3A%20A%20diagnostic%20dataset%20for%20compositional%20language%20and%20elementary%20visual%20reasoning%202017"
+        },
+        {
+            "id": "24",
+            "entry": "[24] J.-H. Kim, S.-W. L. D.-H. Kwak, M.-O. Heo, J. Kim, J.-W. Ha, and B.-T. Zhang. Multimodal residual learning for visual qa. In NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kim%2C%20J.-H.%20Kwak%2C%20S.-W.L.D.-H.%20Heo%2C%20M.-O.%20Kim%2C%20J.%20Multimodal%20residual%20learning%20for%20visual%20qa%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kim%2C%20J.-H.%20Kwak%2C%20S.-W.L.D.-H.%20Heo%2C%20M.-O.%20Kim%2C%20J.%20Multimodal%20residual%20learning%20for%20visual%20qa%202016"
+        },
+        {
+            "id": "25",
+            "entry": "[25] T. N. Kipf and M. Welling. Semi-supervised classification with graph convolutional networks. arXiv:1609.02907, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.02907"
+        },
+        {
+            "id": "26",
+            "entry": "[26] O. Kolomiyets and M.-F. Moens. A survey on question answering technology from an information retrieval perspective. In Information Sciences, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kolomiyets%2C%20O.%20Moens%2C%20M.-F.%20A%20survey%20on%20question%20answering%20technology%20from%20an%20information%20retrieval%20perspective%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kolomiyets%2C%20O.%20Moens%2C%20M.-F.%20A%20survey%20on%20question%20answering%20technology%20from%20an%20information%20retrieval%20perspective%202011"
+        },
+        {
+            "id": "27",
+            "entry": "[27] J. Krishnamurthy and T. Kollar. Jointly learning to parse and perceive: Connecting natural language to the physical world. In ACL, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krishnamurthy%2C%20J.%20Kollar%2C%20T.%20Jointly%20learning%20to%20parse%20and%20perceive%3A%20Connecting%20natural%20language%20to%20the%20physical%20world.%20In%20ACL%202013"
+        },
+        {
+            "id": "28",
+            "entry": "[28] T. Kwiatkowski, E. Choi, Y. Artzi, and L. Zettlemoyer. Scaling semantic parsers with on-the-fly ontology matching. In EMNLP, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kwiatkowski%2C%20T.%20Choi%2C%20E.%20Artzi%2C%20Y.%20Zettlemoyer%2C%20L.%20Scaling%20semantic%20parsers%20with%20on-the-fly%20ontology%20matching%202013"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Y. LeCun, L. Bottou, Y. Bengio, and P. Haffner. Gradient-based learning applied to document recognition.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=LeCun%2C%20Y.%20Bottou%2C%20L.%20Bengio%2C%20Y.%20Haffner%2C%20P.%20Gradient-based%20learning%20applied%20to%20document%20recognition"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Y. Li, N. Duan, B. Zhou, X. Chu, W. Ouyang, and X. Wang. Visual question generation as dual task of visual question answering. arXiv:1709.07192, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1709.07192"
+        },
+        {
+            "id": "31",
+            "entry": "[31] P. Liang, M. I. Jordan, and D. Klein. Learning dependency-based compositional semantics. In Computational Linguistics, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liang%2C%20P.%20Jordan%2C%20M.I.%20Klein%2C%20D.%20Learning%20dependency-based%20compositional%20semantics%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liang%2C%20P.%20Jordan%2C%20M.I.%20Klein%2C%20D.%20Learning%20dependency-based%20compositional%20semantics%202013"
+        },
+        {
+            "id": "32",
+            "entry": "[32] J. Lu, J. Yang, D. Batra, and D. Parikh. Hierarchical question-image co-attention for visual question answering. In NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lu%2C%20J.%20Yang%2C%20J.%20Batra%2C%20D.%20Parikh%2C%20D.%20Hierarchical%20question-image%20co-attention%20for%20visual%20question%20answering%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lu%2C%20J.%20Yang%2C%20J.%20Batra%2C%20D.%20Parikh%2C%20D.%20Hierarchical%20question-image%20co-attention%20for%20visual%20question%20answering%202016"
+        },
+        {
+            "id": "33",
+            "entry": "[33] L. Ma, Z. Lu, and H. Li. Learning to answer questions from image using convolutional neural network. In AAAI, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ma%2C%20L.%20Lu%2C%20Z.%20Li%2C%20H.%20Learning%20to%20answer%20questions%20from%20image%20using%20convolutional%20neural%20network%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ma%2C%20L.%20Lu%2C%20Z.%20Li%2C%20H.%20Learning%20to%20answer%20questions%20from%20image%20using%20convolutional%20neural%20network%202016"
+        },
+        {
+            "id": "34",
+            "entry": "[34] M. Malinowski and M. Fritz. A Multi-World Approach to Question Answering about Real-World Scenes based on Uncertain Input. In NIPS, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Malinowski%2C%20M.%20Fritz%2C%20M.%20A%20Multi-World%20Approach%20to%20Question%20Answering%20about%20Real-World%20Scenes%20based%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Malinowski%2C%20M.%20Fritz%2C%20M.%20A%20Multi-World%20Approach%20to%20Question%20Answering%20about%20Real-World%20Scenes%20based%202014"
+        },
+        {
+            "id": "35",
+            "entry": "[35] M. Malinowski, M. Rohrbach, and M. Fritz. Ask your neurons: A neural-based approach to answering questions about images. In ICCV, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Malinowski%2C%20M.%20Rohrbach%2C%20M.%20Fritz%2C%20M.%20Ask%20your%20neurons%3A%20A%20neural-based%20approach%20to%20answering%20questions%20about%20images%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Malinowski%2C%20M.%20Rohrbach%2C%20M.%20Fritz%2C%20M.%20Ask%20your%20neurons%3A%20A%20neural-based%20approach%20to%20answering%20questions%20about%20images%202015"
+        },
+        {
+            "id": "36",
+            "entry": "[36] N. Mostafazadeh, I. Misra, J. Devlin, M. Mitchell, X. He, and L. Vanderwende. Generating natural questions about an image. arXiv:1603.06059, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1603.06059"
+        },
+        {
+            "id": "37",
+            "entry": "[37] K. Narasimhan, A. Yala, and R. Barzilay. Improving information extraction by acquiring external evidence with reinforcement learning. In EMNLP, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Narasimhan%2C%20K.%20Yala%2C%20A.%20Barzilay%2C%20R.%20Improving%20information%20extraction%20by%20acquiring%20external%20evidence%20with%20reinforcement%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Narasimhan%2C%20K.%20Yala%2C%20A.%20Barzilay%2C%20R.%20Improving%20information%20extraction%20by%20acquiring%20external%20evidence%20with%20reinforcement%20learning%202016"
+        },
+        {
+            "id": "38",
+            "entry": "[38] M. Narasimhan and A. G. Schwing. Straight to the facts: Learning knowledge base retrieval for factual visual question answering. In ECCV, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Narasimhan%2C%20M.%20Schwing%2C%20A.G.%20Straight%20to%20the%20facts%3A%20Learning%20knowledge%20base%20retrieval%20for%20factual%20visual%20question%20answering%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Narasimhan%2C%20M.%20Schwing%2C%20A.G.%20Straight%20to%20the%20facts%3A%20Learning%20knowledge%20base%20retrieval%20for%20factual%20visual%20question%20answering%202018"
+        },
+        {
+            "id": "39",
+            "entry": "[39] J. Pennington, R. Socher, and C. D. Manning. Glove: Global vectors for word representation. In EMNLP, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pennington%2C%20J.%20Socher%2C%20R.%20Manning%2C%20C.D.%20Glove%3A%20Global%20vectors%20for%20word%20representation%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pennington%2C%20J.%20Socher%2C%20R.%20Manning%2C%20C.D.%20Glove%3A%20Global%20vectors%20for%20word%20representation%202014"
+        },
+        {
+            "id": "40",
+            "entry": "[40] S. Reddy, O. T\u00e4ckstr\u00f6m, M. Collins, T. Kwiatkowski, D. Das, M. Steedman, and M. Lapata. Transforming dependency structures to logical forms for semantic parsing. In ACL, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Reddy%2C%20S.%20T%C3%A4ckstr%C3%B6m%2C%20O.%20Collins%2C%20M.%20Kwiatkowski%2C%20T.%20Transforming%20dependency%20structures%20to%20logical%20forms%20for%20semantic%20parsing%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Reddy%2C%20S.%20T%C3%A4ckstr%C3%B6m%2C%20O.%20Collins%2C%20M.%20Kwiatkowski%2C%20T.%20Transforming%20dependency%20structures%20to%20logical%20forms%20for%20semantic%20parsing%202016"
+        },
+        {
+            "id": "41",
+            "entry": "[41] M. Ren, R. Kiros, and R. Zemel. Exploring models and data for image question answering. In NIPS, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ren%2C%20M.%20Kiros%2C%20R.%20Zemel%2C%20R.%20Exploring%20models%20and%20data%20for%20image%20question%20answering%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ren%2C%20M.%20Kiros%2C%20R.%20Zemel%2C%20R.%20Exploring%20models%20and%20data%20for%20image%20question%20answering%202015"
+        },
+        {
+            "id": "42",
+            "entry": "[42] M. Schlichtkrull, T. N. Kipf, P. Bloem, R. v. d. Berg, I. Titov, and M. Welling. Modeling relational data with graph convolutional networks. In ESWC, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schlichtkrull%2C%20M.%20Kipf%2C%20T.N.%20Bloem%2C%20P.%20v.%20d.%20Berg%2C%20R.%20Modeling%20relational%20data%20with%20graph%20convolutional%20networks%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schlichtkrull%2C%20M.%20Kipf%2C%20T.N.%20Bloem%2C%20P.%20v.%20d.%20Berg%2C%20R.%20Modeling%20relational%20data%20with%20graph%20convolutional%20networks%202018"
+        },
+        {
+            "id": "43",
+            "entry": "[43] I. Schwartz, A. G. Schwing, and T. Hazan. High-Order Attention Models for Visual Question Answering.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schwartz%2C%20I.%20Schwing%2C%20A.G.%20Hazan%2C%20T.%20High-Order%20Attention%20Models%20for%20Visual%20Question%20Answering"
+        },
+        {
+            "id": "44",
+            "entry": "[44] K. J. Shih, S. Singh, and D. Hoiem. Where to look: Focus regions for visual question answering. In CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shih%2C%20K.J.%20Singh%2C%20S.%20Hoiem%2C%20D.%20Where%20to%20look%3A%20Focus%20regions%20for%20visual%20question%20answering%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shih%2C%20K.J.%20Singh%2C%20S.%20Hoiem%2C%20D.%20Where%20to%20look%3A%20Focus%20regions%20for%20visual%20question%20answering%202016"
+        },
+        {
+            "id": "45",
+            "entry": "[45] R. Speer, J. Chin, and C. Havasi. Conceptnet 5.5: An open multilingual graph of general knowledge. In",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Speer%2C%20R.%20Chin%2C%20J.%20Havasi%2C%20C.%20Conceptnet%205.5%3A%20An%20open%20multilingual%20graph%20of%20general%20knowledge",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Speer%2C%20R.%20Chin%2C%20J.%20Havasi%2C%20C.%20Conceptnet%205.5%3A%20An%20open%20multilingual%20graph%20of%20general%20knowledge"
+        },
+        {
+            "id": "46",
+            "entry": "[46] S. W. t. Yih, M.-W. Chang, X. He, and J. Gao. Semantic parsing via staged query graph generation: Question answering with knowledge base. In ACL-IJCNLP, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=t.%20Yih%2C%20S.W.%20Chang%2C%20M.-W.%20He%2C%20X.%20Gao%2C%20J.%20Semantic%20parsing%20via%20staged%20query%20graph%20generation%3A%20Question%20answering%20with%20knowledge%20base%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=t.%20Yih%2C%20S.W.%20Chang%2C%20M.-W.%20He%2C%20X.%20Gao%2C%20J.%20Semantic%20parsing%20via%20staged%20query%20graph%20generation%3A%20Question%20answering%20with%20knowledge%20base%202015"
+        },
+        {
+            "id": "47",
+            "entry": "[47] N. Tandon, G. de Melo, F. Suchanek, and G. Weikum. Webchild: Harvesting and organizing commonsense knowledge from the web. In WSDM, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tandon%2C%20N.%20de%20Melo%2C%20G.%20Suchanek%2C%20F.%20Weikum%2C%20G.%20Webchild%3A%20Harvesting%20and%20organizing%20commonsense%20knowledge%20from%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tandon%2C%20N.%20de%20Melo%2C%20G.%20Suchanek%2C%20F.%20Weikum%2C%20G.%20Webchild%3A%20Harvesting%20and%20organizing%20commonsense%20knowledge%20from%202014"
+        },
+        {
+            "id": "48",
+            "entry": "[48] C. Unger, L. B\u00fchmann, J. Lehmann, A.-C. N. Ngomo, D. Gerber, and P. Cimiano. Template-based question answering over RDF data. In WWW, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Unger%2C%20C.%20B%C3%BChmann%2C%20L.%20Lehmann%2C%20J.%20Ngomo%2C%20A.-C.N.%20Template-based%20question%20answering%20over%20RDF%20data.%20In%20WWW%202012"
+        },
+        {
+            "id": "49",
+            "entry": "[49] A. K. Vijayakumar, M. Cogswell, R. R. Selvaraju, Q. Sun, S. Lee, D. Crandall, and D. Batra. Diverse beam search: Decoding diverse solutions from neural sequence models. arXiv:1610.02424, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1610.02424"
+        },
+        {
+            "id": "50",
+            "entry": "[50] P. Wang, Q. Wu, C. Shen, A. Dick, and A. v. d. Hengel. Fvqa: Fact-based visual question answering.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20P.%20Wu%2C%20Q.%20Shen%2C%20C.%20Dick%2C%20A.%20Fvqa%3A%20Fact-based%20visual%20question%20answering"
+        },
+        {
+            "id": "51",
+            "entry": "[51] P. Wang, Q. Wu, C. Shen, A. Dick, and A. Van Den Henge. Explicit knowledge-based reasoning for visual question answering. In IJCAI, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20P.%20Wu%2C%20Q.%20Shen%2C%20C.%20Dick%2C%20A.%20Explicit%20knowledge-based%20reasoning%20for%20visual%20question%20answering%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20P.%20Wu%2C%20Q.%20Shen%2C%20C.%20Dick%2C%20A.%20Explicit%20knowledge-based%20reasoning%20for%20visual%20question%20answering%202017"
+        },
+        {
+            "id": "52",
+            "entry": "[52] X. Wang, Y. Ye, and A. Gupta. Zero-shot recognition via semantic embeddings and knowledge graphs. In",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20X.%20Ye%2C%20Y.%20Gupta%2C%20A.%20Zero-shot%20recognition%20via%20semantic%20embeddings%20and%20knowledge%20graphs",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20X.%20Ye%2C%20Y.%20Gupta%2C%20A.%20Zero-shot%20recognition%20via%20semantic%20embeddings%20and%20knowledge%20graphs"
+        },
+        {
+            "id": "53",
+            "entry": "[53] Q. Wu, C. Shen, A. van den Hengel, P. Wang, and A. Dick. Image captioning and visual question answering based on attributes and their related external knowledge. arXiv:1603.02814, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1603.02814"
+        },
+        {
+            "id": "54",
+            "entry": "[54] Q. Wu, P. Wang, C. Shen, A. Dick, and A. van den Hengel. Ask me anything: Free-form visual question answering based on knowledge from external sources. In CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20Q.%20Wang%2C%20P.%20Shen%2C%20C.%20Dick%2C%20A.%20Ask%20me%20anything%3A%20Free-form%20visual%20question%20answering%20based%20on%20knowledge%20from%20external%20sources%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20Q.%20Wang%2C%20P.%20Shen%2C%20C.%20Dick%2C%20A.%20Ask%20me%20anything%3A%20Free-form%20visual%20question%20answering%20based%20on%20knowledge%20from%20external%20sources%202016"
+        },
+        {
+            "id": "55",
+            "entry": "[55] C. Xiao, M. Dymetman, and C. Gardent. Sequence-based structured prediction for semantic parsing. In",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xiao%2C%20C.%20Dymetman%2C%20M.%20C.%20Gardent.%20Sequence-based%20structured%20prediction%20for%20semantic%20parsing",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xiao%2C%20C.%20Dymetman%2C%20M.%20C.%20Gardent.%20Sequence-based%20structured%20prediction%20for%20semantic%20parsing"
+        },
+        {
+            "id": "56",
+            "entry": "[56] C. Xiong, S. Merity, and R. Socher. Dynamic memory networks for visual and textual question answering.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xiong%2C%20C.%20Merity%2C%20S.%20Socher%2C%20R.%20Dynamic%20memory%20networks%20for%20visual%20and%20textual%20question%20answering"
+        },
+        {
+            "id": "57",
+            "entry": "[57] H. Xu and K. Saenko. Ask, attend and answer: Exploring question-guided spatial attention for visual question answering. In ECCV, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xu%2C%20H.%20Ask%2C%20K.Saenko%20attend%20and%20answer%3A%20Exploring%20question-guided%20spatial%20attention%20for%20visual%20question%20answering%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xu%2C%20H.%20Ask%2C%20K.Saenko%20attend%20and%20answer%3A%20Exploring%20question-guided%20spatial%20attention%20for%20visual%20question%20answering%202016"
+        },
+        {
+            "id": "59",
+            "entry": "[59] Z. Yang, X. He, J. Gao, L. Deng, and A. Smola. Stacked attention networks for image question answering.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yang%2C%20Z.%20He%2C%20X.%20Gao%2C%20J.%20Deng%2C%20L.%20Stacked%20attention%20networks%20for%20image%20question%20answering"
+        },
+        {
+            "id": "60",
+            "entry": "[60] L. Yu, E. Park, A. Berg, and T. Berg. Visual madlibs: Fill in the blank image generation and question answering. In ICCV, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yu%2C%20L.%20Park%2C%20E.%20Berg%2C%20A.%20Berg%2C%20T.%20Visual%20madlibs%3A%20Fill%20in%20the%20blank%20image%20generation%20and%20question%20answering%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yu%2C%20L.%20Park%2C%20E.%20Berg%2C%20A.%20Berg%2C%20T.%20Visual%20madlibs%3A%20Fill%20in%20the%20blank%20image%20generation%20and%20question%20answering%202015"
+        },
+        {
+            "id": "61",
+            "entry": "[61] L. S. Zettlemoyer and M. Collins. Learning context-dependent mappings from sentences to logical form.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zettlemoyer%2C%20L.S.%20Collins%2C%20M.%20Learning%20context-dependent%20mappings%20from%20sentences%20to%20logical%20form"
+        },
+        {
+            "id": "62",
+            "entry": "[62] L. S. Zettlemoyer and M. Collins. Learning to map sentences to logical form: Structured classification with probabilistic categorial grammars. In UAI, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zettlemoyer%2C%20L.S.%20Collins%2C%20M.%20Learning%20to%20map%20sentences%20to%20logical%20form%3A%20Structured%20classification%20with%20probabilistic%20categorial%20grammars%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zettlemoyer%2C%20L.S.%20Collins%2C%20M.%20Learning%20to%20map%20sentences%20to%20logical%20form%3A%20Structured%20classification%20with%20probabilistic%20categorial%20grammars%202005"
+        },
+        {
+            "id": "63",
+            "entry": "[63] P. Zhang, Y. Goyal, D. Summers-Stay, D. Batra, and D. Parikh. Yin and yang: Balancing and answering binary visual questions. arXiv:1511.05099, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.05099"
+        },
+        {
+            "id": "64",
+            "entry": "[64] Y. Zhang, K. Liu, S. He, G. Ji, Z. Liu, H. Wu, and J. Zhao. Question answering over knowledge base with neural attention combining global knowledge information. arXiv:1606.00979, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.00979"
+        },
+        {
+            "id": "65",
+            "entry": "[65] B. Zhou, Y. Tian, S. Sukhbataar, A. Szlam, and R. Fergus. Simple baseline for visual question answering. arXiv:1512.02167, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1512.02167"
+        },
+        {
+            "id": "66",
+            "entry": "[66] Y. Zhu, O. Groth, M. Bernstein, and L. Fei-Fei. Visual7W: Grounded Question Answering in Images. In CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhu%2C%20Y.%20Groth%2C%20O.%20Bernstein%2C%20M.%20Fei-Fei%2C%20L.%20Visual7W%3A%20Grounded%20Question%20Answering%20in%20Images%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhu%2C%20Y.%20Groth%2C%20O.%20Bernstein%2C%20M.%20Fei-Fei%2C%20L.%20Visual7W%3A%20Grounded%20Question%20Answering%20in%20Images%202016"
+        },
+        {
+            "id": "67",
+            "entry": "[67] Y. Zhu, C. Zhang, C. R\u00e9, and L. Fei-Fei. Building a large-scale multimodal Knowledge Base for Visual Question Answering. In CoRR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhu%2C%20Y.%20Zhang%2C%20C.%20R%C3%A9%2C%20C.%20Fei-Fei%2C%20L.%20Building%20a%20large-scale%20multimodal%20Knowledge%20Base%20for%20Visual%20Question%20Answering%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhu%2C%20Y.%20Zhang%2C%20C.%20R%C3%A9%2C%20C.%20Fei-Fei%2C%20L.%20Building%20a%20large-scale%20multimodal%20Knowledge%20Base%20for%20Visual%20Question%20Answering%202015"
+        },
+        {
+            "id": "68",
+            "entry": "[68] C. L. Zitnick, A. Agrawal, S. Antol, M. Mitchell, D. Batra, and D. Parikh. Measuring machine intelligence through visual question answering. AI Magazine, 2016. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zitnick%2C%20C.L.%20Agrawal%2C%20A.%20Antol%2C%20S.%20Mitchell%2C%20M.%20Measuring%20machine%20intelligence%20through%20visual%20question%20answering%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zitnick%2C%20C.L.%20Agrawal%2C%20A.%20Antol%2C%20S.%20Mitchell%2C%20M.%20Measuring%20machine%20intelligence%20through%20visual%20question%20answering%202016"
+        }
+    ]
+}

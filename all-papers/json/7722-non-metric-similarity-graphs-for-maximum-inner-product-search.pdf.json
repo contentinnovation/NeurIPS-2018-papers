@@ -1,0 +1,190 @@
+{
+    "filename": "7722-non-metric-similarity-graphs-for-maximum-inner-product-search.pdf",
+    "metadata": {
+        "title": "Non-metric Similarity Graphs for Maximum Inner Product Search",
+        "author": "Stanislav Morozov, Artem Babenko",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7722-non-metric-similarity-graphs-for-maximum-inner-product-search.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "In this paper we address the problem of Maximum Inner Product Search (MIPS) that is currently the computational bottleneck in a large number of machine learning applications. While being similar to the nearest neighbor search (NNS), the MIPS problem was shown to be more challenging, as the inner product is not a proper metric function. We propose to solve the MIPS problem with the usage of similarity graphs, i.e., graphs where each vertex is connected to the vertices that are the most similar in terms of some similarity function. Originally, the framework of similarity graphs was proposed for metric spaces and in this paper we naturally extend it to the non-metric MIPS scenario. We demonstrate that, unlike existing approaches, similarity graphs do not require any data transformation to reduce MIPS to the NNS problem and should be used for the original data. Moreover, we explain why such a reduction is detrimental for similarity graphs. By an extensive comparison to the existing approaches, we show that the proposed method is a game-changer in terms of the runtime/accuracy trade-off for the MIPS problem."
+    },
+    "keywords": [
+        {
+            "term": "metric space",
+            "url": "https://en.wikipedia.org/wiki/metric_space"
+        },
+        {
+            "term": "nearest neighbor search",
+            "url": "https://en.wikipedia.org/wiki/nearest_neighbor_search"
+        },
+        {
+            "term": "machine learning",
+            "url": "https://en.wikipedia.org/wiki/machine_learning"
+        },
+        {
+            "term": "MIPS",
+            "url": "https://en.wikipedia.org/wiki/MIPS"
+        }
+    ],
+    "highlights": [
+        "The Maximum Inner Product Search (MIPS) problem has recently received increased attention from different research communities",
+        "We propose to employ the similarity graphs framework that was recently shown to provide the exceptional performance for the nearest neighbor search",
+        "We demonstrate both theoretically and experimentally that typical Maximum Inner Product Search-to-nearest neighbor search reductions are detrimental for similarity graphs.\n3",
+        "After transforming the original data, the Maximum Inner Product Search problem becomes equivalent to metric neighbor search and can be solved with standard nearest neighbor search techniques, like LSH[<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>], Randomized Partitioning Tree[<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>] or clustering[<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>]",
+        "The natural question is: Why should we develop an additional theory for non-metric similarity graphs? Maybe, one should just reduce the Maximum Inner Product Search problem to nearest neighbor search[<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>, <a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>, <a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>] and apply the state-of-the-art graph implementation for Euclidean similarity",
+        "We investigate the optimal way to use this framework for Maximum Inner Product Search and demonstrate that the popular Maximum Inner Product Search-to-nearest neighbor search reductions are harmful to similarity graphs"
+    ],
+    "key_statements": [
+        "The Maximum Inner Product Search (MIPS) problem has recently received increased attention from different research communities",
+        "In this work we introduce a new research direction for the Maximum Inner Product Search problem",
+        "We propose to employ the similarity graphs framework that was recently shown to provide the exceptional performance for the nearest neighbor search",
+        "We demonstrate both theoretically and experimentally that typical Maximum Inner Product Search-to-nearest neighbor search reductions are detrimental for similarity graphs.\n3",
+        "The rest of the paper is organized as follows: in Section 2, we shortly review the existing Maximum Inner Product Search methods and the similarity graphs framework",
+        "After transforming the original data, the Maximum Inner Product Search problem becomes equivalent to metric neighbor search and can be solved with standard nearest neighbor search techniques, like LSH[<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>], Randomized Partitioning Tree[<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>] or clustering[<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>]",
+        "We shortly describe the similarity graphs that are currently used for nearest neighbor search in metric spaces",
+        "Our approach for Maximum Inner Product Search will be based on the Navigable Small World algorithm, the other graph-based nearest neighbor search methods[<a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>, <a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>] could be used",
+        "The natural question is: Why should we develop an additional theory for non-metric similarity graphs? Maybe, one should just reduce the Maximum Inner Product Search problem to nearest neighbor search[<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>, <a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>, <a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>] and apply the state-of-the-art graph implementation for Euclidean similarity",
+        "The edges in the Euclidean graph, constructed for the transformed data, typically lead in the direction of norm decreasing, which is counterproductive to Maximum Inner Product Search, which prefers the vectors of larger norms",
+        "We have proposed and evaluated a new framework for inner product similarity search",
+        "We investigate the optimal way to use this framework for Maximum Inner Product Search and demonstrate that the popular Maximum Inner Product Search-to-nearest neighbor search reductions are harmful to similarity graphs"
+    ],
+    "summary": [
+        "The Maximum Inner Product Search (MIPS) problem has recently received increased attention from different research communities.",
+        "After transforming the original data, the MIPS problem becomes equivalent to metric neighbor search and can be solved with standard NNS techniques, like LSH[<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>], Randomized Partitioning Tree[<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>] or clustering[<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>].",
+        "Our approach for MIPS will be based on the NSW algorithm, the other graph-based NNS methods[<a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>, <a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>] could be used.",
+        "1: Input: Database X, similarity function s(x, y), maximum vertex degree M 2: Initialize graph Gs = \u2205 3: for x in X do 4: S = {M vertices from Gs, s.t. the corresponding vectors y give the largest values of s(x, y)} 5: Add x to the graph Gs and connect it by the directed edges with vertices in S 6: return Gs",
+        "On each step NSW adds the vertex v, corresponding to a database vector x to the current graph.",
+        "V is connected by directed edges to M vertices, corresponding to the closest database vectors that are already added to the graph.",
+        "The s-Delaunay graph for the database X and the similarity function s(x, y) is a graph Gs(V, E) where the set of vertices V corresponds to the set X and two vertices i and j are connected by an edge if the correspoding s-Voronoi cells Ri and Rj are adjacent in Rd. Theorem 1.",
+        "Suppose that the similarity function s(x, y) is such that for every finite database X the corresponding s-Voronoi cells are path-connected sets.",
+        "One should just reduce the MIPS problem to NNS[<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>, <a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>, <a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>] and apply the state-of-the-art graph implementation for Euclidean similarity.",
+        "We construct the Euclidean similarity graph for the transformed database X = {(x, 1 \u2212 x 2)T |x \u2208 X} via Algorithm 2.",
+        "The edges in the Euclidean graph, constructed for the transformed data, typically lead in the direction of norm decreasing, which is counterproductive to MIPS, which prefers the vectors of larger norms.",
+        "We present the experimental evaluation of non-metric similarity graphs for the top-K MIPS problem.",
+        "Ip-NSW is the proposed algorithm based on the non-metric similarity graph, described in Section 3.2.",
+        "To justify that the speedup improvements are due to the proposed algorithm and not because of implementation differences we compare number of inner products needed to achieve certain recall levels for different methods.",
+        "We investigate the optimal way to use this framework for MIPS and demonstrate that the popular MIPS-to-NNS reductions are harmful to similarity graphs."
+    ],
+    "headline": "In this paper we address the problem of Maximum Inner Product Search  that is currently the computational bottleneck in a large number of machine learning applications",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Stephen Mussmann and Stefano Ermon. Learning and inference via maximum inner product search. In Proceedings of the 33nd International Conference on Machine Learning, ICML 2016, New York City, NY, USA, June 19-24, 2016, pages 2587\u20132596, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mussmann%2C%20Stephen%20Ermon%2C%20Stefano%20Learning%20and%20inference%20via%20maximum%20inner%20product%20search%202016-06-19",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mussmann%2C%20Stephen%20Ermon%2C%20Stefano%20Learning%20and%20inference%20via%20maximum%20inner%20product%20search%202016-06-19"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Stephen Mussmann, Daniel Levy, and Stefano Ermon. Fast amortized inference and learning in log-linear models with randomly perturbed nearest neighbor search. In Proceedings of the Thirty-Third Conference on Uncertainty in Artificial Intelligence, UAI 2017, Sydney, Australia, August 11-15, 2017, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mussmann%2C%20Stephen%20Levy%2C%20Daniel%20Ermon%2C%20Stefano%20Fast%20amortized%20inference%20and%20learning%20in%20log-linear%20models%20with%20randomly%20perturbed%20nearest%20neighbor%20search%202017-08",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mussmann%2C%20Stephen%20Levy%2C%20Daniel%20Ermon%2C%20Stefano%20Fast%20amortized%20inference%20and%20learning%20in%20log-linear%20models%20with%20randomly%20perturbed%20nearest%20neighbor%20search%202017-08"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Sarath Chandar, Sungjin Ahn, Hugo Larochelle, Pascal Vincent, Gerald Tesauro, and Yoshua Bengio. Hierarchical memory networks. CoRR, abs/1605.07427, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1605.07427"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Matthew Henderson, Rami Al-Rfou, Brian Strope, Yun-Hsuan Sung, L\u00e1szl\u00f3 Luk\u00e1cs, Ruiqi Guo, Sanjiv Kumar, Balint Miklos, and Ray Kurzweil. Efficient natural language response suggestion for smart reply. CoRR, abs/1705.00652, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1705.00652"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Kwang-Sung Jun, Aniruddha Bhargava, Robert D. Nowak, and Rebecca Willett. Scalable generalized linear bandits: Online computation and hashing. In Advances in Neural Information Processing Systems 30: Annual Conference on Neural Information Processing Systems 2017, 4-9 December 2017, Long Beach, CA, USA, pages 98\u2013108, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jun%2C%20Kwang-Sung%20Bhargava%2C%20Aniruddha%20Nowak%2C%20Robert%20D.%20Willett%2C%20Rebecca%20Scalable%20generalized%20linear%20bandits%3A%20Online%20computation%20and%20hashing%202017-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jun%2C%20Kwang-Sung%20Bhargava%2C%20Aniruddha%20Nowak%2C%20Robert%20D.%20Willett%2C%20Rebecca%20Scalable%20generalized%20linear%20bandits%3A%20Online%20computation%20and%20hashing%202017-12"
+        },
+        {
+            "id": "6",
+            "entry": "[6] O. Keivani, K. Sinha, and P. Ram. Improved maximum inner product search with better theoretical guarantees. In 2017 International Joint Conference on Neural Networks (IJCNN), pages 2927\u20132934, May 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Keivani%2C%20O.%20Sinha%2C%20K.%20Ram%2C%20P.%20Improved%20maximum%20inner%20product%20search%20with%20better%20theoretical%20guarantees%202017-05",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Keivani%2C%20O.%20Sinha%2C%20K.%20Ram%2C%20P.%20Improved%20maximum%20inner%20product%20search%20with%20better%20theoretical%20guarantees%202017-05"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Behnam Neyshabur and Nathan Srebro. On symmetric and asymmetric lshs for inner product search. In Proceedings of the 32Nd International Conference on International Conference on Machine Learning - Volume 37, ICML\u201915, pages 1926\u20131934. JMLR.org, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Neyshabur%2C%20Behnam%20Srebro%2C%20Nathan%20On%20symmetric%20and%20asymmetric%20lshs%20for%20inner%20product%20search%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Neyshabur%2C%20Behnam%20Srebro%2C%20Nathan%20On%20symmetric%20and%20asymmetric%20lshs%20for%20inner%20product%20search%202015"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Alex Auvolat and Pascal Vincent. Clustering is efficient for approximate maximum inner product search. CoRR, abs/1507.05910, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1507.05910"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Christina Teflioudi and Rainer Gemulla. Exact and approximate maximum inner product search with lemp. ACM Trans. Database Syst., 42(1):5:1\u20135:49, December 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Teflioudi%2C%20Christina%20Gemulla%2C%20Rainer%20Exact%20and%20approximate%20maximum%20inner%20product%20search%20with%20lemp%202016-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Teflioudi%2C%20Christina%20Gemulla%2C%20Rainer%20Exact%20and%20approximate%20maximum%20inner%20product%20search%20with%20lemp%202016-12"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Hui Li, Tsz Nam Chan, Man Lung Yiu, and Nikos Mamoulis. Fexipro: Fast and exact inner product retrieval in recommender systems. In SIGMOD Conference, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Hui%20Chan%2C%20Tsz%20Nam%20Yiu%2C%20Man%20Lung%20Mamoulis%2C%20Nikos%20Fexipro%3A%20Fast%20and%20exact%20inner%20product%20retrieval%20in%20recommender%20systems%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20Hui%20Chan%2C%20Tsz%20Nam%20Yiu%2C%20Man%20Lung%20Mamoulis%2C%20Nikos%20Fexipro%3A%20Fast%20and%20exact%20inner%20product%20retrieval%20in%20recommender%20systems%202017"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Anshumali Shrivastava and Ping Li. Asymmetric lsh (alsh) for sublinear time maximum inner product search (mips). In Advances in Neural Information Processing Systems, pages 2321\u20132329, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shrivastava%2C%20Anshumali%20Li%2C%20Ping%20Asymmetric%20lsh%20%28alsh%29%20for%20sublinear%20time%20maximum%20inner%20product%20search%20%28mips%29%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shrivastava%2C%20Anshumali%20Li%2C%20Ping%20Asymmetric%20lsh%20%28alsh%29%20for%20sublinear%20time%20maximum%20inner%20product%20search%20%28mips%29%202014"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Yoram Bachrach, Yehuda Finkelstein, Ran Gilad-Bachrach, Liran Katzir, Noam Koenigstein, Nir Nice, and Ulrich Paquet. Speeding up the xbox recommender system using a euclidean transformation for inner-product spaces. October 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bachrach%2C%20Yoram%20Finkelstein%2C%20Yehuda%20Gilad-Bachrach%2C%20Ran%20Katzir%2C%20Liran%20Speeding%20up%20the%20xbox%20recommender%20system%20using%20a%20euclidean%20transformation%20for%20inner-product%20spaces%202014-10"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Hsiang-Fu Yu, Cho-Jui Hsieh, Qi Lei, and Inderjit S. Dhillon. A greedy approach for budgeted maximum inner product search. In NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yu%2C%20Hsiang-Fu%20Hsieh%2C%20Cho-Jui%20Lei%2C%20Qi%20Dhillon%2C%20Inderjit%20S.%20A%20greedy%20approach%20for%20budgeted%20maximum%20inner%20product%20search%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yu%2C%20Hsiang-Fu%20Hsieh%2C%20Cho-Jui%20Lei%2C%20Qi%20Dhillon%2C%20Inderjit%20S.%20A%20greedy%20approach%20for%20budgeted%20maximum%20inner%20product%20search%202017"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Gonzalo Navarro. Searching in metric spaces by spatial approximation. The VLDB Journal, 11(1):28\u201346, Aug 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Navarro%2C%20Gonzalo%20Searching%20in%20metric%20spaces%20by%20spatial%20approximation%202002-08",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Navarro%2C%20Gonzalo%20Searching%20in%20metric%20spaces%20by%20spatial%20approximation%202002-08"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Yury A. Malkov and D. A. Yashunin. Efficient and robust approximate nearest neighbor search using hierarchical navigable small world graphs. CoRR, abs/1603.09320, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1603.09320"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Cong Fu and Deng Cai. Efanna : An extremely fast approximate nearest neighbor search algorithm based on knn graph. CoRR, abs/1609.07228, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.07228"
+        },
+        {
+            "id": "17",
+            "entry": "[17] B. Harwood and T. Drummond. Fanng: Fast approximate nearest neighbour graphs. In 2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pages 5713\u20135722, June 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Harwood%2C%20B.%20Drummond%2C%20T.%20Fanng%3A%20Fast%20approximate%20nearest%20neighbour%20graphs%202016-06",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Harwood%2C%20B.%20Drummond%2C%20T.%20Fanng%3A%20Fast%20approximate%20nearest%20neighbour%20graphs%202016-06"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Wen Li, Ying Zhang, Yifang Sun, Wei Wang, Wenjie Zhang, and Xuemin Lin. Approximate nearest neighbor search on high dimensional data - experiments, analyses, and improvement (v1.0). CoRR, abs/1610.02455, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1610.02455"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Stuart C. Shapiro. Encyclopedia of Artificial Intelligence. 1987.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Stuart%20C%20Shapiro%20Encyclopedia%20of%20Artificial%20Intelligence%201987",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Stuart%20C%20Shapiro%20Encyclopedia%20of%20Artificial%20Intelligence%201987"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Jean-Daniel Boissonnat and Mariette Yvinec. Algorithmic Geometry. Cambridge University Press, New York, NY, USA, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Boissonnat%2C%20Jean-Daniel%20Yvinec%2C%20Mariette%20Algorithmic%20Geometry%201998"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Y. Hu, Y. Koren, and C. Volinsky. Collaborative filtering for implicit feedback datasets. In 2008 Eighth IEEE International Conference on Data Mining, pages 263\u2013272, Dec 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hu%2C%20Y.%20Koren%2C%20Y.%20Volinsky%2C%20C.%20Collaborative%20filtering%20for%20implicit%20feedback%20datasets%202008-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hu%2C%20Y.%20Koren%2C%20Y.%20Volinsky%2C%20C.%20Collaborative%20filtering%20for%20implicit%20feedback%20datasets%202008-12"
+        }
+    ]
+}

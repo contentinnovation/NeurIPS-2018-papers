@@ -1,0 +1,431 @@
+{
+    "filename": "7659-the-streaming-rollout-of-deep-networks-towards-fully-model-parallel-execution.pdf",
+    "metadata": {
+        "title": "The streaming rollout of deep networks - towards fully model-parallel execution",
+        "author": "Volker Fischer, Jan Koehler, Thomas Pfeil",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7659-the-streaming-rollout-of-deep-networks-towards-fully-model-parallel-execution.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Deep neural networks, and in particular recurrent networks, are promising candidates to control autonomous agents that interact in real-time with the physical world. However, this requires a seamless integration of temporal features into the network\u2019s architecture. For the training of and inference with recurrent neural networks, they are usually rolled out over time, and different rollouts exist. Conventionally during inference, the layers of a network are computed in a sequential manner resulting in sparse temporal integration of information and long response times. In this study, we present a theoretical framework to describe rollouts, the level of model-parallelization they induce, and demonstrate differences in solving specific tasks. We prove that certain rollouts, also for networks with only skip and no recurrent connections, enable earlier and more frequent responses, and show empirically that these early responses have better performance. The streaming rollout maximizes these properties and enables a fully parallel execution of the network reducing runtime on massively parallel devices. Finally, we provide an open-source toolbox to design, train, evaluate, and interact with streaming rollouts."
+    },
+    "keywords": [
+        {
+            "term": "convolutional neural network",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_network"
+        },
+        {
+            "term": "optical character recognition",
+            "url": "https://en.wikipedia.org/wiki/optical_character_recognition"
+        },
+        {
+            "term": "Neural Turing Machines",
+            "url": "https://en.wikipedia.org/wiki/Neural_Turing_Machine"
+        },
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "real time",
+            "url": "https://en.wikipedia.org/wiki/real_time"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        },
+        {
+            "term": "backpropagation through time",
+            "url": "https://en.wikipedia.org/wiki/backpropagation_through_time"
+        },
+        {
+            "term": "LSTM",
+            "url": "https://en.wikipedia.org/wiki/LSTM"
+        },
+        {
+            "term": "recurrent neural network",
+            "url": "https://en.wikipedia.org/wiki/recurrent_neural_network"
+        }
+    ],
+    "highlights": [
+        "The combination of newly available large datasets, parallel computing power, and new techniques to implement and train deep neural networks has led to significant improvements in the fields of vision [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>], speech [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>], and reinforcement learning [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>]",
+        "We provide a theoretical framework to describe rollouts of deep neural networks and show that, and in some cases how, different rollouts lead to different levels of model-parallelism and network behavior",
+        "Response time: While Recurrent neural networks are the main reason to use network rollouts, in this work we investigate rollouts for non-recurrent networks",
+        "A2), the streaming rollout is mathematically identical to the sequential rollout",
+        "We empirically demonstrated the superiority of the streaming over non-streaming rollouts for different image datasets due to faster first responses to and higher sampling of inputs"
+    ],
+    "key_statements": [
+        "The combination of newly available large datasets, parallel computing power, and new techniques to implement and train deep neural networks has led to significant improvements in the fields of vision [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>], speech [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>], and reinforcement learning [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>]",
+        "We provide a theoretical framework to describe rollouts of deep neural networks and show that, and in some cases how, different rollouts lead to different levels of model-parallelism and network behavior",
+        "Response time: While Recurrent neural networks are the main reason to use network rollouts, in this work we investigate rollouts for non-recurrent networks",
+        "We prove that the streaming rollout exists for every network and is always valid",
+        "A2), the streaming rollout is mathematically identical to the sequential rollout",
+        "The presented theory for network rollouts is generically applicable to a vast variety of deep neural networks (see Sec",
+        "We empirically demonstrated the superiority of the streaming over non-streaming rollouts for different image datasets due to faster first responses to and higher sampling of inputs"
+    ],
+    "summary": [
+        "The combination of newly available large datasets, parallel computing power, and new techniques to implement and train deep neural networks has led to significant improvements in the fields of vision [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>], speech [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>], and reinforcement learning [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>].",
+        "To demonstrate the significance of the chosen rollouts w.r.t. the runtime for inference and achieved accuracy, we compare the two extreme rollouts: the most model-parallel, i.e., streaming rollout (R \u2261 1, results in red in Fig. 3), and the most sequential rollout2 (R(e) = 0 for maximal number of edges, results in blue in Fig. 3).",
+        "Networks: We compare the behavior of streaming and sequential rollout patterns on MNIST for three different networks with two hidden layers (FF, S, SR; see Fig. 1 and Fig. A2).",
+        "But without recurrent connections, the behavioral difference between streaming and sequential rollouts can be shown best.",
+        "While the sequential rollout still only performs classification on single images, the streaming rollout can integrate over two input images due to the skip connection that bridges time.",
+        "Skip connections cause shallow shortcuts in time that can result in earlier in Fig. 3a), but initially worse performance than for deep sequential rollouts.",
+        "Due to parallel computation of the entire frame in the streaming case, the sampling frequency of input images is maximal (F (Rstr) = 1 in Fig. 3a; see d in Theorem 1 in Sec. 3).",
+        "Classification performances are comparable between streaming and sequential rollouts and the same number of input images is integrated over in Fig. 3a).",
+        "For the network DSR2 with the shortest path of length 4 and longest path of length 6, the first response of the streaming rollout is 2 update steps earlier than for the sequential rollout in Fig. 3e) and shows better early performance in Fig. 3e).",
+        "Where both rollouts use the same amount of computations, performance for the sequential rollout increases over time due to less blurry input images, while the streaming rollout in addition performs temporal integration using skip connections and yields better performance in Fig. 3g).",
+        "For sequential rollout patterns this is not the case, since, e.g., for a feed-forward network the longest minimal path is already contained in the first frame.",
+        "Without this assumption and given fully parallel hardware, streaming rollouts still manifest the best case scenario in terms of maximal parallelization and the inference of a single frame would take the runtime of the computationally most expensive node update.",
+        "Sequential rollouts would not benefit from the assumed parallelism of such hardware and inference of a single frame takes the summed up runtime of all necessary node updates.",
+        "We hope our work will encourage the scientific community to further study the advantages and behavioral differences of streaming rollouts in preparation to future massively parallel hardware"
+    ],
+    "headline": "We present a theoretical framework to describe rollouts, the level of model-parallelization they induce, and demonstrate differences in solving specific tasks",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pages 770\u2013778, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Dario Amodei, Sundaram Ananthanarayanan, Rishita Anubhai, Jingliang Bai, Eric Battenberg, Carl Case, Jared Casper, Bryan Catanzaro, Qiang Cheng, Guoliang Chen, et al. Deep speech 2: End-to-end speech recognition in english and mandarin. In International Conference on Machine Learning (ICML), pages 173\u2013182, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Amodei%2C%20Dario%20Ananthanarayanan%2C%20Sundaram%20Anubhai%2C%20Rishita%20Bai%2C%20Jingliang%20Deep%20speech%202%3A%20End-to-end%20speech%20recognition%20in%20english%20and%20mandarin%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Amodei%2C%20Dario%20Ananthanarayanan%2C%20Sundaram%20Anubhai%2C%20Rishita%20Bai%2C%20Jingliang%20Deep%20speech%202%3A%20End-to-end%20speech%20recognition%20in%20english%20and%20mandarin%202016"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Yan Duan, Xi Chen, Rein Houthooft, John Schulman, and Pieter Abbeel. Benchmarking deep reinforcement learning for continuous control. In International Conference on Machine Learning (ICML), pages 1329\u2013 1338, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Duan%2C%20Yan%20Chen%2C%20Xi%20Houthooft%2C%20Rein%20Schulman%2C%20John%20Benchmarking%20deep%20reinforcement%20learning%20for%20continuous%20control%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Duan%2C%20Yan%20Chen%2C%20Xi%20Houthooft%2C%20Rein%20Schulman%2C%20John%20Benchmarking%20deep%20reinforcement%20learning%20for%20continuous%20control%202016"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Santiago Fern\u00e1ndez, Alex Graves, and J\u00fcrgen Schmidhuber. An application of recurrent neural networks to discriminative keyword spotting. In International Conference on Artificial Neural Networks, pages 220\u2013229, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Santiago%20Fern%C3%A1ndez%2C%20Alex%20Graves%20Schmidhuber%2C%20J%C3%BCrgen%20An%20application%20of%20recurrent%20neural%20networks%20to%20discriminative%20keyword%20spotting%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Santiago%20Fern%C3%A1ndez%2C%20Alex%20Graves%20Schmidhuber%2C%20J%C3%BCrgen%20An%20application%20of%20recurrent%20neural%20networks%20to%20discriminative%20keyword%20spotting%202007"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Alex Graves and J\u00fcrgen Schmidhuber. Offline handwriting recognition with multidimensional recurrent neural networks. In Advances in Neural Information Processing Systems (NIPS), pages 545\u2013552, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Graves%2C%20Alex%20Schmidhuber%2C%20J%C3%BCrgen%20Offline%20handwriting%20recognition%20with%20multidimensional%20recurrent%20neural%20networks%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Graves%2C%20Alex%20Schmidhuber%2C%20J%C3%BCrgen%20Offline%20handwriting%20recognition%20with%20multidimensional%20recurrent%20neural%20networks%202009"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Paul J Werbos. Generalization of backpropagation with application to a recurrent gas market model. Neural networks, 1(4):339\u2013356, 1988.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Werbos%2C%20Paul%20J.%20Generalization%20of%20backpropagation%20with%20application%20to%20a%20recurrent%20gas%20market%20model%201988",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Werbos%2C%20Paul%20J.%20Generalization%20of%20backpropagation%20with%20application%20to%20a%20recurrent%20gas%20market%20model%201988"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Ronald J Williams and David Zipser. Gradient-based learning algorithms for recurrent networks and their computational complexity. Backpropagation: Theory, architectures, and applications, 1:433\u2013486, 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%2C%20Ronald%20J.%20Zipser%2C%20David%20Gradient-based%20learning%20algorithms%20for%20recurrent%20networks%20and%20their%20computational%20complexity%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Williams%2C%20Ronald%20J.%20Zipser%2C%20David%20Gradient-based%20learning%20algorithms%20for%20recurrent%20networks%20and%20their%20computational%20complexity%201995"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Qianli Liao and Tomaso Poggio. Bridging the gaps between residual learning, recurrent neural networks and visual cortex. arXiv:1604.03640, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1604.03640"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Razvan Pascanu, Tomas Mikolov, and Yoshua Bengio. On the difficulty of training recurrent neural networks. In International Conference on Machine Learning (ICML), pages 1310\u20131318, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pascanu%2C%20Razvan%20Mikolov%2C%20Tomas%20Bengio%2C%20Yoshua%20On%20the%20difficulty%20of%20training%20recurrent%20neural%20networks%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pascanu%2C%20Razvan%20Mikolov%2C%20Tomas%20Bengio%2C%20Yoshua%20On%20the%20difficulty%20of%20training%20recurrent%20neural%20networks%202013"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Ming Liang and Xiaolin Hu. Recurrent convolutional neural network for object recognition. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pages 3367\u20133375, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liang%2C%20Ming%20Hu%2C%20Xiaolin%20Recurrent%20convolutional%20neural%20network%20for%20object%20recognition%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liang%2C%20Ming%20Hu%2C%20Xiaolin%20Recurrent%20convolutional%20neural%20network%20for%20object%20recognition%202015"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Zhiheng Huang, Wei Xu, and Kai Yu. Bidirectional LSTM-CRF models for sequence tagging. arXiv:1508.01991, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1508.01991"
+        },
+        {
+            "id": "12",
+            "entry": "[12] A. R. Zamir, T.-L. Wu, L. Sun, W. Shen, B. E. Shi, J. Malik, and S. Savarese. Feedback Networks. arXiv 1612.09508, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1612.09508"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Huazhe Xu, Yang Gao, Fisher Yu, and Trevor Darrell. End-to-end learning of driving models from largescale video datasets. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pages 3530\u20133538, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xu%2C%20Huazhe%20Gao%2C%20Yang%20Yu%2C%20Fisher%20Darrell%2C%20Trevor%20End-to-end%20learning%20of%20driving%20models%20from%20largescale%20video%20datasets%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xu%2C%20Huazhe%20Gao%2C%20Yang%20Yu%2C%20Fisher%20Darrell%2C%20Trevor%20End-to-end%20learning%20of%20driving%20models%20from%20largescale%20video%20datasets%202017"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Chih-Min Lin, Ching-Fu Tai, and Chang-Chih Chung. Intelligent control system design for uav using a recurrent wavelet neural network. Neural Computing & Applications, 24(2):487\u2013496, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20Chih-Min%20Tai%2C%20Ching-Fu%20Chung%2C%20Chang-Chih%20Intelligent%20control%20system%20design%20for%20uav%20using%20a%20recurrent%20wavelet%20neural%20network%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lin%2C%20Chih-Min%20Tai%2C%20Ching-Fu%20Chung%2C%20Chang-Chih%20Intelligent%20control%20system%20design%20for%20uav%20using%20a%20recurrent%20wavelet%20neural%20network%202014"
+        },
+        {
+            "id": "15",
+            "entry": "[15] William A Little. The existence of persistent states in the brain. In From High-Temperature Superconductivity to Microminiature Refrigeration, pages 145\u2013164.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Little%2C%20William%20A.%20The%20existence%20of%20persistent%20states%20in%20the%20brain.%20In%20From%20High-Temperature%20Superconductivity%20to%20Microminiature%20Refrigeration"
+        },
+        {
+            "id": "16",
+            "entry": "[16] John J Hopfield. Neural networks and physical systems with emergent collective computational abilities. Proceedings of the national academy of sciences, 79(8):2554\u20132558, 1982.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hopfield%2C%20John%20J.%20Neural%20networks%20and%20physical%20systems%20with%20emergent%20collective%20computational%20abilities%201982",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hopfield%2C%20John%20J.%20Neural%20networks%20and%20physical%20systems%20with%20emergent%20collective%20computational%20abilities%201982"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Sepp Hochreiter and J\u00fcrgen Schmidhuber. Long short-term memory. Neural computation, 9(8):1735\u20131780, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Long%20short-term%20memory%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Long%20short-term%20memory%201997"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Ilya Sutskever, Oriol Vinyals, and Quoc V Le. Sequence to sequence learning with neural networks. In Advances in Neural Information Processing Systems (NIPS), pages 3104\u20133112, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutskever%2C%20Ilya%20Vinyals%2C%20Oriol%20Le%2C%20Quoc%20V.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutskever%2C%20Ilya%20Vinyals%2C%20Oriol%20Le%2C%20Quoc%20V.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Thomas M Breuel, Adnan Ul-Hasan, Mayce Ali Al-Azawi, and Faisal Shafait. High-performance OCR for printed English and Fraktur using LSTM networks. In International Conference on Document Analysis and Recognition (ICDAR), pages 683\u2013687, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Breuel%2C%20Thomas%20M.%20Ul-Hasan%2C%20Adnan%20Al-Azawi%2C%20Mayce%20Ali%20Shafait%2C%20Faisal%20High-performance%20OCR%20for%20printed%20English%20and%20Fraktur%20using%20LSTM%20networks%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Breuel%2C%20Thomas%20M.%20Ul-Hasan%2C%20Adnan%20Al-Azawi%2C%20Mayce%20Ali%20Shafait%2C%20Faisal%20High-performance%20OCR%20for%20printed%20English%20and%20Fraktur%20using%20LSTM%20networks%202013"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Yuchen Fan, Yao Qian, Feng-Long Xie, and Frank K Soong. TTS synthesis with bidirectional LSTM based recurrent neural networks. In Fifteenth Annual Conference of the International Speech Communication Association, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fan%2C%20Yuchen%20Qian%2C%20Yao%20Xie%2C%20Feng-Long%20Soong%2C%20Frank%20K.%20TTS%20synthesis%20with%20bidirectional%20LSTM%20based%20recurrent%20neural%20networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fan%2C%20Yuchen%20Qian%2C%20Yao%20Xie%2C%20Feng-Long%20Soong%2C%20Frank%20K.%20TTS%20synthesis%20with%20bidirectional%20LSTM%20based%20recurrent%20neural%20networks%202014"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Raymond Brueckner and Bjorn Schulter. Social signal classification using deep BLSTM recurrent neural networks. In IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), pages 4823\u20134827, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Brueckner%2C%20Raymond%20Schulter%2C%20Bjorn%20Social%20signal%20classification%20using%20deep%20BLSTM%20recurrent%20neural%20networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Brueckner%2C%20Raymond%20Schulter%2C%20Bjorn%20Social%20signal%20classification%20using%20deep%20BLSTM%20recurrent%20neural%20networks%202014"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Anton Milan, Seyed Hamid Rezatofighi, Anthony R Dick, Ian D Reid, and Konrad Schindler. Online multi-target tracking using recurrent neural networks. In Proceedings of the AAAI Conference on Artificial Intelligence (AAAI), pages 4225\u20134232, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Milan%2C%20Anton%20Rezatofighi%2C%20Seyed%20Hamid%20Dick%2C%20Anthony%20R.%20Reid%2C%20Ian%20D.%20Online%20multi-target%20tracking%20using%20recurrent%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Milan%2C%20Anton%20Rezatofighi%2C%20Seyed%20Hamid%20Dick%2C%20Anthony%20R.%20Reid%2C%20Ian%20D.%20Online%20multi-target%20tracking%20using%20recurrent%20neural%20networks%202017"
+        },
+        {
+            "id": "23",
+            "entry": "[23] J\u00fcrgen Schmidhuber. Deep learning in neural networks: An overview. Neural networks, 61:85\u2013117, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schmidhuber%2C%20J%C3%BCrgen%20Deep%20learning%20in%20neural%20networks%3A%20An%20overview%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schmidhuber%2C%20J%C3%BCrgen%20Deep%20learning%20in%20neural%20networks%3A%20An%20overview%202015"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Kyunghyun Cho, Bart Van Merri\u00ebnboer, Dzmitry Bahdanau, and Yoshua Bengio. On the properties of neural machine translation: Encoder-decoder approaches. arXiv:1409.1259, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1409.1259"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Julian Georg Zilly, Rupesh Kumar Srivastava, Jan Koutn\u00edk, and J\u00fcrgen Schmidhuber. Recurrent highway networks. arXiv:1607.03474, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1607.03474"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Alex Graves, Greg Wayne, and Ivo Danihelka. Neural turing machines. arXiv:1410.5401, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1410.5401"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Alex Graves, Greg Wayne, Malcolm Reynolds, Tim Harley, Ivo Danihelka, Agnieszka Grabska-Barwinska, Sergio G\u00f3mez Colmenarejo, Edward Grefenstette, Tiago Ramalho, John Agapiou, et al. Hybrid computing using a neural network with dynamic external memory. Nature, 538:471\u2013476, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Graves%2C%20Alex%20Wayne%2C%20Greg%20Reynolds%2C%20Malcolm%20Harley%2C%20Tim%20Hybrid%20computing%20using%20a%20neural%20network%20with%20dynamic%20external%20memory%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Graves%2C%20Alex%20Wayne%2C%20Greg%20Reynolds%2C%20Malcolm%20Harley%2C%20Tim%20Hybrid%20computing%20using%20a%20neural%20network%20with%20dynamic%20external%20memory%202016"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Mike Schuster and Kuldip K Paliwal. Bidirectional recurrent neural networks. IEEE Transactions on Signal Processing, 45(11):2673\u20132681, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schuster%2C%20Mike%20Paliwal%2C%20Kuldip%20K.%20Bidirectional%20recurrent%20neural%20networks%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schuster%2C%20Mike%20Paliwal%2C%20Kuldip%20K.%20Bidirectional%20recurrent%20neural%20networks%201997"
+        },
+        {
+            "id": "29",
+            "entry": "[29] V\u00edctor Campos, Brendan Jou, Xavier Gir\u00f3-i Nieto, Jordi Torres, and Shih-Fu Chang. Skip RNN: Learning to skip state updates in recurrent neural networks. In International Conference on Learning Representations (ICLR), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Campos%2C%20V%C3%ADctor%20Jou%2C%20Brendan%20Nieto%2C%20Xavier%20Gir%C3%B3-i%20Torres%2C%20Jordi%20Skip%20RNN%3A%20Learning%20to%20skip%20state%20updates%20in%20recurrent%20neural%20networks%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Campos%2C%20V%C3%ADctor%20Jou%2C%20Brendan%20Nieto%2C%20Xavier%20Gir%C3%B3-i%20Torres%2C%20Jordi%20Skip%20RNN%3A%20Learning%20to%20skip%20state%20updates%20in%20recurrent%20neural%20networks%202018"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Golan Pundak and Tara N Sainath. Highway-LSTM and recurrent highway networks for speech recognition. In Proceedings of Interspeech, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pundak%2C%20Golan%20Sainath%2C%20Tara%20N.%20Highway-LSTM%20and%20recurrent%20highway%20networks%20for%20speech%20recognition%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pundak%2C%20Golan%20Sainath%2C%20Tara%20N.%20Highway-LSTM%20and%20recurrent%20highway%20networks%20for%20speech%20recognition%202017"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Razvan Pascanu, Caglar Gulcehre, Kyunghyun Cho, and Yoshua Bengio. How to construct deep recurrent neural networks. arXiv:1312.6026, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.6026"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Junyoung Chung, Sungjin Ahn, and Yoshua Bengio. Hierarchical multiscale recurrent neural networks. In International Conference on Learning Representations (ICLR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chung%2C%20Junyoung%20Ahn%2C%20Sungjin%20Bengio%2C%20Yoshua%20Hierarchical%20multiscale%20recurrent%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chung%2C%20Junyoung%20Ahn%2C%20Sungjin%20Bengio%2C%20Yoshua%20Hierarchical%20multiscale%20recurrent%20neural%20networks%202017"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Surat Teerapittayanon, Bradley McDanel, and H.T. Kung. BranchyNet: Fast inference via early exiting from deep neural networks. In International Conference on Pattern Recognition (ICPR), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Teerapittayanon%2C%20Surat%20McDanel%2C%20Bradley%20Kung%2C%20H.T.%20BranchyNet%3A%20Fast%20inference%20via%20early%20exiting%20from%20deep%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Teerapittayanon%2C%20Surat%20McDanel%2C%20Bradley%20Kung%2C%20H.T.%20BranchyNet%3A%20Fast%20inference%20via%20early%20exiting%20from%20deep%20neural%20networks%202016"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Klaus Greff, Rupesh K. Srivastava, and J\u00fcrgen Schmidhuber. Highway and residual networks learn unrolled iterative estimation. In International Conference on Learning Representations (ICLR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Greff%2C%20Klaus%20Srivastava%2C%20Rupesh%20K.%20Schmidhuber%2C%20J%C3%BCrgen%20Highway%20and%20residual%20networks%20learn%20unrolled%20iterative%20estimation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Greff%2C%20Klaus%20Srivastava%2C%20Rupesh%20K.%20Schmidhuber%2C%20J%C3%BCrgen%20Highway%20and%20residual%20networks%20learn%20unrolled%20iterative%20estimation%202017"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Song Han, Huizi Mao, and William J Dally. Deep compression: Compressing deep neural networks with pruning, trained quantization and huffman coding. In International Conference on Learning Representations (ICLR), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Han%2C%20Song%20Mao%2C%20Huizi%20Dally%2C%20William%20J.%20Deep%20compression%3A%20Compressing%20deep%20neural%20networks%20with%20pruning%2C%20trained%20quantization%20and%20huffman%20coding%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Han%2C%20Song%20Mao%2C%20Huizi%20Dally%2C%20William%20J.%20Deep%20compression%3A%20Compressing%20deep%20neural%20networks%20with%20pruning%2C%20trained%20quantization%20and%20huffman%20coding%202016"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Yong-Deok Kim, Eunhyeok Park, Sungjoo Yoo, Taelim Choi, Lu Yang, and Dongjun Shin. Compression of deep convolutional neural networks for fast and low power mobile applications. arXiv:1511.06530, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.06530"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Andrew Lavin and Scott Gray. Fast algorithms for convolutional neural networks. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pages 4013\u20134021, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lavin%2C%20Andrew%20Gray%2C%20Scott%20Fast%20algorithms%20for%20convolutional%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lavin%2C%20Andrew%20Gray%2C%20Scott%20Fast%20algorithms%20for%20convolutional%20neural%20networks%202016"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Michael Mathieu, Mikael Henaff, and Yann LeCun. Fast training of convolutional networks through ffts. In International Conference on Learning Representations (ICLR), 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mathieu%2C%20Michael%20Henaff%2C%20Mikael%20LeCun%2C%20Yann%20Fast%20training%20of%20convolutional%20networks%20through%20ffts%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mathieu%2C%20Michael%20Henaff%2C%20Mikael%20LeCun%2C%20Yann%20Fast%20training%20of%20convolutional%20networks%20through%20ffts%202014"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Marvin Minsky and Seymour A. Papert. Perceptrons: An introduction to computational geometry. MIT press, 1969. retrieved from the 1988 reissue.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Minsky%2C%20Marvin%20Papert%2C%20Seymour%20A.%20Perceptrons%3A%20An%20introduction%20to%20computational%20geometry%201969",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Minsky%2C%20Marvin%20Papert%2C%20Seymour%20A.%20Perceptrons%3A%20An%20introduction%20to%20computational%20geometry%201969"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Ian Goodfellow, Yoshua Bengio, and Aaron Courville. Deep learning. MIT press Cambridge, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goodfellow%2C%20Ian%20Bengio%2C%20Yoshua%20Courville%2C%20Aaron%20Deep%20learning%202016"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Karol Gregor and Yann LeCun. Learning fast approximations of sparse coding. International Conference on Machine Learning (ICML), pages 399\u2013406, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gregor%2C%20Karol%20LeCun%2C%20Yann%20Learning%20fast%20approximations%20of%20sparse%20coding%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gregor%2C%20Karol%20LeCun%2C%20Yann%20Learning%20fast%20approximations%20of%20sparse%20coding%202010"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Joao Carreira, Viorica Patraucean, Laurent Mazare, Andrew Zisserman, and Simon Osindero. Massively parallel video networks. Proceedings of the European Conference on Computer Vision (ECCV), pages 649\u2013666, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Carreira%2C%20Joao%20Patraucean%2C%20Viorica%20Mazare%2C%20Laurent%20Zisserman%2C%20Andrew%20Massively%20parallel%20video%20networks%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Carreira%2C%20Joao%20Patraucean%2C%20Viorica%20Mazare%2C%20Laurent%20Zisserman%2C%20Andrew%20Massively%20parallel%20video%20networks%202018"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Du Tran, Lubomir Bourdev, Rob Fergus, Lorenzo Torresani, and Manohar Paluri. Learning spatiotemporal features with 3d convolutional networks. Proceedings of the IEEE International Conference on Computer Vision (ICCV), pages 4489\u20134497, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tran%2C%20Du%20Bourdev%2C%20Lubomir%20Fergus%2C%20Rob%20Torresani%2C%20Lorenzo%20Learning%20spatiotemporal%20features%20with%203d%20convolutional%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tran%2C%20Du%20Bourdev%2C%20Lubomir%20Fergus%2C%20Rob%20Torresani%2C%20Lorenzo%20Learning%20spatiotemporal%20features%20with%203d%20convolutional%20networks%202015"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Fabian Caba Heilbron, Victor Escorcia, Bernard Ghanem, and Juan Carlos Niebles. Activitynet: A large-scale video benchmark for human activity understanding. Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pages 961\u2013970, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Heilbron%2C%20Fabian%20Caba%20Escorcia%2C%20Victor%20Ghanem%2C%20Bernard%20Niebles%2C%20Juan%20Carlos%20Activitynet%3A%20A%20large-scale%20video%20benchmark%20for%20human%20activity%20understanding%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Heilbron%2C%20Fabian%20Caba%20Escorcia%2C%20Victor%20Ghanem%2C%20Bernard%20Niebles%2C%20Juan%20Carlos%20Activitynet%3A%20A%20large-scale%20video%20benchmark%20for%20human%20activity%20understanding%202015"
+        },
+        {
+            "id": "45",
+            "entry": "[45] Jan Koutnik, Klaus Greff, Faustino Gomez, and J\u00fcrgen Schmidhuber. A clockwork rnn. Proceedings of the 31st International Conference on Machine Learning PMLR, pages 1863\u20131871, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jan%20Koutnik%2C%20Klaus%20Greff%2C%20Faustino%20Gomez%20Schmidhuber%2C%20J%C3%BCrgen%20A%20clockwork%20rnn%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jan%20Koutnik%2C%20Klaus%20Greff%2C%20Faustino%20Gomez%20Schmidhuber%2C%20J%C3%BCrgen%20A%20clockwork%20rnn%202014"
+        },
+        {
+            "id": "46",
+            "entry": "[46] Alexander Sasha Vezhnevets, Simon Osindero, Tom Schaul, Nicolas Heess, Max Jaderberg, David Silver, and Koray Kavukcuoglu. Feudal networks for hierarchical reinforcement learning. International Conference on Machine Learning (ICML), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vezhnevets%2C%20Alexander%20Sasha%20Osindero%2C%20Simon%20Schaul%2C%20Tom%20Heess%2C%20Nicolas%20Feudal%20networks%20for%20hierarchical%20reinforcement%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vezhnevets%2C%20Alexander%20Sasha%20Osindero%2C%20Simon%20Schaul%2C%20Tom%20Heess%2C%20Nicolas%20Feudal%20networks%20for%20hierarchical%20reinforcement%20learning%202017"
+        },
+        {
+            "id": "47",
+            "entry": "[47] Evan Shelhamer, Kate Rakelly, Judy Hoffman, and Trevor Darrell. Clockwork convnets for video semantic segmentation. ECCV Workshop, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shelhamer%2C%20Evan%20Rakelly%2C%20Kate%20Hoffman%2C%20Judy%20Darrell%2C%20Trevor%20Clockwork%20convnets%20for%20video%20semantic%20segmentation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shelhamer%2C%20Evan%20Rakelly%2C%20Kate%20Hoffman%2C%20Judy%20Darrell%2C%20Trevor%20Clockwork%20convnets%20for%20video%20semantic%20segmentation%202016"
+        },
+        {
+            "id": "48",
+            "entry": "[48] Michael Figurnov, Maxwell D. Collins, Yukun Zhu, Li Zhang, Jonathan Huang, Dmitry Vetrov, and Ruslan Salakhutdinov. Spatially adaptive computation time for residual networks. Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Figurnov%2C%20Michael%20Collins%2C%20Maxwell%20D.%20Zhu%2C%20Yukun%20Zhang%2C%20Li%20Spatially%20adaptive%20computation%20time%20for%20residual%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Figurnov%2C%20Michael%20Collins%2C%20Maxwell%20D.%20Zhu%2C%20Yukun%20Zhang%2C%20Li%20Spatially%20adaptive%20computation%20time%20for%20residual%20networks%202017"
+        },
+        {
+            "id": "49",
+            "entry": "[49] Daniel Neil, Michael Pfeiffer, and Shih-Chii Liu. Phased LSTM: Accelerating recurrent network training for long or event-based sequences. Advances in Neural Information Processing Systems (NIPS), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Neil%2C%20Daniel%20Pfeiffer%2C%20Michael%20Liu%2C%20Shih-Chii%20Phased%20LSTM%3A%20Accelerating%20recurrent%20network%20training%20for%20long%20or%20event-based%20sequences%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Neil%2C%20Daniel%20Pfeiffer%2C%20Michael%20Liu%2C%20Shih-Chii%20Phased%20LSTM%3A%20Accelerating%20recurrent%20network%20training%20for%20long%20or%20event-based%20sequences%202016"
+        },
+        {
+            "id": "50",
+            "entry": "[50] Yann LeCun, L\u00e9on Bottou, Yoshua Bengio, and Patrick Haffner. Gradient-based learning applied to document recognition. Proceedings of the IEEE, 86(11):2278\u20132324, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=LeCun%2C%20Yann%20Bottou%2C%20L%C3%A9on%20Bengio%2C%20Yoshua%20Haffner%2C%20Patrick%20Gradient-based%20learning%20applied%20to%20document%20recognition%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=LeCun%2C%20Yann%20Bottou%2C%20L%C3%A9on%20Bengio%2C%20Yoshua%20Haffner%2C%20Patrick%20Gradient-based%20learning%20applied%20to%20document%20recognition%201998"
+        },
+        {
+            "id": "51",
+            "entry": "[51] Alex Krizhevsky and Geoffrey E. Hinton. Learning multiple layers of features from tiny images. Technical report, University of Toronto, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20Alex%20Hinton%2C%20Geoffrey%20E.%20Learning%20multiple%20layers%20of%20features%20from%20tiny%20images%202009"
+        },
+        {
+            "id": "52",
+            "entry": "[52] Johannes Stallkamp, Marc Schlipsing, Jan Salmen, and Christian Igel. The german traffic sign recognition benchmark: a multi-class classification competition. In International Joint Conference on Neural Networks (IJCNN), pages 1453\u20131460. IEEE, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Stallkamp%2C%20Johannes%20Schlipsing%2C%20Marc%20Salmen%2C%20Jan%20Igel%2C%20Christian%20The%20german%20traffic%20sign%20recognition%20benchmark%3A%20a%20multi-class%20classification%20competition%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Stallkamp%2C%20Johannes%20Schlipsing%2C%20Marc%20Salmen%2C%20Jan%20Igel%2C%20Christian%20The%20german%20traffic%20sign%20recognition%20benchmark%3A%20a%20multi-class%20classification%20competition%202011"
+        },
+        {
+            "id": "53",
+            "entry": "[53] Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. arXiv:1409.1556, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1409.1556"
+        },
+        {
+            "id": "54",
+            "entry": "[54] Alex Krizhevsky, Ilya Sutskever, and Geoffrey E Hinton. Imagenet classification with deep convolutional neural networks. In Advances in Neural Information Processing Systems (NIPS), pages 1097\u20131105, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Hinton%2C%20Geoffrey%20E.%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Hinton%2C%20Geoffrey%20E.%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012"
+        },
+        {
+            "id": "55",
+            "entry": "[55] Gao Huang, Zhuang Liu, Kilian Q Weinberger, and Laurens van der Maaten. Densely connected convolutional networks. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pages 2261\u20132269, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huang%2C%20Gao%20Liu%2C%20Zhuang%20Weinberger%2C%20Kilian%20Q.%20van%20der%20Maaten%2C%20Laurens%20Densely%20connected%20convolutional%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huang%2C%20Gao%20Liu%2C%20Zhuang%20Weinberger%2C%20Kilian%20Q.%20van%20der%20Maaten%2C%20Laurens%20Densely%20connected%20convolutional%20networks%202017"
+        },
+        {
+            "id": "56",
+            "entry": "[56] Paul A. Merolla, John V. Arthur, Rodrigo Alvarez-Icaza, Andrew S. Cassidy, Jun Sawada, Filipp Akopyan, Bryan L. Jackson, Nabil Imam, Chen Guo, Yutaka Nakamura, Bernard Brezzo, Ivan Vo, Steven K. Esser, Rathinakumar Appuswamy, Brian Taba, Arnon Amir, Myron D. Flickner, William P. Risk, Rajit Manohar, and Dharmendra S. Modha. A million spiking-neuron integrated circuit with a scalable communication network and interface. Science, 345(6197):668\u2013673, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Merolla%2C%20Paul%20A.%20Arthur%2C%20John%20V.%20Alvarez-Icaza%2C%20Rodrigo%20Cassidy%2C%20Andrew%20S.%20A%20million%20spiking-neuron%20integrated%20circuit%20with%20a%20scalable%20communication%20network%20and%20interface%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Merolla%2C%20Paul%20A.%20Arthur%2C%20John%20V.%20Alvarez-Icaza%2C%20Rodrigo%20Cassidy%2C%20Andrew%20S.%20A%20million%20spiking-neuron%20integrated%20circuit%20with%20a%20scalable%20communication%20network%20and%20interface%202014"
+        },
+        {
+            "id": "57",
+            "entry": "[57] Steven K. Esser, Paul A. Merolla, John V. Arthur, Andrew S. Cassidy, Rathinakumar Appuswamy, Alexander Andreopoulos, David J. Berg, Jeffrey L. McKinstry, Timothy Melano, Davis R. Barch, Carmelo di Nolfo, Pallab Datta, Arnon Amir, Brian Taba, Myron D. Flickner, and Dharmendra S. Modha. Convolutional networks for fast, energy-efficient neuromorphic computing. Proceedings of the National Academy of Sciences, 113(41):11441\u201311446, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Esser%2C%20Steven%20K.%20Merolla%2C%20Paul%20A.%20Arthur%2C%20John%20V.%20Cassidy%2C%20Andrew%20S.%20Convolutional%20networks%20for%20fast%2C%20energy-efficient%20neuromorphic%20computing%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Esser%2C%20Steven%20K.%20Merolla%2C%20Paul%20A.%20Arthur%2C%20John%20V.%20Cassidy%2C%20Andrew%20S.%20Convolutional%20networks%20for%20fast%2C%20energy-efficient%20neuromorphic%20computing%202016"
+        },
+        {
+            "id": "58",
+            "entry": "[58] Tijmen Tieleman and Geoffrey Hinton. Lecture 6.5-rmsprop: Divide the gradient by a running average of its recent magnitude. COURSERA: Neural Networks for Machine Learning 4, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tieleman%2C%20Tijmen%20Hinton%2C%20Geoffrey%20Lecture%206.5-rmsprop%3A%20Divide%20the%20gradient%20by%20a%20running%20average%20of%20its%20recent%20magnitude%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tieleman%2C%20Tijmen%20Hinton%2C%20Geoffrey%20Lecture%206.5-rmsprop%3A%20Divide%20the%20gradient%20by%20a%20running%20average%20of%20its%20recent%20magnitude%202012"
+        },
+        {
+            "id": "59",
+            "entry": "[59] Theano Development Team. Theano: A Python framework for fast computation of mathematical expressions. arXiv:1605.02688, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1605.02688"
+        },
+        {
+            "id": "60",
+            "entry": "[60] Mart\u00edn Abadi, Ashish Agarwal, Paul Barham, Eugene Brevdo, Zhifeng Chen, Craig Citro, Greg S. Corrado, Andy Davis, Jeffrey Dean, Matthieu Devin, Sanjay Ghemawat, Ian Goodfellow, Andrew Harp, Geoffrey Irving, Michael Isard, Yangqing Jia, Rafal Jozefowicz, Lukasz Kaiser, Manjunath Kudlur, Josh Levenberg, Dandelion Man\u00e9, Rajat Monga, Sherry Moore, Derek Murray, Chris Olah, Mike Schuster, Jonathon Shlens, Benoit Steiner, Ilya Sutskever, Kunal Talwar, Paul Tucker, Vincent Vanhoucke, Vijay Vasudevan, Fernanda Vi\u00e9gas, Oriol Vinyals, Pete Warden, Martin Wattenberg, Martin Wicke, Yuan Yu, and Xiaoqiang Zheng. TensorFlow: Large-scale machine learning on heterogeneous systems, 2015. URL https://www.tensorflow.org/. Software available from tensorflow.org. ",
+            "url": "https://www.tensorflow.org/"
+        }
+    ]
+}

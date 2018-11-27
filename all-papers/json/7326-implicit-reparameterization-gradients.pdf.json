@@ -1,0 +1,353 @@
+{
+    "filename": "7326-implicit-reparameterization-gradients.pdf",
+    "metadata": {
+        "title": "Implicit Reparameterization Gradients",
+        "author": "Mikhail Figurnov, Shakir Mohamed, Andriy Mnih",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7326-implicit-reparameterization-gradients.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "By providing a simple and efficient way of computing low-variance gradients of continuous random variables, the reparameterization trick has become the technique of choice for training a variety of latent variable models. However, it is not applicable to a number of important continuous distributions. We introduce an alternative approach to computing reparameterization gradients based on implicit differentiation and demonstrate its broader applicability by applying it to Gamma, Beta, Dirichlet, and von Mises distributions, which cannot be used with the classic reparameterization trick. Our experiments show that the proposed approach is faster and more accurate than the existing gradient estimators for these distributions."
+    },
+    "keywords": [
+        {
+            "term": "variational inference",
+            "url": "https://en.wikipedia.org/wiki/variational_inference"
+        },
+        {
+            "term": "topic model",
+            "url": "https://en.wikipedia.org/wiki/topic_model"
+        },
+        {
+            "term": "machine learning",
+            "url": "https://en.wikipedia.org/wiki/machine_learning"
+        },
+        {
+            "term": "random variable",
+            "url": "https://en.wikipedia.org/wiki/random_variable"
+        },
+        {
+            "term": "automatic differentiation",
+            "url": "https://en.wikipedia.org/wiki/automatic_differentiation"
+        },
+        {
+            "term": "cumulative distribution functions",
+            "url": "https://en.wikipedia.org/wiki/cumulative_distribution_functions"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Explicit reparameterization gradients<br/><br/>We start with a review of the original formulation of reparameterization gradients [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>, <a class=\"ref-link\" id=\"c42\" href=\"#r42\">42</a>, <a class=\"ref-link\" id=\"c51\" href=\"#r51\">51</a>], which we will refer to as explicit reparameterization",
+        "This paper provides a general tool for reparameterization in these important cases",
+        "We develop implicit reparameterization gradients that provide unbiased estimators for continuous distributions with numerically tractable cumulative distribution functions",
+        "We propose an alternative way of computing the reparameterization gradient that avoids the inversion of the standardization function",
+        "Latent Dirichlet Allocation [<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>] [<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>] is a popular topic model that represents each document as a bag-of-words and finds a set of topics so that each document is well-described by a few topics",
+        "Reparameterization gradients have become established as a central tool underlying many of the recent advances in machine learning"
+    ],
+    "key_statements": [
+        "Explicit reparameterization gradients<br/><br/>We start with a review of the original formulation of reparameterization gradients [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>, <a class=\"ref-link\" id=\"c42\" href=\"#r42\">42</a>, <a class=\"ref-link\" id=\"c51\" href=\"#r51\">51</a>], which we will refer to as explicit reparameterization",
+        "This paper provides a general tool for reparameterization in these important cases",
+        "We review the standard reparameterization trick in Section 2 and make the following contributions: 32nd Conference on Neural Information Processing Systems (NIPS 2018), Montr\u00e9al, Canada",
+        "We develop implicit reparameterization gradients that provide unbiased estimators for continuous distributions with numerically tractable cumulative distribution functions",
+        "We propose an alternative way of computing the reparameterization gradient that avoids the inversion of the standardization function",
+        "We demonstrate how implicit reparameterization can be applied to a variety of distributions",
+        "While they provide the same result, the implicit version is easier to implement for distributions such as Gamma because it does not require inverting the standardization function S (z)",
+        "Implicit reparameterization for Gamma, Student\u2019s t, Beta, Dirichlet and von Mises distributions is available in TensorFlow Probability [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>]",
+        "For the Dirichlet distribution, increasing the shape augmentation parameter B allows Rejection sampling variational inference to asymptotically approach the variance of the implicit gradient",
+        "Latent Dirichlet Allocation [<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>] [<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>] is a popular topic model that represents each document as a bag-of-words and finds a set of topics so that each document is well-described by a few topics",
+        "We report the number of words in the document and the marginal log-likelihood is approximated with a single-sample estimate of the evidence lower bound",
+        "We provide a detailed comparison between implicit gradients and Rejection sampling variational inference in Table 7 of the supplementary material",
+        "Reparameterization gradients have become established as a central tool underlying many of the recent advances in machine learning"
+    ],
+    "summary": [
+        "Explicit reparameterization gradients<br/><br/>We start with a review of the original formulation of reparameterization gradients [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>, <a class=\"ref-link\" id=\"c42\" href=\"#r42\">42</a>, <a class=\"ref-link\" id=\"c51\" href=\"#r51\">51</a>], which we will refer to as explicit reparameterization.",
+        "Our strategy is to provide a computation method for a standardization function, such as CDF or multivariate distributional transform, and its gradients.",
+        "While they provide the same result, the implicit version is easier to implement for distributions such as Gamma because it does not require inverting the standardization function S (z).",
+        ", we propose to use implicit reparameterization by performing forwardmode automatic differentiation of an efficient numerical method [<a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>] for computation of the CDF.",
+        "As well as Hoffman and Blei [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>], used the implicit gradients to perform backpropagation through the Gamma distribution using a finite difference approximation of the CDF derivative.",
+        "We add to this rich literature by generalizing the technique to handle arbitrary standardization functions, deriving a simpler expression than that of Graves [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>] for the multivariate case, showing the connection to explicit reparameterization gradients, and providing an efficient automatic differentiation method to compute the intractable CDF derivatives.",
+        "Ruiz et al [<a class=\"ref-link\" id=\"c44\" href=\"#r44\">44</a>] introduced generalized reparameterization gradients (GRG) that expand the applicability of the reparameterization trick by using a standardization function that allows the underlying base distribution to depend weakly on the parameter vector.",
+        "The resulting gradient estimator, which in addition to the the reparameterized gradients term includes a score-function gradient term that takes into account the dependence of the base distribution on the parameter vector, was applied to the Gamma, Beta, and log-Normal distributions.",
+        "We apply implicit reparameterization for two distributions with analytically intractable CDFs (Gamma and von Mises) to three problems: a toy setting of stochastic cross-entropy estimation, training a Latent Dirichlet Allocation [<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>] (LDA) topic model, and training VAEs [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>, <a class=\"ref-link\" id=\"c42\" href=\"#r42\">42</a>] with non-Normal latent distributions.",
+        "Implicit reparameterization for Gamma, Student\u2019s t, Beta, Dirichlet and von Mises distributions is available in TensorFlow Probability [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>].",
+        "For the Dirichlet distribution, increasing the shape augmentation parameter B allows RSVI to asymptotically approach the variance of the implicit gradient.",
+        "We compare amortized variational inference in LDA using implicit reparameterization to several alternatives: (i) training the LDA model with the RSVI gradients; stochastic variational inference (SVI) [<a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>] training method for LDA; the method of Srivastava and Sutton [<a class=\"ref-link\" id=\"c47\" href=\"#r47\">47</a>], which we refer to as LN-LDA, that uses a Logistic Normal approximation in place of the Dirichlet prior and performs amortized variational inference using a Logistic Normal variational posterior.",
+        "The proposed implicit reparameterization gradients offer a simple and practical approach to stochastic gradient estimation which has the properties we expect from such a new type of estimator: it is faster than the existing methods and simultaneously provides lower gradient variance."
+    ],
+    "headline": "We introduce an alternative approach to computing reparameterization gradients based on implicit differentiation and demonstrate its broader applicability by applying it to Gamma, Beta, Dirichlet, and von Mises distributions, which cannot be used with the classic reparameterization trick",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] M. Abadi, P. Barham, J. Chen, Z. Chen, A. Davis, J. Dean, M. Devin, S. Ghemawat, G. Irving, M. Isard, et al. \u201cTensorFlow: A System for Large-Scale Machine Learning.\u201d In: OSDI. Vol. 16. 2016, pp. 265\u2013283.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abadi%2C%20M.%20Barham%2C%20P.%20Chen%2C%20J.%20Chen%2C%20Z.%20TensorFlow%3A%20A%20System%20for%20Large-Scale%20Machine%20Learning.%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abadi%2C%20M.%20Barham%2C%20P.%20Chen%2C%20J.%20Chen%2C%20Z.%20TensorFlow%3A%20A%20System%20for%20Large-Scale%20Machine%20Learning.%202016"
+        },
+        {
+            "id": "2",
+            "entry": "[2] A. G. Baydin, B. A. Pearlmutter, A. A. Radul, and J. M. Siskind. \u201cAutomatic differentiation in machine learning: a survey\u201d. In: arXiv preprint arXiv:1502.05767 (2015).",
+            "arxiv_url": "https://arxiv.org/pdf/1502.05767"
+        },
+        {
+            "id": "3",
+            "entry": "[3] G. P. Bhattacharjee. \u201cAlgorithm AS 32: The Incomplete Gamma Integral\u201d. In: Journal of the Royal Statistical Society. Series C (Applied Statistics) 19.3 (1970), pp. 285\u2013287. ISSN: 00359254, 14679876.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bhattacharjee%2C%20G.P.%20Algorithm%20AS%2032%3A%20The%20Incomplete%20Gamma%20Integral%201970",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bhattacharjee%2C%20G.P.%20Algorithm%20AS%2032%3A%20The%20Incomplete%20Gamma%20Integral%201970"
+        },
+        {
+            "id": "4",
+            "entry": "[4] D. M. Blei and J. D. Lafferty. \u201cCorrelated topic models\u201d. In: NIPS (2005), pp. 147\u2013154.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Blei%2C%20D.M.%20Lafferty%2C%20J.D.%20Correlated%20topic%20models%202005"
+        },
+        {
+            "id": "5",
+            "entry": "[5] D. M. Blei and J. D. Lafferty. \u201cDynamic topic models\u201d. In: ICML (2006), pp. 113\u2013120.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Blei%2C%20D.M.%20Lafferty%2C%20J.D.%20Dynamic%20topic%20models%202006"
+        },
+        {
+            "id": "6",
+            "entry": "[6] D. M. Blei, A. Y. Ng, and M. I. Jordan. \u201cLatent dirichlet allocation\u201d. In: JMLR 3.Jan (2003), pp. 993\u20131022.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Blei%2C%20D.M.%20Ng%2C%20A.Y.%20Jordan%2C%20M.I.%20Latent%20dirichlet%20allocation%202003-01-03"
+        },
+        {
+            "id": "7",
+            "entry": "[7] C. Blundell, J. Cornebise, K. Kavukcuoglu, and D. Wierstra. \u201cWeight uncertainty in neural networks\u201d. In: ICML (2015).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Blundell%2C%20C.%20Cornebise%2C%20J.%20Kavukcuoglu%2C%20K.%20Wierstra%2C%20D.%20Weight%20uncertainty%20in%20neural%20networks%202015"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Y. Burda, R. Grosse, and R. Salakhutdinov. \u201cImportance weighted autoencoders\u201d. In: ICLR",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Burda%2C%20Y.%20Grosse%2C%20R.%20Salakhutdinov%2C%20R.%20Importance%20weighted%20autoencoders"
+        },
+        {
+            "id": "9",
+            "entry": "[9] T. R. Davidson, L. Falorsi, N. De Cao, T. Kipf, and J. M. Tomczak. \u201cHyperspherical Variational Auto-Encoders\u201d. In: UAI (2018).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Davidson%2C%20T.R.%20Falorsi%2C%20L.%20Cao%2C%20N.De%20Kipf%2C%20T.%20Hyperspherical%20Variational%20Auto-Encoders%202018"
+        },
+        {
+            "id": "10",
+            "entry": "[10] L. Devroye. Non-Uniform Random Variate Generation. Springer, 1986.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Devroye%2C%20L.%20Non-Uniform%20Random%20Variate%20Generation%201986"
+        },
+        {
+            "id": "11",
+            "entry": "[11] J. V. Dillon, I. Langmore, D. Tran, E. Brevdo, S. Vasudevan, D. Moore, B. Patton, A. Alemi, M. Hoffman, and R. A. Saurous. \u201cTensorFlow Distributions\u201d. In: arXiv (2017).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dillon%2C%20J.V.%20Langmore%2C%20I.%20Tran%2C%20D.%20Brevdo%2C%20E.%20TensorFlow%20Distributions%202017"
+        },
+        {
+            "id": "12",
+            "entry": "[12] M. C. Fu. \u201cGradient estimation\u201d. In: Handbooks in operations research and management science 13 (2006), pp. 575\u2013616.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fu%2C%20M.C.%20%E2%80%9CGradient%20estimation%E2%80%9D.%20In%3A%20Handbooks%20in%20operations%20research%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fu%2C%20M.C.%20%E2%80%9CGradient%20estimation%E2%80%9D.%20In%3A%20Handbooks%20in%20operations%20research%202006"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Y. Gal and Z. Ghahramani. \u201cA theoretically grounded application of dropout in recurrent neural networks\u201d. In: NIPS. 2016, pp. 1019\u20131027.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gal%2C%20Y.%20Ghahramani%2C%20Z.%20A%20theoretically%20grounded%20application%20of%20dropout%20in%20recurrent%20neural%20networks%202016"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Y. Gal and Z. Ghahramani. \u201cDropout as a Bayesian approximation: Representing model uncertainty in deep learning\u201d. In: ICML (2016), pp. 1050\u20131059. Business Media, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gal%2C%20Y.%20Ghahramani%2C%20Z.%20Dropout%20as%20a%20Bayesian%20approximation%3A%20Representing%20model%20uncertainty%20in%20deep%20learning%202016"
+        },
+        {
+            "id": "16",
+            "entry": "[16] P. W. Glynn. \u201cLikelihood ratio gradient estimation for stochastic systems\u201d. In: Communications of the ACM 33.10 (1990), pp. 75\u201384.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Glynn%2C%20P.W.%20Likelihood%20ratio%20gradient%20estimation%20for%20stochastic%20systems%201990",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Glynn%2C%20P.W.%20Likelihood%20ratio%20gradient%20estimation%20for%20stochastic%20systems%201990"
+        },
+        {
+            "id": "17",
+            "entry": "[17] A. Graves. \u201cStochastic backpropagation through mixture density distributions\u201d. In: arXiv preprint arXiv:1607.05690 (2016).",
+            "arxiv_url": "https://arxiv.org/pdf/1607.05690"
+        },
+        {
+            "id": "18",
+            "entry": "[18] G. W. Hill. \u201cAlgorithm 518: Incomplete Bessel Function I0. The Von Mises Distribution\u201d. In: ACM Transactions on Mathematical Software (TOMS) 3.3 (1977), pp. 279\u2013284.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hill%2C%20G.W.%20Algorithm%20518%3A%20Incomplete%20Bessel%20Function%20I0.%20The%20Von%20Mises%20Distribution%201977",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hill%2C%20G.W.%20Algorithm%20518%3A%20Incomplete%20Bessel%20Function%20I0.%20The%20Von%20Mises%20Distribution%201977"
+        },
+        {
+            "id": "19",
+            "entry": "[19] M. D. Hoffman, D. M. Blei, C. Wang, and J. Paisley. \u201cStochastic variational inference\u201d. In: JMLR 14.1 (2013), pp. 1303\u20131347.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hoffman%2C%20M.D.%20Blei%2C%20D.M.%20Wang%2C%20C.%20Paisley%2C%20J.%20Stochastic%20variational%20inference%202013"
+        },
+        {
+            "id": "20",
+            "entry": "[20] M. Hoffman, F. R. Bach, and D. M. Blei. \u201cOnline learning for latent dirichlet allocation\u201d. In: NIPS (2010), pp. 856\u2013864.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hoffman%2C%20M.%20Bach%2C%20F.R.%20Blei%2C%20D.M.%20Online%20learning%20for%20latent%20dirichlet%20allocation%202010"
+        },
+        {
+            "id": "21",
+            "entry": "[21] M. Hoffman and D. Blei. \u201cStochastic structured variational inference\u201d. In: AISTATS (2015), pp. 361\u2013369.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hoffman%2C%20M.%20Blei%2C%20D.%20Stochastic%20structured%20variational%20inference%202015"
+        },
+        {
+            "id": "22",
+            "entry": "[22] T. S. Jaakkola and M. I. Jordan. \u201cBayesian parameter estimation via variational methods\u201d. In: Statistics and Computing 10.1 (2000), pp. 25\u201337.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jaakkola%2C%20T.S.%20Jordan%2C%20M.I.%20Bayesian%20parameter%20estimation%20via%20variational%20methods%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jaakkola%2C%20T.S.%20Jordan%2C%20M.I.%20Bayesian%20parameter%20estimation%20via%20variational%20methods%202000"
+        },
+        {
+            "id": "23",
+            "entry": "[23] E. Jang, S. Gu, and B. Poole. \u201cCategorical reparameterization with gumbel-softmax\u201d. In: ICLR",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jang%2C%20E.%20Gu%2C%20S.%20Poole%2C%20B.%20Categorical%20reparameterization%20with%20gumbel-softmax"
+        },
+        {
+            "id": "24",
+            "entry": "[24] M. Jankowiak and T. Karaletsos. \u201cPathwise Derivatives for Multivariate Distributions\u201d. In: arXiv preprint arXiv:1806.01856 (2018).",
+            "arxiv_url": "https://arxiv.org/pdf/1806.01856"
+        },
+        {
+            "id": "25",
+            "entry": "[25] M. Jankowiak and F. Obermeyer. \u201cPathwise Derivatives Beyond the Reparameterization Trick\u201d. In: ICML (2018).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jankowiak%2C%20M.%20Obermeyer%2C%20F.%20Pathwise%20Derivatives%20Beyond%20the%20Reparameterization%20Trick%202018"
+        },
+        {
+            "id": "26",
+            "entry": "[26] D. P. Kingma and M. Welling. \u201cAuto-encoding variational bayes\u201d. In: ICLR (2014).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20D.P.%20Welling%2C%20M.%20Auto-encoding%20variational%20bayes%202014"
+        },
+        {
+            "id": "27",
+            "entry": "[27] D. A. Knowles. \u201cStochastic gradient variational Bayes for Gamma approximating distributions\u201d. In: arXiv preprint arXiv:1509.01631 (2015).",
+            "arxiv_url": "https://arxiv.org/pdf/1509.01631"
+        },
+        {
+            "id": "28",
+            "entry": "[28] A. Kucukelbir, D. Tran, R. Ranganath, A. Gelman, and D. M. Blei. \u201cAutomatic differentiation variational inference\u201d. In: JMLR 18.1 (2017), pp. 430\u2013474.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kucukelbir%2C%20A.%20Tran%2C%20D.%20Ranganath%2C%20R.%20Gelman%2C%20A.%20Automatic%20differentiation%20variational%20inference%202017"
+        },
+        {
+            "id": "29",
+            "entry": "[29] D. D. Lewis, Y. Yang, T. G. Rose, and F. Li. \u201cRcv1: A new benchmark collection for text categorization research\u201d. In: JMLR 5.Apr (2004), pp. 361\u2013397.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lewis%2C%20D.D.%20Yang%2C%20Y.%20Rose%2C%20T.G.%20Li%2C%20F.%20Rcv1%3A%20A%20new%20benchmark%20collection%20for%20text%20categorization%20research%202004-04-05"
+        },
+        {
+            "id": "30",
+            "entry": "[30] C. J. Maddison, A. Mnih, and Y. W. Teh. \u201cThe concrete distribution: A continuous relaxation of discrete random variables\u201d. In: ICLR (2017).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Maddison%2C%20C.J.%20Mnih%2C%20A.%20W%2C%20Y.%20Teh.%20%E2%80%9CThe%20concrete%20distribution%3A%20A%20continuous%20relaxation%20of%20discrete%20random%20variables%E2%80%9D%202017"
+        },
+        {
+            "id": "31",
+            "entry": "[31] K. V. Mardia and P. E. Jupp. Directional statistics. John Wiley & Sons, 2009, p. 494.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mardia%2C%20K.V.%20Jupp%2C%20P.E.%20Directional%20statistics%202009"
+        },
+        {
+            "id": "32",
+            "entry": "[32] R. von Mises. \u201c\u00dcber die \u201cGanzzahligkeit\u201d der Atomgewicht und verwandte Fragen.\u201d In: Physikalische Z. 19 (1918), pp. 490\u2013500.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=von%20Mises%2C%20R.%20%C3%9Cber%20die%20%E2%80%9CGanzzahligkeit%E2%80%9D%20der%20Atomgewicht%20und%20verwandte%20Fragen.%201918"
+        },
+        {
+            "id": "33",
+            "entry": "[33] A. Mnih and K. Gregor. \u201cNeural variational inference and learning in belief networks\u201d. In: ICML (2014).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20A.%20Gregor%2C%20K.%20Neural%20variational%20inference%20and%20learning%20in%20belief%20networks%202014"
+        },
+        {
+            "id": "34",
+            "entry": "[34] D. Molchanov, A. Ashukha, and D. Vetrov. \u201cVariational dropout sparsifies deep neural networks\u201d. In: ICML (2017).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Molchanov%2C%20D.%20Ashukha%2C%20A.%20Vetrov%2C%20D.%20Variational%20dropout%20sparsifies%20deep%20neural%20networks%202017"
+        },
+        {
+            "id": "35",
+            "entry": "[35] R. Moore. \u201cAlgorithm AS 187: Derivatives of the incomplete gamma integral\u201d. In: Journal of the Royal Statistical Society. Series C (Applied Statistics) 31.3 (1982), pp. 330\u2013335.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Moore%2C%20R.%20Algorithm%20AS%20187%3A%20Derivatives%20of%20the%20incomplete%20gamma%20integral%201982",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Moore%2C%20R.%20Algorithm%20AS%20187%3A%20Derivatives%20of%20the%20incomplete%20gamma%20integral%201982"
+        },
+        {
+            "id": "36",
+            "entry": "[36] C. Naesseth, F. Ruiz, S. Linderman, and D. Blei. \u201cReparameterization gradients through acceptance-rejection sampling algorithms\u201d. In: AISTATS (2017), pp. 489\u2013498.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Naesseth%2C%20C.%20Ruiz%2C%20F.%20Linderman%2C%20S.%20Blei%2C%20D.%20Reparameterization%20gradients%20through%20acceptance-rejection%20sampling%20algorithms%202017"
+        },
+        {
+            "id": "37",
+            "entry": "[37] E. Nalisnick, L. Hertel, and P. Smyth. \u201cApproximate inference for deep latent gaussian mixtures\u201d. In: NIPS Workshop on Bayesian Deep Learning. Vol. 2. 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nalisnick%2C%20E.%20Hertel%2C%20L.%20Smyth%2C%20P.%20Approximate%20inference%20for%20deep%20latent%20gaussian%20mixtures%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nalisnick%2C%20E.%20Hertel%2C%20L.%20Smyth%2C%20P.%20Approximate%20inference%20for%20deep%20latent%20gaussian%20mixtures%202016"
+        },
+        {
+            "id": "38",
+            "entry": "[38] E. Nalisnick and P. Smyth. \u201cStick-breaking variational autoencoders\u201d. In: ICLR (2017).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nalisnick%2C%20E.%20Smyth%2C%20P.%20Stick-breaking%20variational%20autoencoders%202017"
+        },
+        {
+            "id": "39",
+            "entry": "[39] J. Paisley, D. Blei, and M. Jordan. \u201cVariational Bayesian inference with stochastic search\u201d. In: ICML (2012).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Paisley%2C%20J.%20Blei%2C%20D.%20Jordan%2C%20M.%20Variational%20Bayesian%20inference%20with%20stochastic%20search%202012"
+        },
+        {
+            "id": "40",
+            "entry": "[40] A. Paszke, S. Gross, S. Chintala, G. Chanan, E. Yang, Z. DeVito, Z. Lin, A. Desmaison, L. Antiga, and A. Lerer. \u201cAutomatic differentiation in PyTorch\u201d. In: NIPS-W (2017).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Paszke%2C%20A.%20Gross%2C%20S.%20Chintala%2C%20S.%20Chanan%2C%20G.%20Automatic%20differentiation%20in%20PyTorch%202017"
+        },
+        {
+            "id": "41",
+            "entry": "[41] R. Ranganath, S. Gerrish, and D. Blei. \u201cBlack box variational inference\u201d. In: AISTATS (2014), pp. 814\u2013822.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ranganath%2C%20R.%20Gerrish%2C%20S.%20Blei%2C%20D.%20Black%20box%20variational%20inference%202014"
+        },
+        {
+            "id": "42",
+            "entry": "[42] D. J. Rezende, S. Mohamed, and D. Wierstra. \u201cStochastic backpropagation and approximate inference in deep generative models\u201d. In: ICML (2014).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rezende%2C%20D.J.%20Mohamed%2C%20S.%20Wierstra%2C%20D.%20Stochastic%20backpropagation%20and%20approximate%20inference%20in%20deep%20generative%20models%202014"
+        },
+        {
+            "id": "43",
+            "entry": "[43] G. Roeder, Y. Wu, and D. Duvenaud. \u201cSticking the landing: An asymptotically zero-variance gradient estimator for variational inference\u201d. In: NIPS (2017).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Roeder%2C%20G.%20Wu%2C%20Y.%20Duvenaud%2C%20D.%20Sticking%20the%20landing%3A%20An%20asymptotically%20zero-variance%20gradient%20estimator%20for%20variational%20inference%202017"
+        },
+        {
+            "id": "44",
+            "entry": "[44] F. R. Ruiz, M. Titsias, and D. Blei. \u201cThe Generalized Reparameterization Gradient\u201d. In: NIPS Risk Analysis. Springer, 2013, pp. 3\u201334.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ruiz%2C%20F.R.%20Titsias%2C%20M.%20Blei%2C%20D.%20%E2%80%9CThe%20Generalized%20Reparameterization%20Gradient%E2%80%9D.%20In%3A%20NIPS%20Risk%20Analysis%202013"
+        },
+        {
+            "id": "46",
+            "entry": "[46] T. Salimans and D. A. Knowles. \u201cFixed-form variational posterior approximation through stochastic linear regression\u201d. In: Bayesian Analysis 8.4 (2013), pp. 837\u2013882.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Salimans%2C%20T.%20Knowles%2C%20D.A.%20Fixed-form%20variational%20posterior%20approximation%20through%20stochastic%20linear%20regression%202013"
+        },
+        {
+            "id": "47",
+            "entry": "[47] A. Srivastava and C. Sutton. \u201cAutoencoding variational inference for topic models\u201d. In: ICLR",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Srivastava%2C%20A.%20Sutton%2C%20C.%20Autoencoding%20variational%20inference%20for%20topic%20models"
+        },
+        {
+            "id": "48",
+            "entry": "[48] A. Srivastava and C. Sutton. \u201cVariational Inference In Pachinko Allocation Machines\u201d. In: arXiv preprint arXiv:1804.07944 (2018).",
+            "arxiv_url": "https://arxiv.org/pdf/1804.07944"
+        },
+        {
+            "id": "49",
+            "entry": "[49] R. Suri and M. A. Zazanis. \u201cPerturbation analysis gives strongly consistent sensitivity estimates for the M/G/1 queue\u201d. In: Management Science 34.1 (1988), pp. 39\u201364.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Suri%2C%20R.%20Zazanis%2C%20M.A.%20Perturbation%20analysis%20gives%20strongly%20consistent%20sensitivity%20estimates%20for%20the%20M/G/1%20queue%201988",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Suri%2C%20R.%20Zazanis%2C%20M.A.%20Perturbation%20analysis%20gives%20strongly%20consistent%20sensitivity%20estimates%20for%20the%20M/G/1%20queue%201988"
+        },
+        {
+            "id": "50",
+            "entry": "[50] Y. W. Teh, D. Newman, and M. Welling. \u201cA collapsed variational Bayesian inference algorithm for latent Dirichlet allocation\u201d. In: NIPS (2007), pp. 1353\u20131360.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Teh%2C%20Y.W.%20Newman%2C%20D.%20Welling%2C%20M.%20A%20collapsed%20variational%20Bayesian%20inference%20algorithm%20for%20latent%20Dirichlet%20allocation%202007"
+        },
+        {
+            "id": "51",
+            "entry": "[51] M. Titsias and M. L\u00e1zaro-Gredilla. \u201cDoubly stochastic variational Bayes for non-conjugate inference\u201d. In: International Conference on Machine Learning. 2014, pp. 1971\u20131979.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Titsias%2C%20M.%20L%C3%A1zaro-Gredilla%2C%20M.%20Doubly%20stochastic%20variational%20Bayes%20for%20non-conjugate%20inference%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Titsias%2C%20M.%20L%C3%A1zaro-Gredilla%2C%20M.%20Doubly%20stochastic%20variational%20Bayes%20for%20non-conjugate%20inference%202014"
+        },
+        {
+            "id": "52",
+            "entry": "[52] H. M. Wallach, D. M. Mimno, and A. McCallum. \u201cRethinking LDA: Why priors matter\u201d. In: NIPS. 2009, pp. 1973\u20131981.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wallach%2C%20H.M.%20Mimno%2C%20D.M.%20McCallum%2C%20A.%20Rethinking%20LDA%3A%20Why%20priors%20matter%202009"
+        },
+        {
+            "id": "53",
+            "entry": "[53] R. J. Williams. \u201cSimple statistical gradient-following algorithms for connectionist reinforcement learning\u201d. In: Reinforcement Learning (1992), pp. 5\u201332.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%2C%20R.J.%20Simple%20statistical%20gradient-following%20algorithms%20for%20connectionist%20reinforcement%20learning%201992"
+        },
+        {
+            "id": "54",
+            "entry": "[54] H. Zhang, B. Chen, D. Guo, and M. Zhou. \u201cWHAI: Weibull Hybrid Autoencoding Inference for Deep Topic Modeling\u201d. In: ICLR (2018). ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20H.%20Chen%2C%20B.%20Guo%2C%20D.%20Zhou%2C%20M.%20WHAI%3A%20Weibull%20Hybrid%20Autoencoding%20Inference%20for%20Deep%20Topic%20Modeling%202018"
+        }
+    ]
+}

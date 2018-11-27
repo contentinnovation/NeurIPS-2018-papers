@@ -1,0 +1,277 @@
+{
+    "filename": "7759-gradiveq-vector-quantization-for-bandwidth-efficient-gradient-aggregation-in-distributed-cnn-training.pdf",
+    "metadata": {
+        "title": "GradiVeQ: Vector Quantization for Bandwidth-Efficient Gradient Aggregation in Distributed CNN Training",
+        "author": "Mingchao Yu, Zhifeng Lin, Krishna Narra, Songze Li, Youjie Li, Nam Sung Kim, Alexander Schwing, Murali Annavaram, Salman Avestimehr",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7759-gradiveq-vector-quantization-for-bandwidth-efficient-gradient-aggregation-in-distributed-cnn-training.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Data parallelism can boost the training speed of convolutional neural networks (CNN), but could suffer from significant communication costs caused by gradient aggregation. To alleviate this problem, several scalar quantization techniques have been developed to compress the gradients. But these techniques could perform poorly when used together with decentralized aggregation protocols like ring all-reduce (RAR), mainly due to their inability to directly aggregate compressed gradients. In this paper, we empirically demonstrate the strong linear correlations between CNN gradients, and propose a gradient vector quantization technique, named GradiVeQ, to exploit these correlations through principal component analysis (PCA) for substantial gradient dimension reduction. GradiVeQ enables direct aggregation of compressed gradients, hence allows us to build a distributed learning system that parallelizes GradiVeQ gradient compression and RAR communications. Extensive experiments on popular CNNs demonstrate that applying GradiVeQ slashes the wall-clock gradient aggregation time of the original RAR by more than 5X without noticeable accuracy loss, and reduces the end-to-end training time by almost 50%. The results also show that GradiVeQ is compatible with scalar quantization techniques such as QSGD (Quantized SGD), and achieves a much higher speed-up gain under the same compression ratio."
+    },
+    "keywords": [
+        {
+            "term": "CIFAR",
+            "url": "https://en.wikipedia.org/wiki/CIFAR"
+        },
+        {
+            "term": "vector quantization",
+            "url": "https://en.wikipedia.org/wiki/vector_quantization"
+        },
+        {
+            "term": "NIPS",
+            "url": "https://en.wikipedia.org/wiki/NIPS"
+        },
+        {
+            "term": "principal component analysis",
+            "url": "https://en.wikipedia.org/wiki/principal_component_analysis"
+        },
+        {
+            "term": "wall clock",
+            "url": "https://en.wikipedia.org/wiki/wall_clock"
+        },
+        {
+            "term": "singular value decomposition",
+            "url": "https://en.wikipedia.org/wiki/singular_value_decomposition"
+        },
+        {
+            "term": "stochastic gradient descent",
+            "url": "https://en.wikipedia.org/wiki/stochastic_gradient_descent"
+        },
+        {
+            "term": "convolutional neural network",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_network"
+        },
+        {
+            "term": "linear correlation",
+            "url": "https://en.wikipedia.org/wiki/linear_correlation"
+        },
+        {
+            "term": "Defense Advanced Research Projects Agency",
+            "url": "https://en.wikipedia.org/wiki/Defense_Advanced_Research_Projects_Agency"
+        },
+        {
+            "term": "speech recognition",
+            "url": "https://en.wikipedia.org/wiki/speech_recognition"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Convolutional neural networks (CNN) such as VGG [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>] and ResNet [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>] can achieve unprecedented performance on many practical applications like speech recognition [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>], text processing [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>, <a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>], and image classification on very large datasets like CIFAR-100 [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>] and ImageNet [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>]",
+        "Due to the large dataset size, Convolutional neural networks training is widely implemented using distributed methods such as dataparallel stochastic gradient descent (SGD) [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>, <a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>, <a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>, <a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>, <a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>, <a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>, <a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>], where gradients computed by distributed nodes are summed after every iteration to update the Convolutional neural networks model of every node2",
+        "Experiments on ResNet with CIFAR100 show that GradiVeQ can compress the gradient by 8 times, and reduce the wall-clock gradient aggregation time by over 5X, which translates to a 46% reduction on the end-to-end training time in a system where communication contributes to 60% of the time",
+        "4-bit-QSGD can offer the same compression ratio, its incompatibility to be parallelized with ring all-reduce makes its gradient aggregation time almost double that of GradiVeQ",
+        "In this paper we have proposed GradiVeQ, a novel vector quantization technique for Convolutional neural networks gradient compression",
+        "GradiVeQ enables direct aggregation of compressed gradients, so that when paired with decentralized aggregation protocols such as ring all-reduce (RAR), GradiVeQ compression can be parallelized with gradient communication"
+    ],
+    "key_statements": [
+        "Convolutional neural networks (CNN) such as VGG [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>] and ResNet [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>] can achieve unprecedented performance on many practical applications like speech recognition [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>], text processing [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>, <a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>], and image classification on very large datasets like CIFAR-100 [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>] and ImageNet [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>]",
+        "Due to the large dataset size, Convolutional neural networks training is widely implemented using distributed methods such as dataparallel stochastic gradient descent (SGD) [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>, <a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>, <a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>, <a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>, <a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>, <a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>, <a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>], where gradients computed by distributed nodes are summed after every iteration to update the Convolutional neural networks model of every node2",
+        "Experiments on ResNet with CIFAR100 show that GradiVeQ can compress the gradient by 8 times, and reduce the wall-clock gradient aggregation time by over 5X, which translates to a 46% reduction on the end-to-end training time in a system where communication contributes to 60% of the time",
+        "4-bit-QSGD can offer the same compression ratio, its incompatibility to be parallelized with ring all-reduce makes its gradient aggregation time almost double that of GradiVeQ",
+        "In this paper we have proposed GradiVeQ, a novel vector quantization technique for Convolutional neural networks gradient compression",
+        "GradiVeQ enables direct aggregation of compressed gradients, so that when paired with decentralized aggregation protocols such as ring all-reduce (RAR), GradiVeQ compression can be parallelized with gradient communication",
+        "We are interested in understanding the implications of the linear correlation between gradients we have discovered, such as its usage in model reduction"
+    ],
+    "summary": [
+        "Convolutional neural networks (CNN) such as VGG [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>] and ResNet [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>] can achieve unprecedented performance on many practical applications like speech recognition [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>], text processing [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>, <a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>], and image classification on very large datasets like CIFAR-100 [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>] and ImageNet [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>].",
+        "Contributions We propose GradiVeQ (Gradient Vector Quantizer), a novel gradient compression technique that can significantly reduce the communication load in distributed CNN training.",
+        "Experiments on ResNet with CIFAR100 show that GradiVeQ can compress the gradient by 8 times, and reduce the wall-clock gradient aggregation time by over 5X, which translates to a 46% reduction on the end-to-end training time in a system where communication contributes to 60% of the time.",
+        "For each slice-m, all nodes periodically invest the same Lt out of L CNN training iterations on uncompressed gradient aggregation.",
+        "For every consecutive s slices in the same convolutional layer, GradiVeQ computes a single PCA compressor U d using the first slice, and uses the resulting U d to compress the remaining s \u2212 1 slices.",
+        "The corresponding U d will guarantee a compression loss of at most \u03bb to the sample slices of size K in each layer and, based on our spatial correlation observation the U d from one slice works well for other slices in the gradient vector.",
+        "When the majority of nodes experience large loss, we stop compression, and resume training with uncompressed aggregations to compute new compressors.",
+        "Computation Complexity: GradiVeQ has two main operations for each gradient slice: (a) one SVD over Lt samples of the aggregated slice for every Lt + Lc iterations, and (b) two low-dimensional matrix multiplications per iteration per node to compress/decompress the slice.",
+        "We observe that without applying any gradient compression techniques, gradient communication and aggregation overheads account for 60% of the end-to-end training time, which is consistent with prior works [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>].",
+        "As plotted in 7(a), both compression approaches reduce the model convergence wall-clock time significantly, with GradiVeQ slashing it even more due to its further reduction in gradient aggregation time \u2013 in our CPU setup, uncompressed RAR takes about 135, 000 seconds for the model to converge, 4-bit-QSGD takes 90, 000 seconds to converge, whereas GradiVeQ takes only 76, 000 seconds to converge.",
+        "4-bit-QSGD can offer the same compression ratio, its incompatibility to be parallelized with RAR makes its gradient aggregation time almost double that of GradiVeQ.",
+        "By slashing the gradient aggregation time, GradiVeQ achieves a higher end-to-end training time reduction of 4X over the uncompressed method and 1.40 times over 4-bit-QSGD.",
+        "Experiments show that GradiVeQ can significantly reduce the wall-clock gradient aggregation time of RAR, and achieves better speed-up than scalar quantization techniques such as QSGD.",
+        "We are interested in understanding the implications of the linear correlation between gradients we have discovered, such as its usage in model reduction"
+    ],
+    "headline": "We empirically demonstrate the strong linear correlations between Convolutional neural networks gradients, and propose a gradient vector quantization technique, named GradiVeQ, to exploit these correlations through principal component analysis  for substantial gradient dimension reduction",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] K. Simonyan and A. Zisserman, \u201cVery deep convolutional networks for large-scale image recognition,\u201d in ICLR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Simonyan%2C%20K.%20Zisserman%2C%20A.%20Very%20deep%20convolutional%20networks%20for%20large-scale%20image%20recognition%2C%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Simonyan%2C%20K.%20Zisserman%2C%20A.%20Very%20deep%20convolutional%20networks%20for%20large-scale%20image%20recognition%2C%202015"
+        },
+        {
+            "id": "2",
+            "entry": "[2] K. He, X. Zhang, S. Ren, and J. Sun, \u201cDeep residual learning for image recognition,\u201d in Proc. IEEE conf. Computer Vision and Pattern Recognition (CVPR), 2016, pp. 770\u2013778.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%2C%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%2C%202016"
+        },
+        {
+            "id": "3",
+            "entry": "[3] O. Abdel-Hamid, A.-r. Mohamed, H. Jiang, and G. Penn, \u201cApplying convolutional neural networks concepts to hybrid nn-hmm model for speech recognition,\u201d in ICASSP. IEEE, 2012, pp. 4277\u20134280.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abdel-Hamid%2C%20O.%20Mohamed%2C%20A.-r%20Jiang%2C%20H.%20Penn%2C%20G.%20%E2%80%9CApplying%20convolutional%20neural%20networks%20concepts%20to%20hybrid%20nn-hmm%20model%20for%20speech%20recognition%2C%E2%80%9D%20in%20ICASSP%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abdel-Hamid%2C%20O.%20Mohamed%2C%20A.-r%20Jiang%2C%20H.%20Penn%2C%20G.%20%E2%80%9CApplying%20convolutional%20neural%20networks%20concepts%20to%20hybrid%20nn-hmm%20model%20for%20speech%20recognition%2C%E2%80%9D%20in%20ICASSP%202012"
+        },
+        {
+            "id": "4",
+            "entry": "[4] O. Abdel-Hamid, A.-r. Mohamed, H. Jiang, L. Deng, G. Penn, and D. Yu, \u201cConvolutional neural networks for speech recognition,\u201d IEEE/ACM Transactions on audio, speech, and language processing, vol. 22, no. 10, pp. 1533\u20131545, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abdel-Hamid%2C%20O.%20Mohamed%2C%20A.-r%20Jiang%2C%20H.%20Deng%2C%20L.%20Convolutional%20neural%20networks%20for%20speech%20recognition%2C%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abdel-Hamid%2C%20O.%20Mohamed%2C%20A.-r%20Jiang%2C%20H.%20Deng%2C%20L.%20Convolutional%20neural%20networks%20for%20speech%20recognition%2C%202014"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Y. Miao, L. Yu, and P. Blunsom, \u201cNeural variational inference for text processing,\u201d in International Conference on Machine Learning, 2016, pp. 1727\u20131736.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Miao%2C%20Y.%20Yu%2C%20L.%20Blunsom%2C%20P.%20Neural%20variational%20inference%20for%20text%20processing%2C%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Miao%2C%20Y.%20Yu%2C%20L.%20Blunsom%2C%20P.%20Neural%20variational%20inference%20for%20text%20processing%2C%202016"
+        },
+        {
+            "id": "6",
+            "entry": "[6] R. Johnson and T. Zhang, \u201cEffective use of word order for text categorization with convolutional neural networks,\u201d arXiv preprint arXiv:1412.1058, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.1058"
+        },
+        {
+            "id": "7",
+            "entry": "[7] A. Krizhevsky, V. Nair, and G. Hinton, \u201cThe CIFAR-10 and CIFAR-100 dataset,\u201d 2009. [Online]. Available: https://www.cs.toronto.edu/~kriz/cifar.html",
+            "url": "https://www.cs.toronto.edu/~kriz/cifar.html"
+        },
+        {
+            "id": "8",
+            "entry": "[8] J. Deng, W. Dong, R. Socher, L.-J. Li, K. Li, and L. Fei-Fei, \u201cImagenet: A large-scale hierarchical image database,\u201d in Proc. IEEE conf. Computer Vision and Pattern Recognition (CVPR), 2009, pp. 248\u2013255.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Deng%2C%20J.%20Dong%2C%20W.%20Socher%2C%20R.%20Li%2C%20L.-J.%20Imagenet%3A%20A%20large-scale%20hierarchical%20image%20database%2C%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Deng%2C%20J.%20Dong%2C%20W.%20Socher%2C%20R.%20Li%2C%20L.-J.%20Imagenet%3A%20A%20large-scale%20hierarchical%20image%20database%2C%202009"
+        },
+        {
+            "id": "9",
+            "entry": "[9] R. Mcdonald, M. Mohri, N. Silberman, D. Walker, and G. S. Mann, \u201cEfficient large-scale distributed training of conditional maximum entropy models,\u201d in NIPS, 2009, pp. 1231\u20131239.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mcdonald%2C%20R.%20Mohri%2C%20M.%20Silberman%2C%20N.%20Walker%2C%20D.%20%E2%80%9CEfficient%20large-scale%20distributed%20training%20of%20conditional%20maximum%20entropy%20models%2C%E2%80%9D%20in%20NIPS%202009"
+        },
+        {
+            "id": "10",
+            "entry": "[10] M. Zinkevich, M. Weimer, L. Li, and A. J. Smola, \u201cParallelized stochastic gradient descent,\u201d in NIPS, 2010, pp. 2595\u20132603.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zinkevich%2C%20M.%20Weimer%2C%20M.%20Li%2C%20L.%20Smola%2C%20A.J.%20%E2%80%9CParallelized%20stochastic%20gradient%20descent%2C%E2%80%9D%20in%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zinkevich%2C%20M.%20Weimer%2C%20M.%20Li%2C%20L.%20Smola%2C%20A.J.%20%E2%80%9CParallelized%20stochastic%20gradient%20descent%2C%E2%80%9D%20in%202010"
+        },
+        {
+            "id": "11",
+            "entry": "[11] R. McDonald, K. Hall, and G. Mann, \u201cDistributed training strategies for the structured perceptron,\u201d in NAACL. Association for Computational Linguistics, 2010, pp. 456\u2013464.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=McDonald%2C%20R.%20Hall%2C%20K.%20Mann%2C%20G.%20%E2%80%9CDistributed%20training%20strategies%20for%20the%20structured%20perceptron%2C%E2%80%9D%20in%20NAACL%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=McDonald%2C%20R.%20Hall%2C%20K.%20Mann%2C%20G.%20%E2%80%9CDistributed%20training%20strategies%20for%20the%20structured%20perceptron%2C%E2%80%9D%20in%20NAACL%202010"
+        },
+        {
+            "id": "12",
+            "entry": "[12] R. Gemulla, E. Nijkamp, P. J. Haas, and Y. Sismanis, \u201cLarge-scale matrix factorization with distributed stochastic gradient descent,\u201d in Proceedings of the 17th ACM SIGKDD international conference on Knowledge discovery and data mining. ACM, 2011, pp. 69\u201377.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gemulla%2C%20R.%20Nijkamp%2C%20E.%20Haas%2C%20P.J.%20Sismanis%2C%20Y.%20Large-scale%20matrix%20factorization%20with%20distributed%20stochastic%20gradient%20descent%2C%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gemulla%2C%20R.%20Nijkamp%2C%20E.%20Haas%2C%20P.J.%20Sismanis%2C%20Y.%20Large-scale%20matrix%20factorization%20with%20distributed%20stochastic%20gradient%20descent%2C%202011"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Y. Zhuang, W.-S. Chin, Y.-C. Juan, and C.-J. Lin, \u201cA fast parallel sgd for matrix factorization in shared memory systems,\u201d in Proceedings of the 7th ACM conference on Recommender systems. ACM, 2013, pp. 249\u2013256.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhuang%2C%20Y.%20Chin%2C%20W.-S.%20Juan%2C%20Y.-C.%20Lin%2C%20C.-J.%20A%20fast%20parallel%20sgd%20for%20matrix%20factorization%20in%20shared%20memory%20systems%2C%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhuang%2C%20Y.%20Chin%2C%20W.-S.%20Juan%2C%20Y.-C.%20Lin%2C%20C.-J.%20A%20fast%20parallel%20sgd%20for%20matrix%20factorization%20in%20shared%20memory%20systems%2C%202013"
+        },
+        {
+            "id": "14",
+            "entry": "[14] M. Li, D. G. Andersen, J. W. Park, A. J. Smola, A. Ahmed, V. Josifovski, J. Long, E. J. Shekita, and B.-Y. Su, \u201cScaling distributed machine learning with the parameter server,\u201d in OSDI, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20M.%20Andersen%2C%20D.G.%20Park%2C%20J.W.%20Smola%2C%20A.J.%20%E2%80%9CScaling%20distributed%20machine%20learning%20with%20the%20parameter%20server%2C%E2%80%9D%20in%20OSDI%202014"
+        },
+        {
+            "id": "15",
+            "entry": "[15] M. Li, D. G. Andersen, A. J. Smola, and K. Yu, \u201cCommunication efficient distributed machine learning with the parameter server,\u201d in NIPS, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20M.%20Andersen%2C%20D.G.%20Smola%2C%20A.J.%20Yu%2C%20K.%20%E2%80%9CCommunication%20efficient%20distributed%20machine%20learning%20with%20the%20parameter%20server%2C%E2%80%9D%20in%20NIPS%202014"
+        },
+        {
+            "id": "16",
+            "entry": "[16] F. N. Iandola, K. Ashraf, M. W. Moskewicz, and K. Keutzer, \u201cFirecaffe: near-linear acceleration of deep neural network training on compute clusters,\u201d in CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Iandola%2C%20F.N.%20Ashraf%2C%20K.%20Moskewicz%2C%20M.W.%20Keutzer%2C%20K.%20%E2%80%9CFirecaffe%3A%20near-linear%20acceleration%20of%20deep%20neural%20network%20training%20on%20compute%20clusters%2C%E2%80%9D%20in%20CVPR%202016"
+        },
+        {
+            "id": "17",
+            "entry": "[17] J. Langford, A. J. Smola, and M. Zinkevich, \u201cSlow learners are fast,\u201d in Proc. Advances in Neural Information Processing Systems (NIPS), 2009, pp. 2331\u20132339.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Langford%2C%20J.%20Smola%2C%20A.J.%20Zinkevich%2C%20M.%20Slow%20learners%20are%20fast%2C%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Langford%2C%20J.%20Smola%2C%20A.J.%20Zinkevich%2C%20M.%20Slow%20learners%20are%20fast%2C%202009"
+        },
+        {
+            "id": "18",
+            "entry": "[18] B. Recht, C. Re, S. Wright, and F. Niu, \u201cHogwild: A lock-free approach to parallelizing stochastic gradient descent,\u201d in Proc. Advances in Neural Information Processing Systems (NIPS), 2011, pp. 693\u2013701.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Recht%2C%20B.%20Re%2C%20C.%20Wright%2C%20S.%20Niu%2C%20F.%20Hogwild%3A%20A%20lock-free%20approach%20to%20parallelizing%20stochastic%20gradient%20descent%2C%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Recht%2C%20B.%20Re%2C%20C.%20Wright%2C%20S.%20Niu%2C%20F.%20Hogwild%3A%20A%20lock-free%20approach%20to%20parallelizing%20stochastic%20gradient%20descent%2C%202011"
+        },
+        {
+            "id": "19",
+            "entry": "[19] A. Agarwal and J. C. Duchi, \u201cDistributed delayed stochastic optimization,\u201d in NIPS, 2011, pp. 873\u2013881.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Agarwal%2C%20A.%20Duchi%2C%20J.C.%20%E2%80%9CDistributed%20delayed%20stochastic%20optimization%2C%E2%80%9D%20in%20NIPS%202011"
+        },
+        {
+            "id": "20",
+            "entry": "[20] J. Dean, G. Corrado, R. Monga, K. Chen, M. Devin, M. Mao, A. Senior, P. Tucker, K. Yang, Q. V. Le et al., \u201cLarge scale distributed deep networks,\u201d in NIPS, 2012, pp. 1223\u20131231.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dean%2C%20J.%20Corrado%2C%20G.%20Monga%2C%20R.%20Chen%2C%20K.%20%E2%80%9CLarge%20scale%20distributed%20deep%20networks%2C%E2%80%9D%20in%20NIPS%202012"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Q. Ho, J. Cipar, H. Cui, S. Lee, J. K. Kim, P. B. Gibbons, G. A. Gibson, G. R. Ganger, and E. P. Xing, \u201cMore effective distributed ml via a stale synchronous parallel parameter server.\u201d in NIPS, 2013, pp. 1223\u20131231.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ho%2C%20Q.%20Cipar%2C%20J.%20Cui%2C%20H.%20Lee%2C%20S.%20%E2%80%9CMore%20effective%20distributed%20ml%20via%20a%20stale%20synchronous%20parallel%20parameter%20server.%E2%80%9D%20in%20NIPS%202013"
+        },
+        {
+            "id": "22",
+            "entry": "[22] X. Lian, W. Zhang, C. Zhang, and J. Liu, \u201cAsynchronous decentralized parallel stochastic gradient descent,\u201d 2018, cite arxiv:1710.06952. [Online]. Available: https://arxiv.org/abs/1710.06952",
+            "url": "https://arxiv.org/abs/1710.06952",
+            "arxiv_url": "https://arxiv.org/pdf/1710.06952"
+        },
+        {
+            "id": "23",
+            "entry": "[23] F. Seide, H. Fu, J. Droppo, G. Li, and D. Yu, \u201c1-bit stochastic gradient descent and its application to data-parallel distributed training of speech dnns,\u201d in Fifteenth Annual Conference of the International Speech Communication Association, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Seide%2C%20F.%20Fu%2C%20H.%20Droppo%2C%20J.%20Li%2C%20G.%201-bit%20stochastic%20gradient%20descent%20and%20its%20application%20to%20data-parallel%20distributed%20training%20of%20speech%20dnns%2C%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Seide%2C%20F.%20Fu%2C%20H.%20Droppo%2C%20J.%20Li%2C%20G.%201-bit%20stochastic%20gradient%20descent%20and%20its%20application%20to%20data-parallel%20distributed%20training%20of%20speech%20dnns%2C%202014"
+        },
+        {
+            "id": "24",
+            "entry": "[24] D. Alistarh, D. Grubic, J. Li, R. Tomioka, and M. Vojnovic, \u201cQSGD: Communication-efficient SGD via gradient quantization and encoding,\u201d in Proc. Advances in Neural Information Processing Systems (NIPS), 2017, pp. 1707\u20131718.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Alistarh%2C%20D.%20Grubic%2C%20D.%20Li%2C%20J.%20Tomioka%2C%20R.%20QSGD%3A%20Communication-efficient%20SGD%20via%20gradient%20quantization%20and%20encoding%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Alistarh%2C%20D.%20Grubic%2C%20D.%20Li%2C%20J.%20Tomioka%2C%20R.%20QSGD%3A%20Communication-efficient%20SGD%20via%20gradient%20quantization%20and%20encoding%2C%202017"
+        },
+        {
+            "id": "25",
+            "entry": "[25] N. Dryden, T. Moon, S. A. Jacobs, and B. Van Essen, \u201cCommunication quantization for data-parallel training of deep neural networks,\u201d in Workshop on Machine Learning in HPC Environments (MLHPC). IEEE, 2016, pp. 1\u20138.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dryden%2C%20N.%20Moon%2C%20T.%20Jacobs%2C%20S.A.%20Essen%2C%20B.Van%20Communication%20quantization%20for%20data-parallel%20training%20of%20deep%20neural%20networks%2C%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dryden%2C%20N.%20Moon%2C%20T.%20Jacobs%2C%20S.A.%20Essen%2C%20B.Van%20Communication%20quantization%20for%20data-parallel%20training%20of%20deep%20neural%20networks%2C%202016"
+        },
+        {
+            "id": "26",
+            "entry": "[26] W. Wen, C. Xu, F. Yan, C. Wu, Y. Wang, Y. Chen, and H. Li, \u201cTerngrad: Ternary gradients to reduce communication in distributed deep learning,\u201d NIPS, pp. 1508\u20131518, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wen%2C%20W.%20Xu%2C%20C.%20Yan%2C%20F.%20Wu%2C%20C.%20Terngrad%3A%20Ternary%20gradients%20to%20reduce%20communication%20in%20distributed%20deep%20learning%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wen%2C%20W.%20Xu%2C%20C.%20Yan%2C%20F.%20Wu%2C%20C.%20Terngrad%3A%20Ternary%20gradients%20to%20reduce%20communication%20in%20distributed%20deep%20learning%2C%202017"
+        },
+        {
+            "id": "27",
+            "entry": "[27] S. Zhou, Y. Wu, Z. Ni, X. Zhou, H. Wen, and Y. Zou, \u201cDorefa-net: Training low bitwidth convolutional neural networks with low bitwidth gradients,\u201d arXiv preprint arXiv:1606.06160, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.06160"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Y. Lin, S. Han, H. Mao, Y. Wang, and W. J. Dally, \u201cDeep gradient compression: Reducing the communication bandwidth for distributed training,\u201d in ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20Y.%20Han%2C%20S.%20Mao%2C%20H.%20Wang%2C%20Y.%20%E2%80%9CDeep%20gradient%20compression%3A%20Reducing%20the%20communication%20bandwidth%20for%20distributed%20training%2C%E2%80%9D%20in%20ICLR%202018"
+        },
+        {
+            "id": "29",
+            "entry": "[29] P. Patarasuk and X. Yuan, \u201cBandwidth optimal all-reduce algorithms for clusters of workstations,\u201d Journal of Parallel and Distributed Computing, vol. 69, no. 2, pp. 117\u2013124, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Patarasuk%2C%20P.%20Yuan%2C%20X.%20Bandwidth%20optimal%20all-reduce%20algorithms%20for%20clusters%20of%20workstations%2C%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Patarasuk%2C%20P.%20Yuan%2C%20X.%20Bandwidth%20optimal%20all-reduce%20algorithms%20for%20clusters%20of%20workstations%2C%202009"
+        },
+        {
+            "id": "30",
+            "entry": "[30] R. Thakur, R. Rabenseifner, and W. Gropp, \u201cOptimization of collective communication operations in mpich.\u201d IJHPCA, vol. 19, pp. 49\u201366, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Thakur%2C%20R.%20Rabenseifner%2C%20R.%20Gropp%2C%20W.%20Optimization%20of%20collective%20communication%20operations%20in%20mpich.%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Thakur%2C%20R.%20Rabenseifner%2C%20R.%20Gropp%2C%20W.%20Optimization%20of%20collective%20communication%20operations%20in%20mpich.%202005"
+        },
+        {
+            "id": "31",
+            "entry": "[31] P. Goyal, P. Doll\u00e1r, R. Girshick, P. Noordhuis, L. Wesolowski, A. Kyrola, A. Tulloch, Y. Jia, and K. He, \u201cAccurate, large minibatch sgd: training imagenet in 1 hour,\u201d arXiv preprint arXiv:1706.02677, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.02677"
+        },
+        {
+            "id": "32",
+            "entry": "[32] A. Gibiansky, \u201cBringing HPC Techniques to Deep Learning,\u201d http://research.baidu.com/bringing-hpc-techniques-deep-learning/, 2017, [Online; accessed October 26, 2018]. ",
+            "url": "http://research.baidu.com/bringing-hpc-techniques-deep-learning/"
+        }
+    ]
+}

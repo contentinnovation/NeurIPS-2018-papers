@@ -1,0 +1,233 @@
+{
+    "filename": "7863-tangent-automatic-differentiation-using-source-code-transformation-for-dynamically-typed-array-programming.pdf",
+    "metadata": {
+        "title": "Tangent: Automatic differentiation using source-code transformation for dynamically typed array programming",
+        "author": "Bart van Merrienboer, Dan Moldovan, Alexander Wiltschko",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7863-tangent-automatic-differentiation-using-source-code-transformation-for-dynamically-typed-array-programming.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "The need to efficiently calculate firstand higher-order derivatives of increasingly complex models expressed in Python has stressed or exceeded the capabilities of available tools. In this work, we explore techniques from the field of automatic differentiation (AD) that can give researchers expressive power, performance and strong usability. These include source-code transformation (SCT), flexible gradient surgery, efficient in-place array operations, and higher-order derivatives. We implement and demonstrate these ideas in the Tangent software library for Python, the first AD framework for a dynamic language that uses SCT."
+    },
+    "keywords": [
+        {
+            "term": "recurrent neural networks",
+            "url": "https://en.wikipedia.org/wiki/recurrent_neural_networks"
+        },
+        {
+            "term": "control-flow graph",
+            "url": "https://en.wikipedia.org/wiki/control-flow_graph"
+        },
+        {
+            "term": "mathematical expression",
+            "url": "https://en.wikipedia.org/wiki/mathematical_expression"
+        },
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "machine learning",
+            "url": "https://en.wikipedia.org/wiki/machine_learning"
+        },
+        {
+            "term": "source code transformation",
+            "url": "https://en.wikipedia.org/wiki/source_code_transformation"
+        },
+        {
+            "term": "dead code elimination",
+            "url": "https://en.wikipedia.org/wiki/dead_code_elimination"
+        },
+        {
+            "term": "Automatic differentiation",
+            "url": "https://en.wikipedia.org/wiki/Automatic_differentiation"
+        },
+        {
+            "term": "abstract syntax tree",
+            "url": "https://en.wikipedia.org/wiki/abstract_syntax_tree"
+        }
+    ],
+    "highlights": [
+        "Automatic differentiation (AD) is a set of techniques to evaluate derivatives of mathematical functions defined as programs [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>], and is heavily used in machine learning [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>]",
+        "We show here that it is possible to offer the programming flexibility usually thought to be exclusive to OO-based tools in an source code transformation framework",
+        "Automatic differentiation is different from symbolic differentiation and numerical differentiation",
+        "In order to perform dead code elimination effectively on the generated code, our dataflow analysis follows variables uses through their respective pushes and pops in the primal and adjoint code",
+        "In this work we introduced the Automatic differentiation library Tangent",
+        "Machine learning models are natural and easy to express and debug in Tangent using many features that are not available in other frameworks e.g. mutable arrays, inspectable derivative code, and modifying gradients by injecting arbitrary code in the backward pass.\n3For an up to date overview of supported abstract syntax tree nodes please refer to the code in tangent/fence.py"
+    ],
+    "key_statements": [
+        "Automatic differentiation (AD) is a set of techniques to evaluate derivatives of mathematical functions defined as programs [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>], and is heavily used in machine learning [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>]",
+        "We show here that it is possible to offer the programming flexibility usually thought to be exclusive to OO-based tools in an source code transformation framework",
+        "Automatic differentiation is different from symbolic differentiation and numerical differentiation",
+        "Tangent will generate code that uses type checking to ensure that the correct adjoint calculation is performed based on the runtime types",
+        "In order to perform dead code elimination effectively on the generated code, our dataflow analysis follows variables uses through their respective pushes and pops in the primal and adjoint code",
+        "In this work we introduced the Automatic differentiation library Tangent",
+        "Machine learning models are natural and easy to express and debug in Tangent using many features that are not available in other frameworks e.g. mutable arrays, inspectable derivative code, and modifying gradients by injecting arbitrary code in the backward pass.\n3For an up to date overview of supported abstract syntax tree nodes please refer to the code in tangent/fence.py"
+    ],
+    "summary": [
+        "Automatic differentiation (AD) is a set of techniques to evaluate derivatives of mathematical functions defined as programs [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>], and is heavily used in machine learning [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>].",
+        "Tangent has mutable multidimensional arrays as first class objects, implemented using persistent data structures for performance in the context of reverse mode AD.",
+        "As a consequence of performing SCT directly on the Python source code, the generated programs can be run, inspected, profiled, and debugged with standard Python tools.",
+        "Listing 3: Source code of the gradient of def f(x): return x * x in Tangent.",
+        "Tangent provides this functionality as well, but uses Python\u2019s context manager syntax to introduce a second, novel way of allowing the user to inject arbitrary code into the gradient computation.",
+        "To support dynamic typing and array programming while maintaining efficiency, Tangent relies on a novel combination of multiple dispatch, lazy evaluation, persistent data structures, and static optimizations.",
+        "Instead of enforcing static types, Tangent embraces late binding and generates adjoints that will use the runtime types to determine what derivative computation to execute.",
+        "Tangent will generate code that uses type checking to ensure that the correct adjoint calculation is performed based on the runtime types.",
+        "Tangent includes a small Python optimizing compiler toolchain which constructs a control-flow graph (CFG) on which forward dataflow analysis is performed.",
+        "Tangent uses this to perform dead code elimination on generated adjoints.",
+        "Listing 6: A simple example of Tangent\u2019s optimization capabilities as applied to the gradient function of def f(x): y = x; return y.",
+        "Note that the original transformation includes the writing and reading of y to and from the tape, and contains dead code in initializing the gradient of y which is never returned.",
+        "In order to perform DCE effectively on the generated code, our dataflow analysis follows variables uses through their respective pushes and pops in the primal and adjoint code.",
+        "To deal with mutability in full generality Tangent introduces a persistent array data structure with support for index assignment as well as inserting and deleting rows at the end.",
+        "Machine learning models are natural and easy to express and debug in Tangent using many features that are not available in other frameworks e.g. mutable arrays, inspectable derivative code, and modifying gradients by injecting arbitrary code in the backward pass.",
+        "Instead of an ML-framework, Tangent can be seen as the addition of the gradient operator to the Python language, without the need for metaprogramming or separate derivative interpreters (OO)."
+    ],
+    "headline": "We explore techniques from the field of automatic differentiation  that can give researchers expressive power, performance and strong usability",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Mart\u00edn Abadi, Paul Barham, Jianmin Chen, Zhifeng Chen, Andy Davis, Jeffrey Dean, Matthieu Devin, Sanjay Ghemawat, Geoffrey Irving, Michael Isard, et al. Tensorflow: A system for large-scale machine learning. In OSDI, volume 16, pages 265\u2013283, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abadi%2C%20Mart%C3%ADn%20Barham%2C%20Paul%20Chen%2C%20Jianmin%20Chen%2C%20Zhifeng%20Tensorflow%3A%20A%20system%20for%20large-scale%20machine%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abadi%2C%20Mart%C3%ADn%20Barham%2C%20Paul%20Chen%2C%20Jianmin%20Chen%2C%20Zhifeng%20Tensorflow%3A%20A%20system%20for%20large-scale%20machine%20learning%202016"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Rami Al-Rfou, Guillaume Alain, Amjad Almahairi, Christof Angermueller, Dzmitry Bahdanau, Nicolas Ballas, Fr\u00e9d\u00e9ric Bastien, Justin Bayer, Anatoly Belikov, Alexander Belopolsky, et al. Theano: A python framework for fast computation of mathematical expressions. arXiv preprint arXiv:1605.02688, 472:473, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1605.02688"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Atilim Gunes Baydin, Barak A Pearlmutter, Alexey Andreyevich Radul, and Jeffrey Mark Siskind. Automatic differentiation in machine learning: a survey. arXiv preprint arXiv:1502.05767, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1502.05767"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Yoshua Bengio, Nicholas L\u00e9onard, and Aaron Courville. Estimating or propagating gradients through stochastic neurons for conditional computation. arXiv preprint arXiv:1308.3432, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1308.3432"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Christian H Bischof and H Martin B\u00fccker. Computing derivatives of computer programs. Technical report, Argonne National Lab., IL (US), 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bischof%2C%20Christian%20H.%20B%C3%BCcker%2C%20H.Martin%20Computing%20derivatives%20of%20computer%20programs%202000"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Jacob Buckman and Graham Neubig. Neural lattice language models. arXiv preprint arXiv:1803.05071, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.05071"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Tianqi Chen, Thierry Moreau, Ziheng Jiang, Lianmin Zheng, Eddie Yan, Haichen Shen, Meghan Cowan, Leyuan Wang, Yuwei Hu, Luis Ceze, et al. TVM: An automated end-to-end optimizing compiler for deep learning. In 13th USENIX Symposium on Operating Systems Design and Implementation (OSDI 18), pages 578\u2013594. USENIX Association, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Tianqi%20Moreau%2C%20Thierry%20Jiang%2C%20Ziheng%20Zheng%2C%20Lianmin%20TVM%3A%20An%20automated%20end-to-end%20optimizing%20compiler%20for%20deep%20learning%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Tianqi%20Moreau%2C%20Thierry%20Jiang%2C%20Ziheng%20Zheng%2C%20Lianmin%20TVM%3A%20An%20automated%20end-to-end%20optimizing%20compiler%20for%20deep%20learning%202018"
+        },
+        {
+            "id": "8",
+            "entry": "[8] James R Driscoll, Neil Sarnak, Daniel D Sleator, and Robert E Tarjan. Making data structures persistent. Journal of computer and system sciences, 38(1):86\u2013124, 1989.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Driscoll%2C%20James%20R.%20Sarnak%2C%20Neil%20Sleator%2C%20Daniel%20D.%20Tarjan%2C%20Robert%20E.%20Making%20data%20structures%20persistent%201989",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Driscoll%2C%20James%20R.%20Sarnak%2C%20Neil%20Sleator%2C%20Daniel%20D.%20Tarjan%2C%20Robert%20E.%20Making%20data%20structures%20persistent%201989"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Yaroslav Ganin, Evgeniya Ustinova, Hana Ajakan, Pascal Germain, Hugo Larochelle, Fran\u00e7ois Laviolette, Mario Marchand, and Victor Lempitsky. Domain-adversarial training of neural networks. The Journal of Machine Learning Research, 17(1):2096\u20132030, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ganin%2C%20Yaroslav%20Ustinova%2C%20Evgeniya%20Ajakan%2C%20Hana%20Germain%2C%20Pascal%20Domain-adversarial%20training%20of%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ganin%2C%20Yaroslav%20Ustinova%2C%20Evgeniya%20Ajakan%2C%20Hana%20Germain%2C%20Pascal%20Domain-adversarial%20training%20of%20neural%20networks%202016"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Andreas Griewank and Andrea Walther. Evaluating derivatives: principles and techniques of algorithmic differentiation, volume 105.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Griewank%2C%20Andreas%20Walther%2C%20Andrea%20Evaluating%20derivatives%3A%20principles%20and%20techniques%20of%20algorithmic%20differentiation"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Serge Guelton, Pierrick Brunet, Mehdi Amini, Adrien Merlini, Xavier Corbillon, and Alan Raynaud. Pythran: Enabling static optimization of scientific python programs. Computational Science & Discovery, 8(1):014001, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Guelton%2C%20Serge%20Brunet%2C%20Pierrick%20Amini%2C%20Mehdi%20Merlini%2C%20Adrien%20Pythran%3A%20Enabling%20static%20optimization%20of%20scientific%20python%20programs%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Guelton%2C%20Serge%20Brunet%2C%20Pierrick%20Amini%2C%20Mehdi%20Merlini%2C%20Adrien%20Pythran%3A%20Enabling%20static%20optimization%20of%20scientific%20python%20programs%202015"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Nicolas Heess, Gregory Wayne, David Silver, Tim Lillicrap, Tom Erez, and Yuval Tassa. Learning continuous control policies by stochastic value gradients. In Advances in Neural Information Processing Systems, pages 2944\u20132952, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Heess%2C%20Nicolas%20Wayne%2C%20Gregory%20Silver%2C%20David%20Lillicrap%2C%20Tim%20Learning%20continuous%20control%20policies%20by%20stochastic%20value%20gradients%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Heess%2C%20Nicolas%20Wayne%2C%20Gregory%20Silver%2C%20David%20Lillicrap%2C%20Tim%20Learning%20continuous%20control%20policies%20by%20stochastic%20value%20gradients%202015"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Eric Jang, Shixiang Gu, and Ben Poole. Categorical reparameterization with gumbel-softmax. arXiv preprint arXiv:1611.01144, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.01144"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Siu Kwan Lam, Antoine Pitrou, and Stanley Seibert. Numba: A LLVM-based Python JIT compiler. In Proceedings of the Second Workshop on the LLVM Compiler Infrastructure in HPC, page 7. ACM, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lam%2C%20Siu%20Kwan%20Pitrou%2C%20Antoine%20Seibert%2C%20Stanley%20Numba%3A%20A%20LLVM-based%20Python%20JIT%20compiler%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lam%2C%20Siu%20Kwan%20Pitrou%2C%20Antoine%20Seibert%2C%20Stanley%20Numba%3A%20A%20LLVM-based%20Python%20JIT%20compiler%202015"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Timothy P Lillicrap, Daniel Cownden, Douglas B Tweed, and Colin J Akerman. Random feedback weights support learning in deep neural networks. arXiv preprint arXiv:1411.0247, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1411.0247"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Dougal Maclaurin, David Duvenaud, and Ryan P Adams. Autograd: Effortless gradients in numpy. In ICML 2015 AutoML Workshop, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Maclaurin%2C%20Dougal%20Duvenaud%2C%20David%20Adams%2C%20Ryan%20P.%20Autograd%3A%20Effortless%20gradients%20in%20numpy%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Maclaurin%2C%20Dougal%20Duvenaud%2C%20David%20Adams%2C%20Ryan%20P.%20Autograd%3A%20Effortless%20gradients%20in%20numpy%202015"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Uwe Naumann. The art of differentiating computer programs: an introduction to algorithmic differentiation, volume 24.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Naumann%2C%20Uwe%20The%20art%20of%20differentiating%20computer%20programs%3A%20an%20introduction%20to%20algorithmic%20differentiation"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Arild N\u00f8kland. Direct feedback alignment provides learning in deep neural networks. In Advances in Neural Information Processing Systems, pages 1037\u20131045, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=N%C3%B8kland%2C%20Arild%20Direct%20feedback%20alignment%20provides%20learning%20in%20deep%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=N%C3%B8kland%2C%20Arild%20Direct%20feedback%20alignment%20provides%20learning%20in%20deep%20neural%20networks%202016"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Travis E Oliphant. A guide to NumPy, volume 1. Trelgol Publishing USA, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Oliphant%2C%20Travis%20E.%20A%20guide%20to%20NumPy%2C%20volume%201%202006"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Razvan Pascanu, Tomas Mikolov, and Yoshua Bengio. On the difficulty of training recurrent neural networks. In International Conference on Machine Learning, pages 1310\u20131318, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pascanu%2C%20Razvan%20Mikolov%2C%20Tomas%20Bengio%2C%20Yoshua%20On%20the%20difficulty%20of%20training%20recurrent%20neural%20networks%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pascanu%2C%20Razvan%20Mikolov%2C%20Tomas%20Bengio%2C%20Yoshua%20On%20the%20difficulty%20of%20training%20recurrent%20neural%20networks%202013"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Adam Paszke, Sam Gross, Soumith Chintala, Gregory Chanan, Edward Yang, Zachary DeVito, Zeming Lin, Alban Desmaison, Luca Antiga, and Adam Lerer. Automatic differentiation in pytorch. NIPS 2017 Autodiff Workshop, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Paszke%2C%20Adam%20Gross%2C%20Sam%20Chintala%2C%20Soumith%20Chanan%2C%20Gregory%20Automatic%20differentiation%20in%20pytorch%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Paszke%2C%20Adam%20Gross%2C%20Sam%20Chintala%2C%20Soumith%20Chanan%2C%20Gregory%20Automatic%20differentiation%20in%20pytorch%202017"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Jack Rae, Jonathan J Hunt, Ivo Danihelka, Timothy Harley, Andrew W Senior, Gregory Wayne, Alex Graves, and Tim Lillicrap. Scaling memory-augmented neural networks with sparse reads and writes. In Advances in Neural Information Processing Systems, pages 3621\u20133629, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rae%2C%20Jack%20Hunt%2C%20Jonathan%20J.%20Danihelka%2C%20Ivo%20Harley%2C%20Timothy%20Scaling%20memory-augmented%20neural%20networks%20with%20sparse%20reads%20and%20writes%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rae%2C%20Jack%20Hunt%2C%20Jonathan%20J.%20Danihelka%2C%20Ivo%20Harley%2C%20Timothy%20Scaling%20memory-augmented%20neural%20networks%20with%20sparse%20reads%20and%20writes%202016"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Jeffrey Mark Siskind and Barak A Pearlmutter. Perturbation confusion and referential transparency: Correct functional implementation of forward-mode ad. 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Siskind%2C%20Jeffrey%20Mark%20Pearlmutter%2C%20Barak%20A.%20Perturbation%20confusion%20and%20referential%20transparency%3A%20Correct%20functional%20implementation%20of%20forward-mode%20ad%202005"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Seiya Tokui, Kenta Oono, Shohei Hido, and Justin Clayton. Chainer: a next-generation open source framework for deep learning. In NIPS 2015 LearningSys Workshop, volume 5, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tokui%2C%20Seiya%20Oono%2C%20Kenta%20Hido%2C%20Shohei%20Clayton%2C%20Justin%20Chainer%3A%20a%20next-generation%20open%20source%20framework%20for%20deep%20learning%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tokui%2C%20Seiya%20Oono%2C%20Kenta%20Hido%2C%20Shohei%20Clayton%2C%20Justin%20Chainer%3A%20a%20next-generation%20open%20source%20framework%20for%20deep%20learning%202015"
+        },
+        {
+            "id": "25",
+            "entry": "[25] A\u00e4ron van den Oord, Oriol Vinyals, and Koray Kavukcuoglu. Neural discrete representation learning. CoRR, abs/1711.00937, 2017. URL http://arxiv.org/abs/1711.00937.",
+            "url": "http://arxiv.org/abs/1711.00937",
+            "arxiv_url": "https://arxiv.org/pdf/1711.00937"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Ronald J Williams and Jing Peng. An efficient gradient-based algorithm for on-line training of recurrent network trajectories. Neural computation, 2(4):490\u2013501, 1990. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%2C%20Ronald%20J.%20Peng%2C%20Jing%20An%20efficient%20gradient-based%20algorithm%20for%20on-line%20training%20of%20recurrent%20network%20trajectories%201990",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Williams%2C%20Ronald%20J.%20Peng%2C%20Jing%20An%20efficient%20gradient-based%20algorithm%20for%20on-line%20training%20of%20recurrent%20network%20trajectories%201990"
+        }
+    ]
+}

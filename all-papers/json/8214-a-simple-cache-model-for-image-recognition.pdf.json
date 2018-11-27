@@ -1,0 +1,161 @@
+{
+    "filename": "8214-a-simple-cache-model-for-image-recognition.pdf",
+    "metadata": {
+        "title": "A Simple Cache Model for Image Recognition",
+        "author": "Emin Orhan",
+        "date": 2017,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8214-a-simple-cache-model-for-image-recognition.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Training large-scale image recognition models is computationally expensive. This raises the question of whether there might be simple ways to improve the test performance of an already trained model without having to re-train or fine-tune it with new data. Here, we show that, surprisingly, this is indeed possible. The key observation we make is that the layers of a deep network close to the output layer contain independent, easily extractable class-relevant information that is not contained in the output layer itself. We propose to extract this extra class-relevant information using a simple key-value cache memory to improve the classification performance of the model at test time. Our cache memory is directly inspired by a similar cache model previously proposed for language modeling (Grave et al., 2017). This cache component does not require any training or fine-tuning; it can be applied to any pre-trained model and, by properly setting only two hyper-parameters, leads to significant improvements in its classification performance. Improvements are observed across several architectures and datasets. In the cache component, using features extracted from layers close to the output (but not from the output layer itself) as keys leads to the largest improvements. Concatenating features from multiple layers to form keys can further improve performance over using single-layer features as keys. The cache component also has a regularizing effect, a simple consequence of which is that it substantially increases the robustness of models against adversarial attacks."
+    },
+    "keywords": [
+        {
+            "term": "cache memory",
+            "url": "https://en.wikipedia.org/wiki/cache_memory"
+        },
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "fine tuning",
+            "url": "https://en.wikipedia.org/wiki/fine_tuning"
+        },
+        {
+            "term": "key value",
+            "url": "https://en.wikipedia.org/wiki/key_value"
+        },
+        {
+            "term": "k-nearest neighbor",
+            "url": "https://en.wikipedia.org/wiki/k-nearest_neighbor"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Deep neural networks are currently the state of the art models in a wide range of image recognition problems",
+        "We propose to extract this extra class-relevant information with a simple key-value cache memory that is directly inspired by Grave et al [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>], where a similar cache model was introduced in the context of language modeling",
+        "Our cache component is conceptually very similar to the cache component proposed by Grave et al [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>] in the context of language modeling",
+        "To determine whether adding a cache component would impede the transferability of adversarial examples, we presented the adversarial examples generated for the baseline ResNet32 model above to ResNet20 models with or without a cache component",
+        "We proposed a simple method to improve the classification performance of large-scale image recognition models at test time",
+        "Our method relies on the observation that higher layers of deep neural networks contain independent class-relevant information that is not already contained in the output layer of the network and this extra information is in an extractable format"
+    ],
+    "key_statements": [
+        "Deep neural networks are currently the state of the art models in a wide range of image recognition problems",
+        "We propose to extract this extra class-relevant information with a simple key-value cache memory that is directly inspired by Grave et al [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>], where a similar cache model was introduced in the context of language modeling",
+        "Our cache component is conceptually very similar to the cache component proposed by Grave et al [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>] in the context of language modeling",
+        "Using the output layer itself in the cache component resulted in test performance comparable to that of the baseline model",
+        "To determine whether adding a cache component would impede the transferability of adversarial examples, we presented the adversarial examples generated for the baseline ResNet32 model above to ResNet20 models with or without a cache component",
+        "As predicted, both cache models lead to an overall decrease in the Jacobian norm, ||J(x)||, averaged over all test points (Figure 4a, inset)",
+        "We proposed a simple method to improve the classification performance of large-scale image recognition models at test time",
+        "Our method relies on the observation that higher layers of deep neural networks contain independent class-relevant information that is not already contained in the output layer of the network and this extra information is in an extractable format",
+        "There is no temporal context in these tasks, a similar \u201crare features\u201d problem arises in image recognition too: if correct classification of an item depends on the detection of a set of distinctive features that do not occur very frequently in the training data, standard image recognition models trained end-to-end with gradient descent might have a difficulty, since these models would typically require a large enough number of examples to learn the association between those features and the correct label",
+        "We have only considered classification tasks in this paper, but a continuous key-value cache component can be added to models performing other image-based tasks, such as object detection or segmentation, as well"
+    ],
+    "summary": [
+        "Deep neural networks are currently the state of the art models in a wide range of image recognition problems.",
+        "Significantly better than the baseline models, which only use the output layer of the network to make predictions, suggests that layers other than the output layer contain independent class-relevant information and that this extra information can be read-out using a simple continuous key-value memory (Equations 1-3).",
+        "To find out which layers contained this extra class-relevant information, we tried using different layers of the network, all the way from the input layer, i.e. the image itself, to the output layer, as key vectors in the cache component.",
+        "Using the output layer itself in the cache component resulted in test performance comparable to that of the baseline model.",
+        "We ran a number of gradient-based and decision-based adversarial attacks against a baseline model (ResNet32) and tested the efficacy of the resulting adversarial images against the cache models (a similar procedure was recently used in [<a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>]).",
+        "When the same baseline model is combined with a cache component (ResNet32-Cache3), the classification accuracy on the adversarial images increases significantly.",
+        "Table 3 compares the mean minimum perturbation sizes, \u03c1adv , needed for generating adversarial images from the CIFAR-10 test set in different models.",
+        "There is no temporal context in these tasks, a similar \u201crare features\u201d problem arises in image recognition too: if correct classification of an item depends on the detection of a set of distinctive features that do not occur very frequently in the training data, standard image recognition models trained end-to-end with gradient descent might have a difficulty, since these models would typically require a large enough number of examples to learn the association between those features and the correct label.",
+        "For a given test item, k nearest neighbors from the training data are retrieved based on their representations at each layer of a deep network.",
+        "Using large cache sizes is important especially in problems with large training set sizes, such as ImageNet, as we empirically observed this to be a more important factor affecting the generalization accuracy than the number of layers used in the key vectors.",
+        "We have only considered classification tasks in this paper, but a continuous key-value cache component can be added to models performing other image-based tasks, such as object detection or segmentation, as well."
+    ],
+    "headline": "Surprisingly, this is possible",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Cand\u00e8s E, Tao T (2006) Near-optimal signal recovery from random projections: universal encoding strategies? IEEE Trans Inf Theory 52, 5406\u20135425.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cand%C3%A8s%2C%20E.%20Tao%2C%20T.%20Near-optimal%20signal%20recovery%20from%20random%20projections%3A%20universal%20encoding%20strategies%3F%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cand%C3%A8s%2C%20E.%20Tao%2C%20T.%20Near-optimal%20signal%20recovery%20from%20random%20projections%3A%20universal%20encoding%20strategies%3F%202006"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Goodfellow IJ, Shlens J, Szegedy C (2014) Explaining and harnessing adversarial examples. arXiv:1412.6572.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6572"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Grave E, Joulin A, Usunier N (2017) Improving neural language models with a continuous cache. ICLR 2017, arXiv:1612.04426.",
+            "arxiv_url": "https://arxiv.org/pdf/1612.04426"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Grave E, Cisse M, Joulin A (2017) Unbounded cache model for online language modeling with open vocabulary. NIPS 2017, arXiv:1711.02604.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.02604"
+        },
+        {
+            "id": "5",
+            "entry": "[5] He K, Zhang X, Ren S, Sun J (2015) Deep residual learning for image recognition. arXiv:1512.03385.",
+            "arxiv_url": "https://arxiv.org/pdf/1512.03385"
+        },
+        {
+            "id": "6",
+            "entry": "[6] He K, Zhang X, Ren S, Sun J (2016) Identity mappings in deep residual networks. arXiv:1603.05027.",
+            "arxiv_url": "https://arxiv.org/pdf/1603.05027"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Huang G, Liu Z, Weinberger KQ, van der Maaten L (2016) Densely connected convolutional networks. CVPR 2017, arXiv:1608.06993.",
+            "arxiv_url": "https://arxiv.org/pdf/1608.06993"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Kaiser L, Nachum O, Roy A, Bengio S (2017) Learning to remember rare events. ICLR 2017, arXiv:1703.03129.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.03129"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Kurakin A, Goodfellow IJ, Bengio S (2016) Adversarial examples in the physical world. arXiv:1607.02533.",
+            "arxiv_url": "https://arxiv.org/pdf/1607.02533"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Moosavi-Dezfooli S-M, Fawzi A, Frossard P (2015) DeepFool: A simple and accurate method to fool deep neural networks. CVPR 2016, arXiv:1511.04599.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.04599"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Novak R, Bahri Y, Abolafia DA, Pennington J, Sohl-Dickstein (2018) Sensitivity and generalization in neural networks: An empirical study. ICLR 2018, arXiv:1802.08760.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.08760"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Papernot N, McDaniel P (2018) Deep k-nearest neighbors: Towards confident, interpretable and robust deep learning. arXiv:1803.04765.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.04765"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Pritzel A, et al. (2017) Neural episodic control. ICML 2017, arXiv:1703.01988.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.01988"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Rauber J, Brendel W, Bethge M (2017) Foolbox: A Python toolbox to benchmark the robustness of machine learning models. arXiv:1707.04131.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.04131"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Su J, Vargas V, Kouichi S (2017) One pixel attack for fooling deep neural networks.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Su%2C%20J.%20Vargas%2C%20V.%20Kouichi%2C%20S.%20One%20pixel%20attack%20for%20fooling%20deep%20neural%20networks%202017"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Zhang H, Cisse M, Dauphin Y, Lopez-Paz D (2017) mixup: Beyond empirical risk minimization. ICLR 2018, arXiv:1710.09412.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.09412"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Zhao J, Cho K (2018) Retrieval-augmented convolutional neural networks for improved robustness against adversarial examples. arXiv:1802.09502. ",
+            "arxiv_url": "https://arxiv.org/pdf/1802.09502"
+        }
+    ]
+}

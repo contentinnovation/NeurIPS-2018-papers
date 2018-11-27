@@ -1,0 +1,264 @@
+{
+    "filename": "7785-evolved-policy-gradients.pdf",
+    "metadata": {
+        "title": "Evolved Policy Gradients",
+        "author": "Rein Houthooft, Yuhua Chen, Phillip Isola, Bradly Stadie, Filip Wolski, OpenAI Jonathan Ho, Pieter Abbeel",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7785-evolved-policy-gradients.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We propose a metalearning approach for learning gradient-based reinforcement learning (RL) algorithms. The idea is to evolve a differentiable loss function, such that an agent, which optimizes its policy to minimize this loss, will achieve high rewards. The loss is parametrized via temporal convolutions over the agent\u2019s experience. Because this loss is highly flexible in its ability to take into account the agent\u2019s history, it enables fast task learning. Empirical results show that our evolved policy gradient algorithm (EPG) achieves faster learning on several randomized environments compared to an off-the-shelf policy gradient method. We also demonstrate that EPG\u2019s learned loss can generalize to out-of-distribution test time tasks, and exhibits qualitatively different behavior from other popular metalearning algorithms."
+    },
+    "keywords": [
+        {
+            "term": "policy gradient method",
+            "url": "https://en.wikipedia.org/wiki/policy_gradient_method"
+        },
+        {
+            "term": "stochastic gradient descent",
+            "url": "https://en.wikipedia.org/wiki/stochastic_gradient_descent"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "evolution strategies",
+            "url": "https://en.wikipedia.org/wiki/evolution_strategies"
+        },
+        {
+            "term": "Markov decision process",
+            "url": "https://en.wikipedia.org/wiki/Markov_decision_process"
+        },
+        {
+            "term": "loss function",
+            "url": "https://en.wikipedia.org/wiki/loss_function"
+        }
+    ],
+    "highlights": [
+        "Most current reinforcement learning (RL) agents approach each new task de novo",
+        "We evaluate the learned loss function L\u03c6 produced by Algorithm 1 on a test Markov decision process M by training a policy from scratch",
+        "We have demonstrated that Evolved Policy Gradients can learn a loss that is specialized to the task distribution it is metatrained on, resulting in faster test time learning on novel tasks sampled from this distribution",
+        "Evolved Policy Gradients is trained to specialize to a task distribution, it exhibits generalization properties that go beyond current metalearning methods such as RL2 and MAML",
+        "We can train an Evolved Policy Gradients loss to be effective for one small family of tasks at a time, e.g., getting an ant to walk left and right",
+        "Standard reinforcement learning losses do have this level of generality \u2013 the same loss function can be used to learn a huge variety of skills"
+    ],
+    "key_statements": [
+        "Most current reinforcement learning (RL) agents approach each new task de novo",
+        "In Section 4.3, we find evidence that a loss learned by Evolved Policy Gradients can train an agent to solve a task outside the distribution of tasks on which Evolved Policy Gradients was trained",
+        "Our contributions include the following: 1) Formulating a metalearning approach that learns a differentiable loss function for reinforcement learning agents, called Evolved Policy Gradients; 2) Optimizing the parameters of this loss function via evolution strategies, overcoming the challenge that final returns are not explicit functions of the loss parameters; 3) Designing a loss architecture that takes into account agent history via temporal convolutions; 4) Demonstrating that Evolved Policy Gradients produces a learned loss that can train agents faster than an off-the-shelf policy gradient method; 5) Showing that Evolved Policy Gradients\u2019s learned loss can generalize to out-of-distribution test time tasks, exhibiting qualitatively different behavior from other popular metalearning algorithms",
+        "We model reinforcement learning [<a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>] as a Markov decision process (MDP), defined as the tuple",
+        "We evaluate the learned loss function L\u03c6 produced by Algorithm 1 on a test Markov decision process M by training a policy from scratch",
+        "We evaluate all metalearning methods\u2019 performance when the test-time task is sampled from the training-time task distribution",
+        "We have demonstrated that Evolved Policy Gradients can learn a loss that is specialized to the task distribution it is metatrained on, resulting in faster test time learning on novel tasks sampled from this distribution",
+        "Evolved Policy Gradients is trained to specialize to a task distribution, it exhibits generalization properties that go beyond current metalearning methods such as RL2 and MAML",
+        "We can train an Evolved Policy Gradients loss to be effective for one small family of tasks at a time, e.g., getting an ant to walk left and right",
+        "Standard reinforcement learning losses do have this level of generality \u2013 the same loss function can be used to learn a huge variety of skills"
+    ],
+    "summary": [
+        "Most current reinforcement learning (RL) agents approach each new task de novo.",
+        "The agent learns to solve this task by minimizing a loss function provided by the outer loop.",
+        "The parameters of the loss function are adjusted so as to maximize the final returns achieved after inner loop learning.",
+        "Using ES to evolve the loss function allows us to optimize the true objective, namely the final trained policy performance, rather than short-term returns, with the learned loss incentivizing the necessary exploration to achieve this.",
+        "Our contributions include the following: 1) Formulating a metalearning approach that learns a differentiable loss function for RL agents, called EPG; 2) Optimizing the parameters of this loss function via ES, overcoming the challenge that final returns are not explicit functions of the loss parameters; 3) Designing a loss architecture that takes into account agent history via temporal convolutions; 4) Demonstrating that EPG produces a learned loss that can train agents faster than an off-the-shelf policy gradient method; 5) Showing that EPG\u2019s learned loss can generalize to out-of-distribution test time tasks, exhibiting qualitatively different behavior from other popular metalearning algorithms.",
+        "The outer loop objective is to learn L\u03c6 such that an agent\u2019s policy \u03c0\u03b8\u2217 trained with the loss function achieves high expected returns in the MDP distribution: \u03c6\u2217 = arg max EM\u223cp(M)E\u03c4\u223cM,\u03c0\u03b8\u2217 [R\u03c4 ].",
+        "The outer-loop aggregates the final returns {Rw}wW=1 from all workers and updates the loss function parameter \u03c6 as follows: V",
+        "This achieves variance reduction by preventing the outer-loop ES update from promoting loss functions that are assigned to MDPs that consistently generate higher returns.",
+        "We evaluate the learned loss function L\u03c6 produced by Algorithm 1 on a test MDP M by training a policy from scratch.",
+        "Where M < N and we augment each transition with the memory output mem, a context vector fcontext generated from the loss\u2019s temporal convolutional layers, and the policy distribution \u03c0\u03b8(\u00b7|si).",
+        "To generate the context vector, we first augment each transition in the buffer with the output of the memory unit mem and the policy distribution \u03c0\u03b8(\u00b7|si) to obtain a set",
+        "We compare metatest-time learning performance, using the EPG loss function, against an off-the-shelf policy gradient method, PPO [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>].",
+        "EPG evolves a loss function that trains agents to quickly reach goals sampled from negative x-axis, never seen during metatraining.",
+        "EPG is trained to specialize to a task distribution, it exhibits generalization properties that go beyond current metalearning methods such as RL2 and MAML."
+    ],
+    "headline": "We propose a metalearning approach for learning gradient-based reinforcement learning  algorithms",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Greg Brockman, Vicki Cheung, Ludwig Pettersson, Jonas Schneider, John Schulman, Jie Tang, and Wojciech Zaremba. OpenAI Gym. arXiv preprint arXiv:1606.01540, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.01540"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Richard Y Chen, John Schulman, Pieter Abbeel, and Szymon Sidor. UCB exploration via Q-ensembles. arXiv preprint arXiv:1706.01502, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.01502"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Richard Dearden, Nir Friedman, and David Andre. Model based bayesian exploration. In Proceedings of the Fifteenth conference on Uncertainty in artificial intelligence, pages 150\u2013159. Morgan Kaufmann Publishers Inc., 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dearden%2C%20Richard%20Friedman%2C%20Nir%20Andre%2C%20David%20Model%20based%20bayesian%20exploration%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dearden%2C%20Richard%20Friedman%2C%20Nir%20Andre%2C%20David%20Model%20based%20bayesian%20exploration%201999"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Yan Duan, Xi Chen, Rein Houthooft, John Schulman, and Pieter Abbeel. Benchmarking deep reinforcement learning for continuous control. In International Conference on Machine Learning, pages 1329\u20131338, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Duan%2C%20Yan%20Chen%2C%20Xi%20Houthooft%2C%20Rein%20Schulman%2C%20John%20Benchmarking%20deep%20reinforcement%20learning%20for%20continuous%20control%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Duan%2C%20Yan%20Chen%2C%20Xi%20Houthooft%2C%20Rein%20Schulman%2C%20John%20Benchmarking%20deep%20reinforcement%20learning%20for%20continuous%20control%202016"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Yan Duan, John Schulman, Xi Chen, Peter L Bartlett, Ilya Sutskever, and Pieter Abbeel. RL2: Fast reinforcement learning via slow reinforcement learning. arXiv preprint arXiv:1611.02779, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.02779"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Chelsea Finn, Pieter Abbeel, and Sergey Levine. Model-agnostic meta-learning for fast adaptation of deep networks. arXiv preprint arXiv:1703.03400, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.03400"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Chelsea Finn and Sergey Levine. Meta-learning and universality: Deep representations and gradient descent can approximate any learning algorithm. arXiv preprint arXiv:1710.11622, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.11622"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Tuomas Haarnoja, Haoran Tang, Pieter Abbeel, and Sergey Levine. Reinforcement learning with deep energy-based policies. arXiv preprint arXiv:1702.08165, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1702.08165"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Nikolaus Hansen and Andreas Ostermeier. Completely derandomized self-adaptation in evolution strategies. Evolutionary computation, 9(2):159\u2013195, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hansen%2C%20Nikolaus%20Ostermeier%2C%20Andreas%20Completely%20derandomized%20self-adaptation%20in%20evolution%20strategies%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hansen%2C%20Nikolaus%20Ostermeier%2C%20Andreas%20Completely%20derandomized%20self-adaptation%20in%20evolution%20strategies%202001"
+        },
+        {
+            "id": "10",
+            "entry": "[10] J Zico Kolter and Andrew Y Ng. Near-bayesian exploration in polynomial time. In Proceedings of the 26th Annual International Conference on Machine Learning, pages 513\u2013520. ACM, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kolter%2C%20J.Zico%20Ng%2C%20Andrew%20Y.%20Near-bayesian%20exploration%20in%20polynomial%20time%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kolter%2C%20J.Zico%20Ng%2C%20Andrew%20Y.%20Near-bayesian%20exploration%20in%20polynomial%20time%202009"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Vijay R Konda and John N Tsitsiklis. Actor-critic algorithms. In Advances in Neural Information Processing Systems, pages 1008\u20131014, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Konda%2C%20Vijay%20R.%20Tsitsiklis%2C%20John%20N.%20Actor-critic%20algorithms%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Konda%2C%20Vijay%20R.%20Tsitsiklis%2C%20John%20N.%20Actor-critic%20algorithms%202000"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Brenden M Lake, Tomer D Ullman, Joshua B Tenenbaum, and Samuel J Gershman. Building machines that learn and think like people. Behavioral and Brain Sciences, 40, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lake%2C%20Brenden%20M.%20Ullman%2C%20Tomer%20D.%20Tenenbaum%2C%20Joshua%20B.%20Gershman%2C%20Samuel%20J.%20Building%20machines%20that%20learn%20and%20think%20like%20people%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lake%2C%20Brenden%20M.%20Ullman%2C%20Tomer%20D.%20Tenenbaum%2C%20Joshua%20B.%20Gershman%2C%20Samuel%20J.%20Building%20machines%20that%20learn%20and%20think%20like%20people%202017"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Nikhil Mishra, Mostafa Rohaninejad, Xi Chen, and Pieter Abbeel. Meta-learning with temporal convolutions. arXiv preprint arXiv:1707.03141, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.03141"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Ofir Nachum, Mohammad Norouzi, Kelvin Xu, and Dale Schuurmans. Bridging the gap between value and policy based reinforcement learning. In Advances in Neural Information Processing Systems, pages 2772\u20132782, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nachum%2C%20Ofir%20Norouzi%2C%20Mohammad%20Xu%2C%20Kelvin%20Schuurmans%2C%20Dale%20Bridging%20the%20gap%20between%20value%20and%20policy%20based%20reinforcement%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nachum%2C%20Ofir%20Norouzi%2C%20Mohammad%20Xu%2C%20Kelvin%20Schuurmans%2C%20Dale%20Bridging%20the%20gap%20between%20value%20and%20policy%20based%20reinforcement%20learning%202017"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Yurii Nesterov and Vladimir Spokoiny. Random gradient-free minimization of convex functions. Foundations of Computational Mathematics, 17(2):527\u2013566, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nesterov%2C%20Yurii%20Spokoiny%2C%20Vladimir%20Random%20gradient-free%20minimization%20of%20convex%20functions%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nesterov%2C%20Yurii%20Spokoiny%2C%20Vladimir%20Random%20gradient-free%20minimization%20of%20convex%20functions%202017"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Brendan O\u2019Donoghue, Remi Munos, Koray Kavukcuoglu, and Volodymyr Mnih. Pgq: Combining policy gradient and q-learning. arXiv preprint arXiv:1611.01626, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.01626"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Georg Ostrovski, Marc G Bellemare, Aaron van den Oord, and R\u00e9mi Munos. Count-based exploration with neural density models. arXiv preprint arXiv:1703.01310, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.01310"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Deepak Pathak, Pulkit Agrawal, Alexei A Efros, and Trevor Darrell. Curiosity-driven exploration by self-supervised prediction. In International Conference on Machine Learning (ICML), volume 2017, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pathak%2C%20Deepak%20Agrawal%2C%20Pulkit%20Efros%2C%20Alexei%20A.%20Darrell%2C%20Trevor%20Curiosity-driven%20exploration%20by%20self-supervised%20prediction",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pathak%2C%20Deepak%20Agrawal%2C%20Pulkit%20Efros%2C%20Alexei%20A.%20Darrell%2C%20Trevor%20Curiosity-driven%20exploration%20by%20self-supervised%20prediction"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Matthias Plappert, Marcin Andrychowicz, Alex Ray, Bob McGrew, Bowen Baker, Glenn Powell, Jonas Schneider, Josh Tobin, Maciek Chociej, Peter Welinder, et al. Multi-goal reinforcement learning: Challenging robotics environments and request for research. arXiv preprint arXiv:1802.09464, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.09464"
+        },
+        {
+            "id": "20",
+            "entry": "[20] I. Rechenberg and M. Eigen. Evolutionsstrategie: Optimierung Technischer Systeme nach Prinzipien der Biologischen Evolution. 1973.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rechenberg%2C%20I.%20Eigen%2C%20M.%20Evolutionsstrategie%3A%20Optimierung%20Technischer%20Systeme%20nach%20Prinzipien%20der%20Biologischen%20Evolution%201973"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Tim Salimans, Jonathan Ho, Xi Chen, and Ilya Sutskever. Evolution strategies as a scalable alternative to reinforcement learning. arXiv preprint arXiv:1703.03864, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.03864"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Juergen Schmidhuber. Exploring the predictable. In Advances in evolutionary computing, pages 579\u2013612.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schmidhuber%2C%20Juergen%20Exploring%20the%20predictable",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schmidhuber%2C%20Juergen%20Exploring%20the%20predictable"
+        },
+        {
+            "id": "23",
+            "entry": "[23] John Schulman, Pieter Abbeel, and Xi Chen. Equivalence between policy gradients and soft q-learning. arXiv preprint arXiv:1704.06440, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1704.06440"
+        },
+        {
+            "id": "24",
+            "entry": "[24] John Schulman, Nicolas Heess, Theophane Weber, and Pieter Abbeel. Gradient estimation using stochastic computation graphs. In Advances in Neural Information Processing Systems, pages 3528\u20133536, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schulman%2C%20John%20Heess%2C%20Nicolas%20Weber%2C%20Theophane%20Abbeel%2C%20Pieter%20Gradient%20estimation%20using%20stochastic%20computation%20graphs%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schulman%2C%20John%20Heess%2C%20Nicolas%20Weber%2C%20Theophane%20Abbeel%2C%20Pieter%20Gradient%20estimation%20using%20stochastic%20computation%20graphs%202015"
+        },
+        {
+            "id": "25",
+            "entry": "[25] John Schulman, Sergey Levine, Pieter Abbeel, Michael Jordan, and Philipp Moritz. Trust region policy optimization. In International Conference on Machine Learning, pages 1889\u20131897, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schulman%2C%20John%20Levine%2C%20Sergey%20Abbeel%2C%20Pieter%20Jordan%2C%20Michael%20Trust%20region%20policy%20optimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schulman%2C%20John%20Levine%2C%20Sergey%20Abbeel%2C%20Pieter%20Jordan%2C%20Michael%20Trust%20region%20policy%20optimization%202015"
+        },
+        {
+            "id": "26",
+            "entry": "[26] John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov. Proximal policy optimization algorithms. arXiv preprint arXiv:1707.06347, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.06347"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Hans-Paul Schwefel. Numerische Optimierung von Computer-Modellen mittels der Evolutionsstrategie: mit einer vergleichenden Einf\u00fchrung in die Hill-Climbing-und Zufallsstrategie. Birkh\u00e4user, 1977.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schwefel%2C%20Hans-Paul%20Numerische%20Optimierung%20von%20Computer-Modellen%20mittels%20der%20Evolutionsstrategie%3A%20mit%20einer%20vergleichenden%20Einf%C3%BChrung%20in%20die%20Hill-Climbing-und%20Zufallsstrategie%201977"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Frank Sehnke, Christian Osendorfer, Thomas R\u00fcckstie\u00df, Alex Graves, Jan Peters, and J\u00fcrgen Schmidhuber. Parameter-exploring policy gradients. Neural Networks, 23(4):551\u2013559, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Parameter-exploring%20policy%20gradients%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Parameter-exploring%20policy%20gradients%202010"
+        },
+        {
+            "id": "29",
+            "entry": "[29] James C Spall. Multivariate stochastic approximation using a simultaneous perturbation gradient approximation. IEEE transactions on automatic control, 37(3):332\u2013341, 1992.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Spall%2C%20James%20C.%20Multivariate%20stochastic%20approximation%20using%20a%20simultaneous%20perturbation%20gradient%20approximation%201992",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Spall%2C%20James%20C.%20Multivariate%20stochastic%20approximation%20using%20a%20simultaneous%20perturbation%20gradient%20approximation%201992"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Richard S Sutton and Andrew G Barto. Reinforcement learning: An introduction, volume 1. MIT press Cambridge, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20Richard%20S.%20Barto%2C%20Andrew%20G.%20Reinforcement%20learning%3A%20An%20introduction%2C%20volume%201%201998"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Richard S Sutton, David A McAllester, Satinder P Singh, and Yishay Mansour. Policy gradient methods for reinforcement learning with function approximation. In Advances in Neural Information Processing Systems, pages 1057\u20131063, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20Richard%20S.%20McAllester%2C%20David%20A.%20Singh%2C%20Satinder%20P.%20Mansour%2C%20Yishay%20Policy%20gradient%20methods%20for%20reinforcement%20learning%20with%20function%20approximation%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutton%2C%20Richard%20S.%20McAllester%2C%20David%20A.%20Singh%2C%20Satinder%20P.%20Mansour%2C%20Yishay%20Policy%20gradient%20methods%20for%20reinforcement%20learning%20with%20function%20approximation%202000"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Haoran Tang, Rein Houthooft, Davis Foote, Adam Stooke, Xi Chen, Yan Duan, John Schulman, Filip De Turck, and Pieter Abbeel. #Exploration: A study of count-based exploration for deep reinforcement learning. Advances in Neural Information Processing Systems (NIPS), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tang%2C%20Haoran%20Houthooft%2C%20Rein%20Foote%2C%20Davis%20Stooke%2C%20Adam%20%23Exploration%3A%20A%20study%20of%20count-based%20exploration%20for%20deep%20reinforcement%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tang%2C%20Haoran%20Houthooft%2C%20Rein%20Foote%2C%20Davis%20Stooke%2C%20Adam%20%23Exploration%3A%20A%20study%20of%20count-based%20exploration%20for%20deep%20reinforcement%20learning%202017"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Jane X Wang, Zeb Kurth-Nelson, Dhruva Tirumala, Hubert Soyer, Joel Z Leibo, Remi Munos, Charles Blundell, Dharshan Kumaran, and Matt Botvinick. Learning to reinforcement learn. arXiv preprint arXiv:1611.05763, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.05763"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Ronald J Williams. Simple statistical gradient-following algorithms for connectionist reinforcement learning. In Reinforcement Learning, pages 5\u201332. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%2C%20Ronald%20J.%20Simple%20statistical%20gradient-following%20algorithms%20for%20connectionist%20reinforcement%20learning",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Williams%2C%20Ronald%20J.%20Simple%20statistical%20gradient-following%20algorithms%20for%20connectionist%20reinforcement%20learning"
+        }
+    ]
+}

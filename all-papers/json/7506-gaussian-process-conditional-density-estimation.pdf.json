@@ -1,0 +1,244 @@
+{
+    "filename": "7506-gaussian-process-conditional-density-estimation.pdf",
+    "metadata": {
+        "title": "Gaussian Process Conditional Density Estimation",
+        "author": "Vincent Dutordoir, Hugh Salimbeni, James Hensman, Marc Deisenroth",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7506-gaussian-process-conditional-density-estimation.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Conditional Density Estimation (CDE) models deal with estimating conditional distributions. The conditions imposed on the distribution are the inputs of the model. CDE is a challenging task as there is a fundamental trade-off between model complexity, representational capacity and overfitting. In this work, we propose to extend the model\u2019s input with latent variables and use Gaussian processes (GPs) to map this augmented input onto samples from the conditional distribution. Our Bayesian approach allows for the modeling of small datasets, but we also provide the machinery for it to be applied to big data using stochastic variational inference. Our approach can be used to model densities even in sparse data regions, and allows for sharing learned structure between conditions. We illustrate the effectiveness and wide-reaching applicability of our model on a variety of real-world problems, such as spatio-temporal density estimation of taxi drop-offs, non-Gaussian noise modeling, and few-shot learning on omniglot images."
+    },
+    "keywords": [
+        {
+            "term": "gaussian process regression",
+            "url": "https://en.wikipedia.org/wiki/gaussian_process_regression"
+        },
+        {
+            "term": "density estimation",
+            "url": "https://en.wikipedia.org/wiki/density_estimation"
+        },
+        {
+            "term": "Gaussian process",
+            "url": "https://en.wikipedia.org/wiki/Gaussian_process"
+        },
+        {
+            "term": "Evidence Lower Bound",
+            "url": "https://en.wikipedia.org/wiki/Evidence_Lower_Bound"
+        },
+        {
+            "term": "conditional distribution",
+            "url": "https://en.wikipedia.org/wiki/conditional_distribution"
+        },
+        {
+            "term": "variational inference",
+            "url": "https://en.wikipedia.org/wiki/variational_inference"
+        },
+        {
+            "term": "gaussian processes",
+            "url": "https://en.wikipedia.org/wiki/gaussian_processes"
+        }
+    ],
+    "highlights": [
+        "Gaussian Processes and Latent Variable Models<br/><br/>Gaussian Processes A Gaussian process (GP) is a Bayesian non-parametric model for functions",
+        "We present a Gaussian process (GP) based model for estimating conditional densities, abbreviated as Gaussian processes-Conditional Density Estimation",
+        "While a vanilla Gaussian processes used directly is unlikely to be a good model for conditional density estimation as the marginals are Gaussian, we extend the inputs to the model with latent variables to allow for modeling richer, non-Gaussian densities when marginalizing the latent variable",
+        "We show that Gaussian processes-Conditional Density Estimation outperforms Gaussian processes regression on regression benchmarks; we study the importance of accurate density estimation in high-dimensional spaces; and we deal with learning the correlations between conditions in a large spatio-temporal dataset",
+        "Few-shot learning We demonstrate the GPCDE model for the challenging task of few-shot conditional density estimation on the omniglot dataset",
+        "We presented a model for conditional density estimation with Gaussian processes"
+    ],
+    "key_statements": [
+        "Gaussian Processes and Latent Variable Models<br/><br/>Gaussian Processes A Gaussian process (GP) is a Bayesian non-parametric model for functions",
+        "We present a Gaussian process (GP) based model for estimating conditional densities, abbreviated as Gaussian processes-Conditional Density Estimation",
+        "While a vanilla Gaussian processes used directly is unlikely to be a good model for conditional density estimation as the marginals are Gaussian, we extend the inputs to the model with latent variables to allow for modeling richer, non-Gaussian densities when marginalizing the latent variable",
+        "Bayesian Gaussian processes-LVMs are typically used for modeling complex distributions and non-linear mappings from a lower-dimensional latent variable into a high-dimensional space",
+        "We show that Gaussian processes-Conditional Density Estimation outperforms Gaussian processes regression on regression benchmarks; we study the importance of accurate density estimation in high-dimensional spaces; and we deal with learning the correlations between conditions in a large spatio-temporal dataset",
+        "Bayesian Gaussian processes-LVMs are typically used for modeling complex distributions and non-linear mappings from a lower-dimensional variable into a high-dimensional space",
+        "Few-shot learning We demonstrate the GPCDE model for the challenging task of few-shot conditional density estimation on the omniglot dataset",
+        "We demonstrate this with the simplest possible example modeling a dataset of 100 \u20181\u2019 digits, using an unconditional model with no projection matrices, no mini-batches and no recognition model",
+        "We presented a model for conditional density estimation with Gaussian processes"
+    ],
+    "summary": [
+        "Gaussian Processes and Latent Variable Models<br/><br/>Gaussian Processes A Gaussian process (GP) is a Bayesian non-parametric model for functions.",
+        "As the CVAE has no prior on the decoder mapping, the model can overfit the training data and the latent variable posterior becomes over-concentrated, leading to poor test log-likelihoods.",
+        "Bayesian GP-LVMs are typically used for modeling complex distributions and non-linear mappings from a lower-dimensional latent variable into a high-dimensional space.",
+        "Our contributions are threefold:(i) we derive an optimal free-form variational distribution q(W) (Section 3.2); we ease the burden of jointly optimizing q(f (\u00b7)) and q(W) using natural gradients (Section 3.2.1) for the variational parameters of q(f (\u00b7)); we extend the model to allow for the modeling of high-dimensional inputs and impose correlation on the outputs using linear transformations (Section 3.3).",
+        "The natural gradient is used for the Gaussian variational parameters m and S , and ordinary gradients are used for the inducing inputs Z, the recognition network and other hyperparameters of the model.",
+        "If we drop the latent variables W our approach recovers standard multiple-output Gaussian process regression with sparse variational inference.",
+        "We extend their model using linear projection matrices on both input and output, and we present an alternative method of inference that scales to large datasets.",
+        "Damianou and Lawrence [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>] propose a special case of our model, though they use it for missing data imputation rather than to induce non-Gaussian densities.",
+        "Since we model a 1D target we consider wn to be uni-dimensional, allowing us to use the quadrature method (Section 3.2) to obtain the bound for an analytically optimal q.",
+        "In all three models we use a RBF kernel and 100 inducing points, optimizing for 20K iterations using Adam optimizer for the hyperparameters and a natural gradient optimizer with step size 0.1 for the Gaussian variational parameters.",
+        "Density estimation of image data In this experiment we compare the test log-likelihood of the GP-CDE and the CVAE [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>] on the MNIST dataset for the image generation task.",
+        "Wu et al [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>] point out that when evaluating test-densities for generative models, the assumed noise variance \u03c32 plays an important role, so for both models we compare two different cases: one with the likelihood variance parameter fixed and one where it is optimized.",
+        "We derived an optimal posterior for the latent variable inputs and we demonstrated the usefulness of natural gradients for mini-batched training of GPs with uncertain inputs.",
+        "We applied the model in different settings across a wide range of dataset sizes and input/output domains, demonstrating its general utility."
+    ],
+    "headline": "We propose to extend the model\u2019s input with latent variables and use Gaussian processes  to map this augmented input onto samples from the conditional distribution",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Ryan P Adams, Iain Murray, and David JC MacKay. Nonparametric Bayesian Density Modeling with Gaussian Processes. arXiv:0912.4896, 2009.",
+            "arxiv_url": "https://arxiv.org/pdf/0912.4896"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Mauricio A Alvarez, Lorenzo Rosasco, Neil D Lawrence, et al. Kernels for vector-valued functions: A review. Foundations and Trends in Machine Learning, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Alvarez%2C%20Mauricio%20A.%20Rosasco%2C%20Lorenzo%20Lawrence%2C%20Neil%20D.%20Kernels%20for%20vector-valued%20functions%3A%20A%20review%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Alvarez%2C%20Mauricio%20A.%20Rosasco%2C%20Lorenzo%20Lawrence%2C%20Neil%20D.%20Kernels%20for%20vector-valued%20functions%3A%20A%20review%202012"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Shun-Ichi Amari. Natural Gradient Works Efficiently in Learning. Neural Computation, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Amari%2C%20Shun-Ichi%20Natural%20Gradient%20Works%20Efficiently%20in%20Learning%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Amari%2C%20Shun-Ichi%20Natural%20Gradient%20Works%20Efficiently%20in%20Learning%201998"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Michael Arbel and Arthur Gretton. Kernel Conditional Exponential Family. 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Arbel%2C%20Michael%20Gretton%2C%20Arthur%20Kernel%20Conditional%20Exponential%20Family%202018"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Christopher M Bishop. Mixture Density Networks. 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Christopher%20M%20Bishop%20Mixture%20Density%20Networks%201994",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Christopher%20M%20Bishop%20Mixture%20Density%20Networks%201994"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Erik Bodin, Neill D Campbell, and Carl H Ek. Latent Gaussian Process Regression. arXiv:1707.05534, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.05534"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Thang D Bui and Richard E Turner. Stochastic variational inference for gaussian process latent variable models using back constraints. In Black Box Learning and Inference NIPS workshop, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bui%2C%20Thang%20D.%20Turner%2C%20Richard%20E.%20Stochastic%20variational%20inference%20for%20gaussian%20process%20latent%20variable%20models%20using%20back%20constraints.%20In%20Black%20Box%20Learning%20and%20Inference%20NIPS%20workshop%202015"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Chris Cremer, Xuechen Li, and David Duvenaud. Inference Suboptimality in Variational Autoencoders. arXiv:1801.03558, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1801.03558"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Zhenwen Dai, Andreas Damianou, Javier Gonz\u00e1lez, and Neil Lawrence. Variational autoencoded deep gaussian processes. International Conference on Learning Representations, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dai%2C%20Zhenwen%20Damianou%2C%20Andreas%20Gonz%C3%A1lez%2C%20Javier%20Lawrence%2C%20Neil%20Variational%20autoencoded%20deep%20gaussian%20processes%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dai%2C%20Zhenwen%20Damianou%2C%20Andreas%20Gonz%C3%A1lez%2C%20Javier%20Lawrence%2C%20Neil%20Variational%20autoencoded%20deep%20gaussian%20processes%202015"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Zhenwen Dai, Mauricio A \u00c1lvarez, and Neil Lawrence. Efficient Modeling of Latent Information in Supervised Learning using Gaussian Processes. Advances in Neural Information Processing Systems, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dai%2C%20Zhenwen%20%C3%81lvarez%2C%20Mauricio%20A.%20Lawrence%2C%20Neil%20Efficient%20Modeling%20of%20Latent%20Information%20in%20Supervised%20Learning%20using%20Gaussian%20Processes%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dai%2C%20Zhenwen%20%C3%81lvarez%2C%20Mauricio%20A.%20Lawrence%2C%20Neil%20Efficient%20Modeling%20of%20Latent%20Information%20in%20Supervised%20Learning%20using%20Gaussian%20Processes%202017"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Andreas Damianou and Neil D Lawrence. Semi-described and semi-supervised learning with gaussian processes. Uncertainty in Artificial Intelligence, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Damianou%2C%20Andreas%20Lawrence%2C%20Neil%20D.%20Semi-described%20and%20semi-supervised%20learning%20with%20gaussian%20processes%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Damianou%2C%20Andreas%20Lawrence%2C%20Neil%20D.%20Semi-described%20and%20semi-supervised%20learning%20with%20gaussian%20processes%202015"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Stefan Depeweg, Jos\u00e9 Miguel Hern\u00e1ndez-Lobato, Finale Doshi-Velez, and Steffen Udluft. Learning and policy search in stochastic dynamical systems with bayesian neural networks. International Conference on Learning Representations, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Depeweg%2C%20Stefan%20Hern%C3%A1ndez-Lobato%2C%20Jos%C3%A9%20Miguel%20Doshi-Velez%2C%20Finale%20Udluft%2C%20Steffen%20Learning%20and%20policy%20search%20in%20stochastic%20dynamical%20systems%20with%20bayesian%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Depeweg%2C%20Stefan%20Hern%C3%A1ndez-Lobato%2C%20Jos%C3%A9%20Miguel%20Doshi-Velez%2C%20Finale%20Udluft%2C%20Steffen%20Learning%20and%20policy%20search%20in%20stochastic%20dynamical%20systems%20with%20bayesian%20neural%20networks%202016"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Agathe Girard, Carl E Rasmussen, Joaquin Quinonero-Candela, and Roderick Murray-Smith. Gaussian Process Priors With Uncertain Inputs Application to Multiple-Step Ahead Time Series Forecasting. Advances in Neural Information Processing Systems, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Girard%2C%20Agathe%20Rasmussen%2C%20Carl%20E.%20Quinonero-Candela%2C%20Joaquin%20Murray-Smith%2C%20Roderick%20Gaussian%20Process%20Priors%20With%20Uncertain%20Inputs%20Application%20to%20Multiple-Step%20Ahead%20Time%20Series%20Forecasting%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Girard%2C%20Agathe%20Rasmussen%2C%20Carl%20E.%20Quinonero-Candela%2C%20Joaquin%20Murray-Smith%2C%20Roderick%20Gaussian%20Process%20Priors%20With%20Uncertain%20Inputs%20Application%20to%20Multiple-Step%20Ahead%20Time%20Series%20Forecasting%202003"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Xavier Glorot and Yoshua Bengio. Understanding the difficulty of training deep feedforward neural networks. Artificial Intelligence and Statistics, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Glorot%2C%20Xavier%20Bengio%2C%20Yoshua%20Understanding%20the%20difficulty%20of%20training%20deep%20feedforward%20neural%20networks%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Glorot%2C%20Xavier%20Bengio%2C%20Yoshua%20Understanding%20the%20difficulty%20of%20training%20deep%20feedforward%20neural%20networks%202010"
+        },
+        {
+            "id": "15",
+            "entry": "[15] James Hensman, Nicolo Fusi, and Neil D Lawrence. Gaussian Processes for Big Data. Uncertainty in Artificial Intelligence, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hensman%2C%20James%20Fusi%2C%20Nicolo%20Lawrence%2C%20Neil%20D.%20Gaussian%20Processes%20for%20Big%20Data.%20Uncertainty%20in%20Artificial%20Intelligence%202013"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Matthew D Hoffman, David M Blei, Chong Wang, and John Paisley. Stochastic Variational Inference. Journal of Machine Learning Research, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hoffman%2C%20Matthew%20D.%20Blei%2C%20David%20M.%20Wang%2C%20Chong%20Paisley%2C%20John%20Stochastic%20Variational%20Inference%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hoffman%2C%20Matthew%20D.%20Blei%2C%20David%20M.%20Wang%2C%20Chong%20Paisley%2C%20John%20Stochastic%20Variational%20Inference%202013"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Diederik P Kingma and Max Welling. Auto-encoding Variational Bayes. arXiv:1312.6114, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.6114"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Diederik P Kingma, Shakir Mohamed, Danilo Jimenez Rezende, and Max Welling. Semisupervised Learning with Deep Generative Models. Advances in Neural Information Processing Systems, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Mohamed%2C%20Shakir%20Rezende%2C%20Danilo%20Jimenez%20Welling%2C%20Max%20Semisupervised%20Learning%20with%20Deep%20Generative%20Models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Mohamed%2C%20Shakir%20Rezende%2C%20Danilo%20Jimenez%20Welling%2C%20Max%20Semisupervised%20Learning%20with%20Deep%20Generative%20Models%202014"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Brenden M Lake, Ruslan Salakhutdinov, and Joshua B Tenenbaum. Human-level Concept Learning through Probabilistic Program Induction. Science, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lake%2C%20Brenden%20M.%20Salakhutdinov%2C%20Ruslan%20Tenenbaum%2C%20Joshua%20B.%20Human-level%20Concept%20Learning%20through%20Probabilistic%20Program%20Induction%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lake%2C%20Brenden%20M.%20Salakhutdinov%2C%20Ruslan%20Tenenbaum%2C%20Joshua%20B.%20Human-level%20Concept%20Learning%20through%20Probabilistic%20Program%20Induction%202015"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Neil D Lawrence and Joaquin Qui\u00f1onero-Candela. Local distance preservation in the gp-lvm through back constraints. In International Conference on Machine learning, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lawrence%2C%20Neil%20D.%20Qui%C3%B1onero-Candela%2C%20Joaquin%20Local%20distance%20preservation%20in%20the%20gp-lvm%20through%20back%20constraints%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lawrence%2C%20Neil%20D.%20Qui%C3%B1onero-Candela%2C%20Joaquin%20Local%20distance%20preservation%20in%20the%20gp-lvm%20through%20back%20constraints%202006"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Alexander Matthews, James Hensman, Turner Richard, and Zoubin Ghahramani. On Sparse Variational Methods and the Kullback-Leibler Divergence between Stochastic Processes. Artificial Intelligence and Statistics, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Matthews%2C%20Alexander%20Hensman%2C%20James%20Richard%2C%20Turner%20Ghahramani%2C%20Zoubin%20On%20Sparse%20Variational%20Methods%20and%20the%20Kullback-Leibler%20Divergence%20between%20Stochastic%20Processes%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Matthews%2C%20Alexander%20Hensman%2C%20James%20Richard%2C%20Turner%20Ghahramani%2C%20Zoubin%20On%20Sparse%20Variational%20Methods%20and%20the%20Kullback-Leibler%20Divergence%20between%20Stochastic%20Processes%202016"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Carl E Rasmussen and Christopher KI Williams. Gaussian Processes for Machine Learning. MIT Press, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rasmussen%2C%20Carl%20E.%20Williams%2C%20Christopher%20K.I.%20Gaussian%20Processes%20for%20Machine%20Learning%202006"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Danilo Jimenez Rezende, Shakir Mohamed, and Daan Wierstra. Stochastic Backpropagation and Approximate Inference in Deep Generative Models. International Conference on Machine Learning, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rezende%2C%20Danilo%20Jimenez%20Mohamed%2C%20Shakir%20Wierstra%2C%20Daan%20Stochastic%20Backpropagation%20and%20Approximate%20Inference%20in%20Deep%20Generative%20Models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rezende%2C%20Danilo%20Jimenez%20Mohamed%2C%20Shakir%20Wierstra%2C%20Daan%20Stochastic%20Backpropagation%20and%20Approximate%20Inference%20in%20Deep%20Generative%20Models%202014"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Kihyuk Sohn, Honglak Lee, and Xinchen Yan. Learning Structured Output Representation using Deep Conditional Generative Models. Advances in Neural Information Processing Systems.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sohn%2C%20Kihyuk%20Lee%2C%20Honglak%20Yan%2C%20Xinchen%20Learning%20Structured%20Output%20Representation%20using%20Deep%20Conditional%20Generative%20Models",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sohn%2C%20Kihyuk%20Lee%2C%20Honglak%20Yan%2C%20Xinchen%20Learning%20Structured%20Output%20Representation%20using%20Deep%20Conditional%20Generative%20Models"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Bharath Sriperumbudur, Kenji Fukumizu, Arthur Gretton, Aapo Hyv\u00e4rinen, and Revant Kumar. Density Estimation in Infinite Dimensional Exponential Families. Journal of Machine Learning Research, 18(57):1\u201359, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sriperumbudur%2C%20Bharath%20Fukumizu%2C%20Kenji%20Gretton%2C%20Arthur%20Hyv%C3%A4rinen%2C%20Aapo%20Density%20Estimation%20in%20Infinite%20Dimensional%20Exponential%20Families%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sriperumbudur%2C%20Bharath%20Fukumizu%2C%20Kenji%20Gretton%2C%20Arthur%20Hyv%C3%A4rinen%2C%20Aapo%20Density%20Estimation%20in%20Infinite%20Dimensional%20Exponential%20Families%202017"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Michalis Titsias and Neil D Lawrence. Bayesian Gaussian Process Latent Variable Model. Artificial Intelligence and Statistics, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Titsias%2C%20Michalis%20Lawrence%2C%20Neil%20D.%20Bayesian%20Gaussian%20Process%20Latent%20Variable%20Model%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Titsias%2C%20Michalis%20Lawrence%2C%20Neil%20D.%20Bayesian%20Gaussian%20Process%20Latent%20Variable%20Model%202010"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Michalis Titsias and Miguel L\u00e1zaro-Gredilla. Variational Inference for Mahalanobis Distance Metrics in Gaussian Process Regression. Advances in Neural Information Processing Systems, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Titsias%2C%20Michalis%20L%C3%A1zaro-Gredilla%2C%20Miguel%20Variational%20Inference%20for%20Mahalanobis%20Distance%20Metrics%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Titsias%2C%20Michalis%20L%C3%A1zaro-Gredilla%2C%20Miguel%20Variational%20Inference%20for%20Mahalanobis%20Distance%20Metrics%202013"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Chunyi Wang and Radford Neal. Gaussian Process Regression with Heteroscedastic or Nongaussian Residuals. arXiv:1212.6246, 2012.",
+            "arxiv_url": "https://arxiv.org/pdf/1212.6246"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Yuhuai Wu, Yuri Burda, Ruslan Salakhutdinov, and Roger Grosse. On the Quantitative Analysis of Decoder-based Generative Models. arXiv preprint arXiv:1611.04273, 2016. ",
+            "arxiv_url": "https://arxiv.org/pdf/1611.04273"
+        }
+    ]
+}

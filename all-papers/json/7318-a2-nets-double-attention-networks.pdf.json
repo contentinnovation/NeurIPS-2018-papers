@@ -1,0 +1,215 @@
+{
+    "filename": "7318-a2-nets-double-attention-networks.pdf",
+    "metadata": {
+        "title": "A^2-Nets: Double Attention Networks",
+        "author": "Yunpeng Chen, Yannis Kalantidis, Jianshu Li, Shuicheng Yan, Jiashi Feng",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7318-a2-nets-double-attention-networks.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Learning to capture long-range relations is fundamental to image/video recognition. Existing CNN models generally rely on increasing depth to model such relations which is highly inefficient. In this work, we propose the \u201cdouble attention block\u201d, a novel component that aggregates and propagates informative global features from the entire spatio-temporal space of input images/videos, enabling subsequent convolution layers to access features from the entire space efficiently. The component is designed with a double attention mechanism in two steps, where the first step gathers features from the entire space into a compact set through second-order attention pooling and the second step adaptively selects and distributes features to each location via another attention. The proposed double attention block is easy to adopt and can be plugged into existing deep neural networks conveniently. We conduct extensive ablation studies and experiments on both image and video recognition tasks for evaluating its performance. On the image recognition task, a ResNet-50 equipped with our double attention blocks outperforms a much larger ResNet-152 architecture on ImageNet-1k dataset with over 40% less the number of parameters and less FLOPs. On the action recognition task, our proposed model achieves the state-of-the-art results on the Kinetics and UCF-101 datasets with significantly higher efficiency than recent works."
+    },
+    "keywords": [
+        {
+            "term": "Convolutional Neural Networks",
+            "url": "https://en.wikipedia.org/wiki/Convolutional_Neural_Network"
+        },
+        {
+            "term": "action recognition",
+            "url": "https://en.wikipedia.org/wiki/action_recognition"
+        },
+        {
+            "term": "image recognition",
+            "url": "https://en.wikipedia.org/wiki/image_recognition"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Deep Convolutional Neural Networks (CNNs) have been successfully applied in image and video understanding during the past few years",
+        "Convolutional Neural Networks are inherently limited by their convolution operators which are dedicated to capturing local features and relations, e.g. from a 7 \u00d7 7 region, and are inefficient in modeling long-range interdependencies",
+        "We investigate the effect of our proposed A2-Net with extensive ablation studies and prove its superior performance through comparison with the state-of-the-arts on a number of public benchmarks for both image recognition and video action recognition tasks, including ImageNet-1k, Kinetics and UCF-101",
+        "We introduce this genetic formulation and propose the Double Attention block, where global information is first gathered by second-order attention pooling, and the gathered global features are adaptively distributed conditioned on the need of current local feature vi, by a second attention mechanism",
+        "Learning Motion from Scratch on Kinetics We use ResNet-50 pretrained on ImageNet and add 5 randomly initialized A2-blocks to build the 3D convolutional network",
+        "We proposed a double attention mechanism for deep Convolutional Neural Networks to overcome the limitation of local convolution operations"
+    ],
+    "key_statements": [
+        "Deep Convolutional Neural Networks (CNNs) have been successfully applied in image and video understanding during the past few years",
+        "Convolutional Neural Networks are inherently limited by their convolution operators which are dedicated to capturing local features and relations, e.g. from a 7 \u00d7 7 region, and are inefficient in modeling long-range interdependencies",
+        "We investigate the effect of our proposed A2-Net with extensive ablation studies and prove its superior performance through comparison with the state-of-the-arts on a number of public benchmarks for both image recognition and video action recognition tasks, including ImageNet-1k, Kinetics and UCF-101",
+        "We introduce this genetic formulation and propose the Double Attention block, where global information is first gathered by second-order attention pooling, and the gathered global features are adaptively distributed conditioned on the need of current local feature vi, by a second attention mechanism",
+        "Instead of distributing the same summarized global features to all locations like squeeze-and-excitation network [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>], we propose to get more flexibility by distributing an adaptive bag of visual primitives based on the need of feature vi at each location",
+        "It is interesting to observe that the implementation in Eqn (7) with right association can be further explained by the recent NL-Net [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>], where the first multiplication captures pair-wise relations between local features and gives an output relation matrix in Rdhw\u00d7dhw",
+        "The difference is apparent in the design of the pair-wise relation function, where we propose a new relation function, i.e. softmax (\u03b8(X)) softmax (\u03c1(X)) rather than using the Embedded Gaussian formulation [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>] to capture the pair-wise relations",
+        "Since NL-Net is the current state-of-the-art for video recognition tasks and closely related, we directly compare and extensively discuss performance between the two in the Experiments section",
+        "We evaluate the proposed A2-Net on ImageNet-1k [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>] image classification dataset, which contains more than 1.2 million high resolution images in 1, 000 categories",
+        "Learning Motion from Scratch on Kinetics We use ResNet-50 pretrained on ImageNet and add 5 randomly initialized A2-blocks to build the 3D convolutional network",
+        "We proposed a double attention mechanism for deep Convolutional Neural Networks to overcome the limitation of local convolution operations"
+    ],
+    "summary": [
+        "Deep Convolutional Neural Networks (CNNs) have been successfully applied in image and video understanding during the past few years.",
+        "We propose the double attention block for gathering and distributing long-range features, an efficient architecture that captures second-order feature statistics and makes adaptive feature assignment.",
+        "We present a component capable of gathering and distributing global features to each spatial-temporal location of the input, helping subsequent convolution layers sense the entire space immediately and capture complex relations.",
+        "The first row in Figure 1 (b) shows the second-order attention pooling that corresponds to Eqn (4), where both A and B are outputs of two different convolution layers transforming the input X.",
+        "In our work, we propose to apply attention pooling to gather visual primitives at different locations into a bag of global descriptors using softmax attention map and do not apply any low-rank constraint.",
+        "The step after gathering features from the entire space is to distribute them to each location of the input, such that the subsequent convolution layer can sense the global information even with a small convolutional kernel.",
+        "It is interesting to observe that the implementation in Eqn (7) with right association can be further explained by the recent NL-Net [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>], where the first multiplication captures pair-wise relations between local features and gives an output relation matrix in Rdhw\u00d7dhw.",
+        "Table 1 shows architecture details of the backbone CNNs for video recognition tasks, where we use ResNet-26 for all ablation studies and ResNet-29 as one of the baseline methods.",
+        "The network takes 8 frames as input and is trained for 32k iterations with a total batch size of 512 using 64 GPUs. The initial learning rate is set to 0.04 and decreased in a stepwise manner when training accuracy is saturated.",
+        "Compared with the state-of-the-art I3D [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>] and R(2+1)D [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>], our proposed model shows higher accuracy even with a less number of sampled frames, which once again confirms the superiority of the proposed double-attention mechanism.",
+        "The network is trained with a base learning rate of 0.01 which is decreased for three times with a factor 0.1, using 8 GPUs with a batch size of 104 clips and tested with 224 \u00d7 224 input resolution on single scale.",
+        "The proposed double attention method effectively captures the global information and distributes it to every location in a two-step attention manner.",
+        "Extensive ablation studies and experiments on a number of benchmark datasets, including ImageNet-1k, Kinetics and UCF-101, confirmed the effectiveness of the proposed A2-Net on both 2D image recognition tasks and 3D video recognition tasks.",
+        "We want to explore integrating the double attention in recent compact network architectures [<a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>, <a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>], to leverage the expressiveness of the proposed method for smaller, mobile-friendly models"
+    ],
+    "headline": "We propose the \u201cdouble attention block\u201d, a novel component that aggregates and propagates informative global features from the entire spatio-temporal space of input images/videos, enabling subsequent convolution layers to access features from the entire space efficiently",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Joao Carreira and Andrew Zisserman. Quo vadis, action recognition? a new model and the kinetics dataset. In 2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pages 4724\u20134733. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Carreira%2C%20Joao%20Zisserman%2C%20Andrew%20Quo%20vadis%2C%20action%20recognition%3F%20a%20new%20model%20and%20the%20kinetics%20dataset%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Carreira%2C%20Joao%20Zisserman%2C%20Andrew%20Quo%20vadis%2C%20action%20recognition%3F%20a%20new%20model%20and%20the%20kinetics%20dataset%202017"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Liang-Chieh Chen, George Papandreou, Iasonas Kokkinos, Kevin Murphy, and Alan L Yuille. Deeplab: Semantic image segmentation with deep convolutional nets, atrous convolution, and fully connected crfs. arXiv preprint arXiv:1606.00915, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.00915"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Tianqi Chen, Mu Li, Yutian Li, Min Lin, Naiyan Wang, Minjie Wang, Tianjun Xiao, Bing Xu, Chiyuan Zhang, and Zheng Zhang. Mxnet: A flexible and efficient machine learning library for heterogeneous distributed systems. arXiv preprint arXiv:1512.01274, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1512.01274"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Yunpeng Chen, Yannis Kalantidis, Jianshu Li, Shuicheng Yan, and Jiashi Feng. Multi-fiber networks for video recognition. In European Conference on Computer Vision (ECCV), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Yunpeng%20Kalantidis%2C%20Yannis%20Li%2C%20Jianshu%20Yan%2C%20Shuicheng%20Multi-fiber%20networks%20for%20video%20recognition%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Yunpeng%20Kalantidis%2C%20Yannis%20Li%2C%20Jianshu%20Yan%2C%20Shuicheng%20Multi-fiber%20networks%20for%20video%20recognition%202018"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Yunpeng Chen, Jianan Li, Huaxin Xiao, Xiaojie Jin, Shuicheng Yan, and Jiashi Feng. Dual path networks. In Advances in Neural Information Processing Systems, pages 4470\u20134478, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Yunpeng%20Li%2C%20Jianan%20Xiao%2C%20Huaxin%20Jin%2C%20Xiaojie%20Dual%20path%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Yunpeng%20Li%2C%20Jianan%20Xiao%2C%20Huaxin%20Jin%2C%20Xiaojie%20Dual%20path%20networks%202017"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Jeffrey Donahue, Lisa Anne Hendricks, Sergio Guadarrama, Marcus Rohrbach, Subhashini Venugopalan, Kate Saenko, and Trevor Darrell. Long-term recurrent convolutional networks for visual recognition and description. In Proceedings of the IEEE conference on computer vision and pattern recognition, pages 2625\u20132634, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Donahue%2C%20Jeffrey%20Hendricks%2C%20Lisa%20Anne%20Guadarrama%2C%20Sergio%20Rohrbach%2C%20Marcus%20Long-term%20recurrent%20convolutional%20networks%20for%20visual%20recognition%20and%20description%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Donahue%2C%20Jeffrey%20Hendricks%2C%20Lisa%20Anne%20Guadarrama%2C%20Sergio%20Rohrbach%2C%20Marcus%20Long-term%20recurrent%20convolutional%20networks%20for%20visual%20recognition%20and%20description%202015"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Rohit Girdhar and Deva Ramanan. Attentional pooling for action recognition. In Advances in Neural Information Processing Systems, pages 33\u201344, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Girdhar%2C%20Rohit%20Ramanan%2C%20Deva%20Attentional%20pooling%20for%20action%20recognition%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Girdhar%2C%20Rohit%20Ramanan%2C%20Deva%20Attentional%20pooling%20for%20action%20recognition%202017"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Ross Girshick. Fast r-cnn. arXiv preprint arXiv:1504.08083, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1504.08083"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. In Proceedings of the IEEE conference on computer vision and pattern recognition, pages 770\u2013778, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Identity mappings in deep residual networks. In European Conference on Computer Vision, pages 630\u2013645.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Identity%20mappings%20in%20deep%20residual%20networks",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Identity%20mappings%20in%20deep%20residual%20networks"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Jie Hu, Li Shen, and Gang Sun. Squeeze-and-excitation networks. 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hu%2C%20Jie%20Shen%2C%20Li%20Sun%2C%20Gang%20Squeeze-and-excitation%20networks%202018"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Will Kay, Joao Carreira, Karen Simonyan, Brian Zhang, Chloe Hillier, Sudheendra Vijayanarasimhan, Fabio Viola, Tim Green, Trevor Back, Paul Natsev, et al. The kinetics human action video dataset. arXiv preprint arXiv:1705.06950, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1705.06950"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Alex Krizhevsky, Ilya Sutskever, and Geoffrey E Hinton. Imagenet classification with deep convolutional neural networks. In Advances in neural information processing systems, pages 1097\u20131105, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Hinton%2C%20Geoffrey%20E.%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Hinton%2C%20Geoffrey%20E.%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Peihua Li, Jiangtao Xie, Qilong Wang, and Wangmeng Zuo. Is second-order information helpful for large-scale visual recognition? arXiv preprint arXiv:1703.08050, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.08050"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Tsung-Yu Lin, Aruni RoyChowdhury, and Subhransu Maji. Bilinear cnn models for fine-grained visual recognition. In Proceedings of the IEEE International Conference on Computer Vision, pages 1449\u20131457, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20Tsung-Yu%20RoyChowdhury%2C%20Aruni%20Maji%2C%20Subhransu%20Bilinear%20cnn%20models%20for%20fine-grained%20visual%20recognition%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lin%2C%20Tsung-Yu%20RoyChowdhury%2C%20Aruni%20Maji%2C%20Subhransu%20Bilinear%20cnn%20models%20for%20fine-grained%20visual%20recognition%202015"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Ningning Ma, Xiangyu Zhang, Hai-Tao Zheng, and Jian Sun. Shufflenet v2: Practical guidelines for efficient cnn architecture design. arXiv preprint arXiv:1807.11164, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1807.11164"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Joe Yue-Hei Ng, Matthew Hausknecht, Sudheendra Vijayanarasimhan, Oriol Vinyals, Rajat Monga, and George Toderici. Beyond short snippets: Deep networks for video classification. In Computer Vision and Pattern Recognition (CVPR), 2015 IEEE Conference on, pages 4694\u20134702. IEEE, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ng%2C%20Joe%20Yue-Hei%20Hausknecht%2C%20Matthew%20Vijayanarasimhan%2C%20Sudheendra%20Vinyals%2C%20Oriol%20Beyond%20short%20snippets%3A%20Deep%20networks%20for%20video%20classification%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ng%2C%20Joe%20Yue-Hei%20Hausknecht%2C%20Matthew%20Vijayanarasimhan%2C%20Sudheendra%20Vinyals%2C%20Oriol%20Beyond%20short%20snippets%3A%20Deep%20networks%20for%20video%20classification%202015"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Adam Paszke, Sam Gross, Soumith Chintala, and Gregory Chanan. Pytorch, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Adam%20Paszke%20Sam%20Gross%20Soumith%20Chintala%20and%20Gregory%20Chanan%20Pytorch%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Adam%20Paszke%20Sam%20Gross%20Soumith%20Chintala%20and%20Gregory%20Chanan%20Pytorch%202017"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Mark Sandler, Andrew Howard, Menglong Zhu, Andrey Zhmoginov, and Liang-Chieh Chen. Inverted residuals and linear bottlenecks: Mobile networks for classification, detection and segmentation. arXiv preprint arXiv:1801.04381, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1801.04381"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Khurram Soomro, Amir Roshan Zamir, and Mubarak Shah. Ucf101: A dataset of 101 human actions classes from videos in the wild. arXiv preprint arXiv:1212.0402, 2012.",
+            "arxiv_url": "https://arxiv.org/pdf/1212.0402"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Du Tran, Lubomir Bourdev, Rob Fergus, Lorenzo Torresani, and Manohar Paluri. Learning spatiotemporal features with 3d convolutional networks. In Computer Vision (ICCV), 2015 IEEE International Conference on, pages 4489\u20134497. IEEE, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tran%2C%20Du%20Bourdev%2C%20Lubomir%20Fergus%2C%20Rob%20Torresani%2C%20Lorenzo%20Learning%20spatiotemporal%20features%20with%203d%20convolutional%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tran%2C%20Du%20Bourdev%2C%20Lubomir%20Fergus%2C%20Rob%20Torresani%2C%20Lorenzo%20Learning%20spatiotemporal%20features%20with%203d%20convolutional%20networks%202015"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Du Tran, Jamie Ray, Zheng Shou, Shih-Fu Chang, and Manohar Paluri. Convnet architecture search for spatiotemporal feature learning. arXiv preprint arXiv:1708.05038, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1708.05038"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Du Tran, Heng Wang, Lorenzo Torresani, Jamie Ray, Yann LeCun, and Manohar Paluri. A closer look at spatiotemporal convolutions for action recognition. 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tran%2C%20Du%20Wang%2C%20Heng%20Torresani%2C%20Lorenzo%20Ray%2C%20Jamie%20A%20closer%20look%20at%20spatiotemporal%20convolutions%20for%20action%20recognition%202018"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, \u0141ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In Advances in Neural Information Processing Systems, pages 6000\u20136010, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ashish%20Vaswani%20Noam%20Shazeer%20Niki%20Parmar%20Jakob%20Uszkoreit%20Llion%20Jones%20Aidan%20N%20Gomez%20%C5%81ukasz%20Kaiser%20and%20Illia%20Polosukhin%20Attention%20is%20all%20you%20need%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20pages%2060006010%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ashish%20Vaswani%20Noam%20Shazeer%20Niki%20Parmar%20Jakob%20Uszkoreit%20Llion%20Jones%20Aidan%20N%20Gomez%20%C5%81ukasz%20Kaiser%20and%20Illia%20Polosukhin%20Attention%20is%20all%20you%20need%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20pages%2060006010%202017"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Xiaolong Wang, Ross Girshick, Abhinav Gupta, and Kaiming He. Non-local neural networks. In Computer Vision and Pattern Recognition (CVPR), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Xiaolong%20Girshick%2C%20Ross%20Gupta%2C%20Abhinav%20He%2C%20Kaiming%20Non-local%20neural%20networks%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Xiaolong%20Girshick%2C%20Ross%20Gupta%2C%20Abhinav%20He%2C%20Kaiming%20Non-local%20neural%20networks%202018"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Saining Xie, Ross Girshick, Piotr Doll\u00e1r, Zhuowen Tu, and Kaiming He. Aggregated residual transformations for deep neural networks. In 2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pages 5987\u20135995. IEEE, 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xie%2C%20Saining%20Girshick%2C%20Ross%20Doll%C3%A1r%2C%20Piotr%20Tu%2C%20Zhuowen%20Aggregated%20residual%20transformations%20for%20deep%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xie%2C%20Saining%20Girshick%2C%20Ross%20Doll%C3%A1r%2C%20Piotr%20Tu%2C%20Zhuowen%20Aggregated%20residual%20transformations%20for%20deep%20neural%20networks%202017"
+        }
+    ]
+}

@@ -1,0 +1,309 @@
+{
+    "filename": "7424-variational-memory-encoder-decoder.pdf",
+    "metadata": {
+        "title": "Variational Memory Encoder-Decoder",
+        "author": "Hung Le, Truyen Tran, Thin Nguyen, Svetha Venkatesh",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7424-variational-memory-encoder-decoder.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Introducing variability while maintaining coherence is a core task in learning to generate utterances in conversation. Standard neural encoder-decoder models and their extensions using conditional variational autoencoder often result in either trivial or digressive responses. To overcome this, we explore a novel approach that injects variability into neural encoder-decoder via the use of external memory as a mixture model, namely Variational Memory Encoder-Decoder (VMED). By associating each memory read with a mode in the latent mixture distribution at each timestep, our model can capture the variability observed in sequential data such as natural conversations. We empirically compare the proposed model against other recent approaches on various conversational datasets. The results show that VMED consistently achieves significant improvement over others in both metricbased and qualitative evaluations."
+    },
+    "keywords": [
+        {
+            "term": "recurrent neural networks",
+            "url": "https://en.wikipedia.org/wiki/recurrent_neural_networks"
+        },
+        {
+            "term": "external memory",
+            "url": "https://en.wikipedia.org/wiki/external_memory"
+        },
+        {
+            "term": "mixture model",
+            "url": "https://en.wikipedia.org/wiki/mixture_model"
+        },
+        {
+            "term": "generative model",
+            "url": "https://en.wikipedia.org/wiki/generative_model"
+        },
+        {
+            "term": "Mixture of Gaussians",
+            "url": "https://en.wikipedia.org/wiki/Mixture_of_Gaussians"
+        }
+    ],
+    "highlights": [
+        "Recent advances in generative modeling have led to exploration of generative tasks",
+        "Built upon conditional VAE and partly inspired by VRNN [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>], we introduce a novel memory-augmented variational recurrent network dubbed Variational Memory Encoder-Decoder (VMED)",
+        "Unlike the VRNN which uses hidden values of recurrent neural networks to model the latent distribution as a Gaussian, our Variational Memory Encoder-Decoder uses read values r from an external memory M as a Mixture of Gaussians (MoG) to model the latent space",
+        "We propose a novel approach to sequence generation called Variational Memory Encoder-Decoder (VMED) that introduces variability into encoder-decoder architecture via the use of external memory as mixture model",
+        "To accommodate the Mixture of Gaussians, we employ a KL approximation and we demonstrate that minimizing this approximation is equivalent to minimizing the KL divergence",
+        "We derive an upper bound on our total timestep-wise KL divergence and indicate that the optimization of this upper bound is equivalent to fitting a continuous function by an scaled Mixture of Gaussians, which is in theory possible regardless of the function form"
+    ],
+    "key_statements": [
+        "Recent advances in generative modeling have led to exploration of generative tasks",
+        "We propose a novel hybrid approach that integrates memory augmented neural networks and VAE, called Variational Memory Encoder-Decoder (VMED), to model the sequential properties and inject variability in sequence generation tasks",
+        "Built upon conditional VAE and partly inspired by VRNN [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>], we introduce a novel memory-augmented variational recurrent network dubbed Variational Memory Encoder-Decoder (VMED)",
+        "Unlike the VRNN which uses hidden values of recurrent neural networks to model the latent distribution as a Gaussian, our Variational Memory Encoder-Decoder uses read values r from an external memory M as a Mixture of Gaussians (MoG) to model the latent space",
+        "Unlike other designs of conditional VAE where there is often only one conditional VAE with a Gaussian prior for the whole decoding process, our model keeps reading the external memory to produce the prior as a Mixture of Gaussians at every timestep",
+        "We propose a novel approach to sequence generation called Variational Memory Encoder-Decoder (VMED) that introduces variability into encoder-decoder architecture via the use of external memory as mixture model",
+        "To accommodate the Mixture of Gaussians, we employ a KL approximation and we demonstrate that minimizing this approximation is equivalent to minimizing the KL divergence",
+        "We derive an upper bound on our total timestep-wise KL divergence and indicate that the optimization of this upper bound is equivalent to fitting a continuous function by an scaled Mixture of Gaussians, which is in theory possible regardless of the function form",
+        "The results demonstrate that Variational Memory Encoder-Decoder outperforms recent advances both quantitatively and qualitatively"
+    ],
+    "summary": [
+        "Recent advances in generative modeling have led to exploration of generative tasks.",
+        "We propose a novel hybrid approach that integrates MANN and VAE, called Variational Memory Encoder-Decoder (VMED), to model the sequential properties and inject variability in sequence generation tasks.",
+        "By modeling the latent space as an MoG where each mode associates with some memory slot, we aim to capture multiple modes of the speaker\u2019s intention and mood when producing a word in the response.",
+        "Unlike other designs of CVAE where there is often only one CVAE with a Gaussian prior for the whole decoding process, our model keeps reading the external memory to produce the prior as a Mixture of Gaussians at every timestep.",
+        "At the t-th step of generating an utterance in the output sequence, the decoder will read from the memory K read values, representing K modes of the MoG.",
+        "We treat the mean \u03bcti,x and standard deviation (s.d.) \u03c3ti,x of each Gaussian distribution in the prior as neural functions of the context sequence x and read vectors from the memory.",
+        "We follow a recurrent generative process by alternatively using the memory to compute the MoG and using latent variable z sampled from the MoG to update the memory and produce the output conditional distribution.",
+        "The decoder uses the prior for generating latent variable zt, from which the output is computed.",
+        "We show that by modeling the prior as MoG and the posterior as Gaussian, minimizing the approximation results in KL divergence minimization.",
+        "If at each decoding i=1 step, minimizing Dvar results in adequate KL divergence such that the prior is optimized close to the neural posterior, according to Chebyshev\u2019s sum inequality, we can derive an upper bound on the total timestep-wise KL divergence as:",
+        "In contrast to this design, our VMED uses recurrent latent variable approach [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>], that is, our model requires a CVAE for each step of generation.",
+        "On the contrary, memory slots are strongly correlated with each others, and modes in our MoG work together to define the shape of the latent distributions at specific timestep.",
+        "To the best of our knowledge, our work is the first attempt to use an external memory to induce mixture models for sequence generation problems.",
+        "We propose a novel approach to sequence generation called Variational Memory Encoder-Decoder (VMED) that introduces variability into encoder-decoder architecture via the use of external memory as mixture model.",
+        "Another aspect would be multi-person dialog setting, where our memory as mixture model may be useful to capture more complex modes of speaking in the dialog"
+    ],
+    "headline": "We explore a novel approach that injects variability into neural encoder-decoder via the use of external memory as a mixture model, namely Variational Memory Encoder-Decoder ",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Athanassia Bacharoglou. Approximation of probability distributions by convex mixtures of gaussian measures. Proceedings of the American Mathematical Society, 138(7):2619\u20132628, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bacharoglou%2C%20Athanassia%20Approximation%20of%20probability%20distributions%20by%20convex%20mixtures%20of%20gaussian%20measures%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bacharoglou%2C%20Athanassia%20Approximation%20of%20probability%20distributions%20by%20convex%20mixtures%20of%20gaussian%20measures%202010"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio. Neural machine translation by jointly learning to align and translate. Proceedings of the International Conference on Learning Representations, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bahdanau%2C%20Dzmitry%20Cho%2C%20Kyunghyun%20Bengio%2C%20Yoshua%20Neural%20machine%20translation%20by%20jointly%20learning%20to%20align%20and%20translate%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bahdanau%2C%20Dzmitry%20Cho%2C%20Kyunghyun%20Bengio%2C%20Yoshua%20Neural%20machine%20translation%20by%20jointly%20learning%20to%20align%20and%20translate%202015"
+        },
+        {
+            "id": "3",
+            "entry": "[3] J\u00f6rg Bornschein, Andriy Mnih, Daniel Zoran, and Danilo Jimenez Rezende. Variational memory addressing in generative models. In Advances in Neural Information Processing Systems, pages 3923\u20133932, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bornschein%2C%20J%C3%B6rg%20Mnih%2C%20Andriy%20Zoran%2C%20Daniel%20Rezende%2C%20Danilo%20Jimenez%20Variational%20memory%20addressing%20in%20generative%20models%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bornschein%2C%20J%C3%B6rg%20Mnih%2C%20Andriy%20Zoran%2C%20Daniel%20Rezende%2C%20Danilo%20Jimenez%20Variational%20memory%20addressing%20in%20generative%20models%202017"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Samuel R Bowman, Luke Vilnis, Oriol Vinyals, Andrew Dai, Rafal Jozefowicz, and Samy Bengio. Generating sentences from a continuous space. In Proceedings of The SIGNLL Conference on Computational Natural Language Learning, pages 10\u201321, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bowman%2C%20Samuel%20R.%20Vilnis%2C%20Luke%20Vinyals%2C%20Oriol%20Dai%2C%20Andrew%20Generating%20sentences%20from%20a%20continuous%20space%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bowman%2C%20Samuel%20R.%20Vilnis%2C%20Luke%20Vinyals%2C%20Oriol%20Dai%2C%20Andrew%20Generating%20sentences%20from%20a%20continuous%20space%202016"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Denny Britz, Melody Guan, and Minh-Thang Luong. Efficient attention using a fixed-size memory representation. In Proceedings of the Conference on Empirical Methods in Natural Language Processing, pages 392\u2013400, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Britz%2C%20Denny%20Guan%2C%20Melody%20Luong%2C%20Minh-Thang%20Efficient%20attention%20using%20a%20fixed-size%20memory%20representation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Britz%2C%20Denny%20Guan%2C%20Melody%20Luong%2C%20Minh-Thang%20Efficient%20attention%20using%20a%20fixed-size%20memory%20representation%202017"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Boxing Chen and Colin Cherry. A systematic comparison of smoothing techniques for sentence-level bleu. In Proceedings of the Ninth Workshop on Statistical Machine Translation, pages 362\u2013367, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20Boxing%20Chen%20and%20Colin%20Cherry.%20A%20systematic%20comparison%20of%20smoothing%20techniques%20for%20sentence-level%20bleu%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Boxing%20Chen%20and%20Colin%20Cherry.%20A%20systematic%20comparison%20of%20smoothing%20techniques%20for%20sentence-level%20bleu%202014"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Hongshen Chen, Zhaochun Ren, Jiliang Tang, Yihong Eric Zhao, and Dawei Yin. Hierarchical variational memory network for dialogue generation. In Proceedings of the World Wide Web Conference on World Wide Web, pages 1653\u20131662. International World Wide Web Conferences Steering Committee, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Hongshen%20Ren%2C%20Zhaochun%20Tang%2C%20Jiliang%20Zhao%2C%20Yihong%20Eric%20Hierarchical%20variational%20memory%20network%20for%20dialogue%20generation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Hongshen%20Ren%2C%20Zhaochun%20Tang%2C%20Jiliang%20Zhao%2C%20Yihong%20Eric%20Hierarchical%20variational%20memory%20network%20for%20dialogue%20generation%202018"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Junyoung Chung, Kyle Kastner, Laurent Dinh, Kratarth Goel, Aaron C Courville, and Yoshua Bengio. A recurrent latent variable model for sequential data. In Advances in Neural Information Processing Systems, pages 2980\u20132988, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chung%2C%20Junyoung%20Kastner%2C%20Kyle%20Dinh%2C%20Laurent%20Goel%2C%20Kratarth%20and%20Yoshua%20Bengio.%20A%20recurrent%20latent%20variable%20model%20for%20sequential%20data%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chung%2C%20Junyoung%20Kastner%2C%20Kyle%20Dinh%2C%20Laurent%20Goel%2C%20Kratarth%20and%20Yoshua%20Bengio.%20A%20recurrent%20latent%20variable%20model%20for%20sequential%20data%202015"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Nat Dilokthanakul, Pedro AM Mediano, Marta Garnelo, Matthew CH Lee, Hugh Salimbeni, Kai Arulkumaran, and Murray Shanahan. Deep unsupervised clustering with gaussian mixture variational autoencoders. arXiv preprint arXiv:1611.02648, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.02648"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Gabriel Forgues, Joelle Pineau, Jean-Marie Larchev\u00eaque, and R\u00e9al Tremblay. Bootstrapping dialog systems with word embeddings. In Nips, Modern Machine Learning and Natural Language Processing Workshop, volume 2, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gabriel%20Forgues%2C%20Joelle%20Pineau%2C%20Jean-Marie%20Larchev%C3%AAque%20Tremblay%2C%20R%C3%A9al%20Bootstrapping%20dialog%20systems%20with%20word%20embeddings%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gabriel%20Forgues%2C%20Joelle%20Pineau%2C%20Jean-Marie%20Larchev%C3%AAque%20Tremblay%2C%20R%C3%A9al%20Bootstrapping%20dialog%20systems%20with%20word%20embeddings%202014"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Mevlana Gemici, Chia-Chun Hung, Adam Santoro, Greg Wayne, Shakir Mohamed, Danilo J Rezende, David Amos, and Timothy Lillicrap. Generative temporal models with memory. arXiv preprint arXiv:1702.04649, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1702.04649"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Ian Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, and Yoshua Bengio. Generative adversarial nets. In Advances in Neural Information Processing Systems, pages 2672\u20132680, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goodfellow%2C%20Ian%20Pouget-Abadie%2C%20Jean%20Mirza%2C%20Mehdi%20Xu%2C%20Bing%20Generative%20adversarial%20nets%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goodfellow%2C%20Ian%20Pouget-Abadie%2C%20Jean%20Mirza%2C%20Mehdi%20Xu%2C%20Bing%20Generative%20adversarial%20nets%202014"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Alex Graves. Generating sequences with recurrent neural networks. arXiv preprint arXiv:1308.0850, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1308.0850"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Alex Graves, Greg Wayne, Malcolm Reynolds, Tim Harley, Ivo Danihelka, Agnieszka Grabska-Barwinska, Sergio G\u00f3mez Colmenarejo, Edward Grefenstette, Tiago Ramalho, John Agapiou, et al. Hybrid computing using a neural network with dynamic external memory. Nature, 538(7626):471\u2013476, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Graves%2C%20Alex%20Wayne%2C%20Greg%20Reynolds%2C%20Malcolm%20Harley%2C%20Tim%20Hybrid%20computing%20using%20a%20neural%20network%20with%20dynamic%20external%20memory%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Graves%2C%20Alex%20Wayne%2C%20Greg%20Reynolds%2C%20Malcolm%20Harley%2C%20Tim%20Hybrid%20computing%20using%20a%20neural%20network%20with%20dynamic%20external%20memory%202016"
+        },
+        {
+            "id": "15",
+            "entry": "[15] John R Hershey and Peder A Olsen. Approximating the kullback leibler divergence between gaussian mixture models. In IEEE International Conference on Acoustics, Speech and Signal Processing., 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hershey%2C%20John%20R.%20Olsen%2C%20Peder%20A.%20Approximating%20the%20kullback%20leibler%20divergence%20between%20gaussian%20mixture%20models%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hershey%2C%20John%20R.%20Olsen%2C%20Peder%20A.%20Approximating%20the%20kullback%20leibler%20divergence%20between%20gaussian%20mixture%20models%202007"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Zhuxi Jiang, Yin Zheng, Huachun Tan, Bangsheng Tang, and Hanning Zhou. Variational deep embedding: An unsupervised and generative approach to clustering. In Proceedings of the International Joint Conference on Artificial Intelligence, pages 1965\u20131972. International Joint Conference on Artificial Intelligence, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jiang%2C%20Zhuxi%20Zheng%2C%20Yin%20Tan%2C%20Huachun%20Tang%2C%20Bangsheng%20Variational%20deep%20embedding%3A%20An%20unsupervised%20and%20generative%20approach%20to%20clustering%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jiang%2C%20Zhuxi%20Zheng%2C%20Yin%20Tan%2C%20Huachun%20Tang%2C%20Bangsheng%20Variational%20deep%20embedding%3A%20An%20unsupervised%20and%20generative%20approach%20to%20clustering%202017"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Nal Kalchbrenner and Phil Blunsom. Recurrent continuous translation models. In Proceedings of the Conference on Empirical Methods in Natural Language Processing, pages 1700\u20131709, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20Nal%20Kalchbrenner%20and%20Phil%20Blunsom.%20Recurrent%20continuous%20translation%20models%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Nal%20Kalchbrenner%20and%20Phil%20Blunsom.%20Recurrent%20continuous%20translation%20models%202013"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Diederik P Kingma, Shakir Mohamed, Danilo Jimenez Rezende, and Max Welling. Semisupervised learning with deep generative models. In Advances in Neural Information Processing Systems, pages 3581\u20133589, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Mohamed%2C%20Shakir%20Rezende%2C%20Danilo%20Jimenez%20Welling%2C%20Max%20Semisupervised%20learning%20with%20deep%20generative%20models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Mohamed%2C%20Shakir%20Rezende%2C%20Danilo%20Jimenez%20Welling%2C%20Max%20Semisupervised%20learning%20with%20deep%20generative%20models%202014"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Diederik P Kingma and Max Welling. Auto-encoding variational bayes. In Proceedings of the International Conference on Learning Representations, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Welling%2C%20Max%20Auto-encoding%20variational%20bayes%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Welling%2C%20Max%20Auto-encoding%20variational%20bayes%202014"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Hung Le, Truyen Tran, and Svetha Venkatesh. Dual control memory augmented neural networks for treatment recommendations. In Advances in Knowledge Discovery and Data Mining, pages 273\u2013284, Cham, 2018. Springer International Publishing.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Le%2C%20Hung%20Tran%2C%20Truyen%20Venkatesh%2C%20Svetha%20Dual%20control%20memory%20augmented%20neural%20networks%20for%20treatment%20recommendations",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Le%2C%20Hung%20Tran%2C%20Truyen%20Venkatesh%2C%20Svetha%20Dual%20control%20memory%20augmented%20neural%20networks%20for%20treatment%20recommendations"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Hung Le, Truyen Tran, and Svetha Venkatesh. Dual memory neural computer for asynchronous two-view sequential learning. In Proceedings of the 24th ACM SIGKDD International Conference on Knowledge Discovery; Data Mining, KDD \u201918, pages 1637\u20131645, New York, NY, USA, 2018. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Le%2C%20Hung%20Tran%2C%20Truyen%20Venkatesh%2C%20Svetha%20Dual%20memory%20neural%20computer%20for%20asynchronous%20two-view%20sequential%20learning%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Le%2C%20Hung%20Tran%2C%20Truyen%20Venkatesh%2C%20Svetha%20Dual%20memory%20neural%20computer%20for%20asynchronous%20two-view%20sequential%20learning%202018"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Omer Levy and Yoav Goldberg. Neural word embedding as implicit matrix factorization. In Advances in Neural Information Processing Systems, pages 2177\u20132185, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Levy%2C%20Omer%20Goldberg%2C%20Yoav%20Neural%20word%20embedding%20as%20implicit%20matrix%20factorization%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Levy%2C%20Omer%20Goldberg%2C%20Yoav%20Neural%20word%20embedding%20as%20implicit%20matrix%20factorization%202014"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Jiwei Li, Michel Galley, Chris Brockett, Jianfeng Gao, and Bill Dolan. A diversity-promoting objective function for neural conversation models. In Proceedings of the Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, pages 110\u2013119, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Jiwei%20Galley%2C%20Michel%20Brockett%2C%20Chris%20Gao%2C%20Jianfeng%20A%20diversity-promoting%20objective%20function%20for%20neural%20conversation%20models%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20Jiwei%20Galley%2C%20Michel%20Brockett%2C%20Chris%20Gao%2C%20Jianfeng%20A%20diversity-promoting%20objective%20function%20for%20neural%20conversation%20models%202016"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Pierre Lison and Serge Bibauw. Not all dialogues are created equal: Instance weighting for neural conversational models. In Proceedings of the Annual SIGdial Meeting on Discourse and Dialogue, pages 384\u2013394, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lison%2C%20Pierre%20Bibauw%2C%20Serge%20Not%20all%20dialogues%20are%20created%20equal%3A%20Instance%20weighting%20for%20neural%20conversational%20models%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lison%2C%20Pierre%20Bibauw%2C%20Serge%20Not%20all%20dialogues%20are%20created%20equal%3A%20Instance%20weighting%20for%20neural%20conversational%20models%202017"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Vladimir Maz\u2019ya and Gunther Schmidt. On approximate approximations using gaussian kernels. IMA Journal of Numerical Analysis, 16(1):13\u201329, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Maz%E2%80%99ya%2C%20Vladimir%20Schmidt%2C%20Gunther%20On%20approximate%20approximations%20using%20gaussian%20kernels%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Maz%E2%80%99ya%2C%20Vladimir%20Schmidt%2C%20Gunther%20On%20approximate%20approximations%20using%20gaussian%20kernels%201996"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Eric Nalisnick, Lars Hertel, and Padhraic Smyth. Approximate inference for deep latent gaussian mixtures. In NIPS Workshop on Bayesian Deep Learning, volume 2, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nalisnick%2C%20Eric%20Hertel%2C%20Lars%20Smyth%2C%20Padhraic%20Approximate%20inference%20for%20deep%20latent%20gaussian%20mixtures%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nalisnick%2C%20Eric%20Hertel%2C%20Lars%20Smyth%2C%20Padhraic%20Approximate%20inference%20for%20deep%20latent%20gaussian%20mixtures%202016"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Ramesh Nallapati, Bowen Zhou, Cicero dos Santos, Caglar Gulcehre, and Bing Xiang. Abstractive text summarization using sequence-to-sequence rnns and beyond. In Proceedings of the SIGNLL Conference on Computational Natural Language Learning, pages 280\u2013290, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nallapati%2C%20Ramesh%20Zhou%2C%20Bowen%20dos%20Santos%2C%20Cicero%20Gulcehre%2C%20Caglar%20Abstractive%20text%20summarization%20using%20sequence-to-sequence%20rnns%20and%20beyond%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nallapati%2C%20Ramesh%20Zhou%2C%20Bowen%20dos%20Santos%2C%20Cicero%20Gulcehre%2C%20Caglar%20Abstractive%20text%20summarization%20using%20sequence-to-sequence%20rnns%20and%20beyond%202016"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Aaditya Prakash, Siyuan Zhao, Sadid A Hasan, Vivek V Datla, Kathy Lee, Ashequl Qadir, Joey Liu, and Oladimeji Farri. Condensed memory networks for clinical diagnostic inferencing. In Proceedings of the AAAI Conference on Artificial Intelligence, pages 3274\u20133280, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Prakash%2C%20Aaditya%20Zhao%2C%20Siyuan%20Hasan%2C%20Sadid%20A.%20Datla%2C%20Vivek%20V.%20Condensed%20memory%20networks%20for%20clinical%20diagnostic%20inferencing%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Prakash%2C%20Aaditya%20Zhao%2C%20Siyuan%20Hasan%2C%20Sadid%20A.%20Datla%2C%20Vivek%20V.%20Condensed%20memory%20networks%20for%20clinical%20diagnostic%20inferencing%202017"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Danilo Jimenez Rezende, Shakir Mohamed, and Daan Wierstra. Stochastic backpropagation and approximate inference in deep generative models. In Proceedings of the International Conference on International Conference on Machine Learning, pages II\u20131278. JMLR. org, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rezende%2C%20Danilo%20Jimenez%20Mohamed%2C%20Shakir%20Wierstra%2C%20Daan%20Stochastic%20backpropagation%20and%20approximate%20inference%20in%20deep%20generative%20models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rezende%2C%20Danilo%20Jimenez%20Mohamed%2C%20Shakir%20Wierstra%2C%20Daan%20Stochastic%20backpropagation%20and%20approximate%20inference%20in%20deep%20generative%20models%202014"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Iulian Vlad Serban, Alessandro Sordoni, Ryan Lowe, Laurent Charlin, Joelle Pineau, Aaron C Courville, and Yoshua Bengio. A hierarchical latent variable encoder-decoder model for generating dialogues. In Proceedings of the AAAI Conference on Artificial Intelligence, pages 3295\u20133301, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Serban%2C%20Iulian%20Vlad%20Sordoni%2C%20Alessandro%20Lowe%2C%20Ryan%20Charlin%2C%20Laurent%20and%20Yoshua%20Bengio.%20A%20hierarchical%20latent%20variable%20encoder-decoder%20model%20for%20generating%20dialogues%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Serban%2C%20Iulian%20Vlad%20Sordoni%2C%20Alessandro%20Lowe%2C%20Ryan%20Charlin%2C%20Laurent%20and%20Yoshua%20Bengio.%20A%20hierarchical%20latent%20variable%20encoder-decoder%20model%20for%20generating%20dialogues%202017"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Xiaoyu Shen, Hui Su, Yanran Li, Wenjie Li, Shuzi Niu, Yang Zhao, Akiko Aizawa, and Guoping Long. A conditional variational framework for dialog generation. In Proceedings of the Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers), volume 2, pages 504\u2013509, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shen%2C%20Xiaoyu%20Su%2C%20Hui%20Li%2C%20Yanran%20Li%2C%20Wenjie%20A%20conditional%20variational%20framework%20for%20dialog%20generation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shen%2C%20Xiaoyu%20Su%2C%20Hui%20Li%2C%20Yanran%20Li%2C%20Wenjie%20A%20conditional%20variational%20framework%20for%20dialog%20generation%202017"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Rui Shu, James Brofos, Frank Zhang, Hung Hai Bui, Mohammad Ghavamzadeh, and Mykel Kochenderfer. Stochastic video prediction with conditional density estimation. In ECCV Workshop on Action and Anticipation for Visual Learning, volume 2, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shu%2C%20Rui%20Brofos%2C%20James%20Zhang%2C%20Frank%20Bui%2C%20Hung%20Hai%20Stochastic%20video%20prediction%20with%20conditional%20density%20estimation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shu%2C%20Rui%20Brofos%2C%20James%20Zhang%2C%20Frank%20Bui%2C%20Hung%20Hai%20Stochastic%20video%20prediction%20with%20conditional%20density%20estimation%202016"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Sainbayar Sukhbaatar, arthur szlam, Jason Weston, and Rob Fergus. End-to-end memory networks. In C. Cortes, N. D. Lawrence, D. D. Lee, M. Sugiyama, and R. Garnett, editors, Advances in Neural Information Processing Systems, pages 2440\u20132448. 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sukhbaatar%2C%20Sainbayar%20arthur%20szlam%20Weston%2C%20Jason%20Fergus%2C%20Rob%20End-to-end%20memory%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sukhbaatar%2C%20Sainbayar%20arthur%20szlam%20Weston%2C%20Jason%20Fergus%2C%20Rob%20End-to-end%20memory%20networks%202015"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Ilya Sutskever, Oriol Vinyals, and Quoc VV Le. Sequence to sequence learning with neural networks. In Advances in Neural Information Processing Systems, pages 3104\u20133112, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ilya%20Sutskever%2C%20Oriol%20Vinyals%20Le%2C%20Quoc%20VV%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ilya%20Sutskever%2C%20Oriol%20Vinyals%20Le%2C%20Quoc%20VV%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Oriol Vinyals and Quoc Le. A neural conversational model. arXiv preprint arXiv:1506.05869, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1506.05869"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Liwei Wang, Alexander Schwing, and Svetlana Lazebnik. Diverse and accurate image description using a variational auto-encoder with an additive gaussian encoding space. In I. Guyon, U. V. Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems, pages 5756\u20135766. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Liwei%20Schwing%2C%20Alexander%20Lazebnik%2C%20Svetlana%20Diverse%20and%20accurate%20image%20description%20using%20a%20variational%20auto-encoder%20with%20an%20additive%20gaussian%20encoding%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Liwei%20Schwing%2C%20Alexander%20Lazebnik%2C%20Svetlana%20Diverse%20and%20accurate%20image%20description%20using%20a%20variational%20auto-encoder%20with%20an%20additive%20gaussian%20encoding%202017"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Mingxuan Wang, Zhengdong Lu, Hang Li, and Qun Liu. Memory-enhanced decoder for neural machine translation. In Proceedings of the Conference on Empirical Methods in Natural Language Processing, pages 278\u2013286, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Mingxuan%20Lu%2C%20Zhengdong%20Li%2C%20Hang%20Liu%2C%20Qun%20Memory-enhanced%20decoder%20for%20neural%20machine%20translation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Mingxuan%20Lu%2C%20Zhengdong%20Li%2C%20Hang%20Liu%2C%20Qun%20Memory-enhanced%20decoder%20for%20neural%20machine%20translation%202016"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Tsung-Hsien Wen, Yishu Miao, Phil Blunsom, and Steve Young. Latent intention dialogue models. In Proceedings of the International Conference on Machine Learning, pages 3732\u2013 3741, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wen%2C%20Tsung-Hsien%20Miao%2C%20Yishu%20Blunsom%2C%20Phil%20Young%2C%20Steve%20Latent%20intention%20dialogue%20models%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wen%2C%20Tsung-Hsien%20Miao%2C%20Yishu%20Blunsom%2C%20Phil%20Young%2C%20Steve%20Latent%20intention%20dialogue%20models%202017"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Biao Zhang, Deyi Xiong, Hong Duan, Min Zhang, et al. Variational neural machine translation. In Proceedings of the Conference on Empirical Methods in Natural Language Processing, pages 521\u2013530, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Biao%20Xiong%2C%20Deyi%20Duan%2C%20Hong%20Zhang%2C%20Min%20Variational%20neural%20machine%20translation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Biao%20Xiong%2C%20Deyi%20Duan%2C%20Hong%20Zhang%2C%20Min%20Variational%20neural%20machine%20translation%202016"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Tiancheng Zhao, Ran Zhao, and Maxine Eskenazi. Learning discourse-level diversity for neural dialog models using conditional variational autoencoders. In Proceedings of the Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), volume 1, pages 654\u2013664, 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhao%2C%20Tiancheng%20Zhao%2C%20Ran%20Eskenazi%2C%20Maxine%20Learning%20discourse-level%20diversity%20for%20neural%20dialog%20models%20using%20conditional%20variational%20autoencoders%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhao%2C%20Tiancheng%20Zhao%2C%20Ran%20Eskenazi%2C%20Maxine%20Learning%20discourse-level%20diversity%20for%20neural%20dialog%20models%20using%20conditional%20variational%20autoencoders%202017"
+        }
+    ]
+}

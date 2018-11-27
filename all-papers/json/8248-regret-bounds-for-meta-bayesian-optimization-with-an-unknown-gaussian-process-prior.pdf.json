@@ -1,0 +1,413 @@
+{
+    "filename": "8248-regret-bounds-for-meta-bayesian-optimization-with-an-unknown-gaussian-process-prior.pdf",
+    "metadata": {
+        "title": "Regret bounds for meta Bayesian optimization with an unknown Gaussian process prior",
+        "author": "Zi Wang, Beomjoon Kim, Leslie Pack Kaelbling",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8248-regret-bounds-for-meta-bayesian-optimization-with-an-unknown-gaussian-process-prior.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Bayesian optimization usually assumes that a Bayesian prior is given. However, the strong theoretical guarantees in Bayesian optimization are often regrettably compromised in practice because of unknown parameters in the prior. In this paper, we adopt a variant of empirical Bayes and show that, by estimating the Gaussian process prior from offline data sampled from the same prior and constructing unbiased estimators of the posterior, variants of both GP-UCB and probability of improvement achieve a near-zero regret bound, which decreases to a constant proportional to the observational noise as the number of offline data and the number of online evaluations increase. Empirically, we have verified our approach on challenging simulated robotic problems featuring task and motion planning."
+    },
+    "keywords": [
+        {
+            "term": "Rapidly-exploring random tree",
+            "url": "https://en.wikipedia.org/wiki/Rapidly-exploring_random_tree"
+        },
+        {
+            "term": "black box",
+            "url": "https://en.wikipedia.org/wiki/black_box"
+        },
+        {
+            "term": "gradient descent",
+            "url": "https://en.wikipedia.org/wiki/gradient_descent"
+        },
+        {
+            "term": "machine learning",
+            "url": "https://en.wikipedia.org/wiki/machine_learning"
+        },
+        {
+            "term": "kernel function",
+            "url": "https://en.wikipedia.org/wiki/kernel_function"
+        },
+        {
+            "term": "motion planning",
+            "url": "https://en.wikipedia.org/wiki/motion_planning"
+        },
+        {
+            "term": "empirical bayes",
+            "url": "https://en.wikipedia.org/wiki/Empirical_Bayes"
+        },
+        {
+            "term": "Bayesian optimization",
+            "url": "https://en.wikipedia.org/wiki/Bayesian_optimization"
+        },
+        {
+            "term": "gaussian process",
+            "url": "https://en.wikipedia.org/wiki/gaussian_process"
+        }
+    ],
+    "highlights": [
+        "Bayesian optimization optimizes a black-box objective function through sequential queries",
+        "We prove theorems that show a near-zero regret bound for variants of Gaussian process-UCB [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>, <a class=\"ref-link\" id=\"c51\" href=\"#r51\">51</a>] and probability of improvement (PI) [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>, <a class=\"ref-link\" id=\"c53\" href=\"#r53\">53</a>]",
+        "From a more pragmatic perspective on Bayesian optimization for important areas such as robotics, we further explore how our approach works for problems in task and motion planning domains [<a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>], and we explain why the assumptions in our theorems make sense for these problems in Sec. 5",
+        "We prove a regret bound for meta Bayesian optimization where the Gaussian process prior is unknown; this means, neither the range of Gaussian process hyper-parameters nor the form of the kernel or mean function is given",
+        "Regret bounds We show a near-zero upper bound on the best-sample simple regret of meta Bayesian optimization with Gaussian process-UCB and probability of improvement that uses specific parameter settings in Thm. 2",
+        "We proposed a new framework for meta Bayesian optimization that estimates its Gaussian process prior based on past experience with functions sampled from the same prior"
+    ],
+    "key_statements": [
+        "Bayesian optimization optimizes a black-box objective function through sequential queries",
+        "We prove theorems that show a near-zero regret bound for variants of Gaussian process-UCB [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>, <a class=\"ref-link\" id=\"c51\" href=\"#r51\">51</a>] and probability of improvement (PI) [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>, <a class=\"ref-link\" id=\"c53\" href=\"#r53\">53</a>]",
+        "From a more pragmatic perspective on Bayesian optimization for important areas such as robotics, we further explore how our approach works for problems in task and motion planning domains [<a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>], and we explain why the assumptions in our theorems make sense for these problems in Sec. 5",
+        "We prove a regret bound for meta Bayesian optimization where the Gaussian process prior is unknown; this means, neither the range of Gaussian process hyper-parameters nor the form of the kernel or mean function is given",
+        "We show both theoretically and empirically how the number of \u201ctraining instances\u201d in our method affects the performance of Bayesian optimization",
+        "Our methods for the discrete setting directly improve on BOX by choosing the exploration parameters in Gaussian process-UCB more effectively. This general strategy is extended to the continuous-domain setting in Sec. 4.2, in which we extend a method for learning the Gaussian process prior [<a class=\"ref-link\" id=\"c41\" href=\"#r41\">41</a>] and the use the learned prior in Gaussian process-UCB and probability of improvement",
+        "The key difference from traditional empirical Bayes methods is that we are able to prove a regret bound for a Bayesian optimization method that uses estimated parameters to construct priors and posteriors",
+        "Regret bounds We show a near-zero upper bound on the best-sample simple regret of meta Bayesian optimization with Gaussian process-UCB and probability of improvement that uses specific parameter settings in Thm. 2",
+        "The second is a transfer learning sequential model-based optimization [<a class=\"ref-link\" id=\"c57\" href=\"#r57\">57</a>] method, that, like PEM-Bayesian optimization, uses past function evaluations, but assumes that functions sampled from the same Gaussian process have similar response surface values",
+        "We proposed a new framework for meta Bayesian optimization that estimates its Gaussian process prior based on past experience with functions sampled from the same prior"
+    ],
+    "summary": [
+        "BO optimizes a black-box objective function through sequential queries.",
+        "We use a variant of empirical Bayes that gives unbiased estimates for both the parameters in the prior and the posterior given observations of the function we wish to optimize.",
+        "Given possibly noisy observations and the prior distribution, we can do Bayesian posterior inference and construct acquisition functions [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>, <a class=\"ref-link\" id=\"c38\" href=\"#r38\">38</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>] to search for the function optimizer.",
+        "One of the most popular methods of prior estimation in BO is to optimize mean/kernel hyper-parameters by maximizing data-likelihood of the current observations [<a class=\"ref-link\" id=\"c44\" href=\"#r44\">44</a>, <a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>].",
+        "It has been shown that meta BO methods that use information from similar functions may result in an improvement for the cumulative regret bound [<a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>, <a class=\"ref-link\" id=\"c47\" href=\"#r47\">47</a>] or the simple regret bound [<a class=\"ref-link\" id=\"c42\" href=\"#r42\">42</a>] with the assumptions that the GP priors are given.",
+        "We prove a regret bound for meta BO where the GP prior is unknown; this means, neither the range of GP hyper-parameters nor the form of the kernel or mean function is given.",
+        "Our methods are most similar to the BOX algorithm [<a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>], which uses evaluations of previous functions to make point estimates of a mean and covariance matrix on the values over a discrete domain.",
+        "The key difference from traditional empirical Bayes methods is that we are able to prove a regret bound for a BO method that uses estimated parameters to construct priors and posteriors.",
+        "Regret bounds We show a near-zero upper bound on the best-sample simple regret of meta BO with GP-UCB and PI that uses specific parameter settings in Thm. 2.",
+        "With probability at least 1 \u2212 \u03b4, the best-sample simple regret in T iterations of meta BO with special cases of either GP-UCB or PI satisfies rTUCB < \u03b7TUCB(N )\u03bbT , rTPI < \u03b7TPI(N )\u03bbT , \u03bb2T = O + \u03c32,",
+        "The bounds indicate that the best-sample simple regret of both our settings of GP-UCB and PI decreases to a constant proportional to noise level \u03c3.",
+        "Together with the bounds on the best-sample simple regret from Thm. 2 and Thm. 4, our result shows that, with high probability, the simple regret decreases to a constant proportional to the noise level \u03c3 as the number of iterations and training functions increases.",
+        "The second is a transfer learning sequential model-based optimization [<a class=\"ref-link\" id=\"c57\" href=\"#r57\">57</a>] method, that, like PEM-BO, uses past function evaluations, but assumes that functions sampled from the same GP have similar response surface values.",
+        "We established regret bounds for our approach without the reliance on a known prior and showed its good performance on task and motion planning benchmark problems"
+    ],
+    "headline": "We propose a simple yet effective strategy for learning a prior in a meta-learning setting where training data on functions from the same Gaussian process prior are available",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Theodore Wilbur Anderson. An Introduction to Multivariate Statistical Analysis. Wiley New York, 1958.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Anderson%2C%20Theodore%20Wilbur%20An%20Introduction%20to%20Multivariate%20Statistical%20Analysis%201958"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Peter Auer. Using confidence bounds for exploitation-exploration tradeoffs. JMLR, 3:397\u2013422, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Auer%2C%20Peter%20Using%20confidence%20bounds%20for%20exploitation-exploration%20tradeoffs%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Auer%2C%20Peter%20Using%20confidence%20bounds%20for%20exploitation-exploration%20tradeoffs%202002"
+        },
+        {
+            "id": "3",
+            "entry": "[3] R\u00e9mi Bardenet, M\u00e1ty\u00e1s Brendel, Bal\u00e1zs K\u00e9gl, and Michele Sebag. Collaborative hyperparameter tuning. In ICML, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=R%C3%A9mi%20Bardenet%2C%20M%C3%A1ty%C3%A1s%20Brendel%2C%20Bal%C3%A1zs%20K%C3%A9gl%20Sebag%2C%20Michele%20Collaborative%20hyperparameter%20tuning%202013"
+        },
+        {
+            "id": "4",
+            "entry": "[4] J Baxter. A Bayesian/information theoretic model of bias learning. In COLT, New York, New York, USA, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Baxter%2C%20J.%20A%20Bayesian/information%20theoretic%20model%20of%20bias%20learning%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Baxter%2C%20J.%20A%20Bayesian/information%20theoretic%20model%20of%20bias%20learning%201996"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Ilija Bogunovic, Jonathan Scarlett, Andreas Krause, and Volkan Cevher. Truncated variance reduction: A unified approach to bayesian optimization and level-set estimation. In NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bogunovic%2C%20Ilija%20Scarlett%2C%20Jonathan%20Krause%2C%20Andreas%20Cevher%2C%20Volkan%20Truncated%20variance%20reduction%3A%20A%20unified%20approach%20to%20bayesian%20optimization%20and%20level-set%20estimation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bogunovic%2C%20Ilija%20Scarlett%2C%20Jonathan%20Krause%2C%20Andreas%20Cevher%2C%20Volkan%20Truncated%20variance%20reduction%3A%20A%20unified%20approach%20to%20bayesian%20optimization%20and%20level-set%20estimation%202016"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Pavel Brazdil, Joao Gama, and Bob Henery. Characterizing the applicability of classification algorithms using meta-level learning. In ECML, 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Brazdil%2C%20Pavel%20Gama%2C%20Joao%20Henery%2C%20Bob%20Characterizing%20the%20applicability%20of%20classification%20algorithms%20using%20meta-level%20learning%201994",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Brazdil%2C%20Pavel%20Gama%2C%20Joao%20Henery%2C%20Bob%20Characterizing%20the%20applicability%20of%20classification%20algorithms%20using%20meta-level%20learning%201994"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Emmanuel J Cand\u00e8s and Benjamin Recht. Exact matrix completion via convex optimization. Foundations of Computational mathematics, 9(6):717, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cand%C3%A8s%2C%20Emmanuel%20J.%20Recht%2C%20Benjamin%20Exact%20matrix%20completion%20via%20convex%20optimization%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cand%C3%A8s%2C%20Emmanuel%20J.%20Recht%2C%20Benjamin%20Exact%20matrix%20completion%20via%20convex%20optimization%202009"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Yutian Chen, Matthew W Hoffman, Sergio G\u00f3mez Colmenarejo, Misha Denil, Timothy P Lillicrap, Matt Botvinick, and Nando de Freitas. Learning to learn without gradient descent by gradient descent. In ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Yutian%20Hoffman%2C%20Matthew%20W.%20Colmenarejo%2C%20Sergio%20G%C3%B3mez%20Denil%2C%20Misha%20Learning%20to%20learn%20without%20gradient%20descent%20by%20gradient%20descent%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Yutian%20Hoffman%2C%20Matthew%20W.%20Colmenarejo%2C%20Sergio%20G%C3%B3mez%20Denil%2C%20Misha%20Learning%20to%20learn%20without%20gradient%20descent%20by%20gradient%20descent%202017"
+        },
+        {
+            "id": "9",
+            "entry": "[9] A. Cully, J. Clune, D. Tarapore, and J. Mouret. Robots that adapt like animals. Nature, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cully%2C%20A.%20Clune%2C%20J.%20Tarapore%2C%20D.%20Mouret%2C%20J.%20Robots%20that%20adapt%20like%20animals%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cully%2C%20A.%20Clune%2C%20J.%20Tarapore%2C%20D.%20Mouret%2C%20J.%20Robots%20that%20adapt%20like%20animals%202015"
+        },
+        {
+            "id": "10",
+            "entry": "[10] R. Diankov. Automated Construction of Robotic Manipulation Programs. PhD thesis, CMU Robotics Institute, August 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Diankov%2C%20R.%20Automated%20Construction%20of%20Robotic%20Manipulation%20Programs%202010-08"
+        },
+        {
+            "id": "11",
+            "entry": "[11] David K Duvenaud, Hannes Nickisch, and Carl E Rasmussen. Additive Gaussian processes. In NIPS, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Duvenaud%2C%20David%20K.%20Nickisch%2C%20Hannes%20Rasmussen%2C%20Carl%20E.%20Additive%20Gaussian%20processes%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Duvenaud%2C%20David%20K.%20Nickisch%2C%20Hannes%20Rasmussen%2C%20Carl%20E.%20Additive%20Gaussian%20processes%202011"
+        },
+        {
+            "id": "12",
+            "entry": "[12] M. L. Eaton. Multivariate Statistics: A Vector Space Approach. Beachwood, Ohio, USA: Institute of Mathematical Statistics, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Eaton%2C%20M.L.%20Multivariate%20Statistics%3A%20A%20Vector%20Space%20Approach%202007"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Bradley Efron. Bayes, oracle Bayes, and empirical Bayes. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bayes%2C%20Bradley%20Efron%20oracle%20Bayes%20and%20empirical%20Bayes%202017"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Matthias Feurer, Aaron Klein, Katharina Eggensperger, Jost Springenberg, Manuel Blum, and Frank Hutter. Efficient and robust automated machine learning. In NIPS, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Feurer%2C%20Matthias%20Klein%2C%20Aaron%20Eggensperger%2C%20Katharina%20Springenberg%2C%20Jost%20Efficient%20and%20robust%20automated%20machine%20learning%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Feurer%2C%20Matthias%20Klein%2C%20Aaron%20Eggensperger%2C%20Katharina%20Springenberg%2C%20Jost%20Efficient%20and%20robust%20automated%20machine%20learning%202015"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Matthias Feurer, Benjamin Letham, and Eytan Bakshy. Scalable meta-learning for Bayesian optimization. arXiv preprint arXiv:1802.02219, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.02219"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Matthias Feurer, Jost Springenberg, and Frank Hutter. Initializing Bayesian hyperparameter optimization via meta-learning. In AAAI, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Feurer%2C%20Matthias%20Springenberg%2C%20Jost%20Hutter%2C%20Frank%20Initializing%20Bayesian%20hyperparameter%20optimization%20via%20meta-learning%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Feurer%2C%20Matthias%20Springenberg%2C%20Jost%20Hutter%2C%20Frank%20Initializing%20Bayesian%20hyperparameter%20optimization%20via%20meta-learning%202015"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Yarin Gal and Zoubin Ghahramani. Dropout as a Bayesian approximation: Representing model uncertainty in deep learning. In ICML, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gal%2C%20Yarin%20Ghahramani%2C%20Zoubin%20Dropout%20as%20a%20Bayesian%20approximation%3A%20Representing%20model%20uncertainty%20in%20deep%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gal%2C%20Yarin%20Ghahramani%2C%20Zoubin%20Dropout%20as%20a%20Bayesian%20approximation%3A%20Representing%20model%20uncertainty%20in%20deep%20learning%202016"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Daniel Golovin, Benjamin Solnik, Subhodeep Moitra, Greg Kochanski, John Elliot Karro, and D. Sculley. Google vizier: A service for black-box optimization. In KDD, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Golovin%2C%20Daniel%20Solnik%2C%20Benjamin%20Moitra%2C%20Subhodeep%20Kochanski%2C%20Greg%20Google%20vizier%3A%20A%20service%20for%20black-box%20optimization%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Golovin%2C%20Daniel%20Solnik%2C%20Benjamin%20Moitra%2C%20Subhodeep%20Kochanski%2C%20Greg%20Google%20vizier%3A%20A%20service%20for%20black-box%20optimization%202017"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Philipp Hennig and Christian J Schuler. Entropy search for information-efficient global optimization. JMLR, 13:1809\u20131837, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hennig%2C%20Philipp%20Schuler%2C%20Christian%20J.%20Entropy%20search%20for%20information-efficient%20global%20optimization%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hennig%2C%20Philipp%20Schuler%2C%20Christian%20J.%20Entropy%20search%20for%20information-efficient%20global%20optimization%202012"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Jos\u00e9 Miguel Hern\u00e1ndez-Lobato, Matthew W Hoffman, and Zoubin Ghahramani. Predictive entropy search for efficient global optimization of black-box functions. In NIPS, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hern%C3%A1ndez-Lobato%2C%20Jos%C3%A9%20Miguel%20Hoffman%2C%20Matthew%20W.%20Ghahramani%2C%20Zoubin%20Predictive%20entropy%20search%20for%20efficient%20global%20optimization%20of%20black-box%20functions%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hern%C3%A1ndez-Lobato%2C%20Jos%C3%A9%20Miguel%20Hoffman%2C%20Matthew%20W.%20Ghahramani%2C%20Zoubin%20Predictive%20entropy%20search%20for%20efficient%20global%20optimization%20of%20black-box%20functions%202014"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Sepp Hochreiter and J\u00fcrgen Schmidhuber. Long short-term memory. Neural computation, 9(8):1735\u20131780, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Long%20short-term%20memory%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Long%20short-term%20memory%201997"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Christian Igel and Marc Toussaint. A no-free-lunch theorem for non-uniform distributions of target functions. Journal of Mathematical Modelling and Algorithms, 3(4):313\u2013322, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Igel%2C%20Christian%20Toussaint%2C%20Marc%20A%20no-free-lunch%20theorem%20for%20non-uniform%20distributions%20of%20target%20functions%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Igel%2C%20Christian%20Toussaint%2C%20Marc%20A%20no-free-lunch%20theorem%20for%20non-uniform%20distributions%20of%20target%20functions%202005"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Kirthevasan Kandasamy, Willie Neiswanger, Jeff Schneider, Barnabas Poczos, and Eric Xing. Neural architecture search with Bayesian optimisation and optimal transport. arXiv preprint arXiv:1802.07191, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.07191"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Kirthevasan Kandasamy, Jeff Schneider, and Barnabas Poczos. High dimensional Bayesian optimisation and bandits via additive models. In ICML, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kandasamy%2C%20Kirthevasan%20Schneider%2C%20Jeff%20Poczos%2C%20Barnabas%20High%20dimensional%20Bayesian%20optimisation%20and%20bandits%20via%20additive%20models%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kandasamy%2C%20Kirthevasan%20Schneider%2C%20Jeff%20Poczos%2C%20Barnabas%20High%20dimensional%20Bayesian%20optimisation%20and%20bandits%20via%20additive%20models%202015"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Kenji Kawaguchi, Bo Xie, Vikas Verma, and Le Song. Deep semi-random features for nonlinear function approximation. In AAAI, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kawaguchi%2C%20Kenji%20Xie%2C%20Bo%20Verma%2C%20Vikas%20Song%2C%20Le%20Deep%20semi-random%20features%20for%20nonlinear%20function%20approximation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kawaguchi%2C%20Kenji%20Xie%2C%20Bo%20Verma%2C%20Vikas%20Song%2C%20Le%20Deep%20semi-random%20features%20for%20nonlinear%20function%20approximation%202017"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Robert W Keener. Theoretical Statistics: Topics for a Core Course. Springer, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Keener%2C%20Robert%20W.%20Theoretical%20Statistics%3A%20Topics%20for%20a%20Core%20Course%202011"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Beomjoon Kim, Leslie Pack Kaelbling, and Tom\u00e1s Lozano-P\u00e9rez. Learning to guide task and motion planning using score-space representation. In ICRA, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Beomjoon%20Kim%2C%20Leslie%20Pack%20Kaelbling%20Lozano-P%C3%A9rez%2C%20Tom%C3%A1s%20Learning%20to%20guide%20task%20and%20motion%20planning%20using%20score-space%20representation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Beomjoon%20Kim%2C%20Leslie%20Pack%20Kaelbling%20Lozano-P%C3%A9rez%2C%20Tom%C3%A1s%20Learning%20to%20guide%20task%20and%20motion%20planning%20using%20score-space%20representation%202017"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Andreas Krause and Cheng S Ong. Contextual Gaussian process bandit optimization. In NIPS, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krause%2C%20Andreas%20Ong%2C%20Cheng%20S.%20Contextual%20Gaussian%20process%20bandit%20optimization%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krause%2C%20Andreas%20Ong%2C%20Cheng%20S.%20Contextual%20Gaussian%20process%20bandit%20optimization%202011"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Harold J Kushner. A new method of locating the maximum point of an arbitrary multipeak curve in the presence of noise. Journal of Fluids Engineering, 86(1):97\u2013106, 1964.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kushner%2C%20Harold%20J.%20A%20new%20method%20of%20locating%20the%20maximum%20point%20of%20an%20arbitrary%20multipeak%20curve%20in%20the%20presence%20of%20noise%201964",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kushner%2C%20Harold%20J.%20A%20new%20method%20of%20locating%20the%20maximum%20point%20of%20an%20arbitrary%20multipeak%20curve%20in%20the%20presence%20of%20noise%201964"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Balaji Lakshminarayanan, Alexander Pritzel, and Charles Blundell. Simple and scalable predictive uncertainty estimation using deep ensembles. In NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lakshminarayanan%2C%20Balaji%20Pritzel%2C%20Alexander%20Blundell%2C%20Charles%20Simple%20and%20scalable%20predictive%20uncertainty%20estimation%20using%20deep%20ensembles%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lakshminarayanan%2C%20Balaji%20Pritzel%2C%20Alexander%20Blundell%2C%20Charles%20Simple%20and%20scalable%20predictive%20uncertainty%20estimation%20using%20deep%20ensembles%202017"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Beatrice Laurent and Pascal Massart. Adaptive estimation of a quadratic functional by model selection. Annals of Statistics, pages 1302\u20131338, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Laurent%2C%20Beatrice%20Massart%2C%20Pascal%20Adaptive%20estimation%20of%20a%20quadratic%20functional%20by%20model%20selection%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Laurent%2C%20Beatrice%20Massart%2C%20Pascal%20Adaptive%20estimation%20of%20a%20quadratic%20functional%20by%20model%20selection%202000"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Steven M LaValle and James J Kuffner Jr. Rapidly-exploring random trees: Progress and prospects. In Workshop on the Algorithmic Foundations of Robotics (WAFR), 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=LaValle%2C%20Steven%20M.%20Kuffner%2C%20Jr%2C%20James%20J.%20Rapidly-exploring%20random%20trees%3A%20Progress%20and%20prospects%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=LaValle%2C%20Steven%20M.%20Kuffner%2C%20Jr%2C%20James%20J.%20Rapidly-exploring%20random%20trees%3A%20Progress%20and%20prospects%202000"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Lisha Li, Kevin Jamieson, Giulia DeSalvo, Afshin Rostamizadeh, and Ameet Talwalkar. Hyperband: A novel bandit-based approach to hyperparameter optimization. In International Conference on Learning Representations (ICLR), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Lisha%20Jamieson%2C%20Kevin%20DeSalvo%2C%20Giulia%20Rostamizadeh%2C%20Afshin%20Hyperband%3A%20A%20novel%20bandit-based%20approach%20to%20hyperparameter%20optimization%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20Lisha%20Jamieson%2C%20Kevin%20DeSalvo%2C%20Giulia%20Rostamizadeh%2C%20Afshin%20Hyperband%3A%20A%20novel%20bandit-based%20approach%20to%20hyperparameter%20optimization%202016"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Karim Lounici et al. High-dimensional covariance matrix estimation with missing observations. Bernoulli, 20(3):1029\u20131058, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lounici%2C%20Karim%20High-dimensional%20covariance%20matrix%20estimation%20with%20missing%20observations%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lounici%2C%20Karim%20High-dimensional%20covariance%20matrix%20estimation%20with%20missing%20observations%202014"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Gustavo Malkomes and Roman Garnett. Towards automated Bayesian optimization. In ICML AutoML Workshop, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Malkomes%2C%20Gustavo%20Garnett%2C%20Roman%20Towards%20automated%20Bayesian%20optimization%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Malkomes%2C%20Gustavo%20Garnett%2C%20Roman%20Towards%20automated%20Bayesian%20optimization%202017"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Gustavo Malkomes, Charles Schaff, and Roman Garnett. Bayesian optimization for automated model selection. In NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Malkomes%2C%20Gustavo%20Schaff%2C%20Charles%20Garnett%2C%20Roman%20Bayesian%20optimization%20for%20automated%20model%20selection%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Malkomes%2C%20Gustavo%20Schaff%2C%20Charles%20Garnett%2C%20Roman%20Bayesian%20optimization%20for%20automated%20model%20selection%202016"
+        },
+        {
+            "id": "37",
+            "entry": "[37] T P Minka and R W Picard. Learning how to learn is learning with point sets. Technical report, MIT Media Lab, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Minka%2C%20T.P.%20Picard%2C%20R.W.%20Learning%20how%20to%20learn%20is%20learning%20with%20point%20sets%201997"
+        },
+        {
+            "id": "38",
+            "entry": "[38] J. Mockus. On Bayesian methods for seeking the extremum. In Optimization Techniques IFIP Technical Conference, 1974.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mockus%2C%20J.%20On%20Bayesian%20methods%20for%20seeking%20the%20extremum%201974",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mockus%2C%20J.%20On%20Bayesian%20methods%20for%20seeking%20the%20extremum%201974"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Sonia Petrone, Judith Rousseau, and Catia Scricciolo. Bayes and empirical Bayes: do they merge? Biometrika, 101(2):285\u2013302, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Petrone%2C%20Sonia%20Rousseau%2C%20Judith%20Scricciolo%2C%20Catia%20Bayes%20and%20empirical%20Bayes%3A%20do%20they%20merge%3F%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Petrone%2C%20Sonia%20Rousseau%2C%20Judith%20Scricciolo%2C%20Catia%20Bayes%20and%20empirical%20Bayes%3A%20do%20they%20merge%3F%202014"
+        },
+        {
+            "id": "41",
+            "entry": "[41] John C Platt, Christopher JC Burges, Steven Swenson, Christopher Weare, and Alice Zheng. Learning a Gaussian process prior for automatically generating music playlists. In NIPS, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Platt%2C%20John%20C.%20Burges%2C%20Christopher%20J.C.%20Swenson%2C%20Steven%20Weare%2C%20Christopher%20Learning%20a%20Gaussian%20process%20prior%20for%20automatically%20generating%20music%20playlists%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Platt%2C%20John%20C.%20Burges%2C%20Christopher%20J.C.%20Swenson%2C%20Steven%20Weare%2C%20Christopher%20Learning%20a%20Gaussian%20process%20prior%20for%20automatically%20generating%20music%20playlists%202002"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Matthias Poloczek, Jialei Wang, and Peter Frazier. Multi-information source optimization. In NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Poloczek%2C%20Matthias%20Wang%2C%20Jialei%20Frazier%2C%20Peter%20Multi-information%20source%20optimization%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Poloczek%2C%20Matthias%20Wang%2C%20Jialei%20Frazier%2C%20Peter%20Multi-information%20source%20optimization%202017"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Matthias Poloczek, Jialei Wang, and Peter I Frazier. Warm starting Bayesian optimization. In Winter Simulation Conference (WSC). IEEE, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Poloczek%2C%20Matthias%20Wang%2C%20Jialei%20and%20Peter%20I%20Frazier.%20Warm%20starting%20Bayesian%20optimization%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Poloczek%2C%20Matthias%20Wang%2C%20Jialei%20and%20Peter%20I%20Frazier.%20Warm%20starting%20Bayesian%20optimization%202016"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Carl Edward Rasmussen and Christopher KI Williams. Gaussian processes for machine learning. The MIT Press, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rasmussen%2C%20Carl%20Edward%20Williams%2C%20Christopher%20K.I.%20Gaussian%20processes%20for%20machine%20learning%202006"
+        },
+        {
+            "id": "45",
+            "entry": "[45] Herbert Robbins. An empirical Bayes approach to statistics. In Third Berkeley Symp. Math. Statist. Probab., 1956.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Robbins%2C%20Herbert%20An%20empirical%20Bayes%20approach%20to%20statistics.%20In%20Third%20Berkeley%20Symp%201956",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Robbins%2C%20Herbert%20An%20empirical%20Bayes%20approach%20to%20statistics.%20In%20Third%20Berkeley%20Symp%201956"
+        },
+        {
+            "id": "46",
+            "entry": "[46] J Schmidhuber. On learning how to learn learning strategies. Technical report, FKI-198-94 (revised), 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schmidhuber%2C%20J.%20On%20learning%20how%20to%20learn%20learning%20strategies%201995"
+        },
+        {
+            "id": "47",
+            "entry": "[47] Alistair Shilton, Sunil Gupta, Santu Rana, and Svetha Venkatesh. Regret bounds for transfer learning in Bayesian optimisation. In AISTATS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shilton%2C%20Alistair%20Gupta%2C%20Sunil%20Rana%2C%20Santu%20Venkatesh%2C%20Svetha%20Regret%20bounds%20for%20transfer%20learning%20in%20Bayesian%20optimisation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shilton%2C%20Alistair%20Gupta%2C%20Sunil%20Rana%2C%20Santu%20Venkatesh%2C%20Svetha%20Regret%20bounds%20for%20transfer%20learning%20in%20Bayesian%20optimisation%202017"
+        },
+        {
+            "id": "48",
+            "entry": "[48] Mlnoru Slotani. Tolerance regions for a multivariate normal population. Annals of the Institute of Statistical Mathematics, 16(1):135\u2013153, 1964.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Slotani%2C%20Mlnoru%20Tolerance%20regions%20for%20a%20multivariate%20normal%20population%201964",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Slotani%2C%20Mlnoru%20Tolerance%20regions%20for%20a%20multivariate%20normal%20population%201964"
+        },
+        {
+            "id": "49",
+            "entry": "[49] Suzanne Sniekers, Aad van der Vaart, et al. Adaptive Bayesian credible sets in regression with a Gaussian process prior. Electronic Journal of Statistics, 9(2):2475\u20132527, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sniekers%2C%20Suzanne%20van%20der%20Vaart%2C%20Aad%20Adaptive%20Bayesian%20credible%20sets%20in%20regression%20with%20a%20Gaussian%20process%20prior%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sniekers%2C%20Suzanne%20van%20der%20Vaart%2C%20Aad%20Adaptive%20Bayesian%20credible%20sets%20in%20regression%20with%20a%20Gaussian%20process%20prior%202015"
+        },
+        {
+            "id": "50",
+            "entry": "[50] Jasper Snoek, Hugo Larochelle, and Ryan P Adams. Practical Bayesian optimization of machine learning algorithms. In NIPS, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Snoek%2C%20Jasper%20Larochelle%2C%20Hugo%20Adams%2C%20Ryan%20P.%20Practical%20Bayesian%20optimization%20of%20machine%20learning%20algorithms%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Snoek%2C%20Jasper%20Larochelle%2C%20Hugo%20Adams%2C%20Ryan%20P.%20Practical%20Bayesian%20optimization%20of%20machine%20learning%20algorithms%202012"
+        },
+        {
+            "id": "51",
+            "entry": "[51] Niranjan Srinivas, Andreas Krause, Sham M Kakade, and Matthias Seeger. Gaussian process optimization in the bandit setting: No regret and experimental design. In ICML, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Srinivas%2C%20Niranjan%20Krause%2C%20Andreas%20Kakade%2C%20Sham%20M.%20Seeger%2C%20Matthias%20Gaussian%20process%20optimization%20in%20the%20bandit%20setting%3A%20No%20regret%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Srinivas%2C%20Niranjan%20Krause%2C%20Andreas%20Kakade%2C%20Sham%20M.%20Seeger%2C%20Matthias%20Gaussian%20process%20optimization%20in%20the%20bandit%20setting%3A%20No%20regret%202010"
+        },
+        {
+            "id": "52",
+            "entry": "[52] Kevin Swersky, Jasper Snoek, and Ryan P Adams. Multi-task Bayesian optimization. In NIPS, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Swersky%2C%20Kevin%20Snoek%2C%20Jasper%20Adams%2C%20Ryan%20P.%20Multi-task%20Bayesian%20optimization%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Swersky%2C%20Kevin%20Snoek%2C%20Jasper%20Adams%2C%20Ryan%20P.%20Multi-task%20Bayesian%20optimization%202013"
+        },
+        {
+            "id": "53",
+            "entry": "[53] Zi Wang and Stefanie Jegelka. Max-value entropy search for efficient Bayesian optimization. In ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Zi%20Jegelka%2C%20Stefanie%20Max-value%20entropy%20search%20for%20efficient%20Bayesian%20optimization%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Zi%20Jegelka%2C%20Stefanie%20Max-value%20entropy%20search%20for%20efficient%20Bayesian%20optimization%202017"
+        },
+        {
+            "id": "54",
+            "entry": "[54] Ziyu Wang and Nando de Freitas. Theoretical analysis of Bayesian optimisation with unknown Gaussian process hyper-parameters. In NIPS workshop on Bayesian Optimization, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Ziyu%20de%20Freitas%2C%20Nando%20Theoretical%20analysis%20of%20Bayesian%20optimisation%20with%20unknown%20Gaussian%20process%20hyper-parameters%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Ziyu%20de%20Freitas%2C%20Nando%20Theoretical%20analysis%20of%20Bayesian%20optimisation%20with%20unknown%20Gaussian%20process%20hyper-parameters%202014"
+        },
+        {
+            "id": "55",
+            "entry": "[55] Eric W. Weisstein. Square root inequality. MathWorld\u2013A Wolfram Web Resource. http://mathworld.wolfram.com/SquareRootInequality.html, 1999-2018.",
+            "url": "http://mathworld.wolfram.com/SquareRootInequality.html"
+        },
+        {
+            "id": "56",
+            "entry": "[56] David H Wolpert and William G Macready. No free lunch theorems for optimization. IEEE transactions on evolutionary computation, 1(1):67\u201382, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wolpert%2C%20David%20H.%20Macready%2C%20William%20G.%20No%20free%20lunch%20theorems%20for%20optimization%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wolpert%2C%20David%20H.%20Macready%2C%20William%20G.%20No%20free%20lunch%20theorems%20for%20optimization%201997"
+        },
+        {
+            "id": "57",
+            "entry": "[57] Dani Yogatama and Gideon Mann. Efficient transfer learning method for automatic hyperparameter tuning. In AISTATS, 2014. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yogatama%2C%20Dani%20Mann%2C%20Gideon%20Efficient%20transfer%20learning%20method%20for%20automatic%20hyperparameter%20tuning%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yogatama%2C%20Dani%20Mann%2C%20Gideon%20Efficient%20transfer%20learning%20method%20for%20automatic%20hyperparameter%20tuning%202014"
+        }
+    ]
+}

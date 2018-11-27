@@ -1,0 +1,313 @@
+{
+    "filename": "8184-large-scale-computation-of-means-and-clusters-for-persistence-diagrams-using-optimal-transport.pdf",
+    "metadata": {
+        "title": "Large Scale computation of Means and Clusters for Persistence Diagrams using Optimal Transport",
+        "author": "Theo Lacombe, Marco Cuturi, Steve OUDOT",
+        "date": 2011,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8184-large-scale-computation-of-means-and-clusters-for-persistence-diagrams-using-optimal-transport.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Persistence diagrams (PDs) are now routinely used to summarize the underlying topology of complex data. Despite several appealing properties, incorporating PDs in learning pipelines can be challenging because their natural geometry is not Hilbertian. Indeed, this was recently exemplified in a string of papers which show that the simple task of averaging a few PDs can be computationally prohibitive. We propose in this article a tractable framework to carry out standard tasks on PDs at scale, notably evaluating distances, estimating barycenters and performing clustering. This framework builds upon a reformulation of PD metrics as optimal transport (OT) problems. Doing so, we can exploit recent computational advances: the OT problem on a planar grid, when regularized with entropy, is convex can be solved in linear time using the Sinkhorn algorithm and convolutions. This results in scalable computations that can stream on GPUs. We demonstrate the efficiency of our approach by carrying out clustering with diagrams metrics on several thousands of PDs, a scale never seen before in the literature."
+    },
+    "keywords": [
+        {
+            "term": "persistent homology",
+            "url": "https://en.wikipedia.org/wiki/persistent_homology"
+        },
+        {
+            "term": "Topological data analysis",
+            "url": "https://en.wikipedia.org/wiki/Topological_data_analysis"
+        },
+        {
+            "term": "linear time",
+            "url": "https://en.wikipedia.org/wiki/linear_time"
+        },
+        {
+            "term": "optimal transport",
+            "url": "https://en.wikipedia.org/wiki/optimal_transport"
+        },
+        {
+            "term": "topology",
+            "url": "https://en.wikipedia.org/wiki/topology"
+        },
+        {
+            "term": "probability measure",
+            "url": "https://en.wikipedia.org/wiki/probability_measure"
+        }
+    ],
+    "highlights": [
+        "We reformulate the computation of diagram metrics as an optimal transport (OT) problem, opening several perspectives, among them the ability to benefit from entropic regularization (<a class=\"ref-link\" id=\"cCuturi_2013_a\" href=\"#rCuturi_2013_a\">Cuturi, 2013</a>)",
+        "We demonstrate the scalability of these two advances by providing the first tractable implementation of the k-means algorithm in the space of Persistence diagrams",
+        "We introduce the linear operator R which, to a finite non-negative measure \u03bc supported on R2>, associates a dirac on \u2206 with mass equal to the total mass of \u03bc, namely R : \u03bc \u2192 |\u03bc|\u03b4\u2206",
+        "We use these differentiable approximations to estimate barycenters of Persistence diagrams significantly faster than existing algorithm, and showcase their application by clustering thousand diagrams built from real data",
+        "We believe this first step will open the way for new statistical tools for Topological data analysis and ambitious data analysis applications of persistence diagrams"
+    ],
+    "key_statements": [
+        "We reformulate the computation of diagram metrics as an optimal transport (OT) problem, opening several perspectives, among them the ability to benefit from entropic regularization (<a class=\"ref-link\" id=\"cCuturi_2013_a\" href=\"#rCuturi_2013_a\">Cuturi, 2013</a>)",
+        "We demonstrate the scalability of these two advances by providing the first tractable implementation of the k-means algorithm in the space of Persistence diagrams",
+        "We introduce the linear operator R which, to a finite non-negative measure \u03bc supported on R2>, associates a dirac on \u2206 with mass equal to the total mass of \u03bc, namely R : \u03bc \u2192 |\u03bc|\u03b4\u2206",
+        "We propose on-the-fly error control, using approximate solutions to the smoothed primal (2) and dual (3) optimal transport problems, which provide upper and lower bounds on the optimal transport cost",
+        "Showed that for regular grids endowed with a separable cost, each Sinkhorn iteration can be performed using Gaussian convolutions, which amounts to performing matrix multiplications of size d \u00d7 d, without having to manipulate d2 \u00d7 d2 matrices",
+        "We use these differentiable approximations to estimate barycenters of Persistence diagrams significantly faster than existing algorithm, and showcase their application by clustering thousand diagrams built from real data",
+        "We believe this first step will open the way for new statistical tools for Topological data analysis and ambitious data analysis applications of persistence diagrams"
+    ],
+    "summary": [
+        "We reformulate the computation of diagram metrics as an optimal transport (OT) problem, opening several perspectives, among them the ability to benefit from entropic regularization (<a class=\"ref-link\" id=\"cCuturi_2013_a\" href=\"#rCuturi_2013_a\">Cuturi, 2013</a>).",
+        "We propose on-the-fly error control, using approximate solutions to the smoothed primal (2) and dual (3) optimal transport problems, which provide upper and lower bounds on the optimal transport cost.",
+        "Showed that for regular grids endowed with a separable cost, each Sinkhorn iteration can be performed using Gaussian convolutions, which amounts to performing matrix multiplications of size d \u00d7 d, without having to manipulate d2 \u00d7 d2 matrices.",
+        "We can estimate distances be-Algorithm 1 Sinkhorn divergence for persistence diagrams tween persistence diagrams with Alg. 1 in parallel by performing only (d \u00d7 d)-sized matrix multiplications, leading to a computational scaling in d3 where d is the grid resolution parameter.",
+        "End if fits of entropic regularization apply to the computation of barycenters of PDs. As the space of PD is not Hilbertian but only a metric space, the natural definition of barycenters is to formulate them as Fr\u00e9chet means for the dp metric, as first introduced in (<a class=\"ref-link\" id=\"cMileyko_et+al_2011_a\" href=\"#rMileyko_et+al_2011_a\">Mileyko et al, 2011</a>).",
+        "I=1 where RT denotes the adjoint operator R and is a fixed point of the Sinkhorn map obtained while transporting z + Rai onto ai + Rz. As in (<a class=\"ref-link\" id=\"cCuturi_2014_a\" href=\"#rCuturi_2014_a\">Cuturi & Doucet, 2014</a>), this result follows from the envelope the-",
+        "For each pair of diagrams, we Figure 5: Comparison of scalings of Hera and center our estimates by removing the true distance, so that Sinkhorn (Alg. 1) as the number of points in the target cost is 0 across all pairs.",
+        "We compute the average time tn to estimate a distance between two random diagrams having from n to 2n points where n ranges from 10 to 5000.",
+        "We record in Fig. 6 running times of both algorithms on a set of 10 diagrams having from n to 2n points, n ranging from 1 to 500, on Intel Xeon 2.3 GHz (CPU) and P100 (GPU, Sinkhorn only).",
+        "We took advantage of a link between PD metrics and optimal transport to leverage and adapt entropic regularization for persistence diagrams.",
+        "Our approach relies on matrix manipulations rather than combinatorial computations, providing parallelization and efficient use of GPUs. We provide bounds to control approximation errors.",
+        "We use these differentiable approximations to estimate barycenters of PDs significantly faster than existing algorithm, and showcase their application by clustering thousand diagrams built from real data.",
+        "We believe this first step will open the way for new statistical tools for TDA and ambitious data analysis applications of persistence diagrams"
+    ],
+    "headline": "We propose in this article a tractable framework to carry out standard tasks on Persistence diagrams at scale, notably evaluating distances, estimating barycenters and performing clustering",
+    "reference_links": [
+        {
+            "id": "Adams_et+al_2017_a",
+            "entry": "Adams, H., Emerson, T., Kirby, M., Neville, R., Peterson, C., Shipman, P., Chepushtanova, S., Hanson, E., Motta, F., and Ziegelmeier, L. Persistence images: a stable vector representation of persistent homology. Journal of Machine Learning Research, 18(8):1\u201335, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Adams%2C%20H.%20Emerson%2C%20T.%20Kirby%2C%20M.%20Neville%2C%20R.%20Persistence%20images%3A%20a%20stable%20vector%20representation%20of%20persistent%20homology%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Adams%2C%20H.%20Emerson%2C%20T.%20Kirby%2C%20M.%20Neville%2C%20R.%20Persistence%20images%3A%20a%20stable%20vector%20representation%20of%20persistent%20homology%202017"
+        },
+        {
+            "id": "Agueh_2011_a",
+            "entry": "Agueh, M. and Carlier, G. Barycenters in the wasserstein space. SIAM Journal on Mathematical Analysis, 43(2):904\u2013924, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Agueh%2C%20M.%20Carlier%2C%20G.%20Barycenters%20in%20the%20wasserstein%20space%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Agueh%2C%20M.%20Carlier%2C%20G.%20Barycenters%20in%20the%20wasserstein%20space%202011"
+        },
+        {
+            "id": "Altschuler_et+al_2017_a",
+            "entry": "Altschuler, J., Weed, J., and Rigollet, P. Near-linear time approximation algorithms for optimal transport via sinkhorn iteration. In Advances in Neural Information Processing Systems, pp. 1961\u20131971, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Altschuler%2C%20J.%20Weed%2C%20J.%20Rigollet%2C%20P.%20Near-linear%20time%20approximation%20algorithms%20for%20optimal%20transport%20via%20sinkhorn%20iteration%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Altschuler%2C%20J.%20Weed%2C%20J.%20Rigollet%2C%20P.%20Near-linear%20time%20approximation%20algorithms%20for%20optimal%20transport%20via%20sinkhorn%20iteration%202017"
+        },
+        {
+            "id": "Anderes_et+al_2016_a",
+            "entry": "Anderes, E., Borgwardt, S., and Miller, J. Discrete wasserstein barycenters: optimal transport for discrete data. Mathematical Methods of Operations Research, 84(2):389\u2013409, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Anderes%2C%20E.%20Borgwardt%2C%20S.%20Miller%2C%20J.%20Discrete%20wasserstein%20barycenters%3A%20optimal%20transport%20for%20discrete%20data%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Anderes%2C%20E.%20Borgwardt%2C%20S.%20Miller%2C%20J.%20Discrete%20wasserstein%20barycenters%3A%20optimal%20transport%20for%20discrete%20data%202016"
+        },
+        {
+            "id": "Beck_2003_a",
+            "entry": "Beck, A. and Teboulle, M. Mirror descent and nonlinear projected subgradient methods for convex optimization. Operations Research Letters, 31(3):167\u2013175, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Beck%2C%20A.%20Teboulle%2C%20M.%20Mirror%20descent%20and%20nonlinear%20projected%20subgradient%20methods%20for%20convex%20optimization%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Beck%2C%20A.%20Teboulle%2C%20M.%20Mirror%20descent%20and%20nonlinear%20projected%20subgradient%20methods%20for%20convex%20optimization%202003"
+        },
+        {
+            "id": "Benamou_et+al_2015_a",
+            "entry": "Benamou, J.-D., Carlier, G., Cuturi, M., Nenna, L., and Peyr\u00e9, G. Iterative bregman projections for regularized transportation problems. SIAM Journal on Scientific Computing, 37(2):A1111\u2013A1138, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Benamou%2C%20J.-D.%20Carlier%2C%20G.%20Cuturi%2C%20M.%20Nenna%2C%20L.%20Iterative%20bregman%20projections%20for%20regularized%20transportation%20problems%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Benamou%2C%20J.-D.%20Carlier%2C%20G.%20Cuturi%2C%20M.%20Nenna%2C%20L.%20Iterative%20bregman%20projections%20for%20regularized%20transportation%20problems%202015"
+        },
+        {
+            "id": "Bubenik_2015_a",
+            "entry": "Bubenik, P. Statistical topological data analysis using persistence landscapes. The Journal of Machine Learning Research, 16(1):77\u2013102, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bubenik%2C%20P.%20Statistical%20topological%20data%20analysis%20using%20persistence%20landscapes%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bubenik%2C%20P.%20Statistical%20topological%20data%20analysis%20using%20persistence%20landscapes%202015"
+        },
+        {
+            "id": "Carlier_et+al_2015_a",
+            "entry": "Carlier, G., Oberman, A., and Oudet, E. Numerical methods for matching for teams and wasserstein barycenters. ESAIM: Mathematical Modelling and Numerical Analysis, 49(6):1621\u20131642, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Carlier%2C%20G.%20Oberman%2C%20A.%20Oudet%2C%20E.%20Numerical%20methods%20for%20matching%20for%20teams%20and%20wasserstein%20barycenters%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Carlier%2C%20G.%20Oberman%2C%20A.%20Oudet%2C%20E.%20Numerical%20methods%20for%20matching%20for%20teams%20and%20wasserstein%20barycenters%202015"
+        },
+        {
+            "id": "Carri_et+al_2015_a",
+            "entry": "Carri\u00e8re, M., Oudot, S. Y., and Ovsjanikov, M. Stable topological signatures for points on 3d shapes. In Computer Graphics Forum, volume 34, pp. 1\u201312. Wiley Online Library, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Carri%C3%A8re%2C%20M.%20Oudot%2C%20S.Y.%20Ovsjanikov%2C%20M.%20Stable%20topological%20signatures%20for%20points%20on%203d%20shapes%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Carri%C3%A8re%2C%20M.%20Oudot%2C%20S.Y.%20Ovsjanikov%2C%20M.%20Stable%20topological%20signatures%20for%20points%20on%203d%20shapes%202015"
+        },
+        {
+            "id": "Carri_et+al_2017_a",
+            "entry": "Carri\u00e8re, M., Cuturi, M., and Oudot, S. Sliced wasserstein kernel for persistence diagrams. In 34th International Conference on Machine Learning, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Carri%C3%A8re%2C%20M.%20Cuturi%2C%20M.%20Oudot%2C%20S.%20Sliced%20wasserstein%20kernel%20for%20persistence%20diagrams%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Carri%C3%A8re%2C%20M.%20Cuturi%2C%20M.%20Oudot%2C%20S.%20Sliced%20wasserstein%20kernel%20for%20persistence%20diagrams%202017"
+        },
+        {
+            "id": "Chazal_et+al_2009_a",
+            "entry": "Chazal, F., Cohen-Steiner, D., Glisse, M., Guibas, L. J., and Oudot, S. Y. Proximity of persistence modules and their diagrams. In Proceedings of the twenty-fifth annual symposium on Computational geometry, pp. 237\u2013246. ACM, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chazal%2C%20F.%20Cohen-Steiner%2C%20D.%20Glisse%2C%20M.%20Guibas%2C%20L.J.%20Proximity%20of%20persistence%20modules%20and%20their%20diagrams%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chazal%2C%20F.%20Cohen-Steiner%2C%20D.%20Glisse%2C%20M.%20Guibas%2C%20L.J.%20Proximity%20of%20persistence%20modules%20and%20their%20diagrams%202009"
+        },
+        {
+            "id": "Chazal_et+al_2014_a",
+            "entry": "Chazal, F., De Silva, V., and Oudot, S. Persistence stability for geometric complexes. Geometriae Dedicata, 173(1):193\u2013214, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chazal%2C%20F.%20De%20Silva%2C%20V.%20Oudot%2C%20S.%20Persistence%20stability%20for%20geometric%20complexes%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chazal%2C%20F.%20De%20Silva%2C%20V.%20Oudot%2C%20S.%20Persistence%20stability%20for%20geometric%20complexes%202014"
+        },
+        {
+            "id": "Cohen-Steiner_et+al_2007_a",
+            "entry": "Cohen-Steiner, D., Edelsbrunner, H., and Harer, J. Stability of persistence diagrams. Discrete & Computational Geometry, 37(1):103\u2013120, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cohen-Steiner%2C%20D.%20Edelsbrunner%2C%20H.%20Harer%2C%20J.%20Stability%20of%20persistence%20diagrams%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cohen-Steiner%2C%20D.%20Edelsbrunner%2C%20H.%20Harer%2C%20J.%20Stability%20of%20persistence%20diagrams%202007"
+        },
+        {
+            "id": "Cuturi_2013_a",
+            "entry": "Cuturi, M. Sinkhorn distances: Lightspeed computation of optimal transport. In Advances in Neural Information Processing Systems, pp. 2292\u20132300, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cuturi%2C%20M.%20Sinkhorn%20distances%3A%20Lightspeed%20computation%20of%20optimal%20transport%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cuturi%2C%20M.%20Sinkhorn%20distances%3A%20Lightspeed%20computation%20of%20optimal%20transport%202013"
+        },
+        {
+            "id": "Cuturi_2014_a",
+            "entry": "Cuturi, M. and Doucet, A. Fast computation of wasserstein barycenters. In International Conference on Machine Learning, pp. 685\u2013693, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cuturi%2C%20M.%20Doucet%2C%20A.%20Fast%20computation%20of%20wasserstein%20barycenters%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cuturi%2C%20M.%20Doucet%2C%20A.%20Fast%20computation%20of%20wasserstein%20barycenters%202014"
+        },
+        {
+            "id": "Dvurechensky_et+al_2018_a",
+            "entry": "Dvurechensky, P., Gasnikov, A., and Kroshnin, A. Computational optimal transport: Complexity by accelerated gradient descent is better than by sinkhorn\u2019s algorithm. In Dy, J. and Krause, A. (eds.), Proceedings of the 35th International Conference on Machine Learning, volume 80 of Proceedings of Machine Learning Research, pp. 1367\u20131376, Stockholmsm\u00e4ssan, Stockholm Sweden, 10\u201315 Jul 2018. PMLR. URL http://proceedings.mlr.press/v80/dvurechensky18a.html.",
+            "url": "http://proceedings.mlr.press/v80/dvurechensky18a.html",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dvurechensky%2C%20P.%20Gasnikov%2C%20A.%20Kroshnin%2C%20A.%20Computational%20optimal%20transport%3A%20Complexity%20by%20accelerated%20gradient%20descent%20is%20better%20than%20by%20sinkhorn%E2%80%99s%20algorithm%202018-07"
+        },
+        {
+            "id": "Edelsbrunner_2010_a",
+            "entry": "Edelsbrunner, H. and Harer, J. Computational topology: an introduction. American Mathematical Soc., 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Edelsbrunner%2C%20H.%20Harer%2C%20J.%20Computational%20topology%3A%20an%20introduction%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Edelsbrunner%2C%20H.%20Harer%2C%20J.%20Computational%20topology%3A%20an%20introduction%202010"
+        },
+        {
+            "id": "Edelsbrunner_et+al_2000_a",
+            "entry": "Edelsbrunner, H., Letscher, D., and Zomorodian, A. Topological persistence and simplification. In Foundations of Computer Science, 2000. Proceedings. 41st Annual Symposium on, pp. 454\u2013463. IEEE, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Edelsbrunner%2C%20H.%20Letscher%2C%20D.%20Zomorodian%2C%20A.%20Topological%20persistence%20and%20simplification%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Edelsbrunner%2C%20H.%20Letscher%2C%20D.%20Zomorodian%2C%20A.%20Topological%20persistence%20and%20simplification%202000"
+        },
+        {
+            "id": "Fr_1948_a",
+            "entry": "Fr\u00e9chet, M. Les \u00e9l\u00e9ments al\u00e9atoires de nature quelconque dans un espace distanci\u00e9. In Annales de l\u2019institut Henri Poincar\u00e9, volume 10, pp. 215\u2013310. Presses universitaires de France, 1948.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fr%C3%A9chet%2C%20M.%20Les%20%C3%A9l%C3%A9ments%20al%C3%A9atoires%20de%20nature%20quelconque%20dans%20un%20espace%20distanci%C3%A9.%20In%20Annales%20de%20l%E2%80%99institut%20Henri%201948",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fr%C3%A9chet%2C%20M.%20Les%20%C3%A9l%C3%A9ments%20al%C3%A9atoires%20de%20nature%20quelconque%20dans%20un%20espace%20distanci%C3%A9.%20In%20Annales%20de%20l%E2%80%99institut%20Henri%201948"
+        },
+        {
+            "id": "Guittet_2002_a",
+            "entry": "Guittet, K. Extended Kantorovich norms: a tool for optimization. PhD thesis, INRIA, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Guittet%2C%20K.%20Extended%20Kantorovich%20norms%3A%20a%20tool%20for%20optimization%202002"
+        },
+        {
+            "id": "Hiraoka_et+al_2016_a",
+            "entry": "Hiraoka, Y., Nakamura, T., Hirata, A., Escolar, E. G., Matsue, K., and Nishiura, Y. Hierarchical structures of amorphous solids characterized by persistent homology. Proceedings of the National Academy of Sciences, 113(26):7035\u20137040, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hiraoka%2C%20Y.%20Nakamura%2C%20T.%20Hirata%2C%20A.%20Escolar%2C%20E.G.%20Hierarchical%20structures%20of%20amorphous%20solids%20characterized%20by%20persistent%20homology%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hiraoka%2C%20Y.%20Nakamura%2C%20T.%20Hirata%2C%20A.%20Escolar%2C%20E.G.%20Hierarchical%20structures%20of%20amorphous%20solids%20characterized%20by%20persistent%20homology%202016"
+        },
+        {
+            "id": "Kerber_et+al_2017_a",
+            "entry": "Kerber, M., Morozov, D., and Nigmetov, A. Geometry helps to compare persistence diagrams. Journal of Experimental Algorithmics (JEA), 22(1):1\u20134, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kerber%2C%20M.%20Morozov%2C%20D.%20Nigmetov%2C%20A.%20Geometry%20helps%20to%20compare%20persistence%20diagrams%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kerber%2C%20M.%20Morozov%2C%20D.%20Nigmetov%2C%20A.%20Geometry%20helps%20to%20compare%20persistence%20diagrams%202017"
+        },
+        {
+            "id": "Li_et+al_1995_a",
+            "entry": "Li, C., Ovsjanikov, M., and Chazal, F. Persistence-based structural recognition. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pp. 1995\u20132002, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20C.%20Ovsjanikov%2C%20M.%20Chazal%2C%20F.%20Persistence-based%20structural%20recognition%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20C.%20Ovsjanikov%2C%20M.%20Chazal%2C%20F.%20Persistence-based%20structural%20recognition%201995"
+        },
+        {
+            "id": "Lucet_2010_a",
+            "entry": "Lucet, Y. What shape is your conjugate? a survey of computational convex analysis and its applications. SIAM review, 52(3):505\u2013542, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lucet%2C%20Y.%20What%20shape%20is%20your%20conjugate%3F%20a%20survey%20of%20computational%20convex%20analysis%20and%20its%20applications%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lucet%2C%20Y.%20What%20shape%20is%20your%20conjugate%3F%20a%20survey%20of%20computational%20convex%20analysis%20and%20its%20applications%202010"
+        },
+        {
+            "id": "Lum_et+al_2013_a",
+            "entry": "Lum, P., Singh, G., Lehman, A., Ishkanov, T., Vejdemo-Johansson, M., Alagappan, M., Carlsson, J., and Carlsson, G. Extracting insights from the shape of complex data using topology. Scientific reports, 3:1236, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lum%2C%20P.%20Singh%2C%20G.%20Lehman%2C%20A.%20Ishkanov%2C%20T.%20Extracting%20insights%20from%20the%20shape%20of%20complex%20data%20using%20topology%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lum%2C%20P.%20Singh%2C%20G.%20Lehman%2C%20A.%20Ishkanov%2C%20T.%20Extracting%20insights%20from%20the%20shape%20of%20complex%20data%20using%20topology%202013"
+        },
+        {
+            "id": "Makarenko_et+al_2016_a",
+            "entry": "Makarenko, N., Kalimoldayev, M., Pak, I., and Yessenaliyeva, A. Texture recognition by the methods of topological data analysis. Open Engineering, 6(1), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Makarenko%2C%20N.%20Kalimoldayev%2C%20M.%20Pak%2C%20I.%20Yessenaliyeva%2C%20A.%20Texture%20recognition%20by%20the%20methods%20of%20topological%20data%20analysis%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Makarenko%2C%20N.%20Kalimoldayev%2C%20M.%20Pak%2C%20I.%20Yessenaliyeva%2C%20A.%20Texture%20recognition%20by%20the%20methods%20of%20topological%20data%20analysis%202016"
+        },
+        {
+            "id": "Mileyko_et+al_2011_a",
+            "entry": "Mileyko, Y., Mukherjee, S., and Harer, J. Probability measures on the space of persistence diagrams. Inverse Problems, 27(12):124007, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mileyko%2C%20Y.%20Mukherjee%2C%20S.%20Harer%2C%20J.%20Probability%20measures%20on%20the%20space%20of%20persistence%20diagrams%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mileyko%2C%20Y.%20Mukherjee%2C%20S.%20Harer%2C%20J.%20Probability%20measures%20on%20the%20space%20of%20persistence%20diagrams%202011"
+        },
+        {
+            "id": "Moreau_1965_a",
+            "entry": "Moreau, J.-J. Proximit\u00e9 et dualit\u00e9 dans un espace hilbertien. Bull. Soc. Math. France, 93(2):273\u2013299, 1965.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Moreau%2C%20J.-J.%20Proximit%C3%A9%20et%20dualit%C3%A9%20dans%20un%20espace%20hilbertien%201965",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Moreau%2C%20J.-J.%20Proximit%C3%A9%20et%20dualit%C3%A9%20dans%20un%20espace%20hilbertien%201965"
+        },
+        {
+            "id": "Nicolau_et+al_2011_a",
+            "entry": "Nicolau, M., Levine, A. J., and Carlsson, G. Topology based data analysis identifies a subgroup of breast cancers with a unique mutational profile and excellent survival. Proceedings of the National Academy of Sciences, 108(17):7265\u20137270, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nicolau%2C%20M.%20Levine%2C%20A.J.%20Carlsson%2C%20G.%20Topology%20based%20data%20analysis%20identifies%20a%20subgroup%20of%20breast%20cancers%20with%20a%20unique%20mutational%20profile%20and%20excellent%20survival%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nicolau%2C%20M.%20Levine%2C%20A.J.%20Carlsson%2C%20G.%20Topology%20based%20data%20analysis%20identifies%20a%20subgroup%20of%20breast%20cancers%20with%20a%20unique%20mutational%20profile%20and%20excellent%20survival%202011"
+        },
+        {
+            "id": "Obayashi_et+al_2018_a",
+            "entry": "Obayashi, I., Hiraoka, Y., and Kimura, M. Persistence diagrams with linear machine learning models. Journal of Applied and Computational Topology, 1(3-4):421\u2013449, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Obayashi%2C%20I.%20Hiraoka%2C%20Y.%20Kimura%2C%20M.%20Persistence%20diagrams%20with%20linear%20machine%20learning%20models%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Obayashi%2C%20I.%20Hiraoka%2C%20Y.%20Kimura%2C%20M.%20Persistence%20diagrams%20with%20linear%20machine%20learning%20models%202018"
+        },
+        {
+            "id": "Peyr_2018_a",
+            "entry": "Peyr\u00e9, G. and Cuturi, M. Computational Optimal Transport, 2018. URL http://arxiv.org/abs/1803.00567.",
+            "url": "http://arxiv.org/abs/1803.00567",
+            "arxiv_url": "https://arxiv.org/pdf/1803.00567"
+        },
+        {
+            "id": "Reininghaus_et+al_2015_a",
+            "entry": "Reininghaus, J., Huber, S., Bauer, U., and Kwitt, R. A stable multi-scale kernel for topological machine learning. In Proceedings of the IEEE conference on computer vision and pattern recognition, pp. 4741\u20134748, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Reininghaus%2C%20J.%20Huber%2C%20S.%20Bauer%2C%20U.%20Kwitt%2C%20R.%20A%20stable%20multi-scale%20kernel%20for%20topological%20machine%20learning%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Reininghaus%2C%20J.%20Huber%2C%20S.%20Bauer%2C%20U.%20Kwitt%2C%20R.%20A%20stable%20multi-scale%20kernel%20for%20topological%20machine%20learning%202015"
+        },
+        {
+            "id": "Santambrogio_2015_a",
+            "entry": "Santambrogio, F. Optimal transport for applied mathematicians. Birk\u00e4user, NY, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Santambrogio%2C%20F.%20Optimal%20transport%20for%20applied%20mathematicians%202015"
+        },
+        {
+            "id": "Schrijver_1998_a",
+            "entry": "Schrijver, A. Theory of linear and integer programming. John Wiley & Sons, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schrijver%2C%20A.%20Theory%20of%20linear%20and%20integer%20programming%201998"
+        },
+        {
+            "id": "Solomon_et+al_2015_a",
+            "entry": "Solomon, J., De Goes, F., Peyr\u00e9, G., Cuturi, M., Butscher, A., Nguyen, A., Du, T., and Guibas, L. Convolutional wasserstein distances: Efficient optimal transportation on geometric domains. ACM Transactions on Graphics (TOG), 34(4):66, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Solomon%2C%20J.%20De%20Goes%2C%20F.%20Peyr%C3%A9%2C%20G.%20Cuturi%2C%20M.%20Convolutional%20wasserstein%20distances%3A%20Efficient%20optimal%20transportation%20on%20geometric%20domains%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Solomon%2C%20J.%20De%20Goes%2C%20F.%20Peyr%C3%A9%2C%20G.%20Cuturi%2C%20M.%20Convolutional%20wasserstein%20distances%3A%20Efficient%20optimal%20transportation%20on%20geometric%20domains%202015"
+        },
+        {
+            "id": "Sumner_2004_a",
+            "entry": "Sumner, R. W. and Popovic, J. Deformation transfer for triangle meshes. In ACM Transactions on Graphics (TOG), volume 23, pp. 399\u2013405. ACM, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sumner%2C%20R.W.%20Popovic%2C%20J.%20Deformation%20transfer%20for%20triangle%20meshes%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sumner%2C%20R.W.%20Popovic%2C%20J.%20Deformation%20transfer%20for%20triangle%20meshes%202004"
+        },
+        {
+            "id": "Turner_2013_a",
+            "entry": "Turner, K. Means and medians of sets of persistence diagrams. arXiv preprint arXiv:1307.8300, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1307.8300"
+        },
+        {
+            "id": "Turner_et+al_2014_a",
+            "entry": "Turner, K., Mileyko, Y., Mukherjee, S., and Harer, J. Fr\u00e9chet means for distributions of persistence diagrams. Discrete & Computational Geometry, 52(1):44\u201370, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Turner%2C%20K.%20Mileyko%2C%20Y.%20Mukherjee%2C%20S.%20Harer%2C%20J.%20Fr%C3%A9chet%20means%20for%20distributions%20of%20persistence%20diagrams%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Turner%2C%20K.%20Mileyko%2C%20Y.%20Mukherjee%2C%20S.%20Harer%2C%20J.%20Fr%C3%A9chet%20means%20for%20distributions%20of%20persistence%20diagrams%202014"
+        },
+        {
+            "id": "Villani_2003_a",
+            "entry": "Villani, C. Topics in optimal transportation. Number 58. American Mathematical Soc., 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Villani%2C%20C.%20Topics%20in%20optimal%20transportation.%20Number%2058%202003"
+        },
+        {
+            "id": "Villani_2008_a",
+            "entry": "Villani, C. Optimal transport: old and new, volume 338. Springer Science & Business Media, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Villani%2C%20C.%20Optimal%20transport%3A%20old%20and%20new%2C%20volume%20338%202008"
+        },
+        {
+            "id": "Zomorodian_2005_a",
+            "entry": "Zomorodian, A. and Carlsson, G. Computing persistent homology. Discrete & Computational Geometry, 33(2):249\u2013274, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zomorodian%2C%20A.%20Carlsson%2C%20G.%20Computing%20persistent%20homology%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zomorodian%2C%20A.%20Carlsson%2C%20G.%20Computing%20persistent%20homology%202005"
+        }
+    ]
+}

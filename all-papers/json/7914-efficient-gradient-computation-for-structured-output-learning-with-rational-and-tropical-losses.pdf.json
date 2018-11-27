@@ -1,0 +1,336 @@
+{
+    "filename": "7914-efficient-gradient-computation-for-structured-output-learning-with-rational-and-tropical-losses.pdf",
+    "metadata": {
+        "title": "Efficient Gradient Computation for Structured Output Learning with Rational and Tropical Losses",
+        "author": "Corinna Cortes, Vitaly Kuznetsov, Mehryar Mohri, Dmitry Storcheus, Scott Yang",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7914-efficient-gradient-computation-for-structured-output-learning-with-rational-and-tropical-losses.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Many structured prediction problems admit a natural loss function for evaluation such as the edit-distance or n-gram loss. However, existing learning algorithms are typically designed to optimize alternative objectives such as the cross-entropy. This is because a na\u00efve implementation of the natural loss functions often results in intractable gradient computations. In this paper, we design efficient gradient computation algorithms for two broad families of structured prediction loss functions: rational and tropical losses. These families include as special cases the n-gram loss, the edit-distance loss, and many other loss functions commonly used in natural language processing and computational biology tasks that are based on sequence similarity measures. Our algorithms make use of weighted automata and graph operations over appropriate semirings to design efficient solutions. They facilitate efficient gradient computation and hence enable one to train learning models such as neural networks with complex structured losses."
+    },
+    "keywords": [
+        {
+            "term": "finite state transducer",
+            "url": "https://en.wikipedia.org/wiki/finite_state_transducer"
+        },
+        {
+            "term": "computational biology",
+            "url": "https://en.wikipedia.org/wiki/computational_biology"
+        },
+        {
+            "term": "machine learning",
+            "url": "https://en.wikipedia.org/wiki/machine_learning"
+        },
+        {
+            "term": "recurrent neural network",
+            "url": "https://en.wikipedia.org/wiki/recurrent_neural_network"
+        },
+        {
+            "term": "natural language processing",
+            "url": "https://en.wikipedia.org/wiki/natural_language_processing"
+        },
+        {
+            "term": "Conditional Random Fields",
+            "url": "https://en.wikipedia.org/wiki/Conditional_Random_Field"
+        },
+        {
+            "term": "edit distance",
+            "url": "https://en.wikipedia.org/wiki/edit_distance"
+        },
+        {
+            "term": "loss function",
+            "url": "https://en.wikipedia.org/wiki/loss_function"
+        },
+        {
+            "term": "machine translation",
+            "url": "https://en.wikipedia.org/wiki/machine_translation"
+        },
+        {
+            "term": "speech recognition",
+            "url": "https://en.wikipedia.org/wiki/speech_recognition"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Many important machine learning tasks are instances of structured prediction problems",
+        "We present efficient gradient computation algorithms for two broad families of structured prediction loss functions: rational and tropical losses",
+        "These families include as special cases the n-gram loss, the edit-distance loss, and many other loss functions commonly used in natural language processing and computational biology tasks that are based on sequence similarity measures",
+        "The gradient computation methods we present apply to the Hamming loss, n-gram loss, and editdistance loss, and more generally to two broad families of losses that can be represented by weighted finite-state transducers (WFSTs)",
+        "We presented efficient algorithms for computing the gradients of structured prediction models with rational and tropical losses, reporting experimental results confirming both runtime improvement compared to na\u00efve implementations and learning improvement compared to standard methods that settle for using easier-to-optimize losses",
+        "We showed how our approach can be incorporated into the top layer of a neural network, so that it can be used to train end-to-end models in domains including speech recognition, machine translation, and natural language processing"
+    ],
+    "key_statements": [
+        "Many important machine learning tasks are instances of structured prediction problems",
+        "We present efficient gradient computation algorithms for two broad families of structured prediction loss functions: rational and tropical losses",
+        "These families include as special cases the n-gram loss, the edit-distance loss, and many other loss functions commonly used in natural language processing and computational biology tasks that are based on sequence similarity measures",
+        "For extremely large-scale problems with more data than can be processed, we further present an approximate truncated shortest-path algorithm that can be used for fast approximate gradient computations of the edit-distance",
+        "In Section 2, we briefly describe structured prediction problems and algorithms, discuss their learning objectives, and point out the challenge of gradient computation",
+        "The gradient computation methods we present apply to the Hamming loss, n-gram loss, and editdistance loss, and more generally to two broad families of losses that can be represented by weighted finite-state transducers (WFSTs)",
+        "We briefly describe the weighted finite-state transducers operations relevant to our solutions and provide an example of how the edit-distance loss can be represented with a weighted finite-state transducers in Section 5.\n3 Weighted automata and transducers",
+        "We presented efficient algorithms for computing the gradients of structured prediction models with rational and tropical losses, reporting experimental results confirming both runtime improvement compared to na\u00efve implementations and learning improvement compared to standard methods that settle for using easier-to-optimize losses",
+        "We showed how our approach can be incorporated into the top layer of a neural network, so that it can be used to train end-to-end models in domains including speech recognition, machine translation, and natural language processing"
+    ],
+    "summary": [
+        "Many important machine learning tasks are instances of structured prediction problems.",
+        "We present efficient gradient computation algorithms for two broad families of structured prediction loss functions: rational and tropical losses.",
+        "Section 3 defines several weighted automata and transducer operations that we use to design efficient algorithms for gradient-based learning.",
+        "In Sections 4 and 5, we give general algorithms for computing the gradient of rational and tropical loss functions, respectively.",
+        "We move on to discussing the hypothesis sets and forms of the objection function that are used by many structured prediction algorithms, which leads us to describe the problem of computing their gradients.",
+        "We will present efficient algorithms for the exact computation of the terms Qw(z, s), with their full definition, including the loss function.",
+        "This leads to an efficient computation of the gradients \u2207Fi, which can be used as input to back-propagation algorithms that would enable us to train neural network models with structured prediction losses.",
+        "We will use WFAs and WFSTs to devise algorithms that efficiently compute gradients of structured prediction objectives.",
+        "As shown in Sections 4 and 5, in many useful cases, we can reduce the computation of the loss function L(y, y ) between two strings y and y , along with the gradient of the corresponding objective described in (1), to that of the \u2295-sum of the weights of all paths labeled by y:y in a suitably defined transducer over either the probability or tropical semiring.",
+        "Following the treatment in (<a class=\"ref-link\" id=\"cCortes_et+al_2015_a\" href=\"#rCortes_et+al_2015_a\">Cortes et al, 2015</a>), the tropical loss associated to a weighted transducer U over the tropical semiring is defined as the function LU : \u2206\u2217 \u00d7 \u2206\u2217 \u2192 R coinciding with U; for all y, y \u2208 \u2206\u2217, LU(y, y ) = U(y, y ).",
+        "We present experiments validating both the computational efficiency of our gradient computation methods as well as the learning benefits of training with natural loss functions.",
+        "We randomly generate an input and output data pair, both of a given fixed length, as well as a weight vector w, and we compute \u2207Fi(w) using both the na\u00efve and the outlined efficient methods.",
+        "We presented efficient algorithms for computing the gradients of structured prediction models with rational and tropical losses, reporting experimental results confirming both runtime improvement compared to na\u00efve implementations and learning improvement compared to standard methods that settle for using easier-to-optimize losses.",
+        "We plan to run large-scale experiments with neural networks to further demonstrate the benefit of working directly with rational or tropical losses using our efficient computational methods."
+    ],
+    "headline": "We present efficient gradient computation algorithms for two broad families of structured prediction loss functions: rational and tropical losses",
+    "reference_links": [
+        {
+            "id": "Abadi_et+al_2016_a",
+            "entry": "M. Abadi, P. Barham, J. Chen, Z. Chen, A. Davis, J. Dean, M. Devin, S. Ghemawat, G. Irving, M. Isard, M. Kudlur, J. Levenberg, R. Monga, S. Moore, D. G. Murray, B. Steiner, P. Tucker, V. Vasudevan, P. Warden, M. Wicke, Y. Yu, and X. Zheng. Tensorflow: a system for large-scale machine learning. In Proceedings of USENIX, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abadi%2C%20M.%20Barham%2C%20P.%20Chen%2C%20J.%20Chen%2C%20Z.%20Tensorflow%3A%20a%20system%20for%20large-scale%20machine%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abadi%2C%20M.%20Barham%2C%20P.%20Chen%2C%20J.%20Chen%2C%20Z.%20Tensorflow%3A%20a%20system%20for%20large-scale%20machine%20learning%202016"
+        },
+        {
+            "id": "Allauzen_et+al_2007_a",
+            "entry": "C. Allauzen, M. Riley, J. Schalkwyk, W. Skut, and M. Mohri. OpenFst: a general and efficient weighted finite-state transducer library. In Proceedings of CIAA. Springer, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Allauzen%2C%20C.%20Riley%2C%20M.%20Schalkwyk%2C%20J.%20Skut%2C%20W.%20OpenFst%3A%20a%20general%20and%20efficient%20weighted%20finite-state%20transducer%20library%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Allauzen%2C%20C.%20Riley%2C%20M.%20Schalkwyk%2C%20J.%20Skut%2C%20W.%20OpenFst%3A%20a%20general%20and%20efficient%20weighted%20finite-state%20transducer%20library%202007"
+        },
+        {
+            "id": "Amodei_et+al_2016_a",
+            "entry": "D. Amodei, R. Anubhai, E. Battenberg, C. Case, J. Casper, B. Catanzaro, J. Chen, M. Chrzanowski, A. Coates, G. Diamos, E. Elsen, J. Engel, L. Fan, C. Fougner, A. Y. Hannun, B. Jun, T. Han, P. LeGresley, X. Li, L. Lin, S. Narang, A. Y. Ng, S. Ozair, R. Prenger, S. Qian, J. Raiman, S. Satheesh, D. Seetapun, S. Sengupta, C. Wang, Y. Wang, Z. Wang, B. Xiao, Y. Xie, D. Yogatama, J. Zhan, and Z. Zhu. Deep speech 2: End-to-end speech recognition in english and mandarin. In Proceedings of ICML, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=D%20Amodei%20R%20Anubhai%20E%20Battenberg%20C%20Case%20J%20Casper%20B%20Catanzaro%20J%20Chen%20M%20Chrzanowski%20A%20Coates%20G%20Diamos%20E%20Elsen%20J%20Engel%20L%20Fan%20C%20Fougner%20A%20Y%20Hannun%20B%20Jun%20T%20Han%20P%20LeGresley%20X%20Li%20L%20Lin%20S%20Narang%20A%20Y%20Ng%20S%20Ozair%20R%20Prenger%20S%20Qian%20J%20Raiman%20S%20Satheesh%20D%20Seetapun%20S%20Sengupta%20C%20Wang%20Y%20Wang%20Z%20Wang%20B%20Xiao%20Y%20Xie%20D%20Yogatama%20J%20Zhan%20and%20Z%20Zhu%20Deep%20speech%202%20Endtoend%20speech%20recognition%20in%20english%20and%20mandarin%20In%20Proceedings%20of%20ICML%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=D%20Amodei%20R%20Anubhai%20E%20Battenberg%20C%20Case%20J%20Casper%20B%20Catanzaro%20J%20Chen%20M%20Chrzanowski%20A%20Coates%20G%20Diamos%20E%20Elsen%20J%20Engel%20L%20Fan%20C%20Fougner%20A%20Y%20Hannun%20B%20Jun%20T%20Han%20P%20LeGresley%20X%20Li%20L%20Lin%20S%20Narang%20A%20Y%20Ng%20S%20Ozair%20R%20Prenger%20S%20Qian%20J%20Raiman%20S%20Satheesh%20D%20Seetapun%20S%20Sengupta%20C%20Wang%20Y%20Wang%20Z%20Wang%20B%20Xiao%20Y%20Xie%20D%20Yogatama%20J%20Zhan%20and%20Z%20Zhu%20Deep%20speech%202%20Endtoend%20speech%20recognition%20in%20english%20and%20mandarin%20In%20Proceedings%20of%20ICML%202016"
+        },
+        {
+            "id": "K_2015_a",
+            "entry": "K. Chang, A. Krishnamurthy, A. Agarwal, H. Daum\u00e9 III, and J. Langford. Learning to search better than your teacher. In Proceedings of ICML, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Learning%20to%20search%20better%20than%20your%20teacher%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Learning%20to%20search%20better%20than%20your%20teacher%202015"
+        },
+        {
+            "id": "Chen_et+al_2015_a",
+            "entry": "T. Chen, M. Li, Y. Li, M. Lin, N. Wang, M. Wang, T. Xiao, B. Xu, C. Zhang, and Z. Zhang. MXNet: A flexible and efficient machine learning library for heterogeneous distributed systems. CoRR, abs/1512.01274, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1512.01274"
+        },
+        {
+            "id": "Cortes_et+al_2004_a",
+            "entry": "C. Cortes, P. Haffner, and M. Mohri. Rational kernels: Theory and algorithms. JMLR, 5:1035\u20131062, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cortes%2C%20C.%20Haffner%2C%20P.%20Mohri%2C%20M.%20Rational%20kernels%3A%20Theory%20and%20algorithms%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cortes%2C%20C.%20Haffner%2C%20P.%20Mohri%2C%20M.%20Rational%20kernels%3A%20Theory%20and%20algorithms%202004"
+        },
+        {
+            "id": "Cortes_et+al_2007_a",
+            "entry": "C. Cortes, M. Mohri, and J. Weston. A General Regression Framework for Learning String-to-String Mappings. In Predicting Structured Data. MIT Press, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cortes%2C%20C.%20Mohri%2C%20M.%20Weston%2C%20J.%20A%20General%20Regression%20Framework%20for%20Learning%20String-to-String%20Mappings.%20In%20Predicting%20Structured%20Data%202007"
+        },
+        {
+            "id": "Cortes_et+al_2015_a",
+            "entry": "C. Cortes, V. Kuznetsov, M. Mohri, and M. K. Warmuth. On-line learning algorithms for path experts with non-additive losses. In Proceedings of COLT, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cortes%2C%20C.%20Kuznetsov%2C%20V.%20Mohri%2C%20M.%20Warmuth%2C%20M.K.%20On-line%20learning%20algorithms%20for%20path%20experts%20with%20non-additive%20losses%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cortes%2C%20C.%20Kuznetsov%2C%20V.%20Mohri%2C%20M.%20Warmuth%2C%20M.K.%20On-line%20learning%20algorithms%20for%20path%20experts%20with%20non-additive%20losses%202015"
+        },
+        {
+            "id": "Cortes_et+al_2016_a",
+            "entry": "C. Cortes, V. Kuznetsov, M. Mohri, and S. Yang. Structured prediction theory based on factor graph complexity. In Proceedings of NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cortes%2C%20C.%20Kuznetsov%2C%20V.%20Mohri%2C%20M.%20Yang%2C%20S.%20Structured%20prediction%20theory%20based%20on%20factor%20graph%20complexity%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cortes%2C%20C.%20Kuznetsov%2C%20V.%20Mohri%2C%20M.%20Yang%2C%20S.%20Structured%20prediction%20theory%20based%20on%20factor%20graph%20complexity%202016"
+        },
+        {
+            "id": "Daum_et+al_2009_a",
+            "entry": "H. Daum\u00e9 III, J. Langford, and D. Marcu. Search-based structured prediction. Machine Learning, 75 (3):297\u2013325, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Daum%C3%A9%2C%20III%2C%20H.%20Langford%2C%20J.%20Marcu%2C%20D.%20Search-based%20structured%20prediction%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Daum%C3%A9%2C%20III%2C%20H.%20Langford%2C%20J.%20Marcu%2C%20D.%20Search-based%20structured%20prediction%202009"
+        },
+        {
+            "id": "Doppa_et+al_2014_a",
+            "entry": "J. R. Doppa, A. Fern, and P. Tadepalli. Structured prediction via output space search. JMLR, 15(1): 1317\u20131350, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Doppa%2C%20J.R.%20Fern%2C%20A.%20Tadepalli%2C%20P.%20Structured%20prediction%20via%20output%20space%20search%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Doppa%2C%20J.R.%20Fern%2C%20A.%20Tadepalli%2C%20P.%20Structured%20prediction%20via%20output%20space%20search%202014"
+        },
+        {
+            "id": "Eban_et+al_2017_a",
+            "entry": "E. Eban, M. Schain, A. Mackey, A. Gordon, R. Rifkin, and G. Elidan. Scalable learning of nondecomposable objectives. In Artificial Intelligence and Statistics, pages 832\u2013840, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Eban%2C%20E.%20Schain%2C%20M.%20Mackey%2C%20A.%20Gordon%2C%20A.%20Scalable%20learning%20of%20nondecomposable%20objectives%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Eban%2C%20E.%20Schain%2C%20M.%20Mackey%2C%20A.%20Gordon%2C%20A.%20Scalable%20learning%20of%20nondecomposable%20objectives%202017"
+        },
+        {
+            "id": "Gimpel_2010_a",
+            "entry": "K. Gimpel and N. A. Smith. Softmax-margin CRFs: Training log-linear models with cost functions. In Proceedings of ACL, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gimpel%2C%20K.%20Smith%2C%20N.A.%20Softmax-margin%20CRFs%3A%20Training%20log-linear%20models%20with%20cost%20functions%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gimpel%2C%20K.%20Smith%2C%20N.A.%20Softmax-margin%20CRFs%3A%20Training%20log-linear%20models%20with%20cost%20functions%202010"
+        },
+        {
+            "id": "Graves_2014_a",
+            "entry": "A. Graves and N. Jaitly. Towards end-to-end speech recognition with recurrent neural networks. In Proceedings of ICML, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Graves%2C%20A.%20Jaitly%2C%20N.%20Towards%20end-to-end%20speech%20recognition%20with%20recurrent%20neural%20networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Graves%2C%20A.%20Jaitly%2C%20N.%20Towards%20end-to-end%20speech%20recognition%20with%20recurrent%20neural%20networks%202014"
+        },
+        {
+            "id": "Joachims_2005_a",
+            "entry": "T. Joachims. A support vector method for multivariate performance measures. In Proceedings of ICML, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Joachims%2C%20T.%20A%20support%20vector%20method%20for%20multivariate%20performance%20measures%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Joachims%2C%20T.%20A%20support%20vector%20method%20for%20multivariate%20performance%20measures%202005"
+        },
+        {
+            "id": "Jurafsky_2009_a",
+            "entry": "D. Jurafsky and J. H. Martin. Speech and Language Processing (2nd Edition). Prentice-Hall, Inc., 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jurafsky%2C%20D.%20Martin%2C%20J.H.%20Speech%20and%20Language%20Processing%202009"
+        },
+        {
+            "id": "Lafferty_et+al_2001_a",
+            "entry": "J. Lafferty, A. McCallum, and F. Pereira. Conditional random fields: Probabilistic models for segmenting and labeling sequence data. In Proceedings of ICML, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lafferty%2C%20J.%20McCallum%2C%20A.%20Pereira%2C%20F.%20Conditional%20random%20fields%3A%20Probabilistic%20models%20for%20segmenting%20and%20labeling%20sequence%20data%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lafferty%2C%20J.%20McCallum%2C%20A.%20Pereira%2C%20F.%20Conditional%20random%20fields%3A%20Probabilistic%20models%20for%20segmenting%20and%20labeling%20sequence%20data%202001"
+        },
+        {
+            "id": "Lam_et+al_2015_a",
+            "entry": "M. Lam, J. R. Doppa, S. Todorovic, and T. G. Dietterich. Hc-search for structured prediction in computer vision. In CVPR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lam%2C%20M.%20Doppa%2C%20J.R.%20Todorovic%2C%20S.%20Dietterich%2C%20T.G.%20Hc-search%20for%20structured%20prediction%20in%20computer%20vision%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lam%2C%20M.%20Doppa%2C%20J.R.%20Todorovic%2C%20S.%20Dietterich%2C%20T.G.%20Hc-search%20for%20structured%20prediction%20in%20computer%20vision%202015"
+        },
+        {
+            "id": "Lucchi_et+al_2013_a",
+            "entry": "A. Lucchi, L. Yunpeng, and P. Fua. Learning for structured prediction using approximate subgradient descent with working sets. In Proceedings of CVPR, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lucchi%2C%20A.%20Yunpeng%2C%20L.%20Fua%2C%20P.%20Learning%20for%20structured%20prediction%20using%20approximate%20subgradient%20descent%20with%20working%20sets%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lucchi%2C%20A.%20Yunpeng%2C%20L.%20Fua%2C%20P.%20Learning%20for%20structured%20prediction%20using%20approximate%20subgradient%20descent%20with%20working%20sets%202013"
+        },
+        {
+            "id": "Manning_1999_a",
+            "entry": "C. D. Manning and H. Sch\u00fctze. Foundations of Statistical Natural Language Processing. The MIT Press, Cambridge, Massachusetts, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=C%20D%20Manning%20and%20H%20Sch%C3%BCtze%20Foundations%20of%20Statistical%20Natural%20Language%20Processing%20The%20MIT%20Press%20Cambridge%20Massachusetts%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=C%20D%20Manning%20and%20H%20Sch%C3%BCtze%20Foundations%20of%20Statistical%20Natural%20Language%20Processing%20The%20MIT%20Press%20Cambridge%20Massachusetts%201999"
+        },
+        {
+            "id": "Mcallester_et+al_2010_a",
+            "entry": "D. A. McAllester, T. Hazan, and J. Keshet. Direct loss minimization for structured prediction. In Proceedings of NIPS, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=McAllester%2C%20D.A.%20Hazan%2C%20T.%20Keshet%2C%20J.%20Direct%20loss%20minimization%20for%20structured%20prediction%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=McAllester%2C%20D.A.%20Hazan%2C%20T.%20Keshet%2C%20J.%20Direct%20loss%20minimization%20for%20structured%20prediction%202010"
+        },
+        {
+            "id": "Mohri_1997_a",
+            "entry": "M. Mohri. Finite-state transducers in language and speech processing. Computational Linguistics, 23 (2):269\u2013311, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mohri%2C%20M.%20Finite-state%20transducers%20in%20language%20and%20speech%20processing%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mohri%2C%20M.%20Finite-state%20transducers%20in%20language%20and%20speech%20processing%201997"
+        },
+        {
+            "id": "Mohri_2002_a",
+            "entry": "M. Mohri. Semiring Frameworks and Algorithms for Shortest-Distance Problems. Journal of Automata, Languages and Combinatorics, 7(3):321\u2013350, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mohri%2C%20M.%20Semiring%20Frameworks%20and%20Algorithms%20for%20Shortest-Distance%20Problems%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mohri%2C%20M.%20Semiring%20Frameworks%20and%20Algorithms%20for%20Shortest-Distance%20Problems%202002"
+        },
+        {
+            "id": "Mohri_2003_a",
+            "entry": "M. Mohri. Edit-distance of weighted automata: General definitions and algorithms. International Journal of Foundations of Computer Science, 14(6):957\u2013982, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mohri%2C%20M.%20Edit-distance%20of%20weighted%20automata%3A%20General%20definitions%20and%20algorithms%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mohri%2C%20M.%20Edit-distance%20of%20weighted%20automata%3A%20General%20definitions%20and%20algorithms%202003"
+        },
+        {
+            "id": "Nadeau_2007_a",
+            "entry": "D. Nadeau and S. Sekine. A survey of named entity recognition and classification. Linguisticae Investigationes, 30(1):3\u201326, January 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nadeau%2C%20D.%20Sekine%2C%20S.%20A%20survey%20of%20named%20entity%20recognition%20and%20classification%202007-01",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nadeau%2C%20D.%20Sekine%2C%20S.%20A%20survey%20of%20named%20entity%20recognition%20and%20classification%202007-01"
+        },
+        {
+            "id": "Norouzi_et+al_2016_a",
+            "entry": "M. Norouzi, S. Bengio, N. Jaitly, M. Schuster, Y. Wu, and D. Schuurmans. Reward augmented maximum likelihood for neural structured prediction. In Proceedings of NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Norouzi%2C%20M.%20Bengio%2C%20S.%20Jaitly%2C%20N.%20Schuster%2C%20M.%20Reward%20augmented%20maximum%20likelihood%20for%20neural%20structured%20prediction%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Norouzi%2C%20M.%20Bengio%2C%20S.%20Jaitly%2C%20N.%20Schuster%2C%20M.%20Reward%20augmented%20maximum%20likelihood%20for%20neural%20structured%20prediction%202016"
+        },
+        {
+            "id": "Och_2003_a",
+            "entry": "F. J. Och. Minimum error rate training in statistical machine translation. In Proceedings of ACL, volume 1, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Och%2C%20F.J.%20Minimum%20error%20rate%20training%20in%20statistical%20machine%20translation%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Och%2C%20F.J.%20Minimum%20error%20rate%20training%20in%20statistical%20machine%20translation%202003"
+        },
+        {
+            "id": "Paszke_et+al_2017_a",
+            "entry": "A. Paszke, S. Gross, S. Chintala, G. Chanan, E. Yang, Z. DeVito, Z. Lin, A. Desmaison, L. Antiga, and A. Lerer. Automatic differentiation in PyTorch. In Proceedings of NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=A%20Paszke%20S%20Gross%20S%20Chintala%20G%20Chanan%20E%20Yang%20Z%20DeVito%20Z%20Lin%20A%20Desmaison%20L%20Antiga%20and%20A%20Lerer%20Automatic%20differentiation%20in%20PyTorch%20In%20Proceedings%20of%20NIPS%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=A%20Paszke%20S%20Gross%20S%20Chintala%20G%20Chanan%20E%20Yang%20Z%20DeVito%20Z%20Lin%20A%20Desmaison%20L%20Antiga%20and%20A%20Lerer%20Automatic%20differentiation%20in%20PyTorch%20In%20Proceedings%20of%20NIPS%202017"
+        },
+        {
+            "id": "Poon_2011_a",
+            "entry": "H. Poon and P. Domingos. Sum-product networks: A new deep architecture. In ICCV Workshops, pages 689\u2013690, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Poon%2C%20H.%20Domingos%2C%20P.%20Sum-product%20networks%3A%20A%20new%20deep%20architecture%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Poon%2C%20H.%20Domingos%2C%20P.%20Sum-product%20networks%3A%20A%20new%20deep%20architecture%202011"
+        },
+        {
+            "id": "Prabhavalkar_et+al_2017_a",
+            "entry": "R. Prabhavalkar, T. N. Sainath, Y. Wu, P. Nguyen, Z. Chen, C.-C. Chiu, and A. Kannan. Minimum word error rate training for attention-based sequence-to-sequence models. arXiv preprint arXiv:1712.01818, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1712.01818"
+        },
+        {
+            "id": "Ranjbar_et+al_2013_a",
+            "entry": "M. Ranjbar, T. Lan, Y. Wang, S. N. Robinovitch, Z.-N. Li, and G. Mori. Optimizing nondecomposable loss functions in structured prediction. IEEE transactions on pattern analysis and machine intelligence, 35(4):911\u2013924, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ranjbar%2C%20M.%20Lan%2C%20T.%20Wang%2C%20Y.%20Robinovitch%2C%20S.N.%20Optimizing%20nondecomposable%20loss%20functions%20in%20structured%20prediction%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ranjbar%2C%20M.%20Lan%2C%20T.%20Wang%2C%20Y.%20Robinovitch%2C%20S.N.%20Optimizing%20nondecomposable%20loss%20functions%20in%20structured%20prediction%202013"
+        },
+        {
+            "id": "Ranzato_et+al_2015_a",
+            "entry": "M. Ranzato, S. Chopra, M. Auli, and W. Zaremba. Sequence level training with recurrent neural networks. arXiv preprint arXiv:1511.06732, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.06732"
+        },
+        {
+            "id": "Ross_et+al_2011_a",
+            "entry": "S. Ross, G. J. Gordon, and D. Bagnell. A reduction of imitation learning and structured prediction to no-regret online learning. In Proceedings of AISTATS, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ross%2C%20S.%20Gordon%2C%20G.J.%20Bagnell%2C%20D.%20A%20reduction%20of%20imitation%20learning%20and%20structured%20prediction%20to%20no-regret%20online%20learning%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ross%2C%20S.%20Gordon%2C%20G.J.%20Bagnell%2C%20D.%20A%20reduction%20of%20imitation%20learning%20and%20structured%20prediction%20to%20no-regret%20online%20learning%202011"
+        },
+        {
+            "id": "Schoelkopf_et+al_2004_a",
+            "entry": "B. Sch\u00f6lkopf, K. Tsuda, and J.-P. Vert. Kernel methods in computational biology. MIT Press, Cambridge, Mass., 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sch%C3%B6lkopf%2C%20B.%20Tsuda%2C%20K.%20Vert%2C%20J.-P.%20Kernel%20methods%20in%20computational%20biology%202004"
+        },
+        {
+            "id": "Seide_2016_a",
+            "entry": "F. Seide and A. Agarwal. CNTK: Microsoft\u2019s open-source deep-learning toolkit. In Proceedings of KDD. ACM, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Seide%2C%20F.%20Agarwal%2C%20A.%20CNTK%3A%20Microsoft%E2%80%99s%20open-source%20deep-learning%20toolkit%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Seide%2C%20F.%20Agarwal%2C%20A.%20CNTK%3A%20Microsoft%E2%80%99s%20open-source%20deep-learning%20toolkit%202016"
+        },
+        {
+            "id": "Shen_et+al_2016_a",
+            "entry": "S. Shen, Y. Cheng, Z. He, W. He, H. Wu, M. Sun, and Y. Liu. Minimum risk training for neural machine translation. In Proceedings of ACL, volume 1, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shen%2C%20S.%20Cheng%2C%20Y.%20He%2C%20Z.%20He%2C%20W.%20Minimum%20risk%20training%20for%20neural%20machine%20translation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shen%2C%20S.%20Cheng%2C%20Y.%20He%2C%20Z.%20He%2C%20W.%20Minimum%20risk%20training%20for%20neural%20machine%20translation%202016"
+        },
+        {
+            "id": "Sutskever_et+al_2014_a",
+            "entry": "I. Sutskever, O. Vinyals, and Q. V. Le. Sequence to sequence learning with neural networks. In Proceedings of NIPS, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutskever%2C%20I.%20Vinyals%2C%20O.%20Le%2C%20Q.V.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutskever%2C%20I.%20Vinyals%2C%20O.%20Le%2C%20Q.V.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014"
+        },
+        {
+            "id": "Taskar_et+al_2003_a",
+            "entry": "B. Taskar, C. Guestrin, and D. Koller. Max-margin Markov networks. In NIPS, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Taskar%2C%20B.%20Guestrin%2C%20C.%20Koller%2C%20D.%20Max-margin%20Markov%20networks%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Taskar%2C%20B.%20Guestrin%2C%20C.%20Koller%2C%20D.%20Max-margin%20Markov%20networks%202003"
+        },
+        {
+            "id": "Tsochantaridis_et+al_2005_a",
+            "entry": "I. Tsochantaridis, T. Joachims, T. Hofmann, and Y. Altun. Large margin methods for structured and interdependent output variables. JMLR, 6:1453\u20131484, Dec. 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tsochantaridis%2C%20I.%20Joachims%2C%20T.%20Hofmann%2C%20T.%20Altun%2C%20Y.%20Large%20margin%20methods%20for%20structured%20and%20interdependent%20output%20variables%202005-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tsochantaridis%2C%20I.%20Joachims%2C%20T.%20Hofmann%2C%20T.%20Altun%2C%20Y.%20Large%20margin%20methods%20for%20structured%20and%20interdependent%20output%20variables%202005-12"
+        },
+        {
+            "id": "Vinyals_et+al_2015_a",
+            "entry": "In Proceedings of NIPS, 2015a. O. Vinyals, A. Toshev, S. Bengio, and D. Erhan. Show and tell: A neural image caption generator. In",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vinyals%2C%20O.%20Toshev%2C%20A.%20Bengio%2C%20S.%20Erhan%2C%20D.%20Show%20and%20tell%3A%20A%20neural%20image%20caption%20generator%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vinyals%2C%20O.%20Toshev%2C%20A.%20Bengio%2C%20S.%20Erhan%2C%20D.%20Show%20and%20tell%3A%20A%20neural%20image%20caption%20generator%202015"
+        },
+        {
+            "id": "Proceedings_2016_a",
+            "entry": "Proceedings of CVPR, 2015b. Y. Wu, M. Schuster, Z. Chen, Q. V. Le, M. Norouzi, W. Macherey, M. Krikun, Y. Cao, Q. Gao, K. Macherey, J. Klingner, A. Shah, M. Johnson, X. Liu, \u0141ukasz Kaiser, S. Gouws, Y. Kato, T. Kudo, H. Kazawa, K. Stevens, G. Kurian, N. Patil, W. Wang, C. Young, J. Smith, J. Riesa, A. Rudnick, O. Vinyals, G. Corrado, M. Hughes, and J. Dean. Google\u2019s neural machine translation system: Bridging the gap between human and machine translation. CoRR, abs/1609.08144, 2016. URL http://arxiv.org/abs/1609.08144. D. Zhang, L. Sun, and W. Li. A structured prediction approach for statistical machine translation. In Proceedings of IJCNLP, 2008.",
+            "url": "http://arxiv.org/abs/1609.08144",
+            "arxiv_url": "https://arxiv.org/pdf/1609.08144"
+        }
+    ]
+}

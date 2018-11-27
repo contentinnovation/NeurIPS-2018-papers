@@ -1,0 +1,396 @@
+{
+    "filename": "8028-pipe-sgd-a-decentralized-pipelined-sgd-framework-for-distributed-deep-net-training.pdf",
+    "metadata": {
+        "title": "Pipe-SGD: A Decentralized Pipelined SGD Framework for Distributed Deep Net Training",
+        "author": "Youjie Li, Mingchao Yu, Songze Li, Salman Avestimehr, Nam Sung Kim, Alexander Schwing",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8028-pipe-sgd-a-decentralized-pipelined-sgd-framework-for-distributed-deep-net-training.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Distributed training of deep nets is an important technique to address some of the present day computing challenges like memory consumption and computational demands. Classical distributed approaches, synchronous or asynchronous, are based on the parameter server architecture, i.e., worker nodes compute gradients which are communicated to the parameter server while updated parameters are returned. Recently, distributed training with AllReduce operations gained popularity as well. While many of those operations seem appealing, little is reported about wall-clock training time improvements. In this paper, we carefully analyze the AllReduce based setup, propose timing models which include network latency, bandwidth, cluster size and compute time, and demonstrate that a pipelined training with a width of two combines the best of both synchronous and asynchronous training. Specifically, for a setup consisting of a four-node GPU cluster we show wall-clock time training improvements of up to 5.4\u00d7 compared to conventional approaches."
+    },
+    "keywords": [
+        {
+            "term": "deep net",
+            "url": "https://en.wikipedia.org/wiki/deep_net"
+        },
+        {
+            "term": "network latency",
+            "url": "https://en.wikipedia.org/wiki/network_latency"
+        },
+        {
+            "term": "wall clock",
+            "url": "https://en.wikipedia.org/wiki/wall_clock"
+        },
+        {
+            "term": "data parallel",
+            "url": "https://en.wikipedia.org/wiki/data_parallel"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        },
+        {
+            "term": "gpu cluster",
+            "url": "https://en.wikipedia.org/wiki/gpu_cluster"
+        },
+        {
+            "term": "FPGA",
+            "url": "https://en.wikipedia.org/wiki/FPGA"
+        },
+        {
+            "term": "stochastic gradient descent",
+            "url": "https://en.wikipedia.org/wiki/stochastic_gradient_descent"
+        },
+        {
+            "term": "Defense Advanced Research Projects Agency",
+            "url": "https://en.wikipedia.org/wiki/Defense_Advanced_Research_Projects_Agency"
+        }
+    ],
+    "highlights": [
+        "General Training of Deep Nets: Training of deep nets involves finding the parameters w of a predictor F(x, w) given input data x",
+        "We evaluate the performance of three different frameworks: parameter server with synchronous stochastic gradient descent (PS-Sync), decentralized synchronous stochastic gradient descent (D-Sync), and Pipe-stochastic gradient descent",
+        "Convergence: From Fig. 4, we observe: decentralized approaches, i.e., decentralized synchronous SGD and Pipe-stochastic gradient descent, converge much faster than the parameter server even without compression, and Pipe-stochastic gradient descent shows the fastest convergence among these frameworks, especially when compression is applied",
+        "The convergence curve of the CIFAR100-Convex shows that decentralized synchronous SGD is around 40% faster than parameter server with synchronous SGD and Pipe-stochastic gradient descent is another 37% faster than decentralized synchronous SGD",
+        "We developed a rigorous timing model for distributed deep net training which takes into account network latency, model size, byte transfer time, etc",
+        "We showed efficacy of the proposed method on a four-node GPU cluster connected with 10Gb links"
+    ],
+    "key_statements": [
+        "General Training of Deep Nets: Training of deep nets involves finding the parameters w of a predictor F(x, w) given input data x",
+        "Based on the results of our model we develop Pipe-stochastic gradient descent, a framework with pipelined training and balanced communication, and show its convergence properties by adjusting proofs of [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>, <a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>]",
+        "We developed Pipe-stochastic gradient descent by analyzing a timing model for wall-clock train time under different resource conditions using various communication approaches",
+        "We find that the proposed Pipe-stochastic gradient descent is optimal when gradient updates are delayed by only one iteration and the time taken by each iteration is dominated by local computation on workers",
+        "Timing Model: We propose timing models based on decentralized synchronous stochastic gradient descent to analyze the wall-clock runtime of training",
+        "Based on our timing models, we find: Pipe-stochastic gradient descent is optimal for K = 2, system is compute bound, and sequential gradient communication is used",
+        "Decentralized Pipeline stochastic gradient descent: Guided by the timing models, we develop the decentralized Pipe-stochastic gradient descent framework illustrated in Fig. 1 (c) where neighboring training iterations on workers are interleaved with a width of K = 2 while the execution within each iteration remains strictly sequential",
+        "From 2) and 3), we find that the total number of iterations required for Pipe-stochastic gradient descent is Tsingle/p, because Pipe-stochastic gradient descent has a p times larger batch size while still training the same number of samples",
+        "We evaluate the performance of three different frameworks: parameter server with synchronous stochastic gradient descent (PS-Sync), decentralized synchronous stochastic gradient descent (D-Sync), and Pipe-stochastic gradient descent",
+        "Convergence: From Fig. 4, we observe: decentralized approaches, i.e., decentralized synchronous SGD and Pipe-stochastic gradient descent, converge much faster than the parameter server even without compression, and Pipe-stochastic gradient descent shows the fastest convergence among these frameworks, especially when compression is applied",
+        "The convergence curve of the CIFAR100-Convex shows that decentralized synchronous SGD is around 40% faster than parameter server with synchronous SGD and Pipe-stochastic gradient descent is another 37% faster than decentralized synchronous SGD",
+        "The advantage of Pipe-stochastic gradient descent is further boosted by compression, i.e., truncation in this case, and demonstrates an additional 46% faster convergence than the decentralized synchronous SGD with the same compression scheme",
+        "Pipe-stochastic gradient descent prevails with a great margin",
+        "We developed a rigorous timing model for distributed deep net training which takes into account network latency, model size, byte transfer time, etc",
+        "We showed efficacy of the proposed method on a four-node GPU cluster connected with 10Gb links"
+    ],
+    "summary": [
+        "General Training of Deep Nets: Training of deep nets involves finding the parameters w of a predictor F(x, w) given input data x.",
+        "Based on the results of our model we develop Pipe-SGD, a framework with pipelined training and balanced communication, and show its convergence properties by adjusting proofs of [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>, <a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>].",
+        "We find that the proposed Pipe-SGD is optimal when gradient updates are delayed by only one iteration and the time taken by each iteration is dominated by local computation on workers.",
+        "The timing model for distributed learning is resource bound, either communication or computation bound, as shown in Fig. 2 (a), i.e., the total runtime is: ltotal_pipe = T \u00b7 max, (4)",
+        "Adopting the Ring-AllReduce model of [<a class=\"ref-link\" id=\"c46\" href=\"#r46\">46</a>], we obtain the total runtime of Pipe-SGD with sequential gradient communication under the limited resource assumption via: p\u22121 p\u22121",
+        "Based on our timing models, we find: Pipe-SGD is optimal for K = 2, system is compute bound, and sequential gradient communication is used.",
+        "Decentralized Pipeline SGD: Guided by the timing models, we develop the decentralized Pipe-SGD framework illustrated in Fig. 1 (c) where neighboring training iterations on workers are interleaved with a width of K = 2 while the execution within each iteration remains strictly sequential.",
+        "Decentralized workers perform pipelined training in parallel with synchronization on gradient communication after every iteration.",
+        "The number of iterations for a delayed update is 1, as compared to O(p) where p is the cluster size in the conventional asynchronous parameter server training [<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>, <a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>, <a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>].",
+        "Once Pipe-SGD is completely computation bound, linear speedups of end-to-end training time can be realized as the cluster size increases.",
+        "We showed that once our system becomes compute bound with compressed communication, Pipe-SGD can achieve linear speedup as the cluster scales, i.e., SE = 1.",
+        "Accuracy: Considering the potential drawback of the 1-iteration staled update and lossy compression in Pipe-SGD, we evaluate the final test/validation accuracies after end-to-end training, as shown in Fig. 4.",
+        "Li et al [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>, <a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>] proposed a parameter server framework for distributed learning and a few approaches to reduce the cost of communication among compute nodes, such as exchanging only nonzero parameter values, local caching of index list, and random skip of messages to be transmitted.",
+        "Based on our timing model and realistic resource assumptions, e.g., limited network bandwidth, we assessed scalability and developed Pipe-SGD, a pipelined training framework which is able to mask the faster of computation or communication time.",
+        "Assessing wall-clock time for Pipe-SGD, we are able to achieve improvements of up to 5.4\u00d7 compared to conventional approaches"
+    ],
+    "headline": "For a setup consisting of a four-node GPU cluster we show wall-clock time training improvements of up to 5.4\u00d7 compared to conventional approaches",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] M. Abadi, P. Barham, J. Chen, Z. Chen, A. Davis, J. Dean, M. Devin, S. Ghemawat, G. Irving, M. Isard, M. Kudlur, J. Levenberg, R. Monga, S. Moore, D. G. Murray, B. Steiner, P. A. Tucker, V. Vasudevan, P. Warden, M. Wicke, Y. Yu, and X. Zhang. TensorFlow: A System for Large-Scale Machine Learning. In OSDI, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=M%20Abadi%20P%20Barham%20J%20Chen%20Z%20Chen%20A%20Davis%20J%20Dean%20M%20Devin%20S%20Ghemawat%20G%20Irving%20M%20Isard%20M%20Kudlur%20J%20Levenberg%20R%20Monga%20S%20Moore%20D%20G%20Murray%20B%20Steiner%20P%20A%20Tucker%20V%20Vasudevan%20P%20Warden%20M%20Wicke%20Y%20Yu%20and%20X%20Zhang%20TensorFlow%20A%20System%20for%20LargeScale%20Machine%20Learning%20In%20OSDI%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=M%20Abadi%20P%20Barham%20J%20Chen%20Z%20Chen%20A%20Davis%20J%20Dean%20M%20Devin%20S%20Ghemawat%20G%20Irving%20M%20Isard%20M%20Kudlur%20J%20Levenberg%20R%20Monga%20S%20Moore%20D%20G%20Murray%20B%20Steiner%20P%20A%20Tucker%20V%20Vasudevan%20P%20Warden%20M%20Wicke%20Y%20Yu%20and%20X%20Zhang%20TensorFlow%20A%20System%20for%20LargeScale%20Machine%20Learning%20In%20OSDI%202016"
+        },
+        {
+            "id": "2",
+            "entry": "[2] D. Alistarh, D. Grubic, J. Li, R. Tomioka, and M. Vojnovic. QSGD: Communication-Efficient SGD via Gradient Quantization and Encoding. In NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Alistarh%2C%20D.%20Grubic%2C%20D.%20Li%2C%20J.%20Tomioka%2C%20R.%20QSGD%3A%20Communication-Efficient%20SGD%20via%20Gradient%20Quantization%20and%20Encoding%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Alistarh%2C%20D.%20Grubic%2C%20D.%20Li%2C%20J.%20Tomioka%2C%20R.%20QSGD%3A%20Communication-Efficient%20SGD%20via%20Gradient%20Quantization%20and%20Encoding%202017"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Y. Bengio, A. Courville, and P. Vincent. Representation Learning: A Review and New Perspectives. PAMI, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bengio%2C%20Y.%20Courville%2C%20A.%20Vincent%2C%20P.%20Representation%20Learning%3A%20A%20Review%20and%20New%20Perspectives%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bengio%2C%20Y.%20Courville%2C%20A.%20Vincent%2C%20P.%20Representation%20Learning%3A%20A%20Review%20and%20New%20Perspectives%202013"
+        },
+        {
+            "id": "4",
+            "entry": "[4] C.-Y. Chen, J. Choi, D. Brand, A. Agrawal, W. Zhang, and K. Gopalakrishnan. AdaComp : Adaptive Residual Gradient Compression for Data-Parallel Distributed Training. In AAAI, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20C.-Y.%20Choi%2C%20J.%20Brand%2C%20D.%20Agrawal%2C%20A.%20AdaComp%20%3A%20Adaptive%20Residual%20Gradient%20Compression%20for%20Data-Parallel%20Distributed%20Training%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20C.-Y.%20Choi%2C%20J.%20Brand%2C%20D.%20Agrawal%2C%20A.%20AdaComp%20%3A%20Adaptive%20Residual%20Gradient%20Compression%20for%20Data-Parallel%20Distributed%20Training%202018"
+        },
+        {
+            "id": "5",
+            "entry": "[5] L.-C. Chen, G. Papandreou, I. Kokkinos, K. Murphy, and A. L. Yuille. Semantic Image Segmentation with Deep Convolutional Nets and Fully Connected CRFs. In ICLR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20L.-C.%20Papandreou%2C%20G.%20Kokkinos%2C%20I.%20Murphy%2C%20K.%20Semantic%20Image%20Segmentation%20with%20Deep%20Convolutional%20Nets%20and%20Fully%20Connected%20CRFs%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20L.-C.%20Papandreou%2C%20G.%20Kokkinos%2C%20I.%20Murphy%2C%20K.%20Semantic%20Image%20Segmentation%20with%20Deep%20Convolutional%20Nets%20and%20Fully%20Connected%20CRFs%202015"
+        },
+        {
+            "id": "6",
+            "entry": "[6] T. Chilimbi, Y. Suzue, J. Apacible, and K. Kalyanaraman. Project Adam: Building an efficient and scalable deep learning training system. In OSDI, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chilimbi%2C%20T.%20Suzue%2C%20Y.%20Apacible%2C%20J.%20Kalyanaraman%2C%20K.%20Project%20Adam%3A%20Building%20an%20efficient%20and%20scalable%20deep%20learning%20training%20system%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chilimbi%2C%20T.%20Suzue%2C%20Y.%20Apacible%2C%20J.%20Kalyanaraman%2C%20K.%20Project%20Adam%3A%20Building%20an%20efficient%20and%20scalable%20deep%20learning%20training%20system%202014"
+        },
+        {
+            "id": "7",
+            "entry": "[7] H. Cui, H. Zhang, G. R. Ganger, P. B. Gibbons, and E. P. Xing. GeePS: Scalable Deep Learning on Distributed GPUs with a GPU-Specialized Parameter Server. In EuroSys, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cui%2C%20H.%20Zhang%2C%20H.%20Ganger%2C%20G.R.%20Gibbons%2C%20P.B.%20GeePS%3A%20Scalable%20Deep%20Learning%20on%20Distributed%20GPUs%20with%20a%20GPU-Specialized%20Parameter%20Server%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cui%2C%20H.%20Zhang%2C%20H.%20Ganger%2C%20G.R.%20Gibbons%2C%20P.B.%20GeePS%3A%20Scalable%20Deep%20Learning%20on%20Distributed%20GPUs%20with%20a%20GPU-Specialized%20Parameter%20Server%202016"
+        },
+        {
+            "id": "8",
+            "entry": "[8] J. Dean, G. Corrado, R. Monga, K. Chen, M. Devin, M. Mao, M. Ranzato, A. Senior, P. Tucker, K. Yang, Q. V. Le, and A. Y. Ng. Large Scale Distributed Deep Networks. In NIPS, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=J%20Dean%20G%20Corrado%20R%20Monga%20K%20Chen%20M%20Devin%20M%20Mao%20M%20Ranzato%20A%20Senior%20P%20Tucker%20K%20Yang%20Q%20V%20Le%20and%20A%20Y%20Ng%20Large%20Scale%20Distributed%20Deep%20Networks%20In%20NIPS%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=J%20Dean%20G%20Corrado%20R%20Monga%20K%20Chen%20M%20Devin%20M%20Mao%20M%20Ranzato%20A%20Senior%20P%20Tucker%20K%20Yang%20Q%20V%20Le%20and%20A%20Y%20Ng%20Large%20Scale%20Distributed%20Deep%20Networks%20In%20NIPS%202012"
+        },
+        {
+            "id": "9",
+            "entry": "[9] J. Dean and S. Ghemawat. MapReduce: Simplified Data Processing on Large Clusters. Communications of the ACM, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dean%2C%20J.%20Ghemawat%2C%20S.%20MapReduce%3A%20Simplified%20Data%20Processing%20on%20Large%20Clusters%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dean%2C%20J.%20Ghemawat%2C%20S.%20MapReduce%3A%20Simplified%20Data%20Processing%20on%20Large%20Clusters%202008"
+        },
+        {
+            "id": "10",
+            "entry": "[10] N. Dryden, N. Maruyama, T. Moon, T. Benson, A. Yoo, M. Snir, and B. V. Essen. Aluminum: An Asynchronous, GPU-Aware Communication Library Optimized for Large-Scale Training of Deep Neural Networks on HPC Systems. In MLHPC, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dryden%2C%20N.%20Maruyama%2C%20N.%20Moon%2C%20T.%20Benson%2C%20T.%20Aluminum%3A%20An%20Asynchronous%2C%20GPU-Aware%20Communication%20Library%20Optimized%20for%20Large-Scale%20Training%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dryden%2C%20N.%20Maruyama%2C%20N.%20Moon%2C%20T.%20Benson%2C%20T.%20Aluminum%3A%20An%20Asynchronous%2C%20GPU-Aware%20Communication%20Library%20Optimized%20for%20Large-Scale%20Training%202018"
+        },
+        {
+            "id": "11",
+            "entry": "[11] N. Dryden, T. Moon, S. A. Jacobs, and B. V. Essen. Communication Quantization for Data-Parallel Training of Deep Neural Networks. In MLHPC, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dryden%2C%20N.%20Moon%2C%20T.%20Jacobs%2C%20S.A.%20Essen%2C%20B.V.%20Communication%20Quantization%20for%20Data-Parallel%20Training%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dryden%2C%20N.%20Moon%2C%20T.%20Jacobs%2C%20S.A.%20Essen%2C%20B.V.%20Communication%20Quantization%20for%20Data-Parallel%20Training%202016"
+        },
+        {
+            "id": "12",
+            "entry": "[12] P. Goyal, P. Doll\u00e1r, R. B. Girshick, P. Noordhuis, L. Wesolowski, A. Kyrola, A. Tulloch, Y. Jia, and K. He. Accurate, Large Minibatch SGD: Training ImageNet in 1 Hour. In CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Large%20Minibatch%20SGD%3A%20Training%20ImageNet%20in%201%20Hour%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Large%20Minibatch%20SGD%3A%20Training%20ImageNet%20in%201%20Hour%202017"
+        },
+        {
+            "id": "13",
+            "entry": "[13] K. He, X. Zhang, S. Ren, and J. Sun. Deep Residual Learning for Image Recognition. In CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20Residual%20Learning%20for%20Image%20Recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20Residual%20Learning%20for%20Image%20Recognition%202016"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Q. Ho, J. Cipar, H. Cui, S. Lee, J. K. Kim, P. B. Gibbons, G. A. Gibson, G. R. Ganger, and E. P. Xing. More Effective Distributed ML via a Stale Synchronous Parallel Parameter Server. In NIPS, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ho%2C%20Q.%20Cipar%2C%20J.%20Cui%2C%20H.%20Lee%2C%20S.%20More%20Effective%20Distributed%20ML%20via%20a%20Stale%20Synchronous%20Parallel%20Parameter%20Server%202013"
+        },
+        {
+            "id": "15",
+            "entry": "[15] F. N. Iandola, K. Ashraf, M. W. Moskewicz, and K. Keutzer. FireCaffe: Near-linear Acceleration of Deep Neural Network Training on Compute Clusters. In CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=F%20N%20Iandola%20K%20Ashraf%20M%20W%20Moskewicz%20and%20K%20Keutzer%20FireCaffe%20Nearlinear%20Acceleration%20of%20Deep%20Neural%20Network%20Training%20on%20Compute%20Clusters%20In%20CVPR%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=F%20N%20Iandola%20K%20Ashraf%20M%20W%20Moskewicz%20and%20K%20Keutzer%20FireCaffe%20Nearlinear%20Acceleration%20of%20Deep%20Neural%20Network%20Training%20on%20Compute%20Clusters%20In%20CVPR%202016"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Intel Corporation. Xeon CPU E5, https://www.intel.com/content/www/us/en/products/processors/xeon/e5processors.html, 2017.",
+            "url": "https://www.intel.com/content/www/us/en/products/processors/xeon/e5processors.html"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Intel Corporation. Intel Math Kernel Library, https://software.intel.com/en-us/mkl, 2018.",
+            "url": "https://software.intel.com/en-us/mkl"
+        },
+        {
+            "id": "18",
+            "entry": "[18] M. Isard, M. Budiu, Y. Yu, A. Birrell, and D. Fetterly. Dryad: Distributed data-parallel programs from sequential building blocks. In ACM SIGOP, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Isard%2C%20M.%20Budiu%2C%20M.%20Yu%2C%20Y.%20Birrell%2C%20A.%20Dryad%3A%20Distributed%20data-parallel%20programs%20from%20sequential%20building%20blocks%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Isard%2C%20M.%20Budiu%2C%20M.%20Yu%2C%20Y.%20Birrell%2C%20A.%20Dryad%3A%20Distributed%20data-parallel%20programs%20from%20sequential%20building%20blocks%202007"
+        },
+        {
+            "id": "19",
+            "entry": "[19] H. Kim, J. Park, J. Jang, and S. Yoon. Deepspark: A spark-based distributed deep learning framework for commodity clusters. arXiv:1602.08191 [cs], 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1602.08191"
+        },
+        {
+            "id": "20",
+            "entry": "[20] A. Krizhevsky. Learning Multiple Layers of Features from Tiny Images, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20A.%20Learning%20Multiple%20Layers%20of%20Features%20from%20Tiny%20Images%202009"
+        },
+        {
+            "id": "21",
+            "entry": "[21] A. Krizhevsky, I. Sutskever, and G. E. Hinton. Imagenet Classification with Deep Convolutional Neural Networks. In NIPS, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20A.%20Sutskever%2C%20I.%20Hinton%2C%20G.E.%20Imagenet%20Classification%20with%20Deep%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krizhevsky%2C%20A.%20Sutskever%2C%20I.%20Hinton%2C%20G.E.%20Imagenet%20Classification%20with%20Deep%202012"
+        },
+        {
+            "id": "22",
+            "entry": "[22] J. Langford, A. J. Smola, and M. Zinkevich. Slow Learners are Fast. In NIPS, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Langford%2C%20J.%20Smola%2C%20A.J.%20Zinkevich%2C%20M.%20Slow%20Learners%20are%20Fast%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Langford%2C%20J.%20Smola%2C%20A.J.%20Zinkevich%2C%20M.%20Slow%20Learners%20are%20Fast%202009"
+        },
+        {
+            "id": "23",
+            "entry": "[23] G. Larsson, M. Maire, and G. Shakhnarovich. FractalNet: Ultra-Deep Neural Networks without Residuals. In https://arxiv.org/abs/1605.07648, 2016.",
+            "url": "https://arxiv.org/abs/1605.07648",
+            "arxiv_url": "https://arxiv.org/pdf/1605.07648"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Y. LeCun, Y. Bengio, and G. E. Hinton. Deep learning. Nature, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=LeCun%2C%20Y.%20Bengio%2C%20Y.%20Hinton%2C%20G.E.%20Deep%20learning%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=LeCun%2C%20Y.%20Bengio%2C%20Y.%20Hinton%2C%20G.E.%20Deep%20learning%202015"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Y. LeCun, L. Bottou, Y. Bengio, and P. Haffner. Gradient-based learning applied to document recognition. IEEE, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=LeCun%2C%20Y.%20Bottou%2C%20L.%20Bengio%2C%20Y.%20Haffner%2C%20P.%20Gradient-based%20learning%20applied%20to%20document%20recognition%201998"
+        },
+        {
+            "id": "26",
+            "entry": "[26] M. Li, D. G. Andersen, J. W. Park, A. J. Smola, A. Ahmed, V. Josifovski, J. Long, E. J. Shekita, and B.-Y. Su. Scaling Distributed Machine Learning with the Parameter Server. In OSDI, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=M%20Li%20D%20G%20Andersen%20J%20W%20Park%20A%20J%20Smola%20A%20Ahmed%20V%20Josifovski%20J%20Long%20E%20J%20Shekita%20and%20BY%20Su%20Scaling%20Distributed%20Machine%20Learning%20with%20the%20Parameter%20Server%20In%20OSDI%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=M%20Li%20D%20G%20Andersen%20J%20W%20Park%20A%20J%20Smola%20A%20Ahmed%20V%20Josifovski%20J%20Long%20E%20J%20Shekita%20and%20BY%20Su%20Scaling%20Distributed%20Machine%20Learning%20with%20the%20Parameter%20Server%20In%20OSDI%202014"
+        },
+        {
+            "id": "27",
+            "entry": "[27] M. Li, D. G. Andersen, A. J. Smola, and K. Yu. Communication Efficient Distributed Machine Learning with the Parameter Server. In NIPS, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=M%20Li%20D%20G%20Andersen%20A%20J%20Smola%20and%20K%20Yu%20Communication%20Efficient%20Distributed%20Machine%20Learning%20with%20the%20Parameter%20Server%20In%20NIPS%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=M%20Li%20D%20G%20Andersen%20A%20J%20Smola%20and%20K%20Yu%20Communication%20Efficient%20Distributed%20Machine%20Learning%20with%20the%20Parameter%20Server%20In%20NIPS%202014"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Y. Li, J. Park, M. Alian, Y. Yuan, Z. Qu, P. Pan, R. Wang, A.G. Schwing, H. Esmaeilzadeh, and N.S. Kim. A Network-Centric Hardware/Algorithm Co-Design to Accelerate Distributed Training of Deep Neural Networks. In MICRO, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Y.%20Park%2C%20J.%20Alian%2C%20M.%20Yuan%2C%20Y.%20A%20Network-Centric%20Hardware/Algorithm%20Co-Design%20to%20Accelerate%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20Y.%20Park%2C%20J.%20Alian%2C%20M.%20Yuan%2C%20Y.%20A%20Network-Centric%20Hardware/Algorithm%20Co-Design%20to%20Accelerate%202018"
+        },
+        {
+            "id": "29",
+            "entry": "[29] X. Lian, C. Zhang, H. Zhang, C. Hsieh, W. Zhang, and J. Liu. Can Decentralized Algorithms Outperform Centralized Algorithms? A Case Study for Decentralized Parallel Stochastic Gradient Descent. In NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lian%2C%20X.%20Zhang%2C%20C.%20Zhang%2C%20H.%20Hsieh%2C%20C.%20Can%20Decentralized%20Algorithms%20Outperform%20Centralized%20Algorithms%3F%20A%20Case%20Study%20for%20Decentralized%20Parallel%20Stochastic%20Gradient%20Descent%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lian%2C%20X.%20Zhang%2C%20C.%20Zhang%2C%20H.%20Hsieh%2C%20C.%20Can%20Decentralized%20Algorithms%20Outperform%20Centralized%20Algorithms%3F%20A%20Case%20Study%20for%20Decentralized%20Parallel%20Stochastic%20Gradient%20Descent%202017"
+        },
+        {
+            "id": "30",
+            "entry": "[30] X. Lian, W. Zhang, C. Zhang, and J. Liu. Asynchronous Decentralized Parallel Stochastic Gradient Descent. In arXiv:1710.06952v3, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.06952v3"
+        },
+        {
+            "id": "31",
+            "entry": "[31] R. Liao, A. Schwing, R. Zemel, and R. Urtasun. Learning Deep Parsimonious Representations. In NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liao%2C%20R.%20Schwing%2C%20A.%20Zemel%2C%20R.%20Urtasun%2C%20R.%20Learning%20Deep%20Parsimonious%20Representations%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liao%2C%20R.%20Schwing%2C%20A.%20Zemel%2C%20R.%20Urtasun%2C%20R.%20Learning%20Deep%20Parsimonious%20Representations%202016"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Y. Lin, S. Han, H. Mao, Y. Wang, and W. J. Dally. Deep Gradient Compression: Reducing the Communication Bandwidth for Distributed Training. In ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20Y.%20Han%2C%20S.%20Mao%2C%20H.%20Wang%2C%20Y.%20Deep%20Gradient%20Compression%3A%20Reducing%20the%20Communication%20Bandwidth%20for%20Distributed%20Training%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lin%2C%20Y.%20Han%2C%20S.%20Mao%2C%20H.%20Wang%2C%20Y.%20Deep%20Gradient%20Compression%3A%20Reducing%20the%20Communication%20Bandwidth%20for%20Distributed%20Training%202018"
+        },
+        {
+            "id": "33",
+            "entry": "[33] V. Mnih, K. Kavukcuoglu, D. Silver, A. Graves, I. Antonoglou, D. Wierstra, and M. Riedmiller. Playing Atari with Deep Reinforcement Learning. In NIPS Deep Learning Workshop, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20V.%20Kavukcuoglu%2C%20K.%20Silver%2C%20D.%20Graves%2C%20A.%20Playing%20Atari%20with%20Deep%20Reinforcement%20Learning.%20In%20NIPS%20Deep%20Learning%20Workshop%202013"
+        },
+        {
+            "id": "34",
+            "entry": "[34] V. Mnih, K. Kavukcuoglu, D. Silver, A. A. Rusu, J. Veness, M. G. Bellemare, A. Graves, M. Riedmiller, A. K. Fidjeland, G. Ostrovski, S. Petersen, C. Beattie, A. Sadik, I. Antonoglou, H. King, D. Kumaran, D. Wierstra, S. Legg, and D. Hassabis. Human-level Control through Deep Reinforcement Learning. Nature, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20V.%20Kavukcuoglu%2C%20K.%20Silver%2C%20D.%20Rusu%2C%20A.A.%20Human-level%20Control%20through%20Deep%20Reinforcement%20Learning%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20V.%20Kavukcuoglu%2C%20K.%20Silver%2C%20D.%20Rusu%2C%20A.A.%20Human-level%20Control%20through%20Deep%20Reinforcement%20Learning%202015"
+        },
+        {
+            "id": "35",
+            "entry": "[35] P. Moritz, R. Nishihara, I. Stoica, and M. I. Jordan. SparkNet: Training Deep Networks in Spark. In ICLR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Moritz%2C%20P.%20Nishihara%2C%20R.%20Stoica%2C%20I.%20Jordan%2C%20M.I.%20SparkNet%3A%20Training%20Deep%20Networks%20in%20Spark%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Moritz%2C%20P.%20Nishihara%2C%20R.%20Stoica%2C%20I.%20Jordan%2C%20M.I.%20SparkNet%3A%20Training%20Deep%20Networks%20in%20Spark%202016"
+        },
+        {
+            "id": "36",
+            "entry": "[36] D. G. Murray, R. Isaacs F. McSherry, M. Isard, P. Barham, and M. Abadi. Naiad: A Timely Dataflow System. In SOSP, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Murray%2C%20D.G.%20McSherry%2C%20R.Isaacs%20F.%20Isard%2C%20M.%20Barham%2C%20P.%20Naiad%3A%20A%20Timely%20Dataflow%20System%202013"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Nvidia. GPU-Based Deep Learning Inference: A Performance and Power Analysis. In Whitepaper, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nvidia%20GPU-Based%20Deep%20Learning%20Inference%3A%20A%20Performance%20and%20Power%20Analysis%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nvidia%20GPU-Based%20Deep%20Learning%20Inference%3A%20A%20Performance%20and%20Power%20Analysis%202015"
+        },
+        {
+            "id": "38",
+            "entry": "[38] NVIDIA Corporation. NVIDIA CUDA C programming guide, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Corporation%2C%20N.V.I.D.I.A.%20NVIDIA%20CUDA%20C%20programming%20guide%202010"
+        },
+        {
+            "id": "39",
+            "entry": "[39] NVIDIA Corporation. TITAN Xp, https://www.nvidia.com/en-us/design-visualization/products/titan-xp/, 2017.",
+            "url": "https://www.nvidia.com/en-us/design-visualization/products/titan-xp/"
+        },
+        {
+            "id": "40",
+            "entry": "[40] OpenMPI Community. OpenMPI: A High Performance Message Passing Library, https://www.openmpi.org/, 2017.",
+            "url": "https://www.openmpi.org/"
+        },
+        {
+            "id": "41",
+            "entry": "[41] O. Russakovsky, J. Deng, H. Su, J. Krause, S. Satheesh, S. Ma, Z. Huang, A. Karpathy, A. Khosla, M. Bernstein, A. C. Berg, and L. Fei-Fei. ImageNet Large Scale Visual Recognition Challenge. IJCV, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Russakovsky%2C%20O.%20Deng%2C%20J.%20Su%2C%20H.%20Krause%2C%20J.%20ImageNet%20Large%20Scale%20Visual%20Recognition%20Challenge%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Russakovsky%2C%20O.%20Deng%2C%20J.%20Su%2C%20H.%20Krause%2C%20J.%20ImageNet%20Large%20Scale%20Visual%20Recognition%20Challenge%202015"
+        },
+        {
+            "id": "42",
+            "entry": "[42] F. Seide, H. Fu, J. Droppo, G. Li, and D. Yu. 1-Bit Stochastic Gradient Descent and Its Application to Data-Parallel Distributed Training of Speech DNNs. In INTERSPEECH, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Seide%2C%20F.%20Fu%2C%20H.%20Droppo%2C%20J.%20Li%2C%20G.%201-Bit%20Stochastic%20Gradient%20Descent%20and%20Its%20Application%20to%20Data-Parallel%20Distributed%20Training%20of%20Speech%20DNNs%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Seide%2C%20F.%20Fu%2C%20H.%20Droppo%2C%20J.%20Li%2C%20G.%201-Bit%20Stochastic%20Gradient%20Descent%20and%20Its%20Application%20to%20Data-Parallel%20Distributed%20Training%20of%20Speech%20DNNs%202014"
+        },
+        {
+            "id": "43",
+            "entry": "[43] H. Sharma, J. Park, D. Mahajan, E. Amaro, J. K. Kim, C. Shao, A. Misra, and H. Esmaeilzadeh. From High-Level Deep Neural Models to FPGAs. In MICRO, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sharma%2C%20H.%20Park%2C%20J.%20Mahajan%2C%20D.%20Amaro%2C%20E.%20From%20High-Level%20Deep%20Neural%20Models%20to%20FPGAs%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sharma%2C%20H.%20Park%2C%20J.%20Mahajan%2C%20D.%20Amaro%2C%20E.%20From%20High-Level%20Deep%20Neural%20Models%20to%20FPGAs%202016"
+        },
+        {
+            "id": "44",
+            "entry": "[44] D. Silver, A. Huang, C. J. Maddison, A. Guez, L. Sifre, G. van den Driessche, J. Schrittwieser, I. Antonoglou, V. Panneershelvam, M. Lanctot, S. Dieleman, D. Grewe, J. Nham, N. Kalchbrenner, I. Sutskever, T. Lillicrap, M. Leach, K. Kavukcuoglu, T. Graepel, and D. Hassabis. Mastering the Game of Go with Deep Neural Networks and Tree Search. Nature, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silver%2C%20D.%20Huang%2C%20A.%20Maddison%2C%20C.J.%20Guez%2C%20A.%20Mastering%20the%20Game%20of%20Go%20with%20Deep%20Neural%20Networks%20and%20Tree%20Search%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silver%2C%20D.%20Huang%2C%20A.%20Maddison%2C%20C.J.%20Guez%2C%20A.%20Mastering%20the%20Game%20of%20Go%20with%20Deep%20Neural%20Networks%20and%20Tree%20Search%202016"
+        },
+        {
+            "id": "45",
+            "entry": "[45] N. Strom. Scalable Distributed DNN Training using Commodity GPU Cloud Computing. In INTERSPEECH, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Strom%2C%20N.%20Scalable%20Distributed%20DNN%20Training%20using%20Commodity%20GPU%20Cloud%20Computing%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Strom%2C%20N.%20Scalable%20Distributed%20DNN%20Training%20using%20Commodity%20GPU%20Cloud%20Computing%202015"
+        },
+        {
+            "id": "46",
+            "entry": "[46] R. Thakur, R. Rabenseifner, and W. Gropp. Optimization of Collective Communication Operations in MPICH. IJHPCA, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=R%20Thakur%20R%20Rabenseifner%20and%20W%20Gropp%20Optimization%20of%20Collective%20Communication%20Operations%20in%20MPICH%20IJHPCA%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=R%20Thakur%20R%20Rabenseifner%20and%20W%20Gropp%20Optimization%20of%20Collective%20Communication%20Operations%20in%20MPICH%20IJHPCA%202005"
+        },
+        {
+            "id": "47",
+            "entry": "[47] Q. Wang, Y. Li, and P. Li. Liquid State Machine based Pattern Recognition on FPGA with Firing-Activity Dependent Power Gating and Approximate Computing. In ISCAS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Q.%20Li%2C%20Y.%20Li%2C%20P.%20Liquid%20State%20Machine%20based%20Pattern%20Recognition%20on%20FPGA%20with%20Firing-Activity%20Dependent%20Power%20Gating%20and%20Approximate%20Computing%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Q.%20Li%2C%20Y.%20Li%2C%20P.%20Liquid%20State%20Machine%20based%20Pattern%20Recognition%20on%20FPGA%20with%20Firing-Activity%20Dependent%20Power%20Gating%20and%20Approximate%20Computing%202016"
+        },
+        {
+            "id": "48",
+            "entry": "[48] Q. Wang, Y. Li, B. Shao, S. Dey, and Peng Li. Energy Efficient Parallel Neuromorphic Architectures with Approximate Arithmetic on FPGA. Neurocomputing, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Q.%20Li%2C%20Y.%20Shao%2C%20B.%20Dey%2C%20S.%20Energy%20Efficient%20Parallel%20Neuromorphic%20Architectures%20with%20Approximate%20Arithmetic%20on%20FPGA%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Q.%20Li%2C%20Y.%20Shao%2C%20B.%20Dey%2C%20S.%20Energy%20Efficient%20Parallel%20Neuromorphic%20Architectures%20with%20Approximate%20Arithmetic%20on%20FPGA%202017"
+        },
+        {
+            "id": "49",
+            "entry": "[49] W. Wen, C. Xu, F. Yan, C. Wu, Y. Wang, Y. Chen, and H. Li. TernGrad: Ternary Gradients to Reduce Communication in Distributed Deep Learning. In NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=W%20Wen%20C%20Xu%20F%20Yan%20C%20Wu%20Y%20Wang%20Y%20Chen%20and%20H%20Li%20TernGrad%20Ternary%20Gradients%20to%20Reduce%20Communication%20in%20Distributed%20Deep%20Learning%20In%20NIPS%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=W%20Wen%20C%20Xu%20F%20Yan%20C%20Wu%20Y%20Wang%20Y%20Chen%20and%20H%20Li%20TernGrad%20Ternary%20Gradients%20to%20Reduce%20Communication%20in%20Distributed%20Deep%20Learning%20In%20NIPS%202017"
+        },
+        {
+            "id": "50",
+            "entry": "[50] M. Zaharia, M. Chowdhury, Michael J. Franklin, S. Shenker, and I. Stoica. Spark: Cluster Computing with Working Sets. In HotCloud, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zaharia%2C%20M.%20Chowdhury%2C%20M.%20Franklin%2C%20Michael%20J.%20Shenker%2C%20S.%20Spark%3A%20Cluster%20Computing%20with%20Working%20Sets%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zaharia%2C%20M.%20Chowdhury%2C%20M.%20Franklin%2C%20Michael%20J.%20Shenker%2C%20S.%20Spark%3A%20Cluster%20Computing%20with%20Working%20Sets%202010"
+        },
+        {
+            "id": "51",
+            "entry": "[51] C. Zhang, P. Li, G. Sun, Y. Guan, B. Xiao, and J. Cong. Optimizing FPGA-based Accelerator Design for Deep Convolutional Neural Networks. In FPGA, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20C.%20Li%2C%20P.%20Sun%2C%20G.%20Guan%2C%20Y.%20Optimizing%20FPGA-based%20Accelerator%20Design%20for%20Deep%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20C.%20Li%2C%20P.%20Sun%2C%20G.%20Guan%2C%20Y.%20Optimizing%20FPGA-based%20Accelerator%20Design%20for%20Deep%202015"
+        },
+        {
+            "id": "52",
+            "entry": "[52] B. Zhou, A. Lapedriza, J. Xiao, A. Torralba, and A. Oliva. Learning Deep Features for Scene Recognition using Places Database. In NIPS, 2014. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhou%2C%20B.%20Lapedriza%2C%20A.%20Xiao%2C%20J.%20Torralba%2C%20A.%20Learning%20Deep%20Features%20for%20Scene%20Recognition%20using%20Places%20Database%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhou%2C%20B.%20Lapedriza%2C%20A.%20Xiao%2C%20J.%20Torralba%2C%20A.%20Learning%20Deep%20Features%20for%20Scene%20Recognition%20using%20Places%20Database%202014"
+        }
+    ]
+}

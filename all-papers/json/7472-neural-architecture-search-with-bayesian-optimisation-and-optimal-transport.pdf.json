@@ -1,0 +1,389 @@
+{
+    "filename": "7472-neural-architecture-search-with-bayesian-optimisation-and-optimal-transport.pdf",
+    "metadata": {
+        "date": 2018,
+        "title": "Neural Architecture Search with Bayesian Optimisation and Optimal Transport",
+        "author": "Kirthevasan Kandasamy, Willie Neiswanger, Jeff Schneider, Barnab\u00e1s P\u00f3czos, Eric P Xing Carnegie Mellon University, Petuum Inc.",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7472-neural-architecture-search-with-bayesian-optimisation-and-optimal-transport.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Bayesian Optimisation (BO) refers to a class of methods for global optimisation of a function f which is only accessible via point evaluations. It is typically used in settings where f is expensive to evaluate. A common use case for BO in machine learning is model selection, where it is not possible to analytically model the generalisation performance of a statistical model, and we resort to noisy and expensive training and validation procedures to choose the best model. Conventional BO methods have focused on Euclidean and categorical domains, which, in the context of model selection, only permits tuning scalar hyper-parameters of machine learning algorithms. However, with the surge of interest in deep learning, there is an increasing demand to tune neural network architectures. In this work, we develop NASBOT, a Gaussian process based BO framework for neural architecture search. To accomplish this, we develop a distance metric in the space of neural network architectures which can be computed efficiently via an optimal transport program. This distance might be of independent interest to the deep learning community as it may find applications outside of BO. We demonstrate that NASBOT outperforms other alternatives for architecture search in several cross validation based model selection tasks on multi-layer perceptrons and convolutional neural networks."
+    },
+    "keywords": [
+        {
+            "term": "architecture search",
+            "url": "https://en.wikipedia.org/wiki/architecture_search"
+        },
+        {
+            "term": "neural architecture search",
+            "url": "https://en.wikipedia.org/wiki/neural_architecture_search"
+        },
+        {
+            "term": "convolutional neural networks",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_networks"
+        },
+        {
+            "term": "model selection",
+            "url": "https://en.wikipedia.org/wiki/model_selection"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "evolutionary algorithm",
+            "url": "https://en.wikipedia.org/wiki/evolutionary_algorithm"
+        },
+        {
+            "term": "machine learning",
+            "url": "https://en.wikipedia.org/wiki/machine_learning"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        },
+        {
+            "term": "stochastic gradient descent",
+            "url": "https://en.wikipedia.org/wiki/stochastic_gradient_descent"
+        },
+        {
+            "term": "use case",
+            "url": "https://en.wikipedia.org/wiki/use_case"
+        },
+        {
+            "term": "Gaussian processes",
+            "url": "https://en.wikipedia.org/wiki/Gaussian_processes"
+        },
+        {
+            "term": "gaussian process",
+            "url": "https://en.wikipedia.org/wiki/gaussian_process"
+        },
+        {
+            "term": "multi-layer perceptrons",
+            "url": "https://en.wikipedia.org/wiki/multi-layer_perceptrons"
+        }
+    ],
+    "highlights": [
+        "In many real world problems, we are required to sequentially evaluate a noisy black-box function f with the goal of finding its optimum in some domain X",
+        "We develop a Bayesian optimisation framework for optimising functions on neural network architectures called NASBOT (Neural Architecture Search with Bayesian Optimisation and Optimal Transport)",
+        "We describe NASBOT, our Bayesian optimisation algorithm for neural architecture search",
+        "In Appendices B and C, we provide additional details on the experiment set up and conduct synthetic ablation studies by holding out different components of the NASBOT framework",
+        "We described NASBOT, a Bayesian optimisation framework for neural architecture search",
+        "A key contribution of this work is the efficiently computable OTMANN distance for neural network architectures, which may be of independent interest as it might find applications outside of Bayesian optimisation"
+    ],
+    "key_statements": [
+        "In many real world problems, we are required to sequentially evaluate a noisy black-box function f with the goal of finding its optimum in some domain X",
+        "Bayesian optimisation (BO) refers to an approach for global optimisation that is popularly used in such settings",
+        "Bayesian optimisation has been successfully applied for many optimisation problems in optimal policy search, industrial design, and scientific experimentation",
+        "We develop a Bayesian optimisation framework for optimising functions on neural network architectures called NASBOT (Neural Architecture Search with Bayesian Optimisation and Optimal Transport)",
+        "While there has been prior work for defining various distances and kernels on graphs, we cannot use them in Bayesian optimisation because neural networks have additional complex properties in addition to graphical structure, such as the type of operations performed at each layer, the number of neurons, etc",
+        "We provide illustrations to demonstrate that OTMANN is a meaningful distance for architecture search",
+        "We describe NASBOT, our Bayesian optimisation algorithm for neural architecture search",
+        "Our RAND implementation, operates in exactly the same way as NASBOT, except that the evolutionary algorithm procedure is fed a random sample from Unif(0, 1) instead of the Gaussian processes acquisition each time it evaluates an architecture",
+        "In Appendices B and C, we provide additional details on the experiment set up and conduct synthetic ablation studies by holding out different components of the NASBOT framework",
+        "We described NASBOT, a Bayesian optimisation framework for neural architecture search",
+        "A key contribution of this work is the efficiently computable OTMANN distance for neural network architectures, which may be of independent interest as it might find applications outside of Bayesian optimisation"
+    ],
+    "summary": [
+        "In many real world problems, we are required to sequentially evaluate a noisy black-box function f with the goal of finding its optimum in some domain X.",
+        "None of the above methods have been designed with a focus on the expense of evaluating a neural network, with an emphasis on being judicious in selecting which architecture to try .",
+        "Our goal is to maximise a function f defined on a space X of neural network architectures.",
+        "A neural network G = (L, E) is defined by a set of layers L and directed edges E.",
+        "Note that the performance of a neural network is determined by the amount of computation at each layer, the types of these operations, and how the layers are connected.",
+        "We first describe two concepts, layer masses and path lengths, which we will use to define OTMANN.",
+        "We use m = m = \u03b6 u\u2208PL m(u) where PL denotes the set of processing layers, and \u03b6 \u2208 (0, 1) is a parameter to be determined.",
+        "As the layers of a neural network can be topologically ordered1, the above path lengths are well defined and finite.",
+        "Structural penalty \u03c6str: We define a matrix Cstr \u2208 Rn1\u00d7n2 where Cstr(i, j) is small if layers i \u2208 L1 and j \u2208 L2 are at structurally similar positions in their respective networks.",
+        "We define \u03c6str in terms of the shortest/longest/random-walk path lengths from/to the input/output, because they capture various notions of information flow in a neural network; a layer\u2019s input is influenced by the paths the data takes before reaching the layer and its output influences all layers it passes through before reaching the decision layers.",
+        "While there has been prior work for defining various distances and kernels on graphs, we cannot use them in BO because neural networks have additional complex properties in addition to graphical structure, such as the type of operations performed at each layer, the number of neurons, etc.",
+        "While EA works fine for cheap functions, such as the acquisition \u03c6t which is analytically available, it is not suitable when evaluations are expensive, such as training a neural network.",
+        "Our RAND implementation, operates in exactly the same way as NASBOT, except that the EA procedure is fed a random sample from Unif(0, 1) instead of the GP acquisition each time it evaluates an architecture.",
+        "A key contribution of this work is the efficiently computable OTMANN distance for neural network architectures, which may be of independent interest as it might find applications outside of BO.",
+        "Our code for NASBOT and OTMANN will be made available"
+    ],
+    "headline": "We develop NASBOT, a Gaussian process based Bayesian optimisation framework for neural architecture search",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Bowen Baker, Otkrist Gupta, Nikhil Naik, and Ramesh Raskar. Designing neural network architectures using reinforcement learning. arXiv preprint arXiv:1611.02167, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.02167"
+        },
+        {
+            "id": "2",
+            "entry": "[2] James Bergstra, Daniel Yamins, and David Daniel Cox. Making a science of model search: Hyperparameter optimization in hundreds of dimensions for vision architectures. 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bergstra%2C%20James%20Yamins%2C%20Daniel%20Cox%2C%20David%20Daniel%20Making%20a%20science%20of%20model%20search%3A%20Hyperparameter%20optimization%20in%20hundreds%20of%20dimensions%20for%20vision%20architectures%202013"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Eric Brochu, Vlad M. Cora, and Nando de Freitas. A Tutorial on Bayesian Optimization of Expensive Cost Functions, with Application to Active User Modeling and Hierarchical Reinforcement Learning. CoRR, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Brochu%2C%20Eric%20Cora%2C%20Vlad%20M.%20de%20Freitas%2C%20Nando%20A%20Tutorial%20on%20Bayesian%20Optimization%20of%20Expensive%20Cost%20Functions%2C%20with%20Application%20to%20Active%20User%20Modeling%20and%20Hierarchical%20Reinforcement%20Learning%202010"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Krisztian Buza. Feedback prediction for blogs. In Data analysis, machine learning and knowledge discovery, pages 145\u2013152.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Buza%2C%20Krisztian%20Feedback%20prediction%20for%20blogs.%20In%20Data%20analysis%2C%20machine%20learning%20and%20knowledge%20discovery"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Andrea Coraddu, Luca Oneto, Aessandro Ghio, Stefano Savio, Davide Anguita, and Massimo Figari. Machine learning approaches for improving condition-based maintenance of naval propulsion plants. Proceedings of the Institution of Mechanical Engineers, Part M: Journal of Engineering for the Maritime Environment, 230(1):136\u2013153, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Coraddu%2C%20Andrea%20Oneto%2C%20Luca%20Ghio%2C%20Aessandro%20Savio%2C%20Stefano%20Machine%20learning%20approaches%20for%20improving%20condition-based%20maintenance%20of%20naval%20propulsion%20plants%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Coraddu%2C%20Andrea%20Oneto%2C%20Luca%20Ghio%2C%20Aessandro%20Savio%2C%20Stefano%20Machine%20learning%20approaches%20for%20improving%20condition-based%20maintenance%20of%20naval%20propulsion%20plants%202016"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Corinna Cortes, Xavi Gonzalvo, Vitaly Kuznetsov, Mehryar Mohri, and Scott Yang. Adanet: Adaptive structural learning of artificial neural networks. arXiv preprint arXiv:1607.01097, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1607.01097"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Kelwin Fernandes, Pedro Vinagre, and Paulo Cortez. A proactive intelligent decision support system for predicting the popularity of online news. In Portuguese Conference on Artificial Intelligence, pages 535\u2013546.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fernandes%2C%20Kelwin%20Vinagre%2C%20Pedro%20Cortez%2C%20Paulo%20A%20proactive%20intelligent%20decision%20support%20system%20for%20predicting%20the%20popularity%20of%20online%20news",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fernandes%2C%20Kelwin%20Vinagre%2C%20Pedro%20Cortez%2C%20Paulo%20A%20proactive%20intelligent%20decision%20support%20system%20for%20predicting%20the%20popularity%20of%20online%20news"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Dario Floreano, Peter D\u00fcrr, and Claudio Mattiussi. Neuroevolution: from architectures to learning. Evolutionary Intelligence, 1(1):47\u201362, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dario%20Floreano%2C%20Peter%20D%C3%BCrr%20Mattiussi%2C%20Claudio%20Neuroevolution%3A%20from%20architectures%20to%20learning%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dario%20Floreano%2C%20Peter%20D%C3%BCrr%20Mattiussi%2C%20Claudio%20Neuroevolution%3A%20from%20architectures%20to%20learning%202008"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Xinbo Gao, Bing Xiao, Dacheng Tao, and Xuelong Li. A survey of graph edit distance. Pattern Analysis and applications, 13(1):113\u2013129, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gao%2C%20Xinbo%20Xiao%2C%20Bing%20Tao%2C%20Dacheng%20Li%2C%20Xuelong%20A%20survey%20of%20graph%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gao%2C%20Xinbo%20Xiao%2C%20Bing%20Tao%2C%20Dacheng%20Li%2C%20Xuelong%20A%20survey%20of%20graph%202010"
+        },
+        {
+            "id": "10",
+            "entry": "[10] David Ginsbourger, Janis Janusevskis, and Rodolphe Le Riche. Dealing with asynchronicity in parallel gaussian process based global optimization. In 4th International Conference of the ERCIM WG on computing & statistics (ERCIM\u201911), 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ginsbourger%2C%20David%20Janusevskis%2C%20Janis%20Riche%2C%20Rodolphe%20Le%20Dealing%20with%20asynchronicity%20in%20parallel%20gaussian%20process%20based%20global%20optimization%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ginsbourger%2C%20David%20Janusevskis%2C%20Janis%20Riche%2C%20Rodolphe%20Le%20Dealing%20with%20asynchronicity%20in%20parallel%20gaussian%20process%20based%20global%20optimization%202011"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Franz Graf, Hans-Peter Kriegel, Matthias Schubert, Sebastian P\u00f6lsterl, and Alexander Cavallaro. 2d image registration in ct images using radial image descriptors. In International Conference on Medical Image Computing and Computer-Assisted Intervention, pages 607\u2013614.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Graf%2C%20Franz%20Kriegel%2C%20Hans-Peter%20Schubert%2C%20Matthias%20P%C3%B6lsterl%2C%20Sebastian%202d%20image%20registration%20in%20ct%20images%20using%20radial%20image%20descriptors",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Graf%2C%20Franz%20Kriegel%2C%20Hans-Peter%20Schubert%2C%20Matthias%20P%C3%B6lsterl%2C%20Sebastian%202d%20image%20registration%20in%20ct%20images%20using%20radial%20image%20descriptors"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. In Proceedings of the IEEE conference on computer vision and pattern recognition, pages 770\u2013778, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Gao Huang, Zhuang Liu, Kilian Q Weinberger, and Laurens van der Maaten. Densely connected convolutional networks. In Proceedings of the IEEE conference on computer vision and pattern recognition, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huang%2C%20Gao%20Liu%2C%20Zhuang%20Weinberger%2C%20Kilian%20Q.%20van%20der%20Maaten%2C%20Laurens%20Densely%20connected%20convolutional%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huang%2C%20Gao%20Liu%2C%20Zhuang%20Weinberger%2C%20Kilian%20Q.%20van%20der%20Maaten%2C%20Laurens%20Densely%20connected%20convolutional%20networks%202017"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Frank Hutter, Holger H Hoos, and Kevin Leyton-Brown. Sequential model-based optimization for general algorithm configuration. In LION, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hutter%2C%20Frank%20Hoos%2C%20Holger%20H.%20Leyton-Brown%2C%20Kevin%20Sequential%20model-based%20optimization%20for%20general%20algorithm%20configuration%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hutter%2C%20Frank%20Hoos%2C%20Holger%20H.%20Leyton-Brown%2C%20Kevin%20Sequential%20model-based%20optimization%20for%20general%20algorithm%20configuration%202011"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Rodolphe Jenatton, Cedric Archambeau, Javier Gonz\u00e1lez, and Matthias Seeger. Bayesian optimization with tree-structured dependencies. In International Conference on Machine Learning, pages 1655\u20131664, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jenatton%2C%20Rodolphe%20Archambeau%2C%20Cedric%20Gonz%C3%A1lez%2C%20Javier%20Seeger%2C%20Matthias%20Bayesian%20optimization%20with%20tree-structured%20dependencies%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jenatton%2C%20Rodolphe%20Archambeau%2C%20Cedric%20Gonz%C3%A1lez%2C%20Javier%20Seeger%2C%20Matthias%20Bayesian%20optimization%20with%20tree-structured%20dependencies%202017"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Nan Jiang, Akshay Krishnamurthy, Alekh Agarwal, John Langford, and Robert E Schapire. Contextual decision processes with low bellman rank are pac-learnable. arXiv preprint arXiv:1610.09512, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1610.09512"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Kirthevasan Kandasamy, Gautam Dasarathy, Jeff Schneider, and Barnabas Poczos. Multi-fidelity Bayesian Optimisation with Continuous Approximations. arXiv preprint arXiv:1703.06240, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.06240"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Hiroaki Kitano. Designing neural networks using genetic algorithms with graph generation system. Complex systems, 4(4):461\u2013476, 1990.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kitano%2C%20Hiroaki%20Designing%20neural%20networks%20using%20genetic%20algorithms%20with%20graph%20generation%20system%201990",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kitano%2C%20Hiroaki%20Designing%20neural%20networks%20using%20genetic%20algorithms%20with%20graph%20generation%20system%201990"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Aaron Klein, Stefan Falkner, Simon Bartels, Philipp Hennig, and Frank Hutter. Fast bayesian optimization of machine learning hyperparameters on large datasets. arXiv preprint arXiv:1605.07079, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1605.07079"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Risi Imre Kondor and John Lafferty. Diffusion kernels on graphs and other discrete input spaces. In ICML, volume 2, pages 315\u2013322, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kondor%2C%20Risi%20Imre%20Lafferty%2C%20John%20Diffusion%20kernels%20on%20graphs%20and%20other%20discrete%20input%20spaces%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kondor%2C%20Risi%20Imre%20Lafferty%2C%20John%20Diffusion%20kernels%20on%20graphs%20and%20other%20discrete%20input%20spaces%202002"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Alex Krizhevsky and Geoffrey Hinton. Learning multiple layers of features from tiny images, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20Alex%20Hinton%2C%20Geoffrey%20Learning%20multiple%20layers%20of%20features%20from%20tiny%20images%202009"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Chenxi Liu, Barret Zoph, Jonathon Shlens, Wei Hua, Li-Jia Li, Li Fei-Fei, Alan Yuille, Jonathan Huang, and Kevin Murphy. Progressive neural architecture search. arXiv preprint arXiv:1712.00559, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1712.00559"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Hanxiao Liu, Karen Simonyan, Oriol Vinyals, Chrisantha Fernando, and Koray Kavukcuoglu. Hierarchical representations for efficient architecture search. arXiv preprint arXiv:1711.00436, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.00436"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Laurens van der Maaten and Geoffrey Hinton. Visualizing data using t-sne. Journal of machine learning research, 9(Nov):2579\u20132605, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=van%20der%20Maaten%2C%20Laurens%20Hinton%2C%20Geoffrey%20Visualizing%20data%20using%20t-sne%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=van%20der%20Maaten%2C%20Laurens%20Hinton%2C%20Geoffrey%20Visualizing%20data%20using%20t-sne%202008"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Hector Mendoza, Aaron Klein, Matthias Feurer, Jost Tobias Springenberg, and Frank Hutter. Towards automatically-tuned neural networks. In Workshop on Automatic Machine Learning, pages 58\u201365, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mendoza%2C%20Hector%20Klein%2C%20Aaron%20Feurer%2C%20Matthias%20Springenberg%2C%20Jost%20Tobias%20Towards%20automatically-tuned%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mendoza%2C%20Hector%20Klein%2C%20Aaron%20Feurer%2C%20Matthias%20Springenberg%2C%20Jost%20Tobias%20Towards%20automatically-tuned%20neural%20networks%202016"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Bruno T Messmer and Horst Bunke. A new algorithm for error-tolerant subgraph isomorphism detection. IEEE Transactions on Pattern Analysis and Machine Intelligence, 20(5):493\u2013504, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Messmer%2C%20Bruno%20T.%20Bunke%2C%20Horst%20A%20new%20algorithm%20for%20error-tolerant%20subgraph%20isomorphism%20detection%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Messmer%2C%20Bruno%20T.%20Bunke%2C%20Horst%20A%20new%20algorithm%20for%20error-tolerant%20subgraph%20isomorphism%20detection%201998"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Risto Miikkulainen, Jason Liang, Elliot Meyerson, Aditya Rawal, Dan Fink, Olivier Francon, Bala Raju, Arshak Navruzyan, Nigel Duffy, and Babak Hodjat. Evolving deep neural networks. arXiv preprint arXiv:1703.00548, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.00548"
+        },
+        {
+            "id": "28",
+            "entry": "[28] J.B. Mockus and L.J. Mockus. Bayesian approach to global optimization and application to multiobjective and constrained problems. Journal of Optimization Theory and Applications, 1991.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mockus%2C%20J.B.%20Mockus%2C%20L.J.%20Bayesian%20approach%20to%20global%20optimization%20and%20application%20to%20multiobjective%20and%20constrained%20problems%201991",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mockus%2C%20J.B.%20Mockus%2C%20L.J.%20Bayesian%20approach%20to%20global%20optimization%20and%20application%20to%20multiobjective%20and%20constrained%20problems%201991"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Renato Negrinho and Geoff Gordon. Deeparchitect: Automatically designing and training deep architectures. arXiv preprint arXiv:1704.08792, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1704.08792"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Gabriel Peyr\u00e9 and Marco Cuturi. Computational Optimal Transport. Available online, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gabriel%20Peyr%C3%A9%20and%20Marco%20Cuturi%20Computational%20Optimal%20Transport%20Available%20online%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gabriel%20Peyr%C3%A9%20and%20Marco%20Cuturi%20Computational%20Optimal%20Transport%20Available%20online%202017"
+        },
+        {
+            "id": "31",
+            "entry": "[31] PS Rana. Physicochemical properties of protein tertiary structure data set, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rana%2C%20P.S.%20Physicochemical%20properties%20of%20protein%20tertiary%20structure%20data%20set%202013"
+        },
+        {
+            "id": "32",
+            "entry": "[32] C.E. Rasmussen and C.K.I. Williams. Gaussian Processes for Machine Learning. Adaptative computation and machine learning series. University Press Group Limited, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rasmussen%2C%20C.E.%20Williams%2C%20C.K.I.%20Gaussian%20Processes%20for%20Machine%20Learning.%20Adaptative%20computation%20and%20machine%20learning%20series%202006"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Esteban Real, Sherry Moore, Andrew Selle, Saurabh Saxena, Yutaka Leon Suematsu, Quoc Le, and Alex Kurakin. Large-scale evolution of image classifiers. arXiv preprint arXiv:1703.01041, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.01041"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. arXiv preprint arXiv:1409.1556, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1409.1556"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Alexander J Smola and Risi Kondor. Kernels and regularization on graphs. In Learning theory and kernel machines, pages 144\u2013158.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Smola%2C%20Alexander%20J.%20Kondor%2C%20Risi%20Kernels%20and%20regularization%20on%20graphs",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Smola%2C%20Alexander%20J.%20Kondor%2C%20Risi%20Kernels%20and%20regularization%20on%20graphs"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Edward Snelson and Zoubin Ghahramani. Sparse gaussian processes using pseudo-inputs. In Advances in neural information processing systems, pages 1257\u20131264, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Snelson%2C%20Edward%20Ghahramani%2C%20Zoubin%20Sparse%20gaussian%20processes%20using%20pseudo-inputs%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Snelson%2C%20Edward%20Ghahramani%2C%20Zoubin%20Sparse%20gaussian%20processes%20using%20pseudo-inputs%202006"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Jasper Snoek, Hugo Larochelle, and Ryan P Adams. Practical Bayesian Optimization of Machine Learning Algorithms. In Advances in Neural Information Processing Systems, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jasper%20Snoek%20Hugo%20Larochelle%20and%20Ryan%20P%20Adams%20Practical%20Bayesian%20Optimization%20of%20Machine%20Learning%20Algorithms%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jasper%20Snoek%20Hugo%20Larochelle%20and%20Ryan%20P%20Adams%20Practical%20Bayesian%20Optimization%20of%20Machine%20Learning%20Algorithms%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%202012"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Kenneth O Stanley and Risto Miikkulainen. Evolving neural networks through augmenting topologies. Evolutionary computation, 10(2):99\u2013127, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Stanley%2C%20Kenneth%20O.%20Miikkulainen%2C%20Risto%20Evolving%20neural%20networks%20through%20augmenting%20topologies%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Stanley%2C%20Kenneth%20O.%20Miikkulainen%2C%20Risto%20Evolving%20neural%20networks%20through%20augmenting%20topologies%202002"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Dougal J Sutherland. Scalable, Active and Flexible Learning on Distributions. PhD thesis, Carnegie Mellon University Pittsburgh, PA, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Scalable%2C%20Dougal%20J.Sutherland%20Active%20and%20Flexible%20Learning%20on%20Distributions%202015"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Richard S Sutton and Andrew G Barto. Reinforcement learning: An introduction, volume 1. MIT press Cambridge, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20Richard%20S.%20Barto%2C%20Andrew%20G.%20Reinforcement%20learning%3A%20An%20introduction%2C%20volume%201%201998"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Kevin Swersky, David Duvenaud, Jasper Snoek, Frank Hutter, and Michael A Osborne. Raiders of the lost architecture: Kernels for bayesian optimization in conditional parameter spaces. arXiv preprint arXiv:1409.4011, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1409.4011"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott Reed, Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich. Going deeper with convolutions. In Proceedings of the IEEE conference on computer vision and pattern recognition, pages 1\u20139, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Szegedy%2C%20Christian%20Liu%2C%20Wei%20Jia%2C%20Yangqing%20Sermanet%2C%20Pierre%20Going%20deeper%20with%20convolutions%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Szegedy%2C%20Christian%20Liu%2C%20Wei%20Jia%2C%20Yangqing%20Sermanet%2C%20Pierre%20Going%20deeper%20with%20convolutions%202015"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Joaqu\u00edn Torres-Sospedra, Ra\u00fal Montoliu, Adolfo Mart\u00ednez-Us\u00f3, Joan P Avariento, Tom\u00e1s J Arnau, Mauri Benedito-Bordonau, and Joaqu\u00edn Huerta. Ujiindoorloc: A new multi-building and multi-floor database for wlan fingerprint-based indoor localization problems. In Indoor Positioning and Indoor Navigation (IPIN), 2014 International Conference on, pages 261\u2013270. IEEE, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Torres-Sospedra%2C%20Joaqu%C3%ADn%20Montoliu%2C%20Ra%C3%BAl%20Mart%C3%ADnez-Us%C3%B3%2C%20Adolfo%20Avariento%2C%20Joan%20P.%20Ujiindoorloc%3A%20A%20new%20multi-building%20and%20multi-floor%20database%20for%20wlan%20fingerprint-based%20indoor%20localization%20problems%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Torres-Sospedra%2C%20Joaqu%C3%ADn%20Montoliu%2C%20Ra%C3%BAl%20Mart%C3%ADnez-Us%C3%B3%2C%20Adolfo%20Avariento%2C%20Joan%20P.%20Ujiindoorloc%3A%20A%20new%20multi-building%20and%20multi-floor%20database%20for%20wlan%20fingerprint-based%20indoor%20localization%20problems%202014"
+        },
+        {
+            "id": "44",
+            "entry": "[44] C\u00e9dric Villani. Optimal transport: old and new, volume 338. Springer Science & Business Media, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Villani%2C%20C%C3%A9dric%20Optimal%20transport%3A%20old%20and%20new%2C%20volume%20338%202008"
+        },
+        {
+            "id": "45",
+            "entry": "[45] S Vichy N Vishwanathan, Nicol N Schraudolph, Risi Kondor, and Karsten M Borgwardt. Graph kernels. Journal of Machine Learning Research, 11(Apr):1201\u20131242, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=S%20Vichy%20N%20Vishwanathan%20Nicol%20N%20Schraudolph%20Risi%20Kondor%20and%20Karsten%20M%20Borgwardt%20Graph%20kernels%20Journal%20of%20Machine%20Learning%20Research%2011Apr12011242%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=S%20Vichy%20N%20Vishwanathan%20Nicol%20N%20Schraudolph%20Risi%20Kondor%20and%20Karsten%20M%20Borgwardt%20Graph%20kernels%20Journal%20of%20Machine%20Learning%20Research%2011Apr12011242%202010"
+        },
+        {
+            "id": "46",
+            "entry": "[46] Walter D Wallis, Peter Shoubridge, M Kraetz, and D Ray. Graph distances using graph union. Pattern Recognition Letters, 22(6-7):701\u2013704, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wallis%2C%20Walter%20D.%20Peter%20Shoubridge%2C%20M.Kraetz%20Ray%2C%20D.%20Graph%20distances%20using%20graph%20union%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wallis%2C%20Walter%20D.%20Peter%20Shoubridge%2C%20M.Kraetz%20Ray%2C%20D.%20Graph%20distances%20using%20graph%20union%202001"
+        },
+        {
+            "id": "47",
+            "entry": "[47] Andrew Wilson and Hannes Nickisch. Kernel interpolation for scalable structured gaussian processes (kiss-gp). In International Conference on Machine Learning, pages 1775\u20131784, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wilson%2C%20Andrew%20Nickisch%2C%20Hannes%20Kernel%20interpolation%20for%20scalable%20structured%20gaussian%20processes%20%28kiss-gp%29%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wilson%2C%20Andrew%20Nickisch%2C%20Hannes%20Kernel%20interpolation%20for%20scalable%20structured%20gaussian%20processes%20%28kiss-gp%29%202015"
+        },
+        {
+            "id": "48",
+            "entry": "[48] Lingxi Xie and Alan Yuille. Genetic cnn. arXiv preprint arXiv:1703.01513, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.01513"
+        },
+        {
+            "id": "49",
+            "entry": "[49] Zhao Zhong, Junjie Yan, and Cheng-Lin Liu. Practical network blocks design with q-learning. arXiv preprint arXiv:1708.05552, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1708.05552"
+        },
+        {
+            "id": "50",
+            "entry": "[50] Barret Zoph and Quoc V Le. Neural architecture search with reinforcement learning. arXiv preprint arXiv:1611.01578, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.01578"
+        },
+        {
+            "id": "51",
+            "entry": "[51] Barret Zoph, Vijay Vasudevan, Jonathon Shlens, and Quoc V Le. Learning transferable architectures for scalable image recognition. arXiv preprint arXiv:1707.07012, 2017. ",
+            "arxiv_url": "https://arxiv.org/pdf/1707.07012"
+        }
+    ]
+}

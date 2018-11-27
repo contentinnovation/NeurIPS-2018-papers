@@ -1,0 +1,348 @@
+{
+    "filename": "7305-cooperative-holistic-scene-understanding-unifying-3d-object-layout-and-camera-pose-estimation.pdf",
+    "metadata": {
+        "title": "Cooperative Holistic Scene Understanding: Unifying 3D Object, Layout, and Camera Pose Estimation",
+        "author": "Siyuan Huang, Siyuan Qi, Yinxue Xiao, Yixin Zhu, Ying Nian Wu, Song-Chun Zhu",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7305-cooperative-holistic-scene-understanding-unifying-3d-object-layout-and-camera-pose-estimation.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Holistic 3D indoor scene understanding refers to jointly recovering the i) object bounding boxes, ii) room layout, and iii) camera pose, all in 3D. The existing methods either are ineffective or only tackle the problem partially. In this paper, we propose an end-to-end model that simultaneously solves all three tasks in realtime given only a single RGB image. The essence of the proposed method is to improve the prediction by i) parametrizing the targets (e.g., 3D boxes) instead of directly estimating the targets, and ii) cooperative training across different modules in contrast to training these modules individually. Specifically, we parametrize the 3D object bounding boxes by the predictions from several modules, i.e., 3D camera pose and object attributes. The proposed method provides two major advantages: i) The parametrization helps maintain the consistency between the 2D image and the 3D world, thus largely reducing the prediction variances in 3D coordinates. ii) Constraints can be imposed on the parametrization to train different modules simultaneously. We call these constraints \"cooperative losses\" as they enable the joint training and inference. We employ three cooperative losses for 3D bounding boxes, 2D projections, and physical constraints to estimate a geometrically consistent and physically plausible 3D scene. Experiments on the SUN RGB-D dataset shows that the proposed method significantly outperforms prior approaches on 3D object detection, 3D layout estimation, 3D camera pose estimation, and holistic scene understanding."
+    },
+    "keywords": [
+        {
+            "term": "bounding box",
+            "url": "https://en.wikipedia.org/wiki/bounding_box"
+        },
+        {
+            "term": "mean average precision",
+            "url": "https://en.wikipedia.org/wiki/mean_average_precision"
+        },
+        {
+            "term": "object detection",
+            "url": "https://en.wikipedia.org/wiki/object_detection"
+        }
+    ],
+    "highlights": [
+        "Holistic 3D scene understanding from a single RGB image is a fundamental yet challenging computer vision problem, while humans are capable of performing such tasks effortlessly within 200 ms [<a class=\"ref-link\" id=\"cPotter_1975_a\" href=\"#rPotter_1975_a\"><a class=\"ref-link\" id=\"cPotter_1975_a\" href=\"#rPotter_1975_a\">Potter, 1975</a></a>, 1976, <a class=\"ref-link\" id=\"cSchyns_1994_a\" href=\"#rSchyns_1994_a\"><a class=\"ref-link\" id=\"cSchyns_1994_a\" href=\"#rSchyns_1994_a\">Schyns and Oliva, 1994</a></a>, <a class=\"ref-link\" id=\"cThorpe_et+al_1996_a\" href=\"#rThorpe_et+al_1996_a\"><a class=\"ref-link\" id=\"cThorpe_et+al_1996_a\" href=\"#rThorpe_et+al_1996_a\">Thorpe et al, 1996</a></a>]",
+        "Using the parametrization described in Subsection 2.1, we hope to cooperatively optimize global geometry network and local object network, simultaneously estimating 3D camera pose, 3D room layout, and 3D object bounding boxes, in the sense that the two networks enhance each other and cooperate to make the definitive estimation during the learning process",
+        "Note that the holistic scene understanding task defined in [<a class=\"ref-link\" id=\"cSong_et+al_2015_a\" href=\"#rSong_et+al_2015_a\">Song et al, 2015</a>] misses 3D camera pose estimation compared to the definition in this paper, as the results are evaluated in the world coordinate",
+        "In the proposed cooperative model, we introduce the parametrization of the 3D bounding box, together with a differentiable loss function to impose the consistency between 2D-3D bounding boxes for indoor scene understanding",
+        "Using a single RGB image as the input, we propose an end-to-end model that recovers a 3D indoor scene in real-time, including the 3D room layout, camera pose, and object bounding boxes",
+        "A novel parametrization of 3D bounding boxes and a 2D projection loss are introduced to enforce the consistency between 2D and 3D"
+    ],
+    "key_statements": [
+        "Holistic 3D scene understanding from a single RGB image is a fundamental yet challenging computer vision problem, while humans are capable of performing such tasks effortlessly within 200 ms [<a class=\"ref-link\" id=\"cPotter_1975_a\" href=\"#rPotter_1975_a\"><a class=\"ref-link\" id=\"cPotter_1975_a\" href=\"#rPotter_1975_a\">Potter, 1975</a></a>, 1976, <a class=\"ref-link\" id=\"cSchyns_1994_a\" href=\"#rSchyns_1994_a\"><a class=\"ref-link\" id=\"cSchyns_1994_a\" href=\"#rSchyns_1994_a\">Schyns and Oliva, 1994</a></a>, <a class=\"ref-link\" id=\"cThorpe_et+al_1996_a\" href=\"#rThorpe_et+al_1996_a\"><a class=\"ref-link\" id=\"cThorpe_et+al_1996_a\" href=\"#rThorpe_et+al_1996_a\">Thorpe et al, 1996</a></a>]",
+        "How can the model estimate a 3D scene in a physically plausible fashion, or at least have some sense of physics? To address these issues, we propose a novel parametrization of the 3D bounding box as well as a set of cooperative losses",
+        "The essence of the proposed model is to cooperatively estimate 3D room layout, 3D camera pose, and 3D object bounding boxes. ii) We propose a novel parametrization of the 3D bounding boxes and integrate physical constraint, enabling the cooperative training of these tasks. iii) We bridge the gap between the 2D image plane and the 3D world by introducing a differentiable objective function between the 2D and 3D bounding boxes. iv) Our method significantly outperforms the state-of-the-art methods and runs in real-time",
+        "We describe the parametrization of the 3D bounding boxes and the neural networks designed for the 3D holistic scene understanding",
+        "The proposed model consists of two networks, shown in Figure 2: a global geometric network (GGN) that estimates the 3D room layout and camera pose, and a local object network (LON) that infers the attributes of each object",
+        "Using the parametrization described in Subsection 2.1, we hope to cooperatively optimize global geometry network and local object network, simultaneously estimating 3D camera pose, 3D room layout, and 3D object bounding boxes, in the sense that the two networks enhance each other and cooperate to make the definitive estimation during the learning process",
+        "We evaluate our model on five tasks: i) 3D layout estimation, ii) 3D object detection, iii) 3D box estimation iv) 3D camera pose estimation, and v) holistic scene understanding, all with the test images across all scene categories",
+        "Note that the holistic scene understanding task defined in [<a class=\"ref-link\" id=\"cSong_et+al_2015_a\" href=\"#rSong_et+al_2015_a\">Song et al, 2015</a>] misses 3D camera pose estimation compared to the definition in this paper, as the results are evaluated in the world coordinate",
+        "The model trained in an unsupervised fashion where we only use 2D supervision to estimate the\n3D bounding boxes (w/o L3D + LGGN + LLON, S4)",
+        "In the proposed cooperative model, we introduce the parametrization of the 3D bounding box, together with a differentiable loss function to impose the consistency between 2D-3D bounding boxes for indoor scene understanding",
+        "Using a single RGB image as the input, we propose an end-to-end model that recovers a 3D indoor scene in real-time, including the 3D room layout, camera pose, and object bounding boxes",
+        "A novel parametrization of 3D bounding boxes and a 2D projection loss are introduced to enforce the consistency between 2D and 3D"
+    ],
+    "summary": [
+        "Holistic 3D scene understanding from a single RGB image is a fundamental yet challenging computer vision problem, while humans are capable of performing such tasks effortlessly within 200 ms [<a class=\"ref-link\" id=\"cPotter_1975_a\" href=\"#rPotter_1975_a\"><a class=\"ref-link\" id=\"cPotter_1975_a\" href=\"#rPotter_1975_a\">Potter, 1975</a></a>, 1976, <a class=\"ref-link\" id=\"cSchyns_1994_a\" href=\"#rSchyns_1994_a\"><a class=\"ref-link\" id=\"cSchyns_1994_a\" href=\"#rSchyns_1994_a\">Schyns and Oliva, 1994</a></a>, <a class=\"ref-link\" id=\"cThorpe_et+al_1996_a\" href=\"#rThorpe_et+al_1996_a\"><a class=\"ref-link\" id=\"cThorpe_et+al_1996_a\" href=\"#rThorpe_et+al_1996_a\">Thorpe et al, 1996</a></a>].",
+        "The proposed method outperforms previous methods on four tasks, including 3D layout estimation, 3D object detection, 3D camera pose estimation, and holistic scene understanding.",
+        "The essence of the proposed model is to cooperatively estimate 3D room layout, 3D camera pose, and 3D object bounding boxes.",
+        "The proposed model consists of two networks, shown in Figure 2: a global geometric network (GGN) that estimates the 3D room layout and camera pose, and a local object network (LON) that infers the attributes of each object.",
+        "As shown in Figure 2(a), the global geometry network (GGN) takes a single RGB image as the input, and predicts both 3D room layout and 3D camera pose.",
+        "Using the parametrization described in Subsection 2.1, we hope to cooperatively optimize GGN and LON, simultaneously estimating 3D camera pose, 3D room layout, and 3D object bounding boxes, in the sense that the two networks enhance each other and cooperate to make the definitive estimation during the learning process.",
+        "The SUN RGB-D dataset has 47 scene categories with high-quality 3D room layout, 3D camera pose, and 3D object bounding boxes annotations.",
+        "We evaluate our model on five tasks: i) 3D layout estimation, ii) 3D object detection, iii) 3D box estimation iv) 3D camera pose estimation, and v) holistic scene understanding, all with the test images across all scene categories.",
+        "We compare our cooperatively trained model with the settings in which we train GGN and LON individually without the proposed parametrization of 3D object bounding box or cooperative losses.",
+        "Benefiting from the parametrization method and 2D projection loss, the proposed cooperative model maintains the consistency between 3D and 2D, substantially reducing the estimation variance.",
+        "Note that the holistic scene understanding task defined in [<a class=\"ref-link\" id=\"cSong_et+al_2015_a\" href=\"#rSong_et+al_2015_a\">Song et al, 2015</a>] misses 3D camera pose estimation compared to the definition in this paper, as the results are evaluated in the world coordinate.",
+        "Experiment S1 and S3 Without the supervision on 3D object bounding box corners or physical constraint, the performance of all the tasks decreases since it removes the cooperation between the two networks.",
+        "In the proposed cooperative model, we introduce the parametrization of the 3D bounding box, together with a differentiable loss function to impose the consistency between 2D-3D bounding boxes for indoor scene understanding.",
+        "Using a single RGB image as the input, we propose an end-to-end model that recovers a 3D indoor scene in real-time, including the 3D room layout, camera pose, and object bounding boxes."
+    ],
+    "headline": "We propose an end-to-end model that simultaneously solves all three tasks in realtime given only a single RGB image",
+    "reference_links": [
+        {
+            "id": "Bodla_et+al_2017_a",
+            "entry": "Navaneeth Bodla, Bharat Singh, Rama Chellappa, and Larry S. Davis. Soft-nms \u2013 improving object detection with one line of code. In IEEE International Conference on Computer Vision (ICCV), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bodla%2C%20Navaneeth%20Singh%2C%20Bharat%20Chellappa%2C%20Rama%20Davis%2C%20Larry%20S.%20Soft-nms%20%E2%80%93%20improving%20object%20detection%20with%20one%20line%20of%20code%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bodla%2C%20Navaneeth%20Singh%2C%20Bharat%20Chellappa%2C%20Rama%20Davis%2C%20Larry%20S.%20Soft-nms%20%E2%80%93%20improving%20object%20detection%20with%20one%20line%20of%20code%202017"
+        },
+        {
+            "id": "Choi_et+al_2013_a",
+            "entry": "Wongun Choi, Yu-Wei Chao, Caroline Pantofaru, and Silvio Savarese. Understanding indoor scenes using 3d geometric phrases. In IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Choi%2C%20Wongun%20Chao%2C%20Yu-Wei%20Pantofaru%2C%20Caroline%20Savarese%2C%20Silvio%20Understanding%20indoor%20scenes%20using%203d%20geometric%20phrases%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Choi%2C%20Wongun%20Chao%2C%20Yu-Wei%20Pantofaru%2C%20Caroline%20Savarese%2C%20Silvio%20Understanding%20indoor%20scenes%20using%203d%20geometric%20phrases%202013"
+        },
+        {
+            "id": "Dai_et+al_2017_a",
+            "entry": "Jifeng Dai, Haozhi Qi, Yuwen Xiong, Yi Li, Guodong Zhang, Han Hu, and Yichen Wei. Deformable convolutional networks. In IEEE International Conference on Computer Vision (ICCV), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dai%2C%20Jifeng%20Qi%2C%20Haozhi%20Xiong%2C%20Yuwen%20Li%2C%20Yi%20Deformable%20convolutional%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dai%2C%20Jifeng%20Qi%2C%20Haozhi%20Xiong%2C%20Yuwen%20Li%2C%20Yi%20Deformable%20convolutional%20networks%202017"
+        },
+        {
+            "id": "Deng_2017_a",
+            "entry": "Zhuo Deng and Longin Jan Latecki. Amodal detection of 3d objects: Inferring 3d bounding boxes from 2d ones in rgb-depth images. In IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Deng%2C%20Zhuo%20Latecki%2C%20Longin%20Jan%20Amodal%20detection%20of%203d%20objects%3A%20Inferring%203d%20bounding%20boxes%20from%202d%20ones%20in%20rgb-depth%20images%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Deng%2C%20Zhuo%20Latecki%2C%20Longin%20Jan%20Amodal%20detection%20of%203d%20objects%3A%20Inferring%203d%20bounding%20boxes%20from%202d%20ones%20in%20rgb-depth%20images%202017"
+        },
+        {
+            "id": "Guo_2013_a",
+            "entry": "Ruiqi Guo and Derek Hoiem. Support surface prediction in indoor scenes. In IEEE International Conference on Computer Vision (ICCV), 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Guo%2C%20Ruiqi%20Hoiem%2C%20Derek%20Support%20surface%20prediction%20in%20indoor%20scenes%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Guo%2C%20Ruiqi%20Hoiem%2C%20Derek%20Support%20surface%20prediction%20in%20indoor%20scenes%202013"
+        },
+        {
+            "id": "Gupta_et+al_2010_a",
+            "entry": "Abhinav Gupta, Martial Hebert, Takeo Kanade, and David M Blei. Estimating spatial layout of rooms using volumetric reasoning about objects and surfaces. In Conference on Neural Information Processing Systems (NIPS), 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gupta%2C%20Abhinav%20Hebert%2C%20Martial%20Kanade%2C%20Takeo%20Blei%2C%20David%20M.%20Estimating%20spatial%20layout%20of%20rooms%20using%20volumetric%20reasoning%20about%20objects%20and%20surfaces%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gupta%2C%20Abhinav%20Hebert%2C%20Martial%20Kanade%2C%20Takeo%20Blei%2C%20David%20M.%20Estimating%20spatial%20layout%20of%20rooms%20using%20volumetric%20reasoning%20about%20objects%20and%20surfaces%202010"
+        },
+        {
+            "id": "He_et+al_2016_a",
+            "entry": "Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. In IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016"
+        },
+        {
+            "id": "Hedau_et+al_2009_a",
+            "entry": "Varsha Hedau, Derek Hoiem, and David Forsyth. Recovering the spatial layout of cluttered rooms. In IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hedau%2C%20Varsha%20Hoiem%2C%20Derek%20Forsyth%2C%20David%20Recovering%20the%20spatial%20layout%20of%20cluttered%20rooms%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hedau%2C%20Varsha%20Hoiem%2C%20Derek%20Forsyth%2C%20David%20Recovering%20the%20spatial%20layout%20of%20cluttered%20rooms%202009"
+        },
+        {
+            "id": "Huang_et+al_2018_a",
+            "entry": "Siyuan Huang, Siyuan Qi, Yixin Zhu, Yinxue Xiao, Yuanlu Xu, and Song-Chun Zhu. Holistic 3d scene parsing and reconstruction from a single rgb image. In European Conference on Computer Vision (ECCV), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huang%2C%20Siyuan%20Qi%2C%20Siyuan%20Zhu%2C%20Yixin%20Xiao%2C%20Yinxue%20Holistic%203d%20scene%20parsing%20and%20reconstruction%20from%20a%20single%20rgb%20image%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huang%2C%20Siyuan%20Qi%2C%20Siyuan%20Zhu%2C%20Yixin%20Xiao%2C%20Yinxue%20Holistic%203d%20scene%20parsing%20and%20reconstruction%20from%20a%20single%20rgb%20image%202018"
+        },
+        {
+            "id": "Izadinia_et+al_2017_a",
+            "entry": "Hamid Izadinia, Qi Shan, and Steven M Seitz. Im2cad. In IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hamid%20Izadinia%20Qi%20Shan%20and%20Steven%20M%20Seitz%20Im2cad%20In%20IEEE%20Conference%20on%20Computer%20Vision%20and%20Pattern%20Recognition%20CVPR%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hamid%20Izadinia%20Qi%20Shan%20and%20Steven%20M%20Seitz%20Im2cad%20In%20IEEE%20Conference%20on%20Computer%20Vision%20and%20Pattern%20Recognition%20CVPR%202017"
+        },
+        {
+            "id": "Jacobs_2002_a",
+            "entry": "Robert A Jacobs. What determines visual cue reliability? Trends in cognitive sciences, 6(8):345\u2013350, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jacobs%2C%20Robert%20A.%20What%20determines%20visual%20cue%20reliability%3F%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jacobs%2C%20Robert%20A.%20What%20determines%20visual%20cue%20reliability%3F%202002"
+        },
+        {
+            "id": "Kehl_et+al_2017_a",
+            "entry": "Wadim Kehl, Fabian Manhardt, Federico Tombari, Slobodan Ilic, and Nassir Navab. Ssd-6d: Making rgb-based 3d detection and 6d pose estimation great again. In IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kehl%2C%20Wadim%20Manhardt%2C%20Fabian%20Tombari%2C%20Federico%20Ilic%2C%20Slobodan%20Ssd-%206d%3A%20Making%20rgb-based%203d%20detection%20and%206d%20pose%20estimation%20great%20again%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kehl%2C%20Wadim%20Manhardt%2C%20Fabian%20Tombari%2C%20Federico%20Ilic%2C%20Slobodan%20Ssd-%206d%3A%20Making%20rgb-based%203d%20detection%20and%206d%20pose%20estimation%20great%20again%202017"
+        },
+        {
+            "id": "Kingma_2015_a",
+            "entry": "Diederik Kingma and Jimmy Ba. Adam: A method for stochastic optimization. In International Conference on Learning Representations (ICLR), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20Ba%2C%20Jimmy%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20Ba%2C%20Jimmy%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202015"
+        },
+        {
+            "id": "Kubricht_et+al_2017_a",
+            "entry": "James R Kubricht, Keith J Holyoak, and Hongjing Lu. Intuitive physics: Current research and controversies. Trends in cognitive sciences, 21(10):749\u2013759, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kubricht%2C%20James%20R.%20Holyoak%2C%20Keith%20J.%20Lu%2C%20Hongjing%20Intuitive%20physics%3A%20Current%20research%20and%20controversies%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kubricht%2C%20James%20R.%20Holyoak%2C%20Keith%20J.%20Lu%2C%20Hongjing%20Intuitive%20physics%3A%20Current%20research%20and%20controversies%202017"
+        },
+        {
+            "id": "Kundu_et+al_2018_a",
+            "entry": "Abhijit Kundu, Yin Li, and James M Rehg. 3d-rcnn: Instance-level 3d object reconstruction via render-and-compare. In IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kundu%2C%20Abhijit%20Li%2C%20Yin%20Rehg%2C%20James%20M.%203d-rcnn%3A%20Instance-level%203d%20object%20reconstruction%20via%20render-and-compare%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kundu%2C%20Abhijit%20Li%2C%20Yin%20Rehg%2C%20James%20M.%203d-rcnn%3A%20Instance-level%203d%20object%20reconstruction%20via%20render-and-compare%202018"
+        },
+        {
+            "id": "Lahoud_2017_a",
+            "entry": "Jean Lahoud and Bernard Ghanem. 2d-driven 3d object detection in rgb-d images. In IEEE International Conference on Computer Vision (ICCV), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lahoud%2C%20Jean%20Ghanem%2C%20Bernard%202d-driven%203d%20object%20detection%20in%20rgb-d%20images%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lahoud%2C%20Jean%20Ghanem%2C%20Bernard%202d-driven%203d%20object%20detection%20in%20rgb-d%20images%202017"
+        },
+        {
+            "id": "Landy_et+al_1995_a",
+            "entry": "Michael S Landy, Laurence T Maloney, Elizabeth B Johnston, and Mark Young. Measurement and modeling of depth cue combination: In defense of weak fusion. Vision research, 35(3):389\u2013412, 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Landy%2C%20Michael%20S.%20Maloney%2C%20Laurence%20T.%20Johnston%2C%20Elizabeth%20B.%20Young%2C%20Mark%20Measurement%20and%20modeling%20of%20depth%20cue%20combination%3A%20In%20defense%20of%20weak%20fusion%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Landy%2C%20Michael%20S.%20Maloney%2C%20Laurence%20T.%20Johnston%2C%20Elizabeth%20B.%20Young%2C%20Mark%20Measurement%20and%20modeling%20of%20depth%20cue%20combination%3A%20In%20defense%20of%20weak%20fusion%201995"
+        },
+        {
+            "id": "Lee_et+al_2017_a",
+            "entry": "Chen-Yu Lee, Vijay Badrinarayanan, Tomasz Malisiewicz, and Andrew Rabinovich. Roomnet: End-to-end room layout estimation. In IEEE International Conference on Computer Vision (ICCV), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lee%2C%20Chen-Yu%20Badrinarayanan%2C%20Vijay%20Malisiewicz%2C%20Tomasz%20Rabinovich%2C%20Andrew%20Roomnet%3A%20End-to-end%20room%20layout%20estimation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lee%2C%20Chen-Yu%20Badrinarayanan%2C%20Vijay%20Malisiewicz%2C%20Tomasz%20Rabinovich%2C%20Andrew%20Roomnet%3A%20End-to-end%20room%20layout%20estimation%202017"
+        },
+        {
+            "id": "Lin_et+al_2013_a",
+            "entry": "Dahua Lin, Sanja Fidler, and Raquel Urtasun. Holistic scene understanding for 3d object detection with rgbd cameras. In IEEE International Conference on Computer Vision (ICCV), 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20Dahua%20Fidler%2C%20Sanja%20Urtasun%2C%20Raquel%20Holistic%20scene%20understanding%20for%203d%20object%20detection%20with%20rgbd%20cameras%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lin%2C%20Dahua%20Fidler%2C%20Sanja%20Urtasun%2C%20Raquel%20Holistic%20scene%20understanding%20for%203d%20object%20detection%20with%20rgbd%20cameras%202013"
+        },
+        {
+            "id": "Liu_et+al_2018_a",
+            "entry": "Chen Liu, Jimei Yang, Duygu Ceylan, Ersin Yumer, and Yasutaka Furukawa. Planenet: Piece-wise planar reconstruction from a single rgb image. In IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20Chen%20Yang%2C%20Jimei%20Ceylan%2C%20Duygu%20Yumer%2C%20Ersin%20Planenet%3A%20Piece-wise%20planar%20reconstruction%20from%20a%20single%20rgb%20image%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liu%2C%20Chen%20Yang%2C%20Jimei%20Ceylan%2C%20Duygu%20Yumer%2C%20Ersin%20Planenet%3A%20Piece-wise%20planar%20reconstruction%20from%20a%20single%20rgb%20image%202018"
+        },
+        {
+            "id": "Mousavian_et+al_2017_a",
+            "entry": "Arsalan Mousavian, Dragomir Anguelov, John Flynn, and Jana Ko\u0161eck\u00e1. 3d bounding box estimation using deep learning and geometry. In IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mousavian%2C%20Arsalan%20Anguelov%2C%20Dragomir%20Flynn%2C%20John%20Ko%C5%A1eck%C3%A1%2C%20Jana%203d%20bounding%20box%20estimation%20using%20deep%20learning%20and%20geometry%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mousavian%2C%20Arsalan%20Anguelov%2C%20Dragomir%20Flynn%2C%20John%20Ko%C5%A1eck%C3%A1%2C%20Jana%203d%20bounding%20box%20estimation%20using%20deep%20learning%20and%20geometry%202017"
+        },
+        {
+            "id": "Oliva_2006_a",
+            "entry": "Aude Oliva and Antonio Torralba. Building the gist of a scene: The role of global image features in recognition. Progress in brain research, 155:23\u201336, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Oliva%2C%20Aude%20Torralba%2C%20Antonio%20Building%20the%20gist%20of%20a%20scene%3A%20The%20role%20of%20global%20image%20features%20in%20recognition%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Oliva%2C%20Aude%20Torralba%2C%20Antonio%20Building%20the%20gist%20of%20a%20scene%3A%20The%20role%20of%20global%20image%20features%20in%20recognition%202006"
+        },
+        {
+            "id": "Paszke_et+al_2017_a",
+            "entry": "Adam Paszke, Sam Gross, Soumith Chintala, Gregory Chanan, Edward Yang, Zachary DeVito, Zeming Lin, Alban Desmaison, Luca Antiga, and Adam Lerer. Automatic differentiation in pytorch. In NIPS-W, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Adam%20Paszke%20Sam%20Gross%20Soumith%20Chintala%20Gregory%20Chanan%20Edward%20Yang%20Zachary%20DeVito%20Zeming%20Lin%20Alban%20Desmaison%20Luca%20Antiga%20and%20Adam%20Lerer%20Automatic%20differentiation%20in%20pytorch%20In%20NIPSW%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Adam%20Paszke%20Sam%20Gross%20Soumith%20Chintala%20Gregory%20Chanan%20Edward%20Yang%20Zachary%20DeVito%20Zeming%20Lin%20Alban%20Desmaison%20Luca%20Antiga%20and%20Adam%20Lerer%20Automatic%20differentiation%20in%20pytorch%20In%20NIPSW%202017"
+        },
+        {
+            "id": "Potter_1975_a",
+            "entry": "Mary C Potter. Meaning in visual search. Science, 187(4180):965\u2013966, 1975.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Potter%2C%20Mary%20C.%20Meaning%20in%20visual%20search%201975",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Potter%2C%20Mary%20C.%20Meaning%20in%20visual%20search%201975"
+        },
+        {
+            "id": "Potter_1976_a",
+            "entry": "Mary C Potter. Short-term conceptual memory for pictures. Journal of experimental psychology: human learning and memory, 2(5):509, 1976.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Potter%2C%20Mary%20C.%20Short-term%20conceptual%20memory%20for%20pictures.%20Journal%20of%20experimental%20psychology%3A%20human%20learning%20and%201976",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Potter%2C%20Mary%20C.%20Short-term%20conceptual%20memory%20for%20pictures.%20Journal%20of%20experimental%20psychology%3A%20human%20learning%20and%201976"
+        },
+        {
+            "id": "Qi_et+al_2018_a",
+            "entry": "Charles R Qi, Wei Liu, Chenxia Wu, Hao Su, and Leonidas J Guibas. Frustum pointnets for 3d object detection from rgb-d data. In IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Qi%2C%20Charles%20R.%20Liu%2C%20Wei%20Wu%2C%20Chenxia%20Su%2C%20Hao%20Frustum%20pointnets%20for%203d%20object%20detection%20from%20rgb-d%20data%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Qi%2C%20Charles%20R.%20Liu%2C%20Wei%20Wu%2C%20Chenxia%20Su%2C%20Hao%20Frustum%20pointnets%20for%203d%20object%20detection%20from%20rgb-d%20data%202018"
+        },
+        {
+            "id": "Ren_et+al_2015_a",
+            "entry": "Shaoqing Ren, Kaiming He, Ross Girshick, and Jian Sun. Faster r-cnn: Towards real-time object detection with region proposal networks. In Conference on Neural Information Processing Systems (NIPS), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ren%2C%20Shaoqing%20He%2C%20Kaiming%20Girshick%2C%20Ross%20Sun%2C%20Jian%20Faster%20r-cnn%3A%20Towards%20real-time%20object%20detection%20with%20region%20proposal%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ren%2C%20Shaoqing%20He%2C%20Kaiming%20Girshick%2C%20Ross%20Sun%2C%20Jian%20Faster%20r-cnn%3A%20Towards%20real-time%20object%20detection%20with%20region%20proposal%20networks%202015"
+        },
+        {
+            "id": "Danilo_et+al_2016_a",
+            "entry": "Danilo Jimenez Rezende, SM Ali Eslami, Shakir Mohamed, Peter Battaglia, Max Jaderberg, and Nicolas Heess. Unsupervised learning of 3d structure from images. In Conference on Neural Information Processing Systems (NIPS), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Danilo%20Jimenez%20Rezende%2C%20S.M.Ali%20Eslami%20Mohamed%2C%20Shakir%20Battaglia%2C%20Peter%20Jaderberg%2C%20Max%20Unsupervised%20learning%20of%203d%20structure%20from%20images%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Danilo%20Jimenez%20Rezende%2C%20S.M.Ali%20Eslami%20Mohamed%2C%20Shakir%20Battaglia%2C%20Peter%20Jaderberg%2C%20Max%20Unsupervised%20learning%20of%203d%20structure%20from%20images%202016"
+        },
+        {
+            "id": "Schwing_et+al_2013_a",
+            "entry": "Alexander G Schwing, Sanja Fidler, Marc Pollefeys, and Raquel Urtasun. Box in the box: Joint 3d layout and object reasoning from single images. In IEEE International Conference on Computer Vision (ICCV), 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schwing%2C%20Alexander%20G.%20Fidler%2C%20Sanja%20Pollefeys%2C%20Marc%20Urtasun%2C%20Raquel%20Box%20in%20the%20box%3A%20Joint%203d%20layout%20and%20object%20reasoning%20from%20single%20images%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schwing%2C%20Alexander%20G.%20Fidler%2C%20Sanja%20Pollefeys%2C%20Marc%20Urtasun%2C%20Raquel%20Box%20in%20the%20box%3A%20Joint%203d%20layout%20and%20object%20reasoning%20from%20single%20images%202013"
+        },
+        {
+            "id": "Schyns_1994_a",
+            "entry": "Philippe G Schyns and Aude Oliva. From blobs to boundary edges: Evidence for time-and spatialscale-dependent scene recognition. Psychological science, 5(4):195\u2013200, 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schyns%2C%20Philippe%20G.%20Oliva%2C%20Aude%20From%20blobs%20to%20boundary%20edges%3A%20Evidence%20for%20time-and%20spatialscale-dependent%20scene%20recognition%201994",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schyns%2C%20Philippe%20G.%20Oliva%2C%20Aude%20From%20blobs%20to%20boundary%20edges%3A%20Evidence%20for%20time-and%20spatialscale-dependent%20scene%20recognition%201994"
+        },
+        {
+            "id": "Song_2014_a",
+            "entry": "Shuran Song and Jianxiong Xiao. Sliding shapes for 3d object detection in depth images. In European Conference on Computer Vision (ECCV), 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Song%2C%20Shuran%20Xiao%2C%20Jianxiong%20Sliding%20shapes%20for%203d%20object%20detection%20in%20depth%20images%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Song%2C%20Shuran%20Xiao%2C%20Jianxiong%20Sliding%20shapes%20for%203d%20object%20detection%20in%20depth%20images%202014"
+        },
+        {
+            "id": "Song_2016_a",
+            "entry": "Shuran Song and Jianxiong Xiao. Deep sliding shapes for amodal 3d object detection in rgb-d images. In IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Song%2C%20Shuran%20Xiao%2C%20Jianxiong%20Deep%20sliding%20shapes%20for%20amodal%203d%20object%20detection%20in%20rgb-d%20images%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Song%2C%20Shuran%20Xiao%2C%20Jianxiong%20Deep%20sliding%20shapes%20for%20amodal%203d%20object%20detection%20in%20rgb-d%20images%202016"
+        },
+        {
+            "id": "Song_et+al_2015_a",
+            "entry": "Shuran Song, Samuel P Lichtenberg, and Jianxiong Xiao. Sun rgb-d: A rgb-d scene understanding benchmark suite. In IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Song%2C%20Shuran%20Lichtenberg%2C%20Samuel%20P.%20Xiao%2C%20Jianxiong%20Sun%20rgb-d%3A%20A%20rgb-d%20scene%20understanding%20benchmark%20suite%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Song%2C%20Shuran%20Lichtenberg%2C%20Samuel%20P.%20Xiao%2C%20Jianxiong%20Sun%20rgb-d%3A%20A%20rgb-d%20scene%20understanding%20benchmark%20suite%202015"
+        },
+        {
+            "id": "Song_et+al_2017_a",
+            "entry": "Shuran Song, Fisher Yu, Andy Zeng, Angel X Chang, Manolis Savva, and Thomas Funkhouser. Semantic scene completion from a single depth image. In IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Song%2C%20Shuran%20Yu%2C%20Fisher%20Zeng%2C%20Andy%20Chang%2C%20Angel%20X.%20Semantic%20scene%20completion%20from%20a%20single%20depth%20image%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Song%2C%20Shuran%20Yu%2C%20Fisher%20Zeng%2C%20Andy%20Chang%2C%20Angel%20X.%20Semantic%20scene%20completion%20from%20a%20single%20depth%20image%202017"
+        },
+        {
+            "id": "Thorpe_et+al_1996_a",
+            "entry": "Simon Thorpe, Denis Fize, and Catherine Marlot. Speed of processing in the human visual system. Nature, 381(6582):520, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Thorpe%2C%20Simon%20Fize%2C%20Denis%20Marlot%2C%20Catherine%20Speed%20of%20processing%20in%20the%20human%20visual%20system%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Thorpe%2C%20Simon%20Fize%2C%20Denis%20Marlot%2C%20Catherine%20Speed%20of%20processing%20in%20the%20human%20visual%20system%201996"
+        },
+        {
+            "id": "Tulsiani_2015_a",
+            "entry": "Shubham Tulsiani and Jitendra Malik. Viewpoints and keypoints. In IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tulsiani%2C%20Shubham%20Malik%2C%20Jitendra%20Viewpoints%20and%20keypoints%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tulsiani%2C%20Shubham%20Malik%2C%20Jitendra%20Viewpoints%20and%20keypoints%202015"
+        },
+        {
+            "id": "Tulsiani_et+al_2018_a",
+            "entry": "Shubham Tulsiani, Saurabh Gupta, David Fouhey, Alexei A Efros, and Jitendra Malik. Factoring shape, pose, and layout from the 2d image of a 3d scene. In IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tulsiani%2C%20Shubham%20Gupta%2C%20Saurabh%20Fouhey%2C%20David%20Efros%2C%20Alexei%20A.%20Factoring%20shape%2C%20pose%2C%20and%20layout%20from%20the%202d%20image%20of%20a%203d%20scene%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tulsiani%2C%20Shubham%20Gupta%2C%20Saurabh%20Fouhey%2C%20David%20Efros%2C%20Alexei%20A.%20Factoring%20shape%2C%20pose%2C%20and%20layout%20from%20the%202d%20image%20of%20a%203d%20scene%202018"
+        },
+        {
+            "id": "Wu_et+al_2016_a",
+            "entry": "Jiajun Wu, Tianfan Xue, Joseph J Lim, Yuandong Tian, Joshua B Tenenbaum, Antonio Torralba, and William T Freeman. Single image 3d interpreter network. In European Conference on Computer Vision (ECCV), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20Jiajun%20Xue%2C%20Tianfan%20Lim%2C%20Joseph%20J.%20Tian%2C%20Yuandong%20Single%20image%203d%20interpreter%20network%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20Jiajun%20Xue%2C%20Tianfan%20Lim%2C%20Joseph%20J.%20Tian%2C%20Yuandong%20Single%20image%203d%20interpreter%20network%202016"
+        },
+        {
+            "id": "Wu_et+al_2017_a",
+            "entry": "Jiajun Wu, Yifan Wang, Tianfan Xue, Xingyuan Sun, Bill Freeman, and Josh Tenenbaum. Marrnet: 3d shape reconstruction via 2.5 d sketches. In Conference on Neural Information Processing Systems (NIPS), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20Jiajun%20Wang%2C%20Yifan%20Xue%2C%20Tianfan%20Sun%2C%20Xingyuan%20Marrnet%3A%203d%20shape%20reconstruction%20via%202.5%20d%20sketches%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20Jiajun%20Wang%2C%20Yifan%20Xue%2C%20Tianfan%20Sun%2C%20Xingyuan%20Marrnet%3A%203d%20shape%20reconstruction%20via%202.5%20d%20sketches%202017"
+        },
+        {
+            "id": "Yan_et+al_2016_a",
+            "entry": "Xinchen Yan, Jimei Yang, Ersin Yumer, Yijie Guo, and Honglak Lee. Perspective transformer nets: Learning single-view 3d object reconstruction without 3d supervision. In Conference on Neural Information Processing Systems (NIPS), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yan%2C%20Xinchen%20Yang%2C%20Jimei%20Yumer%2C%20Ersin%20Guo%2C%20Yijie%20Perspective%20transformer%20nets%3A%20Learning%20single-view%203d%20object%20reconstruction%20without%203d%20supervision%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yan%2C%20Xinchen%20Yang%2C%20Jimei%20Yumer%2C%20Ersin%20Guo%2C%20Yijie%20Perspective%20transformer%20nets%3A%20Learning%20single-view%203d%20object%20reconstruction%20without%203d%20supervision%202016"
+        },
+        {
+            "id": "Zhang_et+al_2014_a",
+            "entry": "Yinda Zhang, Shuran Song, Ping Tan, and Jianxiong Xiao. Panocontext: A whole-room 3d context model for panoramic scene understanding. In European Conference on Computer Vision (ECCV), 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Yinda%20Song%2C%20Shuran%20Tan%2C%20Ping%20Xiao%2C%20Jianxiong%20Panocontext%3A%20A%20whole-room%203d%20context%20model%20for%20panoramic%20scene%20understanding%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Yinda%20Song%2C%20Shuran%20Tan%2C%20Ping%20Xiao%2C%20Jianxiong%20Panocontext%3A%20A%20whole-room%203d%20context%20model%20for%20panoramic%20scene%20understanding%202014"
+        },
+        {
+            "id": "Zhang_et+al_2017_a",
+            "entry": "Yinda Zhang, Mingru Bai, Pushmeet Kohli, Shahram Izadi, and Jianxiong Xiao. Deepcontext: Context-encoding neural pathways for 3d holistic scene understanding. In IEEE International Conference on Computer Vision (ICCV), 2017a.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Yinda%20Bai%2C%20Mingru%20Kohli%2C%20Pushmeet%20Izadi%2C%20Shahram%20Deepcontext%3A%20Context-encoding%20neural%20pathways%20for%203d%20holistic%20scene%20understanding%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Yinda%20Bai%2C%20Mingru%20Kohli%2C%20Pushmeet%20Izadi%2C%20Shahram%20Deepcontext%3A%20Context-encoding%20neural%20pathways%20for%203d%20holistic%20scene%20understanding%202017"
+        },
+        {
+            "id": "Zhang_et+al_2017_b",
+            "entry": "Yinda Zhang, Shuran Song, Ersin Yumer, Manolis Savva, Joon-Young Lee, Hailin Jin, and Thomas Funkhouser. Physically-based rendering for indoor scene understanding using convolutional neural networks. In IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017b.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Yinda%20Song%2C%20Shuran%20Yumer%2C%20Ersin%20Savva%2C%20Manolis%20Physically-based%20rendering%20for%20indoor%20scene%20understanding%20using%20convolutional%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Yinda%20Song%2C%20Shuran%20Yumer%2C%20Ersin%20Savva%2C%20Manolis%20Physically-based%20rendering%20for%20indoor%20scene%20understanding%20using%20convolutional%20neural%20networks%202017"
+        },
+        {
+            "id": "Zhao_2011_a",
+            "entry": "Yibiao Zhao and Song-Chun Zhu. Image parsing with stochastic scene grammar. In Conference on Neural Information Processing Systems (NIPS), 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhao%2C%20Yibiao%20Zhu%2C%20Song-Chun%20Image%20parsing%20with%20stochastic%20scene%20grammar%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhao%2C%20Yibiao%20Zhu%2C%20Song-Chun%20Image%20parsing%20with%20stochastic%20scene%20grammar%202011"
+        },
+        {
+            "id": "Zhao_2013_a",
+            "entry": "Yibiao Zhao and Song-Chun Zhu. Scene parsing by integrating function, geometry and appearance models. In IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhao%2C%20Yibiao%20Zhu%2C%20Song-Chun%20Scene%20parsing%20by%20integrating%20function%2C%20geometry%20and%20appearance%20models%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhao%2C%20Yibiao%20Zhu%2C%20Song-Chun%20Scene%20parsing%20by%20integrating%20function%2C%20geometry%20and%20appearance%20models%202013"
+        },
+        {
+            "id": "Zou_et+al_2017_a",
+            "entry": "Chuhang Zou, Zhizhong Li, and Derek Hoiem. Complete 3d scene parsing from single rgbd image. arXiv preprint arXiv:1710.09490, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.09490"
+        },
+        {
+            "id": "Zou_et+al_2018_a",
+            "entry": "Chuhang Zou, Alex Colburn, Qi Shan, and Derek Hoiem. Layoutnet: Reconstructing the 3d room layout from a single rgb image. In IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zou%2C%20Chuhang%20Colburn%2C%20Alex%20Shan%2C%20Qi%20Hoiem%2C%20Derek%20Layoutnet%3A%20Reconstructing%20the%203d%20room%20layout%20from%20a%20single%20rgb%20image%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zou%2C%20Chuhang%20Colburn%2C%20Alex%20Shan%2C%20Qi%20Hoiem%2C%20Derek%20Layoutnet%3A%20Reconstructing%20the%203d%20room%20layout%20from%20a%20single%20rgb%20image%202018"
+        }
+    ]
+}

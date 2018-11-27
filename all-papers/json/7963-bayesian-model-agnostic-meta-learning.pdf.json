@@ -1,0 +1,272 @@
+{
+    "filename": "7963-bayesian-model-agnostic-meta-learning.pdf",
+    "metadata": {
+        "title": "Bayesian Model-Agnostic Meta-Learning",
+        "author": "Jaesik Yoon, Taesup Kim, Ousmane Dia, Sungwoong Kim, Yoshua Bengio, Sungjin Ahn",
+        "date": 2017,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7963-bayesian-model-agnostic-meta-learning.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Due to the inherent model uncertainty, learning to infer Bayesian posterior from a few-shot dataset is an important step towards robust meta-learning. In this paper, we propose a novel Bayesian model-agnostic meta-learning method. The proposed method combines efficient gradient-based meta-learning with nonparametric variational inference in a principled probabilistic framework. Unlike previous methods, during fast adaptation, the method is capable of learning complex uncertainty structure beyond a simple Gaussian approximation, and during meta-update, a novel Bayesian mechanism prevents meta-level overfitting. Remaining a gradientbased method, it is also the first Bayesian model-agnostic meta-learning method applicable to various tasks including reinforcement learning. Experiment results show the accuracy and robustness of the proposed method in sinusoidal regression, image classification, active learning, and reinforcement learning."
+    },
+    "keywords": [
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "mean squared error",
+            "url": "https://en.wikipedia.org/wiki/mean_squared_error"
+        },
+        {
+            "term": "active learning",
+            "url": "https://en.wikipedia.org/wiki/active_learning"
+        },
+        {
+            "term": "Bayesian neural network",
+            "url": "https://en.wikipedia.org/wiki/Bayesian_neural_network"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Two-year-old children can infer a new category from only one instance (<a class=\"ref-link\" id=\"cSmith_2017_a\" href=\"#rSmith_2017_a\"><a class=\"ref-link\" id=\"cSmith_2017_a\" href=\"#rSmith_2017_a\">Smith & Slone, 2017</a></a>)",
+        "We evaluated our proposed model (BMAML) in various few-shot learning tasks: sinusoidal regression, image classification, active learning, and reinforcement learning",
+        "Motivated by the hierarchical probabilistic modeling perspective to gradient-based meta-learning, we proposed a Bayesian gradient-based meta learning method",
+        "We combined the Stein Variational Gradient Descent with gradient-based meta learning in a probabilistic framework, and proposed the Bayesian Fast Adaptation and the Chaser loss for meta-update",
+        "As it remains a modelagnostic model, in experiments, we evaluated the method in various types of learning tasks including supervised learning, active learning, and reinforcement learning, and showed its superior performance in prediction accuracy, robustness to overfitting, and efficient exploration",
+        "Because the performance of Stein Variational Gradient Descent can be sensitive to the parameters of the kernel function, incorporating the fast-adaptation of the kernel parameter into a part of meta-learning would be an interesting future direction"
+    ],
+    "key_statements": [
+        "Two-year-old children can infer a new category from only one instance (<a class=\"ref-link\" id=\"cSmith_2017_a\" href=\"#rSmith_2017_a\"><a class=\"ref-link\" id=\"cSmith_2017_a\" href=\"#rSmith_2017_a\">Smith & Slone, 2017</a></a>)",
+        "Because we perform only a small number of inner-updates while the meta-update is based on empirical risk minimization, the initial model \u03980 can be overfitted to the task-validation sets when we use highly complex models like deep neural networks",
+        "We evaluated our proposed model (BMAML) in various few-shot learning tasks: sinusoidal regression, image classification, active learning, and reinforcement learning",
+        "In Fig. 1, we show the mean squared error (MSE) performance on the test tasks",
+        "In Appendix C.4, we provide the results on 2D Navigation task, where we observe similar superiority of BMAML to ensemble of independent MAML models",
+        "Motivated by the hierarchical probabilistic modeling perspective to gradient-based meta-learning, we proposed a Bayesian gradient-based meta learning method",
+        "We combined the Stein Variational Gradient Descent with gradient-based meta learning in a probabilistic framework, and proposed the Bayesian Fast Adaptation and the Chaser loss for meta-update",
+        "As it remains a modelagnostic model, in experiments, we evaluated the method in various types of learning tasks including supervised learning, active learning, and reinforcement learning, and showed its superior performance in prediction accuracy, robustness to overfitting, and efficient exploration",
+        "Because the performance of Stein Variational Gradient Descent can be sensitive to the parameters of the kernel function, incorporating the fast-adaptation of the kernel parameter into a part of meta-learning would be an interesting future direction"
+    ],
+    "summary": [
+        "Two-year-old children can infer a new category from only one instance (<a class=\"ref-link\" id=\"cSmith_2017_a\" href=\"#rSmith_2017_a\"><a class=\"ref-link\" id=\"cSmith_2017_a\" href=\"#rSmith_2017_a\">Smith & Slone, 2017</a></a>).",
+        "By introducing Bayesian methods for fast adaptation and meta-update, the proposed method learns to quickly obtain an approximate posterior of a given unseen task and",
+        "\u201cCan we use a more flexible task-train posterior than a point estimate or a simple Gaussian distribution while maintaining the efficiency of gradient-based meta-learning?\u201d This is an important question because as discussed in <a class=\"ref-link\" id=\"cGrant_et+al_2018_a\" href=\"#rGrant_et+al_2018_a\">Grant et al (2018</a>), the task-train posterior of a Bayesian neural network (BNN) trained with a few-shot dataset would have a significant amount of uncertainty which, according to the Bayesian central limit theorem (Le Cam, 1986; <a class=\"ref-link\" id=\"cAhn_et+al_2012_a\" href=\"#rAhn_et+al_2012_a\">Ahn et al, 2012</a>), cannot be well approximated by a Gaussian distribution.",
+        "This means that we maintain M initial particles \u03980 and by obtaining samples from the task-train posterior p using SVGD, we can optimize the following Monte Carlo approximation of Eq (3) by computing the gradient of the meta-loss log p(DTval|\u03980, DTtrn) w.r.t. \u03980, p(DTval | \u03980, DTtrn) \u2248",
+        "Being updated by gradient descent, it remains an efficient meta-learning method while providing a more flexible way to capture the complex uncertainty structure of the task-train posterior than a point estimate or a simple Gaussian approximation.",
+        "At iteration t, for each task \u03c4 in a sampled mini-batch Tt, the particles initialized to \u03980 are updated for n steps by applying the SVGD updater, denoted by SVGDn(\u03980; D\u03c4trn) \u2013 the target distribution in Eq (1) is set to the task-train posterior p \u221d p(D\u03c4trn|\u03b8\u03c4 )p1.",
+        "Because we perform only a small number of inner-updates while the meta-update is based on empirical risk minimization, the initial model \u03980 can be overfitted to the task-validation sets when we use highly complex models like deep neural networks.",
+        "In order to reduce the space and time complexity of the ensemble models (i.e., BMAML and EMAML) in this large network setting, we used the following parameter sharing scheme among the particles, to <a class=\"ref-link\" id=\"cBauer_et+al_2017_a\" href=\"#rBauer_et+al_2017_a\">Bauer et al (2017</a>).",
+        "We combined the Stein Variational Gradient Descent with gradient-based meta learning in a probabilistic framework, and proposed the Bayesian Fast Adaptation and the Chaser loss for meta-update.",
+        "As it remains a modelagnostic model, in experiments, we evaluated the method in various types of learning tasks including supervised learning, active learning, and reinforcement learning, and showed its superior performance in prediction accuracy, robustness to overfitting, and efficient exploration.",
+        "Because the performance of SVGD can be sensitive to the parameters of the kernel function, incorporating the fast-adaptation of the kernel parameter into a part of meta-learning would be an interesting future direction"
+    ],
+    "headline": "We propose a novel Bayesian model-agnostic meta-learning method",
+    "reference_links": [
+        {
+            "id": "Ahn_et+al_2012_a",
+            "entry": "Sungjin Ahn, Anoop Korattikara, and Max Welling. Bayesian posterior sampling via stochastic gradient fisher scoring. arXiv preprint arXiv:1206.6380, 2012.",
+            "arxiv_url": "https://arxiv.org/pdf/1206.6380"
+        },
+        {
+            "id": "Balan_et+al_2015_a",
+            "entry": "Anoop Korattikara Balan, Vivek Rathod, Kevin Murphy, and Max Welling. Bayesian dark knowledge. CoRR, abs/1506.04416, 2015. URL http://arxiv.org/abs/1506.04416.",
+            "url": "http://arxiv.org/abs/1506.04416",
+            "arxiv_url": "https://arxiv.org/pdf/1506.04416"
+        },
+        {
+            "id": "Bauer_et+al_2017_a",
+            "entry": "Matthias Bauer, Mateo Rojas-Carulla, Jakub Bart\u0142omiej Swiatkowski, Bernhard Sch\u00f6lkopf, and Richard E Turner. Discriminative k-shot learning using probabilistic models. arXiv preprint arXiv:1706.00326, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.00326"
+        },
+        {
+            "id": "Bengio_et+al_1990_a",
+            "entry": "Yoshua Bengio, Samy Bengio, and Jocelyn Cloutier. Learning a synaptic learning rule. Universit\u00e9 de Montr\u00e9al, D\u00e9partement d\u2019informatique et de recherche op\u00e9rationnelle, 1990.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bengio%2C%20Yoshua%20Bengio%2C%20Samy%20Cloutier%2C%20Jocelyn%20Learning%20a%20synaptic%20learning%20rule.%20Universit%C3%A9%20de%20Montr%C3%A9al%2C%20D%C3%A9partement%20d%E2%80%99informatique%20et%20de%20recherche%20op%C3%A9rationnelle%201990"
+        },
+        {
+            "id": "Biggs_1985_a",
+            "entry": "John B Biggs. The role of metalearning in study processes. British journal of educational psychology, 55(3):185\u2013212, 1985.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Biggs%2C%20John%20B.%20The%20role%20of%20metalearning%20in%20study%20processes%201985",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Biggs%2C%20John%20B.%20The%20role%20of%20metalearning%20in%20study%20processes%201985"
+        },
+        {
+            "id": "Borgwardt_et+al_2006_a",
+            "entry": "Karsten M Borgwardt, Arthur Gretton, Malte J Rasch, Hans-Peter Kriegel, Bernhard Sch\u00f6lkopf, and Alex J Smola. Integrating structured biological data by kernel maximum mean discrepancy. Bioinformatics, 22(14):e49\u2013e57, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Borgwardt%2C%20Karsten%20M.%20Gretton%2C%20Arthur%20Rasch%2C%20Malte%20J.%20Kriegel%2C%20Hans-Peter%20Integrating%20structured%20biological%20data%20by%20kernel%20maximum%20mean%20discrepancy%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Borgwardt%2C%20Karsten%20M.%20Gretton%2C%20Arthur%20Rasch%2C%20Malte%20J.%20Kriegel%2C%20Hans-Peter%20Integrating%20structured%20biological%20data%20by%20kernel%20maximum%20mean%20discrepancy%202006"
+        },
+        {
+            "id": "Daum_2009_a",
+            "entry": "Hal Daum\u00e9 III. Bayesian multitask learning with latent hierarchies. In Proceedings of the Twenty-Fifth Conference on Uncertainty in Artificial Intelligence, pp. 135\u2013142. AUAI Press, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Daum%C3%A9%2C%20III%2C%20Hal%20Bayesian%20multitask%20learning%20with%20latent%20hierarchies%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Daum%C3%A9%2C%20III%2C%20Hal%20Bayesian%20multitask%20learning%20with%20latent%20hierarchies%202009"
+        },
+        {
+            "id": "Duan_et+al_2016_a",
+            "entry": "Yan Duan, John Schulman, Xi Chen, Peter L Bartlett, Ilya Sutskever, and Pieter Abbeel. Rl\u03982: Fast reinforcement learning via slow reinforcement learning. arXiv preprint arXiv:1611.02779, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.02779"
+        },
+        {
+            "id": "Fe-Fei_2003_a",
+            "entry": "Li Fe-Fei et al. A bayesian approach to unsupervised one-shot learning of object categories. In Computer Vision, 2003. Proceedings. Ninth IEEE International Conference on, pp. 1134\u20131141. IEEE, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fe-Fei%2C%20Li%20A%20bayesian%20approach%20to%20unsupervised%20one-shot%20learning%20of%20object%20categories%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fe-Fei%2C%20Li%20A%20bayesian%20approach%20to%20unsupervised%20one-shot%20learning%20of%20object%20categories%202003"
+        },
+        {
+            "id": "Finn_et+al_2017_a",
+            "entry": "Chelsea Finn, Pieter Abbeel, and Sergey Levine. Model-agnostic meta-learning for fast adaptation of deep networks. arXiv preprint arXiv:1703.03400, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.03400"
+        },
+        {
+            "id": "Gal_et+al_2016_a",
+            "entry": "Yarin Gal, Riashat Islam, and Zoubin Ghahramani. Deep Bayesian active learning with image data. In Bayesian Deep Learning workshop, NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gal%2C%20Yarin%20Islam%2C%20Riashat%20Ghahramani%2C%20Zoubin%20Deep%20Bayesian%20active%20learning%20with%20image%20data.%20In%20Bayesian%20Deep%20Learning%20workshop%2C%20NIPS%202016"
+        },
+        {
+            "id": "Goodfellow_et+al_2016_a",
+            "entry": "Ian Goodfellow, Yoshua Bengio, Aaron Courville, and Yoshua Bengio. Deep learning, volume 1. MIT press Cambridge, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goodfellow%2C%20Ian%20Bengio%2C%20Yoshua%20Courville%2C%20Aaron%20Bengio%2C%20Yoshua%20Deep%20learning%2C%20volume%201%202016"
+        },
+        {
+            "id": "Grant_et+al_2018_a",
+            "entry": "Erin Grant, Chelsea Finn, Sergey Levine, Trevor Darrell, and Thomas Griffiths. Recasting gradientbased meta-learning as hierarchical bayes. arXiv preprint arXiv:1801.08930, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1801.08930"
+        },
+        {
+            "id": "Houthooft_et+al_2016_a",
+            "entry": "Rein Houthooft, Xi Chen, Yan Duan, John Schulman, Filip De Turck, and Pieter Abbeel. Vime: Variational information maximizing exploration. In Advances in Neural Information Processing Systems, pp. 1109\u20131117, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Houthooft%2C%20Rein%20Chen%2C%20Xi%20Duan%2C%20Yan%20Schulman%2C%20John%20Vime%3A%20Variational%20information%20maximizing%20exploration%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Houthooft%2C%20Rein%20Chen%2C%20Xi%20Duan%2C%20Yan%20Schulman%2C%20John%20Vime%3A%20Variational%20information%20maximizing%20exploration%202016"
+        },
+        {
+            "id": "Kingma_2014_a",
+            "entry": "Diederik P Kingma and Jimmy Ba. Adam: A method for stochastic optimization. arXiv preprint arXiv:1412.6980, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6980"
+        },
+        {
+            "id": "Krizhevsky_et+al_2012_a",
+            "entry": "Alex Krizhevsky, Ilya Sutskever, and Geoffrey E Hinton. Imagenet classification with deep convolutional neural networks. In Advances in neural information processing systems, pp. 1097\u20131105, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Hinton%2C%20Geoffrey%20E.%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Hinton%2C%20Geoffrey%20E.%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012"
+        },
+        {
+            "id": "Lacoste_et+al_2017_a",
+            "entry": "Alexandre Lacoste, Thomas Boquet, Negar Rostamzadeh, Boris Oreshki, Wonchang Chung, and David Krueger. Deep prior. arXiv preprint arXiv:1712.05016, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1712.05016"
+        },
+        {
+            "id": "Lake_et+al_2015_a",
+            "entry": "Brenden M Lake, Ruslan Salakhutdinov, and Joshua B Tenenbaum. Human-level concept learning through probabilistic program induction. Science, 350(6266):1332\u20131338, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lake%2C%20Brenden%20M.%20Salakhutdinov%2C%20Ruslan%20Tenenbaum%2C%20Joshua%20B.%20Human-level%20concept%20learning%20through%20probabilistic%20program%20induction%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lake%2C%20Brenden%20M.%20Salakhutdinov%2C%20Ruslan%20Tenenbaum%2C%20Joshua%20B.%20Human-level%20concept%20learning%20through%20probabilistic%20program%20induction%202015"
+        },
+        {
+            "id": "Landau_et+al_1988_a",
+            "entry": "Barbara Landau, Linda B Smith, and Susan S Jones. The importance of shape in early lexical learning. Cognitive development, 3(3):299\u2013321, 1988.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Landau%2C%20Barbara%20Smith%2C%20Linda%20B.%20Jones%2C%20Susan%20S.%20The%20importance%20of%20shape%20in%20early%20lexical%20learning%201988",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Landau%2C%20Barbara%20Smith%2C%20Linda%20B.%20Jones%2C%20Susan%20S.%20The%20importance%20of%20shape%20in%20early%20lexical%20learning%201988"
+        },
+        {
+            "id": "Lawrence_2004_a",
+            "entry": "Neil D Lawrence and John C Platt. Learning to learn with the informative vector machine. In Proceedings of the twenty-first international conference on Machine learning, pp. 65. ACM, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20C%20Platt.%20Learning%20to%20learn%20with%20the%20informative%20vector%20machine%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20C%20Platt.%20Learning%20to%20learn%20with%20the%20informative%20vector%20machine%202004"
+        },
+        {
+            "id": "Cam_1986_a",
+            "entry": "L.M. Le Cam. Asymptotic methods in statistical decision theory. Springer, 1986.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cam%2C%20L.M.Le%20Asymptotic%20methods%20in%20statistical%20decision%20theory%201986"
+        },
+        {
+            "id": "Liu_2016_a",
+            "entry": "Qiang Liu and Dilin Wang. Stein variational gradient descent: A general purpose bayesian inference algorithm. In Advances In Neural Information Processing Systems, pp. 2378\u20132386, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20Qiang%20Wang%2C%20Dilin%20Stein%20variational%20gradient%20descent%3A%20A%20general%20purpose%20bayesian%20inference%20algorithm%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liu%2C%20Qiang%20Wang%2C%20Dilin%20Stein%20variational%20gradient%20descent%3A%20A%20general%20purpose%20bayesian%20inference%20algorithm%202016"
+        },
+        {
+            "id": "Liu_et+al_2017_a",
+            "entry": "Yang Liu, Prajit Ramachandran, Qiang Liu, and Jian Peng. Stein variational policy gradient. arXiv preprint arXiv:1704.02399, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1704.02399"
+        },
+        {
+            "id": "Martens_2015_a",
+            "entry": "James Martens and Roger Grosse. Optimizing neural networks with kronecker-factored approximate curvature. In International conference on machine learning, pp. 2408\u20132417, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Martens%2C%20James%20Grosse%2C%20Roger%20Optimizing%20neural%20networks%20with%20kronecker-factored%20approximate%20curvature%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Martens%2C%20James%20Grosse%2C%20Roger%20Optimizing%20neural%20networks%20with%20kronecker-factored%20approximate%20curvature%202015"
+        },
+        {
+            "id": "Mishra_et+al_2017_a",
+            "entry": "Nikhil Mishra, Mostafa Rohaninejad, Xi Chen, and Pieter Abbeel. Meta-learning with temporal convolutions. arXiv preprint arXiv:1707.03141, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.03141"
+        },
+        {
+            "id": "Neal_2011_a",
+            "entry": "Radford M Neal et al. Mcmc using hamiltonian dynamics. Handbook of Markov Chain Monte Carlo, 2(11):2, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Neal%2C%20Radford%20M.%20Mcmc%20using%20hamiltonian%20dynamics.%20Handbook%20of%20Markov%20Chain%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Neal%2C%20Radford%20M.%20Mcmc%20using%20hamiltonian%20dynamics.%20Handbook%20of%20Markov%20Chain%202011"
+        },
+        {
+            "id": "Nichol_et+al_2018_a",
+            "entry": "A. Nichol, J. Achiam, and J. Schulman. On First-Order Meta-Learning Algorithms. ArXiv e-prints, March 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nichol%2C%20A.%20Achiam%2C%20J.%20Schulman%2C%20J.%20On%20First-Order%20Meta-Learning%20Algorithms%202018-03",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nichol%2C%20A.%20Achiam%2C%20J.%20Schulman%2C%20J.%20On%20First-Order%20Meta-Learning%20Algorithms%202018-03"
+        },
+        {
+            "id": "Ravi_2017_a",
+            "entry": "Sachin Ravi and Hugo Larochelle. Optimization as a model for few-shot learning. In In International Conference on Learning Representations (ICLR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ravi%2C%20Sachin%20Larochelle%2C%20Hugo%20Optimization%20as%20a%20model%20for%20few-shot%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ravi%2C%20Sachin%20Larochelle%2C%20Hugo%20Optimization%20as%20a%20model%20for%20few-shot%20learning%202017"
+        },
+        {
+            "id": "Santoro_et+al_2016_a",
+            "entry": "Adam Santoro, Sergey Bartunov, Matthew Botvinick, Daan Wierstra, and Timothy Lillicrap. Metalearning with memory-augmented neural networks. In International conference on machine learning, pp. 1842\u20131850, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Santoro%2C%20Adam%20Bartunov%2C%20Sergey%20Botvinick%2C%20Matthew%20Wierstra%2C%20Daan%20Metalearning%20with%20memory-augmented%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Santoro%2C%20Adam%20Bartunov%2C%20Sergey%20Botvinick%2C%20Matthew%20Wierstra%2C%20Daan%20Metalearning%20with%20memory-augmented%20neural%20networks%202016"
+        },
+        {
+            "id": "Schulman_et+al_2015_a",
+            "entry": "John Schulman, Sergey Levine, Pieter Abbeel, Michael Jordan, and Philipp Moritz. Trust region policy optimization. In International Conference on Machine Learning, pp. 1889\u20131897, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schulman%2C%20John%20Levine%2C%20Sergey%20Abbeel%2C%20Pieter%20Jordan%2C%20Michael%20Trust%20region%20policy%20optimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schulman%2C%20John%20Levine%2C%20Sergey%20Abbeel%2C%20Pieter%20Jordan%2C%20Michael%20Trust%20region%20policy%20optimization%202015"
+        },
+        {
+            "id": "Smith_2017_a",
+            "entry": "Linda B Smith and Lauren K Slone. A developmental approach to machine learning? Frontiers in psychology, 8:2124, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Smith%2C%20Linda%20B.%20Slone%2C%20Lauren%20K.%20A%20developmental%20approach%20to%20machine%20learning%3F%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Smith%2C%20Linda%20B.%20Slone%2C%20Lauren%20K.%20A%20developmental%20approach%20to%20machine%20learning%3F%202017"
+        },
+        {
+            "id": "Snell_et+al_2017_a",
+            "entry": "Jake Snell, Kevin Swersky, and Richard Zemel. Prototypical networks for few-shot learning. In Advances in Neural Information Processing Systems, pp. 4080\u20134090, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Snell%2C%20Jake%20Swersky%2C%20Kevin%20Zemel%2C%20Richard%20Prototypical%20networks%20for%20few-shot%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Snell%2C%20Jake%20Swersky%2C%20Kevin%20Zemel%2C%20Richard%20Prototypical%20networks%20for%20few-shot%20learning%202017"
+        },
+        {
+            "id": "Tenenbaum_1999_a",
+            "entry": "Joshua Brett Tenenbaum. A Bayesian framework for concept learning. PhD thesis, Massachusetts Institute of Technology, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tenenbaum%2C%20Joshua%20Brett%20A%20Bayesian%20framework%20for%20concept%20learning%201999"
+        },
+        {
+            "id": "Todorov_et+al_2012_a",
+            "entry": "Emanuel Todorov, Tom Erez, and Yuval Tassa. Mujoco: A physics engine for model-based control. In Intelligent Robots and Systems (IROS), 2012 IEEE/RSJ International Conference on, pp. 5026\u2013 5033. IEEE, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Todorov%2C%20Emanuel%20Erez%2C%20Tom%20Tassa%2C%20Yuval%20Mujoco%3A%20A%20physics%20engine%20for%20model-based%20control%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Todorov%2C%20Emanuel%20Erez%2C%20Tom%20Tassa%2C%20Yuval%20Mujoco%3A%20A%20physics%20engine%20for%20model-based%20control%202012"
+        },
+        {
+            "id": "Vinyals_et+al_2016_a",
+            "entry": "Oriol Vinyals, Charles Blundell, Tim Lillicrap, Daan Wierstra, et al. Matching networks for one shot learning. In Advances in Neural Information Processing Systems, pp. 3630\u20133638, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vinyals%2C%20Oriol%20Blundell%2C%20Charles%20Lillicrap%2C%20Tim%20Wierstra%2C%20Daan%20Matching%20networks%20for%20one%20shot%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vinyals%2C%20Oriol%20Blundell%2C%20Charles%20Lillicrap%2C%20Tim%20Wierstra%2C%20Daan%20Matching%20networks%20for%20one%20shot%20learning%202016"
+        },
+        {
+            "id": "Welling_2011_a",
+            "entry": "Max Welling and Yee W Teh. Bayesian learning via stochastic gradient langevin dynamics. In Proceedings of the 28th International Conference on Machine Learning (ICML-11), pp. 681\u2013688, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Welling%2C%20Max%20Teh%2C%20Yee%20W.%20Bayesian%20learning%20via%20stochastic%20gradient%20langevin%20dynamics%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Welling%2C%20Max%20Teh%2C%20Yee%20W.%20Bayesian%20learning%20via%20stochastic%20gradient%20langevin%20dynamics%202011"
+        }
+    ]
+}

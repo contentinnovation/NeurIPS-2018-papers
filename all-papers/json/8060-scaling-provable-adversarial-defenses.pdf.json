@@ -1,0 +1,188 @@
+{
+    "filename": "8060-scaling-provable-adversarial-defenses.pdf",
+    "metadata": {
+        "title": "Scaling provable adversarial defenses",
+        "author": "Eric Wong, Frank Schmidt, Jan Hendrik Metzen, J. Zico Kolter",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8060-scaling-provable-adversarial-defenses.pdf"
+        },
+        "abstract": "Recent work has developed methods for learning deep network classifiers that are provably robust to norm-bounded adversarial perturbation; however, these methods are currently only possible for relatively small feedforward networks. In this paper, in an effort to scale these approaches to substantially larger models, we extend previous work in three main directions. First, we present a technique for extending these training procedures to much more general networks, with skip connections (such as ResNets) and general nonlinearities; the approach is fully modular, and can be implemented automatically (analogous to automatic differentiation). Second, in the specific case of \u221e adversarial perturbations and networks with ReLU nonlinearities, we adopt a nonlinear random projection for training, which scales linearly in the number of hidden units (previous approaches scaled quadratically). Third, we show how to further improve robust error through cascade models. On both MNIST and CIFAR data sets, we train classifiers that improve substantially on the state of the art in provable robust adversarial error bounds: from 5.8% to 3.1% on MNIST (with \u221e perturbations of = 0.1), and from 80% to 36.4% on CIFAR (with \u221e perturbations of = 2/255). Code for all experiments in the paper is available at https://github.com/locuslab/convex_adversarial/."
+    },
+    "keywords": [
+        {
+            "term": "random projection",
+            "url": "https://en.wikipedia.org/wiki/random_projection"
+        },
+        {
+            "term": "Satisfiability Modulo Theories",
+            "url": "https://en.wikipedia.org/wiki/Satisfiability_Modulo_Theories"
+        },
+        {
+            "term": "CIFAR",
+            "url": "https://en.wikipedia.org/wiki/CIFAR"
+        },
+        {
+            "term": "semidefinite programming",
+            "url": "https://en.wikipedia.org/wiki/semidefinite_programming"
+        },
+        {
+            "term": "deep network",
+            "url": "https://en.wikipedia.org/wiki/deep_network"
+        },
+        {
+            "term": "MNIST",
+            "url": "https://en.wikipedia.org/wiki/MNIST"
+        }
+    ],
+    "highlights": [
+        "Work in adversarial defenses typically falls in one of three primary categories",
+        "While past work has only applied to pure feedforward networks, we extend the framework to deal with arbitrary residual/skip connections (a hallmark of modern deep network architectures), Preprint",
+        "While this work is largely empirical at this point, substantial progress has been made towards developing networks that seem much more robust than previous approaches",
+        "A distressingly large number of these defenses are quickly \u201cbroken\u201d by more advanced attacks [<a class=\"ref-link\" id=\"cAthalye_et+al_2018_a\" href=\"#rAthalye_et+al_2018_a\">Athalye et al, 2018</a>], there have been some methods that have proven empirically resistant to the current suite of attacks; the recent NIPS 2017 adversarial example challenge [<a class=\"ref-link\" id=\"cKurakin_et+al_2018_a\" href=\"#rKurakin_et+al_2018_a\">Kurakin et al, 2018</a>], for example, highlights some of the progress made on developing classifiers that appear much stronger in practice than many of the ad-hoc techniques developed in previous years",
+        "Dataset and Architectures We evaluate the techniques in this paper on two main datasets: MNIST digit classification [LeCun et al, 1998] and CIFAR10 image classification [<a class=\"ref-link\" id=\"cKrizhevsky_2009_a\" href=\"#rKrizhevsky_2009_a\">Krizhevsky, 2009</a>].2",
+        "We have presented a general methodology for deriving dual networks from compositions of dual layers based on the methodology of conjugate functions to train classifiers that are provably robust to adversarial attacks"
+    ],
+    "key_statements": [
+        "Work in adversarial defenses typically falls in one of three primary categories",
+        "While past work has only applied to pure feedforward networks, we extend the framework to deal with arbitrary residual/skip connections (a hallmark of modern deep network architectures), Preprint",
+        "While this work is largely empirical at this point, substantial progress has been made towards developing networks that seem much more robust than previous approaches",
+        "A distressingly large number of these defenses are quickly \u201cbroken\u201d by more advanced attacks [<a class=\"ref-link\" id=\"cAthalye_et+al_2018_a\" href=\"#rAthalye_et+al_2018_a\">Athalye et al, 2018</a>], there have been some methods that have proven empirically resistant to the current suite of attacks; the recent NIPS 2017 adversarial example challenge [<a class=\"ref-link\" id=\"cKurakin_et+al_2018_a\" href=\"#rKurakin_et+al_2018_a\">Kurakin et al, 2018</a>], for example, highlights some of the progress made on developing classifiers that appear much stronger in practice than many of the ad-hoc techniques developed in previous years",
+        "Dataset and Architectures We evaluate the techniques in this paper on two main datasets: MNIST digit classification [LeCun et al, 1998] and CIFAR10 image classification [<a class=\"ref-link\" id=\"cKrizhevsky_2009_a\" href=\"#rKrizhevsky_2009_a\">Krizhevsky, 2009</a>].2",
+        "Number of random projections In the MNIST dataset, we have evaluated our approach using different projection dimensions as well as exact training",
+        "We have presented a general methodology for deriving dual networks from compositions of dual layers based on the methodology of conjugate functions to train classifiers that are provably robust to adversarial attacks"
+    ],
+    "summary": [
+        "Work in adversarial defenses typically falls in one of three primary categories.",
+        "Wong and Kolter [2017] present a linear-programming (LP) based upper bound on the robust error or loss that can be suffered under norm-bounded perturbation, minimize this upper bound during training; the method is particularly efficient since they do not solve the LP directly, but instead show that it is possible to bound the LP optimal value and compute elementwise bounds on the activation functions based on a backward pass through the network.",
+        "The resulting method: 1) extends to general networks with skip connections, residual layers, and activations besides the ReLU; we do so by using a general formulation based on the Fenchel conjugate function of activations; 2) scales linearly in the dimensionality of the input and number of hidden units in the network, using techniques from nonlinear random projections, all while suffering minimal degradation in accuracy; and 3) further improves the quality of the bound with model cascades.",
+        "If the dual layers for all operations are linear, the bounds for all layers can be computed with a single forward pass through the dual network using a direct generalization of the form used in Wong and Kolter [2017].",
+        "The complexity is no longer a quadratic function of the network size: if we fix the projection dimension to some constant r, the computational complexity is linear with the input dimension and Ii. Since previous work was either quadratic or combinatorially expensive to compute, estimating the bound with random projections is the fastest and most scalable approach towards training robust networks that we are aware of.",
+        "Using the same convolutional architecture used by Wong and Kolter [2017], which previously required gigabytes of memory and took hours to train, it is sufficient to use only 10 random projections to achieve comparable test error performance to training with the exact bound.",
+        "We have presented a general methodology for deriving dual networks from compositions of dual layers based on the methodology of conjugate functions to train classifiers that are provably robust to adversarial attacks.",
+        "The methodology is linearly scalable for ReLU based networks against \u221e norm bounded attacks, making it possible to train large scale, provably robust networks that were previously out of reach, and the obtained bounds can be improved further with model cascades.",
+        "One particularly important direction is better architecture development: a wide range of functions and activations not found in traditional deep residual networks may have better robustness properties or more efficient dual layers that allow for scalable training.",
+        "Better characterizing the space of perturbations that a network \u201cshould\u201d be resilient to represents one of the major challenges going forward for adversarial machine learning"
+    ],
+    "headline": "In an effort to scale these approaches to substantially larger models, we extend previous work in three main directions",
+    "reference_links": [
+        {
+            "id": "Athalye_et+al_2018_a",
+            "entry": "Anish Athalye, Nicholas Carlini, and David Wagner. Obfuscated gradients give a false sense of security: Circumventing defenses to adversarial examples. arXiv preprint arXiv:1802.00420, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.00420"
+        },
+        {
+            "id": "Carlini_2017_a",
+            "entry": "Nicholas Carlini and David Wagner. Towards evaluating the robustness of neural networks. In Security and Privacy (SP), 2017 IEEE Symposium on, pages 39\u201357. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Carlini%2C%20Nicholas%20Wagner%2C%20David%20Towards%20evaluating%20the%20robustness%20of%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Carlini%2C%20Nicholas%20Wagner%2C%20David%20Towards%20evaluating%20the%20robustness%20of%20neural%20networks%202017"
+        },
+        {
+            "id": "Dvijotham_et+al_2018_a",
+            "entry": "Krishnamurthy Dvijotham, Robert Stanforth, Sven Gowal, Timothy Mann, and Pushmeet Kohli. A dual approach to scalable verification of deep networks. arXiv preprint arXiv:1803.06567, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.06567"
+        },
+        {
+            "id": "Ehlers_2017_a",
+            "entry": "Ruediger Ehlers. Formal verification of piece-wise linear feed-forward neural networks. In International Symposium on Automated Technology for Verification and Analysis, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ehlers%2C%20Ruediger%20Formal%20verification%20of%20piece-wise%20linear%20feed-forward%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ehlers%2C%20Ruediger%20Formal%20verification%20of%20piece-wise%20linear%20feed-forward%20neural%20networks%202017"
+        },
+        {
+            "id": "Fenchel_1949_a",
+            "entry": "Werner Fenchel. On conjugate convex functions. Canad. J. Math, 1(73-77), 1949.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fenchel%2C%20Werner%20On%20conjugate%20convex%20functions%201949",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fenchel%2C%20Werner%20On%20conjugate%20convex%20functions%201949"
+        },
+        {
+            "id": "Gehr_et+al_2018_a",
+            "entry": "Timon Gehr, Matthew Mirman, Dana Drachsler-Cohen, Petar Tsankov, Swarat Chaudhuri, and Martin Vechev. AI2: Safety and robustness certification of neural networks with abstract interpretation. In IEEE Conference on Security and Privacy, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gehr%2C%20Timon%20Mirman%2C%20Matthew%20Drachsler-Cohen%2C%20Dana%20Tsankov%2C%20Petar%20AI2%3A%20Safety%20and%20robustness%20certification%20of%20neural%20networks%20with%20abstract%20interpretation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gehr%2C%20Timon%20Mirman%2C%20Matthew%20Drachsler-Cohen%2C%20Dana%20Tsankov%2C%20Petar%20AI2%3A%20Safety%20and%20robustness%20certification%20of%20neural%20networks%20with%20abstract%20interpretation%202018"
+        },
+        {
+            "id": "Goodfellow_et+al_2015_a",
+            "entry": "Ian Goodfellow, Jonathon Shlens, and Christian Szegedy. Explaining and harnessing adversarial examples. In International Conference on Learning Representations, 2015. URL http://arxiv.org/abs/1412.6572.",
+            "url": "http://arxiv.org/abs/1412.6572",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6572"
+        },
+        {
+            "id": "Hein_2017_a",
+            "entry": "Matthias Hein and Maksym Andriushchenko. Formal guarantees on the robustness of a classifier against adversarial manipulation. In Advances in Neural Information Processing Systems. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hein%2C%20Matthias%20Andriushchenko%2C%20Maksym%20Formal%20guarantees%20on%20the%20robustness%20of%20a%20classifier%20against%20adversarial%20manipulation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hein%2C%20Matthias%20Andriushchenko%2C%20Maksym%20Formal%20guarantees%20on%20the%20robustness%20of%20a%20classifier%20against%20adversarial%20manipulation%202017"
+        },
+        {
+            "id": "Krizhevsky_2009_a",
+            "entry": "Alex Krizhevsky. Learning multiple layers of features from tiny images. 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20Alex%20Learning%20multiple%20layers%20of%20features%20from%20tiny%20images%202009"
+        },
+        {
+            "id": "Kurakin_et+al_2017_a",
+            "entry": "Alexey Kurakin, Ian Goodfellow, and Samy Bengio. Adversarial machine learning at scale. In International Conference on Learning Representations, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kurakin%2C%20Alexey%20Goodfellow%2C%20Ian%20Bengio%2C%20Samy%20Adversarial%20machine%20learning%20at%20scale%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kurakin%2C%20Alexey%20Goodfellow%2C%20Ian%20Bengio%2C%20Samy%20Adversarial%20machine%20learning%20at%20scale%202017"
+        },
+        {
+            "id": "Kurakin_et+al_2018_a",
+            "entry": "Alexey Kurakin, Ian Goodfellow, Samy Bengio, Yinpeng Dong, Fangzhou Liao, Ming Liang, Tianyu Pang, Jun Zhu, Xiaolin Hu, Cihang Xie, et al. Adversarial attacks and defences competition. arXiv preprint arXiv:1804.00097, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1804.00097"
+        },
+        {
+            "id": "Lecun_et+al_1998_a",
+            "entry": "Yann LeCun, L\u00e9on Bottou, Yoshua Bengio, and Patrick Haffner. Gradient-based learning applied to document recognition. Proceedings of the IEEE, 86(11):2278\u20132324, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=LeCun%2C%20Yann%20Bottou%2C%20L%C3%A9on%20Bengio%2C%20Yoshua%20Haffner%2C%20Patrick%20Gradient-based%20learning%20applied%20to%20document%20recognition%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=LeCun%2C%20Yann%20Bottou%2C%20L%C3%A9on%20Bengio%2C%20Yoshua%20Haffner%2C%20Patrick%20Gradient-based%20learning%20applied%20to%20document%20recognition%201998"
+        },
+        {
+            "id": "Li_et+al_2007_a",
+            "entry": "Ping Li, Trevor J Hastie, and Kenneth W Church. Nonlinear estimators and tail bounds for dimension reduction in l1 using cauchy random projections. Journal of Machine Learning Research, 8(Oct): 2497\u20132532, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Ping%20Hastie%2C%20Trevor%20J.%20Church%2C%20Kenneth%20W.%20Nonlinear%20estimators%20and%20tail%20bounds%20for%20dimension%20reduction%20in%20l1%20using%20cauchy%20random%20projections%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20Ping%20Hastie%2C%20Trevor%20J.%20Church%2C%20Kenneth%20W.%20Nonlinear%20estimators%20and%20tail%20bounds%20for%20dimension%20reduction%20in%20l1%20using%20cauchy%20random%20projections%202007"
+        },
+        {
+            "id": "Lomuscio_2017_a",
+            "entry": "Alessio Lomuscio and Lalit Maganti. An approach to reachability analysis for feed-forward relu neural networks. arXiv preprint arXiv:1706.07351, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.07351"
+        },
+        {
+            "id": "Madry_et+al_2017_a",
+            "entry": "Aleksander Madry, Aleksandar Makelov, Ludwig Schmidt, Dimitris Tsipras, and Adrian Vladu. Towards deep learning models resistant to adversarial attacks. arXiv preprint arXiv:1706.06083, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.06083"
+        },
+        {
+            "id": "Metzen_et+al_2017_a",
+            "entry": "Jan Hendrik Metzen, Tim Genewein, Volker Fischer, and Bastian Bischoff. On detecting adversarial perturbations. In International Conference on Learning Representations, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Metzen%2C%20Jan%20Hendrik%20Genewein%2C%20Tim%20Fischer%2C%20Volker%20Bischoff%2C%20Bastian%20On%20detecting%20adversarial%20perturbations%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Metzen%2C%20Jan%20Hendrik%20Genewein%2C%20Tim%20Fischer%2C%20Volker%20Bischoff%2C%20Bastian%20On%20detecting%20adversarial%20perturbations%202017"
+        },
+        {
+            "id": "Papernot_et+al_2016_a",
+            "entry": "Nicolas Papernot, Patrick McDaniel, Xi Wu, Somesh Jha, and Ananthram Swami. Distillation as a defense to adversarial perturbations against deep neural networks. In Security and Privacy (SP), 2016 IEEE Symposium on, pages 582\u2013597. IEEE, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Papernot%2C%20Nicolas%20McDaniel%2C%20Patrick%20Wu%2C%20Xi%20Jha%2C%20Somesh%20Distillation%20as%20a%20defense%20to%20adversarial%20perturbations%20against%20deep%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Papernot%2C%20Nicolas%20McDaniel%2C%20Patrick%20Wu%2C%20Xi%20Jha%2C%20Somesh%20Distillation%20as%20a%20defense%20to%20adversarial%20perturbations%20against%20deep%20neural%20networks%202016"
+        },
+        {
+            "id": "Raghunathan_et+al_2018_a",
+            "entry": "Aditi Raghunathan, Jacob Steinhardt, and Percy Liang. Certified defenses against adversarial examples. In International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Raghunathan%2C%20Aditi%20Steinhardt%2C%20Jacob%20Liang%2C%20Percy%20Certified%20defenses%20against%20adversarial%20examples%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Raghunathan%2C%20Aditi%20Steinhardt%2C%20Jacob%20Liang%2C%20Percy%20Certified%20defenses%20against%20adversarial%20examples%202018"
+        },
+        {
+            "id": "Sinha_et+al_2018_a",
+            "entry": "Aman Sinha, Hongseok Namkoong, and John Duchi. Certifiable distributional robustness with principled adversarial training. In International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sinha%2C%20Aman%20Namkoong%2C%20Hongseok%20Duchi%2C%20John%20Certifiable%20distributional%20robustness%20with%20principled%20adversarial%20training%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sinha%2C%20Aman%20Namkoong%2C%20Hongseok%20Duchi%2C%20John%20Certifiable%20distributional%20robustness%20with%20principled%20adversarial%20training%202018"
+        },
+        {
+            "id": "Tjeng_2017_a",
+            "entry": "Vincent Tjeng and Russ Tedrake. Verifying neural networks with mixed integer programming. CoRR, abs/1711.07356, 2017. URL http://arxiv.org/abs/1711.07356.",
+            "url": "http://arxiv.org/abs/1711.07356",
+            "arxiv_url": "https://arxiv.org/pdf/1711.07356"
+        },
+        {
+            "id": "Vempala_2017_a",
+            "entry": "Santosh S Vempala. The random projection method, volume 65. American Mathematical Soc., 2005. Eric Wong and J Zico Kolter. Provable defenses against adversarial examples via the convex outer adversarial polytope. arXiv preprint arXiv:1711.00851, 2017. Sergey Zagoruyko and Nikos Komodakis. Wide residual networks. arXiv preprint arXiv:1605.07146, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.00851"
+        }
+    ]
+}

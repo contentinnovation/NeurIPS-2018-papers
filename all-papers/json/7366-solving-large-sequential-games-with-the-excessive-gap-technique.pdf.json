@@ -1,0 +1,243 @@
+{
+    "filename": "7366-solving-large-sequential-games-with-the-excessive-gap-technique.pdf",
+    "metadata": {
+        "title": "Solving Large Sequential Games with the Excessive Gap Technique",
+        "author": "Christian Kroer, Gabriele Farina, Tuomas Sandholm",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7366-solving-large-sequential-games-with-the-excessive-gap-technique.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "There has been tremendous recent progress on equilibrium-finding algorithms for zero-sum imperfect-information extensive-form games, but there has been a puzzling gap between theory and practice. First-order methods have significantly better theoretical convergence rates than any counterfactual-regret minimization (CFR) variant. Despite this, CFR variants have been favored in practice. Experiments with first-order methods have only been conducted on smalland medium-sized games because those methods are complicated to implement in this setting, and because CFR variants have been enhanced extensively for over a decade they perform well in practice. In this paper we show that a particular first-order method, a state-ofthe-art variant of the excessive gap technique\u2014instantiated with the dilated entropy distance function\u2014can efficiently solve large real-world problems competitively with CFR and its variants. We show this on large endgames encountered by the Libratus poker AI, which recently beat top human poker specialist professionals at no-limit Texas hold\u2019em. We show experimental results on our variant of the excessive gap technique as well as a prior version. We introduce a numerically friendly implementation of the smoothed best response computation associated with first-order methods for extensive-form game solving. We present, to our knowledge, the first GPU implementation of a first-order method for extensiveform games. We present comparisons of several excessive gap technique and CFR variants."
+    },
+    "keywords": [
+        {
+            "term": "solution concept",
+            "url": "https://en.wikipedia.org/wiki/solution_concept"
+        },
+        {
+            "term": "equilibrium",
+            "url": "https://en.wikipedia.org/wiki/equilibrium"
+        },
+        {
+            "term": "linear program",
+            "url": "https://en.wikipedia.org/wiki/linear_program"
+        },
+        {
+            "term": "extensive form game",
+            "url": "https://en.wikipedia.org/wiki/extensive_form_game"
+        }
+    ],
+    "highlights": [
+        "Two-player zero-sum extensive-form games (EFGs) are a general representation that enables one to model a myriad of settings ranging from security to business to military to recreational",
+        "Two types of algorithms have been popular in particular: regretminimization algorithms based on counterfactual regret minimization (CFR) [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>, <a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>, <a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>, <a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>, <a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>], and first-order methods (FOMs) based on combining a fast bilinear saddle-point problem (BSPP) solver such as the excessive gap technique (EGT) [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>] with an appropriate distance-generating function (DGF) for extensive-form games strategies [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>, <a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>, <a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>]",
+        "We present the first experiments on a large game\u2014a real game played by humans\u2014 showing that an aggressive variant of excessive gap technique instantiated with the distancegenerating function of Kroer et al [<a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>] is competitive with the counterfactual regret minimization family in practice",
+        "We introduced a practical variant of the excessive gap technique algorithm that employs aggressive stepsizes, \u03bc balancing, a numerically-friendly smoothed-best-response algorithm, parallelization via Cartesian product operations at the root of the strategy treeplex, and a GPU implementation",
+        "We showed for the first time, via experiments on real large-scale Libratus endgames, that first-order methods (with the dilated entropy",
+        "Our best variant of excessive gap technique can solve subgames to the desired accuracy at a speed that is within a factor of two of counterfactual regret minimization+"
+    ],
+    "key_statements": [
+        "Two-player zero-sum extensive-form games (EFGs) are a general representation that enables one to model a myriad of settings ranging from security to business to military to recreational",
+        "It is robust in this class of game: if the opponent plays some other strategy than an equilibrium strategy, that can only help us",
+        "Two types of algorithms have been popular in particular: regretminimization algorithms based on counterfactual regret minimization (CFR) [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>, <a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>, <a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>, <a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>, <a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>], and first-order methods (FOMs) based on combining a fast bilinear saddle-point problem (BSPP) solver such as the excessive gap technique (EGT) [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>] with an appropriate distance-generating function (DGF) for extensive-form games strategies [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>, <a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>, <a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>]",
+        "We present the first experiments on a large game\u2014a real game played by humans\u2014 showing that an aggressive variant of excessive gap technique instantiated with the distancegenerating function of Kroer et al [<a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>] is competitive with the counterfactual regret minimization family in practice",
+        "We derive efficient and numerically friendly expressions for the smoothed-best response (SBR) and prox mapping, two optimization subproblems that excessive gap technique solves at every iteration",
+        "The computation of a Nash equilibrium in a zero-sum imperfect-information extensive-form games can be formulated as the following bilinear saddle-point problem: min maxhx, Ayi = max minhx, Ayi, (2)",
+        "For excessive gap technique on extensive-form games, the distancegenerating function can be interpreted as a smoothing function applied to the best-response problems faced by the players",
+        "We introduced a practical variant of the excessive gap technique algorithm that employs aggressive stepsizes, \u03bc balancing, a numerically-friendly smoothed-best-response algorithm, parallelization via Cartesian product operations at the root of the strategy treeplex, and a GPU implementation",
+        "We showed for the first time, via experiments on real large-scale Libratus endgames, that first-order methods (with the dilated entropy",
+        "Our best variant of excessive gap technique can solve subgames to the desired accuracy at a speed that is within a factor of two of counterfactual regret minimization+",
+        "We only investigated excessive gap technique, which has been most popular first-order methods in extensive-form games solving",
+        "It would be interesting to compare our excessive gap technique approach to counterfactual regret minimization algorithms for computing equilibrium refinements, for example in the approximate extensive-form perfect equilibrium model investigated by Kroer et al [<a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>] and Farina et al [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>]"
+    ],
+    "summary": [
+        "Two-player zero-sum extensive-form games (EFGs) are a general representation that enables one to model a myriad of settings ranging from security to business to military to recreational.",
+        "Two types of algorithms have been popular in particular: regretminimization algorithms based on counterfactual regret minimization (CFR) [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>, <a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>, <a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>, <a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>, <a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>], and first-order methods (FOMs) based on combining a fast bilinear saddle-point problem (BSPP) solver such as the excessive gap technique (EGT) [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>] with an appropriate distance-generating function (DGF) for EFG strategies [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>, <a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>, <a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>].",
+        "We present the first experiments on a large game\u2014a real game played by humans\u2014 showing that an aggressive variant of EGT instantiated with the DGF of Kroer et al [<a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>] is competitive with the CFR family in practice.",
+        "In order to make our approach practical, we introduce a number of practical techniques for running FOMs on EFGs. In particular, we derive efficient and numerically friendly expressions for the smoothed-best response (SBR) and prox mapping, two optimization subproblems that EGT solves at every iteration.",
+        "The computation of a Nash equilibrium in a zero-sum imperfect-information EFG can be formulated as the following bilinear saddle-point problem: min maxhx, Ayi = max minhx, Ayi, (2)",
+        "For EGT on EFGs, the DGF can be interpreted as a smoothing function applied to the best-response problems faced by the players.",
+        "CFR+ and EGT/AS perform the best; both reach the goal of 1mbb after about 400 iterations in both Endgame 2 and 7.",
+        "In our second set of plots, we show the convergence rate as a function of the total number of gradient computations performed by the algorithm.",
+        "CFR+ takes about 800 gradient computations in order to reach 1mbb in either game, whereas EGT/AS takes about 1800.",
+        "We introduced a practical variant of the EGT algorithm that employs aggressive stepsizes, \u03bc balancing, a numerically-friendly smoothed-best-response algorithm, parallelization via Cartesian product operations at the root of the strategy treeplex, and a GPU implementation.",
+        "We showed for the first time, via experiments on real large-scale Libratus endgames, that FOMs [mbb] \u270f [mbb]",
+        "Our best variant of EGT can solve subgames to the desired accuracy at a speed that is within a factor of two of CFR+.",
+        "It would be interesting to compare our EGT approach to CFR algorithms for computing equilibrium refinements, for example in the approximate extensive-form perfect equilibrium model investigated by Kroer et al [<a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>] and Farina et al [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>].",
+        "While EGT, as well as other FOM-based approaches to computing zero-sum Nash equilibria, are not applicable to the computation of general-sum Nash equilibria in theory they could still be applied to the computation of strategies in practice."
+    ],
+    "headline": "In this paper we show that a particular first-order method, a state-ofthe-art variant of the excessive gap technique\u2014instantiated with the dilated entropy distance function\u2014can efficiently solve large real-world problems competitively with counterfactual regret minimization and its variants",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] M. Bowling, N. Burch, M. Johanson, and O. Tammelin. Heads-up limit hold\u2019em poker is solved. Science, 347(6218), Jan. 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bowling%2C%20M.%20Burch%2C%20N.%20Johanson%2C%20M.%20Tammelin%2C%20O.%20Heads-up%20limit%20hold%E2%80%99em%20poker%20is%20solved%202015-01",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bowling%2C%20M.%20Burch%2C%20N.%20Johanson%2C%20M.%20Tammelin%2C%20O.%20Heads-up%20limit%20hold%E2%80%99em%20poker%20is%20solved%202015-01"
+        },
+        {
+            "id": "2",
+            "entry": "[2] N. Brown and T. Sandholm. Reduced space and faster convergence in imperfect-information games via pruning. In International Conference on Machine Learning (ICML), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Brown%2C%20N.%20Sandholm%2C%20T.%20Reduced%20space%20and%20faster%20convergence%20in%20imperfect-information%20games%20via%20pruning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Brown%2C%20N.%20Sandholm%2C%20T.%20Reduced%20space%20and%20faster%20convergence%20in%20imperfect-information%20games%20via%20pruning%202017"
+        },
+        {
+            "id": "3",
+            "entry": "[3] N. Brown and T. Sandholm. Safe and nested subgame solving for imperfect-information games. In Proceedings of the Annual Conference on Neural Information Processing Systems (NIPS), pages 689\u2013699, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Brown%2C%20N.%20Sandholm%2C%20T.%20Safe%20and%20nested%20subgame%20solving%20for%20imperfect-information%20games%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Brown%2C%20N.%20Sandholm%2C%20T.%20Safe%20and%20nested%20subgame%20solving%20for%20imperfect-information%20games%202017"
+        },
+        {
+            "id": "4",
+            "entry": "[4] N. Brown and T. Sandholm. Superhuman AI for heads-up no-limit poker: Libratus beats top professionals. Science, page eaao1733, Dec. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Brown%2C%20N.%20Sandholm%2C%20T.%20Superhuman%20AI%20for%20heads-up%20no-limit%20poker%3A%20Libratus%20beats%20top%20professionals%202017-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Brown%2C%20N.%20Sandholm%2C%20T.%20Superhuman%20AI%20for%20heads-up%20no-limit%20poker%3A%20Libratus%20beats%20top%20professionals%202017-12"
+        },
+        {
+            "id": "5",
+            "entry": "[5] N. Brown, S. Ganzfried, and T. Sandholm. Hierarchical abstraction, distributed equilibrium computation, and post-processing, with application to a champion no-limit Texas Hold\u2019em agent. In International Conference on Autonomous Agents and Multi-Agent Systems (AAMAS), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Brown%2C%20N.%20Ganzfried%2C%20S.%20Sandholm%2C%20T.%20Hierarchical%20abstraction%2C%20distributed%20equilibrium%20computation%2C%20and%20post-processing%2C%20with%20application%20to%20a%20champion%20no-limit%20Texas%20Hold%E2%80%99em%20agent%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Brown%2C%20N.%20Ganzfried%2C%20S.%20Sandholm%2C%20T.%20Hierarchical%20abstraction%2C%20distributed%20equilibrium%20computation%2C%20and%20post-processing%2C%20with%20application%20to%20a%20champion%20no-limit%20Texas%20Hold%E2%80%99em%20agent%202015"
+        },
+        {
+            "id": "6",
+            "entry": "[6] N. Brown, C. Kroer, and T. Sandholm. Dynamic thresholding and pruning for regret minimization. In AAAI Conference on Artificial Intelligence (AAAI), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Brown%2C%20N.%20Kroer%2C%20C.%20Sandholm%2C%20T.%20Dynamic%20thresholding%20and%20pruning%20for%20regret%20minimization%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Brown%2C%20N.%20Kroer%2C%20C.%20Sandholm%2C%20T.%20Dynamic%20thresholding%20and%20pruning%20for%20regret%20minimization%202017"
+        },
+        {
+            "id": "7",
+            "entry": "[7] J. Cerm\u00e1k, B. Bo\u0161ansky, and N. Gatti. Strategy effectiveness of game-theoretical solution concepts in extensive-form general-sum games. In Autonomous Agents and Multi-Agent Systems, pages 1813\u20131814. International Foundation for Autonomous Agents and Multiagent Systems, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cerm%C3%A1k%2C%20J.%20Bo%C5%A1ansky%2C%20B.%20Gatti%2C%20N.%20Strategy%20effectiveness%20of%20game-theoretical%20solution%20concepts%20in%20extensive-form%20general-sum%20games.%20In%20Autonomous%20Agents%20and%20Multi-Agent%20Systems%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cerm%C3%A1k%2C%20J.%20Bo%C5%A1ansky%2C%20B.%20Gatti%2C%20N.%20Strategy%20effectiveness%20of%20game-theoretical%20solution%20concepts%20in%20extensive-form%20general-sum%20games.%20In%20Autonomous%20Agents%20and%20Multi-Agent%20Systems%202015"
+        },
+        {
+            "id": "8",
+            "entry": "[8] A. Chambolle and T. Pock. A first-order primal-dual algorithm for convex problems with applications to imaging. Journal of Mathematical Imaging and Vision, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chambolle%2C%20A.%20Pock%2C%20T.%20A%20first-order%20primal-dual%20algorithm%20for%20convex%20problems%20with%20applications%20to%20imaging%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chambolle%2C%20A.%20Pock%2C%20T.%20A%20first-order%20primal-dual%20algorithm%20for%20convex%20problems%20with%20applications%20to%20imaging%202011"
+        },
+        {
+            "id": "9",
+            "entry": "[9] G. Farina, C. Kroer, and T. Sandholm. Regret minimization in behaviorally-constrained zerosum games. In International Conference on Machine Learning (ICML), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Farina%2C%20G.%20Kroer%2C%20C.%20Sandholm%2C%20T.%20Regret%20minimization%20in%20behaviorally-constrained%20zerosum%20games%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Farina%2C%20G.%20Kroer%2C%20C.%20Sandholm%2C%20T.%20Regret%20minimization%20in%20behaviorally-constrained%20zerosum%20games%202017"
+        },
+        {
+            "id": "10",
+            "entry": "[10] A. Gilpin and T. Sandholm. Lossless abstraction of imperfect information games. Journal of the ACM, 54(5), 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gilpin%2C%20A.%20Sandholm%2C%20T.%20Lossless%20abstraction%20of%20imperfect%20information%20games%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gilpin%2C%20A.%20Sandholm%2C%20T.%20Lossless%20abstraction%20of%20imperfect%20information%20games%202007"
+        },
+        {
+            "id": "11",
+            "entry": "[11] S. Hoda, A. Gilpin, J. Pe\u00f1a, and T. Sandholm. Smoothing techniques for computing Nash equilibria of sequential games. Mathematics of Operations Research, 35(2), 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hoda%2C%20S.%20Gilpin%2C%20A.%20Pe%C3%B1a%2C%20J.%20Sandholm%2C%20T.%20Smoothing%20techniques%20for%20computing%20Nash%20equilibria%20of%20sequential%20games%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hoda%2C%20S.%20Gilpin%2C%20A.%20Pe%C3%B1a%2C%20J.%20Sandholm%2C%20T.%20Smoothing%20techniques%20for%20computing%20Nash%20equilibria%20of%20sequential%20games%202010"
+        },
+        {
+            "id": "12",
+            "entry": "[12] M. Johanson. Measuring the size of large no-limit poker games. Technical report, University of Alberta, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Johanson%2C%20M.%20Measuring%20the%20size%20of%20large%20no-limit%20poker%20games%202013"
+        },
+        {
+            "id": "13",
+            "entry": "[13] M. Johanson, K. Waugh, M. Bowling, and M. Zinkevich. Accelerating best response calculation in large extensive games. In Proceedings of the International Joint Conference on Artificial Intelligence (IJCAI), 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Johanson%2C%20M.%20Waugh%2C%20K.%20Bowling%2C%20M.%20Zinkevich%2C%20M.%20Accelerating%20best%20response%20calculation%20in%20large%20extensive%20games%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Johanson%2C%20M.%20Waugh%2C%20K.%20Bowling%2C%20M.%20Zinkevich%2C%20M.%20Accelerating%20best%20response%20calculation%20in%20large%20extensive%20games%202011"
+        },
+        {
+            "id": "14",
+            "entry": "[14] A. Juditsky, A. Nemirovski, and C. Tauvel. Solving variational inequalities with stochastic mirror-prox algorithm. Stochastic Systems, 1(1):17\u201358, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Juditsky%2C%20A.%20Nemirovski%2C%20A.%20Tauvel%2C%20C.%20Solving%20variational%20inequalities%20with%20stochastic%20mirror-prox%20algorithm%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Juditsky%2C%20A.%20Nemirovski%2C%20A.%20Tauvel%2C%20C.%20Solving%20variational%20inequalities%20with%20stochastic%20mirror-prox%20algorithm%202011"
+        },
+        {
+            "id": "15",
+            "entry": "[15] D. Koller and A. Pfeffer. Representations and solutions for game-theoretic problems. Artificial Intelligence, 94(1):167\u2013215, July 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Koller%2C%20D.%20Pfeffer%2C%20A.%20Representations%20and%20solutions%20for%20game-theoretic%20problems%201997-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Koller%2C%20D.%20Pfeffer%2C%20A.%20Representations%20and%20solutions%20for%20game-theoretic%20problems%201997-07"
+        },
+        {
+            "id": "16",
+            "entry": "[16] D. Koller, N. Megiddo, and B. von Stengel. Efficient computation of equilibria for extensive two-person games. Games and Economic Behavior, 14(2), 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Koller%2C%20D.%20Megiddo%2C%20N.%20von%20Stengel%2C%20B.%20Efficient%20computation%20of%20equilibria%20for%20extensive%20two-person%20games%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Koller%2C%20D.%20Megiddo%2C%20N.%20von%20Stengel%2C%20B.%20Efficient%20computation%20of%20equilibria%20for%20extensive%20two-person%20games%201996"
+        },
+        {
+            "id": "17",
+            "entry": "[17] C. Kroer, K. Waugh, F. K\u0131l\u0131n\u00e7-Karzan, and T. Sandholm. Faster first-order methods for extensiveform game solving. In Proceedings of the ACM Conference on Economics and Computation (EC), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=C.%20Kroer%2C%20K.%20Waugh%2C%20F.%20K%C4%B1l%C4%B1n%C3%A7-Karzan%20Sandholm%2C%20T.%20Faster%20first-order%20methods%20for%20extensiveform%20game%20solving%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=C.%20Kroer%2C%20K.%20Waugh%2C%20F.%20K%C4%B1l%C4%B1n%C3%A7-Karzan%20Sandholm%2C%20T.%20Faster%20first-order%20methods%20for%20extensiveform%20game%20solving%202015"
+        },
+        {
+            "id": "18",
+            "entry": "[18] C. Kroer, G. Farina, and T. Sandholm. Smoothing method for approximate extensive-form perfect equilibrium. In Proceedings of the International Joint Conference on Artificial Intelligence (IJCAI), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kroer%2C%20C.%20Farina%2C%20G.%20Sandholm%2C%20T.%20Smoothing%20method%20for%20approximate%20extensive-form%20perfect%20equilibrium%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kroer%2C%20C.%20Farina%2C%20G.%20Sandholm%2C%20T.%20Smoothing%20method%20for%20approximate%20extensive-form%20perfect%20equilibrium%202017"
+        },
+        {
+            "id": "19",
+            "entry": "[19] C. Kroer, K. Waugh, F. K\u0131l\u0131n\u00e7-Karzan, and T. Sandholm. Theoretical and practical advances on smoothing for extensive-form games. arXiv preprint arXiv:1702.04849, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1702.04849"
+        },
+        {
+            "id": "20",
+            "entry": "[20] M. Lanctot, K. Waugh, M. Zinkevich, and M. Bowling. Monte Carlo sampling for regret minimization in extensive games. In Proceedings of the Annual Conference on Neural Information Processing Systems (NIPS), 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lanctot%2C%20M.%20Waugh%2C%20K.%20Zinkevich%2C%20M.%20Bowling%2C%20M.%20Monte%20Carlo%20sampling%20for%20regret%20minimization%20in%20extensive%20games%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lanctot%2C%20M.%20Waugh%2C%20K.%20Zinkevich%2C%20M.%20Bowling%2C%20M.%20Monte%20Carlo%20sampling%20for%20regret%20minimization%20in%20extensive%20games%202009"
+        },
+        {
+            "id": "21",
+            "entry": "[21] M. Moravc\u00edk, M. Schmid, N. Burch, V. Lis\u00fd, D. Morrill, N. Bard, T. Davis, K. Waugh, M. Johanson, and M. Bowling. Deepstack: Expert-level artificial intelligence in heads-up no-limit poker. Science, 356(6337), May 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Moravc%C3%ADk%2C%20M.%20Schmid%2C%20M.%20Burch%2C%20N.%20Lis%C3%BD%2C%20V.%20Deepstack%3A%20Expert-level%20artificial%20intelligence%20in%20heads-up%20no-limit%20poker%202017-05",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Moravc%C3%ADk%2C%20M.%20Schmid%2C%20M.%20Burch%2C%20N.%20Lis%C3%BD%2C%20V.%20Deepstack%3A%20Expert-level%20artificial%20intelligence%20in%20heads-up%20no-limit%20poker%202017-05"
+        },
+        {
+            "id": "22",
+            "entry": "[22] J. Nash. Equilibrium points in n-person games. Proceedings of the National Academy of Sciences, 36:48\u201349, 1950.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nash%2C%20J.%20Equilibrium%20points%20in%20n-person%20games%201950",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nash%2C%20J.%20Equilibrium%20points%20in%20n-person%20games%201950"
+        },
+        {
+            "id": "23",
+            "entry": "[23] A. Nemirovski. Prox-method with rate of convergence O(1/t) for variational inequalities with Lipschitz continuous monotone operators and smooth convex-concave saddle point problems. SIAM Journal on Optimization, 15(1), 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nemirovski%2C%20A.%20Prox-method%20with%20rate%20of%20convergence%20O%281/t%29%20for%20variational%20inequalities%20with%20Lipschitz%20continuous%20monotone%20operators%20and%20smooth%20convex-concave%20saddle%20point%20problems%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nemirovski%2C%20A.%20Prox-method%20with%20rate%20of%20convergence%20O%281/t%29%20for%20variational%20inequalities%20with%20Lipschitz%20continuous%20monotone%20operators%20and%20smooth%20convex-concave%20saddle%20point%20problems%202004"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Y. Nesterov. Excessive gap technique in nonsmooth convex minimization. SIAM Journal of Optimization, 16(1), 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nesterov%2C%20Y.%20Excessive%20gap%20technique%20in%20nonsmooth%20convex%20minimization%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nesterov%2C%20Y.%20Excessive%20gap%20technique%20in%20nonsmooth%20convex%20minimization%202005"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Y. Nesterov. Smooth minimization of non-smooth functions. Mathematical Programming, 103, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nesterov%2C%20Y.%20Smooth%20minimization%20of%20non-smooth%20functions%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nesterov%2C%20Y.%20Smooth%20minimization%20of%20non-smooth%20functions%202005"
+        },
+        {
+            "id": "26",
+            "entry": "[26] I. Romanovskii. Reduction of a game with complete memory to a matrix game. Soviet Mathematics, 3, 1962.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Romanovskii%2C%20I.%20Reduction%20of%20a%20game%20with%20complete%20memory%20to%20a%20matrix%20game%201962",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Romanovskii%2C%20I.%20Reduction%20of%20a%20game%20with%20complete%20memory%20to%20a%20matrix%20game%201962"
+        },
+        {
+            "id": "27",
+            "entry": "[27] O. Tammelin, N. Burch, M. Johanson, and M. Bowling. Solving heads-up limit Texas hold\u2019em. In Proceedings of the 24th International Joint Conference on Artificial Intelligence (IJCAI), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tammelin%2C%20O.%20Burch%2C%20N.%20Johanson%2C%20M.%20Bowling%2C%20M.%20Solving%20heads-up%20limit%20Texas%20hold%E2%80%99em%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tammelin%2C%20O.%20Burch%2C%20N.%20Johanson%2C%20M.%20Bowling%2C%20M.%20Solving%20heads-up%20limit%20Texas%20hold%E2%80%99em%202015"
+        },
+        {
+            "id": "28",
+            "entry": "[28] B. von Stengel. Efficient computation of behavior strategies. Games and Economic Behavior, 14(2):220\u2013246, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=von%20Stengel%2C%20B.%20Efficient%20computation%20of%20behavior%20strategies%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=von%20Stengel%2C%20B.%20Efficient%20computation%20of%20behavior%20strategies%201996"
+        },
+        {
+            "id": "29",
+            "entry": "[29] M. Zinkevich, M. Bowling, M. Johanson, and C. Piccione. Regret minimization in games with incomplete information. In Proceedings of the Annual Conference on Neural Information Processing Systems (NIPS), 2007. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zinkevich%2C%20M.%20Bowling%2C%20M.%20Johanson%2C%20M.%20Piccione%2C%20C.%20Regret%20minimization%20in%20games%20with%20incomplete%20information%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zinkevich%2C%20M.%20Bowling%2C%20M.%20Johanson%2C%20M.%20Piccione%2C%20C.%20Regret%20minimization%20in%20games%20with%20incomplete%20information%202007"
+        }
+    ]
+}

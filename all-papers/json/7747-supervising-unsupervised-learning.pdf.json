@@ -1,0 +1,245 @@
+{
+    "filename": "7747-supervising-unsupervised-learning.pdf",
+    "metadata": {
+        "title": "Supervising Unsupervised Learning",
+        "author": "Vikas Garg",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7747-supervising-unsupervised-learning.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We introduce a framework to transfer knowledge acquired from a repository of (heterogeneous) supervised datasets to new unsupervised datasets. Our perspective avoids the subjectivity inherent in unsupervised learning by reducing it to supervised learning, and provides a principled way to evaluate unsupervised algorithms. We demonstrate the versatility of our framework via rigorous agnostic bounds on a variety of unsupervised problems. In the context of clustering, our approach helps choose the number of clusters and the clustering algorithm, remove the outliers, and provably circumvent Kleinberg\u2019s impossibility result. Experiments across hundreds of problems demonstrate improvements in performance on unsupervised data with simple algorithms despite the fact our problems come from heterogeneous domains. Additionally, our framework lets us leverage deep networks to learn common features across many small datasets, and perform zero shot learning."
+    },
+    "keywords": [
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "Machine Learning",
+            "url": "https://en.wikipedia.org/wiki/Machine_Learning"
+        },
+        {
+            "term": "root-mean-square error",
+            "url": "https://en.wikipedia.org/wiki/root-mean-square_error"
+        },
+        {
+            "term": "scale invariance",
+            "url": "https://en.wikipedia.org/wiki/scale_invariance"
+        },
+        {
+            "term": "unsupervised learning",
+            "url": "https://en.wikipedia.org/wiki/unsupervised_learning"
+        }
+    ],
+    "highlights": [
+        "Unsupervised Learning (UL) is an elusive branch of Machine Learning (ML), including problems such as clustering and manifold learning, that seeks to identify structure among unlabeled data",
+        "We model Unsupervised Learning problems as representative samples from a meta-distribution, and offer a solution using an annotated collection of prior datasets",
+        "We show how to adapt knowledge acquired from a repository of small datasets that come from different domains, to new unsupervised datasets",
+        "We show a natural meta-version of the axioms is satisfied by a simple meta-single-linkage clustering algorithm",
+        "We remove the subjectivity inherent in them by reducing Unsupervised Learning to supervised learning in a meta-setting. This helps us provide theoretically sound and practically efficient algorithms for questions like which clustering algorithm and how many clusters to choose for a particular task, how to fix the threshold in single linkage algorithms, and what fraction of data to discard as outliers",
+        "We introduce the meta-scale-invariance (MSI) property, a natural alternative to scale invariance, and show how to design a single-linkage clustering algorithm that satisfies MSI, richness and consistency"
+    ],
+    "key_statements": [
+        "Unsupervised Learning (UL) is an elusive branch of Machine Learning (ML), including problems such as clustering and manifold learning, that seeks to identify structure among unlabeled data",
+        "We model Unsupervised Learning problems as representative samples from a meta-distribution, and offer a solution using an annotated collection of prior datasets",
+        "We show how one can provably learn to perform Unsupervised Learning as well as the best algorithm in certain classes of algorithms",
+        "We show how to adapt knowledge acquired from a repository of small datasets that come from different domains, to new unsupervised datasets",
+        "We introduce algorithms for various problems including choosing a clustering algorithm and the number of clusters, learning common features, and removing outliers in a principled way",
+        "We show that these seemingly unrelated problems can be leveraged to gain improvements in the average performance across previously unseen Unsupervised Learning datasets",
+        "We show that choosing the right algorithm is essentially a multi-class classification problem given any set of problem meta-data features and cluster-specific features",
+        "We show a natural meta-version of the axioms is satisfied by a simple meta-single-linkage clustering algorithm",
+        "We describe in detail the results of our experiments",
+        "We define the best-fit ki\u2217 for dataset i to be the one that yielded maximum Adjusted Rand Index score across the different runs, which is often different from ki, the number of clusters in the ground truth",
+        "We evaluated two quantities of interest: the Adjusted Rand Index and the root-mean-square error (RMSE) between kand k\u2217",
+        "Instead of choosing the clustering with best Silhouette score, which is a standard approach, the meta-clustering algorithm effectively learns terms that can correct for overor under-estimates, e.g., learning for which problems the Silhouette heuristic tends to produce too many clusters",
+        "To choose which of the ten clustering algorithms on each problem, we fit ten estimators of accuracy by Adjusted Rand Index based on these features",
+        "We report the results averaged over 10 independent train/test partitions",
+        "The goal is to learn a classifier f (x, x , \u03c6) \u2208 {0, 1} that takes two examples x, x \u2208 X and the corresponding problem meta-features \u03c6, and predicts 1 if the input pair would belong to the same cluster",
+        "We remove the subjectivity inherent in them by reducing Unsupervised Learning to supervised learning in a meta-setting. This helps us provide theoretically sound and practically efficient algorithms for questions like which clustering algorithm and how many clusters to choose for a particular task, how to fix the threshold in single linkage algorithms, and what fraction of data to discard as outliers",
+        "We introduce the meta-scale-invariance (MSI) property, a natural alternative to scale invariance, and show how to design a single-linkage clustering algorithm that satisfies MSI, richness and consistency"
+    ],
+    "summary": [
+        "Unsupervised Learning (UL) is an elusive branch of Machine Learning (ML), including problems such as clustering and manifold learning, that seeks to identify structure among unlabeled data.",
+        "In meta-Euclidean-clustering, we instead aim to learn a clustering algorithm from several different training clustering problems.",
+        "We show that choosing the right algorithm is essentially a multi-class classification problem given any set of problem meta-data features and cluster-specific features.",
+        ", 9}, we fit ARI as a linear function of Silhouette scores using all the data from the meta-training set in the partition pertaining to k: each dataset in the meta-training set provided 10 target values, corresponding to different runs where number of clusters was fixed to k.",
+        "We define the best-fit ki\u2217 for dataset i to be the one that yielded maximum ARI score across the different runs, which is often different from ki, the number of clusters in the ground truth.",
+        "We implement the algorithm selection approach of Section 3, learning to choose a different algorithm for each problem based on problem and cluster-specific features.",
+        "Instead of choosing the clustering with best Silhouette score, which is a standard approach, the meta-clustering algorithm effectively learns terms that can correct for overor under-estimates, e.g., learning for which problems the Silhouette heuristic tends to produce too many clusters.",
+        "To choose which of the ten clustering algorithms on each problem, we fit ten estimators of accuracy by ARI based on these features.",
+        "That is for each clustering algorithm Cj, we fit ARI(Yi, Cj(Xi)) from features \u03a6(Xi, Cj(Xi)) \u2208 R5 over problems Xi, Yi using \u03bd-SVR regression, with default parameters as implemented by scikit-learn.",
+        "Following an identical procedure to the meta-k algorithm of Section 5, we fitted regression models for ARI corresponding to complete data using the silhouette scores on pruned data, and measured the effect of outlier removal in terms of the true average ARI over entire data.",
+        "The goal is to learn a classifier f (x, x , \u03c6) \u2208 {0, 1} that takes two examples x, x \u2208 X and the corresponding problem meta-features \u03c6, and predicts 1 if the input pair would belong to the same cluster.",
+        "This helps us provide theoretically sound and practically efficient algorithms for questions like which clustering algorithm and how many clusters to choose for a particular task, how to fix the threshold in single linkage algorithms, and what fraction of data to discard as outliers.",
+        "We introduce the meta-scale-invariance (MSI) property, a natural alternative to scale invariance, and show how to design a single-linkage clustering algorithm that satisfies MSI, richness and consistency.",
+        "We avoid Kleinberg\u2019s impossibility result and achieve provably good meta-clustering"
+    ],
+    "headline": "We introduce a framework to transfer knowledge acquired from a repository of  supervised datasets to new unsupervised datasets",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Jon Kleinberg. An impossibility theorem for clustering. In Advances in neural information processing systems (NIPS), pages 463\u2013470, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kleinberg%2C%20Jon%20An%20impossibility%20theorem%20for%20clustering%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kleinberg%2C%20Jon%20An%20impossibility%20theorem%20for%20clustering%202003"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Sinno Jialin Pan and Qiang Yang. A survey on transfer learning. IEEE Transactions on Knowledge and Data Engineering (TKDE), 22:1345\u20131359, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20Sinno%20Jialin%20Pan%20and%20Qiang%20Yang.%20A%20survey%20on%20transfer%20learning%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Sinno%20Jialin%20Pan%20and%20Qiang%20Yang.%20A%20survey%20on%20transfer%20learning%202010"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Diederik P. Kingma, Danilo J. Rezende, Shakir Mohamed, and Max Welling. Semi-supervised learning with deep generative models. In NIPS, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Rezende%2C%20Danilo%20J.%20Mohamed%2C%20Shakir%20Welling%2C%20Max%20Semi-supervised%20learning%20with%20deep%20generative%20models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Rezende%2C%20Danilo%20J.%20Mohamed%2C%20Shakir%20Welling%2C%20Max%20Semi-supervised%20learning%20with%20deep%20generative%20models%202014"
+        },
+        {
+            "id": "4",
+            "entry": "[4] N. Siddharth, Brooks Paige, Jan-Willem van de Meent, Alban Desmaison, Noah D. Goodman, Pushmeet Kohli, Frank Wood, and Philip H.S. Torr. Learning disentangled representations with semi-supervised deep generative models. In NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Siddharth%2C%20N.%20Paige%2C%20Brooks%20van%20de%20Meent%2C%20Jan-Willem%20Desmaison%2C%20Alban%20Learning%20disentangled%20representations%20with%20semi-supervised%20deep%20generative%20models%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Siddharth%2C%20N.%20Paige%2C%20Brooks%20van%20de%20Meent%2C%20Jan-Willem%20Desmaison%2C%20Alban%20Learning%20disentangled%20representations%20with%20semi-supervised%20deep%20generative%20models%202017"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Marcus Rohrbach, Sandra Ebert, and Bernt Schiele. Transfer learning in a transductive setting. In NIPS, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rohrbach%2C%20Marcus%20Ebert%2C%20Sandra%20Schiele%2C%20Bernt%20Transfer%20learning%20in%20a%20transductive%20setting%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rohrbach%2C%20Marcus%20Ebert%2C%20Sandra%20Schiele%2C%20Bernt%20Transfer%20learning%20in%20a%20transductive%20setting%202013"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Yaroslav Ganin and Victor Lempitsky. Unsupervised domain adaptation by backpropagation. In ICML, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ganin%2C%20Yaroslav%20Lempitsky%2C%20Victor%20Unsupervised%20domain%20adaptation%20by%20backpropagation%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ganin%2C%20Yaroslav%20Lempitsky%2C%20Victor%20Unsupervised%20domain%20adaptation%20by%20backpropagation%202015"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Mingsheng Long, Han Zhu, Jianmin Wang, and Michael I. Jordan. Unsupervised domain adaptation with residual transfer networks. In NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Long%2C%20Mingsheng%20Zhu%2C%20Han%20Wang%2C%20Jianmin%20Jordan%2C%20Michael%20I.%20Unsupervised%20domain%20adaptation%20with%20residual%20transfer%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Long%2C%20Mingsheng%20Zhu%2C%20Han%20Wang%2C%20Jianmin%20Jordan%2C%20Michael%20I.%20Unsupervised%20domain%20adaptation%20with%20residual%20transfer%20networks%202016"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Konstantinos Bousmalis, George Trigeorgis, Nathan Silberman, Dilip Krishnan, and Dumitru Erhan. Domain separation networks. In NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Konstantinos%20Bousmalis%20George%20Trigeorgis%20Nathan%20Silberman%20Dilip%20Krishnan%20and%20Dumitru%20Erhan%20Domain%20separation%20networks%20In%20NIPS%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Konstantinos%20Bousmalis%20George%20Trigeorgis%20Nathan%20Silberman%20Dilip%20Krishnan%20and%20Dumitru%20Erhan%20Domain%20separation%20networks%20In%20NIPS%202016"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Michael J Kearns, Robert E Schapire, and Linda M Sellie. Toward efficient agnostic learning. Machine Learning, 17(2-3):115\u2013141, 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kearns%2C%20Michael%20J.%20Schapire%2C%20Robert%20E.%20Sellie%2C%20Linda%20M.%20Toward%20efficient%20agnostic%20learning%201994",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kearns%2C%20Michael%20J.%20Schapire%2C%20Robert%20E.%20Sellie%2C%20Linda%20M.%20Toward%20efficient%20agnostic%20learning%201994"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Maria-Florina Balcan, Vaishnavh Nagarajan, Ellen Vitercik, and Colin White. Learning-theoretic foundations of algorithm configuration for combinatorial partitioning problems. In Conference on Learning Theory, pages 213\u2013274, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Balcan%2C%20Maria-Florina%20Nagarajan%2C%20Vaishnavh%20Vitercik%2C%20Ellen%20White%2C%20Colin%20Learning-theoretic%20foundations%20of%20algorithm%20configuration%20for%20combinatorial%20partitioning%20problems%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Balcan%2C%20Maria-Florina%20Nagarajan%2C%20Vaishnavh%20Vitercik%2C%20Ellen%20White%2C%20Colin%20Learning-theoretic%20foundations%20of%20algorithm%20configuration%20for%20combinatorial%20partitioning%20problems%202017"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Chris Thornton, Frank Hutter, Holger H Hoos, and Kevin Leyton-Brown. Auto-weka: Combined selection and hyperparameter optimization of classification algorithms. In Proceedings of the 19th ACM SIGKDD international conference on Knowledge discovery and data mining, pages 847\u2013855. ACM, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Thornton%2C%20Chris%20Hutter%2C%20Frank%20Hoos%2C%20Holger%20H.%20Leyton-Brown%2C%20Kevin%20Auto-weka%3A%20Combined%20selection%20and%20hyperparameter%20optimization%20of%20classification%20algorithms%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Thornton%2C%20Chris%20Hutter%2C%20Frank%20Hoos%2C%20Holger%20H.%20Leyton-Brown%2C%20Kevin%20Auto-weka%3A%20Combined%20selection%20and%20hyperparameter%20optimization%20of%20classification%20algorithms%202013"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Nicolo Fusi, Rishit Sheth, and Huseyn Melih Elibol. Probabilistic matrix factorization for automated machine learning. 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fusi%2C%20Nicolo%20Sheth%2C%20Rishit%20Elibol%2C%20Huseyn%20Melih%20Probabilistic%20matrix%20factorization%20for%20automated%20machine%20learning%202018"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Sebastian Thrun and Lorien Pratt. Learning to learn. Springer Science & Business Media, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Thrun%2C%20Sebastian%20Pratt%2C%20Lorien%20Learning%20to%20learn%202012"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Jasper Snoek, Hugo Larochelle, and Ryan P Adams. Practical bayesian optimization of machine learning algorithms. In NIPS, pages 2951\u20132959, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Snoek%2C%20Jasper%20Larochelle%2C%20Hugo%20Adams%2C%20Ryan%20P.%20Practical%20bayesian%20optimization%20of%20machine%20learning%20algorithms%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Snoek%2C%20Jasper%20Larochelle%2C%20Hugo%20Adams%2C%20Ryan%20P.%20Practical%20bayesian%20optimization%20of%20machine%20learning%20algorithms%202012"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Sebastian Thrun and Tom M Mitchell. Lifelong robot learning. In The biology and technology of intelligent autonomous agents, pages 165\u2013196.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Thrun%2C%20Sebastian%20Mitchell%2C%20Tom%20M.%20Lifelong%20robot%20learning.%20In%20The%20biology%20and%20technology%20of%20intelligent%20autonomous%20agents"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Maria-Florina Balcan, Avrim Blum, and Santosh Vempala. Efficient representations for lifelong learning and autoencoding. In Workshop on Computational Learning Theory (COLT), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Balcan%2C%20Maria-Florina%20Blum%2C%20Avrim%20Vempala%2C%20Santosh%20Efficient%20representations%20for%20lifelong%20learning%20and%20autoencoding%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Balcan%2C%20Maria-Florina%20Blum%2C%20Avrim%20Vempala%2C%20Santosh%20Efficient%20representations%20for%20lifelong%20learning%20and%20autoencoding%202015"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Reza Bosagh Zadeh and Shai Ben-David. A uniqueness theorem for clustering. In Proceedings of the twenty-fifth conference on uncertainty in artificial intelligence (UAI), pages 639\u2013646. AUAI Press, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zadeh%2C%20Reza%20Bosagh%20Ben-David%2C%20Shai%20A%20uniqueness%20theorem%20for%20clustering%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zadeh%2C%20Reza%20Bosagh%20Ben-David%2C%20Shai%20A%20uniqueness%20theorem%20for%20clustering%202009"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Margareta Ackerman and Shai Ben-David. Measures of clustering quality: A working set of axioms for clustering. In NIPS, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ackerman%2C%20Margareta%20Ben-David%2C%20Shai%20Measures%20of%20clustering%20quality%3A%20A%20working%20set%20of%20axioms%20for%20clustering%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ackerman%2C%20Margareta%20Ben-David%2C%20Shai%20Measures%20of%20clustering%20quality%3A%20A%20working%20set%20of%20axioms%20for%20clustering%202008"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Wenlin Chen, James Wilson, Stephen Tyree, Kilian Weinberger, and Yixin Chen. Compressing neural networks with the hashing trick. In ICML, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Wenlin%20Wilson%2C%20James%20Tyree%2C%20Stephen%20Weinberger%2C%20Kilian%20Compressing%20neural%20networks%20with%20the%20hashing%20trick%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Wenlin%20Wilson%2C%20James%20Tyree%2C%20Stephen%20Weinberger%2C%20Kilian%20Compressing%20neural%20networks%20with%20the%20hashing%20trick%202015"
+        },
+        {
+            "id": "20",
+            "entry": "[20] S. Han, H. Mao, and W. J. Dally. Deep compression: Compressing deep neural networks with pruning, trained quantization and huffman coding. In ICLR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Han%2C%20S.%20Mao%2C%20H.%20Dally%2C%20W.J.%20Deep%20compression%3A%20Compressing%20deep%20neural%20networks%20with%20pruning%2C%20trained%20quantization%20and%20huffman%20coding%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Han%2C%20S.%20Mao%2C%20H.%20Dally%2C%20W.J.%20Deep%20compression%3A%20Compressing%20deep%20neural%20networks%20with%20pruning%2C%20trained%20quantization%20and%20huffman%20coding%202016"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Jian-Hao Luo, Jianxin Wu, and Weiyao Lin. Thinet: A filter level pruning method for deep neural network compression. In ICCV, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Luo%2C%20Jian-Hao%20Wu%2C%20Jianxin%20Lin%2C%20Weiyao%20Thinet%3A%20A%20filter%20level%20pruning%20method%20for%20deep%20neural%20network%20compression%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Luo%2C%20Jian-Hao%20Wu%2C%20Jianxin%20Lin%2C%20Weiyao%20Thinet%3A%20A%20filter%20level%20pruning%20method%20for%20deep%20neural%20network%20compression%202017"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Chirag Gupta, Arun Sai Suggala, Ankit Goyal, Harsha Vardhan Simhadri, Bhargavi Paranjape, Ashish Kumar, Saurabh Goyal, Raghavendra Udupa, Manik Varma, and Prateek Jain. ProtoNN: Compressed and accurate kNN for resource-scarce devices. In Proceedings of the 34th International Conference on Machine Learning (ICML), pages 1331\u20131340, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gupta%2C%20Chirag%20Suggala%2C%20Arun%20Sai%20Goyal%2C%20Ankit%20Simhadri%2C%20Harsha%20Vardhan%20ProtoNN%3A%20Compressed%20and%20accurate%20kNN%20for%20resource-scarce%20devices%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gupta%2C%20Chirag%20Suggala%2C%20Arun%20Sai%20Goyal%2C%20Ankit%20Simhadri%2C%20Harsha%20Vardhan%20ProtoNN%3A%20Compressed%20and%20accurate%20kNN%20for%20resource-scarce%20devices%202017"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Lawrence Hubert and Phipps Arabie. Comparing partitions. Journal of classification, 2(1):193\u2013 218, 1985.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hubert%2C%20Lawrence%20Arabie%2C%20Phipps%20Comparing%20partitions%201985",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hubert%2C%20Lawrence%20Arabie%2C%20Phipps%20Comparing%20partitions%201985"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Peter J Rousseeuw. Silhouettes: a graphical aid to the interpretation and validation of cluster analysis. Journal of computational and applied mathematics, 20:53\u201365, 1987.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rousseeuw%2C%20Peter%20J.%20Silhouettes%3A%20a%20graphical%20aid%20to%20the%20interpretation%20and%20validation%20of%20cluster%20analysis%201987",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rousseeuw%2C%20Peter%20J.%20Silhouettes%3A%20a%20graphical%20aid%20to%20the%20interpretation%20and%20validation%20of%20cluster%20analysis%201987"
+        },
+        {
+            "id": "25",
+            "entry": "[25] G. C. Tseng. Penalized and weighted k-means for clustering with scattered objects and prior information in high-throughput biological data. Bioinformatics, 23:2247\u20132255, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tseng%2C%20G.C.%20Penalized%20and%20weighted%20k-means%20for%20clustering%20with%20scattered%20objects%20and%20prior%20information%20in%20high-throughput%20biological%20data%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tseng%2C%20G.C.%20Penalized%20and%20weighted%20k-means%20for%20clustering%20with%20scattered%20objects%20and%20prior%20information%20in%20high-throughput%20biological%20data%202007"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Olga Russakovsky, Jia Deng, Hao Su, Jonathan Krause, Sanjeev Satheesh, Sean Ma, Zhiheng Huang, Andrej Karpathy, Aditya Khosla, Michael Bernstein, Alexander C. Berg, and Li Fei-Fei. ImageNet Large Scale Visual Recognition Challenge. International Journal of Computer Vision (IJCV), 115(3):211\u2013252, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Russakovsky%2C%20Olga%20Deng%2C%20Jia%20Su%2C%20Hao%20Krause%2C%20Jonathan%20ImageNet%20Large%20Scale%20Visual%20Recognition%20Challenge%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Russakovsky%2C%20Olga%20Deng%2C%20Jia%20Su%2C%20Hao%20Krause%2C%20Jonathan%20ImageNet%20Large%20Scale%20Visual%20Recognition%20Challenge%202015"
+        },
+        {
+            "id": "27",
+            "entry": "[27] F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel, B. Thirion, O. Grisel, M. Blondel, P. Prettenhofer, R. Weiss, V. Dubourg, J. Vanderplas, A. Passos, D. Cournapeau, M. Brucher, M. Perrot, and E. Duchesnay. Scikit-learn: Machine learning in Python. Journal of Machine Learning Research (JMLR), 12:2825\u20132830, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pedregosa%2C%20F.%20Varoquaux%2C%20G.%20Gramfort%2C%20A.%20Michel%2C%20V.%20Scikit-learn%3A%20Machine%20learning%20in%20Python%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pedregosa%2C%20F.%20Varoquaux%2C%20G.%20Gramfort%2C%20A.%20Michel%2C%20V.%20Scikit-learn%3A%20Machine%20learning%20in%20Python%202011"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Matthew D Zeiler. Adadelta: an adaptive learning rate method. arXiv preprint arXiv:1212.5701, 2012. ",
+            "arxiv_url": "https://arxiv.org/pdf/1212.5701"
+        }
+    ]
+}

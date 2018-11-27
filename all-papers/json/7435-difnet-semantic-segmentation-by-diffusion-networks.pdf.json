@@ -1,0 +1,215 @@
+{
+    "filename": "7435-difnet-semantic-segmentation-by-diffusion-networks.pdf",
+    "metadata": {
+        "title": "DifNet: Semantic Segmentation by Diffusion Networks",
+        "author": "Peng Jiang, Fanglin Gu, Yunhai Wang, Changhe Tu, Baoquan Chen",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7435-difnet-semantic-segmentation-by-diffusion-networks.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Deep Neural Networks (DNNs) have recently shown state of the art performance on semantic segmentation tasks, however, they still suffer from problems of poor boundary localization and spatial fragmented predictions. The difficulties lie in the requirement of making dense predictions from a long path model all at once, since details are hard to keep when data goes through deeper layers. Instead, in this work, we decompose this difficult task into two relative simple sub-tasks: seed detection which is required to predict initial predictions without the need of wholeness and preciseness, and similarity estimation which measures the possibility of any two nodes belong to the same class without the need of knowing which class they are. We use one branch network for one sub-task each, and apply a cascade of random walks base on hierarchical semantics to approximate a complex diffusion process which propagates seed information to the whole image according to the estimated similarities. The proposed DifNet consistently produces improvements over the baseline models with the same depth and with the equivalent number of parameters, and also achieves promising performance on Pascal VOC and Pascal Context dataset. Our DifNet is trained end-to-end without complex loss functions."
+    },
+    "keywords": [
+        {
+            "term": "long range",
+            "url": "https://en.wikipedia.org/wiki/long_range"
+        },
+        {
+            "term": "random walk",
+            "url": "https://en.wikipedia.org/wiki/random_walk"
+        },
+        {
+            "term": "conditional random field",
+            "url": "https://en.wikipedia.org/wiki/conditional_random_field"
+        }
+    ],
+    "highlights": [
+        "Semantic Segmentation who aims to give dense label predictions for pixels in an image is one of the fundamental topics in computer vision",
+        "Convolutional networks (FCNs) proposed in [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>] have proved to be much more powerful than schemes which rely on hand-crafted features",
+        "Current Fully convolutional networks based semantic segmentation methods still suffer from the problems of poor boundary localization and spatial fragmented predictions, because of following challenges: First, to abstract invariant high level feature representations, deeper models are preferred, the invariance character of features and increasing depth of layers may lead detailed spatial information lost",
+        "We apply a cascade of random walks based on these transition matrices to approximate a complex diffusion process, in order to propagate seed information to the whole image according to the hierarchical similarities",
+        "We present DifNet for semantic segmentation task, our model applies the cascaded random walks to approximate a complex diffusion process",
+        "Our model achieves promising performance compared with various baseline models, the effectiveness of each component in our model is verified through comprehensive mechanism studies"
+    ],
+    "key_statements": [
+        "Semantic Segmentation who aims to give dense label predictions for pixels in an image is one of the fundamental topics in computer vision",
+        "Convolutional networks (FCNs) proposed in [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>] have proved to be much more powerful than schemes which rely on hand-crafted features",
+        "Current Fully convolutional networks based semantic segmentation methods still suffer from the problems of poor boundary localization and spatial fragmented predictions, because of following challenges: First, to abstract invariant high level feature representations, deeper models are preferred, the invariance character of features and increasing depth of layers may lead detailed spatial information lost",
+        "We apply a cascade of random walks based on these transition matrices to approximate a complex diffusion process, in order to propagate seed information to the whole image according to the hierarchical similarities",
+        "Many works [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>, <a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>, <a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>, <a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>, <a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>, <a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>, <a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>, <a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>, <a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>, <a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>\u2013<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>] (Here, we mainly focus on methods that are based on deep neural networks, as these represent the state-of-the-art and are the most relevant to our scheme.) have approached the problems of poor boundary localization and spatially fragmented predictions for semantic segmentation",
+        "Apart from the view of conditional random field, work [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>] utilizes graphical structures to refine results by random walks, but the computation has a dense matrix inversion term which is not appropriate for the networks",
+        "It is important to note that our DifNet consists several transition matrices which are computed based on features from different semantic levels, and each random walk operation is conducted according to one transition matrix, see Fig. 1(a)",
+        "The increasing of parameter value means the output is more depended on information transited from other nodes rather than initial seed and previous random walk result as data flows through our model",
+        "We present DifNet for semantic segmentation task, our model applies the cascaded random walks to approximate a complex diffusion process",
+        "Our model achieves promising performance compared with various baseline models, the effectiveness of each component in our model is verified through comprehensive mechanism studies"
+    ],
+    "summary": [
+        "Semantic Segmentation who aims to give dense label predictions for pixels in an image is one of the fundamental topics in computer vision.",
+        "Transition matrices measure the possibility of random walk between any two nodes, with our implementation they could reflect similarities on different semantic levels.",
+        "We apply a cascade of random walks based on these transition matrices to approximate a complex diffusion process, in order to propagate seed information to the whole image according to the hierarchical similarities.",
+        "We approximate a complex diffusion process by cascaded random walks.",
+        "Apart from the view of CRF, work [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>] utilizes graphical structures to refine results by random walks, but the computation has a dense matrix inversion term which is not appropriate for the networks.",
+        "It is important to note that our DifNet consists several transition matrices which are computed based on features from different semantic levels, and each random walk operation is conducted according to one transition matrix, see Fig. 1(a).",
+        "We propose to use a cascade of random walks to approximate the diffusion process.",
+        "We describe how we implement a cascade of random walks by DifNet to approximate the diffusion process.",
+        "For different random walk, we compute the corresponding transition matrix Pt based on features from different layer of similarity branch which represent different semantic levels, the information will be propagated gradually according to different levels\u2019 semantic similarities.",
+        "To approximate the diffusion process and for the sake of efficiency, in view of backbone architecture, in our DifNet, we conduct five random walks in total based on five transition matrices computed from features out of four ResNet blocks as well as input.",
+        "Similarity Branch Our cascaded random walks are carried out on a sequence of transition matrices Pt which measure similarities on different level of semantics.",
+        "3. The increasing of parameter value means the output is more depended on information transited from other nodes rather than initial seed and previous random walk result as data flows through our model.",
+        "To validate the effectiveness of the transition matrices built on all the ResNet blocks, we test DifNet-50 without 2-th and 4-th random walks, the performance will have 1 percent drop on Pascal VOC validation dataset.",
+        "We present DifNet for semantic segmentation task, our model applies the cascaded random walks to approximate a complex diffusion process.",
+        "With these cascaded random walks, more details can be complemented according to the hierarchical semantic similarities and long-range dependencies are captured.",
+        "Our model achieves promising performance compared with various baseline models, the effectiveness of each component in our model is verified through comprehensive mechanism studies"
+    ],
+    "headline": "We provide comprehensive mechanism studies",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Long, J., E. Shelhamer, T. Darrell. Fully convolutional networks for semantic segmentation. In The IEEE Conference on Computer Vision and Pattern Recognition (CVPR). 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Long%2C%20J.%20Shelhamer%2C%20E.%20Darrell%2C%20T.%20Fully%20convolutional%20networks%20for%20semantic%20segmentation%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Long%2C%20J.%20Shelhamer%2C%20E.%20Darrell%2C%20T.%20Fully%20convolutional%20networks%20for%20semantic%20segmentation%202015"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Chen, L.-C., G. Papandreou, I. Kokkinos, et al. Semantic image segmentation with deep convolutional nets and fully connected crfs. In International Conference on Learning Representations (ICLR). 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20L.-C.%20Papandreou%2C%20G.%20Kokkinos%2C%20I.%20Semantic%20image%20segmentation%20with%20deep%20convolutional%20nets%20and%20fully%20connected%20crfs%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20L.-C.%20Papandreou%2C%20G.%20Kokkinos%2C%20I.%20Semantic%20image%20segmentation%20with%20deep%20convolutional%20nets%20and%20fully%20connected%20crfs%202015"
+        },
+        {
+            "id": "3",
+            "entry": "[3] \u2014. Deeplab: Semantic image segmentation with deep convolutional nets, atrous convolution, and fully connected crfs. IEEE Transactions on Pattern Analysis and Machine Intelligence, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20Deeplab%3A%20Semantic%20image%20segmentation%20with%20deep%20convolutional%20nets%2C%20atrous%20convolution%2C%20and%20fully%20connected%20crfs%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Deeplab%3A%20Semantic%20image%20segmentation%20with%20deep%20convolutional%20nets%2C%20atrous%20convolution%2C%20and%20fully%20connected%20crfs%202018"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Chen, L.-C., G. Papandreou, F. Schroff, et al. Rethinking atrous convolution for semantic image segmentation. In arXiv preprint arxiv:1706.05587. 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.05587"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Zhao, H., J. Shi, X. Qi, et al. Pyramid scene parsing network. In The IEEE Conference on Computer Vision and Pattern Recognition (CVPR). 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhao%2C%20H.%20Shi%2C%20J.%20Qi%2C%20X.%20Pyramid%20scene%20parsing%20network%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhao%2C%20H.%20Shi%2C%20J.%20Qi%2C%20X.%20Pyramid%20scene%20parsing%20network%202017"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Liu, W., A. Rabinovich, A. Berg. Parsenet: Looking wider to see better. In arXiv preprint arXiv:1506.04579. 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1506.04579"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Liu, S., L. Qi, H. Qin, et al. Pyramid scene parsing network. In The IEEE Conference on Computer Vision and Pattern Recognition (CVPR). 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20S.%20Qi%2C%20L.%20Qin%2C%20H.%20Pyramid%20scene%20parsing%20network%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liu%2C%20S.%20Qi%2C%20L.%20Qin%2C%20H.%20Pyramid%20scene%20parsing%20network%202018"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Lin, G., C. Shen, A. van den Hengel, et al. Efficient piecewise training of deep structured models for semantic segmentation. In The IEEE Conference on Computer Vision and Pattern Recognition (CVPR). 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20G.%20Shen%2C%20C.%20van%20den%20Hengel%2C%20A.%20Efficient%20piecewise%20training%20of%20deep%20structured%20models%20for%20semantic%20segmentation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lin%2C%20G.%20Shen%2C%20C.%20van%20den%20Hengel%2C%20A.%20Efficient%20piecewise%20training%20of%20deep%20structured%20models%20for%20semantic%20segmentation%202016"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Vemulapalli, R., O. Tuzel, M.-Y. Liu, et al. Gaussian conditional random field network for semantic segmentation. In The IEEE Conference on Computer Vision and Pattern Recognition (CVPR). 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vemulapalli%2C%20R.%20Tuzel%2C%20O.%20Liu%2C%20M.-Y.%20Gaussian%20conditional%20random%20field%20network%20for%20semantic%20segmentation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vemulapalli%2C%20R.%20Tuzel%2C%20O.%20Liu%2C%20M.-Y.%20Gaussian%20conditional%20random%20field%20network%20for%20semantic%20segmentation%202016"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Liu, Z., X. Li, P. Luo, et al. Semantic image segmentation via deep parsing network. In The IEEE International Conference on Computer Vision (ICCV). 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20Z.%20Li%2C%20X.%20Luo%2C%20P.%20Semantic%20image%20segmentation%20via%20deep%20parsing%20network%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liu%2C%20Z.%20Li%2C%20X.%20Luo%2C%20P.%20Semantic%20image%20segmentation%20via%20deep%20parsing%20network%202015"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Jampani, V., M. Kiefel, P. V. Gehler. Learning sparse high dimensional filters: Image filtering, dense crfs and bilateral neural networks. In The IEEE Conference on Computer Vision and Pattern Recognition (CVPR). 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jampani%2C%20V.%20Kiefel%2C%20M.%20Gehler%2C%20P.V.%20Learning%20sparse%20high%20dimensional%20filters%3A%20Image%20filtering%2C%20dense%20crfs%20and%20bilateral%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jampani%2C%20V.%20Kiefel%2C%20M.%20Gehler%2C%20P.V.%20Learning%20sparse%20high%20dimensional%20filters%3A%20Image%20filtering%2C%20dense%20crfs%20and%20bilateral%20neural%20networks%202016"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Zheng, S., S. Jayasumana, B. Romera-Paredes, et al. Conditional random fields as recurrent neural networks. In The IEEE International Conference on Computer Vision (ICCV). 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zheng%2C%20S.%20Jayasumana%2C%20S.%20Romera-Paredes%2C%20B.%20Conditional%20random%20fields%20as%20recurrent%20neural%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zheng%2C%20S.%20Jayasumana%2C%20S.%20Romera-Paredes%2C%20B.%20Conditional%20random%20fields%20as%20recurrent%20neural%20networks%202015"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Chandra, S., I. Kokkinos. Fast, exact and multi-scale inference for semantic image segmentation with deep gaussian crfs. In European Conference on Computer Vision (ECCV). 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chandra%2C%20S.%20Fast%2C%20I.Kokkinos%20exact%20and%20multi-scale%20inference%20for%20semantic%20image%20segmentation%20with%20deep%20gaussian%20crfs%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chandra%2C%20S.%20Fast%2C%20I.Kokkinos%20exact%20and%20multi-scale%20inference%20for%20semantic%20image%20segmentation%20with%20deep%20gaussian%20crfs%202016"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Chandra, S., N. Usunier, I. Kokkinos. Dense and low-rank gaussian crfs using deep embeddings. In The IEEE International Conference on Computer Vision (ICCV). 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chandra%2C%20S.%20Usunier%2C%20N.%20Kokkinos%2C%20I.%20Dense%20and%20low-rank%20gaussian%20crfs%20using%20deep%20embeddings%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chandra%2C%20S.%20Usunier%2C%20N.%20Kokkinos%2C%20I.%20Dense%20and%20low-rank%20gaussian%20crfs%20using%20deep%20embeddings%202017"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Bertasius, G., L. Torresani, S. X. Yu, et al. Convolutional random walk networks for semantic image segmentation. In The IEEE Conference on Computer Vision and Pattern Recognition (CVPR). 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bertasius%2C%20G.%20Torresani%2C%20L.%20Yu%2C%20S.X.%20Convolutional%20random%20walk%20networks%20for%20semantic%20image%20segmentation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bertasius%2C%20G.%20Torresani%2C%20L.%20Yu%2C%20S.X.%20Convolutional%20random%20walk%20networks%20for%20semantic%20image%20segmentation%202017"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Xie, S., X. Huang, Z. Tu. Top-down learning for structured labeling with convolutional pseudoprior. In European Conference on Computer Vision (ECCV). 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xie%2C%20S.%20Huang%2C%20X.%20Tu%2C%20Z.%20Top-down%20learning%20for%20structured%20labeling%20with%20convolutional%20pseudoprior%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xie%2C%20S.%20Huang%2C%20X.%20Tu%2C%20Z.%20Top-down%20learning%20for%20structured%20labeling%20with%20convolutional%20pseudoprior%202016"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Wang, X., R. Girshick, A. Gupta, et al. Non-local neural networks. In The IEEE Conference on Computer Vision and Pattern Recognition (CVPR). 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20X.%20Girshick%2C%20R.%20Gupta%2C%20A.%20Non-local%20neural%20networks%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20X.%20Girshick%2C%20R.%20Gupta%2C%20A.%20Non-local%20neural%20networks%202018"
+        },
+        {
+            "id": "18",
+            "entry": "[18] He, K., X. Zhang, S. Ren, et al. Deep residual learning for image recognition. In The IEEE Conference on Computer Vision and Pattern Recognition (CVPR). 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Deep%20residual%20learning%20for%20image%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Deep%20residual%20learning%20for%20image%20recognition%202016"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Bertasius, G., J. Shi, L. Torresani. Semantic segmentation with boundary neural fields. In The IEEE Conference on Computer Vision and Pattern Recognition (CVPR). 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bertasius%2C%20G.%20Shi%2C%20J.%20Torresani%2C%20L.%20Semantic%20segmentation%20with%20boundary%20neural%20fields%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bertasius%2C%20G.%20Shi%2C%20J.%20Torresani%2C%20L.%20Semantic%20segmentation%20with%20boundary%20neural%20fields%202016"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Adam W Harley, I. K., Konstantinos G. Derpanis. Segmentation-aware convolutional networks using local attention masks. In IEEE International Conference on Computer Vision (ICCV). 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Harley%2C%20Adam%20W.%20K.%2C%20I.%20Derpanis%2C%20Konstantinos%20G.%20Segmentation-aware%20convolutional%20networks%20using%20local%20attention%20masks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Harley%2C%20Adam%20W.%20K.%2C%20I.%20Derpanis%2C%20Konstantinos%20G.%20Segmentation-aware%20convolutional%20networks%20using%20local%20attention%20masks%202017"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Liu, S., S. De Mello, J. Gu, et al. Learning affinity via spatial propagation networks. In Advances in Neural Information Processing Systems (NIPS). 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20S.%20Mello%2C%20S.De%20Gu%2C%20J.%20Learning%20affinity%20via%20spatial%20propagation%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liu%2C%20S.%20Mello%2C%20S.De%20Gu%2C%20J.%20Learning%20affinity%20via%20spatial%20propagation%20networks%202017"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Jiang, P., N. Vasconcelos, J. Peng. Generic promotion of diffusion-based salient object detection. In The IEEE International Conference on Computer Vision (ICCV). 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jiang%2C%20P.%20Vasconcelos%2C%20N.%20Peng%2C%20J.%20Generic%20promotion%20of%20diffusion-based%20salient%20object%20detection%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jiang%2C%20P.%20Vasconcelos%2C%20N.%20Peng%2C%20J.%20Generic%20promotion%20of%20diffusion-based%20salient%20object%20detection%202015"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Everingham, M., S. M. A. Eslami, L. Van Gool, et al. The pascal visual object classes challenge: A retrospective. International Journal of Computer Vision, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Everingham%2C%20M.%20Eslami%2C%20S.M.A.%20Gool%2C%20L.Van%20The%20pascal%20visual%20object%20classes%20challenge%3A%20A%20retrospective%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Everingham%2C%20M.%20Eslami%2C%20S.M.A.%20Gool%2C%20L.Van%20The%20pascal%20visual%20object%20classes%20challenge%3A%20A%20retrospective%202015"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Hariharan, B., P. Arbelaez, L. Bourdev, et al. Semantic contours from inverse detectors. In International Conference on Computer Vision (ICCV). 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hariharan%2C%20B.%20Arbelaez%2C%20P.%20Bourdev%2C%20L.%20Semantic%20contours%20from%20inverse%20detectors%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hariharan%2C%20B.%20Arbelaez%2C%20P.%20Bourdev%2C%20L.%20Semantic%20contours%20from%20inverse%20detectors%202011"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Mottaghi, R., X. Chen, X. Liu, et al. The role of context for object detection and semantic segmentation in the wild. In The IEEE Conference on Computer Vision and Pattern Recognition (CVPR). 2014. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mottaghi%2C%20R.%20Chen%2C%20X.%20Liu%2C%20X.%20The%20role%20of%20context%20for%20object%20detection%20and%20semantic%20segmentation%20in%20the%20wild%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mottaghi%2C%20R.%20Chen%2C%20X.%20Liu%2C%20X.%20The%20role%20of%20context%20for%20object%20detection%20and%20semantic%20segmentation%20in%20the%20wild%202014"
+        }
+    ]
+}

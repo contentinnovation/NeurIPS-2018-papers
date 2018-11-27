@@ -1,0 +1,214 @@
+{
+    "filename": "8223-total-stochastic-gradient-algorithms-and-applications-in-reinforcement-learning.pdf",
+    "metadata": {
+        "title": "Total stochastic gradient algorithms and applications in reinforcement learning",
+        "author": "Paavo Parmas",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8223-total-stochastic-gradient-algorithms-and-applications-in-reinforcement-learning.pdf"
+        },
+        "abstract": "Backpropagation and the chain rule of derivatives have been prominent; however, the total derivative rule has not enjoyed the same amount of attention. In this work we show how the total derivative rule leads to an intuitive visual framework for creating gradient estimators on graphical models. In particular, previous \u201dpolicy gradient theorems\u201d are easily derived. We derive new gradient estimators based on density estimation, as well as a likelihood ratio gradient, which \u201djumps\u201d to an intermediate node, not directly to the objective function. We evaluate our methods on model-based policy gradient algorithms, achieve good performance, and present evidence towards demystifying the success of the popular PILCO algorithm [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>]."
+    },
+    "keywords": [
+        {
+            "term": "density estimation",
+            "url": "https://en.wikipedia.org/wiki/density_estimation"
+        },
+        {
+            "term": "total derivative",
+            "url": "https://en.wikipedia.org/wiki/total_derivative"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "gradient theorem",
+            "url": "https://en.wikipedia.org/wiki/gradient_theorem"
+        },
+        {
+            "term": "likelihood ratio",
+            "url": "https://en.wikipedia.org/wiki/likelihood_ratio"
+        },
+        {
+            "term": "intermediate node",
+            "url": "https://en.wikipedia.org/wiki/intermediate_node"
+        }
+    ],
+    "highlights": [
+        "Schulman et al provided a method to obtain gradient estimators on stochastic computation graphs by differentiating a surrogate loss [<a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>]",
+        "We focus our discussion on reparameterization gradients gradients, but we mentioned the Gaussian identities to emphasize that reparameterization gradients gradients are not the only possible pathwise estimators, e.g. the derivative w.r.t",
+        "The algorithms have general applicability, to make a concrete example, we explain them in reference to model-based policy gradients using a differentiable model considered in our previous work [<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>], for which the probabilistic computation graphs is given in Fig. 2b",
+        "We derived new gradient estimators based on density estimation (DEL), as well as based on the idea to perform a jump estimation to an intermediate node, not directly to the expected cost (GS)",
+        "The GS estimator allows differentiating through discrete computations in a manner that will still allow backpropagating pathwise derivatives",
+        "We hope that our work could lead towards new automatic gradient estimation software frameworks which are not only concerned with computational speed, but the accuracy of the estimated gradients"
+    ],
+    "key_statements": [
+        "Schulman et al provided a method to obtain gradient estimators on stochastic computation graphs by differentiating a surrogate loss [<a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>]",
+        "We focus our discussion on reparameterization gradients gradients, but we mentioned the Gaussian identities to emphasize that reparameterization gradients gradients are not the only possible pathwise estimators, e.g. the derivative w.r.t",
+        "In our recent work [<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>], we introduced the batch importance weighted Likelihood ratio estimators estimator (BIW-Likelihood ratio estimators)",
+        "Jump gradient estimators sum the gradients across all computational paths between two nodes and directly compute total derivatives, e.g",
+        "The algorithms have general applicability, to make a concrete example, we explain them in reference to model-based policy gradients using a differentiable model considered in our previous work [<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>], for which the probabilistic computation graphs is given in Fig. 2b",
+        "The GTP+\u03c3n experiments show that injecting more noise into the model predictions can solve the problem",
+        "The main important result is that GTP matches PILCO in the Tip Cost scenarios",
+        "In our previous work [<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>], one of the concerns was that TP had not matched PILCO in this scenario",
+        "We derived new gradient estimators based on density estimation (DEL), as well as based on the idea to perform a jump estimation to an intermediate node, not directly to the expected cost (GS)",
+        "The GS estimator allows differentiating through discrete computations in a manner that will still allow backpropagating pathwise derivatives",
+        "We hope that our work could lead towards new automatic gradient estimation software frameworks which are not only concerned with computational speed, but the accuracy of the estimated gradients"
+    ],
+    "summary": [
+        "Schulman et al provided a method to obtain gradient estimators on stochastic computation graphs by differentiating a surrogate loss [<a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>].",
+        "Jump gradient estimators sum the gradients across all computational paths between two nodes and directly compute total derivatives, e.g. The task is to estimate the derivative of the expectation at a distal node i w.r.t. the parameters at an earlier node j: d d\u03b6j",
+        "3. Construct total derivative estimators from IN to i, and apply Eq 3 to combine the gradients.",
+        "In Sec. 3.3 we explained how a particle-based mixture distribution is used for creating gradient estimators.",
+        "The algorithms have general applicability, to make a concrete example, we explain them in reference to model-based policy gradients using a differentiable model considered in our previous work [<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>], for which the PCG is given in Fig. 2b.",
+        "Following the explanation in Sec. 5, one could attempt to estimate the distribution parameters \u0393 from a set of sampled particles, apply the LR gradient using the estimated distribution q(x; \u0393).",
+        "One must compute derivatives of \u03bcand \u03a3w.r.t. the particles xi, carry the gradient to the policy parameters using the chain rule while differentiating through the model, which is straight-forward.",
+        "To use the LR method, we first apply the second half total gradient equation on d\u0393m/d\u03b8 to obtain terms r\u2208{\u03b8\u2192xk }/I N",
+        "Efficient algorithm for accumulating gradients In Fig. 3, for each xk node, we want to perform an LR jump to every xm node after k and compute a gradient with the Gaussian approximation of the distribution at node m.",
+        "We compared particle-based gradients with our new estimators to PILCO.",
+        "The policy was optimized using an RMSprop-like learning rule [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>] from our previous work [<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>], which normalizes the gradients using the sample variance of the gradients from different particles.",
+        "We took some results from our previous work [<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>]: PILCO; reparameterization gradients (RP); Gaussian resampling (GR); batch importance weighted LR, with a batch importance weighted baseline (LR); total propagation combining BIW-LR and RP (TP).",
+        "We have created an intuitive graphical framework for visualizing and deriving gradient estimators in a graph of probabilistic computations.",
+        "We derived new gradient estimators based on density estimation (DEL), as well as based on the idea to perform a jump estimation to an intermediate node, not directly to the expected cost (GS).",
+        "We hope that our work could lead towards new automatic gradient estimation software frameworks which are not only concerned with computational speed, but the accuracy of the estimated gradients"
+    ],
+    "headline": "In this work we show how the total derivative rule leads to an intuitive visual framework for creating gradient estimators on graphical models",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Asadi, K., Allen, C., Roderick, M., Mohamed, A.-r., Konidaris, G., and Littman, M. (2017). Mean actor critic. arXiv preprint arXiv:1709.00503.",
+            "arxiv_url": "https://arxiv.org/pdf/1709.00503"
+        },
+        {
+            "id": "2",
+            "entry": "[2] AUEB, M. T. R. and Lazaro-Gredilla, M. (2015). Local expectation gradients for black box variational inference. In Advances in neural information processing systems, pages 2638\u20132646.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=AUEB%2C%20M.T.R.%20Lazaro-Gredilla%2C%20M.%20Local%20expectation%20gradients%20for%20black%20box%20variational%20inference%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=AUEB%2C%20M.T.R.%20Lazaro-Gredilla%2C%20M.%20Local%20expectation%20gradients%20for%20black%20box%20variational%20inference%202015"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Ciosek, K. and Whiteson, S. (2017). Expected policy gradients. arXiv preprint arXiv:1706.05374.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.05374"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Deisenroth, M. P., Fox, D., and Rasmussen, C. E. (2015). Gaussian processes for data-efficient learning in robotics and control. IEEE Transactions on Pattern Analysis and Machine Intelligence, 37(2):408\u2013423.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Deisenroth%2C%20M.P.%20Fox%2C%20D.%20Rasmussen%2C%20C.E.%20Gaussian%20processes%20for%20data-efficient%20learning%20in%20robotics%20and%20control%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Deisenroth%2C%20M.P.%20Fox%2C%20D.%20Rasmussen%2C%20C.E.%20Gaussian%20processes%20for%20data-efficient%20learning%20in%20robotics%20and%20control%202015"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Deisenroth, M. P. and Rasmussen, C. E. (2011). PILCO: A model-based and data-efficient approach to policy search. In International Conference on Machine Learning, pages 465\u2013472.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Deisenroth%2C%20M.P.%20Rasmussen%2C%20C.E.%20PILCO%3A%20A%20model-based%20and%20data-efficient%20approach%20to%20policy%20search%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Deisenroth%2C%20M.P.%20Rasmussen%2C%20C.E.%20PILCO%3A%20A%20model-based%20and%20data-efficient%20approach%20to%20policy%20search%202011"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Gal, Y., McAllister, R., and Rasmussen, C. (2016). Improving PILCO with bayesian neural network dynamics models. In Workshop on Data-efficient Machine Learning, ICML.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gal%2C%20Y.%20McAllister%2C%20R.%20Rasmussen%2C%20C.%20Improving%20PILCO%20with%20bayesian%20neural%20network%20dynamics%20models%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gal%2C%20Y.%20McAllister%2C%20R.%20Rasmussen%2C%20C.%20Improving%20PILCO%20with%20bayesian%20neural%20network%20dynamics%20models%202016"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Greensmith, E., Bartlett, P. L., and Baxter, J. (2004). Variance reduction techniques for gradient estimates in reinforcement learning. Journal of Machine Learning Research, 5(Nov):1471\u20131530.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Greensmith%2C%20E.%20Bartlett%2C%20P.L.%20Baxter%2C%20J.%20Variance%20reduction%20techniques%20for%20gradient%20estimates%20in%20reinforcement%20learning%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Greensmith%2C%20E.%20Bartlett%2C%20P.L.%20Baxter%2C%20J.%20Variance%20reduction%20techniques%20for%20gradient%20estimates%20in%20reinforcement%20learning%202004"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Heess, N., Wayne, G., Silver, D., Lillicrap, T., Erez, T., and Tassa, Y. (2015). Learning continuous control policies by stochastic value gradients. In Advances in Neural Information Processing Systems, pages 2944\u20132952.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Heess%2C%20N.%20Wayne%2C%20G.%20Silver%2C%20D.%20Lillicrap%2C%20T.%20Learning%20continuous%20control%20policies%20by%20stochastic%20value%20gradients%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Heess%2C%20N.%20Wayne%2C%20G.%20Silver%2C%20D.%20Lillicrap%2C%20T.%20Learning%20continuous%20control%20policies%20by%20stochastic%20value%20gradients%202015"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Hoffman, M. D., Blei, D. M., Wang, C., and Paisley, J. (2013). Stochastic variational inference. The Journal of Machine Learning Research, 14(1):1303\u20131347.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hoffman%2C%20M.D.%20Blei%2C%20D.M.%20Wang%2C%20C.%20Paisley%2C%20J.%20Stochastic%20variational%20inference%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hoffman%2C%20M.D.%20Blei%2C%20D.M.%20Wang%2C%20C.%20Paisley%2C%20J.%20Stochastic%20variational%20inference%202013"
+        },
+        {
+            "id": "10",
+            "entry": "[10] McHutchon, A. (2014). Modelling nonlinear dynamical systems with Gaussian Processes. PhD thesis, University of Cambridge.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=McHutchon%2C%20A.%20Modelling%20nonlinear%20dynamical%20systems%20with%20Gaussian%20Processes%202014"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Mnih, A. and Rezende, D. (2016). Variational inference for Monte Carlo objectives. In International Conference on Machine Learning, pages 2188\u20132196.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20A.%20Rezende%2C%20D.%20Variational%20inference%20for%20Monte%20Carlo%20objectives%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20A.%20Rezende%2C%20D.%20Variational%20inference%20for%20Monte%20Carlo%20objectives%202016"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Murray, I. (2016). Differentiation of the Cholesky decomposition. arXiv preprint arXiv:1602.07527.",
+            "arxiv_url": "https://arxiv.org/pdf/1602.07527"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Naumann, U. (2008). Optimal Jacobian accumulation is NP-complete. Mathematical Programming, 112(2):427\u2013441.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Naumann%2C%20U.%20Optimal%20Jacobian%20accumulation%20is%20NP-complete%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Naumann%2C%20U.%20Optimal%20Jacobian%20accumulation%20is%20NP-complete%202008"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Parmas, P., Rasmussen, C. E., Peters, J., and Doya, K. (2018). PIPPS: Flexible model-based policy search robust to the curse of chaos. In International Conference on Machine Learning.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Parmas%2C%20P.%20Rasmussen%2C%20C.E.%20Peters%2C%20J.%20Doya%2C%20K.%20PIPPS%3A%20Flexible%20model-based%20policy%20search%20robust%20to%20the%20curse%20of%20chaos%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Parmas%2C%20P.%20Rasmussen%2C%20C.E.%20Peters%2C%20J.%20Doya%2C%20K.%20PIPPS%3A%20Flexible%20model-based%20policy%20search%20robust%20to%20the%20curse%20of%20chaos%202018"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Pearl, J. (2014). Probabilistic reasoning in intelligent systems: networks of plausible inference. Elsevier.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pearl%2C%20J.%20Probabilistic%20reasoning%20in%20intelligent%20systems%3A%20networks%20of%20plausible%20inference%202014"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Rasmussen, C. E. and Williams, C. K. I. (2006). Gaussian Processes for Machine Learning. MIT Press.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rasmussen%2C%20C.E.%20Williams%2C%20C.K.I.%20Gaussian%20Processes%20for%20Machine%20Learning%202006"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Rezende, D. J., Mohamed, S., and Wierstra, D. (2014). Stochastic backpropagation and approximate inference in deep generative models. arXiv preprint arXiv:1401.4082.",
+            "arxiv_url": "https://arxiv.org/pdf/1401.4082"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Schulman, J., Heess, N., Weber, T., and Abbeel, P. (2015). Gradient estimation using stochastic computation graphs. In Advances in Neural Information Processing Systems, pages 3528\u20133536.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schulman%2C%20J.%20Heess%2C%20N.%20Weber%2C%20T.%20Abbeel%2C%20P.%20Gradient%20estimation%20using%20stochastic%20computation%20graphs%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schulman%2C%20J.%20Heess%2C%20N.%20Weber%2C%20T.%20Abbeel%2C%20P.%20Gradient%20estimation%20using%20stochastic%20computation%20graphs%202015"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Silver, D., Lever, G., Heess, N., Degris, T., Wierstra, D., and Riedmiller, M. (2014). Deterministic policy gradient algorithms. In International Conference on Machine Learning.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silver%2C%20D.%20Lever%2C%20G.%20Heess%2C%20N.%20Degris%2C%20T.%20Deterministic%20policy%20gradient%20algorithms%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silver%2C%20D.%20Lever%2C%20G.%20Heess%2C%20N.%20Degris%2C%20T.%20Deterministic%20policy%20gradient%20algorithms%202014"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Sutton, R. S. and Barto, A. G. (1998). Reinforcement learning: An introduction, volume 1. MIT press Cambridge.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20R.S.%20Barto%2C%20A.G.%20Reinforcement%20learning%3A%20An%20introduction%2C%20volume%201%201998"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Sutton, R. S., McAllester, D. A., Singh, S. P., and Mansour, Y. (2000). Policy gradient methods for reinforcement learning with function approximation. In Advances in neural information processing systems, pages 1057\u20131063.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20R.S.%20McAllester%2C%20D.A.%20Singh%2C%20S.P.%20Mansour%2C%20Y.%20Policy%20gradient%20methods%20for%20reinforcement%20learning%20with%20function%20approximation%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutton%2C%20R.S.%20McAllester%2C%20D.A.%20Singh%2C%20S.P.%20Mansour%2C%20Y.%20Policy%20gradient%20methods%20for%20reinforcement%20learning%20with%20function%20approximation%202000"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Tieleman, T. and Hinton, G. (2012). Lecture 6.5-rmsprop: Divide the gradient by a running average of its recent magnitude. COURSERA: Neural networks for machine learning, 4(2):26\u201331.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tieleman%2C%20T.%20Hinton%2C%20G.%20Lecture%206.5-rmsprop%3A%20Divide%20the%20gradient%20by%20a%20running%20average%20of%20its%20recent%20magnitude%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tieleman%2C%20T.%20Hinton%2C%20G.%20Lecture%206.5-rmsprop%3A%20Divide%20the%20gradient%20by%20a%20running%20average%20of%20its%20recent%20magnitude%202012"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Tokui, S. and Sato, I. (2017). Evaluating the variance of likelihood-ratio gradient estimators. In International Conference on Machine Learning, pages 3414\u20133423.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tokui%2C%20S.%20Sato%2C%20I.%20Evaluating%20the%20variance%20of%20likelihood-ratio%20gradient%20estimators%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tokui%2C%20S.%20Sato%2C%20I.%20Evaluating%20the%20variance%20of%20likelihood-ratio%20gradient%20estimators%202017"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Van Seijen, H., Van Hasselt, H., Whiteson, S., and Wiering, M. (2009). A theoretical and empirical analysis of expected sarsa. In Adaptive Dynamic Programming and Reinforcement Learning, 2009. ADPRL\u201909. IEEE Symposium on, pages 177\u2013184. IEEE. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Van%20Seijen%2C%20H.%20Van%20Hasselt%2C%20H.%20Whiteson%2C%20S.%20Wiering%2C%20M.%20A%20theoretical%20and%20empirical%20analysis%20of%20expected%20sarsa%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Van%20Seijen%2C%20H.%20Van%20Hasselt%2C%20H.%20Whiteson%2C%20S.%20Wiering%2C%20M.%20A%20theoretical%20and%20empirical%20analysis%20of%20expected%20sarsa%202009"
+        }
+    ]
+}

@@ -1,0 +1,358 @@
+{
+    "filename": "7727-context-dependent-upper-confidence-bounds-for-directed-exploration.pdf",
+    "metadata": {
+        "title": "Context-dependent upper-confidence bounds for directed exploration",
+        "author": "Raksha Kumaraswamy, Matthew Schlegel, Adam White, Martha White",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7727-context-dependent-upper-confidence-bounds-for-directed-exploration.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Directed exploration strategies for reinforcement learning are critical for learning an optimal policy in a minimal number of interactions with the environment. Many algorithms use optimism to direct exploration, either through visitation estimates or upper confidence bounds, as opposed to data-inefficient strategies like \u270f-greedy that use random, undirected exploration. Most data-efficient exploration methods require significant computation, typically relying on a learned model to guide exploration. Least-squares methods have the potential to provide some of the data-efficiency benefits of model-based approaches\u2014because they summarize past interactions\u2014with the computation closer to that of model-free approaches. In this work, we provide a novel, computationally efficient, incremental exploration strategy, leveraging this property of least-squares temporal difference learning (LSTD). We derive upper confidence bounds on the action-values learned by LSTD, with context-dependent (or state-dependent) noise variance. Such contextdependent noise focuses exploration on a subset of variable states, and allows for reduced exploration in other states. We empirically demonstrate that our algorithm can converge more quickly than other incremental exploration strategies using confidence estimates on action-values."
+    },
+    "keywords": [
+        {
+            "term": "UCLS",
+            "url": "https://en.wikipedia.org/wiki/UCLS"
+        },
+        {
+            "term": "temporal difference learning",
+            "url": "https://en.wikipedia.org/wiki/temporal_difference_learning"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "markov decision process",
+            "url": "https://en.wikipedia.org/wiki/markov_decision_process"
+        },
+        {
+            "term": "policy iteration",
+            "url": "https://en.wikipedia.org/wiki/policy_iteration"
+        },
+        {
+            "term": "temporal difference",
+            "url": "https://en.wikipedia.org/wiki/temporal_difference"
+        }
+    ],
+    "highlights": [
+        "We focus on the problem of learning an optimal policy for a Markov decision process, from onpolicy interaction",
+        "E[AT+\u232b \u0304T \u232b \u0304T>AT+>] = 2E[A+T zT zT>AT+>]\n4 Upper Confidence Least Squares: Estimating upper confidence bounds for LSTD in control",
+        "UCBootstrap and Upper Confidence Least Squares learn at a similar rate in Puddle World, which is a cost-to-goal domain",
+        "This paper develops a sound upper confidence bound on the value estimates for least-squares temporal difference learning (LSTD), without making i.i.d. assumptions about noise distributions",
+        "We introduce an algorithm, called Upper Confidence Least Squares, that estimates these upper confidence bounds incrementally, for policy iteration",
+        "We demonstrate empirically that Upper Confidence Least Squares requires far fewer exploration steps to find high-quality policies compared to several baselines, across domains chosen to highlight different exploration difficulties"
+    ],
+    "key_statements": [
+        "We focus on the problem of learning an optimal policy for a Markov decision process, from onpolicy interaction",
+        "We provide an incremental, model-free exploration algorithm with fast converging upper confidence bounds, called Upper Confidence Least Squares: Upper-Confidence Least-Squares",
+        "We demonstrate in several simulated domains that Upper Confidence Least Squares outperforms Delayed Gaussian Process Q-learning, UCBootstrap, and RLSVI",
+        "We make a step towards computing such values incrementally, under function approximation, by providing upper confidence bounds for value estimates made by LSTD, for a fixed policy",
+        "E[AT+\u232b \u0304T \u232b \u0304T>AT+>] = 2E[A+T zT zT>AT+>]\n4 Upper Confidence Least Squares: Estimating upper confidence bounds for LSTD in control",
+        "We present Upper Confidence Least Squares (UCLS)2, a control algorithm, which incrementally estimates the upper confidence bounds provided in Theorem 1, for guiding on-policy exploration",
+        "UCBootstrap and Upper Confidence Least Squares learn at a similar rate in Puddle World, which is a cost-to-goal domain",
+        "In Figure 2, we show the effect of various p values on the performance of the algorithm resulting from Corollary 1, which we call Global Variance-UCB (GV-UCB)",
+        "This paper develops a sound upper confidence bound on the value estimates for least-squares temporal difference learning (LSTD), without making i.i.d. assumptions about noise distributions",
+        "We introduce an algorithm, called Upper Confidence Least Squares, that estimates these upper confidence bounds incrementally, for policy iteration",
+        "We demonstrate empirically that Upper Confidence Least Squares requires far fewer exploration steps to find high-quality policies compared to several baselines, across domains chosen to highlight different exploration difficulties",
+        "Though we considered a fixed representation for Upper Confidence Least Squares, it is feasible that an analysis for the non-stationary case could be used as well for the setting where the representation is being adapted over time"
+    ],
+    "summary": [
+        "We focus on the problem of learning an optimal policy for a Markov decision process, from onpolicy interaction.",
+        "Computing confidence intervals for action-values in RL has remained an open problem, and we provide the first theoretically sound result for obtaining upper confidence bounds for policy evaluation under function approximation, without making strong assumptions on the noise.",
+        "To use optimism in LSTD for control, we need to explicitly compute upper confidence bounds.",
+        "The use of upper confidence bounds on value estimates for exploration has been well-studied and motivated theoretically in online learning [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>].",
+        "We make a step towards computing such values incrementally, under function approximation, by providing upper confidence bounds for value estimates made by LSTD, for a fixed policy.",
+        "Consider the goal of obtaining a confidence interval around value estimates learned incrementally by LSTD for a fixed policy \u21e1.",
+        "4 UCLS: Estimating upper confidence bounds for LSTD in control",
+        "We present Upper Confidence Least Squares (UCLS)2, a control algorithm, which incrementally estimates the upper confidence bounds provided in Theorem 1, for guiding on-policy exploration.",
+        "As is common for LSTD with control, we use an exponential moving average, rather than a sample average, to estimate AT , bT and the upper confidence bound.",
+        "We propose two simple approaches to this issue: updating C based on locality and adaptively adjusting the initialization to Cii. Each covariance estimate Cij for features i and j should only be updated if the sampled outer-product is relevant, with the agent in the region where i and j are active.",
+        "We conducted several experiments to investigate the benefits of UCLS\u2019 directed exploration against other methods that use confidence intervals for action selection, to evaluate sensitivity of UCLS\u2019s performance with respect to its key parameter p, and to contrast the advantage contextual variance estimates offer over global variance estimates in control.",
+        "This domain is used to highlight how exploration techniques perform when the reward signal is sparse, and initializing the value function to zero is not optimistic.",
+        "This domain highlights a common difficulty for traditional exploration methods: high magnitude negative rewards, which often cause the agent to erroneously decrease its value estimates too quickly.",
+        "This paper develops a sound upper confidence bound on the value estimates for least-squares temporal difference learning (LSTD), without making i.i.d. assumptions about noise distributions.",
+        "We introduce an algorithm, called UCLS, that estimates these upper confidence bounds incrementally, for policy iteration.",
+        "The upper confidence bounds for action-values for fixed policies are one of the few available under function approximation, and so a step towards exploration with optimistic values in the general case.",
+        "We demonstrate empirically that UCLS requires far fewer exploration steps to find high-quality policies compared to several baselines, across domains chosen to highlight different exploration difficulties"
+    ],
+    "headline": "We provide a novel, computationally efficient, incremental exploration strategy, leveraging this property of least-squares temporal difference learning ",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Y. Abbasi-Yadkori and C. Szepesvari. Bayesian Optimal Control of Smoothly Parameterized Systems: The Lazy Posterior Sampling Algorithm. In Uncertainty in Artificial Intelligence, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abbasi-Yadkori%2C%20Y.%20Szepesvari%2C%20C.%20Bayesian%20Optimal%20Control%20of%20Smoothly%20Parameterized%20Systems%3A%20The%20Lazy%20Posterior%20Sampling%20Algorithm%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abbasi-Yadkori%2C%20Y.%20Szepesvari%2C%20C.%20Bayesian%20Optimal%20Control%20of%20Smoothly%20Parameterized%20Systems%3A%20The%20Lazy%20Posterior%20Sampling%20Algorithm%202014"
+        },
+        {
+            "id": "2",
+            "entry": "[2] P. Auer and R. Ortner. Logarithmic Online Regret Bounds for Undiscounted Reinforcement Learning. Advances in Neural Information Processing Systems, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Auer%2C%20P.%20Ortner%2C%20R.%20Logarithmic%20Online%20Regret%20Bounds%20for%20Undiscounted%20Reinforcement%20Learning%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Auer%2C%20P.%20Ortner%2C%20R.%20Logarithmic%20Online%20Regret%20Bounds%20for%20Undiscounted%20Reinforcement%20Learning%202006"
+        },
+        {
+            "id": "3",
+            "entry": "[3] P. L. Bartlett and A. Tewari. REGAL - A Regularization based Algorithm for Reinforcement Learning in Weakly Communicating MDPs. In Conference on Uncertainty in Artificial Intelligence, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bartlett%2C%20P.L.%20Tewari%2C%20A.%20REGAL%20-%20A%20Regularization%20based%20Algorithm%20for%20Reinforcement%20Learning%20in%20Weakly%20Communicating%20MDPs%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bartlett%2C%20P.L.%20Tewari%2C%20A.%20REGAL%20-%20A%20Regularization%20based%20Algorithm%20for%20Reinforcement%20Learning%20in%20Weakly%20Communicating%20MDPs%202009"
+        },
+        {
+            "id": "4",
+            "entry": "[4] J. A. Boyan. Technical update: Least-squares temporal difference learning. Machine learning, 49(2-3): 233\u2013246, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Boyan%2C%20J.A.%20Technical%20update%3A%20Least-squares%20temporal%20difference%20learning%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Boyan%2C%20J.A.%20Technical%20update%3A%20Least-squares%20temporal%20difference%20learning%202002"
+        },
+        {
+            "id": "5",
+            "entry": "[5] S. J. Bradtke and A. G. Barto. Linear least-squares algorithms for temporal difference learning. Machine learning, 22(1-3):33\u201357, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bradtke%2C%20S.J.%20Barto%2C%20A.G.%20Linear%20least-squares%20algorithms%20for%20temporal%20difference%20learning%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bradtke%2C%20S.J.%20Barto%2C%20A.G.%20Linear%20least-squares%20algorithms%20for%20temporal%20difference%20learning%201996"
+        },
+        {
+            "id": "6",
+            "entry": "[6] R. Brafman and M. Tennenholtz. R-max-a general polynomial time algorithm for near-optimal reinforcement learning. The Journal of Machine Learning Research, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Brafman%2C%20R.%20Tennenholtz%2C%20M.%20R-max-a%20general%20polynomial%20time%20algorithm%20for%20near-optimal%20reinforcement%20learning%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Brafman%2C%20R.%20Tennenholtz%2C%20M.%20R-max-a%20general%20polynomial%20time%20algorithm%20for%20near-optimal%20reinforcement%20learning%202003"
+        },
+        {
+            "id": "7",
+            "entry": "[7] W. Chu, L. Li, L. Reyzin, and R. E. Schapire. Contextual Bandits with Linear Payoff Functions. In International Conference on Artificial Intelligence and Statistics, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chu%2C%20W.%20Li%2C%20L.%20Reyzin%2C%20L.%20Schapire%2C%20R.E.%20Contextual%20Bandits%20with%20Linear%20Payoff%20Functions%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chu%2C%20W.%20Li%2C%20L.%20Reyzin%2C%20L.%20Schapire%2C%20R.E.%20Contextual%20Bandits%20with%20Linear%20Payoff%20Functions%202011"
+        },
+        {
+            "id": "8",
+            "entry": "[8] R. Grande, T. Walsh, and J. How. Sample Efficient Reinforcement Learning with Gaussian Processes. International Conference on Machine Learning, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Grande%2C%20R.%20Walsh%2C%20T.%20How%2C%20J.%20Sample%20Efficient%20Reinforcement%20Learning%20with%20Gaussian%20Processes%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Grande%2C%20R.%20Walsh%2C%20T.%20How%2C%20J.%20Sample%20Efficient%20Reinforcement%20Learning%20with%20Gaussian%20Processes%202014"
+        },
+        {
+            "id": "9",
+            "entry": "[9] T. Jaksch, R. Ortner, and P. Auer. Near-optimal Regret Bounds for Reinforcement Learning. The Journal of Machine Learning Research, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jaksch%2C%20T.%20Ortner%2C%20R.%20Auer%2C%20P.%20Near-optimal%20Regret%20Bounds%20for%20Reinforcement%20Learning%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jaksch%2C%20T.%20Ortner%2C%20R.%20Auer%2C%20P.%20Near-optimal%20Regret%20Bounds%20for%20Reinforcement%20Learning%202010"
+        },
+        {
+            "id": "10",
+            "entry": "[10] N. Jong and P. Stone. Model-based exploration in continuous state spaces. Abstraction, Reformulation, and Approximation, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jong%2C%20N.%20Stone%2C%20P.%20Model-based%20exploration%20in%20continuous%20state%20spaces.%20Abstraction%2C%20Reformulation%202007"
+        },
+        {
+            "id": "11",
+            "entry": "[11] T. Jung and P. Stone. Gaussian processes for sample efficient reinforcement learning with RMAX-like exploration. In Machine Learning: ECML PKDD, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jung%2C%20T.%20Stone%2C%20P.%20Gaussian%20processes%20for%20sample%20efficient%20reinforcement%20learning%20with%20RMAX-like%20exploration%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jung%2C%20T.%20Stone%2C%20P.%20Gaussian%20processes%20for%20sample%20efficient%20reinforcement%20learning%20with%20RMAX-like%20exploration%202010"
+        },
+        {
+            "id": "12",
+            "entry": "[12] L. P. Kaelbling. Learning in embedded systems. MIT press, 1993.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kaelbling%2C%20L.P.%20Learning%20in%20embedded%20systems%201993"
+        },
+        {
+            "id": "13",
+            "entry": "[13] L. P. Kaelbling, M. L. Littman, and A. W. Moore. Reinforcement learning: A survey. Journal of Artificial Intelligence Research, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kaelbling%2C%20L.P.%20Littman%2C%20M.L.%20Moore%2C%20A.W.%20Reinforcement%20learning%3A%20A%20survey%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kaelbling%2C%20L.P.%20Littman%2C%20M.L.%20Moore%2C%20A.W.%20Reinforcement%20learning%3A%20A%20survey%201996"
+        },
+        {
+            "id": "14",
+            "entry": "[14] S. Kakade, M. Kearns, and J. Langford. Exploration in metric state spaces. In International Conference on Machine Learning, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kakade%2C%20S.%20Kearns%2C%20M.%20Langford%2C%20J.%20Exploration%20in%20metric%20state%20spaces%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kakade%2C%20S.%20Kearns%2C%20M.%20Langford%2C%20J.%20Exploration%20in%20metric%20state%20spaces%202003"
+        },
+        {
+            "id": "15",
+            "entry": "[15] K. Kawaguchi. Bounded Optimal Exploration in MDP. In AAAI Conference on Artificial Intelligence, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kawaguchi%2C%20K.%20Bounded%20Optimal%20Exploration%20in%20MDP%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kawaguchi%2C%20K.%20Bounded%20Optimal%20Exploration%20in%20MDP%202016"
+        },
+        {
+            "id": "16",
+            "entry": "[16] M. J. Kearns and S. P. Singh. Near-Optimal Reinforcement Learning in Polynomial Time. Machine Learning, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kearns%2C%20M.J.%20Singh%2C%20S.P.%20Near-Optimal%20Reinforcement%20Learning%20in%20Polynomial%20Time%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kearns%2C%20M.J.%20Singh%2C%20S.P.%20Near-Optimal%20Reinforcement%20Learning%20in%20Polynomial%20Time%202002"
+        },
+        {
+            "id": "17",
+            "entry": "[17] M. G. Lagoudakis and R. Parr. Least-squares policy iteration. The Journal of Machine Learning Research, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lagoudakis%2C%20M.G.%20Parr%2C%20R.%20Least-squares%20policy%20iteration%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lagoudakis%2C%20M.G.%20Parr%2C%20R.%20Least-squares%20policy%20iteration%202003"
+        },
+        {
+            "id": "18",
+            "entry": "[18] N. Levine, T. Zahavy, D. J. Mankowitz, A. Tamar, and S. Mannor. Shallow updates for deep reinforcement learning. In Advances in Neural Information Processing Systems, pages 3138\u20133148, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Levine%2C%20N.%20Zahavy%2C%20T.%20Mankowitz%2C%20D.J.%20Tamar%2C%20A.%20Shallow%20updates%20for%20deep%20reinforcement%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Levine%2C%20N.%20Zahavy%2C%20T.%20Mankowitz%2C%20D.J.%20Tamar%2C%20A.%20Shallow%20updates%20for%20deep%20reinforcement%20learning%202017"
+        },
+        {
+            "id": "19",
+            "entry": "[19] L. Li, M. Littman, and C. Mansley. Online exploration in least-squares policy iteration. In International Conference on Autonomous Agents and Multiagent Systems, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20L.%20Littman%2C%20M.%20Mansley%2C%20C.%20Online%20exploration%20in%20least-squares%20policy%20iteration%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20L.%20Littman%2C%20M.%20Mansley%2C%20C.%20Online%20exploration%20in%20least-squares%20policy%20iteration%202009"
+        },
+        {
+            "id": "20",
+            "entry": "[20] L. Li, W. Chu, J. Langford, and R. E. Schapire. A contextual-bandit approach to personalized news article recommendation. In World Wide Web Conference, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20L.%20Chu%2C%20W.%20Langford%2C%20J.%20Schapire%2C%20R.E.%20A%20contextual-bandit%20approach%20to%20personalized%20news%20article%20recommendation%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20L.%20Chu%2C%20W.%20Langford%2C%20J.%20Schapire%2C%20R.E.%20A%20contextual-bandit%20approach%20to%20personalized%20news%20article%20recommendation%202010"
+        },
+        {
+            "id": "21",
+            "entry": "[21] J. Martin, S. N. Sasikumar, T. Everitt, and M. Hutter. Count-Based Exploration in Feature Space for Reinforcement Learning. In International Joint Conference on Artificial IntelligenceI, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Martin%2C%20J.%20Sasikumar%2C%20S.N.%20Everitt%2C%20T.%20Hutter%2C%20M.%20Count-Based%20Exploration%20in%20Feature%20Space%20for%20Reinforcement%20Learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Martin%2C%20J.%20Sasikumar%2C%20S.N.%20Everitt%2C%20T.%20Hutter%2C%20M.%20Count-Based%20Exploration%20in%20Feature%20Space%20for%20Reinforcement%20Learning%202017"
+        },
+        {
+            "id": "22",
+            "entry": "[22] N. Meuleau and P. Bourgine. Exploration of Multi-State Environments - Local Measures and BackPropagation of Uncertainty. Machine Learning, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Meuleau%2C%20N.%20Bourgine%2C%20P.%20Exploration%20of%20Multi-State%20Environments%20-%20Local%20Measures%20and%20BackPropagation%20of%20Uncertainty%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Meuleau%2C%20N.%20Bourgine%2C%20P.%20Exploration%20of%20Multi-State%20Environments%20-%20Local%20Measures%20and%20BackPropagation%20of%20Uncertainty%201999"
+        },
+        {
+            "id": "23",
+            "entry": "[23] C. D. Meyer, Jr. Generalized inversion of modified matrices. SIAM Journal on Applied Mathematics, 24 (3):315\u2013323, 1973.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Meyer%2C%20Jr%2C%20C.D.%20Generalized%20inversion%20of%20modified%20matrices%201973",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Meyer%2C%20Jr%2C%20C.D.%20Generalized%20inversion%20of%20modified%20matrices%201973"
+        },
+        {
+            "id": "24",
+            "entry": "[24] K. S. Miller. On the inverse of the sum of matrices. Mathematics magazine, 54(2):67\u201372, 1981.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Miller%2C%20K.S.%20On%20the%20inverse%20of%20the%20sum%20of%20matrices%201981",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Miller%2C%20K.S.%20On%20the%20inverse%20of%20the%20sum%20of%20matrices%201981"
+        },
+        {
+            "id": "25",
+            "entry": "[25] T. M. Moerland, J. Broekens, and C. M. Jonker. Efficient exploration with Double Uncertain Value Networks. In Advances in Neural Information Processing Systems, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Moerland%2C%20T.M.%20Broekens%2C%20J.%20Jonker%2C%20C.M.%20Efficient%20exploration%20with%20Double%20Uncertain%20Value%20Networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Moerland%2C%20T.M.%20Broekens%2C%20J.%20Jonker%2C%20C.M.%20Efficient%20exploration%20with%20Double%20Uncertain%20Value%20Networks%202017"
+        },
+        {
+            "id": "26",
+            "entry": "[26] A. Nouri and M. L. Littman. Multi-resolution Exploration in Continuous Spaces. In Advances in Neural Information Processing Systems, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nouri%2C%20A.%20Littman%2C%20M.L.%20Multi-resolution%20Exploration%20in%20Continuous%20Spaces%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nouri%2C%20A.%20Littman%2C%20M.L.%20Multi-resolution%20Exploration%20in%20Continuous%20Spaces%202009"
+        },
+        {
+            "id": "27",
+            "entry": "[27] R. Ortner and D. Ryabko. Online Regret Bounds for Undiscounted Continuous Reinforcement Learning. In Advances in Neural Information Processing Systems, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ortner%2C%20R.%20Ryabko%2C%20D.%20Online%20Regret%20Bounds%20for%20Undiscounted%20Continuous%20Reinforcement%20Learning%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ortner%2C%20R.%20Ryabko%2C%20D.%20Online%20Regret%20Bounds%20for%20Undiscounted%20Continuous%20Reinforcement%20Learning%202012"
+        },
+        {
+            "id": "28",
+            "entry": "[28] I. Osband and B. Van Roy. Why is Posterior Sampling Better than Optimism for Reinforcement Learning? In International Conference on Machine Learning, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Osband%2C%20I.%20Roy%2C%20B.Van%20Why%20is%20Posterior%20Sampling%20Better%20than%20Optimism%20for%20Reinforcement%20Learning%3F%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Osband%2C%20I.%20Roy%2C%20B.Van%20Why%20is%20Posterior%20Sampling%20Better%20than%20Optimism%20for%20Reinforcement%20Learning%3F%202017"
+        },
+        {
+            "id": "29",
+            "entry": "[29] I. Osband, D. Russo, and B. Van Roy. (More) Efficient Reinforcement Learning via Posterior Sampling. In Advances in Neural Information Processing Systems, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Osband%2C%20I.%20Russo%2C%20D.%20Roy%2C%20B.Van%20Efficient%20Reinforcement%20Learning%20via%20Posterior%20Sampling%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Osband%2C%20I.%20Russo%2C%20D.%20Roy%2C%20B.Van%20Efficient%20Reinforcement%20Learning%20via%20Posterior%20Sampling%202013"
+        },
+        {
+            "id": "30",
+            "entry": "[30] I. Osband, C. Blundell, A. Pritzel, and B. Van Roy. Deep Exploration via Bootstrapped DQN. In Advances in Neural Information Processing Systems, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Osband%2C%20I.%20Blundell%2C%20C.%20Pritzel%2C%20A.%20Roy%2C%20B.Van%20Deep%20Exploration%20via%20Bootstrapped%20DQN%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Osband%2C%20I.%20Blundell%2C%20C.%20Pritzel%2C%20A.%20Roy%2C%20B.Van%20Deep%20Exploration%20via%20Bootstrapped%20DQN%202016"
+        },
+        {
+            "id": "31",
+            "entry": "[31] I. Osband, B. Van Roy, and Z. Wen. Generalization and Exploration via Randomized Value Functions. In International Conference on Machine Learning, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Osband%2C%20I.%20Roy%2C%20B.Van%20Wen%2C%20Z.%20Generalization%20and%20Exploration%20via%20Randomized%20Value%20Functions%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Osband%2C%20I.%20Roy%2C%20B.Van%20Wen%2C%20Z.%20Generalization%20and%20Exploration%20via%20Randomized%20Value%20Functions%202016"
+        },
+        {
+            "id": "32",
+            "entry": "[32] G. Ostrovski, M. G. Bellemare, A. van den Oord, and R. Munos. Count-Based Exploration with Neural Density Models. In International Conference on Machine Learning, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=G%20Ostrovski%20M%20G%20Bellemare%20A%20van%20den%20Oord%20and%20R%20Munos%20CountBased%20Exploration%20with%20Neural%20Density%20Models%20In%20International%20Conference%20on%20Machine%20Learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=G%20Ostrovski%20M%20G%20Bellemare%20A%20van%20den%20Oord%20and%20R%20Munos%20CountBased%20Exploration%20with%20Neural%20Density%20Models%20In%20International%20Conference%20on%20Machine%20Learning%202017"
+        },
+        {
+            "id": "33",
+            "entry": "[33] J. Pazis and R. Parr. PAC optimal exploration in continuous space Markov decision processes. In AAAI Conference on Artificial Intelligence, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pazis%2C%20J.%20Parr%2C%20R.%20PAC%20optimal%20exploration%20in%20continuous%20space%20Markov%20decision%20processes%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pazis%2C%20J.%20Parr%2C%20R.%20PAC%20optimal%20exploration%20in%20continuous%20space%20Markov%20decision%20processes%202013"
+        },
+        {
+            "id": "34",
+            "entry": "[34] M. Plappert, R. Houthooft, P. Dhariwal, S. Sidor, R. Y. Chen, X. Chen, T. Asfour, P. Abbeel, and M. Andrychowicz. Parameter Space Noise for Exploration. arXiv.org, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Plappert%2C%20M.%20Houthooft%2C%20R.%20Dhariwal%2C%20P.%20Sidor%2C%20S.%20Parameter%20Space%20Noise%20for%20Exploration%202017"
+        },
+        {
+            "id": "35",
+            "entry": "[35] S. P. Singh, T. S. Jaakkola, M. L. Littman, and C. Szepesvari. Convergence Results for Single-Step On-Policy Reinforcement-Learning Algorithms. Machine Learning, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Singh%2C%20S.P.%20Jaakkola%2C%20T.S.%20Littman%2C%20M.L.%20Szepesvari%2C%20C.%20Convergence%20Results%20for%20Single-Step%20On-Policy%20Reinforcement-Learning%20Algorithms%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Singh%2C%20S.P.%20Jaakkola%2C%20T.S.%20Littman%2C%20M.L.%20Szepesvari%2C%20C.%20Convergence%20Results%20for%20Single-Step%20On-Policy%20Reinforcement-Learning%20Algorithms%202000"
+        },
+        {
+            "id": "36",
+            "entry": "[36] A. Strehl and M. Littman. Exploration via model based interval estimation. In International Conference on Machine Learning, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Strehl%2C%20A.%20Littman%2C%20M.%20Exploration%20via%20model%20based%20interval%20estimation%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Strehl%2C%20A.%20Littman%2C%20M.%20Exploration%20via%20model%20based%20interval%20estimation%202004"
+        },
+        {
+            "id": "37",
+            "entry": "[37] A. L. Strehl, L. Li, E. Wiewiora, J. Langford, and M. L. Littman. PAC model-free reinforcement learning. In International Conference on Machine Learning, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Strehl%2C%20A.L.%20Li%2C%20L.%20Wiewiora%2C%20E.%20Langford%2C%20J.%20PAC%20model-free%20reinforcement%20learning%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Strehl%2C%20A.L.%20Li%2C%20L.%20Wiewiora%2C%20E.%20Langford%2C%20J.%20PAC%20model-free%20reinforcement%20learning%202006"
+        },
+        {
+            "id": "38",
+            "entry": "[38] R. Sutton, C. Szepesv\u00e1ri, A. Geramifard, and M. Bowling. Dyna-style planning with linear function approximation and prioritized sweeping. In Conference on Uncertainty in Artificial Intelligence, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20R.%20Szepesv%C3%A1ri%2C%20C.%20Geramifard%2C%20A.%20Bowling%2C%20M.%20Dyna-style%20planning%20with%20linear%20function%20approximation%20and%20prioritized%20sweeping%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutton%2C%20R.%20Szepesv%C3%A1ri%2C%20C.%20Geramifard%2C%20A.%20Bowling%2C%20M.%20Dyna-style%20planning%20with%20linear%20function%20approximation%20and%20prioritized%20sweeping%202008"
+        },
+        {
+            "id": "39",
+            "entry": "[39] R. S. Sutton. Learning to predict by the methods of temporal differences. Machine Learning, 1988.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20R.S.%20Learning%20to%20predict%20by%20the%20methods%20of%20temporal%20differences%201988",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutton%2C%20R.S.%20Learning%20to%20predict%20by%20the%20methods%20of%20temporal%20differences%201988"
+        },
+        {
+            "id": "40",
+            "entry": "[40] R. S. Sutton and A. G. Barto. Reinforcement learning: An introduction. MIT press Cambridge, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20R.S.%20Barto%2C%20A.G.%20Reinforcement%20learning%3A%20An%20introduction%201998"
+        },
+        {
+            "id": "41",
+            "entry": "[41] C. Szepesvari. Algorithms for Reinforcement Learning. Morgan & Claypool Publishers, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Szepesvari%2C%20C.%20Algorithms%20for%20Reinforcement%20Learning%202010"
+        },
+        {
+            "id": "42",
+            "entry": "[42] I. Szita and A. Lorincz. The many faces of optimism. In International Conference on Machine Learning, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Szita%2C%20I.%20Lorincz%2C%20A.%20The%20many%20faces%20of%20optimism%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Szita%2C%20I.%20Lorincz%2C%20A.%20The%20many%20faces%20of%20optimism%202008"
+        },
+        {
+            "id": "43",
+            "entry": "[43] I. Szita and C. Szepesvari. Model-based reinforcement learning with nearly tight exploration complexity bounds. In International Conference on Machine Learning, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Szita%2C%20I.%20Szepesvari%2C%20C.%20Model-based%20reinforcement%20learning%20with%20nearly%20tight%20exploration%20complexity%20bounds%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Szita%2C%20I.%20Szepesvari%2C%20C.%20Model-based%20reinforcement%20learning%20with%20nearly%20tight%20exploration%20complexity%20bounds%202010"
+        },
+        {
+            "id": "44",
+            "entry": "[44] H. van Seijen and R. Sutton. A deeper look at planning as learning from replay. In International Conference on Machine Learning, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=van%20Seijen%2C%20H.%20Sutton%2C%20R.%20A%20deeper%20look%20at%20planning%20as%20learning%20from%20replay%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=van%20Seijen%2C%20H.%20Sutton%2C%20R.%20A%20deeper%20look%20at%20planning%20as%20learning%20from%20replay%202015"
+        },
+        {
+            "id": "45",
+            "entry": "[45] M. White. Unifying task specification in reinforcement learning. In International Conference on Machine Learning, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=White%2C%20M.%20Unifying%20task%20specification%20in%20reinforcement%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=White%2C%20M.%20Unifying%20task%20specification%20in%20reinforcement%20learning%202017"
+        },
+        {
+            "id": "46",
+            "entry": "[46] M. White and A. White. Interval estimation for reinforcement-learning algorithms in continuous-state domains. In Advances in Neural Information Processing Systems, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=White%2C%20M.%20White%2C%20A.%20Interval%20estimation%20for%20reinforcement-learning%20algorithms%20in%20continuous-state%20domains%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=White%2C%20M.%20White%2C%20A.%20Interval%20estimation%20for%20reinforcement-learning%20algorithms%20in%20continuous-state%20domains%202010"
+        },
+        {
+            "id": "47",
+            "entry": "[47] M. A. Wiering and J. Schmidhuber. Efficient Model-Based Exploration. In Simulation of Adaptive Behavior From Animals to Animats, 1998. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wiering%2C%20M.A.%20Schmidhuber%2C%20J.%20Efficient%20Model-Based%20Exploration.%20In%20Simulation%20of%20Adaptive%20Behavior%20From%20Animals%20to%20Animats%201998"
+        }
+    ]
+}

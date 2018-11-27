@@ -1,0 +1,252 @@
+{
+    "filename": "7898-catboost-unbiased-boosting-with-categorical-features.pdf",
+    "metadata": {
+        "title": "CatBoost: unbiased boosting with categorical features",
+        "author": "Liudmila Prokhorenkova, Gleb Gusev, Aleksandr Vorobev, Anna Veronika Dorogush, Andrey Gulin",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7898-catboost-unbiased-boosting-with-categorical-features.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "This paper presents the key algorithmic techniques behind CatBoost, a new gradient boosting toolkit. Their combination leads to CatBoost outperforming other publicly available boosting implementations in terms of quality on a variety of datasets. Two critical algorithmic advances introduced in CatBoost are the implementation of ordered boosting, a permutation-driven alternative to the classic algorithm, and an innovative algorithm for processing categorical features. Both techniques were created to fight a prediction shift caused by a special kind of target leakage present in all currently existing implementations of gradient boosting algorithms. In this paper, we provide a detailed analysis of this problem and demonstrate that proposed algorithms solve it effectively, leading to excellent empirical results."
+    },
+    "keywords": [
+        {
+            "term": "gradient boosting",
+            "url": "https://en.wikipedia.org/wiki/gradient_boosting"
+        },
+        {
+            "term": "decision tree",
+            "url": "https://en.wikipedia.org/wiki/decision_tree"
+        }
+    ],
+    "highlights": [
+        "A prediction model F obtained after several steps of boosting relies on the targets of all training examples",
+        "Analysis of target statistics We compare different target statistic introduced in Section 3.2 as options of CatBoost in ordered boosting mode keeping all its other algorithmic details the same; the results can be found in Table 4",
+        "We identify and analyze the problem of prediction shifts present in all existing implementations of gradient boosting",
+        "We propose a general solution, ordered boosting with ordered target statistic, which solves the problem",
+        "This idea is implemented in CatBoost, which is a new gradient boosting library",
+        "Empirical results demonstrate that CatBoost outperforms leading GBDT packages and leads to state-of-the-art results on common benchmarks"
+    ],
+    "key_statements": [
+        "A prediction model F obtained after several steps of boosting relies on the targets of all training examples",
+        "We show in this paper that all existing implementations of gradient boosting face the following statistical issue",
+        "A prediction model F obtained after several steps of boosting relies on the targets of all training examples",
+        "We demonstrate that this leads to a shift of the distribution of F | xk for a training example xk from the distribution of F (x) | x for a test example x",
+        "We identify this problem as a special kind of target leakage in Section 4",
+        "We propose an ordering principle to solve both problems",
+        "L(\u00b7, \u00b7) is a smooth loss function and (x, y) is a test example sampled from P independently of the training set D",
+        "We further focus on the ways to calculate target statistic and leave one-hot encoding and gradient statistics out of the scope of the current paper",
+        "To adapt this idea to standard offline setting, we introduce an artificial \u201ctime\u201d, i.e., a random permutation \u03c3 of the training examples",
+        "We describe and analyze the following chain of shifts: 1. the conditional distribution of the gradient gt | xk is shifted from that distribution on a test example gt(x, y) | x; 2. in turn, base predictor ht defined by Equation (6) is biased from the solution of Equation (2); 3. this, affects the generalization ability of the trained model F t",
+        "We propose a boosting algorithm which does not suffer from the prediction shift problem described in Section 4.1",
+        "In Sections 3 and 4.2 we proposed to use random permutations \u03c3cat and \u03c3boost of training examples for the target statistic calculation and for ordered boosting, respectively",
+        "The Plain boosting mode works to a standard GBDT procedure, but, if categorical features are present, it maintains s supporting models Mr corresponding to target statistic based on \u03c31, . . . , \u03c3s",
+        "When the final model F is applied to a new example at testing time, we use target statistic calculated on the whole training data according to Section 3",
+        "We present the computational complexity of different components of both modes of CatBoost per one iteration in Table 1, see Section 3.1 of the supplementary material for the proof",
+        "We preprocess categorical features using ordered target statistic method described in Section 3",
+        "To show that our implementation of plain boosting is an appropriate baseline for our research, we show that a raw setting of CatBoost provides state-of-the-art quality",
+        "Here and below we present the results only for logloss since the figures for zero-one loss are similar",
+        "Analysis of target statistics We compare different target statistic introduced in Section 3.2 as options of CatBoost in ordered boosting mode keeping all its other algorithmic details the same; the results can be found in Table 4",
+        "To save space, we present only relative increase in loss functions for each algorithm compared to CatBoost with Ordered target statistic",
+        "We identify and analyze the problem of prediction shifts present in all existing implementations of gradient boosting",
+        "We propose a general solution, ordered boosting with ordered target statistic, which solves the problem",
+        "This idea is implemented in CatBoost, which is a new gradient boosting library",
+        "Empirical results demonstrate that CatBoost outperforms leading GBDT packages and leads to state-of-the-art results on common benchmarks"
+    ],
+    "summary": [
+        "A prediction model F obtained after several steps of boosting relies on the targets of all training examples.",
+        "We formally analyze the problem of prediction shift in a simple case of regression task with the quadratic loss function L(y, y) = (y \u2212 y)2.4 In this case, the negative gradient \u2212gt in Equation (6) can be substituted by the residual function rt\u22121 := yk \u2212 F t\u22121.5 Assume we have m = 2 features x1, x2 that are i.i.d. Bernoulli random variables with p = 1/2 and y = f \u2217(x) = c1x1 + c2x2.",
+        "Recall that greedy TS xi can be considered as a simple statistical model predicting the target y and it suffers from a similar problem, conditional shift of xik | yk, caused by the target leakage, i.e., using yk to compute xik.",
+        "In Sections 3 and 4.2 we proposed to use random permutations \u03c3cat and \u03c3boost of training examples for the TS calculation and for ordered boosting, respectively.",
+        "In the Ordered boosting mode, during the learning process, we maintain the supporting models Mr,j, where Mr,j(i) is a current prediction for i-th example based on the first j examples in permutation \u03c3r.",
+        "The Plain boosting mode works to a standard GBDT procedure, but, if categorical features are present, it maintains s supporting models Mr corresponding to TS based on \u03c31, .",
+        "Given all the trees constructed, the leaf values of the final model F are calculated by the standard gradient boosting procedure for both modes.",
+        "When the final model F is applied to a new example at testing time, we use TS calculated on the whole training data according to Section 3.",
+        "The source code of the experiment is available, and the results can be reproduced.7 For all learning algorithms, we preprocess categorical features using ordered TS method described in Section 3.",
+        "Analysis of target statistics We compare different TSs introduced in Section 3.2 as options of CatBoost in ordered boosting mode keeping all its other algorithmic details the same; the results can be found in Table 4.",
+        "Let us note that in Table 4 we combine Ordered mode of CatBoost with different TSs. To generalize this results, we made similar experiment by combining different TSs with Plain mode, used in standard gradient boosting.",
+        "Empirical results demonstrate that CatBoost outperforms leading GBDT packages and leads to state-of-the-art results on common benchmarks"
+    ],
+    "headline": "This paper presents the key algorithmic techniques behind CatBoost, a new gradient boosting toolkit",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] L. Bottou and Y. L. Cun. Large scale online learning. In Advances in neural information processing systems, pages 217\u2013224, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bottou%2C%20L.%20Cun%2C%20Y.L.%20Large%20scale%20online%20learning%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bottou%2C%20L.%20Cun%2C%20Y.L.%20Large%20scale%20online%20learning%202004"
+        },
+        {
+            "id": "2",
+            "entry": "[2] L. Breiman. Out-of-bag estimation, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Breiman%2C%20L.%20Out-of-bag%20estimation%201996"
+        },
+        {
+            "id": "3",
+            "entry": "[3] L. Breiman. Using iterated bagging to debias regressions. Machine Learning, 45(3):261\u2013277, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Breiman%2C%20L.%20Using%20iterated%20bagging%20to%20debias%20regressions%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Breiman%2C%20L.%20Using%20iterated%20bagging%20to%20debias%20regressions%202001"
+        },
+        {
+            "id": "4",
+            "entry": "[4] L. Breiman, J. Friedman, C. J. Stone, and R. A. Olshen. Classification and regression trees. CRC press, 1984.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Breiman%2C%20L.%20Friedman%2C%20J.%20Stone%2C%20C.J.%20Olshen%2C%20R.A.%20Classification%20and%20regression%20trees%201984"
+        },
+        {
+            "id": "5",
+            "entry": "[5] R. Caruana and A. Niculescu-Mizil. An empirical comparison of supervised learning algorithms. In Proceedings of the 23rd international conference on Machine learning, pages 161\u2013168. ACM, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Caruana%2C%20R.%20Niculescu-Mizil%2C%20A.%20An%20empirical%20comparison%20of%20supervised%20learning%20algorithms%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Caruana%2C%20R.%20Niculescu-Mizil%2C%20A.%20An%20empirical%20comparison%20of%20supervised%20learning%20algorithms%202006"
+        },
+        {
+            "id": "6",
+            "entry": "[6] B. Cestnik et al. Estimating probabilities: a crucial task in machine learning. In ECAI, volume 90, pages 147\u2013149, 1990.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cestnik%2C%20B.%20Estimating%20probabilities%3A%20a%20crucial%20task%20in%20machine%20learning%201990",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cestnik%2C%20B.%20Estimating%20probabilities%3A%20a%20crucial%20task%20in%20machine%20learning%201990"
+        },
+        {
+            "id": "7",
+            "entry": "[7] O. Chapelle, E. Manavoglu, and R. Rosales. Simple and scalable response prediction for display advertising. ACM Transactions on Intelligent Systems and Technology (TIST), 5(4):61, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chapelle%2C%20O.%20Manavoglu%2C%20E.%20Rosales%2C%20R.%20Simple%20and%20scalable%20response%20prediction%20for%20display%20advertising%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chapelle%2C%20O.%20Manavoglu%2C%20E.%20Rosales%2C%20R.%20Simple%20and%20scalable%20response%20prediction%20for%20display%20advertising%202015"
+        },
+        {
+            "id": "8",
+            "entry": "[8] T. Chen and C. Guestrin. Xgboost: A scalable tree boosting system. In Proceedings of the 22Nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, pages 785\u2013794. ACM, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20T.%20Guestrin%2C%20C.%20Xgboost%3A%20A%20scalable%20tree%20boosting%20system%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20T.%20Guestrin%2C%20C.%20Xgboost%3A%20A%20scalable%20tree%20boosting%20system%202016"
+        },
+        {
+            "id": "9",
+            "entry": "[9] M. Ferov and M. Modry. Enhancing lambdamart using oblivious trees. arXiv preprint arXiv:1609.05610, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.05610"
+        },
+        {
+            "id": "10",
+            "entry": "[10] J. Friedman, T. Hastie, and R. Tibshirani. Additive logistic regression: a statistical view of boosting. The annals of statistics, 28(2):337\u2013407, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Friedman%2C%20J.%20Hastie%2C%20T.%20Tibshirani%2C%20R.%20Additive%20logistic%20regression%3A%20a%20statistical%20view%20of%20boosting%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Friedman%2C%20J.%20Hastie%2C%20T.%20Tibshirani%2C%20R.%20Additive%20logistic%20regression%3A%20a%20statistical%20view%20of%20boosting%202000"
+        },
+        {
+            "id": "11",
+            "entry": "[11] J. Friedman, T. Hastie, and R. Tibshirani. The elements of statistical learning, volume 1. Springer series in statistics New York, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Friedman%2C%20J.%20Hastie%2C%20T.%20Tibshirani%2C%20R.%20The%20elements%20of%20statistical%20learning%2C%20volume%201.%20Springer%20series%20in%20statistics%20New%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Friedman%2C%20J.%20Hastie%2C%20T.%20Tibshirani%2C%20R.%20The%20elements%20of%20statistical%20learning%2C%20volume%201.%20Springer%20series%20in%20statistics%20New%202001"
+        },
+        {
+            "id": "12",
+            "entry": "[12] J. H. Friedman. Greedy function approximation: a gradient boosting machine. Annals of statistics, pages 1189\u20131232, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Friedman%2C%20J.H.%20Greedy%20function%20approximation%3A%20a%20gradient%20boosting%20machine%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Friedman%2C%20J.H.%20Greedy%20function%20approximation%3A%20a%20gradient%20boosting%20machine%202001"
+        },
+        {
+            "id": "13",
+            "entry": "[13] J. H. Friedman. Stochastic gradient boosting. Computational Statistics & Data Analysis, 38(4):367\u2013378, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Friedman%2C%20J.H.%20Stochastic%20gradient%20boosting%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Friedman%2C%20J.H.%20Stochastic%20gradient%20boosting%202002"
+        },
+        {
+            "id": "14",
+            "entry": "[14] A. Gulin, I. Kuralenok, and D. Pavlov. Winning the transfer learning track of yahoo!\u2019s learning to rank challenge with yetirank. In Yahoo! Learning to Rank Challenge, pages 63\u201376, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gulin%2C%20A.%20Kuralenok%2C%20I.%20Pavlov%2C%20D.%20Winning%20the%20transfer%20learning%20track%20of%20yahoo%21%E2%80%99s%20learning%20to%20rank%20challenge%20with%20yetirank.%20In%20Yahoo%21%20Learning%20to%20Rank%20Challenge%202011"
+        },
+        {
+            "id": "15",
+            "entry": "[15] X. He, J. Pan, O. Jin, T. Xu, B. Liu, T. Xu, Y. Shi, A. Atallah, R. Herbrich, S. Bowers, et al. Practical lessons from predicting clicks on ads at facebook. In Proceedings of the Eighth International Workshop on Data Mining for Online Advertising, pages 1\u20139. ACM, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20X.%20Pan%2C%20J.%20Jin%2C%20O.%20Xu%2C%20T.%20Practical%20lessons%20from%20predicting%20clicks%20on%20ads%20at%20facebook%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20X.%20Pan%2C%20J.%20Jin%2C%20O.%20Xu%2C%20T.%20Practical%20lessons%20from%20predicting%20clicks%20on%20ads%20at%20facebook%202014"
+        },
+        {
+            "id": "16",
+            "entry": "[16] G. Ke, Q. Meng, T. Finley, T. Wang, W. Chen, W. Ma, Q. Ye, and T.-Y. Liu. Lightgbm: A highly efficient gradient boosting decision tree. In Advances in Neural Information Processing Systems, pages 3149\u20133157, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ke%2C%20G.%20Meng%2C%20Q.%20Finley%2C%20T.%20Wang%2C%20T.%20Lightgbm%3A%20A%20highly%20efficient%20gradient%20boosting%20decision%20tree%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ke%2C%20G.%20Meng%2C%20Q.%20Finley%2C%20T.%20Wang%2C%20T.%20Lightgbm%3A%20A%20highly%20efficient%20gradient%20boosting%20decision%20tree%202017"
+        },
+        {
+            "id": "17",
+            "entry": "[17] M. Kearns and L. Valiant. Cryptographic limitations on learning boolean formulae and finite automata. Journal of the ACM (JACM), 41(1):67\u201395, 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kearns%2C%20M.%20Valiant%2C%20L.%20Cryptographic%20limitations%20on%20learning%20boolean%20formulae%20and%20finite%20automata%201994",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kearns%2C%20M.%20Valiant%2C%20L.%20Cryptographic%20limitations%20on%20learning%20boolean%20formulae%20and%20finite%20automata%201994"
+        },
+        {
+            "id": "18",
+            "entry": "[18] J. Langford, L. Li, and T. Zhang. Sparse online learning via truncated gradient. Journal of Machine Learning Research, 10(Mar):777\u2013801, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Langford%2C%20J.%20Li%2C%20L.%20Zhang%2C%20T.%20Sparse%20online%20learning%20via%20truncated%20gradient%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Langford%2C%20J.%20Li%2C%20L.%20Zhang%2C%20T.%20Sparse%20online%20learning%20via%20truncated%20gradient%202009"
+        },
+        {
+            "id": "19",
+            "entry": "[19] LightGBM. Categorical feature support. http://lightgbm.readthedocs.io/en/latest/ Advanced-Topics.html#categorical-feature-support, 2017.",
+            "url": "http://lightgbm.readthedocs.io/en/latest/Advanced-Topics.html#categorical-feature-support"
+        },
+        {
+            "id": "20",
+            "entry": "[20] LightGBM. Optimal split for categorical features. http://lightgbm.readthedocs.io/en/latest/Features.html#optimal-split-for-categorical-features, 2017.",
+            "url": "http://lightgbm.readthedocs.io/en/latest/Features.html#optimal-split-for-categorical-features"
+        },
+        {
+            "id": "21",
+            "entry": "[21] LightGBM. feature_histogram.cpp. https://github.com/Microsoft/LightGBM/blob/master/src/treelearner/feature_histogram.hpp, 2018.",
+            "url": "https://github.com/Microsoft/LightGBM/blob/master/src/treelearner/feature_histogram.hpp"
+        },
+        {
+            "id": "22",
+            "entry": "[22] X. Ling, W. Deng, C. Gu, H. Zhou, C. Li, and F. Sun. Model ensemble for click prediction in bing search ads. In Proceedings of the 26th International Conference on World Wide Web Companion, pages 689\u2013698. International World Wide Web Conferences Steering Committee, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ling%2C%20X.%20Deng%2C%20W.%20Gu%2C%20C.%20Zhou%2C%20H.%20Model%20ensemble%20for%20click%20prediction%20in%20bing%20search%20ads%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ling%2C%20X.%20Deng%2C%20W.%20Gu%2C%20C.%20Zhou%2C%20H.%20Model%20ensemble%20for%20click%20prediction%20in%20bing%20search%20ads%202017"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Y. Lou and M. Obukhov. Bdt: Gradient boosted decision tables for high accuracy and scoring efficiency. In Proceedings of the 23rd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, pages 1893\u20131901. ACM, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lou%2C%20Y.%20Obukhov%2C%20M.%20Bdt%3A%20Gradient%20boosted%20decision%20tables%20for%20high%20accuracy%20and%20scoring%20efficiency%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lou%2C%20Y.%20Obukhov%2C%20M.%20Bdt%3A%20Gradient%20boosted%20decision%20tables%20for%20high%20accuracy%20and%20scoring%20efficiency%202017"
+        },
+        {
+            "id": "24",
+            "entry": "[24] L. Mason, J. Baxter, P. L. Bartlett, and M. R. Frean. Boosting algorithms as gradient descent. In Advances in neural information processing systems, pages 512\u2013518, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mason%2C%20L.%20Baxter%2C%20J.%20Bartlett%2C%20P.L.%20Frean%2C%20M.R.%20Boosting%20algorithms%20as%20gradient%20descent%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mason%2C%20L.%20Baxter%2C%20J.%20Bartlett%2C%20P.L.%20Frean%2C%20M.R.%20Boosting%20algorithms%20as%20gradient%20descent%202000"
+        },
+        {
+            "id": "25",
+            "entry": "[25] D. Micci-Barreca. A preprocessing scheme for high-cardinality categorical attributes in classification and prediction problems. ACM SIGKDD Explorations Newsletter, 3(1):27\u201332, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Micci-Barreca%2C%20D.%20A%20preprocessing%20scheme%20for%20high-cardinality%20categorical%20attributes%20in%20classification%20and%20prediction%20problems%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Micci-Barreca%2C%20D.%20A%20preprocessing%20scheme%20for%20high-cardinality%20categorical%20attributes%20in%20classification%20and%20prediction%20problems%202001"
+        },
+        {
+            "id": "26",
+            "entry": "[26] B. P. Roe, H.-J. Yang, J. Zhu, Y. Liu, I. Stancu, and G. McGregor. Boosted decision trees as an alternative to artificial neural networks for particle identification. Nuclear Instruments and Methods in Physics Research Section A: Accelerators, Spectrometers, Detectors and Associated Equipment, 543(2):577\u2013584, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Roe%2C%20B.P.%20Yang%2C%20H.-J.%20Zhu%2C%20J.%20Liu%2C%20Y.%20Boosted%20decision%20trees%20as%20an%20alternative%20to%20artificial%20neural%20networks%20for%20particle%20identification%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Roe%2C%20B.P.%20Yang%2C%20H.-J.%20Zhu%2C%20J.%20Liu%2C%20Y.%20Boosted%20decision%20trees%20as%20an%20alternative%20to%20artificial%20neural%20networks%20for%20particle%20identification%202005"
+        },
+        {
+            "id": "27",
+            "entry": "[27] L. Rokach and O. Maimon. Top\u2013down induction of decision trees classifiers \u2014 a survey. IEEE Transactions on Systems, Man, and Cybernetics, Part C (Applications and Reviews), 35(4):476\u2013487, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rokach%2C%20L.%20Maimon%2C%20O.%20Top%E2%80%93down%20induction%20of%20decision%20trees%20classifiers%20%E2%80%94%20a%20survey%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rokach%2C%20L.%20Maimon%2C%20O.%20Top%E2%80%93down%20induction%20of%20decision%20trees%20classifiers%20%E2%80%94%20a%20survey%202005"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Q. Wu, C. J. Burges, K. M. Svore, and J. Gao. Adapting boosting for information retrieval measures. Information Retrieval, 13(3):254\u2013270, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20Q.%20Burges%2C%20C.J.%20Svore%2C%20K.M.%20Gao%2C%20J.%20Adapting%20boosting%20for%20information%20retrieval%20measures%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20Q.%20Burges%2C%20C.J.%20Svore%2C%20K.M.%20Gao%2C%20J.%20Adapting%20boosting%20for%20information%20retrieval%20measures%202010"
+        },
+        {
+            "id": "29",
+            "entry": "[29] K. Zhang, B. Sch\u00f6lkopf, K. Muandet, and Z. Wang. Domain adaptation under target and conditional shift. In International Conference on Machine Learning, pages 819\u2013827, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20K.%20Sch%C3%B6lkopf%2C%20B.%20Muandet%2C%20K.%20Wang%2C%20Z.%20Domain%20adaptation%20under%20target%20and%20conditional%20shift%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20K.%20Sch%C3%B6lkopf%2C%20B.%20Muandet%2C%20K.%20Wang%2C%20Z.%20Domain%20adaptation%20under%20target%20and%20conditional%20shift%202013"
+        },
+        {
+            "id": "30",
+            "entry": "[30] O. Zhang. Winning data science competitions. https://www.slideshare.net/ ShangxuanZhang/winning-data-science-competitions-presented-by-owen-zhang, 2015.",
+            "url": "https://www.slideshare.net/ShangxuanZhang/winning-data-science-competitions-presented-by-owen-zhang"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Y. Zhang and A. Haghani. A gradient boosting method to improve travel time prediction. Transportation Research Part C: Emerging Technologies, 58:308\u2013324, 2015. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Y.%20Haghani%2C%20A.%20A%20gradient%20boosting%20method%20to%20improve%20travel%20time%20prediction%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Y.%20Haghani%2C%20A.%20A%20gradient%20boosting%20method%20to%20improve%20travel%20time%20prediction%202015"
+        }
+    ]
+}

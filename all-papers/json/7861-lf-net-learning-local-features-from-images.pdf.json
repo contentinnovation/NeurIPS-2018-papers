@@ -1,0 +1,368 @@
+{
+    "filename": "7861-lf-net-learning-local-features-from-images.pdf",
+    "metadata": {
+        "title": "LF-Net: Learning Local Features from Images",
+        "author": "Yuki Ono, Eduard Trulls, Pascal Fua, Kwang Moo Yi",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7861-lf-net-learning-local-features-from-images.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We present a novel deep architecture and a training strategy to learn a local feature pipeline from scratch, using collections of images without the need for human supervision. To do so we exploit depth and relative camera pose cues to create a virtual target that the network should achieve on one image, provided the outputs of the network for the other image. While this process is inherently non-differentiable, we show that we can optimize the network in a two-branch setup by confining it to one branch, while preserving differentiability in the other. We train our method on both indoor and outdoor datasets, with depth data from 3D sensors for the former, and depth estimates from an off-the-shelf Structure-from-Motion solution for the latter. Our models outperform the state of the art on sparse feature matching on both datasets, while running at 60+ fps for QVGA images."
+    },
+    "keywords": [
+        {
+            "term": "SLAM",
+            "url": "https://en.wikipedia.org/wiki/SLAM"
+        },
+        {
+            "term": "SIFT",
+            "url": "https://en.wikipedia.org/wiki/SIFT"
+        },
+        {
+            "term": "QVGA",
+            "url": "https://en.wikipedia.org/wiki/QVGA"
+        },
+        {
+            "term": "SURF",
+            "url": "https://en.wikipedia.org/wiki/SURF"
+        }
+    ],
+    "highlights": [
+        "Establishing correspondences across images is at the heart of many Computer Vision algorithms, such as those for wide-baseline stereo, object detection, and image retrieval",
+        "We propose a sparse-matching method with a novel deep architecture, which we name LF-Net, for Local Feature Network, that is trainable end-to-end and does not require using a hand-crafted detector to generate training data",
+        "To evaluate the entire local feature pipeline performance, we use the matching score [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>], which is defined as the ratio of estimated correspondences that are correct according to the ground-truth geometry, after obtaining them through nearest neighbour matching with the descriptors",
+        "We have proposed LF-Net, a novel deep architecture to learn local features",
+        "Our method outperforms the state of the art by a large margin, on both indoor and outdoor datasets, at 60 fps for QVGA images"
+    ],
+    "key_statements": [
+        "Establishing correspondences across images is at the heart of many Computer Vision algorithms, such as those for wide-baseline stereo, object detection, and image retrieval",
+        "We propose a sparse-matching method with a novel deep architecture, which we name LF-Net, for Local Feature Network, that is trainable end-to-end and does not require using a hand-crafted detector to generate training data",
+        "To evaluate the entire local feature pipeline performance, we use the matching score [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>], which is defined as the ratio of estimated correspondences that are correct according to the ground-truth geometry, after obtaining them through nearest neighbour matching with the descriptors",
+        "We have proposed LF-Net, a novel deep architecture to learn local features",
+        "Our method outperforms the state of the art by a large margin, on both indoor and outdoor datasets, at 60 fps for QVGA images"
+    ],
+    "summary": [
+        "Establishing correspondences across images is at the heart of many Computer Vision algorithms, such as those for wide-baseline stereo, object detection, and image retrieval.",
+        "We propose a sparse-matching method with a novel deep architecture, which we name LF-Net, for Local Feature Network, that is trainable end-to-end and does not require using a hand-crafted detector to generate training data.",
+        "Being given dense correspondence data, we could train a feature extraction pipeline by selecting a number of keypoints over two images, computing descriptors for each keypoint, using the ground truth to determine which ones match correctly across images, and use those to learn good descriptors.",
+        "The detector network generates a scale-space score map along with dense orientation estimates, which are used to select the keypoints.",
+        "(b) For training we use a two-branch LF-Net, containing two identical copies of the network, processing two corresponding images Ii and Ij. Branch j is used to generate a supervision signal for branch i, created by warping the results from i to j.",
+        "In Section 3.2, we introduce our training architecture, which is based on two LF-Net copies processing separate images with non-differentiable components, along with the loss function used to learn the weights.",
+        "We first use a fully convolutional network to generate a rich feature map o from an image I, which can be used to extract keypoint locations as well as their attributes, i.e., scale and orientation.",
+        "With these corresponding regions and their associated decriptors Dik and Dkj we form Lpair which is used to train the detector network, i.e., the keypoint, orientation, and scale components.",
+        "To evaluate the entire local feature pipeline performance, we use the matching score [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>], which is defined as the ratio of estimated correspondences that are correct according to the ground-truth geometry, after obtaining them through nearest neighbour matching with the descriptors.",
+        "As for the outdoors case, the images in this dataset are mostly upright, so we report results for models trained with and without explicit rotation and scale detection.",
+        "More experimental results that could not fit in the paper due to spatial constraints are available as a supplementary appendix: a generalization study, training and testing on very different datasets; a performance evaluation for different pixel thresholds, to evaluate the precision of the detected features; results over the \u2018hpatches\u2019 dataset [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>]; a study to benchmark performance under orientation changes; detailed results for the ablation experiments of Section 4.5; and computational cost estimates.",
+        "Our method outperforms the state of the art by a large margin, on both indoor and outdoor datasets, at 60 fps for QVGA images"
+    ],
+    "headline": "We present a novel deep architecture and a training strategy to learn a local feature pipeline from scratch, using collections of images without the need for human supervision",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] P. Alcantarilla, P. Fern\u00e1ndez, A. Bartoli, and A. J. Davidson. KAZE Features. In ECCV, 2012. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=P%20Alcantarilla%20P%20Fern%C3%A1ndez%20A%20Bartoli%20and%20A%20J%20Davidson%20KAZE%20Features%20In%20ECCV%202012%202",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=P%20Alcantarilla%20P%20Fern%C3%A1ndez%20A%20Bartoli%20and%20A%20J%20Davidson%20KAZE%20Features%20In%20ECCV%202012%202"
+        },
+        {
+            "id": "2",
+            "entry": "[2] P. F. Alcantarilla, J. Nuevo, and A. Bartoli. Fast Explicit Diffusion for Accelerated Features in Nonlinear Scale Spaces. In BMVC, 2013. 7",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Alcantarilla%2C%20P.F.%20Nuevo%2C%20J.%20Bartoli%2C%20A.%20Fast%20Explicit%20Diffusion%20for%20Accelerated%20Features%20in%20Nonlinear%20Scale%20Spaces%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Alcantarilla%2C%20P.F.%20Nuevo%2C%20J.%20Bartoli%2C%20A.%20Fast%20Explicit%20Diffusion%20for%20Accelerated%20Features%20in%20Nonlinear%20Scale%20Spaces%202013"
+        },
+        {
+            "id": "3",
+            "entry": "[3] V. Balntas, E. Johns, L. Tang, and K. Mikolajczyk. PN-Net: Conjoined Triple Deep Network for Learning Local Image Descriptors. In arXiv Preprint, 2016. 2, 5",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Balntas%2C%20V.%20Johns%2C%20E.%20Tang%2C%20L.%20Mikolajczyk%2C%20K.%20PN-Net%3A%20Conjoined%20Triple%20Deep%20Network%20for%20Learning%20Local%20Image%20Descriptors%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Balntas%2C%20V.%20Johns%2C%20E.%20Tang%2C%20L.%20Mikolajczyk%2C%20K.%20PN-Net%3A%20Conjoined%20Triple%20Deep%20Network%20for%20Learning%20Local%20Image%20Descriptors%202016"
+        },
+        {
+            "id": "4",
+            "entry": "[4] V. Balntas, K. Lenc, A. Vedaldi, and K. Mikolajczyk. Hpatches: A benchmark and evaluation of handcrafted and learned local descriptors. In CVPR, 2017. 9, 13",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Balntas%2C%20V.%20Lenc%2C%20K.%20Vedaldi%2C%20A.%20Mikolajczyk%2C%20K.%20Hpatches%3A%20A%20benchmark%20and%20evaluation%20of%20handcrafted%20and%20learned%20local%20descriptors%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Balntas%2C%20V.%20Lenc%2C%20K.%20Vedaldi%2C%20A.%20Mikolajczyk%2C%20K.%20Hpatches%3A%20A%20benchmark%20and%20evaluation%20of%20handcrafted%20and%20learned%20local%20descriptors%202017"
+        },
+        {
+            "id": "5",
+            "entry": "[5] H. Bay, A. Ess, T. Tuytelaars, and L. Van Gool. SURF: Speeded Up Robust Features. CVIU, 10(3):346\u2013359, 2008. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bay%2C%20H.%20Ess%2C%20A.%20Tuytelaars%2C%20T.%20Gool%2C%20L.Van%20SURF%3A%20Speeded%20Up%20Robust%20Features%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bay%2C%20H.%20Ess%2C%20A.%20Tuytelaars%2C%20T.%20Gool%2C%20L.Van%20SURF%3A%20Speeded%20Up%20Robust%20Features%202008"
+        },
+        {
+            "id": "6",
+            "entry": "[6] H. Bay, T. Tuytelaars, and L. Van Gool. SURF: Speeded Up Robust Features. In ECCV, 2006. 7",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bay%2C%20H.%20Tuytelaars%2C%20T.%20Gool%2C%20L.Van%20SURF%3A%20Speeded%20Up%20Robust%20Features%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bay%2C%20H.%20Tuytelaars%2C%20T.%20Gool%2C%20L.Van%20SURF%3A%20Speeded%20Up%20Robust%20Features%202006"
+        },
+        {
+            "id": "7",
+            "entry": "[7] M. Brown, G. Hua, and S. Winder. Discriminative Learning of Local Image Descriptors. PAMI, 2011. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Brown%2C%20M.%20Hua%2C%20G.%20Winder%2C%20S.%20Discriminative%20Learning%20of%20Local%20Image%20Descriptors%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Brown%2C%20M.%20Hua%2C%20G.%20Winder%2C%20S.%20Discriminative%20Learning%20of%20Local%20Image%20Descriptors%202011"
+        },
+        {
+            "id": "8",
+            "entry": "[8] O. Chapelle and M. Wu. Gradient Descent Optimization of Smoothed Information Retrieval Metrics. Information Retrieval, 13(3):216\u2013235, 2009. 4",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chapelle%2C%20O.%20Wu%2C%20M.%20Gradient%20Descent%20Optimization%20of%20Smoothed%20Information%20Retrieval%20Metrics%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chapelle%2C%20O.%20Wu%2C%20M.%20Gradient%20Descent%20Optimization%20of%20Smoothed%20Information%20Retrieval%20Metrics%202009"
+        },
+        {
+            "id": "9",
+            "entry": "[9] C. Choy, J. Gwak, S. Savarese, and M. Chandraker. Universe Correspondence Network. In NIPS, 2016. 1, 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Choy%2C%20C.%20Gwak%2C%20J.%20Savarese%2C%20S.%20Chandraker%2C%20M.%20Universe%20Correspondence%20Network%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Choy%2C%20C.%20Gwak%2C%20J.%20Savarese%2C%20S.%20Chandraker%2C%20M.%20Universe%20Correspondence%20Network%202016"
+        },
+        {
+            "id": "10",
+            "entry": "[10] A. Dai, A. Chang, M. Savva, M. Halber, T. Funkhouser, and M. Nie\u00dfner. Scannet: Richly-Annotated 3D Reconstructions of Indoor Scenes. In CVPR, 2017. 6",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dai%2C%20A.%20Chang%2C%20A.%20Savva%2C%20M.%20Halber%2C%20M.%20Scannet%3A%20Richly-Annotated%203D%20Reconstructions%20of%20Indoor%20Scenes%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dai%2C%20A.%20Chang%2C%20A.%20Savva%2C%20M.%20Halber%2C%20M.%20Scannet%3A%20Richly-Annotated%203D%20Reconstructions%20of%20Indoor%20Scenes%202017"
+        },
+        {
+            "id": "11",
+            "entry": "[11] D. Detone, T. Malisiewicz, and A. Rabinovich. Superpoint: Self-Supervised Interest Point Detection and Description. CVPR Workshop on Deep Learning for Visual SLAM, 2018. 1, 3, 4, 6, 7",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Detone%2C%20D.%20Malisiewicz%2C%20T.%20Rabinovich%2C%20A.%20Superpoint%3A%20Self-Supervised%20Interest%20Point%20Detection%20and%20Description.%20CVPR%20Workshop%20on%20Deep%20Learning%20for%20Visual%20SLAM%202018"
+        },
+        {
+            "id": "12",
+            "entry": "[12] J. Engel, T. Sch\u00f6ps, and D. Cremers. LSD-SLAM: Large-Scale Direct Monocular SLAM. In ECCV, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Engel%2C%20J.%20Sch%C3%B6ps%2C%20T.%20Cremers%2C%20D.%20LSD-SLAM%3A%20Large-Scale%20Direct%20Monocular%20SLAM%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Engel%2C%20J.%20Sch%C3%B6ps%2C%20T.%20Cremers%2C%20D.%20LSD-SLAM%3A%20Large-Scale%20Direct%20Monocular%20SLAM%202014"
+        },
+        {
+            "id": "13",
+            "entry": "[13] X. Han, T. Leung, Y. Jia, R. Sukthankar, and A. C. Berg. MatchNet: Unifying Feature and Metric Learning for Patch-Based Matching. In CVPR, 2015. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Han%2C%20X.%20Leung%2C%20T.%20Jia%2C%20Y.%20Sukthankar%2C%20R.%20MatchNet%3A%20Unifying%20Feature%20and%20Metric%20Learning%20for%20Patch-Based%20Matching%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Han%2C%20X.%20Leung%2C%20T.%20Jia%2C%20Y.%20Sukthankar%2C%20R.%20MatchNet%3A%20Unifying%20Feature%20and%20Metric%20Learning%20for%20Patch-Based%20Matching%202015"
+        },
+        {
+            "id": "14",
+            "entry": "[14] R. Hartley and A. Zisserman. Multiple View Geometry in Computer Vision. Cambridge University Press, 2000. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hartley%2C%20R.%20Zisserman%2C%20A.%20Multiple%20View%20Geometry%20in%20Computer%20Vision%202000"
+        },
+        {
+            "id": "15",
+            "entry": "[15] K. He, X. Zhang, S. Ren, and J. Sun. Deep Residual Learning for Image Recognition. In CVPR, pages 770\u2013778, 2016. 4",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20Residual%20Learning%20for%20Image%20Recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20Residual%20Learning%20for%20Image%20Recognition%202016"
+        },
+        {
+            "id": "16",
+            "entry": "[16] J. Heinly, J. Schoenberger, E. Dunn, and J.-M. Frahm. Reconstructing the World in Six Days. In CVPR, 2015. 7",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=J%20Heinly%20J%20Schoenberger%20E%20Dunn%20and%20JM%20Frahm%20Reconstructing%20the%20World%20in%20Six%20Days%20In%20CVPR%202015%207",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=J%20Heinly%20J%20Schoenberger%20E%20Dunn%20and%20JM%20Frahm%20Reconstructing%20the%20World%20in%20Six%20Days%20In%20CVPR%202015%207"
+        },
+        {
+            "id": "17",
+            "entry": "[17] S. Ioffe and C. Szegedy. Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift. In ICML, 2015. 4",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ioffe%2C%20S.%20Szegedy%2C%20C.%20Batch%20Normalization%3A%20Accelerating%20Deep%20Network%20Training%20by%20Reducing%20Internal%20Covariate%20Shift",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ioffe%2C%20S.%20Szegedy%2C%20C.%20Batch%20Normalization%3A%20Accelerating%20Deep%20Network%20Training%20by%20Reducing%20Internal%20Covariate%20Shift"
+        },
+        {
+            "id": "18",
+            "entry": "[18] M. Jaderberg, K. Simonyan, A. Zisserman, and K. Kavukcuoglu. Spatial Transformer Networks. In NIPS, pages 2017\u20132025, 2015. 4",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jaderberg%2C%20M.%20Simonyan%2C%20K.%20Zisserman%2C%20A.%20Kavukcuoglu%2C%20K.%20Spatial%20Transformer%20Networks",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jaderberg%2C%20M.%20Simonyan%2C%20K.%20Zisserman%2C%20A.%20Kavukcuoglu%2C%20K.%20Spatial%20Transformer%20Networks"
+        },
+        {
+            "id": "19",
+            "entry": "[19] M. Keller, Z. Chen, F. Maffra, P. Schmuck, and M. Chli. Learning Deep Descriptors with Scale-Aware Triplet Networks. In CVPR, 2018. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Keller%2C%20M.%20Chen%2C%20Z.%20Maffra%2C%20F.%20Schmuck%2C%20P.%20Learning%20Deep%20Descriptors%20with%20Scale-Aware%20Triplet%20Networks%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Keller%2C%20M.%20Chen%2C%20Z.%20Maffra%2C%20F.%20Schmuck%2C%20P.%20Learning%20Deep%20Descriptors%20with%20Scale-Aware%20Triplet%20Networks%202018"
+        },
+        {
+            "id": "20",
+            "entry": "[20] D. Kingma and J. Ba. Adam: A Method for Stochastic Optimisation. In ICLR, 2015. 6 Vision Using Diverse Datasets and Limited Memory. In CVPR, 2017. 4",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20D.%20Ba%2C%20J.%20Adam%3A%20A%20Method%20for%20Stochastic%20Optimisation%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20D.%20Ba%2C%20J.%20Adam%3A%20A%20Method%20for%20Stochastic%20Optimisation%202015"
+        },
+        {
+            "id": "22",
+            "entry": "[22] K. Lenc and A. Vedaldi. Learning Covariant Feature Detectors. In ECCV, 2016. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lenc%2C%20K.%20Vedaldi%2C%20A.%20Learning%20Covariant%20Feature%20Detectors%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lenc%2C%20K.%20Vedaldi%2C%20A.%20Learning%20Covariant%20Feature%20Detectors%202016"
+        },
+        {
+            "id": "23",
+            "entry": "[23] D. Lowe. Distinctive Image Features from Scale-Invariant Keypoints. IJCV, 20(2), 2004. 1, 2, 7",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lowe%2C%20D.%20Distinctive%20Image%20Features%20from%20Scale-Invariant%20Keypoints%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lowe%2C%20D.%20Distinctive%20Image%20Features%20from%20Scale-Invariant%20Keypoints%202004"
+        },
+        {
+            "id": "24",
+            "entry": "[24] K. Mikolajczyk and C. Schmid. A Performance Evaluation of Local Descriptors. PAMI, 27(10):1615\u20131630, 2004. 7",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mikolajczyk%2C%20K.%20Schmid%2C%20C.%20A%20Performance%20Evaluation%20of%20Local%20Descriptors%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mikolajczyk%2C%20K.%20Schmid%2C%20C.%20A%20Performance%20Evaluation%20of%20Local%20Descriptors%202004"
+        },
+        {
+            "id": "25",
+            "entry": "[25] A. Mishchuk, D. Mishkin, F. Radenovic, and J. Matas. Working Hard to Know Your Neighbor\u2019s Margins: Local Descriptor Learning Loss. In NIPS, 2017. 2, 5",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mishchuk%2C%20A.%20Mishkin%2C%20D.%20Radenovic%2C%20F.%20Matas%2C%20J.%20Working%20Hard%20to%20Know%20Your%20Neighbor%E2%80%99s%20Margins%3A%20Local%20Descriptor%20Learning%20Loss%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mishchuk%2C%20A.%20Mishkin%2C%20D.%20Radenovic%2C%20F.%20Matas%2C%20J.%20Working%20Hard%20to%20Know%20Your%20Neighbor%E2%80%99s%20Margins%3A%20Local%20Descriptor%20Learning%20Loss%202017"
+        },
+        {
+            "id": "26",
+            "entry": "[26] D. Mishkin, F. Radenovic, and J. Matas. Repeatability Is Not Enough: Learning Affine Regions via Discriminability. In ECCV, 2018. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mishkin%2C%20D.%20Radenovic%2C%20F.%20Matas%2C%20J.%20Repeatability%20Is%20Not%20Enough%3A%20Learning%20Affine%20Regions%20via%20Discriminability.%20In%20ECCV%202018"
+        },
+        {
+            "id": "27",
+            "entry": "[27] V. Mnih, K. Kavukcuoglu, D. Silver, A. Rusu, J. Veness, M. Bellemare, A. Graves, M. Riedmiller, A. Fidjeland, G. Ostrovski, S. Petersen, C. Beattie, A. Sadik, I. Antonoglou, H. King, D. Kumaran, D. Wierstra, S. Legg, and D. Hassabis. Human-Level Control through Deep Reinforcement Learning. Nature, 518(7540):529\u2013533, February 2015. 5",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20V.%20Kavukcuoglu%2C%20K.%20Silver%2C%20D.%20Rusu%2C%20A.%20Human-Level%20Control%20through%20Deep%20Reinforcement%20Learning%202015-02-05",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20V.%20Kavukcuoglu%2C%20K.%20Silver%2C%20D.%20Rusu%2C%20A.%20Human-Level%20Control%20through%20Deep%20Reinforcement%20Learning%202015-02-05"
+        },
+        {
+            "id": "28",
+            "entry": "[28] D. Mukherjee, Q. M. J. Wu, and G. Wang. A Comparative Experimental Study of Image Feature Detectors and Descriptors. MVA, 26(4):443\u2013466, 2015. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mukherjee%2C%20D.%20Wu%2C%20Q.M.J.%20Wang%2C%20G.%20A%20Comparative%20Experimental%20Study%20of%20Image%20Feature%20Detectors%20and%20Descriptors%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mukherjee%2C%20D.%20Wu%2C%20Q.M.J.%20Wang%2C%20G.%20A%20Comparative%20Experimental%20Study%20of%20Image%20Feature%20Detectors%20and%20Descriptors%202015"
+        },
+        {
+            "id": "29",
+            "entry": "[29] R. Mur-artal, J. Montiel, and J. Tard\u00f3s. Orb-Slam: A Versatile and Accurate Monocular Slam System. IEEE Transactions on Robotics, 31(5):1147\u20131163, 2015. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mur-artal%2C%20R.%20Montiel%2C%20J.%20Tard%C3%B3s%2C%20J.%20Orb-Slam%3A%20A%20Versatile%20and%20Accurate%20Monocular%20Slam%20System%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mur-artal%2C%20R.%20Montiel%2C%20J.%20Tard%C3%B3s%2C%20J.%20Orb-Slam%3A%20A%20Versatile%20and%20Accurate%20Monocular%20Slam%20System%202015"
+        },
+        {
+            "id": "30",
+            "entry": "[30] E. Rosten and T. Drummond. Machine Learning for High-Speed Corner Detection. In ECCV, 2006. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rosten%2C%20E.%20Drummond%2C%20T.%20Machine%20Learning%20for%20High-Speed%20Corner%20Detection%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rosten%2C%20E.%20Drummond%2C%20T.%20Machine%20Learning%20for%20High-Speed%20Corner%20Detection%202006"
+        },
+        {
+            "id": "31",
+            "entry": "[31] E. Rosten, R. Porter, and T. Drummond. Faster and Better: A Machine Learning Approach to Corner Detection. PAMI, 32:105\u2013119, 2010. 2, 7",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rosten%2C%20E.%20Porter%2C%20R.%20Drummond%2C%20T.%20Faster%20and%20Better%3A%20A%20Machine%20Learning%20Approach%20to%20Corner%20Detection%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rosten%2C%20E.%20Porter%2C%20R.%20Drummond%2C%20T.%20Faster%20and%20Better%3A%20A%20Machine%20Learning%20Approach%20to%20Corner%20Detection%202010"
+        },
+        {
+            "id": "32",
+            "entry": "[32] E. Rublee, V. Rabaud, K. Konolidge, and G. Bradski. ORB: An Efficient Alternative to SIFT or SURF. In ICCV, 2011. 2, 7",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rublee%2C%20E.%20Rabaud%2C%20V.%20Konolidge%2C%20K.%20Bradski%2C%20G.%20ORB%3A%20An%20Efficient%20Alternative%20to%20SIFT%20or%20SURF%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rublee%2C%20E.%20Rabaud%2C%20V.%20Konolidge%2C%20K.%20Bradski%2C%20G.%20ORB%3A%20An%20Efficient%20Alternative%20to%20SIFT%20or%20SURF%202011"
+        },
+        {
+            "id": "33",
+            "entry": "[33] N. Savinov, A. Seki, L. Ladicky, T. Sattler, and M. Pollefeys. Quad-Networks: Unsupervised Learning to Rank for Interest Point Detection. CVPR, 2017. 1, 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Savinov%2C%20N.%20Seki%2C%20A.%20Ladicky%2C%20L.%20Sattler%2C%20T.%20Pollefeys.%20Quad-Networks%3A%20Unsupervised%20Learning%20to%20Rank%20for%20Interest%20Point%20Detection%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Savinov%2C%20N.%20Seki%2C%20A.%20Ladicky%2C%20L.%20Sattler%2C%20T.%20Pollefeys.%20Quad-Networks%3A%20Unsupervised%20Learning%20to%20Rank%20for%20Interest%20Point%20Detection%202017"
+        },
+        {
+            "id": "34",
+            "entry": "[34] J. Sch\u00f6nberger and J. Frahm. Structure-From-Motion Revisited. In CVPR, 2016. 1, 4, 7",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sch%C3%B6nberger%2C%20J.%20Frahm%2C%20J.%20Structure-From-Motion%20Revisited%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sch%C3%B6nberger%2C%20J.%20Frahm%2C%20J.%20Structure-From-Motion%20Revisited%202016"
+        },
+        {
+            "id": "35",
+            "entry": "[35] J. Sch\u00f6nberger, H. Hardmeier, T. Sattler, and M. Pollefeys. Comparative Evaluation of Hand-Crafted and Learned Local Features. In CVPR, 2017. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sch%C3%B6nberger%2C%20J.%20Hardmeier%2C%20H.%20Sattler%2C%20T.%20M.%20Pollefeys.%20Comparative%20Evaluation%20of%20Hand-Crafted%20and%20Learned%20Local%20Features%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sch%C3%B6nberger%2C%20J.%20Hardmeier%2C%20H.%20Sattler%2C%20T.%20M.%20Pollefeys.%20Comparative%20Evaluation%20of%20Hand-Crafted%20and%20Learned%20Local%20Features%202017"
+        },
+        {
+            "id": "36",
+            "entry": "[36] E. Simo-serra, E. Trulls, L. Ferraz, I. Kokkinos, P. Fua, and F. moreno-noguer. Discriminative Learning of Deep Convolutional Feature Point Descriptors. In ICCV, 2015. 2, 3, 5",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Simo-serra%2C%20E.%20Trulls%2C%20E.%20Ferraz%2C%20L.%20Kokkinos%2C%20I.%20Discriminative%20Learning%20of%20Deep%20Convolutional%20Feature%20Point%20Descriptors%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Simo-serra%2C%20E.%20Trulls%2C%20E.%20Ferraz%2C%20L.%20Kokkinos%2C%20I.%20Discriminative%20Learning%20of%20Deep%20Convolutional%20Feature%20Point%20Descriptors%202015"
+        },
+        {
+            "id": "37",
+            "entry": "[37] K. Simonyan, A. Vedaldi, and A. Zisserman. Learning Local Feature Descriptors Using Convex Optimisation. PAMI, 2014. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Simonyan%2C%20K.%20Vedaldi%2C%20A.%20Zisserman%2C%20A.%20Learning%20Local%20Feature%20Descriptors%20Using%20Convex%20Optimisation%202014"
+        },
+        {
+            "id": "38",
+            "entry": "[38] C. Strecha, A. Bronstein, M. Bronstein, and P. Fua. LDAHash: Improved Matching with Smaller Descriptors. PAMI, 34(1), January 2012. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Strecha%2C%20C.%20Bronstein%2C%20A.%20Bronstein%2C%20M.%20Fua%2C%20P.%20LDAHash%3A%20Improved%20Matching%20with%20Smaller%20Descriptors%202012-01-02",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Strecha%2C%20C.%20Bronstein%2C%20A.%20Bronstein%2C%20M.%20Fua%2C%20P.%20LDAHash%3A%20Improved%20Matching%20with%20Smaller%20Descriptors%202012-01-02"
+        },
+        {
+            "id": "39",
+            "entry": "[39] B. Thomee, D. Shamma, G. Friedland, B. Elizalde, K. Ni, D. Poland, D. Borth, and L. Li. YFCC100M: the New Data in Multimedia Research. In CACM, 2016. 7",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=B%20Thomee%20D%20Shamma%20G%20Friedland%20B%20Elizalde%20K%20Ni%20D%20Poland%20D%20Borth%20and%20L%20Li%20YFCC100M%20the%20New%20Data%20in%20Multimedia%20Research%20In%20CACM%202016%207",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=B%20Thomee%20D%20Shamma%20G%20Friedland%20B%20Elizalde%20K%20Ni%20D%20Poland%20D%20Borth%20and%20L%20Li%20YFCC100M%20the%20New%20Data%20in%20Multimedia%20Research%20In%20CACM%202016%207"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Y. Tian, B. Fan, and F. Wu. L2-Net: Deep Learning of Discriminative Patch Descriptor in Euclidean Space. In CVPR, 2017. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tian%2C%20Y.%20Fan%2C%20B.%20Wu%2C%20F.%20L2-Net%3A%20Deep%20Learning%20of%20Discriminative%20Patch%20Descriptor%20in%20Euclidean%20Space%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tian%2C%20Y.%20Fan%2C%20B.%20Wu%2C%20F.%20L2-Net%3A%20Deep%20Learning%20of%20Discriminative%20Patch%20Descriptor%20in%20Euclidean%20Space%202017"
+        },
+        {
+            "id": "41",
+            "entry": "[41] E. Tola, V. Lepetit, and P. Fua. Daisy: An Efficient Dense Descriptor Applied to Wide Baseline Stereo. PAMI, 32(5):815\u2013830, 2010. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tola%2C%20E.%20Lepetit%2C%20V.%20Fua%2C%20P.%20Daisy%3A%20An%20Efficient%20Dense%20Descriptor%20Applied%20to%20Wide%20Baseline%20Stereo%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tola%2C%20E.%20Lepetit%2C%20V.%20Fua%2C%20P.%20Daisy%3A%20An%20Efficient%20Dense%20Descriptor%20Applied%20to%20Wide%20Baseline%20Stereo%202010"
+        },
+        {
+            "id": "42",
+            "entry": "[42] D. Ulyanov, A. Vedaldi, and V. Lempitsky. Improved Texture Networks: Maximizing Quality and Diversity in Feed-Forward Stylization and Texture Synthesis. In CVPR, 2017. 4",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ulyanov%2C%20D.%20Vedaldi%2C%20A.%20Lempitsky%2C%20V.%20Improved%20Texture%20Networks%3A%20Maximizing%20Quality%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ulyanov%2C%20D.%20Vedaldi%2C%20A.%20Lempitsky%2C%20V.%20Improved%20Texture%20Networks%3A%20Maximizing%20Quality%202017"
+        },
+        {
+            "id": "43",
+            "entry": "[43] B. Ummenhofer, H. Zhou, J. Uhrig, N. Mayer, E. Ilg, A. Dosovitskiy, and T. Brox. Demon: Depth and Motion Network for Learning Monocular Stereo. In CVPR, 2017. 1, 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ummenhofer%2C%20B.%20Zhou%2C%20H.%20Uhrig%2C%20J.%20Mayer%2C%20N.%20Demon%3A%20Depth%20and%20Motion%20Network%20for%20Learning%20Monocular%20Stereo%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ummenhofer%2C%20B.%20Zhou%2C%20H.%20Uhrig%2C%20J.%20Mayer%2C%20N.%20Demon%3A%20Depth%20and%20Motion%20Network%20for%20Learning%20Monocular%20Stereo%202017"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Y. Verdie, K. M. Yi, P. Fua, and V. Lepetit. TILDE: A Temporally Invariant Learned DEtector. In CVPR, 2015. 2, 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Verdie%2C%20Y.%20Yi%2C%20K.M.%20Fua%2C%20P.%20Lepetit%2C%20V.%20TILDE%3A%20A%20Temporally%20Invariant%20Learned%20DEtector%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Verdie%2C%20Y.%20Yi%2C%20K.M.%20Fua%2C%20P.%20Lepetit%2C%20V.%20TILDE%3A%20A%20Temporally%20Invariant%20Learned%20DEtector%202015"
+        },
+        {
+            "id": "45",
+            "entry": "[45] S. Vijayanarasimhan, S. Ricco, C. Schmid, R. Sukthankar, and K. Fragkiadaki. Sfm-Net: Learning of Structure and Motion from Video. arXiv Preprint, 2017. 1, 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vijayanarasimhan%2C%20S.%20Ricco%2C%20S.%20Schmid%2C%20C.%20Sukthankar%2C%20R.%20Sfm-Net%3A%20Learning%20of%20Structure%20and%20Motion%20from%20Video%202017"
+        },
+        {
+            "id": "46",
+            "entry": "[46] X. Wei, Y. Zhang, Y. Gong, and N. Zheng. Kernelized Subspace Pooling for Deep Local Descriptors. In CVPR, 2018. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wei%2C%20X.%20Zhang%2C%20Y.%20Gong%2C%20Y.%20Zheng%2C%20N.%20Kernelized%20Subspace%20Pooling%20for%20Deep%20Local%20Descriptors%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wei%2C%20X.%20Zhang%2C%20Y.%20Gong%2C%20Y.%20Zheng%2C%20N.%20Kernelized%20Subspace%20Pooling%20for%20Deep%20Local%20Descriptors%202018"
+        },
+        {
+            "id": "47",
+            "entry": "[47] C. Wu. Towards Linear-Time Incremental Structure from Motion. In 3DV, 2013. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20C.%20Towards%20Linear-Time%20Incremental%20Structure%20from%20Motion%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20C.%20Towards%20Linear-Time%20Incremental%20Structure%20from%20Motion%202013"
+        },
+        {
+            "id": "48",
+            "entry": "[48] K. M. Yi, E. Trulls, V. Lepetit, and P. Fua. LIFT: Learned Invariant Feature Transform. In ECCV, 2016. 1, 2, 3, 4, 7, 8",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=K%20M%20Yi%20E%20Trulls%20V%20Lepetit%20and%20P%20Fua%20LIFT%20Learned%20Invariant%20Feature%20Transform%20In%20ECCV%202016%201%202%203%204%207%208",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=K%20M%20Yi%20E%20Trulls%20V%20Lepetit%20and%20P%20Fua%20LIFT%20Learned%20Invariant%20Feature%20Transform%20In%20ECCV%202016%201%202%203%204%207%208"
+        },
+        {
+            "id": "49",
+            "entry": "[49] K. M. Yi, E. Trulls, Y. Ono, V. Lepetit, M. Salzmann, and P. Fua. Learning to Find Good Correspondences. In CVPR, 2018. 1",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yi%2C%20K.M.%20Trulls%2C%20E.%20Ono%2C%20Y.%20Lepetit%2C%20V.%20Learning%20to%20Find%20Good%20Correspondences%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yi%2C%20K.M.%20Trulls%2C%20E.%20Ono%2C%20Y.%20Lepetit%2C%20V.%20Learning%20to%20Find%20Good%20Correspondences%202018"
+        },
+        {
+            "id": "50",
+            "entry": "[50] K. M. Yi, Y. Verdie, P. Fua, and V. Lepetit. Learning to Assign Orientations to Feature Points. In CVPR, 2016. 2, 3, 4",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yi%2C%20K.M.%20Verdie%2C%20Y.%20Fua%2C%20P.%20Lepetit%2C%20V.%20Learning%20to%20Assign%20Orientations%20to%20Feature%20Points%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yi%2C%20K.M.%20Verdie%2C%20Y.%20Fua%2C%20P.%20Lepetit%2C%20V.%20Learning%20to%20Assign%20Orientations%20to%20Feature%20Points%202016"
+        },
+        {
+            "id": "51",
+            "entry": "[51] S. Zagoruyko and N. Komodakis. Learning to Compare Image Patches via Convolutional Neural Networks. In CVPR, 2015. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zagoruyko%2C%20S.%20Komodakis%2C%20N.%20Learning%20to%20Compare%20Image%20Patches%20via%20Convolutional%20Neural%20Networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zagoruyko%2C%20S.%20Komodakis%2C%20N.%20Learning%20to%20Compare%20Image%20Patches%20via%20Convolutional%20Neural%20Networks%202015"
+        },
+        {
+            "id": "52",
+            "entry": "[52] A. R. Zamir, T. Wekel, P. Agrawal, J. Malik, and S. Savarese. Generic 3D Representation via Pose Estimation and Matching. In ECCV, 2016. 1, 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zamir%2C%20A.R.%20Wekel%2C%20T.%20Agrawal%2C%20P.%20Malik%2C%20J.%20Generic%203D%20Representation%20via%20Pose%20Estimation%20and%20Matching%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zamir%2C%20A.R.%20Wekel%2C%20T.%20Agrawal%2C%20P.%20Malik%2C%20J.%20Generic%203D%20Representation%20via%20Pose%20Estimation%20and%20Matching%202016"
+        },
+        {
+            "id": "53",
+            "entry": "[53] T. Zhou, M. Brown, N. Snavely, and D. Lowe. Unsupervised Learning of Depth and Ego-Motion from Video. In CVPR, 2017. 1, 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhou%2C%20T.%20Brown%2C%20M.%20Snavely%2C%20N.%20Lowe%2C%20D.%20Unsupervised%20Learning%20of%20Depth%20and%20Ego-Motion%20from%20Video%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhou%2C%20T.%20Brown%2C%20M.%20Snavely%2C%20N.%20Lowe%2C%20D.%20Unsupervised%20Learning%20of%20Depth%20and%20Ego-Motion%20from%20Video%202017"
+        }
+    ]
+}

@@ -1,0 +1,389 @@
+{
+    "filename": "7657-unsupervised-learning-of-object-landmarks-through-conditional-image-generation.pdf",
+    "metadata": {
+        "title": "Unsupervised Learning of Object Landmarks through Conditional Image Generation",
+        "author": "Tomas Jakab, Ankush Gupta, Hakan Bilen, Andrea Vedaldi",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7657-unsupervised-learning-of-object-landmarks-through-conditional-image-generation.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We propose a method for learning landmark detectors for visual objects (such as the eyes and the nose in a face) without any manual supervision. We cast this as the problem of generating images that combine the appearance of the object as seen in a first example image with the geometry of the object as seen in a second example image, where the two examples differ by a viewpoint change and/or an object deformation. In order to factorize appearance and geometry, we introduce a tight bottleneck in the geometry-extraction process that selects and distils geometryrelated features. Compared to standard image generation problems, which often use generative adversarial networks, our generation task is conditioned on both appearance and geometry and thus is significantly less ambiguous, to the point that adopting a simple perceptual loss formulation is sufficient. We demonstrate that our approach can learn object landmarks from synthetic image deformations or videos, all without manual supervision, while outperforming state-of-the-art unsupervised landmark detectors. We further show that our method is applicable to a large variety of datasets \u2014 faces, people, 3D objects, and digits \u2014 without any modifications."
+    },
+    "keywords": [
+        {
+            "term": "super resolution",
+            "url": "https://en.wikipedia.org/wiki/super_resolution"
+        },
+        {
+            "term": "pose estimation",
+            "url": "https://en.wikipedia.org/wiki/pose_estimation"
+        },
+        {
+            "term": "unsupervised learning",
+            "url": "https://en.wikipedia.org/wiki/unsupervised_learning"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "There is a growing interest in developing machine learning methods that have little or no dependence on manual supervision",
+        "We show that this still results in excellent image generation results and that, more importantly, semantically consistent landmark detectors are learned without manual supervision",
+        "We explore extracting source-target image pairs (x, x ) using either (1) synthetic transformations, or (2) videos",
+        "In this paper we have shown that a simple network trained for conditional image generation can be utilised to induce, without manual supervision, a object landmark detectors"
+    ],
+    "key_statements": [
+        "There is a growing interest in developing machine learning methods that have little or no dependence on manual supervision",
+        "We show that this still results in excellent image generation results and that, more importantly, semantically consistent landmark detectors are learned without manual supervision",
+        "We explore extracting source-target image pairs (x, x ) using either (1) synthetic transformations, or (2) videos",
+        "In this paper we have shown that a simple network trained for conditional image generation can be utilised to induce, without manual supervision, a object landmark detectors"
+    ],
+    "summary": [
+        "There is a growing interest in developing machine learning methods that have little or no dependence on manual supervision.",
+        "The method of Zhang et al [<a class=\"ref-link\" id=\"c55\" href=\"#r55\">55</a>] shares several similarities with ours, in that they use image generation with the goal of learning landmarks.",
+        "In order for the model \u03a6(x) to learn to extract keypoint-like structures from the image, we terminate the network \u03a6 with a layer that forces the output to be akin to a set of K keypoint detections.",
+        "Nowadays the standard practice is to learn such a loss function using adversarial techniques, as exemplified in numerous variants of GANs. since the goal here is not generative modelling, but rather to induce a representation y of the object geometry for reconstructing a specific target image, a simpler method may suffice.",
+        "The perceptual loss compares a set of the activations extracted from multiple layers of a deep network for both the reference and the generated images, instead of the only raw pixel values.",
+        "As our goal is to have a purely-unsupervised learning, we pre-train the network by using a self-supervised approach, namely colorising grayscale images [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>].",
+        "This is achieved in two steps: first, the image x is encoded as a feature tensor z \u2208 R16\u00d716\u00d7C using a convolutional network with exactly the same architecture as the landmark detection network except for the final 1\u00d71 convolutional layer, which is omitted; the features z and the landmarks y are stacked together and fed to a regressor that reconstructs the target frame x .",
+        "We freeze the parameters of the unsupervised detector network (\u03a6) and learn a linear regressor from our unsupervised keypoints to 5 manually-labelled ones from the respective training sets.",
+        "The keypoint bottleneck has two functions: (1) it provides a differentiable and distributed representation of the location of landmarks, and (2) it restricts the information from the target image to spatial locations only.",
+        "The frames are annotated with 7 keypoints corresponding to head, wrists, elbows, and shoulders which, as for faces, we use only for quantitative evaluation, not for training.",
+        "Figure 4 compares the accuracy of localising the 7 keypoints on BBC-Pose against supervised methods, for both self-supervised and supervised perceptual loss networks.",
+        "We train our unsupervised keypoint detectors on the SmallNORB [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>] dataset, comprising 5 object categories with 10 object instances each, imaged from regularly spaced viewpoints and under different illumination conditions.",
+        "In this paper we have shown that a simple network trained for conditional image generation can be utilised to induce, without manual supervision, a object landmark detectors.",
+        "We would like to thank James Thewlis for suggestions and support with code and data, and David Novotn\u00fd and Triantafyllos Afouras for helpful advice"
+    ],
+    "headline": "We propose a method for learning landmark detectors for visual objects  without any manual supervision",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] J. Bruna, P. Sprechmann, and Y. LeCun. Super-resolution with deep convolutional sufficient statistics. In Proc. ICLR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bruna%2C%20J.%20Sprechmann%2C%20P.%20LeCun%2C%20Y.%20Super-resolution%20with%20deep%20convolutional%20sufficient%20statistics%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bruna%2C%20J.%20Sprechmann%2C%20P.%20LeCun%2C%20Y.%20Super-resolution%20with%20deep%20convolutional%20sufficient%20statistics%202016"
+        },
+        {
+            "id": "2",
+            "entry": "[2] X. P. Burgos-Artizzu, P. Perona, and P. Doll\u00e1r. Robust face landmark estimation under occlusion. In Computer Vision (ICCV), 2013 IEEE International Conference on, pages 1513\u20131520. IEEE, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Burgos-Artizzu%2C%20X.P.%20Perona%2C%20P.%20Doll%C3%A1r%2C%20P.%20Robust%20face%20landmark%20estimation%20under%20occlusion%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Burgos-Artizzu%2C%20X.P.%20Perona%2C%20P.%20Doll%C3%A1r%2C%20P.%20Robust%20face%20landmark%20estimation%20under%20occlusion%202013"
+        },
+        {
+            "id": "3",
+            "entry": "[3] J. Charles, T. Pfister, D. Magee, D. Hogg, and A. Zisserman. Domain adaptation for upper body pose tracking in signed TV broadcasts. In Proc. BMVC, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Charles%2C%20J.%20Pfister%2C%20T.%20Magee%2C%20D.%20Hogg%2C%20D.%20Domain%20adaptation%20for%20upper%20body%20pose%20tracking%20in%20signed%20TV%20broadcasts%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Charles%2C%20J.%20Pfister%2C%20T.%20Magee%2C%20D.%20Hogg%2C%20D.%20Domain%20adaptation%20for%20upper%20body%20pose%20tracking%20in%20signed%20TV%20broadcasts%202013"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Q. Chen and V. Koltun. Photographic image synthesis with cascaded refinement networks. In Proc. ICCV, volume 1, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Q.%20Koltun%2C%20V.%20Photographic%20image%20synthesis%20with%20cascaded%20refinement%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Q.%20Koltun%2C%20V.%20Photographic%20image%20synthesis%20with%20cascaded%20refinement%20networks%202017"
+        },
+        {
+            "id": "5",
+            "entry": "[5] X. Chen and A. L. Yuille. Articulated pose estimation by a graphical model with image dependent pairwise relations. In Proc. NIPS, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20X.%20Yuille%2C%20A.L.%20Articulated%20pose%20estimation%20by%20a%20graphical%20model%20with%20image%20dependent%20pairwise%20relations%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20X.%20Yuille%2C%20A.L.%20Articulated%20pose%20estimation%20by%20a%20graphical%20model%20with%20image%20dependent%20pairwise%20relations%202014"
+        },
+        {
+            "id": "6",
+            "entry": "[6] X. Chen, Y. Duan, R. Houthooft, J. Schulman, I. Sutskever, and P. Abbeel. Infogan: Interpretable representation learning by information maximizing generative adversarial nets. In Proc. NIPS, pages 2172\u20132180, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20X.%20Duan%2C%20Y.%20Houthooft%2C%20R.%20Schulman%2C%20J.%20Infogan%3A%20Interpretable%20representation%20learning%20by%20information%20maximizing%20generative%20adversarial%20nets%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20X.%20Duan%2C%20Y.%20Houthooft%2C%20R.%20Schulman%2C%20J.%20Infogan%3A%20Interpretable%20representation%20learning%20by%20information%20maximizing%20generative%20adversarial%20nets%202016"
+        },
+        {
+            "id": "7",
+            "entry": "[7] J. S. Chung, A. Nagrani, and A. Zisserman. VoxCeleb2: Deep speaker recognition. In INTERSPEECH, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chung%2C%20J.S.%20Nagrani%2C%20A.%20Zisserman%2C%20A.%20VoxCeleb2%3A%20Deep%20speaker%20recognition%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chung%2C%20J.S.%20Nagrani%2C%20A.%20Zisserman%2C%20A.%20VoxCeleb2%3A%20Deep%20speaker%20recognition%202018"
+        },
+        {
+            "id": "8",
+            "entry": "[8] E. L. Denton and V. Birodkar. Unsupervised learning of disentangled representations from video. In Proc. NIPS. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Denton%2C%20E.L.%20Birodkar%2C%20V.%20Unsupervised%20learning%20of%20disentangled%20representations%20from%20video%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Denton%2C%20E.L.%20Birodkar%2C%20V.%20Unsupervised%20learning%20of%20disentangled%20representations%20from%20video%202017"
+        },
+        {
+            "id": "9",
+            "entry": "[9] A. Dosovitskiy and T. Brox. Generating images with perceptual similarity metrics based on deep networks. In Proc. NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dosovitskiy%2C%20A.%20Brox%2C%20T.%20Generating%20images%20with%20perceptual%20similarity%20metrics%20based%20on%20deep%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dosovitskiy%2C%20A.%20Brox%2C%20T.%20Generating%20images%20with%20perceptual%20similarity%20metrics%20based%20on%20deep%20networks%202016"
+        },
+        {
+            "id": "10",
+            "entry": "[10] A. Dosovitskiy and T. Brox. Generating images with perceptual similarity metrics based on deep networks. In Proc. NIPS, pages 658\u2013666, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dosovitskiy%2C%20A.%20Brox%2C%20T.%20Generating%20images%20with%20perceptual%20similarity%20metrics%20based%20on%20deep%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dosovitskiy%2C%20A.%20Brox%2C%20T.%20Generating%20images%20with%20perceptual%20similarity%20metrics%20based%20on%20deep%20networks%202016"
+        },
+        {
+            "id": "11",
+            "entry": "[11] J. Duchon. Splines minimizing rotation-invariant semi-norms in sobolev spaces. In Constructive theory of functions of several variables. 1977.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Duchon%2C%20J.%20Splines%20minimizing%20rotation-invariant%20semi-norms%20in%20sobolev%20spaces.%20In%20Constructive%20theory%20of%20functions%20of%20several%20variables%201977"
+        },
+        {
+            "id": "12",
+            "entry": "[12] L. A. Gatys, A. S. Ecker, and M. Bethge. Image style transfer using convolutional neural networks. In Proc. CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gatys%2C%20L.A.%20Ecker%2C%20A.S.%20Bethge%2C%20M.%20Image%20style%20transfer%20using%20convolutional%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gatys%2C%20L.A.%20Ecker%2C%20A.S.%20Bethge%2C%20M.%20Image%20style%20transfer%20using%20convolutional%20neural%20networks%202016"
+        },
+        {
+            "id": "13",
+            "entry": "[13] I. Goodfellow, J. Pouget-Abadie, M. Mirza, B. Xu, D. Warde-Farley, S. Ozair, A. Courville, and Y. Bengio. Generative adversarial nets. In Proc. NIPS, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goodfellow%2C%20I.%20Pouget-Abadie%2C%20J.%20Mirza%2C%20M.%20Xu%2C%20B.%20Generative%20adversarial%20nets%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goodfellow%2C%20I.%20Pouget-Abadie%2C%20J.%20Mirza%2C%20M.%20Xu%2C%20B.%20Generative%20adversarial%20nets%202014"
+        },
+        {
+            "id": "14",
+            "entry": "[14] G. E. Hinton and R. R. Salakhutdinov. Reducing the dimensionality of data with neural networks. Science, 313(5786):504\u2013507, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hinton%2C%20G.E.%20Salakhutdinov%2C%20R.R.%20Reducing%20the%20dimensionality%20of%20data%20with%20neural%20networks%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hinton%2C%20G.E.%20Salakhutdinov%2C%20R.R.%20Reducing%20the%20dimensionality%20of%20data%20with%20neural%20networks%202006"
+        },
+        {
+            "id": "15",
+            "entry": "[15] G. E. Hinton, S. Osindero, and Y.-W. Teh. A fast learning algorithm for deep belief nets. Neural computation, 18(7):1527\u20131554, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hinton%2C%20G.E.%20Osindero%2C%20S.%20Teh%2C%20Y.-W.%20A%20fast%20learning%20algorithm%20for%20deep%20belief%20nets%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hinton%2C%20G.E.%20Osindero%2C%20S.%20Teh%2C%20Y.-W.%20A%20fast%20learning%20algorithm%20for%20deep%20belief%20nets%202006"
+        },
+        {
+            "id": "16",
+            "entry": "[16] S. Hochreiter and J. Schmidhuber. Long short-term memory. Neural computation, 9(8): 1735\u20131780, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hochreiter%2C%20S.%20Schmidhuber%2C%20J.%20Long%20short-term%20memory%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hochreiter%2C%20S.%20Schmidhuber%2C%20J.%20Long%20short-term%20memory%201997"
+        },
+        {
+            "id": "17",
+            "entry": "[17] C. Ionescu, D. Papava, V. Olaru, and C. Sminchisescu. Human3.6m: Large scale datasets and predictive methods for 3d human sensing in natural environments. PAMI, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ionescu%2C%20C.%20Papava%2C%20D.%20Olaru%2C%20V.%20Sminchisescu%2C%20C.%20Human3.%206m%3A%20Large%20scale%20datasets%20and%20predictive%20methods%20for%203d%20human%20sensing%20in%20natural%20environments%202014"
+        },
+        {
+            "id": "18",
+            "entry": "[18] P. Isola, J.-Y. Zhu, T. Zhou, and A. A. Efros. Image-to-image translation with conditional adversarial networks. In Proc. CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Isola%2C%20P.%20Zhu%2C%20J.-Y.%20Zhou%2C%20T.%20Efros%2C%20A.A.%20Image-to-image%20translation%20with%20conditional%20adversarial%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Isola%2C%20P.%20Zhu%2C%20J.-Y.%20Zhou%2C%20T.%20Efros%2C%20A.A.%20Image-to-image%20translation%20with%20conditional%20adversarial%20networks%202017"
+        },
+        {
+            "id": "19",
+            "entry": "[19] J. Johnson, A. Alahi, and F. Li. Perceptual losses for real-time style transfer and super-resolution. In Proc. ECCV, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Johnson%2C%20J.%20Alahi%2C%20A.%20Li%2C%20F.%20Perceptual%20losses%20for%20real-time%20style%20transfer%20and%20super-resolution%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Johnson%2C%20J.%20Alahi%2C%20A.%20Li%2C%20F.%20Perceptual%20losses%20for%20real-time%20style%20transfer%20and%20super-resolution%202016"
+        },
+        {
+            "id": "20",
+            "entry": "[20] N. Kalchbrenner, A. Oord, K. Simonyan, I. Danihelka, O. Vinyals, A. Graves, and K. Kavukcuoglu. Video pixel networks. arXiv preprint arXiv:1610.00527, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1610.00527"
+        },
+        {
+            "id": "21",
+            "entry": "[21] D. P. Kingma and J. Ba. Adam: A method for stochastic optimization. arXiv preprint arXiv:1412.6980, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6980"
+        },
+        {
+            "id": "22",
+            "entry": "[22] D. P. Kingma and M. Welling. Auto-encoding variational bayes. arXiv preprint arXiv:1312.6114, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.6114"
+        },
+        {
+            "id": "23",
+            "entry": "[23] M. Koestinger, P. Wohlhart, P. M. Roth, and H. Bischof. Annotated facial landmarks in the wild: A large-scale, real-world database for facial landmark localization. In ICCV Workshops, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Koestinger%2C%20M.%20Wohlhart%2C%20P.%20Roth%2C%20P.M.%20Bischof%2C%20H.%20Annotated%20facial%20landmarks%20in%20the%20wild%3A%20A%20large-scale%2C%20real-world%20database%20for%20facial%20landmark%20localization%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Koestinger%2C%20M.%20Wohlhart%2C%20P.%20Roth%2C%20P.M.%20Bischof%2C%20H.%20Annotated%20facial%20landmarks%20in%20the%20wild%3A%20A%20large-scale%2C%20real-world%20database%20for%20facial%20landmark%20localization%202011"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Z. L., P. L., X. W., and X. T. Deep learning face attributes in the wild. In Proc. ICCV, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=L.%2C%20Z.%20L.%2C%20P.%20W.%2C%20X.%20T%2C%20X.%20Deep%20learning%20face%20attributes%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=L.%2C%20Z.%20L.%2C%20P.%20W.%2C%20X.%20T%2C%20X.%20Deep%20learning%20face%20attributes%202015"
+        },
+        {
+            "id": "25",
+            "entry": "[25] G. Larsson, M. Maire, and G. Shakhnarovich. Learning representations for automatic colorization. In Proc. ECCV, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Larsson%2C%20G.%20Maire%2C%20M.%20Shakhnarovich%2C%20G.%20Learning%20representations%20for%20automatic%20colorization%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Larsson%2C%20G.%20Maire%2C%20M.%20Shakhnarovich%2C%20G.%20Learning%20representations%20for%20automatic%20colorization%202016"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Y. LeCun, F. J. Huang, and L. Bottou. Learning methods for generic object recognition with invariance to pose and lighting. In Proc. CVPR, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=LeCun%2C%20Y.%20Huang%2C%20F.J.%20Bottou%2C%20L.%20Learning%20methods%20for%20generic%20object%20recognition%20with%20invariance%20to%20pose%20and%20lighting%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=LeCun%2C%20Y.%20Huang%2C%20F.J.%20Bottou%2C%20L.%20Learning%20methods%20for%20generic%20object%20recognition%20with%20invariance%20to%20pose%20and%20lighting%202004"
+        },
+        {
+            "id": "27",
+            "entry": "[27] C. Ledig, L. Theis, F. Husz\u00e1r, J. Caballero, A. Cunningham, A. Acosta, A. Aitken, A. Tejani, J. Totz, Z. Wang, and W. Shi. Photo-realistic single image super-resolution using a generative adversarial network. In Proc. CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Photo-realistic%20single%20image%20super-resolution%20using%20a%20generative%20adversarial%20network%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Photo-realistic%20single%20image%20super-resolution%20using%20a%20generative%20adversarial%20network%202017"
+        },
+        {
+            "id": "28",
+            "entry": "[28] A. Nagrani, J. S. Chung, and A. Zisserman. Voxceleb: a large-scale speaker identification dataset. In INTERSPEECH, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nagrani%2C%20A.%20Chung%2C%20J.S.%20Zisserman%2C%20A.%20Voxceleb%3A%20a%20large-scale%20speaker%20identification%20dataset%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nagrani%2C%20A.%20Chung%2C%20J.S.%20Zisserman%2C%20A.%20Voxceleb%3A%20a%20large-scale%20speaker%20identification%20dataset%202017"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Y. Netzer, T. Wang, A. Coates, A. Bissacco, B. Wu, and A. Y. Ng. Reading digits in natural images with unsupervised feature learning. In NIPS DLW, volume 2011, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Netzer%2C%20Y.%20Wang%2C%20T.%20Coates%2C%20A.%20Bissacco%2C%20A.%20Reading%20digits%20in%20natural%20images%20with%20unsupervised%20feature%20learning%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Netzer%2C%20Y.%20Wang%2C%20T.%20Coates%2C%20A.%20Bissacco%2C%20A.%20Reading%20digits%20in%20natural%20images%20with%20unsupervised%20feature%20learning%202011"
+        },
+        {
+            "id": "30",
+            "entry": "[30] A. Nguyen, A. Dosovitskiy, J. Yosinski, T. Brox, and J. Clune. Synthesizing the preferred inputs for neurons in neural networks via deep generator networks. In Proc. NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nguyen%2C%20A.%20Dosovitskiy%2C%20A.%20Yosinski%2C%20J.%20Brox%2C%20T.%20Synthesizing%20the%20preferred%20inputs%20for%20neurons%20in%20neural%20networks%20via%20deep%20generator%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nguyen%2C%20A.%20Dosovitskiy%2C%20A.%20Yosinski%2C%20J.%20Brox%2C%20T.%20Synthesizing%20the%20preferred%20inputs%20for%20neurons%20in%20neural%20networks%20via%20deep%20generator%20networks%202016"
+        },
+        {
+            "id": "31",
+            "entry": "[31] A. Nguyen, J. Yosinski, Y. Bengio, A. Dosovitskiy, and J. Clune. Plug & play generative networks: Conditional iterative generation of images in latent space. In Proc. CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nguyen%2C%20A.%20Yosinski%2C%20J.%20Bengio%2C%20Y.%20Dosovitskiy%2C%20A.%20Plug%20%26%20play%20generative%20networks%3A%20Conditional%20iterative%20generation%20of%20images%20in%20latent%20space%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nguyen%2C%20A.%20Yosinski%2C%20J.%20Bengio%2C%20Y.%20Dosovitskiy%2C%20A.%20Plug%20%26%20play%20generative%20networks%3A%20Conditional%20iterative%20generation%20of%20images%20in%20latent%20space%202017"
+        },
+        {
+            "id": "32",
+            "entry": "[32] V. Patraucean, A. Handa, and R. Cipolla. Spatio-temporal video autoencoder with differentiable memory. In ICLR Workshop, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Patraucean%2C%20V.%20Handa%2C%20A.%20Cipolla%2C%20R.%20Spatio-temporal%20video%20autoencoder%20with%20differentiable%20memory%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Patraucean%2C%20V.%20Handa%2C%20A.%20Cipolla%2C%20R.%20Spatio-temporal%20video%20autoencoder%20with%20differentiable%20memory%202015"
+        },
+        {
+            "id": "33",
+            "entry": "[33] T. Pfister, J. Charles, and A. Zisserman. Large-scale learning of sign language by watching TV (using co-occurrences). In Proc. BMVC, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pfister%2C%20T.%20Charles%2C%20J.%20Zisserman%2C%20A.%20Large-scale%20learning%20of%20sign%20language%20by%20watching%20TV%20%28using%20co-occurrences%29%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pfister%2C%20T.%20Charles%2C%20J.%20Zisserman%2C%20A.%20Large-scale%20learning%20of%20sign%20language%20by%20watching%20TV%20%28using%20co-occurrences%29%202013"
+        },
+        {
+            "id": "34",
+            "entry": "[34] T. Pfister, K. Simonyan, J. Charles, and A. Zisserman. Deep convolutional neural networks for efficient pose estimation in gesture videos. In Proceedings of the Asian Conference on Computer Vision, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pfister%2C%20T.%20Simonyan%2C%20K.%20Charles%2C%20J.%20Zisserman%2C%20A.%20Deep%20convolutional%20neural%20networks%20for%20efficient%20pose%20estimation%20in%20gesture%20videos%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pfister%2C%20T.%20Simonyan%2C%20K.%20Charles%2C%20J.%20Zisserman%2C%20A.%20Deep%20convolutional%20neural%20networks%20for%20efficient%20pose%20estimation%20in%20gesture%20videos%202014"
+        },
+        {
+            "id": "35",
+            "entry": "[35] T. Pfister, J. Charles, and A. Zisserman. Flowing convnets for human pose estimation in videos. In Proc. ICCV, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pfister%2C%20T.%20Charles%2C%20J.%20Zisserman%2C%20A.%20Flowing%20convnets%20for%20human%20pose%20estimation%20in%20videos%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pfister%2C%20T.%20Charles%2C%20J.%20Zisserman%2C%20A.%20Flowing%20convnets%20for%20human%20pose%20estimation%20in%20videos%202015"
+        },
+        {
+            "id": "36",
+            "entry": "[36] S. E. Reed, Y. Zhang, Y. Zhang, and H. Lee. Deep visual analogy-making. In Proc. NIPS, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Reed%2C%20S.E.%20Zhang%2C%20Y.%20Zhang%2C%20Y.%20Lee%2C%20H.%20Deep%20visual%20analogy-making%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Reed%2C%20S.E.%20Zhang%2C%20Y.%20Zhang%2C%20Y.%20Lee%2C%20H.%20Deep%20visual%20analogy-making%202015"
+        },
+        {
+            "id": "37",
+            "entry": "[37] S. E. Reed, Z. Akata, S. Mohan, S. Tenka, B. Schiele, and H. Lee. Learning what and where to draw. In Proc. NIPS, pages 217\u2013225, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Reed%2C%20S.E.%20Akata%2C%20Z.%20Mohan%2C%20S.%20Tenka%2C%20S.%20Learning%20what%20and%20where%20to%20draw%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Reed%2C%20S.E.%20Akata%2C%20Z.%20Mohan%2C%20S.%20Tenka%2C%20S.%20Learning%20what%20and%20where%20to%20draw%202016"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Z. Shu, M. Sahasrabudhe, A. Guler, D. Samaras, N. Paragios, and I. Kokkinos. Deforming autoencoders: Unsupervised disentangling of shape and appearance. In Proc. ECCV, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shu%2C%20Z.%20Sahasrabudhe%2C%20M.%20Guler%2C%20A.%20Samaras%2C%20D.%20Deforming%20autoencoders%3A%20Unsupervised%20disentangling%20of%20shape%20and%20appearance%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shu%2C%20Z.%20Sahasrabudhe%2C%20M.%20Guler%2C%20A.%20Samaras%2C%20D.%20Deforming%20autoencoders%3A%20Unsupervised%20disentangling%20of%20shape%20and%20appearance%202018"
+        },
+        {
+            "id": "39",
+            "entry": "[39] K. Simonyan and A. Zisserman. Very deep convolutional networks for large-scale image recognition. CoRR, abs/1409.1556, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1409.1556"
+        },
+        {
+            "id": "40",
+            "entry": "[40] N. Srivastava, E. Mansimov, and R. Salakhudinov. Unsupervised learning of video representations using lstms. In Proc. ICML, pages 843\u2013852, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Srivastava%2C%20N.%20Mansimov%2C%20E.%20Salakhudinov%2C%20R.%20Unsupervised%20learning%20of%20video%20representations%20using%20lstms%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Srivastava%2C%20N.%20Mansimov%2C%20E.%20Salakhudinov%2C%20R.%20Unsupervised%20learning%20of%20video%20representations%20using%20lstms%202015"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Y. Sun, X. Wang, and X. Tang. Deep convolutional network cascade for facial point detection. In Proc. CVPR, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sun%2C%20Y.%20Wang%2C%20X.%20Tang%2C%20X.%20Deep%20convolutional%20network%20cascade%20for%20facial%20point%20detection%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sun%2C%20Y.%20Wang%2C%20X.%20Tang%2C%20X.%20Deep%20convolutional%20network%20cascade%20for%20facial%20point%20detection%202013"
+        },
+        {
+            "id": "42",
+            "entry": "[42] I. Sutskever, G. E. Hinton, and G. W. Taylor. The recurrent temporal restricted boltzmann machine. In Proc. NIPS, pages 1601\u20131608, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutskever%2C%20I.%20Hinton%2C%20G.E.%20Taylor%2C%20G.W.%20The%20recurrent%20temporal%20restricted%20boltzmann%20machine%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutskever%2C%20I.%20Hinton%2C%20G.E.%20Taylor%2C%20G.W.%20The%20recurrent%20temporal%20restricted%20boltzmann%20machine%202009"
+        },
+        {
+            "id": "43",
+            "entry": "[43] S. Suwajanakorn, N. Snavely, J. Tompson, and M. Norouzi. Discovery of latent 3d keypoints via end-to-end geometric reasoning. In Proc. NIPS, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Suwajanakorn%2C%20S.%20Snavely%2C%20N.%20Tompson%2C%20J.%20Norouzi%2C%20M.%20Discovery%20of%20latent%203d%20keypoints%20via%20end-to-end%20geometric%20reasoning%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Suwajanakorn%2C%20S.%20Snavely%2C%20N.%20Tompson%2C%20J.%20Norouzi%2C%20M.%20Discovery%20of%20latent%203d%20keypoints%20via%20end-to-end%20geometric%20reasoning%202018"
+        },
+        {
+            "id": "44",
+            "entry": "[44] J. Thewlis, H. Bilen, and A. Vedaldi. Unsupervised object learning from dense invariant image labelling. In Proc. NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Thewlis%2C%20J.%20Bilen%2C%20H.%20Vedaldi%2C%20A.%20Unsupervised%20object%20learning%20from%20dense%20invariant%20image%20labelling%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Thewlis%2C%20J.%20Bilen%2C%20H.%20Vedaldi%2C%20A.%20Unsupervised%20object%20learning%20from%20dense%20invariant%20image%20labelling%202017"
+        },
+        {
+            "id": "45",
+            "entry": "[45] J. Thewlis, H. Bilen, and A. Vedaldi. Unsupervised learning of object landmarks by factorized spatial embeddings. In Proc. ICCV, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Thewlis%2C%20J.%20Bilen%2C%20H.%20Vedaldi%2C%20A.%20Unsupervised%20learning%20of%20object%20landmarks%20by%20factorized%20spatial%20embeddings%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Thewlis%2C%20J.%20Bilen%2C%20H.%20Vedaldi%2C%20A.%20Unsupervised%20learning%20of%20object%20landmarks%20by%20factorized%20spatial%20embeddings%202017"
+        },
+        {
+            "id": "46",
+            "entry": "[46] R. Villegas, J. Yang, Y. Zou, S. Sohn, X. Lin, and H. Lee. Learning to generate long-term future via hierarchical prediction. arXiv preprint arXiv:1704.05831, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1704.05831"
+        },
+        {
+            "id": "47",
+            "entry": "[47] P. Vincent, H. Larochelle, Y. Bengio, and P.-A. Manzagol. Extracting and composing robust features with denoising autoencoders. In Proc. ICML, pages 1096\u20131103. ACM, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vincent%2C%20P.%20Larochelle%2C%20H.%20Bengio%2C%20Y.%20Manzagol%2C%20P.-A.%20Extracting%20and%20composing%20robust%20features%20with%20denoising%20autoencoders%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vincent%2C%20P.%20Larochelle%2C%20H.%20Bengio%2C%20Y.%20Manzagol%2C%20P.-A.%20Extracting%20and%20composing%20robust%20features%20with%20denoising%20autoencoders%202008"
+        },
+        {
+            "id": "48",
+            "entry": "[48] C. Vondrick, H. Pirsiavash, and A. Torralba. Generating videos with scene dynamics. In Proc. NIPS, pages 613\u2013621, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vondrick%2C%20C.%20Pirsiavash%2C%20H.%20Torralba%2C%20A.%20Generating%20videos%20with%20scene%20dynamics%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vondrick%2C%20C.%20Pirsiavash%2C%20H.%20Torralba%2C%20A.%20Generating%20videos%20with%20scene%20dynamics%202016"
+        },
+        {
+            "id": "50",
+            "entry": "[50] W. F. Whitney, M. Chang, T. Kulkarni, and J. B. Tenenbaum. Understanding visual concepts with continuation learning. In ICLR Workshop, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Whitney%2C%20W.F.%20Chang%2C%20M.%20Kulkarni%2C%20T.%20Tenenbaum%2C%20J.B.%20Understanding%20visual%20concepts%20with%20continuation%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Whitney%2C%20W.F.%20Chang%2C%20M.%20Kulkarni%2C%20T.%20Tenenbaum%2C%20J.B.%20Understanding%20visual%20concepts%20with%20continuation%20learning%202016"
+        },
+        {
+            "id": "51",
+            "entry": "[51] O. Wiles, A. S. Koepke, and A. Zisserman. Self-supervised learning of a facial attribute embedding from video. In Proc. BMVC, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wiles%2C%20O.%20Koepke%2C%20A.S.%20Zisserman%2C%20A.%20Self-supervised%20learning%20of%20a%20facial%20attribute%20embedding%20from%20video%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wiles%2C%20O.%20Koepke%2C%20A.S.%20Zisserman%2C%20A.%20Self-supervised%20learning%20of%20a%20facial%20attribute%20embedding%20from%20video%202018"
+        },
+        {
+            "id": "52",
+            "entry": "[52] T. Xue, J. Wu, K. L. Bouman, and W. T. Freeman. Visual dynamics: Probabilistic future frame synthesis via cross convolutional networks. In Proc. NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xue%2C%20T.%20Wu%2C%20J.%20Bouman%2C%20K.L.%20Freeman%2C%20W.T.%20Visual%20dynamics%3A%20Probabilistic%20future%20frame%20synthesis%20via%20cross%20convolutional%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xue%2C%20T.%20Wu%2C%20J.%20Bouman%2C%20K.L.%20Freeman%2C%20W.T.%20Visual%20dynamics%3A%20Probabilistic%20future%20frame%20synthesis%20via%20cross%20convolutional%20networks%202016"
+        },
+        {
+            "id": "53",
+            "entry": "[53] Y. Yang and D. Ramanan. Articulated pose estimation with flexible mixtures-of-parts. In Proc.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yang%2C%20Y.%20Ramanan%2C%20D.%20Articulated%20pose%20estimation%20with%20flexible%20mixtures-of-parts",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yang%2C%20Y.%20Ramanan%2C%20D.%20Articulated%20pose%20estimation%20with%20flexible%20mixtures-of-parts"
+        },
+        {
+            "id": "54",
+            "entry": "[54] J. Zhang, S. Shan, M. Kan, and X. Chen. Coarse-to-fine auto-encoder networks (cfan) for real-time face alignment. In Proc. ECCV, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20J.%20Shan%2C%20S.%20Kan%2C%20M.%20Chen%2C%20X.%20Coarse-to-fine%20auto-encoder%20networks%20%28cfan%29%20for%20real-time%20face%20alignment%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20J.%20Shan%2C%20S.%20Kan%2C%20M.%20Chen%2C%20X.%20Coarse-to-fine%20auto-encoder%20networks%20%28cfan%29%20for%20real-time%20face%20alignment%202014"
+        },
+        {
+            "id": "55",
+            "entry": "[55] Y. Zhang, Y. Guo, Y. Jin, Y. Luo, Z. He, and H. Lee. Unsupervised discovery of object landmarks as structural representations. In Proc. CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Y.%20Guo%2C%20Y.%20Jin%2C%20Y.%20Luo%2C%20Y.%20Unsupervised%20discovery%20of%20object%20landmarks%20as%20structural%20representations%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Y.%20Guo%2C%20Y.%20Jin%2C%20Y.%20Luo%2C%20Y.%20Unsupervised%20discovery%20of%20object%20landmarks%20as%20structural%20representations%202018"
+        },
+        {
+            "id": "56",
+            "entry": "[56] Z. Zhang, P. Luo, C. C. Loy, and X. Tang. Facial landmark detection by deep multi-task learning.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Z.%20Luo%2C%20P.%20Loy%2C%20C.C.%20Tang%2C%20X.%20Facial%20landmark%20detection%20by%20deep%20multi-task%20learning"
+        },
+        {
+            "id": "57",
+            "entry": "[57] Z. Zhang, P. Luo, C. C. Loy, and X. Tang. Learning Deep Representation for Face Alignment with Auxiliary Attributes. PAMI, 2016. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Z.%20Luo%2C%20P.%20Loy%2C%20C.C.%20Tang%2C%20X.%20Learning%20Deep%20Representation%20for%20Face%20Alignment%20with%20Auxiliary%20Attributes%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Z.%20Luo%2C%20P.%20Loy%2C%20C.C.%20Tang%2C%20X.%20Learning%20Deep%20Representation%20for%20Face%20Alignment%20with%20Auxiliary%20Attributes%202016"
+        }
+    ]
+}

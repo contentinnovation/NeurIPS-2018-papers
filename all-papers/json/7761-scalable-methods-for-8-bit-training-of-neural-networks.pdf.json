@@ -1,0 +1,204 @@
+{
+    "filename": "7761-scalable-methods-for-8-bit-training-of-neural-networks.pdf",
+    "metadata": {
+        "title": "Scalable methods for 8-bit training of neural networks",
+        "author": "Ron Banner, Itay Hubara, Elad Hoffer, Daniel Soudry",
+        "date": 2015,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7761-scalable-methods-for-8-bit-training-of-neural-networks.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Quantized Neural Networks (QNNs) are often used to improve network efficiency during the inference phase, i.e. after the network has been trained. Extensive research in the field suggests many different quantization schemes. Still, the number of bits required, as well as the best quantization scheme, are yet unknown. Our theoretical analysis suggests that most of the training process is robust to substantial precision reduction, and points to only a few specific operations that require higher precision. Armed with this knowledge, we quantize the model parameters, activations and layer gradients to 8-bit, leaving at a higher precision only the final step in the computation of the weight gradients. Additionally, as QNNs require batch-normalization to be trained at high precision, we introduce Range BatchNormalization (BN) which has significantly higher tolerance to quantization noise and improved computational complexity. Our simulations show that Range BN is equivalent to the traditional batch norm if a precise scale adjustment, which can be approximated analytically, is applied. To the best of the authors\u2019 knowledge, this work is the first to quantize the weights, activations, as well as a substantial volume of the gradients stream, in all layers (including batch normalization) to 8-bit while showing state-of-the-art results over the ImageNet-1K dataset."
+    },
+    "keywords": [
+        {
+            "term": "batch normalization",
+            "url": "https://en.wikipedia.org/wiki/batch_normalization"
+        },
+        {
+            "term": "convolutional neural network",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_network"
+        },
+        {
+            "term": "high precision",
+            "url": "https://en.wikipedia.org/wiki/High_Precision"
+        },
+        {
+            "term": "low precision",
+            "url": "https://en.wikipedia.org/wiki/low_precision"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Deep Neural Networks (DNNs) achieved remarkable results in many fields making them the most common off-the-shelf approach for a wide variety of machine learning applications",
+        "Since the backward pass requires twice the amount of multiplications compared to the forward pass, quantizing the gradients is a crucial step towards faster training machines",
+        "We investigate the internal representation of low precision neural networks and present guidelines for their quantization",
+        "On the forward pass the inputs to each layer are known to be distributed according to a Gaussian distribution, but on the backward pass we observe that the layer gradients gl do not follow this distribution",
+        "We further show that Range BN is comparable to the traditional batch norm in terms of accuracy and convergence rate",
+        "The weight gradients gW are computed as a product of 8-bit precision with a 16-bit precision, resulting with a speedup of x8 for the rest of multiplications and at least x2 power savings"
+    ],
+    "key_statements": [
+        "Deep Neural Networks (DNNs) achieved remarkable results in many fields making them the most common off-the-shelf approach for a wide variety of machine learning applications",
+        "Since training neural networks requires approximately three times more computation power than just evaluating them, quantizing the gradients is a critical step towards faster training machines",
+        "The traditional batch normalization [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>] implementation requires the computation of the sum of squares, square-root and reciprocal operations; these require high precision and a large dynamic range",
+        "Batch normalization is mentioned by [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>] as a bottleneck for network quantization and is either replaced by a constant scaling layer kept in full precision, or avoided altogether; this clearly has some impact on performance (e.g., AlexNet trained over ImageNet resulted with top-1 error of 51.6%, where the state of the art is near 42%) and better ways to quantize normalization are explicitly called for",
+        "Since the backward pass requires twice the amount of multiplications compared to the forward pass, quantizing the gradients is a crucial step towards faster training machines",
+        "We argue that the extra time required for this matrix multiplication is comparably small to the time required to communicate the gradients g",
+        "Taking a closer look the following additional observations can be made: (1) During quantization the direction of vectors is better preserved with the forward pass compared to the backward pass; (2) validation accuracy follows tightly the cosine of the angle in the backward pass, indicating gradient quantization as the primary bottleneck; (3) as expected, the bound on E) in Eq 12 holds in the forward pass, but less so in the backward pass, where the Gaussian assumption tends to break",
+        "We investigate the internal representation of low precision neural networks and present guidelines for their quantization",
+        "On the forward pass the inputs to each layer are known to be distributed according to a Gaussian distribution, but on the backward pass we observe that the layer gradients gl do not follow this distribution",
+        "We further show that Range BN is comparable to the traditional batch norm in terms of accuracy and convergence rate",
+        "The weight gradients gW are computed as a product of 8-bit precision with a 16-bit precision, resulting with a speedup of x8 for the rest of multiplications and at least x2 power savings",
+        "Previous works considered an even lower precision quantization, we claim that 8-bit quantization may prove to be more of an interest"
+    ],
+    "summary": [
+        "Deep Neural Networks (DNNs) achieved remarkable results in many fields making them the most common off-the-shelf approach for a wide variety of machine learning applications.",
+        "Since training neural networks requires approximately three times more computation power than just evaluating them, quantizing the gradients is a critical step towards faster training machines.",
+        "Researchers [<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>, <a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>] have shown that 16-bit is sufficient precision for most network training but further quantization (i.e., 8-bit) results with severe degradation.",
+        "The traditional batch normalization [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>] implementation requires the computation of the sum of squares, square-root and reciprocal operations; these require high precision and a large dynamic range.",
+        "While several works [<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>, <a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>] have shown that training at 16-bit is sufficient for most networks, more aggressive quantization schemes were suggested [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>, <a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>, <a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>].",
+        "Batch normalization is mentioned by [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>] as a bottleneck for network quantization and is either replaced by a constant scaling layer kept in full precision, or avoided altogether; this clearly has some impact on performance (e.g., AlexNet trained over ImageNet resulted with top-1 error of 51.6%, where the state of the art is near 42%) and better ways to quantize normalization are explicitly called for.",
+        "To the best of our knowledge, no work has succeeded to quantize the activations, weights, and gradient of all layers to 8-bit without any degradation.",
+        "Since the backward pass requires twice the amount of multiplications compared to the forward pass, quantizing the gradients is a crucial step towards faster training machines.",
+        "We evaluated the ideas of Range Batch-Norm and Quantized Back-Propagation on multiple different models and datasets.",
+        "To validate our assumption that the cosine similarity is a good measure for the quality of the quantization, we ran a set of experiments on Cifar-10 dataset, each with a different number of bits, and plotted the average angle and the final accuracy.",
+        "Taking a closer look the following additional observations can be made: (1) During quantization the direction of vectors is better preserved with the forward pass compared to the backward pass; (2) validation accuracy follows tightly the cosine of the angle in the backward pass, indicating gradient quantization as the primary bottleneck; (3) as expected, the bound on E) in Eq 12 holds in the forward pass, but less so in the backward pass, where the Gaussian assumption tends to break.",
+        "6.2 Experiment results on ImageNet dataset: Range Batch-Normalization",
+        "We ran experiments with Res50 on ImageNet dataset showing the equivalence between the standard batch-norm and Range BN in terms of accuracy."
+    ],
+    "headline": "As quantized neural networks require batch-normalization to be trained at high precision, we introduce Range BatchNormalization  which has significantly higher tolerance to quantization noise and improved computational complexity",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Benoit, J., Pete, W., Miao, W., et al. gemmlowp: a small self-contained low-precision gemm library, 2017. https://github.com/google/gemmlowp.",
+            "url": "https://github.com/google/gemmlowp"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Biau, G. and Mason, D. M. High-dimensional p p-norms. In Mathematical Statistics and Limit Theorems, pp. 21\u201340.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Biau%2C%20G.%20Mason%2C%20D.M.%20High-dimensional%20p%20p-norms",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Biau%2C%20G.%20Mason%2C%20D.M.%20High-dimensional%20p%20p-norms"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Chandrasekaran, V., Recht, B., Parrilo, P. A., and Willsky, A. S. The convex geometry of linear inverse problems. Foundations of Computational mathematics, 12(6):805\u2013849, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chandrasekaran%2C%20V.%20Recht%2C%20B.%20Parrilo%2C%20P.A.%20Willsky%2C%20A.S.%20The%20convex%20geometry%20of%20linear%20inverse%20problems%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chandrasekaran%2C%20V.%20Recht%2C%20B.%20Parrilo%2C%20P.A.%20Willsky%2C%20A.S.%20The%20convex%20geometry%20of%20linear%20inverse%20problems%202012"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Chen, W., Wilson, J., Tyree, S., Weinberger, K., and Chen, Y. Compressing neural networks with the hashing trick. In International Conference on Machine Learning, pp. 2285\u20132294, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20W.%20Wilson%2C%20J.%20Tyree%2C%20S.%20Weinberger%2C%20K.%20Compressing%20neural%20networks%20with%20the%20hashing%20trick%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20W.%20Wilson%2C%20J.%20Tyree%2C%20S.%20Weinberger%2C%20K.%20Compressing%20neural%20networks%20with%20the%20hashing%20trick%202015"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Das, D., Mellempudi, N., Mudigere, D., et al. Mixed precision training of convolutional neural networks using integer operations. 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Das%2C%20D.%20Mellempudi%2C%20N.%20Mudigere%2C%20D.%20Mixed%20precision%20training%20of%20convolutional%20neural%20networks%20using%20integer%20operations%202018"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Gupta, S., Agrawal, A., Gopalakrishnan, K., and Narayanan, P. Deep learning with limited numerical precision. In Proceedings of the 32nd International Conference on Machine Learning (ICML-15), pp. 1737\u20131746, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gupta%2C%20S.%20Agrawal%2C%20A.%20Gopalakrishnan%2C%20K.%20Narayanan%2C%20P.%20Deep%20learning%20with%20limited%20numerical%20precision%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gupta%2C%20S.%20Agrawal%2C%20A.%20Gopalakrishnan%2C%20K.%20Narayanan%2C%20P.%20Deep%20learning%20with%20limited%20numerical%20precision%202015"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Han, S., Mao, H., and Dally, W. J. Deep compression: Compressing deep neural networks with pruning, trained quantization and huffman coding. arXiv preprint arXiv:1510.00149, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1510.00149"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Hoffer, E., Banner, R., Golan, I., and Soudry, D. Norm matters: efficient and accurate normalization schemes in deep networks. arXiv preprint arXiv:1803.01814, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.01814"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Hubara, I., Courbariaux, M., Soudry, D., El-Yaniv, R., and Bengio, Y. Binarized neural networks. In Advances in Neural Information Processing Systems 29 (NIPS\u201916), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hubara%2C%20I.%20Courbariaux%2C%20M.%20Soudry%2C%20D.%20El-Yaniv%2C%20R.%20Binarized%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hubara%2C%20I.%20Courbariaux%2C%20M.%20Soudry%2C%20D.%20El-Yaniv%2C%20R.%20Binarized%20neural%20networks%202016"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Hubara, I., Courbariaux, M., Soudry, D., El-Yaniv, R., and Bengio, Y. Quantized neural networks: Training neural networks with low precision weights and activations. arXiv preprint arXiv:1609.07061, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.07061"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Ioffe, S. and Szegedy, C. Batch normalization: Accelerating deep network training by reducing internal covariate shift. arXiv preprint arXiv:1502.03167, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1502.03167"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Jaderberg, M., Vedaldi, A., and Zisserman, A. Speeding up convolutional neural networks with low rank expansions. arXiv preprint arXiv:1405.3866, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1405.3866"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Kamath, G. Bounds on the expectation of the maximum of samples from a gaussian. URL http://www.gautamkamath.com/writings/gaussian max.pdf, 2015.",
+            "url": "http://www.gautamkamath.com/writings/gaussian"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Lin, X., Zhao, C., and Pan, W. Towards accurate binary convolutional neural network. In Advances in Neural Information Processing Systems, pp. 344\u2013352, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20X.%20Zhao%2C%20C.%20Pan%2C%20W.%20Towards%20accurate%20binary%20convolutional%20neural%20network%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lin%2C%20X.%20Zhao%2C%20C.%20Pan%2C%20W.%20Towards%20accurate%20binary%20convolutional%20neural%20network%202017"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Mishra, A., Nurvitadhi, E., Cook, J. J., and Marr, D. Wrpn: Wide reduced-precision networks. arXiv preprint arXiv:1709.01134, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1709.01134"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Miyashita, D., Lee, E. H., and Murmann, B. Convolutional neural networks using logarithmic data representation. arXiv preprint arXiv:1603.01025, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1603.01025"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Rodriguez, A., Segal, E., Meiri, E., et al. Lower numerical precision deep learning inference and training. https://software.intel.com/en-us/articles/lower-numerical-precision-deep-learning-inference-andtraining, 2018.",
+            "url": "https://software.intel.com/en-us/articles/lower-numerical-precision-deep-learning-inference-andtraining"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Soudry, D., Hubara, I., and Meir, R. Expectation backpropagation: Parameter-free training of multilayer neural networks with continuous or discrete weights. In Advances in Neural Information Processing Systems, pp. 963\u2013971, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Soudry%2C%20D.%20Hubara%2C%20I.%20Meir%2C%20R.%20Expectation%20backpropagation%3A%20Parameter-free%20training%20of%20multilayer%20neural%20networks%20with%20continuous%20or%20discrete%20weights%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Soudry%2C%20D.%20Hubara%2C%20I.%20Meir%2C%20R.%20Expectation%20backpropagation%3A%20Parameter-free%20training%20of%20multilayer%20neural%20networks%20with%20continuous%20or%20discrete%20weights%202014"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Ullrich, K., Meeds, E., and Welling, M. Soft weight-sharing for neural network compression. arXiv preprint arXiv:1702.04008, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1702.04008"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Wen, W., Xu, C., Yan, F., et al. Terngrad: Ternary gradients to reduce communication in distributed deep learning. In Advances in Neural Information Processing Systems, pp. 1508\u20131518, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wen%2C%20W.%20Xu%2C%20C.%20Yan%2C%20F.%20Terngrad%3A%20Ternary%20gradients%20to%20reduce%20communication%20in%20distributed%20deep%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wen%2C%20W.%20Xu%2C%20C.%20Yan%2C%20F.%20Terngrad%3A%20Ternary%20gradients%20to%20reduce%20communication%20in%20distributed%20deep%20learning%202017"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Wu, S., Li, G., Chen, F., and Shi, L. Training and inference with integers in deep neural networks. International Conference on Learning Representations (ICLR), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20S.%20Li%2C%20G.%20Chen%2C%20F.%20Shi%2C%20L.%20Training%20and%20inference%20with%20integers%20in%20deep%20neural%20networks%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20S.%20Li%2C%20G.%20Chen%2C%20F.%20Shi%2C%20L.%20Training%20and%20inference%20with%20integers%20in%20deep%20neural%20networks%202018"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Wu, S., Li, G., Deng, L., et al. L1-norm batch normalization for efficient training of deep neural networks. arXiv preprint arXiv:1802.09769, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.09769"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Wu, Y., Schuster, M., Chen, Z., et al. Google\u2019s neural machine translation system: Bridging the gap between human and machine translation. arXiv preprint arXiv:1609.08144, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.08144"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Zhou, S., Ni, Z., Zhou, X., et al. Dorefa-net: Training low bitwidth convolutional neural networks with low bitwidth gradients. arXiv preprint arXiv:1606.06160, 2016. ",
+            "arxiv_url": "https://arxiv.org/pdf/1606.06160"
+        }
+    ]
+}

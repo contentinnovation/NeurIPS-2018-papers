@@ -1,0 +1,241 @@
+{
+    "filename": "7600-boosting-black-box-variational-inference.pdf",
+    "metadata": {
+        "title": "Boosting Black Box Variational Inference",
+        "author": "Francesco Locatello, Gideon Dresdner, Rajiv Khanna, Isabel Valera, Gunnar Raetsch",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7600-boosting-black-box-variational-inference.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Approximating a probability density in a tractable manner is a central task in Bayesian statistics. Variational Inference (VI) is a popular technique that achieves tractability by choosing a relatively simple variational approximation. Borrowing ideas from the classic boosting framework, recent approaches attempt to boost VI by replacing the selection of a single density with an iteratively constructed mixture of densities. In order to guarantee convergence, previous works impose stringent assumptions that require significant effort for practitioners. Specifically, they require a custom implementation of the greedy step (called the LMO) for every probabilistic model with respect to an unnatural variational family of truncated distributions. Our work fixes these issues with novel theoretical and algorithmic insights. On the theoretical side, we show that boosting VI satisfies a relaxed smoothness assumption which is sufficient for the convergence of the functional Frank-Wolfe (FW) algorithm. Furthermore, we rephrase the LMO problem and propose to maximize the Residual ELBO (RELBO) which replaces the standard ELBO optimization in VI. These theoretical enhancements allow for black box implementation of the boosting subroutine. Finally, we present a stopping criterion drawn from the duality gap in the classic FW analyses and exhaustive experiments to illustrate the usefulness of our theoretical and algorithmic contributions."
+    },
+    "keywords": [
+        {
+            "term": "bayesian statistic",
+            "url": "https://en.wikipedia.org/wiki/bayesian_statistic"
+        },
+        {
+            "term": "probability density",
+            "url": "https://en.wikipedia.org/wiki/probability_density"
+        },
+        {
+            "term": "variational inference",
+            "url": "https://en.wikipedia.org/wiki/variational_inference"
+        },
+        {
+            "term": "convergence rate",
+            "url": "https://en.wikipedia.org/wiki/convergence_rate"
+        },
+        {
+            "term": "mean field approximation",
+            "url": "https://en.wikipedia.org/wiki/mean_field_approximation"
+        },
+        {
+            "term": "frank wolfe",
+            "url": "https://en.wikipedia.org/wiki/Frank_Wolfe"
+        },
+        {
+            "term": "optimization problem",
+            "url": "https://en.wikipedia.org/wiki/optimization_problem"
+        },
+        {
+            "term": "black box",
+            "url": "https://en.wikipedia.org/wiki/black_box"
+        },
+        {
+            "term": "posterior distribution",
+            "url": "https://en.wikipedia.org/wiki/posterior_distribution"
+        },
+        {
+            "term": "ELBO",
+            "url": "https://en.wikipedia.org/wiki/ELBO"
+        },
+        {
+            "term": "single density",
+            "url": "https://en.wikipedia.org/wiki/single_density"
+        }
+    ],
+    "highlights": [
+        "Approximating probability densities is a core problem in Bayesian statistics, where inference translates to the computation of a posterior distribution",
+        "We propose a modified form of the ELBO optimization, the Residual ELBO (RELBO), which guarantees that the selected density is non-degenerate and is suitable for black box solvers",
+        "The other important difference between ELBO and Residual Evidence Lower Bound is the residual term which is expressed through Es[log p] Es[log qt]",
+        "We have presented a refined yet practical theoretical analysis for the boosting variational inference paradigm",
+        "Our approach incorporates black box Variational Inference solvers into a general gradient boosting framework based on the Frank-Wolfe algorithm",
+        "We introduced a subroutine which is attractive to practitioners as it does not require any additional overhead beyond running a general black box Variational Inference solver multiple times"
+    ],
+    "key_statements": [
+        "Approximating probability densities is a core problem in Bayesian statistics, where inference translates to the computation of a posterior distribution",
+        "Approximating a probability density in a tractable manner is a central task in Bayesian statistics",
+        "We show that boosting Variational Inference satisfies a relaxed smoothness assumption which is sufficient for the convergence of the functional Frank-Wolfe (FW) algorithm",
+        "The optimization problem is trivial and runs in constant time, but the quality of the solution is poor and stands in no relation to the true posterior. This contrived example is clearly too restrictive, and in practice, the mean field approximation offers a good trade-off between expressivity and tractability [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>]",
+        "We propose a modified form of the ELBO optimization, the Residual ELBO (RELBO), which guarantees that the selected density is non-degenerate and is suitable for black box solvers",
+        "We propose a novel stopping criterion using the duality gap from FW, which is applicable to any boosting Variational Inference algorithm",
+        "Our approach is in line with several previous approaches using mixtures of distributions to improve the expressiveness of the variational approximation [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>, <a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>] but goes further to draw connections with classic optimization to obtain several novel theoretical and algorithmic insights",
+        "The crucial question, which they leave unaddressed, is whether under their assumptions there exists a variational family of densities which (a) is expressive enough to well-approximate the posterior; (b) satisfies the conditions required to guarantee convergence; and (c) allows for efficient implementation of the Linear Minimization Oracle.\n3.1",
+        "The other important difference between ELBO and Residual Evidence Lower Bound is the residual term which is expressed through Es[log p] Es[log qt]",
+        "We chose to implement our algorithm as an extension to the Edward probabilistic programming framework [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>] thereby enabling users to apply boosting Variational Inference to any probabilistic model and variational family which are definable in Edward",
+        "Un-Figure 1: Comparison between black box VI and three this improved solution comes at a variants of our boosting black box VI method on a mixture computational cost \u2014 solving the line search of Gaussians example. and fully corrective subproblems is dramatically slower than the fixed step size variant",
+        "We have presented a refined yet practical theoretical analysis for the boosting variational inference paradigm",
+        "Our approach incorporates black box Variational Inference solvers into a general gradient boosting framework based on the Frank-Wolfe algorithm",
+        "We introduced a subroutine which is attractive to practitioners as it does not require any additional overhead beyond running a general black box Variational Inference solver multiple times"
+    ],
+    "summary": [
+        "Approximating probability densities is a core problem in Bayesian statistics, where inference translates to the computation of a posterior distribution.",
+        "We show that boosting VI satisfies a relaxed smoothness assumption which is sufficient for the convergence of the functional Frank-Wolfe (FW) algorithm.",
+        "Increasing the capacity of the variational family to approximate the posterior increases the complexity of the optimization problem.",
+        "These greedy algorithms require a specialized, restricted variational family to ensure convergence and a white box implementation of the boosting subroutine.",
+        "We fix this issue by proposing a boosting black box VI algorithm that has many practical benefits.",
+        "Our approach is in line with several previous approaches using mixtures of distributions to improve the expressiveness of the variational approximation [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>, <a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>] but goes further to draw connections with classic optimization to obtain several novel theoretical and algorithmic insights.",
+        "9: end for iteration, the FW algorithm queries a so-called Linear Minimization Oracle (LMO) which solves the following inner optimization problem: LMOA(y) := arg minhy, si, (6)",
+        "Theorem 1 guarantees that Algorithm 1 converges to the best approximation in conv(A) which, depending on the expressivity of the base family, could even contain the full posterior.",
+        "The crucial question, which they leave unaddressed, is whether under their assumptions there exists a variational family of densities which (a) is expressive enough to well-approximate the posterior; (b) satisfies the conditions required to guarantee convergence; and (c) allows for efficient implementation of the LMO.",
+        "We are able to reuse the same boosting black box VI solver to run all our experiments, and more generally, any probabilistic model and choice of variational family.",
+        "We chose to implement our algorithm as an extension to the Edward probabilistic programming framework [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>] thereby enabling users to apply boosting VI to any probabilistic model and variational family which are definable in Edward.",
+        "Un-Figure 1: Comparison between BBVI and three this improved solution comes at a variants of our boosting BBVI method on a mixture computational cost \u2014 solving the line search of Gaussians example.",
+        "While BBVI already has good performance in terms of AUROC, we are able to improve it further by using the fixed step size variant of FW and the Laplace distributions as the base family.",
+        "Our approach incorporates black box VI solvers into a general gradient boosting framework based on the Frank-Wolfe algorithm.",
+        "This is an important step forward in adding boosting VI to the standard toolbox of Bayesian inference"
+    ],
+    "headline": "We show that boosting Variational Inference satisfies a relaxed smoothness assumption which is sufficient for the convergence of the functional Frank-Wolfe  algorithm",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] David M Blei, Alp Kucukelbir, and Jon D McAuliffe. Variational inference: A review for statisticians. arXiv preprint arXiv:1601.00670, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1601.00670"
+        },
+        {
+            "id": "2",
+            "entry": "[2] M Bishop Christopher. Pattern Recognition and Machine Learning. Springer-Verlag New York, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Christopher%2C%20M.Bishop%20Pattern%20Recognition%20and%20Machine%20Learning%202016"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Vincent Fortuin, Matthias H\u00fcser, Francesco Locatello, Heiko Strathmann, and Gunnar R\u00e4tsch. Deep Self-Organization: Interpretable Discrete Representation Learning on Time Series. arXiv preprint arXiv:1806.02199, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1806.02199"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Ary L. Goldberger, Luis A. N. Amaral, Leon Glass, Jeffrey M. Hausdorff, Plamen Ch. Ivanov, Roger G. Mark, Joseph E. Mietus, George B. Moody, Chung-Kang Peng, and H. Eugene Stanley. Physiobank, physiotoolkit, and physionet. Circulation, 101(23):e215\u2013e220, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ary%20L%20Goldberger%20Luis%20A%20N%20Amaral%20Leon%20Glass%20Jeffrey%20M%20Hausdorff%20Plamen%20Ch%20Ivanov%20Roger%20G%20Mark%20Joseph%20E%20Mietus%20George%20B%20Moody%20ChungKang%20Peng%20and%20H%20Eugene%20Stanley%20Physiobank%20physiotoolkit%20and%20physionet%20Circulation%2010123e215e220%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ary%20L%20Goldberger%20Luis%20A%20N%20Amaral%20Leon%20Glass%20Jeffrey%20M%20Hausdorff%20Plamen%20Ch%20Ivanov%20Roger%20G%20Mark%20Joseph%20E%20Mietus%20George%20B%20Moody%20ChungKang%20Peng%20and%20H%20Eugene%20Stanley%20Physiobank%20physiotoolkit%20and%20physionet%20Circulation%2010123e215e220%202000"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Fangjian Guo, Xiangyu Wang, Kai Fan, Tamara Broderick, and David B Dunson. Boosting variational inference. arXiv preprint arXiv:1611.05559, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.05559"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Tommi S. Jaakkola and Michael I. Jordan. Improving the mean field approximation via the use of mixture distributions, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jaakkola%2C%20Tommi%20S.%20Jordan%2C%20Michael%20I.%20Improving%20the%20mean%20field%20approximation%20via%20the%20use%20of%20mixture%20distributions%201998"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Martin Jaggi. Convex Optimization without Projection Steps. arXiv math.OC, August 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jaggi%2C%20Martin%20Convex%20Optimization%20without%20Projection%20Steps.%20arXiv%20math%202011-08",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jaggi%2C%20Martin%20Convex%20Optimization%20without%20Projection%20Steps.%20arXiv%20math%202011-08"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Martin Jaggi. Revisiting Frank-Wolfe: Projection-Free Sparse Convex Optimization. In ICML 2013 - Proceedings of the 30th International Conference on Machine Learning, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Martin%20Jaggi%20Revisiting%20FrankWolfe%20ProjectionFree%20Sparse%20Convex%20Optimization%20In%20ICML%202013%20%20Proceedings%20of%20the%2030th%20International%20Conference%20on%20Machine%20Learning%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Martin%20Jaggi%20Revisiting%20FrankWolfe%20ProjectionFree%20Sparse%20Convex%20Optimization%20In%20ICML%202013%20%20Proceedings%20of%20the%2030th%20International%20Conference%20on%20Machine%20Learning%202013"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Ghassen Jerfel. Boosted stochastic backpropagation for variational inference, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jerfel%2C%20Ghassen%20Boosted%20stochastic%20backpropagation%20for%20variational%20inference%202017"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Rahul G. Krishnan, Simon Lacoste-Julien, and David Sontag. Barrier frank-wolfe for marginal inference. pages 532\u2013540, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krishnan%2C%20Rahul%20G.%20Lacoste-Julien%2C%20Simon%20Sontag%2C%20David%20Barrier%20frank-wolfe%20for%20marginal%20inference%202015"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Simon Lacoste-Julien. Convergence rate of frank-wolfe for non-convex objectives. arXiv preprint arXiv:1607.00345, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1607.00345"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Simon Lacoste-Julien and Martin Jaggi. On the Global Linear Convergence of Frank-Wolfe Optimization Variants. In NIPS 2015, pages 496\u2013504, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lacoste-Julien%2C%20Simon%20Jaggi%2C%20Martin%20On%20the%20Global%20Linear%20Convergence%20of%20Frank-Wolfe%20Optimization%20Variants%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lacoste-Julien%2C%20Simon%20Jaggi%2C%20Martin%20On%20the%20Global%20Linear%20Convergence%20of%20Frank-Wolfe%20Optimization%20Variants%202015"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Francesco Locatello, Rajiv Khanna, Joydeep Ghosh, and Gunnar R\u00e4tsch. Boosting variational inference: an optimization perspective. In Proceedings of the 21st International Conference on Artificial Intelligence and Statistics (AISTATS 2018), volume 84 of Proceedings of Machine Learning Research, pages 464\u2013472. PMLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Locatello%2C%20Francesco%20Khanna%2C%20Rajiv%20Ghosh%2C%20Joydeep%20R%C3%A4tsch%2C%20Gunnar%20Boosting%20variational%20inference%3A%20an%20optimization%20perspective%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Locatello%2C%20Francesco%20Khanna%2C%20Rajiv%20Ghosh%2C%20Joydeep%20R%C3%A4tsch%2C%20Gunnar%20Boosting%20variational%20inference%3A%20an%20optimization%20perspective%202018"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Francesco Locatello, Rajiv Khanna, Michael Tschannen, and Martin Jaggi. A unified optimization view on generalized matching pursuit and frank-wolfe. In Proc. International Conference on Artificial Intelligence and Statistics (AISTATS), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Locatello%2C%20Francesco%20Khanna%2C%20Rajiv%20Tschannen%2C%20Michael%20Jaggi%2C%20Martin%20A%20unified%20optimization%20view%20on%20generalized%20matching%20pursuit%20and%20frank-wolfe%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Locatello%2C%20Francesco%20Khanna%2C%20Rajiv%20Tschannen%2C%20Michael%20Jaggi%2C%20Martin%20A%20unified%20optimization%20view%20on%20generalized%20matching%20pursuit%20and%20frank-wolfe%202017"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Ron Meir and Gunnar R\u00e4tsch. An introduction to boosting and leveraging. In Advanced lectures on machine learning, pages 118\u2013183.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Meir%2C%20Ron%20R%C3%A4tsch%2C%20Gunnar%20An%20introduction%20to%20boosting%20and%20leveraging",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Meir%2C%20Ron%20R%C3%A4tsch%2C%20Gunnar%20An%20introduction%20to%20boosting%20and%20leveraging"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Andrew C Miller, Nicholas Foti, and Ryan P Adams. Variational boosting: Iteratively refining posterior approximations. arXiv preprint arXiv:1611.06585, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.06585"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Andriy Mnih and Ruslan R Salakhutdinov. Probabilistic matrix factorization. In Advances in neural information processing systems, pages 1257\u20131264, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20Andriy%20Salakhutdinov%2C%20Ruslan%20R.%20Probabilistic%20matrix%20factorization%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20Andriy%20Salakhutdinov%2C%20Ruslan%20R.%20Probabilistic%20matrix%20factorization%202008"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Emanuel Parzen. On estimation of a probability density function and mode. The Annals of Mathematical Statistics, 33:pp. 1065\u20131076, 1962.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Parzen%2C%20Emanuel%20On%20estimation%20of%20a%20probability%20density%20function%20and%20mode%201962",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Parzen%2C%20Emanuel%20On%20estimation%20of%20a%20probability%20density%20function%20and%20mode%201962"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Rajesh Ranganath, Sean Gerrish, and David M Blei. Black box variational inference. In AISTATS, pages 814\u2013822, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ranganath%2C%20Rajesh%20Gerrish%2C%20Sean%20Blei%2C%20David%20M.%20Black%20box%20variational%20inference%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ranganath%2C%20Rajesh%20Gerrish%2C%20Sean%20Blei%2C%20David%20M.%20Black%20box%20variational%20inference%202014"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Danilo Jimenez Rezende and Shakir Mohamed. Variational inference with normalizing flows. In Francis R. Bach and David M. Blei, editors, ICML, volume 37 of JMLR Workshop and Conference Proceedings, pages 1530\u20131538. JMLR.org, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rezende%2C%20Danilo%20Jimenez%20Mohamed%2C%20Shakir%20Variational%20inference%20with%20normalizing%20flows%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rezende%2C%20Danilo%20Jimenez%20Mohamed%2C%20Shakir%20Variational%20inference%20with%20normalizing%20flows%202015"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Ardavan Saeedi, Tejas D. Kulkarni, Vikash K. Mansinghka, and Samuel J. Gershman. Variational particle approximations. Journal of Machine Learning Research, 18(69):1\u201329, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Saeedi%2C%20Ardavan%20Kulkarni%2C%20Tejas%20D.%20Mansinghka%2C%20Vikash%20K.%20Gershman%2C%20Samuel%20J.%20Variational%20particle%20approximations%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Saeedi%2C%20Ardavan%20Kulkarni%2C%20Tejas%20D.%20Mansinghka%2C%20Vikash%20K.%20Gershman%2C%20Samuel%20J.%20Variational%20particle%20approximations%202017"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Tim Salimans, Diederik P. Kingma, and Max Welling. Markov chain monte carlo and variational inference: Bridging the gap. In ICML, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Salimans%2C%20Tim%20Kingma%2C%20Diederik%20P.%20Welling%2C%20Max%20Markov%20chain%20monte%20carlo%20and%20variational%20inference%3A%20Bridging%20the%20gap%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Salimans%2C%20Tim%20Kingma%2C%20Diederik%20P.%20Welling%2C%20Max%20Markov%20chain%20monte%20carlo%20and%20variational%20inference%3A%20Bridging%20the%20gap%202015"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Siddhartha Saxena, Shibhansh Dohare, and Jaivardhan Kapoor. Variational inference via transformations on distributions. CoRR, abs/1707.02510, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.02510"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Ilya Tolstikhin, Sylvain Gelly, Olivier Bousquet, Carl-Johann Simon-Gabriel, and Bernhard Sch\u00f6lkopf. Adagan: Boosting generative models. arXiv preprint arXiv:1701.02386, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1701.02386"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Dustin Tran, Alp Kucukelbir, Adji B. Dieng, Maja Rudolph, Dawen Liang, and David M. Blei. Edward: A library for probabilistic modeling, inference, and criticism. arXiv preprint arXiv:1610.09787, 2016. ",
+            "arxiv_url": "https://arxiv.org/pdf/1610.09787"
+        }
+    ]
+}

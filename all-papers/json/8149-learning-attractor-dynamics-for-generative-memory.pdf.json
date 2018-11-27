@@ -1,0 +1,260 @@
+{
+    "filename": "8149-learning-attractor-dynamics-for-generative-memory.pdf",
+    "metadata": {
+        "title": "Learning Attractor Dynamics for Generative Memory",
+        "author": "Yan Wu, Gregory Wayne, Karol Gregor, Timothy Lillicrap",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8149-learning-attractor-dynamics-for-generative-memory.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "A central challenge faced by memory systems is the robust retrieval of a stored pattern in the presence of interference due to other stored patterns and noise. A theoretically well-founded solution to robust retrieval is given by attractor dynamics, which iteratively clean up patterns during recall. However, incorporating attractor dynamics into modern deep learning systems poses difficulties: attractor basins are characterised by vanishing gradients, which are known to make training neural networks difficult. In this work, we avoid the vanishing gradient problem by training a generative distributed memory without simulating the attractor dynamics. Based on the idea of memory writing as inference, as proposed in the Kanerva Machine, we show that a likelihood-based Lyapunov function emerges from maximising the variational lower-bound of a generative memory. Experiments shows it converges to correct patterns upon iterative retrieval and achieves competitive performance as both a memory model and a generative model."
+    },
+    "keywords": [
+        {
+            "term": "recurrent neural network",
+            "url": "https://en.wikipedia.org/wiki/recurrent_neural_network"
+        },
+        {
+            "term": "Kalman Filter",
+            "url": "https://en.wikipedia.org/wiki/Kalman_Filter"
+        },
+        {
+            "term": "boltzmann machine",
+            "url": "https://en.wikipedia.org/wiki/boltzmann_machine"
+        },
+        {
+            "term": "generative model",
+            "url": "https://en.wikipedia.org/wiki/generative_model"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        },
+        {
+            "term": "maximum a posteriori",
+            "url": "https://en.wikipedia.org/wiki/maximum_a_posteriori"
+        }
+    ],
+    "highlights": [
+        "To confirm that the emerging attractor dynamics help memory retrieval, we experiment with the Omniglot dataset [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>] and images from DMLab [<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>], showing that the attractor dynamics consistently improve images corrupted by noise unseen during training, as well as low-quality prior samples",
+        "In this context we focus on demonstrating high capacity and robustness, though the framework may be used for any other memory model with a well-defined likelihood",
+        "We show that the Dynamic Kanerva Machine generalises much better to unseen long episodes",
+        "We have demonstrated its high capacity by efficiently compressing episodes online and have shown its robustness in retrieving patterns corrupted by unseen noise",
+        "Zemel and Mozer proposed a generative model for memory [<a class=\"ref-link\" id=\"c32\" href=\"#r32\">32</a>] that pioneered the use of variational free energy to construct attractors for memory",
+        "As a principled probabilistic model, the linear Gaussian memory of the Dynamic Kanerva Machine can be seen as a special case of the Kalman Filter (KF) [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>] without the drift-diffusion dynamics of the latent state"
+    ],
+    "key_statements": [
+        "To confirm that the emerging attractor dynamics help memory retrieval, we experiment with the Omniglot dataset [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>] and images from DMLab [<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>], showing that the attractor dynamics consistently improve images corrupted by noise unseen during training, as well as low-quality prior samples",
+        "In this context we focus on demonstrating high capacity and robustness, though the framework may be used for any other memory model with a well-defined likelihood",
+        "To confirm that the emerging attractor dynamics help memory retrieval, we experiment with the Omniglot dataset [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>] and images from DMLab [<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>], showing that the attractor dynamics consistently improve images corrupted by noise unseen during training, as well as low-quality prior samples",
+        "Having inferred q and q (M) = q (MT ), we focus on gradient-based optimisation of the lower-bound LT",
+        "We show that the Dynamic Kanerva Machine generalises much better to unseen long episodes",
+        "We investigated memory capacity using the Omniglot dataset, and compared our model with the Kanerva Machine and DNC",
+        "We report retrieval error as the negative of the conditional evidence lower-bound objective",
+        "Generative models trained with stochastic variational inference usually suffer from the problem of low sample quality, because the asymmetric KL-divergence they minimise usually results in priors broader than the posterior that is used to train the decoders",
+        "While different approaches exist to improve sample quality, including using more elaborated posteriors [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>] and different training objectives [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>], our model solves this problem by moving to regions with higher likelihoods via the attractor dynamics",
+        "We have demonstrated its high capacity by efficiently compressing episodes online and have shown its robustness in retrieving patterns corrupted by unseen noise",
+        "Zemel and Mozer proposed a generative model for memory [<a class=\"ref-link\" id=\"c32\" href=\"#r32\">32</a>] that pioneered the use of variational free energy to construct attractors for memory",
+        "As a principled probabilistic model, the linear Gaussian memory of the Dynamic Kanerva Machine can be seen as a special case of the Kalman Filter (KF) [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>] without the drift-diffusion dynamics of the latent state"
+    ],
+    "summary": [
+        "To confirm that the emerging attractor dynamics help memory retrieval, we experiment with the Omniglot dataset [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>] and images from DMLab [<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>], showing that the attractor dynamics consistently improve images corrupted by noise unseen during training, as well as low-quality prior samples.",
+        "Since the memory is a linear Gaussian model, its posterior distribution p(M|z t, w t) is analytically tractable and online Bayesian inference can be performed efficiently.",
+        "While the variance parameter is trained using gradient-based updates, dynamic addressing is used to find the \u03bcwt that minimises DKL (q (w) p (w|x, M)).",
+        "Dynamic addressing finds the combination of memory rows that minimises the square error between the read out M \u03bcw and the embedding z = e(x), subject to the constraint from the prior p (w).",
+        "The sequence will converge to some x\u2217, a local minimum in the energy landscape, which in a well trained memory model corresponds to a stored pattern.",
+        "We used the same testing protocol as [<a class=\"ref-link\" id=\"c31\" href=\"#r31\">31</a>], first computing the posterior distribution of memory given an episode, and performing tasks using the memory\u2019s posterior mean.",
+        "To account for the additional O(K3) cost in the proposed dynamic addressing, our model in Omniglot experiments used a significantly smaller number of memory parameters (32 \u00d7 100 + 32 \u00d7 32) than the DNC (64 \u00d7 100), and less than half of that used for the KM in [<a class=\"ref-link\" id=\"c31\" href=\"#r31\">31</a>].",
+        "Generative models trained with stochastic variational inference usually suffer from the problem of low sample quality, because the asymmetric KL-divergence they minimise usually results in priors broader than the posterior that is used to train the decoders.",
+        "While different approaches exist to improve sample quality, including using more elaborated posteriors [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>] and different training objectives [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>], our model solves this problem by moving to regions with higher likelihoods via the attractor dynamics.",
+        "We have presented a novel approach to robust attractor dynamics inside a generative distributed memory.",
+        "Boltzmann Machines [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>] are high-capacity generative models with distributed representations which obey stochastic attractor dynamics.",
+        "As a principled probabilistic model, the linear Gaussian memory of the DKM can be seen as a special case of the Kalman Filter (KF) [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>] without the drift-diffusion dynamics of the latent state.",
+        "By combining deep neural networks and variational inference this allows our model to store associations between a large number of patterns, and generalise to large scale non-Gaussian datasets ."
+    ],
+    "headline": "Based on the idea of memory writing as inference, as proposed in the Kanerva Machine, we show that a likelihood-based Lyapunov function emerges from maximising the variational lower-bound of a generative memory",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] David H Ackley, Geoffrey E Hinton, and Terrence J Sejnowski. A learning algorithm for boltzmann machines. In Readings in Computer Vision, pages 522\u2013533.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ackley%2C%20David%20H.%20Hinton%2C%20Geoffrey%20E.%20Sejnowski%2C%20Terrence%20J.%20A%20learning%20algorithm%20for%20boltzmann%20machines",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ackley%2C%20David%20H.%20Hinton%2C%20Geoffrey%20E.%20Sejnowski%2C%20Terrence%20J.%20A%20learning%20algorithm%20for%20boltzmann%20machines"
+        },
+        {
+            "id": "2",
+            "entry": "[2] David J Aldous. Exchangeability and related topics. In \u00c9cole d\u2019\u00c9t\u00e9 de Probabilit\u00e9s de Saint-Flour XIII\u20141983, pages 1\u2013198.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Aldous%2C%20David%20J.%20Exchangeability%20and%20related%20topics.%20In%20%C3%89cole%20d%E2%80%99%C3%89t%C3%A9%20de%20Probabilit%C3%A9s%20de",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Aldous%2C%20David%20J.%20Exchangeability%20and%20related%20topics.%20In%20%C3%89cole%20d%E2%80%99%C3%89t%C3%A9%20de%20Probabilit%C3%A9s%20de"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Daniel J Amit. Modeling brain function: The world of attractor neural networks. Cambridge university press, 1992.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Amit%2C%20Daniel%20J.%20Modeling%20brain%20function%3A%20The%20world%20of%20attractor%20neural%20networks%201992"
+        },
+        {
+            "id": "4",
+            "entry": "[4] John Robert Anderson. Learning and memory: An integrated approach. John Wiley & Sons Inc, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Anderson%2C%20John%20Robert%20Learning%20and%20memory%3A%20An%20integrated%20approach%202000"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio. Neural machine translation by jointly learning to align and translate. arXiv preprint arXiv:1409.0473, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1409.0473"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Charles Beattie, Joel Z Leibo, Denis Teplyashin, Tom Ward, Marcus Wainwright, Heinrich K\u00fcttler, Andrew Lefrancq, Simon Green, V\u00edctor Vald\u00e9s, Amir Sadik, et al. Deepmind lab. arXiv preprint arXiv:1612.03801, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1612.03801"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Jonathan D Cohen, William M Perlstein, Todd S Braver, Leigh E Nystrom, Douglas C Noll, John Jonides, and Edward E Smith. Temporal dynamics of brain activation during a working memory task. Nature, 386(6625):604, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cohen%2C%20Jonathan%20D.%20Perlstein%2C%20William%20M.%20Braver%2C%20Todd%20S.%20Nystrom%2C%20Leigh%20E.%20Temporal%20dynamics%20of%20brain%20activation%20during%20a%20working%20memory%20task%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cohen%2C%20Jonathan%20D.%20Perlstein%2C%20William%20M.%20Braver%2C%20Todd%20S.%20Nystrom%2C%20Leigh%20E.%20Temporal%20dynamics%20of%20brain%20activation%20during%20a%20working%20memory%20task%201997"
+        },
+        {
+            "id": "8",
+            "entry": "[8] John Conklin and Chris Eliasmith. A controlled attractor network model of path integration in the rat. Journal of computational neuroscience, 18(2):183\u2013203, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Conklin%2C%20John%20Eliasmith%2C%20Chris%20A%20controlled%20attractor%20network%20model%20of%20path%20integration%20in%20the%20rat%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Conklin%2C%20John%20Eliasmith%2C%20Chris%20A%20controlled%20attractor%20network%20model%20of%20path%20integration%20in%20the%20rat%202005"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Yann N Dauphin, Razvan Pascanu, Caglar Gulcehre, Kyunghyun Cho, Surya Ganguli, and Yoshua Bengio. Identifying and attacking the saddle point problem in high-dimensional non-convex optimization. In Z. Ghahramani, M. Welling, C. Cortes, N. D. Lawrence, and K. Q. Weinberger, editors, Advances in Neural Information Processing Systems 27, pages 2933\u20132941. Curran Associates, Inc., 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dauphin%2C%20Yann%20N.%20Pascanu%2C%20Razvan%20Gulcehre%2C%20Caglar%20Cho%2C%20Kyunghyun%20Identifying%20and%20attacking%20the%20saddle%20point%20problem%20in%20high-dimensional%20non-convex%20optimization%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dauphin%2C%20Yann%20N.%20Pascanu%2C%20Razvan%20Gulcehre%2C%20Caglar%20Cho%2C%20Kyunghyun%20Identifying%20and%20attacking%20the%20saddle%20point%20problem%20in%20high-dimensional%20non-convex%20optimization%202014"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Peter Dayan and Sham Kakade. Explaining away in weight space. In Advances in neural information processing systems, pages 451\u2013457, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dayan%2C%20Peter%20Kakade%2C%20Sham%20Explaining%20away%20in%20weight%20space%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dayan%2C%20Peter%20Kakade%2C%20Sham%20Explaining%20away%20in%20weight%20space%202001"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Arthur P Dempster, Nan M Laird, and Donald B Rubin. Maximum likelihood from incomplete data via the em algorithm. Journal of the royal statistical society. Series B (methodological), pages 1\u201338, 1977.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dempster%2C%20Arthur%20P.%20Laird%2C%20Nan%20M.%20Rubin%2C%20Donald%20B.%20Maximum%20likelihood%20from%20incomplete%20data%20via%20the%20em%20algorithm%201977",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dempster%2C%20Arthur%20P.%20Laird%2C%20Nan%20M.%20Rubin%2C%20Donald%20B.%20Maximum%20likelihood%20from%20incomplete%20data%20via%20the%20em%20algorithm%201977"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Surya Ganguli, Dongsung Huh, and Haim Sompolinsky. Memory traces in dynamical systems. Proceedings of the National Academy of Sciences, 105(48):18970\u201318975, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ganguli%2C%20Surya%20Huh%2C%20Dongsung%20Sompolinsky%2C%20Haim%20Memory%20traces%20in%20dynamical%20systems%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ganguli%2C%20Surya%20Huh%2C%20Dongsung%20Sompolinsky%2C%20Haim%20Memory%20traces%20in%20dynamical%20systems%202008"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Ian Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, and Yoshua Bengio. Generative adversarial nets. In Z. Ghahramani, M. Welling, C. Cortes, N. D. Lawrence, and K. Q. Weinberger, editors, Advances in Neural Information Processing Systems 27, pages 2672\u20132680. Curran Associates, Inc., 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goodfellow%2C%20Ian%20Pouget-Abadie%2C%20Jean%20Mirza%2C%20Mehdi%20Xu%2C%20Bing%20Generative%20adversarial%20nets%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goodfellow%2C%20Ian%20Pouget-Abadie%2C%20Jean%20Mirza%2C%20Mehdi%20Xu%2C%20Bing%20Generative%20adversarial%20nets%202014"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Alex Graves, Greg Wayne, Malcolm Reynolds, Tim Harley, Ivo Danihelka, Agnieszka Grabska-Barwinska, Sergio G\u00f3mez Colmenarejo, Edward Grefenstette, Tiago Ramalho, John Agapiou, et al. Hybrid computing using a neural network with dynamic external memory. Nature, 538(7626):471, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Graves%2C%20Alex%20Wayne%2C%20Greg%20Reynolds%2C%20Malcolm%20Harley%2C%20Tim%20Hybrid%20computing%20using%20a%20neural%20network%20with%20dynamic%20external%20memory%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Graves%2C%20Alex%20Wayne%2C%20Greg%20Reynolds%2C%20Malcolm%20Harley%2C%20Tim%20Hybrid%20computing%20using%20a%20neural%20network%20with%20dynamic%20external%20memory%202016"
+        },
+        {
+            "id": "15",
+            "entry": "[15] John J Hopfield. Neural networks and physical systems with emergent collective computational abilities. Proceedings of the national academy of sciences, 79(8):2554\u20132558, 1982.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hopfield%2C%20John%20J.%20Neural%20networks%20and%20physical%20systems%20with%20emergent%20collective%20computational%20abilities%201982",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hopfield%2C%20John%20J.%20Neural%20networks%20and%20physical%20systems%20with%20emergent%20collective%20computational%20abilities%201982"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Auke Jan Ijspeert, Jun Nakanishi, Heiko Hoffmann, Peter Pastor, and Stefan Schaal. Dynamical movement primitives: learning attractor models for motor behaviors. Neural computation, 25(2):328\u2013373, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ijspeert%2C%20Auke%20Jan%20Dynamical%20movement%20primitives%3A%20learning%20attractor%20models%20for%20motor%20behaviors%202013-06",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ijspeert%2C%20Auke%20Jan%20Dynamical%20movement%20primitives%3A%20learning%20attractor%20models%20for%20motor%20behaviors%202013-06"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Rudolph Emil Kalman. A new approach to linear filtering and prediction problems. Transactions of the ASME\u2013Journal of Basic Engineering, 82(Series D):35\u201345, 1960.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kalman%2C%20Rudolph%20Emil%20A%20new%20approach%20to%20linear%20filtering%20and%20prediction%20problems.%20Transactions%20of%20the%20ASME%E2%80%93Journal%20of%20Basic%20Engineering%2C%2082%28Series%20D%29%201960"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Pentti Kanerva. Sparse distributed memory. MIT press, 1988.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kanerva%2C%20Pentti%20Sparse%20distributed%20memory%201988"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Diederik P Kingma and Max Welling. Auto-encoding variational bayes. In Proceedings of the 2nd International Conference on Learning Representations (ICLR), 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Welling%2C%20Max%20Auto-encoding%20variational%20bayes%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Welling%2C%20Max%20Auto-encoding%20variational%20bayes%202013"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Konrad P Kording, Joshua B Tenenbaum, and Reza Shadmehr. The dynamics of memory as a consequence of optimal adaptation to a changing body. Nature neuroscience, 10(6):779, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kording%2C%20Konrad%20P.%20Tenenbaum%2C%20Joshua%20B.%20Shadmehr%2C%20Reza%20The%20dynamics%20of%20memory%20as%20a%20consequence%20of%20optimal%20adaptation%20to%20a%20changing%20body%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kording%2C%20Konrad%20P.%20Tenenbaum%2C%20Joshua%20B.%20Shadmehr%2C%20Reza%20The%20dynamics%20of%20memory%20as%20a%20consequence%20of%20optimal%20adaptation%20to%20a%20changing%20body%202007"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Rahul G Krishnan, Uri Shalit, and David Sontag. Deep kalman filters. arXiv preprint arXiv:1511.05121, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.05121"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Brenden M Lake, Ruslan Salakhutdinov, and Joshua B Tenenbaum. Human-level concept learning through probabilistic program induction. Science, 350(6266):1332\u20131338, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lake%2C%20Brenden%20M.%20Salakhutdinov%2C%20Ruslan%20Tenenbaum%2C%20Joshua%20B.%20Human-level%20concept%20learning%20through%20probabilistic%20program%20induction%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lake%2C%20Brenden%20M.%20Salakhutdinov%2C%20Ruslan%20Tenenbaum%2C%20Joshua%20B.%20Human-level%20concept%20learning%20through%20probabilistic%20program%20induction%202015"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Razvan Pascanu, Tomas Mikolov, and Yoshua Bengio. On the difficulty of training recurrent neural networks. In International Conference on Machine Learning, pages 1310\u20131318, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pascanu%2C%20Razvan%20Mikolov%2C%20Tomas%20Bengio%2C%20Yoshua%20On%20the%20difficulty%20of%20training%20recurrent%20neural%20networks%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pascanu%2C%20Razvan%20Mikolov%2C%20Tomas%20Bengio%2C%20Yoshua%20On%20the%20difficulty%20of%20training%20recurrent%20neural%20networks%202013"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Barak A Pearlmutter. Learning state space trajectories in recurrent neural networks. Neural Computation, 1(2):263\u2013269, 1989.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pearlmutter%2C%20Barak%20A.%20Learning%20state%20space%20trajectories%20in%20recurrent%20neural%20networks%201989",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pearlmutter%2C%20Barak%20A.%20Learning%20state%20space%20trajectories%20in%20recurrent%20neural%20networks%201989"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Alexander Pritzel, Benigno Uria, Sriram Srinivasan, Adri\u00e0 Puigdom\u00e8nech, Oriol Vinyals, Demis Hassabis, Daan Wierstra, and Charles Blundell. Neural episodic control. arXiv preprint arXiv:1703.01988, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.01988"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Danilo Jimenez Rezende and Shakir Mohamed. Variational inference with normalizing flows. arXiv preprint arXiv:1505.05770, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1505.05770"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Danilo Jimenez Rezende, Shakir Mohamed, and Daan Wierstra. Stochastic backpropagation and approximate inference in deep generative models. In The 31st International Conference on Machine Learning (ICML), 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rezende%2C%20Danilo%20Jimenez%20Mohamed%2C%20Shakir%20Wierstra%2C%20Daan%20Stochastic%20backpropagation%20and%20approximate%20inference%20in%20deep%20generative%20models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rezende%2C%20Danilo%20Jimenez%20Mohamed%2C%20Shakir%20Wierstra%2C%20Daan%20Stochastic%20backpropagation%20and%20approximate%20inference%20in%20deep%20generative%20models%202014"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Alexei Samsonovich and Bruce L McNaughton. Path integration and cognitive mapping in a continuous attractor neural network model. Journal of Neuroscience, 17(15):5900\u20135920, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Samsonovich%2C%20Alexei%20McNaughton%2C%20Bruce%20L.%20Path%20integration%20and%20cognitive%20mapping%20in%20a%20continuous%20attractor%20neural%20network%20model%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Samsonovich%2C%20Alexei%20McNaughton%2C%20Bruce%20L.%20Path%20integration%20and%20cognitive%20mapping%20in%20a%20continuous%20attractor%20neural%20network%20model%201997"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Adam Santoro, Sergey Bartunov, Matthew Botvinick, Daan Wierstra, and Timothy Lillicrap. One-shot learning with memory-augmented neural networks. arXiv preprint arXiv:1605.06065, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1605.06065"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Jason Weston, Sumit Chopra, and Antoine Bordes. Memory networks. arXiv preprint arXiv:1410.3916, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1410.3916"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Yan Wu, Greg Wayne, Alex Graves, and Timothy Lillicrap. The kanerva machine: A generative distributed memory. In International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20Yan%20Wayne%2C%20Greg%20Graves%2C%20Alex%20Lillicrap%2C%20Timothy%20The%20kanerva%20machine%3A%20A%20generative%20distributed%20memory%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20Yan%20Wayne%2C%20Greg%20Graves%2C%20Alex%20Lillicrap%2C%20Timothy%20The%20kanerva%20machine%3A%20A%20generative%20distributed%20memory%202018"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Richard S Zemel and Michael C Mozer. A generative model for attractor dynamics. In Advances in neural information processing systems, pages 80\u201388, 2000. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zemel%2C%20Richard%20S.%20Mozer%2C%20Michael%20C.%20A%20generative%20model%20for%20attractor%20dynamics%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zemel%2C%20Richard%20S.%20Mozer%2C%20Michael%20C.%20A%20generative%20model%20for%20attractor%20dynamics%202000"
+        }
+    ]
+}

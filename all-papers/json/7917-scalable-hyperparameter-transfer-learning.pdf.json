@@ -1,0 +1,382 @@
+{
+    "filename": "7917-scalable-hyperparameter-transfer-learning.pdf",
+    "metadata": {
+        "title": "Scalable Hyperparameter Transfer Learning",
+        "author": "Valerio Perrone, Rodolphe Jenatton, Matthias W. Seeger, Cedric Archambeau",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7917-scalable-hyperparameter-transfer-learning.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Bayesian optimization (BO) is a model-based approach for gradient-free black-box function optimization, such as hyperparameter optimization. Typically, BO relies on conventional Gaussian process (GP) regression, whose algorithmic complexity is cubic in the number of evaluations. As a result, GP-based BO cannot leverage large numbers of past function evaluations, for example, to warm-start related BO runs. We propose a multi-task adaptive Bayesian linear regression model for transfer learning in BO, whose complexity is linear in the function evaluations: one Bayesian linear regression model is associated to each black-box function optimization problem (or task), while transfer learning is achieved by coupling the models through a shared deep neural net. Experiments show that the neural net learns a representation suitable for warm-starting the black-box optimization problems and that BO runs can be accelerated when the target black-box function (e.g., validation loss) is learned together with other related signals (e.g., training loss). The proposed method was found to be at least one order of magnitude faster than competing methods recently published in the literature."
+    },
+    "keywords": [
+        {
+            "term": "surrogate model",
+            "url": "https://en.wikipedia.org/wiki/surrogate_model"
+        },
+        {
+            "term": "function optimization",
+            "url": "https://en.wikipedia.org/wiki/function_optimization"
+        },
+        {
+            "term": "neural net",
+            "url": "https://en.wikipedia.org/wiki/neural_net"
+        },
+        {
+            "term": "optimization problem",
+            "url": "https://en.wikipedia.org/wiki/optimization_problem"
+        },
+        {
+            "term": "hyperparameter optimization",
+            "url": "https://en.wikipedia.org/wiki/hyperparameter_optimization"
+        },
+        {
+            "term": "Bayesian optimization",
+            "url": "https://en.wikipedia.org/wiki/Bayesian_optimization"
+        },
+        {
+            "term": "stochastic gradient descent",
+            "url": "https://en.wikipedia.org/wiki/stochastic_gradient_descent"
+        },
+        {
+            "term": "transfer learning",
+            "url": "https://en.wikipedia.org/wiki/transfer_learning"
+        },
+        {
+            "term": "gaussian process",
+            "url": "https://en.wikipedia.org/wiki/gaussian_process"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Consider the problem of optimizing a black-box function f (x) : X \u2192 R over a convex set X \u2282 R, namely a function whose analytical form and gradients are unavailable and that can only be queried through expensive and potentially noisy evaluations",
+        "We provided the context vector ct as input to multi-task adaptive Bayesian linear regression and optimized the hyperparameters of a random forest model, but these settings did not lead to robust conclusions and further explorations are left for future work",
+        "We can see that adding auxiliary signals to a hyperparameter optimization run driven by adaptive Bayesian linear regression neural net speeds up convergence",
+        "We introduced multi-task adaptive Bayesian linear regression (ABLR), a novel method for Bayesian optimization which scales linearly in the number of observations and is specifically designed for transfer learning in this context",
+        "Each task is modeled by a Bayesian linear regression layer on top of a shared feature map, learned jointly for all tasks with a deep neural net",
+        "Each Bayesian linear regression model comes with its own scale and noise parameters, which are learned together with the neural net parameters by empirical Bayes"
+    ],
+    "key_statements": [
+        "Consider the problem of optimizing a black-box function f (x) : X \u2192 R over a convex set X \u2282 R, namely a function whose analytical form and gradients are unavailable and that can only be queried through expensive and potentially noisy evaluations",
+        "To circumvent the scalability limitation of Gaussian process and enable transfer learning in hyperparameter optimization at scale, we propose falling back to adaptive Bayesian linear regression (ABLR) [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>], which scales linearly in the number of observations and cubically in the dimension of a\n32nd Conference on Neural Information Processing Systems (NIPS 2018), Montr\u00e9al, Canada",
+        "Suppose f (x) is the test error associated to a deep neural network as a function of its hyper-parameters x",
+        "The dimension D = 100 was picked after we investigated the computation time of adaptive Bayesian linear regression-based hyperparameter optimization with learned neural net features (D = 50) and with RKS features (D \u2208 {50, 100, 200}) and found that the running times were similar",
+        "Our simulations showed that that Gaussian process-based hyperparameter optimization will not scale much beyond 2000 evaluations, which took approximately ten minutes, while adaptive Bayesian linear regression-based hyperparameter optimization took only a few seconds",
+        "All the considered neural net-based algorithms scale linearly in N , with BOHAMIANN being slightly faster than DNGO, we found that our adaptive Bayesian linear regression implementation requires much less computation time",
+        "We focus on some of the most popular binary classification flows from OpenML, namely on a support vector machine (SVM, flow_id 5891) and extreme gradient boosting (XGBoost, flow_id 6767), and apply multi-task adaptive Bayesian linear regression to optimize their hyperparameters",
+        "We provided the context vector ct as input to multi-task adaptive Bayesian linear regression and optimized the hyperparameters of a random forest model, but these settings did not lead to robust conclusions and further explorations are left for future work",
+        "The feedforward neural net was trained for 200 iterations, each time on a batch of 200 samples",
+        "The number in parentheses denotes the number T of signals modeled in adaptive Bayesian linear regression",
+        "We can see that adding auxiliary signals to a hyperparameter optimization run driven by adaptive Bayesian linear regression neural net speeds up convergence",
+        "We conjecture that adding auxiliary signals, related to the criterion of interest would facilitate learning a useful feature basis by way of a feedforward neural net, even if only one of these signals is the target of hyperparameter optimization",
+        "We introduced multi-task adaptive Bayesian linear regression (ABLR), a novel method for Bayesian optimization which scales linearly in the number of observations and is specifically designed for transfer learning in this context",
+        "Each task is modeled by a Bayesian linear regression layer on top of a shared feature map, learned jointly for all tasks with a deep neural net",
+        "Each Bayesian linear regression model comes with its own scale and noise parameters, which are learned together with the neural net parameters by empirical Bayes",
+        "We demonstrated that multi-task adaptive Bayesian linear regression converges considerably faster than Gaussian process or other neural net-based approaches, and scales to much larger sets of evaluations",
+        "Multi-task adaptive Bayesian linear regression further allows meta-data to be fed as context vectors to the underlying neural net, allowing the learned features to be task-specific without the need to design task distance metrics or requiring manual tuning",
+        "We investigated multi-signal hyperparameter optimization for feedforward neural nets, showing that multi-task adaptive Bayesian linear regression can leverage side-signals to speed up the optimization"
+    ],
+    "summary": [
+        "Consider the problem of optimizing a black-box function f (x) : X \u2192 R over a convex set X \u2282 R, namely a function whose analytical form and gradients are unavailable and that can only be queried through expensive and potentially noisy evaluations.",
+        "Our multi-task ABLR model learns a useful shared feature basis even in the absence of task meta-data.",
+        "DNGO jointly learns features and weights of a linear regression model, hoping that the former give rise to a useful covariance function.",
+        "Since Bayesian learning and optimization are grounded in the same principle, we can re-train all model parameters as part of BO, whenever new evaluations become available for a task.",
+        "The first use case we are interested in is HPO for a single machine learning model across different data sets.",
+        "In Figure 1a, we compare single-task ABLR and standard GP driven HPO with their transfer learning counterparts.",
+        "While the GP-based HPO with transfer slightly outperformed multi-task ABLR on the quadratic toy example, it does not scale to larger data sets, such as those considered .",
+        "We consider the OpenML platform [<a class=\"ref-link\" id=\"c32\" href=\"#r32\">32</a>], which contains a large number of evaluations for a wide range of machine learning algorithms over different data sets.",
+        "ABLR NN transfer is able to leverage such data by way of learning an efficient shared set of features.",
+        "We provided the context vector ct as input to multi-task ABLR and optimized the hyperparameters of a random forest model, but these settings did not lead to robust conclusions and further explorations are left for future work.",
+        "BOHAMIANN was able to greatly speed up the optimization when warm-started and provided with contextual features, ABLR runs significantly faster and does not require dataset meta-data.",
+        "We use multi-task ABLR to simultaneously model T signals associated to these feedforward NNs as outlined in Section 3.3.",
+        "We use the multi-task nature of ABLR to model T signals, learning a NN feature basis alongside a single HPO run.",
+        "We introduced multi-task adaptive Bayesian linear regression (ABLR), a novel method for Bayesian optimization which scales linearly in the number of observations and is specifically designed for transfer learning in this context.",
+        "Each task is modeled by a Bayesian linear regression layer on top of a shared feature map, learned jointly for all tasks with a deep neural net.",
+        "We demonstrated that multi-task ABLR converges considerably faster than GPs or other NN-based approaches, and scales to much larger sets of evaluations.",
+        "Multi-task ABLR further allows meta-data to be fed as context vectors to the underlying neural net, allowing the learned features to be task-specific without the need to design task distance metrics or requiring manual tuning.",
+        "When leveraging the auto-grad operators for the Cholesky decomposition [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>], we found that training is at least as fast as the two-step heuristic recommended in [<a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>]"
+    ],
+    "headline": "We propose a multi-task adaptive Bayesian linear regression model for transfer learning in Bayesian optimization, whose complexity is linear in the function evaluations: one Bayesian linear regression model is associated to each black-box function optimization problem , while transfer learning is achieved by coupling the models through a shared deep neural net",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Bobak Shahriari, Kevin Swersky, Ziyu Wang, Ryan P Adams, and Nando de Freitas. Taking the human out of the loop: A review of Bayesian optimization. Proceedings of the IEEE, 104(1):148\u2013175, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shahriari%2C%20Bobak%20Swersky%2C%20Kevin%20Wang%2C%20Ziyu%20Adams%2C%20Ryan%20P.%20Taking%20the%20human%20out%20of%20the%20loop%3A%20A%20review%20of%20Bayesian%20optimization%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shahriari%2C%20Bobak%20Swersky%2C%20Kevin%20Wang%2C%20Ziyu%20Adams%2C%20Ryan%20P.%20Taking%20the%20human%20out%20of%20the%20loop%3A%20A%20review%20of%20Bayesian%20optimization%202016"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Jonas Mockus, Vytautas Tiesis, and Antanas Zilinskas. The application of Bayesian methods for seeking the extremum. Towards Global Optimization, 2(117-129):2, 1978.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mockus%2C%20Jonas%20Tiesis%2C%20Vytautas%20Zilinskas%2C%20Antanas%20The%20application%20of%20Bayesian%20methods%20for%20seeking%20the%20extremum%201978",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mockus%2C%20Jonas%20Tiesis%2C%20Vytautas%20Zilinskas%2C%20Antanas%20The%20application%20of%20Bayesian%20methods%20for%20seeking%20the%20extremum%201978"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Donald R Jones, Matthias Schonlau, and William J Welch. Efficient global optimization of expensive black-box functions. Journal of Global optimization, 13(4):455\u2013492, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jones%2C%20Donald%20R.%20Schonlau%2C%20Matthias%20Welch%2C%20William%20J.%20Efficient%20global%20optimization%20of%20expensive%20black-box%20functions%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jones%2C%20Donald%20R.%20Schonlau%2C%20Matthias%20Welch%2C%20William%20J.%20Efficient%20global%20optimization%20of%20expensive%20black-box%20functions%201998"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Carl Rasmussen and Chris Williams. Gaussian Processes for Machine Learning. MIT Press, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rasmussen%2C%20Carl%20Williams%2C%20Chris%20Gaussian%20Processes%20for%20Machine%20Learning%202006"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Joaquin Quinonero-Candela and Carl Edward Rasmussen. A unifying view of sparse approximate Gaussian process regression. Journal of Machine Learning Research, 6:1939\u20131959, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Quinonero-Candela%2C%20Joaquin%20Rasmussen%2C%20Carl%20Edward%20A%20unifying%20view%20of%20sparse%20approximate%20Gaussian%20process%20regression%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Quinonero-Candela%2C%20Joaquin%20Rasmussen%2C%20Carl%20Edward%20A%20unifying%20view%20of%20sparse%20approximate%20Gaussian%20process%20regression%202005"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Michalis K Titsias. Variational learning of inducing variables in sparse Gaussian processes. In International Conference on Artificial Intelligence and Statistics, pages 567\u2013574, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Titsias%2C%20Michalis%20K.%20Variational%20learning%20of%20inducing%20variables%20in%20sparse%20Gaussian%20processes%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Titsias%2C%20Michalis%20K.%20Variational%20learning%20of%20inducing%20variables%20in%20sparse%20Gaussian%20processes%202009"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Andrew Gordon Wilson, Christoph Dann, and Hannes Nickisch. Thoughts on massively scalable Gaussian processes. Technical report, preprint arXiv:1511.01870, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.01870"
+        },
+        {
+            "id": "8",
+            "entry": "[8] R\u00e9mi Bardenet, M\u00e1ty\u00e1s Brendel, Bal\u00e1zs K\u00e9gl, and Michele Sebag. Collaborative hyperparameter tuning. In Proceedings of the International Conference on Machine Learning (ICML), pages 199\u2013207, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=R%C3%A9mi%20Bardenet%2C%20M%C3%A1ty%C3%A1s%20Brendel%2C%20Bal%C3%A1zs%20K%C3%A9gl%20Sebag%2C%20Michele%20Collaborative%20hyperparameter%20tuning%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=R%C3%A9mi%20Bardenet%2C%20M%C3%A1ty%C3%A1s%20Brendel%2C%20Bal%C3%A1zs%20K%C3%A9gl%20Sebag%2C%20Michele%20Collaborative%20hyperparameter%20tuning%202013"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Dani Yogatama and Gideon Mann. Efficient transfer learning method for automatic hyperparameter tuning. In Proceedings of the International Conference on Artificial Intelligence and Statistics (AISTATS), pages 1077\u20131085, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yogatama%2C%20Dani%20Mann%2C%20Gideon%20Efficient%20transfer%20learning%20method%20for%20automatic%20hyperparameter%20tuning%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yogatama%2C%20Dani%20Mann%2C%20Gideon%20Efficient%20transfer%20learning%20method%20for%20automatic%20hyperparameter%20tuning%202014"
+        },
+        {
+            "id": "10",
+            "entry": "[10] C. M. Bishop. Pattern Recognition and Machine Learning. Springer New York, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bishop%2C%20C.M.%20Pattern%20Recognition%20and%20Machine%20Learning%202006"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Matthias Seeger, Asmus Hetzel, Zhenwen Dai, and Neil D Lawrence. Auto-differentiating linear algebra. Technical report, preprint arXiv:1710.08717, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.08717"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Tianqi Chen, Mu Li, Yutian Li, Min Lin, Naiyan Wang, Minjie Wang, Tianjun Xiao, Bing Xu, Chiyuan Zhang, and Zheng Zhang. Mxnet: A flexible and efficient machine learning library for heterogeneous distributed systems. In Neural Information Processing Systems, Workshop on Machine Learning Systems, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Tianqi%20Li%2C%20Mu%20Li%2C%20Yutian%20Lin%2C%20Min%20Mxnet%3A%20A%20flexible%20and%20efficient%20machine%20learning%20library%20for%20heterogeneous%20distributed%20systems%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Tianqi%20Li%2C%20Mu%20Li%2C%20Yutian%20Lin%2C%20Min%20Mxnet%3A%20A%20flexible%20and%20efficient%20machine%20learning%20library%20for%20heterogeneous%20distributed%20systems%202015"
+        },
+        {
+            "id": "13",
+            "entry": "[13] G. F. Trecate, C. K. I. Williams, and M. Opper. Finite-dimensional approximations of Gaussian processes. In Neural Information Processing Systems 11, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Trecate%2C%20G.F.%20Williams%2C%20C.K.I.%20Opper%2C%20M.%20Finite-dimensional%20approximations%20of%20Gaussian%20processes%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Trecate%2C%20G.F.%20Williams%2C%20C.K.I.%20Opper%2C%20M.%20Finite-dimensional%20approximations%20of%20Gaussian%20processes%201999"
+        },
+        {
+            "id": "14",
+            "entry": "[14] C. Rasmussen and J. Quinonero Candela. Healing the relevance vector machine through augmentation. In International Conference on Machine Learning 22, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rasmussen%2C%20C.%20Candela%2C%20J.Quinonero%20Healing%20the%20relevance%20vector%20machine%20through%20augmentation%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rasmussen%2C%20C.%20Candela%2C%20J.Quinonero%20Healing%20the%20relevance%20vector%20machine%20through%20augmentation%202005"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Jost Tobias Springenberg, Aaron Klein, Stefan Falkner, and Frank Hutter. Bayesian optimization with robust Bayesian neural networks. In Advances in Neural Information Processing Systems (NIPS), pages 4134\u20134142, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Springenberg%2C%20Jost%20Tobias%20Klein%2C%20Aaron%20Falkner%2C%20Stefan%20Hutter%2C%20Frank%20Bayesian%20optimization%20with%20robust%20Bayesian%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Springenberg%2C%20Jost%20Tobias%20Klein%2C%20Aaron%20Falkner%2C%20Stefan%20Hutter%2C%20Frank%20Bayesian%20optimization%20with%20robust%20Bayesian%20neural%20networks%202016"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Andrew Gordon Wilson, Zhiting Hu, Ruslan Salakhutdinov, and Eric P Xing. Deep kernel learning. In Artificial Intelligence in Statistics, 2016. arXiv:1511.02222.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.02222"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Mitchell McIntire, Daniel Ratner, and Stefano Ermon. Sparse Gaussian processes for Bayesian optimization. In Proceedings of the Conference on Uncertainty in Artificial Intelligence (UAI), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=McIntire%2C%20Mitchell%20Ratner%2C%20Daniel%20Ermon%2C%20Stefano%20Sparse%20Gaussian%20processes%20for%20Bayesian%20optimization%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=McIntire%2C%20Mitchell%20Ratner%2C%20Daniel%20Ermon%2C%20Stefano%20Sparse%20Gaussian%20processes%20for%20Bayesian%20optimization%202016"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Jasper Snoek, Oren Rippel, Kevin Swersky, Ryan Kiros, Nadathur Satish, Narayanan Sundaram, Mostofa Patwary, Mr Prabhat, and Ryan Adams. Scalable Bayesian optimization using deep neural networks. In Proceedings of the International Conference on Machine Learning (ICML), pages 2171\u20132180, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Scalable%20Bayesian%20optimization%20using%20deep%20neural%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Scalable%20Bayesian%20optimization%20using%20deep%20neural%20networks%202015"
+        },
+        {
+            "id": "19",
+            "entry": "[19] R. M. Neal. Bayesian Learning for Neural Networks. Number 118 in Lecture Notes in Statistics. Springer, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Neal%2C%20R.M.%20Bayesian%20Learning%20for%20Neural%20Networks%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Neal%2C%20R.M.%20Bayesian%20Learning%20for%20Neural%20Networks%201996"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Matthias Feurer, T Springenberg, and Frank Hutter. Initializing Bayesian hyperparameter optimization via meta-learning. In Proceedings of the Twenty-Ninth AAAI Conference on Artificial Intelligence, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Matthias%20Feurer%2C%20T.Springenberg%20Hutter%2C%20Frank%20Initializing%20Bayesian%20hyperparameter%20optimization%20via%20meta-learning%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Matthias%20Feurer%2C%20T.Springenberg%20Hutter%2C%20Frank%20Initializing%20Bayesian%20hyperparameter%20optimization%20via%20meta-learning%202015"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Kevin Swersky, Jasper Snoek, and Ryan P Adams. Multi-task Bayesian optimization. In Advances in Neural Information Processing Systems (NIPS), pages 2004\u20132012, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Swersky%2C%20Kevin%20Snoek%2C%20Jasper%20Adams%2C%20Ryan%20P.%20Multi-task%20Bayesian%20optimization%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Swersky%2C%20Kevin%20Snoek%2C%20Jasper%20Adams%2C%20Ryan%20P.%20Multi-task%20Bayesian%20optimization%202004"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Matthias Poloczek, Jialei Wang, and Peter I. Frazier. Warm starting Bayesian optimization. In Winter Simulation Conference, WSC 2016, Washington, DC, USA, December 11-14, 2016, pages 770\u2013781, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Poloczek%2C%20Matthias%20Wang%2C%20Jialei%20Frazier%2C%20Peter%20I.%20Warm%20starting%20Bayesian%20optimization%202016-12-11",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Poloczek%2C%20Matthias%20Wang%2C%20Jialei%20Frazier%2C%20Peter%20I.%20Warm%20starting%20Bayesian%20optimization%202016-12-11"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Matthias Poloczek, Jialei Wang, and Peter Frazier. Multi-information source optimization. In Advances in Neural Information Processing Systems 30, pages 4291\u20134301, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Poloczek%2C%20Matthias%20Wang%2C%20Jialei%20Frazier%2C%20Peter%20Multi-information%20source%20optimization%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Poloczek%2C%20Matthias%20Wang%2C%20Jialei%20Frazier%2C%20Peter%20Multi-information%20source%20optimization%202017"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Nicolas Schilling, Martin Wistuba, Lucas Drumond, , and Lars Schmidt-Thieme. Hyperparameter optimization with factorized multilayer perceptrons. Proceedings of the European Conference on Machine Learning (ECML), pages 87\u2013103, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hyperparameter%20optimization%20with%20factorized%20multilayer%20perceptrons%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hyperparameter%20optimization%20with%20factorized%20multilayer%20perceptrons%202015"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Daniel Golovin, Benjamin Solnik, Subhodeep Moitra, Greg Kochanski, John Karro, and D Sculley. Google Vizier: A service for black-box optimization. In Proceedings of the 23rd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, pages 1487\u20131495, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Golovin%2C%20Daniel%20Solnik%2C%20Benjamin%20Moitra%2C%20Subhodeep%20Kochanski%2C%20Greg%20Google%20Vizier%3A%20A%20service%20for%20black-box%20optimization%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Golovin%2C%20Daniel%20Solnik%2C%20Benjamin%20Moitra%2C%20Subhodeep%20Kochanski%2C%20Greg%20Google%20Vizier%3A%20A%20service%20for%20black-box%20optimization%202017"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Martin Wistuba, Nicolas Schilling, and Lars Schmidt-Thieme. Learning hyperparameter optimization initializations. In DSAA, pages 1\u201310. IEEE, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wistuba%2C%20Martin%20Schilling%2C%20Nicolas%20Schmidt-Thieme%2C%20Lars%20Learning%20hyperparameter%20optimization%20initializations%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wistuba%2C%20Martin%20Schilling%2C%20Nicolas%20Schmidt-Thieme%2C%20Lars%20Learning%20hyperparameter%20optimization%20initializations%202015"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Martin Wistuba, Nicolas Schilling, and Lars Schmidt-Thieme. Two-Stage Transfer Surrogate Model for Automatic Hyperparameter Optimization. Proceedings of the European Conference on Machine Learning (ECML), pages 199\u2013214, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wistuba%2C%20Martin%20Schilling%2C%20Nicolas%20Schmidt-Thieme%2C%20Lars%20Two-Stage%20Transfer%20Surrogate%20Model%20for%20Automatic%20Hyperparameter%20Optimization%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wistuba%2C%20Martin%20Schilling%2C%20Nicolas%20Schmidt-Thieme%2C%20Lars%20Two-Stage%20Transfer%20Surrogate%20Model%20for%20Automatic%20Hyperparameter%20Optimization%202016"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Matthias Feurer, Benjamin Letham, and Eytan Bakshy. Scalable Meta-Learning for Bayesian Optimization. Technical report, Preprint arXiv:1802.02219, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.02219"
+        },
+        {
+            "id": "29",
+            "entry": "[29] B. Bakker and T. Heskes. Task clustering and gating for Bayesian multitask learning. Journal of Machine Learning Research, 4:83\u201389, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bakker%2C%20B.%20Heskes%2C%20T.%20Task%20clustering%20and%20gating%20for%20Bayesian%20multitask%20learning%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bakker%2C%20B.%20Heskes%2C%20T.%20Task%20clustering%20and%20gating%20for%20Bayesian%20multitask%20learning%202003"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Richard H Byrd, Peihuang Lu, Jorge Nocedal, and Ciyou Zhu. A limited memory algorithm for bound constrained optimization. SIAM Journal on Scientific Computing, 16(5):1190\u20131208, 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Byrd%2C%20Richard%20H.%20Lu%2C%20Peihuang%20Nocedal%2C%20Jorge%20Zhu%2C%20Ciyou%20A%20limited%20memory%20algorithm%20for%20bound%20constrained%20optimization%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Byrd%2C%20Richard%20H.%20Lu%2C%20Peihuang%20Nocedal%2C%20Jorge%20Zhu%2C%20Ciyou%20A%20limited%20memory%20algorithm%20for%20bound%20constrained%20optimization%201995"
+        },
+        {
+            "id": "31",
+            "entry": "[31] David J. C. Mackay. Information Theory, Inference and Learning Algorithms. Cambridge University Press, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mackay%2C%20David%20J.C.%20Information%20Theory%2C%20Inference%20and%20Learning%20Algorithms%202003"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Joaquin Vanschoren, Jan N Van Rijn, Bernd Bischl, and Luis Torgo. OpenML: Networked science in machine learning. ACM SIGKDD Explorations Newsletter, 15(2):49\u201360, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vanschoren%2C%20Joaquin%20Rijn%2C%20Jan%20N.Van%20Bischl%2C%20Bernd%20Torgo%2C%20Luis%20OpenML%3A%20Networked%20science%20in%20machine%20learning%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vanschoren%2C%20Joaquin%20Rijn%2C%20Jan%20N.Van%20Bischl%2C%20Bernd%20Torgo%2C%20Luis%20OpenML%3A%20Networked%20science%20in%20machine%20learning%202014"
+        },
+        {
+            "id": "33",
+            "entry": "[33] GPyOpt: A Bayesian optimization framework in Python. http://github.com/SheffieldML/GPyOpt, 2016.",
+            "url": "http://github.com/SheffieldML/GPyOpt"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Ali Rahimi, Benjamin Recht, et al. Random features for large-scale kernel machines. In Advances in Neural Information Processing Systems (NIPS) 20, pages 1177\u20131184, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rahimi%2C%20Ali%20Recht%2C%20Benjamin%20Random%20features%20for%20large-scale%20kernel%20machines%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rahimi%2C%20Ali%20Recht%2C%20Benjamin%20Random%20features%20for%20large-scale%20kernel%20machines%202007"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Jos\u00e9 Miguel Hern\u00e1ndez-Lobato, James Requeima, Edward O Pyzer-Knapp, and Al\u00e1n Aspuru-Guzik. Parallel and distributed Thompson sampling for large-scale accelerated exploration of chemical space. In Proceedings of the International Conference on Machine Learning (ICML), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hern%C3%A1ndez-Lobato%2C%20Jos%C3%A9%20Miguel%20Requeima%2C%20James%20Pyzer-Knapp%2C%20Edward%20O.%20Aspuru-Guzik%2C%20Al%C3%A1n%20Parallel%20and%20distributed%20Thompson%20sampling%20for%20large-scale%20accelerated%20exploration%20of%20chemical%20space%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hern%C3%A1ndez-Lobato%2C%20Jos%C3%A9%20Miguel%20Requeima%2C%20James%20Pyzer-Knapp%2C%20Edward%20O.%20Aspuru-Guzik%2C%20Al%C3%A1n%20Parallel%20and%20distributed%20Thompson%20sampling%20for%20large-scale%20accelerated%20exploration%20of%20chemical%20space%202017"
+        },
+        {
+            "id": "36",
+            "entry": "[36] R. Jenatton, C. Archambeau, J. Gonzales, and M. Seeger. Bayesian optimization with tree-structured dependencies. In Proceedings of the International Conference on Machine Learning (ICML), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jenatton%2C%20R.%20Archambeau%2C%20C.%20Gonzales%2C%20J.%20Seeger%2C%20M.%20Bayesian%20optimization%20with%20tree-structured%20dependencies%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jenatton%2C%20R.%20Archambeau%2C%20C.%20Gonzales%2C%20J.%20Seeger%2C%20M.%20Bayesian%20optimization%20with%20tree-structured%20dependencies%202017"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Andreas Krause and Cheng S Ong. Contextual Gaussian process bandit optimization. In Advances in Neural Information Processing Systems (NIPS), pages 2447\u20132455, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krause%2C%20Andreas%20Ong%2C%20Cheng%20S.%20Contextual%20Gaussian%20process%20bandit%20optimization%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krause%2C%20Andreas%20Ong%2C%20Cheng%20S.%20Contextual%20Gaussian%20process%20bandit%20optimization%202011"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Julien-Charles L\u00e9vesque, Audrey Durand, Christian Gagn\u00e9, and Robert Sabourin. Bayesian optimization for conditional hyperparameter spaces. In International Joint Conference on Neural Networks (IJCNN), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=L%C3%A9vesque%2C%20Julien-Charles%20Durand%2C%20Audrey%20Gagn%C3%A9%2C%20Christian%20Sabourin%2C%20Robert%20Bayesian%20optimization%20for%20conditional%20hyperparameter%20spaces%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=L%C3%A9vesque%2C%20Julien-Charles%20Durand%2C%20Audrey%20Gagn%C3%A9%2C%20Christian%20Sabourin%2C%20Robert%20Bayesian%20optimization%20for%20conditional%20hyperparameter%20spaces%202017"
+        },
+        {
+            "id": "39",
+            "entry": "[39] K Eggensperger, F Hutter, HH Hoos, and K Leyton-brown. Efficient benchmarking of hyperparameter optimizers via surrogates background: Hyperparameter optimization. In Proceedings of the 29th AAAI Conference on Artificial Intelligence, pages 1114\u20131120, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Eggensperger%2C%20K.%20Hutter%2C%20F.%20Hoos%2C%20H.H.%20Leyton-brown%2C%20K.%20Efficient%20benchmarking%20of%20hyperparameter%20optimizers%20via%20surrogates%20background%3A%20Hyperparameter%20optimization%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Eggensperger%2C%20K.%20Hutter%2C%20F.%20Hoos%2C%20H.H.%20Leyton-brown%2C%20K.%20Efficient%20benchmarking%20of%20hyperparameter%20optimizers%20via%20surrogates%20background%3A%20Hyperparameter%20optimization%202012"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Diederik Kingma and Jimmy Ba. Adam: A method for stochastic optimization. Technical report, preprint arXiv:1412.6980, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6980"
+        },
+        {
+            "id": "41",
+            "entry": "[41] John C Platt. fast training of support vector machines using sequential minimal optimization, pages 185\u2013208. MIT Press, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Platt%2C%20John%20C.%20fast%20training%20of%20support%20vector%20machines%20using%20sequential%20minimal%20optimization%201999"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Dua Dheeru and Efi Karra Taniskidou. UCI machine learning repository, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dheeru%2C%20Dua%20Taniskidou%2C%20Efi%20Karra%20UCI%20machine%20learning%20repository%202017"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Rami M Mohammad, Fadi Thabtah, and Lee McCluskey. An assessment of features related to phishing websites using an automated technique. In Internet Technology And Secured Transactions, 2012 International Conference for, pages 492\u2013497. IEEE, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mohammad%2C%20Rami%20M.%20Thabtah%2C%20Fadi%20McCluskey%2C%20Lee%20An%20assessment%20of%20features%20related%20to%20phishing%20websites%20using%20an%20automated%20technique%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mohammad%2C%20Rami%20M.%20Thabtah%2C%20Fadi%20McCluskey%2C%20Lee%20An%20assessment%20of%20features%20related%20to%20phishing%20websites%20using%20an%20automated%20technique%202012"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Quilan J.R. Simplifying decision trees. International journal of man-machine studies, 1987.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=R%2C%20Quilan%20J.%20Simplifying%20decision%20trees%201987",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=R%2C%20Quilan%20J.%20Simplifying%20decision%20trees%201987"
+        },
+        {
+            "id": "45",
+            "entry": "[45] Chih-Chung Chang and Chih-Jen Lin. LIBSVM: A library for support vector machines. ACM Transactions on Intelligent Systems and Technology, 2:27:1\u201327:27, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20Chih-Chung%20Chang%20and%20Chih-Jen%20Lin.%20LIBSVM%3A%20A%20library%20for%20support%20vector%20machines%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Chih-Chung%20Chang%20and%20Chih-Jen%20Lin.%20LIBSVM%3A%20A%20library%20for%20support%20vector%20machines%202011"
+        },
+        {
+            "id": "46",
+            "entry": "[46] Michael A Gelbart, Jasper Snoek, and Ryan P Adams. Bayesian optimization with unknown constraints. Technical report, preprint arXiv:1403.5607, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1403.5607"
+        },
+        {
+            "id": "47",
+            "entry": "[47] D. Kingma and M. Welling. Auto-encoding variational Bayes. In International Conference on Representation Learning, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20D.%20Welling%2C%20M.%20Auto-encoding%20variational%20Bayes%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20D.%20Welling%2C%20M.%20Auto-encoding%20variational%20Bayes%202014"
+        },
+        {
+            "id": "48",
+            "entry": "[48] D. Rezende, S. Mohamed, and D. Wierstra. Stochastic backpropagation and variational inference in deep latent Gaussian models. In International Conference on Machine Learning 31, 2014. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rezende%2C%20D.%20Mohamed%2C%20S.%20Wierstra%2C%20D.%20Stochastic%20backpropagation%20and%20variational%20inference%20in%20deep%20latent%20Gaussian%20models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rezende%2C%20D.%20Mohamed%2C%20S.%20Wierstra%2C%20D.%20Stochastic%20backpropagation%20and%20variational%20inference%20in%20deep%20latent%20Gaussian%20models%202014"
+        }
+    ]
+}

@@ -1,0 +1,328 @@
+{
+    "filename": "8233-learning-to-solve-smt-formulas.pdf",
+    "metadata": {
+        "title": "Learning to Solve SMT Formulas",
+        "date": 2018,
+        "author": "Mislav Balunovic, Pavol Bielik, Martin Vechev Department of Computer Science ETH Z\u00fcrich Switzerland bmislav@ethz.ch, {pavol.bielik, martin.vechev}@inf.ethz.ch",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8233-learning-to-solve-smt-formulas.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We present a new approach for learning to solve SMT formulas. We phrase the challenge of solving SMT formulas as a tree search problem where at each step a transformation is applied to the input formula until the formula is solved. Our approach works in two phases: first, given a dataset of unsolved formulas we learn a policy that for each formula selects a suitable transformation to apply at each step in order to solve the formula, and second, we synthesize a strategy in the form of a loop-free program with branches. This strategy is an interpretable representation of the policy decisions and is used to guide the SMT solver to decide formulas more efficiently, without requiring any modification to the solver itself and without needing to evaluate the learned policy at inference time. We show that our approach is effective in practice \u2013 it solves 17% more formulas over a range of benchmarks and achieves up to 100\u00d7 runtime improvement over a state-of-the-art SMT solver."
+    },
+    "keywords": [
+        {
+            "term": "formula",
+            "url": "https://en.wikipedia.org/wiki/formula"
+        },
+        {
+            "term": "Abstract Syntax Tree",
+            "url": "https://en.wikipedia.org/wiki/Abstract_Syntax_Tree"
+        },
+        {
+            "term": "Satisfiability Modulo Theories",
+            "url": "https://en.wikipedia.org/wiki/Satisfiability_Modulo_Theories"
+        },
+        {
+            "term": "new approach",
+            "url": "https://en.wikipedia.org/wiki/New_Approach"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Satisfiability Modulo Theories (SMT) solvers are a powerful class of automated theorem provers which can deduce satisfiability and validity of first-order formulas in particular logical theories",
+        "We show that our synthesized strategies solve 17% more formulas and are up to 100\u00d7 faster when compared to the default strategy used in the state-of-the-art Z3 solver",
+        "We extend this line of work by considering fast to compute representations based on bag of words, syntactic features, and features extracted from a graph representation of the formula",
+        "Comparison to state-of-the-art Satisfiability Modulo Theories solvers We evaluate the effectiveness of the learned strategies compared to the hand-crafted strategies in Z3 4.6.2 on two metrics \u2013 number of solved formulas and runtime",
+        "We presented a new approach for solving Satisfiability Modulo Theories formulas based on a combination of training a policy that learns to discover strategies that solve formulas efficiently and a synthesizer that produces interpretable strategies based on this model",
+        "The synthesized strategies are represented as programs with branches and are directly usable by state-of-the-art Satisfiability Modulo Theories solvers to guide its search"
+    ],
+    "key_statements": [
+        "Satisfiability Modulo Theories (SMT) solvers are a powerful class of automated theorem provers which can deduce satisfiability and validity of first-order formulas in particular logical theories",
+        "Satisfiability Modulo Theories solvers are more general than SAT solvers and have been used in a variety of application domains including verification, program synthesis, static analysis, scheduling, and others [<a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>]",
+        "We show that our synthesized strategies solve 17% more formulas and are up to 100\u00d7 faster when compared to the default strategy used in the state-of-the-art Z3 solver",
+        "StratEVO has several limitations \u2013 it performs search using an evolutionary algorithm which does not incorporate any form of learning, the search does not depend on the actual formula, and local mutations tend to get stuck in local minima",
+        "We extend this line of work by considering fast to compute representations based on bag of words, syntactic features, and features extracted from a graph representation of the formula",
+        "The task we are interested in solving is defined as follows: Problem statement Given a dataset of Satisfiability Modulo Theories formulas F = {fi}Ni=1, our goal is to find a strategy: N",
+        "Comparison to state-of-the-art Satisfiability Modulo Theories solvers We evaluate the effectiveness of the learned strategies compared to the hand-crafted strategies in Z3 4.6.2 on two metrics \u2013 number of solved formulas and runtime",
+        "We presented a new approach for solving Satisfiability Modulo Theories formulas based on a combination of training a policy that learns to discover strategies that solve formulas efficiently and a synthesizer that produces interpretable strategies based on this model",
+        "The synthesized strategies are represented as programs with branches and are directly usable by state-of-the-art Satisfiability Modulo Theories solvers to guide its search"
+    ],
+    "summary": [
+        "Satisfiability Modulo Theories (SMT) solvers are a powerful class of automated theorem provers which can deduce satisfiability and validity of first-order formulas in particular logical theories.",
+        "The resulting strategy is passed on to the SMT solver which uses it to make more effective decisions when solving a given formula.",
+        "We address a harder problem - learn how to instantiate an SMT solver with a strategy that efficiently solves the given dataset of formulas.",
+        "The task we are interested in solving is defined as follows: Problem statement Given a dataset of SMT formulas F = {fi}Ni=1, our goal is to find a strategy: N",
+        "We are interested in learning a model that is not only efficient at solving a given set of formulas but expressible as programs in the Strategy language.",
+        "We learn a policy which finds a set of candidate strategies consisting of only sequences of tactics where each strategy performs well on a different subset of the dataset F.",
+        "As the model is initially untrained the strategies are sampled at random and only as the training progresses the policy will learn to select strategies that perform well on formulas from F.",
+        "The intuition behind this choice is that for a state s, the vector t encodes the likelihood that a given tactic is fast at solving the formula whereas p contains the best parameter values found so far during training.",
+        "Pruning via equivalence classes A challenge in training the models presented above is that whether a strategy solves the formula is known only at terminal states.",
+        "Using the model learned in Section 4.1, we obtain a set of successful strategies, consisting of a sequence of tactics with parameters, where each strategy solves at least one formula from the training dataset F.",
+        "Comparison to state-of-the-art SMT solvers We evaluate the effectiveness of the learned strategies compared to the hand-crafted strategies in Z3 4.6.2 on two metrics \u2013 number of solved formulas and runtime.",
+        "We presented a new approach for solving SMT formulas based on a combination of training a policy that learns to discover strategies that solve formulas efficiently and a synthesizer that produces interpretable strategies based on this model.",
+        "The synthesized strategies are represented as programs with branches and are directly usable by state-of-the-art SMT solvers to guide its search.",
+        "Our technique is practically effective \u2013 it solves 17% more formulas over a range of benchmarks and achieves up to 100\u00d7 runtime improvements over state-of-the-art SMT solver."
+    ],
+    "headline": "We present a new approach for learning to solve Satisfiability Modulo Theories formulas",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] A. A. Alemi, F. Chollet, N. Een, G. Irving, C. Szegedy, and J. Urban. DeepMath - Deep Sequence Models for Premise Selection. In Proceedings of the 30th International Conference on Neural Information Processing Systems, NIPS\u201916, pages 2243\u20132251, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Alemi%2C%20A.A.%20Chollet%2C%20F.%20Een%2C%20N.%20Irving%2C%20G.%20DeepMath%20-%20Deep%20Sequence%20Models%20for%20Premise%20Selection%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Alemi%2C%20A.A.%20Chollet%2C%20F.%20Een%2C%20N.%20Irving%2C%20G.%20DeepMath%20-%20Deep%20Sequence%20Models%20for%20Premise%20Selection%202016"
+        },
+        {
+            "id": "2",
+            "entry": "[2] R. Amadini, M. Gabbrielli, and J. Mauro. SUNNY: a Lazy Portfolio Approach for Constraint Solving. Theory and Practice of Logic Programming, 14(4-5):509\u2013524, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Amadini%2C%20R.%20Gabbrielli%2C%20M.%20Mauro%2C%20J.%20SUNNY%3A%20a%20Lazy%20Portfolio%20Approach%20for%20Constraint%20Solving%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Amadini%2C%20R.%20Gabbrielli%2C%20M.%20Mauro%2C%20J.%20SUNNY%3A%20a%20Lazy%20Portfolio%20Approach%20for%20Constraint%20Solving%202014"
+        },
+        {
+            "id": "3",
+            "entry": "[3] C. Ans\u00f3tegui, M. Sellmann, and K. Tierney. A Gender-Based Genetic Algorithm for the Automatic Configuration of Algorithms. In Principles and Practice of Constraint Programming - CP 2009, pages 142\u2013157, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ans%C3%B3tegui%2C%20C.%20Sellmann%2C%20M.%20Tierney%2C%20K.%20A%20Gender-Based%20Genetic%20Algorithm%20for%20the%20Automatic%20Configuration%20of%20Algorithms%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ans%C3%B3tegui%2C%20C.%20Sellmann%2C%20M.%20Tierney%2C%20K.%20A%20Gender-Based%20Genetic%20Algorithm%20for%20the%20Automatic%20Configuration%20of%20Algorithms%202009"
+        },
+        {
+            "id": "4",
+            "entry": "[4] C. Barrett, C. L. Conway, M. Deters, L. Hadarean, D. Jovanovi\u2019c, T. King, A. Reynolds, and C. Tinelli. CVC4. In Proceedings of the 23rd International Conference on Computer Aided Verification (CAV \u201911), volume 6806 of Lecture Notes in Computer Science, pages 171\u2013177, July 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=C%20Barrett%20C%20L%20Conway%20M%20Deters%20L%20Hadarean%20D%20Jovanovic%20T%20King%20A%20Reynolds%20and%20C%20Tinelli%20CVC4%20In%20Proceedings%20of%20the%2023rd%20International%20Conference%20on%20Computer%20Aided%20Verification%20CAV%2011%20volume%206806%20of%20Lecture%20Notes%20in%20Computer%20Science%20pages%20171177%20July%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=C%20Barrett%20C%20L%20Conway%20M%20Deters%20L%20Hadarean%20D%20Jovanovic%20T%20King%20A%20Reynolds%20and%20C%20Tinelli%20CVC4%20In%20Proceedings%20of%20the%2023rd%20International%20Conference%20on%20Computer%20Aided%20Verification%20CAV%2011%20volume%206806%20of%20Lecture%20Notes%20in%20Computer%20Science%20pages%20171177%20July%202011"
+        },
+        {
+            "id": "5",
+            "entry": "[5] C. Barrett, P. Fontaine, and C. Tinelli. AProVE Benchmarks. https://clc-gitlab.cs.uiowa.edu:2443/SMT-LIB-benchmarks/QF_NIA/tree/master/AProVE, 2016.",
+            "url": "https://clc-gitlab.cs.uiowa.edu:2443/SMT-LIB-benchmarks/QF_NIA/tree/master/AProVE"
+        },
+        {
+            "id": "6",
+            "entry": "[6] C. Barrett, P. Fontaine, and C. Tinelli. core Benchmarks. https://clc-gitlab.cs.uiowa.edu:2443/SMT-LIB-benchmarks/QF_BV/tree/master/bruttomesso/core, 2016.",
+            "url": "https://clc-gitlab.cs.uiowa.edu:2443/SMT-LIB-benchmarks/QF_BV/tree/master/bruttomesso/core"
+        },
+        {
+            "id": "7",
+            "entry": "[7] C. Barrett, P. Fontaine, and C. Tinelli. hycomp Benchmarks. https://clc-gitlab.cs.uiowa.edu:2443/SMT-LIB-benchmarks/QF_NRA/tree/master/hycomp, 2016.",
+            "url": "https://clc-gitlab.cs.uiowa.edu:2443/SMT-LIB-benchmarks/QF_NRA/tree/master/hycomp"
+        },
+        {
+            "id": "8",
+            "entry": "[8] C. Barrett, P. Fontaine, and C. Tinelli. leipzig Benchmarks. https://clc-gitlab.cs .uiowa.edu:2443/SMT-LIB-benchmarks/QF_NIA/tree/master/leipzig, 2016.",
+            "url": "https://clc-gitlab.cs"
+        },
+        {
+            "id": "9",
+            "entry": "[9] C. Barrett, P. Fontaine, and C. Tinelli. Sage2 Benchmarks. https://clc-gitlab.cs.uiowa.edu:2443/SMT-LIB-benchmarks/Sage2, 2016.",
+            "url": "https://clc-gitlab.cs.uiowa.edu:2443/SMT-LIB-benchmarks/Sage2"
+        },
+        {
+            "id": "10",
+            "entry": "[10] C. Barrett, P. Fontaine, and C. Tinelli. The Satisfiability Modulo Theories Library (SMT-LIB). www.SMT-LIB.org, 2016.",
+            "url": "http://www.SMT-LIB.org"
+        },
+        {
+            "id": "11",
+            "entry": "[11] P. Bojanowski, E. Grave, A. Joulin, and T. Mikolov. Enriching Word Vectors with Subword Information. Transactions of the Association for Computational Linguistics, 5:135\u2013146, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bojanowski%2C%20P.%20Grave%2C%20E.%20Joulin%2C%20A.%20Mikolov%2C%20T.%20Enriching%20Word%20Vectors%20with%20Subword%20Information%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bojanowski%2C%20P.%20Grave%2C%20E.%20Joulin%2C%20A.%20Mikolov%2C%20T.%20Enriching%20Word%20Vectors%20with%20Subword%20Information%202017"
+        },
+        {
+            "id": "12",
+            "entry": "[12] D. Bridge, E. O\u2019Mahony, and B. O\u2019Sullivan. Case-Based Reasoning for Autonomous Constraint Solving. In Autonomous Search, pages 73\u201395. 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bridge%2C%20D.%20O%E2%80%99Mahony%2C%20E.%20O%E2%80%99Sullivan%2C%20B.%20Case-Based%20Reasoning%20for%20Autonomous%20Constraint%20Solving%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bridge%2C%20D.%20O%E2%80%99Mahony%2C%20E.%20O%E2%80%99Sullivan%2C%20B.%20Case-Based%20Reasoning%20for%20Autonomous%20Constraint%20Solving%202012"
+        },
+        {
+            "id": "13",
+            "entry": "[13] A. Cimatti, A. Griggio, B. Schaafsma, and R. Sebastiani. The MathSAT5 SMT Solver. In Proceedings of TACAS, volume 7795 of LNCS, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=A%20Cimatti%20A%20Griggio%20B%20Schaafsma%20and%20R%20Sebastiani%20The%20MathSAT5%20SMT%20Solver%20In%20Proceedings%20of%20TACAS%20volume%207795%20of%20LNCS%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=A%20Cimatti%20A%20Griggio%20B%20Schaafsma%20and%20R%20Sebastiani%20The%20MathSAT5%20SMT%20Solver%20In%20Proceedings%20of%20TACAS%20volume%207795%20of%20LNCS%202013"
+        },
+        {
+            "id": "14",
+            "entry": "[14] A. Clare and R. D. King. Knowledge discovery in multi-label phenotype data. In European Conference on Principles of Data Mining and Knowledge Discovery, pages 42\u201353, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Clare%2C%20A.%20King%2C%20R.D.%20Knowledge%20discovery%20in%20multi-label%20phenotype%20data%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Clare%2C%20A.%20King%2C%20R.D.%20Knowledge%20discovery%20in%20multi-label%20phenotype%20data%202001"
+        },
+        {
+            "id": "15",
+            "entry": "[15] L. De Moura and N. Bj\u00f8rner. Z3: An Efficient SMT Solver. In Proceedings of the Theory and Practice of Software, 14th International Conference on Tools and Algorithms for the Construction and Analysis of Systems, TACAS\u201908/ETAPS\u201908, pages 337\u2013340, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Moura%2C%20L.De%20Bj%C3%B8rner%2C%20N.%20Z3%3A%20An%20Efficient%20SMT%20Solver%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Moura%2C%20L.De%20Bj%C3%B8rner%2C%20N.%20Z3%3A%20An%20Efficient%20SMT%20Solver%202008"
+        },
+        {
+            "id": "16",
+            "entry": "[16] L. De Moura and N. Bj\u00f8rner. Satisfiability Modulo Theories: Introduction and Applications. Commun. ACM, 54(9):69\u201377, Sept. 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Moura%2C%20L.De%20Bj%C3%B8rner%2C%20N.%20Satisfiability%20Modulo%20Theories%3A%20Introduction%20and%20Applications%202011-09",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Moura%2C%20L.De%20Bj%C3%B8rner%2C%20N.%20Satisfiability%20Modulo%20Theories%3A%20Introduction%20and%20Applications%202011-09"
+        },
+        {
+            "id": "17",
+            "entry": "[17] L. de Moura and G. O. Passmore. The Strategy Challenge in SMT Solving. In Automated Reasoning and Mathematics, pages 15\u201344. 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=de%20Moura%2C%20L.%20Passmore%2C%20G.O.%20The%20Strategy%20Challenge%20in%20SMT%20Solving%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=de%20Moura%2C%20L.%20Passmore%2C%20G.O.%20The%20Strategy%20Challenge%20in%20SMT%20Solving%202013"
+        },
+        {
+            "id": "18",
+            "entry": "[18] B. Dutertre. Yices 2.2. In Computer Aided Verification, pages 737\u2013744, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dutertre%2C%20B.%20Yices%202.2%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dutertre%2C%20B.%20Yices%202.2%202014"
+        },
+        {
+            "id": "19",
+            "entry": "[19] J. Giesl, C. Aschermann, M. Brockschmidt, F. Emmes, F. Frohn, C. Fuhs, J. Hensel, C. Otto, M. Pl\u00fccker, P. Schneider-Kamp, T. Str\u00f6der, S. Swiderski, and R. Thiemann. Analyzing Program Termination and Complexity Automatically with AProVE. Journal of Automated Reasoning, 58(1):3\u201331, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Giesl%2C%20J.%20Aschermann%2C%20C.%20Brockschmidt%2C%20M.%20Emmes%2C%20F.%20Analyzing%20Program%20Termination%20and%20Complexity%20Automatically%20with%20AProVE%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Giesl%2C%20J.%20Aschermann%2C%20C.%20Brockschmidt%2C%20M.%20Emmes%2C%20F.%20Analyzing%20Program%20Termination%20and%20Complexity%20Automatically%20with%20AProVE%202017"
+        },
+        {
+            "id": "20",
+            "entry": "[20] X. Glorot and Y. Bengio. Understanding the difficulty of training deep feedforward neural networks. In In Proceedings of the International Conference on Artificial Intelligence and Statistics (AISTATS\u201910). Society for Artificial Intelligence and Statistics, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Glorot%2C%20X.%20Bengio%2C%20Y.%20Understanding%20the%20difficulty%20of%20training%20deep%20feedforward%20neural%20networks%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Glorot%2C%20X.%20Bengio%2C%20Y.%20Understanding%20the%20difficulty%20of%20training%20deep%20feedforward%20neural%20networks%202010"
+        },
+        {
+            "id": "21",
+            "entry": "[21] P. Godefroid, M. Y. Levin, and D. Molnar. Automated Whitebox Fuzz Testing. 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Godefroid%2C%20P.%20Levin%2C%20M.Y.%20Molnar%2C%20D.%20Automated%20Whitebox%20Fuzz%20Testing%202008"
+        },
+        {
+            "id": "22",
+            "entry": "[22] B. Hurley, L. Kotthoff, Y. Malitsky, and B. O\u2019Sullivan. Proteus: A Hierarchical Portfolio of Solvers and Transformations. In Integration of AI and OR Techniques in Constraint Programming, pages 301\u2013317, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hurley%2C%20B.%20Kotthoff%2C%20L.%20Malitsky%2C%20Y.%20O%E2%80%99Sullivan%2C%20B.%20Proteus%3A%20A%20Hierarchical%20Portfolio%20of%20Solvers%20and%20Transformations%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hurley%2C%20B.%20Kotthoff%2C%20L.%20Malitsky%2C%20Y.%20O%E2%80%99Sullivan%2C%20B.%20Proteus%3A%20A%20Hierarchical%20Portfolio%20of%20Solvers%20and%20Transformations%202014"
+        },
+        {
+            "id": "23",
+            "entry": "[23] F. Hutter, H. H. Hoos, and K. Leyton-Brown. Sequential Model-based Optimization for General Algorithm Configuration. In Proceedings of the 5th International Conference on Learning and Intelligent Optimization, LION\u201905, pages 507\u2013523, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hutter%2C%20F.%20Hoos%2C%20H.H.%20Leyton-Brown%2C%20K.%20Sequential%20Model-based%20Optimization%20for%20General%20Algorithm%20Configuration%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hutter%2C%20F.%20Hoos%2C%20H.H.%20Leyton-Brown%2C%20K.%20Sequential%20Model-based%20Optimization%20for%20General%20Algorithm%20Configuration%202011"
+        },
+        {
+            "id": "24",
+            "entry": "[24] F. Hutter, H. H. Hoos, K. Leyton-Brown, and K. Murphy. Time-Bounded Sequential Parameter Optimization. In Learning and Intelligent Optimization, pages 281\u2013298, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hutter%2C%20F.%20Hoos%2C%20H.H.%20Leyton-Brown%2C%20K.%20Murphy%2C%20K.%20Time-Bounded%20Sequential%20Parameter%20Optimization%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hutter%2C%20F.%20Hoos%2C%20H.H.%20Leyton-Brown%2C%20K.%20Murphy%2C%20K.%20Time-Bounded%20Sequential%20Parameter%20Optimization%202010"
+        },
+        {
+            "id": "25",
+            "entry": "[25] F. Hutter, H. H. Hoos, K. Leyton-Brown, and T. St\u00fctzle. ParamILS: An Automatic Algorithm Configuration Framework. J. Artif. Int. Res., 36(1):267\u2013306, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hutter%2C%20F.%20Hoos%2C%20H.H.%20Leyton-Brown%2C%20K.%20St%C3%BCtzle%2C%20T.%20ParamILS%3A%20An%20Automatic%20Algorithm%20Configuration%20Framework%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hutter%2C%20F.%20Hoos%2C%20H.H.%20Leyton-Brown%2C%20K.%20St%C3%BCtzle%2C%20T.%20ParamILS%3A%20An%20Automatic%20Algorithm%20Configuration%20Framework%202009"
+        },
+        {
+            "id": "26",
+            "entry": "[26] A. Joulin, E. Grave, P. Bojanowski, and T. Mikolov. Bag of Tricks for Efficient Text Classification. In Proceedings of the 15th Conference of the European Chapter of the Association for Computational Linguistics: Volume 2, Short Papers, pages 427\u2013431, April 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Joulin%2C%20A.%20Grave%2C%20E.%20Bojanowski%2C%20P.%20Mikolov%2C%20T.%20Bag%20of%20Tricks%20for%20Efficient%20Text%20Classification%202017-04",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Joulin%2C%20A.%20Grave%2C%20E.%20Bojanowski%2C%20P.%20Mikolov%2C%20T.%20Bag%20of%20Tricks%20for%20Efficient%20Text%20Classification%202017-04"
+        },
+        {
+            "id": "27",
+            "entry": "[27] S. Kadioglu, Y. Malitsky, M. Sellmann, and K. Tierney. ISAC \u2013Instance-Specific Algorithm Configuration. In Proceedings of the 2010 Conference on ECAI 2010: 19th European Conference on Artificial Intelligence, pages 751\u2013756, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kadioglu%2C%20S.%20Malitsky%2C%20Y.%20Sellmann%2C%20M.%20Tierney%2C%20K.%20ISAC%20%E2%80%93Instance-Specific%20Algorithm%20Configuration%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kadioglu%2C%20S.%20Malitsky%2C%20Y.%20Sellmann%2C%20M.%20Tierney%2C%20K.%20ISAC%20%E2%80%93Instance-Specific%20Algorithm%20Configuration%202010"
+        },
+        {
+            "id": "28",
+            "entry": "[28] G. Katz, C. Barrett, D. L. Dill, K. Julian, and M. J. Kochenderfer. Reluplex: An Efficient SMT Solver for Verifying Deep Neural Networks. In Computer Aided Verification, pages 97\u2013117, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Katz%2C%20G.%20Barrett%2C%20C.%20Dill%2C%20D.L.%20Julian%2C%20K.%20Reluplex%3A%20An%20Efficient%20SMT%20Solver%20for%20Verifying%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Katz%2C%20G.%20Barrett%2C%20C.%20Dill%2C%20D.L.%20Julian%2C%20K.%20Reluplex%3A%20An%20Efficient%20SMT%20Solver%20for%20Verifying%202017"
+        },
+        {
+            "id": "29",
+            "entry": "[29] E. B. Khalil, P. L. Bodic, L. Song, G. Nemhauser, and B. Dilkina. Learning to Branch in Mixed Integer Programming. In Proceedings of the Thirtieth AAAI Conference on Artificial Intelligence, AAAI\u201916, pages 724\u2013731, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Khalil%2C%20E.B.%20Bodic%2C%20P.L.%20Song%2C%20L.%20Nemhauser%2C%20G.%20Learning%20to%20Branch%20in%20Mixed%20Integer%20Programming%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Khalil%2C%20E.B.%20Bodic%2C%20P.L.%20Song%2C%20L.%20Nemhauser%2C%20G.%20Learning%20to%20Branch%20in%20Mixed%20Integer%20Programming%202016"
+        },
+        {
+            "id": "30",
+            "entry": "[30] A. R. KhudaBukhsh, L. Xu, H. H. Hoos, and K. Leyton-Brown. SATenstein: Automatically Building Local Search SAT Solvers from Components. In Proceedings of the 21st International Jont Conference on Artifical Intelligence, IJCAI\u201909, pages 517\u2013524, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=KhudaBukhsh%2C%20A.R.%20Xu%2C%20L.%20Hoos%2C%20H.H.%20Leyton-Brown%2C%20K.%20SATenstein%3A%20Automatically%20Building%20Local%20Search%20SAT%20Solvers%20from%20Components%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=KhudaBukhsh%2C%20A.R.%20Xu%2C%20L.%20Hoos%2C%20H.H.%20Leyton-Brown%2C%20K.%20SATenstein%3A%20Automatically%20Building%20Local%20Search%20SAT%20Solvers%20from%20Components%202009"
+        },
+        {
+            "id": "31",
+            "entry": "[31] D. P. Kingma and J. Ba. Adam: A Method for Stochastic Optimization. CoRR, abs/1412.6980, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6980"
+        },
+        {
+            "id": "32",
+            "entry": "[32] M. G. Lagoudakis and M. L. Littman. Learning to Select Branching Rules in the DPLL Procedure for Satisfiability. Electronic Notes in Discrete Mathematics, 9:344 \u2013 359, 2001. LICS 2001 Workshop on Theory and Applications of Satisfiability Testing (SAT 2001).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lagoudakis%2C%20M.G.%20Littman%2C%20M.L.%20Learning%20to%20Select%20Branching%20Rules%20in%20the%20DPLL%20Procedure%20for%20Satisfiability%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lagoudakis%2C%20M.G.%20Littman%2C%20M.L.%20Learning%20to%20Select%20Branching%20Rules%20in%20the%20DPLL%20Procedure%20for%20Satisfiability%202001"
+        },
+        {
+            "id": "33",
+            "entry": "[33] S. M. Loos, G. Irving, C. Szegedy, and C. Kaliszyk. Deep Network Guided Proof Search. In LPAR, volume 46 of EPiC Series in Computing, pages 85\u2013105, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Loos%2C%20S.M.%20Irving%2C%20G.%20Szegedy%2C%20C.%20Kaliszyk%2C%20C.%20Deep%20Network%20Guided%20Proof%20Search%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Loos%2C%20S.M.%20Irving%2C%20G.%20Szegedy%2C%20C.%20Kaliszyk%2C%20C.%20Deep%20Network%20Guided%20Proof%20Search%202017"
+        },
+        {
+            "id": "34",
+            "entry": "[34] M. Loth, M. Sebag, Y. Hamadi, and M. Schoenauer. Bandit-based Search for Constraint Programming. In Proceedings of the 19th International Conference on Principles and Practice of Constraint Programming, CP\u201913, pages 464\u2013480, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Loth%2C%20M.%20Sebag%2C%20M.%20Hamadi%2C%20Y.%20Schoenauer%2C%20M.%20Bandit-based%20Search%20for%20Constraint%20Programming%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Loth%2C%20M.%20Sebag%2C%20M.%20Hamadi%2C%20Y.%20Schoenauer%2C%20M.%20Bandit-based%20Search%20for%20Constraint%20Programming%202013"
+        },
+        {
+            "id": "35",
+            "entry": "[35] A. Niemetz, M. Preiner, and A. Biere. Boolector 2.0 system description. Journal on Satisfiability, Boolean Modeling and Computation, 9:53\u201358, 2014 (published 2015).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Niemetz%2C%20A.%20Preiner%2C%20M.%20Biere%2C%20A.%20Boolector%202.0%20system%20description%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Niemetz%2C%20A.%20Preiner%2C%20M.%20Biere%2C%20A.%20Boolector%202.0%20system%20description%202014"
+        },
+        {
+            "id": "36",
+            "entry": "[36] E. Nudelman, K. Leyton-Brown, H. H. Hoos, A. Devkar, and Y. Shoham. Understanding Random SAT: Beyond the Clauses-to-variables Ratio. In Proceedings of the 10th International Conference on Principles and Practice of Constraint Programming, CP\u201904, pages 438\u2013452, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nudelman%2C%20E.%20Leyton-Brown%2C%20K.%20Hoos%2C%20H.H.%20Devkar%2C%20A.%20Understanding%20Random%20SAT%3A%20Beyond%20the%20Clauses-to-variables%20Ratio%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nudelman%2C%20E.%20Leyton-Brown%2C%20K.%20Hoos%2C%20H.H.%20Devkar%2C%20A.%20Understanding%20Random%20SAT%3A%20Beyond%20the%20Clauses-to-variables%20Ratio%202004"
+        },
+        {
+            "id": "37",
+            "entry": "[37] A. Paszke, S. Gross, S. Chintala, G. Chanan, E. Yang, Z. DeVito, Z. Lin, A. Desmaison, L. Antiga, and A. Lerer. Automatic differentiation in PyTorch. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Paszke%2C%20A.%20Gross%2C%20S.%20Chintala%2C%20S.%20Chanan%2C%20G.%20Automatic%20differentiation%20in%20PyTorch%202017"
+        },
+        {
+            "id": "38",
+            "entry": "[38] J. Pennington, R. Socher, and C. Manning. Glove: Global Vectors for Word Representation. In Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP), pages 1532\u20131543, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pennington%2C%20J.%20Socher%2C%20R.%20Manning%2C%20C.%20Glove%3A%20Global%20Vectors%20for%20Word%20Representation%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pennington%2C%20J.%20Socher%2C%20R.%20Manning%2C%20C.%20Glove%3A%20Global%20Vectors%20for%20Word%20Representation%202014"
+        },
+        {
+            "id": "39",
+            "entry": "[39] N. G. Ram\u00edrez, Y. Hamadi, E. Monfroy, and F. Saubion. Evolving SMT Strategies. In IEEE 28th International Conference on Tools with Artificial Intelligence (ICTAI), pages 247\u2013254, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ram%C3%ADrez%2C%20N.G.%20Hamadi%2C%20Y.%20Monfroy%2C%20E.%20Saubion%2C%20F.%20Evolving%20SMT%20Strategies%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ram%C3%ADrez%2C%20N.G.%20Hamadi%2C%20Y.%20Monfroy%2C%20E.%20Saubion%2C%20F.%20Evolving%20SMT%20Strategies%202016"
+        },
+        {
+            "id": "40",
+            "entry": "[40] S. Ross, G. Gordon, and D. Bagnell. A reduction of imitation learning and structured prediction to no-regret online learning. In Proceedings of the fourteenth international conference on artificial intelligence and statistics, pages 627\u2013635, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ross%2C%20S.%20Gordon%2C%20G.%20Bagnell%2C%20D.%20A%20reduction%20of%20imitation%20learning%20and%20structured%20prediction%20to%20no-regret%20online%20learning%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ross%2C%20S.%20Gordon%2C%20G.%20Bagnell%2C%20D.%20A%20reduction%20of%20imitation%20learning%20and%20structured%20prediction%20to%20no-regret%20online%20learning%202011"
+        },
+        {
+            "id": "41",
+            "entry": "[41] H. Samulowitz and R. Memisevic. Learning to Solve QBF. In Proceedings of the 22nd National Conference on Artificial Intelligence - Volume 1, AAAI\u201907, pages 255\u2013260, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Samulowitz%2C%20H.%20Memisevic%2C%20R.%20Learning%20to%20Solve%20QBF%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Samulowitz%2C%20H.%20Memisevic%2C%20R.%20Learning%20to%20Solve%20QBF%202007"
+        },
+        {
+            "id": "42",
+            "entry": "[42] P. Somol, P. Pudil, and J. Kittler. Fast Branch & Bound Algorithms for Optimal Feature Selection. IEEE Trans. Pattern Anal. Mach. Intell., 26(7):900\u2013912, July 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Somol%2C%20P.%20Pudil%2C%20P.%20Kittler%2C%20J.%20Fast%20Branch%20%26%20Bound%20Algorithms%20for%20Optimal%20Feature%20Selection%202004-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Somol%2C%20P.%20Pudil%2C%20P.%20Kittler%2C%20J.%20Fast%20Branch%20%26%20Bound%20Algorithms%20for%20Optimal%20Feature%20Selection%202004-07"
+        },
+        {
+            "id": "43",
+            "entry": "[43] M. Wang, Y. Tang, J. Wang, and J. Deng. Premise Selection for Theorem Proving by Deep Graph Embedding. In Advances in Neural Information Processing Systems 30, pages 2786\u20132796. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20M.%20Tang%2C%20Y.%20Wang%2C%20J.%20Deng%2C%20J.%20Premise%20Selection%20for%20Theorem%20Proving%20by%20Deep%20Graph%20Embedding%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20M.%20Tang%2C%20Y.%20Wang%2C%20J.%20Deng%2C%20J.%20Premise%20Selection%20for%20Theorem%20Proving%20by%20Deep%20Graph%20Embedding%202017"
+        },
+        {
+            "id": "44",
+            "entry": "[44] L. Xu, F. Hutter, H. H. Hoos, and K. Leyton-Brown. SATzilla: Portfolio-based Algorithm Selection for SAT. J. Artif. Int. Res., 32(1):565\u2013606, June 2008. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xu%2C%20L.%20Hutter%2C%20F.%20Hoos%2C%20H.H.%20Leyton-Brown%2C%20K.%20SATzilla%3A%20Portfolio-based%20Algorithm%20Selection%20for%20SAT%202008-06",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xu%2C%20L.%20Hutter%2C%20F.%20Hoos%2C%20H.H.%20Leyton-Brown%2C%20K.%20SATzilla%3A%20Portfolio-based%20Algorithm%20Selection%20for%20SAT%202008-06"
+        }
+    ]
+}

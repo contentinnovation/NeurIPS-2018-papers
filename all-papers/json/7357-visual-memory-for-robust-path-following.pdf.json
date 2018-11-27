@@ -1,0 +1,312 @@
+{
+    "filename": "7357-visual-memory-for-robust-path-following.pdf",
+    "metadata": {
+        "title": "Visual Memory for Robust Path Following",
+        "author": "Ashish Kumar\u2217 Saurabh Gupta\u2217 David Fouhey Sergey Levine Jitendra Malik University of California, Berkeley",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7357-visual-memory-for-robust-path-following.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Humans routinely retrace a path in a novel environment both forwards and backwards despite uncertainty in their motion. In this paper, we present an approach for doing so. Given a demonstration of a path, a first network generates an abstraction of the path. Equipped with this abstraction, a second network then observes the world and decides how to act in order to retrace the path under noisy actuation and a changing environment. The two networks are optimized end-to-end at training time. We evaluate the method in two realistic simulators, performing path following both forwards and backwards. Our experiments show that our approach outperforms both a classical approach to solving this task as well as a number of other baselines."
+    },
+    "keywords": [
+        {
+            "term": "SLAM",
+            "url": "https://en.wikipedia.org/wiki/SLAM"
+        },
+        {
+            "term": "robot navigation",
+            "url": "https://en.wikipedia.org/wiki/robot_navigation"
+        },
+        {
+            "term": "visual navigation",
+            "url": "https://en.wikipedia.org/wiki/visual_navigation"
+        },
+        {
+            "term": "real time",
+            "url": "https://en.wikipedia.org/wiki/real_time"
+        },
+        {
+            "term": "mobile robot",
+            "url": "https://en.wikipedia.org/wiki/mobile_robot"
+        },
+        {
+            "term": "simultaneous localization and mapping",
+            "url": "https://en.wikipedia.org/wiki/simultaneous_localization_and_mapping"
+        }
+    ],
+    "highlights": [
+        "Consider the first morning of a conference in a city you have never been to",
+        "We found adding visually diverse data from the Matterport 3D Dataset [<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>] dataset was crucial for good performance as our models are trained entirely from scratch"
+    ],
+    "key_statements": [
+        "Consider the first morning of a conference in a city you have never been to",
+        "We found adding visually diverse data from the Matterport 3D Dataset [<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>] dataset was crucial for good performance as our models are trained entirely from scratch"
+    ],
+    "summary": [
+        "Consider the first morning of a conference in a city you have never been to.",
+        "An agent learns in an end-to-end fashion from a set of images to perform a navigation task.",
+        "We study the problem of retracing a path under noisy actuation and a changing world.",
+        "At this time-scale, some works have framed the problem of navigation as learning to reach different goals in a fixed training environment [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>, <a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>], designing policies that can directly act in new test environments [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>, <a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>, <a class=\"ref-link\" id=\"c40\" href=\"#r40\">40</a>], self-supervised learning for reaching goals in a well-traversed environment [<a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>] or by following a demonstration [<a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>].",
+        "This action ais executed in the stochastic environment; the agent obtains the new visual observation at the state; and this process is repeated for a fixed number of time steps.",
+        "Our policy function \u03a0 uses the observation O to implicitly localize the agent with respect to its memory of the path.",
+        "The policy reads out relevant information and uses this in context of O to take an action that conveys the agent to the desired target location.",
+        "The entire policy is implemented using neural network modules that are differentiable and learned end-to-end using training data for the task of efficiently going to the desired goal location.",
+        "We use this path description with a learned controller that takes as input the current image observation O to output actions to follow the path under noisy actuation.",
+        "This paper studies the task of retracing a route in a new environment under noisy actuation and a changing world given a demonstration.",
+        "Note that this is a competitive comparison as the policy can learn to replay actions meaningfully in context of current images from the environment.",
+        "All learned policies are trained in base settings: the noise level is at 20%, reference trajectories are of length 30, the policy is executed for 40 time steps, and these reference trajectories are sampled to be far from obstacles.",
+        "We set up the homing task by sampling the same trajectories but providing images from a 180\u25e6 rotated camera at each reference location.",
+        "As RPF learns features, it can better adapt to change in visual imagery in the synthetic dataset as compared to feature-based geometric methods.",
+        "Not only does the agent need to be robust to visual changes between reference images and the current observations, but it must exhibit local going-around-behaviour as the reference trajectory may go through the newly added obstacles."
+    ],
+    "headline": "We present an approach for doing so",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Iro Armeni, Ozan Sener, Amir R Zamir, Helen Jiang, Ioannis Brilakis, Martin Fischer, and Silvio Savarese. 3D semantic parsing of large-scale indoor spaces. In CVPR, 2016. 5",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Armeni%2C%20Iro%20Sener%2C%20Ozan%20Zamir%2C%20Amir%20R.%20Jiang%2C%20Helen%203D%20semantic%20parsing%20of%20large-scale%20indoor%20spaces%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Armeni%2C%20Iro%20Sener%2C%20Ozan%20Zamir%2C%20Amir%20R.%20Jiang%2C%20Helen%203D%20semantic%20parsing%20of%20large-scale%20indoor%20spaces%202016"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Brian Axelrod, Leslie Pack Kaelbling, and Tom\u00e1s Lozano-P\u00e9rez. Provably safe robot navigation with obstacle uncertainty. In RSS, 2017. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Brian%20Axelrod%2C%20Leslie%20Pack%20Kaelbling%20Lozano-P%C3%A9rez%2C%20Tom%C3%A1s%20Provably%20safe%20robot%20navigation%20with%20obstacle%20uncertainty%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Brian%20Axelrod%2C%20Leslie%20Pack%20Kaelbling%20Lozano-P%C3%A9rez%2C%20Tom%C3%A1s%20Provably%20safe%20robot%20navigation%20with%20obstacle%20uncertainty%202017"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Sean L Bowman, Nikolay Atanasov, Kostas Daniilidis, and George J Pappas. Probabilistic data association for semantic slam. In ICRA, 2017. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bowman%2C%20Sean%20L.%20Atanasov%2C%20Nikolay%20Daniilidis%2C%20Kostas%20Pappas%2C%20George%20J.%20Probabilistic%20data%20association%20for%20semantic%20slam%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bowman%2C%20Sean%20L.%20Atanasov%2C%20Nikolay%20Daniilidis%2C%20Kostas%20Pappas%2C%20George%20J.%20Probabilistic%20data%20association%20for%20semantic%20slam%202017"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Samarth Brahmbhatt, Jinwei Gu, Kihwan Kim, James Hays, and Jan Kautz. MapNet: Geometry-aware learning of maps for camera localization. In CVPR, 2018. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Brahmbhatt%2C%20Samarth%20Gu%2C%20Jinwei%20Kim%2C%20Kihwan%20Hays%2C%20James%20MapNet%3A%20Geometry-aware%20learning%20of%20maps%20for%20camera%20localization%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Brahmbhatt%2C%20Samarth%20Gu%2C%20Jinwei%20Kim%2C%20Kihwan%20Hays%2C%20James%20MapNet%3A%20Geometry-aware%20learning%20of%20maps%20for%20camera%20localization%202018"
+        },
+        {
+            "id": "5",
+            "entry": "[5] John Canny. The complexity of robot motion planning. MIT press, 1988. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Canny%2C%20John%20The%20complexity%20of%20robot%20motion%20planning%201988"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Angel Chang, Angela Dai, Thomas Funkhouser, Maciej Halber, Matthias Niessner, Manolis Savva, Shuran Song, Andy Zeng, and Yinda Zhang. Matterport3D: Learning from RGB-D data in indoor environments. In 3DV, 2017. 5",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chang%2C%20Angel%20Dai%2C%20Angela%20Funkhouser%2C%20Thomas%20Halber%2C%20Maciej%20Matterport3D%3A%20Learning%20from%20RGB-D%20data%20in%20indoor%20environments%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chang%2C%20Angel%20Dai%2C%20Angela%20Funkhouser%2C%20Thomas%20Halber%2C%20Maciej%20Matterport3D%3A%20Learning%20from%20RGB-D%20data%20in%20indoor%20environments%202017"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Devendra Singh Chaplot, Emilio Parisotto, and Ruslan Salakhutdinov. Active neural localization. In ICLR, 2018. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chaplot%2C%20Devendra%20Singh%20Parisotto%2C%20Emilio%20Salakhutdinov%2C%20Ruslan%20Active%20neural%20localization%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chaplot%2C%20Devendra%20Singh%20Parisotto%2C%20Emilio%20Salakhutdinov%2C%20Ruslan%20Active%20neural%20localization%202018"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Lee Clement, Jonathan Kelly, and Timothy D Barfoot. Robust monocular visual teach and repeat aided by local ground planarity and color-constant imagery. JFR, 2017. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Clement%2C%20Lee%20Kelly%2C%20Jonathan%20Barfoot%2C%20Timothy%20D.%20Robust%20monocular%20visual%20teach%20and%20repeat%20aided%20by%20local%20ground%20planarity%20and%20color-constant%20imagery%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Clement%2C%20Lee%20Kelly%2C%20Jonathan%20Barfoot%2C%20Timothy%20D.%20Robust%20monocular%20visual%20teach%20and%20repeat%20aided%20by%20local%20ground%20planarity%20and%20color-constant%20imagery%202017"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Mark Cummins and Paul Newman. FAB-MAP: Probabilistic localization and mapping in the space of appearance. IJRR, 2008. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cummins%2C%20Mark%20Newman%2C%20Paul%20FAB-MAP%3A%20Probabilistic%20localization%20and%20mapping%20in%20the%20space%20of%20appearance%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cummins%2C%20Mark%20Newman%2C%20Paul%20FAB-MAP%3A%20Probabilistic%20localization%20and%20mapping%20in%20the%20space%20of%20appearance%202008"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Shreyansh Daftry, J Andrew Bagnell, and Martial Hebert. Learning transferable policies for monocular reactive mav control. In ISER, 2016. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shreyansh%20Daftry%2C%20J.Andrew%20Bagnell%20Hebert%2C%20Martial%20Learning%20transferable%20policies%20for%20monocular%20reactive%20mav%20control%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shreyansh%20Daftry%2C%20J.Andrew%20Bagnell%20Hebert%2C%20Martial%20Learning%20transferable%20policies%20for%20monocular%20reactive%20mav%20control%202016"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Andrew J Davison and David W Murray. Mobile robot localisation using active vision. In ECCV, 1998. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Davison%2C%20Andrew%20J.%20Murray%2C%20David%20W.%20Mobile%20robot%20localisation%20using%20active%20vision%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Davison%2C%20Andrew%20J.%20Murray%2C%20David%20W.%20Mobile%20robot%20localisation%20using%20active%20vision%201998"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Jakob Engel, Thomas Sch\u00f6ps, and Daniel Cremers. LSD-SLAM: Large-scale direct monocular SLAM. In ECCV, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Engel%2C%20Jakob%20Sch%C3%B6ps%2C%20Thomas%20Cremers%2C%20Daniel%20LSD-SLAM%3A%20Large-scale%20direct%20monocular%20SLAM%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Engel%2C%20Jakob%20Sch%C3%B6ps%2C%20Thomas%20Cremers%2C%20Daniel%20LSD-SLAM%3A%20Large-scale%20direct%20monocular%20SLAM%202014"
+        },
+        {
+            "id": "13",
+            "entry": "[13] J. Fuentes-Pacheco, J. Ruiz-Ascencio, and J. M. Rend\u00f3n-Mancha. Visual simultaneous localization and mapping: a survey. Artificial Intelligence Review, 2015. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fuentes-Pacheco%2C%20J.%20Ruiz-Ascencio%2C%20J.%20Rend%C3%B3n-Mancha%2C%20J.M.%20Visual%20simultaneous%20localization%20and%20mapping%3A%20a%20survey%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fuentes-Pacheco%2C%20J.%20Ruiz-Ascencio%2C%20J.%20Rend%C3%B3n-Mancha%2C%20J.M.%20Visual%20simultaneous%20localization%20and%20mapping%3A%20a%20survey%202015"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Paul Furgale and Timothy D Barfoot. Visual teach and repeat for long-range rover autonomy. JFR, 2010. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Furgale%2C%20Paul%20Barfoot%2C%20Timothy%20D.%20Visual%20teach%20and%20repeat%20for%20long-range%20rover%20autonomy%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Furgale%2C%20Paul%20Barfoot%2C%20Timothy%20D.%20Visual%20teach%20and%20repeat%20for%20long-range%20rover%20autonomy%202010"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Dhiraj Gandhi, Lerrel Pinto, and Abhinav Gupta. Learning to fly by crashing. In IROS, 2017. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gandhi%2C%20Dhiraj%20Pinto%2C%20Lerrel%20Gupta%2C%20Abhinav%20Learning%20to%20fly%20by%20crashing%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gandhi%2C%20Dhiraj%20Pinto%2C%20Lerrel%20Gupta%2C%20Abhinav%20Learning%20to%20fly%20by%20crashing%202017"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Alessandro Giusti, J\u00e9r\u00f4me Guzzi, Dan C Ciresan, Fang-Lin He, Juan P Rodr\u00edguez, Flavio Fontana, Matthias Faessler, Christian Forster, J\u00fcrgen Schmidhuber, Gianni Di Caro, et al. A machine learning approach to visual perception of forest trails for mobile robots. RAL, 2016. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Giusti%2C%20Alessandro%20Guzzi%2C%20J%C3%A9r%C3%B4me%20Ciresan%2C%20Dan%20C.%20He%2C%20Fang-Lin%20A%20machine%20learning%20approach%20to%20visual%20perception%20of%20forest%20trails%20for%20mobile%20robots%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Giusti%2C%20Alessandro%20Guzzi%2C%20J%C3%A9r%C3%B4me%20Ciresan%2C%20Dan%20C.%20He%2C%20Fang-Lin%20A%20machine%20learning%20approach%20to%20visual%20perception%20of%20forest%20trails%20for%20mobile%20robots%202016"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Saurabh Gupta, James Davidson, Sergey Levine, Rahul Sukthankar, and Jitendra Malik. Cognitive mapping and planning for visual navigation. In CVPR, 2017. 1, 3, 5",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gupta%2C%20Saurabh%20Davidson%2C%20James%20Levine%2C%20Sergey%20Sukthankar%2C%20Rahul%20Cognitive%20mapping%20and%20planning%20for%20visual%20navigation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gupta%2C%20Saurabh%20Davidson%2C%20James%20Levine%2C%20Sergey%20Sukthankar%2C%20Rahul%20Cognitive%20mapping%20and%20planning%20for%20visual%20navigation%202017"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Shahram Izadi, David Kim, Otmar Hilliges, David Molyneaux, Richard Newcombe, Pushmeet Kohli, Jamie Shotton, Steve Hodges, Dustin Freeman, Andrew Davison, and Andrew Fitzgibbon. KinectFusion: real-time 3D reconstruction and interaction using a moving depth camera. UIST, 2011. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Izadi%2C%20Shahram%20Kim%2C%20David%20Hilliges%2C%20Otmar%20Molyneaux%2C%20David%20KinectFusion%3A%20real-time%203D%20reconstruction%20and%20interaction%20using%20a%20moving%20depth%20camera%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Izadi%2C%20Shahram%20Kim%2C%20David%20Hilliges%2C%20Otmar%20Molyneaux%2C%20David%20KinectFusion%3A%20real-time%203D%20reconstruction%20and%20interaction%20using%20a%20moving%20depth%20camera%202011"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Gregory Kahn, Adam Villaflor, Bosen Ding, Pieter Abbeel, and Sergey Levine. Self-supervised deep reinforcement learning with generalized computation graphs for robot navigation. arXiv preprint arXiv:1709.10489, 2017. 3",
+            "arxiv_url": "https://arxiv.org/pdf/1709.10489"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Abhishek Kar, Christian H\u00e4ne, and Jitendra Malik. Learning a multi-view stereo machine. In NIPS, 2017. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kar%2C%20Abhishek%20H%C3%A4ne%2C%20Christian%20Malik%2C%20Jitendra%20Learning%20a%20multi-view%20stereo%20machine%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kar%2C%20Abhishek%20H%C3%A4ne%2C%20Christian%20Malik%2C%20Jitendra%20Learning%20a%20multi-view%20stereo%20machine%202017"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Lydia E Kavraki, Petr Svestka, J-C Latombe, and Mark H Overmars. Probabilistic roadmaps for path planning in high-dimensional configuration spaces. RA, 1996. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kavraki%2C%20Lydia%20E.%20Petr%20Svestka%2C%20J.-C.Latombe%20Overmars%2C%20Mark%20H.%20Probabilistic%20roadmaps%20for%20path%20planning%20in%20high-dimensional%20configuration%20spaces%201996"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Alex Kendall, Matthew Grimes, and Roberto Cipolla. Posenet: A convolutional network for real-time 6-dof camera relocalization. In ICCV, 2015. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kendall%2C%20Alex%20Grimes%2C%20Matthew%20Cipolla%2C%20Roberto%20Posenet%3A%20A%20convolutional%20network%20for%20real-time%206-dof%20camera%20relocalization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kendall%2C%20Alex%20Grimes%2C%20Matthew%20Cipolla%2C%20Roberto%20Posenet%3A%20A%20convolutional%20network%20for%20real-time%206-dof%20camera%20relocalization%202015"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Arbaaz Khan, Clark Zhang, Nikolay Atanasov, Konstantinos Karydis, Vijay Kumar, and Daniel D Lee. Memory augmented control networks. In ICLR, 2018. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Khan%2C%20Arbaaz%20Zhang%2C%20Clark%20Atanasov%2C%20Nikolay%20Karydis%2C%20Konstantinos%20Memory%20augmented%20control%20networks%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Khan%2C%20Arbaaz%20Zhang%2C%20Clark%20Atanasov%2C%20Nikolay%20Karydis%2C%20Konstantinos%20Memory%20augmented%20control%20networks%202018"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Steven M Lavalle and James J Kuffner Jr. Rapidly-exploring random trees: Progress and prospects. In Algorithmic and Computational Robotics: New Directions, 2000. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lavalle%2C%20Steven%20M.%20Kuffner%2C%20Jr%2C%20James%20J.%20Rapidly-exploring%20random%20trees%3A%20Progress%20and%20prospects%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lavalle%2C%20Steven%20M.%20Kuffner%2C%20Jr%2C%20James%20J.%20Rapidly-exploring%20random%20trees%3A%20Progress%20and%20prospects%202000"
+        },
+        {
+            "id": "25",
+            "entry": "[25] David G Lowe. Distinctive image features from scale-invariant keypoints. IJCV, 2004. 6",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lowe%2C%20David%20G.%20Distinctive%20image%20features%20from%20scale-invariant%20keypoints%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lowe%2C%20David%20G.%20Distinctive%20image%20features%20from%20scale-invariant%20keypoints%202004"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Piotr Mirowski, Matthew Koichi Grimes, Mateusz Malinowski, Karl Moritz Hermann, Keith Anderson, Denis Teplyashin, Karen Simonyan, Koray Kavukcuoglu, Andrew Zisserman, and Raia Hadsell. Learning to navigate in cities without a map. arXiv preprint arXiv:1804.00168, 2018. 1, 3",
+            "arxiv_url": "https://arxiv.org/pdf/1804.00168"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Piotr Mirowski, Razvan Pascanu, Fabio Viola, Hubert Soyer, Andy Ballard, Andrea Banino, Misha Denil, Ross Goroshin, Laurent Sifre, Koray Kavukcuoglu, et al. Learning to navigate in complex environments. In ICLR, 2017. 1, 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mirowski%2C%20Piotr%20Pascanu%2C%20Razvan%20Viola%2C%20Fabio%20Soyer%2C%20Hubert%20Learning%20to%20navigate%20in%20complex%20environments%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mirowski%2C%20Piotr%20Pascanu%2C%20Razvan%20Viola%2C%20Fabio%20Soyer%2C%20Hubert%20Learning%20to%20navigate%20in%20complex%20environments%202017"
+        },
+        {
+            "id": "28",
+            "entry": "[28] David Nist\u00e9r, Oleg Naroditsky, and James Bergen. Visual odometry. In CVPR, 2004. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=David%20Nist%C3%A9r%20Oleg%20Naroditsky%20and%20James%20Bergen%20Visual%20odometry%20In%20CVPR%202004%202",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=David%20Nist%C3%A9r%20Oleg%20Naroditsky%20and%20James%20Bergen%20Visual%20odometry%20In%20CVPR%202004%202"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Emilio Parisotto and Ruslan Salakhutdinov. Neural Map: Structured memory for deep reinforcement learning. In ICLR, 2018. 1, 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Parisotto%2C%20Emilio%20Salakhutdinov%2C%20Ruslan%20Neural%20Map%3A%20Structured%20memory%20for%20deep%20reinforcement%20learning%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Parisotto%2C%20Emilio%20Salakhutdinov%2C%20Ruslan%20Neural%20Map%3A%20Structured%20memory%20for%20deep%20reinforcement%20learning%202018"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Deepak Pathak, Parsa Mahmoudieh, Guanghao Luo, Pulkit Agrawal, Dian Chen, Yide Shentu, Evan Shelhamer, Jitendra Malik, Alexei A. Efros, and Trevor Darrell. Zero-shot visual imitation. In ICLR, 2018. 1, 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pathak%2C%20Deepak%20Mahmoudieh%2C%20Parsa%20Luo%2C%20Guanghao%20Agrawal%2C%20Pulkit%20Zero-shot%20visual%20imitation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pathak%2C%20Deepak%20Mahmoudieh%2C%20Parsa%20Luo%2C%20Guanghao%20Agrawal%2C%20Pulkit%20Zero-shot%20visual%20imitation%202018"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Sudeep Pillai and John J Leonard. Towards visual ego-motion learning in robots. arXiv preprint arXiv:1705.10279, 2017. 3",
+            "arxiv_url": "https://arxiv.org/pdf/1705.10279"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Dean A Pomerleau. Alvinn: An autonomous land vehicle in a neural network. In NIPS, 1989. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20Dean%20A%20Pomerleau.%20Alvinn%3A%20An%20autonomous%20land%20vehicle%20in%20a%20neural%20network%201989",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Dean%20A%20Pomerleau.%20Alvinn%3A%20An%20autonomous%20land%20vehicle%20in%20a%20neural%20network%201989"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Fereshteh Sadeghi and Sergey Levine. (CAD)2RL: Real singel-image flight without a singel real image. In RSS, 2017. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sadeghi%2C%20Fereshteh%20Levine%2C%20Sergey%202RL%3A%20Real%20singel-image%20flight%20without%20a%20singel%20real%20image%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sadeghi%2C%20Fereshteh%20Levine%2C%20Sergey%202RL%3A%20Real%20singel-image%20flight%20without%20a%20singel%20real%20image%202017"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Nikolay Savinov, Alexey Dosovitskiy, and Vladlen Koltun. Semi-parametric topological memory for navigation. In ICLR, 2018. 1, 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Savinov%2C%20Nikolay%20Dosovitskiy%2C%20Alexey%20Koltun%2C%20Vladlen%20Semi-parametric%20topological%20memory%20for%20navigation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Savinov%2C%20Nikolay%20Dosovitskiy%2C%20Alexey%20Koltun%2C%20Vladlen%20Semi-parametric%20topological%20memory%20for%20navigation%202018"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Johannes L Sch\u00f6nberger, Marc Pollefeys, Andreas Geiger, and Torsten Sattler. Semantic visual localization. In CVPR, 2018. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sch%C3%B6nberger%2C%20Johannes%20L.%20Pollefeys%2C%20Marc%20Geiger%2C%20Andreas%20Sattler%2C%20Torsten%20Semantic%20visual%20localization%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sch%C3%B6nberger%2C%20Johannes%20L.%20Pollefeys%2C%20Marc%20Geiger%2C%20Andreas%20Sattler%2C%20Torsten%20Semantic%20visual%20localization%202018"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Johannes Lutz Sch\u00f6nberger and Jan-Michael Frahm. Structure-from-motion revisited. In CVPR, 2016. 6",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sch%C3%B6nberger%2C%20Johannes%20Lutz%20Frahm%2C%20Jan-Michael%20Structure-from-motion%20revisited%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sch%C3%B6nberger%2C%20Johannes%20Lutz%20Frahm%2C%20Jan-Michael%20Structure-from-motion%20revisited%202016"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Johannes Lutz Sch\u00f6nberger, Enliang Zheng, Marc Pollefeys, and Jan-Michael Frahm. Pixelwise view selection for unstructured multi-view stereo. In ECCV, 2016. 6",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sch%C3%B6nberger%2C%20Johannes%20Lutz%20Zheng%2C%20Enliang%20Pollefeys%2C%20Marc%20Frahm%2C%20Jan-Michael%20Pixelwise%20view%20selection%20for%20unstructured%20multi-view%20stereo%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sch%C3%B6nberger%2C%20Johannes%20Lutz%20Zheng%2C%20Enliang%20Pollefeys%2C%20Marc%20Frahm%2C%20Jan-Michael%20Pixelwise%20view%20selection%20for%20unstructured%20multi-view%20stereo%202016"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Shuran Song, Fisher Yu, Andy Zeng, Angel X Chang, Manolis Savva, and Thomas Funkhouser. Semantic scene completion from a single depth image. In CVPR, 2018. 5",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Song%2C%20Shuran%20Yu%2C%20Fisher%20Zeng%2C%20Andy%20Chang%2C%20Angel%20X.%20Semantic%20scene%20completion%20from%20a%20single%20depth%20image%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Song%2C%20Shuran%20Yu%2C%20Fisher%20Zeng%2C%20Andy%20Chang%2C%20Angel%20X.%20Semantic%20scene%20completion%20from%20a%20single%20depth%20image%202018"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Tristan Swedish and Ramesh Raskar. Deep visual teach and repeat on path networks. In CVPR, 2018. 3",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Swedish%2C%20Tristan%20Raskar%2C%20Ramesh%20Deep%20visual%20teach%20and%20repeat%20on%20path%20networks%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Swedish%2C%20Tristan%20Raskar%2C%20Ramesh%20Deep%20visual%20teach%20and%20repeat%20on%20path%20networks%202018"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Jingwei Zhang, Lei Tai, Joschka Boedecker, Wolfram Burgard, and Ming Liu. Neural slam. arXiv preprint arXiv:1706.09520, 2017. 3",
+            "arxiv_url": "https://arxiv.org/pdf/1706.09520"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Tinghui Zhou, Matthew Brown, Noah Snavely, and David G Lowe. Unsupervised learning of depth and ego-motion from video. In CVPR, 2017. 2",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhou%2C%20Tinghui%20Brown%2C%20Matthew%20Snavely%2C%20Noah%20Lowe%2C%20David%20G.%20Unsupervised%20learning%20of%20depth%20and%20ego-motion%20from%20video%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhou%2C%20Tinghui%20Brown%2C%20Matthew%20Snavely%2C%20Noah%20Lowe%2C%20David%20G.%20Unsupervised%20learning%20of%20depth%20and%20ego-motion%20from%20video%202017"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Yuke Zhu, Roozbeh Mottaghi, Eric Kolve, Joseph J Lim, Abhinav Gupta, Li Fei-Fei, and Ali Farhadi. Target-driven visual navigation in indoor scenes using deep reinforcement learning. In ICRA, 2017. 1 ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhu%2C%20Yuke%20Mottaghi%2C%20Roozbeh%20Kolve%2C%20Eric%20Lim%2C%20Joseph%20J.%20Target-driven%20visual%20navigation%20in%20indoor%20scenes%20using%20deep%20reinforcement%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhu%2C%20Yuke%20Mottaghi%2C%20Roozbeh%20Kolve%2C%20Eric%20Lim%2C%20Joseph%20J.%20Target-driven%20visual%20navigation%20in%20indoor%20scenes%20using%20deep%20reinforcement%20learning%202017"
+        }
+    ]
+}

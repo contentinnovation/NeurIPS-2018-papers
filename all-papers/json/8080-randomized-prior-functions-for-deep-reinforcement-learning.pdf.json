@@ -1,0 +1,503 @@
+{
+    "filename": "8080-randomized-prior-functions-for-deep-reinforcement-learning.pdf",
+    "metadata": {
+        "title": "Randomized Prior Functions for Deep Reinforcement Learning",
+        "author": "Ian Osband, John Aslanides, Albin Cassirer",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8080-randomized-prior-functions-for-deep-reinforcement-learning.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Dealing with uncertainty is essential for e cient reinforcement learning. There is a growing literature on uncertainty estimation for deep learning from fixed datasets, but many of the most popular approaches are poorlysuited to sequential decision problems. Other methods, such as bootstrap sampling, have no mechanism for uncertainty that does not come from the observed data. We highlight why this can be a crucial shortcoming and propose a simple remedy through addition of a randomized untrainable \u2018prior\u2019 network to each ensemble member. We prove that this approach is e cient with linear representations, provide simple illustrations of its e cacy with nonlinear representations and show that this approach scales to large-scale problems far better than previous attempts."
+    },
+    "keywords": [
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "variational inference",
+            "url": "https://en.wikipedia.org/wiki/variational_inference"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        },
+        {
+            "term": "stochastic gradient descent",
+            "url": "https://en.wikipedia.org/wiki/stochastic_gradient_descent"
+        },
+        {
+            "term": "thompson sampling",
+            "url": "https://en.wikipedia.org/wiki/thompson_sampling"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Deep learning methods have emerged as the state of the art approach for many challenging problems [<a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>, <a class=\"ref-link\" id=\"c70\" href=\"#r70\">70</a>]",
+        "Dropout as posterior is motivated by its connection to variational inference (VI) [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>], and recent work to address Lemma 1 improves the quality of this variational approximation by tuning the dropout rate from data [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>].2",
+        "Another source of justification comes from the observation that bootstrapped DQN+prior is an instance of randomized least-squares value iteration (RLSVI), with regularization via \u2018prior function\u2019 for an ensemble of neural networks",
+        "This paper highlights the importance of uncertainty estimates in deep reinforcement learning, the need for an e ective \u2018prior\u2019 mechanism, and its potential benefits towards e cient exploration",
+        "We present some alarming shortcomings of existing methods and suggest bootstrapped ensembles with randomized prior functions as a simple, practical alternative",
+        "What kinds of prior functions are appropriate for deep reinforcement learning? Can they be optimized or \u2018meta-learned\u2019? Can we distill the ensemble process to a single network? We hope this work helps to inspire solutions to these problems, and build connections between the theory of e cient learning and practical algorithms for deep reinforcement learning"
+    ],
+    "key_statements": [
+        "Deep learning methods have emerged as the state of the art approach for many challenging problems [<a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>, <a class=\"ref-link\" id=\"c70\" href=\"#r70\">70</a>]",
+        "Deep reinforcement learning combines deep learning with sequential decision making under uncertainty",
+        "We show that this disconnect is more than a technical detail, but a serious shortcoming that can lead to arbitrarily poor performance",
+        "We show that many of the most popular approaches for uncertainty estimation in deep reinforcement learning do not pass these sanity checks, and crystallize these shortcomings in a series of lemmas and small examples",
+        "We demonstrate that our simple modification can facilitate aspiration in di cult tasks where previous approaches for deep reinforcement learning fail",
+        "We outline crucial shortcomings for the most popular existing approaches to posterior approximation; these outlines will be brief, but more detail can be found in Appendix C. These shortcomings set the scene for Section 3, where we introduce a simple and practical alternative that passes each of our simple sanity checks: bootstrapped ensembles with randomized prior functions",
+        "Dropout as posterior is motivated by its connection to variational inference (VI) [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>], and recent work to address Lemma 1 improves the quality of this variational approximation by tuning the dropout rate from data [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>].2",
+        "We argue this method is quite intuitive: the perturbed data D = {}in=1 is generated according to the estimated noise process \u2018t and the sample \u25ca \u0303 is drawn from prior beliefs",
+        "Algorithm 1 might be applied to model or policy learning approaches, but this paper focuses on value learning",
+        "Another source of justification comes from the observation that bootstrapped DQN+prior is an instance of randomized least-squares value iteration (RLSVI), with regularization via \u2018prior function\u2019 for an ensemble of neural networks",
+        "We find that many of the insights born out of simple problems extend to more complex \u2018deep reinforcement learning\u2019",
+        "In our experiments we focus on a tabula rasa setting in which the prior function is drawn as a random neural network",
+        "We provide some intuition for how bootstrap with prior networks is able to consistently and scalably solve such a di cult task",
+        "The experiments of Section 4.2.1 show that the choice of prior mechanism can be absolutely essential for e cient exploration via randomized value functions",
+        "Figure 5 compares the performance of deep Q networks with \u2018-greedy, bootstrap without prior (BS), bootstrap with prior networks (BSP) and the state-of-the-art continuous control algorithm D4PG, itself an application of \u2018distributional reinforcement learning\u2019 [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>]",
+        "This paper highlights the importance of uncertainty estimates in deep reinforcement learning, the need for an e ective \u2018prior\u2019 mechanism, and its potential benefits towards e cient exploration",
+        "We present some alarming shortcomings of existing methods and suggest bootstrapped ensembles with randomized prior functions as a simple, practical alternative",
+        "What kinds of prior functions are appropriate for deep reinforcement learning? Can they be optimized or \u2018meta-learned\u2019? Can we distill the ensemble process to a single network? We hope this work helps to inspire solutions to these problems, and build connections between the theory of e cient learning and practical algorithms for deep reinforcement learning"
+    ],
+    "summary": [
+        "Deep learning methods have emerged as the state of the art approach for many challenging problems [<a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>, <a class=\"ref-link\" id=\"c70\" href=\"#r70\">70</a>].",
+        "We present a simple modification where each member of the ensemble is initialized together with a random but fixed prior function.",
+        "We believe that this work presents a simple and practical approach to encoding prior knowledge with deep reinforcement learning.",
+        "Dropout as posterior is motivated by its connection to variational inference (VI) [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>], and recent work to address Lemma 1 improves the quality of this variational approximation by tuning the dropout rate from data [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>].2 there is a deeper problem to this line of research that is common across many works in this field: even given access to an oracle method for exact inference, applying independent inference to the Bellman error does not propagate uncertainty correctly for the value function as a whole [<a class=\"ref-link\" id=\"c44\" href=\"#r44\">44</a>].",
+        "This paper explores the performance of each of these methods for uncertainty estimation with deep learning.",
+        "Algorithm 1 Randomized prior functions for ensemble posterior.",
+        "We apply Algorithm 1 to deep Q networks (DQN) [<a class=\"ref-link\" id=\"c42\" href=\"#r42\">42</a>] on a series of tasks designed to require good uncertainty estimates.",
+        "We train an ensemble of K networks {Qk}kK=1 in parallel, each on a perturbed version of the observed data Ht and each with a distinct random, but fixed, prior function pk.",
+        "Algorithm 2 is a simple modification of vanilla Q-learning: rather than maintain a single point estimate for Q, we maintain K estimates in parallel, and rather than regularize each estimate to a single value, each is individually regularized to a distinct random prior function.",
+        "Another source of justification comes from the observation that BootDQN+prior is an instance of randomized least-squares value iteration (RLSVI), with regularization via \u2018prior function\u2019 for an ensemble of neural networks.",
+        "The prior function plays a crucial role - it provides motivation for the agent to explore even when the observed data has low reward.",
+        "The experiments of Section 4.2.1 show that the choice of prior mechanism can be absolutely essential for e cient exploration via randomized value functions.",
+        "Figure 5 compares the performance of DQN with \u2018-greedy, bootstrap without prior (BS), bootstrap with prior networks (BSP) and the state-of-the-art continuous control algorithm D4PG, itself an application of \u2018distributional RL\u2019 [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>].",
+        "This paper highlights the importance of uncertainty estimates in deep RL, the need for an e ective \u2018prior\u2019 mechanism, and its potential benefits towards e cient exploration.",
+        "We present some alarming shortcomings of existing methods and suggest bootstrapped ensembles with randomized prior functions as a simple, practical alternative.",
+        "What kinds of prior functions are appropriate for deep RL? Can they be optimized or \u2018meta-learned\u2019? Can we distill the ensemble process to a single network? We hope this work helps to inspire solutions to these problems, and build connections between the theory of e cient learning and practical algorithms for deep reinforcement learning"
+    ],
+    "headline": "We prove that this approach is e cient with linear representations, provide simple illustrations of its e cacy with nonlinear representations and show that this approach scales to large-scale problems far better than previous attempts",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Shipra Agrawal and Navin Goyal. Analysis of Thompson sampling for the multi-armed bandit problem. In Conference on Learning Theory, pages 39\u20131, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Agrawal%2C%20Shipra%20Goyal%2C%20Navin%20Analysis%20of%20Thompson%20sampling%20for%20the%20multi-armed%20bandit%20problem%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Agrawal%2C%20Shipra%20Goyal%2C%20Navin%20Analysis%20of%20Thompson%20sampling%20for%20the%20multi-armed%20bandit%20problem%202012"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Shipra Agrawal and Navin Goyal. Further optimal regret bounds for Thompson sampling. In Artificial Intelligence and Statistics, pages 99\u2013107, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Agrawal%2C%20Shipra%20Goyal%2C%20Navin%20Further%20optimal%20regret%20bounds%20for%20Thompson%20sampling%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Agrawal%2C%20Shipra%20Goyal%2C%20Navin%20Further%20optimal%20regret%20bounds%20for%20Thompson%20sampling%202013"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Kamyar Azizzadenesheli, Emma Brunskill, and Animashree Anandkumar. E cient exploration through bayesian deep q-networks. arXiv preprint arXiv:1802.04412, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.04412"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Gabriel Barth-Maron, Matthew W Ho man, David Budden, Will Dabney, Dan Horgan, Alistair Muldal, Nicolas Heess, and Timothy Lillicrap. Distributed distributional deterministic policy gradients. arXiv preprint arXiv:1804.08617, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1804.08617"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Peter L Bartlett, Dylan J Foster, and Matus J Telgarsky. Spectrally-normalized margin bounds for neural networks. In Advances in Neural Information Processing Systems 30, pages 6241\u20136250, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bartlett%2C%20Peter%20L.%20Foster%2C%20Dylan%20J.%20Telgarsky%2C%20Matus%20J.%20Spectrally-normalized%20margin%20bounds%20for%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bartlett%2C%20Peter%20L.%20Foster%2C%20Dylan%20J.%20Telgarsky%2C%20Matus%20J.%20Spectrally-normalized%20margin%20bounds%20for%20neural%20networks%202017"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Marc Bellemare, Sriram Srinivasan, Georg Ostrovski, Tom Schaul, David Saxton, and Remi Munos. Unifying count-based exploration and intrinsic motivation. In Advances in Neural Information Processing Systems 29, pages 1471\u20131479. 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bellemare%2C%20Marc%20Srinivasan%2C%20Sriram%20Ostrovski%2C%20Georg%20Schaul%2C%20Tom%20Unifying%20count-based%20exploration%20and%20intrinsic%20motivation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bellemare%2C%20Marc%20Srinivasan%2C%20Sriram%20Ostrovski%2C%20Georg%20Schaul%2C%20Tom%20Unifying%20count-based%20exploration%20and%20intrinsic%20motivation%202016"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Marc G Bellemare, Will Dabney, and R\u00e9mi Munos. A Distributional Perspective on Reinforcement Learning. Proceedings of the 34th International Conference on Machine Learning (ICML), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Marc%20G%20Bellemare%2C%20Will%20Dabney%20Munos%2C%20R%C3%A9mi%20A%20Distributional%20Perspective%20on%20Reinforcement%20Learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Marc%20G%20Bellemare%2C%20Will%20Dabney%20Munos%2C%20R%C3%A9mi%20A%20Distributional%20Perspective%20on%20Reinforcement%20Learning%202017"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Marc G Bellemare, Will Dabney, and R\u00e9mi Munos. A distributional perspective on reinforcement learning. In International Conference on Machine Learning, pages 449\u2013458, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Marc%20G%20Bellemare%2C%20Will%20Dabney%20Munos%2C%20R%C3%A9mi%20A%20distributional%20perspective%20on%20reinforcement%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Marc%20G%20Bellemare%2C%20Will%20Dabney%20Munos%2C%20R%C3%A9mi%20A%20distributional%20perspective%20on%20reinforcement%20learning%202017"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Marc G Bellemare, Yavar Naddaf, Joel Veness, and Michael Bowling. The arcade learning environment: An evaluation platform for general agents. J. Artif. Intell. Res.(JAIR), 47:253\u2013279, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bellemare%2C%20Marc%20G.%20Naddaf%2C%20Yavar%20Veness%2C%20Joel%20Bowling%2C%20Michael%20The%20arcade%20learning%20environment%3A%20An%20evaluation%20platform%20for%20general%20agents%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bellemare%2C%20Marc%20G.%20Naddaf%2C%20Yavar%20Veness%2C%20Joel%20Bowling%2C%20Michael%20The%20arcade%20learning%20environment%3A%20An%20evaluation%20platform%20for%20general%20agents%202013"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Dimitri P. Bertsekas and John Tsitsiklis. Neuro-Dynamic Programming. Athena Scientific, September 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bertsekas%2C%20Dimitri%20P.%20Tsitsiklis%2C%20John%20Neuro-Dynamic%20Programming%201996-09",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bertsekas%2C%20Dimitri%20P.%20Tsitsiklis%2C%20John%20Neuro-Dynamic%20Programming%201996-09"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Charles Blundell, Julien Cornebise, Koray Kavukcuoglu, and Daan Wierstra. Weight uncertainty in neural networks. arXiv preprint arXiv:1505.05424, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1505.05424"
+        },
+        {
+            "id": "12",
+            "entry": "[12] David Roxbee Cox and David Victor Hinkley. Theoretical statistics. CRC Press, 1979.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cox%2C%20David%20Roxbee%20Hinkley%2C%20David%20Victor%20Theoretical%20statistics%201979"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Will Dabney, Mark Rowland, Marc G Bellemare, and R\u00e9mi Munos. Distributional reinforcement learning with quantile regression. In Proceedings of the AAAI Conference on Artificial Intelligence, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dabney%2C%20Will%20Rowland%2C%20Mark%20Bellemare%2C%20Marc%20G.%20Munos%2C%20R%C3%A9mi%20Distributional%20reinforcement%20learning%20with%20quantile%20regression%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dabney%2C%20Will%20Rowland%2C%20Mark%20Bellemare%2C%20Marc%20G.%20Munos%2C%20R%C3%A9mi%20Distributional%20reinforcement%20learning%20with%20quantile%20regression%202018"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Bruno De Finetti. La pr\u00e9vision: ses lois logiques, ses sources subjectives. In Annales de l\u2019institut Henri Poincar\u00e9, volume 7, pages 1\u201368, 1937.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Finetti%2C%20Bruno%20De%20La%20pr%C3%A9vision%3A%20ses%20lois%20logiques%2C%20ses%20sources%20subjectives.%20In%20Annales%20de%20l%E2%80%99institut%201937",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Finetti%2C%20Bruno%20De%20La%20pr%C3%A9vision%3A%20ses%20lois%20logiques%2C%20ses%20sources%20subjectives.%20In%20Annales%20de%20l%E2%80%99institut%201937"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Bradley Efron. The jackknife, the bootstrap and other resampling plans, volume 38. SIAM, 1982.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Efron%2C%20Bradley%20The%20jackknife%2C%20the%20bootstrap%20and%20other%20resampling%20plans%201982"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Bradley Efron and Robert J Tibshirani. An introduction to the bootstrap. CRC press, 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Efron%2C%20Bradley%20Tibshirani%2C%20Robert%20J.%20An%20introduction%20to%20the%20bootstrap%201994"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Meire Fortunato, Mohammad Gheshlaghi Azar, Bilal Piot, Jacob Menick, Ian Osband, Alex Graves, Vlad Mnih, Remi Munos, Demis Hassabis, Olivier Pietquin, et al. Noisy networks for exploration. In Proc. of ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fortunato%2C%20Meire%20Azar%2C%20Mohammad%20Gheshlaghi%20Piot%2C%20Bilal%20Menick%2C%20Jacob%20Noisy%20networks%20for%20exploration%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fortunato%2C%20Meire%20Azar%2C%20Mohammad%20Gheshlaghi%20Piot%2C%20Bilal%20Menick%2C%20Jacob%20Noisy%20networks%20for%20exploration%202018"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Tadayoshi Fushiki. Bootstrap prediction and bayesian prediction under misspecified models. Bernoulli, pages 747\u2013758, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fushiki%2C%20Tadayoshi%20Bootstrap%20prediction%20and%20bayesian%20prediction%20under%20misspecified%20models%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fushiki%2C%20Tadayoshi%20Bootstrap%20prediction%20and%20bayesian%20prediction%20under%20misspecified%20models%202005"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Tadayoshi Fushiki, Fumiyasu Komaki, Kazuyuki Aihara, et al. Nonparametric bootstrap prediction. Bernoulli, 11(2):293\u2013307, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fushiki%2C%20Tadayoshi%20Komaki%2C%20Fumiyasu%20Aihara%2C%20Kazuyuki%20Nonparametric%20bootstrap%20prediction%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fushiki%2C%20Tadayoshi%20Komaki%2C%20Fumiyasu%20Aihara%2C%20Kazuyuki%20Nonparametric%20bootstrap%20prediction%202005"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Yarin Gal and Zoubin Ghahramani. Dropout as a Bayesian approximation: Representing model uncertainty in deep learning. In International Conference on Machine Learning, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gal%2C%20Yarin%20Ghahramani%2C%20Zoubin%20Dropout%20as%20a%20Bayesian%20approximation%3A%20Representing%20model%20uncertainty%20in%20deep%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gal%2C%20Yarin%20Ghahramani%2C%20Zoubin%20Dropout%20as%20a%20Bayesian%20approximation%3A%20Representing%20model%20uncertainty%20in%20deep%20learning%202016"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Yarin Gal, Jiri Hron, and Alex Kendall. Concrete dropout. In Advances in Neural Information Processing Systems, pages 3584\u20133593, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yarin%20Gal%20Jiri%20Hron%20and%20Alex%20Kendall%20Concrete%20dropout%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20pages%2035843593%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yarin%20Gal%20Jiri%20Hron%20and%20Alex%20Kendall%20Concrete%20dropout%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20pages%2035843593%202017"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Yarin Gal, Rowan McAllister, and Carl Edward Rasmussen. Improving pilco with bayesian neural network dynamics models. In Data-E cient Machine Learning workshop, ICML, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gal%2C%20Yarin%20McAllister%2C%20Rowan%20Rasmussen%2C%20Carl%20Edward%20Improving%20pilco%20with%20bayesian%20neural%20network%20dynamics%20models%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gal%2C%20Yarin%20McAllister%2C%20Rowan%20Rasmussen%2C%20Carl%20Edward%20Improving%20pilco%20with%20bayesian%20neural%20network%20dynamics%20models%202016"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Xavier Glorot and Yoshua Bengio. Understanding the di culty of training deep feedforward neural networks. In Proceedings of the 13th international conference on artificial intelligence and statistics, pages 249\u2013256, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Glorot%2C%20Xavier%20Bengio%2C%20Yoshua%20Understanding%20the%20di%20culty%20of%20training%20deep%20feedforward%20neural%20networks%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Glorot%2C%20Xavier%20Bengio%2C%20Yoshua%20Understanding%20the%20di%20culty%20of%20training%20deep%20feedforward%20neural%20networks%202010"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Hado van Hasselt, Arthur Guez, and David Silver. Deep reinforcement learning with double q-learning. In Proceedings of the Thirtieth AAAI Conference on Artificial Intelligence, AAAI\u201916, pages 2094\u20132100. AAAI Press, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=van%20Hasselt%2C%20Hado%20Guez%2C%20Arthur%20Silver%2C%20David%20Deep%20reinforcement%20learning%20with%20double%20q-learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=van%20Hasselt%2C%20Hado%20Guez%2C%20Arthur%20Silver%2C%20David%20Deep%20reinforcement%20learning%20with%20double%20q-learning%202016"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Daniel Horgan, John Quan, David Budden, Gabriel Barth-Maron, Matteo Hessel, Hado Van Hasselt, and David Silver. Distributed prioritized experience replay. In 6th International Conference on Learning Represenations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Daniel%20Horgan%20John%20Quan%20David%20Budden%20Gabriel%20BarthMaron%20Matteo%20Hessel%20Hado%20Van%20Hasselt%20and%20David%20Silver%20Distributed%20prioritized%20experience%20replay%20In%206th%20International%20Conference%20on%20Learning%20Represenations%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Daniel%20Horgan%20John%20Quan%20David%20Budden%20Gabriel%20BarthMaron%20Matteo%20Hessel%20Hado%20Van%20Hasselt%20and%20David%20Silver%20Distributed%20prioritized%20experience%20replay%20In%206th%20International%20Conference%20on%20Learning%20Represenations%202018"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Thomas Jaksch, Ronald Ortner, and Peter Auer. Near-optimal regret bounds for reinforcement learning. Journal of Machine Learning Research, 11(Apr):1563\u20131600, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jaksch%2C%20Thomas%20Ortner%2C%20Ronald%20Auer%2C%20Peter%20Near-optimal%20regret%20bounds%20for%20reinforcement%20learning%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jaksch%2C%20Thomas%20Ortner%2C%20Ronald%20Auer%2C%20Peter%20Near-optimal%20regret%20bounds%20for%20reinforcement%20learning%202010"
+        },
+        {
+            "id": "27",
+            "entry": "[27] M. Kearns and S. Singh. Near-optimal reinforcement learning in polynomial time. Machine Learning, 49, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kearns%2C%20M.%20Singh%2C%20S.%20Near-optimal%20reinforcement%20learning%20in%20polynomial%20time%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kearns%2C%20M.%20Singh%2C%20S.%20Near-optimal%20reinforcement%20learning%20in%20polynomial%20time%202002"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Diederik Kingma and Jimmy Ba. Adam: A Method for Stochastic Optimization. Proceedings of the International Conference on Learning Representations, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20Ba%2C%20Jimmy%20Adam%3A%20A%20Method%20for%20Stochastic%20Optimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20Ba%2C%20Jimmy%20Adam%3A%20A%20Method%20for%20Stochastic%20Optimization%202015"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Diederik P Kingma and Max Welling. Auto-encoding variational bayes. International Conference on Learning Representations, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Welling%2C%20Max%20Auto-encoding%20variational%20bayes%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Welling%2C%20Max%20Auto-encoding%20variational%20bayes%202014"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Alex Krizhevsky, Ilya Sutskever, and Geo rey E Hinton. Imagenet classification with deep convolutional neural networks. In Advances in Neural Information Processing Systems 25, pages 1097\u20131105, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20rey%20E%20Hinton%2C%20Geo%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20rey%20E%20Hinton%2C%20Geo%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Balaji Lakshminarayanan, Alexander Pritzel, and Charles Blundell. Simple and scalable predictive uncertainty estimation using deep ensembles. In Advances in Neural Information Processing Systems, pages 6405\u20136416, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lakshminarayanan%2C%20Balaji%20Pritzel%2C%20Alexander%20Blundell%2C%20Charles%20Simple%20and%20scalable%20predictive%20uncertainty%20estimation%20using%20deep%20ensembles%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lakshminarayanan%2C%20Balaji%20Pritzel%2C%20Alexander%20Blundell%2C%20Charles%20Simple%20and%20scalable%20predictive%20uncertainty%20estimation%20using%20deep%20ensembles%202017"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Yann LeCun, Yoshua Bengio, and Geo rey Hinton. Deep learning. Nature, 521(7553):436, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=LeCun%2C%20Yann%20Bengio%2C%20Yoshua%20rey%20Hinton%2C%20Geo%20Deep%20learning%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=LeCun%2C%20Yann%20Bengio%2C%20Yoshua%20rey%20Hinton%2C%20Geo%20Deep%20learning%202015"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Shane Legg, Marcus Hutter, et al. A collection of definitions of intelligence. Frontiers in Artificial Intelligence and applications, 157:17, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Legg%2C%20Shane%20Hutter%2C%20Marcus%20A%20collection%20of%20definitions%20of%20intelligence%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Legg%2C%20Shane%20Hutter%2C%20Marcus%20A%20collection%20of%20definitions%20of%20intelligence%202007"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Jan Leike, Tor Lattimore, Laurent Orseau, and Marcus Hutter. Thompson sampling is asymptotically optimal in general environments. Uncertainty in Artificial Intelligence, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Leike%2C%20Jan%20Lattimore%2C%20Tor%20Orseau%2C%20Laurent%20Hutter%2C%20Marcus%20Thompson%20sampling%20is%20asymptotically%20optimal%20in%20general%20environments%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Leike%2C%20Jan%20Lattimore%2C%20Tor%20Orseau%2C%20Laurent%20Hutter%2C%20Marcus%20Thompson%20sampling%20is%20asymptotically%20optimal%20in%20general%20environments%202016"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Zachary C Lipton, Jianfeng Gao, Lihong Li, Xiujun Li, Faisal Ahmed, and Li Deng. E cient exploration for dialogue policy learning with bbq networks & replay bu er spiking. arXiv preprint arXiv:1608.05081, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1608.05081"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Xiuyuan Lu and Benjamin Van Roy. Ensemble sampling. In Advances in Neural Information Processing Systems, pages 3260\u20133268, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lu%2C%20Xiuyuan%20Roy%2C%20Benjamin%20Van%20Ensemble%20sampling%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lu%2C%20Xiuyuan%20Roy%2C%20Benjamin%20Van%20Ensemble%20sampling%202017"
+        },
+        {
+            "id": "37",
+            "entry": "[37] David JC MacKay. A practical Bayesian framework for backpropagation networks. Neural computation, 4(3):448\u2013472, 1992.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=MacKay%2C%20David%20J.C.%20A%20practical%20Bayesian%20framework%20for%20backpropagation%20networks%201992",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=MacKay%2C%20David%20J.C.%20A%20practical%20Bayesian%20framework%20for%20backpropagation%20networks%201992"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Hartmut Maennel, Olivier Bousquet, and Sylvain Gelly. Gradient descent quantizes ReLU network features. arXiv preprint arXiv:1803.08367, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.08367"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Horia Mania, Aurelia Guy, and Benjamin Recht. Simple random search provides a competitive approach to reinforcement learning. arXiv preprint arXiv:1803.07055, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.07055"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Oliver Mihatsch and Ralph Neuneier. Risk-sensitive reinforcement learning. Machine learning, 49(2-3):267\u2013290, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mihatsch%2C%20Oliver%20Neuneier%2C%20Ralph%20Risk-sensitive%20reinforcement%20learning%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mihatsch%2C%20Oliver%20Neuneier%2C%20Ralph%20Risk-sensitive%20reinforcement%20learning%202002"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Volodymyr Mnih, Adria Puigdomenech Badia, Mehdi Mirza, Alex Graves, Timothy Lillicrap, Tim Harley, David Silver, and Koray Kavukcuoglu. Asynchronous methods for deep reinforcement learning. In Proc. of ICML, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20Volodymyr%20Badia%2C%20Adria%20Puigdomenech%20Mirza%2C%20Mehdi%20Graves%2C%20Alex%20Asynchronous%20methods%20for%20deep%20reinforcement%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20Volodymyr%20Badia%2C%20Adria%20Puigdomenech%20Mirza%2C%20Mehdi%20Graves%2C%20Alex%20Asynchronous%20methods%20for%20deep%20reinforcement%20learning%202016"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei A Rusu, Joel Veness, Marc G Bellemare, Alex Graves, Martin Riedmiller, Andreas K Fidjeland, Georg Ostrovski, et al. Human-level control through deep reinforcement learning. Nature, 518(7540):529\u2013533, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20Volodymyr%20Kavukcuoglu%2C%20Koray%20Silver%2C%20David%20Rusu%2C%20Andrei%20A.%20Human-level%20control%20through%20deep%20reinforcement%20learning%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20Volodymyr%20Kavukcuoglu%2C%20Koray%20Silver%2C%20David%20Rusu%2C%20Andrei%20A.%20Human-level%20control%20through%20deep%20reinforcement%20learning%202015"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Radford M Neal. Bayesian learning for neural networks, volume 118. Springer Science & Business Media, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Neal%2C%20Radford%20M.%20Bayesian%20learning%20for%20neural%20networks%2C%20volume%20118%202012"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Brendan O\u2019Donoghue, Ian Osband, Remi Munos, and Volodymyr Mnih. The uncertainty bellman equation and exploration. arXiv preprint arXiv:1709.05380, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1709.05380"
+        },
+        {
+            "id": "45",
+            "entry": "[45] Ian Osband. Deep Exploration via Randomized Value Functions. PhD thesis, Stanford University, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Osband%2C%20Ian%20Deep%20Exploration%20via%20Randomized%20Value%20Functions%202016"
+        },
+        {
+            "id": "46",
+            "entry": "[46] Ian Osband. Risk versus uncertainty in deep learning: Bayes, bootstrap and the dangers of dropout. 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Osband%2C%20Ian%20Risk%20versus%20uncertainty%20in%20deep%20learning%3A%20Bayes%2C%20bootstrap%20and%20the%20dangers%20of%20dropout%202016"
+        },
+        {
+            "id": "47",
+            "entry": "[47] Ian Osband, Charles Blundell, Alexander Pritzel, and Benjamin Van Roy. Deep exploration via bootstrapped DQN. In Advances In Neural Information Processing Systems 29, pages 4026\u20134034, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Osband%2C%20Ian%20Blundell%2C%20Charles%20Pritzel%2C%20Alexander%20Roy%2C%20Benjamin%20Van%20Deep%20exploration%20via%20bootstrapped%20DQN%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Osband%2C%20Ian%20Blundell%2C%20Charles%20Pritzel%2C%20Alexander%20Roy%2C%20Benjamin%20Van%20Deep%20exploration%20via%20bootstrapped%20DQN%202016"
+        },
+        {
+            "id": "48",
+            "entry": "[48] Ian Osband, Daniel Russo, and Benjamin Van Roy. (More) e cient reinforcement learning via posterior sampling. In Advances in Neural Information Processing Systems 26, pages 3003\u20133011. 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Osband%2C%20Ian%20Russo%2C%20Daniel%20Roy%2C%20Benjamin%20Van%20%28More%29%20e%20cient%20reinforcement%20learning%20via%20posterior%20sampling%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Osband%2C%20Ian%20Russo%2C%20Daniel%20Roy%2C%20Benjamin%20Van%20%28More%29%20e%20cient%20reinforcement%20learning%20via%20posterior%20sampling%202013"
+        },
+        {
+            "id": "49",
+            "entry": "[49] Ian Osband, Daniel Russo, Zheng Wen, and Benjamin Van Roy. Deep exploration via randomized value functions. arXiv preprint arXiv:1703.07608, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.07608"
+        },
+        {
+            "id": "50",
+            "entry": "[50] Ian Osband and Benjamin Van Roy. Bootstrapped Thompson sampling and deep exploration. arXiv preprint arXiv:1507.00300, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1507.00300"
+        },
+        {
+            "id": "51",
+            "entry": "[51] Ian Osband and Benjamin Van Roy. Why is posterior sampling better than optimism for reinforcement learning? In Proceedings of the 34th International Conference on Machine Learning, pages 2701\u20132710, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Osband%2C%20Ian%20Roy%2C%20Benjamin%20Van%20Why%20is%20posterior%20sampling%20better%20than%20optimism%20for%20reinforcement%20learning%3F%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Osband%2C%20Ian%20Roy%2C%20Benjamin%20Van%20Why%20is%20posterior%20sampling%20better%20than%20optimism%20for%20reinforcement%20learning%3F%202017"
+        },
+        {
+            "id": "52",
+            "entry": "[52] Ian Osband, Benjamin Van Roy, and Zheng Wen. Generalization and exploration via randomized value functions. In Proceedings of The 33rd International Conference on Machine Learning, pages 2377\u20132386, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Osband%2C%20Ian%20Roy%2C%20Benjamin%20Van%20Wen%2C%20Zheng%20Generalization%20and%20exploration%20via%20randomized%20value%20functions%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Osband%2C%20Ian%20Roy%2C%20Benjamin%20Van%20Wen%2C%20Zheng%20Generalization%20and%20exploration%20via%20randomized%20value%20functions%202016"
+        },
+        {
+            "id": "53",
+            "entry": "[53] Georg Ostrovski, Marc G Bellemare, Aaron van den Oord, and R\u00e9mi Munos. Count-based exploration with neural density models. In Proc. of ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Georg%20Ostrovski%2C%20Marc%20G%20Bellemare%2C%20Aaron%20van%20den%20Oord%20Munos%2C%20R%C3%A9mi%20Count-based%20exploration%20with%20neural%20density%20models%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Georg%20Ostrovski%2C%20Marc%20G%20Bellemare%2C%20Aaron%20van%20den%20Oord%20Munos%2C%20R%C3%A9mi%20Count-based%20exploration%20with%20neural%20density%20models%202017"
+        },
+        {
+            "id": "54",
+            "entry": "[54] Matthias Plappert, Rein Houthooft, Prafulla Dhariwal, Szymon Sidor, Richard Y Chen, Xi Chen, Tamim Asfour, Pieter Abbeel, and Marcin Andrychowicz. Parameter space noise for exploration. arXiv preprint arXiv:1706.01905, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.01905"
+        },
+        {
+            "id": "55",
+            "entry": "[55] David E Rumelhart, Geo rey E Hinton, and Ronald J Williams. Learning internal representations by error propagation. Technical report, DTIC Document, 1985.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%20Learning%20internal%20representations%20by%20error%20propagation%201985"
+        },
+        {
+            "id": "56",
+            "entry": "[56] Paat Rusmevichientong and John N. Tsitsiklis. Linearly parameterized bandits. Math. Oper. Res., 35(2):395\u2013411, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rusmevichientong%2C%20Paat%20Tsitsiklis%2C%20John%20N.%20Linearly%20parameterized%20bandits%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rusmevichientong%2C%20Paat%20Tsitsiklis%2C%20John%20N.%20Linearly%20parameterized%20bandits%202010"
+        },
+        {
+            "id": "57",
+            "entry": "[57] Daniel Russo and Benjamin Van Roy. Learning to optimize via posterior sampling. Mathematics of Operations Research, 39(4):1221\u20131243, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Russo%2C%20Daniel%20Roy%2C%20Benjamin%20Van%20Learning%20to%20optimize%20via%20posterior%20sampling%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Russo%2C%20Daniel%20Roy%2C%20Benjamin%20Van%20Learning%20to%20optimize%20via%20posterior%20sampling%202014"
+        },
+        {
+            "id": "58",
+            "entry": "[58] Daniel Russo, Benjamin Van Roy, Abbas Kazerouni, and Ian Osband. A tutorial on Thompson sampling. arXiv preprint arXiv:1707.02038, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.02038"
+        },
+        {
+            "id": "59",
+            "entry": "[59] Tom Schaul, John Quan, Ioannis Antonoglou, and David Silver. Prioritized experience replay. CoRR, abs/1511.05952, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.05952"
+        },
+        {
+            "id": "60",
+            "entry": "[60] David Silver, Aja Huang, Chris J Maddison, Arthur Guez, Laurent Sifre, George Van Den Driessche, Julian Schrittwieser, Ioannis Antonoglou, Veda Panneershelvam, Marc Lanctot, et al. Mastering the game of go with deep neural networks and tree search. Nature, 529(7587):484\u2013489, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silver%2C%20David%20Huang%2C%20Aja%20Maddison%2C%20Chris%20J.%20Guez%2C%20Arthur%20Mastering%20the%20game%20of%20go%20with%20deep%20neural%20networks%20and%20tree%20search%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silver%2C%20David%20Huang%2C%20Aja%20Maddison%2C%20Chris%20J.%20Guez%2C%20Arthur%20Mastering%20the%20game%20of%20go%20with%20deep%20neural%20networks%20and%20tree%20search%202016"
+        },
+        {
+            "id": "61",
+            "entry": "[61] Nitish Srivastava, Geo rey Hinton, Alex Krizhevsky, Ilya Sutskever, and Ruslan Salakhutdinov. Dropout: A simple way to prevent neural networks from overfitting. The Journal of Machine Learning Research, 15(1):1929\u20131958, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Srivastava%2C%20Nitish%20rey%20Hinton%2C%20Geo%20Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Dropout%3A%20A%20simple%20way%20to%20prevent%20neural%20networks%20from%20overfitting%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Srivastava%2C%20Nitish%20rey%20Hinton%2C%20Geo%20Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Dropout%3A%20A%20simple%20way%20to%20prevent%20neural%20networks%20from%20overfitting%202014"
+        },
+        {
+            "id": "62",
+            "entry": "[62] Malcolm Strens. A Bayesian framework for reinforcement learning. In International Conference on Machine Learning, pages 943\u2013950, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Strens%2C%20Malcolm%20A%20Bayesian%20framework%20for%20reinforcement%20learning%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Strens%2C%20Malcolm%20A%20Bayesian%20framework%20for%20reinforcement%20learning%202000"
+        },
+        {
+            "id": "63",
+            "entry": "[63] Richard Sutton and Andrew Barto. Reinforcement Learning: An Introduction. MIT Press, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20Richard%20Barto%2C%20Andrew%20Reinforcement%20Learning%3A%20An%20Introduction%202017"
+        },
+        {
+            "id": "64",
+            "entry": "[64] Richard S Sutton, Joseph Modayil, Michael Delp, Thomas Degris, Patrick M Pilarski, Adam White, and Doina Precup. Horde: A scalable real-time architecture for learning knowledge from unsupervised sensorimotor interaction. In The 10th International Conference on Autonomous Agents and Multiagent Systems-Volume 2, pages 761\u2013768. International Foundation for Autonomous Agents and Multiagent Systems, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20Richard%20S.%20Modayil%2C%20Joseph%20Delp%2C%20Michael%20Degris%2C%20Thomas%20Horde%3A%20A%20scalable%20real-time%20architecture%20for%20learning%20knowledge%20from%20unsupervised%20sensorimotor%20interaction%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutton%2C%20Richard%20S.%20Modayil%2C%20Joseph%20Delp%2C%20Michael%20Degris%2C%20Thomas%20Horde%3A%20A%20scalable%20real-time%20architecture%20for%20learning%20knowledge%20from%20unsupervised%20sensorimotor%20interaction%202011"
+        },
+        {
+            "id": "65",
+            "entry": "[65] Yunhao Tang and Alp Kucukelbir. Variational deep q network. arXiv preprint arXiv:1711.11225, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.11225"
+        },
+        {
+            "id": "66",
+            "entry": "[66] Yuval Tassa, Yotam Doron, Alistair Muldal, Tom Erez, Yazhe Li, Diego de Las Casas, David Budden, Abbas Abdolmaleki, Josh Merel, Andrew Lefrancq, et al. Deepmind control suite. arXiv preprint arXiv:1801.00690, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1801.00690"
+        },
+        {
+            "id": "67",
+            "entry": "[67] Gerald Tesauro. Temporal di erence learning and TD-gammon. Communications of the ACM, 38(3):58\u201368, 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tesauro%2C%20Gerald%20Temporal%20di%20erence%20learning%20and%20TD-gammon%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tesauro%2C%20Gerald%20Temporal%20di%20erence%20learning%20and%20TD-gammon%201995"
+        },
+        {
+            "id": "68",
+            "entry": "[68] William R Thompson. On the likelihood that one unknown probability exceeds another in view of the evidence of two samples. Biometrika, 25(3/4):285\u2013294, 1933.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Thompson%2C%20William%20R.%20On%20the%20likelihood%20that%20one%20unknown%20probability%20exceeds%20another%20in%20view%20of%20the%20evidence%20of%20two%20samples%201933",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Thompson%2C%20William%20R.%20On%20the%20likelihood%20that%20one%20unknown%20probability%20exceeds%20another%20in%20view%20of%20the%20evidence%20of%20two%20samples%201933"
+        },
+        {
+            "id": "69",
+            "entry": "[69] Ahmed Touati, Harsh Satija, Joshua Romo , Joelle Pineau, and Pascal Vincent. Randomized value functions via multiplicative normalizing flows. arXiv preprint arXiv:1806.02315, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1806.02315"
+        },
+        {
+            "id": "70",
+            "entry": "[70] Aaron Van Den Oord, Sander Dieleman, Heiga Zen, Karen Simonyan, Oriol Vinyals, Alex Graves, Nal Kalchbrenner, Andrew Senior, and Koray Kavukcuoglu. Wavenet: A generative model for raw audio. arXiv preprint arXiv:1609.03499, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.03499"
+        },
+        {
+            "id": "71",
+            "entry": "[71] Abraham Wald. Statistical decision functions. In Breakthroughs in Statistics, pages 342\u2013357.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wald%2C%20Abraham%20Statistical%20decision%20functions",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wald%2C%20Abraham%20Statistical%20decision%20functions"
+        },
+        {
+            "id": "72",
+            "entry": "[72] Ziyu Wang, Nando de Freitas, and Marc Lanctot. Dueling network architectures for deep reinforcement learning. CoRR, abs/1511.06581, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.06581"
+        },
+        {
+            "id": "73",
+            "entry": "[73] Chiyuan Zhang, Samy Bengio, Moritz Hardt, Benjamin Recht, and Oriol Vinyals. Understanding deep learning requires rethinking generalization. CoRR, abs/1611.03530, 2016. ",
+            "arxiv_url": "https://arxiv.org/pdf/1611.03530"
+        }
+    ]
+}

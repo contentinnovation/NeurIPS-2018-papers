@@ -1,0 +1,264 @@
+{
+    "filename": "7327-training-dnns-with-hybrid-block-floating-point.pdf",
+    "metadata": {
+        "title": "Training DNNs with Hybrid Block Floating Point",
+        "author": "Mario Drumond, Tao LIN, Martin Jaggi, Babak Falsafi",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7327-training-dnns-with-hybrid-block-floating-point.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "The wide adoption of DNNs has given birth to unrelenting computing requirements, forcing datacenter operators to adopt domain-specific accelerators to train them. These accelerators typically employ densely packed full-precision floating-point arithmetic to maximize performance per area. Ongoing research efforts seek to further increase that performance density by replacing floating-point with fixedpoint arithmetic. However, a significant roadblock for these attempts has been fixed point\u2019s narrow dynamic range, which is insufficient for DNN training convergence. We identify block floating point (BFP) as a promising alternative representation since it exhibits wide dynamic range and enables the majority of DNN operations to be performed with fixed-point logic. Unfortunately, BFP alone introduces several limitations that preclude its direct applicability. In this work, we introduce HBFP, a hybrid BFP-FP approach, which performs all dot products in BFP and other operations in floating point. HBFP delivers the best of both worlds: the high accuracy of floating point at the superior hardware density of fixed point. For a wide variety of models, we show that HBFP matches floating point\u2019s accuracy while enabling hardware implementations that deliver up to 8.5\u00d7 higher throughput."
+    },
+    "keywords": [
+        {
+            "term": "matrix multiplication",
+            "url": "https://en.wikipedia.org/wiki/matrix_multiplication"
+        },
+        {
+            "term": "FP32",
+            "url": "https://en.wikipedia.org/wiki/FP32"
+        },
+        {
+            "term": "convolutional neural networks",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_networks"
+        },
+        {
+            "term": "deep neural networks",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_networks"
+        },
+        {
+            "term": "arithmetic density",
+            "url": "https://en.wikipedia.org/wiki/arithmetic_density"
+        },
+        {
+            "term": "dynamic range",
+            "url": "https://en.wikipedia.org/wiki/dynamic_range"
+        },
+        {
+            "term": "block floating point",
+            "url": "https://en.wikipedia.org/wiki/block_floating_point"
+        }
+    ],
+    "highlights": [
+        "Today\u2019s online services are ubiquitous, offering custom-tailored content to billions of daily users",
+        "This paper\u2019s contributions are: (1) a hybrid block floating point-FP (HBFP) deep neural networks training framework that maximizes fixed-point arithmetic and minimizes the mantissa width requirements while preserving convergence, (2) two optimizations to block floating point, namely tiling and wide weight storage, to improve block floating point\u2019s precision with modest area and memory bandwidth overhead, (3) an exploration of the Hybrid Block Floating Point design space showing that deep neural networks trained on block floating point with 12-and 8-bit mantissas match FP32 accuracy, serving as a drop-in replacement for this representation and (4) we show, with an FPGA prototype, that Hybrid Block Floating Point exhibits arithmetic density similar to that of fixed-point hardware with the accuracy of FP32 hardware.\n2 Related Work",
+        "deep neural networks training still depends on floating-point representations for convergence, severely limiting the efficiency of accelerators",
+        "We propose Hybrid Block Floating Point, a hybrid block floating point-FP number representation for deep neural networks training",
+        "We show that the Hybrid Block Floating Point leads to efficient hardware, with the bulk of the silicon real-estate spent on efficient fixed-point logic",
+        "block floating point-FP32 leads to faster accelerators, with 8bit block floating point achieving 8.5\u00d7 higher throughput when compared to FP16"
+    ],
+    "key_statements": [
+        "Today\u2019s online services are ubiquitous, offering custom-tailored content to billions of daily users",
+        "This paper\u2019s contributions are: (1) a hybrid block floating point-FP (HBFP) deep neural networks training framework that maximizes fixed-point arithmetic and minimizes the mantissa width requirements while preserving convergence, (2) two optimizations to block floating point, namely tiling and wide weight storage, to improve block floating point\u2019s precision with modest area and memory bandwidth overhead, (3) an exploration of the Hybrid Block Floating Point design space showing that deep neural networks trained on block floating point with 12-and 8-bit mantissas match FP32 accuracy, serving as a drop-in replacement for this representation and (4) we show, with an FPGA prototype, that Hybrid Block Floating Point exhibits arithmetic density similar to that of fixed-point hardware with the accuracy of FP32 hardware.\n2 Related Work",
+        "We identify block floating point (BFP) as the ideal numeric representation for deep neural networks",
+        "Because the vast majority of the arithmetic operations executed by deep neural networks training and inference are dot products, we are able to fold almost all the training computation into fixed-point logic.\n4 deep neural networks Training With block floating point Arithmetic",
+        "We propose the use of block floating point for all dot product computations, with other operations performed in floating-point representations",
+        "This configuration enables the bulk of the deep neural networks operations to be performed in fixed-point logic and facilitates the use of various activation functions or techniques like batch normalization without the restrictions imposed by block floating point",
+        "We propose to use block floating point in all dot-product-based operations present in deep neural networks, and floating-point representations for all other operations",
+        "We evaluate deep neural networks training with Hybrid Block Floating Point",
+        "We evaluate the throughput gains obtained with Hybrid Block Floating Point using our hardware prototype",
+        "deep neural networks have become ubiquitous in datacenter settings, forcing operators to adopt specialized hardware to execute and train them",
+        "deep neural networks training still depends on floating-point representations for convergence, severely limiting the efficiency of accelerators",
+        "We propose Hybrid Block Floating Point, a hybrid block floating point-FP number representation for deep neural networks training",
+        "We show that the Hybrid Block Floating Point leads to efficient hardware, with the bulk of the silicon real-estate spent on efficient fixed-point logic",
+        "block floating point-FP32 leads to faster accelerators, with 8bit block floating point achieving 8.5\u00d7 higher throughput when compared to FP16"
+    ],
+    "summary": [
+        "Today\u2019s online services are ubiquitous, offering custom-tailored content to billions of daily users.",
+        "BFP dot products are very area-efficient, other BFP operations may not be as efficient, leading to hardware with floating-point-like arithmetic density.",
+        "These techniques quantize the weights of DNNs trained with full precision floating point to use fixed-point logic during inference.",
+        "The 24-bit mantissa is an overkill for DNNs. Table 1 shows the validation error obtained when training ResNet-20 models on CIFAR10 using floating-point representations with various mantissas and exponent widths.",
+        "We identify block floating point (BFP) as the ideal numeric representation for DNNs. Like floating point, BFP represents numbers with mantissas and exponent and exhibits a wide dynamic range.",
+        "BFP logic is denser because exponents are shared across entire tensors, resulting in dot products that can be computed entirely in fixed-point logic.",
+        "Because the vast majority of the arithmetic operations executed by DNN training and inference are dot products, we are able to fold almost all the training computation into fixed-point logic.",
+        "We propose the use of BFP for all dot product computations, with other operations performed in floating-point representations.",
+        "This configuration enables the bulk of the DNN operations to be performed in fixed-point logic and facilitates the use of various activation functions or techniques like batch normalization without the restrictions imposed by BFP.",
+        "BFP can lead to costly floating-point-like hardware in the general case, since it may lead to numerous mantissa realignments and expensive exponent computations to ensure that tensors\u2019 exponents match value distributions.",
+        "We propose to use BFP in all dot-product-based operations present in DNNs, and floating-point representations for all other operations.",
+        "We convert tensors to BFP before every dot product, using the exponent of the largest tensor value, and convert the result back to floating point afterwards.",
+        "We use a WideResNet [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>] trained on CIFAR-100 to explore the BFP design space, evaluating models trained with various mantissa widths and various tile sizes.",
+        "We conclude that HBFP is a drop-in replacement for FP32 for a wide set of tasks, leading to models that are more compact and enabling HW accelerators that use fixed point arithmetic for most of the DNNs computations.",
+        "HBFP silicon density and performance estimation: We synthesize the accelerator on a Stratix V 5SGSD5 FPGA at a clock rate of 200MHz. We achieve a maximum throughput of 1 TOp/s using 8-bit wide multiply-and-add units in the matrix-multiplier and floating-point activations.",
+        "Higher throughput leads to faster and more energy-efficient DNN training/inference, while model compression leads to lower bandwidth requirements for off-chip memory, lower capacity requirements for on-chip memory and lower communication bandwidth requirements for distributed training"
+    ],
+    "headline": "We identify block floating point  as a promising alternative representation since it exhibits wide dynamic range and enables the majority of deep neural networks operations to be performed with fixed-point logic",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] \u201cArtificial intelligence architecture.\u201d https://www.nvidia.com/en-us/data-center/volta-gpu-architecture, 2018. Accessed:2018-01-31.",
+            "url": "https://www.nvidia.com/en-us/data-center/volta-gpu-architecture"
+        },
+        {
+            "id": "2",
+            "entry": "[2] \u201cTearing apart google\u2019s tpu 3.0 ai coprocessor.\u201d https://www.nextplatform.com/2018/05/10/tearing-apart-googles-tpu-3-0-ai-coprocessor, 2018. Accessed:2018-0515.",
+            "url": "https://www.nextplatform.com/2018/05/10/tearing-apart-googles-tpu-3-0-ai-coprocessor"
+        },
+        {
+            "id": "3",
+            "entry": "[3] W. Dally, \u201cHigh performance hardware for machine learning.\u201d https://media.nips.cc/Conferences/2015/tutorialslides/Dally-NIPS-Tutorial-2015.pdf, 2015. Accessed:2018-01-31.",
+            "url": "https://media.nips.cc/Conferences/2015/tutorialslides/Dally-NIPS-Tutorial-2015.pdf"
+        },
+        {
+            "id": "4",
+            "entry": "[4] P. Micikevicius, S. Narang, J. Alben, G. F. Diamos, E. Elsen, D. Garcia, B. Ginsburg, M. Houston, O. Kuchaiev, G. Venkatesh, and H. Wu, \u201cMixed precision training,\u201d in Proceedings of Sixth International Conference on Learning Representations (ICLR 18), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Micikevicius%2C%20P.%20Narang%2C%20S.%20Alben%2C%20J.%20Diamos%2C%20G.F.%20Mixed%20precision%20training%2C%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Micikevicius%2C%20P.%20Narang%2C%20S.%20Alben%2C%20J.%20Diamos%2C%20G.F.%20Mixed%20precision%20training%2C%202018"
+        },
+        {
+            "id": "5",
+            "entry": "[5] U. K\u00f6ster, T. Webb, X. Wang, M. Nassar, A. K. Bansal, W. Constable, O. Elibol, S. Hall, L. Hornof, A. Khosrowshahi, C. Kloss, R. J. Pai, and N. Rao, \u201cFlexpoint: An Adaptive Numerical Format for Efficient Training of Deep Neural Networks.,\u201d in Proceedings of Thirtyfirst Conference on Neural Information Processing Systems (NIPS 17), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=K%C3%B6ster%2C%20U.%20Webb%2C%20T.%20Wang%2C%20X.%20Nassar%2C%20M.%20Flexpoint%3A%20An%20Adaptive%20Numerical%20Format%20for%20Efficient%20Training%20of%20Deep%20Neural%20Networks.%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=K%C3%B6ster%2C%20U.%20Webb%2C%20T.%20Wang%2C%20X.%20Nassar%2C%20M.%20Flexpoint%3A%20An%20Adaptive%20Numerical%20Format%20for%20Efficient%20Training%20of%20Deep%20Neural%20Networks.%2C%202017"
+        },
+        {
+            "id": "6",
+            "entry": "[6] S. Zhou, Z. Ni, X. Zhou, H. Wen, Y. Wu, and Y. Zou, \u201cDoReFa-Net: Training Low Bitwidth Convolutional Neural Networks with Low Bitwidth Gradients.,\u201d CoRR, vol. abs/1606.06160, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.06160"
+        },
+        {
+            "id": "7",
+            "entry": "[7] N. P. Jouppi, C. Young, N. Patil, D. Patterson, G. Agrawal, R. Bajwa, S. Bates, S. Bhatia, N. Boden, A. Borchers, R. Boyle, P. luc Cantin, C. Chao, C. Clark, J. Coriell, M. Daley, M. Dau, J. Dean, B. Gelb, T. V. Ghaemmaghami, R. Gottipati, W. Gulland, R. Hagmann, C. R. Ho, D. Hogberg, J. Hu, R. Hundt, D. Hurt, J. Ibarz, A. Jaffey, A. Jaworski, A. Kaplan, H. Khaitan, D. Killebrew, A. Koch, N. Kumar, S. Lacy, J. Laudon, J. Law, D. Le, C. Leary, Z. Liu, K. Lucke, A. Lundin, G. MacKean, A. Maggiore, M. Mahony, K. Miller, R. Nagarajan, R. Narayanaswami, R. Ni, K. Nix, T. Norrie, M. Omernick, N. Penukonda, A. Phelps, J. Ross, M. Ross, A. Salek, E. Samadiani, C. Severn, G. Sizikov, M. Snelham, J. Souter, D. Steinberg, A. Swing, M. Tan, G. Thorson, B. Tian, H. Toma, E. Tuttle, V. Vasudevan, R. Walter, W. Wang, E. Wilcox, and D. H. Yoon, \u201cIn-Datacenter Performance Analysis of a Tensor Processing Unit.,\u201d in Proceedings of The 44th International Symposium on Computer Architecture (ISCA 17), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jouppi%2C%20N.P.%20Young%2C%20C.%20Patil%2C%20N.%20Patterson%2C%20D.%20In-Datacenter%20Performance%20Analysis%20of%20a%20Tensor%20Processing%20Unit.%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jouppi%2C%20N.P.%20Young%2C%20C.%20Patil%2C%20N.%20Patterson%2C%20D.%20In-Datacenter%20Performance%20Analysis%20of%20a%20Tensor%20Processing%20Unit.%2C%202017"
+        },
+        {
+            "id": "8",
+            "entry": "[8] \u201cHow to quantize neural networks with tensorflow.\u201d https://www.tensorflow.org/performance/quantization, 2017. Accessed:2018-01-31.",
+            "url": "https://www.tensorflow.org/performance/quantization"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Z. Song, Z. Liu, and D. Wang, \u201cComputation error analysis of block floating point arithmetic oriented convolution neural network accelerator design,\u201d in Proceedings of the Thirty-Second AAAI Conference on Artificial Intelligence, (AAAI-18), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Song%2C%20Z.%20Liu%2C%20Z.%20Wang%2C%20D.%20Computation%20error%20analysis%20of%20block%20floating%20point%20arithmetic%20oriented%20convolution%20neural%20network%20accelerator%20design%2C%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Song%2C%20Z.%20Liu%2C%20Z.%20Wang%2C%20D.%20Computation%20error%20analysis%20of%20block%20floating%20point%20arithmetic%20oriented%20convolution%20neural%20network%20accelerator%20design%2C%202018"
+        },
+        {
+            "id": "10",
+            "entry": "[10] I. Hubara, M. Courbariaux, D. Soudry, R. El-Yaniv, and Y. Bengio, \u201cBinarized Neural Networks.,\u201d in Proceedings of Thirtieth Conference on Neural Information Processing Systems (NIPS 16), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hubara%2C%20I.%20Courbariaux%2C%20M.%20Soudry%2C%20D.%20El-Yaniv%2C%20R.%20Binarized%20Neural%20Networks.%2C%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hubara%2C%20I.%20Courbariaux%2C%20M.%20Soudry%2C%20D.%20El-Yaniv%2C%20R.%20Binarized%20Neural%20Networks.%2C%202016"
+        },
+        {
+            "id": "11",
+            "entry": "[11] F. Li and B. Liu, \u201cTernary Weight Networks.,\u201d CoRR, vol. abs/1605.04711, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1605.04711"
+        },
+        {
+            "id": "12",
+            "entry": "[12] C. Zhu, S. Han, H. Mao, and W. J. Dally, \u201cTrained Ternary Quantization.,\u201d in Proceedings of Fifth International Conference on Learning Representations (ICLR 17), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhu%2C%20C.%20Han%2C%20S.%20Mao%2C%20H.%20Dally%2C%20W.J.%20Trained%20Ternary%20Quantization.%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhu%2C%20C.%20Han%2C%20S.%20Mao%2C%20H.%20Dally%2C%20W.J.%20Trained%20Ternary%20Quantization.%2C%202017"
+        },
+        {
+            "id": "13",
+            "entry": "[13] M. Courbariaux, Y. Bengio, and J.-P. David, \u201cBinaryConnect: Training Deep Neural Networks with binary weights during propagations.,\u201d in Proceedings of Twenty-ninth Conference on Neural Information Processing Systems (NIPS 15), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Courbariaux%2C%20M.%20Bengio%2C%20Y.%20David%2C%20J.-P.%20BinaryConnect%3A%20Training%20Deep%20Neural%20Networks%20with%20binary%20weights%20during%20propagations.%2C%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Courbariaux%2C%20M.%20Bengio%2C%20Y.%20David%2C%20J.-P.%20BinaryConnect%3A%20Training%20Deep%20Neural%20Networks%20with%20binary%20weights%20during%20propagations.%2C%202015"
+        },
+        {
+            "id": "14",
+            "entry": "[14] M. Rastegari, V. Ordonez, J. Redmon, and A. Farhadi, \u201cXNOR-Net: ImageNet Classification Using Binary Convolutional Neural Networks.,\u201d in Proceedings of 13rd European Conference on Computer Vision (ECCV 16), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rastegari%2C%20M.%20Ordonez%2C%20V.%20Redmon%2C%20J.%20Farhadi%2C%20A.%20XNOR-Net%3A%20ImageNet%20Classification%20Using%20Binary%20Convolutional%20Neural%20Networks.%2C%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rastegari%2C%20M.%20Ordonez%2C%20V.%20Redmon%2C%20J.%20Farhadi%2C%20A.%20XNOR-Net%3A%20ImageNet%20Classification%20Using%20Binary%20Convolutional%20Neural%20Networks.%2C%202016"
+        },
+        {
+            "id": "15",
+            "entry": "[15] H. Zhang, J. Li, K. Kara, D. Alistarh, J. Liu, and C. Zhang, \u201cZipML: Training Linear Models with End-to-End Low Precision, and a Little Bit of Deep Learning.,\u201d in Proceedings of Thirtyfourth International Conference on Machine Learning (ICML 17), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20H.%20Li%2C%20J.%20Kara%2C%20K.%20Alistarh%2C%20D.%20ZipML%3A%20Training%20Linear%20Models%20with%20End-to-End%20Low%20Precision%2C%20and%20a%20Little%20Bit%20of%20Deep%20Learning.%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20H.%20Li%2C%20J.%20Kara%2C%20K.%20Alistarh%2C%20D.%20ZipML%3A%20Training%20Linear%20Models%20with%20End-to-End%20Low%20Precision%2C%20and%20a%20Little%20Bit%20of%20Deep%20Learning.%2C%202017"
+        },
+        {
+            "id": "16",
+            "entry": "[16] D. Alistarh, D. Grubic, J. Li, R. Tomioka, and M. Vojnovic, \u201cQSGD: Communication-Efficient SGD via Gradient Quantization and Encoding.,\u201d in Proceedings of Thirty-first Conference on Neural Information Processing Systems (NIPS 17), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Alistarh%2C%20D.%20Grubic%2C%20D.%20Li%2C%20J.%20Tomioka%2C%20R.%20QSGD%3A%20Communication-Efficient%20SGD%20via%20Gradient%20Quantization%20and%20Encoding.%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Alistarh%2C%20D.%20Grubic%2C%20D.%20Li%2C%20J.%20Tomioka%2C%20R.%20QSGD%3A%20Communication-Efficient%20SGD%20via%20Gradient%20Quantization%20and%20Encoding.%2C%202017"
+        },
+        {
+            "id": "17",
+            "entry": "[17] \u201cCloud tpu.\u201d https://cloud.google.com/tpu, 2017. Accessed:2018-01-31.",
+            "url": "https://cloud.google.com/tpu"
+        },
+        {
+            "id": "18",
+            "entry": "[18] A. Paszke, S. Gross, S. Chintala, G. Chanan, E. Yang, Z. DeVito, Z. Lin, A. Desmaison, L. Antiga, and A. Lerer, \u201cAutomatic differentiation in pytorch,\u201d NIPS 2017 Autodiff Workshop: The Future of Gradient-based Machine Learning Software and Techniques, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Paszke%2C%20A.%20Gross%2C%20S.%20Chintala%2C%20S.%20Chanan%2C%20G.%20Automatic%20differentiation%20in%20pytorch%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Paszke%2C%20A.%20Gross%2C%20S.%20Chintala%2C%20S.%20Chanan%2C%20G.%20Automatic%20differentiation%20in%20pytorch%2C%202017"
+        },
+        {
+            "id": "19",
+            "entry": "[19] A. Krizhevsky, \u201cLearning multiple layers of features from tiny images,\u201d Technical report, University of Toronto, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20A.%20Learning%20multiple%20layers%20of%20features%20from%20tiny%20images%2C%202009"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Y. Netzer, T. Wang, A. Coates, A. Bissacco, B. Wu, and A. Y. Ng, \u201cReading digits in natural images with unsupervised feature learning,\u201d Deep Learning and Unsupervised Feature Learning Workshop, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Netzer%2C%20Y.%20Wang%2C%20T.%20Coates%2C%20A.%20Bissacco%2C%20A.%20Reading%20digits%20in%20natural%20images%20with%20unsupervised%20feature%20learning%2C%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Netzer%2C%20Y.%20Wang%2C%20T.%20Coates%2C%20A.%20Bissacco%2C%20A.%20Reading%20digits%20in%20natural%20images%20with%20unsupervised%20feature%20learning%2C%202011"
+        },
+        {
+            "id": "21",
+            "entry": "[21] O. Russakovsky, J. Deng, H. Su, J. Krause, S. Satheesh, S. Ma, Z. Huang, A. Karpathy, A. Khosla, M. S. Bernstein, A. C. Berg, and F. Li, \u201cImagenet large scale visual recognition challenge,\u201d CoRR, vol. abs/1409.0575, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1409.0575"
+        },
+        {
+            "id": "22",
+            "entry": "[22] K. He, X. Zhang, S. Ren, and J. Sun, \u201cDeep Residual Learning for Image Recognition.,\u201d in Proceedings of Conference on Computer Vision and Pattern Recognition (CVPR 16), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20Residual%20Learning%20for%20Image%20Recognition.%2C%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20Residual%20Learning%20for%20Image%20Recognition.%2C%202016"
+        },
+        {
+            "id": "23",
+            "entry": "[23] G. Huang, Y. Sun, Z. Liu, D. Sedra, and K. Q. Weinberger, \u201cDeep networks with stochastic depth,\u201d in Proceedings of 13rd European Conference on Computer Vision (ECCV 16), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huang%2C%20G.%20Sun%2C%20Y.%20Liu%2C%20Z.%20Sedra%2C%20D.%20Deep%20networks%20with%20stochastic%20depth%2C%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huang%2C%20G.%20Sun%2C%20Y.%20Liu%2C%20Z.%20Sedra%2C%20D.%20Deep%20networks%20with%20stochastic%20depth%2C%202016"
+        },
+        {
+            "id": "24",
+            "entry": "[24] T. Mikolov, M. Karafi\u00e1t, L. Burget, J. Cernock\u00fd, and S. Khudanpur, \u201cRecurrent neural network based language model,\u201d in Proceedings of 11th Annual Conference of the International Speech Communication Association (INTERSPEECH 2010), 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mikolov%2C%20T.%20Karafi%C3%A1t%2C%20M.%20Burget%2C%20L.%20Cernock%C3%BD%2C%20J.%20Recurrent%20neural%20network%20based%20language%20model%2C%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mikolov%2C%20T.%20Karafi%C3%A1t%2C%20M.%20Burget%2C%20L.%20Cernock%C3%BD%2C%20J.%20Recurrent%20neural%20network%20based%20language%20model%2C%202010"
+        },
+        {
+            "id": "25",
+            "entry": "[25] S. Zagoruyko and N. Komodakis, \u201cWide Residual Networks.,\u201d in Proceedings of British Machine Vision Conference (BMVC 16), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zagoruyko%2C%20S.%20Komodakis%2C%20N.%20Wide%20Residual%20Networks.%2C%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zagoruyko%2C%20S.%20Komodakis%2C%20N.%20Wide%20Residual%20Networks.%2C%202016"
+        },
+        {
+            "id": "26",
+            "entry": "[26] G. Huang, Z. Liu, L. van der Maaten, and K. Q. Weinberger, \u201cDensely Connected Convolutional Networks.,\u201d in Proceedings of Conference on Computer Vision and Pattern Recognition (CVPR 17), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huang%2C%20G.%20Liu%2C%20Z.%20van%20der%20Maaten%2C%20L.%20Weinberger%2C%20K.Q.%20Densely%20Connected%20Convolutional%20Networks.%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huang%2C%20G.%20Liu%2C%20Z.%20van%20der%20Maaten%2C%20L.%20Weinberger%2C%20K.Q.%20Densely%20Connected%20Convolutional%20Networks.%2C%202017"
+        },
+        {
+            "id": "27",
+            "entry": "[27] S. Merity, N. S. Keskar, and R. Socher, \u201cRegularizing and optimizing LSTM language models,\u201d in Proceedings of Sixth International Conference on Learning Representations (ICLR 18), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Merity%2C%20S.%20Keskar%2C%20N.S.%20Socher%2C%20R.%20Regularizing%20and%20optimizing%20LSTM%20language%20models%2C%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Merity%2C%20S.%20Keskar%2C%20N.S.%20Socher%2C%20R.%20Regularizing%20and%20optimizing%20LSTM%20language%20models%2C%202018"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Y.-H. Chen, J. S. Emer, and V. Sze, \u201cEyeriss: A Spatial Architecture for Energy-Efficient Dataflow for Convolutional Neural Networks.,\u201d in Proceedings of The 43rd International Symposium on Computer Architecture (ISCA 16), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Y.-H.%20Emer%2C%20J.S.%20Sze%2C%20V.%20Eyeriss%3A%20A%20Spatial%20Architecture%20for%20Energy-Efficient%20Dataflow%20for%20Convolutional%20Neural%20Networks.%2C%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Y.-H.%20Emer%2C%20J.S.%20Sze%2C%20V.%20Eyeriss%3A%20A%20Spatial%20Architecture%20for%20Energy-Efficient%20Dataflow%20for%20Convolutional%20Neural%20Networks.%2C%202016"
+        },
+        {
+            "id": "29",
+            "entry": "[29] S. Gupta, A. Agrawal, K. Gopalakrishnan, and P. Narayanan, \u201cDeep Learning with Limited Numerical Precision.,\u201d in Proceedings of Thirty-second International Conference on Machine Learning (ICML 15), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gupta%2C%20S.%20Agrawal%2C%20A.%20Gopalakrishnan%2C%20K.%20Narayanan%2C%20P.%20Deep%20Learning%20with%20Limited%20Numerical%20Precision.%2C",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gupta%2C%20S.%20Agrawal%2C%20A.%20Gopalakrishnan%2C%20K.%20Narayanan%2C%20P.%20Deep%20Learning%20with%20Limited%20Numerical%20Precision.%2C"
+        },
+        {
+            "id": "30",
+            "entry": "[30] G. Marsaglia, \u201cXorshift RNGs,\u201d Journal of Statistical Software, vol. 8, no. 14, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Marsaglia%2C%20G.%20Xorshift%20RNGs%2C%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Marsaglia%2C%20G.%20Xorshift%20RNGs%2C%202003"
+        },
+        {
+            "id": "31",
+            "entry": "[31] C. D. Sa, M. Feldman, C. R\u00e9, and K. Olukotun, \u201cUnderstanding and Optimizing Asynchronous Low-Precision Stochastic Gradient Descent.,\u201d in Proceedings of The 44th International Symposium on Computer Architecture (ISCA 17), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sa%2C%20C.D.%20Feldman%2C%20M.%20R%C3%A9%2C%20C.%20Olukotun%2C%20K.%20Understanding%20and%20Optimizing%20Asynchronous%20Low-Precision%20Stochastic%20Gradient%20Descent.%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sa%2C%20C.D.%20Feldman%2C%20M.%20R%C3%A9%2C%20C.%20Olukotun%2C%20K.%20Understanding%20and%20Optimizing%20Asynchronous%20Low-Precision%20Stochastic%20Gradient%20Descent.%2C%202017"
+        }
+    ]
+}

@@ -1,0 +1,251 @@
+{
+    "filename": "8219-human-in-the-loop-interpretability-prior.pdf",
+    "metadata": {
+        "title": "Human-in-the-Loop Interpretability Prior",
+        "author": "Isaac Lage, Andrew Ross, Samuel J. Gershman, Been Kim, Finale Doshi-Velez",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8219-human-in-the-loop-interpretability-prior.pdf"
+        },
+        "abstract": "We often desire our models to be interpretable as well as accurate. Prior work on optimizing models for interpretability has relied on easy-to-quantify proxies for interpretability, such as sparsity or the number of operations required. In this work, we optimize for interpretability by directly including humans in the optimization loop. We develop an algorithm that minimizes the number of user studies to find models that are both predictive and interpretable and demonstrate our approach on several data sets. Our human subjects results show trends towards different proxy notions of interpretability on different datasets, which suggests that different proxies are preferred on different tasks."
+    },
+    "keywords": [
+        {
+            "term": "experimental design",
+            "url": "https://en.wikipedia.org/wiki/experimental_design"
+        },
+        {
+            "term": "machine learning",
+            "url": "https://en.wikipedia.org/wiki/machine_learning"
+        },
+        {
+            "term": "decision tree",
+            "url": "https://en.wikipedia.org/wiki/decision_tree"
+        },
+        {
+            "term": "Gaussian Process",
+            "url": "https://en.wikipedia.org/wiki/Gaussian_Process"
+        }
+    ],
+    "highlights": [
+        "Understanding machine learning models can help people discover confounders in their training data, and dangerous associations or new scientific insights learned by their models [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>, <a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>]",
+        "Such as decision trees, we find these solutions via running multiple restarts with different hyperparameter settings and rejecting those that do not meet our accuracy threshold",
+        "Where \u03ba is a hyperparameter that can be tuned, \u03b8 are parameters of the Gaussian Process, \u03bc is the Gaussian Process mean function, and \u03c3 is the Gaussian Process variance. (We find \u03ba = 1 works well in practice.)",
+        "We presented an approach to efficiently optimize models for human-interpretability by directly including humans in the optimization loop"
+    ],
+    "key_statements": [
+        "Understanding machine learning models can help people discover confounders in their training data, and dangerous associations or new scientific insights learned by their models [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>, <a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>]",
+        "Such as decision trees, we find these solutions via running multiple restarts with different hyperparameter settings and rejecting those that do not meet our accuracy threshold",
+        "Where \u03ba is a hyperparameter that can be tuned, \u03b8 are parameters of the Gaussian Process, \u03bc is the Gaussian Process mean function, and \u03c3 is the Gaussian Process variance. (We find \u03ba = 1 works well in practice.)",
+        "We presented an approach to efficiently optimize models for human-interpretability by directly including humans in the optimization loop"
+    ],
+    "summary": [
+        "Understanding machine learning models can help people discover confounders in their training data, and dangerous associations or new scientific insights learned by their models [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>, <a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>].",
+        "To limit the number of user studies required, we will use a model-based optimization approach [<a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>] to identify which models M to evaluate.",
+        "Our overall approach will be to find a collection of models with high likelihood p(X|M ) and perform model-based optimization [<a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>] to identify which priors p(M ) to evaluate via user studies.",
+        "We generate these local approximations via a procedure akin to Ribeiro et al [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>]: for any x, we sample a set of perturbations x around x, compute the outputs of model M for each of those x , and fit a human-interpretable model (e.g. a decision-tree) to those data.",
+        "Since we defined HIS to equal max-RT when mean-RT(x, M ) is 0 as it does when no local model can be fit, we can compute the integral in Equation 4 more intelligently by only seeking user input for samples near the model\u2019s decision boundary: p(M ) \u221d HIS(x, local-proxy(M, x))p(x)dx",
+        "In the following we will use four different interpretability proxies to demonstrate the ability of our pipeline to identify models that are best under these different proxies, simulating the case where we have a ground truth measure of HIS.",
+        "We identify what rank it would have had among the collection of models if the same proxy had been computed on a small sample of data points.",
+        "This suggests that it may be better to find interpretable models by asking people to examine the interpretability of a small number of examples\u2014which will result in noisy measurements of the true quantity of interest\u2014rather than by accurately optimizing a proxy that does not capture the quantity of interest.",
+        "Our model-based optimization approach can learn human-interpretable models that correspond to a variety of different proxies on globally and locally interpretable models.",
+        "Each data point is the dataset, our approach converges to models with the mean response time for a single user.",
+        "In both experifewest nodes and shortest paths, and on the census ments, we see the mean response times decrease as we dataset, it converges to models with the fewest features.",
+        "The many exciting directions for future work include exploring ways to efficiently allocate the human computation to minimize the variance of our estimates p(M ) via intelligently choosing which inputs x to evaluate and structuring these long, sequential experiments to be more engaging; and further refining our model kernels to capture more nuanced notions of human-interpretability, particularly across model classes."
+    ],
+    "headline": "We develop an algorithm that minimizes the number of user studies to find models that are both predictive and interpretable and demonstrate our approach on several data sets",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Eric E. Altendorf, Angelo C. Restificar, and Thomas G. Dietterich. Learning from sparse data by exploiting monotonicity constraints. In Proceedings of the Twenty-First Conference on Uncertainty in Artificial Intelligence, UAI\u201905, pages 18\u201326, Arlington, Virginia, United States, 2005. AUAI Press.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Altendorf%2C%20Eric%20E.%20Restificar%2C%20Angelo%20C.%20Dietterich%2C%20Thomas%20G.%20Learning%20from%20sparse%20data%20by%20exploiting%20monotonicity%20constraints",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Altendorf%2C%20Eric%20E.%20Restificar%2C%20Angelo%20C.%20Dietterich%2C%20Thomas%20G.%20Learning%20from%20sparse%20data%20by%20exploiting%20monotonicity%20constraints"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Francis R. Bach. Structured sparsity-inducing norms through submodular functions. In J. D. Lafferty, C. K. I. Williams, J. Shawe-Taylor, R. S. Zemel, and A. Culotta, editors, Advances in Neural Information Processing Systems 23, pages 118\u2013126. Curran Associates, Inc., 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bach%2C%20Francis%20R.%20Structured%20sparsity-inducing%20norms%20through%20submodular%20functions%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bach%2C%20Francis%20R.%20Structured%20sparsity-inducing%20norms%20through%20submodular%20functions%202010"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Rich Caruana, Yin Lou, Johannes Gehrke, Paul Koch, Marc Sturm, and Noemie Elhadad. Intelligible models for healthcare: Predicting pneumonia risk and hospital 30-day readmission. In Proceedings of the 21th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, pages 1721\u20131730. ACM, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Caruana%2C%20Rich%20Lou%2C%20Yin%20Gehrke%2C%20Johannes%20Koch%2C%20Paul%20Intelligible%20models%20for%20healthcare%3A%20Predicting%20pneumonia%20risk%20and%20hospital%2030-day%20readmission%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Caruana%2C%20Rich%20Lou%2C%20Yin%20Gehrke%2C%20Johannes%20Koch%2C%20Paul%20Intelligible%20models%20for%20healthcare%3A%20Predicting%20pneumonia%20risk%20and%20hospital%2030-day%20readmission%202015"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Kathryn Chaloner and Isabella Verdinelli. Bayesian experimental design: A review. Statist. Sci., 10(3):273\u2013 304, 08 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chaloner%2C%20Kathryn%20Verdinelli%2C%20Isabella%20Bayesian%20experimental%20design%3A%20A%20review%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chaloner%2C%20Kathryn%20Verdinelli%2C%20Isabella%20Bayesian%20experimental%20design%3A%20A%20review%201995"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Paul F Christiano, Jan Leike, Tom Brown, Miljan Martic, Shane Legg, and Dario Amodei. Deep reinforcement learning from human preferences. In I. Guyon, U. V. Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems 30, pages 4299\u20134307. Curran Associates, Inc., 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Christiano%2C%20Paul%20F.%20Leike%2C%20Jan%20Brown%2C%20Tom%20Martic%2C%20Miljan%20Deep%20reinforcement%20learning%20from%20human%20preferences%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Christiano%2C%20Paul%20F.%20Leike%2C%20Jan%20Brown%2C%20Tom%20Martic%2C%20Miljan%20Deep%20reinforcement%20learning%20from%20human%20preferences%202017"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Wei Chu, S. S. Keerthi, and Chong Jin Ong. Bayesian support vector regression using a unified loss function. IEEE Transactions on Neural Networks, 15(1):29\u201344, Jan 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wei%20Chu%2C%20S.S.Keerthi%20Ong%2C%20Chong%20Jin%20Bayesian%20support%20vector%20regression%20using%20a%20unified%20loss%20function%202004-01",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wei%20Chu%2C%20S.S.Keerthi%20Ong%2C%20Chong%20Jin%20Bayesian%20support%20vector%20regression%20using%20a%20unified%20loss%20function%202004-01"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Dua Dheeru and Efi Karra Taniskidou. UCI machine learning repository, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dheeru%2C%20Dua%20Taniskidou%2C%20Efi%20Karra%20UCI%20machine%20learning%20repository%202017"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Finale Doshi-Velez and Been Kim. Towards a rigorous science of interpretable machine learning. arXiv, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Doshi-Velez%2C%20Finale%20Kim%2C%20Been%20Towards%20a%20rigorous%20science%20of%20interpretable%20machine%20learning%202017"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Alex A. Freitas. Comprehensible classification models: A position paper. SIGKDD Explor. Newsl., 15(1):1\u201310, March 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Freitas%2C%20Alex%20A.%20Comprehensible%20classification%20models%3A%20A%20position%20paper%202014-03",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Freitas%2C%20Alex%20A.%20Comprehensible%20classification%20models%3A%20A%20position%20paper%202014-03"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Geoffrey Hinton. A practical guide to training restricted boltzmann machines. Momentum, 9(1):926, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hinton%2C%20Geoffrey%20A%20practical%20guide%20to%20training%20restricted%20boltzmann%20machines%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hinton%2C%20Geoffrey%20A%20practical%20guide%20to%20training%20restricted%20boltzmann%20machines%202010"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Been Kim, Cynthia Rudin, and Julie A Shah. The bayesian case model: A generative approach for case-based reasoning and prototype classification. In Z. Ghahramani, M. Welling, C. Cortes, N. D. Lawrence, and K. Q. Weinberger, editors, Advances in Neural Information Processing Systems 27, pages 1952\u20131960. Curran Associates, Inc., 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kim%2C%20Been%20Rudin%2C%20Cynthia%20Shah%2C%20Julie%20A.%20The%20bayesian%20case%20model%3A%20A%20generative%20approach%20for%20case-based%20reasoning%20and%20prototype%20classification%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kim%2C%20Been%20Rudin%2C%20Cynthia%20Shah%2C%20Julie%20A.%20The%20bayesian%20case%20model%3A%20A%20generative%20approach%20for%20case-based%20reasoning%20and%20prototype%20classification%202014"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Alex Kosorukoff. Human based genetic algorithm. In Proceedings of the IEEE International Conference on Systems, Man and Cybernetics, volume 5, 05 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kosorukoff%2C%20Alex%20Human%20based%20genetic%20algorithm%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kosorukoff%2C%20Alex%20Human%20based%20genetic%20algorithm%202001"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Himabindu Lakkaraju, Stephen H. Bach, and Jure Leskovec. Interpretable decision sets: A joint framework for description and prediction. In Proceedings of the 22Nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, KDD \u201916, pages 1675\u20131684, New York, NY, USA, 2016. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lakkaraju%2C%20Himabindu%20Bach%2C%20Stephen%20H.%20Leskovec%2C%20Jure%20Interpretable%20decision%20sets%3A%20A%20joint%20framework%20for%20description%20and%20prediction%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lakkaraju%2C%20Himabindu%20Bach%2C%20Stephen%20H.%20Leskovec%2C%20Jure%20Interpretable%20decision%20sets%3A%20A%20joint%20framework%20for%20description%20and%20prediction%202016"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Nada Lavrac. Selected techniques for data mining in medicine. Artificial Intelligence in Medicine, 16(1):3 \u2013 23, 1999. Data Mining Techniques and Applications in Medicine.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lavrac%2C%20Nada%20Selected%20techniques%20for%20data%20mining%20in%20medicine%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lavrac%2C%20Nada%20Selected%20techniques%20for%20data%20mining%20in%20medicine%201999"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Zachary Chase Lipton. The mythos of model interpretability. CoRR, abs/1606.03490, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.03490"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Greg Little, Lydia B. Chilton, Max Goldman, and Robert C. Miller. Turkit: Human computation algorithms on mechanical turk. In Proceedings of the 23Nd Annual ACM Symposium on User Interface Software and Technology, UIST \u201910, pages 57\u201366, New York, NY, USA, 2010. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Little%2C%20Greg%20Chilton%2C%20Lydia%20B.%20Goldman%2C%20Max%20Miller%2C%20Robert%20C.%20Turkit%3A%20Human%20computation%20algorithms%20on%20mechanical%20turk%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Little%2C%20Greg%20Chilton%2C%20Lydia%20B.%20Goldman%2C%20Max%20Miller%2C%20Robert%20C.%20Turkit%3A%20Human%20computation%20algorithms%20on%20mechanical%20turk%202010"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Yifei Ma, Roman Garnett, and Jeff G. Schneider. Submodularity in batch active learning and survey problems on gaussian random fields. CoRR, abs/1209.3694, 2012.",
+            "arxiv_url": "https://arxiv.org/pdf/1209.3694"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Muhammad A. Masood and Finale Doshi-Velez. A particle-based variational approach to bayesian non-negative matrix factorization. arXiv, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Muhammad%2C%20A.%20Masood%20and%20Finale%20Doshi-Velez.%20A%20particle-based%20variational%20approach%20to%20bayesian%20non-negative%20matrix%20factorization%202018"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Menaka Narayanan, Emily, Chen, Jeffrey He, Been Kim, Sam Gershman, and Finale Doshi-Velez. How do Humans Understand Explanations from Machine Learning Systems? An Evaluation of the HumanInterpretability of Explanation. ArXiv e-prints, February 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Narayanan%2C%20Menaka%20Emily%2C%20Chen%20He%2C%20Jeffrey%20Kim%2C%20Been%20How%20do%20Humans%20Understand%20Explanations%20from%20Machine%20Learning%20Systems%3F%20An%20Evaluation%20of%20the%20HumanInterpretability%20of%20Explanation.%20ArXiv%20e-prints%202018-02"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Forough Poursabzi-Sangdeh, Daniel G. Goldstein, Jake M. Hofman, Jennifer Wortman Vaughan, and Hanna M. Wallach. Manipulating and measuring model interpretability. CoRR, abs/1802.07810, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.07810"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Carl Edward Rasmussen. Gaussian processes for machine learning. MIT Press, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rasmussen%2C%20Carl%20Edward%20Gaussian%20processes%20for%20machine%20learning%202006"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Marco Tulio Ribeiro, Sameer Singh, and Carlos Guestrin. \"why should i trust you?\": Explaining the predictions of any classifier. In Proceedings of the 22Nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, KDD \u201916, pages 1135\u20131144, New York, NY, USA, 2016. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ribeiro%2C%20Marco%20Tulio%20Singh%2C%20Sameer%20Guestrin%2C%20Carlos%20%22why%20should%20i%20trust%20you%3F%22%3A%20Explaining%20the%20predictions%20of%20any%20classifier%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ribeiro%2C%20Marco%20Tulio%20Singh%2C%20Sameer%20Guestrin%2C%20Carlos%20%22why%20should%20i%20trust%20you%3F%22%3A%20Explaining%20the%20predictions%20of%20any%20classifier%202016"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Lior Rokach and Oded Maimon. Introduction to Decision Trees, chapter Chapter 1, pages 1\u201316. WORLD SCIENTIFIC, 2nd edition, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rokach%2C%20Lior%20Maimon%2C%20Oded%20Introduction%20to%20Decision%20Trees%2C%20chapter%20Chapter%202014"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Andrew Ross, Isaac Lage, and Finale Doshi-Velez. The neural lasso: Local linear sparsity for interpretable explanations. In Workshop on Transparent and Interpretable Machine Learning in Safety Critical Environments, 31st Conference on Neural Information Processing Systems, 2017. https://goo.gl/TwRhXo.",
+            "url": "https://goo.gl/TwRhXo",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ross%2C%20Andrew%20Lage%2C%20Isaac%20Doshi-Velez%2C%20Finale%20The%20neural%20lasso%3A%20Local%20linear%20sparsity%20for%20interpretable%20explanations%202017"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Andrew Ross, Weiwei Pan, and Finale Doshi-Velez. Learning qualitatively diverse and interpretable rules for classification. In 2018 ICML Workshop on Human Interpretability in Machine Learning (WHI 2018), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ross%2C%20Andrew%20Pan%2C%20Weiwei%20Doshi-Velez%2C%20Finale%20Learning%20qualitatively%20diverse%20and%20interpretable%20rules%20for%20classification%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ross%2C%20Andrew%20Pan%2C%20Weiwei%20Doshi-Velez%2C%20Finale%20Learning%20qualitatively%20diverse%20and%20interpretable%20rules%20for%20classification%202018"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Jasper Snoek, Hugo Larochelle, and Ryan P Adams. Practical bayesian optimization of machine learning algorithms. In F. Pereira, C. J. C. Burges, L. Bottou, and K. Q. Weinberger, editors, Advances in Neural Information Processing Systems 25, pages 2951\u20132959. Curran Associates, Inc., 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Snoek%2C%20Jasper%20Larochelle%2C%20Hugo%20Adams%2C%20Ryan%20P.%20Practical%20bayesian%20optimization%20of%20machine%20learning%20algorithms%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Snoek%2C%20Jasper%20Larochelle%2C%20Hugo%20Adams%2C%20Ryan%20P.%20Practical%20bayesian%20optimization%20of%20machine%20learning%20algorithms%202012"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Niranjan Srinivas, Andreas Krause, Sham M Kakade, and Matthias Seeger. Gaussian Process Bandits without Regret: An Experimental Design Approach. Technical Report arXiv:0912.3995, Dec 2009. Comments: 17 pages, 5 figures.",
+            "arxiv_url": "https://arxiv.org/pdf/0912.3995"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Omer Tamuz, Ce Liu, Serge J. Belongie, Ohad Shamir, and Adam Tauman Kalai. Adaptively learning the crowd kernel. CoRR, abs/1105.1033, 2011.",
+            "arxiv_url": "https://arxiv.org/pdf/1105.1033"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Robert Tibshirani. Regression shrinkage and selection via the lasso. Journal of the Royal Statistical Society. Series B (Methodological), pages 267\u2013288, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tibshirani%2C%20Robert%20Regression%20shrinkage%20and%20selection%20via%20the%20lasso%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tibshirani%2C%20Robert%20Regression%20shrinkage%20and%20selection%20via%20the%20lasso%201996"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Berk Ustun and Cynthia Rudin. Optimized risk scores. In Proceedings of the 23rd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, KDD \u201917, pages 1125\u20131134, New York, NY, USA, 2017. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ustun%2C%20Berk%20Rudin%2C%20Cynthia%20Optimized%20risk%20scores%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ustun%2C%20Berk%20Rudin%2C%20Cynthia%20Optimized%20risk%20scores%202017"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Andrew G Wilson, Christoph Dann, Chris Lucas, and Eric P Xing. The human kernel. In C. Cortes, N. D. Lawrence, D. D. Lee, M. Sugiyama, and R. Garnett, editors, Advances in Neural Information Processing Systems 28, pages 2854\u20132862. Curran Associates, Inc., 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wilson%2C%20Andrew%20G.%20Dann%2C%20Christoph%20Lucas%2C%20Chris%20and%20Eric%20P%20Xing.%20The%20human%20kernel%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wilson%2C%20Andrew%20G.%20Dann%2C%20Christoph%20Lucas%2C%20Chris%20and%20Eric%20P%20Xing.%20The%20human%20kernel%202015"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Christian Wirth, Riad Akrour, Gerhard Neumann, and Johannes F\u00fcrnkranz. A survey of preference-based reinforcement learning methods. Journal of Machine Learning Research, 18(136):1\u201346, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wirth%2C%20Christian%20Akrour%2C%20Riad%20Neumann%2C%20Gerhard%20and%20Johannes%20F%C3%BCrnkranz.%20A%20survey%20of%20preference-based%20reinforcement%20learning%20methods%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wirth%2C%20Christian%20Akrour%2C%20Riad%20Neumann%2C%20Gerhard%20and%20Johannes%20F%C3%BCrnkranz.%20A%20survey%20of%20preference-based%20reinforcement%20learning%20methods%202017"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Mike Wu, Michael C. Hughes, Sonali Parbhoo, Maurizio Zazzi, Volker Roth, and Finale Doshi-Velez. Beyond Sparsity: Tree Regularization of Deep Models for Interpretability. In Proceedings of the ThirtySecond AAAI Conference on Artificial Intelligence, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20Mike%20Hughes%2C%20Michael%20C.%20Parbhoo%2C%20Sonali%20Zazzi%2C%20Maurizio%20Beyond%20Sparsity%3A%20Tree%20Regularization%20of%20Deep%20Models%20for%20Interpretability%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20Mike%20Hughes%2C%20Michael%20C.%20Parbhoo%2C%20Sonali%20Zazzi%2C%20Maurizio%20Beyond%20Sparsity%3A%20Tree%20Regularization%20of%20Deep%20Models%20for%20Interpretability%202018"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Xiaojin Zhu, John Lafferty, and Zoubin Ghahramani. Combining active learning and semi-supervised learning using gaussian fields and harmonic functions. In ICML 2003 workshop on The Continuum from Labeled to Unlabeled Data in Machine Learning and Data Mining, pages 58\u201365, 2003. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhu%2C%20Xiaojin%20Lafferty%2C%20John%20Ghahramani%2C%20Zoubin%20Combining%20active%20learning%20and%20semi-supervised%20learning%20using%20gaussian%20fields%20and%20harmonic%20functions%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhu%2C%20Xiaojin%20Lafferty%2C%20John%20Ghahramani%2C%20Zoubin%20Combining%20active%20learning%20and%20semi-supervised%20learning%20using%20gaussian%20fields%20and%20harmonic%20functions%202003"
+        }
+    ]
+}

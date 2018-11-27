@@ -1,0 +1,315 @@
+{
+    "filename": "7937-dual-policy-iteration.pdf",
+    "metadata": {
+        "title": "Dual Policy Iteration",
+        "author": "Wen Sun, Geoffrey J. Gordon, Byron Boots, J. Bagnell",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7937-dual-policy-iteration.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "A novel class of Approximate Policy Iteration (API) algorithms have recently demonstrated impressive practical performance (e.g., ExIt [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>], AlphaGo-Zero [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>]). This new family of algorithms maintains, and alternately optimizes, two policies: a fast, reactive policy (e.g., a deep neural network) deployed at test time, and a slow, non-reactive policy (e.g., Tree Search), that can plan multiple steps ahead. The reactive policy is updated under supervision from the non-reactive policy, while the non-reactive policy is improved via guidance from the reactive policy. In this work we study this class of Dual Policy Iteration (DPI) strategy in an alternating optimization framework and provide a convergence analysis that extends existing API theory. We also develop a special instance of this framework which reduces the update of non-reactive policies to model-based optimal control using learned local models, and provides a theoretically sound way of unifying model-free and model-based RL approaches with unknown dynamics. We demonstrate the efficacy of our approach on various continuous control Markov Decision Processes."
+    },
+    "keywords": [
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "Markov Decision Process",
+            "url": "https://en.wikipedia.org/wiki/Markov_Decision_Process"
+        },
+        {
+            "term": "tree search",
+            "url": "https://en.wikipedia.org/wiki/tree_search"
+        },
+        {
+            "term": "Reinforcement Learning",
+            "url": "https://en.wikipedia.org/wiki/Reinforcement_Learning"
+        },
+        {
+            "term": "optimal control",
+            "url": "https://en.wikipedia.org/wiki/optimal_control"
+        },
+        {
+            "term": "Model Predictive Control",
+            "url": "https://en.wikipedia.org/wiki/Model_Predictive_Control"
+        },
+        {
+            "term": "Dynamic Programming",
+            "url": "https://en.wikipedia.org/wiki/Dynamic_Programming"
+        },
+        {
+            "term": "policy iteration",
+            "url": "https://en.wikipedia.org/wiki/policy_iteration"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Approximate Policy Iteration (API) [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>, <a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>, <a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>, <a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>], including conservative Approximate Policy Iteration (CPI) [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>], Approximate Policy Iteration driven by learned critics [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>], or gradient-based Approximate Policy Iteration with stochastic policies [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>, <a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>, <a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>, <a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>], have played a central role in Reinforcement Learning (RL) for decades and motivated many modern practical Reinforcement Learning algorithms",
+        "We update \u21e1 by performing policy iteration against \u2318, i.e., \u21e1 approximately acts greedily with respect to A\u2318, which resulting a key difference: if we limit the power of Model-Based Optimal Control, i.e., set the trust region size in Model-Based Optimal Control step to zero in both Dual Policy Iteration and Guided Policy Search, our approach reduces to conservative API and improves \u21e1 to local optimality",
+        "We present and analyze Dual Policy Iteration\u2014a framework that alternatively computes a non-reactive policy via more advanced and systematic search, and updates a reactive policy via imitating the non-reactive one",
+        "Recent algorithms that have been successful in practice, like AlphaGo-Zero and Expert Iteration, are subsumed by the Dual Policy Iteration framework",
+        "We provide a simple instance of Dual Policy Iteration for Reinforcement Learning with unknown dynamics, where the instance integrates local model fit, local model-based search, and reactive policy improvement via imitating the teacher\u2013the nearly local-optimal policy resulting from model-based search"
+    ],
+    "key_statements": [
+        "Approximate Policy Iteration (API) [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>, <a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>, <a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>, <a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>], including conservative Approximate Policy Iteration (CPI) [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>], Approximate Policy Iteration driven by learned critics [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>], or gradient-based Approximate Policy Iteration with stochastic policies [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>, <a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>, <a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>, <a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>], have played a central role in Reinforcement Learning (RL) for decades and motivated many modern practical Reinforcement Learning algorithms",
+        "Most modern practical Approximate Policy Iteration algorithms rely on myopic random exploration (e.g., REINFORCE [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>] type policy gradient or \u270f-greedy)",
+        "In this work we provide a general framework for synthesizing and analyzing Dual Policy Iteration by considering a particular alternating optimization strategy with different optimization approaches each forming a new family of approximate policy iteration methods",
+        "We demonstrate our algorithm on discrete Markov Decision Process and continuous control tasks",
+        "We show that by integrating local model-based search with learned local dynamics into policy improvement via an imitation learning-style update, our algorithm is substantially more sampleefficient than classic Approximate Policy Iteration algorithms such as conservative API [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>], as well as more recent actor-critic baselines [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>], albeit at the cost of slower computation per iteration due to the model-based search",
+        "Dual Policy Iteration operates in the middle of two extremes: (1) Approximate Policy Iteration type methods that update policies locally, (2) global model-based optimization where one attempts to learn a global model and perform model-based search",
+        "We can expect larger per-iteration policy improvement from Dual Policy Iteration compared to conservative API, thanks to the introduction of local model-based search",
+        "We update \u21e1 by performing policy iteration against \u2318, i.e., \u21e1 approximately acts greedily with respect to A\u2318, which resulting a key difference: if we limit the power of Model-Based Optimal Control, i.e., set the trust region size in Model-Based Optimal Control step to zero in both Dual Policy Iteration and Guided Policy Search, our approach reduces to conservative API and improves \u21e1 to local optimality",
+        "We present and analyze Dual Policy Iteration\u2014a framework that alternatively computes a non-reactive policy via more advanced and systematic search, and updates a reactive policy via imitating the non-reactive one",
+        "Recent algorithms that have been successful in practice, like AlphaGo-Zero and Expert Iteration, are subsumed by the Dual Policy Iteration framework",
+        "We provide a simple instance of Dual Policy Iteration for Reinforcement Learning with unknown dynamics, where the instance integrates local model fit, local model-based search, and reactive policy improvement via imitating the teacher\u2013the nearly local-optimal policy resulting from model-based search"
+    ],
+    "summary": [
+        "Approximate Policy Iteration (API) [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>, <a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>, <a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>, <a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>], including conservative API (CPI) [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>], API driven by learned critics [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>], or gradient-based API with stochastic policies [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>, <a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>, <a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>, <a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>], have played a central role in Reinforcement Learning (RL) for decades and motivated many modern practical RL algorithms.",
+        "DPI operates in the middle of two extremes: (1) API type methods that update policies locally, (2) global model-based optimization where one attempts to learn a global model and perform model-based search.",
+        "We introduce one instance of DPI for settings with unknown models, first describe how to compute \u2318n from a given reactive policy \u21e1n (Sec. 3.1), and describe how to update \u21e1n to \u21e1n+1 via imitating \u2318n (Sec. 3.2).",
+        "Thanks to the trust region, we can learn a local dynamics model, under the state-action distribution d\u21e1n \u21e1n.",
+        "The following theorem quantifies the performance gap between \u2318n and \u21e1n using the learned local model\u2019s predictive error : Theorem 3.1 Assume Ps,a satisfies Eq 3, and \u2318n is the output of a MBOC solver for the optimization problem defined in Eq 4, we have:",
+        "Note that the key difference between Eq 5 and classic API policy improvement procedure is that we use \u2318n\u2019s disadvantage function A\u2318n , i.e., we are performing imitation learning by treating \u2318n as an expert in this iteration [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>, <a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>].",
+        "The above framework shows how \u21e1 and \u2318 are tightened together to guide each other\u2019s improvements: the first step corresponds classic MLE under \u21e1n\u2019s state-action distribution: d\u21e1n \u21e1n; the second step corresponds to model-based policy search around \u21e1n (Pis only locally accurate); the third step corresponds to updating \u21e1 by imitating \u2318.",
+        "We can expect larger per-iteration policy improvement from DPI compared to CPI, thanks to the introduction of local model-based search.",
+        "GPS demonstrates model-based optimal control approaches can be used to speed up training policies parameterized by rich non-linear function approximators in large-scale applications.",
+        "We update \u21e1 by performing policy iteration against \u2318, i.e., \u21e1 approximately acts greedily with respect to A\u2318, which resulting a key difference: if we limit the power of MBOC, i.e., set the trust region size in MBOC step to zero in both DPI and GPS, our approach reduces to CPI and improves \u21e1 to local optimality.",
+        "The goals of these experiments are: (a) to experimentally verify that using A\u2318 from the intermediate expert \u2318 computed by model-based search to perform policy improvement is more sample-efficient than using A\u21e1.",
+        "We provide a simple instance of DPI for RL with unknown dynamics, where the instance integrates local model fit, local model-based search, and reactive policy improvement via imitating the teacher\u2013the nearly local-optimal policy resulting from model-based search.",
+        "We experimentally demonstrate the improved sample efficiency compared to strong baselines"
+    ],
+    "headline": "In this work we study this class of Dual Policy Iteration  strategy in an alternating optimization framework and provide a convergence analysis that extends existing Approximate Policy Iteration theory",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Thomas Anthony, Zheng Tian, and David Barber. Thinking fast and slow with deep learning and tree search. arXiv preprint arXiv:1705.08439, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1705.08439"
+        },
+        {
+            "id": "2",
+            "entry": "[2] David Silver, Julian Schrittwieser, Karen Simonyan, Ioannis Antonoglou, Aja Huang, Arthur Guez, Thomas Hubert, Lucas Baker, Matthew Lai, Adrian Bolton, et al. Mastering the game of go without human knowledge. Nature, 550(7676):354, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silver%2C%20David%20Schrittwieser%2C%20Julian%20Simonyan%2C%20Karen%20Antonoglou%2C%20Ioannis%20Mastering%20the%20game%20of%20go%20without%20human%20knowledge%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silver%2C%20David%20Schrittwieser%2C%20Julian%20Simonyan%2C%20Karen%20Antonoglou%2C%20Ioannis%20Mastering%20the%20game%20of%20go%20without%20human%20knowledge%202017"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Dimitri P Bertsekas and John N Tsitsiklis. Neuro-dynamic programming: an overview. In Decision and Control, 1995., Proceedings of the 34th IEEE Conference on, volume 1, pages 560\u2013564. IEEE, 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bertsekas%2C%20Dimitri%20P.%20Tsitsiklis%2C%20John%20N.%20Neuro-dynamic%20programming%3A%20an%20overview%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bertsekas%2C%20Dimitri%20P.%20Tsitsiklis%2C%20John%20N.%20Neuro-dynamic%20programming%3A%20an%20overview%201995"
+        },
+        {
+            "id": "4",
+            "entry": "[4] J Andrew Bagnell, Sham M Kakade, Jeff G Schneider, and Andrew Y Ng. Policy search by dynamic programming. In Advances in neural information processing systems, pages 831\u2013838, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bagnell%2C%20J.Andrew%20Kakade%2C%20Sham%20M.%20Schneider%2C%20Jeff%20G.%20and%20Andrew%20Y%20Ng.%20Policy%20search%20by%20dynamic%20programming%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bagnell%2C%20J.Andrew%20Kakade%2C%20Sham%20M.%20Schneider%2C%20Jeff%20G.%20and%20Andrew%20Y%20Ng.%20Policy%20search%20by%20dynamic%20programming%202004"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Sham Kakade and John Langford. Approximately optimal approximate reinforcement learning. In ICML, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kakade%2C%20Sham%20Langford%2C%20John%20Approximately%20optimal%20approximate%20reinforcement%20learning%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kakade%2C%20Sham%20Langford%2C%20John%20Approximately%20optimal%20approximate%20reinforcement%20learning%202002"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Alessandro Lazaric, Mohammad Ghavamzadeh, and R\u00e9mi Munos. Analysis of a classificationbased policy iteration algorithm. In ICML-27th International Conference on Machine Learning, pages 607\u2013614. Omnipress, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Alessandro%20Lazaric%2C%20Mohammad%20Ghavamzadeh%20Munos%2C%20R%C3%A9mi%20Analysis%20of%20a%20classificationbased%20policy%20iteration%20algorithm%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Alessandro%20Lazaric%2C%20Mohammad%20Ghavamzadeh%20Munos%2C%20R%C3%A9mi%20Analysis%20of%20a%20classificationbased%20policy%20iteration%20algorithm%202010"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Bruno Scherrer. Approximate policy iteration schemes: a comparison. In International Conference on Machine Learning, pages 1314\u20131322, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Scherrer%2C%20Bruno%20Approximate%20policy%20iteration%20schemes%3A%20a%20comparison%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Scherrer%2C%20Bruno%20Approximate%20policy%20iteration%20schemes%3A%20a%20comparison%202014"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Gavin A Rummery and Mahesan Niranjan. On-line Q-learning using connectionist systems, volume 37. University of Cambridge, Department of Engineering, 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rummery%2C%20Gavin%20A.%20Niranjan%2C%20Mahesan%20On-line%20Q-learning%20using%20connectionist%20systems%2C%20volume%2037%201994"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Jonathan Baxter and Peter L Bartlett. Infinite-horizon policy-gradient estimation. Journal of Artificial Intelligence Research, 15:319\u2013350, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Baxter%2C%20Jonathan%20Bartlett%2C%20Peter%20L.%20Infinite-horizon%20policy-gradient%20estimation%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Baxter%2C%20Jonathan%20Bartlett%2C%20Peter%20L.%20Infinite-horizon%20policy-gradient%20estimation%202001"
+        },
+        {
+            "id": "10",
+            "entry": "[10] J Andrew Bagnell and Jeff Schneider. Covariant policy search. IJCAI, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bagnell%2C%20J.Andrew%20Schneider%2C%20Jeff%20Covariant%20policy%20search%202003"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Sham Kakade. A natural policy gradient. NIPS, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kakade%2C%20Sham%20A%20natural%20policy%20gradient%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kakade%2C%20Sham%20A%20natural%20policy%20gradient%202002"
+        },
+        {
+            "id": "12",
+            "entry": "[12] John Schulman, Sergey Levine, Pieter Abbeel, Michael I Jordan, and Philipp Moritz. Trust region policy optimization. In ICML, pages 1889\u20131897, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schulman%2C%20John%20Levine%2C%20Sergey%20Abbeel%2C%20Pieter%20Jordan%2C%20Michael%20I.%20Trust%20region%20policy%20optimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schulman%2C%20John%20Levine%2C%20Sergey%20Abbeel%2C%20Pieter%20Jordan%2C%20Michael%20I.%20Trust%20region%20policy%20optimization%202015"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Ronald J Williams. Simple statistical gradient-following algorithms for connectionist reinforcement learning. Machine learning, 1992.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%2C%20Ronald%20J.%20Simple%20statistical%20gradient-following%20algorithms%20for%20connectionist%20reinforcement%20learning%201992"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Horia Mania, Aurelia Guy, and Benjamin Recht. Simple random search provides a competitive approach to reinforcement learning. arXiv preprint arXiv:1803.07055, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.07055"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Levente Kocsis and Csaba Szepesv\u00e1ri. Bandit based monte-carlo planning. In European conference on machine learning, pages 282\u2013293.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kocsis%2C%20Levente%20Szepesv%C3%A1ri%2C%20Csaba%20Bandit%20based%20monte-carlo%20planning",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kocsis%2C%20Levente%20Szepesv%C3%A1ri%2C%20Csaba%20Bandit%20based%20monte-carlo%20planning"
+        },
+        {
+            "id": "16",
+            "entry": "[16] David Silver et al. Mastering the game of go with deep neural networks and tree search. Nature, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silver%2C%20David%20Mastering%20the%20game%20of%20go%20with%20deep%20neural%20networks%20and%20tree%20search%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silver%2C%20David%20Mastering%20the%20game%20of%20go%20with%20deep%20neural%20networks%20and%20tree%20search%202016"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Christopher G Atkeson. Using local trajectory optimizers to speed up global optimization in dynamic programming. In Advances in neural information processing systems, pages 663\u2013670, 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Atkeson%2C%20Christopher%20G.%20Using%20local%20trajectory%20optimizers%20to%20speed%20up%20global%20optimization%20in%20dynamic%20programming%201994",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Atkeson%2C%20Christopher%20G.%20Using%20local%20trajectory%20optimizers%20to%20speed%20up%20global%20optimization%20in%20dynamic%20programming%201994"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Christopher G Atkeson and Jun Morimoto. Nonparametric representation of policies and value functions: A trajectory-based approach. In Advances in neural information processing systems, pages 1643\u20131650, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Atkeson%2C%20Christopher%20G.%20Morimoto%2C%20Jun%20Nonparametric%20representation%20of%20policies%20and%20value%20functions%3A%20A%20trajectory-based%20approach%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Atkeson%2C%20Christopher%20G.%20Morimoto%2C%20Jun%20Nonparametric%20representation%20of%20policies%20and%20value%20functions%3A%20A%20trajectory-based%20approach%202003"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Sergey Levine and Pieter Abbeel. Learning neural network policies with guided policy search under unknown dynamics. In Advances in Neural Information Processing Systems, pages 1071\u20131079, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Levine%2C%20Sergey%20Abbeel%2C%20Pieter%20Learning%20neural%20network%20policies%20with%20guided%20policy%20search%20under%20unknown%20dynamics%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Levine%2C%20Sergey%20Abbeel%2C%20Pieter%20Learning%20neural%20network%20policies%20with%20guided%20policy%20search%20under%20unknown%20dynamics%202014"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Sergey Levine, Chelsea Finn, Trevor Darrell, and Pieter Abbeel. End-to-end training of deep visuomotor policies. The Journal of Machine Learning Research, 17(1):1334\u20131373, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Levine%2C%20Sergey%20Finn%2C%20Chelsea%20Darrell%2C%20Trevor%20Abbeel%2C%20Pieter%20End-to-end%20training%20of%20deep%20visuomotor%20policies%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Levine%2C%20Sergey%20Finn%2C%20Chelsea%20Darrell%2C%20Trevor%20Abbeel%2C%20Pieter%20End-to-end%20training%20of%20deep%20visuomotor%20policies%202016"
+        },
+        {
+            "id": "21",
+            "entry": "[21] William H Montgomery and Sergey Levine. Guided policy search via approximate mirror descent. In Advances in Neural Information Processing Systems, pages 4008\u20134016, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Montgomery%2C%20William%20H.%20Levine%2C%20Sergey%20Guided%20policy%20search%20via%20approximate%20mirror%20descent%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Montgomery%2C%20William%20H.%20Levine%2C%20Sergey%20Guided%20policy%20search%20via%20approximate%20mirror%20descent%202016"
+        },
+        {
+            "id": "22",
+            "entry": "[22] William Montgomery, Anurag Ajay, Chelsea Finn, Pieter Abbeel, and Sergey Levine. Reset-free guided policy search: efficient deep reinforcement learning with stochastic initial states. In Robotics and Automation (ICRA), 2017 IEEE International Conference on, pages 3373\u20133380. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Montgomery%2C%20William%20Ajay%2C%20Anurag%20Finn%2C%20Chelsea%20Abbeel%2C%20Pieter%20Reset-free%20guided%20policy%20search%3A%20efficient%20deep%20reinforcement%20learning%20with%20stochastic%20initial%20states%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Montgomery%2C%20William%20Ajay%2C%20Anurag%20Finn%2C%20Chelsea%20Abbeel%2C%20Pieter%20Reset-free%20guided%20policy%20search%3A%20efficient%20deep%20reinforcement%20learning%20with%20stochastic%20initial%20states%202017"
+        },
+        {
+            "id": "23",
+            "entry": "[23] John Schulman, Philipp Moritz, Sergey Levine, Michael Jordan, and Pieter Abbeel. Highdimensional continuous control using generalized advantage estimation. arXiv preprint arXiv:1506.02438, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1506.02438"
+        },
+        {
+            "id": "24",
+            "entry": "[24] J Andrew Bagnell and Jeff G Schneider. Autonomous helicopter control using reinforcement learning policy search methods. In Robotics and Automation, 2001. Proceedings 2001 ICRA. IEEE International Conference on, volume 2, pages 1615\u20131620. IEEE, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=J%20Andrew%20Bagnell%20and%20Jeff%20G%20Schneider%20Autonomous%20helicopter%20control%20using%20reinforcement%20learning%20policy%20search%20methods%20In%20Robotics%20and%20Automation%202001%20Proceedings%202001%20ICRA%20IEEE%20International%20Conference%20on%20volume%202%20pages%2016151620%20IEEE%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=J%20Andrew%20Bagnell%20and%20Jeff%20G%20Schneider%20Autonomous%20helicopter%20control%20using%20reinforcement%20learning%20policy%20search%20methods%20In%20Robotics%20and%20Automation%202001%20Proceedings%202001%20ICRA%20IEEE%20International%20Conference%20on%20volume%202%20pages%2016151620%20IEEE%202001"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Christopher G Atkeson. Efficient robust policy optimization. In American Control Conference (ACC), 2012, pages 5220\u20135227. IEEE, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Atkeson%2C%20Christopher%20G.%20Efficient%20robust%20policy%20optimization%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Atkeson%2C%20Christopher%20G.%20Efficient%20robust%20policy%20optimization%202012"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Stephane Ross and J Andrew Bagnell. Reinforcement and imitation learning via interactive no-regret learning. arXiv preprint arXiv:1406.5979, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1406.5979"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Wen Sun, Arun Venkatraman, Geoffrey J Gordon, Byron Boots, and J Andrew Bagnell. Deeply aggrevated: Differentiable imitation learning for sequential prediction. ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sun%2C%20Wen%20Venkatraman%2C%20Arun%20Gordon%2C%20Geoffrey%20J.%20Boots%2C%20Byron%20Deeply%20aggrevated%3A%20Differentiable%20imitation%20learning%20for%20sequential%20prediction%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sun%2C%20Wen%20Venkatraman%2C%20Arun%20Gordon%2C%20Geoffrey%20J.%20Boots%2C%20Byron%20Deeply%20aggrevated%3A%20Differentiable%20imitation%20learning%20for%20sequential%20prediction%202017"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Huibert Kwakernaak and Raphael Sivan. Linear optimal control systems, volume 1. WileyInterscience New York, 1972.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kwakernaak%2C%20Huibert%20Sivan%2C%20Raphael%20Linear%20optimal%20control%20systems%2C%20volume%201%201972"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Brian D Ziebart. Modeling purposeful adaptive behavior with the principle of maximum causal entropy. 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ziebart%2C%20Brian%20D.%20Modeling%20purposeful%20adaptive%20behavior%20with%20the%20principle%20of%20maximum%20causal%20entropy%202010"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Martin Zinkevich. Online Convex Programming and Generalized Infinitesimal Gradient Ascent. In ICML, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zinkevich%2C%20Martin%20Online%20Convex%20Programming%20and%20Generalized%20Infinitesimal%20Gradient%20Ascent%202003"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Richard S Sutton and Andrew G Barto. Introduction to reinforcement learning, volume 135. MIT Press Cambridge, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20Richard%20S.%20Barto%2C%20Andrew%20G.%20Introduction%20to%20reinforcement%20learning%2C%20volume%20135%201998"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Pieter Abbeel, Varun Ganapathi, and Andrew Y Ng. Learning vehicular dynamics, with application to modeling helicopters. In NIPS, pages 1\u20138, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abbeel%2C%20Pieter%20Ganapathi%2C%20Varun%20Ng%2C%20Andrew%20Y.%20Learning%20vehicular%20dynamics%2C%20with%20application%20to%20modeling%20helicopters%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abbeel%2C%20Pieter%20Ganapathi%2C%20Varun%20Ng%2C%20Andrew%20Y.%20Learning%20vehicular%20dynamics%2C%20with%20application%20to%20modeling%20helicopters%202005"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Emanuel Todorov, Tom Erez, and Yuval Tassa. Mujoco: A physics engine for model-based control. In Intelligent Robots and Systems (IROS), 2012 IEEE/RSJ International Conference on, pages 5026\u20135033. IEEE, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Todorov%2C%20Emanuel%20Erez%2C%20Tom%20Tassa%2C%20Yuval%20Mujoco%3A%20A%20physics%20engine%20for%20model-based%20control%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Todorov%2C%20Emanuel%20Erez%2C%20Tom%20Tassa%2C%20Yuval%20Mujoco%3A%20A%20physics%20engine%20for%20model-based%20control%202012"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Kemin Zhou, John Comstock Doyle, Keith Glover, et al. Robust and optimal control, volume 40. Prentice hall New Jersey, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhou%2C%20Kemin%20Doyle%2C%20John%20Comstock%20Glover%2C%20Keith%20Robust%20and%20optimal%20control%2C%20volume%2040%201996"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Arun Venkatraman, Martial Hebert, and J Andrew Bagnell. Improving multi-step prediction of learned time series models. AAAI, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Venkatraman%2C%20Arun%20Hebert%2C%20Martial%20Bagnell%2C%20J.Andrew%20Improving%20multi-step%20prediction%20of%20learned%20time%20series%20models%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Venkatraman%2C%20Arun%20Hebert%2C%20Martial%20Bagnell%2C%20J.Andrew%20Improving%20multi-step%20prediction%20of%20learned%20time%20series%20models%202015"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Wen Sun, Arun Venkatraman, Byron Boots, and J Andrew Bagnell. Learning to filter with predictive state inference machines. In ICML, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sun%2C%20Wen%20Venkatraman%2C%20Arun%20Boots%2C%20Byron%20Bagnell%2C%20J.Andrew%20Learning%20to%20filter%20with%20predictive%20state%20inference%20machines%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sun%2C%20Wen%20Venkatraman%2C%20Arun%20Boots%2C%20Byron%20Bagnell%2C%20J.Andrew%20Learning%20to%20filter%20with%20predictive%20state%20inference%20machines%202016"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Stephane Ross and Drew Bagnell. Agnostic system identification for model-based reinforcement learning. In Proceedings of the 29th International Conference on Machine Learning (ICML-12), pages 1703\u20131710, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ross%2C%20Stephane%20Bagnell%2C%20Drew%20Agnostic%20system%20identification%20for%20model-based%20reinforcement%20learning%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ross%2C%20Stephane%20Bagnell%2C%20Drew%20Agnostic%20system%20identification%20for%20model-based%20reinforcement%20learning%202012"
+        },
+        {
+            "id": "38",
+            "entry": "[38] St\u00e9phane Ross, Geoffrey J Gordon, and J.Andrew Bagnell. A reduction of imitation learning and structured prediction to no-regret online learning. In AISTATS, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ross%2C%20St%C3%A9phane%20Gordon%2C%20Geoffrey%20J.%20Bagnell%2C%20J.Andrew%20A%20reduction%20of%20imitation%20learning%20and%20structured%20prediction%20to%20no-regret%20online%20learning%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ross%2C%20St%C3%A9phane%20Gordon%2C%20Geoffrey%20J.%20Bagnell%2C%20J.Andrew%20A%20reduction%20of%20imitation%20learning%20and%20structured%20prediction%20to%20no-regret%20online%20learning%202011"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Alex Gorodetsky, Sertac Karaman, and Youssef Marzouk. Efficient high-dimensional stochastic optimal motion control using tensor-train decomposition. In Proceedings of Robotics: Science and Systems, Rome, Italy, July 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gorodetsky%2C%20Alex%20Karaman%2C%20Sertac%20Marzouk%2C%20Youssef%20Efficient%20high-dimensional%20stochastic%20optimal%20motion%20control%20using%20tensor-train%20decomposition%202015-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gorodetsky%2C%20Alex%20Karaman%2C%20Sertac%20Marzouk%2C%20Youssef%20Efficient%20high-dimensional%20stochastic%20optimal%20motion%20control%20using%20tensor-train%20decomposition%202015-07"
+        },
+        {
+            "id": "40",
+            "entry": "[40] C. Finn, M. Zhang, J. Fu, X. Tan, Z. McCarthy, E. Scharff, and S. Levine. Guided policy search code implementation, 2016. Software available from rll.berkeley.edu/gps. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=C%20Finn%20M%20Zhang%20J%20Fu%20X%20Tan%20Z%20McCarthy%20E%20Scharff%20and%20S%20Levine%20Guided%20policy%20search%20code%20implementation%202016%20Software%20available%20from%20rllberkeleyedugps"
+        }
+    ]
+}

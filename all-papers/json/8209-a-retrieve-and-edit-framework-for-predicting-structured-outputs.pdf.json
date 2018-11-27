@@ -1,0 +1,329 @@
+{
+    "filename": "8209-a-retrieve-and-edit-framework-for-predicting-structured-outputs.pdf",
+    "metadata": {
+        "title": "A Retrieve-and-Edit Framework for Predicting Structured Outputs",
+        "author": "Tatsunori B. Hashimoto Department of Computer Science",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8209-a-retrieve-and-edit-framework-for-predicting-structured-outputs.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "For the task of generating complex outputs such as source code, editing existing outputs can be easier than generating complex outputs from scratch. With this motivation, we propose an approach that first retrieves a training example based on the input (e.g., natural language description) and then edits it to the desired output (e.g., code). Our contribution is a computationally efficient method for learning a retrieval model that embeds the input in a task-dependent way without relying on a hand-crafted metric or incurring the expense of jointly training the retriever with the editor. Our retrieve-and-edit framework can be applied on top of any base model. We show that on a new autocomplete task for GitHub Python code and the Hearthstone cards benchmark, retrieve-and-edit significantly boosts the performance of a vanilla sequence-to-sequence model on both tasks."
+    },
+    "keywords": [
+        {
+            "term": "evidence lower bound",
+            "url": "https://en.wikipedia.org/wiki/evidence_lower_bound"
+        },
+        {
+            "term": "expectation maximization",
+            "url": "https://en.wikipedia.org/wiki/expectation_maximization"
+        },
+        {
+            "term": "restructured text",
+            "url": "https://en.wikipedia.org/wiki/restructured_text"
+        },
+        {
+            "term": "code generation",
+            "url": "https://en.wikipedia.org/wiki/code_generation"
+        },
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "neural machine translation",
+            "url": "https://en.wikipedia.org/wiki/neural_machine_translation"
+        },
+        {
+            "term": "python code",
+            "url": "https://en.wikipedia.org/wiki/python_code"
+        },
+        {
+            "term": "machine translation",
+            "url": "https://en.wikipedia.org/wiki/machine_translation"
+        },
+        {
+            "term": "source code",
+            "url": "https://en.wikipedia.org/wiki/source_code"
+        },
+        {
+            "term": "abstract syntax tree",
+            "url": "https://en.wikipedia.org/wiki/abstract_syntax_tree"
+        }
+    ],
+    "highlights": [
+        "In prediction tasks with complex outputs, generating well-formed outputs is challenging, as is wellknown in natural language generation [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>, <a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>]",
+        "We evaluate various retrievers: TaskRetriever, which is our task-dependent retriever presented in Section 3.1; LexicalRetriever, which embeds the input tokens using a bag-of-word vectors and retrieves based on cosine similarity; and InputRetriever, which uses the same encoder-decoder architecture as TaskRetriever but modifies the decoder to predict x rather than y",
+        "We did not directly compare to abstract syntax tree (AST) based methods here since they do not have a direct way to condition on partially-generated code, which is needed for autocomplete",
+        "Methods based on abstract syntax tree still achieve the highest BLEU and exact match scores, but we are able to significantly narrow the gap between specialized code generation techniques and vanilla sequence-tosequence models if the latter is boosted with the retrieve-and-edit framework",
+        "We considered the task of generating complex outputs such as source code using standard sequence-to-sequence models augmented by a learned retriever",
+        "We demonstrated that our model can narrow the gap between specialized code generation models and vanilla sequence-to-sequence models on the Hearthstone dataset, and show substantial improvements on a Python code autocomplete task over sequence-to-sequence baselines"
+    ],
+    "key_statements": [
+        "In prediction tasks with complex outputs, generating well-formed outputs is challenging, as is wellknown in natural language generation [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>, <a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>]",
+        "We evaluate our retrieve-and-edit approach on a new Python code autocomplete dataset of 76k functions, where the task is to predict the token given partially written code and natural language description",
+        "We evaluate on the Hearthstone cards benchmark [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>], where systems must predict a code snippet based on card properties and a natural language description",
+        "We show that augmenting a standard sequence-tosequence model with the retrieve-and-edit approach improves the model by 7 BLEU and outperforms the best non-abstract syntax tree (AST) based model by 4 points.\n2 Problem statement",
+        "We evaluate various retrievers: TaskRetriever, which is our task-dependent retriever presented in Section 3.1; LexicalRetriever, which embeds the input tokens using a bag-of-word vectors and retrieves based on cosine similarity; and InputRetriever, which uses the same encoder-decoder architecture as TaskRetriever but modifies the decoder to predict x rather than y",
+        "We did not directly compare to abstract syntax tree (AST) based methods here since they do not have a direct way to condition on partially-generated code, which is needed for autocomplete",
+        "Methods based on abstract syntax tree still achieve the highest BLEU and exact match scores, but we are able to significantly narrow the gap between specialized code generation techniques and vanilla sequence-tosequence models if the latter is boosted with the retrieve-and-edit framework",
+        "Note that retrieve-andedit could be applied to abstract syntax tree-based models, which would be an interesting direction for future work",
+        "Our work demonstrates that retrieve-and-edit can boost the performance of vanilla sequence-to-sequence models without the use of domain-specific retrievers",
+        "We considered the task of generating complex outputs such as source code using standard sequence-to-sequence models augmented by a learned retriever",
+        "We demonstrated that our model can narrow the gap between specialized code generation models and vanilla sequence-to-sequence models on the Hearthstone dataset, and show substantial improvements on a Python code autocomplete task over sequence-to-sequence baselines"
+    ],
+    "summary": [
+        "In prediction tasks with complex outputs, generating well-formed outputs is challenging, as is wellknown in natural language generation [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>, <a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>].",
+        "We evaluate our retrieve-and-edit approach on a new Python code autocomplete dataset of 76k functions, where the task is to predict the token given partially written code and natural language description.",
+        "The retrieve-and-edit framework corresponds to the following generative process: given an input x, we first retrieve an example (x , y ) from the training set D by sampling using a retriever of the form pret((x , y ) | x).",
+        "We first train the retriever in isolation, replacing the edit model pedit with an oracle editor p\u2217edit and optimizing a lower bound for the marginal likelihood under this editor.",
+        "The procedure in Section 3.1.4 returns a retriever pret that maximizes a lower bound on L\u2217, which is defined in terms of the oracle editor pe\u2217dit.",
+        "We consider a code autocomplete task over Python functions taken from GitHub and show that retrieve-and-edit substantially outperforms approaches based only on sequence-to-sequence models or retrieval.",
+        "Comparing the retrieve-and-edit model (Retrieve+Edit) to a sequence-to-sequence baseline (Seq2Seq) whose architecture and training procedure matches that of the editor, we find that retrieval adds substantial performance gains on all metrics with no domain knowledge or hand-crafted features (Table 1).",
+        "We evaluate various retrievers: TaskRetriever, which is our task-dependent retriever presented in Section 3.1; LexicalRetriever, which embeds the input tokens using a bag-of-word vectors and retrieves based on cosine similarity; and InputRetriever, which uses the same encoder-decoder architecture as TaskRetriever but modifies the decoder to predict x rather than y.",
+        "Methods based on ASTs still achieve the highest BLEU and exact match scores, but we are able to significantly narrow the gap between specialized code generation techniques and vanilla sequence-tosequence models if the latter is boosted with the retrieve-and-edit framework.",
+        "Our goal differs from these works in that we use retrieve-and-edit as a general-purpose method to boost model performance.",
+        "The idea of conditioning on retrieved examples is an instance of a mixture model, and these types of ensembling approaches have been shown to boost the performance of simple base models on tasks such as language modeling [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>].",
+        "We considered the task of generating complex outputs such as source code using standard sequence-to-sequence models augmented by a learned retriever.",
+        "We show that learning a retriever using a noisy encoder-decoder can naturally combine the desire to retrieve examples that maximize downstream editability with the computational efficiency of cosine LSH."
+    ],
+    "headline": "We propose an approach that first retrieves a training example based on the input  and edits it to the desired output ",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] M. Allamanis, D. Tarlow, A. Gordon, and Y. Wei. Bimodal modelling of source code and natural language. In International Conference on Machine Learning (ICML), pages 2123\u20132132, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Allamanis%2C%20M.%20Tarlow%2C%20D.%20Gordon%2C%20A.%20Wei%2C%20Y.%20Bimodal%20modelling%20of%20source%20code%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Allamanis%2C%20M.%20Tarlow%2C%20D.%20Gordon%2C%20A.%20Wei%2C%20Y.%20Bimodal%20modelling%20of%20source%20code%202015"
+        },
+        {
+            "id": "2",
+            "entry": "[2] G. Andrew, R. Arora, J. Bilmes, and K. Livescu. Deep canonical correlation analysis. In International Conference on Machine Learning (ICML), pages 1247\u20131255, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Andrew%2C%20G.%20Arora%2C%20R.%20Bilmes%2C%20J.%20Livescu%2C%20K.%20Deep%20canonical%20correlation%20analysis%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Andrew%2C%20G.%20Arora%2C%20R.%20Bilmes%2C%20J.%20Livescu%2C%20K.%20Deep%20canonical%20correlation%20analysis%202013"
+        },
+        {
+            "id": "3",
+            "entry": "[3] D. Bahdanau, K. Cho, and Y. Bengio. Neural machine translation by jointly learning to align and translate. In International Conference on Learning Representations (ICLR), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bahdanau%2C%20D.%20Cho%2C%20K.%20Bengio%2C%20Y.%20Neural%20machine%20translation%20by%20jointly%20learning%20to%20align%20and%20translate%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bahdanau%2C%20D.%20Cho%2C%20K.%20Bengio%2C%20Y.%20Neural%20machine%20translation%20by%20jointly%20learning%20to%20align%20and%20translate%202015"
+        },
+        {
+            "id": "4",
+            "entry": "[4] M. Balog, A. L. Gaunt, M. Brockschmidt, S. Nowozin, and D. Tarlow. Deepcoder: Learning to write programs. arXiv preprint arXiv:1611.01989, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.01989"
+        },
+        {
+            "id": "5",
+            "entry": "[5] S. R. Bowman, L. Vilnis, O. Vinyals, A. M. Dai, R. Jozefowicz, and S. Bengio. Generating sentences from a continuous space. In Computational Natural Language Learning (CoNLL), pages 10\u201321, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bowman%2C%20S.R.%20Vilnis%2C%20L.%20Vinyals%2C%20O.%20Dai%2C%20A.M.%20Generating%20sentences%20from%20a%20continuous%20space%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bowman%2C%20S.R.%20Vilnis%2C%20L.%20Vinyals%2C%20O.%20Dai%2C%20A.M.%20Generating%20sentences%20from%20a%20continuous%20space%202016"
+        },
+        {
+            "id": "6",
+            "entry": "[6] S. Chaidaroon and Y. Fang. Variational deep semantic hashing for text documents. In ACM Special Interest Group on Information Retreival (SIGIR), pages 75\u201384, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chaidaroon%2C%20S.%20Fang%2C%20Y.%20Variational%20deep%20semantic%20hashing%20for%20text%20documents%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chaidaroon%2C%20S.%20Fang%2C%20Y.%20Variational%20deep%20semantic%20hashing%20for%20text%20documents%202017"
+        },
+        {
+            "id": "7",
+            "entry": "[7] C. Chelba, T. Mikolov, M. Schuster, Q. Ge, T. Brants, P. Koehn, and T. Robinson. One billion word benchmark for measuring progress in statistical language modeling. arXiv preprint arXiv:1312.3005, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.3005"
+        },
+        {
+            "id": "8",
+            "entry": "[8] K. Cho, B. van Merrienboer, C. Gulcehre, D. Bahdanau, F. Bougares, H. Schwenk, and Y. Bengio. Learning phrase representations using RNN encoder-decoder for statistical machine translation. In Empirical Methods in Natural Language Processing (EMNLP), pages 1724\u20131734, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cho%2C%20K.%20van%20Merrienboer%2C%20B.%20Gulcehre%2C%20C.%20Bahdanau%2C%20D.%20Learning%20phrase%20representations%20using%20RNN%20encoder-decoder%20for%20statistical%20machine%20translation%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cho%2C%20K.%20van%20Merrienboer%2C%20B.%20Gulcehre%2C%20C.%20Bahdanau%2C%20D.%20Learning%20phrase%20representations%20using%20RNN%20encoder-decoder%20for%20statistical%20machine%20translation%202014"
+        },
+        {
+            "id": "9",
+            "entry": "[9] T. R. Davidson, L. Falorsi, N. D. Cao, T. Kipf, and J. M. Tomczak. Hyperspherical variational auto-encoders. arXiv preprint arXiv:1804.00891, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1804.00891"
+        },
+        {
+            "id": "10",
+            "entry": "[10] F. Feng, X. Wang, and R. Li. Cross-modal retrieval with correspondence autoencoder. In Proceedings of the 22Nd ACM International Conference on Multimedia, pages 7\u201316, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Feng%2C%20F.%20Wang%2C%20X.%20Li%2C%20R.%20Cross-modal%20retrieval%20with%20correspondence%20autoencoder%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Feng%2C%20F.%20Wang%2C%20X.%20Li%2C%20R.%20Cross-modal%20retrieval%20with%20correspondence%20autoencoder%202014"
+        },
+        {
+            "id": "11",
+            "entry": "[11] A. Goldenshluger and A. Nemirovski. On spatially adaptive estimation of nonparametric regression. Mathematical Methods of Statistics, 6:135\u2013170, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goldenshluger%2C%20A.%20Nemirovski%2C%20A.%20On%20spatially%20adaptive%20estimation%20of%20nonparametric%20regression%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goldenshluger%2C%20A.%20Nemirovski%2C%20A.%20On%20spatially%20adaptive%20estimation%20of%20nonparametric%20regression%201997"
+        },
+        {
+            "id": "12",
+            "entry": "[12] J. Gu, Z. Lu, H. Li, and V. O. Li. Incorporating copying mechanism in sequence-to-sequence learning. In Association for Computational Linguistics (ACL), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gu%2C%20J.%20Lu%2C%20Z.%20Li%2C%20H.%20Li%2C%20V.O.%20Incorporating%20copying%20mechanism%20in%20sequence-to-sequence%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gu%2C%20J.%20Lu%2C%20Z.%20Li%2C%20H.%20Li%2C%20V.O.%20Incorporating%20copying%20mechanism%20in%20sequence-to-sequence%20learning%202016"
+        },
+        {
+            "id": "13",
+            "entry": "[13] J. Gu, Y. Wang, K. Cho, and V. O. Li. Search engine guided non-parametric neural machine translation. arXiv preprint arXiv:1705.07267, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1705.07267"
+        },
+        {
+            "id": "14",
+            "entry": "[14] K. Guu, T. B. Hashimoto, Y. Oren, and P. Liang. Generating sentences by editing prototypes. Transactions of the Association for Computational Linguistics (TACL), 0, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Guu%2C%20K.%20Hashimoto%2C%20T.B.%20Oren%2C%20Y.%20Liang%2C%20P.%20Generating%20sentences%20by%20editing%20prototypes%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Guu%2C%20K.%20Hashimoto%2C%20T.B.%20Oren%2C%20Y.%20Liang%2C%20P.%20Generating%20sentences%20by%20editing%20prototypes%202018"
+        },
+        {
+            "id": "15",
+            "entry": "[15] S. A. Hayati, R. Olivier, P. Avvaru, P. Yin, A. Tomasic, and G. Neubig. Retrieval-based neural code generation. In Empirical Methods in Natural Language Processing (EMNLP), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hayati%2C%20S.A.%20Olivier%2C%20R.%20Avvaru%2C%20P.%20Yin%2C%20P.%20Retrieval-based%20neural%20code%20generation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hayati%2C%20S.A.%20Olivier%2C%20R.%20Avvaru%2C%20P.%20Yin%2C%20P.%20Retrieval-based%20neural%20code%20generation%202018"
+        },
+        {
+            "id": "16",
+            "entry": "[16] A. Krizhevsky and G. E. Hinton. Using very deep autoencoders for content-based image retrieval. In 19th European Symposium on Artificial Neural Networks, Computational Intelligence and Machine Learning (ESANN), pages 489\u2013494, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20A.%20Hinton%2C%20G.E.%20Using%20very%20deep%20autoencoders%20for%20content-based%20image%20retrieval%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krizhevsky%2C%20A.%20Hinton%2C%20G.E.%20Using%20very%20deep%20autoencoders%20for%20content-based%20image%20retrieval%202011"
+        },
+        {
+            "id": "17",
+            "entry": "[17] N. Kushman and R. Barzilay. Using semantic unification to generate regular expressions from natural language. In Human Language Technology and North American Association for Computational Linguistics (HLT/NAACL), pages 826\u2013836, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kushman%2C%20N.%20Barzilay%2C%20R.%20Using%20semantic%20unification%20to%20generate%20regular%20expressions%20from%20natural%20language%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kushman%2C%20N.%20Barzilay%2C%20R.%20Using%20semantic%20unification%20to%20generate%20regular%20expressions%20from%20natural%20language%202013"
+        },
+        {
+            "id": "18",
+            "entry": "[18] P. Kuznetsova, V. Ordonez, A. C. Berg, T. L. Berg, and Y. Choi. Generalizing image captions for image-text parallel corpus. In Association for Computational Linguistics (ACL), pages 790\u2013796, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kuznetsova%2C%20P.%20Ordonez%2C%20V.%20Berg%2C%20A.C.%20Berg%2C%20T.L.%20Generalizing%20image%20captions%20for%20image-text%20parallel%20corpus%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kuznetsova%2C%20P.%20Ordonez%2C%20V.%20Berg%2C%20A.C.%20Berg%2C%20T.L.%20Generalizing%20image%20captions%20for%20image-text%20parallel%20corpus%202013"
+        },
+        {
+            "id": "19",
+            "entry": "[19] T. Lei, H. Joshi, R. Barzilay, T. Jaakkola, K. Tymoshenko, A. Moschitti, and L. Marquez. Semi-supervised question retrieval with gated convolutions. In North American Association for Computational Linguistics (NAACL), pages 1279\u20131289, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lei%2C%20T.%20Joshi%2C%20H.%20Barzilay%2C%20R.%20Jaakkola%2C%20T.%20Semi-supervised%20question%20retrieval%20with%20gated%20convolutions%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lei%2C%20T.%20Joshi%2C%20H.%20Barzilay%2C%20R.%20Jaakkola%2C%20T.%20Semi-supervised%20question%20retrieval%20with%20gated%20convolutions%202016"
+        },
+        {
+            "id": "20",
+            "entry": "[20] J. Li, W. Monroe, T. Shi, A. Ritter, and D. Jurafsky. Adversarial learning for neural dialogue generation. arXiv preprint arXiv:1701.06547, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1701.06547"
+        },
+        {
+            "id": "21",
+            "entry": "[21] P. Liang, M. I. Jordan, and D. Klein. Learning programs: A hierarchical Bayesian approach. In International Conference on Machine Learning (ICML), pages 639\u2013646, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liang%2C%20P.%20Jordan%2C%20M.I.%20Klein%2C%20D.%20Learning%20programs%3A%20A%20hierarchical%20Bayesian%20approach%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liang%2C%20P.%20Jordan%2C%20M.I.%20Klein%2C%20D.%20Learning%20programs%3A%20A%20hierarchical%20Bayesian%20approach%202010"
+        },
+        {
+            "id": "22",
+            "entry": "[22] W. Ling, E. Grefenstette, K. M. Hermann, T. Kocisk\u00fd, A. Senior, F. Wang, and P. Blunsom. Latent predictor networks for code generation. In Association for Computational Linguistics (ACL), pages 599\u2013609, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ling%2C%20W.%20Grefenstette%2C%20E.%20Hermann%2C%20K.M.%20Kocisk%C3%BD%2C%20T.%20Blunsom.%20Latent%20predictor%20networks%20for%20code%20generation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ling%2C%20W.%20Grefenstette%2C%20E.%20Hermann%2C%20K.M.%20Kocisk%C3%BD%2C%20T.%20Blunsom.%20Latent%20predictor%20networks%20for%20code%20generation%202016"
+        },
+        {
+            "id": "23",
+            "entry": "[23] C. Maddison and D. Tarlow. Structured generative models of natural source code. In International Conference on Machine Learning (ICML), pages 649\u2013657, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Maddison%2C%20C.%20Tarlow%2C%20D.%20Structured%20generative%20models%20of%20natural%20source%20code%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Maddison%2C%20C.%20Tarlow%2C%20D.%20Structured%20generative%20models%20of%20natural%20source%20code%202014"
+        },
+        {
+            "id": "24",
+            "entry": "[24] R. Mason and E. Charniak. Domain-specific image captioning. In Computational Natural Language Learning (CoNLL), pages 2\u201310, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mason%2C%20R.%20Charniak%2C%20E.%20Domain-specific%20image%20captioning%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mason%2C%20R.%20Charniak%2C%20E.%20Domain-specific%20image%20captioning%202014"
+        },
+        {
+            "id": "25",
+            "entry": "[25] K. Papineni, S. Roukos, T. Ward, and W. Zhu. BLEU: A method for automatic evaluation of machine translation. In Association for Computational Linguistics (ACL), 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Papineni%2C%20K.%20Roukos%2C%20S.%20Ward%2C%20T.%20Zhu%2C%20W.%20BLEU%3A%20A%20method%20for%20automatic%20evaluation%20of%20machine%20translation%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Papineni%2C%20K.%20Roukos%2C%20S.%20Ward%2C%20T.%20Zhu%2C%20W.%20BLEU%3A%20A%20method%20for%20automatic%20evaluation%20of%20machine%20translation%202002"
+        },
+        {
+            "id": "26",
+            "entry": "[26] M. Rabinovich, M. Stern, and D. Klein. Abstract syntax networks for code generation and semantic parsing. In Association for Computational Linguistics (ACL), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rabinovich%2C%20M.%20Stern%2C%20M.%20Klein%2C%20D.%20Abstract%20syntax%20networks%20for%20code%20generation%20and%20semantic%20parsing%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rabinovich%2C%20M.%20Stern%2C%20M.%20Klein%2C%20D.%20Abstract%20syntax%20networks%20for%20code%20generation%20and%20semantic%20parsing%202017"
+        },
+        {
+            "id": "27",
+            "entry": "[27] A. Severyn and A. Moschitti. Learning to rank short text pairs with convolutional deep neural networks. In ACM Special Interest Group on Information Retreival (SIGIR), pages 373\u2013382, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Severyn%2C%20A.%20Moschitti%2C%20A.%20Learning%20to%20rank%20short%20text%20pairs%20with%20convolutional%20deep%20neural%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Severyn%2C%20A.%20Moschitti%2C%20A.%20Learning%20to%20rank%20short%20text%20pairs%20with%20convolutional%20deep%20neural%20networks%202015"
+        },
+        {
+            "id": "28",
+            "entry": "[28] L. Shao, S. Gouws, D. Britz, A. Goldie, B. Strope, and R. Kurzweil. Generating high-quality and informative conversation responses with sequence-to-sequence models. In Empirical Methods in Natural Language Processing (EMNLP), pages 2210\u20132219, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shao%2C%20L.%20Gouws%2C%20S.%20Britz%2C%20D.%20Goldie%2C%20A.%20Generating%20high-quality%20and%20informative%20conversation%20responses%20with%20sequence-to-sequence%20models%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shao%2C%20L.%20Gouws%2C%20S.%20Britz%2C%20D.%20Goldie%2C%20A.%20Generating%20high-quality%20and%20informative%20conversation%20responses%20with%20sequence-to-sequence%20models%202017"
+        },
+        {
+            "id": "29",
+            "entry": "[29] D. Shen, Q. Su, P. Chapfuwa, W. Wang, G. Wang, R. Henao, and L. Carin. Nash: Toward endto-end neural architecture for generative semantic hashing. In Association for Computational Linguistics (ACL), pages 2041\u20132050, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shen%2C%20D.%20Su%2C%20Q.%20Chapfuwa%2C%20P.%20Wang%2C%20W.%20Nash%3A%20Toward%20endto-end%20neural%20architecture%20for%20generative%20semantic%20hashing%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shen%2C%20D.%20Su%2C%20Q.%20Chapfuwa%2C%20P.%20Wang%2C%20W.%20Nash%3A%20Toward%20endto-end%20neural%20architecture%20for%20generative%20semantic%20hashing%202018"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Y. Song, R. Yan, X. Li, D. Zhao, and M. Zhang. Two are better than one: An ensemble of retrievaland generation-based dialog systems. arXiv preprint arXiv:1610.07149, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1610.07149"
+        },
+        {
+            "id": "31",
+            "entry": "[31] N. Srivastava and R. R. Salakhutdinov. Multimodal learning with deep Boltzmann machines. In Advances in Neural Information Processing Systems (NIPS), pages 2222\u20132230, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Srivastava%2C%20N.%20Salakhutdinov%2C%20R.R.%20Multimodal%20learning%20with%20deep%20Boltzmann%20machines%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Srivastava%2C%20N.%20Salakhutdinov%2C%20R.R.%20Multimodal%20learning%20with%20deep%20Boltzmann%20machines%202012"
+        },
+        {
+            "id": "32",
+            "entry": "[32] C. J. Stone. Consistent nonparametric regression. Annals of Statistics, 5, 1977.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Stone%2C%20C.J.%20Consistent%20nonparametric%20regression%201977",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Stone%2C%20C.J.%20Consistent%20nonparametric%20regression%201977"
+        },
+        {
+            "id": "33",
+            "entry": "[33] E. Sumita and H. Iida. Experiments and prospects of example-based machine translation. In Association for Computational Linguistics (ACL), 1991.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sumita%2C%20E.%20Iida%2C%20H.%20Experiments%20and%20prospects%20of%20example-based%20machine%20translation%201991",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sumita%2C%20E.%20Iida%2C%20H.%20Experiments%20and%20prospects%20of%20example-based%20machine%20translation%201991"
+        },
+        {
+            "id": "34",
+            "entry": "[34] W. Sun, A. Beygelzimer, H. Daume, J. Langford, and P. Mineiro. Contextual memory trees. arXiv preprint arXiv:1807.06473, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1807.06473"
+        },
+        {
+            "id": "35",
+            "entry": "[35] M. Tan, C. dos Santos, B. Xiang, and B. Zhou. LSTM-based deep learning models for nonfactoid answer selection. arXiv preprint arXiv:1511.04108, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.04108"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Y. Wu, M. Schuster, Z. Chen, Q. V. Le, M. Norouzi, W. Macherey, M. Krikun, Y. Cao, Q. Gao, K. Macherey, et al. Google\u2019s neural machine translation system: Bridging the gap between human and machine translation. arXiv preprint arXiv:1609.08144, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.08144"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Y. Wu, F. Wei, S. Huang, Z. Li, and M. Zhou. Response generation by context-aware prototype editing. arXiv preprint arXiv:1806.07042, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1806.07042"
+        },
+        {
+            "id": "38",
+            "entry": "[38] J. Xu and G. Durrett. Spherical latent spaces for stable variational autoencoders. In Empirical Methods in Natural Language Processing (EMNLP), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xu%2C%20J.%20Durrett%2C%20G.%20Spherical%20latent%20spaces%20for%20stable%20variational%20autoencoders%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xu%2C%20J.%20Durrett%2C%20G.%20Spherical%20latent%20spaces%20for%20stable%20variational%20autoencoders%202018"
+        },
+        {
+            "id": "39",
+            "entry": "[39] F. Yan and K. Mikolajczyk. Deep correlation for matching images and text. In Computer Vision and Pattern Recognition (CVPR), pages 3441\u20133450, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yan%2C%20F.%20Mikolajczyk%2C%20K.%20Deep%20correlation%20for%20matching%20images%20and%20text%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yan%2C%20F.%20Mikolajczyk%2C%20K.%20Deep%20correlation%20for%20matching%20images%20and%20text%202015"
+        },
+        {
+            "id": "40",
+            "entry": "[40] R. Yan, Y. Song, and H. Wu. Learning to respond with deep neural networks for retrieval-based human-computer conversation system. In ACM Special Interest Group on Information Retreival (SIGIR), pages 55\u201364, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yan%2C%20R.%20Song%2C%20Y.%20Wu%2C%20H.%20Learning%20to%20respond%20with%20deep%20neural%20networks%20for%20retrieval-based%20human-computer%20conversation%20system%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yan%2C%20R.%20Song%2C%20Y.%20Wu%2C%20H.%20Learning%20to%20respond%20with%20deep%20neural%20networks%20for%20retrieval-based%20human-computer%20conversation%20system%202016"
+        },
+        {
+            "id": "41",
+            "entry": "[41] P. Yin and G. Neubig. A syntactic neural model for general-purpose code generation. In Association for Computational Linguistics (ACL), pages 440\u2013450, 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yin%2C%20P.%20Neubig%2C%20G.%20A%20syntactic%20neural%20model%20for%20general-purpose%20code%20generation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yin%2C%20P.%20Neubig%2C%20G.%20A%20syntactic%20neural%20model%20for%20general-purpose%20code%20generation%202017"
+        }
+    ]
+}

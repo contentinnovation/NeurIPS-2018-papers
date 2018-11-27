@@ -1,0 +1,312 @@
+{
+    "filename": "8200-non-delusional-q-learning-and-value-iteration.pdf",
+    "metadata": {
+        "date": 2018,
+        "title": "Non-delusional Q-learning and value iteration",
+        "author": "Tyler Lu Google AI tylerlu@google.com",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8200-non-delusional-q-learning-and-value-iteration.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We identify a fundamental source of error in Q-learning and other forms of dynamic programming with function approximation. Delusional bias arises when the approximation architecture limits the class of expressible greedy policies. Since standard Q-updates make globally uncoordinated action choices with respect to the expressible policy class, inconsistent or even conflicting Q-value estimates can result, leading to pathological behaviour such as over/under-estimation, instability and even divergence. To solve this problem, we introduce a new notion of policy consistency and define a local backup process that ensures global consistency through the use of information sets\u2014sets that record constraints on policies consistent with backed-up Q-values. We prove that both the model-based and model-free algorithms using this backup remove delusional bias, yielding the first known algorithms that guarantee optimal results under general conditions. These algorithms furthermore only require polynomially many information sets (from a potentially exponential support). Finally, we suggest other practical heuristics for value-iteration and Q-learning that attempt to reduce delusional bias."
+    },
+    "keywords": [
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "np complete",
+            "url": "https://en.wikipedia.org/wiki/np_complete"
+        },
+        {
+            "term": "value function",
+            "url": "https://en.wikipedia.org/wiki/value_function"
+        },
+        {
+            "term": "value iteration",
+            "url": "https://en.wikipedia.org/wiki/value_iteration"
+        },
+        {
+            "term": "function approximation",
+            "url": "https://en.wikipedia.org/wiki/function_approximation"
+        },
+        {
+            "term": "information set",
+            "url": "https://en.wikipedia.org/wiki/information_set"
+        },
+        {
+            "term": "deep neural networks",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_networks"
+        },
+        {
+            "term": "q learning",
+            "url": "https://en.wikipedia.org/wiki/q_learning"
+        },
+        {
+            "term": "approximation error",
+            "url": "https://en.wikipedia.org/wiki/approximation_error"
+        },
+        {
+            "term": "mixed integer program",
+            "url": "https://en.wikipedia.org/wiki/mixed_integer_program"
+        },
+        {
+            "term": "q value",
+            "url": "https://en.wikipedia.org/wiki/q_value"
+        },
+        {
+            "term": "dynamic programming",
+            "url": "https://en.wikipedia.org/wiki/dynamic_programming"
+        },
+        {
+            "term": "Markov decision process",
+            "url": "https://en.wikipedia.org/wiki/Markov_decision_process"
+        }
+    ],
+    "highlights": [
+        "Q-learning is a foundational algorithm in reinforcement learning (RL) [<a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>, <a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>]",
+        "The update can become inconsistent under function approximation: if no policy in the admissible class can jointly express all past action selections, backed-up values do not correspond to Q-values that can be achieved by any expressible policy. (We note that the source of this potential estimation error is quite different than the optimistic bias of maximizing over noisy Q-values addressed by double Q-learning; see Appendix A.5.) the consequences of such delusional bias might appear subtle, we demonstrate how delusion can profoundly affect both Q-learning and value iteration",
+        "We have identified delusional bias, a fundamental problem in Q-learning and approximate dynamic programming with function approximation or other policy constraints",
+        "Delusional bias becomes an important entry in the catalog of risks that emerge in the deployment of Q-learning",
+        "We have developed and analyzed a new policyclass consistent backup operator, and the corresponding model-based policy-class value iteration and model-free Policy-Class Q-learning algorithms, that fully remove delusional bias",
+        "We suggested several practical heuristics for large-scale reinforcement learning problems to mitigate the effect of delusional bias"
+    ],
+    "key_statements": [
+        "Q-learning is a foundational algorithm in reinforcement learning (RL) [<a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>, <a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>]",
+        "Q-learning is guaranteed to converge to an optimal state-action value function when stateaction pairs are explicitly enumerated [<a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>], it is potentially unstable when combined with function approximation [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>, <a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>, <a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>]",
+        "We identify a fundamental problem with Q-learning with function approximation, distinct from those previously discussed in the literature",
+        "We show that approximate Q-learning suffers from delusional bias, in which updates are based on mutually inconsistent values",
+        "We show that in the tabular case with policy constraints\u2014isolating delusion-error from approximation error\u2014the algorithms converge to an optimal policy in the admissible policy class",
+        "We show that the number of information sets is bounded polynomially when the greedy policy class has finite VC-dimension; the algorithms have polynomial-time iteration complexity in the tabular case",
+        "The problem of delusion can be given a precise statement: delusional bias occurs whenever a backed-up value estimate is derived from action choices that are not realizable in the underlying policy class",
+        "The update can become inconsistent under function approximation: if no policy in the admissible class can jointly express all past action selections, backed-up values do not correspond to Q-values that can be achieved by any expressible policy. (We note that the source of this potential estimation error is quite different than the optimistic bias of maximizing over noisy Q-values addressed by double Q-learning; see Appendix A.5.) the consequences of such delusional bias might appear subtle, we demonstrate how delusion can profoundly affect both Q-learning and value iteration",
+        "The Discounting Paradox: Another phenomenon induced by delusional bias is the discounting paradox: given an Markov decision process with a specific discount factor \u03b3eval, Q-learning with a different discount \u03b3train results in a Q-function whose greedy policy has better performance, relative to the target \u03b3eval, than when trained with \u03b3eval",
+        "In Appendix A.4, we provide an example where the paradox is extreme: a policy trained with \u03b3 = 1 is provably worse than one trained myopically with \u03b3 = 0, even when evaluated using \u03b3 = 1",
+        "We provide an example where the gap can be made arbitrarily large",
+        "These results suggest that treating the discount as hyperparameter might yield systematic training benefits; we demonstrate that this is the case on some benchmark (Atari) tasks in Appendix A.10",
+        "Specific batching schemes can cause even greater degrees of delusion; for example, training in a sequence of batches that run through a batch of transitions at s4, followed by batches at s3, s2, s1 will induce a Q-function that deludes itself into estimating the value of (s1, a2) to be that of the optimal unconstrained policy.\n4 Non-delusional Q-learning and dynamic programming",
+        "We develop a provably correct solution that directly tackles the source of the problem: the potential inconsistency of the set of Q-values used to generate a Bellman or Q-backup",
+        "We provide a detailed illustration of the policy-class value iteration algorithm in Appendix A.7, walking through the steps of policy-class value iteration on the example Markov decision process in Fig. 1",
+        "To illustrate the effects of function approximation, we considered linear approximators defined over random feature representations: feature vectors were produced for each state-action pair by drawing independent standard normal values",
+        "The policy-class value iteration and Policy-Class Q-learning algorithms can be viewed as constructs that demonstrate how delusion arises and how it can be eliminated in Q-learning and approximate dynamic programming by preventing inadmissible policy choices from influencing Q-values",
+        "We have identified delusional bias, a fundamental problem in Q-learning and approximate dynamic programming with function approximation or other policy constraints",
+        "Delusion manifests itself in different ways that lead to poor approximation quality or divergence for reasons quite independent of approximation error itself",
+        "Delusional bias becomes an important entry in the catalog of risks that emerge in the deployment of Q-learning",
+        "We have developed and analyzed a new policyclass consistent backup operator, and the corresponding model-based policy-class value iteration and model-free Policy-Class Q-learning algorithms, that fully remove delusional bias",
+        "We suggested several practical heuristics for large-scale reinforcement learning problems to mitigate the effect of delusional bias"
+    ],
+    "summary": [
+        "Q-learning is a foundational algorithm in reinforcement learning (RL) [<a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>, <a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>].",
+        "We let F = {f\u03b8 : S \u00d7A \u2192 R | \u03b8 \u2208 \u0398} denote the set of expressible value function approximators, and denote the class of admissible greedy policies by",
+        "The problem of delusion can be given a precise statement: delusional bias occurs whenever a backed-up value estimate is derived from action choices that are not realizable in the underlying policy class.",
+        "The Discounting Paradox: Another phenomenon induced by delusional bias is the discounting paradox: given an MDP with a specific discount factor \u03b3eval, Q-learning with a different discount \u03b3train results in a Q-function whose greedy policy has better performance, relative to the target \u03b3eval, than when trained with \u03b3eval.",
+        "Specific batching schemes can cause even greater degrees of delusion; for example, training in a sequence of batches that run through a batch of transitions at s4, followed by batches at s3, s2, s1 will induce a Q-function that deludes itself into estimating the value of (s1, a2) to be that of the optimal unconstrained policy.",
+        "Because delusion is a general phenomenon, we first develop a model-based consistent backup, which gives rise to non-delusional policy-class value iteration, and describe the sample-backup version, policy-class Q-learning.",
+        "To illustrate the effects of function approximation, we considered linear approximators defined over random feature representations: feature vectors were produced for each state-action pair by drawing independent standard normal values.",
+        "A tabular version of Q-learning using the same partition-function representation of Q-values as in PCVI yields policy-class Q-learning PCQL, shown in Alg. 2.2 The key difference with PCVI is that we use sample backups in Line 4 instead of full Bellman backups as in PCVI.",
+        "We applied PCQL to the initial illustrative example in Fig. 1 with R(s1, a1) = 0.3, R(s4, a2) = 2 and uniform random exploration as the behaviour policy, adding the use of a value approximator (a linear regressor).",
+        "The PCVI and PCQL algorithms can be viewed as constructs that demonstrate how delusion arises and how it can be eliminated in Q-learning and approximate dynamic programming by preventing inadmissible policy choices from influencing Q-values.",
+        "If we maintain a global collection of cells, each with its own Q-regressor, we have a set of approximate Q-functions that give both a compact representation and the ability to generalize across state-action pairs for any set of policy consistent assumptions.",
+        "We suggested several practical heuristics for large-scale RL problems to mitigate the effect of delusional bias"
+    ],
+    "headline": "We identify a fundamental source of error in Q-learning and other forms of dynamic programming with function approximation",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Leemon Baird. Residual algorithms: Reinforcement learning with function approximation. In Proceedings of the International Conference on Machine Learning (ICML-95), pages 30\u201337, 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Baird%2C%20Leemon%20Residual%20algorithms%3A%20Reinforcement%20learning%20with%20function%20approximation%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Baird%2C%20Leemon%20Residual%20algorithms%3A%20Reinforcement%20learning%20with%20function%20approximation%201995"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Peter L. Bartlett, Nick Harvey, Chris Liaw, and Abbas Mehrabian. Nearly-tight VC-dimension and pseudodimension bounds for piecewise linear neural networks. arXiv:1703.02930, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.02930"
+        },
+        {
+            "id": "3",
+            "entry": "[3] M. G. Bellemare, Y. Naddaf, J. Veness, and M. Bowling. The arcade learning environment: An evaluation platform for general agents. Journal of Artificial Intelligence Research, 47:253\u2013279, June 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bellemare%2C%20M.G.%20Naddaf%2C%20Y.%20Veness%2C%20J.%20Bowling%2C%20M.%20The%20arcade%20learning%20environment%3A%20An%20evaluation%20platform%20for%20general%20agents%202013-06",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bellemare%2C%20M.G.%20Naddaf%2C%20Y.%20Veness%2C%20J.%20Bowling%2C%20M.%20The%20arcade%20learning%20environment%3A%20An%20evaluation%20platform%20for%20general%20agents%202013-06"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Marc G. Bellemare, Will Dabney, and R\u00e9mi Munos. A distributional perspective on reinforcement learning. In Proceedings of the International Conference on Machine Learning (ICML-17), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Marc%20G.%20Bellemare%2C%20Will%20Dabney%20Munos%2C%20R%C3%A9mi%20A%20distributional%20perspective%20on%20reinforcement%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Marc%20G.%20Bellemare%2C%20Will%20Dabney%20Munos%2C%20R%C3%A9mi%20A%20distributional%20perspective%20on%20reinforcement%20learning%202017"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Marc G. Bellemare, Georg Ostrovski, Arthur Guez, Philip S. Thomas, and R\u00e9mi Munos. Increasing the action gap: New operators for reinforcement learning. In Proceedings of the Thirtieth AAAI Conference on Artificial Intelligence (AAAI-16), pages 1476\u20131483, Qu\u00e9bec City, QC, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bellemare%2C%20Marc%20G.%20Ostrovski%2C%20Georg%20Guez%2C%20Arthur%20Thomas%2C%20Philip%20S.%20Increasing%20the%20action%20gap%3A%20New%20operators%20for%20reinforcement%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bellemare%2C%20Marc%20G.%20Ostrovski%2C%20Georg%20Guez%2C%20Arthur%20Thomas%2C%20Philip%20S.%20Increasing%20the%20action%20gap%3A%20New%20operators%20for%20reinforcement%20learning%202016"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Dimitri P. Bertsekas and John. N. Tsitsiklis. Neuro-dynamic Programming. Athena, Belmont, MA, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bertsekas%2C%20Dimitri%20P.%20Tsitsiklis%2C%20John%20N.%20Neuro-dynamic%20Programming%201996"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Avrim Blum and Ronald L. Rivest. Training a 3-node neural network is NP-complete. In COLT, pages 9\u201318, 1988.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Blum%2C%20Avrim%20Rivest%2C%20Ronald%20L.%20Training%20a%203-node%20neural%20network%20is%20NP-complete%201988",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Blum%2C%20Avrim%20Rivest%2C%20Ronald%20L.%20Training%20a%203-node%20neural%20network%20is%20NP-complete%201988"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Justin A. Boyan and Andrew W. Moore. Generalization in reinforcement learning: Safely approximating the value function. In G. Tesauro, D. S. Touretzky, and T. K. Leen, editors, Advances in Neural Information Processing Systems 7 (NIPS-94). MIT Press, Cambridge, 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Boyan%2C%20Justin%20A.%20Moore%2C%20Andrew%20W.%20Generalization%20in%20reinforcement%20learning%3A%20Safely%20approximating%20the%20value%20function%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Boyan%2C%20Justin%20A.%20Moore%2C%20Andrew%20W.%20Generalization%20in%20reinforcement%20learning%3A%20Safely%20approximating%20the%20value%20function%201995"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Daniela Pucci de Farias and Benjamin Van Roy. The linear programming approach to approximate dynamic programming. Operations Research, 51(6):850\u2013865, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=de%20Farias%2C%20Daniela%20Pucci%20Roy%2C%20Benjamin%20Van%20The%20linear%20programming%20approach%20to%20approximate%20dynamic%20programming%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=de%20Farias%2C%20Daniela%20Pucci%20Roy%2C%20Benjamin%20Van%20The%20linear%20programming%20approach%20to%20approximate%20dynamic%20programming%202003"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Rick Durrett. Probability: Theory and Examples. Cambridge University Press, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Durrett%2C%20Rick%20Probability%3A%20Theory%20and%20Examples%202013"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Matthieu Geist, Bilal Piot, and Olivier Pietquin. Is the bellman residual a bad proxy? In Advances in Neural Information Processing Systems 30 (NIPS-17), pages 3208\u20133217, Long Beach, CA, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Geist%2C%20Matthieu%20Piot%2C%20Bilal%20Pietquin%2C%20Olivier%20Is%20the%20bellman%20residual%20a%20bad%20proxy%3F%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Geist%2C%20Matthieu%20Piot%2C%20Bilal%20Pietquin%2C%20Olivier%20Is%20the%20bellman%20residual%20a%20bad%20proxy%3F%202017"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Geoffrey J. Gordon. Stable function approximation in dynamic programming. In Proceedings of the Twelfth International Conference on Machine Learning (ICML-95), pages 261\u2013268, Lake Tahoe, 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gordon%2C%20Geoffrey%20J.%20Stable%20function%20approximation%20in%20dynamic%20programming%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gordon%2C%20Geoffrey%20J.%20Stable%20function%20approximation%20in%20dynamic%20programming%201995"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Geoffrey J. Gordon. Approximation Solutions to Markov Decision Problems. PhD thesis, Carnegie Mellon University, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gordon%2C%20Geoffrey%20J.%20Approximation%20Solutions%20to%20Markov%20Decision%20Problems%201999"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Matteo Hessel, Joseph Modayil, Hado van Hasselt, Tom Schaul, Georg Ostrovski, Will Dabney, Dan Horgan, Bilal Piot, Mohammad Azar, and David Silver. Rainbow: Combining improvements in deep reinforcement learning. arXiv:1710.02298, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.02298"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Nan Jiang, Alex Kulesza, Satinder Singh, and Richard Lewis. The dependence of effective planning horizon on model accuracy. In Proceedings of the Thirteenth International Joint Conference on Autonomous Agents and Multiagent Systems (AAMAS-14), pages 1181\u20131189, Istanbul, Turkey, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jiang%2C%20Nan%20Kulesza%2C%20Alex%20Singh%2C%20Satinder%20Lewis%2C%20Richard%20The%20dependence%20of%20effective%20planning%20horizon%20on%20model%20accuracy%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jiang%2C%20Nan%20Kulesza%2C%20Alex%20Singh%2C%20Satinder%20Lewis%2C%20Richard%20The%20dependence%20of%20effective%20planning%20horizon%20on%20model%20accuracy%202015"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Lucas Lehnert, Romain Laroche, and Harm van Seijen. On value function representation of long horizon problems. In Proceedings of the Thirty-second AAAI Conference on Artificial Intelligence (AAAI-18), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lehnert%2C%20Lucas%20Laroche%2C%20Romain%20van%20Seijen%2C%20Harm%20On%20value%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lehnert%2C%20Lucas%20Laroche%2C%20Romain%20van%20Seijen%2C%20Harm%20On%20value%202018"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Hamid Maei, Csaba Szepesv\u00e1ri, Shalabh Bhatnagar, and Richard S. Sutton. Toward off-policy learning control wtih function approximation. In International Conference on Machine Learning, pages 719\u2013726, Haifa, Israel, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Maei%2C%20Hamid%20Szepesv%C3%A1ri%2C%20Csaba%20Bhatnagar%2C%20Shalabh%20Sutton%2C%20Richard%20S.%20Toward%20off-policy%20learning%20control%20wtih%20function%20approximation%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Maei%2C%20Hamid%20Szepesv%C3%A1ri%2C%20Csaba%20Bhatnagar%2C%20Shalabh%20Sutton%2C%20Richard%20S.%20Toward%20off-policy%20learning%20control%20wtih%20function%20approximation%202010"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Francisco Melo and M. Isabel Ribeiro. Q-learning with linear function approximation. In Proceedings of the International Conference on Computational Learning Theory (COLT), pages 308\u2013322, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Melo%2C%20Francisco%20Ribeiro%2C%20M.Isabel%20Q-learning%20with%20linear%20function%20approximation%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Melo%2C%20Francisco%20Ribeiro%2C%20M.Isabel%20Q-learning%20with%20linear%20function%20approximation%202007"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei Rusu, Joel Veness, Marc Bellemare, Alex Graves, Martin Riedmiller, Andreas Fidjeland, Georg Ostrovski, Stig Petersen, Charles Beattie, Amir Sadik, Ioannis Antonoglou, Helen King, Dharshan Kumaran, Daan Wierstra, Shane Legg, and Demis Hassabis. Human-level control through deep reinforcement learning. Science, 518:529\u2013533, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20Volodymyr%20Kavukcuoglu%2C%20Koray%20Silver%2C%20David%20Rusu%2C%20Andrei%20Human-level%20control%20through%20deep%20reinforcement%20learning%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20Volodymyr%20Kavukcuoglu%2C%20Koray%20Silver%2C%20David%20Rusu%2C%20Andrei%20Human-level%20control%20through%20deep%20reinforcement%20learning%202015"
+        },
+        {
+            "id": "20",
+            "entry": "[20] R\u00e9mi Munos. Performance bounds in lp-norm for approximate value iteration. SIAM Journal on Control and Optimization, 46(2):541\u2013561, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Munos%2C%20R%C3%A9mi%20Performance%20bounds%20in%20lp-norm%20for%20approximate%20value%20iteration%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Munos%2C%20R%C3%A9mi%20Performance%20bounds%20in%20lp-norm%20for%20approximate%20value%20iteration%202007"
+        },
+        {
+            "id": "21",
+            "entry": "[21] R\u00e9mi Munos, Thomas Stepleton, Anna Harutyunyan, and Marc G. Bellemare. Safe and efficient off-policy reinforcement learning. In Advances in Neural Information Processing Systems 29 (NIPS-16), pages 1046\u20131054, Barcelona, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Munos%2C%20R%C3%A9mi%20Stepleton%2C%20Thomas%20Harutyunyan%2C%20Anna%20Bellemare%2C%20Marc%20G.%20Safe%20and%20efficient%20off-policy%20reinforcement%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Munos%2C%20R%C3%A9mi%20Stepleton%2C%20Thomas%20Harutyunyan%2C%20Anna%20Bellemare%2C%20Marc%20G.%20Safe%20and%20efficient%20off-policy%20reinforcement%20learning%202016"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Ofir Nachum, Mohammad Norouzi, Kelvin Xu, and Dale Schuurmans. Bridging the gap between value and policy based reinforcement learning. In Advances in Neural Information Processing Systems 30 (NIPS-17), pages 1476\u20131483, Long Beach, CA, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nachum%2C%20Ofir%20Norouzi%2C%20Mohammad%20Xu%2C%20Kelvin%20Schuurmans%2C%20Dale%20Bridging%20the%20gap%20between%20value%20and%20policy%20based%20reinforcement%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nachum%2C%20Ofir%20Norouzi%2C%20Mohammad%20Xu%2C%20Kelvin%20Schuurmans%2C%20Dale%20Bridging%20the%20gap%20between%20value%20and%20policy%20based%20reinforcement%20learning%202017"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Marek Petrik. Optimization-based Approximate Dynamic Programming. PhD thesis, University of Massachusetts, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Petrik%2C%20Marek%20Optimization-based%20Approximate%20Dynamic%20Programming%202010"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Norbert Sauer. On the density of families of sets. Journal of Combinatorial Theory, Series A, 13:145\u2013147, July 1972.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sauer%2C%20Norbert%20On%20the%20density%20of%20families%20of%20sets%201972-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sauer%2C%20Norbert%20On%20the%20density%20of%20families%20of%20sets%201972-07"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Saharon Shelah. A combinatorial problem; stability and order for models and theories in infinitary languages. Pacific Journal of Mathematics, 41:247\u2013261, April 1972.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shelah%2C%20Saharon%20A%20combinatorial%20problem%3B%20stability%20and%20order%20for%20models%20and%20theories%20in%20infinitary%20languages%201972-04",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shelah%2C%20Saharon%20A%20combinatorial%20problem%3B%20stability%20and%20order%20for%20models%20and%20theories%20in%20infinitary%20languages%201972-04"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Richard S. Sutton and Andrew G. Barto. Reinforcement Learning: An Introduction. MIT Press, Cambridge, MA, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20Richard%20S.%20Barto%2C%20Andrew%20G.%20Reinforcement%20Learning%3A%20An%20Introduction%202018"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Csaba Szepesv\u00e1ri and William Smart. Interpolation-based Q-learning. In Proceedings of the International Conference on Machine Learning (ICML-04), 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Szepesv%C3%A1ri%2C%20Csaba%20Smart%2C%20William%20Interpolation-based%20Q-learning%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Szepesv%C3%A1ri%2C%20Csaba%20Smart%2C%20William%20Interpolation-based%20Q-learning%202004"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Gerald Tesauro. Practical issues in temporal difference learning. Machine Learning, 8(3):257\u2013 277, May 1992.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tesauro%2C%20Gerald%20Practical%20issues%20in%20temporal%20difference%20learning%201992-05",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tesauro%2C%20Gerald%20Practical%20issues%20in%20temporal%20difference%20learning%201992-05"
+        },
+        {
+            "id": "29",
+            "entry": "[29] John H. Tsitsiklis and Benjamin Van Roy. An analysis of temporal-difference learning with function approximation. IEEE Transactions on Automatic Control, 42:674\u2013690, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tsitsiklis%2C%20John%20H.%20Roy%2C%20Benjamin%20Van%20An%20analysis%20of%20temporal-difference%20learning%20with%20function%20approximation%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tsitsiklis%2C%20John%20H.%20Roy%2C%20Benjamin%20Van%20An%20analysis%20of%20temporal-difference%20learning%20with%20function%20approximation%201996"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Hado van Hasselt. Double Q-learning. In Advances in Neural Information Processing Systems 23 (NIPS-10), pages 2613\u20132621, Vancouver, BC, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hado%20van%20Hasselt%20Double%20Qlearning%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%2023%20NIPS10%20pages%2026132621%20Vancouver%20BC%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hado%20van%20Hasselt%20Double%20Qlearning%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%2023%20NIPS10%20pages%2026132621%20Vancouver%20BC%202010"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Vladimir N. Vapnik. Statistical Learning Theory. Wiley-Interscience, September 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vladimir%20N%20Vapnik%20Statistical%20Learning%20Theory%20WileyInterscience%20September%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vladimir%20N%20Vapnik%20Statistical%20Learning%20Theory%20WileyInterscience%20September%201998"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Ziyu Wang, Tom Schaul, Matteo Hessel, Hado van Hasselt, Marc Lanctot, and Nando de Freitas. Dueling network architectures for deep reinforcement learning. In Proceedings of the International Conference on Machine Learning (ICML-16), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Ziyu%20Schaul%2C%20Tom%20Hessel%2C%20Matteo%20van%20Hasselt%2C%20Hado%20Dueling%20network%20architectures%20for%20deep%20reinforcement%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Ziyu%20Schaul%2C%20Tom%20Hessel%2C%20Matteo%20van%20Hasselt%2C%20Hado%20Dueling%20network%20architectures%20for%20deep%20reinforcement%20learning%202016"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Christopher J. C. H. Watkins. Learning from Delayed Rewards. PhD thesis, King\u2019s College, Cambridge, UK, May 1989.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Watkins%2C%20Christopher%20J.C.H.%20Learning%20from%20Delayed%20Rewards%201989-05"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Christopher J. C. H. Watkins and Peter Dayan. Q-learning. Machine Learning, 8:279\u2013292, 1992. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Christopher%20J%20C%20H%20Watkins%20and%20Peter%20Dayan%20Qlearning%20Machine%20Learning%208279292%201992",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Christopher%20J%20C%20H%20Watkins%20and%20Peter%20Dayan%20Qlearning%20Machine%20Learning%208279292%201992"
+        }
+    ]
+}

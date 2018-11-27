@@ -1,0 +1,221 @@
+{
+    "filename": "8272-forward-modeling-for-partial-observation-strategy-games-a-starcraft-defogger.pdf",
+    "metadata": {
+        "title": "Forward Modeling for Partial Observation Strategy Games - A StarCraft Defogger",
+        "author": "Gabriel Synnaeve, Zeming Lin, Jonas Gehring, Dan Gant, Vegard Mella, Vasil Khalidov, Nicolas Carion, Nicolas Usunier",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8272-forward-modeling-for-partial-observation-strategy-games-a-starcraft-defogger.pdf"
+        },
+        "abstract": "We formulate the problem of defogging as state estimation and future state prediction from previous, partial observations in the context of real-time strategy games. We propose to employ encoder-decoder neural networks for this task, and introduce proxy tasks and baselines for evaluation to assess their ability of capturing basic game rules and high-level dynamics. By combining convolutional neural networks and recurrent networks, we exploit spatial and sequential correlations and train well-performing models on a large dataset of human games of StarCraft R : Brood War R \u2020. Finally, we demonstrate the relevance of our models to downstream tasks by applying them for enemy unit prediction in a state-of-the-art, rule-based StarCraft bot. We observe improvements in win rates against several strong community bots."
+    },
+    "keywords": [
+        {
+            "term": "long term",
+            "url": "https://en.wikipedia.org/wiki/long_term"
+        },
+        {
+            "term": "strategy games",
+            "url": "https://en.wikipedia.org/wiki/strategy_games"
+        },
+        {
+            "term": "state estimation",
+            "url": "https://en.wikipedia.org/wiki/state_estimation"
+        },
+        {
+            "term": "real time strategy game",
+            "url": "https://en.wikipedia.org/wiki/real_time_strategy_game"
+        },
+        {
+            "term": "high level",
+            "url": "https://en.wikipedia.org/wiki/high_level"
+        },
+        {
+            "term": "real-time strategy",
+            "url": "https://en.wikipedia.org/wiki/real-time_strategy"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "A current challenge in AI is to design policies to act in complex and partially observable environments",
+        "We address this question by considering the problems of state estimation and future state prediction in partially observable real-time strategy (RTS) games, taking StarCraft: Brood War as a running example",
+        "We report baselines and models scores according to the metrics described above, on 64 and 32 walktiles effective grids (g) due to striding, with predictions at 0, 5, 15, and 30 seconds in the future (s), in Table 1",
+        "We report the results on the test set with the best thresholds on the validation set",
+        "We proposed models for state estimation and future state prediction in real-time strategy games, with the goals of inferring hidden parts of the state and learning higher-level strategic patterns and basic rules of the game from human games",
+        "We demonstrated via off-line tests that encoder-decoder architectures with temporal memory perform better than rule-based baselines at predicting both the current state and the future state"
+    ],
+    "key_statements": [
+        "A current challenge in AI is to design policies to act in complex and partially observable environments",
+        "Many real-world scenarios involve a large number of agents that interact in different ways, and only a few of these interactions are observable at a given point in time",
+        "We address this question by considering the problems of state estimation and future state prediction in partially observable real-time strategy (RTS) games, taking StarCraft: Brood War as a running example",
+        "The recurrent cells allow our models to capture information from previous frames, which is necessary in a partially observable environment such as StarCraft, because events that we observed minutes ago are relevant to predict the hidden parts of the current state",
+        "We evaluate our models on a human games dataset, and compare them to heuristic baselines that are currently employed by competitive rule-based bots",
+        "We explored the following properties: kernel width of convolutions and striding (3,5); model depth; non-linearities (ReLU, GLU); residual connections; skip connections in the encoder LSTM; optimizers (Adam, SGD); learning rates",
+        "We found Adam to be more stable than SGD over a large range of hyperparameters",
+        "We report baselines and models scores according to the metrics described above, on 64 and 32 walktiles effective grids (g) due to striding, with predictions at 0, 5, 15, and 30 seconds in the future (s), in Table 1",
+        "To obtain the existence thresholds from a regression output, we sweep the validation set for threshold values on a logarithmic scale from 0.001 to 1.5",
+        "A unit is assumed to be present in a cell, if the corresponding model output is greater than the existence threshold",
+        "Lower threshold values performed better, indicating that our model is sure of grid locations with zero units",
+        "We report the results on the test set with the best thresholds on the validation set",
+        "We proposed models for state estimation and future state prediction in real-time strategy games, with the goals of inferring hidden parts of the state and learning higher-level strategic patterns and basic rules of the game from human games",
+        "We demonstrated via off-line tests that encoder-decoder architectures with temporal memory perform better than rule-based baselines at predicting both the current state and the future state",
+        "We believe the promising results presented in this paper open the way towards learning models of the evolution of the game conditioned on the players\u2019 strategy, to perform model-based reinforcement learning or model predictive control"
+    ],
+    "summary": [
+        "A current challenge in AI is to design policies to act in complex and partially observable environments.",
+        "We address this question by considering the problems of state estimation and future state prediction in partially observable real-time strategy (RTS) games, taking StarCraft: Brood War as a running example.",
+        "The only deep learning approach utilizing replays of human games to improve actual full-game play is [<a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>], which use a feed-forward model to predict the unit that the player should produce.",
+        "We propose to model a low-resolution game state by considering accumulated counts of units by type, downsampled onto a coarse spatial grid.",
+        "The recurrent cells allow our models to capture information from previous frames, which is necessary in a partially observable environment such as StarCraft, because events that we observed minutes ago are relevant to predict the hidden parts of the current state.",
+        "We hypothesize that our models will be able to make predictions of the global build tree and local unit numbers better than strong existing baselines.",
+        "We test whether we are able to use the defogger directly in a state-of-the-art rule-based StarCraft bot, and we evaluate the impact of the best models within full games.",
+        "One task is the model correctly predicting the existence or absence of all enemy units on the game map, correlated to being able to model the game dynamics.",
+        "To validate the strength of our models, we compare their performance to relevant baselines that are similar to what rule-based bots use traditionally in StarCraft: Brood War competitions.",
+        "Well the model learns the game dynamics \u2013 in (a), the model gets almost nothing as input at the current timestep, yet still manages to predict a good distribution over the enemy units from what is seen in the previous frames.",
+        "5.1.5 Evaluation in a Full-Game Bot After observing good performance on metrics representing potential downstream tasks, we test these trained models in a StarCraft: Brood War full-game setting.",
+        "In Figure 3, we observe that the defogger model is able to much more precisely predict the number of units in the game compared to using heuristics, equivalent to the PS baseline.",
+        "We proposed models for state estimation and future state prediction in real-time strategy games, with the goals of inferring hidden parts of the state and learning higher-level strategic patterns and basic rules of the game from human games.",
+        "We demonstrated via off-line tests that encoder-decoder architectures with temporal memory perform better than rule-based baselines at predicting both the current state and the future state.",
+        "We believe the promising results presented in this paper open the way towards learning models of the evolution of the game conditioned on the players\u2019 strategy, to perform model-based reinforcement learning or model predictive control"
+    ],
+    "headline": "We propose to employ encoder-decoder neural networks for this task, and introduce proxy tasks and baselines for evaluation to assess their ability of capturing basic game rules and high-level dynamics",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Wikipedia contributors. Actions per minute. https://en.wikipedia.org/wiki/Actions_per_minute, 2018.[Online; accessed 26-October-2018].",
+            "url": "https://en.wikipedia.org/wiki/Actions_per_minute"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Reinhard Kneser and Hermann Ney. Improved backing-off for m-gram language modeling. In Acoustics, Speech, and Signal Processing, 1995. ICASSP-95., 1995 International Conference on, volume 1, pages 181\u2013184. IEEE, 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kneser%2C%20Reinhard%20Ney%2C%20Hermann%20Improved%20backing-off%20for%20m-gram%20language%20modeling%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kneser%2C%20Reinhard%20Ney%2C%20Hermann%20Improved%20backing-off%20for%20m-gram%20language%20modeling%201995"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Yoshua Bengio, R\u00e9jean Ducharme, Pascal Vincent, and Christian Jauvin. A neural probabilistic language model. Journal of machine learning research, 3(Feb):1137\u20131155, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bengio%2C%20Yoshua%20Ducharme%2C%20R%C3%A9jean%20Vincent%2C%20Pascal%20Jauvin%2C%20Christian%20A%20neural%20probabilistic%20language%20model%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bengio%2C%20Yoshua%20Ducharme%2C%20R%C3%A9jean%20Vincent%2C%20Pascal%20Jauvin%2C%20Christian%20A%20neural%20probabilistic%20language%20model%202003"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Rafal Jozefowicz, Oriol Vinyals, Mike Schuster, Noam Shazeer, and Yonghui Wu. Exploring the limits of language modeling. arXiv preprint arXiv:1602.02410, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1602.02410"
+        },
+        {
+            "id": "5",
+            "entry": "[5] MarcAurelio Ranzato, Arthur Szlam, Joan Bruna, Michael Mathieu, Ronan Collobert, and Sumit Chopra. Video (language) modeling: a baseline for generative models of natural videos. In International Conference on Learning Representations, ICLR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ranzato%2C%20MarcAurelio%20Szlam%2C%20Arthur%20Bruna%2C%20Joan%20Mathieu%2C%20Michael%20Video%20%28language%29%20modeling%3A%20a%20baseline%20for%20generative%20models%20of%20natural%20videos%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ranzato%2C%20MarcAurelio%20Szlam%2C%20Arthur%20Bruna%2C%20Joan%20Mathieu%2C%20Michael%20Video%20%28language%29%20modeling%3A%20a%20baseline%20for%20generative%20models%20of%20natural%20videos%202015"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Michael Mathieu, Camille Couprie, and Yann LeCun. Deep multi-scale video prediction beyond mean square error. arXiv:1511.05440 [cs, stat], November 2015. arXiv: 1511.05440.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.05440"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Pauline Luc, Natalia Neverova, Camille Couprie, Jakob Verbeek, and Yann Lecun. Predicting Deeper into the Future of Semantic Segmentation. In ICCV 2017 - International Conference on Computer Vision, page 10, Venise, Italy, October 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Luc%2C%20Pauline%20Neverova%2C%20Natalia%20Couprie%2C%20Camille%20Verbeek%2C%20Jakob%20Predicting%20Deeper%20into%20the%20Future%20of%20Semantic%20Segmentation%202017-10",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Luc%2C%20Pauline%20Neverova%2C%20Natalia%20Couprie%2C%20Camille%20Verbeek%2C%20Jakob%20Predicting%20Deeper%20into%20the%20Future%20of%20Semantic%20Segmentation%202017-10"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Adam Lerer, Sam Gross, and Rob Fergus. Learning physical intuition of block towers by example. In Proceedings of the 33rd International Conference on International Conference on Machine Learning - Volume 48, ICML\u201916, pages 430\u2013438. JMLR.org, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lerer%2C%20Adam%20Gross%2C%20Sam%20Fergus%2C%20Rob%20Learning%20physical%20intuition%20of%20block%20towers%20by%20example%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lerer%2C%20Adam%20Gross%2C%20Sam%20Fergus%2C%20Rob%20Learning%20physical%20intuition%20of%20block%20towers%20by%20example%202016"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Xingjian Shi, Zhihan Gao, Leonard Lausen, Hao Wang, Dit-Yan Yeung, Wai-kin Wong, and Wang-chun Woo. Deep learning for precipitation nowcasting: A benchmark and a new model. In Advances in Neural Information Processing Systems, pages 5622\u20135632, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shi%2C%20Xingjian%20Gao%2C%20Zhihan%20Lausen%2C%20Leonard%20Wang%2C%20Hao%20Dit-Yan%20Yeung%2C%20Wai-kin%20Wong%2C%20and%20Wang-chun%20Woo.%20Deep%20learning%20for%20precipitation%20nowcasting%3A%20A%20benchmark%20and%20a%20new%20model%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shi%2C%20Xingjian%20Gao%2C%20Zhihan%20Lausen%2C%20Leonard%20Wang%2C%20Hao%20Dit-Yan%20Yeung%2C%20Wai-kin%20Wong%2C%20and%20Wang-chun%20Woo.%20Deep%20learning%20for%20precipitation%20nowcasting%3A%20A%20benchmark%20and%20a%20new%20model%202017"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Jintao Ke, Hongyu Zheng, Hai Yang, and Xiqun Michael Chen. Short-term forecasting of passenger demand under on-demand ride services: A spatio-temporal deep learning approach. Transportation Research Part C: Emerging Technologies, 85:591\u2013608, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ke%2C%20Jintao%20Zheng%2C%20Hongyu%20Yang%2C%20Hai%20Chen%2C%20Xiqun%20Michael%20Short-term%20forecasting%20of%20passenger%20demand%20under%20on-demand%20ride%20services%3A%20A%20spatio-temporal%20deep%20learning%20approach%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ke%2C%20Jintao%20Zheng%2C%20Hongyu%20Yang%2C%20Hai%20Chen%2C%20Xiqun%20Michael%20Short-term%20forecasting%20of%20passenger%20demand%20under%20on-demand%20ride%20services%3A%20A%20spatio-temporal%20deep%20learning%20approach%202017"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Haiyang Yu, Zhihai Wu, Shuqin Wang, Yunpeng Wang, and Xiaolei Ma. Spatiotemporal recurrent convolutional networks for traffic prediction in transportation networks. Sensors, 17(7):1501, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yu%2C%20Haiyang%20Wu%2C%20Zhihai%20Shuqin%20Wang%2C%20Yunpeng%20Wang%2C%20and%20Xiaolei%20Ma.%20Spatiotemporal%20recurrent%20convolutional%20networks%20for%20traffic%20prediction%20in%20transportation%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yu%2C%20Haiyang%20Wu%2C%20Zhihai%20Shuqin%20Wang%2C%20Yunpeng%20Wang%2C%20and%20Xiaolei%20Ma.%20Spatiotemporal%20recurrent%20convolutional%20networks%20for%20traffic%20prediction%20in%20transportation%20networks%202017"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Santiago Ontan\u00f3n, Gabriel Synnaeve, Alberto Uriarte, Florian Richoux, David Churchill, and Mike Preuss. A survey of real-time strategy game ai research and competition in starcraft. IEEE Transactions on Computational Intelligence and AI in games, 5(4):293\u2013311, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ontan%C3%B3n%2C%20Santiago%20Synnaeve%2C%20Gabriel%20Uriarte%2C%20Alberto%20Richoux%2C%20Florian%20A%20survey%20of%20real-time%20strategy%20game%20ai%20research%20and%20competition%20in%20starcraft%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ontan%C3%B3n%2C%20Santiago%20Synnaeve%2C%20Gabriel%20Uriarte%2C%20Alberto%20Richoux%2C%20Florian%20A%20survey%20of%20real-time%20strategy%20game%20ai%20research%20and%20competition%20in%20starcraft%202013"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Ben George Weber, Michael Mateas, and Arnav Jhala. A particle model for state estimation in real-time strategy games. In AIIDE, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Weber%2C%20Ben%20George%20Mateas%2C%20Michael%20Jhala%2C%20Arnav%20A%20particle%20model%20for%20state%20estimation%20in%20real-time%20strategy%20games%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Weber%2C%20Ben%20George%20Mateas%2C%20Michael%20Jhala%2C%20Arnav%20A%20particle%20model%20for%20state%20estimation%20in%20real-time%20strategy%20games%202011"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Gabriel Synnaeve and Pierre Bessiere. Special tactics: A bayesian approach to tactical decisionmaking. In Computational Intelligence and Games (CIG), 2012 IEEE Conference on, pages 409\u2013416. IEEE, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Synnaeve%2C%20Gabriel%20Bessiere%2C%20Pierre%20Special%20tactics%3A%20A%20bayesian%20approach%20to%20tactical%20decisionmaking%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Synnaeve%2C%20Gabriel%20Bessiere%2C%20Pierre%20Special%20tactics%3A%20A%20bayesian%20approach%20to%20tactical%20decisionmaking%202012"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Alberto Uriarte and Santiago Ontan\u00f3n. Automatic learning of combat models for rts games. In Eleventh Artificial Intelligence and Interactive Digital Entertainment Conference, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Uriarte%2C%20Alberto%20Ontan%C3%B3n%2C%20Santiago%20Automatic%20learning%20of%20combat%20models%20for%20rts%20games%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Uriarte%2C%20Alberto%20Ontan%C3%B3n%2C%20Santiago%20Automatic%20learning%20of%20combat%20models%20for%20rts%20games%202015"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Nicolas Usunier, Gabriel Synnaeve, Zeming Lin, and Soumith Chintala. Episodic exploration for deep deterministic policies: An application to starcraft micromanagement tasks. arXiv preprint arXiv:1609.02993, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.02993"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Jakob Foerster, Gregory Farquhar, Triantafyllos Afouras, Nantas Nardelli, and Shimon Whiteson. Counterfactual multi-agent policy gradients. arXiv preprint arXiv:1705.08926, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1705.08926"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Niels Justesen and Sebastian Risi. Learning macromanagement in starcraft from replays using deep learning. In Computational Intelligence and Games (CIG), 2017 IEEE Conference on, pages 162\u2013169. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Justesen%2C%20Niels%20Risi%2C%20Sebastian%20Learning%20macromanagement%20in%20starcraft%20from%20replays%20using%20deep%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Justesen%2C%20Niels%20Risi%2C%20Sebastian%20Learning%20macromanagement%20in%20starcraft%20from%20replays%20using%20deep%20learning%202017"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Zeming Lin, Jonas Gehring, Vasil Khalidov, and Gabriel Synnaeve. STARDATA: A StarCraft AI Research Dataset. In AAAI Conference on Artificial Intelligence and Interactive Digital Entertainment, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20Zeming%20Gehring%2C%20Jonas%20Khalidov%2C%20Vasil%20Synnaeve%2C%20Gabriel%20STARDATA%3A%20A%20StarCraft%20AI%20Research%20Dataset%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lin%2C%20Zeming%20Gehring%2C%20Jonas%20Khalidov%2C%20Vasil%20Synnaeve%2C%20Gabriel%20STARDATA%3A%20A%20StarCraft%20AI%20Research%20Dataset%202017"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Xingjian Shi, Zhourong Chen, Hao Wang, Dit-Yan Yeung, Wai-Kin Wong, and Wang-chun Woo. Convolutional LSTM network: A machine learning approach for precipitation nowcasting. CoRR, abs/1506.04214, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1506.04214"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Adam Paszke, Sam Gross, Soumith Chintala, Gregory Chanan, Edward Yang, Zachary DeVito, Zeming Lin, Alban Desmaison, Luca Antiga, and Adam Lerer. Automatic differentiation in pytorch. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Paszke%2C%20Adam%20Gross%2C%20Sam%20Chintala%2C%20Soumith%20Chanan%2C%20Gregory%20Automatic%20differentiation%20in%20pytorch%202017"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Gabriel Synnaeve, Nantas Nardelli, Alex Auvolat, Soumith Chintala, Timoth\u00e9e Lacroix, Zeming Lin, Florian Richoux, and Nicolas Usunier. TorchCraft: a Library for Machine Learning Research on Real-Time Strategy Games. arXiv:1611.00625 [cs], November 2016. arXiv: 1611.00625.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.00625"
+        },
+        {
+            "id": "23",
+            "entry": "[23] S. Onta\u00f1\u00f3n, G. Synnaeve, A. Uriarte, F. Richoux, D. Churchill, and M. Preuss. A Survey of Real-Time Strategy Game AI Research and Competition in StarCraft. IEEE Transactions on Computational Intelligence and AI in Games, 5(4):293\u2013311, December 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Onta%C3%B1%C3%B3n%2C%20S.%20Synnaeve%2C%20G.%20Uriarte%2C%20A.%20Richoux%2C%20F.%20A%20Survey%20of%20Real-Time%20Strategy%20Game%20AI%20Research%20and%20Competition%20in%20StarCraft%202013-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Onta%C3%B1%C3%B3n%2C%20S.%20Synnaeve%2C%20G.%20Uriarte%2C%20A.%20Richoux%2C%20F.%20A%20Survey%20of%20Real-Time%20Strategy%20Game%20AI%20Research%20and%20Competition%20in%20StarCraft%202013-12"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Gabriel Synnaeve. Bayesian programming and learning for multi-player video games. PhD thesis, Grenoble University, 2012. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Synnaeve%2C%20Gabriel%20Bayesian%20programming%20and%20learning%20for%20multi-player%20video%20games%202012"
+        }
+    ]
+}

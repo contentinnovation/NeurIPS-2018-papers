@@ -1,0 +1,208 @@
+{
+    "filename": "8202-post-device-placement-with-cross-entropy-minimization-and-proximal-policy-optimization.pdf",
+    "metadata": {
+        "title": "Post: Device Placement with Cross-Entropy Minimization and Proximal Policy Optimization",
+        "author": "Yuanxiang Gao, Li Chen, Baochun Li",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8202-post-device-placement-with-cross-entropy-minimization-and-proximal-policy-optimization.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Training deep neural networks requires an exorbitant amount of computation resources, including a heterogeneous mix of GPU and CPU devices. It is critical to place operations in a neural network on these devices in an optimal way, so that the training process can complete within the shortest amount of time. The state-of-the-art uses reinforcement learning to learn placement skills by repeatedly performing Monte-Carlo experiments. However, due to its equal treatment of placement samples, we argue that there remains ample room for significant improvements. In this paper, we propose a new joint learning algorithm, called Post, that integrates cross-entropy minimization and proximal policy optimization to achieve theoretically guaranteed optimal efficiency. In order to incorporate the cross-entropy method as a sampling technique, we propose to represent placements using discrete probability distributions, which allows us to estimate an optimal probability mass by maximal likelihood estimation, a powerful tool with the best possible efficiency. We have implemented Post in the Google Cloud platform, and our extensive experiments with several popular neural network training benchmarks have demonstrated clear evidence of superior performance: with the same amount of learning time, it leads to placements that have training times up to 63.7% shorter over the state-of-the-art."
+    },
+    "keywords": [
+        {
+            "term": "cross entropy method",
+            "url": "https://en.wikipedia.org/wiki/cross_entropy_method"
+        },
+        {
+            "term": "neural machine translation",
+            "url": "https://en.wikipedia.org/wiki/neural_machine_translation"
+        },
+        {
+            "term": "deep neural networks",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_networks"
+        },
+        {
+            "term": "monte carlo",
+            "url": "https://en.wikipedia.org/wiki/monte_carlo"
+        },
+        {
+            "term": "policy gradient method",
+            "url": "https://en.wikipedia.org/wiki/policy_gradient_method"
+        },
+        {
+            "term": "sampling technique",
+            "url": "https://en.wikipedia.org/wiki/sampling_technique"
+        },
+        {
+            "term": "learning algorithm",
+            "url": "https://en.wikipedia.org/wiki/learning_algorithm"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "probability distribution",
+            "url": "https://en.wikipedia.org/wiki/probability_distribution"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "With an increasing demand of computing resources to train today\u2019s deep neural networks (DNNs), it becomes typical to leverage a heterogeneous mix of both CPU and GPU devices [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>]",
+        "Our original contribution in this paper focuses on the design and implementation of a new learning algorithm, called Post, that integrates cross-entropy minimization and proximal policy optimization [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>, <a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>], a state-of-the-art reinforcement learning algorithm",
+        "We compare the training time performance \u2014 including both the average and the minimum training time \u2014 of the placements found by Post with the following baselines: Single GPU, which assigns all the operations to a single GPU, except for those without GPU implementation; Policy Gradient Method, the device placement algorithm proposed by Google [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>], with the policy gradient update rule; Proximal Policy Optimization, the reinforcement learning algorithm [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>, <a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>] used by Spotlight [<a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>]), performing SGA updates; Cross-Entropy Minimization, our proposed global optimization method in Theorem 1, without the updates from proximal policy optimization; Metis, an algorithm that partitions the network into 2 parts (2-GPU case), 4 parts (4-GPU case) or 8 parts (8-GPU case), each assigned to one device, according to a cost model of operations in the network [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>]; Expert, a method that places the entire model on a single GPU for Inception-V3 and ResNet [<a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>, <a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>], and",
+        "We evaluated our proposed algorithm with an array of deep neural network models in TensorFlow",
+        "Our experiments demonstrated that Post achieved a significantly better learning performance than the policy gradient method, proximal policy optimization, and the cross-entropy method alone"
+    ],
+    "key_statements": [
+        "With an increasing demand of computing resources to train today\u2019s deep neural networks (DNNs), it becomes typical to leverage a heterogeneous mix of both CPU and GPU devices [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>]",
+        "Our original contribution in this paper focuses on the design and implementation of a new learning algorithm, called Post, that integrates cross-entropy minimization and proximal policy optimization [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>, <a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>], a state-of-the-art reinforcement learning algorithm",
+        "We have evaluated Post with a wide variety of deep neural network models in TensorFlow, including Inception-V3 [<a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>], ResNet [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>], Language Modeling [<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>] and Neural Machine Translation [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>]",
+        "Our experimental results have demonstrated a substantial improvement in the learning efficiency achieved by Post, compared with using the policy gradient method [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>], proximal policy optimization only [<a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>], and cross-entropy minimization only",
+        "We have evaluated Post using four open-source benchmarks in TensorFlow: Inception-V3 [<a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>, <a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>], ResNet [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>, <a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>], RNN Language Modeling (RNNLM) [<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>], and Neural Machine Translation (NMT) [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>, <a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>]",
+        "We compare the training time performance \u2014 including both the average and the minimum training time \u2014 of the placements found by Post with the following baselines: Single GPU, which assigns all the operations to a single GPU, except for those without GPU implementation; Policy Gradient Method, the device placement algorithm proposed by Google [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>], with the policy gradient update rule; Proximal Policy Optimization, the reinforcement learning algorithm [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>, <a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>] used by Spotlight [<a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>]), performing SGA updates; Cross-Entropy Minimization, our proposed global optimization method in Theorem 1, without the updates from proximal policy optimization; Metis, an algorithm that partitions the network into 2 parts (2-GPU case), 4 parts (4-GPU case) or 8 parts (8-GPU case), each assigned to one device, according to a cost model of operations in the network [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>]; Expert, a method that places the entire model on a single GPU for Inception-V3 and ResNet [<a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>, <a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>], and",
+        "We present the placements our algorithm has discovered for Inception-V3 and Neural Machine Translation in Figure 3(a) and 3(d), in comparison with the placement given by the Expert method, shown in Figure 3(c)",
+        "We evaluated our proposed algorithm with an array of deep neural network models in TensorFlow",
+        "Our experiments demonstrated that Post achieved a significantly better learning performance than the policy gradient method, proximal policy optimization, and the cross-entropy method alone"
+    ],
+    "summary": [
+        "With an increasing demand of computing resources to train today\u2019s deep neural networks (DNNs), it becomes typical to leverage a heterogeneous mix of both CPU and GPU devices [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>].",
+        "Our experimental results have demonstrated a substantial improvement in the learning efficiency achieved by Post, compared with using the policy gradient method [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>], proximal policy optimization only [<a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>], and cross-entropy minimization only.",
+        "Accompanied by proximal policy optimization and cross-entropy minimization, training softmax distributions solves the device placement problem with a lower training overhead, as demonstrated in our extensive experiments.",
+        "For every N sampled placements (N is several or tens of times larger than K), we solve the cross-entropy minimization problem with Eq (10) to achieve a global and an aggressive policy improvement.",
+        "We compare the training time performance \u2014 including both the average and the minimum training time \u2014 of the placements found by Post with the following baselines: Single GPU, which assigns all the operations to a single GPU, except for those without GPU implementation; Policy Gradient Method, the device placement algorithm proposed by Google [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>], with the policy gradient update rule; Proximal Policy Optimization, the reinforcement learning algorithm [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>, <a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>] used by Spotlight [<a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>]), performing SGA updates; Cross-Entropy Minimization, our proposed global optimization method in Theorem 1, without the updates from proximal policy optimization; Metis, an algorithm that partitions the network into 2 parts (2-GPU case), 4 parts (4-GPU case) or 8 parts (8-GPU case), each assigned to one device, according to a cost model of operations in the network [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>]; Expert, a method that places the entire model on a single GPU for Inception-V3 and ResNet [<a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>, <a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>], and",
+        "Figure 2 presents the average per-step training time resulted from sampled placements for a neural network, along with the progress of learning the softmax distributions.",
+        "Proximal policy optimization improves the training time performance at a faster speed than the policy gradient method, while the cross-entropy minimization is even faster.",
+        "Post achieves the fastest improvement and obtains the shortest training time, as it integrates crossentropy minimization into proximal policy optimization to simultaneously improve the placement distribution.",
+        "The policy gradient method fails to discover a placement that is better than Post or Single GPU within a pre-specified amount of learning time.",
+        "It requires 20 hours for the single GPU case and 20.5 hours with the placement found by the policy gradient method, which clearly demonstrate that Post saves the end-to-end training time by 32.5% and 34.1%, respectively.",
+        "Our experiments demonstrated that Post achieved a significantly better learning performance than the policy gradient method, proximal policy optimization, and the cross-entropy method alone."
+    ],
+    "headline": "Due to its equal treatment of placement samples, we argue that there remains ample room for significant improvements",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] I. Sutskever, O. Vinyals, and Q. Le, \u201cSequence to sequence learning with neural networks,\u201d in Advances in Neural Information Processing Systems (NIPS), 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutskever%2C%20I.%20Vinyals%2C%20O.%20Le%2C%20Q.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%2C%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutskever%2C%20I.%20Vinyals%2C%20O.%20Le%2C%20Q.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%2C%202014"
+        },
+        {
+            "id": "2",
+            "entry": "[2] D. Bahdanau, C. Kyunghyun, and Y. Bengio, \u201cNeural machine translation by jointly learning to align and translate,\u201d in Proc. Int\u2019l Conference on Learning Representations (ICLR), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bahdanau%2C%20D.%20Kyunghyun%2C%20C.%20Bengio%2C%20Y.%20Neural%20machine%20translation%20by%20jointly%20learning%20to%20align%20and%20translate%2C%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bahdanau%2C%20D.%20Kyunghyun%2C%20C.%20Bengio%2C%20Y.%20Neural%20machine%20translation%20by%20jointly%20learning%20to%20align%20and%20translate%2C%202015"
+        },
+        {
+            "id": "3",
+            "entry": "[3] A. Mirhoseini, H. Pham, Q. Le, B. Steiner, M. Norouzi, S. Bengio, and J. Dean, \u201cDevice placement optimization with reinforcement learning,\u201d in Proc. Int\u2019l Conference on Machine Learning (ICML), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mirhoseini%2C%20A.%20Pham%2C%20H.%20Le%2C%20Q.%20Steiner%2C%20B.%20Device%20placement%20optimization%20with%20reinforcement%20learning%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mirhoseini%2C%20A.%20Pham%2C%20H.%20Le%2C%20Q.%20Steiner%2C%20B.%20Device%20placement%20optimization%20with%20reinforcement%20learning%2C%202017"
+        },
+        {
+            "id": "4",
+            "entry": "[4] A. Mirhoseini, A. Goldie, H. Pham, B. Steiner, Q. V. Le, and J. Dean, \u201cA hierarchical model for device placement,\u201d in Proc. Int\u2019l Conference on Learning Representations (ICLR), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mirhoseini%2C%20A.%20Goldie%2C%20A.%20Pham%2C%20H.%20Steiner%2C%20B.%20A%20hierarchical%20model%20for%20device%20placement%2C%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mirhoseini%2C%20A.%20Goldie%2C%20A.%20Pham%2C%20H.%20Steiner%2C%20B.%20A%20hierarchical%20model%20for%20device%20placement%2C%202018"
+        },
+        {
+            "id": "5",
+            "entry": "[5] R. Sutton, D. McAllester, S. Singh, and Y. Mansour, \u201cPolicy gradient methods for reinforcement learning with function approximation,\u201d in Advances in Neural Information Processing Systems (NIPS), 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20R.%20McAllester%2C%20D.%20Singh%2C%20S.%20Mansour%2C%20Y.%20Policy%20gradient%20methods%20for%20reinforcement%20learning%20with%20function%20approximation%2C%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutton%2C%20R.%20McAllester%2C%20D.%20Singh%2C%20S.%20Mansour%2C%20Y.%20Policy%20gradient%20methods%20for%20reinforcement%20learning%20with%20function%20approximation%2C%202000"
+        },
+        {
+            "id": "6",
+            "entry": "[6] S. Goschin, A. Weinstein, and M. L. Littman, \u201cThe cross-entropy method optimizes for quantiles,\u201d in Proc. Int\u2019l Conference on Machine Learning (ICML), 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goschin%2C%20S.%20Weinstein%2C%20A.%20Littman%2C%20M.L.%20The%20cross-entropy%20method%20optimizes%20for%20quantiles%2C%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goschin%2C%20S.%20Weinstein%2C%20A.%20Littman%2C%20M.L.%20The%20cross-entropy%20method%20optimizes%20for%20quantiles%2C%202013"
+        },
+        {
+            "id": "7",
+            "entry": "[7] S. Mannor, R. Rubinstein, and Y. Gat, \u201cThe cross-entropy method for fast policy search,\u201d in Proc. Int\u2019l Conference on Machine Learning (ICML), 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mannor%2C%20S.%20Rubinstein%2C%20R.%20Gat%2C%20Y.%20The%20cross-entropy%20method%20for%20fast%20policy%20search%2C%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mannor%2C%20S.%20Rubinstein%2C%20R.%20Gat%2C%20Y.%20The%20cross-entropy%20method%20for%20fast%20policy%20search%2C%202003"
+        },
+        {
+            "id": "8",
+            "entry": "[8] I. Szita and A. Lorincz, \u201cLearning Tetris using the noisy cross-entropy method,\u201d Neural Computation, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Szita%2C%20I.%20Lorincz%2C%20A.%20Learning%20Tetris%20using%20the%20noisy%20cross-entropy%20method%2C%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Szita%2C%20I.%20Lorincz%2C%20A.%20Learning%20Tetris%20using%20the%20noisy%20cross-entropy%20method%2C%202006"
+        },
+        {
+            "id": "9",
+            "entry": "[9] R. Y. Rubinstein and D. P. Kroese, The Cross-Entropy Method: A Unified Approach to Combinatorial Optimization, Monte-Carlo Simulation and Machine Learning. Springer, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rubinstein%2C%20R.Y.%20Kroese%2C%20D.P.%20The%20Cross-Entropy%20Method%3A%20A%20Unified%20Approach%20to%20Combinatorial%20Optimization%2C%20Monte-Carlo%20Simulation%20and%20Machine%20Learning%202004"
+        },
+        {
+            "id": "10",
+            "entry": "[10] N. Heess, D. TB, S. Sriram, J. Merel, G. Wayne, Y. Tassa, T. Erez, Z. Wang, A. Eslami, and M. Riedmiller, \u201cEmergence of locomotion behaviours in rich environments,\u201d in arXiv preprint arXiv:1707.02286, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.02286"
+        },
+        {
+            "id": "11",
+            "entry": "[11] J. Shulman, F. Wolski, P. Dhariwal, A. Radford, and O. Klimov, \u201cProximal policy optimization algorithms,\u201d in Proc. Int\u2019l Conference on Machine Learning (ICML), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shulman%2C%20J.%20Wolski%2C%20F.%20Dhariwal%2C%20P.%20Radford%2C%20A.%20Proximal%20policy%20optimization%20algorithms%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shulman%2C%20J.%20Wolski%2C%20F.%20Dhariwal%2C%20P.%20Radford%2C%20A.%20Proximal%20policy%20optimization%20algorithms%2C%202017"
+        },
+        {
+            "id": "12",
+            "entry": "[12] C. Szegedy, V. Vanhoucke, S. Ioffe, J. Shlens, and Z. Wojna, \u201cRethinking the inception architecture for computer vision,\u201d in Proc. IEEE Computer Vision and Pattern Recognition (CVPR), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Szegedy%2C%20C.%20Vanhoucke%2C%20V.%20Ioffe%2C%20S.%20Shlens%2C%20J.%20Rethinking%20the%20inception%20architecture%20for%20computer%20vision%2C%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Szegedy%2C%20C.%20Vanhoucke%2C%20V.%20Ioffe%2C%20S.%20Shlens%2C%20J.%20Rethinking%20the%20inception%20architecture%20for%20computer%20vision%2C%202016"
+        },
+        {
+            "id": "13",
+            "entry": "[13] K. He, X. Zhang, S. Ren, and J. Sun, \u201cDeep residual learning for image recognition,\u201d in Proc. IEEE Computer Vision and Pattern Recognition (CVPR), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%2C%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%2C%202016"
+        },
+        {
+            "id": "14",
+            "entry": "[14] R. Jozefowicz, O. Vinyals, M. Schuster, N. Shazeer, and Y. Wu, \u201cExploring the limits of language modeling,\u201d in eprint arXiv:1602.02410, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1602.02410"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Y. Wu, M. Schuster, Z. Chen, Q. V. Le, and et al., \u201cGoogle\u2019s neural machine translation system: Bridging the gap between human and machine translation,\u201d in eprint arXiv:1609.08144, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.08144"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Y. Gao, L. Chen, and B. Li, \u201cSpotlight: Optimizing device placement for training deep neural networks,\u201d in Proc. Int\u2019l Conference on Machine Learning (ICML), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gao%2C%20Y.%20Chen%2C%20L.%20Li%2C%20B.%20Spotlight%3A%20Optimizing%20device%20placement%20for%20training%20deep%20neural%20networks%2C%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gao%2C%20Y.%20Chen%2C%20L.%20Li%2C%20B.%20Spotlight%3A%20Optimizing%20device%20placement%20for%20training%20deep%20neural%20networks%2C%202018"
+        },
+        {
+            "id": "17",
+            "entry": "[17] P. D. Boer, D. P. Kroese, and R. Y. Rubinstein, \u201cA tutorial on the cross-entropy method,\u201d Annals of Operations Research, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Boer%2C%20P.D.%20Kroese%2C%20D.P.%20Rubinstein%2C%20R.Y.%20A%20tutorial%20on%20the%20cross-entropy%20method%2C%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Boer%2C%20P.D.%20Kroese%2C%20D.P.%20Rubinstein%2C%20R.Y.%20A%20tutorial%20on%20the%20cross-entropy%20method%2C%202005"
+        },
+        {
+            "id": "18",
+            "entry": "[18] J. Shulman, S. Levine, P. Moritz, M. Jordan, and P. Abbeel, \u201cTrust region policy optimization,\u201d in Proc. Int\u2019l Conference on Machine Learning (ICML), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shulman%2C%20J.%20Levine%2C%20S.%20Moritz%2C%20P.%20Jordan%2C%20M.%20Trust%20region%20policy%20optimization%2C%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shulman%2C%20J.%20Levine%2C%20S.%20Moritz%2C%20P.%20Jordan%2C%20M.%20Trust%20region%20policy%20optimization%2C%202015"
+        },
+        {
+            "id": "19",
+            "entry": "[19] A. Papoulis and S. U. Pillai, Probability, Random Variables, and Stochastic Processes, 4th Edition. McGraw-Hill, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Papoulis%2C%20A.%20Pillai%2C%20S.U.%20Probability%2C%20Random%20Variables%20and%20Stochastic%20Processes%202002"
+        },
+        {
+            "id": "20",
+            "entry": "[20] S. Boyd and L. Vandenberghe, Convex Optimization. Cambridge University Press, 2004. [21] \u201cTensorFlow-Slim image classification model library.\u201d [Online]. Available: https: //github.com/tensorflow/models/tree/master/research/slim [22] \u201cNeural machine translation.\u201d [Online]. Available: https://github.com/tensorflow/nmt",
+            "url": "https://github.com/tensorflow/nmt"
+        },
+        {
+            "id": "23",
+            "entry": "[23] G. Karypis and V. Kumar, \u201cA fast and highly quality multilevel scheme for partitioning irregular graphs,\u201d SIAM Journal on Scientific Computing, vol. 20, no. 1, pp. 359\u2013392, 1999. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Karypis%2C%20G.%20Kumar%2C%20V.%20A%20fast%20and%20highly%20quality%20multilevel%20scheme%20for%20partitioning%20irregular%20graphs%2C%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Karypis%2C%20G.%20Kumar%2C%20V.%20A%20fast%20and%20highly%20quality%20multilevel%20scheme%20for%20partitioning%20irregular%20graphs%2C%201999"
+        }
+    ]
+}

@@ -1,0 +1,296 @@
+{
+    "filename": "8145-hardware-conditioned-policies-for-multi-robot-transfer-learning.pdf",
+    "metadata": {
+        "title": "Hardware Conditioned Policies for Multi-Robot Transfer Learning",
+        "author": "Tao Chen, Adithyavairavan Murali, Abhinav Gupta",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8145-hardware-conditioned-policies-for-multi-robot-transfer-learning.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Deep reinforcement learning could be used to learn dexterous robotic policies but it is challenging to transfer them to new robots with vastly different hardware properties. It is also prohibitively expensive to learn a new policy from scratch for each robot hardware due to the high sample complexity of modern state-ofthe-art algorithms. We propose a novel approach called Hardware Conditioned Policies where we train a universal policy conditioned on a vector representation of robot hardware. We considered robots in simulation with varied dynamics, kinematic structure, kinematic lengths and degrees-of-freedom. First, we use the kinematic structure directly as the hardware encoding and show great zero-shot transfer to completely novel robots not seen during training. For robots with lower zero-shot success rate, we also demonstrate that fine-tuning the policy network is significantly more sample-efficient than training a model from scratch. In tasks where knowing the agent dynamics is important for success, we learn an embedding for robot hardware and show that policies conditioned on the encoding of hardware tend to generalize and transfer well. Videos of experiments are available at: https://sites.google.com/view/robot-transfer-hcp."
+    },
+    "keywords": [
+        {
+            "term": "degrees of freedom",
+            "url": "https://en.wikipedia.org/wiki/degrees_of_freedom"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "policy network",
+            "url": "https://en.wikipedia.org/wiki/Policy_Network"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "We have seen remarkable success in the field of deep reinforcement learning (DRL)",
+        "To represent the hardware properties as a vector, we propose two methods depending on the task: explicit encoding (HCP-E) and implicit encoding (HCP-I)",
+        "Hardware Conditioned Policies-E works well when task policy does not heavily depend on agent dynamics",
+        "Even when zero-shot transfer gives low success rate, we showed that Hardware Conditioned Policies-E brings the agents very close to goals and is able to adapt to the new robots very quickly with finetuning",
+        "To deal with such cases, we propose an implicit encoding scheme (HCP-I) to learn the hardware embedding representation automatically via back-propagation",
+        "We showed that Hardware Conditioned Policies-I, without using any kinematics and dynamics information, can achieve good performance on par with the model that utilized both ground truth kinematics and dynamics information"
+    ],
+    "key_statements": [
+        "We have seen remarkable success in the field of deep reinforcement learning (DRL)",
+        "There are several factors that encompass robot hardware that we have considered in our framework - robot kinematics, robot dynamics and other aspects such as shape geometry, actuation design, etc. that we will explore in future work",
+        "Explicit Encoding First, we propose to represent robot hardware information via an explicit encoding method (HCP-E)",
+        "From Table 1, it is clear that Hardware Conditioned Policies-E still maintains high success rates when the policy is applied to new types of robots that have never been used in training, while DDPG+HER barely succeeds at controlling new types of robots at all",
+        "XI is trained on easier 6-degrees of freedom robots the policy trained with the actual Sawyer CAD model in simulation with randomized dynamics.\n6Since we are using direct torque control without gravity compensation, the trivial solution of transferring where the network can regard the 7-degrees of freedom robot as a 6-degrees of freedom robot by keeping one joint fixed doesn\u2019t exist here.\n7The reality gap is further exaggerated by the fact that we didn\u2019t do any form of gravity compensation in the simulation but the real-robot tests used the gravity compensation to make tests safer.\n8The Hardware Conditioned Policies-E policy resulted in a motion that was jerky on the real Sawyer robot to reach the target positions",
+        "We introduced a novel framework of Hardware Conditioned Policies for multi-robot transfer learning",
+        "To represent the hardware properties as a vector, we propose two methods depending on the task: explicit encoding (HCP-E) and implicit encoding (HCP-I)",
+        "Hardware Conditioned Policies-E works well when task policy does not heavily depend on agent dynamics",
+        "Even when zero-shot transfer gives low success rate, we showed that Hardware Conditioned Policies-E brings the agents very close to goals and is able to adapt to the new robots very quickly with finetuning",
+        "When the robot dynamics is so complicated that feeding dynamics information into policy network helps improve learning, the explicit encoding is not enough as it can only encode the kinematics information and dynamics information is usually challenging and sophisticated to acquire",
+        "To deal with such cases, we propose an implicit encoding scheme (HCP-I) to learn the hardware embedding representation automatically via back-propagation",
+        "We showed that Hardware Conditioned Policies-I, without using any kinematics and dynamics information, can achieve good performance on par with the model that utilized both ground truth kinematics and dynamics information"
+    ],
+    "summary": [
+        "We have seen remarkable success in the field of deep reinforcement learning (DRL).",
+        "We use low-level torque control which is severely affected by robot dynamics and show transfer even between kinematically different agents.",
+        "Hardware Conditioned Policies (HCP), takes robot hardware information into account in order to generalize the policy network over robots with different kinematics and dynamics.",
+        "To show the importance of hardware information as input to the policy network, we experiment on learning robotic skills among robots with different dynamics and kinematics.",
+        "DDPG+HER without any hardware information is unable to learn a common policy across multiple robots as different robots will behave differently even if they execute the same action in the same state.",
+        "We can test the zero-shot transfer ability of policy network on new type of robots.",
+        "From Table 1, it is clear that HCP-E still maintains high success rates when the policy is applied to new types of robots that have never been used in training, while DDPG+HER barely succeeds at controlling new types of robots at all.",
+        "As we can see from Exp. I and V, HCP-E got about 90% zero-shot transfer success rate even if it\u2019s applied on the hard robot type H.",
+        "Fine-tuning the zero-shot policy: Table 1 shows that Exp. XI and Exp. XV have relatively low zero-shot success rates on new type of robots.",
+        "Exp. XI is trained on easier 6-DOF robots the policy trained with the actual Sawyer CAD model in simulation with randomized dynamics.",
+        "Even though the success rates are low, HCP-E is able to move the peg bottom close to the hole in most testing robots, while DDPG+HER is much worse, as shown in Figure 5a.",
+        "5.2 Implicit Encoding Environment HCP-E shows remarkable success on transferring manipulator tasks to different types of robots.",
+        "We propose to learn an implicit, latent encoding (HCP-I) for each robot without using any kinematics and dynamics information.",
+        "We will demonstrate that adding implicitly learned robot representation can lead to comparable performance to the case where we know the ground-truth kinematics and dynamics.",
+        "To create robots with different kinematics and dynamics, we varied the length and mass of each hopper link, damping, friction, armature of each joint, which are shown in Table 5 in Appendix B.",
+        "Even when zero-shot transfer gives low success rate, we showed that HCP-E brings the agents very close to goals and is able to adapt to the new robots very quickly with finetuning.",
+        "We showed that HCP-I, without using any kinematics and dynamics information, can achieve good performance on par with the model that utilized both ground truth kinematics and dynamics information"
+    ],
+    "headline": "We propose a novel approach called Hardware Conditioned Policies where we train a universal policy conditioned on a vector representation of robot hardware",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei A Rusu, Joel Veness, Marc G Bellemare, Alex Graves, Martin Riedmiller, Andreas K Fidjeland, Georg Ostrovski, et al. Human-level control through deep reinforcement learning. Nature, 518(7540):529, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20Volodymyr%20Kavukcuoglu%2C%20Koray%20Silver%2C%20David%20Rusu%2C%20Andrei%20A.%20Human-level%20control%20through%20deep%20reinforcement%20learning%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20Volodymyr%20Kavukcuoglu%2C%20Koray%20Silver%2C%20David%20Rusu%2C%20Andrei%20A.%20Human-level%20control%20through%20deep%20reinforcement%20learning%202015"
+        },
+        {
+            "id": "2",
+            "entry": "[2] David Silver, Aja Huang, Chris J Maddison, Arthur Guez, Laurent Sifre, George Van Den Driessche, Julian Schrittwieser, Ioannis Antonoglou, Veda Panneershelvam, Marc Lanctot, et al. Mastering the game of go with deep neural networks and tree search. Nature, 529(7587):484\u2013489, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silver%2C%20David%20Huang%2C%20Aja%20Maddison%2C%20Chris%20J.%20Guez%2C%20Arthur%20Mastering%20the%20game%20of%20go%20with%20deep%20neural%20networks%20and%20tree%20search%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silver%2C%20David%20Huang%2C%20Aja%20Maddison%2C%20Chris%20J.%20Guez%2C%20Arthur%20Mastering%20the%20game%20of%20go%20with%20deep%20neural%20networks%20and%20tree%20search%202016"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Timothy P. Lillicrap, Jonathan J. Hunt, Alexander Pritzel, Nicolas Heess, Tom Erez, Yuval Tassa, David Silver, and Daan Wierstra. Continuous control with deep reinforcement learning. CoRR, abs/1509.02971, 2015. URL http://arxiv.org/abs/1509.02971.",
+            "url": "http://arxiv.org/abs/1509.02971",
+            "arxiv_url": "https://arxiv.org/pdf/1509.02971"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Xue Bin Peng, Marcin Andrychowicz, Wojciech Zaremba, and Pieter Abbeel. Sim-to-real transfer of robotic control with dynamics randomization. arXiv preprint arXiv:1710.06537, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.06537"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Matthew E Taylor and Peter Stone. Transfer learning for reinforcement learning domains: A survey. Journal of Machine Learning Research, 10(Jul):1633\u20131685, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Taylor%2C%20Matthew%20E.%20Stone%2C%20Peter%20Transfer%20learning%20for%20reinforcement%20learning%20domains%3A%20A%20survey%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Taylor%2C%20Matthew%20E.%20Stone%2C%20Peter%20Transfer%20learning%20for%20reinforcement%20learning%20domains%3A%20A%20survey%202009"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Coline Devin, Abhishek Gupta, Trevor Darrell, Pieter Abbeel, and Sergey Levine. Learning modular neural network policies for multi-task and multi-robot transfer. In Robotics and Automation (ICRA), 2017 IEEE International Conference on, pages 2169\u20132176. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Devin%2C%20Coline%20Gupta%2C%20Abhishek%20Darrell%2C%20Trevor%20Abbeel%2C%20Pieter%20Learning%20modular%20neural%20network%20policies%20for%20multi-task%20and%20multi-robot%20transfer%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Devin%2C%20Coline%20Gupta%2C%20Abhishek%20Darrell%2C%20Trevor%20Abbeel%2C%20Pieter%20Learning%20modular%20neural%20network%20policies%20for%20multi-task%20and%20multi-robot%20transfer%202017"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Justin Fu, Sergey Levine, and Pieter Abbeel. One-shot learning of manipulation skills with online dynamics adaptation and neural network priors. In Intelligent Robots and Systems (IROS), 2016 IEEE/RSJ International Conference on, pages 4019\u20134026. IEEE, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fu%2C%20Justin%20Levine%2C%20Sergey%20Abbeel%2C%20Pieter%20One-shot%20learning%20of%20manipulation%20skills%20with%20online%20dynamics%20adaptation%20and%20neural%20network%20priors%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fu%2C%20Justin%20Levine%2C%20Sergey%20Abbeel%2C%20Pieter%20One-shot%20learning%20of%20manipulation%20skills%20with%20online%20dynamics%20adaptation%20and%20neural%20network%20priors%202016"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Lerrel Pinto and Abhinav Gupta. Learning to push by grasping: Using multiple tasks for effective learning. ICRA, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pinto%2C%20Lerrel%20Gupta%2C%20Abhinav%20Learning%20to%20push%20by%20grasping%3A%20Using%20multiple%20tasks%20for%20effective%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pinto%2C%20Lerrel%20Gupta%2C%20Abhinav%20Learning%20to%20push%20by%20grasping%3A%20Using%20multiple%20tasks%20for%20effective%20learning%202017"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Andrei Rusu, Neil C. Rabinowitz, Guillaume Desjardins, Hubert Soyer, James Kirkpatrick, Koray Kavukcuoglu, Razvan Pascanu, and Raia Hadsell. Progressive neural networks. 2016. URL https://arxiv.org/abs/1606.04671.",
+            "url": "https://arxiv.org/abs/1606.04671",
+            "arxiv_url": "https://arxiv.org/pdf/1606.04671"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Adithyavairavan Murali, Lerrel Pinto, Dhiraj Gandhi, and Abhinav Gupta. CASSL: Curriculum accelerated self-supervised learning. ICRA, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Murali%2C%20Adithyavairavan%20Pinto%2C%20Lerrel%20Gandhi%2C%20Dhiraj%20Gupta%2C%20Abhinav%20CASSL%3A%20Curriculum%20accelerated%20self-supervised%20learning%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Murali%2C%20Adithyavairavan%20Pinto%2C%20Lerrel%20Gandhi%2C%20Dhiraj%20Gupta%2C%20Abhinav%20CASSL%3A%20Curriculum%20accelerated%20self-supervised%20learning%202018"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Rajeswaran Aravind, Sarvjeet Ghotra, Balaraman Ravindran, and Sergey Levine. Epopt: Learning robust neural network policies using model ensembles. ICLR, 2017. URL http://arxiv.org/abs/1610.01283.",
+            "url": "http://arxiv.org/abs/1610.01283",
+            "arxiv_url": "https://arxiv.org/pdf/1610.01283"
+        },
+        {
+            "id": "12",
+            "entry": "[12] A Nilim and L El Ghaoui. Robust control of markov decision processes with uncertain transition matrices. In Operations Research, pages 780\u2013798, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20A%20Nilim%20and%20L%20El%20Ghaoui.%20Robust%20control%20of%20markov%20decision%20processes%20with%20uncertain%20transition%20matrices%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20A%20Nilim%20and%20L%20El%20Ghaoui.%20Robust%20control%20of%20markov%20decision%20processes%20with%20uncertain%20transition%20matrices%202005"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Ajay Mandlekar, Yuke Zhu, Li Fei-Fei, and Silvio Savarese. Adversarially robust policy learning: Active construction of physically-plausible perturbations. IROS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mandlekar%2C%20Ajay%20Zhu%2C%20Yuke%20Fei-Fei%2C%20Li%20Savarese%2C%20Silvio%20Adversarially%20robust%20policy%20learning%3A%20Active%20construction%20of%20physically-plausible%20perturbations%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mandlekar%2C%20Ajay%20Zhu%2C%20Yuke%20Fei-Fei%2C%20Li%20Savarese%2C%20Silvio%20Adversarially%20robust%20policy%20learning%3A%20Active%20construction%20of%20physically-plausible%20perturbations%202017"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Josh Tobin, Rachel Fong, Alex Ray, Jonas Schneider, Wojciech Zaremba, and Pieter Abbeel. Domain randomization for transferring deep neural networks from simulation to the real world. 2017. URL https://arxiv.org/abs/1703.06907.",
+            "url": "https://arxiv.org/abs/1703.06907",
+            "arxiv_url": "https://arxiv.org/pdf/1703.06907"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Maruan Al-Shedivat, Trapit Bansal, Yuri Burda, Ilya Sutskever, Igor Mordatch, and Pieter Abbeel. Continuous adaptation via meta-learning in nonstationary and competitive environments. arXiv preprint arXiv:1710.03641, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.03641"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Tom Schaul, Daniel Horgan, Karol Gregor, and David Silver. Universal value function approximators. In Francis Bach and David Blei, editors, Proceedings of the 32nd International Conference on Machine Learning, volume 37 of Proceedings of Machine Learning Research, pages 1312\u20131320, Lille, France, 07\u201309 Jul 2015. PMLR. URL http://proceedings.mlr.press/v37/schaul15.html.",
+            "url": "http://proceedings.mlr.press/v37/schaul15.html",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schaul%2C%20Tom%20Horgan%2C%20Daniel%20Gregor%2C%20Karol%20Silver%2C%20David%20Universal%20value%20function%20approximators%202015-07"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Abhishek Gupta, Coline Devin, YuXuan Liu, Pieter Abbeel, and Sergey Levine. Learning invariant feature spaces to transfer skills with reinforcement learning. arXiv preprint arXiv:1703.02949, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.02949"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Botond Bocsi, Lehel Csat\u00f3, and Jan Peters. Alignment-based transfer learning for robot models. In Neural Networks (IJCNN), The 2013 International Joint Conference on, pages 1\u20137. IEEE, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bocsi%2C%20Botond%20Csat%C3%B3%2C%20Lehel%20Peters%2C%20Jan%20Alignment-based%20transfer%20learning%20for%20robot%20models%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bocsi%2C%20Botond%20Csat%C3%B3%2C%20Lehel%20Peters%2C%20Jan%20Alignment-based%20transfer%20learning%20for%20robot%20models%202013"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Samuel Barrett, Matthew E Taylor, and Peter Stone. Transfer learning for reinforcement learning on a physical robot. In Ninth International Conference on Autonomous Agents and Multiagent Systems-Adaptive Learning Agents Workshop (AAMAS-ALA), 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Barrett%2C%20Samuel%20Taylor%2C%20Matthew%20E.%20Stone%2C%20Peter%20Transfer%20learning%20for%20reinforcement%20learning%20on%20a%20physical%20robot%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Barrett%2C%20Samuel%20Taylor%2C%20Matthew%20E.%20Stone%2C%20Peter%20Transfer%20learning%20for%20reinforcement%20learning%20on%20a%20physical%20robot%202010"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Jeffrey Mahler, Jacky Liang, Sherdil Niyaz, Michael Laskey, Richard Doan, Xinyu Liu, Juan Aparicio Ojea, and Ken Goldberg. Dex-net 2.0: Deep learning to plan robust grasps with synthetic point clouds and analytic grasp metrics. RSS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mahler%2C%20Jeffrey%20Liang%2C%20Jacky%20Niyaz%2C%20Sherdil%20Laskey%2C%20Michael%20Dex-net%202.0%3A%20Deep%20learning%20to%20plan%20robust%20grasps%20with%20synthetic%20point%20clouds%20and%20analytic%20grasp%20metrics%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mahler%2C%20Jeffrey%20Liang%2C%20Jacky%20Niyaz%2C%20Sherdil%20Laskey%2C%20Michael%20Dex-net%202.0%3A%20Deep%20learning%20to%20plan%20robust%20grasps%20with%20synthetic%20point%20clouds%20and%20analytic%20grasp%20metrics%202017"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Mohamed K. Helwa and Angela P. Schoellig. Multi-robot transfer learning: A dynamical system perspective. 2017. URL https://arxiv.org/abs/1707.08689.",
+            "url": "https://arxiv.org/abs/1707.08689",
+            "arxiv_url": "https://arxiv.org/pdf/1707.08689"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Tingwu Wang, Renjie Liao, Jimmy Ba, and Sanja Fidler. Nervenet: Learning structured policy with graph neural networks. In International Conference on Learning Representations, 2018. URL https://openreview.net/forum?id=S1sqHMZCb.",
+            "url": "https://openreview.net/forum?id=S1sqHMZCb",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Tingwu%20Liao%2C%20Renjie%20Ba%2C%20Jimmy%20Fidler%2C%20Sanja%20Nervenet%3A%20Learning%20structured%20policy%20with%20graph%20neural%20networks%202018"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Alvaro Sanchez-Gonzalez, Nicolas Heess, Jost Tobias Springenberg, Josh Merel, Martin Riedmiller, Raia Hadsell, and Peter Battaglia. Graph networks as learnable physics engines for inference and control. arXiv preprint arXiv:1806.01242, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1806.01242"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Igor Mordatch, Kendall Lowrey, and Emanuel Todorov. Ensemble-cio: Full-body dynamic motion planning that transfers to physical humanoids. In Intelligent Robots and Systems (IROS), 2015 IEEE/RSJ International Conference on, pages 5307\u20135314. IEEE, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mordatch%2C%20Igor%20Lowrey%2C%20Kendall%20Todorov%2C%20Emanuel%20Ensemble-cio%3A%20Full-body%20dynamic%20motion%20planning%20that%20transfers%20to%20physical%20humanoids%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mordatch%2C%20Igor%20Lowrey%2C%20Kendall%20Todorov%2C%20Emanuel%20Ensemble-cio%3A%20Full-body%20dynamic%20motion%20planning%20that%20transfers%20to%20physical%20humanoids%202015"
+        },
+        {
+            "id": "25",
+            "entry": "[25] J-JE Slotine and Li Weiping. Adaptive manipulator control: A case study. IEEE transactions on automatic control, 33(11):995\u20131003, 1988.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Slotine%2C%20J.-J.E.%20Weiping%2C%20Li%20Adaptive%20manipulator%20control%3A%20A%20case%20study%201988",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Slotine%2C%20J.-J.E.%20Weiping%2C%20Li%20Adaptive%20manipulator%20control%3A%20A%20case%20study%201988"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Hae-Won Park, Koushil Sreenath, Jonathan Hurst, and J. W. Grizzle. System identification and modeling for mabel, a bipedal robot with a cable-differential-based compliant drivetrain. In Dynamic Walking Conference (DW), MIT, July 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Park%2C%20Hae-Won%20Sreenath%2C%20Koushil%20Hurst%2C%20Jonathan%20Grizzle%2C%20J.W.%20System%20identification%20and%20modeling%20for%20mabel%2C%20a%20bipedal%20robot%20with%20a%20cable-differential-based%20compliant%20drivetrain%202010-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Park%2C%20Hae-Won%20Sreenath%2C%20Koushil%20Hurst%2C%20Jonathan%20Grizzle%2C%20J.W.%20System%20identification%20and%20modeling%20for%20mabel%2C%20a%20bipedal%20robot%20with%20a%20cable-differential-based%20compliant%20drivetrain%202010-07"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Umashankar Nagarajan, Anish Mampetta, George A Kantor, and Ralph L Hollis. State transition, balancing, station keeping, and yaw control for a dynamically stable single spherical wheel mobile robot. In Robotics and Automation, 2009. ICRA\u201909. IEEE International Conference on, pages 998\u20131003. IEEE, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nagarajan%2C%20Umashankar%20Anish%20Mampetta%2C%20George%20A%20Kantor%2C%20and%20Ralph%20L%20Hollis.%20State%20transition%2C%20balancing%2C%20station%20keeping%2C%20and%20yaw%20control%20for%20a%20dynamically%20stable%20single%20spherical%20wheel%20mobile%20robot%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nagarajan%2C%20Umashankar%20Anish%20Mampetta%2C%20George%20A%20Kantor%2C%20and%20Ralph%20L%20Hollis.%20State%20transition%2C%20balancing%2C%20station%20keeping%2C%20and%20yaw%20control%20for%20a%20dynamically%20stable%20single%20spherical%20wheel%20mobile%20robot%202009"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Pieter Abbeel, Morgan Quigley, and Andrew Y Ng. Using inaccurate models in reinforcement learning. In Proceedings of the 23rd international conference on Machine learning, pages 1\u20138. ACM, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abbeel%2C%20Pieter%20Quigley%2C%20Morgan%20Ng%2C%20Andrew%20Y.%20Using%20inaccurate%20models%20in%20reinforcement%20learning%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abbeel%2C%20Pieter%20Quigley%2C%20Morgan%20Ng%2C%20Andrew%20Y.%20Using%20inaccurate%20models%20in%20reinforcement%20learning%202006"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Sergey Levine, Chelsea Finn, Trevor Darrell, and Pieter Abbeel. End-to-end training of deep visuomotor policies. The Journal of Machine Learning Research, 17(1):1334\u20131373, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Levine%2C%20Sergey%20Finn%2C%20Chelsea%20Darrell%2C%20Trevor%20Abbeel%2C%20Pieter%20End-to-end%20training%20of%20deep%20visuomotor%20policies%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Levine%2C%20Sergey%20Finn%2C%20Chelsea%20Darrell%2C%20Trevor%20Abbeel%2C%20Pieter%20End-to-end%20training%20of%20deep%20visuomotor%20policies%202016"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Gregory Kahn, Tianhao Zhang, Sergey Levine, and Pieter Abbeel. Plato: Policy learning using adaptive trajectory optimization. In Robotics and Automation (ICRA), 2017 IEEE International Conference on, pages 3342\u20133349. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kahn%2C%20Gregory%20Zhang%2C%20Tianhao%20Levine%2C%20Sergey%20Abbeel%2C%20Pieter%20Plato%3A%20Policy%20learning%20using%20adaptive%20trajectory%20optimization%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kahn%2C%20Gregory%20Zhang%2C%20Tianhao%20Levine%2C%20Sergey%20Abbeel%2C%20Pieter%20Plato%3A%20Policy%20learning%20using%20adaptive%20trajectory%20optimization%202017"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Wenhao Yu, C Karen Liu, and Greg Turk. Preparing for the unknown: Learning a universal policy with online system identification. arXiv preprint arXiv:1702.02453, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1702.02453"
+        },
+        {
+            "id": "32",
+            "entry": "[32] John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov. Proximal policy optimization algorithms. CoRR, abs/1707.06347, 2017. URL http://arxiv.org/abs/1707.06347.",
+            "url": "http://arxiv.org/abs/1707.06347",
+            "arxiv_url": "https://arxiv.org/pdf/1707.06347"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Marcin Andrychowicz, Filip Wolski, Alex Ray, Jonas Schneider, Rachel Fong, Peter Welinder, Bob McGrew, Josh Tobin, Pieter Abbeel, and Wojciech Zaremba. Hindsight experience replay. CoRR, abs/1707.01495, 2017. URL http://arxiv.org/abs/1707.01495.",
+            "url": "http://arxiv.org/abs/1707.01495",
+            "arxiv_url": "https://arxiv.org/pdf/1707.01495"
+        },
+        {
+            "id": "34",
+            "entry": "[34] ROS URDF. http://wiki.ros.org/urdf.",
+            "url": "http://wiki.ros.org/urdf"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Emanuel Todorov, Tom Erez, and Yuval Tassa. Mujoco: A physics engine for model-based control. In Intelligent Robots and Systems (IROS), 2012 IEEE/RSJ International Conference on, pages 5026\u20135033. IEEE, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Todorov%2C%20Emanuel%20Erez%2C%20Tom%20Tassa%2C%20Yuval%20Mujoco%3A%20A%20physics%20engine%20for%20model-based%20control%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Todorov%2C%20Emanuel%20Erez%2C%20Tom%20Tassa%2C%20Yuval%20Mujoco%3A%20A%20physics%20engine%20for%20model-based%20control%202012"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Xijian Huo, Yiwei Liu, Li Jiang, and Hong Liu. Design and development of a 7-dof humanoid arm. In Robotics and Biomimetics (ROBIO), 2012 IEEE International Conference on, pages 277\u2013282. IEEE, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huo%2C%20Xijian%20Liu%2C%20Yiwei%20Jiang%2C%20Li%20Liu%2C%20Hong%20Design%20and%20development%20of%20a%207-dof%20humanoid%20arm%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huo%2C%20Xijian%20Liu%2C%20Yiwei%20Jiang%2C%20Li%20Liu%2C%20Hong%20Design%20and%20development%20of%20a%207-dof%20humanoid%20arm%202012"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Zvi Artstein. Discrete and continuous bang-bang and facial spaces or: look for the extreme points. SIAM Review, 22(2):172\u2013185, 1980.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Artstein%2C%20Zvi%20Discrete%20and%20continuous%20bang-bang%20and%20facial%20spaces%20or%3A%20look%20for%20the%20extreme%20points%201980",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Artstein%2C%20Zvi%20Discrete%20and%20continuous%20bang-bang%20and%20facial%20spaces%20or%3A%20look%20for%20the%20extreme%20points%201980"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Tom Erez, Yuval Tassa, and Emanuel Todorov. Infinite-horizon model predictive control for periodic tasks with contacts. Robotics: Science and systems VII, page 73, 2012. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Erez%2C%20Tom%20Tassa%2C%20Yuval%20Todorov%2C%20Emanuel%20Infinite-horizon%20model%20predictive%20control%20for%20periodic%20tasks%20with%20contacts.%20Robotics%3A%20Science%20and%20systems%20VII%202012"
+        }
+    ]
+}

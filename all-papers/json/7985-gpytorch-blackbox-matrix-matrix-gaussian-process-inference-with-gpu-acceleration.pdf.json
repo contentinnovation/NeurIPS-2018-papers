@@ -1,0 +1,349 @@
+{
+    "filename": "7985-gpytorch-blackbox-matrix-matrix-gaussian-process-inference-with-gpu-acceleration.pdf",
+    "metadata": {
+        "title": "GPyTorch: Blackbox Matrix-Matrix Gaussian Process Inference with GPU Acceleration",
+        "author": "Jacob Gardner, Geoff Pleiss, Kilian Q. Weinberger, David Bindel, Andrew G. Wilson",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7985-gpytorch-blackbox-matrix-matrix-gaussian-process-inference-with-gpu-acceleration.pdf"
+        },
+        "abstract": "Despite advances in scalable models, the inference tools used for Gaussian processes (GPs) have yet to fully capitalize on developments in computing hardware. We present an efficient and general approach to GP inference based on Blackbox Matrix-Matrix multiplication (BBMM). BBMM inference uses a modified batched version of the conjugate gradients algorithm to derive all terms for training and inference in a single call. BBMM reduces the asymptotic complexity of exact GP inference from O(n3) to O(n2). Adapting this algorithm to scalable approximations and complex GP models simply requires a routine for efficient matrix-matrix multiplication with the kernel and its derivative. In addition, BBMM uses a specialized preconditioner to substantially speed up convergence. In experiments we show that BBMM effectively uses GPU hardware to dramatically accelerate both exact GP inference and scalable approximations. Additionally, we provide GPyTorch, a software platform for scalable GP inference via BBMM, built on PyTorch."
+    },
+    "keywords": [
+        {
+            "term": "cholesky decomposition",
+            "url": "https://en.wikipedia.org/wiki/cholesky_decomposition"
+        },
+        {
+            "term": "matrix-vector multiplication",
+            "url": "https://en.wikipedia.org/wiki/matrix-vector_multiplication"
+        },
+        {
+            "term": "Gaussian processes",
+            "url": "https://en.wikipedia.org/wiki/Gaussian_processes"
+        },
+        {
+            "term": "gaussian process",
+            "url": "https://en.wikipedia.org/wiki/gaussian_process"
+        }
+    ],
+    "highlights": [
+        "MBCG uses large matrix-matrix multiplications that more efficiently utilize modern hardware than both existing Cholesky and matrix-vector multiplication based inference strategies",
+        "We introduce GPyTorch, a new software platform using Blackbox Matrix-Matrix inference inference for scalable Gaussian processes, which is built on top of PyTorch: https://gpytorch.ai",
+        "We evaluate the Blackbox Matrix-Matrix inference framework, demonstrating: (1) the Blackbox Matrix-Matrix inference inference engine provides a substantial speed benefit over Cholesky based inference and standard matrix-vector multiplication-based CG inference, especially for GPU computing; (2) Blackbox Matrix-Matrix inference achieves comparable or better final test error compared to Cholesky inference, even with no kernel approximations; and (3) preconditioning provides a substantial improvement in the efficiency of our approach",
+        "For Exact and Sparse Gaussian Process Regression, we compare Blackbox Matrix-Matrix inference against Cholesky-based inference engines implemented in GPFlow [<a class=\"ref-link\" id=\"c33\" href=\"#r33\">33</a>]",
+        "Since Structured Kernel Interpolation is not intended for Cholesky inference, we compare Blackbox Matrix-Matrix inference to the inference procedure of Dong et al [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>], implemented in our GPyTorch package",
+        "This paper primarily focuses on the regression setting, Blackbox Matrix-Matrix inference is fully compatible with variational techniques such as [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>, <a class=\"ref-link\" id=\"c53\" href=\"#r53\">53</a>], which are supported in GPyTorch"
+    ],
+    "key_statements": [
+        "MBCG uses large matrix-matrix multiplications that more efficiently utilize modern hardware than both existing Cholesky and matrix-vector multiplication based inference strategies",
+        "We introduce GPyTorch, a new software platform using Blackbox Matrix-Matrix inference inference for scalable Gaussian processes, which is built on top of PyTorch: https://gpytorch.ai",
+        "On datasets with at least up to 3000 data points we demonstrate that exact Gaussian processes with Blackbox Matrix-Matrix inference are up to 20\u00d7 faster than Gaussian processes using Cholesky-based approaches",
+        "We show how to use a single call to mBCG to compute the three Gaussian processes inference directly returned from mteBrmCsG: .K",
+        "We evaluate the Blackbox Matrix-Matrix inference framework, demonstrating: (1) the Blackbox Matrix-Matrix inference inference engine provides a substantial speed benefit over Cholesky based inference and standard matrix-vector multiplication-based CG inference, especially for GPU computing; (2) Blackbox Matrix-Matrix inference achieves comparable or better final test error compared to Cholesky inference, even with no kernel approximations; and (3) preconditioning provides a substantial improvement in the efficiency of our approach",
+        "For Exact and Sparse Gaussian Process Regression, we compare Blackbox Matrix-Matrix inference against Cholesky-based inference engines implemented in GPFlow [<a class=\"ref-link\" id=\"c33\" href=\"#r33\">33</a>]",
+        "Since Structured Kernel Interpolation is not intended for Cholesky inference, we compare Blackbox Matrix-Matrix inference to the inference procedure of Dong et al [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>], implemented in our GPyTorch package",
+        "In Figure 3 we report test mean average error (MAE) for Exact and Sparse Gaussian Process Regression models.3",
+        "CG has a regularizing effects which may improve methods involving the exact kernel over the Cholesky decomposition, where numerical issues resulting from extremely small eigenvalues of the kernel matrix are ignored",
+        "This paper primarily focuses on the regression setting, Blackbox Matrix-Matrix inference is fully compatible with variational techniques such as [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>, <a class=\"ref-link\" id=\"c53\" href=\"#r53\">53</a>], which are supported in GPyTorch",
+        "The basic algorithm for the Cholesky decomposition involves a divideand conquer approach that can prove ill-suited for parallel hardware",
+        "The Cholesky decomposition performs a large amount of computation to get a linear solve when fast approximate methods suffice",
+        "It is our hope that this work dramatically reduces the complexity of implementing new Gaussian process models, while allowing for inference to be performed as efficiently as possible"
+    ],
+    "summary": [
+        "MBCG uses large matrix-matrix multiplications that more efficiently utilize modern hardware than both existing Cholesky and MVM based inference strategies.",
+        "The Pivoted Cholesky decomposition is an efficient algorithm for computing a low-rank decomposition of a positive definite matrix [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>, <a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>], which we use in the context of preconditioning.",
+        "The pivoted Cholesky algorithm allows us to compute a low-rank approximation of a positive definite matrix, KXX \u2248 LkL",
+        "Theorem 1 implies that we should expect the convergence of conjugate gradients to improve exponentially with the rank of the pivoted Cholesky decomposition used for RBF kernels.",
+        "Structured Kernel Interpolation (SKI) [<a class=\"ref-link\" id=\"c50\" href=\"#r50\">50</a>], known as KISS-GP, is an inducing point method designed to provide fast matrix vector multiplies (MVMs) for use with Krylov subspace methods.",
+        "We evaluate the BBMM framework, demonstrating: (1) the BBMM inference engine provides a substantial speed benefit over Cholesky based inference and standard MVM-based CG inference, especially for GPU computing; (2) BBMM achieves comparable or better final test error compared to Cholesky inference, even with no kernel approximations; and (3) preconditioning provides a substantial improvement in the efficiency of our approach.",
+        "For Exact and SGPR, we compare BBMM against Cholesky-based inference engines implemented in GPFlow [<a class=\"ref-link\" id=\"c33\" href=\"#r33\">33</a>].",
+        "Achieved by linear conjugate gradients using no preconditioner versus rank 2, 5, and 9 pivoted Cholesky preconditioners on 2 UCI benchmark datasets using deep RBF and deep Matern kernels.",
+        "CG has a regularizing effects which may improve methods involving the exact kernel over the Cholesky decomposition, where numerical issues resulting from extremely small eigenvalues of the kernel matrix are ignored.",
+        "To demonstrate the effectiveness of preconditioning at accelerating the convergence of conjugate gradients, we first train a deep RBF kernel model on two datasets, Protein and KEGG, and evaluate the solve error of as a function of the number poefrfCoGrmiitnegraK",
+        "Because such a low rank preconditioner is sufficient, using preconditioning results in significantly more accurate solves while having virtually no impact on the running time of each CG iteration.",
+        "We discuss a novel framework for Gaussian process inference (BBMM) based on blackbox matrix-matrix multiplication routines with kernel matrices.",
+        "The Cholesky decomposition performs a large amount of computation to get a linear solve when fast approximate methods suffice.",
+        "It is our hope that this work dramatically reduces the complexity of implementing new Gaussian process models, while allowing for inference to be performed as efficiently as possible."
+    ],
+    "headline": "We present an efficient and general approach to Gaussian processes inference based on Blackbox Matrix-Matrix multiplication ",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] M. Abadi, P. Barham, J. Chen, Z. Chen, A. Davis, J. Dean, M. Devin, S. Ghemawat, G. Irving, M. Isard, et al. Tensorflow: A system for large-scale machine learning. In OSDI, volume 16, pages 265\u2013283, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abadi%2C%20M.%20Barham%2C%20P.%20Chen%2C%20J.%20Chen%2C%20Z.%20Tensorflow%3A%20A%20system%20for%20large-scale%20machine%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abadi%2C%20M.%20Barham%2C%20P.%20Chen%2C%20J.%20Chen%2C%20Z.%20Tensorflow%3A%20A%20system%20for%20large-scale%20machine%20learning%202016"
+        },
+        {
+            "id": "2",
+            "entry": "[2] A. Asuncion and D. Newman. Uci machine learning repository. https://archive.ics.uci.edu/ml/, 2007. Last accessed:2018-05-18.",
+            "url": "https://archive.ics.uci.edu/ml/"
+        },
+        {
+            "id": "3",
+            "entry": "[3] H. Avron and S. Toledo. Randomized algorithms for estimating the trace of an implicit symmetric positive semi-definite matrix. Journal of the ACM (JACM), 58(2):8, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Avron%2C%20H.%20Toledo%2C%20S.%20Randomized%20algorithms%20for%20estimating%20the%20trace%20of%20an%20implicit%20symmetric%20positive%20semi-definite%20matrix%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Avron%2C%20H.%20Toledo%2C%20S.%20Randomized%20algorithms%20for%20estimating%20the%20trace%20of%20an%20implicit%20symmetric%20positive%20semi-definite%20matrix%202011"
+        },
+        {
+            "id": "4",
+            "entry": "[4] F. Bach. Sharp analysis of low-rank kernel matrix approximations. In COLT, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bach%2C%20F.%20Sharp%20analysis%20of%20low-rank%20kernel%20matrix%20approximations%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bach%2C%20F.%20Sharp%20analysis%20of%20low-rank%20kernel%20matrix%20approximations%202013"
+        },
+        {
+            "id": "5",
+            "entry": "[5] E. V. Bonilla, K. M. Chai, and C. Williams. Multi-task Gaussian process prediction. In NIPS, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bonilla%2C%20E.V.%20Chai%2C%20K.M.%20Williams%2C%20C.%20Multi-task%20Gaussian%20process%20prediction%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bonilla%2C%20E.V.%20Chai%2C%20K.M.%20Williams%2C%20C.%20Multi-task%20Gaussian%20process%20prediction%202008"
+        },
+        {
+            "id": "7",
+            "entry": "[7] P. Chaudhari, A. Choromanska, S. Soatto, Y. LeCun, C. Baldassi, C. Borgs, J. Chayes, L. Sagun, and R. Zecchina. Entropy-sgd: Biasing gradient descent into wide valleys. arXiv preprint arXiv:1611.01838, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.01838"
+        },
+        {
+            "id": "8",
+            "entry": "[8] T. Chen, M. Li, Y. Li, M. Lin, N. Wang, M. Wang, T. Xiao, B. Xu, C. Zhang, and Z. Zhang. Mxnet: A flexible and efficient machine learning library for heterogeneous distributed systems. arXiv preprint arXiv:1512.01274, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1512.01274"
+        },
+        {
+            "id": "9",
+            "entry": "[9] J. P. Cunningham, K. V. Shenoy, and M. Sahani. Fast Gaussian process methods for point process intensity estimation. In ICML, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cunningham%2C%20J.P.%20Shenoy%2C%20K.V.%20Sahani%2C%20M.%20Fast%20Gaussian%20process%20methods%20for%20point%20process%20intensity%20estimation%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cunningham%2C%20J.P.%20Shenoy%2C%20K.V.%20Sahani%2C%20M.%20Fast%20Gaussian%20process%20methods%20for%20point%20process%20intensity%20estimation%202008"
+        },
+        {
+            "id": "10",
+            "entry": "[10] K. Cutajar, M. Osborne, J. Cunningham, and M. Filippone. Preconditioning kernel matrices. In ICML, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cutajar%2C%20K.%20Osborne%2C%20M.%20Cunningham%2C%20J.%20Filippone%2C%20M.%20Preconditioning%20kernel%20matrices%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cutajar%2C%20K.%20Osborne%2C%20M.%20Cunningham%2C%20J.%20Filippone%2C%20M.%20Preconditioning%20kernel%20matrices%202016"
+        },
+        {
+            "id": "13",
+            "entry": "[13] K. Dong, D. Eriksson, H. Nickisch, D. Bindel, and A. G. Wilson. Scalable log determinants for Gaussian process kernel learning. In NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dong%2C%20K.%20Eriksson%2C%20D.%20Nickisch%2C%20H.%20Bindel%2C%20D.%20Scalable%20log%20determinants%20for%20Gaussian%20process%20kernel%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dong%2C%20K.%20Eriksson%2C%20D.%20Nickisch%2C%20H.%20Bindel%2C%20D.%20Scalable%20log%20determinants%20for%20Gaussian%20process%20kernel%20learning%202017"
+        },
+        {
+            "id": "14",
+            "entry": "[14] J. K. Fitzsimons, M. A. Osborne, S. J. Roberts, and J. F. Fitzsimons. Improved stochastic trace estimation using mutually unbiased bases. arXiv preprint arXiv:1608.00117, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1608.00117"
+        },
+        {
+            "id": "15",
+            "entry": "[15] J. R. Gardner, G. Pleiss, R. Wu, K. Q. Weinberger, and A. G. Wilson. Product kernel interpolation for scalable Gaussian processes. In AISTATS, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gardner%2C%20J.R.%20Pleiss%2C%20G.%20Wu%2C%20R.%20Weinberger%2C%20K.Q.%20Product%20kernel%20interpolation%20for%20scalable%20Gaussian%20processes%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gardner%2C%20J.R.%20Pleiss%2C%20G.%20Wu%2C%20R.%20Weinberger%2C%20K.Q.%20Product%20kernel%20interpolation%20for%20scalable%20Gaussian%20processes%202018"
+        },
+        {
+            "id": "16",
+            "entry": "[16] G. H. Golub and G. Meurant. Matrices, moments and quadrature with applications. Princeton University",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Golub%2C%20G.H.%20Meurant%2C%20G.%20Matrices%2C%20moments%20and%20quadrature%20with%20applications"
+        },
+        {
+            "id": "17",
+            "entry": "[17] G. H. Golub and C. F. Van Loan. Matrix computations, volume 3. JHU Press, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=G%20H%20Golub%20and%20C%20F%20Van%20Loan%20Matrix%20computations%20volume%203%20JHU%20Press%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=G%20H%20Golub%20and%20C%20F%20Van%20Loan%20Matrix%20computations%20volume%203%20JHU%20Press%202012"
+        },
+        {
+            "id": "18",
+            "entry": "[18] R. H. Hahnloser, R. Sarpeshkar, M. A. Mahowald, R. J. Douglas, and H. S. Seung. Digital selection and analogue amplification coexist in a cortex-inspired silicon circuit. Nature, 405(6789):947, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hahnloser%2C%20R.H.%20Sarpeshkar%2C%20R.%20Mahowald%2C%20M.A.%20Douglas%2C%20R.J.%20Digital%20selection%20and%20analogue%20amplification%20coexist%20in%20a%20cortex-inspired%20silicon%20circuit%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hahnloser%2C%20R.H.%20Sarpeshkar%2C%20R.%20Mahowald%2C%20M.A.%20Douglas%2C%20R.J.%20Digital%20selection%20and%20analogue%20amplification%20coexist%20in%20a%20cortex-inspired%20silicon%20circuit%202000"
+        },
+        {
+            "id": "19",
+            "entry": "[19] H. Harbrecht, M. Peters, and R. Schneider. On the low-rank approximation by the pivoted cholesky decomposition. Applied numerical mathematics, 62(4):428\u2013440, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Harbrecht%2C%20H.%20Peters%2C%20M.%20Schneider%2C%20R.%20On%20the%20low-rank%20approximation%20by%20the%20pivoted%20cholesky%20decomposition%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Harbrecht%2C%20H.%20Peters%2C%20M.%20Schneider%2C%20R.%20On%20the%20low-rank%20approximation%20by%20the%20pivoted%20cholesky%20decomposition%202012"
+        },
+        {
+            "id": "20",
+            "entry": "[20] K. He, X. Zhang, S. Ren, and J. Sun. Deep residual learning for image recognition. In CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%202016"
+        },
+        {
+            "id": "21",
+            "entry": "[21] J. Hensman, N. Fusi, and N. D. Lawrence. Gaussian processes for big data. In UAI, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hensman%2C%20J.%20Fusi%2C%20N.%20Lawrence%2C%20N.D.%20Gaussian%20processes%20for%20big%20data.%20In%20UAI%202013"
+        },
+        {
+            "id": "22",
+            "entry": "[22] J. Hensman, A. G. d. G. Matthews, and Z. Ghahramani. Scalable variational Gaussian process classification.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hensman%2C%20J.%20d.%20G.%20Matthews%2C%20A.G.%20Ghahramani%2C%20Z.%20Scalable%20variational%20Gaussian%20process%20classification"
+        },
+        {
+            "id": "23",
+            "entry": "[23] S. Hochreiter and J. Schmidhuber. Flat minima. Neural Computation, 9(1):1\u201342, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hochreiter%2C%20S.%20Schmidhuber%2C%20J.%20Flat%20minima%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hochreiter%2C%20S.%20Schmidhuber%2C%20J.%20Flat%20minima%201997"
+        },
+        {
+            "id": "24",
+            "entry": "[24] G. Huang, Z. Liu, K. Q. Weinberger, and L. van der Maaten. Densely connected convolutional networks.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huang%2C%20G.%20Liu%2C%20Z.%20Weinberger%2C%20K.Q.%20van%20der%20Maaten%2C%20L.%20Densely%20connected%20convolutional%20networks"
+        },
+        {
+            "id": "25",
+            "entry": "[25] M. F. Hutchinson. A stochastic estimator of the trace of the influence matrix for laplacian smoothing splines. Communications in Statistics-Simulation and Computation, 19(2):433\u2013450, 1990.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hutchinson%2C%20M.F.%20A%20stochastic%20estimator%20of%20the%20trace%20of%20the%20influence%20matrix%20for%20laplacian%20smoothing%20splines%201990",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hutchinson%2C%20M.F.%20A%20stochastic%20estimator%20of%20the%20trace%20of%20the%20influence%20matrix%20for%20laplacian%20smoothing%20splines%201990"
+        },
+        {
+            "id": "26",
+            "entry": "[26] S. Ioffe and C. Szegedy. Batch normalization: Accelerating deep network training by reducing internal covariate shift. In ICML, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ioffe%2C%20S.%20Szegedy%2C%20C.%20Batch%20normalization%3A%20Accelerating%20deep%20network%20training%20by%20reducing%20internal%20covariate%20shift%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ioffe%2C%20S.%20Szegedy%2C%20C.%20Batch%20normalization%3A%20Accelerating%20deep%20network%20training%20by%20reducing%20internal%20covariate%20shift%202015"
+        },
+        {
+            "id": "27",
+            "entry": "[27] P. Izmailov, D. Podoprikhin, T. Garipov, D. Vetrov, and A. G. Wilson. Averaging weights leads to wider optima and better generalization. In Uncertainty in Artificial Intelligence (UAI), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Izmailov%2C%20P.%20Podoprikhin%2C%20D.%20Garipov%2C%20T.%20Vetrov%2C%20D.%20Averaging%20weights%20leads%20to%20wider%20optima%20and%20better%20generalization%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Izmailov%2C%20P.%20Podoprikhin%2C%20D.%20Garipov%2C%20T.%20Vetrov%2C%20D.%20Averaging%20weights%20leads%20to%20wider%20optima%20and%20better%20generalization%202018"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Y. Jia, E. Shelhamer, J. Donahue, S. Karayev, J. Long, R. Girshick, S. Guadarrama, and T. Darrell. Caffe: Convolutional architecture for fast feature embedding. In ACMMM, pages 675\u2013678. ACM, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jia%2C%20Y.%20Shelhamer%2C%20E.%20Donahue%2C%20J.%20Karayev%2C%20S.%20Caffe%3A%20Convolutional%20architecture%20for%20fast%20feature%20embedding%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jia%2C%20Y.%20Shelhamer%2C%20E.%20Donahue%2C%20J.%20Karayev%2C%20S.%20Caffe%3A%20Convolutional%20architecture%20for%20fast%20feature%20embedding%202014"
+        },
+        {
+            "id": "29",
+            "entry": "[29] N. S. Keskar, D. Mudigere, J. Nocedal, M. Smelyanskiy, and P. T. P. Tang. On large-batch training for deep learning: Generalization gap and sharp minima. arXiv preprint arXiv:1609.04836, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.04836"
+        },
+        {
+            "id": "30",
+            "entry": "[30] A. Krizhevsky, I. Sutskever, and G. E. Hinton. Imagenet classification with deep convolutional neural networks. In NIPS, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20A.%20Sutskever%2C%20I.%20Hinton%2C%20G.E.%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krizhevsky%2C%20A.%20Sutskever%2C%20I.%20Hinton%2C%20G.E.%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012"
+        },
+        {
+            "id": "31",
+            "entry": "[31] A. Krizhevsky, I. Sutskever, and G. E. Hinton. Imagenet classification with deep convolutional neural networks. In Advances in neural information processing systems, pages 1097\u20131105, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20A.%20Sutskever%2C%20I.%20Hinton%2C%20G.E.%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krizhevsky%2C%20A.%20Sutskever%2C%20I.%20Hinton%2C%20G.E.%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012"
+        },
+        {
+            "id": "32",
+            "entry": "[32] C. Lanczos. An iteration method for the solution of the eigenvalue problem of linear differential and integral operators. United States Governm. Press Office Los Angeles, CA, 1950.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lanczos%2C%20C.%20An%20iteration%20method%20for%20the%20solution%20of%20the%20eigenvalue%20problem%20of%20linear%20differential%20and%20integral%20operators%201950"
+        },
+        {
+            "id": "33",
+            "entry": "[33] A. G. d. G. Matthews, M. van der Wilk, T. Nickson, K. Fujii, A. Boukouvalas, P. Le\u00f3n-Villagr\u00e1, Z. Ghahramani, and J. Hensman. Gpflow: A Gaussian process library using TensorFlow. Journal of Machine Learning Research, 18(40):1\u20136, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=d.%20G.%20Matthews%2C%20A.G.%20van%20der%20Wilk%2C%20M.%20Nickson%2C%20T.%20Fujii%2C%20K.%20Gpflow%3A%20A%20Gaussian%20process%20library%20using%20TensorFlow%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=d.%20G.%20Matthews%2C%20A.G.%20van%20der%20Wilk%2C%20M.%20Nickson%2C%20T.%20Fujii%2C%20K.%20Gpflow%3A%20A%20Gaussian%20process%20library%20using%20TensorFlow%202017"
+        },
+        {
+            "id": "34",
+            "entry": "[34] I. Murray. Gaussian processes and fast matrix-vector multiplies. In ICML Workshop on Numerical Mathematics in Machine Learning, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Murray%2C%20I.%20Gaussian%20processes%20and%20fast%20matrix-vector%20multiplies%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Murray%2C%20I.%20Gaussian%20processes%20and%20fast%20matrix-vector%20multiplies%202009"
+        },
+        {
+            "id": "35",
+            "entry": "[35] D. P. O\u2019Leary. The block conjugate gradient algorithm and related methods. Linear algebra and its applications, 29:293\u2013322, 1980.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=O%E2%80%99Leary%2C%20D.P.%20The%20block%20conjugate%20gradient%20algorithm%20and%20related%20methods%201980",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=O%E2%80%99Leary%2C%20D.P.%20The%20block%20conjugate%20gradient%20algorithm%20and%20related%20methods%201980"
+        },
+        {
+            "id": "36",
+            "entry": "[36] C. Paige. Practical use of the symmetric Lanczos process with re-orthogonalization. BIT Numerical Mathematics, 10(2):183\u2013195, 1970.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Paige%2C%20C.%20Practical%20use%20of%20the%20symmetric%20Lanczos%20process%20with%20re-orthogonalization%201970",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Paige%2C%20C.%20Practical%20use%20of%20the%20symmetric%20Lanczos%20process%20with%20re-orthogonalization%201970"
+        },
+        {
+            "id": "37",
+            "entry": "[37] B. N. Parlett. A new look at the Lanczos algorithm for solving symmetric systems of linear equations. Linear algebra and its applications, 29:323\u2013346, 1980.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Parlett%2C%20B.N.%20A%20new%20look%20at%20the%20Lanczos%20algorithm%20for%20solving%20symmetric%20systems%20of%20linear%20equations%201980",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Parlett%2C%20B.N.%20A%20new%20look%20at%20the%20Lanczos%20algorithm%20for%20solving%20symmetric%20systems%20of%20linear%20equations%201980"
+        },
+        {
+            "id": "38",
+            "entry": "[38] A. Paszke, S. Gross, S. Chintala, G. Chanan, E. Yang, Z. DeVito, Z. Lin, A. Desmaison, L. Antiga, and A. Lerer. Automatic differentiation in PyTorch. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Paszke%2C%20A.%20Gross%2C%20S.%20Chintala%2C%20S.%20Chanan%2C%20G.%20Automatic%20differentiation%20in%20PyTorch%202017"
+        },
+        {
+            "id": "39",
+            "entry": "[39] G. Pleiss, J. R. Gardner, K. Q. Weinberger, and A. G. Wilson. Constant-time predictive distributions for Gaussian processes. In ICML, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pleiss%2C%20G.%20Gardner%2C%20J.R.%20Weinberger%2C%20K.Q.%20Wilson%2C%20A.G.%20Constant-time%20predictive%20distributions%20for%20Gaussian%20processes%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pleiss%2C%20G.%20Gardner%2C%20J.R.%20Weinberger%2C%20K.Q.%20Wilson%2C%20A.G.%20Constant-time%20predictive%20distributions%20for%20Gaussian%20processes%202018"
+        },
+        {
+            "id": "40",
+            "entry": "[40] J. Qui\u00f1onero-Candela and C. E. Rasmussen. A unifying view of sparse approximate Gaussian process regression. Journal of Machine Learning Research, 6(Dec):1939\u20131959, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Qui%C3%B1onero-Candela%2C%20J.%20Rasmussen%2C%20C.E.%20A%20unifying%20view%20of%20sparse%20approximate%20Gaussian%20process%20regression%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Qui%C3%B1onero-Candela%2C%20J.%20Rasmussen%2C%20C.E.%20A%20unifying%20view%20of%20sparse%20approximate%20Gaussian%20process%20regression%202005"
+        },
+        {
+            "id": "41",
+            "entry": "[41] C. E. Rasmussen and C. K. Williams. Gaussian processes for machine learning, volume 1. MIT press Cambridge, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rasmussen%2C%20C.E.%20Williams%2C%20C.K.%20Gaussian%20processes%20for%20machine%20learning%2C%20volume%201%202006"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Y. Saad. Iterative methods for sparse linear systems, volume 82. siam, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Saad%2C%20Y.%20Iterative%20methods%20for%20sparse%20linear%20systems%202003"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Y. Saat\u00e7i. Scalable inference for structured Gaussian process models. PhD thesis, University of Cambridge, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Saat%C3%A7i%2C%20Y.%20Scalable%20inference%20for%20structured%20Gaussian%20process%20models%202012"
+        },
+        {
+            "id": "44",
+            "entry": "[44] E. Snelson and Z. Ghahramani. Sparse Gaussian processes using pseudo-inputs. In NIPS, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Snelson%2C%20E.%20Ghahramani%2C%20Z.%20Sparse%20Gaussian%20processes%20using%20pseudo-inputs%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Snelson%2C%20E.%20Ghahramani%2C%20Z.%20Sparse%20Gaussian%20processes%20using%20pseudo-inputs%202006"
+        },
+        {
+            "id": "46",
+            "entry": "[46] S. Ubaru, J. Chen, and Y. Saad. Fast estimation of tr (f (a)) via stochastic Lanczos quadrature. SIAM Journal on Matrix Analysis and Applications, 38(4):1075\u20131099, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ubaru%2C%20S.%20Chen%2C%20J.%20Saad%2C%20Y.%20Fast%20estimation%20of%20tr%20%28f%20%28a%29%29%20via%20stochastic%20Lanczos%20quadrature%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ubaru%2C%20S.%20Chen%2C%20J.%20Saad%2C%20Y.%20Fast%20estimation%20of%20tr%20%28f%20%28a%29%29%20via%20stochastic%20Lanczos%20quadrature%202017"
+        },
+        {
+            "id": "47",
+            "entry": "[47] H. A. Van der Vorst. Iterative Krylov methods for large linear systems, volume 13. Cambridge University",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=der%20Vorst%2C%20H.A.Van%20Iterative%20Krylov%20methods%20for%20large%20linear",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=der%20Vorst%2C%20H.A.Van%20Iterative%20Krylov%20methods%20for%20large%20linear"
+        },
+        {
+            "id": "48",
+            "entry": "[48] A. J. Wathen and S. Zhu. On spectral distribution of kernel matrices related to radial basis functions. Numerical Algorithms, 70(4):709\u2013726, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wathen%2C%20A.J.%20Zhu%2C%20S.%20On%20spectral%20distribution%20of%20kernel%20matrices%20related%20to%20radial%20basis%20functions%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wathen%2C%20A.J.%20Zhu%2C%20S.%20On%20spectral%20distribution%20of%20kernel%20matrices%20related%20to%20radial%20basis%20functions%202015"
+        },
+        {
+            "id": "49",
+            "entry": "[49] A. G. Wilson. Covariance kernels for fast automatic pattern discovery and extrapolation with Gaussian processes. PhD thesis, University of Cambridge, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wilson%2C%20A.G.%20Covariance%20kernels%20for%20fast%20automatic%20pattern%20discovery%20and%20extrapolation%20with%20Gaussian%20processes%202014"
+        },
+        {
+            "id": "50",
+            "entry": "[50] A. G. Wilson and H. Nickisch. Kernel interpolation for scalable structured Gaussian processes (KISS-GP).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wilson%2C%20A.G.%20Nickisch%2C%20H.%20Kernel%20interpolation%20for%20scalable%20structured%20Gaussian%20processes%20%28KISS-GP%29"
+        },
+        {
+            "id": "51",
+            "entry": "[51] A. G. Wilson, C. Dann, and H. Nickisch. Thoughts on massively scalable Gaussian processes. arXiv preprint arXiv:1511.01870, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.01870"
+        },
+        {
+            "id": "52",
+            "entry": "[52] A. G. Wilson, Z. Hu, R. Salakhutdinov, and E. P. Xing. Deep kernel learning. In AISTATS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wilson%2C%20A.G.%20Hu%2C%20Z.%20Salakhutdinov%2C%20R.%20Xing%2C%20E.P.%20Deep%20kernel%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wilson%2C%20A.G.%20Hu%2C%20Z.%20Salakhutdinov%2C%20R.%20Xing%2C%20E.P.%20Deep%20kernel%20learning%202016"
+        },
+        {
+            "id": "53",
+            "entry": "[53] A. G. Wilson, Z. Hu, R. R. Salakhutdinov, and E. P. Xing. Stochastic variational deep kernel learning. In ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wilson%2C%20A.G.%20Hu%2C%20Z.%20Salakhutdinov%2C%20R.R.%20Xing%2C%20E.P.%20Stochastic%20variational%20deep%20kernel%20learning",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wilson%2C%20A.G.%20Hu%2C%20Z.%20Salakhutdinov%2C%20R.R.%20Xing%2C%20E.P.%20Stochastic%20variational%20deep%20kernel%20learning"
+        }
+    ]
+}

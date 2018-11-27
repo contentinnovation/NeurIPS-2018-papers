@@ -1,0 +1,196 @@
+{
+    "filename": "7461-distributed-stochastic-optimization-via-adaptive-sgd.pdf",
+    "metadata": {
+        "title": "Distributed Stochastic Optimization via Adaptive SGD",
+        "author": "Ashok Cutkosky, R\u00f3bert Busa-Fekete",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7461-distributed-stochastic-optimization-via-adaptive-sgd.pdf"
+        },
+        "abstract": "Stochastic convex optimization algorithms are the most popular way to train machine learning models on large-scale data. Scaling up the training process of these models is crucial, but the most popular algorithm, Stochastic Gradient Descent (SGD), is a serial method that is surprisingly hard to parallelize. In this paper, we propose an efficient distributed stochastic optimization method by combining adaptivity with variance reduction techniques. Our analysis yields a linear speedup in the number of machines, constant memory footprint, and only a logarithmic number of communication rounds. Critically, our approach is a black-box reduction that parallelizes any serial online learning algorithm, streamlining prior analysis and allowing us to leverage the significant progress that has been made in designing adaptive algorithms. In particular, we achieve optimal convergence rates without any prior knowledge of smoothness parameters, yielding a more robust algorithm that reduces the need for hyperparameter tuning. We implement our algorithm in the Spark distributed framework and exhibit dramatic performance gains on large-scale logistic regression problems."
+    },
+    "keywords": [
+        {
+            "term": "logistic regression",
+            "url": "https://en.wikipedia.org/wiki/logistic_regression"
+        },
+        {
+            "term": "SVRG",
+            "url": "https://en.wikipedia.org/wiki/SVRG"
+        },
+        {
+            "term": "variance reduction",
+            "url": "https://en.wikipedia.org/wiki/variance_reduction"
+        },
+        {
+            "term": "stochastic optimization",
+            "url": "https://en.wikipedia.org/wiki/stochastic_optimization"
+        },
+        {
+            "term": "convex optimization",
+            "url": "https://en.wikipedia.org/wiki/convex_optimization"
+        },
+        {
+            "term": "black box",
+            "url": "https://en.wikipedia.org/wiki/black_box"
+        }
+    ],
+    "highlights": [
+        "W is a convex subset of Rd and D is a distribution over L-smooth convex functions W ! R",
+        "Combine the previous three steps to show that applying stochastic variancereduced gradient using these approxipmate variance-reduced gradients pand an adaptive serial Stochastic Gradient Descent algorithm achieves O(L/ N ) suboptimality using only O( N ) serial Stochastic Gradient Descent updates (Sections 6 and 7).\n5",
+        "We proceed to compare stochastic variancereduced gradient OL to Spark ML and Vowpal Wabbit 7.10.0 in Table 4. These two LBFGS-based algorithms were superior in all metrics to minibatch Stochastic Gradient Descent and non-adaptive stochastic variancereduced gradient algorithms and so we report only the comparison to Spark ML and Vowpal Wabbit 7.10.0",
+        "We have presented stochastic variancereduced gradient OL, a generic stochastic optimization framework which combines adaptive online learning algorithms with variance reduction to obtain communication efficiency in parallel architectures",
+        "We developed a Spark implementation of stochastic variancereduced gradient OL and solved real large scale sparse learning problems with competitive performance to L-BFGS implemented by Vowpal Wabbit 7.10.0 and Spark ML"
+    ],
+    "key_statements": [
+        "W is a convex subset of Rd and D is a distribution over L-smooth convex functions W ! R",
+        "Combine the previous three steps to show that applying stochastic variancereduced gradient using these approxipmate variance-reduced gradients pand an adaptive serial Stochastic Gradient Descent algorithm achieves O(L/ N ) suboptimality using only O( N ) serial Stochastic Gradient Descent updates (Sections 6 and 7).\n5",
+        "We proceed to compare stochastic variancereduced gradient OL to Spark ML and Vowpal Wabbit 7.10.0 in Table 4. These two LBFGS-based algorithms were superior in all metrics to minibatch Stochastic Gradient Descent and non-adaptive stochastic variancereduced gradient algorithms and so we report only the comparison to Spark ML and Vowpal Wabbit 7.10.0",
+        "We have presented stochastic variancereduced gradient OL, a generic stochastic optimization framework which combines adaptive online learning algorithms with variance reduction to obtain communication efficiency in parallel architectures",
+        "We developed a Spark implementation of stochastic variancereduced gradient OL and solved real large scale sparse learning problems with competitive performance to L-BFGS implemented by Vowpal Wabbit 7.10.0 and Spark ML"
+    ],
+    "summary": [
+        "W is a convex subset of Rd and D is a distribution over L-smooth convex functions W ! R.",
+        "In contrast to much prior work, our algorithm is a reduction that enables us to generically parallelize any serial online learning algorithm that obtains a sufficiently adaptive convergence guarantee (e.g.",
+        "This technique allows our algorithm to adapt to an unknown smoothness parameter L in the problem, resulting in optimal convergence guarantees without requiring tuning of learning rates.",
+        "To deal with the second issue, we incorporate analysis techniques from online learning which allow us replace the constant step-size SGD with any adaptive stochastic optimization algorithm in a black-box manner.",
+        "3. focusing on the variance-reduction aspect, we show that any online learning algorithm which enjoys a sufficiently adaptive convergence guarantee produces a similar \u201cvirtuous cycle\u201d as observed with constant-step-size SGD in the analysis of SVRG, resulting in fast convergence.",
+        "4. Combine the previous three steps to show that applying SVRG using these approxipmate variance-reduced gradients pand an adaptive serial SGD algorithm achieves O(L/ N ) suboptimality using only O( N ) serial SGD updates (Sections 6 and 7).",
+        "To compute the th t gradient gt given to the online learning algorithm in response to an output point wt, SVRG OL approximates the variance-reduction trick of SVRG, setting gt = rf rf + rF for some new sample f \u21e0 D.",
+        "For algorithms with regret bounds matching the conditions of Theorem 1, we get optimal convergence rates by setting N = T 2, in which case our total data usage is N = O(KN ).",
+        "This is relatively easy to accomplish for most SGD algorithms, but our strategy involves correcting the variance in rf (w) using a dense batch gradient rF and so we are in danger of losing the significant computational speedup that comes from taking advantage of sparsity.",
+        "SVRG OL switches between two phases: a batch gradient computation phase and a serial phase in whicn we run the online learning algorithm.",
+        "Remarkably, SVRG OL\u2019s performs well as a function of number of datapoints processed and so is a competitive serial algorithm before even any parallelization.",
+        "We have presented SVRG OL, a generic stochastic optimization framework which combines adaptive online learning algorithms with variance reduction to obtain communication efficiency in parallel architectures.",
+        "Our analysis significantly streamlines previous work by making black-box use of any adaptive online learning algorithm, disentangling the variance-reduction and serial phases of SVRG algorithms."
+    ],
+    "headline": "We propose an efficient distributed stochastic optimization method by combining adaptivity with variance reduction techniques",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Alekh Agarwal, Olivier Chapelle, Miroslav Dud\u00edk, and John Langford. A reliable effective terascale linear learning system. The Journal of Machine Learning Research, 15(1):1111\u20131133, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Agarwal%2C%20Alekh%20Chapelle%2C%20Olivier%20Dud%C3%ADk%2C%20Miroslav%20Langford%2C%20John%20A%20reliable%20effective%20terascale%20linear%20learning%20system%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Agarwal%2C%20Alekh%20Chapelle%2C%20Olivier%20Dud%C3%ADk%2C%20Miroslav%20Langford%2C%20John%20A%20reliable%20effective%20terascale%20linear%20learning%20system%202014"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Alina Beygelzimer, Robert Busa-Fekete, Guy Halawi, and Francesco Orabona. Algorithmic notifications for mail: Debiasing mail data to predict user actions. In under review, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Beygelzimer%2C%20Alina%20Busa-Fekete%2C%20Robert%20Halawi%2C%20Guy%20Orabona%2C%20Francesco%20Algorithmic%20notifications%20for%20mail%3A%20Debiasing%20mail%20data%20to%20predict%20user%20actions%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Beygelzimer%2C%20Alina%20Busa-Fekete%2C%20Robert%20Halawi%2C%20Guy%20Orabona%2C%20Francesco%20Algorithmic%20notifications%20for%20mail%3A%20Debiasing%20mail%20data%20to%20predict%20user%20actions%202018"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Nicolo Cesa-Bianchi, Alex Conconi, and Claudio Gentile. On the generalization ability of on-line learning algorithms. IEEE Transactions on Information Theory, 50(9):2050\u20132057, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cesa-Bianchi%2C%20Nicolo%20Conconi%2C%20Alex%20Gentile%2C%20Claudio%20On%20the%20generalization%20ability%20of%20on-line%20learning%20algorithms%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cesa-Bianchi%2C%20Nicolo%20Conconi%2C%20Alex%20Gentile%2C%20Claudio%20On%20the%20generalization%20ability%20of%20on-line%20learning%20algorithms%202004"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Haibin Cheng and Erick Cant\u00fa-Paz. Personalized click prediction in sponsored search. In Proceedings of the Third International Conference on Web Search and Web Data Mining, WSDM 2010, New York, NY, USA, February 4-6, 2010, pages 351\u2013360, 2010. doi: 10.1145/1718487.1718531. URL http://doi.acm.org/10.1145/1718487.1718531.",
+            "crossref": "https://dx.doi.org/10.1145/1718487.1718531",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1145/1718487.1718531"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Andrew Cotter, Ohad Shamir, Nati Srebro, and Karthik Sridharan. Better mini-batch algorithms via accelerated gradient methods. In Advances in Neural Information Processing Systems 24: 25th Annual Conference on Neural Information Processing Systems 2011. Proceedings of a meeting held 12-14 December 2011, Granada, Spain., pages 1647\u20131655, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cotter%2C%20Andrew%20Shamir%2C%20Ohad%20Srebro%2C%20Nati%20Sridharan%2C%20Karthik%20Better%20mini-batch%20algorithms%20via%20accelerated%20gradient%20methods%202011-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cotter%2C%20Andrew%20Shamir%2C%20Ohad%20Srebro%2C%20Nati%20Sridharan%2C%20Karthik%20Better%20mini-batch%20algorithms%20via%20accelerated%20gradient%20methods%202011-12"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Ashok Cutkosky and Kwabena Boahen. Online learning without prior information. In Satyen Kale and Ohad Shamir, editors, Proceedings of the 2017 Conference on Learning Theory, volume 65 of Proceedings of Machine Learning Research, pages 643\u2013677, Amsterdam, Netherlands, 07\u201310 Jul 2017. PMLR. URL http://proceedings.mlr.press/v65/cutkosky17a.html.",
+            "url": "http://proceedings.mlr.press/v65/cutkosky17a.html",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Ashok%20Cutkosky%20and%20Kwabena%20Boahen.%20Online%20learning%20without%20prior%20information%202017-07"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Ofer Dekel, Ran Gilad-Bachrach, Ohad Shamir, and Lin Xiao. Optimal distributed online prediction using mini-batches. Journal of Machine Learning Research, 13:165\u2013202, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dekel%2C%20Ofer%20Gilad-Bachrach%2C%20Ran%20Shamir%2C%20Ohad%20Xiao%2C%20Lin%20Optimal%20distributed%20online%20prediction%20using%20mini-batches%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dekel%2C%20Ofer%20Gilad-Bachrach%2C%20Ran%20Shamir%2C%20Ohad%20Xiao%2C%20Lin%20Optimal%20distributed%20online%20prediction%20using%20mini-batches%202012"
+        },
+        {
+            "id": "8",
+            "entry": "[8] John Duchi, Elad Hazan, and Yoram Singer. Adaptive subgradient methods for online learning and stochastic optimization. Journal of Machine Learning Research, 12(Jul):2121\u20132159, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Duchi%2C%20John%20Hazan%2C%20Elad%20Singer%2C%20Yoram%20Adaptive%20subgradient%20methods%20for%20online%20learning%20and%20stochastic%20optimization%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Duchi%2C%20John%20Hazan%2C%20Elad%20Singer%2C%20Yoram%20Adaptive%20subgradient%20methods%20for%20online%20learning%20and%20stochastic%20optimization%202011"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Roy Frostig, Rong Ge, Sham M. Kakade, and Aaron Sidford. Competing with the empirical risk minimizer in a single pass. In Proceedings of The 28th Conference on Learning Theory, COLT 2015, Paris, France, July 3-6, 2015, pages 728\u2013763, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Frostig%2C%20Roy%20Ge%2C%20Rong%20Kakade%2C%20Sham%20M.%20Sidford%2C%20Aaron%20Competing%20with%20the%20empirical%20risk%20minimizer%20in%20a%20single%20pass%202015-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Frostig%2C%20Roy%20Ge%2C%20Rong%20Kakade%2C%20Sham%20M.%20Sidford%2C%20Aaron%20Competing%20with%20the%20empirical%20risk%20minimizer%20in%20a%20single%20pass%202015-07"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Reza Harikandeh, Mohamed Osama Ahmed, Alim Virani, Mark Schmidt, Jakub Konecny, and Scott Sallinen. Stopwasting my gradients: Practical svrg. In Advances in Neural Information Processing Systems, pages 2251\u20132259, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Harikandeh%2C%20Reza%20Ahmed%2C%20Mohamed%20Osama%20Virani%2C%20Alim%20Schmidt%2C%20Mark%20Stopwasting%20my%20gradients%3A%20Practical%20svrg%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Harikandeh%2C%20Reza%20Ahmed%2C%20Mohamed%20Osama%20Virani%2C%20Alim%20Schmidt%2C%20Mark%20Stopwasting%20my%20gradients%3A%20Practical%20svrg%202015"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Rie Johnson and Tong Zhang. Accelerating stochastic gradient descent using predictive variance reduction. In Advances in Neural Information Processing Systems 26: 27th Annual Conference on Neural Information Processing Systems 2013. Proceedings of a meeting held December 5-8, 2013, Lake Tahoe, Nevada, United States., pages 315\u2013323, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Johnson%2C%20Rie%20Zhang%2C%20Tong%20Accelerating%20stochastic%20gradient%20descent%20using%20predictive%20variance%20reduction%202013-12-05",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Johnson%2C%20Rie%20Zhang%2C%20Tong%20Accelerating%20stochastic%20gradient%20descent%20using%20predictive%20variance%20reduction%202013-12-05"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Lihua Lei and Michael I Jordan. Less than a single pass: Stochastically controlled stochastic gradient method. arXiv preprint arXiv:1609.03261, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.03261"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Lihua Lei, Cheng Ju, Jianbo Chen, and Michael I Jordan. Non-convex finite-sum optimization via scsg methods. In Advances in Neural Information Processing Systems, pages 2345\u20132355, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lei%2C%20Lihua%20Ju%2C%20Cheng%20Chen%2C%20Jianbo%20Jordan%2C%20Michael%20I.%20Non-convex%20finite-sum%20optimization%20via%20scsg%20methods%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lei%2C%20Lihua%20Ju%2C%20Cheng%20Chen%2C%20Jianbo%20Jordan%2C%20Michael%20I.%20Non-convex%20finite-sum%20optimization%20via%20scsg%20methods%202017"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Francesco Orabona. Simultaneous model selection and optimization through parameter-free stochastic learning. In Advances in Neural Information Processing Systems, pages 1116\u20131124, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Orabona%2C%20Francesco%20Simultaneous%20model%20selection%20and%20optimization%20through%20parameter-free%20stochastic%20learning%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Orabona%2C%20Francesco%20Simultaneous%20model%20selection%20and%20optimization%20through%20parameter-free%20stochastic%20learning%202014"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Francesco Orabona and D\u00e1vid P\u00e1l. Scale-free online learning. arXiv preprint arXiv:1601.01974, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1601.01974"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Sashank J Reddi, Jakub Konecny, Peter Richt\u00e1rik, Barnab\u00e1s P\u00f3cz\u00f3s, and Alex Smola. Aide: Fast and communication efficient distributed optimization. arXiv preprint arXiv:1608.06879, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1608.06879"
+        },
+        {
+            "id": "17",
+            "entry": "[17] St\u00e9phane Ross, Paul Mineiro, and John Langford. Normalized online learning. arXiv preprint arXiv:1305.6646, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1305.6646"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Vatsal Shah, Megasthenis Asteris, Anastasios Kyrillidis, and Sujay Sanghavi. Trading-off variance and complexity in stochastic gradient descent. arXiv preprint arXiv:1603.06861, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1603.06861"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Shai Shalev-Shwartz. Online learning and online convex optimization. Foundations and Trends R in Machine Learning, 4(2):107\u2013194, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shalev-Shwartz%2C%20Shai%20Online%20learning%20and%20online%20convex%20optimization%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shalev-Shwartz%2C%20Shai%20Online%20learning%20and%20online%20convex%20optimization%202012"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Ohad Shamir, Nathan Srebro, and Tong Zhang. Communication efficient distributed optimization using an approximate newton-type method. CoRR, abs/1312.7853, 2013. URL http://arxiv.org/abs/1312.7853.",
+            "url": "http://arxiv.org/abs/1312.7853",
+            "arxiv_url": "https://arxiv.org/pdf/1312.7853"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Jialei Wang, Weiran Wang, and Nathan Srebro. Memory and communication efficient distributed stochastic optimization with minibatch prox. CoRR, abs/1702.06269, 2017. URL http://arxiv.org/abs/1702.06269.",
+            "url": "http://arxiv.org/abs/1702.06269",
+            "arxiv_url": "https://arxiv.org/pdf/1702.06269"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Yuchen Zhang and Lin Xiao. Communication-efficient distributed optimization of self-concordant empirical loss. CoRR, abs/1501.00263, 2015. URL http://arxiv.org/abs/1501.00263. ",
+            "url": "http://arxiv.org/abs/1501.00263",
+            "arxiv_url": "https://arxiv.org/pdf/1501.00263"
+        }
+    ]
+}

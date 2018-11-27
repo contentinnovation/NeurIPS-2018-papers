@@ -1,0 +1,283 @@
+{
+    "filename": "8117-reversible-recurrent-neural-networks.pdf",
+    "metadata": {
+        "title": "Reversible Recurrent Neural Networks",
+        "author": "Matthew MacKay, Paul Vicol, Jimmy Ba, Roger B. Grosse",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8117-reversible-recurrent-neural-networks.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Recurrent neural networks (RNNs) provide state-of-the-art performance in processing sequential data but are memory intensive to train, limiting the flexibility of RNN models which can be trained. Reversible RNNs\u2014RNNs for which the hidden-to-hidden transition can be reversed\u2014offer a path to reduce the memory requirements of training, as hidden states need not be stored and instead can be recomputed during backpropagation. We first show that perfectly reversible RNNs, which require no storage of the hidden activations, are fundamentally limited because they cannot forget information from their hidden state. We then provide a scheme for storing a small number of bits in order to allow perfect reversal with forgetting. Our method achieves comparable performance to traditional models while reducing the activation memory cost by a factor of 10\u201315. We extend our technique to attention-based sequence-to-sequence models, where it maintains performance while reducing activation memory cost by a factor of 5\u201310 in the encoder, and a factor of 10\u201315 in the decoder."
+    },
+    "keywords": [
+        {
+            "term": "neural machine translation",
+            "url": "https://en.wikipedia.org/wiki/neural_machine_translation"
+        },
+        {
+            "term": "Recurrent neural networks",
+            "url": "https://en.wikipedia.org/wiki/Recurrent_neural_networks"
+        },
+        {
+            "term": "LSTM",
+            "url": "https://en.wikipedia.org/wiki/LSTM"
+        },
+        {
+            "term": "probability distribution",
+            "url": "https://en.wikipedia.org/wiki/probability_distribution"
+        }
+    ],
+    "highlights": [
+        "We begin by describing techniques to construct reversible neural network architectures, which we adapt to Recurrent neural networks",
+        "We show that any perfectly reversible Recurrent neural networks requiring no storage of hidden activations will fail on a simple one-step prediction task",
+        "We have shown reversible Recurrent neural networks in finite precision can be constructed by ensuring that no information is discarded",
+        "We evaluated the performance of reversible models on two standard Recurrent neural networks tasks: language modeling and machine translation",
+        "We have introduced reversible recurrent neural networks as a method to reduce the memory requirements of truncated backpropagation through time",
+        "We demonstrated the flaws of exactly reversible Recurrent neural networks, and developed methods to efficiently store information lost during the hidden-to-hidden transition, allowing us to reverse the transition during backpropagation"
+    ],
+    "key_statements": [
+        "We begin by describing techniques to construct reversible neural network architectures, which we adapt to Recurrent neural networks",
+        "We show that any perfectly reversible Recurrent neural networks requiring no storage of hidden activations will fail on a simple one-step prediction task",
+        "We evaluate the performance of these models on language modeling and neural machine translation benchmarks",
+        "Reversible networks were first motivated by the need for flexible probability distributions with tractable likelihoods [<a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>, <a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>, <a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>]",
+        "Each of these architectures defines a mapping between probability distributions, one of which has a simple, known density",
+        "We have shown reversible Recurrent neural networks in finite precision can be constructed by ensuring that no information is discarded",
+        "Most modern architectures for neural machine translation make use of attention mechanisms [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>, <a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>]; we describe the modifications that must be made to obtain memory savings when using attention",
+        "We evaluated the performance of reversible models on two standard Recurrent neural networks tasks: language modeling and machine translation",
+        "Language Modeling Experiments We evaluated our oneand two-layer reversible models on word-level language modeling on the Penn Treebank [<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>] and WikiText-2 [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>] corpora",
+        "We further evaluated our models on English-to-German neural machine translation (NMT)",
+        "The test BLEU scores and encoder memory savings achieved by our reversible models are shown in Table 3, for several variants of attention and restrictions on forgetting",
+        "We evaluated reversible models in which the decoder used Emb+60H attention",
+        "We have introduced reversible recurrent neural networks as a method to reduce the memory requirements of truncated backpropagation through time",
+        "We demonstrated the flaws of exactly reversible Recurrent neural networks, and developed methods to efficiently store information lost during the hidden-to-hidden transition, allowing us to reverse the transition during backpropagation"
+    ],
+    "summary": [
+        "We begin by describing techniques to construct reversible neural network architectures, which we adapt to RNNs.",
+        "Because the updates of the NFRevGRU do not discard information, we need only store one hidden state in memory at a given time during training.",
+        "We can achieve perfect reconstruction by restoring this information to our hidden state in the reverse computation.",
+        "We argue that this results from a fundamental limitation of no-forgetting reversible models: if none of the hidden state can be forgotten, the hidden state at any given timestep must contain enough information to reconstruct all previous hidden states.",
+        "The decoder uses this final hidden state to produce the input sequence in reverse sequential order.",
+        "The NF-RevGRU was able to memorize input sequences using considerably fewer hidden units than the ordinary GRU or LSTM, suggesting it may be a useful architecture for tasks requiring memorization.",
+        "The impossibility of zero forgetting leads us to explore the second possibility to achieve reversibility: storing information lost from the hidden state during the forward computation, restoring it in the reverse computation.",
+        "This introduces additional considerations which require modifications to Algorithm 1: (1) we implement it with ordinary finite-bit integers, dealing with overflow, and (2) for GPU efficiency, we ensure uniform memory access patterns across all hidden units.",
+        "To determine how little could be forgotten without affecting performance, we experimented with restricting forgetting to at most 2, 3, or 5 bits per hidden unit per timestep using the method of Section 5.3.",
+        "We can achieve a 10\u201315-fold reduction in memory when forgetting at most 2\u20133 bits, while maintaining comparable performance to standard models.",
+        "The test BLEU scores and encoder memory savings achieved by our reversible models are shown in Table 3, for several variants of attention and restrictions on forgetting.",
+        "The RevGRU with Emb+20H attention and forgetting at most 2 bits achieved a test BLEU score of 34.41, outperforming the standard GRU, while reducing activation memory requirements by 7.1\u00d7 and 14.8\u00d7 in the encoder and decoder, respectively.",
+        "The RevLSTM with Emb+20H attention and forgetting at most 3 bits achieved a test BLEU score of 37.23, outperforming the standard LSTM, while reducing activation memory requirements by 8.9\u00d7 and 11.1\u00d7 in the encoder and decoder respectively.",
+        "We have introduced reversible recurrent neural networks as a method to reduce the memory requirements of truncated backpropagation through time.",
+        "Reversible models can achieve roughly equivalent performance to standard models while reducing the memory requirements by a factor of 5\u201315 during training.",
+        "We believe reversible models offer a compelling path towards constructing more flexible and expressive recurrent neural networks"
+    ],
+    "headline": "We provide a scheme for storing a small number of bits in order to allow perfect reversal with forgetting",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Alex Graves, Abdel-Rahman Mohamed, and Geoffrey Hinton. Speech Recognition with Deep Recurrent Neural Networks. In International Conference on Acoustics, Speech and Signal Processing (ICASSP), pages 6645\u20136649. IEEE, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Graves%2C%20Alex%20Mohamed%2C%20Abdel-Rahman%20Hinton%2C%20Geoffrey%20Speech%20Recognition%20with%20Deep%20Recurrent%20Neural%20Networks%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Graves%2C%20Alex%20Mohamed%2C%20Abdel-Rahman%20Hinton%2C%20Geoffrey%20Speech%20Recognition%20with%20Deep%20Recurrent%20Neural%20Networks%202013"
+        },
+        {
+            "id": "2",
+            "entry": "[2] G\u00e1bor Melis, Chris Dyer, and Phil Blunsom. On the State of the Art of Evaluation in Neural Language Models. arXiv:1707.05589, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.05589"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Stephen Merity, Nitish Shirish Keskar, and Richard Socher. Regularizing and Optimizing LSTM Language Models. arXiv:1708.02182, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1708.02182"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio. Neural Machine Translation by Jointly Learning to Align and Translate. arXiv:1409.0473, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1409.0473"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Yonghui Wu, Mike Schuster, Zhifeng Chen, Quoc V Le, Mohammad Norouzi, Wolfgang Macherey, Maxim Krikun, Yuan Cao, Qin Gao, Klaus Macherey, et al. Google\u2019s Neural Machine Translation System: Bridging the Gap between Human and Machine Translation. arXiv:1609.08144, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.08144"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Paul J Werbos. Backpropagation through Time: What It Does and How to Do It. Proceedings of the IEEE, 78(10):1550\u20131560, 1990.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Werbos%2C%20Paul%20J.%20Backpropagation%20through%20Time%3A%20What%20It%20Does%20and%20How%20to%20Do%20It%201990",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Werbos%2C%20Paul%20J.%20Backpropagation%20through%20Time%3A%20What%20It%20Does%20and%20How%20to%20Do%20It%201990"
+        },
+        {
+            "id": "7",
+            "entry": "[7] David E Rumelhart, Geoffrey E Hinton, and Ronald J Williams. Learning Representations by Back-propagating Errors. Nature, 323(6088):533, 1986.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20Representations%20by%20Back-propagating%20Errors%201986",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Representations%20by%20Back-propagating%20Errors%201986"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Razvan Pascanu, Caglar Gulcehre, Kyunghyun Cho, and Yoshua Bengio. How to Construct Deep Recurrent Neural Networks. arXiv:1312.6026, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.6026"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Antonio Valerio Miceli Barone, Jindrich Helcl, Rico Sennrich, Barry Haddow, and Alexandra Birch. Deep Architectures for Neural Machine Translation. arXiv:1707.07631, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.07631"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Julian Georg Zilly, Rupesh Kumar Srivastava, Jan Koutn\u00edk, and J\u00fcrgen Schmidhuber. Recurrent Highway Networks. arXiv:1607.03474, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1607.03474"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Kyunghyun Cho, Bart Van Merri\u00ebnboer, Caglar Gulcehre, Dzmitry Bahdanau, Fethi Bougares, Holger Schwenk, and Yoshua Bengio. Learning Phrase Representations using RNN EncoderDecoder for Statistical Machine Translation. arXiv:1406.1078, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1406.1078"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Sepp Hochreiter and J\u00fcrgen Schmidhuber. Long Short-Term Memory. Neural Computation, 9 (8):1735\u20131780, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Long%20Short-Term%20Memory%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Long%20Short-Term%20Memory%201997"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Dougal Maclaurin, David Duvenaud, and Ryan P Adams. Gradient-based Hyperparameter Optimization through Reversible Learning. In Proceedings of the 32nd International Conference on Machine Learning (ICML), July 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Maclaurin%2C%20Dougal%20Duvenaud%2C%20David%20Adams%2C%20Ryan%20P.%20Gradient-based%20Hyperparameter%20Optimization%20through%20Reversible%20Learning%202015-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Maclaurin%2C%20Dougal%20Duvenaud%2C%20David%20Adams%2C%20Ryan%20P.%20Gradient-based%20Hyperparameter%20Optimization%20through%20Reversible%20Learning%202015-07"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Mitchell P Marcus, Mary Ann Marcinkiewicz, and Beatrice Santorini. Building a large annotated corpus of English: The Penn Treebank. Computational Linguistics, 19(2):313\u2013330, 1993.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Marcus%2C%20Mitchell%20P.%20Marcinkiewicz%2C%20Mary%20Ann%20Santorini%2C%20Beatrice%20Building%20a%20large%20annotated%20corpus%20of%20English%3A%20The%20Penn%20Treebank%201993",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Marcus%2C%20Mitchell%20P.%20Marcinkiewicz%2C%20Mary%20Ann%20Santorini%2C%20Beatrice%20Building%20a%20large%20annotated%20corpus%20of%20English%3A%20The%20Penn%20Treebank%201993"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Stephen Merity, Caiming Xiong, James Bradbury, and Richard Socher. Pointer Sentinel Mixture Models. arXiv:1609.07843, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.07843"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Desmond Elliott, Stella Frank, Khalil Sima\u2019an, and Lucia Specia. Multi30K: Multilingual English-German Image Descriptions. arXiv:1605.00459, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1605.00459"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Mauro Cettolo, Jan Niehues, Sebastian St\u00fcker, Luisa Bentivogli, and Marcello Federico. The IWSLT 2016 Evaluation Campaign. Proceedings of the 13th International Workshop on Spoken Language Translation (IWSLT), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mauro%20Cettolo%20Jan%20Niehues%20Sebastian%20St%C3%BCker%20Luisa%20Bentivogli%20and%20Marcello%20Federico%20The%20IWSLT%202016%20Evaluation%20Campaign%20Proceedings%20of%20the%2013th%20International%20Workshop%20on%20Spoken%20Language%20Translation%20IWSLT%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mauro%20Cettolo%20Jan%20Niehues%20Sebastian%20St%C3%BCker%20Luisa%20Bentivogli%20and%20Marcello%20Federico%20The%20IWSLT%202016%20Evaluation%20Campaign%20Proceedings%20of%20the%2013th%20International%20Workshop%20on%20Spoken%20Language%20Translation%20IWSLT%202016"
+        },
+        {
+            "id": "18",
+            "entry": "[18] George Papamakarios, Iain Murray, and Theo Pavlakou. Masked Autoregressive Flow for Density Estimation. In Advances in Neural Information Processing Systems (NIPS), pages 2335\u20132344, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Papamakarios%2C%20George%20Murray%2C%20Iain%20Pavlakou%2C%20Theo%20Masked%20Autoregressive%20Flow%20for%20Density%20Estimation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Papamakarios%2C%20George%20Murray%2C%20Iain%20Pavlakou%2C%20Theo%20Masked%20Autoregressive%20Flow%20for%20Density%20Estimation%202017"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Laurent Dinh, Jascha Sohl-Dickstein, and Samy Bengio. Density Estimation using Real NVP. arXiv:1605.08803, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1605.08803"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Diederik P Kingma, Tim Salimans, Rafal Jozefowicz, Xi Chen, Ilya Sutskever, and Max Welling. Improving Variational Inference with Inverse Autoregressive Flow. In Advances in Neural Information Processing Systems (NIPS), pages 4743\u20134751, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Salimans%2C%20Tim%20Jozefowicz%2C%20Rafal%20Chen%2C%20Xi%20Improving%20Variational%20Inference%20with%20Inverse%20Autoregressive%20Flow%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Salimans%2C%20Tim%20Jozefowicz%2C%20Rafal%20Chen%2C%20Xi%20Improving%20Variational%20Inference%20with%20Inverse%20Autoregressive%20Flow%202016"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Aidan N Gomez, Mengye Ren, Raquel Urtasun, and Roger B Grosse. The Reversible Residual Network: Backpropagation Without Storing Activations. In Advances in Neural Information Processing Systems (NIPS), pages 2211\u20132221, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gomez%2C%20Aidan%20N.%20Ren%2C%20Mengye%20Urtasun%2C%20Raquel%20Grosse%2C%20Roger%20B.%20The%20Reversible%20Residual%20Network%3A%20Backpropagation%20Without%20Storing%20Activations%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gomez%2C%20Aidan%20N.%20Ren%2C%20Mengye%20Urtasun%2C%20Raquel%20Grosse%2C%20Roger%20B.%20The%20Reversible%20Residual%20Network%3A%20Backpropagation%20Without%20Storing%20Activations%202017"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep Residual Learning for Image Recognition. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pages 770\u2013778, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20Residual%20Learning%20for%20Image%20Recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20Residual%20Learning%20for%20Image%20Recognition%202016"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Felix A Gers, J\u00fcrgen Schmidhuber, and Fred Cummins. Learning to Forget: Continual Prediction with LSTM. 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gers%2C%20Felix%20A.%20Schmidhuber%2C%20J%C3%BCrgen%20Cummins%2C%20Fred%20Learning%20to%20Forget%3A%20Continual%20Prediction%20with%20LSTM%201999"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Klaus Greff, Rupesh K Srivastava, Jan Koutn\u00edk, Bas R Steunebrink, and J\u00fcrgen Schmidhuber. LSTM: A Search Space Odyssey. IEEE Transactions on Neural Networks and Learning Systems, 28(10):2222\u20132232, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Greff%2C%20Klaus%20Srivastava%2C%20Rupesh%20K.%20Koutn%C3%ADk%2C%20Jan%20Steunebrink%2C%20Bas%20R.%20LSTM%3A%20A%20Search%20Space%20Odyssey%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Greff%2C%20Klaus%20Srivastava%2C%20Rupesh%20K.%20Koutn%C3%ADk%2C%20Jan%20Steunebrink%2C%20Bas%20R.%20LSTM%3A%20A%20Search%20Space%20Odyssey%202017"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Wojciech Zaremba and Ilya Sutskever. Learning to Execute. arXiv:1410.4615, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1410.4615"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Suyog Gupta, Ankur Agrawal, Kailash Gopalakrishnan, and Pritish Narayanan. Deep Learning with Limited Numerical Precision. In International Conference on Machine Learning (ICML), pages 1737\u20131746, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gupta%2C%20Suyog%20Agrawal%2C%20Ankur%20Gopalakrishnan%2C%20Kailash%20Narayanan%2C%20Pritish%20Deep%20Learning%20with%20Limited%20Numerical%20Precision%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gupta%2C%20Suyog%20Agrawal%2C%20Ankur%20Gopalakrishnan%2C%20Kailash%20Narayanan%2C%20Pritish%20Deep%20Learning%20with%20Limited%20Numerical%20Precision%202015"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Matthieu Courbariaux, Yoshua Bengio, and Jean-Pierre David. Training Deep Neural Networks with Low Precision Multiplications. arXiv:1412.7024, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.7024"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Minh-Thang Luong, Hieu Pham, and Christopher D Manning. Effective Approaches to Attention-Based Neural Machine Translation. arXiv:1508.04025, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1508.04025"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Mart\u00edn Abadi, Ashish Agarwal, Paul Barham, Eugene Brevdo, Zhifeng Chen, Craig Citro, Greg S Corrado, Andy Davis, Jeffrey Dean, Matthieu Devin, et al. Tensorflow: Large-Scale Machine Learning on Heterogeneous Distributed Systems. arXiv:1603.04467, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1603.04467"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Rami Al-Rfou, Guillaume Alain, Amjad Almahairi, Christof Angermueller, Dzmitry Bahdanau, Nicolas Ballas, Fr\u00e9d\u00e9ric Bastien, Justin Bayer, Anatoly Belikov, Alexander Belopolsky, et al. Theano: A Python Framework for Fast Computation of Mathematical Expressions. arXiv:1605.02688, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1605.02688"
+        },
+        {
+            "id": "31",
+            "entry": "[31] James Martens and Ilya Sutskever. Training Deep and Recurrent Networks with Hessian-Free Optimization. In Neural Networks: Tricks of the Trade, pages 479\u2013535.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Martens%2C%20James%20Sutskever%2C%20Ilya%20Training%20Deep%20and%20Recurrent%20Networks%20with%20Hessian-Free%20Optimization",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Martens%2C%20James%20Sutskever%2C%20Ilya%20Training%20Deep%20and%20Recurrent%20Networks%20with%20Hessian-Free%20Optimization"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Tianqi Chen, Bing Xu, Chiyuan Zhang, and Carlos Guestrin. Training Deep Nets with Sublinear Memory Cost. arXiv:1604.06174, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1604.06174"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Audrunas Gruslys, R\u00e9mi Munos, Ivo Danihelka, Marc Lanctot, and Alex Graves. MemoryEfficient Backpropagation through Time. In Advances in Neural Information Processing Systems (NIPS), pages 4125\u20134133, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gruslys%2C%20Audrunas%20Munos%2C%20R%C3%A9mi%20Danihelka%2C%20Ivo%20Lanctot%2C%20Marc%20MemoryEfficient%20Backpropagation%20through%20Time%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gruslys%2C%20Audrunas%20Munos%2C%20R%C3%A9mi%20Danihelka%2C%20Ivo%20Lanctot%2C%20Marc%20MemoryEfficient%20Backpropagation%20through%20Time%202016"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Max Jaderberg, Wojciech M Czarnecki, Simon Osindero, Oriol Vinyals, Alex Graves, David Silver, and Koray Kavukcuoglu. Decoupled Neural Interfaces using Synthetic Gradients. In International Conference on Machine Learning (ICML), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jaderberg%2C%20Max%20Czarnecki%2C%20Wojciech%20M.%20Osindero%2C%20Simon%20Vinyals%2C%20Oriol%20Decoupled%20Neural%20Interfaces%20using%20Synthetic%20Gradients%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jaderberg%2C%20Max%20Czarnecki%2C%20Wojciech%20M.%20Osindero%2C%20Simon%20Vinyals%2C%20Oriol%20Decoupled%20Neural%20Interfaces%20using%20Synthetic%20Gradients%202017"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Wojciech Marian Czarnecki, Grzegorz Swirszcz, Max Jaderberg, Simon Osindero, Oriol Vinyals, and Koray Kavukcuoglu. Understanding Synthetic Gradients and Decoupled Neural Interfaces. arXiv preprint arXiv:1703.00522, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.00522"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Martin Arjovsky, Amar Shah, and Yoshua Bengio. Unitary Evolution Recurrent Neural Networks. In International Conference on Machine Learning (ICML), pages 1120\u20131128, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Martin%20Arjovsky%20Amar%20Shah%20and%20Yoshua%20Bengio%20Unitary%20Evolution%20Recurrent%20Neural%20Networks%20In%20International%20Conference%20on%20Machine%20Learning%20ICML%20pages%2011201128%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Martin%20Arjovsky%20Amar%20Shah%20and%20Yoshua%20Bengio%20Unitary%20Evolution%20Recurrent%20Neural%20Networks%20In%20International%20Conference%20on%20Machine%20Learning%20ICML%20pages%2011201128%202016"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Scott Wisdom, Thomas Powers, John Hershey, Jonathan Le Roux, and Les Atlas. Full-Capacity Unitary Recurrent Neural Networks. In Advances in Neural Information Processing Systems (NIPS), pages 4880\u20134888, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Scott%20Wisdom%20Thomas%20Powers%20John%20Hershey%20Jonathan%20Le%20Roux%20and%20Les%20Atlas%20FullCapacity%20Unitary%20Recurrent%20Neural%20Networks%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20NIPS%20pages%2048804888%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Scott%20Wisdom%20Thomas%20Powers%20John%20Hershey%20Jonathan%20Le%20Roux%20and%20Les%20Atlas%20FullCapacity%20Unitary%20Recurrent%20Neural%20Networks%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20NIPS%20pages%2048804888%202016"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Li Jing, Yichen Shen, Tena Dubcek, John Peurifoy, Scott Skirlo, Max Tegmark, and Marin Soljacic. Tunable Efficient Unitary Neural Networks (EUNN) and their Application to RNN. arXiv:1612.05231, 2016. ",
+            "arxiv_url": "https://arxiv.org/pdf/1612.05231"
+        }
+    ]
+}

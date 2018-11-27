@@ -1,0 +1,296 @@
+{
+    "filename": "7346-a-neural-compositional-paradigm-for-image-captioning.pdf",
+    "metadata": {
+        "title": "A Neural Compositional Paradigm for Image Captioning",
+        "author": "Bo Dai, Sanja Fidler, Dahua Lin",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7346-a-neural-compositional-paradigm-for-image-captioning.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Mainstream captioning models often follow a sequential structure to generate captions, leading to issues such as introduction of irrelevant semantics, lack of diversity in the generated captions, and inadequate generalization performance. In this paper, we present an alternative paradigm for image captioning, which factorizes the captioning procedure into two stages: (1) extracting an explicit semantic representation from the given image; and (2) constructing the caption based on a recursive compositional procedure in a bottom-up manner. Compared to conventional ones, our paradigm better preserves the semantic content through an explicit factorization of semantics and syntax. By using the compositional generation procedure, caption construction follows a recursive structure, which naturally fits the properties of human language. Moreover, the proposed compositional procedure requires less data to train, generalizes better, and yields more diverse captions."
+    },
+    "keywords": [
+        {
+            "term": "hierarchical structure",
+            "url": "https://en.wikipedia.org/wiki/hierarchical_structure"
+        },
+        {
+            "term": "human language",
+            "url": "https://en.wikipedia.org/wiki/human_language"
+        },
+        {
+            "term": "noun phrase",
+            "url": "https://en.wikipedia.org/wiki/noun_phrase"
+        },
+        {
+            "term": "natural language processing",
+            "url": "https://en.wikipedia.org/wiki/natural_language_processing"
+        },
+        {
+            "term": "feature vector",
+            "url": "https://en.wikipedia.org/wiki/feature_vector"
+        }
+    ],
+    "highlights": [
+        "The task to generate short descriptions for given images, has received increasing attention in recent years",
+        "State-of-the-art models [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>, <a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>] mostly adopt the encoder-decoder paradigm [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>], where the content of the given image is first encoded via a convolutional network into a feature vector, which is decoded into a caption via a recurrent network",
+        "It could not reflect the inherent hierarchical structures of natural languages [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>, <a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>] in image captioning and other generation tasks, it could implicitly capture such structures in tasks taking the complete sentences as input, e.g. parsing [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>], and classification [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>]",
+        "We propose a new paradigm for image captioning, where the extraction of semantics and the construction of syntactically correct captions are decomposed into two stages",
+        "We propose a novel paradigm for image captioning",
+        "Caption generation follows a hierarchical structure, which naturally fits the properties of human language"
+    ],
+    "key_statements": [
+        "The task to generate short descriptions for given images, has received increasing attention in recent years",
+        "State-of-the-art models [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>, <a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>] mostly adopt the encoder-decoder paradigm [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>], where the content of the given image is first encoded via a convolutional network into a feature vector, which is decoded into a caption via a recurrent network",
+        "It could not reflect the inherent hierarchical structures of natural languages [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>, <a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>] in image captioning and other generation tasks, it could implicitly capture such structures in tasks taking the complete sentences as input, e.g. parsing [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>], and classification [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>]",
+        "We propose a new paradigm for image captioning, where the extraction of semantics and the construction of syntactically correct captions are decomposed into two stages",
+        "We propose a novel paradigm for image captioning",
+        "Caption generation follows a hierarchical structure, which naturally fits the properties of human language"
+    ],
+    "summary": [
+        "The task to generate short descriptions for given images, has received increasing attention in recent years.",
+        "Our proposed paradigm proceeds in a bottom-up manner, by representing the input image with a set of noun-phrases, and constructs captions according to a recursive composition procedure.",
+        "Starting with a set of noun-phrases, we construct the caption through a recursive compositional procedure called CompCap. We first provide an overview, and describe details of all the components in the following paragraphs.",
+        "Given an input phrase P , the E-Module encodes it into a vector ze, using a two-level LSTM model as described above, and evaluates the probability of P being a complete caption as",
+        "As for CompCap, we empirically select n = 7 noun-phrases with top scores to represent the input image, which is a trade-off between semantics and syntax, as shown in Figure 8.",
+        "As shown in Table 1, among all methods, CompCap with predicted noun-phrases obtains the best results under the SPICE metric, which has higher correlation with human judgements [<a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>], but is inferior to baselines in terms of CIDEr, BLEU-4, ROUGE and METEOR.",
+        "While SPICE focuses on semantical analysis, metrics including CIDEr, BLEU-4, ROUGE and METEOR are known to favor frequent training n-grams [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>], which are more likely to appear when following a sequential generation procedure.",
+        "The compositional generation procedure preserves semantic content more effectively, but may contain more n-grams that are not observed in the training set.",
+        "We randomly picked one ground-truth caption, and followed its composing order to integrate its noun-phrases into a complete caption, so that CompCap only accounts for connecting phrase selection.",
+        "Metrics except for SPICE obtain further boost, which is reasonable as we only use a part of all ground-truth noun-phrases, and frequent training n-grams are more likely to appear following some ground-truth composing order.",
+        "One important property of CompCap is the ability to generate diverse captions, as these can be obtained by varying the involved noun-phrases or the composing order.",
+        "Errors in captions generated by CompCap mainly come from the misunderstanding of the input visual content, which could be fixed by applying more sophisticated techniques in the stage of noun-phrase extraction.",
+        "A recursive compositional procedure is applied to assemble extracted noun-phrases into a caption.",
+        "The proposed compositional procedure is shown to preserve semantics more effectively, require less data to train, generalize better across datasets, and yield more diverse captions."
+    ],
+    "headline": "We present an alternative paradigm for image captioning, which factorizes the captioning procedure into two stages:  extracting an explicit semantic representation from the given image; and  constructing the caption based on a recursive compositional procedure in a bottom-up manner",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Jiasen Lu, Caiming Xiong, Devi Parikh, and Richard Socher. Knowing when to look: Adaptive attention via a visual sentinel for image captioning. arXiv preprint arXiv:1612.01887, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1612.01887"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Peter Anderson, Xiaodong He, Chris Buehler, Damien Teney, Mark Johnson, Stephen Gould, and Lei Zhang. Bottom-up and top-down attention for image captioning and vqa. arXiv preprint arXiv:1707.07998, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.07998"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Oriol Vinyals, Alexander Toshev, Samy Bengio, and Dumitru Erhan. Show and tell: A neural image caption generator. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 3156\u20133164, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vinyals%2C%20Oriol%20Toshev%2C%20Alexander%20Bengio%2C%20Samy%20Erhan%2C%20Dumitru%20Show%20and%20tell%3A%20A%20neural%20image%20caption%20generator%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vinyals%2C%20Oriol%20Toshev%2C%20Alexander%20Bengio%2C%20Samy%20Erhan%2C%20Dumitru%20Show%20and%20tell%3A%20A%20neural%20image%20caption%20generator%202015"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Kelvin Xu, Jimmy Ba, Ryan Kiros, Kyunghyun Cho, Aaron C Courville, Ruslan Salakhutdinov, Richard S Zemel, and Yoshua Bengio. Show, attend and tell: Neural image caption generation with visual attention. In ICML, volume 14, pages 77\u201381, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xu%2C%20Kelvin%20Ba%2C%20Jimmy%20Kiros%2C%20Ryan%20Cho%2C%20Kyunghyun%20attend%20and%20tell%3A%20Neural%20image%20caption%20generation%20with%20visual%20attention%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xu%2C%20Kelvin%20Ba%2C%20Jimmy%20Kiros%2C%20Ryan%20Cho%2C%20Kyunghyun%20attend%20and%20tell%3A%20Neural%20image%20caption%20generation%20with%20visual%20attention%202015"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Tsung-Yi Lin, Michael Maire, Serge Belongie, James Hays, Pietro Perona, Deva Ramanan, Piotr Doll\u00e1r, and C Lawrence Zitnick. Microsoft coco: Common objects in context. In European Conference on Computer Vision, pages 740\u2013755.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=TsungYi%20Lin%20Michael%20Maire%20Serge%20Belongie%20James%20Hays%20Pietro%20Perona%20Deva%20Ramanan%20Piotr%20Doll%C3%A1r%20and%20C%20Lawrence%20Zitnick%20Microsoft%20coco%20Common%20objects%20in%20context%20In%20European%20Conference%20on%20Computer%20Vision%20pages%20740755",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=TsungYi%20Lin%20Michael%20Maire%20Serge%20Belongie%20James%20Hays%20Pietro%20Perona%20Deva%20Ramanan%20Piotr%20Doll%C3%A1r%20and%20C%20Lawrence%20Zitnick%20Microsoft%20coco%20Common%20objects%20in%20context%20In%20European%20Conference%20on%20Computer%20Vision%20pages%20740755"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Peter Young, Alice Lai, Micah Hodosh, and Julia Hockenmaier. From image descriptions to visual denotations: New similarity metrics for semantic inference over event descriptions. Transactions of the Association for Computational Linguistics, 2:67\u201378, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Young%2C%20Peter%20Lai%2C%20Alice%20Hodosh%2C%20Micah%20Hockenmaier%2C%20Julia%20From%20image%20descriptions%20to%20visual%20denotations%3A%20New%20similarity%20metrics%20for%20semantic%20inference%20over%20event%20descriptions%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Young%2C%20Peter%20Lai%2C%20Alice%20Hodosh%2C%20Micah%20Hockenmaier%2C%20Julia%20From%20image%20descriptions%20to%20visual%20denotations%3A%20New%20similarity%20metrics%20for%20semantic%20inference%20over%20event%20descriptions%202014"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Christopher D Manning and Hinrich Sch\u00fctze. Foundations of statistical natural language processing. MIT press, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Manning%2C%20Christopher%20D.%20Sch%C3%BCtze%2C%20Hinrich%20Foundations%20of%20statistical%20natural%20language%20processing%201999"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Andrew Carnie. Syntax: A generative introduction. John Wiley & Sons, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Carnie%2C%20Andrew%20Syntax%3A%20A%20generative%20introduction%202013"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Danqi Chen and Christopher Manning. A fast and accurate dependency parser using neural networks. In Proceedings of the 2014 conference on empirical methods in natural language processing (EMNLP), pages 740\u2013750, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Danqi%20Manning%2C%20Christopher%20A%20fast%20and%20accurate%20dependency%20parser%20using%20neural%20networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Danqi%20Manning%2C%20Christopher%20A%20fast%20and%20accurate%20dependency%20parser%20using%20neural%20networks%202014"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Pengfei Liu, Xipeng Qiu, and Xuanjing Huang. Recurrent neural network for text classification with multi-task learning. arXiv preprint arXiv:1605.05101, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1605.05101"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Bo Dai, Sanja Fidler, Raquel Urtasun, and Dahua Lin. Towards diverse and natural image descriptions via a conditional gan. In Proceedings of the IEEE International Conference on Computer Vision, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dai%2C%20Bo%20Fidler%2C%20Sanja%20Urtasun%2C%20Raquel%20Lin%2C%20Dahua%20Towards%20diverse%20and%20natural%20image%20descriptions%20via%20a%20conditional%20gan%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dai%2C%20Bo%20Fidler%2C%20Sanja%20Urtasun%2C%20Raquel%20Lin%2C%20Dahua%20Towards%20diverse%20and%20natural%20image%20descriptions%20via%20a%20conditional%20gan%202017"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Ali Farhadi, Mohsen Hejrati, Mohammad Amin Sadeghi, Peter Young, Cyrus Rashtchian, Julia Hockenmaier, and David Forsyth. Every picture tells a story: Generating sentences from images. In European conference on computer vision, pages 15\u201329.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Farhadi%2C%20Ali%20Hejrati%2C%20Mohsen%20Sadeghi%2C%20Mohammad%20Amin%20Young%2C%20Peter%20Every%20picture%20tells%20a%20story%3A%20Generating%20sentences%20from%20images",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Farhadi%2C%20Ali%20Hejrati%2C%20Mohsen%20Sadeghi%2C%20Mohammad%20Amin%20Young%2C%20Peter%20Every%20picture%20tells%20a%20story%3A%20Generating%20sentences%20from%20images"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Girish Kulkarni, Visruth Premraj, Vicente Ordonez, Sagnik Dhar, Siming Li, Yejin Choi, Alexander C Berg, and Tamara L Berg. Babytalk: Understanding and generating simple image descriptions. IEEE Transactions on Pattern Analysis and Machine Intelligence, 35(12):2891\u20132903, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kulkarni%2C%20Girish%20Premraj%2C%20Visruth%20Ordonez%2C%20Vicente%20Dhar%2C%20Sagnik%20Babytalk%3A%20Understanding%20and%20generating%20simple%20image%20descriptions%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kulkarni%2C%20Girish%20Premraj%2C%20Visruth%20Ordonez%2C%20Vicente%20Dhar%2C%20Sagnik%20Babytalk%3A%20Understanding%20and%20generating%20simple%20image%20descriptions%202013"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Siming Li, Girish Kulkarni, Tamara L Berg, Alexander C Berg, and Yejin Choi. Composing simple image descriptions using web-scale n-grams. In Proceedings of the Fifteenth Conference on Computational Natural Language Learning, pages 220\u2013228. Association for Computational Linguistics, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Siming%20Kulkarni%2C%20Girish%20Berg%2C%20Tamara%20L.%20Berg%2C%20Alexander%20C.%20Composing%20simple%20image%20descriptions%20using%20web-scale%20n-grams%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20Siming%20Kulkarni%2C%20Girish%20Berg%2C%20Tamara%20L.%20Berg%2C%20Alexander%20C.%20Composing%20simple%20image%20descriptions%20using%20web-scale%20n-grams%202011"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Dahua Lin, Sanja Fidler, Chen Kong, and Raquel Urtasun. Generating multi-sentence lingual descriptions of indoor scenes. In BMVC, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20Dahua%20Fidler%2C%20Sanja%20Kong%2C%20Chen%20Urtasun%2C%20Raquel%20Generating%20multi-sentence%20lingual%20descriptions%20of%20indoor%20scenes%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lin%2C%20Dahua%20Fidler%2C%20Sanja%20Kong%2C%20Chen%20Urtasun%2C%20Raquel%20Generating%20multi-sentence%20lingual%20descriptions%20of%20indoor%20scenes%202015"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Jacob Devlin, Saurabh Gupta, Ross Girshick, Margaret Mitchell, and C Lawrence Zitnick. Exploring nearest neighbor approaches for image captioning. arXiv preprint arXiv:1505.04467, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1505.04467"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. arXiv preprint arXiv:1512.03385, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1512.03385"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Sepp Hochreiter and J\u00fcrgen Schmidhuber. Long short-term memory. Neural computation, 9(8):1735\u20131780, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Long%20short-term%20memory%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Long%20short-term%20memory%201997"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Bo Dai, Deming Ye, and Dahua Lin. Rethinking the form of latent states in image captioning. In Proceedings of the European Conference on Computer Vision (ECCV), pages 282\u2013298, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dai%2C%20Bo%20Ye%2C%20Deming%20Lin%2C%20Dahua%20Rethinking%20the%20form%20of%20latent%20states%20in%20image%20captioning%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dai%2C%20Bo%20Ye%2C%20Deming%20Lin%2C%20Dahua%20Rethinking%20the%20form%20of%20latent%20states%20in%20image%20captioning%202018"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Ting Yao, Yingwei Pan, Yehao Li, Zhaofan Qiu, and Tao Mei. Boosting image captioning with attributes. arXiv preprint arXiv:1611.01646, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.01646"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Ying Hua Tan and Chee Seng Chan. phi-lstm: a phrase-based hierarchical lstm model for image captioning. In Asian Conference on Computer Vision, pages 101\u2013117.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tan%2C%20Ying%20Hua%20Chan%2C%20Chee%20Seng%20phi-lstm%3A%20a%20phrase-based%20hierarchical%20lstm%20model%20for%20image%20captioning",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tan%2C%20Ying%20Hua%20Chan%2C%20Chee%20Seng%20phi-lstm%3A%20a%20phrase-based%20hierarchical%20lstm%20model%20for%20image%20captioning"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Huan Ling and Sanja Fidler. Teaching machines to describe images via natural language feedback. In NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ling%2C%20Huan%20Fidler%2C%20Sanja%20Teaching%20machines%20to%20describe%20images%20via%20natural%20language%20feedback%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ling%2C%20Huan%20Fidler%2C%20Sanja%20Teaching%20machines%20to%20describe%20images%20via%20natural%20language%20feedback%202017"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Bo Dai and Dahua Lin. Contrastive learning for image captioning. In Advances in Neural Information Processing Systems, pages 898\u2013907, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dai%2C%20Bo%20Lin%2C%20Dahua%20Contrastive%20learning%20for%20image%20captioning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dai%2C%20Bo%20Lin%2C%20Dahua%20Contrastive%20learning%20for%20image%20captioning%202017"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Polina Kuznetsova, Vicente Ordonez, Tamara Berg, and Yejin Choi. Treetalk: Composition and compression of trees for image descriptions. Transactions of the Association of Computational Linguistics, 2(1):351\u2013362, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kuznetsova%2C%20Polina%20Ordonez%2C%20Vicente%20Berg%2C%20Tamara%20Choi%2C%20Yejin%20Treetalk%3A%20Composition%20and%20compression%20of%20trees%20for%20image%20descriptions%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kuznetsova%2C%20Polina%20Ordonez%2C%20Vicente%20Berg%2C%20Tamara%20Choi%2C%20Yejin%20Treetalk%3A%20Composition%20and%20compression%20of%20trees%20for%20image%20descriptions%202014"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Dan Klein and Christopher D Manning. Accurate unlexicalized parsing. In Proceedings of the 41st annual meeting of the association for computational linguistics, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Klein%2C%20Dan%20Manning%2C%20Christopher%20D.%20Accurate%20unlexicalized%20parsing%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Klein%2C%20Dan%20Manning%2C%20Christopher%20D.%20Accurate%20unlexicalized%20parsing%202003"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Slav Petrov and Dan Klein. Improved inference for unlexicalized parsing. In Human Language Technologies 2007: The Conference of the North American Chapter of the Association for Computational Linguistics; Proceedings of the Main Conference, pages 404\u2013411, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Petrov%2C%20Slav%20Klein%2C%20Dan%20Improved%20inference%20for%20unlexicalized%20parsing%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Petrov%2C%20Slav%20Klein%2C%20Dan%20Improved%20inference%20for%20unlexicalized%20parsing%202007"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Richard Socher, John Bauer, Christopher D Manning, et al. Parsing with compositional vector grammars. In Proceedings of the 51st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), volume 1, pages 455\u2013465, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Socher%2C%20Richard%20Bauer%2C%20John%20Manning%2C%20Christopher%20D.%20Parsing%20with%20compositional%20vector%20grammars%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Socher%2C%20Richard%20Bauer%2C%20John%20Manning%2C%20Christopher%20D.%20Parsing%20with%20compositional%20vector%20grammars%202013"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Shaoqing Ren, Kaiming He, Ross Girshick, and Jian Sun. Faster r-cnn: Towards real-time object detection with region proposal networks. In Advances in neural information processing systems, pages 91\u201399, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ren%2C%20Shaoqing%20He%2C%20Kaiming%20Girshick%2C%20Ross%20Sun%2C%20Jian%20Faster%20r-cnn%3A%20Towards%20real-time%20object%20detection%20with%20region%20proposal%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ren%2C%20Shaoqing%20He%2C%20Kaiming%20Girshick%2C%20Ross%20Sun%2C%20Jian%20Faster%20r-cnn%3A%20Towards%20real-time%20object%20detection%20with%20region%20proposal%20networks%202015"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Ali Farhadi, Ian Endres, Derek Hoiem, and David Forsyth. Describing objects by their attributes. In Computer Vision and Pattern Recognition, 2009. CVPR 2009. IEEE Conference on, pages 1778\u20131785. IEEE, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Farhadi%2C%20Ali%20Endres%2C%20Ian%20Hoiem%2C%20Derek%20Forsyth%2C%20David%20Describing%20objects%20by%20their%20attributes%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Farhadi%2C%20Ali%20Endres%2C%20Ian%20Hoiem%2C%20Derek%20Forsyth%2C%20David%20Describing%20objects%20by%20their%20attributes%202009"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Licheng Yu, Eunbyung Park, Alexander C Berg, and Tamara L Berg. Visual madlibs: Fill in the blank description generation and question answering. In Computer Vision (ICCV), 2015 IEEE International Conference on, pages 2461\u20132469. IEEE, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yu%2C%20Licheng%20Park%2C%20Eunbyung%20Berg%2C%20Alexander%20C.%20Berg%2C%20Tamara%20L.%20Visual%20madlibs%3A%20Fill%20in%20the%20blank%20description%20generation%20and%20question%20answering%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yu%2C%20Licheng%20Park%2C%20Eunbyung%20Berg%2C%20Alexander%20C.%20Berg%2C%20Tamara%20L.%20Visual%20madlibs%3A%20Fill%20in%20the%20blank%20description%20generation%20and%20question%20answering%202015"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Andrej Karpathy and Li Fei-Fei. Deep visual-semantic alignments for generating image descriptions. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 3128\u20133137, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Karpathy%2C%20Andrej%20Fei-Fei%2C%20Li%20Deep%20visual-semantic%20alignments%20for%20generating%20image%20descriptions%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Karpathy%2C%20Andrej%20Fei-Fei%2C%20Li%20Deep%20visual-semantic%20alignments%20for%20generating%20image%20descriptions%202015"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Christopher Manning, Mihai Surdeanu, John Bauer, Jenny Finkel, Steven Bethard, and David McClosky. The stanford corenlp natural language processing toolkit. In Proceedings of 52nd annual meeting of the association for computational linguistics: system demonstrations, pages 55\u201360, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Manning%2C%20Christopher%20Surdeanu%2C%20Mihai%20Bauer%2C%20John%20Finkel%2C%20Jenny%20The%20stanford%20corenlp%20natural%20language%20processing%20toolkit%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Manning%2C%20Christopher%20Surdeanu%2C%20Mihai%20Bauer%2C%20John%20Finkel%2C%20Jenny%20The%20stanford%20corenlp%20natural%20language%20processing%20toolkit%202014"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Olga Russakovsky, Jia Deng, Hao Su, Jonathan Krause, Sanjeev Satheesh, Sean Ma, Zhiheng Huang, Andrej Karpathy, Aditya Khosla, Michael Bernstein, Alexander C. Berg, and Li Fei-Fei. ImageNet Large Scale Visual Recognition Challenge. International Journal of Computer Vision (IJCV), 115(3):211\u2013252, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Russakovsky%2C%20Olga%20Deng%2C%20Jia%20Su%2C%20Hao%20Krause%2C%20Jonathan%20ImageNet%20Large%20Scale%20Visual%20Recognition%20Challenge%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Russakovsky%2C%20Olga%20Deng%2C%20Jia%20Su%2C%20Hao%20Krause%2C%20Jonathan%20ImageNet%20Large%20Scale%20Visual%20Recognition%20Challenge%202015"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Peter Anderson, Basura Fernando, Mark Johnson, and Stephen Gould. Spice: Semantic propositional image caption evaluation. In European Conference on Computer Vision, pages 382\u2013398.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Anderson%2C%20Peter%20Fernando%2C%20Basura%20Johnson%2C%20Mark%20Gould%2C%20Stephen%20Spice%3A%20Semantic%20propositional%20image%20caption%20evaluation",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Anderson%2C%20Peter%20Fernando%2C%20Basura%20Johnson%2C%20Mark%20Gould%2C%20Stephen%20Spice%3A%20Semantic%20propositional%20image%20caption%20evaluation"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Ramakrishna Vedantam, C Lawrence Zitnick, and Devi Parikh. Cider: Consensus-based image description evaluation. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 4566\u20134575, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ramakrishna%20Vedantam%2C%20C.Lawrence%20Zitnick%20Parikh%2C%20Devi%20Cider%3A%20Consensus-based%20image%20description%20evaluation%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ramakrishna%20Vedantam%2C%20C.Lawrence%20Zitnick%20Parikh%2C%20Devi%20Cider%3A%20Consensus-based%20image%20description%20evaluation%202015"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Kishore Papineni, Salim Roukos, Todd Ward, and Wei-Jing Zhu. Bleu: a method for automatic evaluation of machine translation. In Proceedings of the 40th annual meeting on association for computational linguistics, pages 311\u2013318. Association for Computational Linguistics, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Papineni%2C%20Kishore%20Roukos%2C%20Salim%20Ward%2C%20Todd%20Zhu%2C%20Wei-Jing%20Bleu%3A%20a%20method%20for%20automatic%20evaluation%20of%20machine%20translation%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Papineni%2C%20Kishore%20Roukos%2C%20Salim%20Ward%2C%20Todd%20Zhu%2C%20Wei-Jing%20Bleu%3A%20a%20method%20for%20automatic%20evaluation%20of%20machine%20translation%202002"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Chin-Yew Lin. Rouge: A package for automatic evaluation of summaries. In Text summarization branches out: Proceedings of the ACL-04 workshop, volume 8. Barcelona, Spain, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20Chin-Yew%20Lin.%20Rouge%3A%20A%20package%20for%20automatic%20evaluation%20of%20summaries.%20In%20Text%20summarization%20branches%20out%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Chin-Yew%20Lin.%20Rouge%3A%20A%20package%20for%20automatic%20evaluation%20of%20summaries.%20In%20Text%20summarization%20branches%20out%202004"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Michael Denkowski Alon Lavie. Meteor universal: Language specific translation evaluation for any target language. ACL 2014, page 376, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lavie%2C%20Michael%20Denkowski%20Alon%20Meteor%20universal%3A%20Language%20specific%20translation%20evaluation%20for%20any%20target%20language%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lavie%2C%20Michael%20Denkowski%20Alon%20Meteor%20universal%3A%20Language%20specific%20translation%20evaluation%20for%20any%20target%20language%202014"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Yufei Wang, Zhe Lin, Xiaohui Shen, Scott Cohen, and Garrison W Cottrell. Skeleton key: Image captioning by skeleton-attribute decomposition. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 7272\u20137281, 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Yufei%20Lin%2C%20Zhe%20Shen%2C%20Xiaohui%20Cohen%2C%20Scott%20Skeleton%20key%3A%20Image%20captioning%20by%20skeleton-attribute%20decomposition%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Yufei%20Lin%2C%20Zhe%20Shen%2C%20Xiaohui%20Cohen%2C%20Scott%20Skeleton%20key%3A%20Image%20captioning%20by%20skeleton-attribute%20decomposition%202017"
+        }
+    ]
+}

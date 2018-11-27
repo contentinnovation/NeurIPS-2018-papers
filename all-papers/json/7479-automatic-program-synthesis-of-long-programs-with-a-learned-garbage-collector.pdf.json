@@ -1,0 +1,153 @@
+{
+    "filename": "7479-automatic-program-synthesis-of-long-programs-with-a-learned-garbage-collector.pdf",
+    "metadata": {
+        "title": "Automatic Program Synthesis of Long Programs with a Learned Garbage Collector",
+        "author": "Amit Zohar, Lior Wolf",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7479-automatic-program-synthesis-of-long-programs-with-a-learned-garbage-collector.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We consider the problem of generating automatic code given sample input-output pairs. We train a neural network to map from the current state and the outputs to the program\u2019s next statement. The neural network optimizes multiple tasks concurrently: the next operation out of a set of high level commands, the operands of the next statement, and which variables can be dropped from memory. Using our method we are able to create programs that are more than twice as long as existing state-of-the-art solutions, while improving the success rate for comparable lengths, and cutting the run-time by two orders of magnitude. Our code, including an implementation of various literature baselines, is publicly available at https: //github.com/amitz25/PCCoder"
+    },
+    "keywords": [
+        {
+            "term": "program synthesis",
+            "url": "https://en.wikipedia.org/wiki/program_synthesis"
+        },
+        {
+            "term": "Reinforcement Learning",
+            "url": "https://en.wikipedia.org/wiki/Reinforcement_Learning"
+        },
+        {
+            "term": "code synthesis",
+            "url": "https://en.wikipedia.org/wiki/Code_Synthesis"
+        },
+        {
+            "term": "Domain Specific Language",
+            "url": "https://en.wikipedia.org/wiki/Domain_Specific_Language"
+        },
+        {
+            "term": "high level",
+            "url": "https://en.wikipedia.org/wiki/high_level"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Automatic program synthesis has been repeatedly identified as a key goal of AI research",
+        "We study program synthesis in a Domain Specific Language (DSL), following [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>]",
+        "In [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>], the authors train a neural network to predict the existence of functions in the program and employ a highly optimized search in order to find a correct solution based on this prediction",
+        "We present a new algorithm that achieves a sizable improvement over the recent baseline, which is a strong method that was compared to other existing approaches from the automatic code synthesis literature",
+        "Within this restricted domain of code synthesis, the task would be extremely challenging for humans, even for programs of shorter lengths"
+    ],
+    "key_statements": [
+        "Automatic program synthesis has been repeatedly identified as a key goal of AI research",
+        "We study program synthesis in a Domain Specific Language (DSL), following [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>]",
+        "In [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>], the authors train a neural network to predict the existence of functions in the program and employ a highly optimized search in order to find a correct solution based on this prediction",
+        "We evaluate a few other program synthesis methods on our Domain Specific Language",
+        "We present a new algorithm that achieves a sizable improvement over the recent baseline, which is a strong method that was compared to other existing approaches from the automatic code synthesis literature",
+        "Within this restricted domain of code synthesis, the task would be extremely challenging for humans, even for programs of shorter lengths"
+    ],
+    "summary": [
+        "Automatic program synthesis has been repeatedly identified as a key goal of AI research.",
+        "In [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>], the authors train a neural network to predict the existence of functions in the program and employ a highly optimized search in order to find a correct solution based on this prediction.",
+        "To that end we define the state of a program as the sequence of all the variable values acquired far, starting with the program\u2019s input, and concatenated with the desired output.",
+        "The environment is the input to both networks f and g and is represented as a set of k state-vectors, where k is the number of samples.",
+        "Each state vector is represented by a fixed-length array of v variables, which includes both generated variables and the program\u2019s initial input, which is assumed to contain at least one variable and up to n variables.",
+        "In order to learn the environment embedding and to perform prediction, we learn networks for three different classification tasks, out of which only the two matching functions f and g are used during test time.",
+        "The parameters of CAB in our setting are: \u03b1, which is the beam size; \u03b2, which is the number of statement predictions to examine; and c, a constant value that is added to \u03b2 after every beam search.",
+        "In each line of experiments, we trained our model on a dataset consisting of programs of length of up to t1.",
+        "This means that at test-time for programs with three inputs a variable is dropped for the last statement.",
+        "We trained our model on a single dataset consisting of programs of length of up to t1 = 12.",
+        "For programs of length 5, when trained on longer programs than what was done in the first experiment, our method outperforms DeepCoder with an even larger gap in performance.",
+        "We trained different models on a dataset of 79000 programs of length of up to t1 = 8.",
+        "All variants employ a memory size of v = 8, which means that variables are discarded after step five for programs with 3 inputs.",
+        "PCCoder_S - the PCCoder model with both the variable dropping and function prediction tasks discarded.",
+        "The loss of the variable drop is less detrimental than the drop of the auxiliary function prediction task, pointing to difficulty of training to predict specific statements.",
+        "A variant of our PCCoder model where intermediate variable values are not used, causing the state to be fixed per input-output pair."
+    ],
+    "headline": "We study program synthesis in a Domain Specific Language , following ",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Matej Balog, Alexander L Gaunt, Marc Brockschmidt, Sebastian Nowozin, and Daniel Tarlow. Deepcoder: Learning to write programs. In ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Balog%2C%20Matej%20Gaunt%2C%20Alexander%20L.%20Brockschmidt%2C%20Marc%20Nowozin%2C%20Sebastian%20Deepcoder%3A%20Learning%20to%20write%20programs%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Balog%2C%20Matej%20Gaunt%2C%20Alexander%20L.%20Brockschmidt%2C%20Marc%20Nowozin%2C%20Sebastian%20Deepcoder%3A%20Learning%20to%20write%20programs%202017"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Ashwin Kalyan, Abhishek Mohta, Oleksandr Polozov, Dhruv Batra, Prateek Jain, and Sumit Gulwani. Neural-guided deductive search for real-time program synthesis from examples. In ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kalyan%2C%20Ashwin%20Mohta%2C%20Abhishek%20Polozov%2C%20Oleksandr%20Batra%2C%20Dhruv%20Neural-guided%20deductive%20search%20for%20real-time%20program%20synthesis%20from%20examples%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kalyan%2C%20Ashwin%20Mohta%2C%20Abhishek%20Polozov%2C%20Oleksandr%20Batra%2C%20Dhruv%20Neural-guided%20deductive%20search%20for%20real-time%20program%20synthesis%20from%20examples%202018"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Sumit Gulwani. Programming by examples: Applications, algorithms, and ambiguity resolution. In Proceedings of the 8th International Joint Conference on Automated Reasoning - Volume 9706, pages 9\u201314, Berlin, Heidelberg, 2016. Springer-Verlag.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gulwani%2C%20Sumit%20Programming%20by%20examples%3A%20Applications%2C%20algorithms%2C%20and%20ambiguity%20resolution",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gulwani%2C%20Sumit%20Programming%20by%20examples%3A%20Applications%2C%20algorithms%2C%20and%20ambiguity%20resolution"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Rishabh Singh and Sumit Gulwani. Predicting a correct program in programming by example. In CAV, July 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Singh%2C%20Rishabh%20Gulwani%2C%20Sumit%20Predicting%20a%20correct%20program%20in%20programming%20by%20example%202015-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Singh%2C%20Rishabh%20Gulwani%2C%20Sumit%20Predicting%20a%20correct%20program%20in%20programming%20by%20example%202015-07"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Oleksandr Polozov and Sumit Gulwani. Flashmeta: A framework for inductive program synthesis. In Proceedings of the 2015 ACM SIGPLAN International Conference on ObjectOriented Programming, Systems, Languages, and Applications, pages 107\u2013126, New York, NY, USA, 2015. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Polozov%2C%20Oleksandr%20Gulwani%2C%20Sumit%20Flashmeta%3A%20A%20framework%20for%20inductive%20program%20synthesis%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Polozov%2C%20Oleksandr%20Gulwani%2C%20Sumit%20Flashmeta%3A%20A%20framework%20for%20inductive%20program%20synthesis%202015"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Jacob Devlin, Jonathan Uesato, Surya Bhupatiraju, Rishabh Singh, Abdel rahman Mohamed, and Pushmeet Kohli. Robustfill: Neural program learning under noisy i/o. In ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Devlin%2C%20Jacob%20Uesato%2C%20Jonathan%20Bhupatiraju%2C%20Surya%20Singh%2C%20Rishabh%20Robustfill%3A%20Neural%20program%20learning%20under%20noisy%20i/o%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Devlin%2C%20Jacob%20Uesato%2C%20Jonathan%20Bhupatiraju%2C%20Surya%20Singh%2C%20Rishabh%20Robustfill%3A%20Neural%20program%20learning%20under%20noisy%20i/o%202017"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Alexander L Gaunt, Marc Brockschmidt, Rishabh Singh, Nate Kushman, Pushmeet Kohli, Jonathan Taylor, and Daniel Tarlow. Terpret: A probabilistic programming language for program induction. arXiv preprint arXiv:1608.04428, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1608.04428"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Sebastian Riedel, Matko Bosnjak, and Tim Rockt\u00e4schel. Programming with a differentiable forth interpreter. CoRR, abs/1605.06640, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1605.06640"
+        },
+        {
+            "id": "9",
+            "entry": "[9] G\u00fcnter Klambauer, Thomas Unterthiner, Andreas Mayr, and Sepp Hochreiter. Self-normalizing neural networks. In I. Guyon, U. V. Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, NIPS, pages 971\u2013980, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Klambauer%2C%20G%C3%BCnter%20Unterthiner%2C%20Thomas%20Mayr%2C%20Andreas%20Hochreiter%2C%20Sepp%20Self-normalizing%20neural%20networks%202017"
+        },
+        {
+            "id": "10",
+            "entry": "[10] G. Huang, Z. Liu, L. v. d. Maaten, and K. Q. Weinberger. Densely connected convolutional networks. In CVPR, pages 2261\u20132269, July 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huang%2C%20G.%20Liu%2C%20Z.%20v.%20d.%20Maaten%2C%20L.%20Weinberger%2C%20K.Q.%20Densely%20connected%20convolutional%20networks%202017-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huang%2C%20G.%20Liu%2C%20Z.%20v.%20d.%20Maaten%2C%20L.%20Weinberger%2C%20K.Q.%20Densely%20connected%20convolutional%20networks%202017-07"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Diederik P. Kingma and Jimmy Ba. Adam: A method for stochastic optimization. CoRR, abs/1412.6980, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6980"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Weixiong Zhang. Complete anytime beam search. In AAAI, AAAI \u201998/IAAI \u201998, pages 425\u2013430, Menlo Park, CA, USA, 1998. American Association for Artificial Intelligence.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Weixiong%20Complete%20anytime%20beam%20search",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Weixiong%20Complete%20anytime%20beam%20search"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Ramakrishna Vedantam, C Lawrence Zitnick, and Devi Parikh. Cider: Consensus-based image description evaluation. In Proceedings of the IEEE conference on computer vision and pattern recognition, pages 4566\u20134575, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ramakrishna%20Vedantam%2C%20C.Lawrence%20Zitnick%20Parikh%2C%20Devi%20Cider%3A%20Consensus-based%20image%20description%20evaluation%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ramakrishna%20Vedantam%2C%20C.Lawrence%20Zitnick%20Parikh%2C%20Devi%20Cider%3A%20Consensus-based%20image%20description%20evaluation%202015"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Anonymous Reviewer 3. ICLR open review of \u201cDeepcoder: Learning to write programs\u201d. https://openreview.net/forum?id=ByldLrqlx&noteId=HJor8rbNg, 2017. ",
+            "url": "https://openreview.net/forum?id=ByldLrqlx&noteId=HJor8rbNg"
+        }
+    ]
+}

@@ -1,0 +1,320 @@
+{
+    "filename": "8206-neural-voice-cloning-with-a-few-samples.pdf",
+    "metadata": {
+        "title": "Neural Voice Cloning with a Few Samples",
+        "author": "Sercan Arik, Jitong Chen, Kainan Peng, Wei Ping, Yanqi Zhou",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8206-neural-voice-cloning-with-a-few-samples.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Voice cloning is a highly desired feature for personalized speech interfaces. We introduce a neural voice cloning system that learns to synthesize a person\u2019s voice from only a few audio samples. We study two approaches: speaker adaptation and speaker encoding. Speaker adaptation is based on fine-tuning a multi-speaker generative model. Speaker encoding is based on training a separate model to directly infer a new speaker embedding, which will be applied to a multi-speaker generative model. In terms of naturalness of the speech and similarity to the original speaker, both approaches can achieve good performance, even with a few cloning audios. 2 While speaker adaptation can achieve slightly better naturalness and similarity, cloning time and required memory for the speaker encoding approach are significantly less, making it more favorable for low-resource deployment."
+    },
+    "keywords": [
+        {
+            "term": "new speaker",
+            "url": "https://en.wikipedia.org/wiki/new_speaker"
+        },
+        {
+            "term": "mean opinion score",
+            "url": "https://en.wikipedia.org/wiki/mean_opinion_score"
+        },
+        {
+            "term": "automatic speech recognition",
+            "url": "https://en.wikipedia.org/wiki/automatic_speech_recognition"
+        },
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "generative model",
+            "url": "https://en.wikipedia.org/wiki/generative_model"
+        },
+        {
+            "term": "speech recognition",
+            "url": "https://en.wikipedia.org/wiki/speech_recognition"
+        },
+        {
+            "term": "audio sample",
+            "url": "https://en.wikipedia.org/wiki/audio_sample"
+        },
+        {
+            "term": "language modeling",
+            "url": "https://en.wikipedia.org/wiki/language_modeling"
+        },
+        {
+            "term": "speech synthesis",
+            "url": "https://en.wikipedia.org/wiki/speech_synthesis"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Generative models based on deep neural networks have been successfully applied to many domains such as image generation [e.g., Oord et al, 2016b, <a class=\"ref-link\" id=\"cKarras_et+al_2017_a\" href=\"#rKarras_et+al_2017_a\"><a class=\"ref-link\" id=\"cKarras_et+al_2017_a\" href=\"#rKarras_et+al_2017_a\">Karras et al, 2017</a></a>], speech synthesis [e.g., Oord et al, 2016a, <a class=\"ref-link\" id=\"cArik_et+al_2017_a\" href=\"#rArik_et+al_2017_a\"><a class=\"ref-link\" id=\"cArik_et+al_2017_a\" href=\"#rArik_et+al_2017_a\">Arik et al, 2017a</a></a>, <a class=\"ref-link\" id=\"cWang_et+al_2017_a\" href=\"#rWang_et+al_2017_a\"><a class=\"ref-link\" id=\"cWang_et+al_2017_a\" href=\"#rWang_et+al_2017_a\">Wang et al, 2017</a></a>], and language modeling [e.g., <a class=\"ref-link\" id=\"cJozefowicz_et+al_2016_a\" href=\"#rJozefowicz_et+al_2016_a\"><a class=\"ref-link\" id=\"cJozefowicz_et+al_2016_a\" href=\"#rJozefowicz_et+al_2016_a\">Jozefowicz et al, 2016</a></a>]",
+        "Generative models based on deep neural networks have been successfully applied to many domains such as image generation [e.g., Oord et al, 2016b, <a class=\"ref-link\" id=\"cKarras_et+al_2017_a\" href=\"#rKarras_et+al_2017_a\">Karras et al, 2017</a>], speech synthesis [e.g., Oord et al, 2016a, <a class=\"ref-link\" id=\"cArik_et+al_2017_a\" href=\"#rArik_et+al_2017_a\">Arik et al, 2017a</a>, <a class=\"ref-link\" id=\"cWang_et+al_2017_a\" href=\"#rWang_et+al_2017_a\">Wang et al, 2017</a>], and language modeling [e.g., <a class=\"ref-link\" id=\"cJozefowicz_et+al_2016_a\" href=\"#rJozefowicz_et+al_2016_a\">Jozefowicz et al, 2016</a>]",
+        "While a generative model can be trained from scratch with a large amount of audio samples 3, we focus on voice cloning of a new speaker with a few minutes or even few seconds data",
+        "We study two approaches for neural voice cloning: speaker adaptation and speaker encoding",
+        "The performance gap between whole-model and embedding-only adaptation indicates that some discriminative speaker information still exists in the generative model besides speaker embeddings",
+        "We observe drawbacks of training the multi-speaker generative model using a speech recognition dataset with low-quality audios and limited speaker diversity"
+    ],
+    "key_statements": [
+        "Generative models based on deep neural networks have been successfully applied to many domains such as image generation [e.g., Oord et al, 2016b, <a class=\"ref-link\" id=\"cKarras_et+al_2017_a\" href=\"#rKarras_et+al_2017_a\"><a class=\"ref-link\" id=\"cKarras_et+al_2017_a\" href=\"#rKarras_et+al_2017_a\">Karras et al, 2017</a></a>], speech synthesis [e.g., Oord et al, 2016a, <a class=\"ref-link\" id=\"cArik_et+al_2017_a\" href=\"#rArik_et+al_2017_a\"><a class=\"ref-link\" id=\"cArik_et+al_2017_a\" href=\"#rArik_et+al_2017_a\">Arik et al, 2017a</a></a>, <a class=\"ref-link\" id=\"cWang_et+al_2017_a\" href=\"#rWang_et+al_2017_a\"><a class=\"ref-link\" id=\"cWang_et+al_2017_a\" href=\"#rWang_et+al_2017_a\">Wang et al, 2017</a></a>], and language modeling [e.g., <a class=\"ref-link\" id=\"cJozefowicz_et+al_2016_a\" href=\"#rJozefowicz_et+al_2016_a\"><a class=\"ref-link\" id=\"cJozefowicz_et+al_2016_a\" href=\"#rJozefowicz_et+al_2016_a\">Jozefowicz et al, 2016</a></a>]",
+        "Generative models based on deep neural networks have been successfully applied to many domains such as image generation [e.g., Oord et al, 2016b, <a class=\"ref-link\" id=\"cKarras_et+al_2017_a\" href=\"#rKarras_et+al_2017_a\">Karras et al, 2017</a>], speech synthesis [e.g., Oord et al, 2016a, <a class=\"ref-link\" id=\"cArik_et+al_2017_a\" href=\"#rArik_et+al_2017_a\">Arik et al, 2017a</a>, <a class=\"ref-link\" id=\"cWang_et+al_2017_a\" href=\"#rWang_et+al_2017_a\">Wang et al, 2017</a>], and language modeling [e.g., <a class=\"ref-link\" id=\"cJozefowicz_et+al_2016_a\" href=\"#rJozefowicz_et+al_2016_a\">Jozefowicz et al, 2016</a>]",
+        "Generative models can be conditioned on text and speaker identity [e.g., <a class=\"ref-link\" id=\"cArik_et+al_2017_b\" href=\"#rArik_et+al_2017_b\">Arik et al, 2017b</a>]",
+        "An intriguing task is to learn the voice of an unseen speaker from a few speech samples, a.k.a. voice cloning, which corresponds to few-shot generative modeling of speech conditioned on the speaker identity",
+        "While a generative model can be trained from scratch with a large amount of audio samples 3, we focus on voice cloning of a new speaker with a few minutes or even few seconds data",
+        "We investigate few-shot generative modeling of speech conditioned on a particular speaker",
+        "We train a separate speaker encoding network to directly predict the parameters of multi-speaker generative model by only taking unsubscribed audio samples as inputs",
+        "We propose a speaker encoding method to directly estimate the speaker embedding from audio samples of an unseen speaker",
+        "We study two approaches for neural voice cloning: speaker adaptation and speaker encoding",
+        "We demonstrate that both approaches can achieve good cloning quality even with only a few cloning audios",
+        "The proposed techniques can potentially be improved with better multi-speaker models in the future",
+        "We demonstrate that both approaches benefit from a larger number of cloning audios",
+        "The performance gap between whole-model and embedding-only adaptation indicates that some discriminative speaker information still exists in the generative model besides speaker embeddings",
+        "We observe drawbacks of training the multi-speaker generative model using a speech recognition dataset with low-quality audios and limited speaker diversity"
+    ],
+    "summary": [
+        "Generative models based on deep neural networks have been successfully applied to many domains such as image generation [e.g., Oord et al, 2016b, <a class=\"ref-link\" id=\"cKarras_et+al_2017_a\" href=\"#rKarras_et+al_2017_a\"><a class=\"ref-link\" id=\"cKarras_et+al_2017_a\" href=\"#rKarras_et+al_2017_a\">Karras et al, 2017</a></a>], speech synthesis [e.g., Oord et al, 2016a, <a class=\"ref-link\" id=\"cArik_et+al_2017_a\" href=\"#rArik_et+al_2017_a\"><a class=\"ref-link\" id=\"cArik_et+al_2017_a\" href=\"#rArik_et+al_2017_a\">Arik et al, 2017a</a></a>, <a class=\"ref-link\" id=\"cWang_et+al_2017_a\" href=\"#rWang_et+al_2017_a\"><a class=\"ref-link\" id=\"cWang_et+al_2017_a\" href=\"#rWang_et+al_2017_a\">Wang et al, 2017</a></a>], and language modeling [e.g., <a class=\"ref-link\" id=\"cJozefowicz_et+al_2016_a\" href=\"#rJozefowicz_et+al_2016_a\"><a class=\"ref-link\" id=\"cJozefowicz_et+al_2016_a\" href=\"#rJozefowicz_et+al_2016_a\">Jozefowicz et al, 2016</a></a>].",
+        "One approach for multi-speaker speech synthesis is to jointly train a generative model and speaker embeddings on triplets of text, audio and speaker identity [e.g., <a class=\"ref-link\" id=\"cPing_et+al_2018_a\" href=\"#rPing_et+al_2018_a\">Ping et al, 2018</a>].",
+        "While a generative model can be trained from scratch with a large amount of audio samples 3, we focus on voice cloning of a new speaker with a few minutes or even few seconds data.",
+        "We demonstrate and analyze the strength of speaker adaption approaches for voice cloning, based on fine-tuning a pre-trained multi-speaker model for an unseen speaker using a few samples.",
+        "We train a separate speaker encoding network to directly predict the parameters of multi-speaker generative model by only taking unsubscribed audio samples as inputs.",
+        "Another approach for multi-speaker speech synthesis is using trainable speaker embeddings [<a class=\"ref-link\" id=\"cArik_et+al_2017_b\" href=\"#rArik_et+al_2017_b\">Arik et al, 2017b</a>], which are randomly initialized and jointly optimized from a generative loss function.",
+        "The idea of speaker adaptation is to fine-tune a trained multi-speaker model for an unseen speaker using a few audio-text pairs.",
+        "The speaker encoder g(Ask ; \u0398) is trained with an L1 loss to predict the embeddings from sampled cloning audios: min",
+        "For speaker encoder g(Ask ; \u0398), we propose a neural network architecture comprising three parts: (i) Spectral processing: We input mel-spectrograms of cloning audio samples to prenet, which contains fully-connected layers with exponential linear unit for feature transformation.",
+        "Unlike the speaker classification approach, speaker verification model does not require training with the audios from the target speaker for cloning, it can be used for unseen speakers with a few samples.",
+        "In our first set of experiments (Sections 4.3 and 4.4), the multi-speaker generative model and speaker encoder are trained using LibriSpeech dataset [<a class=\"ref-link\" id=\"cPanayotov_et+al_2015_a\" href=\"#rPanayotov_et+al_2015_a\">Panayotov et al, 2015</a>], which contains audios (16 KHz) for 2484 speakers, totalling 820 hours.",
+        "The baseline multi-speaker generative model has around 25M trainable parameters when trained for the LibriSpeech dataset.",
+        "We consider voice cloning with and without joint fine-tuning of the speaker encoder and multi-speaker generative model.8 Table 1 summarizes the approaches and lists the requirements for training, data, cloning time and memory footprint.",
+        "Speaker encoding yields a lower classification accuracy compared to embedding adaptation, but they achieve a similar speaker verification performance.",
+        "Compared to LibriSpeech, cleaner VCTK data improves the multi-speaker generative model, leading to better whole-model adaptation results.",
+        "We observe drawbacks of training the multi-speaker generative model using a speech recognition dataset with low-quality audios and limited speaker diversity.",
+        "We expect our techniques to benefit significantly from a large-scale and high-quality multi-speaker dataset"
+    ],
+    "headline": "We introduce a neural voice cloning system that learns to synthesize a person\u2019s voice from only a few audio samples",
+    "reference_links": [
+        {
+            "id": "Abdel-Hamid_2013_a",
+            "entry": "O. Abdel-Hamid and H. Jiang. Fast speaker adaptation of hybrid nn/hmm model for speech recognition based on discriminative learning of speaker code. In IEEE ICASSP, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abdel-Hamid%2C%20O.%20Jiang%2C%20H.%20Fast%20speaker%20adaptation%20of%20hybrid%20nn/hmm%20model%20for%20speech%20recognition%20based%20on%20discriminative%20learning%20of%20speaker%20code%202013"
+        },
+        {
+            "id": "Agiomyrgiannakis_2016_a",
+            "entry": "Y. Agiomyrgiannakis and Z. Roupakia. Voice morphing that improves tts quality using an optimal dynamic frequency warping-and-weighting transform. IEEE ICASSP, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Agiomyrgiannakis%2C%20Y.%20Roupakia%2C%20Z.%20Voice%20morphing%20that%20improves%20tts%20quality%20using%20an%20optimal%20dynamic%20frequency%20warping-and-weighting%20transform%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Agiomyrgiannakis%2C%20Y.%20Roupakia%2C%20Z.%20Voice%20morphing%20that%20improves%20tts%20quality%20using%20an%20optimal%20dynamic%20frequency%20warping-and-weighting%20transform%202016"
+        },
+        {
+            "id": "Amodei_et+al_2016_a",
+            "entry": "D. Amodei, S. Ananthanarayanan, R. Anubhai, J. Bai, E. Battenberg, C. Case, J. Casper, B. Catanzaro, Q. Cheng, G. Chen, et al. Deep speech 2: End-to-end speech recognition in english and mandarin. In International Conference on Machine Learning, pages 173\u2013182, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Amodei%2C%20D.%20Ananthanarayanan%2C%20S.%20Anubhai%2C%20R.%20Bai%2C%20J.%20Deep%20speech%202%3A%20End-to-end%20speech%20recognition%20in%20english%20and%20mandarin%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Amodei%2C%20D.%20Ananthanarayanan%2C%20S.%20Anubhai%2C%20R.%20Bai%2C%20J.%20Deep%20speech%202%3A%20End-to-end%20speech%20recognition%20in%20english%20and%20mandarin%202016"
+        },
+        {
+            "id": "Arik_et+al_2017_a",
+            "entry": "S. \u00d6. Arik, M. Chrzanowski, A. Coates, G. Diamos, A. Gibiansky, Y. Kang, X. Li, J. Miller, J. Raiman, S. Sengupta, and M. Shoeybi. Deep Voice: Real-time neural text-to-speech. In ICML, 2017a.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=S%20%C3%96%20Arik%20M%20Chrzanowski%20A%20Coates%20G%20Diamos%20A%20Gibiansky%20Y%20Kang%20X%20Li%20J%20Miller%20J%20Raiman%20S%20Sengupta%20and%20M%20Shoeybi%20Deep%20Voice%20Realtime%20neural%20texttospeech%20In%20ICML%202017a",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=S%20%C3%96%20Arik%20M%20Chrzanowski%20A%20Coates%20G%20Diamos%20A%20Gibiansky%20Y%20Kang%20X%20Li%20J%20Miller%20J%20Raiman%20S%20Sengupta%20and%20M%20Shoeybi%20Deep%20Voice%20Realtime%20neural%20texttospeech%20In%20ICML%202017a"
+        },
+        {
+            "id": "Arik_et+al_2017_b",
+            "entry": "S. \u00d6. Arik, G. F. Diamos, A. Gibiansky, J. Miller, K. Peng, W. Ping, J. Raiman, and Y. Zhou. Deep Voice 2: Multi-speaker neural text-to-speech. In NIPS, pages 2966\u20132974, 2017b.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=S%20%C3%96%20Arik%20G%20F%20Diamos%20A%20Gibiansky%20J%20Miller%20K%20Peng%20W%20Ping%20J%20Raiman%20and%20Y%20Zhou%20Deep%20Voice%202%20Multispeaker%20neural%20texttospeech%20In%20NIPS%20pages%2029662974%202017b",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=S%20%C3%96%20Arik%20G%20F%20Diamos%20A%20Gibiansky%20J%20Miller%20K%20Peng%20W%20Ping%20J%20Raiman%20and%20Y%20Zhou%20Deep%20Voice%202%20Multispeaker%20neural%20texttospeech%20In%20NIPS%20pages%2029662974%202017b"
+        },
+        {
+            "id": "Azadi_et+al_2017_a",
+            "entry": "S. Azadi, M. Fisher, V. Kim, Z. Wang, E. Shechtman, and T. Darrell. Multi-content gan for few-shot font style transfer. CoRR, abs/1708.02182, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1708.02182"
+        },
+        {
+            "id": "Chen_et+al_2014_a",
+            "entry": "L. H. Chen, Z. H. Ling, L. J. Liu, and L. R. Dai. Voice conversion using deep neural networks with layer-wise generative training. IEEE/ACM Transactions on Audio, Speech, and Language Processing, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20L.H.%20Ling%2C%20Z.H.%20Liu%2C%20L.J.%20Dai%2C%20L.R.%20Voice%20conversion%20using%20deep%20neural%20networks%20with%20layer-wise%20generative%20training%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20L.H.%20Ling%2C%20Z.H.%20Liu%2C%20L.J.%20Dai%2C%20L.R.%20Voice%20conversion%20using%20deep%20neural%20networks%20with%20layer-wise%20generative%20training%202014"
+        },
+        {
+            "id": "Cui_et+al_2017_a",
+            "entry": "X. Cui, V. Goel, and G. Saon. Embedding-based speaker adaptive training of deep neural networks. arXiv preprint arXiv:1710.06937, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.06937"
+        },
+        {
+            "id": "Desai_et+al_2010_a",
+            "entry": "S. Desai, A. W. Black, B. Yegnanarayana, and K. Prahallad. Spectral mapping using artificial neural networks for voice conversion. IEEE Transactions on Audio, Speech, and Language Processing, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Desai%2C%20S.%20Black%2C%20A.W.%20Yegnanarayana%2C%20B.%20Prahallad%2C%20K.%20Spectral%20mapping%20using%20artificial%20neural%20networks%20for%20voice%20conversion%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Desai%2C%20S.%20Black%2C%20A.W.%20Yegnanarayana%2C%20B.%20Prahallad%2C%20K.%20Spectral%20mapping%20using%20artificial%20neural%20networks%20for%20voice%20conversion%202010"
+        },
+        {
+            "id": "Hwang_et+al_2015_a",
+            "entry": "H. T. Hwang, Y. Tsao, H. M. Wang, Y. R. Wang, and S. H. Chen. A probabilistic interpretation for artificial neural network-based voice conversion. In 2015 Asia-Pacific Signal and Information Processing Association Annual Summit and Conference (APSIPA), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hwang%2C%20H.T.%20Tsao%2C%20Y.%20Wang%2C%20H.M.%20Wang%2C%20Y.R.%20A%20probabilistic%20interpretation%20for%20artificial%20neural%20network-based%20voice%20conversion%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hwang%2C%20H.T.%20Tsao%2C%20Y.%20Wang%2C%20H.M.%20Wang%2C%20Y.R.%20A%20probabilistic%20interpretation%20for%20artificial%20neural%20network-based%20voice%20conversion%202015"
+        },
+        {
+            "id": "Jozefowicz_et+al_2016_a",
+            "entry": "R. Jozefowicz, O. Vinyals, M. Schuster, N. Shazeer, and Y. Wu. Exploring the limits of language modeling. arXiv preprint arXiv:1602.02410, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1602.02410"
+        },
+        {
+            "id": "Karras_et+al_2017_a",
+            "entry": "T. Karras, T. Aila, S. Laine, and J. Lehtinen. Progressive growing of gans for improved quality, stability, and variation. CoRR, abs/1710.10196, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.10196"
+        },
+        {
+            "id": "Lake_et+al_2013_a",
+            "entry": "B. M. Lake, R. Salakhutdinov, and J. B. Tenenbaum. One-shot learning by inverting a compositional causal process. In NIPS, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lake%2C%20B.M.%20Salakhutdinov%2C%20R.%20Tenenbaum%2C%20J.B.%20One-shot%20learning%20by%20inverting%20a%20compositional%20causal%20process%202013"
+        },
+        {
+            "id": "Lake_et+al_2014_a",
+            "entry": "B. M. Lake, C. ying Lee, J. R. Glass, and J. B. Tenenbaum. One-shot learning of generative speech concepts. In CogSci, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lake%2C%20B.M.%20ying%20Lee%2C%20C.%20Glass%2C%20J.R.%20Tenenbaum%2C%20J.B.%20One-shot%20learning%20of%20generative%20speech%20concepts%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lake%2C%20B.M.%20ying%20Lee%2C%20C.%20Glass%2C%20J.R.%20Tenenbaum%2C%20J.B.%20One-shot%20learning%20of%20generative%20speech%20concepts%202014"
+        },
+        {
+            "id": "Lake_et+al_2015_a",
+            "entry": "B. M. Lake, R. Salakhutdinov, and J. B. Tenenbaum. Human-level concept learning through probabilistic program induction. Science, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lake%2C%20B.M.%20Salakhutdinov%2C%20R.%20Tenenbaum%2C%20J.B.%20Human-level%20concept%20learning%20through%20probabilistic%20program%20induction%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lake%2C%20B.M.%20Salakhutdinov%2C%20R.%20Tenenbaum%2C%20J.B.%20Human-level%20concept%20learning%20through%20probabilistic%20program%20induction%202015"
+        },
+        {
+            "id": "Li_2015_a",
+            "entry": "X. Li and X. Wu. Modeling speaker variability using long short-term memory networks for speech recognition. In INTERSPEECH, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20X.%20Wu%2C%20X.%20Modeling%20speaker%20variability%20using%20long%20short-term%20memory%20networks%20for%20speech%20recognition%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20X.%20Wu%2C%20X.%20Modeling%20speaker%20variability%20using%20long%20short-term%20memory%20networks%20for%20speech%20recognition%202015"
+        },
+        {
+            "id": "Mehri_et+al_2016_a",
+            "entry": "S. Mehri, K. Kumar, I. Gulrajani, R. Kumar, S. Jain, J. Sotelo, A. Courville, and Y. Bengio. Samplernn: An unconditional end-to-end neural audio generation model. arXiv preprint arXiv:1612.07837, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1612.07837"
+        },
+        {
+            "id": "Miao_2015_a",
+            "entry": "Y. Miao and F. Metze. On speaker adaptation of long short-term memory recurrent neural networks. In Sixteenth Annual Conference of the International Speech Communication Association, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Miao%2C%20Y.%20Metze%2C%20F.%20On%20speaker%20adaptation%20of%20long%20short-term%20memory%20recurrent%20neural%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Miao%2C%20Y.%20Metze%2C%20F.%20On%20speaker%20adaptation%20of%20long%20short-term%20memory%20recurrent%20neural%20networks%202015"
+        },
+        {
+            "id": "Miao_et+al_2015_b",
+            "entry": "Y. Miao, H. Zhang, and F. Metze. Speaker adaptive training of deep neural network acoustic models using i-vectors. IEEE/ACM Transactions on Audio, Speech, and Language Processing, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Miao%2C%20Y.%20Zhang%2C%20H.%20Metze%2C%20F.%20Speaker%20adaptive%20training%20of%20deep%20neural%20network%20acoustic%20models%20using%20i-vectors%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Miao%2C%20Y.%20Zhang%2C%20H.%20Metze%2C%20F.%20Speaker%20adaptive%20training%20of%20deep%20neural%20network%20acoustic%20models%20using%20i-vectors%202015"
+        },
+        {
+            "id": "V_et+al_0000_a",
+            "entry": "A. v. d. Oord, S. Dieleman, H. Zen, K. Simonyan, O. Vinyals, A. Graves, N. Kalchbrenner, A. Senior, and K. Kavukcuoglu. Wavenet: A generative model for raw audio. arXiv preprint arXiv:1609.03499, 2016a.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.03499"
+        },
+        {
+            "id": "V_et+al_2016_a",
+            "entry": "A. v. d. Oord, N. Kalchbrenner, L. Espeholt, O. Vinyals, A. Graves, et al. Conditional image generation with pixelcnn decoders. In Advances in Neural Information Processing Systems, 2016b.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=v.%20d.%20Oord%2C%20A.%20Kalchbrenner%2C%20N.%20Espeholt%2C%20L.%20Vinyals%2C%20O.%20Conditional%20image%20generation%20with%20pixelcnn%20decoders%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=v.%20d.%20Oord%2C%20A.%20Kalchbrenner%2C%20N.%20Espeholt%2C%20L.%20Vinyals%2C%20O.%20Conditional%20image%20generation%20with%20pixelcnn%20decoders%202016"
+        },
+        {
+            "id": "Panayotov_et+al_2015_a",
+            "entry": "V. Panayotov, G. Chen, D. Povey, and S. Khudanpur. Librispeech: an ASR corpus based on public domain audio books. In IEEE ICASSP, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Panayotov%2C%20V.%20Chen%2C%20G.%20Povey%2C%20D.%20Khudanpur%2C%20S.%20Librispeech%3A%20an%20ASR%20corpus%20based%20on%20public%20domain%20audio%20books%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Panayotov%2C%20V.%20Chen%2C%20G.%20Povey%2C%20D.%20Khudanpur%2C%20S.%20Librispeech%3A%20an%20ASR%20corpus%20based%20on%20public%20domain%20audio%20books%202015"
+        },
+        {
+            "id": "Ping_et+al_2018_a",
+            "entry": "W. Ping, K. Peng, A. Gibiansky, S. Arik, A. Kannan, S. Narang, J. Raiman, and J. Miller. Deep Voice 3: Scaling text-to-speech with convolutional sequence learning. In ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ping%2C%20W.%20Peng%2C%20K.%20Gibiansky%2C%20A.%20Arik%2C%20S.%20Deep%20Voice%203%3A%20Scaling%20text-to-speech%20with%20convolutional%20sequence%20learning%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ping%2C%20W.%20Peng%2C%20K.%20Gibiansky%2C%20A.%20Arik%2C%20S.%20Deep%20Voice%203%3A%20Scaling%20text-to-speech%20with%20convolutional%20sequence%20learning%202018"
+        },
+        {
+            "id": "S_2007_a",
+            "entry": "S. Prince and J. Elder. Probabilistic linear discriminant analysis for inferences about identity. In ICCV, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Prince%2C%20S.%20Elder%2C%20J.%20Probabilistic%20linear%20discriminant%20analysis%20for%20inferences%20about%20identity%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Prince%2C%20S.%20Elder%2C%20J.%20Probabilistic%20linear%20discriminant%20analysis%20for%20inferences%20about%20identity%202007"
+        },
+        {
+            "id": "Reed_et+al_2017_a",
+            "entry": "S. E. Reed, Y. Chen, T. Paine, A. van den Oord, S. M. A. Eslami, D. J. Rezende, O. Vinyals, and N. de Freitas. Few-shot autoregressive density estimation: Towards learning to learn distributions. CoRR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Reed%2C%20S.E.%20Chen%2C%20Y.%20Paine%2C%20T.%20van%20den%20Oord%2C%20A.%20Few-shot%20autoregressive%20density%20estimation%3A%20Towards%20learning%20to%20learn%20distributions%202017"
+        },
+        {
+            "id": "Rezende_et+al_2016_a",
+            "entry": "D. Rezende, Shakir, I. Danihelka, K. Gregor, and D. Wierstra. One-shot generalization in deep generative models. In ICML, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rezende%2C%20D.%20Shakir%2C%20I.Danihelka%20Gregor%2C%20K.%20Wierstra%2C%20D.%20One-shot%20generalization%20in%20deep%20generative%20models%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rezende%2C%20D.%20Shakir%2C%20I.Danihelka%20Gregor%2C%20K.%20Wierstra%2C%20D.%20One-shot%20generalization%20in%20deep%20generative%20models%202016"
+        },
+        {
+            "id": "Shen_et+al_2017_a",
+            "entry": "J. Shen, R. Pang, R. J. Weiss, M. Schuster, N. Jaitly, Z. Yang, Z. Chen, Y. Zhang, Y. Wang, R. SkerryRyan, et al. Natural tts synthesis by conditioning wavenet on mel spectrogram predictions. arXiv preprint arXiv:1712.05884, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1712.05884"
+        },
+        {
+            "id": "Snyder_et+al_2016_a",
+            "entry": "D. Snyder, P. Ghahremani, D. Povey, D. Garcia-Romero, Y. Carmiel, and S. Khudanpur. Deep neural network-based speaker embeddings for end-to-end speaker verification. In IEEE Spoken Language Technology Workshop (SLT), pages 165\u2013170, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Snyder%2C%20D.%20Ghahremani%2C%20P.%20Povey%2C%20D.%20Garcia-Romero%2C%20D.%20Deep%20neural%20network-based%20speaker%20embeddings%20for%20end-to-end%20speaker%20verification%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Snyder%2C%20D.%20Ghahremani%2C%20P.%20Povey%2C%20D.%20Garcia-Romero%2C%20D.%20Deep%20neural%20network-based%20speaker%20embeddings%20for%20end-to-end%20speaker%20verification%202016"
+        },
+        {
+            "id": "Sotelo_et+al_2017_a",
+            "entry": "J. Sotelo, S. Mehri, K. Kumar, J. F. Santos, K. Kastner, A. Courville, and Y. Bengio. Char2wav: End-to-end speech synthesis. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sotelo%2C%20J.%20Mehri%2C%20S.%20Kumar%2C%20K.%20Santos%2C%20J.F.%20Char2wav%3A%20End-to-end%20speech%20synthesis%202017"
+        },
+        {
+            "id": "Taigman_et+al_2018_a",
+            "entry": "Y. Taigman, L. Wolf, A. Polyak, and E. Nachmani. Voiceloop: Voice fitting and synthesis via a phonological loop. In ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Taigman%2C%20Y.%20Wolf%2C%20L.%20Polyak%2C%20A.%20Nachmani%2C%20E.%20Voiceloop%3A%20Voice%20fitting%20and%20synthesis%20via%20a%20phonological%20loop%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Taigman%2C%20Y.%20Wolf%2C%20L.%20Polyak%2C%20A.%20Nachmani%2C%20E.%20Voiceloop%3A%20Voice%20fitting%20and%20synthesis%20via%20a%20phonological%20loop%202018"
+        },
+        {
+            "id": "Vaswani_et+al_2017_a",
+            "entry": "A. Vaswani, N. Shazeer, N. Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, L. Kaiser, and I. Polosukhin. Attention is all you need. In NIPS. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=A%20Vaswani%20N%20Shazeer%20N%20Parmar%20J%20Uszkoreit%20L%20Jones%20A%20N%20Gomez%20L%20Kaiser%20and%20I%20Polosukhin%20Attention%20is%20all%20you%20need%20In%20NIPS%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=A%20Vaswani%20N%20Shazeer%20N%20Parmar%20J%20Uszkoreit%20L%20Jones%20A%20N%20Gomez%20L%20Kaiser%20and%20I%20Polosukhin%20Attention%20is%20all%20you%20need%20In%20NIPS%202017"
+        },
+        {
+            "id": "Veaux_et+al_2017_a",
+            "entry": "C. Veaux, J. Yamagishi, and K. e. a. MacDonald. Cstr vctk corpus: English multi-speaker corpus for cstr voice cloning toolkit, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Veaux%2C%20C.%20Yamagishi%2C%20J.%20e.%20a.%20MacDonald%2C%20K.%20Cstr%20vctk%20corpus%3A%20English%20multi-speaker%20corpus%20for%20cstr%20voice%20cloning%20toolkit%202017"
+        },
+        {
+            "id": "Wang_et+al_2017_a",
+            "entry": "Y. Wang, R. J. Skerry-Ryan, D. Stanton, Y. Wu, R. J. Weiss, N. Jaitly, Z. Yang, Y. Xiao, Z. Chen, S. Bengio, Q. V. Le, Y. Agiomyrgiannakis, R. Clark, and R. A. Saurous. Tacotron: A fully end-to-end text-to-speech synthesis model. CoRR, abs/1703.10135, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.10135"
+        },
+        {
+            "id": "Wester_et+al_2016_a",
+            "entry": "M. Wester, Z. Wu, and J. Yamagishi. Analysis of the voice conversion challenge 2016 evaluation results. In INTERSPEECH, pages 1637\u20131641, 09 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=M%20Wester%20Z%20Wu%20and%20J%20Yamagishi%20Analysis%20of%20the%20voice%20conversion%20challenge%202016%20evaluation%20results%20In%20INTERSPEECH%20pages%2016371641%2009%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=M%20Wester%20Z%20Wu%20and%20J%20Yamagishi%20Analysis%20of%20the%20voice%20conversion%20challenge%202016%20evaluation%20results%20In%20INTERSPEECH%20pages%2016371641%2009%202016"
+        },
+        {
+            "id": "Wu_et+al_2016_a",
+            "entry": "Y.-C. Wu, H.-T. Hwang, C.-C. Hsu, Y. Tsao, and H.-m. Wang. Locally linear embedding for exemplar-based spectral conversion. In INTERSPEECH, pages 1652\u20131656, 09 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20Y.-C.%20Hwang%2C%20H.-T.%20Hsu%2C%20C.-C.%20Tsao%2C%20Y.%20Locally%20linear%20embedding%20for%20exemplar-based%20spectral%20conversion%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20Y.-C.%20Hwang%2C%20H.-T.%20Hsu%2C%20C.-C.%20Tsao%2C%20Y.%20Locally%20linear%20embedding%20for%20exemplar-based%20spectral%20conversion%202016"
+        },
+        {
+            "id": "Wu_et+al_2015_a",
+            "entry": "Z. Wu, P. Swietojanski, C. Veaux, S. Renals, and S. King. A study of speaker adaptation for dnn-based speech synthesis. In INTERSPEECH, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20Z.%20Swietojanski%2C%20P.%20Veaux%2C%20C.%20Renals%2C%20S.%20A%20study%20of%20speaker%20adaptation%20for%20dnn-based%20speech%20synthesis%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20Z.%20Swietojanski%2C%20P.%20Veaux%2C%20C.%20Renals%2C%20S.%20A%20study%20of%20speaker%20adaptation%20for%20dnn-based%20speech%20synthesis%202015"
+        },
+        {
+            "id": "Xue_et+al_2014_a",
+            "entry": "S. Xue, O. Abdel-Hamid, H. Jiang, L. Dai, and Q. Liu. Fast adaptation of deep neural network based on discriminant codes for speech recognition. IEEE/ACM Transactions on Audio, Speech, and Language Processing, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xue%2C%20S.%20Abdel-Hamid%2C%20O.%20Jiang%2C%20H.%20Dai%2C%20L.%20Fast%20adaptation%20of%20deep%20neural%20network%20based%20on%20discriminant%20codes%20for%20speech%20recognition%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xue%2C%20S.%20Abdel-Hamid%2C%20O.%20Jiang%2C%20H.%20Dai%2C%20L.%20Fast%20adaptation%20of%20deep%20neural%20network%20based%20on%20discriminant%20codes%20for%20speech%20recognition%202014"
+        },
+        {
+            "id": "Yamagishi_et+al_2009_a",
+            "entry": "J. Yamagishi, T. Kobayashi, Y. Nakano, K. Ogata, and J. Isogai. Analysis of speaker adaptation algorithms for hmm-based speech synthesis and a constrained smaplr adaptation algorithm. IEEE Transactions on Audio, Speech, and Language Processing, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yamagishi%2C%20J.%20Kobayashi%2C%20T.%20Nakano%2C%20Y.%20Ogata%2C%20K.%20Analysis%20of%20speaker%20adaptation%20algorithms%20for%20hmm-based%20speech%20synthesis%20and%20a%20constrained%20smaplr%20adaptation%20algorithm%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yamagishi%2C%20J.%20Kobayashi%2C%20T.%20Nakano%2C%20Y.%20Ogata%2C%20K.%20Analysis%20of%20speaker%20adaptation%20algorithms%20for%20hmm-based%20speech%20synthesis%20and%20a%20constrained%20smaplr%20adaptation%20algorithm%202009"
+        },
+        {
+            "id": "Yu_et+al_2013_a",
+            "entry": "D. Yu, K. Yao, H. Su, G. Li, and F. Seide. Kl-divergence regularized deep neural network adaptation for improved large vocabulary speech recognition. In IEEE ICASSP, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yu%2C%20D.%20Yao%2C%20K.%20Su%2C%20H.%20Li%2C%20G.%20Kl-divergence%20regularized%20deep%20neural%20network%20adaptation%20for%20improved%20large%20vocabulary%20speech%20recognition%202013"
+        }
+    ]
+}

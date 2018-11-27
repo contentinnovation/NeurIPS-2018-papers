@@ -1,0 +1,182 @@
+{
+    "filename": "8242-mesh-tensorflow-deep-learning-for-supercomputers.pdf",
+    "metadata": {
+        "title": "Mesh-TensorFlow: Deep Learning for Supercomputers",
+        "author": "Noam Shazeer, Youlong Cheng, Niki Parmar, Dustin Tran, Ashish Vaswani, Penporn Koanantakool, Peter Hawkins, HyoukJoong Lee, Mingsheng Hong, Cliff Young, Ryan Sepassi, Blake Hechtman",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8242-mesh-tensorflow-deep-learning-for-supercomputers.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Batch-splitting (data-parallelism) is the dominant distributed Deep Neural Network (DNN) training strategy, due to its universal applicability and its amenability to Single-Program-Multiple-Data (SPMD) programming. However, batch-splitting suffers from problems including the inability to train very large models (due to memory constraints), high latency, and inefficiency at small batch sizes. All of these can be solved by more general distribution strategies (model-parallelism). Unfortunately, efficient model-parallel algorithms tend to be complicated to discover, describe, and to implement, particularly on large clusters. We introduce Mesh-TensorFlow, a language for specifying a general class of distributed tensor computations. Where data-parallelism can be viewed as splitting tensors and operations along the \"batch\" dimension, in Mesh-TensorFlow, the user can specify any tensor-dimensions to be split across any dimensions of a multi-dimensional mesh of processors. A Mesh-TensorFlow graph compiles into a SPMD program consisting of parallel operations coupled with collective communication primitives such as Allreduce. We use Mesh-TensorFlow to implement an efficient data-parallel, modelparallel version of the Transformer [Vas+17] sequence-to-sequence model. Using TPU meshes of up to 512 cores, we train Transformer models with up to 5 billion parameters, surpassing SOTA results on WMT\u201914 English-to-French translation task and the one-billion-word Language modeling benchmark. Mesh-Tensorflow is available at https://github.com/tensorflow/mesh ."
+    },
+    "keywords": [
+        {
+            "term": "SPMD",
+            "url": "https://en.wikipedia.org/wiki/SPMD"
+        },
+        {
+            "term": "language modeling",
+            "url": "https://en.wikipedia.org/wiki/language_modeling"
+        },
+        {
+            "term": "single program multiple data",
+            "url": "https://en.wikipedia.org/wiki/single_program_multiple_data"
+        },
+        {
+            "term": "parallel algorithm",
+            "url": "https://en.wikipedia.org/wiki/parallel_algorithm"
+        }
+    ],
+    "highlights": [
+        "Batch-splitting is the dominant distributed Deep Neural Network (DNN) training strategy, due to its universal applicability and its amenability to Single-Program-Multiple-Data (SPMD) programming",
+        "To examine the benefit of scaling the Transformer model in the manner suggested by the previous section, we trained such models on machine translation and language modeling tasks",
+        "We introduce the Mesh-TensorFlow language, facilitating a broad class of SPMD distributed tensor computations"
+    ],
+    "key_statements": [
+        "Batch-splitting is the dominant distributed Deep Neural Network (DNN) training strategy, due to its universal applicability and its amenability to Single-Program-Multiple-Data (SPMD) programming",
+        "To examine the benefit of scaling the Transformer model in the manner suggested by the previous section, we trained such models on machine translation and language modeling tasks",
+        "We introduce the Mesh-TensorFlow language, facilitating a broad class of SPMD distributed tensor computations"
+    ],
+    "summary": [
+        "Batch-splitting is the dominant distributed Deep Neural Network (DNN) training strategy, due to its universal applicability and its amenability to Single-Program-Multiple-Data (SPMD) programming.",
+        "Where data-parallelism can be viewed as splitting tensors and operations along the \"batch\" dimension, in Mesh-TensorFlow, the user can specify any tensordimensions to be split across any dimensions of a multi-dimensional mesh of processors.",
+        "Batch-splitting would be expressed by using a one-dimensional mesh with dimension \"all_processors\" and using the computation layout [(\"batch\", \"all_processors\")].",
+        "Einsum is implemented by parallel einsum operations on each processor of that processor\u2019s input slices, followed by MPI-allreduce across any mesh dimensions corresponding to reduced-out Tensor dimensions.",
+        "To train the above model in data-parallel mode on a mesh of n processors, we would define: mesh_shape = [(\"all\", n)] computation_layout = [(\"batch\", \"all\")]",
+        "When the Mesh-TensorFlow graph is compiled with this layout, the parameter tensors w, v, and bias are replicated on all processors, but the activation matrices x, h, y, etc.",
+        "When the Mesh-TensorFlow graph is compiled with this layout, the input and output layers x, and y are replicated on all processors, but the hidden activations h and the parameter tensors w, v and bias are all split across the hidden dimension.",
+        "On a two-dimensional mesh of r \u00d7 c processors, we can employ both data-parallelism and modelparallelism: mesh_shape = [(\"rows\", r), (\"cols\", c)] computation_layout = [(\"batch\", \"rows\"), (\"hidden\", \"cols\")]",
+        "In computing y, we reduce out the hidden dimension, which is split over the cols dimension of the mesh, so the results of the operation need to be summed up by processor-column, as opposed to over the entire mesh.",
+        "For a computation layout to be efficient, all expensive operations need to be split across all mesh dimensions.",
+        "To use even more processors, we combined this model-parallelism with data parallelism, splitting the batch across one dimension of a 2-dimensional TPU mesh and the dimensions described above across the other dimension of the mesh: mesh_shape = [(\"rows\", r), (\"cols\", c\")] computation_layout = [(\"batch\", \"rows\"), (\"vocab\", \"cols\"), (\"d_ff\", \"cols\"), (\"heads\", \"cols\")]",
+        "We trained Transformer models with feed-forward hidden dimensions up to 262144 and up to 256 attention heads on 2dimensional TPUv2 meshes of up to 16x32=512 cores, maintaining computational efficiency of over 50% (6 PFLOP/s out of a maximum 11.5 PFLOP/s) on the largest models.",
+        "Applying Mesh-TensorFlow to the Transformer model, we are able to train models with 5 billion parameters on up to 512-core clusters, establishing new state-of-the-art results for WMT14 En-Fr translation task and the One Billion Word language modeling benchmark."
+    ],
+    "headline": "We introduce Mesh-TensorFlow, a language for specifying a general class of distributed tensor computations",
+    "reference_links": [
+        {
+            "id": "Berntsen_1989_a",
+            "entry": "Jarle Berntsen. \u201cCommunication efficient matrix multiplication on hypercubes\u201d. In: Parallel computing 12.3 (1989), pp. 335\u2013342.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Berntsen%2C%20Jarle%20%E2%80%9CCommunication%20efficient%20matrix%20multiplication%20on%20hypercubes%E2%80%9D.%20In%3A%20Parallel%20computing%2012.3%201989"
+        },
+        {
+            "id": "Wolfe_1989_a",
+            "entry": "M. Wolfe. \u201cMore Iteration Space Tiling\u201d. In: Proceedings of the 1989 ACM/IEEE Conference on Supercomputing. Supercomputing \u201989. Reno, Nevada, USA: ACM, 1989, pp. 655\u2013664. ISBN: 0-89791-341-8. DOI: 10.1145/76263.76337. URL: http://doi.acm.org/10.1145/76263.76337.",
+            "crossref": "https://dx.doi.org/10.1145/76263.76337",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1145/76263.76337"
+        },
+        {
+            "id": "Aggarwal_et+al_1990_a",
+            "entry": "Alok Aggarwal, Ashok K. Chandra, and Marc Snir. \u201cCommunication Complexity of PRAMs\u201d. In: Theor. Comput. Sci. 71.1 (Mar. 1990), pp. 3\u201328. ISSN: 0304-3975. DOI: 10.1016/0304-3975(90)90188-N. URL: http://dx.doi.org/10.1016/03043975(90)90188-N.",
+            "crossref": "https://dx.doi.org/10.1016/0304-3975(90)90188-N",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1016/0304-3975%2890%2990188-N"
+        },
+        {
+            "id": "Patarasuk_2009_a",
+            "entry": "Pitch Patarasuk and Xin Yuan. \u201cBandwidth optimal all-reduce algorithms for clusters of workstations\u201d. In: 69 (Feb. 2009), pp. 117\u2013124.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Patarasuk%2C%20Pitch%20Yuan%2C%20Xin%20Bandwidth%20optimal%20all-reduce%20algorithms%20for%20clusters%20of%20workstations%202009-02"
+        },
+        {
+            "id": "Jain_2010_a",
+            "entry": "Nikhil Jain and Yogish Sabharwal. \u201cY.: Optimal bucket algorithms for large mpi collectives on torus interconnects\u201d. In: In: Proceedings of the 24th ACM International Conference on Supercomputing. 2010, pp. 27\u201336.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jain%2C%20Nikhil%20Sabharwal%2C%20Yogish%20Y.%3A%20Optimal%20bucket%20algorithms%20for%20large%20mpi%20collectives%20on%20torus%20interconnects%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jain%2C%20Nikhil%20Sabharwal%2C%20Yogish%20Y.%3A%20Optimal%20bucket%20algorithms%20for%20large%20mpi%20collectives%20on%20torus%20interconnects%202010"
+        },
+        {
+            "id": "Solomonik_2011_a",
+            "entry": "Edgar Solomonik and James Demmel. \u201cCommunication-Optimal Parallel 2.5D Matrix Multiplication and LU Factorization Algorithms\u201d. In: Euro-Par. Vol. 6853. 2011, pp. 90\u2013 109. ISBN: 978-3-642-23396-8.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Solomonik%2C%20Edgar%20Demmel%2C%20James%20Communication-Optimal%20Parallel%202.5D%20Matrix%20Multiplication%20and%20LU%20Factorization%20Algorithms%202011"
+        },
+        {
+            "id": "Dean_2012_a",
+            "entry": "Jeffrey Dean et al. \u201cLarge Scale Distributed Deep Networks\u201d. In: Proceedings of the 25th International Conference on Neural Information Processing Systems - Volume 1. NIPS\u201912. Lake Tahoe, Nevada: Curran Associates Inc., 2012, pp. 1223\u20131231. URL: http://dl.acm.org/citation.cfm?id=2999134.2999271.",
+            "url": "http://dl.acm.org/citation.cfm?id=2999134.2999271",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dean%2C%20Jeffrey%20Large%20Scale%20Distributed%20Deep%20Networks%202012"
+        },
+        {
+            "id": "Krizhevsky_et+al_2012_a",
+            "entry": "Alex Krizhevsky, Ilya Sutskever, and Geoffrey E Hinton. \u201cImagenet classification with deep convolutional neural networks\u201d. In: Advances in neural information processing systems. 2012, pp. 1097\u20131105.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Hinton%2C%20Geoffrey%20E.%20%E2%80%9CImagenet%20classification%20with%20deep%20convolutional%20neural%20networks%E2%80%9D.%20In%3A%20Advances%20in%20neural%20information%20processing%20systems%202012"
+        },
+        {
+            "id": "Demmel_2013_a",
+            "entry": "James Demmel et al. \u201cCommunication-optimal parallel recursive rectangular matrix multiplication\u201d. In: Parallel & Distributed Processing (IPDPS), 2013 IEEE 27th International Symposium on. IEEE. 2013, pp. 261\u2013272.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Demmel%2C%20James%20Communication-optimal%20parallel%20recursive%20rectangular%20matrix%20multiplication%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Demmel%2C%20James%20Communication-optimal%20parallel%20recursive%20rectangular%20matrix%20multiplication%202013"
+        },
+        {
+            "id": "Solomonik_2014_a",
+            "entry": "Edgar Solomonik et al. \u201cA massively parallel tensor contraction framework for coupledcluster computations\u201d. In: Journal of Parallel and Distributed Computing 74.12 (2014), pp. 3176\u20133190.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Solomonik%2C%20Edgar%20A%20massively%20parallel%20tensor%20contraction%20framework%20for%20coupledcluster%20computations%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Solomonik%2C%20Edgar%20A%20massively%20parallel%20tensor%20contraction%20framework%20for%20coupledcluster%20computations%202014"
+        },
+        {
+            "id": "Calvin_et+al_2015_a",
+            "entry": "Justus A. Calvin, Cannada A. Lewis, and Edward F. Valeev. \u201cScalable Task-based Algorithm for Multiplication of Block-rank-sparse Matrices\u201d. In: Proceedings of the 5th Workshop on Irregular Applications: Architectures and Algorithms. IA3 \u201915. Austin, Texas: ACM, 2015, 4:1\u20134:8. ISBN: 978-1-4503-4001-4. DOI: 10 . 1145 / 2833179 . 2833186. URL: http://doi.acm.org/10.1145/2833179.2833186.",
+            "url": "http://doi.acm.org/10.1145/2833179.2833186",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Calvin%2C%20Justus%20A.%20Lewis%2C%20Cannada%20A.%20Valeev%2C%20Edward%20F.%20Scalable%20Task-based%20Algorithm%20for%20Multiplication%20of%20Block-rank-sparse%20Matrices%202015"
+        },
+        {
+            "id": "Abadi_0000_a",
+            "entry": "Mart\u0131n Abadi et al. TensorFlow: Large-Scale Machine Learning on Heterogeneous Systems. Software available from tensorflow.org. 2015. URL: https://www.tensorflow.org/.",
+            "url": "https://www.tensorflow.org/",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abadi%2C%20Mart%C4%B1n%20TensorFlow%3A%20Large-Scale%20Machine%20Learning%20on%20Heterogeneous%20Systems"
+        },
+        {
+            "id": "J_2016_a",
+            "entry": "Rafal J\u00f3zefowicz et al. \u201cExploring the Limits of Language Modeling\u201d. In: CoRR abs/1602.02410 (2016). arXiv: 1602.02410. URL: http://arxiv.org/abs/1602.02410.",
+            "url": "http://arxiv.org/abs/1602.02410",
+            "arxiv_url": "https://arxiv.org/pdf/1602.02410"
+        },
+        {
+            "id": "Koanantakool_2016_a",
+            "entry": "Penporn Koanantakool et al. \u201cCommunication-Avoiding Parallel Sparse-Dense MatrixMatrix Multiplication\u201d. In: 2016 IEEE International Parallel and Distributed Processing Symposium (IPDPS). May 2016, pp. 842\u2013853. DOI: 10.1109/IPDPS.2016.117.",
+            "crossref": "https://dx.doi.org/10.1109/IPDPS.2016.117",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1109/IPDPS.2016.117"
+        },
+        {
+            "id": "Gholami_2017_a",
+            "entry": "Amir Gholami et al. \u201cIntegrated Model and Data Parallelism in Training Neural Networks\u201d. In: arXiv preprint arXiv:1712.04432 (2017).",
+            "arxiv_url": "https://arxiv.org/pdf/1712.04432"
+        },
+        {
+            "id": "Shazeer_2017_a",
+            "entry": "Noam Shazeer et al. \u201cOutrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer\u201d. In: CoRR abs/1701.06538 (2017). arXiv: 1701 . 06538. URL: http://arxiv.org/abs/1701.06538.",
+            "url": "http://arxiv.org/abs/1701.06538",
+            "arxiv_url": "https://arxiv.org/pdf/1701.06538"
+        },
+        {
+            "id": "Vaswani_2017_a",
+            "entry": "Ashish Vaswani et al. \u201cAttention Is All You Need\u201d. In: CoRR abs/1706.03762 (2017). arXiv: 1706.03762. URL: http://arxiv.org/abs/1706.03762.",
+            "url": "http://arxiv.org/abs/1706.03762",
+            "arxiv_url": "https://arxiv.org/pdf/1706.03762"
+        },
+        {
+            "id": "Demmel_2018_a",
+            "entry": "James Demmel and Grace Dinh. \u201cCommunication-Optimal Convolutional Neural Nets\u201d. In: arXiv preprint arXiv:1802.06905 (2018).",
+            "arxiv_url": "https://arxiv.org/pdf/1802.06905"
+        },
+        {
+            "id": "Jia_et+al_2018_a",
+            "entry": "Zhihao Jia, Matei Zaharia, and Alex Aiken. \u201cBeyond Data and Model Parallelism for Deep Neural Networks\u201d. In: arXiv preprint arXiv:1807.05358 (2018).",
+            "arxiv_url": "https://arxiv.org/pdf/1807.05358"
+        },
+        {
+            "id": "Jia_2018_b",
+            "entry": "Zhihao Jia et al. \u201cExploring Hidden Dimensions in Parallelizing Convolutional Neural Networks\u201d. In: arXiv preprint arXiv:1802.04924 (2018).",
+            "arxiv_url": "https://arxiv.org/pdf/1802.04924"
+        },
+        {
+            "id": "Koanantakool_2018_a",
+            "entry": "Penporn Koanantakool et al. \u201cCommunication-Avoiding Optimization Methods for Distributed Massive-Scale Sparse Inverse Covariance Estimation\u201d. In: Proceedings of the Twenty-First International Conference on Artificial Intelligence and Statistics. Ed. by Amos Storkey and Fernando Perez-Cruz. Vol. 84. Proceedings of Machine Learning Research. Playa Blanca, Lanzarote, Canary Islands: PMLR, Apr. 2018, pp. 1376\u20131386. URL: http://proceedings.mlr.press/v84/koanantakool18a.html.",
+            "url": "http://proceedings.mlr.press/v84/koanantakool18a.html",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Koanantakool%2C%20Penporn%20Communication-Avoiding%20Optimization%20Methods%20for%20Distributed%20Massive-Scale%20Sparse%20Inverse%20Covariance%20Estimation%202018-04"
+        },
+        {
+            "id": "Jin_et+al_0000_a",
+            "entry": "Peter Jin, Boris Ginsburg, and Kurt Keutzer. Spatially Parallel Convolutions. URL: https://openreview.net/forum?id=S1Yt0d1vG.",
+            "url": "https://openreview.net/forum?id=S1Yt0d1vG"
+        }
+    ]
+}

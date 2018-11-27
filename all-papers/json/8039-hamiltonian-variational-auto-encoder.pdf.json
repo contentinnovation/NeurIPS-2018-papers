@@ -1,0 +1,251 @@
+{
+    "filename": "8039-hamiltonian-variational-auto-encoder.pdf",
+    "metadata": {
+        "title": "Hamiltonian Variational Auto-Encoder",
+        "author": "Anthony L. Caterini, Arnaud Doucet, Dino Sejdinovic",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8039-hamiltonian-variational-auto-encoder.pdf"
+        },
+        "abstract": "Variational Auto-Encoders (VAEs) have become very popular techniques to perform inference and learning in latent variable models: they allow us to leverage the rich representational power of neural networks to obtain flexible approximations of the posterior of latent variables as well as tight evidence lower bounds (ELBOs). Combined with stochastic variational inference, this provides a methodology scaling to large datasets. However, for this methodology to be practically efficient, it is necessary to obtain low-variance unbiased estimators of the ELBO and its gradients with respect to the parameters of interest. While the use of Markov chain Monte Carlo (MCMC) techniques such as Hamiltonian Monte Carlo (HMC) has been previously suggested to achieve this [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>, <a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>], the proposed methods require specifying reverse kernels which have a large impact on performance. Additionally, the resulting unbiased estimator of the ELBO for most MCMC kernels is typically not amenable to the reparameterization trick. We show here how to optimally select reverse kernels in this setting and, by building upon Hamiltonian Importance Sampling (HIS) [<a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>], we obtain a scheme that provides low-variance unbiased estimators of the ELBO and its gradients using the reparameterization trick. This allows us to develop a Hamiltonian Variational Auto-Encoder (HVAE). This method can be re-interpreted as a target-informed normalizing flow [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>] which, within our context, only requires a few evaluations of the gradient of the sampled likelihood and trivial Jacobian calculations at each iteration."
+    },
+    "keywords": [
+        {
+            "term": "importance sampling",
+            "url": "https://en.wikipedia.org/wiki/importance_sampling"
+        },
+        {
+            "term": "variational inference",
+            "url": "https://en.wikipedia.org/wiki/variational_inference"
+        },
+        {
+            "term": "unbiased estimator",
+            "url": "https://en.wikipedia.org/wiki/unbiased_estimator"
+        },
+        {
+            "term": "latent variable",
+            "url": "https://en.wikipedia.org/wiki/latent_variable"
+        },
+        {
+            "term": "ELBO",
+            "url": "https://en.wikipedia.org/wiki/ELBO"
+        },
+        {
+            "term": "evidence lower bound",
+            "url": "https://en.wikipedia.org/wiki/evidence_lower_bound"
+        },
+        {
+            "term": "markov chain monte carlo",
+            "url": "https://en.wikipedia.org/wiki/markov_chain_monte_carlo"
+        },
+        {
+            "term": "Variational Bayes",
+            "url": "https://en.wikipedia.org/wiki/Variational_Bayes"
+        },
+        {
+            "term": "Hamiltonian Monte Carlo",
+            "url": "https://en.wikipedia.org/wiki/Hamiltonian_Monte_Carlo"
+        }
+    ],
+    "highlights": [
+        "Variational Auto-Encoders (VAEs), introduced by Kingma and Welling [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>] and Rezende et al [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>], are popular techniques to carry out inference and learning in complex latent variable models",
+        "We have proposed a principled way to exploit Hamiltonian dynamics within stochastic variational inference",
+        "The resulting Hamiltonian Variational Auto-Encoder can be interpreted as a target-driven normalizing flow which requires the evaluation of a few gradients of the log-likelihood associated to a single data point at each stochastic gradient step",
+        "The Jacobian computations required for the evidence lower bounds are trivial",
+        "We have fewer parameters to optimize, the memory cost of using Hamiltonian Variational Auto-Encoder and target-informed dynamics could become prohibitively large if the memory required to store evaluations of \u2207z log p\u03b8(x, z) is already extremely large",
+        "Further tests explicitly comparing Hamiltonian Variational Auto-Encoder with Variational Auto-Encoders and normalizing flows in various memory regimes are required to determine in what cases one method should be used over the other"
+    ],
+    "key_statements": [
+        "Variational Auto-Encoders (VAEs), introduced by Kingma and Welling [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>] and Rezende et al [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>], are popular techniques to carry out inference and learning in complex latent variable models",
+        "The related Hamiltonian Variational Inference (HVI) [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>] instead stochastically evolves the base samples according to Hamiltonian Monte Carlo (HMC) [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>] and uses target information, but relies on defining reverse dynamics in the flow, which, as we will see, turns out to be unnecessary and suboptimal",
+        "The main idea put forward in Salimans et al [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>] is that it is possible to use K Markov chain Monte Carlo iterations to obtain an unbiased estimator of the evidence lower bounds and its gradients",
+        "We have proposed a principled way to exploit Hamiltonian dynamics within stochastic variational inference",
+        "The resulting Hamiltonian Variational Auto-Encoder can be interpreted as a target-driven normalizing flow which requires the evaluation of a few gradients of the log-likelihood associated to a single data point at each stochastic gradient step",
+        "The Jacobian computations required for the evidence lower bounds are trivial",
+        "The robustness brought about by the use of target-informed dynamics can reduce the number of parameters that must be trained and improve generalizability",
+        "We have fewer parameters to optimize, the memory cost of using Hamiltonian Variational Auto-Encoder and target-informed dynamics could become prohibitively large if the memory required to store evaluations of \u2207z log p\u03b8(x, z) is already extremely large",
+        "Further tests explicitly comparing Hamiltonian Variational Auto-Encoder with Variational Auto-Encoders and normalizing flows in various memory regimes are required to determine in what cases one method should be used over the other",
+        "It is possible to directly use these dynamics instead of the Hamiltonian dynamics within the framework developed in subsection 2.3"
+    ],
+    "summary": [
+        "Variational Auto-Encoders (VAEs), introduced by Kingma and Welling [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>] and Rezende et al [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>], are popular techniques to carry out inference and learning in complex latent variable models.",
+        "The main idea put forward in Salimans et al [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>] is that it is possible to use K MCMC iterations to obtain an unbiased estimator of the ELBO and its gradients.",
+        "This method uses reverse kernels which are optimal for reducing variance of the likelihood estimators and allows for simple calculation of the approximate posteriors of the latent variables.",
+        "The resulting method, which we refer to as the Hamiltonian Variational Auto-Encoder (HVAE), can be thought of as a Normalizing Flow scheme in which the flow depends explicitly on the target distribution.",
+        "When performing stochastic gradient ascent for variational inference, we only require an unbiased estimator of",
+        "We note that this is not exactly the same as the auto-encoder setting, in which an individual latent variable is associated with each observation, it provides a tractable framework to analyze effectiveness of various variational inference methods.",
+        "The VAE approximate posterior \u2013 and the HVAE variational prior across the latent variables in this case \u2013 is given by q\u03b8,\u03c6 = N, \u03a3\u03c6), where \u03bc\u03c6 and \u03a3\u03c6 are separate outputs of the same neural network parametrized by \u03c6, and \u03a3\u03c6 is constrained to be diagonal.",
+        "We notice that increasing the number of leapfrog steps does not always improve the performance, as K = 15 provides the best results in free tempering schemes.",
+        "As in Salimans et al [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>], we are able to improve upon the base model by adding our time-inhomogeneous Hamiltonian dynamics on top, but in a simplified regime without referring to learned reverse kernels.",
+        "Rezende and Mohamed [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>] report only lower bounds on the log-likelihood for NFs, which are lower than our log-likelihood estimates, they use a much larger number of variational parameters.",
+        "Contrary to previous methods [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>, <a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>], our algorithm does not rely on learned reverse Markov kernels and benefits from the use of tempering ideas.",
+        "We can use the reparameterization trick to obtain unbiased estimators of gradients of the ELBO.",
+        "The resulting HVAE can be interpreted as a target-driven normalizing flow which requires the evaluation of a few gradients of the log-likelihood associated to a single data point at each stochastic gradient step.",
+        "We have fewer parameters to optimize, the memory cost of using HVAE and target-informed dynamics could become prohibitively large if the memory required to store evaluations of \u2207z log p\u03b8(x, z) is already extremely large.",
+        "The ideas presented here could be coupled with the methodology proposed in [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>] \u2013 we conjecture that this could reduce the variance of the estimator (3) by an order of magnitude"
+    ],
+    "headline": "We show here how to optimally select reverse kernels in this setting and, by building upon Hamiltonian Importance Sampling  , we obtain a scheme that provides low-variance unbiased estimators of the evidence lower bounds and its gradients using the reparameterization trick",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Mart\u00edn Abadi et al. TensorFlow: Large-scale machine learning on heterogeneous systems, 2015. URL https://www.tensorflow.org/. Software available from tensorflow.org.",
+            "url": "https://www.tensorflow.org/"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Rianne van den Berg, Leonard Hasenclever, Jakub M Tomczak, and Max Welling. Sylvester normalizing flows for variational inference. arXiv preprint arXiv:1803.05649, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.05649"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Yuri Burda, Roger Grosse, and Ruslan Salakhutdinov. Importance weighted autoencoders. In The 4th International Conference on Learning Representations (ICLR), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Burda%2C%20Yuri%20Grosse%2C%20Roger%20Salakhutdinov%2C%20Ruslan%20Importance%20weighted%20autoencoders%202016"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Gavin E Crooks. Nonequilibrium measurements of free energy differences for microscopically reversible Markovian systems. Journal of Statistical Physics, 90(5-6):1481\u20131487, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Crooks%2C%20Gavin%20E.%20Nonequilibrium%20measurements%20of%20free%20energy%20differences%20for%20microscopically%20reversible%20Markovian%20systems%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Crooks%2C%20Gavin%20E.%20Nonequilibrium%20measurements%20of%20free%20energy%20differences%20for%20microscopically%20reversible%20Markovian%20systems%201998"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Michel A Cuendet. Statistical mechanical derivation of Jarzynski\u2019s identity for thermostated non-hamiltonian dynamics. Physical Review Letters, 96(12):120602, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cuendet%2C%20Michel%20A.%20Statistical%20mechanical%20derivation%20of%20Jarzynski%E2%80%99s%20identity%20for%20thermostated%20non-hamiltonian%20dynamics%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cuendet%2C%20Michel%20A.%20Statistical%20mechanical%20derivation%20of%20Jarzynski%E2%80%99s%20identity%20for%20thermostated%20non-hamiltonian%20dynamics%202006"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Pierre Del Moral, Arnaud Doucet, and Ajay Jasra. Sequential Monte Carlo samplers. Journal of the Royal Statistical Society: Series B (Statistical Methodology), 68(3):411\u2013436, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Moral%2C%20Pierre%20Del%20Doucet%2C%20Arnaud%20Jasra%2C%20Ajay%20Sequential%20Monte%20Carlo%20samplers%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Moral%2C%20Pierre%20Del%20Doucet%2C%20Arnaud%20Jasra%2C%20Ajay%20Sequential%20Monte%20Carlo%20samplers%202006"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Alexey Dosovitskiy, Jost Tobias Springenberg, and Thomas Brox. Learning to generate chairs with convolutional neural networks. In Computer Vision and Pattern Recognition (CVPR), 2015 IEEE Conference on, pages 1538\u20131546. IEEE, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dosovitskiy%2C%20Alexey%20Springenberg%2C%20Jost%20Tobias%20Brox%2C%20Thomas%20Learning%20to%20generate%20chairs%20with%20convolutional%20neural%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dosovitskiy%2C%20Alexey%20Springenberg%2C%20Jost%20Tobias%20Brox%2C%20Thomas%20Learning%20to%20generate%20chairs%20with%20convolutional%20neural%20networks%202015"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Paul Glasserman. Gradient estimation via perturbation analysis, volume 116. Springer Science & Business Media, 1991.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Glasserman%2C%20Paul%20Gradient%20estimation%20via%20perturbation%20analysis%2C%20volume%20116%201991"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Jeremy Heng, Adrian N Bishop, George Deligiannidis, and Arnaud Doucet. Controlled sequential Monte Carlo. arXiv preprint arXiv:1708.08396, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1708.08396"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Matthew D Hoffman. Learning deep latent Gaussian models with Markov chain Monte Carlo. In International Conference on Machine Learning, pages 1510\u20131519, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hoffman%2C%20Matthew%20D.%20Learning%20deep%20latent%20Gaussian%20models%20with%20Markov%20chain%20Monte%20Carlo%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hoffman%2C%20Matthew%20D.%20Learning%20deep%20latent%20Gaussian%20models%20with%20Markov%20chain%20Monte%20Carlo%202017"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Matthew D Hoffman and Andrew Gelman. The no-u-turn sampler: adaptively setting path lengths in hamiltonian monte carlo. Journal of Machine Learning Research, 15(1):1593\u20131623, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hoffman%2C%20Matthew%20D.%20Gelman%2C%20Andrew%20The%20no-u-turn%20sampler%3A%20adaptively%20setting%20path%20lengths%20in%20hamiltonian%20monte%20carlo%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hoffman%2C%20Matthew%20D.%20Gelman%2C%20Andrew%20The%20no-u-turn%20sampler%3A%20adaptively%20setting%20path%20lengths%20in%20hamiltonian%20monte%20carlo%202014"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Christopher Jarzynski. Nonequilibrium equality for free energy differences. Physical Review Letters, 78(14):2690, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jarzynski%2C%20Christopher%20Nonequilibrium%20equality%20for%20free%20energy%20differences%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jarzynski%2C%20Christopher%20Nonequilibrium%20equality%20for%20free%20energy%20differences%201997"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Christopher Jarzynski. Hamiltonian derivation of a detailed fluctuation theorem. Journal of Statistical Physics, 98(1-2):77\u2013102, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jarzynski%2C%20Christopher%20Hamiltonian%20derivation%20of%20a%20detailed%20fluctuation%20theorem%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jarzynski%2C%20Christopher%20Hamiltonian%20derivation%20of%20a%20detailed%20fluctuation%20theorem%202000"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Diederik P Kingma and Jimmy Ba. Adam: A method for stochastic optimization. arXiv preprint arXiv:1412.6980, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6980"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Diederik P Kingma and Max Welling. Auto-encoding variational Bayes. In The 2nd International Conference on Learning Representations (ICLR), 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Welling%2C%20Max%20Auto-encoding%20variational%20Bayes%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Welling%2C%20Max%20Auto-encoding%20variational%20Bayes%202014"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Diederik P Kingma, Tim Salimans, Rafal Jozefowicz, Xi Chen, Ilya Sutskever, and Max Welling. Improved variational inference with inverse autoregressive flow. In Advances in Neural Information Processing Systems, pages 4743\u20134751, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Salimans%2C%20Tim%20Jozefowicz%2C%20Rafal%20Chen%2C%20Xi%20Improved%20variational%20inference%20with%20inverse%20autoregressive%20flow%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Salimans%2C%20Tim%20Jozefowicz%2C%20Rafal%20Chen%2C%20Xi%20Improved%20variational%20inference%20with%20inverse%20autoregressive%20flow%202016"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Chris J Maddison, John Lawson, George Tucker, Nicolas Heess, Mohammad Norouzi, Andriy Mnih, Arnaud Doucet, and Yee Teh. Filtering variational objectives. In Advances in Neural Information Processing Systems, pages 6576\u20136586, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Maddison%2C%20Chris%20J.%20Lawson%2C%20John%20Tucker%2C%20George%20Heess%2C%20Nicolas%20Filtering%20variational%20objectives%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Maddison%2C%20Chris%20J.%20Lawson%2C%20John%20Tucker%2C%20George%20Heess%2C%20Nicolas%20Filtering%20variational%20objectives%202017"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Radford M Neal. Annealed importance sampling. Statistics and Computing, 11(2):125\u2013139, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Neal%2C%20Radford%20M.%20Annealed%20importance%20sampling%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Neal%2C%20Radford%20M.%20Annealed%20importance%20sampling%202001"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Radford M Neal. Hamiltonian importance sampling. www.cs.toronto.edu/pub/radford/ his-talk.ps, 2005. Talk presented at the Banff International Research Station (BIRS) workshop on Mathematical Issues in Molecular Dynamics.",
+            "url": "http://www.cs.toronto.edu/pub/radford/his-talk.ps",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Neal%2C%20Radford%20M.%20Hamiltonian%20importance%20sampling%202005"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Radford M Neal et al. MCMC using Hamiltonian dynamics. Handbook of Markov Chain Monte Carlo, 2(11), 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Neal%2C%20Radford%20M.%20MCMC%20using%20Hamiltonian%20dynamics.%20Handbook%20of%20Markov%20Chain%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Neal%2C%20Radford%20M.%20MCMC%20using%20Hamiltonian%20dynamics.%20Handbook%20of%20Markov%20Chain%202011"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Piero Procacci, Simone Marsili, Alessandro Barducci, Giorgio F Signorini, and Riccardo Chelli. Crooks equation for steered molecular dynamics using a Nos\u00e9-Hoover thermostat. The Journal of Chemical Physics, 125(16):164101, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Procacci%2C%20Piero%20Marsili%2C%20Simone%20Barducci%2C%20Alessandro%20Signorini%2C%20Giorgio%20F.%20Crooks%20equation%20for%20steered%20molecular%20dynamics%20using%20a%20Nos%C3%A9-Hoover%20thermostat%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Procacci%2C%20Piero%20Marsili%2C%20Simone%20Barducci%2C%20Alessandro%20Signorini%2C%20Giorgio%20F.%20Crooks%20equation%20for%20steered%20molecular%20dynamics%20using%20a%20Nos%C3%A9-Hoover%20thermostat%202006"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Danilo Rezende and Shakir Mohamed. Variational inference with normalizing flows. In International Conference on Machine Learning, pages 1530\u20131538, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rezende%2C%20Danilo%20Mohamed%2C%20Shakir%20Variational%20inference%20with%20normalizing%20flows%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rezende%2C%20Danilo%20Mohamed%2C%20Shakir%20Variational%20inference%20with%20normalizing%20flows%202015"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Danilo Rezende, Shakir Mohamed, and Daan Wierstra. Stochastic backpropagation and approximate inference in deep generative models. In International Conference on Machine Learning, pages 1278\u20131286, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rezende%2C%20Danilo%20Mohamed%2C%20Shakir%20Wierstra%2C%20Daan%20Stochastic%20backpropagation%20and%20approximate%20inference%20in%20deep%20generative%20models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rezende%2C%20Danilo%20Mohamed%2C%20Shakir%20Wierstra%2C%20Daan%20Stochastic%20backpropagation%20and%20approximate%20inference%20in%20deep%20generative%20models%202014"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Ruslan Salakhutdinov and Iain Murray. On the quantitative analysis of deep belief networks. In Proceedings of the 25th international conference on Machine learning, pages 872\u2013879. ACM, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Salakhutdinov%2C%20Ruslan%20Murray%2C%20Iain%20On%20the%20quantitative%20analysis%20of%20deep%20belief%20networks%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Salakhutdinov%2C%20Ruslan%20Murray%2C%20Iain%20On%20the%20quantitative%20analysis%20of%20deep%20belief%20networks%202008"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Tim Salimans, Diederik P Kingma, and Max Welling. Markov chain Monte Carlo and variational inference: Bridging the gap. In International Conference on Machine Learning, pages 1218\u2013 1226, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Salimans%2C%20Tim%20Kingma%2C%20Diederik%20P.%20Welling%2C%20Max%20Markov%20chain%20Monte%20Carlo%20and%20variational%20inference%3A%20Bridging%20the%20gap",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Salimans%2C%20Tim%20Kingma%2C%20Diederik%20P.%20Welling%2C%20Max%20Markov%20chain%20Monte%20Carlo%20and%20variational%20inference%3A%20Bridging%20the%20gap"
+        },
+        {
+            "id": "26",
+            "entry": "[26] E Sch\u00f6ll-Paschinger and Christoph Dellago. A proof of Jarzynski\u2019s nonequilibrium work theorem for dynamical systems that conserve the canonical distribution. The Journal of Chemical Physics, 125(5):054105, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20Sch%C3%B6ll-Paschinger%20and%20Christoph%20Dellago.%20A%20proof%20of%20Jarzynski%E2%80%99s%20nonequilibrium%20work%20theorem%20for%20dynamical%20systems%20that%20conserve%20the%20canonical%20distribution%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Sch%C3%B6ll-Paschinger%20and%20Christoph%20Dellago.%20A%20proof%20of%20Jarzynski%E2%80%99s%20nonequilibrium%20work%20theorem%20for%20dynamical%20systems%20that%20conserve%20the%20canonical%20distribution%202006"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Tijmen Tieleman and Geoffrey Hinton. Lecture 6.5-rmsprop: Divide the gradient by a running average of its recent magnitude. COURSERA: Neural networks for machine learning, 4(2): 26\u201331, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tieleman%2C%20Tijmen%20Hinton%2C%20Geoffrey%20Lecture%206.5-rmsprop%3A%20Divide%20the%20gradient%20by%20a%20running%20average%20of%20its%20recent%20magnitude%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tieleman%2C%20Tijmen%20Hinton%2C%20Geoffrey%20Lecture%206.5-rmsprop%3A%20Divide%20the%20gradient%20by%20a%20running%20average%20of%20its%20recent%20magnitude%202012"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Christopher Wolf, Maximilian Karl, and Patrick van der Smagt. Variational inference with Hamiltonian Monte Carlo. arXiv preprint arXiv:1609.08203, 2016. ",
+            "arxiv_url": "https://arxiv.org/pdf/1609.08203"
+        }
+    ]
+}

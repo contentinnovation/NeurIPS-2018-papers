@@ -1,0 +1,399 @@
+{
+    "filename": "7358-kdgan-knowledge-distillation-with-generative-adversarial-networks.pdf",
+    "metadata": {
+        "title": "KDGAN: Knowledge Distillation with Generative Adversarial Networks",
+        "author": "Xiaojie Wang, Rui Zhang, Yu Sun, Jianzhong Qi",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7358-kdgan-knowledge-distillation-with-generative-adversarial-networks.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Knowledge distillation (KD) aims to train a lightweight classifier suitable to provide accurate inference with constrained resources in multi-label learning. Instead of directly consuming feature-label pairs, the classifier is trained by a teacher, i.e., a high-capacity model whose training may be resource-hungry. The accuracy of the classifier trained this way is usually suboptimal because it is difficult to learn the true data distribution from the teacher. An alternative method is to adversarially train the classifier against a discriminator in a two-player game akin to generative adversarial networks (GAN), which can ensure the classifier to learn the true data distribution at the equilibrium of this game. However, it may take excessively long time for such a two-player game to reach equilibrium due to high-variance gradient updates. To address these limitations, we propose a three-player game named KDGAN consisting of a classifier, a teacher, and a discriminator. The classifier and the teacher learn from each other via distillation losses and are adversarially trained against the discriminator via adversarial losses. By simultaneously optimizing the distillation and adversarial losses, the classifier will learn the true data distribution at the equilibrium. We approximate the discrete distribution learned by the classifier (or the teacher) with a concrete distribution. From the concrete distribution, we generate continuous samples to obtain low-variance gradient updates, which speed up the training. Extensive experiments using real datasets confirm the superiority of KDGAN in both accuracy and training speed."
+    },
+    "keywords": [
+        {
+            "term": "machine learning",
+            "url": "https://en.wikipedia.org/wiki/machine_learning"
+        },
+        {
+            "term": "mean average precision",
+            "url": "https://en.wikipedia.org/wiki/mean_average_precision"
+        },
+        {
+            "term": "generative adversarial networks",
+            "url": "https://en.wikipedia.org/wiki/generative_adversarial_networks"
+        }
+    ],
+    "highlights": [
+        "It is common that more resources such as input features [<a class=\"ref-link\" id=\"c47\" href=\"#r47\">47</a>] or computational resources [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>], which we refer to as privileged provision, are available at the stage of training a model than those available at the stage of running the deployed model",
+        "We reduce the number of training epochs required to converge by decreasing the variance of gradients, which is achieved by the design of KDGAN and the Gumbel-Max trick",
+        "KDGAN achieves as much as 5.31% performance gain with 100 training images on MNIST",
+        "We proposed a framework named KDGAN to distill knowledge with generative adversarial networks for multi-label learning with privileged provision",
+        "We have shown that KDGAN outperforms the state-of-the-art methods in two important applications, image tag recommendation and deep model compression",
+        "We show that KDGAN learns a more accurate classifier at a faster speed than a naive generative adversarial networks (NaGAN) does"
+    ],
+    "key_statements": [
+        "It is common that more resources such as input features [<a class=\"ref-link\" id=\"c47\" href=\"#r47\">47</a>] or computational resources [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>], which we refer to as privileged provision, are available at the stage of training a model than those available at the stage of running the deployed model",
+        "We reduce the number of training epochs required to converge by decreasing the variance of gradients, which is achieved by the design of KDGAN and the Gumbel-Max trick",
+        "We show how KDGAN reduces the variance of gradients",
+        "We implement KDGAN based on Tensorflow [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>] and here we briefly describe our experimental setup3",
+        "KDGAN achieves as much as 5.31% performance gain with 100 training images on MNIST",
+        "We find that KDGAN converges to a better accuracy with a smaller number of training epochs than naive GAN",
+        "We present how the accuracy of KDGAN varies against the hyperparameters on the MNIST dataset in Figure 4 (Note the logarithmic scale of the x-axis in Figures 4b and 4c)",
+        "We find that \u03b1 and \u03b2 have a relatively small effect on the accuracy, which suggests that KDGAN is a robust framework",
+        "We find that KDGAN achieves significant improvements over the other methods across all the measures",
+        "KDGAN does not explicitly model the semantic similarity between two labels like what REXMP does, it still makes better recommendations than REXMP does",
+        "We investigate how the performance of KDGAN varies against the hyperparameters over the YFCC100M dataset",
+        "We proposed a framework named KDGAN to distill knowledge with generative adversarial networks for multi-label learning with privileged provision",
+        "We use the concrete distribution to control the variance of gradients during the adversarial training and obtained low-variance gradient estimates to accelerate the training",
+        "We have shown that KDGAN outperforms the state-of-the-art methods in two important applications, image tag recommendation and deep model compression",
+        "We show that KDGAN learns a more accurate classifier at a faster speed than a naive generative adversarial networks (NaGAN) does"
+    ],
+    "summary": [
+        "It is common that more resources such as input features [<a class=\"ref-link\" id=\"c47\" href=\"#r47\">47</a>] or computational resources [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>], which we refer to as privileged provision, are available at the stage of training a model than those available at the stage of running the deployed model.",
+        "(a) Training: After a user uploads an image, additional text such as (b) Inference: We recommend bay and comments and titles besides the labeled tags is accumulated.",
+        "The classifier learns from the discriminator to perfectly model the true data distribution at the equilibrium via adversarial losses.",
+        "By formulating the distillation and adversarial losses as a minimax game, we enable the classifier to learn the true data distribution at the equilibrium.",
+        "It is non-trivial to obtain low-variance gradients from the discriminator because the classifier and the teacher generate discrete samples, which are not differentiable w.r.t. their parameters.",
+        "We obtain low-variance gradients from the discriminator to accelerate the KDGAN training.",
+        "We reduce the number of training epochs required to converge by decreasing the variance of gradients, which is achieved by the design of KDGAN and the Gumbel-Max trick.",
+        "Hinton et al [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>] generalize this work by training a classifier to predict soft labels provided by a teacher.",
+        "Compared to KD, the proposed KDGAN framework introduces a discriminator to guarantee that the classifier can learn the true data distribution at the equilibrium.",
+        "These differences lead to different objective functions and training techniques, e.g., KDGAN can use the Gumbel-Max trick [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>, <a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>] to generate samples from both generators while Triple-GAN cannot do this.",
+        "We apply the proposed KDGAN to address the problem of deep model compression and image tag recommendation.",
+        "Similar to the classifier C, the teacher T generates pseudo labels based on a categorical distribution pt (y|x) = softmax(f (x, y)) where f (x, y) is a scoring function.",
+        "This is consistent with our analysis in Section 3.1 that NaGAN can learn the true data distribution better, this requires a large amount of training data.",
+        "This indicates that KDGAN requires a smaller number of training instances than NaGAN does to reach the same level of accuracy.",
+        "We find that KDGAN converges to a better accuracy with a smaller number of training epochs than NaGAN.",
+        "One possible reason is that the Gumbel-Max trick effectively reduces the gradient variance from the discriminator as discussed in Section 3.3.",
+        "We proposed a framework named KDGAN to distill knowledge with generative adversarial networks for multi-label learning with privileged provision.",
+        "We have defined the KDGAN framework as a minimax game where a classifier, a teacher, and a discriminator are trained adversarially.",
+        "We have shown that KDGAN outperforms the state-of-the-art methods in two important applications, image tag recommendation and deep model compression.",
+        "We will explore adaptive methods for determining model hyperparameters to achieve better training dynamics"
+    ],
+    "headline": "We propose a three-player game named KDGAN consisting of a classifier, a teacher, and a discriminator",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] M. Abadi, P. Barham, J. Chen, Z. Chen, A. Davis, J. Dean, M. Devin, S. Ghemawat, G. Irving, M. Isard, et al. Tensorflow: a system for large-scale machine learning. In OSDI, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abadi%2C%20M.%20Barham%2C%20P.%20Chen%2C%20J.%20Chen%2C%20Z.%20Tensorflow%3A%20a%20system%20for%20large-scale%20machine%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abadi%2C%20M.%20Barham%2C%20P.%20Chen%2C%20J.%20Chen%2C%20Z.%20Tensorflow%3A%20a%20system%20for%20large-scale%20machine%20learning%202016"
+        },
+        {
+            "id": "2",
+            "entry": "[2] R. Anil, G. Pereyra, A. Passos, R. Ormandi, G. E. Dahl, and G. E. Hinton. Large scale distributed neural network training through online distillation. In ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Anil%2C%20R.%20Pereyra%2C%20G.%20Passos%2C%20A.%20Ormandi%2C%20R.%20Large%20scale%20distributed%20neural%20network%20training%20through%20online%20distillation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Anil%2C%20R.%20Pereyra%2C%20G.%20Passos%2C%20A.%20Ormandi%2C%20R.%20Large%20scale%20distributed%20neural%20network%20training%20through%20online%20distillation%202018"
+        },
+        {
+            "id": "3",
+            "entry": "[3] S. Antol, A. Agrawal, J. Lu, M. Mitchell, D. Batra, C. Lawrence Zitnick, and D. Parikh. Vqa: Visual question answering. In ICCV, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Antol%2C%20S.%20Agrawal%2C%20A.%20Lu%2C%20J.%20Mitchell%2C%20M.%20Vqa%3A%20Visual%20question%20answering%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Antol%2C%20S.%20Agrawal%2C%20A.%20Lu%2C%20J.%20Mitchell%2C%20M.%20Vqa%3A%20Visual%20question%20answering%202015"
+        },
+        {
+            "id": "4",
+            "entry": "[4] M. Arjovsky and L. Bottou. Towards principled methods for training generative adversarial networks. In ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Arjovsky%2C%20M.%20Bottou%2C%20L.%20Towards%20principled%20methods%20for%20training%20generative%20adversarial%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Arjovsky%2C%20M.%20Bottou%2C%20L.%20Towards%20principled%20methods%20for%20training%20generative%20adversarial%20networks%202017"
+        },
+        {
+            "id": "5",
+            "entry": "[5] M. Arjovsky, S. Chintala, and L. Bottou. Wasserstein gan. arXiv preprint arXiv:1701.07875, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1701.07875"
+        },
+        {
+            "id": "6",
+            "entry": "[6] S. Arora, R. Ge, Y. Liang, T. Ma, and Y. Zhang. Generalization and equilibrium in generative adversarial nets (gans). In ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=S%20Arora%20R%20Ge%20Y%20Liang%20T%20Ma%20and%20Y%20Zhang%20Generalization%20and%20equilibrium%20in%20generative%20adversarial%20nets%20gans%20In%20ICML%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=S%20Arora%20R%20Ge%20Y%20Liang%20T%20Ma%20and%20Y%20Zhang%20Generalization%20and%20equilibrium%20in%20generative%20adversarial%20nets%20gans%20In%20ICML%202017"
+        },
+        {
+            "id": "7",
+            "entry": "[7] J. Ba and R. Caruana. Do deep nets really need to be deep? In NIPS, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ba%2C%20J.%20Caruana%2C%20R.%20Do%20deep%20nets%20really%20need%20to%20be%20deep%3F%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ba%2C%20J.%20Caruana%2C%20R.%20Do%20deep%20nets%20really%20need%20to%20be%20deep%3F%202014"
+        },
+        {
+            "id": "8",
+            "entry": "[8] L. Bottou, F. E. Curtis, and J. Nocedal. Optimization methods for large-scale machine learning. arXiv preprint arXiv:1606.04838, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.04838"
+        },
+        {
+            "id": "9",
+            "entry": "[9] C. Bucilua, R. Caruana, and A. Niculescu-Mizil. Model compression. In SIGKDD, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bucilua%2C%20C.%20Caruana%2C%20R.%20Niculescu-Mizil%2C%20A.%20Model%20compression%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bucilua%2C%20C.%20Caruana%2C%20R.%20Niculescu-Mizil%2C%20A.%20Model%20compression%202006"
+        },
+        {
+            "id": "10",
+            "entry": "[10] G. Chen, W. Choi, X. Yu, T. Han, and M. Chandraker. Learning efficient object detection models with knowledge distillation. In NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20G.%20Choi%2C%20W.%20Yu%2C%20X.%20Han%2C%20T.%20Learning%20efficient%20object%20detection%20models%20with%20knowledge%20distillation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20G.%20Choi%2C%20W.%20Yu%2C%20X.%20Han%2C%20T.%20Learning%20efficient%20object%20detection%20models%20with%20knowledge%20distillation%202017"
+        },
+        {
+            "id": "11",
+            "entry": "[11] L. Chen, D. Xu, I. W. Tsang, and J. Luo. Tag-based image retrieval improved by augmented features and group-based refinement. IEEE Transactions on Multimedia, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20L.%20Xu%2C%20D.%20Tsang%2C%20I.W.%20Luo%2C%20J.%20Tag-based%20image%20retrieval%20improved%20by%20augmented%20features%20and%20group-based%20refinement%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20L.%20Xu%2C%20D.%20Tsang%2C%20I.W.%20Luo%2C%20J.%20Tag-based%20image%20retrieval%20improved%20by%20augmented%20features%20and%20group-based%20refinement%202012"
+        },
+        {
+            "id": "12",
+            "entry": "[12] W. Cheng, E. H\u00fcllermeier, and K. J. Dembczynski. Label ranking methods based on the plackett-luce model. In ICML, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cheng%2C%20W.%20H%C3%BCllermeier%2C%20E.%20Dembczynski%2C%20K.J.%20Label%20ranking%20methods%20based%20on%20the%20plackett-luce%20model%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cheng%2C%20W.%20H%C3%BCllermeier%2C%20E.%20Dembczynski%2C%20K.J.%20Label%20ranking%20methods%20based%20on%20the%20plackett-luce%20model%202010"
+        },
+        {
+            "id": "13",
+            "entry": "[13] L. Chongxuan, T. Xu, J. Zhu, and B. Zhang. Triple generative adversarial nets. In NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chongxuan%2C%20L.%20Xu%2C%20T.%20Zhu%2C%20J.%20Zhang%2C%20B.%20Triple%20generative%20adversarial%20nets%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chongxuan%2C%20L.%20Xu%2C%20T.%20Zhu%2C%20J.%20Zhang%2C%20B.%20Triple%20generative%20adversarial%20nets%202017"
+        },
+        {
+            "id": "14",
+            "entry": "[14] J. Deng, W. Dong, R. Socher, L.-J. Li, K. Li, and L. Fei-Fei. Imagenet: A large-scale hierarchical image database. In CVPR, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Deng%2C%20J.%20Dong%2C%20W.%20Socher%2C%20R.%20Li%2C%20L.-J.%20Imagenet%3A%20A%20large-scale%20hierarchical%20image%20database%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Deng%2C%20J.%20Dong%2C%20W.%20Socher%2C%20R.%20Li%2C%20L.-J.%20Imagenet%3A%20A%20large-scale%20hierarchical%20image%20database%202009"
+        },
+        {
+            "id": "15",
+            "entry": "[15] S. Feizi, C. Suh, F. Xia, and D. Tse. Understanding gans: the lqg setting. arXiv preprint arXiv:1710.10793, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.10793"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Z. Gan, L. Chen, W. Wang, Y. Pu, Y. Zhang, H. Liu, C. Li, and L. Carin. Triangle generative adversarial networks. In NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Z%20Gan%20L%20Chen%20W%20Wang%20Y%20Pu%20Y%20Zhang%20H%20Liu%20C%20Li%20and%20L%20Carin%20Triangle%20generative%20adversarial%20networks%20In%20NIPS%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Z%20Gan%20L%20Chen%20W%20Wang%20Y%20Pu%20Y%20Zhang%20H%20Liu%20C%20Li%20and%20L%20Carin%20Triangle%20generative%20adversarial%20networks%20In%20NIPS%202017"
+        },
+        {
+            "id": "17",
+            "entry": "[17] I. Goodfellow, J. Pouget-Abadie, M. Mirza, B. Xu, D. Warde-Farley, S. Ozair, A. Courville, and Y. Bengio. Generative adversarial nets. In NIPS, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=I%20Goodfellow%20J%20PougetAbadie%20M%20Mirza%20B%20Xu%20D%20WardeFarley%20S%20Ozair%20A%20Courville%20and%20Y%20Bengio%20Generative%20adversarial%20nets%20In%20NIPS%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=I%20Goodfellow%20J%20PougetAbadie%20M%20Mirza%20B%20Xu%20D%20WardeFarley%20S%20Ozair%20A%20Courville%20and%20Y%20Bengio%20Generative%20adversarial%20nets%20In%20NIPS%202014"
+        },
+        {
+            "id": "18",
+            "entry": "[18] M. Grbovic, N. Djuric, S. Guo, and S. Vucetic. Supervised clustering of label ranking data using label preference information. Machine learning, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Grbovic%2C%20M.%20Djuric%2C%20N.%20Guo%2C%20S.%20Vucetic%2C%20S.%20Supervised%20clustering%20of%20label%20ranking%20data%20using%20label%20preference%20information%202013"
+        },
+        {
+            "id": "19",
+            "entry": "[19] M. Guillaumin, T. Mensink, J. Verbeek, and C. Schmid. Tagprop: Discriminative metric learning in nearest neighbor models for image auto-annotation. In ICCV, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Guillaumin%2C%20M.%20Mensink%2C%20T.%20Verbeek%2C%20J.%20Schmid%2C%20C.%20Tagprop%3A%20Discriminative%20metric%20learning%20in%20nearest%20neighbor%20models%20for%20image%20auto-annotation%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Guillaumin%2C%20M.%20Mensink%2C%20T.%20Verbeek%2C%20J.%20Schmid%2C%20C.%20Tagprop%3A%20Discriminative%20metric%20learning%20in%20nearest%20neighbor%20models%20for%20image%20auto-annotation%202009"
+        },
+        {
+            "id": "20",
+            "entry": "[20] E. Gumbel. Statistical theory of extreme values and some practical applications: A series of lectures. US Government Printing Office, Washington, 1954.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gumbel%2C%20E.%20Statistical%20theory%20of%20extreme%20values%20and%20some%20practical%20applications%3A%20A%20series%20of%20lectures.%20US%20Government%20Printing%20Office%201954"
+        },
+        {
+            "id": "21",
+            "entry": "[21] S. Gupta, J. Hoffman, and J. Malik. Cross modal distillation for supervision transfer. In CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gupta%2C%20S.%20Hoffman%2C%20J.%20Malik%2C%20J.%20Cross%20modal%20distillation%20for%20supervision%20transfer%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gupta%2C%20S.%20Hoffman%2C%20J.%20Malik%2C%20J.%20Cross%20modal%20distillation%20for%20supervision%20transfer%202016"
+        },
+        {
+            "id": "22",
+            "entry": "[22] K. He, X. Zhang, S. Ren, and J. Sun. Deep residual learning for image recognition. In CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%202016"
+        },
+        {
+            "id": "23",
+            "entry": "[23] G. Hinton, O. Vinyals, and J. Dean. Distilling the knowledge in a neural network. In NIPS workshop, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hinton%2C%20G.%20Vinyals%2C%20O.%20Dean%2C%20J.%20Distilling%20the%20knowledge%20in%20a%20neural%20network%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hinton%2C%20G.%20Vinyals%2C%20O.%20Dean%2C%20J.%20Distilling%20the%20knowledge%20in%20a%20neural%20network%202014"
+        },
+        {
+            "id": "24",
+            "entry": "[24] S. Hochreiter and J. Schmidhuber. Long short-term memory. Neural computation, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hochreiter%2C%20S.%20Schmidhuber%2C%20J.%20Long%20short-term%20memory%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hochreiter%2C%20S.%20Schmidhuber%2C%20J.%20Long%20short-term%20memory%201997"
+        },
+        {
+            "id": "25",
+            "entry": "[25] E. Jang, S. Gu, and B. Poole. Categorical reparameterization with gumbel-softmax. In ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jang%2C%20E.%20Gu%2C%20S.%20Poole%2C%20B.%20Categorical%20reparameterization%20with%20gumbel-softmax%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jang%2C%20E.%20Gu%2C%20S.%20Poole%2C%20B.%20Categorical%20reparameterization%20with%20gumbel-softmax%202017"
+        },
+        {
+            "id": "26",
+            "entry": "[26] A. Krizhevsky and G. Hinton. Learning multiple layers of features from tiny images. Technical report, University of Toronto, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20A.%20Hinton%2C%20G.%20Learning%20multiple%20layers%20of%20features%20from%20tiny%20images%202009"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Y. LeCun, L. Bottou, Y. Bengio, and P. Haffner. Gradient-based learning applied to document recognition. Proceedings of the IEEE, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=LeCun%2C%20Y.%20Bottou%2C%20L.%20Bengio%2C%20Y.%20Haffner%2C%20P.%20Gradient-based%20learning%20applied%20to%20document%20recognition%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=LeCun%2C%20Y.%20Bottou%2C%20L.%20Bengio%2C%20Y.%20Haffner%2C%20P.%20Gradient-based%20learning%20applied%20to%20document%20recognition%201998"
+        },
+        {
+            "id": "28",
+            "entry": "[28] X. Li and C. G. Snoek. Classifying tag relevance with relevant positive and negative examples. In ACMMM, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20X.%20Snoek%2C%20C.G.%20Classifying%20tag%20relevance%20with%20relevant%20positive%20and%20negative%20examples%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20X.%20Snoek%2C%20C.G.%20Classifying%20tag%20relevance%20with%20relevant%20positive%20and%20negative%20examples%202013"
+        },
+        {
+            "id": "29",
+            "entry": "[29] D. Lopez-Paz, L. Bottou, B. Sch\u00f6lkopf, and V. Vapnik. Unifying distillation and privileged information. In ICLR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lopez-Paz%2C%20D.%20Bottou%2C%20L.%20Sch%C3%B6lkopf%2C%20B.%20Vapnik%2C%20V.%20Unifying%20distillation%20and%20privileged%20information%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lopez-Paz%2C%20D.%20Bottou%2C%20L.%20Sch%C3%B6lkopf%2C%20B.%20Vapnik%2C%20V.%20Unifying%20distillation%20and%20privileged%20information%202016"
+        },
+        {
+            "id": "30",
+            "entry": "[30] C. J. Maddison, D. Tarlow, and T. Minka. A* sampling. In NIPS, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=C%20J%20Maddison%20D%20Tarlow%20and%20T%20Minka%20A%20sampling%20In%20NIPS%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=C%20J%20Maddison%20D%20Tarlow%20and%20T%20Minka%20A%20sampling%20In%20NIPS%202014"
+        },
+        {
+            "id": "31",
+            "entry": "[31] C. J. Maddison, A. Mnih, and Y. W. Teh. The concrete distribution: A continuous relaxation of discrete random variables. In ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Maddison%2C%20C.J.%20Mnih%2C%20A.%20W%2C%20Y.%20Teh.%20The%20concrete%20distribution%3A%20A%20continuous%20relaxation%20of%20discrete%20random%20variables%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Maddison%2C%20C.J.%20Mnih%2C%20A.%20W%2C%20Y.%20Teh.%20The%20concrete%20distribution%3A%20A%20continuous%20relaxation%20of%20discrete%20random%20variables%202017"
+        },
+        {
+            "id": "32",
+            "entry": "[32] A. Makadia, V. Pavlovic, and S. Kumar. Baselines for image annotation. IJCV, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Makadia%2C%20A.%20Pavlovic%2C%20V.%20Kumar%2C%20S.%20Baselines%20for%20image%20annotation%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Makadia%2C%20A.%20Pavlovic%2C%20V.%20Kumar%2C%20S.%20Baselines%20for%20image%20annotation%202010"
+        },
+        {
+            "id": "33",
+            "entry": "[33] L. Metz, B. Poole, D. Pfau, and J. Sohl-Dickstein. Unrolled generative adversarial networks. In ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Metz%2C%20L.%20Poole%2C%20B.%20Pfau%2C%20D.%20Sohl-Dickstein%2C%20J.%20Unrolled%20generative%20adversarial%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Metz%2C%20L.%20Poole%2C%20B.%20Pfau%2C%20D.%20Sohl-Dickstein%2C%20J.%20Unrolled%20generative%20adversarial%20networks%202017"
+        },
+        {
+            "id": "34",
+            "entry": "[34] T. Mikolov, I. Sutskever, K. Chen, G. S. Corrado, and J. Dean. Distributed representations of words and phrases and their compositionality. In NIPS, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mikolov%2C%20T.%20Sutskever%2C%20I.%20Chen%2C%20K.%20Corrado%2C%20G.S.%20Distributed%20representations%20of%20words%20and%20phrases%20and%20their%20compositionality%202013"
+        },
+        {
+            "id": "35",
+            "entry": "[35] D. Pechyony and V. Vapnik. On the theory of learnining with privileged information. In NIPS, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pechyony%2C%20D.%20Vapnik%2C%20V.%20On%20the%20theory%20of%20learnining%20with%20privileged%20information%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pechyony%2C%20D.%20Vapnik%2C%20V.%20On%20the%20theory%20of%20learnining%20with%20privileged%20information%202010"
+        },
+        {
+            "id": "36",
+            "entry": "[36] A. Romero, N. Ballas, S. E. Kahou, A. Chassang, C. Gatta, and Y. Bengio. Fitnets: Hints for thin deep nets. arXiv preprint arXiv:1412.6550, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6550"
+        },
+        {
+            "id": "37",
+            "entry": "[37] D. E. Rumelhart, G. E. Hinton, and R. J. Williams. Learning internal representations by error propagation. Technical report, California Univ San Diego La Jolla Inst for Cognitive Science, 1985.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rumelhart%2C%20D.E.%20Hinton%2C%20G.E.%20Williams%2C%20R.J.%20Learning%20internal%20representations%20by%20error%20propagation%201985"
+        },
+        {
+            "id": "38",
+            "entry": "[38] T. Salimans, I. Goodfellow, W. Zaremba, V. Cheung, A. Radford, and X. Chen. Improved techniques for training gans. In NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Salimans%2C%20T.%20Goodfellow%2C%20I.%20Zaremba%2C%20W.%20Cheung%2C%20V.%20Improved%20techniques%20for%20training%20gans%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Salimans%2C%20T.%20Goodfellow%2C%20I.%20Zaremba%2C%20W.%20Cheung%2C%20V.%20Improved%20techniques%20for%20training%20gans%202016"
+        },
+        {
+            "id": "39",
+            "entry": "[39] B. B. Sau and V. N. Balasubramanian. Deep model compression: Distilling knowledge from noisy teachers. arXiv preprint arXiv:1610.09650, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1610.09650"
+        },
+        {
+            "id": "40",
+            "entry": "[40] K. Simonyan and A. Zisserman. Very deep convolutional networks for large-scale image recognition. In ICLR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Simonyan%2C%20K.%20Zisserman%2C%20A.%20Very%20deep%20convolutional%20networks%20for%20large-scale%20image%20recognition%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Simonyan%2C%20K.%20Zisserman%2C%20A.%20Very%20deep%20convolutional%20networks%20for%20large-scale%20image%20recognition%202015"
+        },
+        {
+            "id": "41",
+            "entry": "[41] J.-C. Su and S. Maji. Cross quality distillation. arXiv preprint arXiv:1604.00433, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1604.00433"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Y. Sun, N. J. Yuan, Y. Wang, X. Xie, K. McDonald, and R. Zhang. Contextual intent tracking for personal assistants. In SIGKDD, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sun%2C%20Y.%20Yuan%2C%20N.J.%20Wang%2C%20Y.%20Xie%2C%20X.%20Contextual%20intent%20tracking%20for%20personal%20assistants%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sun%2C%20Y.%20Yuan%2C%20N.J.%20Wang%2C%20Y.%20Xie%2C%20X.%20Contextual%20intent%20tracking%20for%20personal%20assistants%202016"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Y. Sun, N. J. Yuan, X. Xie, K. McDonald, and R. Zhang. Collaborative nowcasting for contextual recommendation. In WWW, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sun%2C%20Y.%20Yuan%2C%20N.J.%20Xie%2C%20X.%20McDonald%2C%20K.%20Collaborative%20nowcasting%20for%20contextual%20recommendation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sun%2C%20Y.%20Yuan%2C%20N.J.%20Xie%2C%20X.%20McDonald%2C%20K.%20Collaborative%20nowcasting%20for%20contextual%20recommendation%202016"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Y. Sun, N. J. Yuan, X. Xie, K. McDonald, and R. Zhang. Collaborative intent prediction with real-time contextual data. TOIS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sun%2C%20Y.%20Yuan%2C%20N.J.%20Xie%2C%20X.%20McDonald%2C%20K.%20Collaborative%20intent%20prediction%20with%20real-time%20contextual%20data%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sun%2C%20Y.%20Yuan%2C%20N.J.%20Xie%2C%20X.%20McDonald%2C%20K.%20Collaborative%20intent%20prediction%20with%20real-time%20contextual%20data%202017"
+        },
+        {
+            "id": "45",
+            "entry": "[45] B. Thomee, D. A. Shamma, G. Friedland, B. Elizalde, K. Ni, D. Poland, D. Borth, and L.-J. Li. Yfcc100m: the new data in multimedia research. Communications of the ACM, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Thomee%2C%20B.%20Shamma%2C%20D.A.%20Friedland%2C%20G.%20Elizalde%2C%20B.%20Yfcc100m%3A%20the%20new%20data%20in%20multimedia%20research%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Thomee%2C%20B.%20Shamma%2C%20D.A.%20Friedland%2C%20G.%20Elizalde%2C%20B.%20Yfcc100m%3A%20the%20new%20data%20in%20multimedia%20research%202016"
+        },
+        {
+            "id": "46",
+            "entry": "[46] G. Tucker, A. Mnih, C. J. Maddison, J. Lawson, and J. Sohl-Dickstein. Rebar: Low-variance, unbiased gradient estimates for discrete latent variable models. In NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tucker%2C%20G.%20Mnih%2C%20A.%20Maddison%2C%20C.J.%20Lawson%2C%20J.%20Rebar%3A%20Low-variance%2C%20unbiased%20gradient%20estimates%20for%20discrete%20latent%20variable%20models%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tucker%2C%20G.%20Mnih%2C%20A.%20Maddison%2C%20C.J.%20Lawson%2C%20J.%20Rebar%3A%20Low-variance%2C%20unbiased%20gradient%20estimates%20for%20discrete%20latent%20variable%20models%202017"
+        },
+        {
+            "id": "47",
+            "entry": "[47] V. Vapnik and R. Izmailov. Learning using privileged information: similarity control and knowledge transfer. JMLR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vapnik%2C%20V.%20Izmailov%2C%20R.%20Learning%20using%20privileged%20information%3A%20similarity%20control%20and%20knowledge%20transfer%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vapnik%2C%20V.%20Izmailov%2C%20R.%20Learning%20using%20privileged%20information%3A%20similarity%20control%20and%20knowledge%20transfer%202015"
+        },
+        {
+            "id": "48",
+            "entry": "[48] V. Vapnik and A. Vashist. A new learning paradigm: Learning using privileged information. Neural networks, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vapnik%2C%20V.%20Vashist%2C%20A.%20A%20new%20learning%20paradigm%3A%20Learning%20using%20privileged%20information%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vapnik%2C%20V.%20Vashist%2C%20A.%20A%20new%20learning%20paradigm%3A%20Learning%20using%20privileged%20information%202009"
+        },
+        {
+            "id": "49",
+            "entry": "[49] J. Wang, L. Yu, W. Zhang, Y. Gong, Y. Xu, B. Wang, P. Zhang, and D. Zhang. Irgan: A minimax game for unifying generative and discriminative information retrieval models. In SIGIR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20J.%20Yu%2C%20L.%20Zhang%2C%20W.%20Gong%2C%20Y.%20Irgan%3A%20A%20minimax%20game%20for%20unifying%20generative%20and%20discriminative%20information%20retrieval%20models%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20J.%20Yu%2C%20L.%20Zhang%2C%20W.%20Gong%2C%20Y.%20Irgan%3A%20A%20minimax%20game%20for%20unifying%20generative%20and%20discriminative%20information%20retrieval%20models%202017"
+        },
+        {
+            "id": "50",
+            "entry": "[50] X. Wang, J. Qi, K. Ramamohanarao, Y. Sun, B. Li, and R. Zhang. A joint optimization approach for personalized recommendation diversification. In PAKDD, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20X.%20Qi%2C%20J.%20Ramamohanarao%2C%20K.%20Sun%2C%20Y.%20A%20joint%20optimization%20approach%20for%20personalized%20recommendation%20diversification%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20X.%20Qi%2C%20J.%20Ramamohanarao%2C%20K.%20Sun%2C%20Y.%20A%20joint%20optimization%20approach%20for%20personalized%20recommendation%20diversification%202018"
+        },
+        {
+            "id": "51",
+            "entry": "[51] Z. Xu, Y.-C. Hsu, and J. Huang. Learning loss for knowledge distillation with conditional adversarial networks. arXiv preprint arXiv:1709.00513, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1709.00513"
+        },
+        {
+            "id": "52",
+            "entry": "[52] L. Yu, W. Zhang, J. Wang, and Y. Yu. Seqgan: Sequence generative adversarial nets with policy gradient. In AAAI, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yu%2C%20L.%20Zhang%2C%20W.%20Wang%2C%20J.%20Yu%2C%20Y.%20Seqgan%3A%20Sequence%20generative%20adversarial%20nets%20with%20policy%20gradient.%20In%20AAAI%202017"
+        },
+        {
+            "id": "53",
+            "entry": "[53] M.-L. Zhang and Z.-H. Zhou. A review on multi-label learning algorithms. TKDE, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20M.-L.%20Zhou%2C%20Z.-H.%20A%20review%20on%20multi-label%20learning%20algorithms%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20M.-L.%20Zhou%2C%20Z.-H.%20A%20review%20on%20multi-label%20learning%20algorithms%202014"
+        },
+        {
+            "id": "54",
+            "entry": "[54] Y. Zhang, Z. Gan, and L. Carin. Generating text via adversarial training. In NIPS workshop on Adversarial Training, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Y.%20Gan%2C%20Z.%20Carin%2C%20L.%20Generating%20text%20via%20adversarial%20training%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Y.%20Gan%2C%20Z.%20Carin%2C%20L.%20Generating%20text%20via%20adversarial%20training%202016"
+        },
+        {
+            "id": "55",
+            "entry": "[55] Y. Zhang, Z. Gan, K. Fan, Z. Chen, R. Henao, D. Shen, and L. Carin. Adversarial feature matching for text generation. In ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Y.%20Gan%2C%20Z.%20Fan%2C%20K.%20Chen%2C%20Z.%20Adversarial%20feature%20matching%20for%20text%20generation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Y.%20Gan%2C%20Z.%20Fan%2C%20K.%20Chen%2C%20Z.%20Adversarial%20feature%20matching%20for%20text%20generation%202017"
+        },
+        {
+            "id": "56",
+            "entry": "[56] J. Zhao, M. Mathieu, and Y. LeCun. Energy-based generative adversarial network. In ICLR, 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhao%2C%20J.%20Mathieu%2C%20M.%20LeCun%2C%20Y.%20Energy-based%20generative%20adversarial%20network%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhao%2C%20J.%20Mathieu%2C%20M.%20LeCun%2C%20Y.%20Energy-based%20generative%20adversarial%20network%202017"
+        }
+    ]
+}

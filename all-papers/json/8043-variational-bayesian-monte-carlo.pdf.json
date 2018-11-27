@@ -1,0 +1,262 @@
+{
+    "filename": "8043-variational-bayesian-monte-carlo.pdf",
+    "metadata": {
+        "title": "Variational Bayesian Monte Carlo",
+        "author": "Luigi Acerbi",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8043-variational-bayesian-monte-carlo.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Many probabilistic models of interest in scientific computing and machine learning have expensive, black-box likelihoods that prevent the application of standard techniques for Bayesian inference, such as MCMC, which would require access to the gradient or a large number of likelihood evaluations. We introduce here a novel sample-efficient inference framework, Variational Bayesian Monte Carlo (VBMC). VBMC combines variational inference with Gaussian-process based, active-sampling Bayesian quadrature, using the latter to efficiently approximate the intractable integral in the variational objective. Our method produces both a nonparametric approximation of the posterior distribution and an approximate lower bound of the model evidence, useful for model selection. We demonstrate VBMC both on several synthetic likelihoods and on a neuronal model with data from real neurons. Across all tested problems and dimensions (up to D = 10), VBMC performs consistently well in reconstructing the posterior and the model evidence with a limited budget of likelihood evaluations, unlike other methods that work only in very low dimensions. Our framework shows great promise as a novel tool for posterior and model inference with expensive, black-box likelihoods."
+    },
+    "keywords": [
+        {
+            "term": "approximate inference",
+            "url": "https://en.wikipedia.org/wiki/approximate_inference"
+        },
+        {
+            "term": "Markov Chain Monte Carlo",
+            "url": "https://en.wikipedia.org/wiki/Markov_Chain_Monte_Carlo"
+        },
+        {
+            "term": "variational inference",
+            "url": "https://en.wikipedia.org/wiki/variational_inference"
+        },
+        {
+            "term": "machine learning",
+            "url": "https://en.wikipedia.org/wiki/machine_learning"
+        },
+        {
+            "term": "standard deviation",
+            "url": "https://en.wikipedia.org/wiki/standard_deviation"
+        },
+        {
+            "term": "probabilistic model",
+            "url": "https://en.wikipedia.org/wiki/probabilistic_model"
+        },
+        {
+            "term": "posterior distribution",
+            "url": "https://en.wikipedia.org/wiki/posterior_distribution"
+        },
+        {
+            "term": "bayesian inference",
+            "url": "https://en.wikipedia.org/wiki/bayesian_inference"
+        },
+        {
+            "term": "model evidence",
+            "url": "https://en.wikipedia.org/wiki/model_evidence"
+        },
+        {
+            "term": "evidence lower bound",
+            "url": "https://en.wikipedia.org/wiki/evidence_lower_bound"
+        },
+        {
+            "term": "large number",
+            "url": "https://en.wikipedia.org/wiki/large_number"
+        },
+        {
+            "term": "gaussian process",
+            "url": "https://en.wikipedia.org/wiki/gaussian_process"
+        }
+    ],
+    "highlights": [
+        "Engineering, and machine learning domains, such as in computational neuroscience and big data, complex black-box computational models are routinely used to estimate model parameters and compare hypotheses instantiated by different models",
+        "Results For both datasets, Variational Bayesian Monte Carlo is able to find a reasonable approximation of the log marginal likelihood and of the posterior, whereas no other algorithm produces a usable solution (Fig. 3)",
+        "We first trained Gaussian Process on the samples collected by Variational Bayesian Monte Carlo",
+        "The posteriors obtained by sampling from the Gaussian Process trained on the Variational Bayesian Monte Carlo samples scored a better Gaussianized\u201d symmetrized KL divergence than the other methods",
+        "We have introduced Variational Bayesian Monte Carlo, a novel Bayesian inference framework that combines variational inference with active-sampling Bayesian quadrature for models with expensive black-box likelihoods",
+        "We have shown on both synthetic and real model-fitting problems that, given a contained budget of likelihood evaluations, Variational Bayesian Monte Carlo is able to reliably compute valid, usable approximations in realistic scenarios, unlike previous methods whose applicability seems to be limited to very low dimension or simple likelihoods"
+    ],
+    "key_statements": [
+        "Engineering, and machine learning domains, such as in computational neuroscience and big data, complex black-box computational models are routinely used to estimate model parameters and compare hypotheses instantiated by different models",
+        "We introduce Variational Bayesian Monte Carlo (VBMC), a novel approximate inference framework that combines variational inference and active-sampling Bayesian quadrature via Gaussian Process surrogates.1",
+        "We describe here two acquisition functions for Variational Bayesian Monte Carlo based on uncertainty sampling",
+        "While not necessary in theory, we found that trimming generally increases the stability of the Gaussian Process approximation, especially when Variational Bayesian Monte Carlo is initialized in a region of very low probability under the true posterior",
+        "Results For both datasets, Variational Bayesian Monte Carlo is able to find a reasonable approximation of the log marginal likelihood and of the posterior, whereas no other algorithm produces a usable solution (Fig. 3)",
+        "The behavior of Variational Bayesian Monte Carlo is fairly consistent across runs",
+        "We argue that the superior results of Variational Bayesian Monte Carlo stem from a better exploration of the posterior landscape, and from a better approximation of the log joint, related but distinct features",
+        "We first trained Gaussian Process on the samples collected by Variational Bayesian Monte Carlo",
+        "The posteriors obtained by sampling from the Gaussian Process trained on the Variational Bayesian Monte Carlo samples scored a better Gaussianized\u201d symmetrized KL divergence than the other methods",
+        "We estimated the marginal likelihood with WSABI-L using the samples collected by Variational Bayesian Monte Carlo",
+        "The log marginal likelihood error in this hybrid approach is much lower than the error of WSABI-L alone, but still higher than the log marginal likelihood error of Variational Bayesian Monte Carlo",
+        "We have introduced Variational Bayesian Monte Carlo, a novel Bayesian inference framework that combines variational inference with active-sampling Bayesian quadrature for models with expensive black-box likelihoods",
+        "Our method affords both posterior estimation and model inference by providing an approximate posterior and a lower bound to the model evidence",
+        "We have shown on both synthetic and real model-fitting problems that, given a contained budget of likelihood evaluations, Variational Bayesian Monte Carlo is able to reliably compute valid, usable approximations in realistic scenarios, unlike previous methods whose applicability seems to be limited to very low dimension or simple likelihoods"
+    ],
+    "summary": [
+        "Engineering, and machine learning domains, such as in computational neuroscience and big data, complex black-box computational models are routinely used to estimate model parameters and compare hypotheses instantiated by different models.",
+        "VBMC is the only one with consistently good performance across problems, showing promise as a novel tool for posterior and model inference with expensive likelihoods in scientific computing and machine learning.",
+        "We introduce here Variational Bayesian Monte Carlo (VBMC), a sample-efficient inference method that combines variational Bayes and Bayesian quadrature, particularly useful for models with expensive likelihoods.",
+        "VBMC in a nutshell In each iteration t, the algorithm: (1) sequentially samples a batch of \u2018promising\u2019 new points that maximize a given acquisition function, and evaluates the log joint f at each of them; (2) trains a GP model of the log joint f , given the training set \u039et = {Xt, yt} of points evaluated so far; (3) updates the variational posterior approximation, indexed by \u03c6t, by optimizing the ELBO.",
+        "Our choice of variational family (Eq 6) and kernel, likelihood and mean function of the GP affords an analytical computation of the posterior mean and variance of the expected log joint E\u03c6 [f ], and of their gradients.",
+        "We use Eq 10 to compute the GP posterior predictive mean and variances for the acquisition function, and to marginalize the expected log joint over hyperparameters.",
+        "To allow the variational posterior to adapt, we do not actively sample new points in the first iteration after the end of warm-up.",
+        "The algorithm returns the estimate of the mean and standard deviation of the ELBO (a lower bound on the marginal likelihood), and the variational posterior, from which we can cheaply draw samples for estimating distribution moments, marginals, and other properties of the posterior.",
+        "The goal of inference consists of approximating the posterior distribution and the log marginal likelihood (LML) with a fixed budget of likelihood evaluations, assumed to be expensive.",
+        "Most of these algorithms only compute an approximation of the marginal likelihood based on a set of sampled points, but do not directly compute a posterior distribution.",
+        "We have introduced VBMC, a novel Bayesian inference framework that combines variational inference with active-sampling Bayesian quadrature for models with expensive black-box likelihoods.",
+        "We have shown on both synthetic and real model-fitting problems that, given a contained budget of likelihood evaluations, VBMC is able to reliably compute valid, usable approximations in realistic scenarios, unlike previous methods whose applicability seems to be limited to very low dimension or simple likelihoods.",
+        "Represents a novel useful tool for approximate inference in science and engineering"
+    ],
+    "headline": "We introduce here a novel sample-efficient inference framework, Variational Bayesian Monte Carlo ",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Rasmussen, C. & Williams, C. K. I. (2006) Gaussian Processes for Machine Learning. (MIT Press).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rasmussen%2C%20C.%20Williams%2C%20C.K.I.%20Gaussian%20Processes%20for%20Machine%20Learning%202006"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Jones, D. R., Schonlau, M., & Welch, W. J. (1998) Efficient global optimization of expensive black-box functions. Journal of Global Optimization 13, 455\u2013492.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jones%2C%20D.R.%20Schonlau%2C%20M.%20Welch%2C%20W.J.%20Efficient%20global%20optimization%20of%20expensive%20black-box%20functions%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jones%2C%20D.R.%20Schonlau%2C%20M.%20Welch%2C%20W.J.%20Efficient%20global%20optimization%20of%20expensive%20black-box%20functions%201998"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Brochu, E., Cora, V. M., & De Freitas, N. (2010) A tutorial on Bayesian optimization of expensive cost functions, with application to active user modeling and hierarchical reinforcement learning. arXiv preprint arXiv:1012.2599.",
+            "arxiv_url": "https://arxiv.org/pdf/1012.2599"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Snoek, J., Larochelle, H., & Adams, R. P. (2012) Practical Bayesian optimization of machine learning algorithms. Advances in Neural Information Processing Systems 25, 2951\u20132959.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Snoek%2C%20J.%20Larochelle%2C%20H.%20Adams%2C%20R.P.%20Practical%20Bayesian%20optimization%20of%20machine%20learning%20algorithms%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Snoek%2C%20J.%20Larochelle%2C%20H.%20Adams%2C%20R.P.%20Practical%20Bayesian%20optimization%20of%20machine%20learning%20algorithms%202012"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Shahriari, B., Swersky, K., Wang, Z., Adams, R. P., & de Freitas, N. (2016) Taking the human out of the loop: A review of Bayesian optimization. Proceedings of the IEEE 104, 148\u2013175.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shahriari%2C%20B.%20Swersky%2C%20K.%20Wang%2C%20Z.%20Adams%2C%20R.P.%20Taking%20the%20human%20out%20of%20the%20loop%3A%20A%20review%20of%20Bayesian%20optimization%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shahriari%2C%20B.%20Swersky%2C%20K.%20Wang%2C%20Z.%20Adams%2C%20R.P.%20Taking%20the%20human%20out%20of%20the%20loop%3A%20A%20review%20of%20Bayesian%20optimization%202016"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Acerbi, L. & Ma, W. J. (2017) Practical Bayesian optimization for model fitting with Bayesian adaptive direct search. Advances in Neural Information Processing Systems 30, 1834\u20131844.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Acerbi%2C%20L.%20Ma%2C%20W.J.%20Practical%20Bayesian%20optimization%20for%20model%20fitting%20with%20Bayesian%20adaptive%20direct%20search%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Acerbi%2C%20L.%20Ma%2C%20W.J.%20Practical%20Bayesian%20optimization%20for%20model%20fitting%20with%20Bayesian%20adaptive%20direct%20search%202017"
+        },
+        {
+            "id": "7",
+            "entry": "[7] O\u2019Hagan, A. (1991) Bayes\u2013Hermite quadrature. Journal of Statistical Planning and Inference 29, 245\u2013260.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=O%E2%80%99Hagan%2C%20A.%20Bayes%E2%80%93Hermite%20quadrature%201991",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=O%E2%80%99Hagan%2C%20A.%20Bayes%E2%80%93Hermite%20quadrature%201991"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Ghahramani, Z. & Rasmussen, C. E. (2002) Bayesian Monte Carlo. Advances in Neural Information Processing Systems 15, 505\u2013512.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ghahramani%2C%20Z.%20Rasmussen%2C%20C.E.%20Bayesian%20Monte%20Carlo%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ghahramani%2C%20Z.%20Rasmussen%2C%20C.E.%20Bayesian%20Monte%20Carlo%202002"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Osborne, M., Duvenaud, D. K., Garnett, R., Rasmussen, C. E., Roberts, S. J., & Ghahramani, Z. (2012) Active learning of model evidence using Bayesian quadrature. Advances in Neural Information Processing Systems 25, 46\u201354.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Osborne%2C%20M.%20Duvenaud%2C%20D.K.%20Garnett%2C%20R.%20Rasmussen%2C%20C.E.%20Active%20learning%20of%20model%20evidence%20using%20Bayesian%20quadrature%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Osborne%2C%20M.%20Duvenaud%2C%20D.K.%20Garnett%2C%20R.%20Rasmussen%2C%20C.E.%20Active%20learning%20of%20model%20evidence%20using%20Bayesian%20quadrature%202012"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Gunter, T., Osborne, M. A., Garnett, R., Hennig, P., & Roberts, S. J. (2014) Sampling for inference in probabilistic models with fast Bayesian quadrature. Advances in Neural Information Processing Systems 27, 2789\u20132797.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gunter%2C%20T.%20Osborne%2C%20M.A.%20Garnett%2C%20R.%20Hennig%2C%20P.%20Sampling%20for%20inference%20in%20probabilistic%20models%20with%20fast%20Bayesian%20quadrature%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gunter%2C%20T.%20Osborne%2C%20M.A.%20Garnett%2C%20R.%20Hennig%2C%20P.%20Sampling%20for%20inference%20in%20probabilistic%20models%20with%20fast%20Bayesian%20quadrature%202014"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Briol, F.-X., Oates, C., Girolami, M., & Osborne, M. A. (2015) Frank-Wolfe Bayesian quadrature: Probabilistic integration with theoretical guarantees. Advances in Neural Information Processing Systems 28, 1162\u20131170.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Briol%2C%20F.-X.%20Oates%2C%20C.%20Girolami%2C%20M.%20Osborne%2C%20M.A.%20Frank-Wolfe%20Bayesian%20quadrature%3A%20Probabilistic%20integration%20with%20theoretical%20guarantees%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Briol%2C%20F.-X.%20Oates%2C%20C.%20Girolami%2C%20M.%20Osborne%2C%20M.A.%20Frank-Wolfe%20Bayesian%20quadrature%3A%20Probabilistic%20integration%20with%20theoretical%20guarantees%202015"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Kandasamy, K., Schneider, J., & P\u00f3czos, B. (2015) Bayesian active learning for posterior estimation. Twenty-Fourth International Joint Conference on Artificial Intelligence.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kandasamy%2C%20K.%20Schneider%2C%20J.%20P%C3%B3czos%2C%20B.%20Bayesian%20active%20learning%20for%20posterior%20estimation%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kandasamy%2C%20K.%20Schneider%2C%20J.%20P%C3%B3czos%2C%20B.%20Bayesian%20active%20learning%20for%20posterior%20estimation%202015"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Wang, H. & Li, J. (2018) Adaptive Gaussian process approximation for Bayesian inference with expensive likelihood functions. Neural Computation pp. 1\u201323.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20H.%20Li%2C%20J.%20Adaptive%20Gaussian%20process%20approximation%20for%20Bayesian%20inference%20with%20expensive%20likelihood%20functions%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20H.%20Li%2C%20J.%20Adaptive%20Gaussian%20process%20approximation%20for%20Bayesian%20inference%20with%20expensive%20likelihood%20functions%202018"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Goris, R. L., Simoncelli, E. P., & Movshon, J. A. (2015) Origin and function of tuning diversity in macaque visual cortex. Neuron 88, 819\u2013831.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goris%2C%20R.L.%20Simoncelli%2C%20E.P.%20Movshon%2C%20J.A.%20Origin%20and%20function%20of%20tuning%20diversity%20in%20macaque%20visual%20cortex%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goris%2C%20R.L.%20Simoncelli%2C%20E.P.%20Movshon%2C%20J.A.%20Origin%20and%20function%20of%20tuning%20diversity%20in%20macaque%20visual%20cortex%202015"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Jordan, M. I., Ghahramani, Z., Jaakkola, T. S., & Saul, L. K. (1999) An introduction to variational methods for graphical models. Machine Learning 37, 183\u2013233.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jordan%2C%20M.I.%20Ghahramani%2C%20Z.%20Jaakkola%2C%20T.S.%20Saul%2C%20L.K.%20An%20introduction%20to%20variational%20methods%20for%20graphical%20models%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jordan%2C%20M.I.%20Ghahramani%2C%20Z.%20Jaakkola%2C%20T.S.%20Saul%2C%20L.K.%20An%20introduction%20to%20variational%20methods%20for%20graphical%20models%201999"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Bishop, C. M. (2006) Pattern Recognition and Machine Learning. (Springer).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bishop%2C%20C.M.%20Pattern%20Recognition%20and%20Machine%20Learning%202006"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Gramacy, R. B. & Lee, H. K. (2012) Cases for the nugget in modeling computer experiments. Statistics and Computing 22, 713\u2013722.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gramacy%2C%20R.B.%20Lee%2C%20H.K.%20Cases%20for%20the%20nugget%20in%20modeling%20computer%20experiments%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gramacy%2C%20R.B.%20Lee%2C%20H.K.%20Cases%20for%20the%20nugget%20in%20modeling%20computer%20experiments%202012"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Kingma, D. P. & Welling, M. (2013) Auto-encoding variational Bayes. Proceedings of the 2nd International Conference on Learning Representations.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20D.P.%20Welling%2C%20M.%20Auto-encoding%20variational%20Bayes%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20D.P.%20Welling%2C%20M.%20Auto-encoding%20variational%20Bayes%202013"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Miller, A. C., Foti, N., & Adams, R. P. (2017) Variational boosting: Iteratively refining posterior approximations. Proceedings of the 34th International Conference on Machine Learning 70, 2420\u20132429.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Miller%2C%20A.C.%20Foti%2C%20N.%20Adams%2C%20R.P.%20Variational%20boosting%3A%20Iteratively%20refining%20posterior%20approximations%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Miller%2C%20A.C.%20Foti%2C%20N.%20Adams%2C%20R.P.%20Variational%20boosting%3A%20Iteratively%20refining%20posterior%20approximations%202017"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Gershman, S., Hoffman, M., & Blei, D. (2012) Nonparametric variational inference. Proceedings of the 29th International Coference on Machine Learning.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gershman%2C%20S.%20Hoffman%2C%20M.%20Blei%2C%20D.%20Nonparametric%20variational%20inference%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gershman%2C%20S.%20Hoffman%2C%20M.%20Blei%2C%20D.%20Nonparametric%20variational%20inference%202012"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Kingma, D. P. & Ba, J. (2014) Adam: A method for stochastic optimization. Proceedings of the 3rd International Conference on Learning Representations.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20D.P.%20Ba%2C%20J.%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20D.P.%20Ba%2C%20J.%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202014"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Hansen, N., M\u00fcller, S. D., & Koumoutsakos, P. (2003) Reducing the time complexity of the derandomized evolution strategy with covariance matrix adaptation (CMA-ES). Evolutionary Computation 11, 1\u201318.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hansen%2C%20N.%20M%C3%BCller%2C%20S.D.%20Koumoutsakos%2C%20P.%20Reducing%20the%20time%20complexity%20of%20the%20derandomized%20evolution%20strategy%20with%20covariance%20matrix%20adaptation%20%28CMA-ES%29.%20Evolutionary%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hansen%2C%20N.%20M%C3%BCller%2C%20S.D.%20Koumoutsakos%2C%20P.%20Reducing%20the%20time%20complexity%20of%20the%20derandomized%20evolution%20strategy%20with%20covariance%20matrix%20adaptation%20%28CMA-ES%29.%20Evolutionary%202003"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Neal, R. M. (2003) Slice sampling. Annals of Statistics 31, 705\u2013741.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Neal%2C%20R.M.%20Slice%20sampling%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Neal%2C%20R.M.%20Slice%20sampling%202003"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Carpenter, B., Gelman, A., Hoffman, M. D., Lee, D., Goodrich, B., Betancourt, M., Brubaker, M., Guo, J., Li, P., & Riddell, A. (2017) Stan: A probabilistic programming language. Journal of Statistical Software 76.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Carpenter%2C%20B.%20Gelman%2C%20A.%20Hoffman%2C%20M.D.%20Lee%2C%20D.%20Stan%3A%20A%20probabilistic%20programming%20language%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Carpenter%2C%20B.%20Gelman%2C%20A.%20Hoffman%2C%20M.D.%20Lee%2C%20D.%20Stan%3A%20A%20probabilistic%20programming%20language%202017"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Gilks, W. R., Roberts, G. O., & George, E. I. (1994) Adaptive direction sampling. The Statistician 43, 179\u2013189.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gilks%2C%20W.R.%20Roberts%2C%20G.O.%20George%2C%20E.I.%20Adaptive%20direction%20sampling%201994",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gilks%2C%20W.R.%20Roberts%2C%20G.O.%20George%2C%20E.I.%20Adaptive%20direction%20sampling%201994"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Kass, R. E. & Raftery, A. E. (1995) Bayes factors. Journal of the American Statistical Association 90, 773\u2013795.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kass%2C%20R.E.%20Raftery%2C%20A.E.%20Bayes%20factors%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kass%2C%20R.E.%20Raftery%2C%20A.E.%20Bayes%20factors%201995"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Geyer, C. J. (1994) Estimating normalizing constants and reweighting mixtures. (Technical report). ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Geyer%2C%20C.J.%20Estimating%20normalizing%20constants%20and%20reweighting%20mixtures%201994"
+        }
+    ]
+}

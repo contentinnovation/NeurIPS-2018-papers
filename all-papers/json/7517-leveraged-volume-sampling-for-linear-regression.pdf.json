@@ -1,0 +1,274 @@
+{
+    "filename": "7517-leveraged-volume-sampling-for-linear-regression.pdf",
+    "metadata": {
+        "title": "Leveraged volume sampling for linear regression",
+        "author": "Michal Derezinski, Manfred K. Warmuth, Daniel J. Hsu",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7517-leveraged-volume-sampling-for-linear-regression.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Suppose an n \u21e5 d design matrix in a linear regression problem is given, but the response for each point is hidden unless explicitly requested. The goal is to sample only a small number k \u2327 n of the responses, and then produce a weight vector whose sum of squares loss over all points is at most 1 + \u270f times the minimum. When k is very small (e.g., k = d), jointly sampling diverse subsets of points is crucial. One such method called volume sampling has a unique and desirable property that the weight vector it produces is an unbiased estimate of the optimum. It is therefore natural to ask if this method offers the optimal unbiased estimate in terms of the number of responses k needed to achieve a 1 + \u270f loss approximation. Surprisingly we show that volume sampling can have poor behavior when we require a very accurate approximation \u2013 indeed worse than some i.i.d. sampling techniques whose estimates are biased, such as leverage score sampling. We then develop a new rescaled variant of volume sampling that produces an unbiased estimate which avoids this bad behavior and has at least as good a tail bound as leverage score sampling: sample size k = O(d log d + d/\u270f) suffices to guarantee total loss at most 1 + \u270f times the minimum with high probability. Thus we improve on the best previously known sample size for an unbiased estimator, k = O(d2/\u270f). Our rescaling procedure leads to a new efficient algorithm for volume sampling which is based on a determinantal rejection sampling technique with potentially broader applications to determinantal point processes. Other contributions include introducing the combinatorics needed for rescaled volume sampling and developing tail bounds for sums of dependent random matrices which arise in the process."
+    },
+    "keywords": [
+        {
+            "term": "sample size",
+            "url": "https://en.wikipedia.org/wiki/sample_size"
+        },
+        {
+            "term": "weight vector",
+            "url": "https://en.wikipedia.org/wiki/weight_vector"
+        },
+        {
+            "term": "random matrix",
+            "url": "https://en.wikipedia.org/wiki/random_matrix"
+        },
+        {
+            "term": "unbiased estimate",
+            "url": "https://en.wikipedia.org/wiki/unbiased_estimate"
+        },
+        {
+            "term": "determinantal point process",
+            "url": "https://en.wikipedia.org/wiki/determinantal_point_process"
+        }
+    ],
+    "highlights": [
+        "Consider a linear regression problem where the input points in Rd are provided, but the associated response for each point is withheld unless explicitly requested",
+        "We show that standard volume sampling cannot guarantee 1 + \u270f multiplicative loss bounds on some instances, unless over half of the rows are chosen to be in the subsample",
+        "We developed a new variant of volume sampling which produces the first known unbiased subsampled least-squares estimator with strong multiplicative loss bounds",
+        "We proposed an efficient algorithm called determinantal rejection sampling, which is to our knowledge the first joint determinantal sampling procedure that preprocessing step for computing leverage scores) produces its k samples in time Oe(d2 +k)d2), independent of the data size n",
+        "When n is very large, the preprocessing time can be reduced to Oe by rescaling with sufficiently accurate approximations of the leverage scores",
+        "For the sake of clarity we presented the algorithm based on rescaling with exact leverage scores in the main body of the paper"
+    ],
+    "key_statements": [
+        "Consider a linear regression problem where the input points in Rd are provided, but the associated response for each point is withheld unless explicitly requested",
+        "With the aid of having all input points available, such multiplicative loss bounds are achievable without any range dependence on the points or responses common in on-line learning [see, e.g., 8]",
+        "Volume sampling is closely related to optimal design criteria [<a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>, <a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>], which are appropriate under statistical models of the responses; here we study a worst-case setting where the algorithm must use randomization to guard itself against worst-case responses.\n1The total loss being 1 + \u270f times the optimum is the same as the regret being \u270f times the optimum.\n32nd Conference on Neural Information Processing Systems (NIPS 2018), Montr\u00e9al, Canada",
+        "We develop a new solution, called leveraged volume sampling, that retains the aforementioned benefits of volume sampling while avoiding its flaws",
+        "We prove that this new sampling scheme retains the benefits of volume sampling but avoids the bad behavior demonstrated in our lower bound example",
+        "We develop techniques for proving matrix expectation formulas for this variant which show that for any rescaling the weight vector produced for the subproblem is unbiased",
+        "We show that when rescaling with leverage scores, a new algorithm based on rejection sampling is surprisingly efficient (Section 4): Other than the preprocessing step of computing leverage scores, the runtime does not depend on n (a major improvement over existing volume sampling algorithms)",
+        "In Section 4.1 we prove multiplicative loss bounds for leveraged volume sampling by establishing two important properties which are hard to prove for joint sampling procedures",
+        "Given these direct connections of volume sampling to linear regression, it is natural to ask whether this distribution achieves a loss bound of (1 + \u270f) times the optimum for small sample sizes k.\n2.3",
+        "We show that standard volume sampling cannot guarantee 1 + \u270f multiplicative loss bounds on some instances, unless over half of the rows are chosen to be in the subsample",
+        "We show that this procedure not only returns a q-rescaled volume sample, but exploiting the fact that q is proportional to the leverage scores, it requires",
+        "For matrix X 2 Rn\u21e5d, determinantal rejection sampling returns sequence \u21e1S distributed according to leveraged volume sampling, and w.p. at least 1 finishes in time O((d2 + k)d2 ln( 1 ))",
+        "The following result is remarkable because standard matrix tail bounds used to prove this property for leverage score sampling are not applicable to volume sampling",
+        "We address this challenge by defining a coupling procedure for volume sampling and uniform sampling without replacement, which leads to a curious reduction argument described in Appendix D",
+        "Theorems 8 and 9 imply that the unbiased estimator w\u21e1\u21e4 produced from leveraged volume sampling achieves multiplicative tail bounds with sample size k = O(d log d + d/\u270f)",
+        "We developed a new variant of volume sampling which produces the first known unbiased subsampled least-squares estimator with strong multiplicative loss bounds",
+        "We proposed an efficient algorithm called determinantal rejection sampling, which is to our knowledge the first joint determinantal sampling procedure that preprocessing step for computing leverage scores) produces its k samples in time Oe(d2 +k)d2), independent of the data size n",
+        "When n is very large, the preprocessing time can be reduced to Oe by rescaling with sufficiently accurate approximations of the leverage scores",
+        "For the sake of clarity we presented the algorithm based on rescaling with exact leverage scores in the main body of the paper"
+    ],
+    "summary": [
+        "Consider a linear regression problem where the input points in Rd are provided, but the associated response for each point is withheld unless explicitly requested.",
+        "We develop a new method for proving matrix tail bounds for leveraged volume sampling.",
+        "We set up our task of subsampling for linear regression and present our lower bound for standard volume sampling.",
+        "Given these direct connections of volume sampling to linear regression, it is natural to ask whether this distribution achieves a loss bound of (1 + \u270f) times the optimum for small sample sizes k.",
+        "Given a matrix X 2 Rn\u21e5d, vector y 2 Rn and a sequence \u21e1 2 [n]k, we are interested in a leastbsqyutahreescoprrroebslpeomnds, which selects instances indexed by \u21e1, and leads to a natural subsampled least squares rescales each estimator of them",
+        "The matrix expectation equation (1) for standard volume sampling has a natural extension to any rescaled volume sampling, but the equality turns into an inequality: Theorem 4 Given a full rank X 2 Rn\u21e5d and any q as above, if \u21e1 is sampled according to (5),",
+        "We show that the least-squares estimator w\u21e1\u21e4 = (Q1\u21e1/2X)+Q1\u21e1/2y produced from any q-rescaled volume sampling is unbiased, illustrating a proof technique which is useful for showing Theorem 4, as well as Propositions 2 and 5.",
+        "We show that this procedure not only returns a q-rescaled volume sample, but exploiting the fact that q is proportional to the leverage scores, it requires only a constant number of iterations of rejection sampling with high probability.",
+        "For matrix X 2 Rn\u21e5d, determinantal rejection sampling returns sequence \u21e1S distributed according to leveraged volume sampling, and w.p. at least 1 finishes in time O((d2 + k)d2 ln( 1 )).",
+        "An analysis of leverage score sampling, essentially following [33, Section 2] which in turn draws from [<a class=\"ref-link\" id=\"c31\" href=\"#r31\">31</a>], highlights two basic sufficient conditions on the subsampling matrix Q\u21e1 that lead to multiplicative tail bounds for L(w\u21e1\u21e4 ).",
+        "The following result is remarkable because standard matrix tail bounds used to prove this property for leverage score sampling are not applicable to volume sampling.",
+        "Obtaining matrix Chernoff bounds for negatively associated joint distributions like volume sampling is an active area of research, as discussed in [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>].",
+        "Theorems 8 and 9 imply that the unbiased estimator w\u21e1\u21e4 produced from leveraged volume sampling achieves multiplicative tail bounds with sample size k = O(d log d + d/\u270f).",
+        "We developed a new variant of volume sampling which produces the first known unbiased subsampled least-squares estimator with strong multiplicative loss bounds.",
+        "We outline the changes needed when using approximate leverage scores in Appendix F"
+    ],
+    "headline": "We show that volume sampling can have poor behavior when we require a very accurate approximation \u2013 worse than some i.i.d. sampling techniques whose estimates are biased, such as leverage score sampling",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Nir Ailon and Bernard Chazelle. The fast Johnson\u2013Lindenstrauss transform and approximate nearest neighbors. SIAM Journal on computing, 39(1):302\u2013322, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ailon%2C%20Nir%20Chazelle%2C%20Bernard%20The%20fast%20Johnson%E2%80%93Lindenstrauss%20transform%20and%20approximate%20nearest%20neighbors%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ailon%2C%20Nir%20Chazelle%2C%20Bernard%20The%20fast%20Johnson%E2%80%93Lindenstrauss%20transform%20and%20approximate%20nearest%20neighbors%202009"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Zeyuan Allen-Zhu, Yuanzhi Li, Aarti Singh, and Yining Wang. Near-optimal design of experiments via regret minimization. In Doina Precup and Yee Whye Teh, editors, Proceedings of the 34th International Conference on Machine Learning, volume 70 of Proceedings of Machine Learning Research, pages 126\u2013135, International Convention Centre, Sydney, Australia, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Allen-Zhu%2C%20Zeyuan%20Li%2C%20Yuanzhi%20Singh%2C%20Aarti%20Wang%2C%20Yining%20Near-optimal%20design%20of%20experiments%20via%20regret%20minimization%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Allen-Zhu%2C%20Zeyuan%20Li%2C%20Yuanzhi%20Singh%2C%20Aarti%20Wang%2C%20Yining%20Near-optimal%20design%20of%20experiments%20via%20regret%20minimization%202017"
+        },
+        {
+            "id": "3",
+            "entry": "[3] T Ando, Roger A. Horn, and Charles R. Johnson. The singular values of a Hadamard product: A basic inequality. Journal of Linear and Multilinear Algebra, 21(4):345\u2013365, 1987.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ando%2C%20T.%20Horn%2C%20Roger%20A.%20Johnson%2C%20Charles%20R.%20The%20singular%20values%20of%20a%20Hadamard%20product%3A%20A%20basic%20inequality%201987",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ando%2C%20T.%20Horn%2C%20Roger%20A.%20Johnson%2C%20Charles%20R.%20The%20singular%20values%20of%20a%20Hadamard%20product%3A%20A%20basic%20inequality%201987"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Haim Avron and Christos Boutsidis. Faster subset selection for matrices and applications. SIAM Journal on Matrix Analysis and Applications, 34(4):1464\u20131499, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Avron%2C%20Haim%20Boutsidis%2C%20Christos%20Faster%20subset%20selection%20for%20matrices%20and%20applications%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Avron%2C%20Haim%20Boutsidis%2C%20Christos%20Faster%20subset%20selection%20for%20matrices%20and%20applications%202013"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Joshua Batson, Daniel A Spielman, and Nikhil Srivastava. Twice-Ramanujan sparsifiers. SIAM Journal on Computing, 41(6):1704\u20131721, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Batson%2C%20Joshua%20Spielman%2C%20Daniel%20A.%20Srivastava%2C%20Nikhil%20Twice-Ramanujan%20sparsifiers%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Batson%2C%20Joshua%20Spielman%2C%20Daniel%20A.%20Srivastava%2C%20Nikhil%20Twice-Ramanujan%20sparsifiers%202012"
+        },
+        {
+            "id": "6",
+            "entry": "[6] L Elisa Celis, Amit Deshpande, Tarun Kathuria, and Nisheeth K Vishnoi. How to be fair and diverse? arXiv:1610.07183, October 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1610.07183"
+        },
+        {
+            "id": "7",
+            "entry": "[7] L Elisa Celis, Vijay Keswani, Damian Straszak, Amit Deshpande, Tarun Kathuria, and Nisheeth K Vishnoi. Fair and diverse dpp-based data summarization. arXiv:1802.04023, February 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.04023"
+        },
+        {
+            "id": "8",
+            "entry": "[8] N. Cesa-Bianchi, P. M. Long, and M. K. Warmuth. Worst-case quadratic loss bounds for on-line prediction of linear functions by gradient descent. IEEE Transactions on Neural Networks, 7(3):604\u2013619, 1996. Earlier version in 6th COLT, 1993.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cesa-Bianchi%2C%20N.%20Long%2C%20P.M.%20Warmuth%2C%20M.K.%20Worst-case%20quadratic%20loss%20bounds%20for%20on-line%20prediction%20of%20linear%20functions%20by%20gradient%20descent%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cesa-Bianchi%2C%20N.%20Long%2C%20P.M.%20Warmuth%2C%20M.K.%20Worst-case%20quadratic%20loss%20bounds%20for%20on-line%20prediction%20of%20linear%20functions%20by%20gradient%20descent%201996"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Chih-Chung Chang and Chih-Jen Lin. LIBSVM: A library for support vector machines. ACM Transactions on Intelligent Systems and Technology, 2:27:1\u201327:27, 2011. Software available at http://www.csie.ntu.edu.tw/~cjlin/libsvm.",
+            "url": "http://www.csie.ntu.edu.tw/~cjlin/libsvm",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Chih-Chung%20Chang%20and%20Chih-Jen%20Lin.%20LIBSVM%3A%20A%20library%20for%20support%20vector%20machines%202011"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Xue Chen and Eric Price. Condition number-free query and active learning of linear families. CoRR, abs/1711.10051, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.10051"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Micha\u0142 Derezinski and Manfred K Warmuth. Unbiased estimates for linear regression via volume sampling. In Advances in Neural Information Processing Systems 30, pages 3087\u20133096, Long Beach, CA, USA, December 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Derezinski%2C%20Micha%C5%82%20Warmuth%2C%20Manfred%20K.%20Unbiased%20estimates%20for%20linear%20regression%20via%20volume%20sampling%202017-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Derezinski%2C%20Micha%C5%82%20Warmuth%2C%20Manfred%20K.%20Unbiased%20estimates%20for%20linear%20regression%20via%20volume%20sampling%202017-12"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Micha\u0142 Derezinski and Manfred K. Warmuth. Reverse iterative volume sampling for linear regression. Journal of Machine Learning Research, 19(23):1\u201339, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Derezinski%2C%20Micha%C5%82%20Warmuth%2C%20Manfred%20K.%20Reverse%20iterative%20volume%20sampling%20for%20linear%20regression%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Derezinski%2C%20Micha%C5%82%20Warmuth%2C%20Manfred%20K.%20Reverse%20iterative%20volume%20sampling%20for%20linear%20regression%202018"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Micha\u0142 Derezinski and Manfred K. Warmuth. Subsampling for ridge regression via regularized volume sampling. In Proceedings of the 21st International Conference on Artificial Intelligence and Statistics, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Derezinski%2C%20Micha%C5%82%20Warmuth%2C%20Manfred%20K.%20Subsampling%20for%20ridge%20regression%20via%20regularized%20volume%20sampling%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Derezinski%2C%20Micha%C5%82%20Warmuth%2C%20Manfred%20K.%20Subsampling%20for%20ridge%20regression%20via%20regularized%20volume%20sampling%202018"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Amit Deshpande and Luis Rademacher. Efficient volume sampling for row/column subset selection. In Proceedings of the 2010 IEEE 51st Annual Symposium on Foundations of Computer Science, FOCS \u201910, pages 329\u2013338, Washington, DC, USA, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Deshpande%2C%20Amit%20Rademacher%2C%20Luis%20Efficient%20volume%20sampling%20for%20row/column%20subset%20selection%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Deshpande%2C%20Amit%20Rademacher%2C%20Luis%20Efficient%20volume%20sampling%20for%20row/column%20subset%20selection%202010"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Amit Deshpande, Luis Rademacher, Santosh Vempala, and Grant Wang. Matrix approximation and projective clustering via volume sampling. In Proceedings of the Seventeenth Annual ACM-SIAM Symposium on Discrete Algorithm, SODA \u201906, pages 1117\u20131126, Philadelphia, PA, USA, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Deshpande%2C%20Amit%20Rademacher%2C%20Luis%20Vempala%2C%20Santosh%20Wang%2C%20Grant%20Matrix%20approximation%20and%20projective%20clustering%20via%20volume%20sampling%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Deshpande%2C%20Amit%20Rademacher%2C%20Luis%20Vempala%2C%20Santosh%20Wang%2C%20Grant%20Matrix%20approximation%20and%20projective%20clustering%20via%20volume%20sampling%202006"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Petros Drineas, Malik Magdon-Ismail, Michael W. Mahoney, and David P. Woodruff. Fast approximation of matrix coherence and statistical leverage. J. Mach. Learn. Res., 13(1):3475\u2013 3506, December 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Drineas%2C%20Petros%20Magdon-Ismail%2C%20Malik%20Mahoney%2C%20Michael%20W.%20Woodruff%2C%20David%20P.%20Fast%20approximation%20of%20matrix%20coherence%20and%20statistical%20leverage%203506-12",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Drineas%2C%20Petros%20Magdon-Ismail%2C%20Malik%20Mahoney%2C%20Michael%20W.%20Woodruff%2C%20David%20P.%20Fast%20approximation%20of%20matrix%20coherence%20and%20statistical%20leverage%203506-12"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Petros Drineas, Michael W Mahoney, and S Muthukrishnan. Sampling algorithms for2 regression and applications. In Proceedings of the seventeenth annual ACM-SIAM symposium on Discrete algorithm, pages 1127\u20131136, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Drineas%2C%20Petros%20Mahoney%2C%20Michael%20W.%20Muthukrishnan%2C%20S.%20Sampling%20algorithms%20for2%20regression%20and%20applications%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Drineas%2C%20Petros%20Mahoney%2C%20Michael%20W.%20Muthukrishnan%2C%20S.%20Sampling%20algorithms%20for2%20regression%20and%20applications%202006"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Valerii V. Fedorov, William J. Studden, and E. M. Klimko, editors. Theory of optimal experiments. Probability and mathematical statistics. Academic Press, New York, 1972.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fedorov%2C%20Valerii%20V.%20Studden%2C%20William%20J.%20M%2C%20E.%20Klimko%2C%20editors.%20Theory%20of%20optimal%20experiments.%20Probability%20and%20mathematical%20statistics%201972"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Mike Gartrell, Ulrich Paquet, and Noam Koenigstein. Bayesian low-rank determinantal point processes. In Proceedings of the 10th ACM Conference on Recommender Systems, RecSys \u201916, pages 349\u2013356, New York, NY, USA, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gartrell%2C%20Mike%20Paquet%2C%20Ulrich%20Koenigstein%2C%20Noam%20Bayesian%20low-rank%20determinantal%20point%20processes%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gartrell%2C%20Mike%20Paquet%2C%20Ulrich%20Koenigstein%2C%20Noam%20Bayesian%20low-rank%20determinantal%20point%20processes%202016"
+        },
+        {
+            "id": "20",
+            "entry": "[20] David Gross and Vincent Nesme. Note on sampling without replacing from a finite collection of matrices. arXiv:1001.2738, January 2010.",
+            "arxiv_url": "https://arxiv.org/pdf/1001.2738"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Nicholas JA Harvey and Neil Olver. Pipage rounding, pessimistic estimators and matrix concentration. In Proceedings of the twenty-fifth annual ACM-SIAM symposium on Discrete algorithms, pages 926\u2013945. SIAM, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Harvey%2C%20Nicholas%20J.A.%20Olver%2C%20Neil%20Pipage%20rounding%2C%20pessimistic%20estimators%20and%20matrix%20concentration%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Harvey%2C%20Nicholas%20J.A.%20Olver%2C%20Neil%20Pipage%20rounding%2C%20pessimistic%20estimators%20and%20matrix%20concentration%202014"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Wassily Hoeffding. Probability inequalities for sums of bounded random variables. Journal of the American statistical association, 58(301):13\u201330, 1963.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hoeffding%2C%20Wassily%20Probability%20inequalities%20for%20sums%20of%20bounded%20random%20variables%201963",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hoeffding%2C%20Wassily%20Probability%20inequalities%20for%20sums%20of%20bounded%20random%20variables%201963"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Alex Kulesza and Ben Taskar. k-DPPs: Fixed-Size Determinantal Point Processes. In Proceedings of the 28th International Conference on Machine Learning, pages 1193\u20131200. Omnipress, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kulesza%2C%20Alex%20Taskar%2C%20Ben%20k-DPPs%3A%20Fixed-Size%20Determinantal%20Point%20Processes%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kulesza%2C%20Alex%20Taskar%2C%20Ben%20k-DPPs%3A%20Fixed-Size%20Determinantal%20Point%20Processes%202011"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Alex Kulesza and Ben Taskar. Determinantal Point Processes for Machine Learning. Now Publishers Inc., Hanover, MA, USA, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kulesza%2C%20Alex%20Taskar%2C%20Ben%20Determinantal%20Point%20Processes%20for%20Machine%20Learning%202012"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Yin Tat Lee and He Sun. Constructing linear-sized spectral sparsification in almost-linear time. In Foundations of Computer Science (FOCS), 2015 IEEE 56th Annual Symposium on, pages 250\u2013269. IEEE, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lee%2C%20Yin%20Tat%20Sun%2C%20He%20Constructing%20linear-sized%20spectral%20sparsification%20in%20almost-linear%20time%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lee%2C%20Yin%20Tat%20Sun%2C%20He%20Constructing%20linear-sized%20spectral%20sparsification%20in%20almost-linear%20time%202015"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Chengtao Li, Stefanie Jegelka, and Suvrit Sra. Polynomial time algorithms for dual volume sampling. In I. Guyon, U. V. Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems 30, pages 5045\u20135054. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Chengtao%20Jegelka%2C%20Stefanie%20Sra%2C%20Suvrit%20Polynomial%20time%20algorithms%20for%20dual%20volume%20sampling%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20Chengtao%20Jegelka%2C%20Stefanie%20Sra%2C%20Suvrit%20Polynomial%20time%20algorithms%20for%20dual%20volume%20sampling%202017"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Michael W. Mahoney. Randomized algorithms for matrices and data. Found. Trends Mach. Learn., 3(2):123\u2013224, February 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mahoney%2C%20Michael%20W.%20Randomized%20algorithms%20for%20matrices%20and%20data.%20Found%202011-02",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mahoney%2C%20Michael%20W.%20Randomized%20algorithms%20for%20matrices%20and%20data.%20Found%202011-02"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Zelda E. Mariet and Suvrit Sra. Elementary symmetric polynomials for optimal experimental design. In I. Guyon, U. V. Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems 30, pages 2136\u20132145. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mariet%2C%20Zelda%20E.%20Sra%2C%20Suvrit%20Elementary%20symmetric%20polynomials%20for%20optimal%20experimental%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mariet%2C%20Zelda%20E.%20Sra%2C%20Suvrit%20Elementary%20symmetric%20polynomials%20for%20optimal%20experimental%202017"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Aleksandar Nikolov, Mohit Singh, and Uthaipon Tao Tantipongpipat. Proportional volume sampling and approximation algorithms for A-optimal design. arXiv:1802.08318, July 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.08318"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Robin Pemantle and Yuval Peres. Concentration of Lipschitz functionals of determinantal and other strong rayleigh measures. Combinatorics, Probability and Computing, 23(1):140\u2013160, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pemantle%2C%20Robin%20Peres%2C%20Yuval%20Concentration%20of%20Lipschitz%20functionals%20of%20determinantal%20and%20other%20strong%20rayleigh%20measures%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pemantle%2C%20Robin%20Peres%2C%20Yuval%20Concentration%20of%20Lipschitz%20functionals%20of%20determinantal%20and%20other%20strong%20rayleigh%20measures%202014"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Tamas Sarlos. Improved approximation algorithms for large matrices via random projections. In Proceedings of the 47th Annual IEEE Symposium on Foundations of Computer Science, FOCS \u201906, pages 143\u2013152, Washington, DC, USA, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sarlos%2C%20Tamas%20Improved%20approximation%20algorithms%20for%20large%20matrices%20via%20random%20projections%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sarlos%2C%20Tamas%20Improved%20approximation%20algorithms%20for%20large%20matrices%20via%20random%20projections%202006"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Joel A. Tropp. User-friendly tail bounds for sums of random matrices. Foundations of Computational Mathematics, 12(4):389\u2013434, August 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tropp%2C%20Joel%20A.%20User-friendly%20tail%20bounds%20for%20sums%20of%20random%20matrices%202012-08",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tropp%2C%20Joel%20A.%20User-friendly%20tail%20bounds%20for%20sums%20of%20random%20matrices%202012-08"
+        },
+        {
+            "id": "33",
+            "entry": "[33] David P Woodruff. Sketching as a tool for numerical linear algebra. Foundations and Trends\u00ae in Theoretical Computer Science, 10(1\u20132):1\u2013157, 2014. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Woodruff%2C%20David%20P.%20Sketching%20as%20a%20tool%20for%20numerical%20linear%20algebra%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Woodruff%2C%20David%20P.%20Sketching%20as%20a%20tool%20for%20numerical%20linear%20algebra%202014"
+        }
+    ]
+}

@@ -1,0 +1,245 @@
+{
+    "filename": "8061-deep-network-for-the-integrated-3d-sensing-of-multiple-people-in-natural-images.pdf",
+    "metadata": {
+        "title": "Deep Network for the Integrated 3D Sensing of Multiple People in Natural Images",
+        "author": "Andrei Zanfir, Elisabeta Marinoiu, Mihai Zanfir, Alin-Ionut Popa, Cristian Sminchisescu",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8061-deep-network-for-the-integrated-3d-sensing-of-multiple-people-in-natural-images.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We present MubyNet \u2013 a feed-forward, multitask, bottom up system for the integrated localization, as well as 3d pose and shape estimation, of multiple people in monocular images. The challenge is the formal modeling of the problem that intrinsically requires discrete and continuous computation, e.g. grouping people vs. predicting 3d pose. The model identifies human body structures (joints and limbs) in images, groups them based on 2d and 3d information fused using learned scoring functions, and optimally aggregates such responses into partial or complete 3d human skeleton hypotheses under kinematic tree constraints, but without knowing in advance the number of people in the scene and their visibility relations. We design a multi-task deep neural network with differentiable stages where the person grouping problem is formulated as an integer program based on learned body part scores parameterized by both 2d and 3d information. This avoids suboptimality resulting from separate 2d and 3d reasoning, with grouping performed based on the combined representation. The final stage of 3d pose and shape prediction is based on a learned attention process where information from different human body parts is optimally integrated. State-of-the-art results are obtained in large scale datasets like Human3.6M and Panoptic, and qualitatively by reconstructing the 3d shape and pose of multiple people, under occlusion, in difficult monocular images."
+    },
+    "keywords": [
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "human pose estimation",
+            "url": "https://en.wikipedia.org/wiki/human_pose_estimation"
+        },
+        {
+            "term": "CVPR",
+            "url": "https://en.wikipedia.org/wiki/CVPR"
+        },
+        {
+            "term": "human sensing",
+            "url": "https://en.wikipedia.org/wiki/human_sensing"
+        },
+        {
+            "term": "integer program",
+            "url": "https://en.wikipedia.org/wiki/integer_program"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "The recent years have witnessed a resurgence of human sensing methods for body keypoint estimation [1; 2; 3; 4; 5; 6; 7] as well as 3d pose and shape reconstruction [8; 9; 10; 11; 12; 13; 14; 15; 16; 17; 18; 19; 20; 21]",
+        "In this paper we propose a novel, feedforward deep network, supporting different supervision regimes, that predicts the 3d pose and shape of multiple people in monocular images",
+        "We have presented a bottom up trainable model for the 2d and 3d human sensing of multiple people in monocular images",
+        "The difficult problem of localizing and grouping people is formulated as a binary linear integer program, and solved globally and optimally under kinematic problem domain constraints and based on learned scoring functions that combine 2d and 3d information for accurate reasoning",
+        "Qualitative examples show that our model can reliably estimate the 3d properties of multiple people in natural scenes, with occlusion, partial views, and complex backgrounds"
+    ],
+    "key_statements": [
+        "The recent years have witnessed a resurgence of human sensing methods for body keypoint estimation [1; 2; 3; 4; 5; 6; 7] as well as 3d pose and shape reconstruction [8; 9; 10; 11; 12; 13; 14; 15; 16; 17; 18; 19; 20; 21]",
+        "Some of the challenges are in the level of modeling \u2013 shifting towards accurate 3d pose and shape, not just 2d keypoints or skeletons \u2013, and the integration of 2d and 3d reasoning with automatic person localization and grouping",
+        "In this paper we propose a novel, feedforward deep network, supporting different supervision regimes, that predicts the 3d pose and shape of multiple people in monocular images",
+        "The resulting scores are assembled in a vector c and passed to a binary integer programming module that optimally computes skeletons for multiple people under kinematic constraints",
+        "We have presented a bottom up trainable model for the 2d and 3d human sensing of multiple people in monocular images",
+        "The difficult problem of localizing and grouping people is formulated as a binary linear integer program, and solved globally and optimally under kinematic problem domain constraints and based on learned scoring functions that combine 2d and 3d information for accurate reasoning",
+        "Qualitative examples show that our model can reliably estimate the 3d properties of multiple people in natural scenes, with occlusion, partial views, and complex backgrounds"
+    ],
+    "summary": [
+        "The recent years have witnessed a resurgence of human sensing methods for body keypoint estimation [1; 2; 3; 4; 5; 6; 7] as well as 3d pose and shape reconstruction [8; 9; 10; 11; 12; 13; 14; 15; 16; 17; 18; 19; 20; 21].",
+        "We provide a method that leverages a volumetric 3d scene representation with learned scoring functions for the component parts, and an efficient global linear integer programming solution for person grouping with kinematic constraint generation, and amenable to efficient solvers (e.g. 30ms/image).",
+        "The resulting scores are assembled in a vector c and passed to a binary integer programming module that optimally computes skeletons for multiple people under kinematic constraints.",
+        "Our skeleton grouping strategy relies on detecting potential human body joints and their type in images, assembling putative limbs, scoring them using trainable functions, and solving a global, optimal assignment problem to find all connected components satisfying strong kinematic tree constraints \u2013 each component being a different person.",
+        "The problem of identifying the skeletons of multiple people is posed as estimating the optimal L\u2217 \u2286 L such that graph G = (J, L\u2217) has properties (i) any connected component of G falls on a single person, \u2200p, q \u2208 L\u2217, p = (i1, j1) and q = (i2, j2) with t(i1) = t(i2) and t(j1) = t(j2): if j1 = j2 i1 = i2 and if i1 = i2 j1 = j2 \u2013 these constraints ensure that connected components select at most one joint of a given type, and the connected components are as large as possible.",
+        "An immediate way of decoding the M3d volume into 3d pose estimates for all the persons in the image, is to average 3d skeleton predictions at spatial locations given by the limbs selected by the people grouping module.",
+        "In order to further represent the 3d shape of each person, we use a SMPL-based human model representation [<a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>] controlled by a set of parameters \u03b8 \u2208 R72\u00d71, which encode joint angle rotations, and \u03b2 \u2208 R10\u00d71 body dimensions, respectively.",
+        "The difficult problem of localizing and grouping people is formulated as a binary linear integer program, and solved globally and optimally under kinematic problem domain constraints and based on learned scoring functions that combine 2d and 3d information for accurate reasoning.",
+        "Both 3d human pose and shape are computed in a final predictive stage that fuses information based on learned attention maps and deep auto-encoders.",
+        "Ablation studies and model component analysis illustrate the adequacy of various design choices including the efficiency of our global, binary integer linear programming solution, under kinematic constraints, for the human grouping problem.",
+        "Qualitative examples show that our model can reliably estimate the 3d properties of multiple people in natural scenes, with occlusion, partial views, and complex backgrounds"
+    ],
+    "headline": "We present MubyNet \u2013 a feed-forward, multitask, bottom up system for the integrated localization, as well as 3d pose and shape estimation, of multiple people in monocular images",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Z. Cao, T. Simon, S. Wei, and Y. Sheikh, \u201cRealtime multi-person 2d pose estimation using part affinity fields,\u201d in CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cao%2C%20Z.%20Simon%2C%20T.%20Wei%2C%20S.%20Sheikh%2C%20Y.%20%E2%80%9CRealtime%20multi-person%202d%20pose%20estimation%20using%20part%20affinity%20fields%2C%E2%80%9D%20in%20CVPR%202017"
+        },
+        {
+            "id": "2",
+            "entry": "[2] E. Insafutdinov, L. Pishchulin, B. Andres, M. Andriluka, and B. Schiele, \u201cDeeperCut: A deeper, stronger, and faster multi-person pose estimation model,\u201d in ECCV, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Insafutdinov%2C%20E.%20Pishchulin%2C%20L.%20Andres%2C%20B.%20Andriluka%2C%20M.%20%E2%80%9CDeeperCut%3A%20A%20deeper%2C%20stronger%2C%20and%20faster%20multi-person%20pose%20estimation%20model%2C%E2%80%9D%20in%20ECCV%202016"
+        },
+        {
+            "id": "3",
+            "entry": "[3] G. Papandreou, T. Zhu, N. Kanazawa, A. Toshev, J. Tompson, C. Bregler, and K. Murphy, \u201cTowards accurate multi-person pose estimation in the wild,\u201d in CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Papandreou%2C%20G.%20Zhu%2C%20T.%20Kanazawa%2C%20N.%20Toshev%2C%20A.%20%E2%80%9CTowards%20accurate%20multi-person%20pose%20estimation%20in%20the%20wild%2C%E2%80%9D%20in%20CVPR%202017"
+        },
+        {
+            "id": "4",
+            "entry": "[4] J. J. Tompson, A. Jain, Y. LeCun, and C. Bregler, \u201cJoint training of a convolutional network and a graphical model for human pose estimation,\u201d in NIPS, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tompson%2C%20J.J.%20Jain%2C%20A.%20LeCun%2C%20Y.%20Bregler%2C%20C.%20%E2%80%9CJoint%20training%20of%20a%20convolutional%20network%20and%20a%20graphical%20model%20for%20human%20pose%20estimation%2C%E2%80%9D%20in%20NIPS%202014"
+        },
+        {
+            "id": "5",
+            "entry": "[5] A. Toshev and C. Szegedy, \u201cDeeppose: Human pose estimation via deep neural networks,\u201d in CVPR, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Toshev%2C%20A.%20Szegedy%2C%20C.%20%E2%80%9CDeeppose%3A%20Human%20pose%20estimation%20via%20deep%20neural%20networks%2C%E2%80%9D%20in%20CVPR%202014"
+        },
+        {
+            "id": "6",
+            "entry": "[6] G. Gkioxari, B. Hariharan, R. Girshick, and J. Malik, \u201cUsing k-poselets for detecting people and localizing their keypoints,\u201d in CVPR, pp. 3582\u20133589, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gkioxari%2C%20G.%20Hariharan%2C%20B.%20Girshick%2C%20R.%20Malik%2C%20J.%20Using%20k-poselets%20for%20detecting%20people%20and%20localizing%20their%20keypoints%2C%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gkioxari%2C%20G.%20Hariharan%2C%20B.%20Girshick%2C%20R.%20Malik%2C%20J.%20Using%20k-poselets%20for%20detecting%20people%20and%20localizing%20their%20keypoints%2C%202014"
+        },
+        {
+            "id": "7",
+            "entry": "[7] U. Iqbal and J. Gall, \u201cMulti-person pose estimation with local joint-to-person associations,\u201d in ECCV, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Iqbal%2C%20U.%20Gall%2C%20J.%20%E2%80%9CMulti-person%20pose%20estimation%20with%20local%20joint-to-person%20associations%2C%E2%80%9D%20in%20ECCV%202016"
+        },
+        {
+            "id": "8",
+            "entry": "[8] J. Martinez, R. Hossain, J. Romero, and J. J. Little, \u201cA simple yet effective baseline for 3d human pose estimation,\u201d in ICCV, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Martinez%2C%20J.%20Hossain%2C%20R.%20Romero%2C%20J.%20Little%2C%20J.J.%20%E2%80%9CA%20simple%20yet%20effective%20baseline%20for%203d%20human%20pose%20estimation%2C%E2%80%9D%20in%20ICCV%202017"
+        },
+        {
+            "id": "9",
+            "entry": "[9] G. Pavlakos, X. Zhou, K. G. Derpanis, and K. Daniilidis, \u201cCoarse-to-fine volumetric prediction for single-image 3d human pose,\u201d in CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pavlakos%2C%20G.%20Zhou%2C%20X.%20Derpanis%2C%20K.G.%20Daniilidis%2C%20K.%20%E2%80%9CCoarse-to-fine%20volumetric%20prediction%20for%20single-image%203d%20human%20pose%2C%E2%80%9D%20in%20CVPR%202017"
+        },
+        {
+            "id": "10",
+            "entry": "[10] X. Zhou, M. Zhu, K. Derpanis, and K. Daniilidis, \u201cSparseness meets deepness: 3d human pose estimation from monocular video,\u201d in CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhou%2C%20X.%20Zhu%2C%20M.%20Derpanis%2C%20K.%20Daniilidis%2C%20K.%20%E2%80%9CSparseness%20meets%20deepness%3A%203d%20human%20pose%20estimation%20from%20monocular%20video%2C%E2%80%9D%20in%20CVPR%202016"
+        },
+        {
+            "id": "11",
+            "entry": "[11] F. Bogo, A. Kanazawa, C. Lassner, P. Gehler, J. Romero, and M. J. Black, \u201cKeep it SMPL: Automatic estimation of 3d human pose and shape from a single image,\u201d in ECCV, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bogo%2C%20F.%20Kanazawa%2C%20A.%20Lassner%2C%20C.%20Gehler%2C%20P.%20%E2%80%9CKeep%20it%20SMPL%3A%20Automatic%20estimation%20of%203d%20human%20pose%20and%20shape%20from%20a%20single%20image%2C%E2%80%9D%20in%20ECCV%202016"
+        },
+        {
+            "id": "12",
+            "entry": "[12] M. Loper, N. Mahmood, J. Romero, G. Pons-Moll, and M. J. Black, \u201cSMPL: A skinned multi-person linear model,\u201d SIGGRAPH, vol. 34, no. 6, pp. 248:1\u201316, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Loper%2C%20M.%20Mahmood%2C%20N.%20Romero%2C%20J.%20Pons-Moll%2C%20G.%20SMPL%3A%20A%20skinned%20multi-person%20linear%20model%2C%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Loper%2C%20M.%20Mahmood%2C%20N.%20Romero%2C%20J.%20Pons-Moll%2C%20G.%20SMPL%3A%20A%20skinned%20multi-person%20linear%20model%2C%202015"
+        },
+        {
+            "id": "13",
+            "entry": "[13] D. Mehta, S. Sridhar, O. Sotnychenko, H. Rhodin, M. Shafiei, H.-P. Seidel, W. Xu, D. Casas, and C. Theobalt, \u201cVnect: Real-time 3d human pose estimation with a single rgb camera,\u201d ACM Transactions on Graphics (TOG), vol. 36, no. 4, p. 44, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mehta%2C%20D.%20Sridhar%2C%20S.%20Sotnychenko%2C%20O.%20Rhodin%2C%20H.%20Theobalt%2C%20%E2%80%9CVnect%3A%20Real-time%203d%20human%20pose%20estimation%20with%20a%20single%20rgb%20camera%2C%E2%80%9D%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mehta%2C%20D.%20Sridhar%2C%20S.%20Sotnychenko%2C%20O.%20Rhodin%2C%20H.%20Theobalt%2C%20%E2%80%9CVnect%3A%20Real-time%203d%20human%20pose%20estimation%20with%20a%20single%20rgb%20camera%2C%E2%80%9D%202017"
+        },
+        {
+            "id": "14",
+            "entry": "[14] A. Kanazawa, M. J. Black, D. W. Jacobs, and J. Malik, \u201cEnd-to-end recovery of human shape and pose,\u201d in CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kanazawa%2C%20A.%20Black%2C%20M.J.%20Jacobs%2C%20D.W.%20Malik%2C%20J.%20%E2%80%9CEnd-to-end%20recovery%20of%20human%20shape%20and%20pose%2C%E2%80%9D%20in%20CVPR%202018"
+        },
+        {
+            "id": "15",
+            "entry": "[15] C.-H. Chen and D. Ramanan, \u201c3d human pose estimation= 2d pose estimation+ matching,\u201d in CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20C.-H.%20Ramanan%2C%20D.%20%E2%80%9C3d%20human%20pose%20estimation%3D%202d%20pose%20estimation%2B%20matching%2C%E2%80%9D%20in%20CVPR%202017"
+        },
+        {
+            "id": "16",
+            "entry": "[16] F. Moreno-Noguer, \u201c3d human pose estimation from a single image via distance matrix regression,\u201d in CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Moreno-Noguer%2C%20F.%20%E2%80%9C3d%20human%20pose%20estimation%20from%20a%20single%20image%20via%20distance%20matrix%20regression%2C%E2%80%9D%20in%20CVPR%202017"
+        },
+        {
+            "id": "17",
+            "entry": "[17] I. Katircioglu, B. Tekin, M. Salzmann, V. Lepetit, and P. Fua, \u201cLearning latent representations of 3d human pose with deep neural networks,\u201d IJCV, pp. 1\u201316, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Katircioglu%2C%20I.%20Tekin%2C%20B.%20Salzmann%2C%20M.%20Lepetit%2C%20V.%20Learning%20latent%20representations%20of%203d%20human%20pose%20with%20deep%20neural%20networks%2C%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Katircioglu%2C%20I.%20Tekin%2C%20B.%20Salzmann%2C%20M.%20Lepetit%2C%20V.%20Learning%20latent%20representations%20of%203d%20human%20pose%20with%20deep%20neural%20networks%2C%202018"
+        },
+        {
+            "id": "18",
+            "entry": "[18] X. Zhou, Q. Huang, X. Sun, X. Xue, and Y. Wei, \u201cTowards 3d human pose estimation in the wild: a weakly-supervised approach,\u201d in ICCV, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhou%2C%20X.%20Huang%2C%20Q.%20Sun%2C%20X.%20Xue%2C%20X.%20%E2%80%9CTowards%203d%20human%20pose%20estimation%20in%20the%20wild%3A%20a%20weakly-supervised%20approach%2C%E2%80%9D%20in%20ICCV%202017"
+        },
+        {
+            "id": "19",
+            "entry": "[19] S. Li and A. B. Chan, \u201c3d human pose estimation from monocular images with deep convolutional neural network,\u201d in ACCV, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20S.%20Chan%2C%20A.B.%20%E2%80%9C3d%20human%20pose%20estimation%20from%20monocular%20images%20with%20deep%20convolutional%20neural%20network%2C%E2%80%9D%20in%20ACCV%202014"
+        },
+        {
+            "id": "20",
+            "entry": "[20] E. Brau and H. Jiang, \u201c3d human pose estimation via deep learning from 2d annotations,\u201d in 3D Vision (3DV), 2016 Fourth International Conference on, pp. 582\u2013591, IEEE, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Brau%2C%20E.%20Jiang%2C%20H.%203d%20human%20pose%20estimation%20via%20deep%20learning%20from%202d%20annotations%2C%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Brau%2C%20E.%20Jiang%2C%20H.%203d%20human%20pose%20estimation%20via%20deep%20learning%20from%202d%20annotations%2C%202016"
+        },
+        {
+            "id": "21",
+            "entry": "[21] W. Chen, H. Wang, Y. Li, H. Su, Z. Wang, C. Tu, D. Lischinski, D. Cohen-Or, and B. Chen, \u201cSynthesizing training images for boosting human 3d pose estimation,\u201d in 3D Vision (3DV), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20W.%20Wang%2C%20H.%20Li%2C%20Y.%20Su%2C%20H.%20Synthesizing%20training%20images%20for%20boosting%20human%203d%20pose%20estimation%2C%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20W.%20Wang%2C%20H.%20Li%2C%20Y.%20Su%2C%20H.%20Synthesizing%20training%20images%20for%20boosting%20human%203d%20pose%20estimation%2C%202016"
+        },
+        {
+            "id": "22",
+            "entry": "[22] A. I. Popa, M. Zanfir, and C. Sminchisescu, \u201cDeep multitask architecture for integrated 2d and 3d human sensing,\u201d in CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Popa%2C%20A.I.%20Zanfir%2C%20M.%20Sminchisescu%2C%20C.%20%E2%80%9CDeep%20multitask%20architecture%20for%20integrated%202d%20and%203d%20human%20sensing%2C%E2%80%9D%20in%20CVPR%202017"
+        },
+        {
+            "id": "23",
+            "entry": "[23] G. Rogez and C. Schmid, \u201cMocap-guided data augmentation for 3d pose estimation in the wild,\u201d in NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rogez%2C%20G.%20Schmid%2C%20C.%20%E2%80%9CMocap-guided%20data%20augmentation%20for%203d%20pose%20estimation%20in%20the%20wild%2C%E2%80%9D%20in%20NIPS%202016"
+        },
+        {
+            "id": "24",
+            "entry": "[24] B. Tekin, P. Marquez Neila, M. Salzmann, and P. Fua, \u201cLearning to fuse 2d and 3d image cues for monocular body pose estimation,\u201d in ICCV, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tekin%2C%20B.%20Neila%2C%20P.Marquez%20Salzmann%2C%20M.%20Fua%2C%20P.%20%E2%80%9CLearning%20to%20fuse%202d%20and%203d%20image%20cues%20for%20monocular%20body%20pose%20estimation%2C%E2%80%9D%20in%20ICCV%202017"
+        },
+        {
+            "id": "25",
+            "entry": "[25] G. Rogez, P. Weinzaepfel, and C. Schmid, \u201cLcr-net: Localization-classification-regression for human pose,\u201d in CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rogez%2C%20G.%20Weinzaepfel%2C%20P.%20Schmid%2C%20C.%20%E2%80%9CLcr-net%3A%20Localization-classification-regression%20for%20human%20pose%2C%E2%80%9D%20in%20CVPR%202017"
+        },
+        {
+            "id": "26",
+            "entry": "[26] S. Ren, K. He, R. Girshick, and J. Sun, \u201cFaster r-cnn: Towards real-time object detection with region proposal networks,\u201d in NIPS, pp. 91\u201399, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ren%2C%20S.%20He%2C%20K.%20Girshick%2C%20R.%20Sun%2C%20J.%20Faster%20r-cnn%3A%20Towards%20real-time%20object%20detection%20with%20region%20proposal%20networks%2C%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ren%2C%20S.%20He%2C%20K.%20Girshick%2C%20R.%20Sun%2C%20J.%20Faster%20r-cnn%3A%20Towards%20real-time%20object%20detection%20with%20region%20proposal%20networks%2C%202015"
+        },
+        {
+            "id": "27",
+            "entry": "[27] A. Zanfir, E. Marinoiu, and C. Sminchisescu, \u201cMonocular 3D Pose and Shape Estimation of Multiple People in Natural Scenes \u2013 The Importance of Multiple Scene Constraints,\u201d in CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zanfir%2C%20A.%20Marinoiu%2C%20E.%20Sminchisescu%2C%20C.%20%E2%80%9CMonocular%203D%20Pose%20and%20Shape%20Estimation%20of%20Multiple%20People%20in%20Natural%20Scenes%20%E2%80%93%20The%20Importance%20of%20Multiple%20Scene%20Constraints%2C%E2%80%9D%20in%20CVPR%202018"
+        },
+        {
+            "id": "28",
+            "entry": "[28] C. Ionescu, D. Papava, V. Olaru, and C. Sminchisescu, \u201cHuman3.6M: Large scale datasets and predictive methods for 3d human sensing in natural environments,\u201d PAMI, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ionescu%2C%20C.%20Papava%2C%20D.%20Olaru%2C%20V.%20Sminchisescu%2C%20C.%20Human3.%206M%3A%20Large%20scale%20datasets%20and%20predictive%20methods%20for%203d%20human%20sensing%20in%20natural%20environments%2C%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ionescu%2C%20C.%20Papava%2C%20D.%20Olaru%2C%20V.%20Sminchisescu%2C%20C.%20Human3.%206M%3A%20Large%20scale%20datasets%20and%20predictive%20methods%20for%203d%20human%20sensing%20in%20natural%20environments%2C%202014"
+        },
+        {
+            "id": "29",
+            "entry": "[29] S. Wei, V. Ramakrishna, T. Kanade, and Y. Sheikh, \u201cConvolutional pose machines,\u201d in CVPR, June 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wei%2C%20S.%20Ramakrishna%2C%20V.%20Kanade%2C%20T.%20Sheikh%2C%20Y.%20%E2%80%9CConvolutional%20pose%20machines%2C%E2%80%9D%20in%20CVPR%202016-06"
+        },
+        {
+            "id": "30",
+            "entry": "[30] H. Joo, H. Liu, L. Tan, L. Gui, B. Nabbe, I. Matthews, T. Kanade, S. Nobuhara, and Y. Sheikh, \u201cPanoptic studio: A massively multiview system for social motion capture,\u201d in ICCV, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Joo%2C%20H.%20Liu%2C%20H.%20Tan%2C%20L.%20Gui%2C%20L.%20%E2%80%9CPanoptic%20studio%3A%20A%20massively%20multiview%20system%20for%20social%20motion%20capture%2C%E2%80%9D%20in%20ICCV%202015"
+        },
+        {
+            "id": "31",
+            "entry": "[31] C. Ionescu, J. Carreira, and C. Sminchisescu, \u201cIterated second-order label sensitive pooling for 3d human pose estimation,\u201d in CVPR, pp. 1661\u20131668, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ionescu%2C%20C.%20Carreira%2C%20J.%20Sminchisescu%2C%20C.%20Iterated%20second-order%20label%20sensitive%20pooling%20for%203d%20human%20pose%20estimation%2C%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ionescu%2C%20C.%20Carreira%2C%20J.%20Sminchisescu%2C%20C.%20Iterated%20second-order%20label%20sensitive%20pooling%20for%203d%20human%20pose%20estimation%2C%202014"
+        },
+        {
+            "id": "32",
+            "entry": "[32] T.-Y. Lin, M. Maire, S. Belongie, J. Hays, P. Perona, D. Ramanan, P. Doll\u00e1r, and C. L. Zitnick, \u201cMicrosoft coco: Common objects in context,\u201d in ECCV, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=%E2%80%9CMicrosoft%20coco%3A%20Common%20objects%20in%20context%2C%E2%80%9D%20in%20ECCV%202014"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Y. Jia, E. Shelhamer, J. Donahue, S. Karayev, J. Long, R. Girshick, S. Guadarrama, and T. Darrell, \u201cCaffe: Convolutional architecture for fast feature embedding,\u201d arXiv preprint arXiv:1408.5093, 2014. ",
+            "arxiv_url": "https://arxiv.org/pdf/1408.5093"
+        }
+    ]
+}

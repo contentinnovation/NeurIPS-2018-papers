@@ -1,0 +1,112 @@
+{
+    "filename": "8164-fast-approximate-natural-gradient-descent-in-a-kronecker-factored-eigenbasis.pdf",
+    "metadata": {
+        "title": "Fast Approximate Natural Gradient Descent in a Kronecker Factored Eigenbasis",
+        "author": "Thomas George, C\u00e9sar Laurent, Xavier Bouthillier, Nicolas Ballas, Pascal Vincent",
+        "date": 1998,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8164-fast-approximate-natural-gradient-descent-in-a-kronecker-factored-eigenbasis.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Optimization algorithms that leverage gradient covariance information, such as variants of natural gradient descent (<a class=\"ref-link\" id=\"cAmari_1998_a\" href=\"#rAmari_1998_a\">Amari, 1998</a>), offer the prospect of yielding more effective descent directions. For models with many parameters, the covariance matrix they are based on becomes gigantic, making them inapplicable in their original form. This has motivated research into both simple diagonal approximations and more sophisticated factored approximations such as KFAC (Heskes, 2000; <a class=\"ref-link\" id=\"cMartens_2015_a\" href=\"#rMartens_2015_a\">Martens & Grosse, 2015</a>; Grosse & Martens, 2016). In the present work we draw inspiration from both to propose a novel approximation that is provably better than KFAC and amendable to cheap partial updates. It consists in tracking a diagonal variance, not in parameter coordinates, but in a Kronecker-factored eigenbasis, in which the diagonal approximation is likely to be more effective. Experiments show improvements over KFAC in optimization speed for several deep network architectures."
+    },
+    "keywords": [
+        {
+            "term": "optimization algorithm",
+            "url": "https://en.wikipedia.org/wiki/optimization_algorithm"
+        },
+        {
+            "term": "deep network",
+            "url": "https://en.wikipedia.org/wiki/deep_network"
+        },
+        {
+            "term": "KFAC",
+            "url": "https://en.wikipedia.org/wiki/KFAC"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "We are given a dataset Dtrain containing examples (x, y), and a neural network f\u03b8(x) with parameter vector \u03b8 of size n\u03b8",
+        "Full matrix G preconditioning will scale by variances estimated along the eigenbasis of G. Diagonal preconditioning will scale by variances properly estimated, but along the initial parameter basis, which can be very far from the eigenbasis of G. KFAC preconditioning will scale the gradient along the Kroneckerfactored Eigenbasis basis that will likely be closer to the eigenbasis of G, but doesn\u2019t use properly estimated variances along these axes for this scaling",
+        "Dual view by working in the Kroneckerfactored Eigenbasis: Instead of thinking of this new method as an improved factorized approximation of G that we use as a preconditioning matrix, we can alternatively view it as applying a diagonal method, but in a different basis where the diagonal approximation is more accurate. This can be seen by interpreting the update given by Eigenvalue-corrected Kronecker factorization as a 3 step process: project the gradient in the Kroneckerfactored Eigenbasis (\u2013), apply diagonal natural gradient descent in this basis (\u2013), project back to the parameter space (\u2013): G\u2212EK1FAC\u2207\u03b8 = (UA \u2297 UB ) S\u2217\u22121 (UA \u2297 UB )",
+        "We introduced the Eigenvalue-corrected Kronecker factorization (EKFAC), an approximate factorization of the Fisher Information Matrix that is computationally manageable while still being accurate",
+        "We showed that our algorithm allows to cheaply perform partial updates of the curvature estimate, by maintaining an up-to-date estimate of its eigenvalues while keeping the estimate of its eigenbasis fixed",
+        "This partial updating proves competitive when applied to optimizing deep networks, both with respect to the number of iterations and wall-clock time"
+    ],
+    "key_statements": [
+        "We are given a dataset Dtrain containing examples (x, y), and a neural network f\u03b8(x) with parameter vector \u03b8 of size n\u03b8",
+        "Full matrix G preconditioning will scale by variances estimated along the eigenbasis of G. Diagonal preconditioning will scale by variances properly estimated, but along the initial parameter basis, which can be very far from the eigenbasis of G. KFAC preconditioning will scale the gradient along the Kroneckerfactored Eigenbasis basis that will likely be closer to the eigenbasis of G, but doesn\u2019t use properly estimated variances along these axes for this scaling",
+        "Dual view by working in the Kroneckerfactored Eigenbasis: Instead of thinking of this new method as an improved factorized approximation of G that we use as a preconditioning matrix, we can alternatively view it as applying a diagonal method, but in a different basis where the diagonal approximation is more accurate. This can be seen by interpreting the update given by Eigenvalue-corrected Kronecker factorization as a 3 step process: project the gradient in the Kroneckerfactored Eigenbasis (\u2013), apply diagonal natural gradient descent in this basis (\u2013), project back to the parameter space (\u2013): G\u2212EK1FAC\u2207\u03b8 = (UA \u2297 UB ) S\u2217\u22121 (UA \u2297 UB )",
+        "We introduced the Eigenvalue-corrected Kronecker factorization (EKFAC), an approximate factorization of the Fisher Information Matrix that is computationally manageable while still being accurate",
+        "We showed that our algorithm allows to cheaply perform partial updates of the curvature estimate, by maintaining an up-to-date estimate of its eigenvalues while keeping the estimate of its eigenbasis fixed",
+        "This partial updating proves competitive when applied to optimizing deep networks, both with respect to the number of iterations and wall-clock time",
+        "Our approach amounts to normalizing the gradient by its 2nd moment component-wise in a Kroneckerfactored Eigenbasis (KFE)",
+        "We want to explore novel regularization strategies, so that the advantage of efficient optimization algorithms can more reliably be translated to generalization error"
+    ],
+    "summary": [
+        "We are given a dataset Dtrain containing examples (x, y), and a neural network f\u03b8(x) with parameter vector \u03b8 of size n\u03b8.",
+        "We can view the action of the resulting Kronecker-factored preconditioning in the same way as we viewed the preconditioning by the full matrix: it consists in a) expressing gradient vector \u2207\u03b8 in a different basis UA \u2297 UB which can be thought of as approximating the directions of U , b) doing a diagonal rescaling by SA \u2297 SB in that basis, c) switching back to the initial parameter space.",
+        "KFAC preconditioning will scale the gradient along the KFE basis that will likely be closer to the eigenbasis of G, but doesn\u2019t use properly estimated variances along these axes for this scaling.",
+        "Diagonal approximation uses parameter coordinate basis, scaling by actual variance measured along these axes, KFAC uses directions that approximate Fisher Information Matrix eigenvectors, but uses approximate scaling.",
+        "Potential benefits: Since EKFAC is a better approximation of G than KFAC it may yield a better preconditioning of the gradient for optimizing neural networks3.",
+        "Another benefit is linked to computational efficiency: even if KFAC yields a reasonably good approximation in practice, it is costly to re-estimate and invert matrices A and B, so this has to be amortized over many updates: re-estimation of the preconditioning is typically done at a much lower frequency than the parameter updates, and may lag behind, no longer accurately reflecting the local 2nd order information.",
+        "This can be seen by interpreting the update given by EKFAC as a 3 step process: project the gradient in the KFE (\u2013), apply diagonal natural gradient descent in this basis (\u2013), project back to the parameter space (\u2013): G\u2212EK1FAC\u2207\u03b8 = (UA \u2297 UB ) S\u2217\u22121 (UA \u2297 UB )",
+        "Algorithm: Using Eigenvalue-corrected Kronecker factorization (EKFAC) for neural network optimization involves: a) periodically computing the Kronecker-factored Eigenbasis by doing an eigendecomposition of the same A and B matrices as KFAC; b) estimating scaling vector s\u2217 as second moments of gradient coordinates in that implied basis; c) preconditioning gradients prior to updating model parameters.",
+        "Figure 6 (a) show that EKFAC yields better optimization than the SGD baselines and KFAC in training loss per epoch when the computation of the KFE is amortized.",
+        "We observe that using KFAC with a batch size of 200 can catch-up with EKFAC in wall-clock time despite being outperformed in term of optimization per iteration.",
+        "We introduced the Eigenvalue-corrected Kronecker factorization (EKFAC), an approximate factorization of the Fisher Information Matrix that is computationally manageable while still being accurate.",
+        "We want to explore novel regularization strategies, so that the advantage of efficient optimization algorithms can more reliably be translated to generalization error"
+    ],
+    "headline": "We introduce an Eigenvalue-corrected Kronecker Factorization  that consists in tracking a diagonal variance, not in parameter coordinates, but in a Kronecker-factored eigenbasis",
+    "reference_links": [
+        {
+            "id": "Amari_1998_a",
+            "entry": "Shun-Ichi Amari. Natural gradient works efficiently in learning. Neural computation, 1998. Jimmy Ba, Roger Grosse, and James Martens. Distributed second-order optimization using kroneckerfactored approximations. In ICLR, 2017. Sue Becker, Yann Le Cun, et al. Improving the convergence of back-propagation learning with second order methods. In Proceedings of the 1988 connectionist models summer school. San Matteo, CA: Morgan Kaufmann, 1988. L\u00e9on Bottou, Frank E Curtis, and Jorge Nocedal. Optimization methods for large-scale machine learning. arXiv preprint, 2016. Guillaume Desjardins, Karen Simonyan, Razvan Pascanu, et al. Natural neural networks. In NIPS, 2015. John Duchi, Elad Hazan, and Yoram Singer. Adaptive subgradient methods for online learning and stochastic optimization. Journal of Machine Learning Research, 12(Jul):2121\u20132159, 2011. Yuki Fujimoto and Toru Ohira. A neural network model with bidirectional whitening. In International Conference on Artificial Intelligence and Soft Computing, pp. 47\u201357.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Amari%2C%20Shun-Ichi%20Natural%20gradient%20works%20efficiently%20in%20learning.%20Neural%20computation%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Amari%2C%20Shun-Ichi%20Natural%20gradient%20works%20efficiently%20in%20learning.%20Neural%20computation%201998"
+        },
+        {
+            "id": "Martens_2015_a",
+            "entry": "James Martens and Roger Grosse. Optimizing neural networks with kronecker-factored approximate curvature. In ICML, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Martens%2C%20James%20Grosse%2C%20Roger%20Optimizing%20neural%20networks%20with%20kronecker-factored%20approximate%20curvature%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Martens%2C%20James%20Grosse%2C%20Roger%20Optimizing%20neural%20networks%20with%20kronecker-factored%20approximate%20curvature%202015"
+        },
+        {
+            "id": "Ollivier_2015_a",
+            "entry": "Yann Ollivier. Riemannian metrics for neural networks i: feedforward networks. Information and Inference: A Journal of the IMA, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ollivier%2C%20Yann%20Riemannian%20metrics%20for%20neural%20networks%20i%3A%20feedforward%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ollivier%2C%20Yann%20Riemannian%20metrics%20for%20neural%20networks%20i%3A%20feedforward%20networks%202015"
+        },
+        {
+            "id": "Paszke_et+al_2017_a",
+            "entry": "Adam Paszke, Sam Gross, Soumith Chintala, Gregory Chanan, Edward Yang, Zachary DeVito, Zeming Lin, Alban Desmaison, Luca Antiga, and Adam Lerer. Automatic differentiation in pytorch. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Paszke%2C%20Adam%20Gross%2C%20Sam%20Chintala%2C%20Soumith%20Chanan%2C%20Gregory%20Automatic%20differentiation%20in%20pytorch%202017"
+        },
+        {
+            "id": "Schraudolph_2001_a",
+            "entry": "Nicol N Schraudolph. Fast curvature matrix-vector products. In International Conference on Artificial Neural Networks. Springer, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schraudolph%2C%20Nicol%20N.%20Fast%20curvature%20matrix-vector%20products%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schraudolph%2C%20Nicol%20N.%20Fast%20curvature%20matrix-vector%20products%202001"
+        },
+        {
+            "id": "Simonyan_2015_a",
+            "entry": "Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. In ICLR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Simonyan%2C%20Karen%20Zisserman%2C%20Andrew%20Very%20deep%20convolutional%20networks%20for%20large-scale%20image%20recognition%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Simonyan%2C%20Karen%20Zisserman%2C%20Andrew%20Very%20deep%20convolutional%20networks%20for%20large-scale%20image%20recognition%202015"
+        },
+        {
+            "id": "Tieleman_2012_a",
+            "entry": "Tijmen Tieleman and Geoffrey Hinton. Lecture 6.5-rmsprop: Divide the gradient by a running average of its recent magnitude. COURSERA: Neural networks for machine learning, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tieleman%2C%20Tijmen%20Hinton%2C%20Geoffrey%20Lecture%206.5-rmsprop%3A%20Divide%20the%20gradient%20by%20a%20running%20average%20of%20its%20recent%20magnitude%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tieleman%2C%20Tijmen%20Hinton%2C%20Geoffrey%20Lecture%206.5-rmsprop%3A%20Divide%20the%20gradient%20by%20a%20running%20average%20of%20its%20recent%20magnitude%202012"
+        },
+        {
+            "id": "Zeiler_2012_a",
+            "entry": "Matthew D Zeiler. Adadelta: an adaptive learning rate method. arXiv preprint arXiv:1212.5701, 2012.",
+            "arxiv_url": "https://arxiv.org/pdf/1212.5701"
+        }
+    ]
+}

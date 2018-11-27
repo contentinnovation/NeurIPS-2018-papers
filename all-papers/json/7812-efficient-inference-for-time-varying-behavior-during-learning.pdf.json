@@ -1,0 +1,201 @@
+{
+    "filename": "7812-efficient-inference-for-time-varying-behavior-during-learning.pdf",
+    "metadata": {
+        "title": "Efficient inference for time-varying behavior during learning",
+        "author": "Nicholas G. Roy, Ji Hyun Bak, Athena Akrami, Carlos Brody, Jonathan W. Pillow",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7812-efficient-inference-for-time-varying-behavior-during-learning.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "The process of learning new behaviors over time is a problem of great interest in both neuroscience and artificial intelligence. However, most standard analyses of animal training data either treat behavior as fixed or track only coarse performance statistics (e.g., accuracy, bias), providing limited insight into the evolution of the policies governing behavior. To overcome these limitations, we propose a dynamic psychophysical model that efficiently tracks trial-to-trial changes in behavior over the course of training. Our model consists of a dynamic logistic regression model, parametrized by a set of time-varying weights that express dependence on sensory stimuli as well as task-irrelevant covariates, such as stimulus, choice, and answer history. Our implementation scales to large behavioral datasets, allowing us to infer 500K parameters (e.g. 10 weights over 50K trials) in minutes on a desktop computer. We optimize hyperparameters governing how rapidly each weight evolves over time using the decoupled Laplace approximation, an efficient method for maximizing marginal likelihood in non-conjugate models. To illustrate performance, we apply our method to psychophysical data from both rats and human subjects learning a delayed sensory discrimination task. The model successfully tracks the psychophysical weights of rats over the course of training, capturing day-to-day and trial-to-trial fluctuations that underlie changes in performance, choice bias, and dependencies on task history. Finally, we investigate why rats frequently make mistakes on easy trials, and suggest that apparent lapses can be explained by sub-optimal weighting of known task covariates."
+    },
+    "keywords": [
+        {
+            "term": "posterior parietal cortex",
+            "url": "https://en.wikipedia.org/wiki/posterior_parietal_cortex"
+        }
+    ],
+    "highlights": [
+        "A vast swath of modern neuroscience research requires training animals to perform specific tasks",
+        "We propose an alternate approach based on exact MAP estimation of time-varying psychophysical weights, with efficient and scalable methods for inferring hyperparameters governing the timescale of changes for different weights",
+        "We develop efficient inference methods that exploit sparse structure in order to scale to large datasets with high-dimensional, time-varying psychophysical weights",
+        "We model the animal\u2019s behavior as depending on an internal model parametrized by a set of weights wt \u2208 RK that govern how the animal\u2019s choice depends on an input \u201ccarrier\u201d vector gt \u2208 RK for the current trial t (Fig. 1a,b)",
+        "We presented a method for efficiently and flexibly characterizing the dynamics of psychophysical behavior, allowing for unprecedented insight into how animals learn new tasks",
+        "We demonstrated on a real dataset the explanatory as well as predictive power of our method, as compared to two conventional measures of behavior"
+    ],
+    "key_statements": [
+        "A vast swath of modern neuroscience research requires training animals to perform specific tasks. This training is expensive and time-consuming, yet the data collected during the training period are often discarded from analysis",
+        "Animals can learn at vastly different rates, and may learn different strategies to achieve a criterion level of performance in a given task",
+        "Behavior collected during training may provide valuable insights into an animal\u2019s mental arsenal of problem solving strategies, and uncover how those strategies evolve with experience",
+        "We propose an alternate approach based on exact MAP estimation of time-varying psychophysical weights, with efficient and scalable methods for inferring hyperparameters governing the timescale of changes for different weights",
+        "We present a dynamic logistic regression model for time-varying psychophysical behavior",
+        "We develop efficient inference methods that exploit sparse structure in order to scale to large datasets with high-dimensional, time-varying psychophysical weights",
+        "We use the decoupled Laplace approximation method [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>] to perform highly efficient approximate maximum marginal likelihood inference for a set of hyperparameters governing the rates of change for different psychophysical weights",
+        "We model the animal\u2019s behavior as depending on an internal model parametrized by a set of weights wt \u2208 RK that govern how the animal\u2019s choice depends on an input \u201ccarrier\u201d vector gt \u2208 RK for the current trial t (Fig. 1a,b)",
+        "We model this evolution with independent Gaussian innovations noise added to the weights after each trial [<a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>, <a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>]: wt = wt\u22121 + \u03b7t, \u03b7t \u223c N (0, diag(\u03c312, . . . , \u03c3K2 )), (2)",
+        "We have addressed the problem of finding a global optimum for w given a specific hyperparameter setting \u03b8 = {\u03c3k}; we must find the optimal hyperparameters",
+        "We use the decoupled Laplace method [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>] to avoid the need to re-optimize for our weight parameters after every update to our hyperparameters by making a Gaussian approximation to the likelihood of our model",
+        "By only fixing the {\u03c3k,day} to be large while optimizing freely over each of {\u03c3k}, we essentially find the best weight trajectory within each session, while allowing the weights to \u201creset\u201d at the start of each new session",
+        "Method makes it feasible to optimize over any subset of these hyperparameters at once, allowing exploration of many types of models and the localization of behavioral dynamics to specific weights or periods of training.\n4 Simulation results",
+        "To further explore the advantages and insights provided by our model, we apply our method to behavioral data from both rats and humans performing a 2AFC delayed response task, as reported in [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>]",
+        "In contrast to the rat, the weight trajectories for the human subject are largely stable and reflect accurate behavioral performance (Fig. 3c); not much learning is happening",
+        "We presented a method for efficiently and flexibly characterizing the dynamics of psychophysical behavior, allowing for unprecedented insight into how animals learn new tasks",
+        "We demonstrated on a real dataset the explanatory as well as predictive power of our method, as compared to two conventional measures of behavior",
+        "While the weight trajectories are allowed to evolve over time, the volatility hyperparameter \u03c3 is a single value optimized over the entire dataset"
+    ],
+    "summary": [
+        "A vast swath of modern neuroscience research requires training animals to perform specific tasks.",
+        "Our model quantifies animal behavior at single-trial resolution, allowing for intuitive visualization of learning dynamics and direct analysis of psychophysical weight trajectories.",
+        "We use the decoupled Laplace approximation method [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>] to perform highly efficient approximate maximum marginal likelihood inference for a set of hyperparameters governing the rates of change for different psychophysical weights.",
+        "Animal behavior in early training often exhibits dependencies on both stimulus and choice history [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>\u2013<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>]; including these features is critical to building an accurate model of the animal\u2019s evolving psychophysical strategy.",
+        "We use the decoupled Laplace method [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>] to avoid the need to re-optimize for our weight parameters after every update to our hyperparameters by making a Gaussian approximation to the likelihood of our model.",
+        "Method makes it feasible to optimize over any subset of these hyperparameters at once, allowing exploration of many types of models and the localization of behavioral dynamics to specific weights or periods of training.",
+        "In order to confirm the efficacy of our decoupled Laplace method in recovering the best setting of hyperparameters, we confirm with grid search that the algorithm converges on the hyperparameters with the highest evidence and highest cross-validated log-likelihood on simulated data.",
+        "To further explore the advantages and insights provided by our model, we apply our method to behavioral data from both rats and humans performing a 2AFC delayed response task, as reported in [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>].",
+        "In contrast to the rat, the weight trajectories for the human subject are largely stable and reflect accurate behavioral performance (Fig. 3c); not much learning is happening.",
+        "The close match between empirical and predicted performance validates the model\u2019s ability to capture the animal\u2019s true dynamic strategy, in addition to the already-demonstrated success of our inference method to find the best weights and hyperparameters given the model.",
+        "To explore the predictive power of our method further, we look at two distinct models in Fig. 5b: the basic model has dynamic weights only on the task stimuli (Tones A & B) and choice bias, while the history-aware model has additional weights for various history dependencies.",
+        "We presented a method for efficiently and flexibly characterizing the dynamics of psychophysical behavior, allowing for unprecedented insight into how animals learn new tasks.",
+        "While the weight trajectories are allowed to evolve over time, the volatility hyperparameter \u03c3 is a single value optimized over the entire dataset."
+    ],
+    "headline": "We propose a dynamic psychophysical model that efficiently tracks trial-to-trial changes in behavior over the course of training",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] John W Krakauer, Asif A Ghazanfar, Alex Gomez-Marin, Malcolm A MacIver, and David Poeppel. Neuroscience needs behavior: correcting a reductionist bias. Neuron, 93(3):480\u2013490, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krakauer%2C%20John%20W.%20Ghazanfar%2C%20Asif%20A.%20Gomez-Marin%2C%20Alex%20MacIver%2C%20Malcolm%20A.%20Neuroscience%20needs%20behavior%3A%20correcting%20a%20reductionist%20bias%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krakauer%2C%20John%20W.%20Ghazanfar%2C%20Asif%20A.%20Gomez-Marin%2C%20Alex%20MacIver%2C%20Malcolm%20A.%20Neuroscience%20needs%20behavior%3A%20correcting%20a%20reductionist%20bias%202017"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Anne C Smith, Loren M Frank, Sylvia Wirth, Marianna Yanike, Dan Hu, Yasuo Kubota, Ann M Graybiel, Wendy A Suzuki, and Emery N Brown. Dynamic analysis of learning in behavioral experiments. Journal of Neuroscience, 24(2):447\u2013461, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Smith%2C%20Anne%20C.%20Frank%2C%20Loren%20M.%20Wirth%2C%20Sylvia%20Yanike%2C%20Marianna%20Dynamic%20analysis%20of%20learning%20in%20behavioral%20experiments%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Smith%2C%20Anne%20C.%20Frank%2C%20Loren%20M.%20Wirth%2C%20Sylvia%20Yanike%2C%20Marianna%20Dynamic%20analysis%20of%20learning%20in%20behavioral%20experiments%202004"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Wendy A Suzuki and Emery N Brown. Behavioral and neurophysiological analyses of dynamic learning processes. Behavioral and cognitive neuroscience reviews, 4(2):67\u201395, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Suzuki%2C%20Wendy%20A.%20Brown%2C%20Emery%20N.%20Behavioral%20and%20neurophysiological%20analyses%20of%20dynamic%20learning%20processes%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Suzuki%2C%20Wendy%20A.%20Brown%2C%20Emery%20N.%20Behavioral%20and%20neurophysiological%20analyses%20of%20dynamic%20learning%20processes%202005"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Michael J Prerau, Anne C Smith, Uri T Eden, Yasuo Kubota, Marianna Yanike, Wendy Suzuki, Ann M Graybiel, and Emery N Brown. Characterizing learning by simultaneous analysis of continuous and binary measures of performance. Journal of neurophysiology, 102(5):3060\u2013 3072, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Prerau%2C%20Michael%20J.%20Smith%2C%20Anne%20C.%20Eden%2C%20Uri%20T.%20Kubota%2C%20Yasuo%20Characterizing%20learning%20by%20simultaneous%20analysis%20of%20continuous%20and%20binary%20measures%20of%20performance%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Prerau%2C%20Michael%20J.%20Smith%2C%20Anne%20C.%20Eden%2C%20Uri%20T.%20Kubota%2C%20Yasuo%20Characterizing%20learning%20by%20simultaneous%20analysis%20of%20continuous%20and%20binary%20measures%20of%20performance%202009"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Anqi Wu, Nicholas A Roy, Stephen Keeley, and Jonathan W Pillow. Gaussian process based nonlinear latent structure discovery in multivariate spike train data. In Advances in Neural Information Processing Systems, pages 3499\u20133508, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20Anqi%20Roy%2C%20Nicholas%20A.%20Keeley%2C%20Stephen%20Pillow%2C%20Jonathan%20W.%20Gaussian%20process%20based%20nonlinear%20latent%20structure%20discovery%20in%20multivariate%20spike%20train%20data%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20Anqi%20Roy%2C%20Nicholas%20A.%20Keeley%2C%20Stephen%20Pillow%2C%20Jonathan%20W.%20Gaussian%20process%20based%20nonlinear%20latent%20structure%20discovery%20in%20multivariate%20spike%20train%20data%202017"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Nicholas A Roy, Ji Hyun Bak, and Jonathan W Pillow. Open source dynamic behavioral fitting tool for Python (forthcoming), 2018-.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nicholas%20A%20Roy%20Ji%20Hyun%20Bak%20and%20Jonathan%20W%20Pillow%20Open%20source%20dynamic%20behavioral%20fitting%20tool%20for%20Python%20forthcoming%202018"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Ji Hyun Bak and Jonathan W Pillow. Adaptive stimulus selection for multi-alternative psychometric functions with lapses. Journal of Vision, 2018 (to appear).",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bak%2C%20Ji%20Hyun%20Pillow%2C%20Jonathan%20W.%20Adaptive%20stimulus%20selection%20for%20multi-alternative%20psychometric%20functions%20with%20lapses%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bak%2C%20Ji%20Hyun%20Pillow%2C%20Jonathan%20W.%20Adaptive%20stimulus%20selection%20for%20multi-alternative%20psychometric%20functions%20with%20lapses%202018"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Arman Abrahamyan, Laura Luz Silva, Steven C. Dakin, Matteo Carandini, and Justin L. Gardner. Adaptable history biases in human perceptual decisions. Proceedings of the National Academy of Sciences, 113(25):E3548\u2013E3557, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abrahamyan%2C%20Arman%20Silva%2C%20Laura%20Luz%20Dakin%2C%20Steven%20C.%20Carandini%2C%20Matteo%20Adaptable%20history%20biases%20in%20human%20perceptual%20decisions%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abrahamyan%2C%20Arman%20Silva%2C%20Laura%20Luz%20Dakin%2C%20Steven%20C.%20Carandini%2C%20Matteo%20Adaptable%20history%20biases%20in%20human%20perceptual%20decisions%202016"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Laura Busse, Asli Ayaz, Neel T. Dhruv, Steffen Katzner, Aman B. Saleem, Marieke L. Sch\u00f6lvinck, Andrew D. Zaharia, and Matteo Carandini. The detection of visual contrast in the behaving mouse. Journal of Neuroscience, 31(31):11351\u201311361, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Busse%2C%20Laura%20Ayaz%2C%20Asli%20Dhruv%2C%20Neel%20T.%20Katzner%2C%20Steffen%20The%20detection%20of%20visual%20contrast%20in%20the%20behaving%20mouse%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Busse%2C%20Laura%20Ayaz%2C%20Asli%20Dhruv%2C%20Neel%20T.%20Katzner%2C%20Steffen%20The%20detection%20of%20visual%20contrast%20in%20the%20behaving%20mouse%202011"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Eun Jung Hwang, Jeffrey E Dahlen, Madan Mukundan, and Takaki Komiyama. History-based action selection bias in posterior parietal cortex. Nature Communications, 8(1):1242, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hwang%2C%20Eun%20Jung%20Dahlen%2C%20Jeffrey%20E.%20Mukundan%2C%20Madan%20Komiyama%2C%20Takaki%20History-based%20action%20selection%20bias%20in%20posterior%20parietal%20cortex%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hwang%2C%20Eun%20Jung%20Dahlen%2C%20Jeffrey%20E.%20Mukundan%2C%20Madan%20Komiyama%2C%20Takaki%20History-based%20action%20selection%20bias%20in%20posterior%20parietal%20cortex%202017"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Yashar Ahmadian, Jonathan W Pillow, and Liam Paninski. Efficient markov chain monte carlo methods for decoding neural spike trains. Neural Computation, 23(1):46\u201396, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ahmadian%2C%20Yashar%20Pillow%2C%20Jonathan%20W.%20Paninski%2C%20Liam%20Efficient%20markov%20chain%20monte%20carlo%20methods%20for%20decoding%20neural%20spike%20trains%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ahmadian%2C%20Yashar%20Pillow%2C%20Jonathan%20W.%20Paninski%2C%20Liam%20Efficient%20markov%20chain%20monte%20carlo%20methods%20for%20decoding%20neural%20spike%20trains%202011"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Liam Paninski, Yashar Ahmadian, Daniel Gil Ferreira, Shinsuke Koyama, Kamiar Rahnama Rad, Michael Vidne, Joshua Vogelstein, and Wei Wu. A new look at state-space models for neural data. Journal of computational neuroscience, 29(1-2):107\u2013126, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Paninski%2C%20Liam%20Ahmadian%2C%20Yashar%20Ferreira%2C%20Daniel%20Gil%20Koyama%2C%20Shinsuke%20A%20new%20look%20at%20state-space%20models%20for%20neural%20data%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Paninski%2C%20Liam%20Ahmadian%2C%20Yashar%20Ferreira%2C%20Daniel%20Gil%20Koyama%2C%20Shinsuke%20A%20new%20look%20at%20state-space%20models%20for%20neural%20data%202010"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Jorge Nocedal and Stephen J Wright. Quasi-newton methods. Numerical optimization, pages 135\u2013163, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jorge%20Nocedal%20and%20Stephen%20J%20Wright%20Quasinewton%20methods%20Numerical%20optimization%20pages%20135163%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jorge%20Nocedal%20and%20Stephen%20J%20Wright%20Quasinewton%20methods%20Numerical%20optimization%20pages%20135163%202006"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Eric Jones, Travis Oliphant, Pearu Peterson, et al. SciPy: Open source scientific tools for Python, 2001\u2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Eric%20Jones%20Travis%20Oliphant%20Pearu%20Peterson%20et%20al%20SciPy%20Open%20source%20scientific%20tools%20for%20Python%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Eric%20Jones%20Travis%20Oliphant%20Pearu%20Peterson%20et%20al%20SciPy%20Open%20source%20scientific%20tools%20for%20Python%202001"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Maneesh Sahani and Jennifer F Linden. Evidence optimization techniques for estimating stimulus-response functions. In Advances in neural information processing systems, pages 317\u2013324, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sahani%2C%20Maneesh%20Linden%2C%20Jennifer%20F.%20Evidence%20optimization%20techniques%20for%20estimating%20stimulus-response%20functions%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sahani%2C%20Maneesh%20Linden%2C%20Jennifer%20F.%20Evidence%20optimization%20techniques%20for%20estimating%20stimulus-response%20functions%202003"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Ji Hyun Bak, Jung Yoon Choi, Athena Akrami, Ilana Witten, and Jonathan W Pillow. Adaptive optimal training of animal behavior. In Advances in Neural Information Processing Systems, pages 1947\u20131955, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bak%2C%20Ji%20Hyun%20Choi%2C%20Jung%20Yoon%20Akrami%2C%20Athena%20Witten%2C%20Ilana%20Adaptive%20optimal%20training%20of%20animal%20behavior%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bak%2C%20Ji%20Hyun%20Choi%2C%20Jung%20Yoon%20Akrami%2C%20Athena%20Witten%2C%20Ilana%20Adaptive%20optimal%20training%20of%20animal%20behavior%202016"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Athena Akrami, Charles D Kopec, Mathew E Diamond, and Carlos D Brody. Posterior parietal cortex represents sensory history and mediates its effects on behaviour. Nature, 554(7692):368, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Akrami%2C%20Athena%20Kopec%2C%20Charles%20D.%20Diamond%2C%20Mathew%20E.%20Brody%2C%20Carlos%20D.%20Posterior%20parietal%20cortex%20represents%20sensory%20history%20and%20mediates%20its%20effects%20on%20behaviour%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Akrami%2C%20Athena%20Kopec%2C%20Charles%20D.%20Diamond%2C%20Mathew%20E.%20Brody%2C%20Carlos%20D.%20Posterior%20parietal%20cortex%20represents%20sensory%20history%20and%20mediates%20its%20effects%20on%20behaviour%202018"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Ranulfo Romo and Emilio Salinas. Cognitive neuroscience: flutter discrimination: neural codes, perception, memory and decision making. Nature Reviews Neuroscience, 4(3):203, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Romo%2C%20Ranulfo%20Salinas%2C%20Emilio%20Cognitive%20neuroscience%3A%20flutter%20discrimination%3A%20neural%20codes%2C%20perception%2C%20memory%20and%20decision%20making%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Romo%2C%20Ranulfo%20Salinas%2C%20Emilio%20Cognitive%20neuroscience%3A%20flutter%20discrimination%3A%20neural%20codes%2C%20perception%2C%20memory%20and%20decision%20making%202003"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Joshua I Gold and Long Ding. How mechanisms of perceptual decision-making affect the psychometric function. Progress in neurobiology, 103:98\u2013114, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gold%2C%20Joshua%20I.%20Ding%2C%20Long%20How%20mechanisms%20of%20perceptual%20decision-making%20affect%20the%20psychometric%20function%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gold%2C%20Joshua%20I.%20Ding%2C%20Long%20How%20mechanisms%20of%20perceptual%20decision-making%20affect%20the%20psychometric%20function%202013"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Nicolaas Prins. The psychometric function: The lapse rate revisited. Journal of Vision, 12(6):25\u2013 25, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Prins%2C%20Nicolaas%20The%20psychometric%20function%3A%20The%20lapse%20rate%20revisited%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Prins%2C%20Nicolaas%20The%20psychometric%20function%3A%20The%20lapse%20rate%20revisited%202012"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Jeffrey C Erlich, Bingni W Brunton, Chunyu A Duan, Timothy D Hanks, and Carlos D Brody. Distinct effects of prefrontal and parietal cortex inactivations on an accumulation of evidence task in the rat. Elife, 4:e05457, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Erlich%2C%20Jeffrey%20C.%20Brunton%2C%20Bingni%20W.%20Duan%2C%20Chunyu%20A.%20Hanks%2C%20Timothy%20D.%20Distinct%20effects%20of%20prefrontal%20and%20parietal%20cortex%20inactivations%20on%20an%20accumulation%20of%20evidence%20task%20in%20the%20rat%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Erlich%2C%20Jeffrey%20C.%20Brunton%2C%20Bingni%20W.%20Duan%2C%20Chunyu%20A.%20Hanks%2C%20Timothy%20D.%20Distinct%20effects%20of%20prefrontal%20and%20parietal%20cortex%20inactivations%20on%20an%20accumulation%20of%20evidence%20task%20in%20the%20rat%202015"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Benjamin B Scott, Christine M Constantinople, Jeffrey C Erlich, David W Tank, and Carlos D Brody. Sources of noise during accumulation of evidence in unrestrained and voluntarily head-restrained rats. Elife, 4:e11308, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Scott%2C%20Benjamin%20B.%20Constantinople%2C%20Christine%20M.%20Erlich%2C%20Jeffrey%20C.%20Tank%2C%20David%20W.%20Sources%20of%20noise%20during%20accumulation%20of%20evidence%20in%20unrestrained%20and%20voluntarily%20head-restrained%20rats%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Scott%2C%20Benjamin%20B.%20Constantinople%2C%20Christine%20M.%20Erlich%2C%20Jeffrey%20C.%20Tank%2C%20David%20W.%20Sources%20of%20noise%20during%20accumulation%20of%20evidence%20in%20unrestrained%20and%20voluntarily%20head-restrained%20rats%202015"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Samuel J Gershman. Uncertainty and exploration. bioRxiv, page 265504, 2018. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Samuel%20J%20Gershman%20Uncertainty%20and%20exploration%20bioRxiv%20page%20265504%202018"
+        }
+    ]
+}

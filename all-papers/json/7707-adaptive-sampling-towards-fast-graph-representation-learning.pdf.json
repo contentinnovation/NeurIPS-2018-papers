@@ -1,0 +1,224 @@
+{
+    "filename": "7707-adaptive-sampling-towards-fast-graph-representation-learning.pdf",
+    "metadata": {
+        "title": "Adaptive Sampling Towards Fast Graph Representation Learning",
+        "author": "Wenbing Huang1, Tong Zhang2, Yu Rong1, Junzhou Huang1 1 Tencent AI Lab. ;",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7707-adaptive-sampling-towards-fast-graph-representation-learning.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Graph Convolutional Networks (GCNs) have become a crucial tool on learning representations of graph vertices. The main challenge of adapting GCNs on largescale graphs is the scalability issue that it incurs heavy cost both in computation and memory due to the uncontrollable neighborhood expansion across layers. In this paper, we accelerate the training of GCNs through developing an adaptive layer-wise sampling method. By constructing the network layer by layer in a top-down passway, we sample the lower layer conditioned on the top one, where the sampled neighborhoods are shared by different parent nodes and the over expansion is avoided owing to the fixed-size sampling. More importantly, the proposed sampler is adaptive and applicable for explicit variance reduction, which in turn enhances the training of our method. Furthermore, we propose a novel and economical approach to promote the message passing over distant nodes by applying skip connections. Intensive experiments on several benchmarks verify the effectiveness of our method regarding the classification accuracy while enjoying faster convergence speed."
+    },
+    "keywords": [
+        {
+            "term": "network layer",
+            "url": "https://en.wikipedia.org/wiki/network_layer"
+        },
+        {
+            "term": "machine learning",
+            "url": "https://en.wikipedia.org/wiki/machine_learning"
+        },
+        {
+            "term": "variance reduction",
+            "url": "https://en.wikipedia.org/wiki/variance_reduction"
+        },
+        {
+            "term": "sampling method",
+            "url": "https://en.wikipedia.org/wiki/sampling_method"
+        },
+        {
+            "term": "convolutional neural network",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_network"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        }
+    ],
+    "highlights": [
+        "Deep Learning, especially Convolutional Neural Networks (CNNs), has revolutionized various machine learning tasks with grid-like input data, such as image classification [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>] and machine translation [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>]",
+        "We make the following contributions in this paper: I.We develop a novel layer-wise sampling method to speed up the Graph Convolutional Networks model, where the between-layer information is shared and the size of the sampling nodes is controllable",
+        "We present a framework to accelerate the training of Graph Convolutional Networks through developing a sampling method by constructing the network layer by layer",
+        "The developed layer-wise sampler is adaptive for variance reduction",
+        "We explore how to preserve the second-order proximity by using the skip connection",
+        "The experimental evaluations demonstrate that the skip connection further enhances our method in terms of the convergence speed and eventual classification accuracy"
+    ],
+    "key_statements": [
+        "Deep Learning, especially Convolutional Neural Networks (CNNs), has revolutionized various machine learning tasks with grid-like input data, such as image classification [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>] and machine translation [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>]",
+        "We make the following contributions in this paper: I.We develop a novel layer-wise sampling method to speed up the Graph Convolutional Networks model, where the between-layer information is shared and the size of the sampling nodes is controllable",
+        "GraphSAGE randomly samples a fixed-size neighborhoods of each node, while FastGCN constructs each layer independently according to an identical distribution",
+        "The GraphSAGE model is regarded as a node-wise sampler in Eq (3) if p is defined as the uniform distribution; FastGCN can be considered as a special layer-wise method by applying the sampler q that is independent to the nodes {vi}ni=1 in Eq (5).\n3",
+        "We summarize the results of GraphSAGE and FastGCN by their original implementations",
+        "We present a framework to accelerate the training of Graph Convolutional Networks through developing a sampling method by constructing the network layer by layer",
+        "The developed layer-wise sampler is adaptive for variance reduction",
+        "We explore how to preserve the second-order proximity by using the skip connection",
+        "The experimental evaluations demonstrate that the skip connection further enhances our method in terms of the convergence speed and eventual classification accuracy"
+    ],
+    "summary": [
+        "Deep Learning, especially Convolutional Neural Networks (CNNs), has revolutionized various machine learning tasks with grid-like input data, such as image classification [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>] and machine translation [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>].",
+        "The core of our method is to define an appropriate sampler for the layer-wise sampling.",
+        "We make the following contributions in this paper: I.We develop a novel layer-wise sampling method to speed up the GCN model, where the between-layer information is shared and the size of the sampling nodes is controllable.",
+        "The sampler for the layer-wise sampling is adaptive and determined by explicit variance reduction in the training phase.",
+        "The FastGCN model interprets graph convolutions as integral transforms of embedding functions and samples the nodes in each layer independently.",
+        "To minimize the resulting variance, we further propose to learn the layer-wise sampler by performing variance reduction explicitly.",
+        "To allow the network to better utilize information across distant nodes, we can sample the multi-hop neighborhoods for the GCN update in a similar way as the random walk [<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>, <a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>].",
+        "The skip connection allows the information to pass between two distant layers enabling more efficient back-propagation and model training.",
+        "GraphSAGE randomly samples a fixed-size neighborhoods of each node, while FastGCN constructs each layer independently according to an identical distribution.",
+        "The GraphSAGE model is regarded as a node-wise sampler in Eq (3) if p is defined as the uniform distribution; FastGCN can be considered as a special layer-wise method by applying the sampler q that is independent to the nodes {vi}ni=1 in Eq (5).",
+        "The numbers of the sampling nodes for all layers excluding the top one are set to 128 for Cora and Citeseer, 256 for Pubmed and 512 for Reddit.",
+        "We implement the GraphSAGE method by applying the node-wise strategy with a uniform sampler in Eq (3), where the number of the sampling neighborhoods for each node are set to 5.",
+        "For FastGCN, we adopt the Independent-Identical-Distribution (IID) sampler proposed by [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>] in Eq (5), where the number of the sampling nodes for each layer is the same as our method.",
+        "We explicitly involve the 2-hop neighborhood sampling in our method by replacing the re-normalization matrix Awith its 2-order power expansion, i.e. A + A2.",
+        "The skip-connection method is slightly inferior to the explicit 2-hop sampling, it avoids the computation of (i.e. A2) and yields more computationally beneficial for large and dense graphs.",
+        "We present a framework to accelerate the training of GCNs through developing a sampling method by constructing the network layer by layer.",
+        "The experimental evaluations demonstrate that the skip connection further enhances our method in terms of the convergence speed and eventual classification accuracy"
+    ],
+    "headline": "We propose a novel and economical approach to promote the message passing over distant nodes by applying skip connections",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. In Proceedings of the IEEE conference on computer vision and pattern recognition, pages 770\u2013778, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, \u0141ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In Advances in Neural Information Processing Systems, pages 6000\u20136010, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ashish%20Vaswani%20Noam%20Shazeer%20Niki%20Parmar%20Jakob%20Uszkoreit%20Llion%20Jones%20Aidan%20N%20Gomez%20%C5%81ukasz%20Kaiser%20and%20Illia%20Polosukhin%20Attention%20is%20all%20you%20need%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20pages%2060006010%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ashish%20Vaswani%20Noam%20Shazeer%20Niki%20Parmar%20Jakob%20Uszkoreit%20Llion%20Jones%20Aidan%20N%20Gomez%20%C5%81ukasz%20Kaiser%20and%20Illia%20Polosukhin%20Attention%20is%20all%20you%20need%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20pages%2060006010%202017"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Will Hamilton, Zhitao Ying, and Jure Leskovec. Inductive representation learning on large graphs. In Advances in Neural Information Processing Systems, pages 1025\u20131035, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hamilton%2C%20Will%20Ying%2C%20Zhitao%20Leskovec%2C%20Jure%20Inductive%20representation%20learning%20on%20large%20graphs%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hamilton%2C%20Will%20Ying%2C%20Zhitao%20Leskovec%2C%20Jure%20Inductive%20representation%20learning%20on%20large%20graphs%202017"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Alex Fout, Jonathon Byrd, Basir Shariat, and Asa Ben-Hur. Protein interface prediction using graph convolutional networks. In Advances in Neural Information Processing Systems, pages 6533\u20136542, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fout%2C%20Alex%20Byrd%2C%20Jonathon%20Shariat%2C%20Basir%20Ben-Hur%2C%20Asa%20Protein%20interface%20prediction%20using%20graph%20convolutional%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fout%2C%20Alex%20Byrd%2C%20Jonathon%20Shariat%2C%20Basir%20Ben-Hur%2C%20Asa%20Protein%20interface%20prediction%20using%20graph%20convolutional%20networks%202017"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Charles R Qi, Hao Su, Kaichun Mo, and Leonidas J Guibas. Pointnet: Deep learning on point sets for 3d classification and segmentation. Proc. Computer Vision and Pattern Recognition (CVPR), IEEE, 1(2):4, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Qi%2C%20Charles%20R.%20Su%2C%20Hao%20Mo%2C%20Kaichun%20Guibas%2C%20Leonidas%20J.%20Pointnet%3A%20Deep%20learning%20on%20point%20sets%20for%203d%20classification%20and%20segmentation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Qi%2C%20Charles%20R.%20Su%2C%20Hao%20Mo%2C%20Kaichun%20Guibas%2C%20Leonidas%20J.%20Pointnet%3A%20Deep%20learning%20on%20point%20sets%20for%203d%20classification%20and%20segmentation%202017"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Bryan Perozzi, Rami Al-Rfou, and Steven Skiena. Deepwalk: Online learning of social representations. In Proceedings of the 20th ACM SIGKDD international conference on Knowledge discovery and data mining, pages 701\u2013710. ACM, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Perozzi%2C%20Bryan%20Al-Rfou%2C%20Rami%20Skiena%2C%20Steven%20Deepwalk%3A%20Online%20learning%20of%20social%20representations%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Perozzi%2C%20Bryan%20Al-Rfou%2C%20Rami%20Skiena%2C%20Steven%20Deepwalk%3A%20Online%20learning%20of%20social%20representations%202014"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Jian Tang, Meng Qu, Mingzhe Wang, Ming Zhang, Jun Yan, and Qiaozhu Mei. Line: Large-scale information network embedding. In Proceedings of the 24th International Conference on World Wide Web, pages 1067\u20131077. International World Wide Web Conferences Steering Committee, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tang%2C%20Jian%20Qu%2C%20Meng%20Line%3A%20Large-scale%20information%20network%20embedding%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tang%2C%20Jian%20Qu%2C%20Meng%20Line%3A%20Large-scale%20information%20network%20embedding%202015"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Aditya Grover and Jure Leskovec. node2vec: Scalable feature learning for networks. In Proceedings of the 22nd ACM SIGKDD international conference on Knowledge discovery and data mining, pages 855\u2013864. ACM, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Grover%2C%20Aditya%20Leskovec%2C%20Jure%20node2vec%3A%20Scalable%20feature%20learning%20for%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Grover%2C%20Aditya%20Leskovec%2C%20Jure%20node2vec%3A%20Scalable%20feature%20learning%20for%20networks%202016"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Thomas N Kipf and Max Welling. Semi-supervised classification with graph convolutional networks. arXiv preprint arXiv:1609.02907, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.02907"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Felipe Petroski Such, Shagan Sah, Miguel Alexander Dominguez, Suhas Pillai, Chao Zhang, Andrew Michael, Nathan D Cahill, and Raymond Ptucha. Robust spatial filtering with graph convolutional neural networks. IEEE Journal of Selected Topics in Signal Processing, 11(6):884\u2013896, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Such%2C%20Felipe%20Petroski%20Sah%2C%20Shagan%20Dominguez%2C%20Miguel%20Alexander%20Pillai%2C%20Suhas%20Robust%20spatial%20filtering%20with%20graph%20convolutional%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Such%2C%20Felipe%20Petroski%20Sah%2C%20Shagan%20Dominguez%2C%20Miguel%20Alexander%20Pillai%2C%20Suhas%20Robust%20spatial%20filtering%20with%20graph%20convolutional%20neural%20networks%202017"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Prithviraj Sen, Galileo Namata, Mustafa Bilgic, Lise Getoor, Brian Galligher, and Tina Eliassi-Rad. Collective classification in network data. AI magazine, 29(3):93, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sen%2C%20Prithviraj%20Namata%2C%20Galileo%20Bilgic%2C%20Mustafa%20Getoor%2C%20Lise%20Collective%20classification%20in%20network%20data%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sen%2C%20Prithviraj%20Namata%2C%20Galileo%20Bilgic%2C%20Mustafa%20Getoor%2C%20Lise%20Collective%20classification%20in%20network%20data%202008"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Wei Liu, Jun Wang, and Shih-Fu Chang. Robust and scalable graph-based semisupervised learning. Proceedings of the IEEE, 100(9):2624\u20132638, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20Wei%20Wang%2C%20Jun%20Chang%2C%20Shih-Fu%20Robust%20and%20scalable%20graph-based%20semisupervised%20learning%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liu%2C%20Wei%20Wang%2C%20Jun%20Chang%2C%20Shih-Fu%20Robust%20and%20scalable%20graph-based%20semisupervised%20learning%202012"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Petar Velickovic, Guillem Cucurull, Arantxa Casanova, Adriana Romero, Pietro Li\u00f2, and Yoshua Bengio. Graph attention networks. arXiv preprint arXiv:1710.10903, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.10903"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Joan Bruna, Wojciech Zaremba, Arthur Szlam, and Yann LeCun. Spectral networks and locally connected networks on graphs. arXiv preprint arXiv:1312.6203, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.6203"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Mikael Henaff, Joan Bruna, and Yann LeCun. Deep convolutional networks on graph-structured data. arXiv preprint arXiv:1506.05163, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1506.05163"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Micha\u00ebl Defferrard, Xavier Bresson, and Pierre Vandergheynst. Convolutional neural networks on graphs with fast localized spectral filtering. In Advances in Neural Information Processing Systems, pages 3844\u20133852, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Defferrard%2C%20Micha%C3%ABl%20Bresson%2C%20Xavier%20Vandergheynst%2C%20Pierre%20Convolutional%20neural%20networks%20on%20graphs%20with%20fast%20localized%20spectral%20filtering%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Defferrard%2C%20Micha%C3%ABl%20Bresson%2C%20Xavier%20Vandergheynst%2C%20Pierre%20Convolutional%20neural%20networks%20on%20graphs%20with%20fast%20localized%20spectral%20filtering%202016"
+        },
+        {
+            "id": "17",
+            "entry": "[17] David K Duvenaud, Dougal Maclaurin, Jorge Iparraguirre, Rafael Bombarell, Timothy Hirzel, Al\u00e1n Aspuru-Guzik, and Ryan P Adams. Convolutional networks on graphs for learning molecular fingerprints. In Advances in neural information processing systems, pages 2224\u20132232, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Duvenaud%2C%20David%20K.%20Maclaurin%2C%20Dougal%20Iparraguirre%2C%20Jorge%20Bombarell%2C%20Rafael%20Convolutional%20networks%20on%20graphs%20for%20learning%20molecular%20fingerprints%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Duvenaud%2C%20David%20K.%20Maclaurin%2C%20Dougal%20Iparraguirre%2C%20Jorge%20Bombarell%2C%20Rafael%20Convolutional%20networks%20on%20graphs%20for%20learning%20molecular%20fingerprints%202015"
+        },
+        {
+            "id": "18",
+            "entry": "[18] James Atwood and Don Towsley. Diffusion-convolutional neural networks. In Advances in Neural Information Processing Systems, pages 1993\u20132001, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Atwood%2C%20James%20Towsley%2C%20Don%20Diffusion-convolutional%20neural%20networks%201993",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Atwood%2C%20James%20Towsley%2C%20Don%20Diffusion-convolutional%20neural%20networks%201993"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Mathias Niepert, Mohamed Ahmed, and Konstantin Kutzkov. Learning convolutional neural networks for graphs. In International conference on machine learning, pages 2014\u20132023, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Niepert%2C%20Mathias%20Ahmed%2C%20Mohamed%20Kutzkov%2C%20Konstantin%20Learning%20convolutional%20neural%20networks%20for%20graphs%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Niepert%2C%20Mathias%20Ahmed%2C%20Mohamed%20Kutzkov%2C%20Konstantin%20Learning%20convolutional%20neural%20networks%20for%20graphs%202014"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Federico Monti, Davide Boscaini, Jonathan Masci, Emanuele Rodola, Jan Svoboda, and Michael M Bronstein. Geometric deep learning on graphs and manifolds using mixture model cnns. In Proc. CVPR, volume 1, page 3, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Monti%2C%20Federico%20Boscaini%2C%20Davide%20Masci%2C%20Jonathan%20Rodola%2C%20Emanuele%20Geometric%20deep%20learning%20on%20graphs%20and%20manifolds%20using%20mixture%20model%20cnns%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Monti%2C%20Federico%20Boscaini%2C%20Davide%20Masci%2C%20Jonathan%20Rodola%2C%20Emanuele%20Geometric%20deep%20learning%20on%20graphs%20and%20manifolds%20using%20mixture%20model%20cnns%202017"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Jie Chen, Tengfei Ma, and Cao Xiao. Fastgcn: Fast learning with graph convolutional networks via importance sampling. arXiv preprint arXiv:1801.10247, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1801.10247"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Jianfei Chen, Jun Zhu, and Le Song. Stochastic training of graph convolutional networks with variance reduction. In International conference on machine learning, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Jianfei%20Zhu%2C%20Jun%20Song%2C%20Le%20Stochastic%20training%20of%20graph%20convolutional%20networks%20with%20variance%20reduction%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Jianfei%20Zhu%2C%20Jun%20Song%2C%20Le%20Stochastic%20training%20of%20graph%20convolutional%20networks%20with%20variance%20reduction%202018"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Art B. Owen. Monte Carlo theory, methods and examples. 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Owen%2C%20Art%20B.%20Monte%20Carlo%20theory%2C%20methods%20and%20examples%202013"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Mart\u00edn Abadi, Paul Barham, Jianmin Chen, Zhifeng Chen, Andy Davis, Jeffrey Dean, Matthieu Devin, Sanjay Ghemawat, Geoffrey Irving, Michael Isard, et al. Tensorflow: A system for large-scale machine learning. In OSDI, volume 16, pages 265\u2013283, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abadi%2C%20Mart%C3%ADn%20Barham%2C%20Paul%20Chen%2C%20Jianmin%20Chen%2C%20Zhifeng%20Tensorflow%3A%20A%20system%20for%20large-scale%20machine%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abadi%2C%20Mart%C3%ADn%20Barham%2C%20Paul%20Chen%2C%20Jianmin%20Chen%2C%20Zhifeng%20Tensorflow%3A%20A%20system%20for%20large-scale%20machine%20learning%202016"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Fran?ois Fouss, Kevin Fran?oisse, Luh Yen, Alain Pirotte, and Marco Saerens. An experimental investigation of graph kernels on a collaborative recommendation task. In Proceedings of the 6th International Conference on Data Mining (ICDM 2006, pages 863\u2013868, 2006. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fouss%2C%20Fran%3Fois%20Fran%3Foisse%2C%20Kevin%20Yen%2C%20Luh%20Pirotte%2C%20Alain%20An%20experimental%20investigation%20of%20graph%20kernels%20on%20a%20collaborative%20recommendation%20task%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fouss%2C%20Fran%3Fois%20Fran%3Foisse%2C%20Kevin%20Yen%2C%20Luh%20Pirotte%2C%20Alain%20An%20experimental%20investigation%20of%20graph%20kernels%20on%20a%20collaborative%20recommendation%20task%202006"
+        }
+    ]
+}

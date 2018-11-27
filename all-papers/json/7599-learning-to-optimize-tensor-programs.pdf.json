@@ -1,0 +1,343 @@
+{
+    "filename": "7599-learning-to-optimize-tensor-programs.pdf",
+    "metadata": {
+        "title": "Learning to Optimize Tensor Programs",
+        "author": "Tianqi Chen, Lianmin Zheng, Eddie Yan, Ziheng Jiang, Thierry Moreau, Luis Ceze, Carlos Guestrin, Arvind Krishnamurthy",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7599-learning-to-optimize-tensor-programs.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We introduce a learning-based framework to optimize tensor programs for deep learning workloads. Efficient implementations of tensor operators, such as matrix multiplication and high dimensional convolution, are key enablers of effective deep learning systems. However, current systems rely on manually optimized libraries, e.g., cuDNN, that support only a narrow range of server class GPUs. Such reliance limits the applicability of high-level graph optimizations and incurs significant engineering costs when deploying to new hardware targets. We use learning to remove this engineering burden. We learn domain-specific statistical cost models to guide the search of tensor operator implementations over billions of possible program variants. We further accelerate the search using effective model transfer across workloads. Experimental results show that our framework delivers performance that is competitive with state-of-the-art hand-tuned libraries for low-power CPUs, mobile GPUs, and server-class GPUs."
+    },
+    "keywords": [
+        {
+            "term": "matrix multiplication",
+            "url": "https://en.wikipedia.org/wiki/matrix_multiplication"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "machine learning",
+            "url": "https://en.wikipedia.org/wiki/machine_learning"
+        },
+        {
+            "term": "bayesian optimization",
+            "url": "https://en.wikipedia.org/wiki/bayesian_optimization"
+        },
+        {
+            "term": "tensor operator",
+            "url": "https://en.wikipedia.org/wiki/tensor_operator"
+        },
+        {
+            "term": "high dimensional",
+            "url": "https://en.wikipedia.org/wiki/high_dimensional"
+        },
+        {
+            "term": "convolutional neural network",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_network"
+        },
+        {
+            "term": "domain-specific languages",
+            "url": "https://en.wikipedia.org/wiki/domain-specific_languages"
+        },
+        {
+            "term": "Deep learning",
+            "url": "https://en.wikipedia.org/wiki/Deep_learning"
+        },
+        {
+            "term": "abstract syntax tree",
+            "url": "https://en.wikipedia.org/wiki/abstract_syntax_tree"
+        }
+    ],
+    "highlights": [
+        "Deep learning (DL) has become ubiquitous in our daily lives",
+        "Scalable learning systems [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>, <a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>] rely on manually optimized, high-performance tensor operation libraries, such as cuDNN, that are optimized for a narrow range of hardware devices",
+        "We propose a machine learning (ML)-based framework to solve this problem",
+        "We evaluated real world end-to-end Deep learning inference workloads, including ResNet [<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>], MobileNet [<a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>], LSTM Language Model [<a class=\"ref-link\" id=\"c44\" href=\"#r44\">44</a>], Deep Q Network (DQN) [<a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>], and Deep Convolutional Generative Adversarial Networks (DCGAN) [<a class=\"ref-link\" id=\"c31\" href=\"#r31\">31</a>]",
+        "We presented AutoTVM: a machine learning-based framework that automatically optimizes the implementation of tensor operators in deep learning systems"
+    ],
+    "key_statements": [
+        "Deep learning (DL) has become ubiquitous in our daily lives",
+        "Scalable learning systems [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>, <a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>] rely on manually optimized, high-performance tensor operation libraries, such as cuDNN, that are optimized for a narrow range of hardware devices",
+        "We propose a machine learning (ML)-based framework to solve this problem",
+        "We evaluated real world end-to-end Deep learning inference workloads, including ResNet [<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>], MobileNet [<a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>], LSTM Language Model [<a class=\"ref-link\" id=\"c44\" href=\"#r44\">44</a>], Deep Q Network (DQN) [<a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>], and Deep Convolutional Generative Adversarial Networks (DCGAN) [<a class=\"ref-link\" id=\"c31\" href=\"#r31\">31</a>]",
+        "We presented AutoTVM: a machine learning-based framework that automatically optimizes the implementation of tensor operators in deep learning systems"
+    ],
+    "summary": [
+        "Deep learning (DL) has become ubiquitous in our daily lives.",
+        "This research explores the following question: can we use learning to alleviate this engineering burden and automatically optimize tensor operator programs for a given hardware platform?",
+        "These cost models, which guide our exploration of the space of possible programs, use transferable representations that generalize across different workloads to accelerate search.",
+        "We formalize the new problem of learning to optimize tensor programs and summarize its key characteristics.",
+        "An end-to-end DL system must optimize tensor operator programs for different input sizes, shapes, and data layout configurations.",
+        "We use primitives from an existing code generation framework [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>] to form Se. Our search space includes multi-level tiling on each loop axis, loop ordering, shared memory caching for GPUs, and annotations such as unrolling and vectorization.",
+        "We can choose from multiple objective functions to train a statistical cost model for a given collection of data D = {}.",
+        "We use a batch of parallel Markov chains to improve the prediction throughput of the statistical cost model.",
+        "The low-level loop AST x (Figure 3a) is a shared representation of programs that is invariant to the search space.",
+        "Our cost model f(x) takes the low-level loop AST x as input.",
+        "We apply this idea to our problem and build a domain-specific cost model that enables effective transfer among workloads.",
+        "Figure 4 compares the performance of the statistical cost model to black-box methods.",
+        "Using our transferable feature representation, our model generalized across different input shapes and operator types.",
+        "We segue to the natural follow-up question: can learning to optimize tensor programs improve real-world deep learning systems on diverse hardware targets?",
+        "We first evaluated single-operator optimization against baselines that used hardware-specific libraries.",
+        "We evaluated real world end-to-end DL inference workloads, including ResNet [<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>], MobileNet [<a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>], LSTM Language Model [<a class=\"ref-link\" id=\"c44\" href=\"#r44\">44</a>], Deep Q Network (DQN) [<a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>], and Deep Convolutional Generative Adversarial Networks (DCGAN) [<a class=\"ref-link\" id=\"c31\" href=\"#r31\">31</a>].",
+        "We presented AutoTVM: a machine learning-based framework that automatically optimizes the implementation of tensor operators in deep learning systems.",
+        "The specific characteristics of this new problem make it an ideal testbed for innovations in related areas, such as neural program modeling, Bayesian optimization, transfer learning, and reinforcement learning.",
+        "Learning to optimize tensor programs can enable more fused operators, data layouts, and data types across diverse hardware back-ends\u2014crucial to improving DL systems."
+    ],
+    "headline": "We introduce a learning-based framework to optimize tensor programs for deep learning workloads",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Martin Abadi, Paul Barham, Jianmin Chen, Zhifeng Chen, Andy Davis, Jeffrey Dean, Matthieu Devin, Sanjay Ghemawat, Geoffrey Irving, Michael Isard, Manjunath Kudlur, Josh Levenberg, Rajat Monga, Sherry Moore, Derek G. Murray, Benoit Steiner, Paul Tucker, Vijay Vasudevan, Pete Warden, Martin Wicke, Yuan Yu, and Xiaoqiang Zheng. Tensorflow: A system for large-scale machine learning. In 12th USENIX Symposium on Operating Systems Design and Implementation (OSDI 16), pages 265\u2013283, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abadi%2C%20Martin%20Barham%2C%20Paul%20Chen%2C%20Jianmin%20Chen%2C%20Zhifeng%20Tensorflow%3A%20A%20system%20for%20large-scale%20machine%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abadi%2C%20Martin%20Barham%2C%20Paul%20Chen%2C%20Jianmin%20Chen%2C%20Zhifeng%20Tensorflow%3A%20A%20system%20for%20large-scale%20machine%20learning%202016"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Amit Agarwal, Eldar Akchurin, Chris Basoglu, Guoguo Chen, Scott Cyphers, Jasha Droppo, Adam Eversole, Brian Guenter, Mark Hillebrand, Ryan Hoens, Xuedong Huang, Zhiheng Huang, Vladimir Ivanov, Alexey Kamenev, Philipp Kranen, Oleksii Kuchaiev, Wolfgang Manousek, Avner May, Bhaskar Mitra, Olivier Nano, Gaizka Navarro, Alexey Orlov, Marko Padmilac, Hari Parthasarathi, Baolin Peng, Alexey Reznichenko, Frank Seide, Michael L. Seltzer, Malcolm Slaney, Andreas Stolcke, Yongqiang Wang, Huaming Wang, Kaisheng Yao, Dong Yu, Yu Zhang, and Geoffrey Zweig. An introduction to computational networks and the computational network toolkit. Technical Report MSR-TR-2014-112, August 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Agarwal%2C%20Amit%20Akchurin%2C%20Eldar%20Basoglu%2C%20Chris%20Chen%2C%20Guoguo%20Andreas%20Stolcke%2C%20Yongqiang%20Wang%2C%20Huaming%20Wang%2C%20Kaisheng%20Yao%2C%20Dong%20Yu%2C%20Yu%20Zhang%2C%20and%20Geoffrey%20Zweig.%20An%20introduction%20to%20computational%20networks%20and%20the%20computational%20network%20toolkit%202014-08"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Miltiadis Allamanis, Marc Brockschmidt, and Mahmoud Khademi. Learning to represent programs with graphs. In International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Allamanis%2C%20Miltiadis%20Brockschmidt%2C%20Marc%20Khademi%2C%20Mahmoud%20Learning%20to%20represent%20programs%20with%20graphs%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Allamanis%2C%20Miltiadis%20Brockschmidt%2C%20Marc%20Khademi%2C%20Mahmoud%20Learning%20to%20represent%20programs%20with%20graphs%202018"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Fr\u00e9d\u00e9ric Bastien, Pascal Lamblin, Razvan Pascanu, James Bergstra, Ian J. Goodfellow, Arnaud Bergeron, Nicolas Bouchard, and Yoshua Bengio. Theano: new features and speed improvements. Deep Learning and Unsupervised Feature Learning NIPS 2012 Workshop, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bastien%2C%20Fr%C3%A9d%C3%A9ric%20Lamblin%2C%20Pascal%20Pascanu%2C%20Razvan%20Bergstra%2C%20James%20Theano%3A%20new%20features%20and%20speed%20improvements%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bastien%2C%20Fr%C3%A9d%C3%A9ric%20Lamblin%2C%20Pascal%20Pascanu%2C%20Razvan%20Bergstra%2C%20James%20Theano%3A%20new%20features%20and%20speed%20improvements%202012"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Uday Bondhugula, Albert Hartono, J. Ramanujam, and P. Sadayappan. A practical automatic polyhedral parallelizer and locality optimizer. In Proceedings of the 29th ACM SIGPLAN Conference on Programming Language Design and Implementation, PLDI \u201908, pages 101\u2013113. ACM, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bondhugula%2C%20Uday%20Albert%20Hartono%2C%20J.Ramanujam%20Sadayappan%2C%20P.%20A%20practical%20automatic%20polyhedral%20parallelizer%20and%20locality%20optimizer%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bondhugula%2C%20Uday%20Albert%20Hartono%2C%20J.Ramanujam%20Sadayappan%2C%20P.%20A%20practical%20automatic%20polyhedral%20parallelizer%20and%20locality%20optimizer%202008"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Chris Burges, Tal Shaked, Erin Renshaw, Ari Lazier, Matt Deeds, Nicole Hamilton, and Greg Hullender. Learning to rank using gradient descent. In Proceedings of the 22Nd International Conference on Machine Learning, ICML \u201905, pages 89\u201396, New York, NY, USA, 2005. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Burges%2C%20Chris%20Shaked%2C%20Tal%20Renshaw%2C%20Erin%20Lazier%2C%20Ari%20Learning%20to%20rank%20using%20gradient%20descent%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Burges%2C%20Chris%20Shaked%2C%20Tal%20Renshaw%2C%20Erin%20Lazier%2C%20Ari%20Learning%20to%20rank%20using%20gradient%20descent%202005"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Tianqi Chen and Carlos Guestrin. XGBoost: A scalable tree boosting system. In Proceedings of the 22Nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, KDD \u201916, pages 785\u2013794, New York, NY, USA, 2016. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Tianqi%20Guestrin%2C%20Carlos%20XGBoost%3A%20A%20scalable%20tree%20boosting%20system%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Tianqi%20Guestrin%2C%20Carlos%20XGBoost%3A%20A%20scalable%20tree%20boosting%20system%202016"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Tianqi Chen, Mu Li, Yutian Li, Min Lin, Naiyan Wang, Minjie Wang, Tianjun Xiao, Bing Xu, Chiyuan Zhang, , and Zheng Zhang. MXNet: A flexible and efficient machine learning library for heterogeneous distributed systems. In Neural Information Processing Systems, Workshop on Machine Learning Systems (LearningSys\u201915), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=MXNet%3A%20A%20flexible%20and%20efficient%20machine%20learning%20library%20for%20heterogeneous%20distributed%20systems%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=MXNet%3A%20A%20flexible%20and%20efficient%20machine%20learning%20library%20for%20heterogeneous%20distributed%20systems%202015"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Tianqi Chen, Thierry Moreau, Ziheng Jiang, Lianmin Zheng, Eddie Yan, Meghan Cowan, Haichen Shen, Leyuan Wang, Yuwei Hu, Luis Ceze, Carlos Guestrin, and Arvind Krishnamurthy. Tvm: An automated end-to-end optimizing compiler for deep learning. In 13th USENIX Symposium on Operating Systems Design and Implementation (OSDI 18), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Tianqi%20Moreau%2C%20Thierry%20Jiang%2C%20Ziheng%20Zheng%2C%20Lianmin%20Tvm%3A%20An%20automated%20end-to-end%20optimizing%20compiler%20for%20deep%20learning%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Tianqi%20Moreau%2C%20Thierry%20Jiang%2C%20Ziheng%20Zheng%2C%20Lianmin%20Tvm%3A%20An%20automated%20end-to-end%20optimizing%20compiler%20for%20deep%20learning%202018"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Xinyun Chen, Chang Liu, and Dawn Song. Tree-to-tree neural networks for program translation. CoRR, abs/1802.03691, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.03691"
+        },
+        {
+            "id": "11",
+            "entry": "[11] J.H. Friedman. Greedy function approximation: a gradient boosting machine. Annals of Statistics, 29(5):1189\u20131232, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Friedman%2C%20J.H.%20Greedy%20function%20approximation%3A%20a%20gradient%20boosting%20machine%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Friedman%2C%20J.H.%20Greedy%20function%20approximation%3A%20a%20gradient%20boosting%20machine%202001"
+        },
+        {
+            "id": "12",
+            "entry": "[12] M. Frigo and S. G. Johnson. Fftw: an adaptive software architecture for the fft. In Acoustics, Speech and Signal Processing, 1998. Proceedings of the 1998 IEEE International Conference on, volume 3, pages 1381\u20131384 vol.3, May 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Frigo%2C%20M.%20Johnson%2C%20S.G.%20Fftw%3A%20an%20adaptive%20software%20architecture%20for%20the%20fft%201998-05",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Frigo%2C%20M.%20Johnson%2C%20S.G.%20Fftw%3A%20an%20adaptive%20software%20architecture%20for%20the%20fft%201998-05"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Daniel Golovin, Benjamin Solnik, Subhodeep Moitra, Greg Kochanski, John Karro, and D. Sculley. Google vizier: A service for black-box optimization. In Proceedings of the 23rd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, KDD \u201917, pages 1487\u20131495. ACM, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Golovin%2C%20Daniel%20Solnik%2C%20Benjamin%20Moitra%2C%20Subhodeep%20Kochanski%2C%20Greg%20Google%20vizier%3A%20A%20service%20for%20black-box%20optimization%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Golovin%2C%20Daniel%20Solnik%2C%20Benjamin%20Moitra%2C%20Subhodeep%20Kochanski%2C%20Greg%20Google%20vizier%3A%20A%20service%20for%20black-box%20optimization%202017"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Identity mappings in deep residual networks. arXiv preprint arXiv:1603.05027, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1603.05027"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Troels Henriksen, Niels G. W. Serup, Martin Elsman, Fritz Henglein, and Cosmin E. Oancea. Futhark: Purely functional gpu-programming with nested parallelism and in-place array updates. In Proceedings of the 38th ACM SIGPLAN Conference on Programming Language Design and Implementation, PLDI 2017, pages 556\u2013571, New York, NY, USA, 2017. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Henriksen%2C%20Troels%20Serup%2C%20Niels%20G.W.%20Elsman%2C%20Martin%20Henglein%2C%20Fritz%20Futhark%3A%20Purely%20functional%20gpu-programming%20with%20nested%20parallelism%20and%20in-place%20array%20updates%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Henriksen%2C%20Troels%20Serup%2C%20Niels%20G.W.%20Elsman%2C%20Martin%20Henglein%2C%20Fritz%20Futhark%3A%20Purely%20functional%20gpu-programming%20with%20nested%20parallelism%20and%20in-place%20array%20updates%202017"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Andrew G. Howard, Menglong Zhu, Bo Chen, Dmitry Kalenichenko, Weijun Wang, Tobias Weyand, Marco Andreetto, and Hartwig Adam. Mobilenets: Efficient convolutional neural networks for mobile vision applications. CoRR, abs/1704.04861, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1704.04861"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Frank Hutter, Holger H. Hoos, and Kevin Leyton-Brown. Sequential model-based optimization for general algorithm configuration. In Proceedings of the 5th International Conference on Learning and Intelligent Optimization, LION\u201905, pages 507\u2013523, Berlin, Heidelberg, 2011. Springer-Verlag.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hutter%2C%20Frank%20Hoos%2C%20Holger%20H.%20Leyton-Brown%2C%20Kevin%20Sequential%20model-based%20optimization%20for%20general%20algorithm%20configuration",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hutter%2C%20Frank%20Hoos%2C%20Holger%20H.%20Leyton-Brown%2C%20Kevin%20Sequential%20model-based%20optimization%20for%20general%20algorithm%20configuration"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Frank Hutter, Lin Xu, Holger Hoos, and Kevin Leyton-Brown. Algorithm runtime prediction: Methods and evaluation (extended abstract). In Proceedings of the Twenty-Fourth International Joint Conference on Artificial Intelligence, IJCAI 2015, Buenos Aires, Argentina, July 25-31, 2015, pages 4197\u20134201, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hutter%2C%20Frank%20Xu%2C%20Lin%20Hoos%2C%20Holger%20Leyton-Brown%2C%20Kevin%20Algorithm%20runtime%20prediction%3A%20Methods%20and%20evaluation%20%28extended%20abstract%29%202015-07-25",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hutter%2C%20Frank%20Xu%2C%20Lin%20Hoos%2C%20Holger%20Leyton-Brown%2C%20Kevin%20Algorithm%20runtime%20prediction%3A%20Methods%20and%20evaluation%20%28extended%20abstract%29%202015-07-25"
+        },
+        {
+            "id": "19",
+            "entry": "[19] S. Kirkpatrick, C. D. Gelatt, and M. P. Vecchi. Optimization by simulated annealing. Science, 220(4598):671\u2013680, 1983.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kirkpatrick%2C%20S.%20Gelatt%2C%20C.D.%20Vecchi%2C%20M.P.%20Optimization%20by%20simulated%20annealing%201983",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kirkpatrick%2C%20S.%20Gelatt%2C%20C.D.%20Vecchi%2C%20M.P.%20Optimization%20by%20simulated%20annealing%201983"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Fredrik Kjolstad, Shoaib Kamil, Stephen Chou, David Lugato, and Saman Amarasinghe. The tensor algebra compiler. Proc. ACM Program. Lang., 1(OOPSLA):77:1\u201377:29, October 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kjolstad%2C%20Fredrik%20Kamil%2C%20Shoaib%20Chou%2C%20Stephen%20Lugato%2C%20David%20The%20tensor%20algebra%20compiler%202017-10",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kjolstad%2C%20Fredrik%20Kamil%2C%20Shoaib%20Chou%2C%20Stephen%20Lugato%2C%20David%20The%20tensor%20algebra%20compiler%202017-10"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Tim Kraska, Alex Beutel, Ed H. Chi, Jeffrey Dean, and Neoklis Polyzotis. The case for learned index structures. CoRR, abs/1712.01208, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1712.01208"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Andreas Krause and Daniel Golovin. Submodular function maximization. In Tractability: Practical Approaches to Hard Problems. Cambridge University Press, February 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krause%2C%20Andreas%20Golovin%2C%20Daniel%20Submodular%20function%20maximization.%20In%20Tractability%3A%20Practical%20Approaches%20to%20Hard%20Problems%202014-02"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Alex Krizhevsky, Ilya Sutskever, and Geoffrey E. Hinton. Imagenet classification with deep convolutional neural networks. In Advances in Neural Information Processing Systems 25, pages 1097\u20131105. 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Hinton%2C%20Geoffrey%20E.%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krizhevsky%2C%20Alex%20Sutskever%2C%20Ilya%20Hinton%2C%20Geoffrey%20E.%20Imagenet%20classification%20with%20deep%20convolutional%20neural%20networks%202012"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Andrew Lavin and Scott Gray. Fast algorithms for convolutional neural networks. In 2016 IEEE Conference on Computer Vision and Pattern Recognition, CVPR 2016, Las Vegas, NV, USA, June 27-30, 2016, pages 4013\u20134021, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lavin%2C%20Andrew%20Gray%2C%20Scott%20Fast%20algorithms%20for%20convolutional%20neural%20networks%202016-06-27",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lavin%2C%20Andrew%20Gray%2C%20Scott%20Fast%20algorithms%20for%20convolutional%20neural%20networks%202016-06-27"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Lisha Li, Kevin G. Jamieson, Giulia DeSalvo, Afshin Rostamizadeh, and Ameet Talwalkar. Efficient hyperparameter optimization and infinitely many armed bandits. CoRR, abs/1603.06560, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1603.06560"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Azalia Mirhoseini, Hieu Pham, Quoc V. Le, Benoit Steiner, Rasmus Larsen, Yuefeng Zhou, Naveen Kumar, Mohammad Norouzi, Samy Bengio, and Jeff Dean. Device placement optimization with reinforcement learning. In Proceedings of the 34th International Conference on Machine Learning, ICML 2017, Sydney, NSW, Australia, 6-11 August 2017, pages 2430\u20132439, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mirhoseini%2C%20Azalia%20Pham%2C%20Hieu%20Le%2C%20Quoc%20V.%20Steiner%2C%20Benoit%20Device%20placement%20optimization%20with%20reinforcement%20learning%202017-08",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mirhoseini%2C%20Azalia%20Pham%2C%20Hieu%20Le%2C%20Quoc%20V.%20Steiner%2C%20Benoit%20Device%20placement%20optimization%20with%20reinforcement%20learning%202017-08"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei A Rusu, Joel Veness, Marc G Bellemare, Alex Graves, Martin Riedmiller, Andreas K Fidjeland, Georg Ostrovski, et al. Human-level control through deep reinforcement learning. Nature, 518(7540):529, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20Volodymyr%20Kavukcuoglu%2C%20Koray%20Silver%2C%20David%20Rusu%2C%20Andrei%20A.%20Human-level%20control%20through%20deep%20reinforcement%20learning%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20Volodymyr%20Kavukcuoglu%2C%20Koray%20Silver%2C%20David%20Rusu%2C%20Andrei%20A.%20Human-level%20control%20through%20deep%20reinforcement%20learning%202015"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Ravi Teja Mullapudi, Andrew Adams, Dillon Sharlet, Jonathan Ragan-Kelley, and Kayvon Fatahalian. Automatically scheduling halide image processing pipelines. ACM Trans. Graph., 35(4):83:1\u201383:11, July 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mullapudi%2C%20Ravi%20Teja%20Adams%2C%20Andrew%20Sharlet%2C%20Dillon%20Ragan-Kelley%2C%20Jonathan%20Automatically%20scheduling%20halide%20image%20processing%20pipelines%202016-07-11",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mullapudi%2C%20Ravi%20Teja%20Adams%2C%20Andrew%20Sharlet%2C%20Dillon%20Ragan-Kelley%2C%20Jonathan%20Automatically%20scheduling%20halide%20image%20processing%20pipelines%202016-07-11"
+        },
+        {
+            "id": "29",
+            "entry": "[29] George L Nemhauser, Laurence A Wolsey, and Marshall L Fisher. An analysis of approximations for maximizing submodular set functions\u2014i. Mathematical Programming, 14(1):265\u2013294, 1978.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nemhauser%2C%20George%20L.%20Wolsey%2C%20Laurence%20A.%20and%20Marshall%20L%20Fisher.%20An%20analysis%20of%20approximations%20for%20maximizing%20submodular%20set%20functions%E2%80%94i%201978",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nemhauser%2C%20George%20L.%20Wolsey%2C%20Laurence%20A.%20and%20Marshall%20L%20Fisher.%20An%20analysis%20of%20approximations%20for%20maximizing%20submodular%20set%20functions%E2%80%94i%201978"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Shoumik Palkar, James J. Thomas, Deepak Narayanan, Anil Shanbhag, Rahul Palamuttam, Holger Pirk, Malte Schwarzkopf, Saman P. Amarasinghe, Samuel Madden, and Matei Zaharia. Weld: Rethinking the interface between data-intensive applications. CoRR, abs/1709.06416, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1709.06416"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Alec Radford, Luke Metz, and Soumith Chintala. Unsupervised representation learning with deep convolutional generative adversarial networks. arXiv preprint arXiv:1511.06434, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.06434"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Jonathan Ragan-Kelley, Connelly Barnes, Andrew Adams, Sylvain Paris, Fr\u00e9do Durand, and Saman Amarasinghe. Halide: A language and compiler for optimizing parallelism, locality, and recomputation in image processing pipelines. In Proceedings of the 34th ACM SIGPLAN Conference on Programming Language Design and Implementation, PLDI \u201913, pages 519\u2013530, New York, NY, USA, 2013. ACM.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ragan-Kelley%2C%20Jonathan%20Barnes%2C%20Connelly%20Adams%2C%20Andrew%20Paris%2C%20Sylvain%20Halide%3A%20A%20language%20and%20compiler%20for%20optimizing%20parallelism%2C%20locality%2C%20and%20recomputation%20in%20image%20processing%20pipelines%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ragan-Kelley%2C%20Jonathan%20Barnes%2C%20Connelly%20Adams%2C%20Andrew%20Paris%2C%20Sylvain%20Halide%3A%20A%20language%20and%20compiler%20for%20optimizing%20parallelism%2C%20locality%2C%20and%20recomputation%20in%20image%20processing%20pipelines%202013"
+        },
+        {
+            "id": "33",
+            "entry": "[33] B. Shahriari, K. Swersky, Z. Wang, R. P. Adams, and N. de Freitas. Taking the human out of the loop: A review of bayesian optimization. Proceedings of the IEEE, 104(1):148\u2013175, Jan 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shahriari%2C%20B.%20Swersky%2C%20K.%20Wang%2C%20Z.%20Adams%2C%20R.P.%20Taking%20the%20human%20out%20of%20the%20loop%3A%20A%20review%20of%20bayesian%20optimization%202016-01",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shahriari%2C%20B.%20Swersky%2C%20K.%20Wang%2C%20Z.%20Adams%2C%20R.P.%20Taking%20the%20human%20out%20of%20the%20loop%3A%20A%20review%20of%20bayesian%20optimization%202016-01"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Jasper Snoek, Hugo Larochelle, and Ryan P. Adams. Practical bayesian optimization of machine learning algorithms. In Proceedings of the 25th International Conference on Neural Information Processing Systems - Volume 2, NIPS\u201912, pages 2951\u20132959, USA, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Snoek%2C%20Jasper%20Larochelle%2C%20Hugo%20Adams%2C%20Ryan%20P.%20Practical%20bayesian%20optimization%20of%20machine%20learning%20algorithms%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Snoek%2C%20Jasper%20Larochelle%2C%20Hugo%20Adams%2C%20Ryan%20P.%20Practical%20bayesian%20optimization%20of%20machine%20learning%20algorithms%202012"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Jasper Snoek, Oren Rippel, Kevin Swersky, Ryan Kiros, Nadathur Satish, Narayanan Sundaram, Md. Mostofa Ali Patwary, Prabhat Prabhat, and Ryan P. Adams. Scalable bayesian optimization using deep neural networks. In Proceedings of the 32Nd International Conference on International Conference on Machine Learning - Volume 37, ICML\u201915, pages 2171\u20132180, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Snoek%2C%20Jasper%20Rippel%2C%20Oren%20Swersky%2C%20Kevin%20Kiros%2C%20Ryan%20Scalable%20bayesian%20optimization%20using%20deep%20neural%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Snoek%2C%20Jasper%20Rippel%2C%20Oren%20Swersky%2C%20Kevin%20Kiros%2C%20Ryan%20Scalable%20bayesian%20optimization%20using%20deep%20neural%20networks%202015"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Michel Steuwer, Toomas Remmelg, and Christophe Dubach. Lift: A functional data-parallel ir for high-performance gpu code generation. In Proceedings of the 2017 International Symposium on Code Generation and Optimization, CGO \u201917, pages 74\u201385, Piscataway, NJ, USA, 2017. IEEE Press.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Steuwer%2C%20Michel%20Remmelg%2C%20Toomas%20Dubach%2C%20Christophe%20Lift%3A%20A%20functional%20data-parallel%20ir%20for%20high-performance%20gpu%20code%20generation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Steuwer%2C%20Michel%20Remmelg%2C%20Toomas%20Dubach%2C%20Christophe%20Lift%3A%20A%20functional%20data-parallel%20ir%20for%20high-performance%20gpu%20code%20generation%202017"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Arvind K. Sujeeth, HyoukJoong Lee, Kevin J. Brown, Hassan Chafi, Michael Wu, Anand R. Atreya, Kunle Olukotun, Tiark Rompf, and Martin Odersky. Optiml: An implicitly parallel domain-specific language for machine learning. In Proceedings of the 28th International Conference on International Conference on Machine Learning, ICML\u201911, pages 609\u2013616, USA, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sujeeth%2C%20Arvind%20K.%20Lee%2C%20HyoukJoong%20Brown%2C%20Kevin%20J.%20Chafi%2C%20Hassan%20Optiml%3A%20An%20implicitly%20parallel%20domain-specific%20language%20for%20machine%20learning%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sujeeth%2C%20Arvind%20K.%20Lee%2C%20HyoukJoong%20Brown%2C%20Kevin%20J.%20Chafi%2C%20Hassan%20Optiml%3A%20An%20implicitly%20parallel%20domain-specific%20language%20for%20machine%20learning%202011"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Ilya Sutskever, Oriol Vinyals, and Quoc V. Le. Sequence to sequence learning with neural networks. In Proceedings of the 27th International Conference on Neural Information Processing Systems - Volume 2, NIPS\u201914, pages 3104\u20133112, Cambridge, MA, USA, 2014. MIT Press.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutskever%2C%20Ilya%20Vinyals%2C%20Oriol%20Le%2C%20Quoc%20V.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutskever%2C%20Ilya%20Vinyals%2C%20Oriol%20Le%2C%20Quoc%20V.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Kai Sheng Tai, Richard Socher, and Christopher D Manning. Improved semantic representations from tree-structured long short-term memory networks. arXiv preprint arXiv:1503.00075, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1503.00075"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Nicolas Vasilache. personal communication.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vasilache%2C%20Nicolas%20personal%20communication"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Nicolas Vasilache, Oleksandr Zinenko, Theodoros Theodoridis, Priya Goyal, Zachary DeVito, William S. Moses, Sven Verdoolaege, Andrew Adams, and Albert Cohen. Tensor comprehensions: Frameworkagnostic high-performance machine learning abstractions. CoRR, abs/1802.04730, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.04730"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Sven Verdoolaege, Juan Carlos Juega, Albert Cohen, Jos\u00e9 Ignacio G\u00f3mez, Christian Tenllado, and Francky Catthoor. Polyhedral parallel code generation for cuda. ACM Trans. Archit. Code Optim., 9(4):54:1\u201354:23, January 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Verdoolaege%2C%20Sven%20Juega%2C%20Juan%20Carlos%20Cohen%2C%20Albert%20G%C3%B3mez%2C%20Jos%C3%A9%20Ignacio%20Polyhedral%20parallel%20code%20generation%20for%20cuda%202013-01-23",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Verdoolaege%2C%20Sven%20Juega%2C%20Juan%20Carlos%20Cohen%2C%20Albert%20G%C3%B3mez%2C%20Jos%C3%A9%20Ignacio%20Polyhedral%20parallel%20code%20generation%20for%20cuda%202013-01-23"
+        },
+        {
+            "id": "43",
+            "entry": "[43] R. Clint Whaley and Jack J. Dongarra. Automatically tuned linear algebra software. In Proceedings of the 1998 ACM/IEEE Conference on Supercomputing, SC \u201998, pages 1\u201327, Washington, DC, USA, 1998. IEEE Computer Society.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Whaley%2C%20R.Clint%20Dongarra%2C%20Jack%20J.%20Automatically%20tuned%20linear%20algebra%20software%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Whaley%2C%20R.Clint%20Dongarra%2C%20Jack%20J.%20Automatically%20tuned%20linear%20algebra%20software%201998"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Wojciech Zaremba, Ilya Sutskever, and Oriol Vinyals. Recurrent neural network regularization. arXiv preprint arXiv:1409.2329, 2014. ",
+            "arxiv_url": "https://arxiv.org/pdf/1409.2329"
+        }
+    ]
+}

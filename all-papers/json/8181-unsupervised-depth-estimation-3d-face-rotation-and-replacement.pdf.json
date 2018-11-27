@@ -1,0 +1,258 @@
+{
+    "filename": "8181-unsupervised-depth-estimation-3d-face-rotation-and-replacement.pdf",
+    "metadata": {
+        "title": "Unsupervised Depth Estimation, 3D Face Rotation and Replacement",
+        "author": "Joel Ruben Antony Moniz, Christopher Beckham, Simon Rajotte, Sina Honari, Chris Pal",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8181-unsupervised-depth-estimation-3d-face-rotation-and-replacement.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We present an unsupervised approach for learning to estimate three dimensional (3D) facial structure from a single image while also predicting 3D viewpoint transformations that match a desired pose and facial geometry. We achieve this by inferring the depth of facial keypoints of an input image in an unsupervised manner, without using any form of ground-truth depth information. We show how it is possible to use these depths as intermediate computations within a new backpropable loss to predict the parameters of a 3D affine transformation matrix that maps inferred 3D keypoints of an input face to the corresponding 2D keypoints on a desired target facial geometry or pose. Our resulting approach, called DepthNets, can therefore be used to infer plausible 3D transformations from one face pose to another, allowing faces to be frontalized, transformed into 3D models or even warped to another pose and facial geometry. Lastly, we identify certain shortcomings with our formulation, and explore adversarial image translation techniques as a post-processing step to re-synthesize complete head shots for faces re-targeted to different poses or identities. 1"
+    },
+    "keywords": [
+        {
+            "term": "transformation matrix",
+            "url": "https://en.wikipedia.org/wiki/transformation_matrix"
+        },
+        {
+            "term": "unsupervised learning",
+            "url": "https://en.wikipedia.org/wiki/unsupervised_learning"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        },
+        {
+            "term": "facial geometry",
+            "url": "https://en.wikipedia.org/wiki/facial_geometry"
+        },
+        {
+            "term": "ground truth",
+            "url": "https://en.wikipedia.org/wiki/ground_truth"
+        },
+        {
+            "term": "affine transformation",
+            "url": "https://en.wikipedia.org/wiki/affine_transformation"
+        },
+        {
+            "term": "image translation",
+            "url": "https://en.wikipedia.org/wiki/image_translation"
+        }
+    ],
+    "highlights": [
+        "Once the 3D affine transformation matrix is estimated, it can be used to warp the source image onto the target face geometry using a textured triangular mesh",
+        "In this paper we present a novel unsupervised learning technique for face rotation and warping from a 2D source image \u2013 whose facial appearance will be used in the rotation \u2013 to a target face \u2013 to which the facial pose and geometry inferred from the source image is mapped",
+        "This can be leveraged, for example, in the advertisement industry, when putting someone in a particular location can be costly or unfeasible, or in the movie industry when the main actor\u2019s limited time or high cost can enforce using another actor whose face can be later replaced by the main actor\u2019s. This is achieved through estimating the source face depth and the 3D affine parameters that warp the source to the target face using neural networks",
+        "We report error by mapping the template face to each source face via Procrustes superimposition and use an affine transformation from the 3D face f to the target face.\n3, 4) We use our proposed approach to predict both depth and geometry.\n5, 6) These models described in Section 2.2",
+        "We have proposed a novel approach to 3D face model creation which enables pose normalization without using any ground truth depth data",
+        "We have illustrated the quality and utility of the depths and 3D transformations obtained using our method by transforming source faces to a wide variety of target poses and geometries"
+    ],
+    "key_statements": [
+        "Once the 3D affine transformation matrix is estimated, it can be used to warp the source image onto the target face geometry using a textured triangular mesh",
+        "In this paper we present a novel unsupervised learning technique for face rotation and warping from a 2D source image \u2013 whose facial appearance will be used in the rotation \u2013 to a target face \u2013 to which the facial pose and geometry inferred from the source image is mapped",
+        "This can be leveraged, for example, in the advertisement industry, when putting someone in a particular location can be costly or unfeasible, or in the movie industry when the main actor\u2019s limited time or high cost can enforce using another actor whose face can be later replaced by the main actor\u2019s. This is achieved through estimating the source face depth and the 3D affine parameters that warp the source to the target face using neural networks",
+        "We report error by mapping the template face to each source face via Procrustes superimposition and use an affine transformation from the 3D face f to the target face.\n3, 4) We use our proposed approach to predict both depth and geometry.\n5, 6) These models described in Section 2.2",
+        "While their approach eliminates the need for depth estimation, it only allows the source face to be mapped to the target template geometry, while DepthNet can map the source face to any target geometry, provided by a target image, or its keypoints",
+        "We have proposed a novel approach to 3D face model creation which enables pose normalization without using any ground truth depth data",
+        "We have illustrated the quality and utility of the depths and 3D transformations obtained using our method by transforming source faces to a wide variety of target poses and geometries",
+        "Our technique can be used for face rotation and replacement and when combined with adversarial repair it can blend warped faces to synthesize the background"
+    ],
+    "summary": [
+        "Once the 3D affine transformation matrix is estimated, it can be used to warp the source image onto the target face geometry using a textured triangular mesh.",
+        "Our first contribution is to propose a neural architecture that predicts both the depth of source keypoints as well as the parameters of a 3D geometric affine transformation which constitute the",
+        "DepthNet only predicts depth values explicitly and the affine parameters are inferred through a pseudoinverse transformation of source and target keypoints.",
+        "5. Image Warper: This phase consists of using the depth proxy and affine transform matrix generated to warp the face from its source pose to be matched to the target object geometry.",
+        "As observed in Table 1, a simple 2D affine transform without estimating depth and a template 3D face get high errors on mapping to the target faces.",
+        "We train DepthNet on unpaired faces belonging to different identities and compare with other models that estimate depth.",
+        "Since the three baselines estimate depth on a single image due to their different model formulation, we first measure m using closed form solution in Eq 3 and apply m to the estimated source keypoints to get the target keypoint estimations.",
+        "We would like to emphasize that MOFA and AIGN are designed to estimate a 3D model, while DepthNet is designed to estimate the parameters that facilitate warping a face pose to another without having depth values, so these models are designed to solve different problems.",
+        "This allows the estimated camera matrix, 3D rotation matrix and 3D translation vector to be used to transform the target 3D model to the pose of the query image from which an approximate depth can be obtained.",
+        "It estimates the depth of the source face keypoints, thereby inferring an image specific 3D model of the face.",
+        "Similar to DepthNet, DA-GAN [<a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>] estimates parameters of an affine transformation model that maps a 2D face to a 3D face.",
+        "While their approach eliminates the need for depth estimation, it only allows the source face to be mapped to the target template geometry, while DepthNet can map the source face to any target geometry, provided by a target image, or its keypoints.",
+        "Al [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>] estimate 3D human pose in videos, where they use synthetic data to pre-train internal parameters of the model and fine-tune them by keypoint, segmentation and motion loss."
+    ],
+    "headline": "We present an unsupervised approach for learning to estimate three dimensional  facial structure from a single image while predicting 3D viewpoint transformations that match a desired pose and facial geometry",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Blanz, Volker and Vetter, Thomas. A morphable model for the synthesis of 3d faces. In Proceedings of the 26th annual conference on Computer graphics and interactive techniques, pp. 187\u2013194. ACM Press/Addison-Wesley Publishing Co., 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Blanz%2C%20Volker%20Vetter%2C%20Thomas%20A%20morphable%20model%20for%20the%20synthesis%20of%203d%20faces%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Blanz%2C%20Volker%20Vetter%2C%20Thomas%20A%20morphable%20model%20for%20the%20synthesis%20of%203d%20faces%201999"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Eigen, David, Puhrsch, Christian, and Fergus, Rob. Depth map prediction from a single image using a multi-scale deep network. In Advances in Neural Information Processing Systems (NIPS), pp. 2366\u20132374, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Eigen%2C%20David%20Puhrsch%2C%20Christian%20Fergus%2C%20Rob%20Depth%20map%20prediction%20from%20a%20single%20image%20using%20a%20multi-scale%20deep%20network%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Eigen%2C%20David%20Puhrsch%2C%20Christian%20Fergus%2C%20Rob%20Depth%20map%20prediction%20from%20a%20single%20image%20using%20a%20multi-scale%20deep%20network%202014"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Garg, Ravi, BG, Vijay Kumar, Carneiro, Gustavo, and Reid, Ian. Unsupervised cnn for single view depth estimation: Geometry to the rescue. In Proceedings of the European Conference on Computer Vision (ECCV), pp. 740\u2013756.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Garg%2C%20Ravi%20BG%2C%20Vijay%20Kumar%20Carneiro%2C%20Gustavo%20Reid%2C%20Ian%20Unsupervised%20cnn%20for%20single%20view%20depth%20estimation%3A%20Geometry%20to%20the%20rescue",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Garg%2C%20Ravi%20BG%2C%20Vijay%20Kumar%20Carneiro%2C%20Gustavo%20Reid%2C%20Ian%20Unsupervised%20cnn%20for%20single%20view%20depth%20estimation%3A%20Geometry%20to%20the%20rescue"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Glorot, Xavier and Bengio, Yoshua. Understanding the difficulty of training deep feedforward neural networks. In International conference on Artificial Intelligence and Statistics (AISTATS), pp. 249\u2013256, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Glorot%2C%20Xavier%20Bengio%2C%20Yoshua%20Understanding%20the%20difficulty%20of%20training%20deep%20feedforward%20neural%20networks%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Glorot%2C%20Xavier%20Bengio%2C%20Yoshua%20Understanding%20the%20difficulty%20of%20training%20deep%20feedforward%20neural%20networks%202010"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Godard, Cl\u00e9ment, Mac Aodha, Oisin, and Brostow, Gabriel J. Unsupervised monocular depth estimation with left-right consistency. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Godard%2C%20Cl%C3%A9ment%20Aodha%2C%20Mac%20Oisin%20Brostow%2C%20Gabriel%20J.%20Unsupervised%20monocular%20depth%20estimation%20with%20left-right%20consistency%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Godard%2C%20Cl%C3%A9ment%20Aodha%2C%20Mac%20Oisin%20Brostow%2C%20Gabriel%20J.%20Unsupervised%20monocular%20depth%20estimation%20with%20left-right%20consistency%202017"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Gross, Ralph, Matthews, Iain, Cohn, Jeffrey, Kanade, Takeo, and Baker, Simon. Multi-pie. Image and Vision Computing, 28(5):807\u2013813, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gross%20Ralph%20Matthews%20Iain%20Cohn%20Jeffrey%20Kanade%20Takeo%20and%20Baker%20Simon%20Multipie%20Image%20and%20Vision%20Computing%20285807813%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gross%20Ralph%20Matthews%20Iain%20Cohn%20Jeffrey%20Kanade%20Takeo%20and%20Baker%20Simon%20Multipie%20Image%20and%20Vision%20Computing%20285807813%202010"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Hassner, Tal. Viewing real-world faces in 3d. In Proceedings of the IEEE International Conference on Computer Vision (ICCV), pp. 3607\u20133614, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hassner%2C%20Tal%20Viewing%20real-world%20faces%20in%203d%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hassner%2C%20Tal%20Viewing%20real-world%20faces%20in%203d%202013"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Hassner, Tal, Harel, Shai, Paz, Eran, and Enbar, Roee. Effective face frontalization in unconstrained images. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pp. 4295\u20134304, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hassner%2C%20Tal%20Harel%2C%20Shai%20Paz%2C%20Eran%20Enbar%2C%20Roee%20Effective%20face%20frontalization%20in%20unconstrained%20images%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hassner%2C%20Tal%20Harel%2C%20Shai%20Paz%2C%20Eran%20Enbar%2C%20Roee%20Effective%20face%20frontalization%20in%20unconstrained%20images%202015"
+        },
+        {
+            "id": "9",
+            "entry": "[9] He, Kaiming, Zhang, Xiangyu, Ren, Shaoqing, and Sun, Jian. Delving deep into rectifiers: Surpassing human-level performance on imagenet classification. In Proceedings of the IEEE International Conference on Computer Vision (ICCV), pp. 1026\u20131034, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Delving%20deep%20into%20rectifiers%3A%20Surpassing%20human-level%20performance%20on%20imagenet%20classification%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Delving%20deep%20into%20rectifiers%3A%20Surpassing%20human-level%20performance%20on%20imagenet%20classification%202015"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Honari, Sina, Yosinski, Jason, Vincent, Pascal, and Pal, Christopher. Recombinator networks: Learning coarse-to-fine feature aggregation. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pp. 5743\u20135752, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Honari%2C%20Sina%20Yosinski%2C%20Jason%20Vincent%2C%20Pascal%20Pal%2C%20Christopher%20Recombinator%20networks%3A%20Learning%20coarse-to-fine%20feature%20aggregation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Honari%2C%20Sina%20Yosinski%2C%20Jason%20Vincent%2C%20Pascal%20Pal%2C%20Christopher%20Recombinator%20networks%3A%20Learning%20coarse-to-fine%20feature%20aggregation%202016"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Honari, Sina, Molchanov, Pavlo, Tyree, Stephen, Vincent, Pascal, Pal, Christopher, and Kautz, Jan. Improving landmark localization with semi-supervised learning. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Honari%2C%20Sina%20Molchanov%2C%20Pavlo%20Tyree%2C%20Stephen%20Vincent%2C%20Pascal%20Improving%20landmark%20localization%20with%20semi-supervised%20learning%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Honari%2C%20Sina%20Molchanov%2C%20Pavlo%20Tyree%2C%20Stephen%20Vincent%2C%20Pascal%20Improving%20landmark%20localization%20with%20semi-supervised%20learning%202018"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Huang, Rui, Zhang, Shu, Li, Tianyu, and He, Ran. Beyond face rotation: Global and local perception gan for photorealistic and identity preserving frontal view synthesis. In Proceedings of the IEEE International Conference on Computer Vision (ICCV), Oct 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huang%2C%20Rui%20Zhang%2C%20Shu%20Li%2C%20Tianyu%20He%2C%20Ran%20Beyond%20face%20rotation%3A%20Global%20and%20local%20perception%20gan%20for%20photorealistic%20and%20identity%20preserving%20frontal%20view%20synthesis%202017-10",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huang%2C%20Rui%20Zhang%2C%20Shu%20Li%2C%20Tianyu%20He%2C%20Ran%20Beyond%20face%20rotation%3A%20Global%20and%20local%20perception%20gan%20for%20photorealistic%20and%20identity%20preserving%20frontal%20view%20synthesis%202017-10"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Jackson, Aaron S, Bulat, Adrian, Argyriou, Vasileios, and Tzimiropoulos, Georgios. Large pose 3d face reconstruction from a single image via direct volumetric cnn regression. In Proceedings of the IEEE International Conference on Computer Vision (ICCV), pp. 1031\u20131039. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jackson%2C%20Aaron%20S.%20Bulat%2C%20Adrian%20Argyriou%2C%20Vasileios%20Tzimiropoulos%2C%20Georgios%20Large%20pose%203d%20face%20reconstruction%20from%20a%20single%20image%20via%20direct%20volumetric%20cnn%20regression%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jackson%2C%20Aaron%20S.%20Bulat%2C%20Adrian%20Argyriou%2C%20Vasileios%20Tzimiropoulos%2C%20Georgios%20Large%20pose%203d%20face%20reconstruction%20from%20a%20single%20image%20via%20direct%20volumetric%20cnn%20regression%202017"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Jeni, L\u00e1szl\u00f3 A, Cohn, Jeffrey F, and Kanade, Takeo. Dense 3d face alignment from 2d videos in real-time. In IEEE International Conference and Workshops on Automatic Face and Gesture Recognition (FG), volume 1, pp. 1\u20138. IEEE, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jeni%2C%20L%C3%A1szl%C3%B3%20A.%20Cohn%2C%20Jeffrey%20F.%20Kanade%2C%20Takeo%20Dense%203d%20face%20alignment%20from%202d%20videos%20in%20real-time%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jeni%2C%20L%C3%A1szl%C3%B3%20A.%20Cohn%2C%20Jeffrey%20F.%20Kanade%2C%20Takeo%20Dense%203d%20face%20alignment%20from%202d%20videos%20in%20real-time%202015"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Liu, Fayao, Shen, Chunhua, and Lin, Guosheng. Deep convolutional neural fields for depth estimation from a single image. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pp. 5162\u20135170, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20Fayao%20Shen%2C%20Chunhua%20Lin%2C%20Guosheng%20Deep%20convolutional%20neural%20fields%20for%20depth%20estimation%20from%20a%20single%20image%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liu%2C%20Fayao%20Shen%2C%20Chunhua%20Lin%2C%20Guosheng%20Deep%20convolutional%20neural%20fields%20for%20depth%20estimation%20from%20a%20single%20image%202015"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Parkhi, Omkar M, Vedaldi, Andrea, and Zisserman, Andrew. Deep face recognition. Proceedings of the British Machine Vision Conference (BMVC), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Parkhi%2C%20Omkar%20M.%20Vedaldi%2C%20Andrea%20Zisserman%2C%20Andrew%20Deep%20face%20recognition%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Parkhi%2C%20Omkar%20M.%20Vedaldi%2C%20Andrea%20Zisserman%2C%20Andrew%20Deep%20face%20recognition%202015"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Sagonas, Christos, Tzimiropoulos, Georgios, Zafeiriou, Stefanos, and Pantic, Maja. 300 faces in-the-wild challenge: The first facial landmark localization challenge. In Proceedings of the IEEE International Conference on Computer Vision Workshops (CVPRW), pp. 397\u2013403, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sagonas%2C%20Christos%20Tzimiropoulos%2C%20Georgios%20Zafeiriou%2C%20Stefanos%20Pantic%2C%20Maja%20300%20faces%20in-the-wild%20challenge%3A%20The%20first%20facial%20landmark%20localization%20challenge%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sagonas%2C%20Christos%20Tzimiropoulos%2C%20Georgios%20Zafeiriou%2C%20Stefanos%20Pantic%2C%20Maja%20300%20faces%20in-the-wild%20challenge%3A%20The%20first%20facial%20landmark%20localization%20challenge%202013"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Shen, Yujun, Luo, Ping, Yan, Junjie, Wang, Xiaogang, and Tang, Xiaoou. Faceid-gan: Learning a symmetry three-player gan for identity-preserving face synthesis. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pp. 821\u2013830, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shen%2C%20Yujun%20Luo%2C%20Ping%20Yan%2C%20Junjie%20Wang%2C%20Xiaogang%20Faceid-gan%3A%20Learning%20a%20symmetry%20three-player%20gan%20for%20identity-preserving%20face%20synthesis%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shen%2C%20Yujun%20Luo%2C%20Ping%20Yan%2C%20Junjie%20Wang%2C%20Xiaogang%20Faceid-gan%3A%20Learning%20a%20symmetry%20three-player%20gan%20for%20identity-preserving%20face%20synthesis%202018"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Taigman, Yaniv, Yang, Ming, Ranzato, Marc\u2019Aurelio, and Wolf, Lior. Deepface: Closing the gap to human-level performance in face verification. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pp. 1701\u20131708, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Taigman%2C%20Yaniv%20Yang%2C%20Ming%20Ranzato%2C%20Marc%E2%80%99Aurelio%20Wolf%2C%20Lior%20Deepface%3A%20Closing%20the%20gap%20to%20human-level%20performance%20in%20face%20verification%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Taigman%2C%20Yaniv%20Yang%2C%20Ming%20Ranzato%2C%20Marc%E2%80%99Aurelio%20Wolf%2C%20Lior%20Deepface%3A%20Closing%20the%20gap%20to%20human-level%20performance%20in%20face%20verification%202014"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Tewari, Ayush, Zollh\u00f6fer, Michael, Kim, Hyeongwoo, Garrido, Pablo, Bernard, Florian, Perez, Patrick, and Theobalt, Christian. Mofa: Model-based deep convolutional face autoencoder for unsupervised monocular reconstruction. In Proceedings of the IEEE International Conference on Computer Vision (ICCV), volume 2, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tewari%2C%20Ayush%20Zollh%C3%B6fer%2C%20Michael%20Kim%2C%20Hyeongwoo%20Garrido%2C%20Pablo%20Mofa%3A%20Model-based%20deep%20convolutional%20face%20autoencoder%20for%20unsupervised%20monocular%20reconstruction%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tewari%2C%20Ayush%20Zollh%C3%B6fer%2C%20Michael%20Kim%2C%20Hyeongwoo%20Garrido%2C%20Pablo%20Mofa%3A%20Model-based%20deep%20convolutional%20face%20autoencoder%20for%20unsupervised%20monocular%20reconstruction%202017"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Thewlis, James, Bilen, Hakan, and Vedaldi, Andrea. Unsupervised learning of object landmarks by factorized spatial embeddings. In Proceedings of the IEEE International Conference on Computer Vision (ICCV), volume 1, pp. 5, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Thewlis%2C%20James%20Bilen%2C%20Hakan%20Vedaldi%2C%20Andrea%20Unsupervised%20learning%20of%20object%20landmarks%20by%20factorized%20spatial%20embeddings%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Thewlis%2C%20James%20Bilen%2C%20Hakan%20Vedaldi%2C%20Andrea%20Unsupervised%20learning%20of%20object%20landmarks%20by%20factorized%20spatial%20embeddings%202017"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Tran, Luan, Yin, Xi, and Liu, Xiaoming. Disentangled representation learning gan for poseinvariant face recognition. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tran%2C%20Luan%20Yin%2C%20Xi%20Liu%2C%20Xiaoming%20Disentangled%20representation%20learning%20gan%20for%20poseinvariant%20face%20recognition%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tran%2C%20Luan%20Yin%2C%20Xi%20Liu%2C%20Xiaoming%20Disentangled%20representation%20learning%20gan%20for%20poseinvariant%20face%20recognition%202017"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Tung, Hsiao-Yu, Tung, Hsiao-Wei, Yumer, Ersin, and Fragkiadaki, Katerina. Self-supervised learning of motion capture. In Advances in Neural Information Processing Systems (NIPS), pp. 5242\u20135252, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tung%2C%20Hsiao-Yu%20Tung%2C%20Hsiao-Wei%20Yumer%2C%20Ersin%20Fragkiadaki%2C%20Katerina%20Self-supervised%20learning%20of%20motion%20capture%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tung%2C%20Hsiao-Yu%20Tung%2C%20Hsiao-Wei%20Yumer%2C%20Ersin%20Fragkiadaki%2C%20Katerina%20Self-supervised%20learning%20of%20motion%20capture%202017"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Tung, Hsiao-Yu Fish, Harley, Adam W, Seto, William, and Fragkiadaki, Katerina. Adversarial inverse graphics networks: Learning 2d-to-3d lifting and image-to-image translation from unpaired supervision. In Proceedings of the IEEE International Conference on Computer Vision (ICCV), volume 2, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tung%2C%20Hsiao-Yu%20Fish%20Harley%2C%20Adam%20W.%20Seto%2C%20William%20Fragkiadaki%2C%20Katerina%20Adversarial%20inverse%20graphics%20networks%3A%20Learning%202d-to-3d%20lifting%20and%20image-to-image%20translation%20from%20unpaired%20supervision%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tung%2C%20Hsiao-Yu%20Fish%20Harley%2C%20Adam%20W.%20Seto%2C%20William%20Fragkiadaki%2C%20Katerina%20Adversarial%20inverse%20graphics%20networks%3A%20Learning%202d-to-3d%20lifting%20and%20image-to-image%20translation%20from%20unpaired%20supervision%202017"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Yin, Xi, Yu, Xiang, Sohn, Kihyuk, Liu, Xiaoming, and Chandraker, Manmohan. Towards large-pose face frontalization in the wild. In Proceedings of the IEEE International Conference on Computer Vision (ICCV), pp. 1\u201310, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yin%2C%20Xi%20Yu%2C%20Xiang%20Sohn%2C%20Kihyuk%20Liu%2C%20Xiaoming%20Towards%20large-pose%20face%20frontalization%20in%20the%20wild%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yin%2C%20Xi%20Yu%2C%20Xiang%20Sohn%2C%20Kihyuk%20Liu%2C%20Xiaoming%20Towards%20large-pose%20face%20frontalization%20in%20the%20wild%202017"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Zhang, Xing, Yin, Lijun, Cohn, Jeffrey F, Canavan, Shaun, Reale, Michael, Horowitz, Andy, Liu, Peng, and Girard, Jeffrey M. Bp4d-spontaneous: a high-resolution spontaneous 3d dynamic facial expression database. Image and Vision Computing, 32(10):692\u2013706, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Xing%20Yin%2C%20Lijun%20Cohn%2C%20Jeffrey%20F.%20Canavan%2C%20Shaun%20Bp4d-spontaneous%3A%20a%20high-resolution%20spontaneous%203d%20dynamic%20facial%20expression%20database%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Xing%20Yin%2C%20Lijun%20Cohn%2C%20Jeffrey%20F.%20Canavan%2C%20Shaun%20Bp4d-spontaneous%3A%20a%20high-resolution%20spontaneous%203d%20dynamic%20facial%20expression%20database%202014"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Zhao, Jian, Xiong, Lin, Jayashree, Panasonic Karlekar, Li, Jianshu, Zhao, Fang, Wang, Zhecan, Pranata, Panasonic Sugiri, Shen, Panasonic Shengmei, Yan, Shuicheng, and Feng, Jiashi. Dualagent gans for photorealistic and identity preserving profile face synthesis. In Advances in Neural Information Processing Systems (NIPS), pp. 66\u201376, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhao%2C%20Jian%20Xiong%2C%20Lin%20Jayashree%2C%20Panasonic%20Karlekar%20Li%2C%20Jianshu%20Dualagent%20gans%20for%20photorealistic%20and%20identity%20preserving%20profile%20face%20synthesis%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhao%2C%20Jian%20Xiong%2C%20Lin%20Jayashree%2C%20Panasonic%20Karlekar%20Li%2C%20Jianshu%20Dualagent%20gans%20for%20photorealistic%20and%20identity%20preserving%20profile%20face%20synthesis%202017"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Zhao, Jian, Cheng, Yu, Xu, Yan, Xiong, Lin, Li, Jianshu, Zhao, Fang, Jayashree, Karlekar, Pranata, Sugiri, Shen, Shengmei, Xing, Junliang, et al. Towards pose invariant face recognition in the wild. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pp. 2207\u20132216, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhao%2C%20Jian%20Cheng%2C%20Yu%20Xu%2C%20Yan%20Xiong%2C%20Lin%20Towards%20pose%20invariant%20face%20recognition%20in%20the%20wild%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhao%2C%20Jian%20Cheng%2C%20Yu%20Xu%2C%20Yan%20Xiong%2C%20Lin%20Towards%20pose%20invariant%20face%20recognition%20in%20the%20wild%202018"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Zhou, Tinghui, Brown, Matthew, Snavely, Noah, and Lowe, David G. Unsupervised learning of depth and ego-motion from video. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhou%2C%20Tinghui%20Brown%2C%20Matthew%20Snavely%2C%20Noah%20Lowe%2C%20David%20G.%20Unsupervised%20learning%20of%20depth%20and%20ego-motion%20from%20video%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhou%2C%20Tinghui%20Brown%2C%20Matthew%20Snavely%2C%20Noah%20Lowe%2C%20David%20G.%20Unsupervised%20learning%20of%20depth%20and%20ego-motion%20from%20video%202017"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Zhu, Jun-Yan, Park, Taesung, Isola, Phillip, and Efros, Alexei A. Unpaired image-to-image translation using cycle-consistent adversarial networks. In Proceedings of the IEEE International Conference on Computer Vision (ICCV), 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhu%2C%20Jun-Yan%20Park%2C%20Taesung%20Isola%2C%20Phillip%20Efros%2C%20Alexei%20A.%20Unpaired%20image-to-image%20translation%20using%20cycle-consistent%20adversarial%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhu%2C%20Jun-Yan%20Park%2C%20Taesung%20Isola%2C%20Phillip%20Efros%2C%20Alexei%20A.%20Unpaired%20image-to-image%20translation%20using%20cycle-consistent%20adversarial%20networks%202017"
+        }
+    ]
+}

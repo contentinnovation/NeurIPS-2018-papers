@@ -1,0 +1,255 @@
+{
+    "filename": "8276-learning-temporal-point-processes-via-reinforcement-learning.pdf",
+    "metadata": {
+        "title": "Learning Temporal Point Processes via Reinforcement Learning",
+        "author": "Shuang Li, Shuai Xiao, Shixiang Zhu, Nan Du, Yao Xie, Le Song",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8276-learning-temporal-point-processes-via-reinforcement-learning.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Social goods, such as healthcare, smart city, and information networks, often produce ordered event data in continuous time. The generative processes of these event data can be very complex, requiring flexible models to capture their dynamics. Temporal point processes offer an elegant framework for modeling event data without discretizing the time. However, the existing maximum-likelihood-estimation (MLE) learning paradigm requires hand-crafting the intensity function beforehand and cannot directly monitor the goodness-of-fit of the estimated model in the process of training. To alleviate the risk of model-misspecification in MLE, we propose to generate samples from the generative model and monitor the quality of the samples in the process of training until the samples and the real data are indistinguishable. We take inspiration from reinforcement learning (RL) and treat the generation of each event as the action taken by a stochastic policy. We parameterize the policy as a flexible recurrent neural network and gradually improve the policy to mimic the observed event distribution. Since the reward function is unknown in this setting, we uncover an analytic and nonparametric form of the reward function using an inverse reinforcement learning formulation. This new RL framework allows us to derive an efficient policy gradient algorithm for learning flexible point process models, and we show that it performs well in both synthetic and real data."
+    },
+    "keywords": [
+        {
+            "term": "radial basis function",
+            "url": "https://en.wikipedia.org/wiki/radial_basis_function"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "Microsoft Academic Search",
+            "url": "https://en.wikipedia.org/wiki/Microsoft_Academic_Search"
+        },
+        {
+            "term": "recurrent neural network",
+            "url": "https://en.wikipedia.org/wiki/recurrent_neural_network"
+        },
+        {
+            "term": "inverse reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/inverse_reinforcement_learning"
+        },
+        {
+            "term": "reward function",
+            "url": "https://en.wikipedia.org/wiki/reward_function"
+        },
+        {
+            "term": "intensity function",
+            "url": "https://en.wikipedia.org/wiki/intensity_function"
+        },
+        {
+            "term": "reproducing kernel Hilbert space",
+            "url": "https://en.wikipedia.org/wiki/reproducing_kernel_Hilbert_space"
+        },
+        {
+            "term": "generative adversarial network",
+            "url": "https://en.wikipedia.org/wiki/generative_adversarial_network"
+        },
+        {
+            "term": "continuous time",
+            "url": "https://en.wikipedia.org/wiki/continuous_time"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Many natural and artificial systems produce a large volume of discrete events occurring in continuous time, for example, the occurrence of crime events, earthquakes, patient visits to hospitals, financial transactions, and user behavior in mobile applications [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>]",
+        "To show the robustness to model-misspecifications of our approach, we propose the following four different point processes as the ground-truth: (I) Inhomogeneous Poisson (IP) with \u03bb(t) = at + b where a = \u22120.2 and b = 3.5; Here we omit st since \u03bb(t) does not depend on the history. (II) Hawkes Process (HP) with \u03bb(t|st) = \u03bc + \u03b1 ti<t exp{\u2212(t \u2212 ti)} where \u03bc = 2, and \u03b1 = 0.5. (III) Mixture of Inhomogeneous Poisson and Hawkes Process version 1 (IP + HP1)",
+        "This paper proposes a reinforcement learning framework to learn point process models",
+        "The policy is updated by directly minimizing the discrepancy between the generated sequences with the observed sequences, which can avoid model misspecification and the limitation of likelihood based approach",
+        "The discrepancy is explicitly evaluated in terms of the reward function in our setting"
+    ],
+    "key_statements": [
+        "Many natural and artificial systems produce a large volume of discrete events occurring in continuous time, for example, the occurrence of crime events, earthquakes, patient visits to hospitals, financial transactions, and user behavior in mobile applications [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>]",
+        "The reward function directly quantifies the discrepancy between \u03c0E and \u03c0\u03b8, and it guides the learning of the optimal policy \u03c0\u03b8\u2217",
+        "To show the robustness to model-misspecifications of our approach, we propose the following four different point processes as the ground-truth: (I) Inhomogeneous Poisson (IP) with \u03bb(t) = at + b where a = \u22120.2 and b = 3.5; Here we omit st since \u03bb(t) does not depend on the history. (II) Hawkes Process (HP) with \u03bb(t|st) = \u03bc + \u03b1 ti<t exp{\u2212(t \u2212 ti)} where \u03bc = 2, and \u03b1 = 0.5. (III) Mixture of Inhomogeneous Poisson and Hawkes Process version 1 (IP + HP1)",
+        "RLPP only models the policy as a single LSTM with the reward function learned in an analytical form",
+        "The nonparametric Hawkes model is parametrized by weighted sum of basis functions, similar to that of the inhomogeneous Poisson process baseline, and it is difficult to generalize outside the observation window.\n1",
+        "This paper proposes a reinforcement learning framework to learn point process models",
+        "The policy is updated by directly minimizing the discrepancy between the generated sequences with the observed sequences, which can avoid model misspecification and the limitation of likelihood based approach",
+        "The discrepancy is explicitly evaluated in terms of the reward function in our setting",
+        "We show that our proposed approach performs well on both synthetic and real data"
+    ],
+    "summary": [
+        "Many natural and artificial systems produce a large volume of discrete events occurring in continuous time, for example, the occurrence of crime events, earthquakes, patient visits to hospitals, financial transactions, and user behavior in mobile applications [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>].",
+        "|\u03bej \u223c \u03c0E}, we can treat fitting a temporal point process to D as searching for a learner policy \u03c0\u03b8 which can generate another set of sequences D = {\u03b71, \u03b72, .",
+        "The policy \u03c0\u03b8(a|st) corresponds to the conditional probability of the event time in temporal point process, which in turn uniquely determines the corresponding intensity function as \u03bb\u03b8(t|sti )",
+        "This builds the connection between the intensity function in temporal point processes and the stochastic policy in reinforcement learning.",
+        "We relieve the computational challenge by choosing the space of functions F for r(t) to be the unit ball in RKHS H, which allows us to obtain an analytical expression for the updated reward function r(t) given any current learner policy \u03c0(\u03b8).",
+        "The function class of the policy \u03c0\u03b8 \u2208 G should be flexible and expressive enough to capture the potential complex point process patterns of the expert.",
+        "The reward function directly quantifies the discrepancy between \u03c0E and \u03c0\u03b8, and it guides the learning of the optimal policy \u03c0\u03b8\u2217.",
+        "An immediate benefit of this function class is that we can show the optimal policy can be directly learned via a minimization formulation given in Theorem 1 instead of the original minimax formulation (3).",
+        "Given L trajectories of expert point processes, and M trajectories of events generated by \u03c0\u03b8, mean embeddings \u03bc\u03c0E and \u03bc\u03c0\u03b8 can be estimated by their respective empirical mean: \u03bc\u03c0E",
+        "Fig. 4 and Fig. 5 demonstrate the empirical intensity functions of generated sequences based on synthetic and real data.",
+        "We followed the experiment setup in [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>]: we generated samples from each learned point process models, transformed the time interval, and applied the KS test to compare with unit rate exponential distribution.",
+        "RLPP only models the policy as a single LSTM with the reward function learned in an analytical form.",
+        "The nonparametric Hawkes model is parametrized by weighted sum of basis functions, similar to that of the inhomogeneous Poisson process baseline, and it is difficult to generalize outside the observation window.",
+        "1. RMTPP we compared in experiments is a state-of-the-art maximum-likelihood-based model, which uses a similar RNN outputting parametrization of exponential distributions but fits the model parameters with maximum likelihood.",
+        "The policy is updated by directly minimizing the discrepancy between the generated sequences with the observed sequences, which can avoid model misspecification and the limitation of likelihood based approach.",
+        "The optimal reward will iteratively encourage the policy to sample events as close as the observation.",
+        "We show that our proposed approach performs well on both synthetic and real data"
+    ],
+    "headline": "To alleviate the risk of model-misspecification in MLE, we propose to generate samples from the generative model and monitor the quality of the samples in the process of training until the samples and the real data are indistinguishable",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Pieter Abbeel and Andrew Y Ng. Apprenticeship learning via inverse reinforcement learning. In Proceedings of the twenty-first international conference on Machine learning, page 1. ACM, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20Pieter%20Abbeel%20and%20Andrew%20Y%20Ng.%20Apprenticeship%20learning%20via%20inverse%20reinforcement%20learning%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Pieter%20Abbeel%20and%20Andrew%20Y%20Ng.%20Apprenticeship%20learning%20via%20inverse%20reinforcement%20learning%202004"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Robert A Adams and John JF Fournier. Sobolev spaces, volume 140. Academic press, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Adams%2C%20Robert%20A.%20Fournier%2C%20John%20J.F.%20Sobolev%20spaces%2C%20volume%20140%202003"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Alain Berlinet and Christine Thomas-Agnan. Reproducing kernel Hilbert spaces in probability and statistics. Springer Science & Business Media, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Berlinet%2C%20Alain%20Thomas-Agnan%2C%20Christine%20Reproducing%20kernel%20Hilbert%20spaces%20in%20probability%20and%20statistics%202011"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Junyoung Chung, Kyle Kastner, Laurent Dinh, Kratarth Goel, Aaron C Courville, and Yoshua Bengio. A recurrent latent variable model for sequential data. In Advances in neural information processing systems, pages 2980\u20132988, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chung%2C%20Junyoung%20Kastner%2C%20Kyle%20Dinh%2C%20Laurent%20Goel%2C%20Kratarth%20and%20Yoshua%20Bengio.%20A%20recurrent%20latent%20variable%20model%20for%20sequential%20data%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chung%2C%20Junyoung%20Kastner%2C%20Kyle%20Dinh%2C%20Laurent%20Goel%2C%20Kratarth%20and%20Yoshua%20Bengio.%20A%20recurrent%20latent%20variable%20model%20for%20sequential%20data%202015"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Daryl J Daley and David Vere-Jones. An introduction to the theory of point processes: general theory and structure. Springer Science & Business Media, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Daley%2C%20Daryl%20J.%20Vere-Jones%2C%20David%20An%20introduction%20to%20the%20theory%20of%20point%20processes%3A%20general%20theory%20and%20structure%202007"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Nan Du, Hanjun Dai, Rakshit Trivedi, Utkarsh Upadhyay, Manuel Gomez-Rodriguez, and Le Song. Recurrent marked temporal point processes: Embedding event history to vector. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, pages 1555\u20131564. ACM, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Du%2C%20Nan%20Dai%2C%20Hanjun%20Trivedi%2C%20Rakshit%20Upadhyay%2C%20Utkarsh%20Recurrent%20marked%20temporal%20point%20processes%3A%20Embedding%20event%20history%20to%20vector%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Du%2C%20Nan%20Dai%2C%20Hanjun%20Trivedi%2C%20Rakshit%20Upadhyay%2C%20Utkarsh%20Recurrent%20marked%20temporal%20point%20processes%3A%20Embedding%20event%20history%20to%20vector%202016"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Nan Du, Le Song, Manuel Gomez Rodriguez, and Hongyuan Zha. Scalable influence estimation in continuous-time diffusion networks. In Advances in neural information processing systems, pages 3147\u20133155, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Du%2C%20Nan%20Song%2C%20Le%20Rodriguez%2C%20Manuel%20Gomez%20Zha%2C%20Hongyuan%20Scalable%20influence%20estimation%20in%20continuous-time%20diffusion%20networks%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Du%2C%20Nan%20Song%2C%20Le%20Rodriguez%2C%20Manuel%20Gomez%20Zha%2C%20Hongyuan%20Scalable%20influence%20estimation%20in%20continuous-time%20diffusion%20networks%202013"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Gintare Karolina Dziugaite, Daniel M Roy, and Zoubin Ghahramani. Training generative neural networks via maximum mean discrepancy optimization. arXiv preprint arXiv:1505.03906, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1505.03906"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Mehrdad Farajtabar, Yichen Wang, Manuel Gomez Rodriguez, Shuang Li, Hongyuan Zha, and Le Song. Coevolve: A joint point process model for information diffusion and network co-evolution. In Advances in Neural Information Processing Systems, pages 1954\u20131962, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Farajtabar%2C%20Mehrdad%20Wang%2C%20Yichen%20Rodriguez%2C%20Manuel%20Gomez%20Li%2C%20Shuang%20Coevolve%3A%20A%20joint%20point%20process%20model%20for%20information%20diffusion%20and%20network%20co-evolution%201954",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Farajtabar%2C%20Mehrdad%20Wang%2C%20Yichen%20Rodriguez%2C%20Manuel%20Gomez%20Li%2C%20Shuang%20Coevolve%3A%20A%20joint%20point%20process%20model%20for%20information%20diffusion%20and%20network%20co-evolution%201954"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Marc G Genton. Classes of kernels for machine learning: a statistics perspective. Journal of machine learning research, 2(Dec):299\u2013312, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Genton%2C%20Marc%20G.%20Classes%20of%20kernels%20for%20machine%20learning%3A%20a%20statistics%20perspective%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Genton%2C%20Marc%20G.%20Classes%20of%20kernels%20for%20machine%20learning%3A%20a%20statistics%20perspective%202001"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Manuel Gomez Rodriguez, Jure Leskovec, and Andreas Krause. Inferring networks of diffusion and influence. In Proceedings of the 16th ACM SIGKDD international conference on Knowledge discovery and data mining, pages 1019\u20131028. ACM, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rodriguez%2C%20Manuel%20Gomez%20Leskovec%2C%20Jure%20Krause%2C%20Andreas%20Inferring%20networks%20of%20diffusion%20and%20influence%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rodriguez%2C%20Manuel%20Gomez%20Leskovec%2C%20Jure%20Krause%2C%20Andreas%20Inferring%20networks%20of%20diffusion%20and%20influence%202010"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Jan Grandell. Doubly stochastic Poisson processes, volume 529.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Grandell%2C%20Jan%20Doubly%20stochastic%20Poisson%20processes%2C%20volume%20529"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Arthur Gretton, Karsten M Borgwardt, Malte Rasch, Bernhard Sch\u00f6lkopf, and Alex J Smola. A kernel method for the two-sample-problem. In Advances in neural information processing systems, pages 513\u2013520, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gretton%2C%20Arthur%20Borgwardt%2C%20Karsten%20M.%20Rasch%2C%20Malte%20Sch%C3%B6lkopf%2C%20Bernhard%20A%20kernel%20method%20for%20the%20two-sample-problem%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gretton%2C%20Arthur%20Borgwardt%2C%20Karsten%20M.%20Rasch%2C%20Malte%20Sch%C3%B6lkopf%2C%20Bernhard%20A%20kernel%20method%20for%20the%20two-sample-problem%202007"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Arthur Gretton, Karsten M Borgwardt, Malte J Rasch, Bernhard Sch\u00f6lkopf, and Alexander Smola. A kernel two-sample test. Journal of Machine Learning Research, 13(Mar):723\u2013773, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gretton%2C%20Arthur%20Borgwardt%2C%20Karsten%20M.%20Rasch%2C%20Malte%20J.%20Sch%C3%B6lkopf%2C%20Bernhard%20A%20kernel%20two-sample%20test%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gretton%2C%20Arthur%20Borgwardt%2C%20Karsten%20M.%20Rasch%2C%20Malte%20J.%20Sch%C3%B6lkopf%2C%20Bernhard%20A%20kernel%20two-sample%20test%202012"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Jonathan Ho and Stefano Ermon. Generative adversarial imitation learning. In Advances in Neural Information Processing Systems, pages 4565\u20134573, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ho%2C%20Jonathan%20Ermon%2C%20Stefano%20Generative%20adversarial%20imitation%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ho%2C%20Jonathan%20Ermon%2C%20Stefano%20Generative%20adversarial%20imitation%20learning%202016"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Beomjoon Kim and Joelle Pineau. Maximum mean discrepancy imitation learning. In Robotics: Science and systems, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kim%2C%20Beomjoon%20Pineau%2C%20Joelle%20Maximum%20mean%20discrepancy%20imitation%20learning.%20In%20Robotics%3A%20Science%20and%20systems%202013"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Diederik P Kingma and Jimmy Ba. Adam: A method for stochastic optimization. arXiv preprint arXiv:1412.6980, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6980"
+        },
+        {
+            "id": "18",
+            "entry": "[18] John Frank Charles Kingman. Poisson processes. Wiley Online Library, 1993.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingman%2C%20John%20Frank%20Charles%20Poisson%20processes%201993"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Hongyuan Mei and Jason M Eisner. The neural hawkes process: A neurally self-modulating multivariate point process. In Advances in Neural Information Processing Systems, pages 6757\u20136767, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mei%2C%20Hongyuan%20Eisner%2C%20Jason%20M.%20The%20neural%20hawkes%20process%3A%20A%20neurally%20self-modulating%20multivariate%20point%20process%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mei%2C%20Hongyuan%20Eisner%2C%20Jason%20M.%20The%20neural%20hawkes%20process%3A%20A%20neurally%20self-modulating%20multivariate%20point%20process%202017"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Andrew Y Ng, Stuart J Russell, et al. Algorithms for inverse reinforcement learning. In Icml, pages 663\u2013670, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ng%2C%20Andrew%20Y.%20Russell%2C%20Stuart%20J.%20Algorithms%20for%20inverse%20reinforcement%20learning%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ng%2C%20Andrew%20Y.%20Russell%2C%20Stuart%20J.%20Algorithms%20for%20inverse%20reinforcement%20learning%202000"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Takahiro Omi, Yoshito Hirata, and Kazuyuki Aihara. Hawkes process model with a timedependent background rate and its application to high-frequency financial data. Physical Review E, 96(1):012303, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Omi%2C%20Takahiro%20Hirata%2C%20Yoshito%20Aihara%2C%20Kazuyuki%20Hawkes%20process%20model%20with%20a%20timedependent%20background%20rate%20and%20its%20application%20to%20high-frequency%20financial%20data%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Omi%2C%20Takahiro%20Hirata%2C%20Yoshito%20Aihara%2C%20Kazuyuki%20Hawkes%20process%20model%20with%20a%20timedependent%20background%20rate%20and%20its%20application%20to%20high-frequency%20financial%20data%202017"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Johann Pfanzagl. Parametric statistical theory. Walter de Gruyter, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pfanzagl%2C%20Johann%20Parametric%20statistical%20theory%202011"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Bernhard Scholkopf and Alexander J Smola. Learning with kernels: support vector machines, regularization, optimization, and beyond. MIT press, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Scholkopf%2C%20Bernhard%20Smola%2C%20Alexander%20J.%20Learning%20with%20kernels%3A%20support%20vector%20machines%2C%20regularization%2C%20optimization%2C%20and%20beyond%202001"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Alex Smola, Arthur Gretton, Le Song, and Bernhard Sch\u00f6lkopf. A hilbert space embedding for distributions. In International Conference on Algorithmic Learning Theory, pages 13\u201331.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Smola%2C%20Alex%20Gretton%2C%20Arthur%20Song%2C%20Le%20Sch%C3%B6lkopf%2C%20Bernhard%20A%20hilbert%20space%20embedding%20for%20distributions",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Smola%2C%20Alex%20Gretton%2C%20Arthur%20Song%2C%20Le%20Sch%C3%B6lkopf%2C%20Bernhard%20A%20hilbert%20space%20embedding%20for%20distributions"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Bharath Sriperumbudur, Kenji Fukumizu, and Gert Lanckriet. On the relation between universality, characteristic kernels and rkhs embedding of measures. In Proceedings of the Thirteenth International Conference on Artificial Intelligence and Statistics, pages 773\u2013780, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sriperumbudur%2C%20Bharath%20Fukumizu%2C%20Kenji%20Lanckriet%2C%20Gert%20On%20the%20relation%20between%20universality%2C%20characteristic%20kernels%20and%20rkhs%20embedding%20of%20measures%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sriperumbudur%2C%20Bharath%20Fukumizu%2C%20Kenji%20Lanckriet%2C%20Gert%20On%20the%20relation%20between%20universality%2C%20characteristic%20kernels%20and%20rkhs%20embedding%20of%20measures%202010"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Richard S Sutton and Andrew G Barto. Reinforcement learning: An introduction, volume 1. MIT press Cambridge, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20Richard%20S.%20Barto%2C%20Andrew%20G.%20Reinforcement%20learning%3A%20An%20introduction%2C%20volume%201%201998"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Shuai Xiao, Mehrdad Farajtabar, Xiaojing Ye, Junchi Yan, Xiaokang Yang, Le Song, and Hongyuan Zha. Wasserstein learning of deep generative point process models. In Advances in Neural Information Processing Systems, pages 3250\u20133259, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xiao%2C%20Shuai%20Farajtabar%2C%20Mehrdad%20Ye%2C%20Xiaojing%20Yan%2C%20Junchi%20Wasserstein%20learning%20of%20deep%20generative%20point%20process%20models%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xiao%2C%20Shuai%20Farajtabar%2C%20Mehrdad%20Ye%2C%20Xiaojing%20Yan%2C%20Junchi%20Wasserstein%20learning%20of%20deep%20generative%20point%20process%20models%202017"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Brian D Ziebart, Andrew L Maas, J Andrew Bagnell, and Anind K Dey. Maximum entropy inverse reinforcement learning. In AAAI, volume 8, pages 1433\u20131438. Chicago, IL, USA, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ziebart%2C%20Brian%20D.%20Maas%2C%20Andrew%20L.%20Bagnell%2C%20J.Andrew%20Dey%2C%20Anind%20K.%20Maximum%20entropy%20inverse%20reinforcement%20learning%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ziebart%2C%20Brian%20D.%20Maas%2C%20Andrew%20L.%20Bagnell%2C%20J.Andrew%20Dey%2C%20Anind%20K.%20Maximum%20entropy%20inverse%20reinforcement%20learning%202008"
+        }
+    ]
+}

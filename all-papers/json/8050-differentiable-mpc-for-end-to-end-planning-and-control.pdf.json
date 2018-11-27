@@ -1,0 +1,369 @@
+{
+    "filename": "8050-differentiable-mpc-for-end-to-end-planning-and-control.pdf",
+    "metadata": {
+        "title": "Differentiable MPC for End-to-end Planning and Control",
+        "author": "Brandon Amos, Ivan Jimenez, Jacob Sacks, Byron Boots, J. Zico Kolter",
+        "date": 2011,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8050-differentiable-mpc-for-end-to-end-planning-and-control.pdf"
+        },
+        "abstract": "We present foundations for using Model Predictive Control (MPC) as a differentiable policy class for reinforcement learning. This provides one way of leveraging and combining the advantages of model-free and model-based approaches. Specifically, we differentiate through MPC by using the KKT conditions of the convex approximation at a fixed point of the controller. Using this strategy, we are able to learn the cost and dynamics of a controller via end-to-end learning. Our experiments focus on imitation learning in the pendulum and cartpole domains, where we learn the cost and dynamics terms of an MPC policy class. We show that our MPC policies are significantly more data-efficient than a generic neural network and that our method is superior to traditional system identification in a setting where the expert is unrealizable."
+    },
+    "keywords": [
+        {
+            "term": "deep network",
+            "url": "https://en.wikipedia.org/wiki/deep_network"
+        },
+        {
+            "term": "dynamic model",
+            "url": "https://en.wikipedia.org/wiki/dynamic_model"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        },
+        {
+            "term": "model predictive control",
+            "url": "https://en.wikipedia.org/wiki/model_predictive_control"
+        }
+    ],
+    "highlights": [
+        "Pure model-free techniques for policy search have demonstrated promising results in many domains by learning reactive polices which directly map observations to actions [<a class=\"ref-link\" id=\"cMnih_et+al_2013_a\" href=\"#rMnih_et+al_2013_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2013_a\" href=\"#rMnih_et+al_2013_a\">Mnih et al, 2013</a></a>, <a class=\"ref-link\" id=\"cOh_et+al_2016_a\" href=\"#rOh_et+al_2016_a\"><a class=\"ref-link\" id=\"cOh_et+al_2016_a\" href=\"#rOh_et+al_2016_a\">Oh et al, 2016</a></a>, Gu et al, 2016b, <a class=\"ref-link\" id=\"cLillicrap_et+al_2015_a\" href=\"#rLillicrap_et+al_2015_a\"><a class=\"ref-link\" id=\"cLillicrap_et+al_2015_a\" href=\"#rLillicrap_et+al_2015_a\">Lillicrap et al, 2015</a></a>, <a class=\"ref-link\" id=\"cSchulman_et+al_2015_a\" href=\"#rSchulman_et+al_2015_a\"><a class=\"ref-link\" id=\"cSchulman_et+al_2015_a\" href=\"#rSchulman_et+al_2015_a\">Schulman et al, 2015</a></a>, 2016, <a class=\"ref-link\" id=\"cGu_et+al_2016_a\" href=\"#rGu_et+al_2016_a\"><a class=\"ref-link\" id=\"cGu_et+al_2016_a\" href=\"#rGu_et+al_2016_a\">Gu et al, 2016a</a></a>]",
+        "The advantages of neural network policy classes is that they are differentiable and the loss can be directly optimized with respect to them while it is typically not possible to do full end-to-end learning with model-based approaches",
+        "We provide an efficient method for analytically differentiating through an iterative non-convex optimization procedure based upon a box-constrained iterative Linear-Dynamics Quadratic-Cost solver [<a class=\"ref-link\" id=\"cTassa_et+al_2014_a\" href=\"#rTassa_et+al_2014_a\">Tassa et al, 2014</a>]; in particular, we show that the analytical derivative can be computed using one additional backward pass of a modified iterative Linear-Dynamics Quadratic-Cost solver",
+        "As we empirically show in Section 5.1, the backwards pass of this method scales linearly with the number of iterative Linear-Dynamics Quadratic-Cost iterations used in the forward",
+        "In contrast to the more traditional strategy of \u201cunrolling\u201d a policy, has the benefit that it is much less computationally and memory intensive, with a backward pass that is essentially free given the number of iterations required for a the iterative Linear-Dynamics Quadratic-Cost optimizer to converge to a fixed point",
+        "Given the recent prominence of attempting to incorporate planning and control methods into the loop of deep network architectures, the techniques here offer a method for efficiently integrating model predictive control policies into such situations, allowing these architectures to make use of a very powerful function class that has proven extremely effective in practice"
+    ],
+    "key_statements": [
+        "Pure model-free techniques for policy search have demonstrated promising results in many domains by learning reactive polices which directly map observations to actions [<a class=\"ref-link\" id=\"cMnih_et+al_2013_a\" href=\"#rMnih_et+al_2013_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2013_a\" href=\"#rMnih_et+al_2013_a\">Mnih et al, 2013</a></a>, <a class=\"ref-link\" id=\"cOh_et+al_2016_a\" href=\"#rOh_et+al_2016_a\"><a class=\"ref-link\" id=\"cOh_et+al_2016_a\" href=\"#rOh_et+al_2016_a\">Oh et al, 2016</a></a>, Gu et al, 2016b, <a class=\"ref-link\" id=\"cLillicrap_et+al_2015_a\" href=\"#rLillicrap_et+al_2015_a\"><a class=\"ref-link\" id=\"cLillicrap_et+al_2015_a\" href=\"#rLillicrap_et+al_2015_a\">Lillicrap et al, 2015</a></a>, <a class=\"ref-link\" id=\"cSchulman_et+al_2015_a\" href=\"#rSchulman_et+al_2015_a\"><a class=\"ref-link\" id=\"cSchulman_et+al_2015_a\" href=\"#rSchulman_et+al_2015_a\">Schulman et al, 2015</a></a>, 2016, <a class=\"ref-link\" id=\"cGu_et+al_2016_a\" href=\"#rGu_et+al_2016_a\"><a class=\"ref-link\" id=\"cGu_et+al_2016_a\" href=\"#rGu_et+al_2016_a\">Gu et al, 2016a</a></a>]",
+        "The advantages of neural network policy classes is that they are differentiable and the loss can be directly optimized with respect to them while it is typically not possible to do full end-to-end learning with model-based approaches",
+        "We provide an efficient method for analytically differentiating through an iterative non-convex optimization procedure based upon a box-constrained iterative Linear-Dynamics Quadratic-Cost solver [<a class=\"ref-link\" id=\"cTassa_et+al_2014_a\" href=\"#rTassa_et+al_2014_a\">Tassa et al, 2014</a>]; in particular, we show that the analytical derivative can be computed using one additional backward pass of a modified iterative Linear-Dynamics Quadratic-Cost solver",
+        "As we empirically show in Section 5.1, the backwards pass of this method scales linearly with the number of iterative Linear-Dynamics Quadratic-Cost iterations used in the forward",
+        "Our differentiable model predictive control solver is available as a standalone open source package at https://github.com/locuslab/mpc. pytorch and our experimental code is openly available at https://github.com/locuslab/ differentiable-mpc.\n5.1",
+        "In contrast to the more traditional strategy of \u201cunrolling\u201d a policy, has the benefit that it is much less computationally and memory intensive, with a backward pass that is essentially free given the number of iterations required for a the iterative Linear-Dynamics Quadratic-Cost optimizer to converge to a fixed point",
+        "Given the recent prominence of attempting to incorporate planning and control methods into the loop of deep network architectures, the techniques here offer a method for efficiently integrating model predictive control policies into such situations, allowing these architectures to make use of a very powerful function class that has proven extremely effective in practice"
+    ],
+    "summary": [
+        "Pure model-free techniques for policy search have demonstrated promising results in many domains by learning reactive polices which directly map observations to actions [<a class=\"ref-link\" id=\"cMnih_et+al_2013_a\" href=\"#rMnih_et+al_2013_a\"><a class=\"ref-link\" id=\"cMnih_et+al_2013_a\" href=\"#rMnih_et+al_2013_a\">Mnih et al, 2013</a></a>, <a class=\"ref-link\" id=\"cOh_et+al_2016_a\" href=\"#rOh_et+al_2016_a\"><a class=\"ref-link\" id=\"cOh_et+al_2016_a\" href=\"#rOh_et+al_2016_a\">Oh et al, 2016</a></a>, Gu et al, 2016b, <a class=\"ref-link\" id=\"cLillicrap_et+al_2015_a\" href=\"#rLillicrap_et+al_2015_a\"><a class=\"ref-link\" id=\"cLillicrap_et+al_2015_a\" href=\"#rLillicrap_et+al_2015_a\">Lillicrap et al, 2015</a></a>, <a class=\"ref-link\" id=\"cSchulman_et+al_2015_a\" href=\"#rSchulman_et+al_2015_a\"><a class=\"ref-link\" id=\"cSchulman_et+al_2015_a\" href=\"#rSchulman_et+al_2015_a\">Schulman et al, 2015</a></a>, 2016, <a class=\"ref-link\" id=\"cGu_et+al_2016_a\" href=\"#rGu_et+al_2016_a\"><a class=\"ref-link\" id=\"cGu_et+al_2016_a\" href=\"#rGu_et+al_2016_a\">Gu et al, 2016a</a></a>].",
+        "The advantages of neural network policy classes is that they are differentiable and the loss can be directly optimized with respect to them while it is typically not possible to do full end-to-end learning with model-based approaches.",
+        "Discrete-time finite-horizon LQR is a well-studied control method that optimizes a convex quadratic objective function with respect to affine state-transition dynamics from an initial system state xinit.",
+        "Given: Initial state xinit Parameters: \u03b8 of the objective C\u03b8(\u03c4 ) and dynamics f\u03b8(\u03c4 ) Forward Pass: 1: Compute \u03c41\u22c6:T , \u03bb\u22c61:T by solving (10) with M P C reaching the fixed point (11), obtaining approximations to the cost H\u03b8n and dynamics F\u03b8n.",
+        "We show 1) superior runtime performance compared to an unrolled solver, 2) the ability of our method to recover the cost and dynamics of a controller with imitation, and 3) the benefit of directly optimizing the task loss over vanilla SysId. Our experiments are implemented with PyTorch [<a class=\"ref-link\" id=\"cPaszke_et+al_2017_a\" href=\"#rPaszke_et+al_2017_a\">Paszke et al, 2017</a>].",
+        "Sysid assumes the cost of the controller is known and approximates the parameters of the dynamics by optimizing the -state transitions.",
+        "Our Methods: mpc.dx assumes the cost of the controller is known and approximates the parameters of the dynamics by directly optimizing the imitation loss.",
+        "Mpc.cost assumes the dynamics of the controller is known and approximates the cost by directly optimizing the imitation loss.",
+        "Mpc.cost.dx approximates both the cost and parameters of the dynamics of the controller by directly optimizing the imitation loss.",
+        "Figure 4 shows that in nearly every case we are able to directly optimize the imitation loss with respect to the controller and we significantly outperform a general neural network policy trained on the same information.",
+        "Unlike pure system identification, the differentiable MPC policy can naturally be adapted to objectives besides simple state prediction, such as incorporating the additional cost learning portion.",
+        "In contrast to the more traditional strategy of \u201cunrolling\u201d a policy, has the benefit that it is much less computationally and memory intensive, with a backward pass that is essentially free given the number of iterations required for a the iLQR optimizer to converge to a fixed point.",
+        "Given the recent prominence of attempting to incorporate planning and control methods into the loop of deep network architectures, the techniques here offer a method for efficiently integrating MPC policies into such situations, allowing these architectures to make use of a very powerful function class that has proven extremely effective in practice.",
+        "This has numerous additional applications, including tuning model parameters to taskspecific goals, incorporating joint model-based and policy-based loss functions, and extensions into stochastic settings"
+    ],
+    "headline": "We present foundations for using Model Predictive Control  as a differentiable policy class for reinforcement learning",
+    "reference_links": [
+        {
+            "id": "Abbeel_et+al_2006_a",
+            "entry": "Pieter Abbeel, Morgan Quigley, and Andrew Y Ng. Using inaccurate models in reinforcement learning. In Proceedings of the 23rd international conference on Machine learning, pages 1\u20138. ACM, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abbeel%2C%20Pieter%20Quigley%2C%20Morgan%20Ng%2C%20Andrew%20Y.%20Using%20inaccurate%20models%20in%20reinforcement%20learning%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abbeel%2C%20Pieter%20Quigley%2C%20Morgan%20Ng%2C%20Andrew%20Y.%20Using%20inaccurate%20models%20in%20reinforcement%20learning%202006"
+        },
+        {
+            "id": "Alexis_et+al_2011_a",
+            "entry": "Kostas Alexis, Christos Papachristos, George Nikolakopoulos, and Anthony Tzes. Model predictive quadrotor indoor position control. In Control & Automation (MED), 2011 19th Mediterranean Conference on, pages 1247\u20131252. IEEE, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Alexis%2C%20Kostas%20Papachristos%2C%20Christos%20Nikolakopoulos%2C%20George%20Tzes%2C%20Anthony%20Model%20predictive%20quadrotor%20indoor%20position%20control%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Alexis%2C%20Kostas%20Papachristos%2C%20Christos%20Nikolakopoulos%2C%20George%20Tzes%2C%20Anthony%20Model%20predictive%20quadrotor%20indoor%20position%20control%202011"
+        },
+        {
+            "id": "Amos_2017_a",
+            "entry": "Brandon Amos and J Zico Kolter. OptNet: Differentiable Optimization as a Layer in Neural Networks. In Proceedings of the International Conference on Machine Learning, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Brandon%20Amos%20and%20J%20Zico%20Kolter%20OptNet%20Differentiable%20Optimization%20as%20a%20Layer%20in%20Neural%20Networks%20In%20Proceedings%20of%20the%20International%20Conference%20on%20Machine%20Learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Brandon%20Amos%20and%20J%20Zico%20Kolter%20OptNet%20Differentiable%20Optimization%20as%20a%20Layer%20in%20Neural%20Networks%20In%20Proceedings%20of%20the%20International%20Conference%20on%20Machine%20Learning%202017"
+        },
+        {
+            "id": "Bansal_et+al_2017_a",
+            "entry": "Somil Bansal, Roberto Calandra, Sergey Levine, and Claire Tomlin. Mbmf: Model-based priors for model-free reinforcement learning. arXiv preprint arXiv:1709.03153, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1709.03153"
+        },
+        {
+            "id": "Boedecker_et+al_2014_a",
+            "entry": "Joschika Boedecker, Jost Tobias Springenberg, Jan Wulfing, and Martin Riedmiller. Approximate real-time optimal control based on sparse gaussian process models. In IEEE Symposium on Adaptive Dynamic Programming and Reinforcement Learning (ADPRL), 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Boedecker%2C%20Joschika%20Springenberg%2C%20Jost%20Tobias%20Wulfing%2C%20Jan%20Riedmiller%2C%20Martin%20Approximate%20real-time%20optimal%20control%20based%20on%20sparse%20gaussian%20process%20models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Boedecker%2C%20Joschika%20Springenberg%2C%20Jost%20Tobias%20Wulfing%2C%20Jan%20Riedmiller%2C%20Martin%20Approximate%20real-time%20optimal%20control%20based%20on%20sparse%20gaussian%20process%20models%202014"
+        },
+        {
+            "id": "P_2012_a",
+            "entry": "P. Bouffard, A. Aswani, , and C. Tomlin. Learning-based model predictive control on a quadrotor: Onboard implementation and experimental results. In IEEE International Conference on Robotics and Automation, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=P.%20Bouffard%2C%20A.%20Aswani%20Tomlin%2C%20C.%20Learning-based%20model%20predictive%20control%20on%20a%20quadrotor%3A%20Onboard%20implementation%20and%20experimental%20results%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=P.%20Bouffard%2C%20A.%20Aswani%20Tomlin%2C%20C.%20Learning-based%20model%20predictive%20control%20on%20a%20quadrotor%3A%20Onboard%20implementation%20and%20experimental%20results%202012"
+        },
+        {
+            "id": "Boyd_2008_a",
+            "entry": "Stephen Boyd. Lqr via lagrange multipliers. Stanford EE 363: Linear Dynamical Systems, 2008. URL http://stanford.edu/class/ee363/lectures/lqr-lagrange.pdf.",
+            "url": "http://stanford.edu/class/ee363/lectures/lqr-lagrange.pdf"
+        },
+        {
+            "id": "Chebotar_et+al_2017_a",
+            "entry": "Yevgen Chebotar, Karol Hausman, Marvin Zhang, Gaurav Sukhatme, Stefan Schaal, and Sergey Levine. Combining model-based and model-free updates for trajectory-centric reinforcement learning. arXiv preprint arXiv:1703.03078, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.03078"
+        },
+        {
+            "id": "Deisenroth_2011_a",
+            "entry": "Marc Deisenroth and Carl E Rasmussen. Pilco: A model-based and data-efficient approach to policy search. In Proceedings of the 28th International Conference on machine learning (ICML-11), pages 465\u2013472, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Deisenroth%2C%20Marc%20Rasmussen%2C%20Carl%20E.%20Pilco%3A%20A%20model-based%20and%20data-efficient%20approach%20to%20policy%20search%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Deisenroth%2C%20Marc%20Rasmussen%2C%20Carl%20E.%20Pilco%3A%20A%20model-based%20and%20data-efficient%20approach%20to%20policy%20search%202011"
+        },
+        {
+            "id": "Erez_et+al_2012_a",
+            "entry": "T. Erez, Y. Tassa, and E. Todorov. Synthesis and stabilization of complex behaviors through online trajectory optimization. In International Conference on Intelligent Robots and Systems, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Erez%2C%20T.%20Tassa%2C%20Y.%20Todorov%2C%20E.%20Synthesis%20and%20stabilization%20of%20complex%20behaviors%20through%20online%20trajectory%20optimization%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Erez%2C%20T.%20Tassa%2C%20Y.%20Todorov%2C%20E.%20Synthesis%20and%20stabilization%20of%20complex%20behaviors%20through%20online%20trajectory%20optimization%202012"
+        },
+        {
+            "id": "Farquhar_et+al_2017_a",
+            "entry": "Gregory Farquhar, Tim Rockt\u00e4schel, Maximilian Igl, and Shimon Whiteson. Treeqn and atreec: Differentiable tree planning for deep reinforcement learning. arXiv preprint arXiv:1710.11417, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.11417"
+        },
+        {
+            "id": "Gonz_et+al_2011_a",
+            "entry": "Ram\u00f3n Gonz\u00e1lez, Mirko Fiacchini, Jos\u00e9 Luis Guzm\u00e1n, Teodoro \u00c1lamo, and Francisco Rodr\u00edguez. Robust tube-based predictive control for mobile robots in off-road conditions. Robotics and Autonomous Systems, 59 (10):711\u2013726, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gonz%C3%A1lez%2C%20Ram%C3%B3n%20Fiacchini%2C%20Mirko%20Guzm%C3%A1n%2C%20Jos%C3%A9%20Luis%20%C3%81lamo%2C%20Teodoro%20Robust%20tube-based%20predictive%20control%20for%20mobile%20robots%20in%20off-road%20conditions.%20Robotics%20and%20Autonomous%20Systems%2C%2059%202011"
+        },
+        {
+            "id": "Gu_et+al_0000_a",
+            "entry": "Shixiang Gu, Timothy Lillicrap, Zoubin Ghahramani, Richard E Turner, and Sergey Levine. Q-prop: Sampleefficient policy gradient with an off-policy critic. arXiv preprint arXiv:1611.02247, 2016a.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.02247"
+        },
+        {
+            "id": "Gu_et+al_2016_a",
+            "entry": "Shixiang Gu, Timothy Lillicrap, Ilya Sutskever, and Sergey Levine. Continuous deep q-learning with modelbased acceleration. In Proceedings of the International Conference on Machine Learning, 2016b.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gu%2C%20Shixiang%20Lillicrap%2C%20Timothy%20Sutskever%2C%20Ilya%20Levine%2C%20Sergey%20Continuous%20deep%20q-learning%20with%20modelbased%20acceleration%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gu%2C%20Shixiang%20Lillicrap%2C%20Timothy%20Sutskever%2C%20Ilya%20Levine%2C%20Sergey%20Continuous%20deep%20q-learning%20with%20modelbased%20acceleration%202016"
+        },
+        {
+            "id": "Heess_et+al_2015_a",
+            "entry": "Nicolas Heess, Gregory Wayne, David Silver, Tim Lillicrap, Tom Erez, and Yuval Tassa. Learning continuous control policies by stochastic value gradients. In Advances in Neural Information Processing Systems, pages 2944\u20132952, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Heess%2C%20Nicolas%20Wayne%2C%20Gregory%20Silver%2C%20David%20Lillicrap%2C%20Tim%20Learning%20continuous%20control%20policies%20by%20stochastic%20value%20gradients%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Heess%2C%20Nicolas%20Wayne%2C%20Gregory%20Silver%2C%20David%20Lillicrap%2C%20Tim%20Learning%20continuous%20control%20policies%20by%20stochastic%20value%20gradients%202015"
+        },
+        {
+            "id": "Kamel_et+al_2015_a",
+            "entry": "Mina Kamel, Kostas Alexis, Markus Achtelik, and Roland Siegwart. Fast nonlinear model predictive control for multicopter attitude tracking on so (3). In Control Applications (CCA), 2015 IEEE Conference on, pages 1160\u20131166. IEEE, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kamel%2C%20Mina%20Alexis%2C%20Kostas%20Achtelik%2C%20Markus%20Siegwart%2C%20Roland%20Fast%20nonlinear%20model%20predictive%20control%20for%20multicopter%20attitude%20tracking%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kamel%2C%20Mina%20Alexis%2C%20Kostas%20Achtelik%2C%20Markus%20Siegwart%2C%20Roland%20Fast%20nonlinear%20model%20predictive%20control%20for%20multicopter%20attitude%20tracking%202015"
+        },
+        {
+            "id": "Karkus_et+al_2017_a",
+            "entry": "Peter Karkus, David Hsu, and Wee Sun Lee. Qmdp-net: Deep learning for planning under partial observability. In Advances in Neural Information Processing Systems, pages 4697\u20134707, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Karkus%2C%20Peter%20Hsu%2C%20David%20Lee%2C%20Wee%20Sun%20Qmdp-net%3A%20Deep%20learning%20for%20planning%20under%20partial%20observability%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Karkus%2C%20Peter%20Hsu%2C%20David%20Lee%2C%20Wee%20Sun%20Qmdp-net%3A%20Deep%20learning%20for%20planning%20under%20partial%20observability%202017"
+        },
+        {
+            "id": "Kingma_2014_a",
+            "entry": "Diederik Kingma and Jimmy Ba. Adam: A method for stochastic optimization. arXiv preprint arXiv:1412.6980, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6980"
+        },
+        {
+            "id": "Lenz_et+al_2015_a",
+            "entry": "Ian Lenz, Ross A Knepper, and Ashutosh Saxena. Deepmpc: Learning deep latent features for model predictive control. In Robotics: Science and Systems, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lenz%2C%20Ian%20Knepper%2C%20Ross%20A.%20Saxena%2C%20Ashutosh%20Deepmpc%3A%20Learning%20deep%20latent%20features%20for%20model%20predictive%20control%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lenz%2C%20Ian%20Knepper%2C%20Ross%20A.%20Saxena%2C%20Ashutosh%20Deepmpc%3A%20Learning%20deep%20latent%20features%20for%20model%20predictive%20control%202015"
+        },
+        {
+            "id": "Levine_2014_a",
+            "entry": "Sergey Levine and Pieter Abbeel. Learning neural network policies with guided policy search under unknown dynamics. In Advances in Neural Information Processing Systems, pages 1071\u20131079, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Levine%2C%20Sergey%20Abbeel%2C%20Pieter%20Learning%20neural%20network%20policies%20with%20guided%20policy%20search%20under%20unknown%20dynamics%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Levine%2C%20Sergey%20Abbeel%2C%20Pieter%20Learning%20neural%20network%20policies%20with%20guided%20policy%20search%20under%20unknown%20dynamics%202014"
+        },
+        {
+            "id": "Levine_et+al_2016_a",
+            "entry": "Sergey Levine, Chelsea Finn, Trevor Darrell, and Pieter Abbeel. End-to-end training of deep visuomotor policies. The Journal of Machine Learning Research, 17(1):1334\u20131373, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Levine%2C%20Sergey%20Finn%2C%20Chelsea%20Darrell%2C%20Trevor%20Abbeel%2C%20Pieter%20End-to-end%20training%20of%20deep%20visuomotor%20policies%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Levine%2C%20Sergey%20Finn%2C%20Chelsea%20Darrell%2C%20Trevor%20Abbeel%2C%20Pieter%20End-to-end%20training%20of%20deep%20visuomotor%20policies%202016"
+        },
+        {
+            "id": "Li_2004_a",
+            "entry": "Weiwei Li and Emanuel Todorov. Iterative linear quadratic regulator design for nonlinear biological movement systems. 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Weiwei%20Todorov%2C%20Emanuel%20Iterative%20linear%20quadratic%20regulator%20design%20for%20nonlinear%20biological%20movement%20systems%202004"
+        },
+        {
+            "id": "Lillicrap_et+al_2015_a",
+            "entry": "Timothy P Lillicrap, Jonathan J Hunt, Alexander Pritzel, Nicolas Heess, Tom Erez, Yuval Tassa, David Silver, and Daan Wierstra. Continuous control with deep reinforcement learning. arXiv preprint arXiv:1509.02971, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1509.02971"
+        },
+        {
+            "id": "Liniger_et+al_2014_a",
+            "entry": "Alexander Liniger, Alexander Domahidi, and Manfred Morari. Optimization-based autonomous racing of 1:43 scale rc cars. In Optimal Control Applications and Methods, pages 628\u2013647, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liniger%2C%20Alexander%20Domahidi%2C%20Alexander%20Morari%2C%20Manfred%20Optimization-based%20autonomous%20racing%20of%201%3A%2043%20scale%20rc%20cars%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liniger%2C%20Alexander%20Domahidi%2C%20Alexander%20Morari%2C%20Manfred%20Optimization-based%20autonomous%20racing%20of%201%3A%2043%20scale%20rc%20cars%202014"
+        },
+        {
+            "id": "Mnih_et+al_2013_a",
+            "entry": "Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Alex Graves, Ioannis Antonoglou, Daan Wierstra, and Martin Riedmiller. Playing atari with deep reinforcement learning. arXiv preprint arXiv:1312.5602, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.5602"
+        },
+        {
+            "id": "Mnih_et+al_2015_a",
+            "entry": "Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei A Rusu, Joel Veness, Marc G Bellemare, Alex Graves, Martin Riedmiller, Andreas K Fidjeland, Georg Ostrovski, et al. Human-level control through deep reinforcement learning. Nature, 518(7540):529\u2013533, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20Volodymyr%20Kavukcuoglu%2C%20Koray%20Silver%2C%20David%20Rusu%2C%20Andrei%20A.%20Human-level%20control%20through%20deep%20reinforcement%20learning%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20Volodymyr%20Kavukcuoglu%2C%20Koray%20Silver%2C%20David%20Rusu%2C%20Andrei%20A.%20Human-level%20control%20through%20deep%20reinforcement%20learning%202015"
+        },
+        {
+            "id": "Mnih_et+al_2016_a",
+            "entry": "Volodymyr Mnih, Adria Puigdomenech Badia, Mehdi Mirza, Alex Graves, Timothy Lillicrap, Tim Harley, David Silver, and Koray Kavukcuoglu. Asynchronous methods for deep reinforcement learning. In International Conference on Machine Learning, pages 1928\u20131937, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20Volodymyr%20Badia%2C%20Adria%20Puigdomenech%20Mirza%2C%20Mehdi%20Graves%2C%20Alex%20Asynchronous%20methods%20for%20deep%20reinforcement%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20Volodymyr%20Badia%2C%20Adria%20Puigdomenech%20Mirza%2C%20Mehdi%20Graves%2C%20Alex%20Asynchronous%20methods%20for%20deep%20reinforcement%20learning%202016"
+        },
+        {
+            "id": "Nagabandi_et+al_2017_a",
+            "entry": "Anusha Nagabandi, Gregory Kahn, Ronald S. Fearing, and Sergey Levine. Neural network dynamics for model-based deep reinforcement learning with model-free fine-tuning. In arXiv preprint arXiv:1708.02596, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1708.02596"
+        },
+        {
+            "id": "Neunert_et+al_2016_a",
+            "entry": "Michael Neunert, Cedric de Crousaz, Fardi Furrer, Mina Kamel, Farbod Farshidian, Roland Siegwart, and Jonas Buchli. Fast Nonlinear Model Predictive Control for Unified Trajectory Optimization and Tracking. In ICRA, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Neunert%2C%20Michael%20de%20Crousaz%2C%20Cedric%20Furrer%2C%20Fardi%20Kamel%2C%20Mina%20Fast%20Nonlinear%20Model%20Predictive%20Control%20for%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Neunert%2C%20Michael%20de%20Crousaz%2C%20Cedric%20Furrer%2C%20Fardi%20Kamel%2C%20Mina%20Fast%20Nonlinear%20Model%20Predictive%20Control%20for%202016"
+        },
+        {
+            "id": "Oh_et+al_2016_a",
+            "entry": "Junhyuk Oh, Valliappa Chockalingam, Satinder Singh, and Honglak Lee. Control of memory, active perception, and action in minecraft. Proceedings of the 33rd International Conference on Machine Learning (ICML), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Oh%2C%20Junhyuk%20Chockalingam%2C%20Valliappa%20Singh%2C%20Satinder%20Lee%2C%20Honglak%20Control%20of%20memory%2C%20active%20perception%2C%20and%20action%20in%20minecraft%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Oh%2C%20Junhyuk%20Chockalingam%2C%20Valliappa%20Singh%2C%20Satinder%20Lee%2C%20Honglak%20Control%20of%20memory%2C%20active%20perception%2C%20and%20action%20in%20minecraft%202016"
+        },
+        {
+            "id": "Oh_et+al_2017_a",
+            "entry": "Junhyuk Oh, Satinder Singh, and Honglak Lee. Value prediction network. In Advances in Neural Information Processing Systems, pages 6120\u20136130, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Oh%2C%20Junhyuk%20Singh%2C%20Satinder%20Lee%2C%20Honglak%20Value%20prediction%20network%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Oh%2C%20Junhyuk%20Singh%2C%20Satinder%20Lee%2C%20Honglak%20Value%20prediction%20network%202017"
+        },
+        {
+            "id": "Okada_et+al_2017_a",
+            "entry": "Masashi Okada, Luca Rigazio, and Takenobu Aoshima. Path integral networks: End-to-end differentiable optimal control. arXiv preprint arXiv:1706.09597, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.09597"
+        },
+        {
+            "id": "Pascanu_et+al_2017_a",
+            "entry": "Razvan Pascanu, Yujia Li, Oriol Vinyals, Nicolas Heess, Lars Buesing, Sebastien Racani\u00e8re, David Reichert, Th\u00e9ophane Weber, Daan Wierstra, and Peter Battaglia. Learning model-based planning from scratch. arXiv preprint arXiv:1707.06170, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.06170"
+        },
+        {
+            "id": "Paszke_et+al_2017_a",
+            "entry": "Adam Paszke, Sam Gross, Soumith Chintala, Gregory Chanan, Edward Yang, Zachary DeVito, Zeming Lin, Alban Desmaison, Luca Antiga, and Adam Lerer. Automatic differentiation in pytorch. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Paszke%2C%20Adam%20Gross%2C%20Sam%20Chintala%2C%20Soumith%20Chanan%2C%20Gregory%20Automatic%20differentiation%20in%20pytorch%202017"
+        },
+        {
+            "id": "Pathak_et+al_2018_a",
+            "entry": "Deepak Pathak, Parsa Mahmoudieh, Guanghao Luo, Pulkit Agrawal, Dian Chen, Yide Shentu, Evan Shelhamer, Jitendra Malik, Alexei A Efros, and Trevor Darrell. Zero-shot visual imitation. arXiv preprint arXiv:1804.08606, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1804.08606"
+        },
+        {
+            "id": "Pereira_et+al_2018_a",
+            "entry": "Marcus Pereira, David D. Fan, Gabriel Nakajima An, and Evangelos Theodorou. Mpc-inspired neural network policies for sequential decision making. arXiv preprint arXiv:1802.05803, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.05803"
+        },
+        {
+            "id": "Pong_et+al_2018_a",
+            "entry": "Vitchyr Pong, Shixiang Gu, Murtaza Dalal, and Sergey Levine. Temporal difference models: Model-free deep rl for model-based control. arXiv preprint arXiv:1802.09081, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.09081"
+        },
+        {
+            "id": "Schneider_1997_a",
+            "entry": "Jeff G Schneider. Exploiting model uncertainty estimates for safe dynamic control learning. In Advances in neural information processing systems, pages 1047\u20131053, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schneider%2C%20Jeff%20G.%20Exploiting%20model%20uncertainty%20estimates%20for%20safe%20dynamic%20control%20learning%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schneider%2C%20Jeff%20G.%20Exploiting%20model%20uncertainty%20estimates%20for%20safe%20dynamic%20control%20learning%201997"
+        },
+        {
+            "id": "Schulman_et+al_2015_a",
+            "entry": "John Schulman, Sergey Levine, Pieter Abbeel, Michael Jordan, and Philipp Moritz. Trust region policy optimization. In Proceedings of the 32nd International Conference on Machine Learning (ICML-15), pages 1889\u20131897, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schulman%2C%20John%20Levine%2C%20Sergey%20Abbeel%2C%20Pieter%20Jordan%2C%20Michael%20Trust%20region%20policy%20optimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schulman%2C%20John%20Levine%2C%20Sergey%20Abbeel%2C%20Pieter%20Jordan%2C%20Michael%20Trust%20region%20policy%20optimization%202015"
+        },
+        {
+            "id": "Schulman_et+al_2016_a",
+            "entry": "John Schulman, Philpp Moritz, Sergey Levine, Michael I. Jordan, and Pieter Abbeel. High-dimensional continuous control using generalized advantage estimation. International Conference on Learning Representations, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schulman%2C%20John%20Moritz%2C%20Philpp%20Levine%2C%20Sergey%20Jordan%2C%20Michael%20I.%20High-dimensional%20continuous%20control%20using%20generalized%20advantage%20estimation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schulman%2C%20John%20Moritz%2C%20Philpp%20Levine%2C%20Sergey%20Jordan%2C%20Michael%20I.%20High-dimensional%20continuous%20control%20using%20generalized%20advantage%20estimation%202016"
+        },
+        {
+            "id": "Silver_et+al_2016_a",
+            "entry": "David Silver, Hado van Hasselt, Matteo Hessel, Tom Schaul, Arthur Guez, Tim Harley, Gabriel Dulac-Arnold, David Reichert, Neil Rabinowitz, Andre Barreto, et al. The predictron: End-to-end learning and planning. arXiv preprint arXiv:1612.08810, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1612.08810"
+        },
+        {
+            "id": "Srinivas_et+al_2018_a",
+            "entry": "Aravind Srinivas, Allan Jabri, Pieter Abbeel, Sergey Levine, and Chelsea Finn. Universal planning networks. arXiv preprint arXiv:1804.00645, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1804.00645"
+        },
+        {
+            "id": "Sun_et+al_2017_a",
+            "entry": "Liting Sun, Cheng Peng, Wei Zhan, and Masayoshi Tomizuka. A fast integrated planning and control framework for autonomous driving via imitation learning. In arXiv preprint arXiv:1707.02515, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.02515"
+        },
+        {
+            "id": "Sutton_1990_a",
+            "entry": "Richard S Sutton. Integrated architectures for learning, planning, and reacting based on approximating dynamic programming. In Proceedings of the seventh international conference on machine learning, pages 216\u2013224, 1990.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20Richard%20S.%20Integrated%20architectures%20for%20learning%2C%20planning%2C%20and%20reacting%20based%20on%20approximating%20dynamic%20programming%201990",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutton%2C%20Richard%20S.%20Integrated%20architectures%20for%20learning%2C%20planning%2C%20and%20reacting%20based%20on%20approximating%20dynamic%20programming%201990"
+        },
+        {
+            "id": "Tamar_et+al_2016_a",
+            "entry": "Aviv Tamar, Yi Wu, Garrett Thomas, Sergey Levine, and Pieter Abbeel. Value iteration networks. In Advances in Neural Information Processing Systems, pages 2154\u20132162, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Aviv%20Tamar%20Yi%20Wu%20Garrett%20Thomas%20Sergey%20Levine%20and%20Pieter%20Abbeel%20Value%20iteration%20networks%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20pages%2021542162%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Aviv%20Tamar%20Yi%20Wu%20Garrett%20Thomas%20Sergey%20Levine%20and%20Pieter%20Abbeel%20Value%20iteration%20networks%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20pages%2021542162%202016"
+        },
+        {
+            "id": "Tamar_et+al_2017_a",
+            "entry": "Aviv Tamar, Garrett Thomas, Tianhao Zhang, Sergey Levine, and Pieter Abbeel. Learning from the hindsight plan\u2014episodic mpc improvement. In Robotics and Automation (ICRA), 2017 IEEE International Conference on, pages 336\u2013343. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tamar%2C%20Aviv%20Thomas%2C%20Garrett%20Zhang%2C%20Tianhao%20Levine%2C%20Sergey%20Learning%20from%20the%20hindsight%20plan%E2%80%94episodic%20mpc%20improvement%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tamar%2C%20Aviv%20Thomas%2C%20Garrett%20Zhang%2C%20Tianhao%20Levine%2C%20Sergey%20Learning%20from%20the%20hindsight%20plan%E2%80%94episodic%20mpc%20improvement%202017"
+        },
+        {
+            "id": "Tassa_et+al_2014_a",
+            "entry": "Yuval Tassa, Nicolas Mansard, and Emo Todorov. Control-limited differential dynamic programming. In Robotics and Automation (ICRA), 2014 IEEE International Conference on, pages 1168\u20131175. IEEE, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tassa%2C%20Yuval%20Mansard%2C%20Nicolas%20Todorov%2C%20Emo%20Control-limited%20differential%20dynamic%20programming%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tassa%2C%20Yuval%20Mansard%2C%20Nicolas%20Todorov%2C%20Emo%20Control-limited%20differential%20dynamic%20programming%202014"
+        },
+        {
+            "id": "Theodorou_et+al_2010_a",
+            "entry": "Evangelos Theodorou, Jonas Buchli, and Stefan Schaal. A generalized path integral control approach to reinforcement learning. Journal of Machine Learning Research, 11(Nov):3137\u20133181, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Theodorou%2C%20Evangelos%20Buchli%2C%20Jonas%20Schaal%2C%20Stefan%20A%20generalized%20path%20integral%20control%20approach%20to%20reinforcement%20learning%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Theodorou%2C%20Evangelos%20Buchli%2C%20Jonas%20Schaal%2C%20Stefan%20A%20generalized%20path%20integral%20control%20approach%20to%20reinforcement%20learning%202010"
+        },
+        {
+            "id": "Tieleman_2012_a",
+            "entry": "Tijmen Tieleman and Geoffrey Hinton. Lecture 6.5-rmsprop: Divide the gradient by a running average of its recent magnitude. COURSERA: Neural networks for machine learning, 4(2):26\u201331, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tieleman%2C%20Tijmen%20Hinton%2C%20Geoffrey%20Lecture%206.5-rmsprop%3A%20Divide%20the%20gradient%20by%20a%20running%20average%20of%20its%20recent%20magnitude%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tieleman%2C%20Tijmen%20Hinton%2C%20Geoffrey%20Lecture%206.5-rmsprop%3A%20Divide%20the%20gradient%20by%20a%20running%20average%20of%20its%20recent%20magnitude%202012"
+        },
+        {
+            "id": "Watter_et+al_2015_a",
+            "entry": "Manuel Watter, Jost Springenberg, Joschka Boedecker, and Martin Riedmiller. Embed to control: A locally linear latent dynamics model for control from raw images. In Advances in neural information processing systems, pages 2746\u20132754, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Watter%2C%20Manuel%20Springenberg%2C%20Jost%20Boedecker%2C%20Joschka%20Riedmiller%2C%20Martin%20Embed%20to%20control%3A%20A%20locally%20linear%20latent%20dynamics%20model%20for%20control%20from%20raw%20images%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Watter%2C%20Manuel%20Springenberg%2C%20Jost%20Boedecker%2C%20Joschka%20Riedmiller%2C%20Martin%20Embed%20to%20control%3A%20A%20locally%20linear%20latent%20dynamics%20model%20for%20control%20from%20raw%20images%202015"
+        },
+        {
+            "id": "Weber_et+al_2017_a",
+            "entry": "Th\u00e9ophane Weber, S\u00e9bastien Racani\u00e8re, David P Reichert, Lars Buesing, Arthur Guez, Danilo Jimenez Rezende, Adria Puigdom\u00e8nech Badia, Oriol Vinyals, Nicolas Heess, Yujia Li, et al. Imagination-augmented agents for deep reinforcement learning. arXiv preprint arXiv:1707.06203, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.06203"
+        },
+        {
+            "id": "Williams_et+al_2016_a",
+            "entry": "Grady Williams, Paul Drews, Brian Goldfain, James M Rehg, and Evangelos A Theodorou. Aggressive driving with model predictive path integral control. In Robotics and Automation (ICRA), 2016 IEEE International Conference on, pages 1433\u20131440. IEEE, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%2C%20Grady%20Drews%2C%20Paul%20Goldfain%2C%20Brian%20Rehg%2C%20James%20M.%20and%20Evangelos%20A%20Theodorou.%20Aggressive%20driving%20with%20model%20predictive%20path%20integral%20control%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Williams%2C%20Grady%20Drews%2C%20Paul%20Goldfain%2C%20Brian%20Rehg%2C%20James%20M.%20and%20Evangelos%20A%20Theodorou.%20Aggressive%20driving%20with%20model%20predictive%20path%20integral%20control%202016"
+        },
+        {
+            "id": "Williams_2017_a",
+            "entry": "Grady Williams, Andrew Aldrich, and Evangelos A Theodorou. Model predictive path integral control: From theory to parallel computation. Journal of Guidance, Control, and Dynamics, 40(2):344\u2013357, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%2C%20Grady%20Aldrich%2C%20Andrew%20and%20Evangelos%20A%20Theodorou.%20Model%20predictive%20path%20integral%20control%3A%20From%20theory%20to%20parallel%20computation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Williams%2C%20Grady%20Aldrich%2C%20Andrew%20and%20Evangelos%20A%20Theodorou.%20Model%20predictive%20path%20integral%20control%3A%20From%20theory%20to%20parallel%20computation%202017"
+        },
+        {
+            "id": "Zhaoming_2017_a",
+            "entry": "Zhaoming Xie, C. Karen Liu, and Kris Hauser. Differential Dynamic Programming with Nonlinear Constraints. In International Conference on Robotics and Automation (ICRA), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhaoming%20Xie%2C%20C.Karen%20Liu%20Hauser%2C%20Kris%20Differential%20Dynamic%20Programming%20with%20Nonlinear%20Constraints%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhaoming%20Xie%2C%20C.Karen%20Liu%20Hauser%2C%20Kris%20Differential%20Dynamic%20Programming%20with%20Nonlinear%20Constraints%202017"
+        }
+    ]
+}

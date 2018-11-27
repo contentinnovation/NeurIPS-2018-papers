@@ -1,0 +1,344 @@
+{
+    "filename": "8092-automatic-differentiation-in-ml-where-we-are-and-where-we-should-be-going.pdf",
+    "metadata": {
+        "title": "Automatic differentiation in ML: Where we are and where we should be going",
+        "author": "Bart van Merrienboer, Olivier Breuleux, Arnaud Bergeron, Pascal Lamblin",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8092-automatic-differentiation-in-ml-where-we-are-and-where-we-should-be-going.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We review the current state of automatic differentiation (AD) for array programming in machine learning (ML), including the different approaches such as operator overloading (OO) and source transformation (ST) used for AD, graph-based intermediate representations for programs, and source languages. Based on these insights, we introduce a new graph-based intermediate representation (IR) which specifically aims to efficiently support fully-general AD for array programming. Unlike existing dataflow programming representations in ML frameworks, our IR naturally supports function calls, higher-order functions and recursion, making ML models easier to implement. The ability to represent closures allows us to perform AD using ST without a tape, making the resulting derivative (adjoint) program amenable to ahead-of-time optimization using tools from functional language compilers, and enabling higher-order derivatives. Lastly, we introduce a proof of concept compiler toolchain called Myia which uses a subset of Python as a front end."
+    },
+    "keywords": [
+        {
+            "term": "NIPS",
+            "url": "https://en.wikipedia.org/wiki/NIPS"
+        },
+        {
+            "term": "dataflow programming",
+            "url": "https://en.wikipedia.org/wiki/dataflow_programming"
+        },
+        {
+            "term": "operator overloading",
+            "url": "https://en.wikipedia.org/wiki/operator_overloading"
+        },
+        {
+            "term": "array programming",
+            "url": "https://en.wikipedia.org/wiki/array_programming"
+        },
+        {
+            "term": "source transformation",
+            "url": "https://en.wikipedia.org/wiki/source_transformation"
+        },
+        {
+            "term": "machine learning",
+            "url": "https://en.wikipedia.org/wiki/machine_learning"
+        },
+        {
+            "term": "programming language",
+            "url": "https://en.wikipedia.org/wiki/programming_language"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        },
+        {
+            "term": "automatic differentiation",
+            "url": "https://en.wikipedia.org/wiki/automatic_differentiation"
+        },
+        {
+            "term": "algorithmic differentiation",
+            "url": "https://en.wikipedia.org/wiki/algorithmic_differentiation"
+        },
+        {
+            "term": "intermediate representation",
+            "url": "https://en.wikipedia.org/wiki/intermediate_representation"
+        },
+        {
+            "term": "functional language",
+            "url": "https://en.wikipedia.org/wiki/functional_language"
+        },
+        {
+            "term": "computer algebra systems",
+            "url": "https://en.wikipedia.org/wiki/computer_algebra_systems"
+        },
+        {
+            "term": "uniqueness typing",
+            "url": "https://en.wikipedia.org/wiki/uniqueness_typing"
+        },
+        {
+            "term": "abstract syntax tree",
+            "url": "https://en.wikipedia.org/wiki/abstract_syntax_tree"
+        }
+    ],
+    "highlights": [
+        "The development of machine learning frameworks has been driven by a wide range of fields and perspectives\u2014 systems programming, automatic differentiation, programming languages, compiler design, applied machine learning, etc.\u2013which has lead to duplicated research and confused terminology",
+        "In this work we examined the different approaches and techniques used in developing automatic differentiation-enabled machine learning frameworks, drawing insights from functional languages, graph-based intermediate representation, and automatic differentiation",
+        "To address some of the shortcomings in existing frameworks, we propose a novel graph-based intermediate representation and describe a proof of concept toolchain called Myia to show its advantages",
+        "We believe that as automatic differentiation frameworks will slowly move towards being full-fledged languages and compilers, developers will benefit from building on many other ideas from these fields",
+        "Other techniques from functional languages that could be beneficial include the use of monads to handle random number generators, and using higher-order functions for kernel programming"
+    ],
+    "key_statements": [
+        "The development of machine learning frameworks has been driven by a wide range of fields and perspectives\u2014 systems programming, automatic differentiation, programming languages, compiler design, applied machine learning, etc.\u2013which has lead to duplicated research and confused terminology",
+        "In this work we examined the different approaches and techniques used in developing automatic differentiation-enabled machine learning frameworks, drawing insights from functional languages, graph-based intermediate representation, and automatic differentiation",
+        "To address some of the shortcomings in existing frameworks, we propose a novel graph-based intermediate representation and describe a proof of concept toolchain called Myia to show its advantages",
+        "We believe that as automatic differentiation frameworks will slowly move towards being full-fledged languages and compilers, developers will benefit from building on many other ideas from these fields",
+        "Other techniques from functional languages that could be beneficial include the use of monads to handle random number generators, and using higher-order functions for kernel programming"
+    ],
+    "summary": [
+        "The development of ML frameworks has been driven by a wide range of fields and perspectives\u2014 systems programming, automatic differentiation, programming languages, compiler design, applied machine learning, etc.\u2013which has lead to duplicated research and confused terminology.",
+        "Frameworks relying on computation graphs such as TensorFlow and Theano [<a class=\"ref-link\" id=\"c36\" href=\"#r36\">36</a>] do not support higher-order functions or recursion, even though some ML models (e.g.",
+        "The advantage of this approach is that no AD-specific compiler passes are needed: a functional language compiler will recognize the non-local use of the intermediate variables by the fact that they are free variables in the generated closure or continuation.",
+        "Popular ML frameworks such as Theano, TensorFlow, and MXNet [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>] follow the dataflow programming paradigm [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>] and use computation graphs as their intermediate representation.",
+        "Since the adjoint program is part of the same dataflow graph, it can access the intermediate variables from the forward pass directly from the global scope, so neither tapes nor closures are required.",
+        "Projects such as DLVM [<a class=\"ref-link\" id=\"c42\" href=\"#r42\">42</a>] and Swift for TensorFlow6 have attempted to extend existing compiler toolchains such as LLVM and Swift\u2019s intermediate language (SIL) with array programming and AD in order to create frameworks better suited for ML workflow needs.",
+        "Functional Mutation and side effects are problematic for reverse mode AD, where the backward pass requires access to the unchanged intermediate variables from the forward pass.",
+        "Type and shape inference are more complex and powerful on our proposed IR than in dataflow graphs because of the need to support recursive calls and higher order functions.",
+        "These closures contain the adjoint code required to compute the derivatives along with the intermediate variables from the forward pass that are needed.",
+        "See Figure 1 for an illustration of how a Python function is parsed into the proposed IR, its adjoint program is created using ST, and optimized to produce an efficient derivative function.",
+        "In this work we examined the different approaches and techniques used in developing AD-enabled ML frameworks, drawing insights from functional languages, graph-based IRs, and AD.",
+        "To address some of the shortcomings in existing frameworks, we propose a novel graph-based intermediate representation and describe a proof of concept toolchain called Myia to show its advantages.",
+        "The result is a system that can achieve performance similar to compiled frameworks such as TensorFlow, while providing the flexibility of OO frameworks such as PyTorch with e.g. support for recursion and higher-order functions.",
+        "Other techniques from functional languages that could be beneficial include the use of monads to handle random number generators, and using higher-order functions for kernel programming."
+    ],
+    "headline": "We review the current state of automatic differentiation  for array programming in machine learning , including the different approaches such as operator overloading  and source transformation  used for automatic differentiation, graph-based intermediate representations for programs, and source languages",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Mart\u00edn Abadi, Paul Barham, Jianmin Chen, Zhifeng Chen, Andy Davis, Jeffrey Dean, Matthieu Devin, Sanjay Ghemawat, Geoffrey Irving, Michael Isard, et al. TensorFlow: A system for large-scale machine learning. In OSDI, volume 16, pages 265\u2013283, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abadi%2C%20Mart%C3%ADn%20Barham%2C%20Paul%20Chen%2C%20Jianmin%20Chen%2C%20Zhifeng%20TensorFlow%3A%20A%20system%20for%20large-scale%20machine%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abadi%2C%20Mart%C3%ADn%20Barham%2C%20Paul%20Chen%2C%20Jianmin%20Chen%2C%20Zhifeng%20TensorFlow%3A%20A%20system%20for%20large-scale%20machine%20learning%202016"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Tyler Akidau, Robert Bradshaw, Craig Chambers, Slava Chernyak, Rafael J Fern\u00e1ndezMoctezuma, Reuven Lax, Sam McVeety, Daniel Mills, Frances Perry, Eric Schmidt, et al. The dataflow model: a practical approach to balancing correctness, latency, and cost in massivescale, unbounded, out-of-order data processing. Proceedings of the VLDB Endowment, 8(12): 1792\u20131803, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Akidau%2C%20Tyler%20Bradshaw%2C%20Robert%20Chambers%2C%20Craig%20Chernyak%2C%20Slava%20The%20dataflow%20model%3A%20a%20practical%20approach%20to%20balancing%20correctness%2C%20latency%2C%20and%20cost%20in%20massivescale%2C%20unbounded%2C%20out-of-order%20data%20processing%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Akidau%2C%20Tyler%20Bradshaw%2C%20Robert%20Chambers%2C%20Craig%20Chernyak%2C%20Slava%20The%20dataflow%20model%3A%20a%20practical%20approach%20to%20balancing%20correctness%2C%20latency%2C%20and%20cost%20in%20massivescale%2C%20unbounded%2C%20out-of-order%20data%20processing%202015"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Erik Barendsen and Sjaak Smetsers. Conventional and uniqueness typing in graph rewrite systems. In Rudrapatna K. Shyamasundar, editor, Foundations of Software Technology and Theoretical Computer Science, pages 41\u201351, Berlin, Heidelberg, 1993. Springer Berlin Heidelberg. ISBN 978-3-540-48211-6.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Barendsen%2C%20Erik%20Smetsers%2C%20Sjaak%20Conventional%20and%20uniqueness%20typing%20in%20graph%20rewrite%20systems%201993",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Barendsen%2C%20Erik%20Smetsers%2C%20Sjaak%20Conventional%20and%20uniqueness%20typing%20in%20graph%20rewrite%20systems%201993"
+        },
+        {
+            "id": "4",
+            "entry": "[4] At\u0131l\u0131m G\u00fcnes Baydin, Barak A Pearlmutter, and Jeffrey Mark Siskind. DiffSharp: An AD library for .NET languages. arXiv e-prints, abs/1611.03423, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.03423"
+        },
+        {
+            "id": "5",
+            "entry": "[5] At\u0131l\u0131m G\u00fcnes Baydin, Barak A. Pearlmutter, Alexey Andreyevich Radul, and Jeffrey Mark Siskind. Automatic differentiation in machine learning: a survey. Journal of Machine Learning Research (JMLR), 18(153):1\u201343, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Baydin%2C%20At%C4%B1l%C4%B1m%20G%C3%BCnes%20Pearlmutter%2C%20Barak%20A.%20Radul%2C%20Alexey%20Andreyevich%20Siskind%2C%20Jeffrey%20Mark%20Automatic%20differentiation%20in%20machine%20learning%3A%20a%20survey%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Baydin%2C%20At%C4%B1l%C4%B1m%20G%C3%BCnes%20Pearlmutter%2C%20Barak%20A.%20Radul%2C%20Alexey%20Andreyevich%20Siskind%2C%20Jeffrey%20Mark%20Automatic%20differentiation%20in%20machine%20learning%3A%20a%20survey%202018"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Stefan Behnel, Robert Bradshaw, Craig Citro, Lisandro Dalcin, Dag Sverre Seljebotn, and Kurt Smith. Cython: The best of both worlds. Computing in Science & Engineering, 13(2):31\u201339, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Behnel%2C%20Stefan%20Bradshaw%2C%20Robert%20Citro%2C%20Craig%20Dalcin%2C%20Lisandro%20Cython%3A%20The%20best%20of%20both%20worlds%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Behnel%2C%20Stefan%20Bradshaw%2C%20Robert%20Citro%2C%20Craig%20Dalcin%2C%20Lisandro%20Cython%3A%20The%20best%20of%20both%20worlds%202011"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Bradley M Bell. CppAD: a package for C++ algorithmic differentiation. Computational Infrastructure for Operations Research, 57, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bell%2C%20Bradley%20M.%20CppAD%3A%20a%20package%20for%20C%2B%2B%20algorithmic%20differentiation%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bell%2C%20Bradley%20M.%20CppAD%3A%20a%20package%20for%20C%2B%2B%20algorithmic%20differentiation%202012"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Christian Bischof, Peyvand Khademi, Andrew Mauer, and Alan Carle. ADIFOR 2.0: Automatic differentiation of Fortran 77 programs. IEEE Computational Science and Engineering, 3(3): 18\u201332, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bischof%2C%20Christian%20Khademi%2C%20Peyvand%20Mauer%2C%20Andrew%20Carle%2C%20Alan%20ADIFOR%202.0%3A%20Automatic%20differentiation%20of%20Fortran%2077%20programs%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bischof%2C%20Christian%20Khademi%2C%20Peyvand%20Mauer%2C%20Andrew%20Carle%2C%20Alan%20ADIFOR%202.0%3A%20Automatic%20differentiation%20of%20Fortran%2077%20programs%201996"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Christian H Bischof and H Martin B\u00fccker. Computing derivatives of computer programs. Technical report, Argonne National Lab., IL (US), 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bischof%2C%20Christian%20H.%20B%C3%BCcker%2C%20H.Martin%20Computing%20derivatives%20of%20computer%20programs%202000"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Tianqi Chen, Mu Li, Yutian Li, Min Lin, Naiyan Wang, Minjie Wang, Tianjun Xiao, Bing Xu, Chiyuan Zhang, and Zheng Zhang. MXNet: A flexible and efficient machine learning library for heterogeneous distributed systems. arXiv e-prints, abs/1512.01274, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1512.01274"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Tianqi Chen, Thierry Moreau, Ziheng Jiang, Haichen Shen, Eddie Yan, Leyuan Wang, Yuwei Hu, Luis Ceze, Carlos Guestrin, and Arvind Krishnamurthy. TVM: End-to-end optimization stack for deep learning. arXiv e-prints, abs/1802.04799, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.04799"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Cliff Click and Michael Paleczny. A simple graph-based intermediate representation. ACM Sigplan Notices, 30(3):35\u201349, 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Click%2C%20Cliff%20Paleczny%2C%20Michael%20A%20simple%20graph-based%20intermediate%20representation%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Click%2C%20Cliff%20Paleczny%2C%20Michael%20A%20simple%20graph-based%20intermediate%20representation%201995"
+        },
+        {
+            "id": "13",
+            "entry": "[13] William Kingdon Clifford. A preliminary sketch of biquaternions. Proceedings of the London Mathematical Society, s1-4(1):381\u2013395, 1873. doi: 10.1112/plms/s1-4.1.381.",
+            "crossref": "https://dx.doi.org/10.1112/plms/s1-4.1.381",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1112/plms/s1-4.1.381"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Edsko de Vries, Rinus Plasmeijer, and David M. Abrahamson. Uniqueness typing simplified. In Olaf Chitil, Zolt\u00e1n Horv\u00e1th, and Vikt\u00f3ria Zs\u00f3k, editors, Implementation and Application of Functional Languages, pages 201\u2013218, Berlin, Heidelberg, 2008. Springer Berlin Heidelberg. ISBN 978-3-540-85373-2.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=de%20Vries%2C%20Edsko%20Plasmeijer%2C%20Rinus%20Abrahamson%2C%20David%20M.%20Uniqueness%20typing%20simplified%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=de%20Vries%2C%20Edsko%20Plasmeijer%2C%20Rinus%20Abrahamson%2C%20David%20M.%20Uniqueness%20typing%20simplified%202008"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Cormac Flanagan, Amr Sabry, Bruce F. Duba, and Matthias Felleisen. The essence of compiling with continuations. ACM Sigplan Notices, 28(6):237\u2013247, 1993.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Flanagan%2C%20Cormac%20Sabry%2C%20Amr%20Duba%2C%20Bruce%20F.%20Felleisen%2C%20Matthias%20The%20essence%20of%20compiling%20with%20continuations%201993",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Flanagan%2C%20Cormac%20Sabry%2C%20Amr%20Duba%2C%20Bruce%20F.%20Felleisen%2C%20Matthias%20The%20essence%20of%20compiling%20with%20continuations%201993"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Andreas Griewank and Andrea Walther. Evaluating derivatives: principles and techniques of algorithmic differentiation, volume 105.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Griewank%2C%20Andreas%20Walther%2C%20Andrea%20Evaluating%20derivatives%3A%20principles%20and%20techniques%20of%20algorithmic%20differentiation"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Andreas Griewank, David Juedes, and Jean Utke. Algorithm 755: ADOL-C: a package for the automatic differentiation of algorithms written in C/C++. ACM Transactions on Mathematical Software (TOMS), 22(2):131\u2013167, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Griewank%2C%20Andreas%20Juedes%2C%20David%20Utke%2C%20Jean%20Algorithm%20755%3A%20ADOL-C%3A%20a%20package%20for%20the%20automatic%20differentiation%20of%20algorithms%20written%20in%20C/C%2B%2B%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Griewank%2C%20Andreas%20Juedes%2C%20David%20Utke%2C%20Jean%20Algorithm%20755%3A%20ADOL-C%3A%20a%20package%20for%20the%20automatic%20differentiation%20of%20algorithms%20written%20in%20C/C%2B%2B%201996"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Laurent Hasco\u00ebt. Some highlights on source-to-source adjoint AD. NIPS Autodiff workshop, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hasco%C3%ABt%2C%20Laurent%20Some%20highlights%20on%20source-to-source%20adjoint%20AD.%20NIPS%20Autodiff%20workshop%202017"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Laurent Hasco\u00ebt, Uwe Naumann, and Val\u00e9rie Pascual. TBR analysis in reverse-mode automatic differentiation. Technical Report RR-4856, INRIA, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Laurent%20Hasco%C3%ABt%2C%20Uwe%20Naumann%20Pascual%2C%20Val%C3%A9rie%20TBR%20analysis%20in%20reverse-mode%20automatic%20differentiation%202003"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Laurent Hasco\u00ebt and Val\u00e9rie Pascual. The Tapenade automatic differentiation tool: principles, model, and specification. ACM Transactions on Mathematical Software (TOMS), 39(3):20, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hasco%C3%ABt%2C%20Laurent%20Pascual%2C%20Val%C3%A9rie%20The%20Tapenade%20automatic%20differentiation%20tool%3A%20principles%2C%20model%2C%20and%20specification%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hasco%C3%ABt%2C%20Laurent%20Pascual%2C%20Val%C3%A9rie%20The%20Tapenade%20automatic%20differentiation%20tool%3A%20principles%2C%20model%2C%20and%20specification%202013"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Wesley M. Johnston, J. R. Paul Hanna, and Richard J. Millar. Advances in dataflow programming languages. ACM computing surveys (CSUR), 36(1):1\u201334, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Johnston%2C%20Wesley%20M.%20Hanna%2C%20J.R.Paul%20Millar%2C%20Richard%20J.%20Advances%20in%20dataflow%20programming%20languages%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Johnston%2C%20Wesley%20M.%20Hanna%2C%20J.R.Paul%20Millar%2C%20Richard%20J.%20Advances%20in%20dataflow%20programming%20languages%202004"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Siu Kwan Lam, Antoine Pitrou, and Stanley Seibert. Numba: A LLVM-based Python JIT compiler. In Proceedings of the Second Workshop on the LLVM Compiler Infrastructure in HPC, page 7. ACM, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lam%2C%20Siu%20Kwan%20Pitrou%2C%20Antoine%20Seibert%2C%20Stanley%20Numba%3A%20A%20LLVM-based%20Python%20JIT%20compiler%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lam%2C%20Siu%20Kwan%20Pitrou%2C%20Antoine%20Seibert%2C%20Stanley%20Numba%3A%20A%20LLVM-based%20Python%20JIT%20compiler%202015"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Yann LeCun, Yoshua Bengio, and Geoffrey Hinton. Deep learning. Nature, 521(7553):436, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=LeCun%2C%20Yann%20Bengio%2C%20Yoshua%20Hinton%2C%20Geoffrey%20Deep%20learning%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=LeCun%2C%20Yann%20Bengio%2C%20Yoshua%20Hinton%2C%20Geoffrey%20Deep%20learning%202015"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Roland Lei\u00dfa, Marcel K\u00f6ster, and Sebastian Hack. A graph-based higher-order intermediate representation. In Proceedings of the 13th Annual IEEE/ACM International Symposium on Code Generation and Optimization, pages 202\u2013212. IEEE Computer Society, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lei%C3%9Fa%2C%20Roland%20K%C3%B6ster%2C%20Marcel%20Hack%2C%20Sebastian%20A%20graph-based%20higher-order%20intermediate%20representation%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lei%C3%9Fa%2C%20Roland%20K%C3%B6ster%2C%20Marcel%20Hack%2C%20Sebastian%20A%20graph-based%20higher-order%20intermediate%20representation%202015"
+        },
+        {
+            "id": "25",
+            "entry": "[25] G\u00f6tz Lindenmaier, Michael Beck, Boris Boesler, and Rubino Gei\u00df. Firm, an intermediate language for compiler research. Fakult\u00e4t f\u00fcr Informatik, Universit\u00e4t Karlsruhe, Germany, Tech. Rep, 8(3):2005, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lindenmaier%2C%20G%C3%B6tz%20Beck%2C%20Michael%20Boesler%2C%20Boris%20Gei%C3%9F%2C%20Rubino%20Firm%2C%20an%20intermediate%20language%20for%20compiler%20research%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lindenmaier%2C%20G%C3%B6tz%20Beck%2C%20Michael%20Boesler%2C%20Boris%20Gei%C3%9F%2C%20Rubino%20Firm%2C%20an%20intermediate%20language%20for%20compiler%20research%202005"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Dougal Maclaurin, David Duvenaud, and Ryan P. Adams. Autograd: Effortless gradients in NumPy. In ICML 2015 AutoML Workshop, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Maclaurin%2C%20Dougal%20Duvenaud%2C%20David%20Adams%2C%20Ryan%20P.%20Autograd%3A%20Effortless%20gradients%20in%20NumPy%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Maclaurin%2C%20Dougal%20Duvenaud%2C%20David%20Adams%2C%20Ryan%20P.%20Autograd%3A%20Effortless%20gradients%20in%20NumPy%202015"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Uwe Naumann. Optimal Jacobian accumulation is NP-complete. Mathematical Programming, 112(2):427\u2013441, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Naumann%2C%20Uwe%20Optimal%20Jacobian%20accumulation%20is%20NP-complete%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Naumann%2C%20Uwe%20Optimal%20Jacobian%20accumulation%20is%20NP-complete%202008"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Adam Paszke, Sam Gross, Soumith Chintala, Gregory Chanan, Edward Yang, Zachary DeVito, Zeming Lin, Alban Desmaison, Luca Antiga, and Adam Lerer. Automatic differentiation in PyTorch. NIPS Autodiff workshop, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Paszke%2C%20Adam%20Gross%2C%20Sam%20Chintala%2C%20Soumith%20Chanan%2C%20Gregory%20Automatic%20differentiation%20in%20PyTorch.%20NIPS%20Autodiff%20workshop%202017"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Barak A Pearlmutter and Jeffrey Mark Siskind. Reverse-mode AD in a functional framework: Lambda the ultimate backpropagator. ACM Transactions on Programming Languages and Systems (TOPLAS), 30(2):7, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pearlmutter%2C%20Barak%20A.%20Siskind%2C%20Jeffrey%20Mark%20Reverse-mode%20AD%20in%20a%20functional%20framework%3A%20Lambda%20the%20ultimate%20backpropagator%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pearlmutter%2C%20Barak%20A.%20Siskind%2C%20Jeffrey%20Mark%20Reverse-mode%20AD%20in%20a%20functional%20framework%3A%20Lambda%20the%20ultimate%20backpropagator%202008"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Jarrett Revels, Miles Lubin, and Theodore Papamarkou. Forward-mode automatic differentiation in Julia. arXiv e-prints, abs/1607.07892, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1607.07892"
+        },
+        {
+            "id": "31",
+            "entry": "[31] J\u00fcrgen Schmidhuber. Deep learning in neural networks: An overview. Neural networks, 61: 85\u2013117, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schmidhuber%2C%20J%C3%BCrgen%20Deep%20learning%20in%20neural%20networks%3A%20An%20overview%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schmidhuber%2C%20J%C3%BCrgen%20Deep%20learning%20in%20neural%20networks%3A%20An%20overview%202015"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Olin Shivers. Control-flow analysis of higher-order languages. PhD thesis, Carnegie Mellon University, 1991.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shivers%2C%20Olin%20Control-flow%20analysis%20of%20higher-order%20languages%201991"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Jeffrey Mark Siskind and Barak A Pearlmutter. Using polyvariant union-free flow analysis to compile a higher-order functional-programming language with a first-class derivative operator to efficient Fortran-like code. Technical Report TR-ECE-08-01, Purdue University, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Siskind%2C%20Jeffrey%20Mark%20Pearlmutter%2C%20Barak%20A.%20Using%20polyvariant%20union-free%20flow%20analysis%20to%20compile%20a%20higher-order%20functional-programming%20language%20with%20a%20first-class%20derivative%20operator%20to%20efficient%20Fortran-like%20code%202008"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Jeffrey Mark Siskind and Barak A. Pearlmutter. Efficient implementation of a higher-order language with built-in AD. arXiv e-prints, abs/1611.03416, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.03416"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Kai Sheng Tai, Richard Socher, and Christopher D Manning. Improved semantic representations from tree-structured long short-term memory networks. arXiv preprint arXiv:1503.00075, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1503.00075"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Theano Development Team. Theano: A Python framework for fast computation of mathematical expressions. arXiv e-prints, abs/1605.02688, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1605.02688"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Seiya Tokui, Kenta Oono, Shohei Hido, and Justin Clayton. Chainer: a next-generation open source framework for deep learning. In Proceedings of workshop on machine learning systems (LearningSys) in the twenty-ninth annual conference on neural information processing systems (NIPS), volume 5, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tokui%2C%20Seiya%20Oono%2C%20Kenta%20Hido%2C%20Shohei%20Clayton%2C%20Justin%20Chainer%3A%20a%20next-generation%20open%20source%20framework%20for%20deep%20learning%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tokui%2C%20Seiya%20Oono%2C%20Kenta%20Hido%2C%20Shohei%20Clayton%2C%20Justin%20Chainer%3A%20a%20next-generation%20open%20source%20framework%20for%20deep%20learning%202015"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Bart van Merri\u00ebnboer, Alexander B. Wiltschko, and Dan Moldovan. Tangent: Automatic differentiation using source code transformation in Python. arXiv e-prints, abs/1711.02712, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.02712"
+        },
+        {
+            "id": "39",
+            "entry": "[39] St\u00e9fan van der Walt, S. Chris Colbert, and Gael Varoquaux. The NumPy array: a structure for efficient numerical computation. Computing in Science & Engineering, 13(2):22\u201330, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=St%C3%A9fan%20van%20der%20Walt%2C%20S.Chris%20Colbert%20Varoquaux%2C%20Gael%20The%20NumPy%20array%3A%20a%20structure%20for%20efficient%20numerical%20computation%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=St%C3%A9fan%20van%20der%20Walt%2C%20S.Chris%20Colbert%20Varoquaux%2C%20Gael%20The%20NumPy%20array%3A%20a%20structure%20for%20efficient%20numerical%20computation%202011"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Fei Wang and Tiark Rompf. A language and compiler view on differentiable programming. ICLR Workshop track, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Fei%20Rompf%2C%20Tiark%20A%20language%20and%20compiler%20view%20on%20differentiable%20programming%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Fei%20Rompf%2C%20Tiark%20A%20language%20and%20compiler%20view%20on%20differentiable%20programming%202018"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Mu Wang, Assefaw Gebremedhin, and Alex Pothen. Capitalizing on live variables: new algorithms for efficient Hessian computation via automatic differentiation. Mathematical Programming Computation, 8(4):393\u2013433, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Mu%20Gebremedhin%2C%20Assefaw%20Pothen%2C%20Alex%20Capitalizing%20on%20live%20variables%3A%20new%20algorithms%20for%20efficient%20Hessian%20computation%20via%20automatic%20differentiation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Mu%20Gebremedhin%2C%20Assefaw%20Pothen%2C%20Alex%20Capitalizing%20on%20live%20variables%3A%20new%20algorithms%20for%20efficient%20Hessian%20computation%20via%20automatic%20differentiation%202016"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Richard Wei, Lane Schwartz, and Vikram Adve. DLVM: A modern compiler framework for neural network DSLs. Urbana, 51:61801, 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wei%2C%20Richard%20Schwartz%2C%20Lane%20Adve%2C%20Vikram%20DLVM%3A%20A%20modern%20compiler%20framework%20for%20neural%20network%20DSLs%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wei%2C%20Richard%20Schwartz%2C%20Lane%20Adve%2C%20Vikram%20DLVM%3A%20A%20modern%20compiler%20framework%20for%20neural%20network%20DSLs%202017"
+        }
+    ]
+}

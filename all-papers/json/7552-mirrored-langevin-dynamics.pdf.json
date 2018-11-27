@@ -1,0 +1,250 @@
+{
+    "filename": "7552-mirrored-langevin-dynamics.pdf",
+    "metadata": {
+        "title": "Mirrored Langevin Dynamics",
+        "author": "Ya-Ping Hsieh, Ali Kavis, Paul Rolland, Volkan Cevher",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7552-mirrored-langevin-dynamics.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We consider the problem of sampling from constrained distributions, which has posed significant challenges to both non-asymptotic analysis and algorithmic design. We propose a unified framework, which is inspired by the classical mirror descent, to derive novel first-order sampling schemes. We prove that, for a general target distribution with strongly convex potential, our framework implies the existence of a first-order algorithm achieving O( \u22122d) convergence, suggesting that the state-of-the-art O( \u22126d5) can be vastly improved. With the important Latent Dirichlet Allocation (LDA) application in mind, we specialize our algorithm to sample from Dirichlet posteriors, and derive the first non-asymptotic O( \u22122d2) rate for first-order sampling. We further extend our framework to the mini-batch setting and prove convergence rates when only stochastic gradients are available. Finally, we report promising experimental results for LDA on real datasets."
+    },
+    "keywords": [
+        {
+            "term": "convergence rate",
+            "url": "https://en.wikipedia.org/wiki/convergence_rate"
+        },
+        {
+            "term": "Latent Dirichlet Allocation",
+            "url": "https://en.wikipedia.org/wiki/Latent_Dirichlet_Allocation"
+        },
+        {
+            "term": "European Research Council",
+            "url": "https://en.wikipedia.org/wiki/European_Research_Council"
+        },
+        {
+            "term": "langevin dynamics",
+            "url": "https://en.wikipedia.org/wiki/langevin_dynamics"
+        }
+    ],
+    "highlights": [
+        "Many modern learning tasks involve sampling from a high-dimensional and large-scale distribution, which calls for algorithms that are scalable with respect to both the dimension and the data size",
+        "For general constrained distributions with a strongly convex potential V , we prove the existence of a first-order algorithm that achieves the same convergence rates as if there is no constraint at all, suggesting the state-of-the-art O( \u22126d5) can be brought down to O( \u22122d)",
+        "In Section 3, we propose the Mirrored Langevin Dynamics and prove its convergence rates for constrained sampling problems",
+        "One plausible explanation for such phenomenon is that our Mirrored Langevin Dynamics, as a simple unconstrained Langevin Dynamics, is less sensitive to discretization",
+        "The underlying dynamics for Stochastic Gradient Riemannian Langevin Dynamics is a more sophisticated Riemannian diffusion, which requires finer discretization than Mirrored Langevin Dynamics to achieve the same level of approximation to the original continuous-time dynamics, and this is true even in the presence of noisy gradients and our numerical heuristics\n4One can use a higher-order Taylor approximation for exp(y), or add a small threshold exp(y) max{ , 1 + y} to prevent the iterates from going to the boundary"
+    ],
+    "key_statements": [
+        "Many modern learning tasks involve sampling from a high-dimensional and large-scale distribution, which calls for algorithms that are scalable with respect to both the dimension and the data size",
+        "For general constrained distributions with a strongly convex potential V , we prove the existence of a first-order algorithm that achieves the same convergence rates as if there is no constraint at all, suggesting the state-of-the-art O( \u22126d5) can be brought down to O( \u22122d)",
+        "In Section 3, we propose the Mirrored Langevin Dynamics and prove its convergence rates for constrained sampling problems",
+        "One plausible explanation for such phenomenon is that our Mirrored Langevin Dynamics, as a simple unconstrained Langevin Dynamics, is less sensitive to discretization",
+        "The underlying dynamics for Stochastic Gradient Riemannian Langevin Dynamics is a more sophisticated Riemannian diffusion, which requires finer discretization than Mirrored Langevin Dynamics to achieve the same level of approximation to the original continuous-time dynamics, and this is true even in the presence of noisy gradients and our numerical heuristics\n4One can use a higher-order Taylor approximation for exp(y), or add a small threshold exp(y) max{ , 1 + y} to prevent the iterates from going to the boundary"
+    ],
+    "summary": [
+        "Many modern learning tasks involve sampling from a high-dimensional and large-scale distribution, which calls for algorithms that are scalable with respect to both the dimension and the data size.",
+        "Such a framework has inspired numerous first-order sampling algorithms [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>, <a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>, <a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>, <a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>, <a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>, <a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>, <a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>], and the convergence rates are by well-understood for unconstrained and log-concave distributions [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>, <a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>, <a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>].",
+        "For general constrained distributions with a strongly convex potential V , we prove the existence of a first-order algorithm that achieves the same convergence rates as if there is no constraint at all, suggesting the state-of-the-art O( \u22126d5) can be brought down to O( \u22122d).",
+        "For constrained sampling problems, we propose to use the mirror map to transform the target into an unconstrained distribution, whereby many existing methods apply.",
+        "We use the entropic mirror map to design practical first-order algorithms that possess rigorous guarantees, and are amenable to mini-batch extensions.",
+        "In Section 3, we propose the Mirrored Langevin Dynamics and prove its convergence rates for constrained sampling problems.",
+        "The Mirrored Langevin Dynamics, is targeting the push-forward measure e\u2212W (y)dy, and our framework is not covered in [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>].",
+        "In order to minimize a function over a bounded domain, say minx\u2208X f (x), MD uses a mirror map h to transform the primal variable x into the dual space y := \u2207h(x), and performs gradient updates in the dual: y+ = y \u2212 \u03b2\u2207f (x) for some step-size \u03b2.",
+        "In the context of sampling, Theorem 1 suggests the following simple procedure: For any target distribution e\u2212V (x)dx with support X , we choose a mirror map h on X satisfying Assumption 1, and we consider the dual distribution associated with e\u2212V (x)dx and h: e\u2212W (y)dy := \u2207h#e\u2212V (x)dx.",
+        "DYt = \u2212\u22072h(Xt)\u22121 \u2207V (Xt) + \u2207 log det \u22072h(Xt) dt + 2dBt. In order to arrive at a practical algorithm, we discretize the MLD, giving rise to the following equivalent iterations: yt+1 \u2212 yt =",
+        "Since dYt in (3.2) is the classical Langevin Dynamics, and since we have assumed that W is unconstrained, it is typically not difficult to prove the convergence of yt to Y\u221e \u223c e\u2212W (y)dy.",
+        "The main result of this subsection is the existence of a \u201cgood\u201d mirror map for arbitrary constraint, with which the dual distribution e\u2212W (y)dy becomes unconstrained: Theorem 3 (Existence of a good mirror map for MLD).",
+        "Algorithm 1 Stochastic Mirrored Langevin Dynamics (SMLD)",
+        "Let e\u2212V (x)dx be a distribution satisfying Assumption 4, and h a 1-strongly convex mirror map."
+    ],
+    "headline": "We propose a unified framework, which is inspired by the classical mirror descent, to derive novel first-order sampling schemes",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Sungjin Ahn, Anoop Korattikara, and Max Welling. Bayesian posterior sampling via stochastic gradient fisher scoring. In Proceedings of the 29th International Coference on International Conference on Machine Learning, pages 1771\u20131778, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ahn%2C%20Sungjin%20Korattikara%2C%20Anoop%20Welling%2C%20Max%20Bayesian%20posterior%20sampling%20via%20stochastic%20gradient%20fisher%20scoring%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ahn%2C%20Sungjin%20Korattikara%2C%20Anoop%20Welling%2C%20Max%20Bayesian%20posterior%20sampling%20via%20stochastic%20gradient%20fisher%20scoring%202012"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Amir Beck and Marc Teboulle. Mirror descent and nonlinear projected subgradient methods for convex optimization. Operations Research Letters, 31(3):167\u2013175, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Beck%2C%20Amir%20Teboulle%2C%20Marc%20Mirror%20descent%20and%20nonlinear%20projected%20subgradient%20methods%20for%20convex%20optimization%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Beck%2C%20Amir%20Teboulle%2C%20Marc%20Mirror%20descent%20and%20nonlinear%20projected%20subgradient%20methods%20for%20convex%20optimization%202003"
+        },
+        {
+            "id": "3",
+            "entry": "[3] David M Blei, Andrew Y Ng, and Michael I Jordan. Latent dirichlet allocation. Journal of machine Learning research, 3(Jan):993\u20131022, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Blei%2C%20David%20M.%20Andrew%20Y%20Ng%2C%20and%20Michael%20I%20Jordan.%20Latent%20dirichlet%20allocation%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Blei%2C%20David%20M.%20Andrew%20Y%20Ng%2C%20and%20Michael%20I%20Jordan.%20Latent%20dirichlet%20allocation%202003"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Nicolas Brosse, Alain Durmus, Eric Moulines, and Marcelo Pereyra. Sampling from a log-concave distribution with compact support with proximal langevin monte carlo. In Proceedings of the 2017 Conference on Learning Theory, volume 65 of Proceedings of Machine Learning Research, pages 319\u2013342. PMLR, 07\u201310 Jul 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Brosse%2C%20Nicolas%20Durmus%2C%20Alain%20Moulines%2C%20Eric%20Pereyra%2C%20Marcelo%20Sampling%20from%20a%20log-concave%20distribution%20with%20compact%20support%20with%20proximal%20langevin%20monte%20carlo%202017-07",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Brosse%2C%20Nicolas%20Durmus%2C%20Alain%20Moulines%2C%20Eric%20Pereyra%2C%20Marcelo%20Sampling%20from%20a%20log-concave%20distribution%20with%20compact%20support%20with%20proximal%20langevin%20monte%20carlo%202017-07"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Sebastien Bubeck, Ronen Eldan, and Joseph Lehec. Sampling from a log-concave distribution with projected langevin monte carlo. arXiv preprint arXiv:1507.02564, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1507.02564"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Changyou Chen, Nan Ding, and Lawrence Carin. On the convergence of stochastic gradient mcmc algorithms with high-order integrators. In Advances in Neural Information Processing Systems, pages 2278\u20132286, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Changyou%20Ding%2C%20Nan%20Carin%2C%20Lawrence%20On%20the%20convergence%20of%20stochastic%20gradient%20mcmc%20algorithms%20with%20high-order%20integrators%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Changyou%20Ding%2C%20Nan%20Carin%2C%20Lawrence%20On%20the%20convergence%20of%20stochastic%20gradient%20mcmc%20algorithms%20with%20high-order%20integrators%202015"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Tianqi Chen, Emily Fox, and Carlos Guestrin. Stochastic gradient hamiltonian monte carlo. In International Conference on Machine Learning, pages 1683\u20131691, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Tianqi%20Fox%2C%20Emily%20Guestrin%2C%20Carlos%20Stochastic%20gradient%20hamiltonian%20monte%20carlo%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Tianqi%20Fox%2C%20Emily%20Guestrin%2C%20Carlos%20Stochastic%20gradient%20hamiltonian%20monte%20carlo%202014"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Xiang Cheng and Peter Bartlett. Convergence of langevin mcmc in kl-divergence. In Proceedings of Algorithmic Learning Theory, volume 83 of Proceedings of Machine Learning Research, pages 186\u2013211. PMLR, 07\u201309 Apr 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cheng%2C%20Xiang%20Bartlett%2C%20Peter%20Convergence%20of%20langevin%20mcmc%20in%20kl-divergence%202018-04",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cheng%2C%20Xiang%20Bartlett%2C%20Peter%20Convergence%20of%20langevin%20mcmc%20in%20kl-divergence%202018-04"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Xiang Cheng, Niladri S Chatterji, Peter L Bartlett, and Michael I Jordan. Underdamped langevin mcmc: A non-asymptotic analysis. arXiv preprint arXiv:1707.03663, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.03663"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Bo Dai, Niao He, Hanjun Dai, and Le Song. Provable bayesian inference via particle mirror descent. In Artificial Intelligence and Statistics, pages 985\u2013994, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dai%2C%20Bo%20He%2C%20Niao%20Dai%2C%20Hanjun%20Song%2C%20Le%20Provable%20bayesian%20inference%20via%20particle%20mirror%20descent%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dai%2C%20Bo%20He%2C%20Niao%20Dai%2C%20Hanjun%20Song%2C%20Le%20Provable%20bayesian%20inference%20via%20particle%20mirror%20descent%202016"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Arnak S Dalalyan. Theoretical guarantees for approximate sampling from smooth and log-concave densities. Journal of the Royal Statistical Society: Series B (Statistical Methodology), 79(3):651\u2013676, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dalalyan%2C%20Arnak%20S.%20Theoretical%20guarantees%20for%20approximate%20sampling%20from%20smooth%20and%20log-concave%20densities%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dalalyan%2C%20Arnak%20S.%20Theoretical%20guarantees%20for%20approximate%20sampling%20from%20smooth%20and%20log-concave%20densities%202017"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Arnak S Dalalyan and Avetik G Karagulyan. User-friendly guarantees for the langevin monte carlo with inaccurate gradient. arXiv preprint arXiv:1710.00095, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.00095"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Nan Ding, Youhan Fang, Ryan Babbush, Changyou Chen, Robert D Skeel, and Hartmut Neven. Bayesian sampling using stochastic gradient thermostats. In Advances in neural information processing systems, pages 3203\u20133211, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ding%2C%20Nan%20Fang%2C%20Youhan%20Babbush%2C%20Ryan%20Chen%2C%20Changyou%20Bayesian%20sampling%20using%20stochastic%20gradient%20thermostats%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ding%2C%20Nan%20Fang%2C%20Youhan%20Babbush%2C%20Ryan%20Chen%2C%20Changyou%20Bayesian%20sampling%20using%20stochastic%20gradient%20thermostats%202014"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Alain Durmus, Szymon Majewski, and Blazej Miasojedow. Analysis of langevin monte carlo via convex optimization. arXiv preprint arXiv:1802.09188, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.09188"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Alain Durmus, Umut Simsekli, Eric Moulines, Roland Badeau, and Gael Richard. Stochastic gradient richardson-romberg markov chain monte carlo. In Advances in Neural Information Processing Systems, pages 2047\u20132055, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Durmus%2C%20Alain%20Simsekli%2C%20Umut%20Moulines%2C%20Eric%20Badeau%2C%20Roland%20Stochastic%20gradient%20richardson-romberg%20markov%20chain%20monte%20carlo%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Durmus%2C%20Alain%20Simsekli%2C%20Umut%20Moulines%2C%20Eric%20Badeau%2C%20Roland%20Stochastic%20gradient%20richardson-romberg%20markov%20chain%20monte%20carlo%202016"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Raaz Dwivedi, Yuansi Chen, Martin J Wainwright, and Bin Yu. Log-concave sampling: Metropolis-hastings algorithms are fast! arXiv preprint arXiv:1801.02309, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1801.02309"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Walid Krichene and Peter L Bartlett. Acceleration and averaging in stochastic descent dynamics. In Advances in Neural Information Processing Systems, pages 6799\u20136809, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krichene%2C%20Walid%20Bartlett%2C%20Peter%20L.%20Acceleration%20and%20averaging%20in%20stochastic%20descent%20dynamics%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krichene%2C%20Walid%20Bartlett%2C%20Peter%20L.%20Acceleration%20and%20averaging%20in%20stochastic%20descent%20dynamics%202017"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Shiwei Lan and Babak Shahbaba. Sampling constrained probability distributions using spherical augmentation. In Algorithmic Advances in Riemannian Geometry and Applications, pages 25\u201371.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lan%2C%20Shiwei%20Shahbaba%2C%20Babak%20Sampling%20constrained%20probability%20distributions%20using%20spherical%20augmentation",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lan%2C%20Shiwei%20Shahbaba%2C%20Babak%20Sampling%20constrained%20probability%20distributions%20using%20spherical%20augmentation"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Chang Liu, Jun Zhu, and Yang Song. Stochastic gradient geodesic mcmc methods. In Advances in Neural Information Processing Systems, pages 3009\u20133017, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20Chang%20Zhu%2C%20Jun%20Song%2C%20Yang%20Stochastic%20gradient%20geodesic%20mcmc%20methods%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liu%2C%20Chang%20Zhu%2C%20Jun%20Song%2C%20Yang%20Stochastic%20gradient%20geodesic%20mcmc%20methods%202016"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Tung Luu, Jalal Fadili, and Christophe Chesneau. Sampling from non-smooth distribution through langevin diffusion. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Luu%2C%20Tung%20Fadili%2C%20Jalal%20Chesneau%2C%20Christophe%20Sampling%20from%20non-smooth%20distribution%20through%20langevin%20diffusion%202017"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Yi-An Ma, Tianqi Chen, and Emily Fox. A complete recipe for stochastic gradient mcmc. In Advances in Neural Information Processing Systems, pages 2917\u20132925, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ma%2C%20Yi-An%20Chen%2C%20Tianqi%20Fox%2C%20Emily%20A%20complete%20recipe%20for%20stochastic%20gradient%20mcmc%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ma%2C%20Yi-An%20Chen%2C%20Tianqi%20Fox%2C%20Emily%20A%20complete%20recipe%20for%20stochastic%20gradient%20mcmc%202015"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Benoit B Mandelbrot. The fractal geometry of nature, volume 173. WH freeman New York, 1983.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mandelbrot%2C%20Benoit%20B.%20The%20fractal%20geometry%20of%20nature%2C%20volume%20173.%20WH%20freeman%201983"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Robert J McCann. Existence and uniqueness of monotone measure-preserving maps. Duke Mathematical Journal, 80(2):309\u2013324, 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=McCann%2C%20Robert%20J.%20Existence%20and%20uniqueness%20of%20monotone%20measure-preserving%20maps%201995",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=McCann%2C%20Robert%20J.%20Existence%20and%20uniqueness%20of%20monotone%20measure-preserving%20maps%201995"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Panayotis Mertikopoulos and Mathias Staudigl. On the convergence of gradient-like flows with noisy gradient input. SIAM Journal on Optimization, 28(1):163\u2013197, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mertikopoulos%2C%20Panayotis%20Staudigl%2C%20Mathias%20On%20the%20convergence%20of%20gradient-like%20flows%20with%20noisy%20gradient%20input%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mertikopoulos%2C%20Panayotis%20Staudigl%2C%20Mathias%20On%20the%20convergence%20of%20gradient-like%20flows%20with%20noisy%20gradient%20input%202018"
+        },
+        {
+            "id": "25",
+            "entry": "[25] AS Nemirovsky and DB Yudin. Problem complexity and method efficiency in optimization. 1983.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nemirovsky%2C%20A.S.%20Yudin%2C%20D.B.%20Problem%20complexity%20and%20method%20efficiency%20in%20optimization%201983"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Sam Patterson and Yee Whye Teh. Stochastic gradient riemannian langevin dynamics on the probability simplex. In Advances in Neural Information Processing Systems, pages 3102\u20133110, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Patterson%2C%20Sam%20Teh%2C%20Yee%20Whye%20Stochastic%20gradient%20riemannian%20langevin%20dynamics%20on%20the%20probability%20simplex%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Patterson%2C%20Sam%20Teh%2C%20Yee%20Whye%20Stochastic%20gradient%20riemannian%20langevin%20dynamics%20on%20the%20probability%20simplex%202013"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Maxim Raginsky and Jake Bouvrie. Continuous-time stochastic mirror descent on a network: Variance reduction, consensus, convergence. In Decision and Control (CDC), 2012 IEEE 51st Annual Conference on, pages 6793\u20136800. IEEE, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Raginsky%2C%20Maxim%20Bouvrie%2C%20Jake%20Continuous-time%20stochastic%20mirror%20descent%20on%20a%20network%3A%20Variance%20reduction%2C%20consensus%2C%20convergence%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Raginsky%2C%20Maxim%20Bouvrie%2C%20Jake%20Continuous-time%20stochastic%20mirror%20descent%20on%20a%20network%3A%20Variance%20reduction%2C%20consensus%2C%20convergence%202012"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Ralph Tyrell Rockafellar. Convex analysis. Princeton university press, 1970.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rockafellar%2C%20Ralph%20Tyrell%20Convex%20analysis%201970"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Umut Simsekli, Roland Badeau, Taylan Cemgil, and Gael Richard. Stochastic quasinewton langevin monte carlo. In International Conference on Machine Learning, pages 642\u2013651, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Simsekli%2C%20Umut%20Badeau%2C%20Roland%20Cemgil%2C%20Taylan%20Richard%2C%20Gael%20Stochastic%20quasinewton%20langevin%20monte%20carlo%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Simsekli%2C%20Umut%20Badeau%2C%20Roland%20Cemgil%2C%20Taylan%20Richard%2C%20Gael%20Stochastic%20quasinewton%20langevin%20monte%20carlo%202016"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Cedric Villani. Topics in optimal transportation. Number 58. American Mathematical Soc., 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Villani%2C%20Cedric%20Topics%20in%20optimal%20transportation.%20Number%2058%202003"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Cedric Villani. Optimal transport: old and new, volume 338. Springer Science & Business Media, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Villani%2C%20Cedric%20Optimal%20transport%3A%20old%20and%20new%2C%20volume%20338%202008"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Max Welling and Yee W Teh. Bayesian learning via stochastic gradient langevin dynamics. In Proceedings of the 28th International Conference on Machine Learning (ICML-11), pages 681\u2013688, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Welling%2C%20Max%20Teh%2C%20Yee%20W.%20Bayesian%20learning%20via%20stochastic%20gradient%20langevin%20dynamics%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Welling%2C%20Max%20Teh%2C%20Yee%20W.%20Bayesian%20learning%20via%20stochastic%20gradient%20langevin%20dynamics%202011"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Pan Xu, Tianhao Wang, and Quanquan Gu. Accelerated stochastic mirror descent: From continuous-time dynamics to discrete-time algorithms. In International Conference on Artificial Intelligence and Statistics, pages 1087\u20131096, 2018. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xu%2C%20Pan%20Wang%2C%20Tianhao%20Gu%2C%20Quanquan%20Accelerated%20stochastic%20mirror%20descent%3A%20From%20continuous-time%20dynamics%20to%20discrete-time%20algorithms%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xu%2C%20Pan%20Wang%2C%20Tianhao%20Gu%2C%20Quanquan%20Accelerated%20stochastic%20mirror%20descent%3A%20From%20continuous-time%20dynamics%20to%20discrete-time%20algorithms%202018"
+        }
+    ]
+}

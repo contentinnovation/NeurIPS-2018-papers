@@ -1,0 +1,318 @@
+{
+    "filename": "8275-joint-autoregressive-and-hierarchical-priors-for-learned-image-compression.pdf",
+    "metadata": {
+        "title": "Joint Autoregressive and Hierarchical Priors for Learned Image Compression",
+        "author": "David Minnen, Johannes Ball\u00e9, George D. Toderici",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8275-joint-autoregressive-and-hierarchical-priors-for-learned-image-compression.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Recent models for learned image compression are based on autoencoders that learn approximately invertible mappings from pixels to a quantized latent representation. The transforms are combined with an entropy model, which is a prior on the latent representation that can be used with standard arithmetic coding algorithms to generate a compressed bitstream. Recently, hierarchical entropy models were introduced as a way to exploit more structure in the latents than previous fully factorized priors, improving compression performance while maintaining end-to-end optimization. Inspired by the success of autoregressive priors in probabilistic generative models, we examine autoregressive, hierarchical, and combined priors as alternatives, weighing their costs and benefits in the context of image compression. While it is well known that autoregressive models can incur a significant computational penalty, we find that in terms of compression performance, autoregressive and hierarchical priors are complementary and can be combined to exploit the probabilistic structure in the latents better than all previous learned models. The combined model yields state-of-the-art rate\u2013distortion performance and generates smaller files than existing methods: 15.8% rate reductions over the baseline hierarchical model and 59.8%, 35%, and 8.4% savings over JPEG, JPEG2000, and BPG, respectively. To the best of our knowledge, our model is the first learning-based method to outperform the top standard image codec (BPG) on both the PSNR and MS-SSIM distortion metrics.",
+        "doc_ids": [
+            "ISO/IEC 23008-2"
+        ]
+    },
+    "keywords": [
+        {
+            "term": "Gaussian mixture model",
+            "url": "https://en.wikipedia.org/wiki/Gaussian_mixture_model"
+        },
+        {
+            "term": "convolutional neural networks",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_networks"
+        },
+        {
+            "term": "JPEG",
+            "url": "https://en.wikipedia.org/wiki/JPEG"
+        },
+        {
+            "term": "mean squared error",
+            "url": "https://en.wikipedia.org/wiki/mean_squared_error"
+        },
+        {
+            "term": "transform coding",
+            "url": "https://en.wikipedia.org/wiki/transform_coding"
+        },
+        {
+            "term": "probability model",
+            "url": "https://en.wikipedia.org/wiki/probability_model"
+        },
+        {
+            "term": "arithmetic encoding",
+            "url": "https://en.wikipedia.org/wiki/arithmetic_encoding"
+        },
+        {
+            "term": "Bits per pixel",
+            "url": "https://en.wikipedia.org/wiki/Bits_per_pixel"
+        },
+        {
+            "term": "image compression",
+            "url": "https://en.wikipedia.org/wiki/image_compression"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "Most recent methods for learning-based, lossy image compression adopt an approach based on transform coding [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>]",
+        "Within the deep learning research community, the transforms typically take the form of convolutional neural networks (CNNs), which learn nonlinear functions with the potential to map pixels into a more compressible latent space than the linear transforms used by traditional image codecs",
+        "While peak signalto-noise ratio is known to be a relatively poor perceptual metric [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>], it is still a standard metric used to evaluate image compression algorithms and is the primary metric used for tuning conventional codecs",
+        "The average likelihood of the observed latents increases when the center of the conditional Gaussian is closer to the true value and a smaller scale is predicted, i.e., more structure can be exploited by modeling conditional means",
+        "We showed in Figure 2 that a Gaussian mixture model-based entropy model provides a net benefit and outperforms the simpler Gaussian scale mixture-based model in terms of rate\u2013distortion performance without increasing the asymptotic complexity of the model"
+    ],
+    "key_statements": [
+        "Most recent methods for learning-based, lossy image compression adopt an approach based on transform coding [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>]",
+        "Within the deep learning research community, the transforms typically take the form of convolutional neural networks (CNNs), which learn nonlinear functions with the potential to map pixels into a more compressible latent space than the linear transforms used by traditional image codecs",
+        "While dimensionality reduction can be seen as a simple form of compression, it is not equivalent since the goal of compression is to reduce the entropy of the representation under a prior probability model shared between the sender and the receiver, not just to reduce the dimensionality",
+        "Recent methods have focused on better encoder/decoder transforms and on more sophisticated entropy models [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>]\u2013[<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>]",
+        "We extend this Gaussian scale mixture-based entropy model in two ways: first, by generalizing the hierarchical Gaussian scale mixture model to a Gaussian mixture model (GMM), and, inspired by recent work on generative models, by adding an autoregressive component",
+        "While peak signalto-noise ratio is known to be a relatively poor perceptual metric [<a class=\"ref-link\" id=\"c22\" href=\"#r22\">22</a>], it is still a standard metric used to evaluate image compression algorithms and is the primary metric used for tuning conventional codecs",
+        "Image compression with deep neural networks became a popular research topic starting with the work of Toderici et al [<a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>] who used a recurrent architecture based on LSTMs to learn multi-rate, progressive models",
+        "The average likelihood of the observed latents increases when the center of the conditional Gaussian is closer to the true value and a smaller scale is predicted, i.e., more structure can be exploited by modeling conditional means",
+        "We showed in Figure 2 that a Gaussian mixture model-based entropy model provides a net benefit and outperforms the simpler Gaussian scale mixture-based model in terms of rate\u2013distortion performance without increasing the asymptotic complexity of the model"
+    ],
+    "summary": [
+        "Most recent methods for learning-based, lossy image compression adopt an approach based on transform coding [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>].",
+        "The key insight of their work is that the compressed hyperprior can be added to the generated bitstream as side information, which allows the decoder to use the conditional entropy model.",
+        "It combines the Context Model, an autoregressive model over latents, with the hyper-network (Hyper Encoder and Hyper Decoder blocks), which learns to represent information useful for correcting the context-based predictions.",
+        "The predicted Gaussian parameters are functions of the learned parameters of the hyper-decoder, context model, and entropy parameters networks: py(y | z, \u03b8hd, \u03b8cm, \u03b8ep) =",
+        "The entropy model for the hyperprior is the same as in [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>], we expect the hyper-encoder and hyper-decoder to learn significantly different functions in our combined model, since they work in conjunction with an autoregressive network to predict the parameters of the entropy model.",
+        "The formal definition of our model allows the autoregressive component to condition its predictions \u03c6i = gcm(y<i; \u03b8cm) on all previous latents, in practice we use a limited context (5\u00d75 convolution kernels) with masked convolution similar to the approach used by PixelCNN [<a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>].",
+        "The RD graph on the left of Figure 2 compares our combined context + hyperprior model to existing image codecs and shows that this model outperforms all of the existing methods including BPG [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>], a state-of-the-art codec based on the intra-frame coding algorithm from HEVC [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>].",
+        "Image compression with deep neural networks became a popular research topic starting with the work of Toderici et al [<a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>] who used a recurrent architecture based on LSTMs to learn multi-rate, progressive models.",
+        "Their approach was improved by exploring other recurrent architectures for the autoencoder, training an LSTM-based entropy model, and adding a post-process that spatially adapts the bit rate based on the complexity of the local image content [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>], [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>].",
+        "Other methods do not make use of context via an autoregressive model and instead rely on side information that is either predicted by a neural network [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>] or composed of indices into a dictionary of non-parametric code distributions used locally by the entropy coder [<a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>].",
+        "Their integration method between the context model and hyperprior is somewhat simpler than our approach, which leads to a final model with slightly worse rate\u2013distortion performance (~10% higher bit rates for equivalent MS-SSIM).",
+        "To report the rate\u2013distortion performance of the compression models which contain an autoregressive component, we refrained from implementing a full decoder for this paper, and instead compare Shannon entropies."
+    ],
+    "headline": "Inspired by the success of autoregressive priors in probabilistic generative models, we examine autoregressive, hierarchical, and combined priors as alternatives, weighing their costs and benefits in the context of image compression",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] V. K. Goyal, \u201cTheoretical foundations of transform coding,\u201d IEEE Signal Processing Magazine, vol. 18, no. 5, 2001. DOI: 10.1109/79.952802.",
+            "crossref": "https://dx.doi.org/10.1109/79.952802",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1109/79.952802"
+        },
+        {
+            "id": "2",
+            "entry": "[2] D. E. Rumelhart, G. E. Hinton, and R. J. Williams, \u201cParallel distributed processing: Explorations in the microstructure of cognition, vol. 1,\u201d in, D. E. Rumelhart, J. L. McClelland, and C. PDP Research Group, Eds., Cambridge, MA, USA: MIT Press, 1986, ch. Learning Internal Representations by Error Propagation, pp. 318\u2013362, ISBN: 0-262-68053-X. [Online]. Available: http://dl.acm.org/citation.cfm?id=104279.104293.",
+            "url": "http://dl.acm.org/citation.cfm?id=104279.104293"
+        },
+        {
+            "id": "3",
+            "entry": "[3] G. E. Hinton and R. R. Salakhutdinov, \u201cReducing the dimensionality of data with neural networks,\u201d Science, vol. 313, no. 5786, pp. 504\u2013507, Jul. 2006. DOI: 10.1126/science. 1127647.",
+            "crossref": "https://dx.doi.org/10.1126/science.1127647",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1126/science.1127647"
+        },
+        {
+            "id": "4",
+            "entry": "[4] G. Toderici, D. Vincent, N. Johnston, S. J. Hwang, D. Minnen, J. Shor, and M. Covell, \u201cFull resolution image compression with recurrent neural networks,\u201d in 2017 IEEE Conf. on Computer Vision and Pattern Recognition (CVPR), 2017. DOI: 10.1109/CVPR.2017.577. arXiv: 1608.05148.",
+            "crossref": "https://dx.doi.org/10.1109/CVPR.2017.577.arXiv",
+            "arxiv_url": "https://arxiv.org/pdf/1608.05148"
+        },
+        {
+            "id": "5",
+            "entry": "[5] L. Theis, W. Shi, A. Cunningham, and F. Husz\u00e1r, \u201cLossy image compression with compressive autoencoders,\u201d 2017, presented at the 5th Int. Conf. on Learning Representations.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Theis%2C%20L.%20Shi%2C%20W.%20Cunningham%2C%20A.%20Husz%C3%A1r%2C%20F.%20Lossy%20image%20compression%20with%20compressive%20autoencoders%2C"
+        },
+        {
+            "id": "6",
+            "entry": "[6] J. Ball\u00e9, V. Laparra, and E. P. Simoncelli, \u201cEnd-to-end optimized image compression,\u201d arXiv eprints, 2017, presented at the 5th Int. Conf. on Learning Representations. arXiv: 1611.01704.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.01704"
+        },
+        {
+            "id": "7",
+            "entry": "[7] M. Li, W. Zuo, S. Gu, D. Zhao, and D. Zhang, \u201cLearning convolutional networks for contentweighted image compression,\u201d arXiv e-prints, 2017. arXiv: 1703.10553.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.10553"
+        },
+        {
+            "id": "8",
+            "entry": "[8] N. Johnston, D. Vincent, D. Minnen, M. Covell, S. Singh, T. Chinen, S. J. Hwang, J. Shor, and G. Toderici, \u201cImproved lossy image compression with priming and spatially adaptive bit rates for recurrent networks,\u201d in 2018 IEEE Conf. on Computer Vision and Pattern Recognition (CVPR), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Johnston%2C%20N.%20Vincent%2C%20D.%20Minnen%2C%20D.%20Covell%2C%20M.%20Improved%20lossy%20image%20compression%20with%20priming%20and%20spatially%20adaptive%20bit%20rates%20for%20recurrent%20networks%2C%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Johnston%2C%20N.%20Vincent%2C%20D.%20Minnen%2C%20D.%20Covell%2C%20M.%20Improved%20lossy%20image%20compression%20with%20priming%20and%20spatially%20adaptive%20bit%20rates%20for%20recurrent%20networks%2C%202018"
+        },
+        {
+            "id": "9",
+            "entry": "[9] O. Rippel and L. Bourdev, \u201cReal-time adaptive image compression,\u201d in Proc. of Machine Learning Research, vol. 70, 2017, pp. 2922\u20132930.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rippel%2C%20O.%20Bourdev%2C%20L.%20Real-time%20adaptive%20image%20compression%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rippel%2C%20O.%20Bourdev%2C%20L.%20Real-time%20adaptive%20image%20compression%2C%202017"
+        },
+        {
+            "id": "10",
+            "entry": "[10] D. Minnen, G. Toderici, M. Covell, T. Chinen, N. Johnston, J. Shor, S. J. Hwang, D. Vincent, and S. Singh, \u201cSpatially adaptive image compression using a tiled deep network,\u201d International Conference on Image Processing, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Minnen%2C%20D.%20Toderici%2C%20G.%20Covell%2C%20M.%20Chinen%2C%20T.%20Spatially%20adaptive%20image%20compression%20using%20a%20tiled%20deep%20network%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Minnen%2C%20D.%20Toderici%2C%20G.%20Covell%2C%20M.%20Chinen%2C%20T.%20Spatially%20adaptive%20image%20compression%20using%20a%20tiled%20deep%20network%2C%202017"
+        },
+        {
+            "id": "11",
+            "entry": "[11] E. \u00de. \u00c1g\u00fastsson, F. Mentzer, M. Tschannen, L. Cavigelli, R. Timofte, L. Benini, and L. V. Gool, \u201cSoft-to-hard vector quantization for end-to-end learning compressible representations,\u201d in Advances in Neural Information Processing Systems 30, 2017, pp. 1141\u20131151.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=%C3%81g%C3%BAstsson%2C%20E.%C3%9E.%20Mentzer%2C%20F.%20Tschannen%2C%20M.%20Cavigelli%2C%20L.%20Soft-to-hard%20vector%20quantization%20for%20end-to-end%20learning%20compressible%20representations%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=%C3%81g%C3%BAstsson%2C%20E.%C3%9E.%20Mentzer%2C%20F.%20Tschannen%2C%20M.%20Cavigelli%2C%20L.%20Soft-to-hard%20vector%20quantization%20for%20end-to-end%20learning%20compressible%20representations%2C%202017"
+        },
+        {
+            "id": "12",
+            "entry": "[12] F. Mentzer, E. Agustsson, M. Tschannen, R. Timofte, and L. V. Gool, \u201cConditional probability models for deep image compression,\u201d in 2018 IEEE Conf. on Computer Vision and Pattern Recognition (CVPR), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mentzer%2C%20F.%20Agustsson%2C%20E.%20Tschannen%2C%20M.%20Timofte%2C%20R.%20Conditional%20probability%20models%20for%20deep%20image%20compression%2C%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mentzer%2C%20F.%20Agustsson%2C%20E.%20Tschannen%2C%20M.%20Timofte%2C%20R.%20Conditional%20probability%20models%20for%20deep%20image%20compression%2C%202018"
+        },
+        {
+            "id": "13",
+            "entry": "[13] J. Ball\u00e9, D. Minnen, S. Singh, S. J. Hwang, and N. Johnston, \u201cVariational image compression with a scale hyperprior,\u201d 6th Int. Conf. on Learning Representations, 2018. [Online]. Available: https://openreview.net/forum?id=rkcQFMZRb.",
+            "url": "https://openreview.net/forum?id=rkcQFMZRb"
+        },
+        {
+            "id": "14",
+            "entry": "[14] D. Minnen, G. Toderici, S. Singh, S. J. Hwang, and M. Covell, \u201cImage-dependent local entropy models for image compression with deep networks,\u201d International Conference on Image Processing, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Minnen%2C%20D.%20Toderici%2C%20G.%20Singh%2C%20S.%20Hwang%2C%20S.J.%20Image-dependent%20local%20entropy%20models%20for%20image%20compression%20with%20deep%20networks%2C%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Minnen%2C%20D.%20Toderici%2C%20G.%20Singh%2C%20S.%20Hwang%2C%20S.J.%20Image-dependent%20local%20entropy%20models%20for%20image%20compression%20with%20deep%20networks%2C%202018"
+        },
+        {
+            "id": "15",
+            "entry": "[15] J. Rissanen and G. G. Langdon Jr., \u201cUniversal modeling and coding,\u201d IEEE Transactions on Information Theory, vol. 27, no. 1, 1981. DOI: 10.1109/TIT.1981.1056282.",
+            "crossref": "https://dx.doi.org/10.1109/TIT.1981.1056282",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1109/TIT.1981.1056282"
+        },
+        {
+            "id": "16",
+            "entry": "[16] G. Martin, \u201cRange encoding: An algorithm for removing redundancy from a digitized message,\u201d in Video & Data Recording Conference, Jul. 1979.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Martin%2C%20G.%20%E2%80%9CRange%20encoding%3A%20An%20algorithm%20for%20removing%20redundancy%20from%20a%20digitized%20message%2C%E2%80%9D%20in%20Video%20%26%20Data%20Recording%20Conference%201979-07"
+        },
+        {
+            "id": "17",
+            "entry": "[17] J. van Leeuwen, \u201cOn the construction of huffman trees,\u201d in ICALP, 1976, pp. 382\u2013410.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=van%20Leeuwen%2C%20J.%20%E2%80%9COn%20the%20construction%20of%20huffman%20trees%2C%E2%80%9D%20in%20ICALP%201976"
+        },
+        {
+            "id": "18",
+            "entry": "[18] M. J. Wainwright and E. P. Simoncelli, \u201cScale mixtures of gaussians and the statistics of natural images,\u201d in Proceedings of the 12th International Conference on Neural Information Processing Systems, ser. NIPS\u201999, Denver, CO: MIT Press, 1999, pp. 855\u2013861.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wainwright%2C%20M.J.%20Simoncelli%2C%20E.P.%20Scale%20mixtures%20of%20gaussians%20and%20the%20statistics%20of%20natural%20images%2C%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wainwright%2C%20M.J.%20Simoncelli%2C%20E.P.%20Scale%20mixtures%20of%20gaussians%20and%20the%20statistics%20of%20natural%20images%2C%201999"
+        },
+        {
+            "id": "19",
+            "entry": "[19] A. van den Oord, N. Kalchbrenner, L. Espeholt, K. Kavukcuoglu, O. Vinyals, and A. Graves, \u201cConditional image generation with pixelcnn decoders,\u201d in Advances in Neural Information Processing Systems 29, D. D. Lee, M. Sugiyama, U. V. Luxburg, I. Guyon, and R. Garnett, Eds., Curran Associates, Inc., 2016, pp. 4790\u20134798.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=van%20den%20Oord%2C%20A.%20Kalchbrenner%2C%20N.%20Espeholt%2C%20L.%20Kavukcuoglu%2C%20K.%20Conditional%20image%20generation%20with%20pixelcnn%20decoders%2C%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=van%20den%20Oord%2C%20A.%20Kalchbrenner%2C%20N.%20Espeholt%2C%20L.%20Kavukcuoglu%2C%20K.%20Conditional%20image%20generation%20with%20pixelcnn%20decoders%2C%202016"
+        },
+        {
+            "id": "20",
+            "entry": "[20] J. Ball\u00e9, V. Laparra, and E. P. Simoncelli, \u201cDensity modeling of images using a generalized normalization transformation,\u201d arXiv e-prints, 2016, presented at the 4th Int. Conf. on Learning Representations. arXiv: 1511.06281.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.06281"
+        },
+        {
+            "id": "21",
+            "entry": "[21] E. Kodak, Kodak lossless true color image suite (PhotoCD PCD0992). [Online]. Available: http://r0k.us/graphics/kodak/.",
+            "url": "http://r0k.us/graphics/kodak/"
+        },
+        {
+            "id": "22",
+            "entry": "[22] N. Ponomarenko, L. Jin, O. Ieremeiev, V. Lukin, K. Egiazarian, J. Astola, B. Vozel, K. Chehdi, M. Carli, F. Battisti, and C.-C. Jay Kuo, \u201cImage database TID2013,\u201d Image Commun., vol. 30, no. C, pp. 57\u201377, Jan. 2015, ISSN: 0923-5965. DOI: 10.1016/j.image.2014.10.009.",
+            "crossref": "https://dx.doi.org/10.1016/j.image.2014.10.009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1016/j.image.2014.10.009"
+        },
+        {
+            "id": "23",
+            "entry": "[23] F. Bellard, BPG image format (http://bellard.org/bpg/), Accessed:2017-01-30.[Online]. Available:http://bellard.org/bpg/.",
+            "url": "http://bellard.org/bpg/"
+        },
+        {
+            "id": "24",
+            "entry": "[24] ITU-R rec. H.265 & ISO/IEC 23008-2: High efficiency video coding, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20ITU-R%20rec%202013"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Z. Wang, E. P. Simoncelli, and A. C. Bovik, \u201cMultiscale structural similarity for image quality assessment,\u201d in Signals, Systems and Computers, 2004. Conference Record of the Thirty-Seventh Asilomar Conference on, IEEE, vol. 2, 2003, pp. 1398\u20131402.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Z.%20Simoncelli%2C%20E.P.%20Bovik%2C%20A.C.%20Multiscale%20structural%20similarity%20for%20image%20quality%20assessment%2C%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Z.%20Simoncelli%2C%20E.P.%20Bovik%2C%20A.C.%20Multiscale%20structural%20similarity%20for%20image%20quality%20assessment%2C%202003"
+        },
+        {
+            "id": "26",
+            "entry": "[26] G. W. Cottrell, P. Munro, and D. Zipser, \u201cImage compression by back propagation: An example of extensional programming,\u201d in Models of Cognition: A Review of Cognitive Science, N. E. Sharkey, Ed., Also presented at the Ninth Ann Meeting of the Cognitive Science Society, 1987, pp. 461-473, vol. 1, Norwood, NJ, 1989.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cottrell%2C%20G.W.%20Munro%2C%20P.%20Zipser%2C%20D.%20%E2%80%9CImage%20compression%20by%20back%20propagation%3A%20An%20example%20of%20extensional%20programming%2C%E2%80%9D%20in%20Models%20of%20Cognition%3A%20A%20Review%20of%20Cognitive%20Science%201987",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cottrell%2C%20G.W.%20Munro%2C%20P.%20Zipser%2C%20D.%20%E2%80%9CImage%20compression%20by%20back%20propagation%3A%20An%20example%20of%20extensional%20programming%2C%E2%80%9D%20in%20Models%20of%20Cognition%3A%20A%20Review%20of%20Cognitive%20Science%201987"
+        },
+        {
+            "id": "27",
+            "entry": "[27] S. Luttrell, \u201cImage compression using a neural network,\u201d in Pattern Recognition Letters, vol. 10, Oct. 1988, pp. 1231\u20131238.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Luttrell%2C%20S.%20%E2%80%9CImage%20compression%20using%20a%20neural%20network%2C%E2%80%9D%20in%20Pattern%201988-10",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Luttrell%2C%20S.%20%E2%80%9CImage%20compression%20using%20a%20neural%20network%2C%E2%80%9D%20in%20Pattern%201988-10"
+        },
+        {
+            "id": "28",
+            "entry": "[28] E. Watkins Bruce, Data compression using artificial neural networks. 1991. [Online]. Available: https://calhoun.nps.edu/handle/10945/25801.",
+            "url": "https://calhoun.nps.edu/handle/10945/25801"
+        },
+        {
+            "id": "29",
+            "entry": "[29] J. Jiang, \u201cImage compression with neural networks\u2013a survey,\u201d Signal Processing: Image Communication, vol. 14, pp. 737\u2013760, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jiang%2C%20J.%20Image%20compression%20with%20neural%20networks%E2%80%93a%20survey%2C%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jiang%2C%20J.%20Image%20compression%20with%20neural%20networks%E2%80%93a%20survey%2C%201999"
+        },
+        {
+            "id": "30",
+            "entry": "[30] G. Toderici, S. M. O\u2019Malley, S. J. Hwang, D. Vincent, D. Minnen, S. Baluja, M. Covell, and R. Sukthankar, \u201cVariable rate image compression with recurrent neural networks,\u201d arXiv e-prints, 2016, presented at the 4th Int. Conf. on Learning Representations. arXiv: 1511.06085.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.06085"
+        },
+        {
+            "id": "31",
+            "entry": "[31] M. H. Baig, V. Koltun, and L. Torresani, \u201cLearning to inpaint for image compression,\u201d in Advances in Neural Information Processing Systems 30, I. Guyon, U. V. Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, Eds., Curran Associates, Inc., 2017, pp. 1246\u20131255.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Baig%2C%20M.H.%20Koltun%2C%20V.%20Torresani%2C%20L.%20Learning%20to%20inpaint%20for%20image%20compression%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Baig%2C%20M.H.%20Koltun%2C%20V.%20Torresani%2C%20L.%20Learning%20to%20inpaint%20for%20image%20compression%2C%202017"
+        },
+        {
+            "id": "32",
+            "entry": "[32] \u201cInformation technology\u2013JPEG 2000 image coding system,\u201d International Organization for Standardization, Geneva, CH, Standard, Dec. 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Information%20technologyJPEG%202000%20image%20coding%20system%20International%20Organization%20for%20Standardization%20Geneva%20CH%20Standard%20Dec%202000"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Google, WebP: Compression techniques, Accessed: 2017-01-30. [Online]. Available: http://developers.google.com/speed/webp/docs/compression.",
+            "url": "http://developers.google.com/speed/webp/docs/compression"
+        },
+        {
+            "id": "34",
+            "entry": "[34] K. Nakanishi, S.-i. Maeda, T. Miyato, and D. Okanohara, \u201cNeural multi-scale image compression,\u201d arXiv preprint arXiv:1805.06386, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1805.06386"
+        },
+        {
+            "id": "35",
+            "entry": "[35] J. P. Klopp, Y.-C. F. Wang, S.-Y. Chien, and L.-G. Chen, \u201cLearning a code-space predictor by exploiting intra-image-dependencies,\u201d in British Machine Vision Conference (BMVC), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Klopp%2C%20J.P.%20Wang%2C%20Y.-C.F.%20Chien%2C%20S.-Y.%20Chen%2C%20L.-G.%20Learning%20a%20code-space%20predictor%20by%20exploiting%20intra-image-dependencies%2C%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Klopp%2C%20J.P.%20Wang%2C%20Y.-C.F.%20Chien%2C%20S.-Y.%20Chen%2C%20L.-G.%20Learning%20a%20code-space%20predictor%20by%20exploiting%20intra-image-dependencies%2C%202018"
+        },
+        {
+            "id": "36",
+            "entry": "[36] D. P. Kingma and M. Welling, \u201cAuto-encoding variational bayes,\u201d arXiv e-prints, 2014, Presented at the 2nd Int. Conf. on Learning Representations. arXiv: 1312.6114.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.6114"
+        },
+        {
+            "id": "37",
+            "entry": "[37] I. Gulrajani, K. Kumar, F. Ahmed, A. Ali Taiga, F. Visin, D. Vazquez, and A. Courville, \u201cPixelVAE: A latent variable model for natural images,\u201d 2017, presented at the 5th Int. Conf. on Learning Representations.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gulrajani%2C%20I.%20Kumar%2C%20K.%20Ahmed%2C%20F.%20Taiga%2C%20A.Ali%20PixelVAE%3A%20A%20latent%20variable%20model%20for%20natural%20images%2C"
+        },
+        {
+            "id": "38",
+            "entry": "[38] I. Higgins, L. Matthey, A. Pal, C. Burgess, X. Glorot, M. Botvinick, S. Mohamed, and A. Lerchner, \u201c\u03b2-VAE: Learning basic visual concepts with a constrained variational framework,\u201d 2017, presented at the 5th Int. Conf. on Learning Representations.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Higgins%2C%20I.%20Matthey%2C%20L.%20Pal%2C%20A.%20Burgess%2C%20C.%20Lerchner%2C%20%E2%80%9C%CE%B2-VAE%3A%20Learning%20basic%20visual%20concepts%20with%20a%20constrained%20variational%20framework%2C%E2%80%9D"
+        },
+        {
+            "id": "39",
+            "entry": "[39] X. Chen, D. P. Kingma, T. Salimans, Y. Duan, P. Dhariwal, J. Schulman, I. Sutskever, and P. Abbeel, \u201cVariational lossy autoencoder,\u201d 2017, presented at the 5th Int. Conf. on Learning Representations.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20X.%20Kingma%2C%20D.P.%20Salimans%2C%20T.%20Duan%2C%20Y.%20Variational%20lossy%20autoencoder%2C"
+        },
+        {
+            "id": "40",
+            "entry": "[40] A. v. d. Oord, Y. Li, I. Babuschkin, K. Simonyan, O. Vinyals, K. Kavukcuoglu, G. v. d. Driessche, E. Lockhart, L. C. Cobo, F. Stimberg, et al., \u201cParallel wavenet: Fast high-fidelity speech synthesis,\u201d arXiv preprint arXiv:1711.10433, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.10433"
+        },
+        {
+            "id": "41",
+            "entry": "[41] S. Reed, A. van den Oord, N. Kalchbrenner, S. G. Colmenarejo, Z. Wang, Y. Chen, D. Belov, and N. de Freitas, \u201cParallel multiscale autoregressive density estimation,\u201d in Int. Conf. on Machine Learning (ICML), Sydney, Australia, 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Reed%2C%20S.%20van%20den%20Oord%2C%20A.%20Kalchbrenner%2C%20N.%20Colmenarejo%2C%20S.G.%20Parallel%20multiscale%20autoregressive%20density%20estimation%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Reed%2C%20S.%20van%20den%20Oord%2C%20A.%20Kalchbrenner%2C%20N.%20Colmenarejo%2C%20S.G.%20Parallel%20multiscale%20autoregressive%20density%20estimation%2C%202017"
+        }
+    ]
+}

@@ -1,0 +1,313 @@
+{
+    "filename": "8032-a-lyapunov-based-approach-to-safe-reinforcement-learning.pdf",
+    "metadata": {
+        "title": "A Lyapunov-based Approach to Safe Reinforcement Learning",
+        "author": "Yinlam Chow, Ofir Nachum, Edgar Duenez-Guzman, Mohammad Ghavamzadeh",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8032-a-lyapunov-based-approach-to-safe-reinforcement-learning.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "In many real-world reinforcement learning (RL) problems, besides optimizing the main objective function, an agent must concurrently avoid violating a number of constraints. In particular, besides optimizing performance, it is crucial to guarantee the safety of an agent during training as well as deployment (e.g., a robot should avoid taking actions - exploratory or not - which irrevocably harm its hardware). To incorporate safety in RL, we derive algorithms under the framework of constrained Markov decision processes (CMDPs), an extension of the standard Markov decision processes (MDPs) augmented with constraints on expected cumulative costs. Our approach hinges on a novel Lyapunov method. We define and present a method for constructing Lyapunov functions, which provide an effective way to guarantee the global safety of a behavior policy during training via a set of local linear constraints. Leveraging these theoretical underpinnings, we show how to use the Lyapunov approach to systematically transform dynamic programming (DP) and RL algorithms into their safe counterparts. To illustrate their effectiveness, we evaluate these algorithms in several CMDP planning and decision-making tasks on a safety benchmark domain. Our results show that our proposed method significantly outperforms existing baselines in balancing constraint satisfaction and performance."
+    },
+    "keywords": [
+        {
+            "term": "recommender system",
+            "url": "https://en.wikipedia.org/wiki/recommender_system"
+        },
+        {
+            "term": "Markov decision processes",
+            "url": "https://en.wikipedia.org/wiki/Markov_decision_processes"
+        },
+        {
+            "term": "lyapunov function",
+            "url": "https://en.wikipedia.org/wiki/lyapunov_function"
+        },
+        {
+            "term": "Reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/Reinforcement_learning"
+        },
+        {
+            "term": "linear programming",
+            "url": "https://en.wikipedia.org/wiki/linear_programming"
+        },
+        {
+            "term": "real world",
+            "url": "https://en.wikipedia.org/wiki/real_world"
+        },
+        {
+            "term": "dynamic programming",
+            "url": "https://en.wikipedia.org/wiki/dynamic_programming"
+        },
+        {
+            "term": "Markov decision process",
+            "url": "https://en.wikipedia.org/wiki/Markov_decision_process"
+        }
+    ],
+    "highlights": [
+        "Reinforcement learning (RL) has shown exceptional successes in a variety of domains such as video games [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>] and recommender systems [<a class=\"ref-link\" id=\"c39\" href=\"#r39\">39</a>], where the main goal is to optimize a single return",
+        "While the main challenge of other Lyapunovbased methods is to design a Lyapunov function candidate, we propose an linear programming-based algorithm to construct Lyapunov functions w.r.t. generic constrained Markov decision processes constraints",
+        "Using this Lyapunov function Le\u270f, we propose the safe policy iteration (SPI) in Algorithm 1, in which the Lyapunov function is updated via bootstrapping, i.e., at each iteration Le\u270f is recomputed using (5), w.r.t. the current baseline policy",
+        "Analogous to Safe Policy Iteration, we propose a safe value iteration (SVI), in which the Lyapunov function estimate is updated at every iteration via bootstrapping, using the current optimal value estimate",
+        "We showed how Lyapunov approaches can be used to transform dynamic programming algorithms into their safe counterparts that only require straightforward modifications in the algorithm implementations",
+        "Our work represents a step forward in deploying Reinforcement learning to real-world problems in which guaranteeing safety is of paramount importance"
+    ],
+    "key_statements": [
+        "Reinforcement learning (RL) has shown exceptional successes in a variety of domains such as video games [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>] and recommender systems [<a class=\"ref-link\" id=\"c39\" href=\"#r39\">39</a>], where the main goal is to optimize a single return",
+        "While the main challenge of other Lyapunovbased methods is to design a Lyapunov function candidate, we propose an linear programming-based algorithm to construct Lyapunov functions w.r.t. generic constrained Markov decision processes constraints",
+        "Leveraging the theoretical underpinnings of the Lyapunov approach, we present two safe dynamic programming algorithms \u2013 safe policy iteration (SPI) and safe value iteration (SVI) \u2013 and analyze the feasibility and performance of these algorithms",
+        "To handle unknown environments and large state/action spaces, we develop two scalable safe Reinforcement learning algorithms \u2013 (i) safe DQN, an off-policy fitted Q-iteration method, and safe DPI, an approximate policy iteration method",
+        "Using this Lyapunov function Le\u270f, we propose the safe policy iteration (SPI) in Algorithm 1, in which the Lyapunov function is updated via bootstrapping, i.e., at each iteration Le\u270f is recomputed using (5), w.r.t. the current baseline policy",
+        "Analogous to Safe Policy Iteration, we propose a safe value iteration (SVI), in which the Lyapunov function estimate is updated at every iteration via bootstrapping, using the current optimal value estimate",
+        "In order to improve scalability of Safe Value Iteration and Safe Policy Iteration, we develop two off-policy safe Reinforcement learning algorithms, namely safe DQN and safe DPI, which replace the value and policy updates in safe dynamic programming with function approximations",
+        "We showed how Lyapunov approaches can be used to transform dynamic programming algorithms into their safe counterparts that only require straightforward modifications in the algorithm implementations",
+        "Our work represents a step forward in deploying Reinforcement learning to real-world problems in which guaranteeing safety is of paramount importance"
+    ],
+    "summary": [
+        "Reinforcement learning (RL) has shown exceptional successes in a variety of domains such as video games [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>] and recommender systems [<a class=\"ref-link\" id=\"c39\" href=\"#r39\">39</a>], where the main goal is to optimize a single return.",
+        "Without loss of generality we assume to have access to a baseline feasible policy of the OPT problem, namely \u21e1B 2 .1 We define a non-empty2 set of Lyapunov functions w.r.t. the initial state x0 2 X and constraint threshold d0 as n o",
+        "In general the set FL(x) does not necessarily contain any optimal policies of the OPT problem , and our main contribution is to design a Lyapunov function (w.r.t. a baseline policy) that provides this guarantee.",
+        "D0, Before getting into the main results, we consider the following important technical lemma, which states that with appropriate cost-shaping, one can always transform the constraint value function D\u21e1\u21e4 (x) w.r.t. optimal policy \u21e1\u21e4 into a Lyapunov function that is induced by \u21e1B, i.e., L\u270f(x) 2 L\u21e1B (x0, d0).",
+        "Lemma 1 implies that the Lyapunov function L\u270f\u21e4 is a uniform upper-bound to the constraint cost w.r.t. optimal policy \u21e1\u21e4, i.e., L\u270f\u21e4 (x) D\u21e1\u21e4 (x).",
+        "Motivated by the challenge of computing a Lyapunov function L\u270f\u21e4 such that its induced set of policies contains \u21e1\u21e4, we approximate \u270f\u21e4 with an auxiliary constraint cost e\u270f, which is the largest auxiliary cost that satisfies the Lyapunov condition: Le\u270f(x) T\u21e1B,d[Le\u270f](x), 8x 2 X 0, and the safety condition Le\u270f(x0)",
+        "Safe Policy Improvement (SDPI): Similar to SDQN, in this algorithm, we first sample an offpolicy mini-batch from the replay buffer and use it to update the value function estimates (w.r.t. objective, constraint, and stopping-time estimate) that minimize MSE losses.",
+        "Using the same construction as in SDQN for auxiliary cost e\u270f0 and state-action Lyapunov function QbL, we perform a policy improvement step by computing",
+        "The main goal is to compare our safe DP algorithms (SPI and SVI) with the following common CMDP baseline methods: (i) Step-wise Surrogate, Super-martingale Surrogate, Lagrangian, and Dual LP.",
+        "To illustrate the level of sub-optimality, we will compare the returns and constraint costs of these methods with baselines that are generated by maximizing return or minimizing constraint cost of two separate MDPs. The main objective here is to illustrate that safe DP algorithms are less conservative than other surrogate methods, are more numerically stable than the Lagrangian method, and are more computationally efficient than the Dual LP method, without using function approximations.",
+        "We formulated the problem of safe RL as a CMDP and proposed a novel Lyapunov approach to solve CMDPs. We derived an effective LP-based method to generate Lyapunov functions, such that the corresponding algorithm guarantees feasibility and optimality under certain conditions.",
+        "Future work includes evaluating the Lyapunov-based RL algorithms on several real-world testbeds"
+    ],
+    "headline": "We show how to use the Lyapunov approach to systematically transform dynamic programming  and Reinforcement learning algorithms into their safe counterparts",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] N. Abe, P. Melville, C. Pendus, C. Reddy, D. Jensen, V. Thomas, J. Bennett, G. Anderson, B. Cooley, M. Kowalczyk, et al. Optimizing debt collections using constrained reinforcement learning. In Proceedings of the 16th ACM SIGKDD international conference on Knowledge discovery and data mining, pages 75\u201384, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abe%2C%20N.%20Melville%2C%20P.%20Pendus%2C%20C.%20Reddy%2C%20C.%20Optimizing%20debt%20collections%20using%20constrained%20reinforcement%20learning%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abe%2C%20N.%20Melville%2C%20P.%20Pendus%2C%20C.%20Reddy%2C%20C.%20Optimizing%20debt%20collections%20using%20constrained%20reinforcement%20learning%202010"
+        },
+        {
+            "id": "2",
+            "entry": "[2] J. Achiam, D. Held, A. Tamar, and P. Abbeel. Constrained policy optimization. In International Conference of Machine Learning, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Achiam%2C%20J.%20Held%2C%20D.%20Tamar%2C%20A.%20Abbeel%2C%20P.%20Constrained%20policy%20optimization%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Achiam%2C%20J.%20Held%2C%20D.%20Tamar%2C%20A.%20Abbeel%2C%20P.%20Constrained%20policy%20optimization%202017"
+        },
+        {
+            "id": "3",
+            "entry": "[3] E. Altman. Constrained Markov decision processes, volume 7. CRC Press, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Altman%2C%20E.%20Constrained%20Markov%20decision%20processes%2C%20volume%207%201999"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Eitan Altman. Constrained Markov decision processes with total cost criteria: Lagrangian approach and dual linear program. Mathematical methods of operations research, 48(3):387\u2013 417, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Altman%2C%20Eitan%20Constrained%20Markov%20decision%20processes%20with%20total%20cost%20criteria%3A%20Lagrangian%20approach%20and%20dual%20linear%20program%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Altman%2C%20Eitan%20Constrained%20Markov%20decision%20processes%20with%20total%20cost%20criteria%3A%20Lagrangian%20approach%20and%20dual%20linear%20program%201998"
+        },
+        {
+            "id": "5",
+            "entry": "[5] D. Amodei, C. Olah, J. Steinhardt, P. Christiano, J. Schulman, and D. Mane. Concrete problems in AI safety. arXiv preprint arXiv:1606.06565, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.06565"
+        },
+        {
+            "id": "6",
+            "entry": "[6] F. Berkenkamp, M. Turchetta, A. Schoellig, and A. Krause. Safe model-based reinforcement learning with stability guarantees. In Advances in Neural Information Processing Systems, pages 908\u2013919, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Berkenkamp%2C%20F.%20Turchetta%2C%20M.%20Schoellig%2C%20A.%20Krause%2C%20A.%20Safe%20model-based%20reinforcement%20learning%20with%20stability%20guarantees%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Berkenkamp%2C%20F.%20Turchetta%2C%20M.%20Schoellig%2C%20A.%20Krause%2C%20A.%20Safe%20model-based%20reinforcement%20learning%20with%20stability%20guarantees%202017"
+        },
+        {
+            "id": "7",
+            "entry": "[7] D. Bertsekas. Dynamic programming and optimal control. Athena scientific Belmont, MA, 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bertsekas%2C%20D.%20Dynamic%20programming%20and%20optimal%20control.%20Athena%20scientific%201995"
+        },
+        {
+            "id": "8",
+            "entry": "[8] S. Boyd and L. Vandenberghe. Convex optimization. Cambridge university press, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Boyd%2C%20S.%20Vandenberghe%2C%20L.%20Convex%20optimization%202004"
+        },
+        {
+            "id": "9",
+            "entry": "[9] M El Chamie, Y. Yu, and B. Ac\u0131kmese. Convex synthesis of randomized policies for controlled Markov chains with density safety upper bound constraints. In American Control Conference, pages 6290\u20136295, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chamie%2C%20M.El%20Yu%2C%20Y.%20Ac%C4%B1kmese%2C%20B.%20Convex%20synthesis%20of%20randomized%20policies%20for%20controlled%20Markov%20chains%20with%20density%20safety%20upper%20bound%20constraints%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chamie%2C%20M.El%20Yu%2C%20Y.%20Ac%C4%B1kmese%2C%20B.%20Convex%20synthesis%20of%20randomized%20policies%20for%20controlled%20Markov%20chains%20with%20density%20safety%20upper%20bound%20constraints%202016"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Y. Chow, M. Pavone, B. Sadler, and S. Carpin. Trading safety versus performance: Rapid deployment of robotic swarms with robust performance constraints. Journal of Dynamic Systems, Measurement, and Control, 137(3), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chow%2C%20Y.%20Pavone%2C%20M.%20Sadler%2C%20B.%20Carpin%2C%20S.%20Trading%20safety%20versus%20performance%3A%20Rapid%20deployment%20of%20robotic%20swarms%20with%20robust%20performance%20constraints%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chow%2C%20Y.%20Pavone%2C%20M.%20Sadler%2C%20B.%20Carpin%2C%20S.%20Trading%20safety%20versus%20performance%3A%20Rapid%20deployment%20of%20robotic%20swarms%20with%20robust%20performance%20constraints%202015"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Yinlam Chow, Mohammad Ghavamzadeh, Lucas Janson, and Marco Pavone. Risk-constrained reinforcement learning with percentile risk criteria. arXiv preprint arXiv:1512.01629, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1512.01629"
+        },
+        {
+            "id": "12",
+            "entry": "[12] G. Dalal, K. Dvijotham, M. Vecerik, T. Hester, C. Paduraru, and Y. Tassa. Safe exploration in continuous action spaces. arXiv preprint arXiv:1801.08757, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1801.08757"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Z. Gabor and Z. Kalmar. Multi-criteria reinforcement learning. In International Conference of Machine Learning, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gabor%2C%20Z.%20Kalmar%2C%20Z.%20Multi-criteria%20reinforcement%20learning%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gabor%2C%20Z.%20Kalmar%2C%20Z.%20Multi-criteria%20reinforcement%20learning%201998"
+        },
+        {
+            "id": "14",
+            "entry": "[14] P. Geibel and F. Wysotzki. Risk-sensitive reinforcement learning applied to control under constraints. Journal of Artificial Intelligence Research, 24:81\u2013108, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Geibel%2C%20P.%20Wysotzki%2C%20F.%20Risk-sensitive%20reinforcement%20learning%20applied%20to%20control%20under%20constraints%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Geibel%2C%20P.%20Wysotzki%2C%20F.%20Risk-sensitive%20reinforcement%20learning%20applied%20to%20control%20under%20constraints%202005"
+        },
+        {
+            "id": "15",
+            "entry": "[15] P. Glynn, A. Zeevi, et al. Bounding stationary expectations of markov processes. In Markov processes and related topics: a Festschrift for Thomas G. Kurtz, pages 195\u2013214. Institute of Mathematical Statistics, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Glynn%2C%20P.%20Zeevi%2C%20A.%20Bounding%20stationary%20expectations%20of%20markov%20processes.%20In%20Markov%20processes%20and%20related%20topics%3A%20a%20Festschrift%20for%20Thomas%20G%202008"
+        },
+        {
+            "id": "16",
+            "entry": "[16] S. Gu, T. Lillicrap, I. Sutskever, and S. Levine. Continuous deep Q-learning with model-based acceleration. In International Conference on Machine Learning, pages 2829\u20132838, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gu%2C%20S.%20Lillicrap%2C%20T.%20Sutskever%2C%20I.%20Levine%2C%20S.%20Continuous%20deep%20Q-learning%20with%20model-based%20acceleration%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gu%2C%20S.%20Lillicrap%2C%20T.%20Sutskever%2C%20I.%20Levine%2C%20S.%20Continuous%20deep%20Q-learning%20with%20model-based%20acceleration%202016"
+        },
+        {
+            "id": "17",
+            "entry": "[17] S. Junges, N. Jansen, C. Dehnert, U. Topcu, and J. Katoen. Safety-constrained reinforcement learning for MDPs. In International Conference on Tools and Algorithms for the Construction and Analysis of Systems, pages 130\u2013146, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Junges%2C%20S.%20Jansen%2C%20N.%20Dehnert%2C%20C.%20Topcu%2C%20U.%20Safety-constrained%20reinforcement%20learning%20for%20MDPs%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Junges%2C%20S.%20Jansen%2C%20N.%20Dehnert%2C%20C.%20Topcu%2C%20U.%20Safety-constrained%20reinforcement%20learning%20for%20MDPs%202016"
+        },
+        {
+            "id": "18",
+            "entry": "[18] S. Kakade and J. Langford. Approximately optimal approximate reinforcement learning. In International Conference on International Conference on Machine Learning, pages 267\u2013274, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kakade%2C%20S.%20Langford%2C%20J.%20Approximately%20optimal%20approximate%20reinforcement%20learning%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kakade%2C%20S.%20Langford%2C%20J.%20Approximately%20optimal%20approximate%20reinforcement%20learning%202002"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Hassan K Khalil. Noninear systems. Prentice-Hall, New Jersey, 2(5):5\u20131, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Khalil%2C%20Hassan%20K.%20Noninear%20systems%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Khalil%2C%20Hassan%20K.%20Noninear%20systems%201996"
+        },
+        {
+            "id": "20",
+            "entry": "[20] J. Lee, I. Panageas, G. Piliouras, M. Simchowitz, M. Jordan, and B. Recht. First-order methods almost always avoid saddle points. arXiv preprint arXiv:1710.07406, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.07406"
+        },
+        {
+            "id": "21",
+            "entry": "[21] J. Leike, M. Martic, V. Krakovna, P. Ortega, T. Everitt, A. Lefrancq, L. Orseau, and S. Legg. Ai safety gridworlds. arXiv preprint arXiv:1711.09883, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.09883"
+        },
+        {
+            "id": "22",
+            "entry": "[22] D. Luenberger, Y. Ye, et al. Linear and nonlinear programming, volume 2.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=D%20Luenberger%20Y%20Ye%20et%20al%20Linear%20and%20nonlinear%20programming%20volume%202",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=D%20Luenberger%20Y%20Ye%20et%20al%20Linear%20and%20nonlinear%20programming%20volume%202"
+        },
+        {
+            "id": "23",
+            "entry": "[23] N. Mastronarde and M. van der Schaar. Fast reinforcement learning for energy-efficient wireless communication. IEEE Transactions on Signal Processing, 59(12):6262\u20136266, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mastronarde%2C%20N.%20van%20der%20Schaar%2C%20M.%20Fast%20reinforcement%20learning%20for%20energy-efficient%20wireless%20communication%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mastronarde%2C%20N.%20van%20der%20Schaar%2C%20M.%20Fast%20reinforcement%20learning%20for%20energy-efficient%20wireless%20communication%202011"
+        },
+        {
+            "id": "24",
+            "entry": "[24] V. Mnih, K. Kavukcuoglu, D. Silver, A. Graves, I. Antonoglou, D. Wierstra, and M. Riedmiller. Playing Atari with deep reinforcement learning. arXiv preprint arXiv:1312.5602, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.5602"
+        },
+        {
+            "id": "25",
+            "entry": "[25] T. Moldovan and P. Abbeel. Safe exploration in Markov decision processes. arXiv preprint arXiv:1205.4810, 2012.",
+            "arxiv_url": "https://arxiv.org/pdf/1205.4810"
+        },
+        {
+            "id": "26",
+            "entry": "[26] H. Mossalam, Y. Assael, D. Roijers, and S. Whiteson. Multi-objective deep reinforcement learning. arXiv preprint arXiv:1610.02707, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1610.02707"
+        },
+        {
+            "id": "27",
+            "entry": "[27] M. Neely. Stochastic network optimization with application to communication and queueing systems. Synthesis Lectures on Communication Networks, 3(1):1\u2013211, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Neely%2C%20M.%20Stochastic%20network%20optimization%20with%20application%20to%20communication%20and%20queueing%20systems%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Neely%2C%20M.%20Stochastic%20network%20optimization%20with%20application%20to%20communication%20and%20queueing%20systems%202010"
+        },
+        {
+            "id": "28",
+            "entry": "[28] G. Neu, A. Jonsson, and V. Gomez. A unified view of entropy-regularized markov decision processes. arXiv preprint arXiv:1705.07798, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1705.07798"
+        },
+        {
+            "id": "29",
+            "entry": "[29] M. Ono, M. Pavone, Y. Kuwata, and J. Balaram. Chance-constrained dynamic programming with application to risk-aware robotic space exploration. Autonomous Robots, 39(4):555\u2013571, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ono%2C%20M.%20Pavone%2C%20M.%20Kuwata%2C%20Y.%20Balaram%2C%20J.%20Chance-constrained%20dynamic%20programming%20with%20application%20to%20risk-aware%20robotic%20space%20exploration%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ono%2C%20M.%20Pavone%2C%20M.%20Kuwata%2C%20Y.%20Balaram%2C%20J.%20Chance-constrained%20dynamic%20programming%20with%20application%20to%20risk-aware%20robotic%20space%20exploration%202015"
+        },
+        {
+            "id": "30",
+            "entry": "[30] T. Perkins and A. Barto. Lyapunov design for safe reinforcement learning. Journal of Machine Learning Research, 3:803\u2013832, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Perkins%2C%20T.%20Barto%2C%20A.%20Lyapunov%20design%20for%20safe%20reinforcement%20learning%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Perkins%2C%20T.%20Barto%2C%20A.%20Lyapunov%20design%20for%20safe%20reinforcement%20learning%202002"
+        },
+        {
+            "id": "31",
+            "entry": "[31] M. Pirotta, M. Restelli, and L. Bascetta. Adaptive step-size for policy gradient methods. In Advances in Neural Information Processing Systems, pages 1394\u20131402, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pirotta%2C%20M.%20Restelli%2C%20M.%20Bascetta%2C%20L.%20Adaptive%20step-size%20for%20policy%20gradient%20methods%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pirotta%2C%20M.%20Restelli%2C%20M.%20Bascetta%2C%20L.%20Adaptive%20step-size%20for%20policy%20gradient%20methods%202013"
+        },
+        {
+            "id": "32",
+            "entry": "[32] M. Pirotta, M. Restelli, A. Pecorino, and D. Calandriello. Safe policy iteration. In International Conference on Machine Learning, pages 307\u2013315, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pirotta%2C%20M.%20Restelli%2C%20M.%20Pecorino%2C%20A.%20Calandriello%2C%20D.%20Safe%20policy%20iteration%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pirotta%2C%20M.%20Restelli%2C%20M.%20Pecorino%2C%20A.%20Calandriello%2C%20D.%20Safe%20policy%20iteration%202013"
+        },
+        {
+            "id": "33",
+            "entry": "[33] K. Regan and C. Boutilier. Regret-based reward elicitation for Markov decision processes. In Proceedings of the Twenty-Fifth Conference on Uncertainty in Artificial Intelligence, pages 444\u2013451, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Regan%2C%20K.%20Boutilier%2C%20C.%20Regret-based%20reward%20elicitation%20for%20Markov%20decision%20processes%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Regan%2C%20K.%20Boutilier%2C%20C.%20Regret-based%20reward%20elicitation%20for%20Markov%20decision%20processes%202009"
+        },
+        {
+            "id": "34",
+            "entry": "[34] D. Roijers, P. Vamplew, S. Whiteson, and R. Dazeley. A survey of multi-objective sequential decision-making. Journal of Artificial Intelligence Research, 48:67\u2013113, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Roijers%2C%20D.%20Vamplew%2C%20P.%20Whiteson%2C%20S.%20Dazeley%2C%20R.%20A%20survey%20of%20multi-objective%20sequential%20decision-making%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Roijers%2C%20D.%20Vamplew%2C%20P.%20Whiteson%2C%20S.%20Dazeley%2C%20R.%20A%20survey%20of%20multi-objective%20sequential%20decision-making%202013"
+        },
+        {
+            "id": "35",
+            "entry": "[35] A. Rusu, S. Colmenarejo, C. Gulcehre, G. Desjardins, J. Kirkpatrick, R. Pascanu, V. Mnih, K. Kavukcuoglu, and R. Hadsell. Policy distillation. arXiv preprint arXiv:1511.06295, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.06295"
+        },
+        {
+            "id": "36",
+            "entry": "[36] T. Schaul, J. Quan, I. Antonoglou, and D. Silver. Prioritized experience replay. arXiv preprint arXiv:1511.05952, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.05952"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Bruno Scherrer. Performance bounds for policy iteration and application to the game of Tetris. Journal of Machine Learning Research, 14(Apr):1181\u20131227, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Scherrer%2C%20Bruno%20Performance%20bounds%20for%20policy%20iteration%20and%20application%20to%20the%20game%20of%20Tetris%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Scherrer%2C%20Bruno%20Performance%20bounds%20for%20policy%20iteration%20and%20application%20to%20the%20game%20of%20Tetris%202013"
+        },
+        {
+            "id": "38",
+            "entry": "[38] M. Schmitt and L. Martignon. On the complexity of learning lexicographic strategies. Journal of Machine Learning Research, 7:55\u201383, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schmitt%2C%20M.%20Martignon%2C%20L.%20On%20the%20complexity%20of%20learning%20lexicographic%20strategies%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schmitt%2C%20M.%20Martignon%2C%20L.%20On%20the%20complexity%20of%20learning%20lexicographic%20strategies%202006"
+        },
+        {
+            "id": "39",
+            "entry": "[39] G. Shani, D. Heckerman, and R. Brafman. An MDP-based recommender system. Journal of Machine Learning Research, 6:1265\u20131295, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shani%2C%20G.%20Heckerman%2C%20D.%20Brafman%2C%20R.%20An%20MDP-based%20recommender%20system%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shani%2C%20G.%20Heckerman%2C%20D.%20Brafman%2C%20R.%20An%20MDP-based%20recommender%20system%202005"
+        },
+        {
+            "id": "40",
+            "entry": "[40] A. Tamar, D. Di Castro, and S. Mannor. Policy gradients with variance related risk criteria. In International Conference of Machine Learning, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tamar%2C%20A.%20Castro%2C%20D.Di%20Mannor%2C%20S.%20Policy%20gradients%20with%20variance%20related%20risk%20criteria%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tamar%2C%20A.%20Castro%2C%20D.Di%20Mannor%2C%20S.%20Policy%20gradients%20with%20variance%20related%20risk%20criteria%202012"
+        },
+        {
+            "id": "41",
+            "entry": "[41] H. van Hasselt. Double Q-learning. In Advances in Neural Information Processing Systems, pages 2613\u20132621, 2010. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=H%20van%20Hasselt%20Double%20Qlearning%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20pages%2026132621%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=H%20van%20Hasselt%20Double%20Qlearning%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20pages%2026132621%202010"
+        }
+    ]
+}

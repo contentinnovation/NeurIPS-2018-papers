@@ -1,0 +1,330 @@
+{
+    "filename": "7828-practical-deep-stereo-pds-toward-applications-friendly-deep-stereo-matching.pdf",
+    "metadata": {
+        "title": "Practical Deep Stereo (PDS): Toward applications-friendly deep stereo matching",
+        "author": "Stepan Tulyakov, Anton Ivanov, Fran\u00e7ois Fleuret",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7828-practical-deep-stereo-pds-toward-applications-friendly-deep-stereo-matching.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "End-to-end deep-learning networks recently demonstrated extremely good performance for stereo matching. However, existing networks are difficult to use for practical applications since (1) they are memory-hungry and unable to process even modest-size images, (2) they have to be trained for a given disparity range. The Practical Deep Stereo (PDS) network that we propose addresses both issues: First, its architecture relies on novel bottleneck modules that drastically reduce the memory footprint in inference, and additional design choices allow to handle greater image size during training. This results in a model that leverages large image context to resolve matching ambiguities. Second, a novel sub-pixel crossentropy loss combined with a MAP estimator make this network less sensitive to ambiguous matches, and applicable to any disparity range without re-training. We compare PDS to state-of-the-art methods published over the recent months, and demonstrate its superior performance on FlyingThings3D and KITTI sets."
+    },
+    "keywords": [
+        {
+            "term": "memory footprint",
+            "url": "https://en.wikipedia.org/wiki/memory_footprint"
+        },
+        {
+            "term": "sub pixel",
+            "url": "https://en.wikipedia.org/wiki/sub_pixel"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        },
+        {
+            "term": "convolutional neural network",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_network"
+        },
+        {
+            "term": "maximum a posteriori",
+            "url": "https://en.wikipedia.org/wiki/maximum_a_posteriori"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        }
+    ],
+    "highlights": [
+        "Stereo matching consists in matching every point from an image taken from one viewpoint to its physically corresponding one in the image taken from another viewpoint",
+        "Instead of computing the posterior mean of the disparity and training with a L1 penalty [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>, <a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>, <a class=\"ref-link\" id=\"c43\" href=\"#r43\">43</a>, <a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>] we propose for inference a sub-pixel maximum a posteriori approximation that computes a weighted mean around the disparity with maximum posterior probability, which is robust to erroneous modes in the disparity distribution and allows to modify the disparity range without re-training",
+        "To address both of these drawbacks, we propose to use for inference a sub-pixel maximum a posteriori approximation that computes a weighted mean around the disparity with maximum posterior probability as d =",
+        "In this work we addressed two issues precluding the use of deep networks for stereo matching in many practical situations in spite of their excellent accuracy: their large memory footprint, and the inability to adjust to a different disparity range without complete re-training",
+        "We showed that by carefully revising conventionally used networks architecture to control the memory footprint and adapt analytically the network to the disparity range, and by using a new loss and estimator to cope with multi-modal posterior and sub-pixel accuracy, it is possible to resolve these practical issues and reach state-of-the-art performance"
+    ],
+    "key_statements": [
+        "Stereo matching consists in matching every point from an image taken from one viewpoint to its physically corresponding one in the image taken from another viewpoint",
+        "Recent developments in the field have been focused on stereo for hard / uncontrolled environments [<a class=\"ref-link\" id=\"c36\" href=\"#r36\">36</a>, <a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>, <a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>, <a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>], usage of high-order priors and cues [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>, <a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>, <a class=\"ref-link\" id=\"c14\" href=\"#r14\">14</a>, <a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>], and data-driven, and in particular, deep neural network based, methods [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>, <a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c39\" href=\"#r39\">39</a>, <a class=\"ref-link\" id=\"c40\" href=\"#r40\">40</a>, <a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>, <a class=\"ref-link\" id=\"c33\" href=\"#r33\">33</a>, <a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>, <a class=\"ref-link\" id=\"c31\" href=\"#r31\">31</a>, <a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>, <a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>, <a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>, <a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>, <a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>, <a class=\"ref-link\" id=\"c43\" href=\"#r43\">43</a>]",
+        "Recent works attempt at solving stereo matching using neural network trained end-to-end without post-processing [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>, <a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>, <a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>, <a class=\"ref-link\" id=\"c43\" href=\"#r43\">43</a>, <a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>, <a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>, <a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>]",
+        "As a consequence these networks have less parameters, but their disparity range is still non-adjustable without re-training due to SoftArgmin as we show in \u00a7 3.3",
+        "We propose to use a novel sup-pixel maximum a posteriori approximation for inference which computes a weighted mean around the disparity with maximum posterior probability",
+        "Instead of computing the posterior mean of the disparity and training with a L1 penalty [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>, <a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>, <a class=\"ref-link\" id=\"c43\" href=\"#r43\">43</a>, <a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>] we propose for inference a sub-pixel maximum a posteriori approximation that computes a weighted mean around the disparity with maximum posterior probability, which is robust to erroneous modes in the disparity distribution and allows to modify the disparity range without re-training",
+        "In \u00a7 3.2 we show how the reduced memory footprint allows to train on full-size images and to leverage large image contexts to improve performance",
+        "In \u00a7 3.3 we demonstrate that, thanks to the proposed sub-pixel maximum a posteriori and cross-entropy, we are able to modify the disparity range without re-training, and to improve the matching accuracy",
+        "The core of state-of-the-art methods [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>, <a class=\"ref-link\" id=\"c43\" href=\"#r43\">43</a>, <a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>] is the 3D convolutions Hourglass network used as regularization module, that takes as input a tensor composed of concatenated left-right image descriptor for all possible disparity values",
+        "Reducing the memory footprint allows to process a larger area during inference, and to use a larger context to estimate disparity which solve ambiguities and translates directly into better performance. This module is inspired by CRL [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>] and DispNetCorr1D [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>, <a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>] which control the memory footprint by feeding correlation results instead of concatenated embeddings to the Hourglass network and by [<a class=\"ref-link\" id=\"c38\" href=\"#r38\">38</a>] that show superior performance of joint left-right image embedding",
+        "To address both of these drawbacks, we propose to use for inference a sub-pixel maximum a posteriori approximation that computes a weighted mean around the disparity with maximum posterior probability as d =",
+        "In this work we addressed two issues precluding the use of deep networks for stereo matching in many practical situations in spite of their excellent accuracy: their large memory footprint, and the inability to adjust to a different disparity range without complete re-training",
+        "We showed that by carefully revising conventionally used networks architecture to control the memory footprint and adapt analytically the network to the disparity range, and by using a new loss and estimator to cope with multi-modal posterior and sub-pixel accuracy, it is possible to resolve these practical issues and reach state-of-the-art performance"
+    ],
+    "summary": [
+        "Stereo matching consists in matching every point from an image taken from one viewpoint to its physically corresponding one in the image taken from another viewpoint.",
+        "In \u00a7 3.3 we demonstrate that, thanks to the proposed sub-pixel MAP and cross-entropy, we are able to modify the disparity range without re-training, and to improve the matching accuracy.",
+        "The core of state-of-the-art methods [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>, <a class=\"ref-link\" id=\"c43\" href=\"#r43\">43</a>, <a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>] is the 3D convolutions Hourglass network used as regularization module, that takes as input a tensor composed of concatenated left-right image descriptor for all possible disparity values.",
+        "This module is inspired by CRL [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>] and DispNetCorr1D [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>, <a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>] which control the memory footprint by feeding correlation results instead of concatenated embeddings to the Hourglass network and by [<a class=\"ref-link\" id=\"c38\" href=\"#r38\">38</a>] that show superior performance of joint left-right image embedding.",
+        "In state-of-the-art methods, a network produces an posterior disparity distribution and use a SoftArgmin module [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>, <a class=\"ref-link\" id=\"c43\" href=\"#r43\">43</a>, <a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>], introduced in [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>], to compute the predicted sub-pixel disparity as an expectation of this distribution1: d = d \u00b7 P d = d | xL, xR .",
+        "To address both of these drawbacks, we propose to use for inference a sub-pixel MAP approximation that computes a weighted mean around the disparity with maximum posterior probability as d =",
+        "During training we use the posterior disparity distribution and the sub-pixel cross-entropy loss discussed .",
+        "The L1 loss is often selected because it empirically [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>] performs better than cross-entropy, and because when it is combined with SoftArgmin, it allows to train a network with sub-pixel ground truth.",
+        "We train our PDS network till convergence on FlyingThings3D with SoftArgmin, L1 loss and full-size training images and test it twice: the first time with SoftArgmin for inference, and the second time with our sub-pixel MAP for inference instead.",
+        "This shows that with Sub-pixel MAP we can modify the disparity range of the network on-the-fly, without re-training.",
+        "In this work we addressed two issues precluding the use of deep networks for stereo matching in many practical situations in spite of their excellent accuracy: their large memory footprint, and the inability to adjust to a different disparity range without complete re-training.",
+        "We showed that by carefully revising conventionally used networks architecture to control the memory footprint and adapt analytically the network to the disparity range, and by using a new loss and estimator to cope with multi-modal posterior and sub-pixel accuracy, it is possible to resolve these practical issues and reach state-of-the-art performance.",
+        "In this work we addressed two issues precluding the use of deep networks for stereo matching in many practical situations in spite of their excellent accuracy: their large memory footprint, and the inability to adjust to a different disparity range without complete re-training.<br/><br/>We showed that by carefully revising conventionally used networks architecture to control the memory footprint and adapt analytically the network to the disparity range, and by using a new loss and estimator to cope with multi-modal posterior and sub-pixel accuracy, it is possible to resolve these practical issues and reach state-of-the-art performance"
+    ],
+    "headline": "The Practical Deep Stereo  network that we propose addresses both issues: First, its architecture relies on novel bottleneck modules that drastically reduce the memory footprint in inference, and additional design choices allow to handle greater image size during training",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Jonathan T Barron, Andrew Adams, YiChang Shih, and Carlos Hern\u00e1ndez. Fast bilateral-space stereo for synthetic defocus. In CVPR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Barron%2C%20Jonathan%20T.%20Adams%2C%20Andrew%20Shih%2C%20YiChang%20Hern%C3%A1ndez%2C%20Carlos%20Fast%20bilateral-space%20stereo%20for%20synthetic%20defocus%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Barron%2C%20Jonathan%20T.%20Adams%2C%20Andrew%20Shih%2C%20YiChang%20Hern%C3%A1ndez%2C%20Carlos%20Fast%20bilateral-space%20stereo%20for%20synthetic%20defocus%202015"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Jia-Ren Chang and Yong-Sheng Chen. Pyramid stereo matching network. CoRR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chang%2C%20Jia-Ren%20Chen%2C%20Yong-Sheng%20Pyramid%20stereo%20matching%20network%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chang%2C%20Jia-Ren%20Chen%2C%20Yong-Sheng%20Pyramid%20stereo%20matching%20network%202018"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Zhuoyuan Chen, Xun Sun, and Liang Wang. A Deep Visual Correspondence Embedding Model for Stereo Matching Costs. ICCV, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Zhuoyuan%20Sun%2C%20Xun%20Wang%2C%20Liang%20A%20Deep%20Visual%20Correspondence%20Embedding%20Model%20for%20Stereo%20Matching%20Costs%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Zhuoyuan%20Sun%2C%20Xun%20Wang%2C%20Liang%20A%20Deep%20Visual%20Correspondence%20Embedding%20Model%20for%20Stereo%20Matching%20Costs%202015"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Alexey Dosovitskiy, Philipp Fischer, Eddy Ilg, Philip Hausser, Caner Hazirbas, Vladimir Golkov, Patrick van der Smagt, Daniel Cremers, and Thomas Brox. Flownet: Learning optical flow with convolutional networks. In CVPR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dosovitskiy%2C%20Alexey%20Fischer%2C%20Philipp%20Ilg%2C%20Eddy%20Hausser%2C%20Philip%20Flownet%3A%20Learning%20optical%20flow%20with%20convolutional%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dosovitskiy%2C%20Alexey%20Fischer%2C%20Philipp%20Ilg%2C%20Eddy%20Hausser%2C%20Philip%20Flownet%3A%20Learning%20optical%20flow%20with%20convolutional%20networks%202015"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Meirav Galun, Tal Amir, Tal Hassner, Ronen Basri, and Yaron Lipman. Wide baseline stereo matching with convex bounded distortion constraints. In ICCV, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Galun%2C%20Meirav%20Amir%2C%20Tal%20Hassner%2C%20Tal%20Basri%2C%20Ronen%20Wide%20baseline%20stereo%20matching%20with%20convex%20bounded%20distortion%20constraints%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Galun%2C%20Meirav%20Amir%2C%20Tal%20Hassner%2C%20Tal%20Basri%2C%20Ronen%20Wide%20baseline%20stereo%20matching%20with%20convex%20bounded%20distortion%20constraints%202015"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Andreas Geiger, Philip Lenz, and Raquel Urtasun. Are we ready for autonomous driving? the kitti vision benchmark suite. In CVPR, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Geiger%2C%20Andreas%20Lenz%2C%20Philip%20Urtasun%2C%20Raquel%20Are%20we%20ready%20for%20autonomous%20driving%3F%20the%20kitti%20vision%20benchmark%20suite%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Geiger%2C%20Andreas%20Lenz%2C%20Philip%20Urtasun%2C%20Raquel%20Are%20we%20ready%20for%20autonomous%20driving%3F%20the%20kitti%20vision%20benchmark%20suite%202012"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Spyros Gidaris and Nikos Komodakis. Detect, replace, refine: Deep structured prediction for pixel wise labeling. CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gidaris%2C%20Spyros%20Komodakis%2C%20Nikos%20Detect%2C%20replace%2C%20refine%3A%20Deep%20structured%20prediction%20for%20pixel%20wise%20labeling%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gidaris%2C%20Spyros%20Komodakis%2C%20Nikos%20Detect%2C%20replace%2C%20refine%3A%20Deep%20structured%20prediction%20for%20pixel%20wise%20labeling%202017"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Fatma G\u00fcney and Andreas Geiger. Displets: Resolving Stereo Ambiguities using Object Knowledge. CVPR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=G%C3%BCney%2C%20Fatma%20Geiger%2C%20Andreas%20Displets%3A%20Resolving%20Stereo%20Ambiguities%20using%20Object%20Knowledge%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=G%C3%BCney%2C%20Fatma%20Geiger%2C%20Andreas%20Displets%3A%20Resolving%20Stereo%20Ambiguities%20using%20Object%20Knowledge%202015"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Simon Hadfield and Richard Bowden. Exploiting high level scene cues in stereo reconstruction. In ICCV, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hadfield%2C%20Simon%20Bowden%2C%20Richard%20Exploiting%20high%20level%20scene%20cues%20in%20stereo%20reconstruction%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hadfield%2C%20Simon%20Bowden%2C%20Richard%20Exploiting%20high%20level%20scene%20cues%20in%20stereo%20reconstruction%202015"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. In CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Hae-Gon Jeon, Joon-Young Lee, Sunghoon Im, Hyowon Ha, and In So Kweon. Stereo matching with color and monochrome cameras in low-light conditions. In CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jeon%2C%20Hae-Gon%20Lee%2C%20Joon-Young%20Sunghoon%20Im%2C%20Hyowon%20Ha%2C%20and%20In%20So%20Kweon.%20Stereo%20matching%20with%20color%20and%20monochrome%20cameras%20in%20low-light%20conditions%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jeon%2C%20Hae-Gon%20Lee%2C%20Joon-Young%20Sunghoon%20Im%2C%20Hyowon%20Ha%2C%20and%20In%20So%20Kweon.%20Stereo%20matching%20with%20color%20and%20monochrome%20cameras%20in%20low-light%20conditions%202016"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Zequn Jie, Pengfei Wang, Yonggen Ling, Bo Zhao, Yunchao Wei, Jiashi Feng, and Wei Liu. Left-right comparative recurrent model for stereo matching. In CVPR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jie%2C%20Zequn%20Wang%2C%20Pengfei%20Ling%2C%20Yonggen%20Zhao%2C%20Bo%20Left-right%20comparative%20recurrent%20model%20for%20stereo%20matching%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jie%2C%20Zequn%20Wang%2C%20Pengfei%20Ling%2C%20Yonggen%20Zhao%2C%20Bo%20Left-right%20comparative%20recurrent%20model%20for%20stereo%20matching%202018"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Alex Kendall, Hayk Martirosyan, Saumitro Dasgupta, Peter Henry, Ryan Kennedy, Abraham Bachrach, and Adam Bry. End-to-end learning of geometry and context for deep stereo regression. ICCV, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kendall%2C%20Alex%20Martirosyan%2C%20Hayk%20Dasgupta%2C%20Saumitro%20Henry%2C%20Peter%20End-to-end%20learning%20of%20geometry%20and%20context%20for%20deep%20stereo%20regression%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kendall%2C%20Alex%20Martirosyan%2C%20Hayk%20Dasgupta%2C%20Saumitro%20Henry%2C%20Peter%20End-to-end%20learning%20of%20geometry%20and%20context%20for%20deep%20stereo%20regression%202017"
+        },
+        {
+            "id": "14",
+            "entry": "[14] K. R. Kim and C. S. Kim. Adaptive smoothness constraints for efficient stereo matching using texture and edge information. In ICIP, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kim%2C%20K.R.%20Kim%2C%20C.S.%20Adaptive%20smoothness%20constraints%20for%20efficient%20stereo%20matching%20using%20texture%20and%20edge%20information%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kim%2C%20K.R.%20Kim%2C%20C.S.%20Adaptive%20smoothness%20constraints%20for%20efficient%20stereo%20matching%20using%20texture%20and%20edge%20information%202016"
+        },
+        {
+            "id": "15",
+            "entry": "[15] KITTY. Kitti stereo scoreboards. http://www.cvlibs.net/datasets/kitti/ Accessed:05 May 2018.",
+            "url": "http://www.cvlibs.net/datasets/kitti/Accessed:05"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Patrick Kn\u00f6belreiter, Christian Reinbacher, Alexander Shekhovtsov, and Thomas Pock. End-toend training of hybrid cnn-crf models for stereo. CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kn%C3%B6belreiter%2C%20Patrick%20Reinbacher%2C%20Christian%20Shekhovtsov%2C%20Alexander%20Pock%2C%20Thomas%20End-toend%20training%20of%20hybrid%20cnn-crf%20models%20for%20stereo%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kn%C3%B6belreiter%2C%20Patrick%20Reinbacher%2C%20Christian%20Shekhovtsov%2C%20Alexander%20Pock%2C%20Thomas%20End-toend%20training%20of%20hybrid%20cnn-crf%20models%20for%20stereo%202017"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Ang Li, Dapeng Chen, Yuanliu Liu, and Zejian Yuan. Coordinating multiple disparity proposals for stereo computation. In CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Ang%20Chen%2C%20Dapeng%20Liu%2C%20Yuanliu%20Yuan%2C%20Zejian%20Coordinating%20multiple%20disparity%20proposals%20for%20stereo%20computation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20Ang%20Chen%2C%20Dapeng%20Liu%2C%20Yuanliu%20Yuan%2C%20Zejian%20Coordinating%20multiple%20disparity%20proposals%20for%20stereo%20computation%202016"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Zhengfa Liang, Yiliu Feng, Yulan Guo Hengzhu Liu Wei Chen, and Linbo Qiao Li Zhou Jianfeng Zhang. Learning for disparity estimation through feature constancy. CoRR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liang%2C%20Zhengfa%20Feng%2C%20Yiliu%20Chen%2C%20Yulan%20Guo%20Hengzhu%20Liu%20Wei%20Zhang%2C%20Linbo%20Qiao%20Li%20Zhou%20Jianfeng%20Learning%20for%20disparity%20estimation%20through%20feature%20constancy%202018"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Wenjie Luo, Alexander G Schwing, and Raquel Urtasun. Efficient deep learning for stereo matching. In CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Luo%2C%20Wenjie%20Schwing%2C%20Alexander%20G.%20Urtasun%2C%20Raquel%20Efficient%20deep%20learning%20for%20stereo%20matching%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Luo%2C%20Wenjie%20Schwing%2C%20Alexander%20G.%20Urtasun%2C%20Raquel%20Efficient%20deep%20learning%20for%20stereo%20matching%202016"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Nikolaus Mayer, Eddy Ilg, Philip Hausser, Philipp Fischer, Daniel Cremers, Alexey Dosovitskiy, and Thomas Brox. A large dataset to train convolutional networks for disparity, optical flow, and scene flow estimation. In CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mayer%2C%20Nikolaus%20Ilg%2C%20Eddy%20Hausser%2C%20Philip%20Fischer%2C%20Philipp%20A%20large%20dataset%20to%20train%20convolutional%20networks%20for%20disparity%2C%20optical%20flow%2C%20and%20scene%20flow%20estimation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mayer%2C%20Nikolaus%20Ilg%2C%20Eddy%20Hausser%2C%20Philip%20Fischer%2C%20Philipp%20A%20large%20dataset%20to%20train%20convolutional%20networks%20for%20disparity%2C%20optical%20flow%2C%20and%20scene%20flow%20estimation%202016"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Xing Mei, Xun Sun, Mingcai Zhou, Shaohui Jiao, Haitao Wang, and Xiaopeng Zhang. On building an accurate stereo matching system on graphics hardware. In ICCV Workshops, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mei%2C%20Xing%20Sun%2C%20Xun%20Zhou%2C%20Mingcai%20Jiao%2C%20Shaohui%20and%20Xiaopeng%20Zhang.%20On%20building%20an%20accurate%20stereo%20matching%20system%20on%20graphics%20hardware%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mei%2C%20Xing%20Sun%2C%20Xun%20Zhou%2C%20Mingcai%20Jiao%2C%20Shaohui%20and%20Xiaopeng%20Zhang.%20On%20building%20an%20accurate%20stereo%20matching%20system%20on%20graphics%20hardware%202011"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Moritz Menze and Andreas Geiger. Object scene flow for autonomous vehicles. In CVPR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Menze%2C%20Moritz%20Geiger%2C%20Andreas%20Object%20scene%20flow%20for%20autonomous%20vehicles%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Menze%2C%20Moritz%20Geiger%2C%20Andreas%20Object%20scene%20flow%20for%20autonomous%20vehicles%202015"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Kyoung Won Nam, Jeongyun Park, In Young Kim, and Kwang Gi Kim. Application of stereo-imaging technology to medical field. Healthcare informatics research, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nam%2C%20Kyoung%20Won%20Park%2C%20Jeongyun%20Kim%2C%20In%20Young%20Kim%2C%20Kwang%20Gi%20Application%20of%20stereo-imaging%20technology%20to%20medical%20field%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nam%2C%20Kyoung%20Won%20Park%2C%20Jeongyun%20Kim%2C%20In%20Young%20Kim%2C%20Kwang%20Gi%20Application%20of%20stereo-imaging%20technology%20to%20medical%20field%202012"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Jiahao Pang, Wenxiu Sun, JS Ren, Chengxi Yang, and Qiong Yan. Cascade residual learning: A two-stage convolutional neural network for stereo matching. In ICCVW, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pang%2C%20Jiahao%20Wenxiu%20Sun%2C%20J.S.Ren%20Yang%2C%20Chengxi%20Yan%2C%20Qiong%20Cascade%20residual%20learning%3A%20A%20two-stage%20convolutional%20neural%20network%20for%20stereo%20matching%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pang%2C%20Jiahao%20Wenxiu%20Sun%2C%20J.S.Ren%20Yang%2C%20Chengxi%20Yan%2C%20Qiong%20Cascade%20residual%20learning%3A%20A%20two-stage%20convolutional%20neural%20network%20for%20stereo%20matching%202017"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Min-Gyu Park and Kuk-Jin Yoon. Leveraging stereo matching with learning-based confidence measures. In CVPR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Park%2C%20Min-Gyu%20Yoon%2C%20Kuk-Jin%20Leveraging%20stereo%20matching%20with%20learning-based%20confidence%20measures%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Park%2C%20Min-Gyu%20Yoon%2C%20Kuk-Jin%20Leveraging%20stereo%20matching%20with%20learning-based%20confidence%20measures%202015"
+        },
+        {
+            "id": "26",
+            "entry": "[26] PyTorch. Pytorch web site. http://http://pytorch.org/ Accessed:05 May 2018.",
+            "url": "http://http://pytorch.org/Accessed:05"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Yvain QUeau, Tao Wu, Fran\u00e7ois Lauze, Jean-Denis Durou, and Daniel Cremers. A non-convex variational approach to photometric stereo under inaccurate lighting. In CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=QUeau%2C%20Yvain%20Wu%2C%20Tao%20Lauze%2C%20Fran%C3%A7ois%20Durou%2C%20Jean-Denis%20A%20non-convex%20variational%20approach%20to%20photometric%20stereo%20under%20inaccurate%20lighting%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=QUeau%2C%20Yvain%20Wu%2C%20Tao%20Lauze%2C%20Fran%C3%A7ois%20Durou%2C%20Jean-Denis%20A%20non-convex%20variational%20approach%20to%20photometric%20stereo%20under%20inaccurate%20lighting%202017"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Daniel Scharstein and Richard Szeliski. A Taxonomy and Evaluation of Dense Two-Frame Stereo Correspondence Algorithms. IJCV, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Scharstein%2C%20Daniel%20Szeliski%2C%20Richard%20A%20Taxonomy%20and%20Evaluation%20of%20Dense%20Two-Frame%20Stereo%20Correspondence%20Algorithms%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Scharstein%2C%20Daniel%20Szeliski%2C%20Richard%20A%20Taxonomy%20and%20Evaluation%20of%20Dense%20Two-Frame%20Stereo%20Correspondence%20Algorithms%202001"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Akihito Seki and Marc Pollefeys. Patch based confidence prediction for dense disparity map. In BMVC, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Seki%2C%20Akihito%20Pollefeys%2C%20Marc%20Patch%20based%20confidence%20prediction%20for%20dense%20disparity%20map%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Seki%2C%20Akihito%20Pollefeys%2C%20Marc%20Patch%20based%20confidence%20prediction%20for%20dense%20disparity%20map%202016"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Akihito Seki and Marc Pollefeys. Sgm-nets: Semi-global matching with neural networks. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Seki%2C%20Akihito%20Pollefeys%2C%20Marc%20Sgm-nets%3A%20Semi-global%20matching%20with%20neural%20networks%202017"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Amit Shaked and Lior Wolf. Improved stereo matching with constant highway networks and reflective confidence learning. CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shaked%2C%20Amit%20Wolf%2C%20Lior%20Improved%20stereo%20matching%20with%20constant%20highway%20networks%20and%20reflective%20confidence%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shaked%2C%20Amit%20Wolf%2C%20Lior%20Improved%20stereo%20matching%20with%20constant%20highway%20networks%20and%20reflective%20confidence%20learning%202017"
+        },
+        {
+            "id": "32",
+            "entry": "[32] David E Shean, Oleg Alexandrov, Zachary M Moratto, Benjamin E Smith, Ian R Joughin, Claire Porter, and Paul Morin. An automated, open-source pipeline for mass production of digital elevation models (DEMs) from very-high-resolution commercial stereo satellite imagery. {ISPRS}, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shean%2C%20David%20E.%20Alexandrov%2C%20Oleg%20Moratto%2C%20Zachary%20M.%20Smith%2C%20Benjamin%20E.%20An%20automated%2C%20open-source%20pipeline%20for%20mass%20production%20of%20digital%20elevation%20models%20%28DEMs%29%20from%20very-high-resolution%20commercial%20stereo%20satellite%20imagery%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shean%2C%20David%20E.%20Alexandrov%2C%20Oleg%20Moratto%2C%20Zachary%20M.%20Smith%2C%20Benjamin%20E.%20An%20automated%2C%20open-source%20pipeline%20for%20mass%20production%20of%20digital%20elevation%20models%20%28DEMs%29%20from%20very-high-resolution%20commercial%20stereo%20satellite%20imagery%202016"
+        },
+        {
+            "id": "33",
+            "entry": "[33] S. Tulyakov, A. Ivanov, and F. Fleuret. Weakly supervised learning of deep metrics for stereo reconstruction. In ICCV, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tulyakov%2C%20S.%20Ivanov%2C%20A.%20Fleuret%2C%20F.%20Weakly%20supervised%20learning%20of%20deep%20metrics%20for%20stereo%20reconstruction%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tulyakov%2C%20S.%20Ivanov%2C%20A.%20Fleuret%2C%20F.%20Weakly%20supervised%20learning%20of%20deep%20metrics%20for%20stereo%20reconstruction%202017"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Ali Osman Ulusoy, Michael J Black, and Andreas Geiger. Semantic multi-view stereo: Jointly estimating objects and voxels. In CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ulusoy%2C%20Ali%20Osman%20Black%2C%20Michael%20J.%20Geiger%2C%20Andreas%20Semantic%20multi-view%20stereo%3A%20Jointly%20estimating%20objects%20and%20voxels%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ulusoy%2C%20Ali%20Osman%20Black%2C%20Michael%20J.%20Geiger%2C%20Andreas%20Semantic%20multi-view%20stereo%3A%20Jointly%20estimating%20objects%20and%20voxels%202017"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Dmitry Ulyanov, Andrea Vedaldi, and Victor S. Lempitsky. Instance normalization: The missing ingredient for fast stylization. CoRR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ulyanov%2C%20Dmitry%20Vedaldi%2C%20Andrea%20Lempitsky%2C%20Victor%20S.%20Instance%20normalization%3A%20The%20missing%20ingredient%20for%20fast%20stylization%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ulyanov%2C%20Dmitry%20Vedaldi%2C%20Andrea%20Lempitsky%2C%20Victor%20S.%20Instance%20normalization%3A%20The%20missing%20ingredient%20for%20fast%20stylization%202016"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Cedric Verleysen and Christophe De Vleeschouwer. Piecewise-planar 3d approximation from wide-baseline stereo. In CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Verleysen%2C%20Cedric%20Vleeschouwer%2C%20Christophe%20De%20Piecewise-planar%203d%20approximation%20from%20wide-baseline%20stereo%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Verleysen%2C%20Cedric%20Vleeschouwer%2C%20Christophe%20De%20Piecewise-planar%203d%20approximation%20from%20wide-baseline%20stereo%202016"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Ting-Chun Wang, Manohar Srikanth, and Ravi Ramamoorthi. Depth from semi-calibrated stereo and defocus. In CVPR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Ting-Chun%20Srikanth%2C%20Manohar%20Ramamoorthi%2C%20Ravi%20Depth%20from%20semi-calibrated%20stereo%20and%20defocus%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Ting-Chun%20Srikanth%2C%20Manohar%20Ramamoorthi%2C%20Ravi%20Depth%20from%20semi-calibrated%20stereo%20and%20defocus%202016"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Sergey Zagoruyko and Nikos Komodakis. Learning to compare image patches via convolutional neural networks. 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zagoruyko%2C%20Sergey%20Komodakis%2C%20Nikos%20Learning%20to%20compare%20image%20patches%20via%20convolutional%20neural%20networks%202015"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Jure \u017dbontar and Yann LeCun. Computing the Stereo Matching Cost With a Convolutional Neural Network. CVPR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=%C5%BDbontar%2C%20Jure%20LeCun%2C%20Yann%20Computing%20the%20Stereo%20Matching%20Cost%20With%20a%20Convolutional%20Neural%20Network%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=%C5%BDbontar%2C%20Jure%20LeCun%2C%20Yann%20Computing%20the%20Stereo%20Matching%20Cost%20With%20a%20Convolutional%20Neural%20Network%202015"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Jure Zbontar and Yann LeCun. Stereo matching by training a convolutional neural network to compare image patches. JMLR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zbontar%2C%20Jure%20LeCun%2C%20Yann%20Stereo%20matching%20by%20training%20a%20convolutional%20neural%20network%20to%20compare%20image%20patches%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zbontar%2C%20Jure%20LeCun%2C%20Yann%20Stereo%20matching%20by%20training%20a%20convolutional%20neural%20network%20to%20compare%20image%20patches%202016"
+        },
+        {
+            "id": "41",
+            "entry": "[41] F. Zhang and B. W. Wah. Fundamental principles on learning new features for effective dense matching. IEEE Transactions on Image Processing, 27(2):822\u2013836, Feb 2018. ISSN 1057-7149. doi: 10.1109/TIP.2017.2752370.",
+            "crossref": "https://dx.doi.org/10.1109/TIP.2017.2752370",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=https%3A//dx.doi.org/10.1109/TIP.2017.2752370"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Hongyi Zhang, Moustapha Cisse, Yann N. Dauphin, and David Lopez-Paz. mixup: Beyond empirical risk minimization. In International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Hongyi%20Cisse%2C%20Moustapha%20Dauphin%2C%20Yann%20N.%20Lopez-Paz%2C%20David%20mixup%3A%20Beyond%20empirical%20risk%20minimization%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Hongyi%20Cisse%2C%20Moustapha%20Dauphin%2C%20Yann%20N.%20Lopez-Paz%2C%20David%20mixup%3A%20Beyond%20empirical%20risk%20minimization%202018"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Yiran Zhong, Yuchao Dai, and Hongdong Li. Self-supervised learning for stereo matching with self-improving ability. CoRR, 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhong%2C%20Yiran%20Dai%2C%20Yuchao%20Li%2C%20Hongdong%20Self-supervised%20learning%20for%20stereo%20matching%20with%20self-improving%20ability%202017"
+        }
+    ]
+}

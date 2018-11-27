@@ -1,0 +1,228 @@
+{
+    "filename": "8295-groupreduce-block-wise-low-rank-approximation-for-neural-language-model-shrinking.pdf",
+    "metadata": {
+        "title": "GroupReduce: Block-Wise Low-Rank Approximation for Neural Language Model Shrinking",
+        "author": "Patrick Chen, Si Si, Yang Li, Ciprian Chelba, Cho-Jui Hsieh",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8295-groupreduce-block-wise-low-rank-approximation-for-neural-language-model-shrinking.pdf"
+        },
+        "abstract": "Model compression is essential for serving large deep neural nets on devices with limited resources or applications that require real-time responses. As a case study, a neural language model usually consists of one or more recurrent layers sandwiched between an embedding layer used for representing input tokens and a softmax layer for generating output tokens. For problems with a very large vocabulary size, the embedding and the softmax matrices can account for more than half of the model size. For instance, the bigLSTM model achieves great performance on the One-Billion-Word (OBW) dataset with around 800k vocabulary, and its word embedding and softmax matrices use more than 6GBytes space, and are responsible for over 90% of the model parameters. In this paper, we propose GroupReduce, a novel compression method for neural language models, based on vocabulary-partition (block) based low-rank matrix approximation and the inherent frequency distribution of tokens (the power-law distribution of words). The experimental results show our method can significantly outperform traditional compression methods such as low-rank approximation and pruning. On the OBW dataset, our method achieved 6.6 times compression rate for the embedding and softmax matrices, and when combined with quantization, our method can achieve 26 times compression rate, which translates to a factor of 12.8 times compression for the entire model with very little degradation in perplexity."
+    },
+    "keywords": [
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "singular value decomposition",
+            "url": "https://en.wikipedia.org/wiki/singular_value_decomposition"
+        },
+        {
+            "term": "language modeling",
+            "url": "https://en.wikipedia.org/wiki/language_modeling"
+        },
+        {
+            "term": "convolutional neural network",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_network"
+        },
+        {
+            "term": "word embedding",
+            "url": "https://en.wikipedia.org/wiki/word_embedding"
+        },
+        {
+            "term": "neural machine translation",
+            "url": "https://en.wikipedia.org/wiki/neural_machine_translation"
+        },
+        {
+            "term": "low rank approximation",
+            "url": "https://en.wikipedia.org/wiki/low_rank_approximation"
+        }
+    ],
+    "highlights": [
+        "Deep neural nets with a large number of parameters have a great capacity for modeling complex problems",
+        "For language modeling, we evaluate GroupReduce on two datasets: Penn Treebank Bank (PTB) and One-billion-Word Benchmark (OBW)",
+        "We propose a novel compression method for neural language models",
+        "Our method leverages the statistical property of words in language to form block-wise low-rank matrix approximations for embedding and softmax layers",
+        "Experimental results show that our method can significantly outperform traditional compression methods such as low-rank approximation and pruning",
+        "On the One-billion-Word Benchmark dataset, our method combined with quantization achieves 26 times compression rate for both the embedding and softmax matrices, which saves more than 5GB memory usage"
+    ],
+    "key_statements": [
+        "Deep neural nets with a large number of parameters have a great capacity for modeling complex problems",
+        "We found only [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>, <a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>] tried to compress the word embedding matrix in NLP applications. [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>] showed that the quantization-plus-retraining approach can only achieve less than 3 times compression rate on Penn Treebank Bank data with no performance loss. [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>] showed that for word-level LSTM models, the pruning approach can only achieve 87% sparsity with more than 5% performance loss",
+        "We evaluate our method (GroupReduce) on two tasks: language modeling (LM) and neural machine translation (NMT)",
+        "For language modeling, we evaluate GroupReduce on two datasets: Penn Treebank Bank (PTB) and One-billion-Word Benchmark (OBW)",
+        "We propose a novel compression method for neural language models",
+        "Our method leverages the statistical property of words in language to form block-wise low-rank matrix approximations for embedding and softmax layers",
+        "Experimental results show that our method can significantly outperform traditional compression methods such as low-rank approximation and pruning",
+        "On the One-billion-Word Benchmark dataset, our method combined with quantization achieves 26 times compression rate for both the embedding and softmax matrices, which saves more than 5GB memory usage"
+    ],
+    "summary": [
+        "Deep neural nets with a large number of parameters have a great capacity for modeling complex problems.",
+        "The mainstream algorithms from these work such as low-rank approximation, quantization, and pruning can be directly applied to compress the embedding and softmax matrices.",
+        "We propose GroupReduce, a novel method for compressing the embedding and softmax matrices using block-wise, weighted low-rank approximation.",
+        "Our method starts by grouping words into blocks based on their frequencies, and refines the clustering iteratively by constructing weighted low-rank approximation for each block.",
+        "On DE-EN NMT task, Our method achieves 10 times compression rate on the embedding and softmax matrices without much degradation of performance.",
+        "On One Billion Word dataset, our method achieves 6.6 times compression rate on the embedding and softmax matrices that are originally more than 6GB.",
+        "We will show that instead of only treating the embedding or the softmax parameters as a pure matrix, by exploiting the inherent structure of natural languages, GroupReduce algorithm could achieve much better compression rates.",
+        "In bigLSTM model that achieved start-of-the-art performance on OBW, more than 90% of memory is used to store two word-embedding matrices.",
+        "Given a word embedding matrix A, a standard way to compress A while preserving the information is to perform low-rank approximation over A.",
+        "Figure 1(b) shows that all the eigenvalues of the PTB word embedding matrices are quite large, which leads to poor reconstruction error of low-rank approximation in Figure 1(c).",
+        "We introduce a weighted low-rank approximation to compress the embedding matrix A.",
+        "Algorithm 1: GroupReduce: Block-Wise Low-Rank Approximation for Neural Language Model Shrinking",
+        "We compare GroupReduce with two standard model compression strategies: low-rank approximation and pruning.These two techniques are widely used for language model compression, such as [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>, <a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>] We compress both input embedding and softmax matrices.",
+        "Quantized GroupReduce could achieve at least 26 times compression for both input embedding and softmax matrix in OBW as shown in Table 4.",
+        "We first compute SVD of LSTM matrix to obtain 2 times compression, and quantize the entries of low-rank matrices by using only 16 bits.",
+        "Our method leverages the statistical property of words in language to form block-wise low-rank matrix approximations for embedding and softmax layers.",
+        "On the OBW dataset, our method combined with quantization achieves 26 times compression rate for both the embedding and softmax matrices, which saves more than 5GB memory usage.",
+        "We will investigate different retrain schemes such as training the block low-rank parameterization of the model end-to-end"
+    ],
+    "headline": "We propose GroupReduce, a novel compression method for neural language models, based on vocabulary-partition  based low-rank matrix approximation and the inherent frequency distribution of tokens ",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Mauro Cettolo, Jan Niehues, Sebastian St\u00fcker, Luisa Bentivogli, and Marcello Federico. Report on the 11th iwslt evaluation campaign, iwslt 2014. In Proceedings of the International Workshop on Spoken Language Translation, Hanoi, Vietnam, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mauro%20Cettolo%20Jan%20Niehues%20Sebastian%20St%C3%BCker%20Luisa%20Bentivogli%20and%20Marcello%20Federico%20Report%20on%20the%2011th%20iwslt%20evaluation%20campaign%20iwslt%202014%20In%20Proceedings%20of%20the%20International%20Workshop%20on%20Spoken%20Language%20Translation%20Hanoi%20Vietnam%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mauro%20Cettolo%20Jan%20Niehues%20Sebastian%20St%C3%BCker%20Luisa%20Bentivogli%20and%20Marcello%20Federico%20Report%20on%20the%2011th%20iwslt%20evaluation%20campaign%20iwslt%202014%20In%20Proceedings%20of%20the%20International%20Workshop%20on%20Spoken%20Language%20Translation%20Hanoi%20Vietnam%202014"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Ciprian Chelba, Tomas Mikolov, Mike Schuster, Qi Ge, Thorsten Brants, Phillipp Koehn, and Tony Robinson. One billion word benchmark for measuring progress in statistical language modeling. arXiv preprint arXiv:1312.3005, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.3005"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Yunchuan Chen, Lili Mou, Yan Xu, Ge Li, and Zhi Jin. Compressing neural language models by sparse word representations. arXiv preprint arXiv:1610.03950, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1610.03950"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Yoojin Choi, Mostafa El-Khamy, and Jungwon Lee. Universal deep neural network compression. CoRR, abs/1802.02271, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.02271"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Emily L Denton, Wojciech Zaremba, Joan Bruna, Yann LeCun, and Rob Fergus. Exploiting linear structure within convolutional networks for efficient evaluation. In Advances in neural information processing systems, pages 1269\u20131277, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Denton%2C%20Emily%20L.%20Zaremba%2C%20Wojciech%20Bruna%2C%20Joan%20LeCun%2C%20Yann%20Exploiting%20linear%20structure%20within%20convolutional%20networks%20for%20efficient%20evaluation%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Denton%2C%20Emily%20L.%20Zaremba%2C%20Wojciech%20Bruna%2C%20Joan%20LeCun%2C%20Yann%20Exploiting%20linear%20structure%20within%20convolutional%20networks%20for%20efficient%20evaluation%202014"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Song Han, Huizi Mao, and William J. Dally. Deep compression: Compressing deep neural network with pruning, trained quantization and huffman coding. CoRR, abs/1510.00149, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1510.00149"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Song Han, Jeff Pool, John Tran, and William J. Dally. Learning both weights and connections for efficient neural networks. CoRR, abs/1506.02626, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1506.02626"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Andrew G Howard, Menglong Zhu, Bo Chen, Dmitry Kalenichenko, Weijun Wang, Tobias Weyand, Marco Andreetto, and Hartwig Adam. Mobilenets: Efficient convolutional neural networks for mobile vision applications. arXiv preprint arXiv:1704.04861, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1704.04861"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Itay Hubara, Matthieu Courbariaux, Daniel Soudry, Ran El-Yaniv, and Yoshua Bengio. Quantized neural networks: Training neural networks with low precision weights and activations. arXiv preprint arXiv:1609.07061, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.07061"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Max Jaderberg, Andrea Vedaldi, and Andrew Zisserman. Speeding up convolutional neural networks with low rank expansions. arXiv preprint arXiv:1405.3866, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1405.3866"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Rafal Jozefowicz, Oriol Vinyals, Mike Schuster, Noam Shazeer, and Yonghui Wu. Exploring the limits of language modeling. arXiv preprint arXiv:1602.02410, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1602.02410"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Yong-Deok Kim, Eunhyeok Park, Sungjoo Yoo, Taelim Choi, Lu Yang, and Dongjun Shin. Compression of deep convolutional neural networks for fast and low power mobile applications. In ICLR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kim%2C%20Yong-Deok%20Park%2C%20Eunhyeok%20Yoo%2C%20Sungjoo%20Choi%2C%20Taelim%20Compression%20of%20deep%20convolutional%20neural%20networks%20for%20fast%20and%20low%20power%20mobile%20applications%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kim%2C%20Yong-Deok%20Park%2C%20Eunhyeok%20Yoo%2C%20Sungjoo%20Choi%2C%20Taelim%20Compression%20of%20deep%20convolutional%20neural%20networks%20for%20fast%20and%20low%20power%20mobile%20applications%202016"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Guillaume Klein, Yoon Kim, Yuntian Deng, Jean Senellart, and Alexander M Rush. Opennmt: Open-source toolkit for neural machine translation. arXiv preprint arXiv:1701.02810, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1701.02810"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Maximilian Lam. Word2bits - quantized word vectors. arXiv preprint arXiv:1803.05651, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.05651"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Yann LeCun, John S Denker, and Sara A Solla. Optimal brain damage. In Advances in neural information processing systems, pages 598\u2013605, 1990.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=LeCun%2C%20Yann%20Denker%2C%20John%20S.%20Solla%2C%20Sara%20A.%20Optimal%20brain%20damage%201990",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=LeCun%2C%20Yann%20Denker%2C%20John%20S.%20Solla%2C%20Sara%20A.%20Optimal%20brain%20damage%201990"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Darryl Lin, Sachin Talathi, and Sreekanth Annapureddy. Fixed point quantization of deep convolutional networks. In International Conference on Machine Learning, pages 2849\u20132858, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20Darryl%20Talathi%2C%20Sachin%20Annapureddy%2C%20Sreekanth%20Fixed%20point%20quantization%20of%20deep%20convolutional%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lin%2C%20Darryl%20Talathi%2C%20Sachin%20Annapureddy%2C%20Sreekanth%20Fixed%20point%20quantization%20of%20deep%20convolutional%20networks%202016"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Ekaterina Lobacheva, Nadezhda Chirkova, and Dmitry Vetrov. Bayesian sparsification of recurrent neural networks. arXiv preprint arXiv:1708.00077, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1708.00077"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Zhiyun Lu, Vikas Sindhwani, and Tara N. Sainath. Learning compact recurrent neural networks. CoRR, abs/1604.02594, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1604.02594"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Sharan Narang, Erich Elsen, Gregory Diamos, and Shubho Sengupta. Exploring sparsity in recurrent neural networks. In ICLR.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Narang%2C%20Sharan%20Elsen%2C%20Erich%20Diamos%2C%20Gregory%20Sengupta%2C%20Shubho%20Exploring%20sparsity%20in%20recurrent%20neural%20networks.%20In%20ICLR"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Tara N Sainath, Brian Kingsbury, Vikas Sindhwani, Ebru Arisoy, and Bhuvana Ramabhadran. Low-rank matrix factorization for deep neural network training with high-dimensional output targets. In Acoustics, Speech and Signal Processing (ICASSP), 2013 IEEE International Conference on, pages 6655\u20136659. IEEE, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sainath%2C%20Tara%20N.%20Kingsbury%2C%20Brian%20Sindhwani%2C%20Vikas%20Arisoy%2C%20Ebru%20Low-rank%20matrix%20factorization%20for%20deep%20neural%20network%20training%20with%20high-dimensional%20output%20targets%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sainath%2C%20Tara%20N.%20Kingsbury%2C%20Brian%20Sindhwani%2C%20Vikas%20Arisoy%2C%20Ebru%20Low-rank%20matrix%20factorization%20for%20deep%20neural%20network%20training%20with%20high-dimensional%20output%20targets%202013"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Raphael Shu and Hideki Nakayama. Compressing word embeddings via deep compositional code learning. In ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shu%2C%20Raphael%20Nakayama%2C%20Hideki%20Compressing%20word%20embeddings%20via%20deep%20compositional%20code%20learning%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shu%2C%20Raphael%20Nakayama%2C%20Hideki%20Compressing%20word%20embeddings%20via%20deep%20compositional%20code%20learning%202018"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Si Si, Cho-Jui Hsieh, and Inderjit S Dhillon. Memory efficient kernel approximation. J. Mach. Learn. Res, 32:701\u20139.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Si%2C%20Si%20Hsieh%2C%20Cho-Jui%20Dhillon%2C%20Inderjit%20S.%20Memory%20efficient%20kernel%20approximation",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Si%2C%20Si%20Hsieh%2C%20Cho-Jui%20Dhillon%2C%20Inderjit%20S.%20Memory%20efficient%20kernel%20approximation"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Nathan Srebro and Tommi Jaakkola. Weighted low-rank approximations. In Proceedings of the 20th International Conference on Machine Learning (ICML-03), pages 720\u2013727, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Srebro%2C%20Nathan%20Jaakkola%2C%20Tommi%20Weighted%20low-rank%20approximations%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Srebro%2C%20Nathan%20Jaakkola%2C%20Tommi%20Weighted%20low-rank%20approximations%202003"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Andros Tjandra, Sakriani Sakti, and Satoshi Nakamura. Compressing recurrent neural network with tensor train. In Neural Networks (IJCNN), 2017 International Joint Conference on, pages 4451\u20134458. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tjandra%2C%20Andros%20Sakti%2C%20Sakriani%20Nakamura%2C%20Satoshi%20Compressing%20recurrent%20neural%20network%20with%20tensor%20train%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tjandra%2C%20Andros%20Sakti%2C%20Sakriani%20Nakamura%2C%20Satoshi%20Compressing%20recurrent%20neural%20network%20with%20tensor%20train%202017"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Jiaxiang Wu, Cong Leng, Yuhang Wang, Qinghao Hu, and Jian Cheng. Quantized convolutional neural networks for mobile devices. CoRR, abs/1512.06473, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1512.06473"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Yuhui Xu, Yongzhuang Wang, Aojun Zhou, Weiyao Lin, and Hongkai Xiong. Deep neural network compression with single and multiple level quantization. CoRR, abs/1803.03289, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.03289"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Xiyu Yu, Tongliang Liu, Xinchao Wang, and Dacheng Tao. On compressing deep models by low rank and sparse decomposition. 2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pages 67\u201376, 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yu%2C%20Xiyu%20Liu%2C%20Tongliang%20Wang%2C%20Xinchao%20and%20Dacheng%20Tao.%20On%20compressing%20deep%20models%20by%20low%20rank%20and%20sparse%20decomposition%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yu%2C%20Xiyu%20Liu%2C%20Tongliang%20Wang%2C%20Xinchao%20and%20Dacheng%20Tao.%20On%20compressing%20deep%20models%20by%20low%20rank%20and%20sparse%20decomposition%202017"
+        }
+    ]
+}

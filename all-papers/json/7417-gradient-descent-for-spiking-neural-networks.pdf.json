@@ -1,0 +1,312 @@
+{
+    "filename": "7417-gradient-descent-for-spiking-neural-networks.pdf",
+    "metadata": {
+        "title": "Gradient Descent for Spiking Neural Networks",
+        "author": "Dongsung Huh, Terrence J. Sejnowski",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7417-gradient-descent-for-spiking-neural-networks.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Most large-scale network models use neurons with static nonlinearities that produce analog output, despite the fact that information processing in the brain is predominantly carried out by dynamic neurons that produce discrete pulses called spikes. Research in spike-based computation has been impeded by the lack of efficient supervised learning algorithm for spiking neural networks. Here, we present a gradient descent method for optimizing spiking network models by introducing a differentiable formulation of spiking dynamics and deriving the exact gradient calculation. For demonstration, we trained recurrent spiking networks on two dynamic tasks: one that requires optimizing fast (\u2248 millisecond) spike-based interactions for efficient encoding of information, and a delayed-memory task over extended duration (\u2248 second). The results show that the gradient descent approach indeed optimizes networks dynamics on the time scale of individual spikes as well as on behavioral time scales. In conclusion, our method yields a general purpose supervised learning algorithm for spiking neural networks, which can facilitate further investigations on spike-based computations."
+    },
+    "keywords": [
+        {
+            "term": "quadratic integrate and fire",
+            "url": "https://en.wikipedia.org/wiki/quadratic_integrate_and_fire"
+        },
+        {
+            "term": "artificial neural networks",
+            "url": "https://en.wikipedia.org/wiki/artificial_neural_networks"
+        },
+        {
+            "term": "real time",
+            "url": "https://en.wikipedia.org/wiki/real_time"
+        },
+        {
+            "term": "network model",
+            "url": "https://en.wikipedia.org/wiki/network_model"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        },
+        {
+            "term": "supervised learning",
+            "url": "https://en.wikipedia.org/wiki/supervised_learning"
+        },
+        {
+            "term": "time scale",
+            "url": "https://en.wikipedia.org/wiki/time_scale"
+        },
+        {
+            "term": "gradient descent",
+            "url": "https://en.wikipedia.org/wiki/gradient_descent"
+        },
+        {
+            "term": "learning rule",
+            "url": "https://en.wikipedia.org/wiki/learning_rule"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "The brain operates in a highly decentralized event-driven manner, processing multiple asynchronous streams of sensory-motor data in real-time",
+        "We demonstrate our method by training spiking networks on dynamic tasks that require information processing over time",
+        "We have presented a novel, differentiable formulation of spiking neural networks and derived the gradient calculation for supervised learning",
+        "Our result shows that the gradient update occurs in a sparsely compressed manner near spike times, similar to reward-modulated spike-time dependent plasticity, which depends only on a narrow 20 ms window around the postsynaptic spike",
+        "Further analysis may reveal that certain aspects of the gradient calculation can be approximated in a biologically plausible manner without significantly compromising the efficiency of optimization"
+    ],
+    "key_statements": [
+        "The brain operates in a highly decentralized event-driven manner, processing multiple asynchronous streams of sensory-motor data in real-time",
+        "We demonstrate our method by training spiking networks on dynamic tasks that require information processing over time",
+        "We have presented a novel, differentiable formulation of spiking neural networks and derived the gradient calculation for supervised learning",
+        "Our result shows that the gradient update occurs in a sparsely compressed manner near spike times, similar to reward-modulated spike-time dependent plasticity, which depends only on a narrow 20 ms window around the postsynaptic spike",
+        "Further analysis may reveal that certain aspects of the gradient calculation can be approximated in a biologically plausible manner without significantly compromising the efficiency of optimization"
+    ],
+    "summary": [
+        "The brain operates in a highly decentralized event-driven manner, processing multiple asynchronous streams of sensory-motor data in real-time.",
+        "These rate-based artificial neural networks (ANNs) are differentiated, and can be efficiently trained using gradient descent learning rules.",
+        "Learning algorithms compatible with variable spike counts have multiple shortcomings: Most gradient-based methods can only train \"visible neurons\" that directly receive desired target output patterns [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>, <a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>, <a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>, <a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>, <a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>, <a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>].",
+        "The state vector is composed of dynamic variables, such as membrane voltage and synaptic current, rather than spike-time history.",
+        "Unlike the prior literature, our work here provides not just a single learning rule for a particular model and task, but a general framework for calculating gradient for arbitrary network architecture, neuron models, and loss functions.",
+        "Most models describe the synaptic current dynamics as a linear filter process which instantly activates when the presynaptic membrane voltage v crosses a threshold: e.g., \u03c4 s = \u2212s + \u03b4(t \u2212 tk).",
+        "Eq (2) generalizes the threshold-triggered synapse model while preserving the fundamental property of spiking neurons: i.e. all supra-threshold depolarizations induce the same amount of synaptic responses regardless of the depolarization rate (Figure 1A,B).",
+        "To complete the input-output dynamics of a spiking neuron, the synaptic current dynamics must be coupled with the presynaptic neuron\u2019s internal state dynamics.",
+        "We demonstrate our method by training spiking networks on dynamic tasks that require information processing over time.",
+        "Analysis of the simulation reveals that the network operates in a tightly balanced regime: The fast recurrent synaptic input, W s(t), provides opposing current that mostly cancels the input current from the external signal, U i(t), such that the neuron generates a greatly reduced number of spike outputs (Figure 3B,C,D).",
+        "A simpler version of the task was proposed in [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>], whose solution involved first training an analog, rate-based ANN model and converting the trained ANN dynamics with a larger network of spiking neurons (\u2248 3000), using the results from predictive coding [<a class=\"ref-link\" id=\"c35\" href=\"#r35\">35</a>].",
+        "We trained a network of 80 quadratic integrate and fire (QIF) neurons2, whose dynamics is f (v, I) = (1 + cos(2\u03c0v))/\u03c4v + (1 \u2212 cos(2\u03c0v))I, 2NIF networks fail to learn the delayed-memory XOR task: the memory requirement for past input history drives the training toward strong recurrent connections and runaway excitation.",
+        "The trained network successfully solves the delayed-memory XOR task (Figure 4): The spike patterns exhibit time-varying, but sustained activities that maintain the input history, generate the correct outputs when triggered by the go-cue signal, and return to the background activity."
+    ],
+    "headline": "We present a gradient descent method for optimizing spiking network models by introducing a differentiable formulation of spiking dynamics and deriving the exact gradient calculation",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Rufin VanRullen, Rudy Guyonneau, and Simon J Thorpe. Spike times make sense. Trends in neurosciences, 28(1):1\u20134, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=VanRullen%2C%20Rufin%20Guyonneau%2C%20Rudy%20Thorpe%2C%20Simon%20J.%20Spike%20times%20make%20sense%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=VanRullen%2C%20Rufin%20Guyonneau%2C%20Rudy%20Thorpe%2C%20Simon%20J.%20Spike%20times%20make%20sense%202005"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Sander M Bohte, Joost N Kok, and Han La Poutre. Error-backpropagation in temporally encoded networks of spiking neurons. Neurocomputing, 48(1):17\u201337, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bohte%2C%20Sander%20M.%20Kok%2C%20Joost%20N.%20Poutre%2C%20Han%20La%20Error-backpropagation%20in%20temporally%20encoded%20networks%20of%20spiking%20neurons%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bohte%2C%20Sander%20M.%20Kok%2C%20Joost%20N.%20Poutre%2C%20Han%20La%20Error-backpropagation%20in%20temporally%20encoded%20networks%20of%20spiking%20neurons%202002"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Jianguo Xin and Mark J Embrechts. Supervised learning with spiking neural networks. In Neural Networks, 2001. Proceedings. IJCNN\u201901. International Joint Conference on, volume 3, pages 1772\u20131777. IEEE, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xin%2C%20Jianguo%20Embrechts%2C%20Mark%20J.%20Supervised%20learning%20with%20spiking%20neural%20networks%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xin%2C%20Jianguo%20Embrechts%2C%20Mark%20J.%20Supervised%20learning%20with%20spiking%20neural%20networks%202001"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Benjamin Schrauwen and Jan Van Campenhout. Extending spikeprop. In Neural Networks, 2004. Proceedings. 2004 IEEE International Joint Conference on, volume 1, pages 471\u2013475. IEEE, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schrauwen%2C%20Benjamin%20Campenhout%2C%20Jan%20Van%20Extending%20spikeprop%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schrauwen%2C%20Benjamin%20Campenhout%2C%20Jan%20Van%20Extending%20spikeprop%202004"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Olaf Booij and Hieu tat Nguyen. A gradient descent rule for spiking neurons emitting multiple spikes. Information Processing Letters, 95(6):552\u2013558, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20Olaf%20Booij%20and%20Hieu%20tat%20Nguyen.%20A%20gradient%20descent%20rule%20for%20spiking%20neurons%20emitting%20multiple%20spikes%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Olaf%20Booij%20and%20Hieu%20tat%20Nguyen.%20A%20gradient%20descent%20rule%20for%20spiking%20neurons%20emitting%20multiple%20spikes%202005"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Peter Tino and Ashely JS Mills. Learning beyond finite memory in recurrent networks of spiking neurons. Neural computation, 18(3):591\u2013613, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tino%2C%20Peter%20Mills%2C%20Ashely%20J.S.%20Learning%20beyond%20finite%20memory%20in%20recurrent%20networks%20of%20spiking%20neurons%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tino%2C%20Peter%20Mills%2C%20Ashely%20J.S.%20Learning%20beyond%20finite%20memory%20in%20recurrent%20networks%20of%20spiking%20neurons%202006"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Robert G\u00fctig and Haim Sompolinsky. The tempotron: a neuron that learns spike timing\u2013based decisions. Nature neuroscience, 9(3):420\u2013428, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=G%C3%BCtig%2C%20Robert%20Sompolinsky%2C%20Haim%20The%20tempotron%3A%20a%20neuron%20that%20learns%20spike%20timing%E2%80%93based%20decisions%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=G%C3%BCtig%2C%20Robert%20Sompolinsky%2C%20Haim%20The%20tempotron%3A%20a%20neuron%20that%20learns%20spike%20timing%E2%80%93based%20decisions%202006"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Robert Urbanczik and Walter Senn. A gradient learning rule for the tempotron. Neural computation, 21(2):340\u2013352, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Urbanczik%2C%20Robert%20Senn%2C%20Walter%20A%20gradient%20learning%20rule%20for%20the%20tempotron%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Urbanczik%2C%20Robert%20Senn%2C%20Walter%20A%20gradient%20learning%20rule%20for%20the%20tempotron%202009"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Raoul-Martin Memmesheimer, Ran Rubin, Bence P \u00d6lveczky, and Haim Sompolinsky. Learning precisely timed spikes. Neuron, 82(4):925\u2013938, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Memmesheimer%2C%20Raoul-Martin%20Rubin%2C%20Ran%20%C3%96lveczky%2C%20Bence%20P.%20Sompolinsky%2C%20Haim%20Learning%20precisely%20timed%20spikes%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Memmesheimer%2C%20Raoul-Martin%20Rubin%2C%20Ran%20%C3%96lveczky%2C%20Bence%20P.%20Sompolinsky%2C%20Haim%20Learning%20precisely%20timed%20spikes%202014"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Jun Haeng Lee, Tobi Delbruck, and Michael Pfeiffer. Training deep spiking neural networks using backpropagation. Frontiers in neuroscience, 10, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lee%2C%20Jun%20Haeng%20Delbruck%2C%20Tobi%20Pfeiffer%2C%20Michael%20Training%20deep%20spiking%20neural%20networks%20using%20backpropagation%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lee%2C%20Jun%20Haeng%20Delbruck%2C%20Tobi%20Pfeiffer%2C%20Michael%20Training%20deep%20spiking%20neural%20networks%20using%20backpropagation%202016"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Robert G\u00fctig. Spiking neurons can discover predictive features by aggregate-label learning. Science, 351(6277):aab4113, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=G%C3%BCtig%2C%20Robert%20Spiking%20neurons%20can%20discover%20predictive%20features%20by%20aggregate-label%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=G%C3%BCtig%2C%20Robert%20Spiking%20neurons%20can%20discover%20predictive%20features%20by%20aggregate-label%20learning%202016"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Razvan V Florian. The chronotron: a neuron that learns to fire temporally precise spike patterns. PloS one, 7(8):e40233, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Florian%2C%20Razvan%20V.%20The%20chronotron%3A%20a%20neuron%20that%20learns%20to%20fire%20temporally%20precise%20spike%20patterns%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Florian%2C%20Razvan%20V.%20The%20chronotron%3A%20a%20neuron%20that%20learns%20to%20fire%20temporally%20precise%20spike%20patterns%202012"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Jean-Pascal Pfister, Taro Toyoizumi, David Barber, and Wulfram Gerstner. Optimal spike-timing-dependent plasticity for precise action potential firing in supervised learning. Neural computation, 18(6):1318\u20131348, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pfister%2C%20Jean-Pascal%20Toyoizumi%2C%20Taro%20Barber%2C%20David%20Gerstner%2C%20Wulfram%20Optimal%20spike-timing-dependent%20plasticity%20for%20precise%20action%20potential%20firing%20in%20supervised%20learning%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pfister%2C%20Jean-Pascal%20Toyoizumi%2C%20Taro%20Barber%2C%20David%20Gerstner%2C%20Wulfram%20Optimal%20spike-timing-dependent%20plasticity%20for%20precise%20action%20potential%20firing%20in%20supervised%20learning%202006"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Danilo J Rezende, Daan Wierstra, and Wulfram Gerstner. Variational learning for recurrent spiking networks. In Advances in Neural Information Processing Systems, pages 136\u2013144, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rezende%2C%20Danilo%20J.%20Wierstra%2C%20Daan%20Gerstner%2C%20Wulfram%20Variational%20learning%20for%20recurrent%20spiking%20networks%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rezende%2C%20Danilo%20J.%20Wierstra%2C%20Daan%20Gerstner%2C%20Wulfram%20Variational%20learning%20for%20recurrent%20spiking%20networks%202011"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Johanni Brea, Walter Senn, and Jean-Pascal Pfister. Matching recall and storage in sequence learning with spiking neural networks. Journal of neuroscience, 33(23):9565\u20139575, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Brea%2C%20Johanni%20Senn%2C%20Walter%20Pfister%2C%20Jean-Pascal%20Matching%20recall%20and%20storage%20in%20sequence%20learning%20with%20spiking%20neural%20networks%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Brea%2C%20Johanni%20Senn%2C%20Walter%20Pfister%2C%20Jean-Pascal%20Matching%20recall%20and%20storage%20in%20sequence%20learning%20with%20spiking%20neural%20networks%202013"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Brian Gardner, Ioana Sporea, and Andr\u00e9 Gr\u00fcning. Learning spatiotemporally encoded pattern transformations in structured spiking neural networks. Neural computation, 27(12):2548\u20132586, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gardner%2C%20Brian%20Sporea%2C%20Ioana%20Gr%C3%BCning%2C%20Andr%C3%A9%20Learning%20spatiotemporally%20encoded%20pattern%20transformations%20in%20structured%20spiking%20neural%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gardner%2C%20Brian%20Sporea%2C%20Ioana%20Gr%C3%BCning%2C%20Andr%C3%A9%20Learning%20spatiotemporally%20encoded%20pattern%20transformations%20in%20structured%20spiking%20neural%20networks%202015"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Brian Gardner and Andr\u00e9 Gr\u00fcning. Supervised learning in spiking neural networks for precise temporal encoding. PloS one, 11(8):e0161335, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gardner%2C%20Brian%20Gr%C3%BCning%2C%20Andr%C3%A9%20Supervised%20learning%20in%20spiking%20neural%20networks%20for%20precise%20temporal%20encoding%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gardner%2C%20Brian%20Gr%C3%BCning%2C%20Andr%C3%A9%20Supervised%20learning%20in%20spiking%20neural%20networks%20for%20precise%20temporal%20encoding%202016"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Sam McKennoch, Thomas Voegtlin, and Linda Bushnell. Spike-timing error backpropagation in theta neuron networks. Neural computation, 21(1):9\u201345, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=McKennoch%2C%20Sam%20Voegtlin%2C%20Thomas%20Bushnell%2C%20Linda%20Spike-timing%20error%20backpropagation%20in%20theta%20neuron%20networks%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=McKennoch%2C%20Sam%20Voegtlin%2C%20Thomas%20Bushnell%2C%20Linda%20Spike-timing%20error%20backpropagation%20in%20theta%20neuron%20networks%202009"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Friedemann Zenke and Surya Ganguli. Superspike: Supervised learning in multi-layer spiking neural networks. arXiv preprint arXiv:1705.11146, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1705.11146"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Filip Ponulak and Andrzej Kasinski. Supervised learning in spiking neural networks with resume: sequence learning, classification, and spike shifting. Neural Computation, 22(2):467\u2013510, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ponulak%2C%20Filip%20Kasinski%2C%20Andrzej%20Supervised%20learning%20in%20spiking%20neural%20networks%20with%20resume%3A%20sequence%20learning%2C%20classification%2C%20and%20spike%20shifting%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ponulak%2C%20Filip%20Kasinski%2C%20Andrzej%20Supervised%20learning%20in%20spiking%20neural%20networks%20with%20resume%3A%20sequence%20learning%2C%20classification%2C%20and%20spike%20shifting%202010"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Ioana Sporea and Andr\u00e9 Gr\u00fcning. Supervised learning in multilayer spiking neural networks. Neural computation, 25(2):473\u2013509, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=-%20Ioana%20Sporea%20and%20Andr%C3%A9%20Gr%C3%BCning.%20Supervised%20learning%20in%20multilayer%20spiking%20neural%20networks%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=-%20Ioana%20Sporea%20and%20Andr%C3%A9%20Gr%C3%BCning.%20Supervised%20learning%20in%20multilayer%20spiking%20neural%20networks%202013"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Eugene M Izhikevich. Solving the distal reward problem through linkage of stdp and dopamine signaling. Cerebral cortex, 17(10):2443\u20132452, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Izhikevich%2C%20Eugene%20M.%20Solving%20the%20distal%20reward%20problem%20through%20linkage%20of%20stdp%20and%20dopamine%20signaling%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Izhikevich%2C%20Eugene%20M.%20Solving%20the%20distal%20reward%20problem%20through%20linkage%20of%20stdp%20and%20dopamine%20signaling%202007"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Robert Legenstein, Dejan Pecevski, and Wolfgang Maass. A learning theory for reward-modulated spike-timing-dependent plasticity with application to biofeedback. PLoS Comput Biol, 4(10):e1000180, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Legenstein%2C%20Robert%20Pecevski%2C%20Dejan%20Maass%2C%20Wolfgang%20A%20learning%20theory%20for%20reward-modulated%20spike-timing-dependent%20plasticity%20with%20application%20to%20biofeedback%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Legenstein%2C%20Robert%20Pecevski%2C%20Dejan%20Maass%2C%20Wolfgang%20A%20learning%20theory%20for%20reward-modulated%20spike-timing-dependent%20plasticity%20with%20application%20to%20biofeedback%202008"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Nicolas Fr\u00e9maux and Wulfram Gerstner. Neuromodulated spike-timing-dependent plasticity, and theory of three-factor learning rules. Frontiers in neural circuits, 9, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fr%C3%A9maux%2C%20Nicolas%20Gerstner%2C%20Wulfram%20Neuromodulated%20spike-timing-dependent%20plasticity%2C%20and%20theory%20of%20three-factor%20learning%20rules%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fr%C3%A9maux%2C%20Nicolas%20Gerstner%2C%20Wulfram%20Neuromodulated%20spike-timing-dependent%20plasticity%2C%20and%20theory%20of%20three-factor%20learning%20rules%202015"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Eric Hunsberger and Chris Eliasmith. Spiking deep networks with lif neurons. arXiv preprint arXiv:1510.08829, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1510.08829"
+        },
+        {
+            "id": "26",
+            "entry": "[26] LF Abbott, Brian DePasquale, and Raoul-Martin Memmesheimer. Building functional networks of spiking model neurons. Nature neuroscience, 19(3):350\u2013355, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abbott%2C%20L.F.%20DePasquale%2C%20Brian%20and%20Raoul-Martin%20Memmesheimer.%20Building%20functional%20networks%20of%20spiking%20model%20neurons%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abbott%2C%20L.F.%20DePasquale%2C%20Brian%20and%20Raoul-Martin%20Memmesheimer.%20Building%20functional%20networks%20of%20spiking%20model%20neurons%202016"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Peter O\u2019Connor, Daniel Neil, Shih-Chii Liu, Tobi Delbruck, and Michael Pfeiffer. Real-time classification and sensor fusion with a spiking deep belief network. Frontiers in neuroscience, 7:178, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=O%E2%80%99Connor%2C%20Peter%20Neil%2C%20Daniel%20Liu%2C%20Shih-Chii%20Delbruck%2C%20Tobi%20Real-time%20classification%20and%20sensor%20fusion%20with%20a%20spiking%20deep%20belief%20network%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=O%E2%80%99Connor%2C%20Peter%20Neil%2C%20Daniel%20Liu%2C%20Shih-Chii%20Delbruck%2C%20Tobi%20Real-time%20classification%20and%20sensor%20fusion%20with%20a%20spiking%20deep%20belief%20network%202013"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Peter U Diehl, Daniel Neil, Jonathan Binas, Matthew Cook, Shih-Chii Liu, and Michael Pfeiffer. Fastclassifying, high-accuracy spiking deep networks through weight and threshold balancing. In Neural Networks (IJCNN), 2015 International Joint Conference on, pages 1\u20138. IEEE, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Diehl%2C%20Peter%20U.%20Neil%2C%20Daniel%20Binas%2C%20Jonathan%20Cook%2C%20Matthew%20Fastclassifying%2C%20high-accuracy%20spiking%20deep%20networks%20through%20weight%20and%20threshold%20balancing%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Diehl%2C%20Peter%20U.%20Neil%2C%20Daniel%20Binas%2C%20Jonathan%20Cook%2C%20Matthew%20Fastclassifying%2C%20high-accuracy%20spiking%20deep%20networks%20through%20weight%20and%20threshold%20balancing%202015"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Bodo Rueckauer, Iulia-Alexandra Lungu, Yuhuang Hu, and Michael Pfeiffer. Theory and tools for the conversion of analog to spiking convolutional neural networks. arXiv preprint arXiv:1612.04052, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1612.04052"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Abhronil Sengupta, Yuting Ye, Robert Wang, Chiao Liu, and Kaushik Roy. Going deeper in spiking neural networks: Vgg and residual architectures. arXiv preprint arXiv:1802.02627, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.02627"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Peter O\u2019Connor and Max Welling. Deep spiking networks. arXiv preprint arXiv:1602.08323, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1602.08323"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Guillaume Lajoie, Kevin K Lin, and Eric Shea-Brown. Chaos and reliability in balanced spiking networks with temporal drive. Physical Review E, 87(5):052901, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lajoie%2C%20Guillaume%20Lin%2C%20Kevin%20K.%20Shea-Brown%2C%20Eric%20Chaos%20and%20reliability%20in%20balanced%20spiking%20networks%20with%20temporal%20drive%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lajoie%2C%20Guillaume%20Lin%2C%20Kevin%20K.%20Shea-Brown%2C%20Eric%20Chaos%20and%20reliability%20in%20balanced%20spiking%20networks%20with%20temporal%20drive%202013"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Lev Semenovich Pontryagin, EF Mishchenko, VG Boltyanskii, and RV Gamkrelidze. The mathematical theory of optimal processes. 1962.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lev%20Semenovich%20Pontryagin%2C%20E.F.Mishchenko%20Boltyanskii%2C%20V.G.%20Gamkrelidze%2C%20R.V.%20The%20mathematical%20theory%20of%20optimal%20processes%201962"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Diederik Kingma and Jimmy Ba. Adam: A method for stochastic optimization. arXiv preprint arXiv:1412.6980, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6980"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Sophie Den\u00e8ve and Christian K Machens. Efficient codes and balanced networks. Nature neuroscience, 19(3):375\u2013382, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Den%C3%A8ve%2C%20Sophie%20Machens%2C%20Christian%20K.%20Efficient%20codes%20and%20balanced%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Den%C3%A8ve%2C%20Sophie%20Machens%2C%20Christian%20K.%20Efficient%20codes%20and%20balanced%20networks%202016"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Martin Boerlin, Christian K Machens, and Sophie Den\u00e8ve. Predictive coding of dynamical variables in balanced spiking networks. PLoS Comput Biol, 9(11):e1003258, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Boerlin%2C%20Martin%20Machens%2C%20Christian%20K.%20Den%C3%A8ve%2C%20Sophie%20Predictive%20coding%20of%20dynamical%20variables%20in%20balanced%20spiking%20networks%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Boerlin%2C%20Martin%20Machens%2C%20Christian%20K.%20Den%C3%A8ve%2C%20Sophie%20Predictive%20coding%20of%20dynamical%20variables%20in%20balanced%20spiking%20networks%202013"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Wieland Brendel, Ralph Bourdoukan, Pietro Vertechi, Christian K Machens, and Sophie Den\u00e9ve. Learning to represent signals spike by spike. arXiv preprint arXiv:1703.03777, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.03777"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Bard Ermentrout. Ermentrout-kopell canonical model. Scholarpedia, 3(3):1398, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ermentrout%2C%20Bard%20Ermentrout-kopell%20canonical%20model%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ermentrout%2C%20Bard%20Ermentrout-kopell%20canonical%20model%202008"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Timothy P Lillicrap, Daniel Cownden, Douglas B Tweed, and Colin J Akerman. Random synaptic feedback weights support error backpropagation for deep learning. Nature Communications, 7, 2016. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lillicrap%2C%20Timothy%20P.%20Cownden%2C%20Daniel%20Tweed%2C%20Douglas%20B.%20Akerman%2C%20Colin%20J.%20Random%20synaptic%20feedback%20weights%20support%20error%20backpropagation%20for%20deep%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lillicrap%2C%20Timothy%20P.%20Cownden%2C%20Daniel%20Tweed%2C%20Douglas%20B.%20Akerman%2C%20Colin%20J.%20Random%20synaptic%20feedback%20weights%20support%20error%20backpropagation%20for%20deep%20learning%202016"
+        }
+    ]
+}

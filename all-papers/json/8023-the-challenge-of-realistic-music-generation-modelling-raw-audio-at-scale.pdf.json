@@ -1,0 +1,348 @@
+{
+    "filename": "8023-the-challenge-of-realistic-music-generation-modelling-raw-audio-at-scale.pdf",
+    "metadata": {
+        "title": "The challenge of realistic music generation: modelling raw audio at scale",
+        "author": "Sander Dieleman, Aaron van den Oord, Karen Simonyan",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8023-the-challenge-of-realistic-music-generation-modelling-raw-audio-at-scale.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Realistic music generation is a challenging task. When building generative models of music that are learnt from data, typically high-level representations such as scores or MIDI are used that abstract away the idiosyncrasies of a particular performance. But these nuances are very important for our perception of musicality and realism, so in this work we embark on modelling music in the raw audio domain. It has been shown that autoregressive models excel at generating raw audio waveforms of speech, but when applied to music, we find them biased towards capturing local signal structure at the expense of modelling long-range correlations. This is problematic because music exhibits structure at many different timescales. In this work, we explore autoregressive discrete autoencoders (ADAs) as a means to enable autoregressive models to capture long-range correlations in waveforms. We find that they allow us to unconditionally generate piano music directly in the raw audio domain, which shows stylistic consistency across tens of seconds."
+    },
+    "keywords": [
+        {
+            "term": "Generative Adversarial Networks",
+            "url": "https://en.wikipedia.org/wiki/Generative_Adversarial_Networks"
+        },
+        {
+            "term": "generative model",
+            "url": "https://en.wikipedia.org/wiki/generative_model"
+        },
+        {
+            "term": "latent variable model",
+            "url": "https://en.wikipedia.org/wiki/latent_variable_model"
+        },
+        {
+            "term": "convolutional neural network",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_network"
+        },
+        {
+            "term": "recurrent neural networks",
+            "url": "https://en.wikipedia.org/wiki/recurrent_neural_networks"
+        },
+        {
+            "term": "symbolic representation",
+            "url": "https://en.wikipedia.org/wiki/symbolic_representation"
+        },
+        {
+            "term": "vector quantisation",
+            "url": "https://en.wikipedia.org/wiki/vector_quantisation"
+        },
+        {
+            "term": "autoregressive model",
+            "url": "https://en.wikipedia.org/wiki/autoregressive_model"
+        },
+        {
+            "term": "receptive fields",
+            "url": "https://en.wikipedia.org/wiki/receptive_fields"
+        }
+    ],
+    "highlights": [
+        "We address music generation in the raw audio domain, a task which has received little attention in literature so far, and establish it as a useful benchmark to determine the ability of a model to capture long-range structure in data",
+        "We investigate the capabilities of autoregressive models for this task, and demonstrate a computationally efficient method to enlarge their receptive fields using autoregressive discrete autoencoders (ADAs)",
+        "We introduce the argmax autoencoder (AMAE) as an alternative to vector quantisation variational autoencoders (VQ-variational autoencoder) [<a class=\"ref-link\" id=\"c46\" href=\"#r46\">46</a>] that converges more reliably when trained on a challenging dataset, and compare both models in this context.\n2 Scaling up autoregressive models for music",
+        "Three-level models As an alternative to a single vector quantisation variational autoencoders with a large hop size, we investigate stacking two hop-size-8 autoregressive discrete autoencoders and a large WaveNet (#3.6 and #3.7)",
+        "We have addressed the challenge of music generation in the raw audio domain, by using autoregressive models and extending their receptive fields in a computationally efficient manner",
+        "We have introduced the argmax autoencoder (AMAE), an alternative to vector quantisation variational autoencoders which shows improved stability on our challenging task"
+    ],
+    "key_statements": [
+        "We address music generation in the raw audio domain, a task which has received little attention in literature so far, and establish it as a useful benchmark to determine the ability of a model to capture long-range structure in data",
+        "Music can be represented as a waveform, we can represent it more concisely by abstracting away the idiosyncrasies of a particular performance",
+        "Almost all of the work in music generation so far has focused on such symbolic representations: scores, MIDI1 sequences and other representations that remove certain aspects of music to varying degrees",
+        "Symbolic representations are often tailored to particular instruments, which reduces their generality and implies that a lot of work is required to apply existing modelling techniques to new instruments.\n1Musical Instrument Digital Interface\n32nd Conference on Neural Information Processing Systems (NIPS 2018), Montr\u00e9al, Canada.\n1.1",
+        "We address music generation in the raw audio domain, a task which has received little attention in literature so far, and establish it as a useful benchmark to determine the ability of a model to capture long-range structure in data",
+        "We investigate the capabilities of autoregressive models for this task, and demonstrate a computationally efficient method to enlarge their receptive fields using autoregressive discrete autoencoders (ADAs)",
+        "We introduce the argmax autoencoder (AMAE) as an alternative to vector quantisation variational autoencoders (VQ-variational autoencoder) [<a class=\"ref-link\" id=\"c46\" href=\"#r46\">46</a>] that converges more reliably when trained on a challenging dataset, and compare both models in this context.\n2 Scaling up autoregressive models for music",
+        "We found it helpful to perform mean pooling at the output side instead, to encourage the encoder to learn internal representations that are more invariant to time shifts",
+        "We report negative log likelihood on training and held-out data to show that the models do not overfit",
+        "We find that models with better negative log likelihood do not necessarily perform better in terms of perceptual reconstruction quality",
+        "We can train unconditional WaveNets on the code sequences produced by autoregressive discrete autoencoders, and stack them together to create hierarchical unconditional models of waveforms",
+        "Three-level models As an alternative to a single vector quantisation variational autoencoders with a large hop size, we investigate stacking two hop-size-8 autoregressive discrete autoencoders and a large WaveNet (#3.6 and #3.7)",
+        "We have addressed the challenge of music generation in the raw audio domain, by using autoregressive models and extending their receptive fields in a computationally efficient manner",
+        "We have introduced the argmax autoencoder (AMAE), an alternative to vector quantisation variational autoencoders which shows improved stability on our challenging task"
+    ],
+    "summary": [
+        "We address music generation in the raw audio domain, a task which has received little attention in literature so far, and establish it as a useful benchmark to determine the ability of a model to capture long-range structure in data.",
+        "The resulting autoencoder uses its AR decoder to model any local structure that this compressed signal cannot capture.",
+        "Its sample rate is h times lower, so training a model with an RF of r timesteps on this representation results in a corresponding RF of h \u00b7 r in the audio domain.",
+        "To represent the audio waveforms as discrete sequences, we adopt the setup of the original WaveNet paper [<a class=\"ref-link\" id=\"c43\" href=\"#r43\">43</a>]: they are sampled at 16 kHz and quantised to 8 bits (256 levels) using a logarithmic (\u03bc-law) transformation.",
+        "This is no coincidence: within the encoder RF, the ADA will try to represent and compress signal information as efficiently as possible, which makes the code sequence more unpredictable locally.",
+        "For AMAE models, PBT turns out to be unnecessary, which makes them more suitable for training second-level ADAs, despite performing slightly worse.",
+        "We can train unconditional WaveNets on the code sequences produced by ADAs, and stack them together to create hierarchical unconditional models of waveforms.",
+        "We can sample code sequences unconditionally, and render them to audio by passing them through the decoders of one or more ADAs. we qualitatively compare the resulting samples in terms of signal fidelity and musicality.",
+        "Two-level models The combination of a hop-size-8 VQ-VAE with a large WaveNet trained on its code sequences (#3.4) yields a remarkable improvement in musicality, with almost no loss in fidelity.",
+        "We have addressed the challenge of music generation in the raw audio domain, by using autoregressive models and extending their receptive fields in a computationally efficient manner.",
+        "Using up to three separately trained autoregressive models at different levels of abstraction allows us to capture long-range correlations in audio signals across tens of seconds, corresponding to 100,000s of timesteps, at the cost of some signal fidelity.",
+        "While improving the fidelity of the generated samples should be relatively straightforward, scaling up the receptive field further will pose some challenges: learning musical structure at the scale of minutes will not just require additional model capacity, but a lot more training data."
+    ],
+    "headline": "It has been shown that autoregressive models excel at generating raw audio waveforms of speech, but when applied to music, we find them biased towards capturing local signal structure at the expense of modelling long-range correlations",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Martin Arjovsky, Amar Shah, and Yoshua Bengio. Unitary evolution recurrent neural networks. In ICML, pages 1120\u20131128, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Arjovsky%2C%20Martin%20Shah%2C%20Amar%20Bengio%2C%20Yoshua%20Unitary%20evolution%20recurrent%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Arjovsky%2C%20Martin%20Shah%2C%20Amar%20Bengio%2C%20Yoshua%20Unitary%20evolution%20recurrent%20neural%20networks%202016"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Philip Bachman. An architecture for deep, hierarchical generative models. In NIPS, pages 4826\u20134834, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bachman%2C%20Philip%20An%20architecture%20for%20deep%2C%20hierarchical%20generative%20models%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bachman%2C%20Philip%20An%20architecture%20for%20deep%2C%20hierarchical%20generative%20models%202016"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Mohamed Ishmael Belghazi, Sai Rajeswar, Olivier Mastropietro, Negar Rostamzadeh, Jovana Mitrovic, and Aaron Courville. Hierarchical adversarially learned inference. arXiv preprint arXiv:1802.01071, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.01071"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Yoshua Bengio, Nicholas L\u00e9onard, and Aaron Courville. Estimating or propagating gradients through stochastic neurons for conditional computation. arXiv preprint arXiv:1308.3432, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1308.3432"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Nicolas Boulanger-Lewandowski, Yoshua Bengio, and Pascal Vincent. Modeling temporal dependencies in high-dimensional sequences: Application to polyphonic music generation and transcription. In ICML, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Boulanger-Lewandowski%2C%20Nicolas%20Bengio%2C%20Yoshua%20Vincent%2C%20Pascal%20Modeling%20temporal%20dependencies%20in%20high-dimensional%20sequences%3A%20Application%20to%20polyphonic%20music%20generation%20and%20transcription%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Boulanger-Lewandowski%2C%20Nicolas%20Bengio%2C%20Yoshua%20Vincent%2C%20Pascal%20Modeling%20temporal%20dependencies%20in%20high-dimensional%20sequences%3A%20Application%20to%20polyphonic%20music%20generation%20and%20transcription%202012"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Samuel R Bowman, Luke Vilnis, Oriol Vinyals, Andrew M Dai, Rafal Jozefowicz, and Samy Bengio. Generating sentences from a continuous space. arXiv preprint arXiv:1511.06349, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.06349"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Jean-Pierre Briot, Ga\u00ebtan Hadjeres, and Fran\u00e7ois Pachet. Deep learning techniques for music generation-a survey. arXiv preprint arXiv:1709.01620, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1709.01620"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Shiyu Chang, Yang Zhang, Wei Han, Mo Yu, Xiaoxiao Guo, Wei Tan, Xiaodong Cui, Michael Witbrock, Mark A Hasegawa-Johnson, and Thomas S Huang. Dilated recurrent neural networks. In NIPS, pages 76\u201386, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shiyu%20Chang%20Yang%20Zhang%20Wei%20Han%20Mo%20Yu%20Xiaoxiao%20Guo%20Wei%20Tan%20Xiaodong%20Cui%20Michael%20Witbrock%20Mark%20A%20HasegawaJohnson%20and%20Thomas%20S%20Huang%20Dilated%20recurrent%20neural%20networks%20In%20NIPS%20pages%207686%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shiyu%20Chang%20Yang%20Zhang%20Wei%20Han%20Mo%20Yu%20Xiaoxiao%20Guo%20Wei%20Tan%20Xiaodong%20Cui%20Michael%20Witbrock%20Mark%20A%20HasegawaJohnson%20and%20Thomas%20S%20Huang%20Dilated%20recurrent%20neural%20networks%20In%20NIPS%20pages%207686%202017"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Xi Chen, Diederik P Kingma, Tim Salimans, Yan Duan, Prafulla Dhariwal, John Schulman, Ilya Sutskever, and Pieter Abbeel. Variational lossy autoencoder. arXiv preprint arXiv:1611.02731, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.02731"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Junyoung Chung, Kyle Kastner, Laurent Dinh, Kratarth Goel, Aaron C Courville, and Yoshua Bengio. A recurrent latent variable model for sequential data. In C. Cortes, N. D. Lawrence, D. D. Lee, M. Sugiyama, and R. Garnett, editors, NIPS, pages 2980\u20132988. 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chung%2C%20Junyoung%20Kastner%2C%20Kyle%20Dinh%2C%20Laurent%20Goel%2C%20Kratarth%20A%20recurrent%20latent%20variable%20model%20for%20sequential%20data%202015"
+        },
+        {
+            "id": "11",
+            "entry": "[11] David Cope and Melanie J Mayer. Experiments in musical intelligence, volume 12. AR editions Madison, WI, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cope%2C%20David%20Mayer%2C%20Melanie%20J.%20Experiments%20in%20musical%20intelligence%2C%20volume%2012%201996"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Emily L Denton, Soumith Chintala, Arthur Szlam, and Rob Fergus. Deep generative image models using a laplacian pyramid of adversarial networks. In NIPS, pages 1486\u20131494, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Denton%2C%20Emily%20L.%20Chintala%2C%20Soumith%20Szlam%2C%20Arthur%20Fergus%2C%20Rob%20Deep%20generative%20image%20models%20using%20a%20laplacian%20pyramid%20of%20adversarial%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Denton%2C%20Emily%20L.%20Chintala%2C%20Soumith%20Szlam%2C%20Arthur%20Fergus%2C%20Rob%20Deep%20generative%20image%20models%20using%20a%20laplacian%20pyramid%20of%20adversarial%20networks%202015"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Chris Donahue, Julian McAuley, and Miller Puckette. Synthesizing audio with generative adversarial networks. arXiv preprint arXiv:1802.04208, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.04208"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Salah El Hihi and Yoshua Bengio. Hierarchical recurrent neural networks for long-term dependencies. In NIPS, pages 493\u2013499, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hihi%2C%20Salah%20El%20Bengio%2C%20Yoshua%20Hierarchical%20recurrent%20neural%20networks%20for%20long-term%20dependencies%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hihi%2C%20Salah%20El%20Bengio%2C%20Yoshua%20Hierarchical%20recurrent%20neural%20networks%20for%20long-term%20dependencies%201996"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Jesse Engel, Cinjon Resnick, Adam Roberts, Sander Dieleman, Douglas Eck, Karen Simonyan, and Mohammad Norouzi. Neural audio synthesis of musical notes with wavenet autoencoders. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Engel%2C%20Jesse%20Resnick%2C%20Cinjon%20Roberts%2C%20Adam%20Dieleman%2C%20Sander%20Neural%20audio%20synthesis%20of%20musical%20notes%20with%20wavenet%20autoencoders%202017"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Ian Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, and Yoshua Bengio. Generative adversarial nets. In NIPS, pages 2672\u20132680. 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goodfellow%2C%20Ian%20Pouget-Abadie%2C%20Jean%20Mirza%2C%20Mehdi%20Xu%2C%20Bing%20Generative%20adversarial%20nets%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goodfellow%2C%20Ian%20Pouget-Abadie%2C%20Jean%20Mirza%2C%20Mehdi%20Xu%2C%20Bing%20Generative%20adversarial%20nets%202014"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Alex Graves, Jacob Menick, and Aaron van den Oord. Associative compression networks. arXiv preprint arXiv:1804.02476, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1804.02476"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Ishaan Gulrajani, Kundan Kumar, Faruk Ahmed, Adrien Ali Taiga, Francesco Visin, David Vazquez, and Aaron Courville. PixelVAE: A latent variable model for natural images. arXiv e-prints, abs/1611.05013, November 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.05013"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Mikael Henaff, Arthur Szlam, and Yann LeCun. Recurrent orthogonal networks and long-memory tasks. arXiv preprint arXiv:1602.06662, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1602.06662"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Dorien Herremans, Ching-Hua Chuan, and Elaine Chew. A functional taxonomy of music generation systems. ACM Computing Surveys (CSUR), 50(5):69, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Herremans%2C%20Dorien%20Chuan%2C%20Ching-Hua%20Chew%2C%20Elaine%20A%20functional%20taxonomy%20of%20music%20generation%20systems%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Herremans%2C%20Dorien%20Chuan%2C%20Ching-Hua%20Chew%2C%20Elaine%20A%20functional%20taxonomy%20of%20music%20generation%20systems%202017"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Martin Heusel, Hubert Ramsauer, Thomas Unterthiner, Bernhard Nessler, and Sepp Hochreiter. Gans trained by a two time-scale update rule converge to a local nash equilibrium. In NIPS, pages 6629\u20136640, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Heusel%2C%20Martin%20Ramsauer%2C%20Hubert%20Unterthiner%2C%20Thomas%20Nessler%2C%20Bernhard%20Gans%20trained%20by%20a%20two%20time-scale%20update%20rule%20converge%20to%20a%20local%20nash%20equilibrium%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Heusel%2C%20Martin%20Ramsauer%2C%20Hubert%20Unterthiner%2C%20Thomas%20Nessler%2C%20Bernhard%20Gans%20trained%20by%20a%20two%20time-scale%20update%20rule%20converge%20to%20a%20local%20nash%20equilibrium%202017"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Max Jaderberg, Valentin Dalibard, Simon Osindero, Wojciech M Czarnecki, Jeff Donahue, Ali Razavi, Oriol Vinyals, Tim Green, Iain Dunning, Karen Simonyan, Chrisantha Fernando, and Koray Kavukcuoglu. Population based training of neural networks. arXiv preprint arXiv:1711.09846, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.09846"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Nal Kalchbrenner, Erich Elsen, Karen Simonyan, Seb Noury, Norman Casagrande, Edward Lockhart, Florian Stimberg, A\u00e4ron van den Oord, Sander Dieleman, and Koray Kavukcuoglu. Efficient neural audio synthesis. CoRR, abs/1802.08435, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.08435"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Diederik P. Kingma and Jimmy Ba. Adam: A method for stochastic optimization. CoRR, abs/1412.6980, 2014. URL http://arxiv.org/abs/1412.6980.",
+            "url": "http://arxiv.org/abs/1412.6980",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6980"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Diederik P Kingma and Max Welling. Auto-encoding variational bayes. arXiv preprint arXiv:1312.6114, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.6114"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Diederik P Kingma, Tim Salimans, Rafal Jozefowicz, Xi Chen, Ilya Sutskever, and Max Welling. Improved variational inference with inverse autoregressive flow. In NIPS, pages 4743\u20134751, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Salimans%2C%20Tim%20Jozefowicz%2C%20Rafal%20Chen%2C%20Xi%20Improved%20variational%20inference%20with%20inverse%20autoregressive%20flow%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Salimans%2C%20Tim%20Jozefowicz%2C%20Rafal%20Chen%2C%20Xi%20Improved%20variational%20inference%20with%20inverse%20autoregressive%20flow%202016"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Alexander Kolesnikov and Christoph H Lampert. Pixelcnn models with auxiliary variables for natural image modeling. In ICML, pages 1905\u20131914, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kolesnikov%2C%20Alexander%20Lampert%2C%20Christoph%20H.%20Pixelcnn%20models%20with%20auxiliary%20variables%20for%20natural%20image%20modeling%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kolesnikov%2C%20Alexander%20Lampert%2C%20Christoph%20H.%20Pixelcnn%20models%20with%20auxiliary%20variables%20for%20natural%20image%20modeling%202017"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Jan Koutnik, Klaus Greff, Faustino Gomez, and Juergen Schmidhuber. A clockwork rnn. arXiv preprint arXiv:1402.3511, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1402.3511"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Peter J Liu, Mohammad Saleh, Etienne Pot, Ben Goodrich, Ryan Sepassi, Lukasz Kaiser, and Noam Shazeer. Generating wikipedia by summarizing long sequences. arXiv preprint arXiv:1801.10198, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1801.10198"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Shikun Liu, C Lee Giles, II Ororbia, and G Alexander. Learning a hierarchical latent-variable model of 3d shapes. arXiv preprint arXiv:1705.05994, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1705.05994"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Soroush Mehri, Kundan Kumar, Ishaan Gulrajani, Rithesh Kumar, Shubham Jain, Jose Sotelo, Aaron Courville, and Yoshua Bengio. Samplernn: An unconditional end-to-end neural audio generation model. In ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mehri%2C%20Soroush%20Kumar%2C%20Kundan%20Gulrajani%2C%20Ishaan%20Kumar%2C%20Rithesh%20Samplernn%3A%20An%20unconditional%20end-to-end%20neural%20audio%20generation%20model%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mehri%2C%20Soroush%20Kumar%2C%20Kundan%20Gulrajani%2C%20Ishaan%20Kumar%2C%20Rithesh%20Samplernn%3A%20An%20unconditional%20end-to-end%20neural%20audio%20generation%20model%202017"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Tomas Mikolov, Armand Joulin, Sumit Chopra, Michael Mathieu, and Marc\u2019Aurelio Ranzato. Learning longer memory in recurrent neural networks. arXiv preprint arXiv:1412.7753, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.7753"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Vinod Nair and Geoffrey E Hinton. Rectified linear units improve restricted boltzmann machines. In ICML, pages 807\u2013814, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nair%2C%20Vinod%20Hinton%2C%20Geoffrey%20E.%20Rectified%20linear%20units%20improve%20restricted%20boltzmann%20machines%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nair%2C%20Vinod%20Hinton%2C%20Geoffrey%20E.%20Rectified%20linear%20units%20improve%20restricted%20boltzmann%20machines%202010"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Kishore Papineni, Salim Roukos, Todd Ward, and Wei-Jing Zhu. Acl. In Proceedings of the 40th annual meeting on association for computational linguistics, pages 311\u2013318. Association for Computational Linguistics, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kishore%20Papineni%20Salim%20Roukos%20Todd%20Ward%20and%20WeiJing%20Zhu%20Acl%20In%20Proceedings%20of%20the%2040th%20annual%20meeting%20on%20association%20for%20computational%20linguistics%20pages%20311318%20Association%20for%20Computational%20Linguistics%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kishore%20Papineni%20Salim%20Roukos%20Todd%20Ward%20and%20WeiJing%20Zhu%20Acl%20In%20Proceedings%20of%20the%2040th%20annual%20meeting%20on%20association%20for%20computational%20linguistics%20pages%20311318%20Association%20for%20Computational%20Linguistics%202002"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Boris T Polyak and Anatoli B Juditsky. Acceleration of stochastic approximation by averaging. SIAM Journal on Control and Optimization, 30(4):838\u2013855, 1992.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Polyak%2C%20Boris%20T.%20Juditsky%2C%20Anatoli%20B.%20Acceleration%20of%20stochastic%20approximation%20by%20averaging%201992",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Polyak%2C%20Boris%20T.%20Juditsky%2C%20Anatoli%20B.%20Acceleration%20of%20stochastic%20approximation%20by%20averaging%201992"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Danilo Jimenez Rezende, Shakir Mohamed, and Daan Wierstra. Stochastic backpropagation and approximate inference in deep generative models. arXiv preprint arXiv:1401.4082, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1401.4082"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Adam Roberts, Jesse Engel, Colin Raffel, Curtis Hawthorne, and Douglas Eck. A hierarchical latent vector model for learning long-term structure in music. arXiv preprint arXiv:1803.05428, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.05428"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Tim Salimans, Ian Goodfellow, Wojciech Zaremba, Vicki Cheung, Alec Radford, and Xi Chen. Improved techniques for training gans. In NIPS, pages 2234\u20132242, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Salimans%2C%20Tim%20Goodfellow%2C%20Ian%20Zaremba%2C%20Wojciech%20Cheung%2C%20Vicki%20Improved%20techniques%20for%20training%20gans%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Salimans%2C%20Tim%20Goodfellow%2C%20Ian%20Zaremba%2C%20Wojciech%20Cheung%2C%20Vicki%20Improved%20techniques%20for%20training%20gans%202016"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Tim Salimans, Andrej Karpathy, Xi Chen, and Diederik P Kingma. Pixelcnn++: Improving the pixelcnn with discretized logistic mixture likelihood and other modifications. arXiv preprint arXiv:1701.05517, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1701.05517"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Iulian Vlad Serban, Alessandro Sordoni, Ryan Lowe, Laurent Charlin, Joelle Pineau, Aaron C Courville, and Yoshua Bengio. A hierarchical latent variable encoder-decoder model for generating dialogues. In AAAI, pages 3295\u20133301, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Serban%2C%20Iulian%20Vlad%20Sordoni%2C%20Alessandro%20Lowe%2C%20Ryan%20Charlin%2C%20Laurent%20and%20Yoshua%20Bengio.%20A%20hierarchical%20latent%20variable%20encoder-decoder%20model%20for%20generating%20dialogues%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Serban%2C%20Iulian%20Vlad%20Sordoni%2C%20Alessandro%20Lowe%2C%20Ryan%20Charlin%2C%20Laurent%20and%20Yoshua%20Bengio.%20A%20hierarchical%20latent%20variable%20encoder-decoder%20model%20for%20generating%20dialogues%202017"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Ian Simon and Sageev Oore. Performance rnn: Generating music with expressive timing and dynamics. https://magenta.tensorflow.org/performance-rnn, 2017.",
+            "url": "https://magenta.tensorflow.org/performance-rnn"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Trieu H Trinh, Andrew M Dai, Thang Luong, and Quoc V Le. Learning longer-term dependencies in rnns with auxiliary losses. arXiv preprint arXiv:1803.00144, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.00144"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Aaron van den Oord, Sander Dieleman, Heiga Zen, Karen Simonyan, Oriol Vinyals, Alex Graves, Nal Kalchbrenner, Andrew Senior, and Koray Kavukcuoglu. Wavenet: A generative model for raw audio. arXiv preprint arXiv:1609.03499, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.03499"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Aaron van den Oord, Nal Kalchbrenner, and Koray Kavukcuoglu. Pixel recurrent neural networks. In ICML, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=van%20den%20Oord%2C%20Aaron%20Kalchbrenner%2C%20Nal%20Kavukcuoglu%2C%20Koray%20Pixel%20recurrent%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=van%20den%20Oord%2C%20Aaron%20Kalchbrenner%2C%20Nal%20Kavukcuoglu%2C%20Koray%20Pixel%20recurrent%20neural%20networks%202016"
+        },
+        {
+            "id": "45",
+            "entry": "[45] A\u00e4ron van den Oord, Yazhe Li, Igor Babuschkin, Karen Simonyan, Oriol Vinyals, Koray Kavukcuoglu, George van den Driessche, Edward Lockhart, Luis C. Cobo, Florian Stimberg, Norman Casagrande, Dominik Grewe, Seb Noury, Sander Dieleman, Erich Elsen, Nal Kalchbrenner, Heiga Zen, Alex Graves, Helen King, Tom Walters, Dan Belov, and Demis Hassabis. Parallel wavenet: Fast high-fidelity speech synthesis. CoRR, abs/1711.10433, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.10433"
+        },
+        {
+            "id": "46",
+            "entry": "[46] Aaron van den Oord, Oriol Vinyals, and Koray Kavukcuoglu. Neural discrete representation learning. In NIPS, pages 6309\u20136318, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Aaron%20van%20den%20Oord%20Oriol%20Vinyals%20and%20Koray%20Kavukcuoglu%20Neural%20discrete%20representation%20learning%20In%20NIPS%20pages%2063096318%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Aaron%20van%20den%20Oord%20Oriol%20Vinyals%20and%20Koray%20Kavukcuoglu%20Neural%20discrete%20representation%20learning%20In%20NIPS%20pages%2063096318%202017"
+        },
+        {
+            "id": "47",
+            "entry": "[47] Fisher Yu and Vladlen Koltun. Multi-scale context aggregation by dilated convolutions. In ICLR, 2016. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yu%2C%20Fisher%20Koltun%2C%20Vladlen%20Multi-scale%20context%20aggregation%20by%20dilated%20convolutions%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yu%2C%20Fisher%20Koltun%2C%20Vladlen%20Multi-scale%20context%20aggregation%20by%20dilated%20convolutions%202016"
+        }
+    ]
+}

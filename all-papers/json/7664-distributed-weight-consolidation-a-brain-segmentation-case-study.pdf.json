@@ -1,0 +1,270 @@
+{
+    "filename": "7664-distributed-weight-consolidation-a-brain-segmentation-case-study.pdf",
+    "metadata": {
+        "title": "Distributed Weight Consolidation: A Brain Segmentation Case Study",
+        "author": "Patrick McClure, Charles Y. Zheng, Jakub Kaczmarzyk, John Rogers-Lee, Satra Ghosh, Dylan Nielson, Peter A. Bandettini, Francisco Pereira",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7664-distributed-weight-consolidation-a-brain-segmentation-case-study.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Collecting the large datasets needed to train deep neural networks can be very difficult, particularly for the many applications for which sharing and pooling data is complicated by practical, ethical, or legal concerns. However, it may be the case that derivative datasets or predictive models developed within individual sites can be shared and combined with fewer restrictions. Training on distributed data and combining the resulting networks is often viewed as continual learning, but these methods require networks to be trained sequentially. In this paper, we introduce distributed weight consolidation (DWC), a continual learning method to consolidate the weights of separate neural networks, each trained on an independent dataset. We evaluated DWC with a brain segmentation case study, where we consolidated dilated convolutional neural networks trained on independent structural magnetic resonance imaging (sMRI) datasets from different sites. We found that DWC led to increased performance on test sets from the different sites, while maintaining generalization performance for a very large and completely independent multi-site dataset, compared to an ensemble baseline."
+    },
+    "keywords": [
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "test set",
+            "url": "https://en.wikipedia.org/wiki/test_set"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        },
+        {
+            "term": "maximum likelihood estimation",
+            "url": "https://en.wikipedia.org/wiki/maximum_likelihood_estimation"
+        },
+        {
+            "term": "evidence lower bound",
+            "url": "https://en.wikipedia.org/wiki/evidence_lower_bound"
+        },
+        {
+            "term": "Kullback-Leibler divergence",
+            "url": "https://en.wikipedia.org/wiki/Kullback-Leibler_divergence"
+        },
+        {
+            "term": "maximum a posteriori",
+            "url": "https://en.wikipedia.org/wiki/maximum_a_posteriori"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        }
+    ],
+    "highlights": [
+        "We train several of those networks \u2013 each using data from a different site \u2013 and consolidate their weights",
+        "In variational continual learning (VCL) [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>] and Bayesian incremental learning [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>], the DNNs trained on previously obtained data, D1-DT \u22121, are used to regularize the training of a new neural network trained on DT per: p(w|D1:T )",
+        "The weighted average Dice scores were computed across H, N, B, and W by weighing each of the Dice scores according to the number of volumes in each test set",
+        "Training on different datasets sequentially using variational continual learning was very sensitive to dataset order, as seen by the difference in Dice scores when training on Nathan Kline Institute, Buckner, and Washington University 120 in order of decreasing and increasing dataset size (H \u2192 N \u2192 B \u2192 W and H \u2192 W \u2192 B \u2192 N , respectively)",
+        "We developed distributed weight consolidation by modifying these methods to allow for training networks on several new datasets in a distributed way",
+        "Compared to an ensemble made from models trained on different sites, distributed weight consolidation increased performance on the held-out test sets from the sites used in training and led to similar ABIDE performance"
+    ],
+    "key_statements": [
+        "We train several of those networks \u2013 each using data from a different site \u2013 and consolidate their weights",
+        "In variational continual learning (VCL) [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>] and Bayesian incremental learning [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>], the DNNs trained on previously obtained data, D1-DT \u22121, are used to regularize the training of a new neural network trained on DT per: p(w|D1:T )",
+        "The weighted average Dice scores were computed across H, N, B, and W by weighing each of the Dice scores according to the number of volumes in each test set",
+        "Training on different datasets sequentially using variational continual learning was very sensitive to dataset order, as seen by the difference in Dice scores when training on Nathan Kline Institute, Buckner, and Washington University 120 in order of decreasing and increasing dataset size (H \u2192 N \u2192 B \u2192 W and H \u2192 W \u2192 B \u2192 N , respectively)",
+        "The performance of distributed weight consolidation was within the range of variational continual learning performance",
+        "A method often proposed for dealing with these independent datasets is continual learning, which trains on each of these datasets sequentially [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>]",
+        "We developed distributed weight consolidation by modifying these methods to allow for training networks on several new datasets in a distributed way",
+        "Compared to an ensemble made from models trained on different sites, distributed weight consolidation increased performance on the held-out test sets from the sites used in training and led to similar ABIDE performance",
+        "This demonstrates the feasibility of distributed weight consolidation for combining the knowledge learned by networks trained on different datasets, without either training on the sites sequentially or ensembling many trained models",
+        "Another area of research is to investigate the use of alternative families of variational distributions within the framework of distributed weight consolidation"
+    ],
+    "summary": [
+        "We train several of those networks \u2013 each using data from a different site \u2013 and consolidate their weights.",
+        "In variational continual learning (VCL) [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>] and Bayesian incremental learning [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>], the DNNs trained on previously obtained data, D1-DT \u22121, are used to regularize the training of a new neural network trained on DT per: p(w|D1:T )",
+        "For DNNs, computing p(w|D1:T ) directly can be intractable, so variational inference is iteratively used to learn an approximation, q\u03b8T (w), by minimizing KL[q\u03b8T (w)||p(w|D1:T )] for each sequential dataset, D1-DT , in turn.",
+        "The main motivation of our method \u2013 distributed weight consolidation (DWC) \u2013 is to make it possible to train neural networks on different, distributed datasets, independently, and consolidate their weights into a single network.",
+        "Eq 11 can be used to consolidate an ensemble of distributed networks in order to allow for training on new datasets.",
+        "We used used VCL with HCP as the prior for distributed training of the FFG variational networks on the NKI (H \u2192 N ), Buckner (H \u2192 B) and WU120 (H \u2192 W ) datasets.",
+        "For DWC, our goal was to take distributed networks trained using VCL with an initial network as a prior, consolidate them per Eq 17, and use this consolidated model as a prior for finetuning on the original dataset.",
+        "The ABIDE Dice scores of DWC were not significantly different from the scores of the ensemble (p = 0.733, per a two tailed paired t-test across volumes), showing that DWC does not reduce generalization performance for a very large and completely independent multi-site dataset.",
+        "Several recent continual learning methods use previously trained networks as priors for networks trained on the dataset [<a class=\"ref-link\" id=\"c32\" href=\"#r32\">32</a>, <a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>], albeit with the requirement that training happens sequentially.",
+        "We developed DWC by modifying these methods to allow for training networks on several new datasets in a distributed way.",
+        "Using DWC, we consolidated the weights of the distributed neural networks to perform brain segmentation on data from different sites.",
+        "This demonstrates the feasibility of DWC for combining the knowledge learned by networks trained on different datasets, without either training on the sites sequentially or ensembling many trained models.",
+        "Our method has the potential to be applied to many other applications where it is necessary to train specialized networks for specific sites, informed by data from other sites, and where constraints on data sharing necessitate a distributed learning approach, such as disease diagnosis with clinical data."
+    ],
+    "headline": "We introduce distributed weight consolidation , a continual learning method to consolidate the weights of separate neural networks, each trained on an independent dataset",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Olivier Bachem, Mario Lucic, and Andreas Krause. Coresets for nonparametric estimation-the case of dp-means. In International Conference on Machine Learning, pages 209\u2013217, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bachem%2C%20Olivier%20Lucic%2C%20Mario%20Krause%2C%20Andreas%20Coresets%20for%20nonparametric%20estimation-the%20case%20of%20dp-means%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bachem%2C%20Olivier%20Lucic%2C%20Mario%20Krause%2C%20Andreas%20Coresets%20for%20nonparametric%20estimation-the%20case%20of%20dp-means%202015"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Bharat B Biswal, Maarten Mennes, Xi-Nian Zuo, Suril Gohel, Clare Kelly, Steve M Smith, Christian F Beckmann, Jonathan S Adelstein, Randy L Buckner, Stan Colcombe, et al. Toward discovery science of human brain function. Proceedings of the National Academy of Sciences, 107(10):4734\u20134739, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Biswal%2C%20Bharat%20B.%20Mennes%2C%20Maarten%20Zuo%2C%20Xi-Nian%20Gohel%2C%20Suril%20Toward%20discovery%20science%20of%20human%20brain%20function%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Biswal%2C%20Bharat%20B.%20Mennes%2C%20Maarten%20Zuo%2C%20Xi-Nian%20Gohel%2C%20Suril%20Toward%20discovery%20science%20of%20human%20brain%20function%202010"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Charles Blundell, Julien Cornebise, Koray Kavukcuoglu, and Daan Wierstra. Weight uncertainty in neural network. In International Conference on Machine Learning, pages 1613\u20131622, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Blundell%2C%20Charles%20Cornebise%2C%20Julien%20Kavukcuoglu%2C%20Koray%20Wierstra%2C%20Daan%20Weight%20uncertainty%20in%20neural%20network%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Blundell%2C%20Charles%20Cornebise%2C%20Julien%20Kavukcuoglu%2C%20Koray%20Wierstra%2C%20Daan%20Weight%20uncertainty%20in%20neural%20network%202015"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Ken Chang, Niranjan Balachandar, Carson Lam, Darvin Yi, James Brown, Andrew Beers, Bruce Rosen, Daniel L Rubin, and Jayashree Kalpathy-Cramer. Distributed deep learning networks among institutions for medical imaging. Journal of the American Medical Informatics Association.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chang%2C%20Ken%20Balachandar%2C%20Niranjan%20Lam%2C%20Carson%20Yi%2C%20Darvin%20Distributed%20deep%20learning%20networks%20among%20institutions%20for%20medical%20imaging",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chang%2C%20Ken%20Balachandar%2C%20Niranjan%20Lam%2C%20Carson%20Yi%2C%20Darvin%20Distributed%20deep%20learning%20networks%20among%20institutions%20for%20medical%20imaging"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Adriana Di Martino, Chao-Gan Yan, Qingyang Li, Erin Denio, Francisco X Castellanos, Kaat Alaerts, Jeffrey S Anderson, Michal Assaf, Susan Y Bookheimer, Mirella Dapretto, et al. The autism brain imaging data exchange: towards a large-scale evaluation of the intrinsic brain architecture in autism. Molecular Psychiatry, 19(6):659, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Martino%2C%20Adriana%20Di%20Yan%2C%20Chao-Gan%20Li%2C%20Qingyang%20Denio%2C%20Erin%20The%20autism%20brain%20imaging%20data%20exchange%3A%20towards%20a%20large-scale%20evaluation%20of%20the%20intrinsic%20brain%20architecture%20in%20autism%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Martino%2C%20Adriana%20Di%20Yan%2C%20Chao-Gan%20Li%2C%20Qingyang%20Denio%2C%20Erin%20The%20autism%20brain%20imaging%20data%20exchange%3A%20towards%20a%20large-scale%20evaluation%20of%20the%20intrinsic%20brain%20architecture%20in%20autism%202014"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Alex Fedorov, Eswar Damaraju, Vince Calhoun, and Sergey Plis. Almost instant brain atlas segmentation for large-scale studies. arXiv preprint arXiv:1711.00457, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.00457"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Alex Fedorov, Jeremy Johnson, Eswar Damaraju, Alexei Ozerin, Vince Calhoun, and Sergey Plis. End-toend learning of brain tissue segmentation from imperfect labeling. In International Joint Conference on Neural Networks, pages 3785\u20133792. IEEE, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fedorov%2C%20Alex%20Johnson%2C%20Jeremy%20Damaraju%2C%20Eswar%20Ozerin%2C%20Alexei%20End-toend%20learning%20of%20brain%20tissue%20segmentation%20from%20imperfect%20labeling%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fedorov%2C%20Alex%20Johnson%2C%20Jeremy%20Damaraju%2C%20Eswar%20Ozerin%2C%20Alexei%20End-toend%20learning%20of%20brain%20tissue%20segmentation%20from%20imperfect%20labeling%202017"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Bruce Fischl. Freesurfer. Neuroimage, 62(2), 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bruce%20Fischl%20Freesurfer%20Neuroimage%20622%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bruce%20Fischl%20Freesurfer%20Neuroimage%20622%202012"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Yarin Gal and Zoubin Ghahramani. Dropout as a bayesian approximation: Representing model uncertainty in deep learning. In International Conference on Machine Learning, pages 1050\u20131059, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gal%2C%20Yarin%20Ghahramani%2C%20Zoubin%20Dropout%20as%20a%20bayesian%20approximation%3A%20Representing%20model%20uncertainty%20in%20deep%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gal%2C%20Yarin%20Ghahramani%2C%20Zoubin%20Dropout%20as%20a%20bayesian%20approximation%3A%20Representing%20model%20uncertainty%20in%20deep%20learning%202016"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Alex Graves. Practical variational inference for neural networks. In Advances in Neural Information Processing Systems, pages 2348\u20132356, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Graves%2C%20Alex%20Practical%20variational%20inference%20for%20neural%20networks%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Graves%2C%20Alex%20Practical%20variational%20inference%20for%20neural%20networks%202011"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Geoffrey E Hinton and Drew Van Camp. Keeping the neural networks simple by minimizing the description length of the weights. In Proceedings of the sixth annual conference on Computational learning theory, pages 5\u201313. ACM, 1993.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hinton%2C%20Geoffrey%20E.%20Camp%2C%20Drew%20Van%20Keeping%20the%20neural%20networks%20simple%20by%20minimizing%20the%20description%20length%20of%20the%20weights%201993",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hinton%2C%20Geoffrey%20E.%20Camp%2C%20Drew%20Van%20Keeping%20the%20neural%20networks%20simple%20by%20minimizing%20the%20description%20length%20of%20the%20weights%201993"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Jonathan Huggins, Trevor Campbell, and Tamara Broderick. Coresets for scalable bayesian logistic regression. In Advances in Neural Information Processing Systems, pages 4080\u20134088, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huggins%2C%20Jonathan%20Campbell%2C%20Trevor%20Broderick%2C%20Tamara%20Coresets%20for%20scalable%20bayesian%20logistic%20regression%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huggins%2C%20Jonathan%20Campbell%2C%20Trevor%20Broderick%2C%20Tamara%20Coresets%20for%20scalable%20bayesian%20logistic%20regression%202016"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Diederik P Kingma and Jimmy Ba. Adam: A method for stochastic optimization. 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Ba%2C%20Jimmy%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202015"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Diederik P Kingma, Tim Salimans, and Max Welling. Variational dropout and the local reparameterization trick. In Advances in Neural Information Processing Systems, pages 2575\u20132583, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Salimans%2C%20Tim%20Welling%2C%20Max%20Variational%20dropout%20and%20the%20local%20reparameterization%20trick%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Salimans%2C%20Tim%20Welling%2C%20Max%20Variational%20dropout%20and%20the%20local%20reparameterization%20trick%202015"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Diederik P Kingma and Max Welling. Auto-encoding variational bayes. arXiv preprint arXiv:1312.6114, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.6114"
+        },
+        {
+            "id": "16",
+            "entry": "[16] James Kirkpatrick, Razvan Pascanu, Neil Rabinowitz, Joel Veness, Guillaume Desjardins, Andrei A Rusu, Kieran Milan, John Quan, Tiago Ramalho, Agnieszka Grabska-Barwinska, et al. Overcoming catastrophic forgetting in neural networks. Proceedings of the National Academy of Sciences, 114(13):3521\u20133526, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kirkpatrick%2C%20James%20Pascanu%2C%20Razvan%20Rabinowitz%2C%20Neil%20Veness%2C%20Joel%20Overcoming%20catastrophic%20forgetting%20in%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kirkpatrick%2C%20James%20Pascanu%2C%20Razvan%20Rabinowitz%2C%20Neil%20Veness%2C%20Joel%20Overcoming%20catastrophic%20forgetting%20in%20neural%20networks%202017"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Max Kochurov, Timur Garipov, Dmitry Podoprikhin, Dmitry Molchanov, Arsenii Ashukha, and Dmitry Vetrov. Bayesian incremental learning for deep neural networks. ICLR Workshop, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kochurov%2C%20Max%20Garipov%2C%20Timur%20Podoprikhin%2C%20Dmitry%20Molchanov%2C%20Dmitry%20Bayesian%20incremental%20learning%20for%20deep%20neural%20networks%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kochurov%2C%20Max%20Garipov%2C%20Timur%20Podoprikhin%2C%20Dmitry%20Molchanov%2C%20Dmitry%20Bayesian%20incremental%20learning%20for%20deep%20neural%20networks%202018"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Wenqi Li, Guotai Wang, Lucas Fidon, Sebastien Ourselin, M Jorge Cardoso, and Tom Vercauteren. On the compactness, efficiency, and representation of 3d convolutional networks: brain parcellation as a pretext task. In International Conference on Information Processing in Medical Imaging, pages 348\u2013360.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Wenqi%20Wang%2C%20Guotai%20Fidon%2C%20Lucas%20Sebastien%20Ourselin%2C%20M.Jorge%20Cardoso%20On%20the%20compactness%2C%20efficiency%2C%20and%20representation%20of%203d%20convolutional%20networks%3A%20brain%20parcellation%20as%20a%20pretext%20task",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20Wenqi%20Wang%2C%20Guotai%20Fidon%2C%20Lucas%20Sebastien%20Ourselin%2C%20M.Jorge%20Cardoso%20On%20the%20compactness%2C%20efficiency%2C%20and%20representation%20of%203d%20convolutional%20networks%3A%20brain%20parcellation%20as%20a%20pretext%20task"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Christos Louizos and Max Welling. Multiplicative normalizing flows for variational bayesian neural networks. In International Conference on Machine Learning, pages 2218\u20132227, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Louizos%2C%20Christos%20Welling%2C%20Max%20Multiplicative%20normalizing%20flows%20for%20variational%20bayesian%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Louizos%2C%20Christos%20Welling%2C%20Max%20Multiplicative%20normalizing%20flows%20for%20variational%20bayesian%20neural%20networks%202017"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Dmitry Molchanov, Arsenii Ashukha, and Dmitry Vetrov. Variational dropout sparsifies deep neural networks. In International Conference on Machine Learning, pages 2498\u20132507, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Molchanov%2C%20Dmitry%20Ashukha%2C%20Arsenii%20Vetrov%2C%20Dmitry%20Variational%20dropout%20sparsifies%20deep%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Molchanov%2C%20Dmitry%20Ashukha%2C%20Arsenii%20Vetrov%2C%20Dmitry%20Variational%20dropout%20sparsifies%20deep%20neural%20networks%202017"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Cuong V Nguyen, Yingzhen Li, Thang D Bui, and Richard E Turner. Variational continual learning. 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nguyen%2C%20Cuong%20V.%20Li%2C%20Yingzhen%20Bui%2C%20Thang%20D.%20Turner%2C%20Richard%20E.%20Variational%20continual%20learning%202018"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Kate Brody Nooner, Stanley Colcombe, Russell Tobe, Maarten Mennes, Melissa Benedict, Alexis Moreno, Laura Panek, Shaquanna Brown, Stephen Zavitz, Qingyang Li, et al. The nki-rockland sample: a model for accelerating the pace of discovery science in psychiatry. Frontiers in Neuroscience, 6:152, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nooner%2C%20Kate%20Brody%20Colcombe%2C%20Stanley%20Tobe%2C%20Russell%20Mennes%2C%20Maarten%20The%20nki-rockland%20sample%3A%20a%20model%20for%20accelerating%20the%20pace%20of%20discovery%20science%20in%20psychiatry%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nooner%2C%20Kate%20Brody%20Colcombe%2C%20Stanley%20Tobe%2C%20Russell%20Mennes%2C%20Maarten%20The%20nki-rockland%20sample%3A%20a%20model%20for%20accelerating%20the%20pace%20of%20discovery%20science%20in%20psychiatry%202012"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Sergey M Plis, Anand D Sarwate, Dylan Wood, Christopher Dieringer, Drew Landis, Cory Reed, Sandeep R Panta, Jessica A Turner, Jody M Shoemaker, Kim W Carter, et al. Coinstac: a privacy enabled model and prototype for leveraging and processing decentralized brain imaging data. Frontiers in neuroscience, 10:365, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Plis%2C%20Sergey%20M.%20Sarwate%2C%20Anand%20D.%20Wood%2C%20Dylan%20Dieringer%2C%20Christopher%20Coinstac%3A%20a%20privacy%20enabled%20model%20and%20prototype%20for%20leveraging%20and%20processing%20decentralized%20brain%20imaging%20data%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Plis%2C%20Sergey%20M.%20Sarwate%2C%20Anand%20D.%20Wood%2C%20Dylan%20Dieringer%2C%20Christopher%20Coinstac%3A%20a%20privacy%20enabled%20model%20and%20prototype%20for%20leveraging%20and%20processing%20decentralized%20brain%20imaging%20data%202016"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Jonathan D Power, Mark Plitt, Prantik Kundu, Peter A Bandettini, and Alex Martin. Temporal interpolation alters motion in fmri scans: Magnitudes and consequences for artifact detection. PloS one, 12(9):e0182939, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Power%2C%20Jonathan%20D.%20Plitt%2C%20Mark%20Kundu%2C%20Prantik%20Bandettini%2C%20Peter%20A.%20Temporal%20interpolation%20alters%20motion%20in%20fmri%20scans%3A%20Magnitudes%20and%20consequences%20for%20artifact%20detection%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Power%2C%20Jonathan%20D.%20Plitt%2C%20Mark%20Kundu%2C%20Prantik%20Bandettini%2C%20Peter%20A.%20Temporal%20interpolation%20alters%20motion%20in%20fmri%20scans%3A%20Magnitudes%20and%20consequences%20for%20artifact%20detection%202017"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Herbert Robbins and Sutton Monro. A stochastic approximation method. The Annals of Mathematical Statistics, pages 400\u2013407, 1951.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Robbins%2C%20Herbert%20Monro%2C%20Sutton%20A%20stochastic%20approximation%20method%201951",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Robbins%2C%20Herbert%20Monro%2C%20Sutton%20A%20stochastic%20approximation%20method%201951"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Olaf Ronneberger, Philipp Fischer, and Thomas Brox. U-net: Convolutional networks for biomedical image segmentation. In International Conference on Medical Image Computing and Computer-Assisted Intervention, pages 234\u2013241.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ronneberger%2C%20Olaf%20Fischer%2C%20Philipp%20Brox%2C%20Thomas%20U-net%3A%20Convolutional%20networks%20for%20biomedical%20image%20segmentation",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ronneberger%2C%20Olaf%20Fischer%2C%20Philipp%20Brox%2C%20Thomas%20U-net%3A%20Convolutional%20networks%20for%20biomedical%20image%20segmentation"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Abhijit Guha Roy, Sailesh Conjeti, Nassir Navab, and Christian Wachinger. Quicknat: Segmenting mri neuroanatomy in 20 seconds. arXiv preprint arXiv:1801.04161, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1801.04161"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Tim Salimans and Diederik P Kingma. Weight normalization: A simple reparameterization to accelerate training of deep neural networks. In Advances in Neural Information Processing Systems, pages 901\u2013909, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Salimans%2C%20Tim%20Kingma%2C%20Diederik%20P.%20Weight%20normalization%3A%20A%20simple%20reparameterization%20to%20accelerate%20training%20of%20deep%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Salimans%2C%20Tim%20Kingma%2C%20Diederik%20P.%20Weight%20normalization%3A%20A%20simple%20reparameterization%20to%20accelerate%20training%20of%20deep%20neural%20networks%202016"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Paul M Thompson, Jason L Stein, Sarah E Medland, Derrek P Hibar, Alejandro Arias Vasquez, Miguel E Renteria, Roberto Toro, Neda Jahanshad, Gunter Schumann, Barbara Franke, et al. The enigma consortium: large-scale collaborative analyses of neuroimaging and genetic data. Brain imaging and behavior, 8(2):153\u2013 182, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Thompson%2C%20Paul%20M.%20Stein%2C%20Jason%20L.%20Medland%2C%20Sarah%20E.%20Hibar%2C%20Derrek%20P.%20The%20enigma%20consortium%3A%20large-scale%20collaborative%20analyses%20of%20neuroimaging%20and%20genetic%20data",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Thompson%2C%20Paul%20M.%20Stein%2C%20Jason%20L.%20Medland%2C%20Sarah%20E.%20Hibar%2C%20Derrek%20P.%20The%20enigma%20consortium%3A%20large-scale%20collaborative%20analyses%20of%20neuroimaging%20and%20genetic%20data"
+        },
+        {
+            "id": "30",
+            "entry": "[30] David C Van Essen, Stephen M Smith, Deanna M Barch, Timothy EJ Behrens, Essa Yacoub, Kamil Ugurbil, Wu-Minn HCP Consortium, et al. The wu-minn human connectome project: an overview. NeuroImage, 80:62\u201379, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Essen%2C%20David%20C.Van%20Smith%2C%20Stephen%20M.%20Barch%2C%20Deanna%20M.%20Behrens%2C%20Timothy%20E.J.%20The%20wu-minn%20human%20connectome%20project%3A%20an%20overview%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Essen%2C%20David%20C.Van%20Smith%2C%20Stephen%20M.%20Barch%2C%20Deanna%20M.%20Behrens%2C%20Timothy%20E.J.%20The%20wu-minn%20human%20connectome%20project%3A%20an%20overview%202013"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Fisher Yu and Vladlen Koltun. Multi-scale context aggregation by dilated convolutions. arXiv preprint arXiv:1511.07122, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.07122"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Friedemann Zenke, Ben Poole, and Surya Ganguli. Continual learning through synaptic intelligence. In International Conference on Machine Learning, pages 3987\u20133995, 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zenke%2C%20Friedemann%20Poole%2C%20Ben%20Ganguli%2C%20Surya%20Continual%20learning%20through%20synaptic%20intelligence%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zenke%2C%20Friedemann%20Poole%2C%20Ben%20Ganguli%2C%20Surya%20Continual%20learning%20through%20synaptic%20intelligence%202017"
+        }
+    ]
+}

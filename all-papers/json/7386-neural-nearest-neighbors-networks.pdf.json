@@ -1,0 +1,409 @@
+{
+    "filename": "7386-neural-nearest-neighbors-networks.pdf",
+    "metadata": {
+        "title": "Neural Nearest Neighbors Networks",
+        "author": "Tobias Pl\u00f6tz, Stefan Roth",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7386-neural-nearest-neighbors-networks.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Non-local methods exploiting the self-similarity of natural signals have been well studied, for example in image analysis and restoration. Existing approaches, however, rely on k-nearest neighbors (KNN) matching in a fixed feature space. The main hurdle in optimizing this feature space w. r. t. application performance is the non-differentiability of the KNN selection rule. To overcome this, we propose a continuous deterministic relaxation of KNN selection that maintains differentiability w. r. t. pairwise distances, but retains the original KNN as the limit of a temperature parameter approaching zero. To exploit our relaxation, we propose the neural nearest neighbors block (N3 block), a novel non-local processing layer that leverages the principle of self-similarity and can be used as building block in modern neural network architectures.1 We show its effectiveness for the set reasoning task of correspondence classification as well as for image restoration, including image denoising and single image super-resolution, where we outperform strong convolutional neural network (CNN) baselines and recent non-local models that rely on KNN selection in hand-chosen features spaces."
+    },
+    "keywords": [
+        {
+            "term": "feature space",
+            "url": "https://en.wikipedia.org/wiki/feature_space"
+        },
+        {
+            "term": "k-nearest neighbors",
+            "url": "https://en.wikipedia.org/wiki/k-nearest_neighbors"
+        },
+        {
+            "term": "mean average precision",
+            "url": "https://en.wikipedia.org/wiki/mean_average_precision"
+        },
+        {
+            "term": "w. r.",
+            "url": "https://en.wikipedia.org/wiki/W_R"
+        },
+        {
+            "term": "convolutional neural network",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_network"
+        },
+        {
+            "term": "image denoising",
+            "url": "https://en.wikipedia.org/wiki/image_denoising"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        },
+        {
+            "term": "image restoration",
+            "url": "https://en.wikipedia.org/wiki/image_restoration"
+        }
+    ],
+    "highlights": [
+        "The ongoing surge of convolutional neural networks (CNNs) has revolutionized many areas of machine learning and its applications by enabling unprecedented predictive accuracy",
+        "Note that the crucial difference to our work is that we propose a differentiable relaxation of the k-nearest neighbors selection rule where the output is a set of neighbors, instead of a single aggregation of the labels of the neighbors",
+        "We propose a new network block, called neural nearest neighbors block (N3 block, Fig. 2a), which integrates our continuous and differentiable nearest neighbors selection into feed-forward neural networks based on the concept of self-similarity, i. e. query set and database are derived from the same features (e. g., feature patches of an intermediate layer within a convolutional neural network)",
+        "Apply k-nearest neighbors selection on a hand-defined feature space, which may be suboptimal for the task at hand",
+        "We introduced the first continuous relaxation of the k-nearest neighbors selection rule that maintains differentiability w. r. t. the pairwise distances used for neighbor selection",
+        "We integrated continuous nearest neighbors selection into a novel network block, called N3 block, which can be used as a general building block in neural networks"
+    ],
+    "key_statements": [
+        "The ongoing surge of convolutional neural networks (CNNs) has revolutionized many areas of machine learning and its applications by enabling unprecedented predictive accuracy",
+        "We demonstrate that th(e1,0a,c0)curacy of image (d0e,1n,0o)ising and single image super-resolution (SISR) can be improved significantly by augmenting strong local convolutional neural network architectures with our novel N3 block, outperforming strong non-local baselines",
+        "Note that the crucial difference to our work is that we propose a differentiable relaxation of the k-nearest neighbors selection rule where the output is a set of neighbors, instead of a single aggregation of the labels of the neighbors",
+        "We propose a new network block, called neural nearest neighbors block (N3 block, Fig. 2a), which integrates our continuous and differentiable nearest neighbors selection into feed-forward neural networks based on the concept of self-similarity, i. e. query set and database are derived from the same features (e. g., feature patches of an intermediate layer within a convolutional neural network)",
+        "As a crucial difference to our proposed N3Net, all of the compared non-local methods use k-nearest neighbors selection on a fixed feature space, not being able to learn an embedding for matching",
+        "UNLNet do not reach the accuracy of DnCNN even on Urban100, whereas our N3Net even fares better than the strongest local denoiser FFDNet",
+        "We show that we can augment recent strong convolutional neural network models for SISR with our N3 block",
+        "Apply k-nearest neighbors selection on a hand-defined feature space, which may be suboptimal for the task at hand",
+        "We introduced the first continuous relaxation of the k-nearest neighbors selection rule that maintains differentiability w. r. t. the pairwise distances used for neighbor selection",
+        "We integrated continuous nearest neighbors selection into a novel network block, called N3 block, which can be used as a general building block in neural networks"
+    ],
+    "summary": [
+        "The ongoing surge of convolutional neural networks (CNNs) has revolutionized many areas of machine learning and its applications by enabling unprecedented predictive accuracy.",
+        "Incorporating this kind of non-local processing into neural network architectures for image restoration has only very recently been considered [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>, <a class=\"ref-link\" id=\"c47\" href=\"#r47\">47</a>].",
+        "For the task of correspondence classification, we obtain significant improvements by augmenting a recent neural network baseline with our N3 block, showing its effectiveness on set-valued data.",
+        "Our differentiable nearest neighbors selection generalizes this; our method can recover a single weighted average by setting k=1.",
+        "We first detail our continuous and differentiable relaxation of the k-nearest neighbors (KNN) selection rule.",
+        "This will yield a deterministic and continuous relaxation of the stochastic nearest neighbors that still converges to the hard KNN selection rule in the limit case of t \u2192 0.",
+        "We interleave N3 blocks with existing local processing networks to form neural nearest neighbors networks (N3Net) as shown in Fig. 2b.",
+        "A baseline where we replace the N3 blocks with KNN selection (k = 7) to obtain neighbors for each patch.",
+        "The task specific hand-chosen distance embedding for this baseline should intuitively yield more sensible nearest neighbors matches than when matching noisy input patches.",
+        "Table 1 shows the results on the Urban100 test set (\u03c3 = 25) from which we can infer four insights: First, the KNN baselines and improve upon the plain DnCNN model, showing that allowing the network to access non-local information is beneficial.",
+        "These include the classical BM3D [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>], which uses a hand-crafted denoising pipeline, and the state-of-the-art trainable non-local models NLNet [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>] and UNLNet [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>], both learning to process non-locally aggregated patches.",
+        "As a crucial difference to our proposed N3Net, all of the compared non-local methods use KNN selection on a fixed feature space, not being able to learn an embedding for matching.",
+        "UNLNet do not reach the accuracy of DnCNN even on Urban100, whereas our N3Net even fares better than the strongest local denoiser FFDNet. Third, the post-hoc non-local step applied by NN3D is very effective on Urban100 where self-similarity can intuitively shine.",
+        "N3Net sets a new state of the art for denoising raw images, outperforming DnCNN and BM3D by a significant margin.",
+        "CNNet consists of 12 blocks, each comprised of a local fully connected layer with 128 feature channels that processes each point individually, and a context normalization and batch normalization layer that pool information across the whole point set.",
+        "We exemplified its benefit in the context of image denoising, SISR, and correspondence classification, where we outperform state-of-the-art CNN-based methods and non-local approaches.",
+        "We expect the N3 block to benefit end-to-end trainable architectures for other input domains, such as text or other sequence-valued data"
+    ],
+    "headline": "We propose a continuous deterministic relaxation of k-nearest neighbors selection that maintains differentiability w. r. t. pairwise distances, but retains the original k-nearest neighbors as the limit of a temperature parameter approaching zero",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Eirikur Agustsson and Radu Timofte. NTIRE 2017 challenge on single image super-resolution: Dataset and study. In CVPR Workshops, pages 126\u2013135, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Eirikur%20Agustsson%20and%20Radu%20Timofte%20NTIRE%202017%20challenge%20on%20single%20image%20superresolution%20Dataset%20and%20study%20In%20CVPR%20Workshops%20pages%20126135%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Eirikur%20Agustsson%20and%20Radu%20Timofte%20NTIRE%202017%20challenge%20on%20single%20image%20superresolution%20Dataset%20and%20study%20In%20CVPR%20Workshops%20pages%20126135%202017"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Guillaume Alain and Yoshua Bengio. What regularized auto-encoders learn from the data-generating distribution. J. Mach. Learn. Res., 15(1):3563\u20133593, January 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Alain%2C%20Guillaume%20Bengio%2C%20Yoshua%20What%20regularized%20auto-encoders%20learn%20from%20the%20data-generating%20distribution%202014-01",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Alain%2C%20Guillaume%20Bengio%2C%20Yoshua%20What%20regularized%20auto-encoders%20learn%20from%20the%20data-generating%20distribution%202014-01"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Woong Bae, Jae Jun Yoo, and Jong Chul Ye. Beyond deep residual learning for image restoration: Persistent homology-guided manifold simplification. In CVPR Workshops, pages 145\u2013153, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bae%2C%20Woong%20Yoo%2C%20Jae%20Jun%20Ye%2C%20Jong%20Chul%20Beyond%20deep%20residual%20learning%20for%20image%20restoration%3A%20Persistent%20homology-guided%20manifold%20simplification%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bae%2C%20Woong%20Yoo%2C%20Jae%20Jun%20Ye%2C%20Jong%20Chul%20Beyond%20deep%20residual%20learning%20for%20image%20restoration%3A%20Persistent%20homology-guided%20manifold%20simplification%202017"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Marco Bevilacqua, Aline Roumy, Christine Guillemot, and Marie Line Alberi-Morel. Low-complexity single-image super-resolution based on nonnegative neighbor embedding. In BMVC, pages 135.1\u2013135.10, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bevilacqua%2C%20Marco%20Roumy%2C%20Aline%20Guillemot%2C%20Christine%20Alberi-Morel%2C%20Marie%20Line%20Low-complexity%20single-image%20super-resolution%20based%20on%20nonnegative%20neighbor%20embedding%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bevilacqua%2C%20Marco%20Roumy%2C%20Aline%20Guillemot%2C%20Christine%20Alberi-Morel%2C%20Marie%20Line%20Low-complexity%20single-image%20super-resolution%20based%20on%20nonnegative%20neighbor%20embedding%202012"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Siavash Arjomand Bigdeli, Matthias Zwicker, Paolo Favaro, and Meiguang Jin. Deep mean-shift priors for image restoration. In NIPS*2017, pages 763\u2013772.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bigdeli%2C%20Siavash%20Arjomand%20Zwicker%2C%20Matthias%20Favaro%2C%20Paolo%20Jin%2C%20Meiguang%20Deep%20mean-shift%20priors%20for%20image%20restoration",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bigdeli%2C%20Siavash%20Arjomand%20Zwicker%2C%20Matthias%20Favaro%2C%20Paolo%20Jin%2C%20Meiguang%20Deep%20mean-shift%20priors%20for%20image%20restoration"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Antoni Buades, Bartomeu Coll, and Jean-Michel Morel. A non-local algorithm for image denoising. In CVPR, pages 60\u201365, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Buades%2C%20Antoni%20Coll%2C%20Bartomeu%20Morel%2C%20Jean-Michel%20A%20non-local%20algorithm%20for%20image%20denoising%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Buades%2C%20Antoni%20Coll%2C%20Bartomeu%20Morel%2C%20Jean-Michel%20A%20non-local%20algorithm%20for%20image%20denoising%202005"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Crist\u00f3v\u00e3o Cruz, Alessandro Foi, Vladimir Katkovnik, and Karen O. Egiazarian. Nonlocality-reinforced convolutional neural networks for image denoising. IEEE Sig. Proc. Letters, 25(8):1216\u20131220, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cruz%2C%20Crist%C3%B3v%C3%A3o%20Foi%2C%20Alessandro%20Katkovnik%2C%20Vladimir%20Egiazarian%2C%20Karen%20O.%20Nonlocality-reinforced%20convolutional%20neural%20networks%20for%20image%20denoising%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cruz%2C%20Crist%C3%B3v%C3%A3o%20Foi%2C%20Alessandro%20Katkovnik%2C%20Vladimir%20Egiazarian%2C%20Karen%20O.%20Nonlocality-reinforced%20convolutional%20neural%20networks%20for%20image%20denoising%202018"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Crist\u00f3v\u00e3o Cruz, Rakesh Mehta, Vladimir Katkovnik, and Karen O. Egiazarian. Single image superresolution based on Wiener filter in similarity domain. IEEE T. Image Process., 27(2):1376\u20131389, March 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cruz%2C%20Crist%C3%B3v%C3%A3o%20Mehta%2C%20Rakesh%20Katkovnik%2C%20Vladimir%20Egiazarian%2C%20Karen%20O.%20Single%20image%20superresolution%20based%20on%20Wiener%20filter%20in%20similarity%20domain%202018-03",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cruz%2C%20Crist%C3%B3v%C3%A3o%20Mehta%2C%20Rakesh%20Katkovnik%2C%20Vladimir%20Egiazarian%2C%20Karen%20O.%20Single%20image%20superresolution%20based%20on%20Wiener%20filter%20in%20similarity%20domain%202018-03"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Kostadin Dabov, Alessandro Foi, Vladimir Katkovnik, and Karen Egiazarian. Image denoising with block-matching and 3D filtering. In Electronic Imaging \u201906, Proc. SPIE 6064, No. 6064A-30, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dabov%2C%20Kostadin%20Foi%2C%20Alessandro%20Katkovnik%2C%20Vladimir%20Egiazarian%2C%20Karen%20Image%20denoising%20with%20block-matching%20and%203D%20filtering%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dabov%2C%20Kostadin%20Foi%2C%20Alessandro%20Katkovnik%2C%20Vladimir%20Egiazarian%2C%20Karen%20Image%20denoising%20with%20block-matching%20and%203D%20filtering%202006"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Steven Diamond, Vincent Sitzmann, Stephen Boyd, Gordon Wetzstein, and Felix Heide. Dirty pixels: Optimizing image classification architectures for raw sensor data. arXiv:1701.06487 [cs.CV], 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1701.06487"
+        },
+        {
+            "id": "11",
+            "entry": "[11] David L. Donoho. Denoising by soft-thresholding. IEEE T. Info. Theory, 41(3):613\u2013627, May 1995.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Donoho%2C%20David%20L.%20Denoising%20by%20soft-thresholding%201995-05",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Donoho%2C%20David%20L.%20Denoising%20by%20soft-thresholding%201995-05"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Alessandro Foi, Mejdi Trimeche, Vladimir Katkovnik, and Karen Egiazarian. Practical PoissonianGaussian noise modeling and fitting for single-image raw-data. IEEE T. Image Process., 17(10):1737\u20131754, October 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Foi%2C%20Alessandro%20Trimeche%2C%20Mejdi%20Katkovnik%2C%20Vladimir%20Egiazarian%2C%20Karen%20Practical%20PoissonianGaussian%20noise%20modeling%20and%20fitting%20for%20single-image%20raw-data%202008-10",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Foi%2C%20Alessandro%20Trimeche%2C%20Mejdi%20Katkovnik%2C%20Vladimir%20Egiazarian%2C%20Karen%20Practical%20PoissonianGaussian%20noise%20modeling%20and%20fitting%20for%20single-image%20raw-data%202008-10"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Jacob Goldberger, Geoffrey E. Hinton, Sam T. Roweis, and Ruslan R. Salakhutdinov. Neighbourhood components analysis. In NIPS*2005, pages 513\u2013520.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goldberger%2C%20Jacob%20Hinton%2C%20Geoffrey%20E.%20Roweis%2C%20Sam%20T.%20Salakhutdinov%2C%20Ruslan%20R.%20Neighbourhood%20components%20analysis",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goldberger%2C%20Jacob%20Hinton%2C%20Geoffrey%20E.%20Roweis%2C%20Sam%20T.%20Salakhutdinov%2C%20Ruslan%20R.%20Neighbourhood%20components%20analysis"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Alex Graves, Greg Wayne, and Ivo Danihelka. Neural Turing machines. arXiv:1410.5401 [cs.NE], 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1410.5401"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Shi Guo, Zifei Yan, Kai Zhang, Wangmeng Zuo, and Lei Zhang. Toward convolutional blind denoising of real photographs. arXiv:1807.04686 [cs.CV], 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1807.04686"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Jia-Bin Huang, Abhishek Singh, and Narendra Ahuja. Single image super-resolution from transformed self-exemplars. In CVPR, pages 5197\u20135206, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huang%2C%20Jia-Bin%20Singh%2C%20Abhishek%20Ahuja%2C%20Narendra%20Single%20image%20super-resolution%20from%20transformed%20self-exemplars%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huang%2C%20Jia-Bin%20Singh%2C%20Abhishek%20Ahuja%2C%20Narendra%20Single%20image%20super-resolution%20from%20transformed%20self-exemplars%202015"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Sergey Ioffe and Christian Szegedy. Batch normalization: Accelerating deep network training by reducing internal covariate shift. In ICML, pages 448\u2013456, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ioffe%2C%20Sergey%20Szegedy%2C%20Christian%20Batch%20normalization%3A%20Accelerating%20deep%20network%20training%20by%20reducing%20internal%20covariate%20shift%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ioffe%2C%20Sergey%20Szegedy%2C%20Christian%20Batch%20normalization%3A%20Accelerating%20deep%20network%20training%20by%20reducing%20internal%20covariate%20shift%202015"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Viren Jain and H. Sebastian Seung. Natural image denoising with convolutional networks. In NIPS*2008, pages 769\u2013776.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jain%2C%20Viren%20Seung%2C%20H.Sebastian%20Natural%20image%20denoising%20with%20convolutional%20networks",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jain%2C%20Viren%20Seung%2C%20H.Sebastian%20Natural%20image%20denoising%20with%20convolutional%20networks"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Eric Jang, Shixiang Gu, and Ben Poole. Categorical reparameterization with Gumbel-softmax. In ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jang%2C%20Eric%20Gu%2C%20Shixiang%20Poole%2C%20Ben%20Categorical%20reparameterization%20with%20Gumbel-softmax%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jang%2C%20Eric%20Gu%2C%20Shixiang%20Poole%2C%20Ben%20Categorical%20reparameterization%20with%20Gumbel-softmax%202017"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Jiwon Kim, Jung Kwon Lee, and Kyoung Mu Lee. Accurate image super-resolution using very deep convolutional networks. In CVPR, pages 1646\u20131654, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kim%2C%20Jiwon%20Lee%2C%20Jung%20Kwon%20and%20Kyoung%20Mu%20Lee.%20Accurate%20image%20super-resolution%20using%20very%20deep%20convolutional%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kim%2C%20Jiwon%20Lee%2C%20Jung%20Kwon%20and%20Kyoung%20Mu%20Lee.%20Accurate%20image%20super-resolution%20using%20very%20deep%20convolutional%20networks%202016"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Diederik Kingma and Jimmy Ba. Adam: A method for stochastic optimization. In ICLR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20Ba%2C%20Jimmy%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20Ba%2C%20Jimmy%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202015"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Christian Ledig, Lucas Theis, Ferenc Husz\u00e1r, Jose Caballero, Andrew Cunningham, Alejandro Acosta, Andrew P. Aitken, Alykhan Tejani, Johannes Totz, Zehan Wang, and Wenzhe Shi. Photo-realistic single image super-resolution using a generative adversarial network. In CVPR, pages 4681\u20134690, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ledig%2C%20Christian%20Theis%2C%20Lucas%20Husz%C3%A1r%2C%20Ferenc%20Caballero%2C%20Jose%20Photo-realistic%20single%20image%20super-resolution%20using%20a%20generative%20adversarial%20network%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ledig%2C%20Christian%20Theis%2C%20Lucas%20Husz%C3%A1r%2C%20Ferenc%20Caballero%2C%20Jose%20Photo-realistic%20single%20image%20super-resolution%20using%20a%20generative%20adversarial%20network%202018"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Stamatios Lefkimmiatis. Non-local color image denoising with convolutional neural networks. In CVPR, pages 5882\u20135891, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lefkimmiatis%2C%20Stamatios%20Non-local%20color%20image%20denoising%20with%20convolutional%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lefkimmiatis%2C%20Stamatios%20Non-local%20color%20image%20denoising%20with%20convolutional%20neural%20networks%202017"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Stamatios Lefkimmiatis. Universal denoising networks: A novel CNN-based network architecture for image denoising. In CVPR, pages 3204\u20133213, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lefkimmiatis%2C%20Stamatios%20Universal%20denoising%20networks%3A%20A%20novel%20CNN-based%20network%20architecture%20for%20image%20denoising%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lefkimmiatis%2C%20Stamatios%20Universal%20denoising%20networks%3A%20A%20novel%20CNN-based%20network%20architecture%20for%20image%20denoising%202018"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Bee Lim, Sanghyun Son, Heewon Kim, Seungjun Nah, and Kyoung Mu Lee. Enhanced deep residual networks for single image super-resolution. In CVPR Workshops, pages 136\u2013144, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lim%2C%20Bee%20Son%2C%20Sanghyun%20Kim%2C%20Heewon%20Nah%2C%20Seungjun%20and%20Kyoung%20Mu%20Lee.%20Enhanced%20deep%20residual%20networks%20for%20single%20image%20super-resolution%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lim%2C%20Bee%20Son%2C%20Sanghyun%20Kim%2C%20Heewon%20Nah%2C%20Seungjun%20and%20Kyoung%20Mu%20Lee.%20Enhanced%20deep%20residual%20networks%20for%20single%20image%20super-resolution%202017"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Ding Liu, Bihan Wen, Yuchen Fan, Chen Change Loy, and Thomas Huang. Non-local recurrent network for image restoration. In NIPS*2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20Ding%20Wen%2C%20Bihan%20Fan%2C%20Yuchen%20Loy%2C%20Chen%20Change%20Non-local%20recurrent%20network%20for%20image%20restoration.%20In%20NIPS%2A2018"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Jonathan Long, Evan Shelhamer, and Trevor Darrell. Fully convolutional networks for semantic segmentation. In CVPR, pages 3431\u20133440, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Long%2C%20Jonathan%20Shelhamer%2C%20Evan%20Darrell%2C%20Trevor%20Fully%20convolutional%20networks%20for%20semantic%20segmentation%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Long%2C%20Jonathan%20Shelhamer%2C%20Evan%20Darrell%2C%20Trevor%20Fully%20convolutional%20networks%20for%20semantic%20segmentation%202015"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Or Lotan and Michal Irani. Needle-match: Reliable patch matching under high uncertainty. In CVPR, pages 439\u2013448, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lotan%2C%20Or%20Irani%2C%20Michal%20Needle-match%3A%20Reliable%20patch%20matching%20under%20high%20uncertainty%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lotan%2C%20Or%20Irani%2C%20Michal%20Needle-match%3A%20Reliable%20patch%20matching%20under%20high%20uncertainty%202016"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Kede Ma, Zhengfang Duanmu, Qingbo Wu, Zhou Wang, Hongwei Yong, Hongliang Li, and Lei Zhang. Waterloo Exploration Database: New challenges for image quality assessment models. IEEE T. Image Process., 26(2):1004\u20131016, February 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ma%2C%20Kede%20Duanmu%2C%20Zhengfang%20Wu%2C%20Qingbo%20Wang%2C%20Zhou%20Waterloo%20Exploration%20Database%3A%20New%20challenges%20for%20image%20quality%20assessment%20models%202017-02",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ma%2C%20Kede%20Duanmu%2C%20Zhengfang%20Wu%2C%20Qingbo%20Wang%2C%20Zhou%20Waterloo%20Exploration%20Database%3A%20New%20challenges%20for%20image%20quality%20assessment%20models%202017-02"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Chris J. Maddison, Andriy Mnih, and Yee Whye Teh. The Concrete distribution: A continuous relaxation of discrete random variables. In ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Maddison%2C%20Chris%20J.%20Mnih%2C%20Andriy%20and%20Yee%20Whye%20Teh.%20The%20Concrete%20distribution%3A%20A%20continuous%20relaxation%20of%20discrete%20random%20variables%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Maddison%2C%20Chris%20J.%20Mnih%2C%20Andriy%20and%20Yee%20Whye%20Teh.%20The%20Concrete%20distribution%3A%20A%20continuous%20relaxation%20of%20discrete%20random%20variables%202017"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Xiaojiao Mao, Chunhua Shen, and Yu-Bin Yang. Image restoration using very deep convolutional encoderdecoder networks with symmetric skip connections. In NIPS*2016, pages 2802\u20132810.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mao%2C%20Xiaojiao%20Shen%2C%20Chunhua%20Yang%2C%20Yu-Bin%20Image%20restoration%20using%20very%20deep%20convolutional%20encoderdecoder%20networks%20with%20symmetric%20skip%20connections",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mao%2C%20Xiaojiao%20Shen%2C%20Chunhua%20Yang%2C%20Yu-Bin%20Image%20restoration%20using%20very%20deep%20convolutional%20encoderdecoder%20networks%20with%20symmetric%20skip%20connections"
+        },
+        {
+            "id": "32",
+            "entry": "[32] David Martin, Charless Fowlkes, Doron Tal, and Jitendra Malik. A database of human segmented natural images and its application to evaluating segmentation algorithms and measuring ecological statistics. In ICCV, volume 2, pages 416\u2013423, 2001.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Martin%2C%20David%20Fowlkes%2C%20Charless%20Tal%2C%20Doron%20Malik%2C%20Jitendra%20A%20database%20of%20human%20segmented%20natural%20images%20and%20its%20application%20to%20evaluating%20segmentation%20algorithms%20and%20measuring%20ecological%20statistics%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Martin%2C%20David%20Fowlkes%2C%20Charless%20Tal%2C%20Doron%20Malik%2C%20Jitendra%20A%20database%20of%20human%20segmented%20natural%20images%20and%20its%20application%20to%20evaluating%20segmentation%20algorithms%20and%20measuring%20ecological%20statistics%202001"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Andriy Mnih and Danilo J. Rezende. Variational inference for Monte Carlo objectives. In ICML, pages 2188\u20132196, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20Andriy%20Rezende%2C%20Danilo%20J.%20Variational%20inference%20for%20Monte%20Carlo%20objectives%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20Andriy%20Rezende%2C%20Danilo%20J.%20Variational%20inference%20for%20Monte%20Carlo%20objectives%202016"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Tobias Pl\u00f6tz and Stefan Roth. Benchmarking denoising algorithms with real photographs. In CVPR, pages 1586\u20131595, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pl%C3%B6tz%2C%20Tobias%20Roth%2C%20Stefan%20Benchmarking%20denoising%20algorithms%20with%20real%20photographs%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pl%C3%B6tz%2C%20Tobias%20Roth%2C%20Stefan%20Benchmarking%20denoising%20algorithms%20with%20real%20photographs%202017"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Weiqiang Ren, Yinan Yu, Junge Zhang, and Kaiqi Huang. Learning convolutional nonlinear features for k nearest neighbor image classification. In ICPR, pages 4358\u20134363, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ren%2C%20Weiqiang%20Yu%2C%20Yinan%20Zhang%2C%20Junge%20Huang%2C%20Kaiqi%20Learning%20convolutional%20nonlinear%20features%20for%20k%20nearest%20neighbor%20image%20classification%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ren%2C%20Weiqiang%20Yu%2C%20Yinan%20Zhang%2C%20Junge%20Huang%2C%20Kaiqi%20Learning%20convolutional%20nonlinear%20features%20for%20k%20nearest%20neighbor%20image%20classification%202014"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Yaniv Romano, Michael Elad, and Peyman Milanfar. The little engine that could: Regularization by denoising (RED). SIAM Journal on Imaging Sciences, 10(4):1804\u20131844, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Romano%2C%20Yaniv%20Elad%2C%20Michael%20Milanfar%2C%20Peyman%20The%20little%20engine%20that%20could%3A%20Regularization%20by%20denoising%20%28RED%29%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Romano%2C%20Yaniv%20Elad%2C%20Michael%20Milanfar%2C%20Peyman%20The%20little%20engine%20that%20could%3A%20Regularization%20by%20denoising%20%28RED%29%202017"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Stefan Roth and Michael J. Black. Fields of experts. Int. J. Comput. Vision, 82(2):205\u2013229, April 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Roth%2C%20Stefan%20Black%2C%20Michael%20J.%20Fields%20of%20experts%202009-04",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Roth%2C%20Stefan%20Black%2C%20Michael%20J.%20Fields%20of%20experts%202009-04"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Ying Tai, Jian Yang, Xiaoming Liu, and Chunyan Xu. MemNet: A persistent memory network for image restoration. In ICCV, pages 4539\u20134547, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tai%2C%20Ying%20Yang%2C%20Jian%20Liu%2C%20Xiaoming%20Xu%2C%20Chunyan%20MemNet%3A%20A%20persistent%20memory%20network%20for%20image%20restoration%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tai%2C%20Ying%20Yang%2C%20Jian%20Liu%2C%20Xiaoming%20Xu%2C%20Chunyan%20MemNet%3A%20A%20persistent%20memory%20network%20for%20image%20restoration%202017"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Radu Timofte, Eirikur Agustsson, Luc Van Gool, Ming-Hsuan Yang, and Lei Zhang. NTIRE 2017 challenge on single image super-resolution: Methods and results. In CVPR Workshops, pages 114\u2013125, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Timofte%2C%20Radu%20Agustsson%2C%20Eirikur%20Gool%2C%20Luc%20Van%20Yang%2C%20Ming-Hsuan%20challenge%20on%20single%20image%20super-resolution%3A%20Methods%20and%20results%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Timofte%2C%20Radu%20Agustsson%2C%20Eirikur%20Gool%2C%20Luc%20Van%20Yang%2C%20Ming-Hsuan%20challenge%20on%20single%20image%20super-resolution%3A%20Methods%20and%20results%202017"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, \u0141ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In NIPS*2017, pages 6000\u20136010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ashish%20Vaswani%20Noam%20Shazeer%20Niki%20Parmar%20Jakob%20Uszkoreit%20Llion%20Jones%20Aidan%20N%20Gomez%20%C5%81ukasz%20Kaiser%20and%20Illia%20Polosukhin%20Attention%20is%20all%20you%20need%20In%20NIPS2017%20pages%2060006010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ashish%20Vaswani%20Noam%20Shazeer%20Niki%20Parmar%20Jakob%20Uszkoreit%20Llion%20Jones%20Aidan%20N%20Gomez%20%C5%81ukasz%20Kaiser%20and%20Illia%20Polosukhin%20Attention%20is%20all%20you%20need%20In%20NIPS2017%20pages%2060006010"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Oriol Vinyals, Charles Blundell, Tim Lillicrap, Koray Kavukcuoglu, and Daan Wierstra. Matching networks for one shot learning. In NIPS*2016, pages 3630\u20133638.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vinyals%2C%20Oriol%20Blundell%2C%20Charles%20Lillicrap%2C%20Tim%20Kavukcuoglu%2C%20Koray%20Matching%20networks%20for%20one%20shot%20learning",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vinyals%2C%20Oriol%20Blundell%2C%20Charles%20Lillicrap%2C%20Tim%20Kavukcuoglu%2C%20Koray%20Matching%20networks%20for%20one%20shot%20learning"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Xiaolong Wang, Ross Girshick, Abhinav Gupta, and Kaiming He. Non-local neural networks. In CVPR, pages 7794\u20137803, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Xiaolong%20Girshick%2C%20Ross%20Gupta%2C%20Abhinav%20He%2C%20Kaiming%20Non-local%20neural%20networks%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Xiaolong%20Girshick%2C%20Ross%20Gupta%2C%20Abhinav%20He%2C%20Kaiming%20Non-local%20neural%20networks%202018"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Zhou Wang, Eero P. Simoncelli, and Alan C. Bovik. Multi-scale structural similarity for image quality assessment. In IEEE Asilomar Conference on Signals, Systems and Computers, volume 2, pages 1398\u20131402, Pacific Grove, California, November 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Zhou%20Simoncelli%2C%20Eero%20P.%20Bovik%2C%20Alan%20C.%20Multi-scale%20structural%20similarity%20for%20image%20quality%20assessment%202003-11",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Zhou%20Simoncelli%2C%20Eero%20P.%20Bovik%2C%20Alan%20C.%20Multi-scale%20structural%20similarity%20for%20image%20quality%20assessment%202003-11"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Kilian Q. Weinberger and Lawrence K. Saul. Distance metric learning for large margin nearest neighbor classification. J. Mach. Learn. Res., 10:207\u2013244, February 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Weinberger%2C%20Kilian%20Q.%20Saul%2C%20Lawrence%20K.%20Distance%20metric%20learning%20for%20large%20margin%20nearest%20neighbor%20classification%202009-02",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Weinberger%2C%20Kilian%20Q.%20Saul%2C%20Lawrence%20K.%20Distance%20metric%20learning%20for%20large%20margin%20nearest%20neighbor%20classification%202009-02"
+        },
+        {
+            "id": "45",
+            "entry": "[45] Huijuan Xu and Kate Saenko. Ask, attend and answer: Exploring question-guided spatial attention for visual question answering. In ECCV, volume 2, pages 451\u2013466, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xu%2C%20Huijuan%20Ask%2C%20Kate%20Saenko%20attend%20and%20answer%3A%20Exploring%20question-guided%20spatial%20attention%20for%20visual%20question%20answering%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xu%2C%20Huijuan%20Ask%2C%20Kate%20Saenko%20attend%20and%20answer%3A%20Exploring%20question-guided%20spatial%20attention%20for%20visual%20question%20answering%202016"
+        },
+        {
+            "id": "46",
+            "entry": "[46] Jun Xu, Lei Zhang, and David Zhang. A trilateral weighted sparse coding scheme for real-world image denoising. In ECCV, volume 8, pages 21\u201338, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xu%2C%20Jun%20Zhang%2C%20Lei%20Zhang%2C%20David%20A%20trilateral%20weighted%20sparse%20coding%20scheme%20for%20real-world%20image%20denoising%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xu%2C%20Jun%20Zhang%2C%20Lei%20Zhang%2C%20David%20A%20trilateral%20weighted%20sparse%20coding%20scheme%20for%20real-world%20image%20denoising%202018"
+        },
+        {
+            "id": "47",
+            "entry": "[47] Dong Yang and Jian Sun. BM3D-Net: A convolutional neural network for transform-domain collaborative filtering. IEEE T. Signal Process., 25(1):55\u201359, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yang%2C%20Dong%20Sun%2C%20Jian%20BM3D-Net%3A%20A%20convolutional%20neural%20network%20for%20transform-domain%20collaborative%20filtering%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yang%2C%20Dong%20Sun%2C%20Jian%20BM3D-Net%3A%20A%20convolutional%20neural%20network%20for%20transform-domain%20collaborative%20filtering%202018"
+        },
+        {
+            "id": "48",
+            "entry": "[48] Kwang Moo Yi, Eduard Trulls, Yuki Ono, Vincent Lepetit, Mathieu Salzmann, and Pascal Fua. Learning to find good correspondences. In CVPR, pages 2666\u20132674, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yi%2C%20Kwang%20Moo%20Trulls%2C%20Eduard%20Ono%2C%20Yuki%20Lepetit%2C%20Vincent%20Learning%20to%20find%20good%20correspondences%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yi%2C%20Kwang%20Moo%20Trulls%2C%20Eduard%20Ono%2C%20Yuki%20Lepetit%2C%20Vincent%20Learning%20to%20find%20good%20correspondences%202018"
+        },
+        {
+            "id": "49",
+            "entry": "[49] Fisher Yu and Vladlen Koltun. Multi-scale context aggregation by dilated convolutions. In ICLR, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yu%2C%20Fisher%20Koltun%2C%20Vladlen%20Multi-scale%20context%20aggregation%20by%20dilated%20convolutions%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yu%2C%20Fisher%20Koltun%2C%20Vladlen%20Multi-scale%20context%20aggregation%20by%20dilated%20convolutions%202015"
+        },
+        {
+            "id": "50",
+            "entry": "[50] Kai Zhang, Wangmeng Zuo, Yunjin Chen, Deyu Meng, and Lei Zhang. Beyond a Gaussian denoiser: Residual learning of deep CNN for image denoising. IEEE T. Image Process., 26(7):3142\u20133155, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Kai%20Zuo%2C%20Wangmeng%20Chen%2C%20Yunjin%20Meng%2C%20Deyu%20Beyond%20a%20Gaussian%20denoiser%3A%20Residual%20learning%20of%20deep%20CNN%20for%20image%20denoising%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Kai%20Zuo%2C%20Wangmeng%20Chen%2C%20Yunjin%20Meng%2C%20Deyu%20Beyond%20a%20Gaussian%20denoiser%3A%20Residual%20learning%20of%20deep%20CNN%20for%20image%20denoising%202017"
+        },
+        {
+            "id": "51",
+            "entry": "[51] Kai Zhang, Wangmeng Zuo, Shuhang Gu, and Lei Zhang. Learning deep CNN denoiser prior for image restoration. In CVPR, pages 2808\u20132817, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Kai%20Zuo%2C%20Wangmeng%20Gu%2C%20Shuhang%20Zhang%2C%20Lei%20Learning%20deep%20CNN%20denoiser%20prior%20for%20image%20restoration%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Kai%20Zuo%2C%20Wangmeng%20Gu%2C%20Shuhang%20Zhang%2C%20Lei%20Learning%20deep%20CNN%20denoiser%20prior%20for%20image%20restoration%202017"
+        },
+        {
+            "id": "52",
+            "entry": "[52] Kai Zhang, Wangmeng Zuo, and Lei Zhang. FFDNet: Toward a fast and flexible solution for CNN based image denoising. IEEE T. Image Process., 27(9):4608\u20134622, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Kai%20Zuo%2C%20Wangmeng%20Zhang%2C%20Lei%20FFDNet%3A%20Toward%20a%20fast%20and%20flexible%20solution%20for%20CNN%20based%20image%20denoising%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Kai%20Zuo%2C%20Wangmeng%20Zhang%2C%20Lei%20FFDNet%3A%20Toward%20a%20fast%20and%20flexible%20solution%20for%20CNN%20based%20image%20denoising%202018"
+        },
+        {
+            "id": "53",
+            "entry": "[53] Maria Zontak and Michal Irani. Internal statistics of a single natural image. In CVPR, pages 977\u2013984, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zontak%2C%20Maria%20Irani%2C%20Michal%20Internal%20statistics%20of%20a%20single%20natural%20image%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zontak%2C%20Maria%20Irani%2C%20Michal%20Internal%20statistics%20of%20a%20single%20natural%20image%202011"
+        },
+        {
+            "id": "54",
+            "entry": "[54] Maria Zontak, Inbar Mosseri, and Michal Irani. Separating signal from noise using patch recurrence across scales. In CVPR, pages 1195\u20131202, 2013. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zontak%2C%20Maria%20Mosseri%2C%20Inbar%20Irani%2C%20Michal%20Separating%20signal%20from%20noise%20using%20patch%20recurrence%20across%20scales%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zontak%2C%20Maria%20Mosseri%2C%20Inbar%20Irani%2C%20Michal%20Separating%20signal%20from%20noise%20using%20patch%20recurrence%20across%20scales%202013"
+        }
+    ]
+}

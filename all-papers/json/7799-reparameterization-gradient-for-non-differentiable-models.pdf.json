@@ -1,0 +1,287 @@
+{
+    "filename": "7799-reparameterization-gradient-for-non-differentiable-models.pdf",
+    "metadata": {
+        "title": "Reparameterization Gradient for Non-differentiable Models",
+        "author": "Wonyeol Lee, Hangyeol Yu, Hongseok Yang",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7799-reparameterization-gradient-for-non-differentiable-models.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We present a new algorithm for stochastic variational inference that targets at models with non-differentiable densities. One of the key challenges in stochastic variational inference is to come up with a low-variance estimator of the gradient of a variational objective. We tackle the challenge by generalizing the reparameterization trick, one of the most effective techniques for addressing the variance issue for differentiable models, so that the trick works for non-differentiable models as well. Our algorithm splits the space of latent variables into regions where the density of the variables is differentiable, and their boundaries where the density may fail to be differentiable. For each differentiable region, the algorithm applies the standard reparameterization trick and estimates the gradient restricted to the region. For each potentially non-differentiable boundary, it uses a form of manifold sampling and computes the direction for variational parameters that, if followed, would increase the boundary\u2019s contribution to the variational objective. The sum of all the estimates becomes the gradient estimate of our algorithm. Our estimator enjoys the reduced variance of the reparameterization gradient while remaining unbiased even for non-differentiable models. The experiments with our preliminary implementation confirm the benefit of reduced variance and unbiasedness."
+    },
+    "keywords": [
+        {
+            "term": "variational inference",
+            "url": "https://en.wikipedia.org/wiki/variational_inference"
+        },
+        {
+            "term": "latent variable",
+            "url": "https://en.wikipedia.org/wiki/latent_variable"
+        },
+        {
+            "term": "National Research Foundation of Korea",
+            "url": "https://en.wikipedia.org/wiki/National_Research_Foundation_of_Korea"
+        },
+        {
+            "term": "ELBO",
+            "url": "https://en.wikipedia.org/wiki/ELBO"
+        },
+        {
+            "term": "probabilistic programming",
+            "url": "https://en.wikipedia.org/wiki/probabilistic_programming"
+        }
+    ],
+    "highlights": [
+        "Stochastic variational inference (SVI) is a popular choice for performing posterior inference in Bayesian machine learning",
+        "We experimentally compare our gradient estimator (OURS) to the score estimator (SCORE), an unbiased gradient estimator that is applicable to non-differentiable models, and the reparameterization estimator (REPARAM), a biased gradient estimator that computes only RepGrad\u03b8",
+        "Our work extends this line of research by adding a version of the reparameterization trick that can be applied to models with discrete random variables",
+        "We have presented a new estimator for the gradient of the standard variational objective, ELBO",
+        "We have shown the unbiasedness of our estimator using a theorem for interchanging integration and differentiation under moving domain [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>] and the divergence theorem",
+        "One interesting future direction is to investigate the possibility of applying our ideas to recent variational objectives [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>, <a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>, <a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>], which are based on tighter lower bounds of marginal likelihood than the standard ELBO"
+    ],
+    "key_statements": [
+        "Stochastic variational inference (SVI) is a popular choice for performing posterior inference in Bayesian machine learning",
+        "We review the basics of stochastic variational inference",
+        "We experimentally compare our gradient estimator (OURS) to the score estimator (SCORE), an unbiased gradient estimator that is applicable to non-differentiable models, and the reparameterization estimator (REPARAM), a biased gradient estimator that computes only RepGrad\u03b8",
+        "Our work extends this line of research by adding a version of the reparameterization trick that can be applied to models with discrete random variables",
+        "We have presented a new estimator for the gradient of the standard variational objective, ELBO",
+        "We have shown the unbiasedness of our estimator using a theorem for interchanging integration and differentiation under moving domain [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>] and the divergence theorem",
+        "We have experimentally demonstrated the promise of our estimator using three time-series models",
+        "One interesting future direction is to investigate the possibility of applying our ideas to recent variational objectives [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>, <a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>, <a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>], which are based on tighter lower bounds of marginal likelihood than the standard ELBO",
+        "When viewed from a high level, our work suggests a heuristic of splitting the latent space into a bad yet tiny subspace and the remaining good one, and solving an estimation problem in each subspace separately"
+    ],
+    "summary": [
+        "Stochastic variational inference (SVI) is a popular choice for performing posterior inference in Bayesian machine learning.",
+        "The high variance of a gradient estimate is a more serious issue for these models than for those with differentiable densities.",
+        "We present a new gradient estimator for non-differentiable models.",
+        "The reparameterization trick [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>, <a class=\"ref-link\" id=\"c30\" href=\"#r30\">30</a>] is the technique of choice for constructing a low-variance gradient estimator for models with differentiable densities.",
+        "The reparameterization gradient in (2) is unbiased, and has variance significantly lower than the so called score estimator [<a class=\"ref-link\" id=\"c35\" href=\"#r35\">35</a>, <a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>, <a class=\"ref-link\" id=\"c36\" href=\"#r36\">36</a>, <a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>], which does not exploit differentiability.",
+        "Our main result is a new unbiased gradient estimator for a class of non-differentiable models, which can use the reparameterization trick despite the non-differentiability.",
+        "We focus on a class of models that use relatively simple boundaries f\u03b8\u22121(\u2202Rk) and permit, as a result, an efficient method for estimating surface integrals in BouContr\u03b8.",
+        "When every f\u03b8\u22121(\u2202Rk) is an (n\u22121)-dimensional hyperplane { | a \u00b7 = c} for a \u2208 Rn and c \u2208 R with ajk = 0, we can use Theorem 3 and estimate the surface integrals in BouContr\u03b8 as follows: f\u03b8\u22121 (\u2202 Rk )",
+        "We experimentally compare our gradient estimator (OURS) to the score estimator (SCORE), an unbiased gradient estimator that is applicable to non-differentiable models, and the reparameterization estimator (REPARAM), a biased gradient estimator that computes only RepGrad\u03b8.",
+        "Our implementation2 is written in Python and uses autograd [<a class=\"ref-link\" id=\"c18\" href=\"#r18\">18</a>], an automatic differentiation package for Python, to automatically compute the gradient term in RepGrad\u03b8 for an arbitrary probabilistic model.",
+        "A common example of a model with a non-differentiable density is the one that uses discrete random variables, typically together with continuous random variables.3 Coming up with an efficient algorithm for stochastic variational inference for such a model has been an active research topic.",
+        "Maddison et al [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>] and Jang et al [<a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>] proposed continuous relaxations of discrete random variables that convert non-differentiable variational objectives to differentiable ones and make the reparameterization trick applicable.",
+        "A variety of control variates for the standard score estimator [<a class=\"ref-link\" id=\"c35\" href=\"#r35\">35</a>, <a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>, <a class=\"ref-link\" id=\"c36\" href=\"#r36\">36</a>, <a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>] for the gradients of variational objectives have been developed [<a class=\"ref-link\" id=\"c28\" href=\"#r28\">28</a>, <a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>, <a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>, <a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>, <a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>, <a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>], some of which use biased yet differentiable control variates such that the reparameterization trick can be used to correct the bias [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>, <a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>, <a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>].",
+        "The key feature of our estimator is that it can keep variance under control by using a form of the reparameterization trick even when the density of a model is not differentiable.",
+        "One interesting future direction is to investigate the possibility of applying our ideas to recent variational objectives [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>, <a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c19\" href=\"#r19\">19</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>, <a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>], which are based on tighter lower bounds of marginal likelihood than the standard ELBO"
+    ],
+    "headline": "We present a new algorithm for stochastic variational inference that targets at models with non-differentiable densities",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] C. Davidson-Pilon. Bayesian Methods for Hackers: Probabilistic Programming and Bayesian Inference. Addison-Wesley Professional, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Davidson-Pilon%2C%20C.%20Bayesian%20Methods%20for%20Hackers%3A%20Probabilistic%20Programming%20and%20Bayesian%20Inference%202015"
+        },
+        {
+            "id": "2",
+            "entry": "[2] P. Diaconis, S. Holmes, and M. Shahshahani. Sampling from a Manifold, volume Volume 10 of Collections, pages 102\u2013125. Institute of Mathematical Statistics, Beachwood, Ohio, USA, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Diaconis%2C%20P.%20Holmes%2C%20S.%20Shahshahani%2C%20M.%20Sampling%20from%20a%20Manifold%2C%20volume%20Volume%2010%20of%20Collections%202013"
+        },
+        {
+            "id": "3",
+            "entry": "[3] H. Flanders. Differentiation Under the Integral Sign. The American Mathematical Monthly, 80(6):615\u2013627, 1973.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Flanders%2C%20H.%20Differentiation%20Under%20the%20Integral%20Sign%201973",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Flanders%2C%20H.%20Differentiation%20Under%20the%20Integral%20Sign%201973"
+        },
+        {
+            "id": "4",
+            "entry": "[4] N. D. Goodman, V. K. Mansinghka, D. M. Roy, K. Bonawitz, and J. B. Tenenbaum. Church: a language for generative models. In Proceedings of the 24th Conference in Uncertainty in Artificial Intelligence (UAI), 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goodman%2C%20N.D.%20Mansinghka%2C%20V.K.%20Roy%2C%20D.M.%20Bonawitz%2C%20K.%20Church%3A%20a%20language%20for%20generative%20models%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goodman%2C%20N.D.%20Mansinghka%2C%20V.K.%20Roy%2C%20D.M.%20Bonawitz%2C%20K.%20Church%3A%20a%20language%20for%20generative%20models%202008"
+        },
+        {
+            "id": "5",
+            "entry": "[5] A. D. Gordon, T. A. Henzinger, A. V. Nori, and S. K. Rajamani. Probabilistic Programming. In International Conference on Software Engineering (ICSE, FOSE track), 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=A%20D%20Gordon%20T%20A%20Henzinger%20A%20V%20Nori%20and%20S%20K%20Rajamani%20Probabilistic%20Programming%20In%20International%20Conference%20on%20Software%20Engineering%20ICSE%20FOSE%20track%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=A%20D%20Gordon%20T%20A%20Henzinger%20A%20V%20Nori%20and%20S%20K%20Rajamani%20Probabilistic%20Programming%20In%20International%20Conference%20on%20Software%20Engineering%20ICSE%20FOSE%20track%202014"
+        },
+        {
+            "id": "6",
+            "entry": "[6] W. Grathwohl, D. Choi, Y. Wu, G. Roeder, and D. K. Duvenaud. Backpropagation through the Void: Optimizing control variates for black-box gradient estimation. In Proceedings of the 6th International Conference on Learning Representations (ICLR), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Grathwohl%2C%20W.%20Choi%2C%20D.%20Wu%2C%20Y.%20Roeder%2C%20G.%20Backpropagation%20through%20the%20Void%3A%20Optimizing%20control%20variates%20for%20black-box%20gradient%20estimation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Grathwohl%2C%20W.%20Choi%2C%20D.%20Wu%2C%20Y.%20Roeder%2C%20G.%20Backpropagation%20through%20the%20Void%3A%20Optimizing%20control%20variates%20for%20black-box%20gradient%20estimation%202018"
+        },
+        {
+            "id": "7",
+            "entry": "[7] S. Gu, S. Levine, I. Sutskever, and A. Mnih. MuProp: Unbiased Backpropagation for Stochastic Neural Networks. In Proceedings of the 4th International Conference on Learning Representations (ICLR), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gu%2C%20S.%20Levine%2C%20S.%20Sutskever%2C%20I.%20Mnih%2C%20A.%20MuProp%3A%20Unbiased%20Backpropagation%20for%20Stochastic%20Neural%20Networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gu%2C%20S.%20Levine%2C%20S.%20Sutskever%2C%20I.%20Mnih%2C%20A.%20MuProp%3A%20Unbiased%20Backpropagation%20for%20Stochastic%20Neural%20Networks%202016"
+        },
+        {
+            "id": "8",
+            "entry": "[8] S. Gu, T. Lillicrap, Z. Ghahramani, R. E. Turner, and S. Levine. Q-Prop: Sample-Efficient Policy Gradient with An Off-Policy Critic. In Proceedings of the 5th International Conference on Learning Representations (ICLR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gu%2C%20S.%20Lillicrap%2C%20T.%20Ghahramani%2C%20Z.%20Turner%2C%20R.E.%20Q-Prop%3A%20Sample-Efficient%20Policy%20Gradient%20with%20An%20Off-Policy%20Critic%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gu%2C%20S.%20Lillicrap%2C%20T.%20Ghahramani%2C%20Z.%20Turner%2C%20R.E.%20Q-Prop%3A%20Sample-Efficient%20Policy%20Gradient%20with%20An%20Off-Policy%20Critic%202017"
+        },
+        {
+            "id": "9",
+            "entry": "[9] E. J. Gumbel. Statistical Theory of Extreme Values and Some Practical Applications: a Series of Lectures. Number 33. US Govt. Print. Office, 1954.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gumbel%2C%20E.J.%20Statistical%20Theory%20of%20Extreme%20Values%20and%20Some%20Practical%20Applications%3A%20a%20Series%20of%20Lectures.%20Number%2033.%20US%20Govt%201954"
+        },
+        {
+            "id": "10",
+            "entry": "[10] E. Jang, S. Gu, and B. Poole. Categorical Reparameterization with Gumbel-Softmax. In Proceedings of the 5th International Conference on Learning Representations (ICLR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jang%2C%20E.%20Gu%2C%20S.%20Poole%2C%20B.%20Categorical%20Reparameterization%20with%20Gumbel-Softmax%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jang%2C%20E.%20Gu%2C%20S.%20Poole%2C%20B.%20Categorical%20Reparameterization%20with%20Gumbel-Softmax%202017"
+        },
+        {
+            "id": "11",
+            "entry": "[11] D. P. Kingma and J. Ba. Adam: A Method for Stochastic Optimization. In Proceedings of the 3rd International Conference on Learning Representations (ICLR), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20D.P.%20Ba%2C%20J.%20Adam%3A%20A%20Method%20for%20Stochastic%20Optimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20D.P.%20Ba%2C%20J.%20Adam%3A%20A%20Method%20for%20Stochastic%20Optimization%202015"
+        },
+        {
+            "id": "12",
+            "entry": "[12] D. P. Kingma, T. Salimans, R. J\u00f3zefowicz, X. Chen, I. Sutskever, and M. Welling. Improving Variational Autoencoders with Inverse Autoregressive Flow. In Proceedings of the 30th International Conference on Neural Information Processing Systems (NIPS), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20D.P.%20Salimans%2C%20T.%20J%C3%B3zefowicz%2C%20R.%20Chen%2C%20X.%20Improving%20Variational%20Autoencoders%20with%20Inverse%20Autoregressive%20Flow%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20D.P.%20Salimans%2C%20T.%20J%C3%B3zefowicz%2C%20R.%20Chen%2C%20X.%20Improving%20Variational%20Autoencoders%20with%20Inverse%20Autoregressive%20Flow%202016"
+        },
+        {
+            "id": "13",
+            "entry": "[13] D. P. Kingma and M. Welling. Auto-Encoding Variational Bayes. In Proceedings of the 2nd International Conference on Learning Representations (ICLR), 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20D.P.%20Welling%2C%20M.%20Auto-Encoding%20Variational%20Bayes%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20D.P.%20Welling%2C%20M.%20Auto-Encoding%20Variational%20Bayes%202014"
+        },
+        {
+            "id": "14",
+            "entry": "[14] D. A. Knowles. Stochastic gradient variational Bayes for gamma approximating distributions. arXiv, page 1509.01631, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1509.01631"
+        },
+        {
+            "id": "15",
+            "entry": "[15] A. Kucukelbir, D. Tran, R. Ranganath, A. Gelman, and D. M. Blei. Automatic Differentiation Variational Inference. J. Mach. Learn. Res., 18(1):430\u2013474, Jan. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kucukelbir%2C%20A.%20Tran%2C%20D.%20Ranganath%2C%20R.%20Gelman%2C%20A.%20Automatic%20Differentiation%20Variational%20Inference%202017-01",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kucukelbir%2C%20A.%20Tran%2C%20D.%20Ranganath%2C%20R.%20Gelman%2C%20A.%20Automatic%20Differentiation%20Variational%20Inference%202017-01"
+        },
+        {
+            "id": "16",
+            "entry": "[16] T. A. Le, M. Igl, T. Rainforth, T. Jin, and F. Wood. Auto-Encoding Sequential Monte Carlo. In Proceedings of the 6th International Conference on Learning Representations (ICLR), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Le%2C%20T.A.%20Igl%2C%20M.%20Rainforth%2C%20T.%20Jin%2C%20T.%20Auto-Encoding%20Sequential%20Monte%20Carlo%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Le%2C%20T.A.%20Igl%2C%20M.%20Rainforth%2C%20T.%20Jin%2C%20T.%20Auto-Encoding%20Sequential%20Monte%20Carlo%202018"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Y. Li and R. E. Turner. R\u00e9Nyi Divergence Variational Inference. In Proceedings of the 30th International Conference on Neural Information Processing Systems (NIPS), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Y.%20Turner%2C%20R.E.%20R%C3%A9Nyi%20Divergence%20Variational%20Inference%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20Y.%20Turner%2C%20R.E.%20R%C3%A9Nyi%20Divergence%20Variational%20Inference%202016"
+        },
+        {
+            "id": "18",
+            "entry": "[18] D. Maclaurin. Modeling, Inference and Optimization with Composable Differentiable Procedures. PhD thesis, Harvard University, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Maclaurin%2C%20D.%20Modeling%2C%20Inference%20and%20Optimization%20with%20Composable%20Differentiable%20Procedures%202016"
+        },
+        {
+            "id": "19",
+            "entry": "[19] C. J. Maddison, J. Lawson, G. Tucker, N. Heess, M. Norouzi, A. Mnih, A. Doucet, and Y. W. Teh. Filtering Variational Objectives. In Proceedings of the 31st International Conference on Neural Information Processing Systems (NIPS), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Maddison%2C%20C.J.%20Lawson%2C%20J.%20Tucker%2C%20G.%20Heess%2C%20N.%20Filtering%20Variational%20Objectives%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Maddison%2C%20C.J.%20Lawson%2C%20J.%20Tucker%2C%20G.%20Heess%2C%20N.%20Filtering%20Variational%20Objectives%202017"
+        },
+        {
+            "id": "20",
+            "entry": "[20] C. J. Maddison, A. Mnih, and Y. W. Teh. The Concrete Distribution: A Continuous Relaxation of Discrete Random Variables. In Proceedings of the 5th International Conference on Learning Representations (ICLR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Maddison%2C%20C.J.%20Mnih%2C%20A.%20Teh%2C%20Y.W.%20The%20Concrete%20Distribution%3A%20A%20Continuous%20Relaxation%20of%20Discrete%20Random%20Variables%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Maddison%2C%20C.J.%20Mnih%2C%20A.%20Teh%2C%20Y.W.%20The%20Concrete%20Distribution%3A%20A%20Continuous%20Relaxation%20of%20Discrete%20Random%20Variables%202017"
+        },
+        {
+            "id": "21",
+            "entry": "[21] C. J. Maddison, D. Tarlow, and T. Minka. A* Sampling. In Proceedings of the 28th International Conference on Neural Information Processing Systems (NIPS), 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=C%20J%20Maddison%20D%20Tarlow%20and%20T%20Minka%20A%20Sampling%20In%20Proceedings%20of%20the%2028th%20International%20Conference%20on%20Neural%20Information%20Processing%20Systems%20NIPS%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=C%20J%20Maddison%20D%20Tarlow%20and%20T%20Minka%20A%20Sampling%20In%20Proceedings%20of%20the%2028th%20International%20Conference%20on%20Neural%20Information%20Processing%20Systems%20NIPS%202014"
+        },
+        {
+            "id": "22",
+            "entry": "[22] V. K. Mansinghka, D. Selsam, and Y. N. Perov. Venture: a higher-order probabilistic programming platform with programmable inference. arXiv, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mansinghka%2C%20V.K.%20Selsam%2C%20D.%20Perov%2C%20Y.N.%20Venture%3A%20a%20higher-order%20probabilistic%20programming%20platform%20with%20programmable%20inference%202014"
+        },
+        {
+            "id": "23",
+            "entry": "[23] A. C. Miller, N. J. Foti, A. D\u2019Amour, and R. P. Adams. Reducing Reparameterization Gradient Variance. arXiv preprint arXiv:1705.07880, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1705.07880"
+        },
+        {
+            "id": "24",
+            "entry": "[24] A. Mnih and D. J. Rezende. Variational Inference for Monte Carlo Objectives. In Proceedings of the 33rd International Conference on International Conference on Machine Learning (ICML), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20A.%20Rezende%2C%20D.J.%20Variational%20Inference%20for%20Monte%20Carlo%20Objectives%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20A.%20Rezende%2C%20D.J.%20Variational%20Inference%20for%20Monte%20Carlo%20Objectives%202016"
+        },
+        {
+            "id": "25",
+            "entry": "[25] C. A. Naesseth, S. W. Linderman, R. Ranganath, and D. M. Blei. Variational Sequential Monte Carlo. In Proceedings of the 21st International Conference on Artificial Intelligence and Statistics (AISTATS), 2018. To appear.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Naesseth%2C%20C.A.%20Linderman%2C%20S.W.%20Ranganath%2C%20R.%20Blei%2C%20D.M.%20Variational%20Sequential%20Monte%20Carlo%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Naesseth%2C%20C.A.%20Linderman%2C%20S.W.%20Ranganath%2C%20R.%20Blei%2C%20D.M.%20Variational%20Sequential%20Monte%20Carlo%202018"
+        },
+        {
+            "id": "26",
+            "entry": "[26] C. A. Naesseth, F. J. R. Ruiz, S. W. Linderman, and D. M. Blei. Reparameterization Gradients through Acceptance-Rejection Sampling Algorithms. In Proceedings of the 20th International Conference on Artificial Intelligence and Statistics (AISTATS), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Naesseth%2C%20C.A.%20Ruiz%2C%20F.J.R.%20Linderman%2C%20S.W.%20Blei%2C%20D.M.%20Reparameterization%20Gradients%20through%20Acceptance-Rejection%20Sampling%20Algorithms%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Naesseth%2C%20C.A.%20Ruiz%2C%20F.J.R.%20Linderman%2C%20S.W.%20Blei%2C%20D.M.%20Reparameterization%20Gradients%20through%20Acceptance-Rejection%20Sampling%20Algorithms%202017"
+        },
+        {
+            "id": "27",
+            "entry": "[27] J. W. Paisley, D. M. Blei, and M. I. Jordan. Variational Bayesian Inference with Stochastic Search. In Proceedings of the 29th International Conference on Machine Learning (ICML), 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Paisley%2C%20J.W.%20Blei%2C%20D.M.%20Jordan%2C%20M.I.%20Variational%20Bayesian%20Inference%20with%20Stochastic%20Search%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Paisley%2C%20J.W.%20Blei%2C%20D.M.%20Jordan%2C%20M.I.%20Variational%20Bayesian%20Inference%20with%20Stochastic%20Search%202012"
+        },
+        {
+            "id": "28",
+            "entry": "[28] R. Ranganath, S. Gerrish, and D. Blei. Black Box Variational Inference. In Proceedings of the 17th International Conference on Artificial Intelligence and Statistics (AISTATS), 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ranganath%2C%20R.%20Gerrish%2C%20S.%20Blei%2C%20D.%20Black%20Box%20Variational%20Inference%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ranganath%2C%20R.%20Gerrish%2C%20S.%20Blei%2C%20D.%20Black%20Box%20Variational%20Inference%202014"
+        },
+        {
+            "id": "29",
+            "entry": "[29] D. J. Rezende and S. Mohamed. Variational Inference with Normalizing Flows. In Proceedings of the 32nd International Conference on International Conference on Machine Learning (ICML), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rezende%2C%20D.J.%20Mohamed%2C%20S.%20Variational%20Inference%20with%20Normalizing%20Flows%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rezende%2C%20D.J.%20Mohamed%2C%20S.%20Variational%20Inference%20with%20Normalizing%20Flows%202015"
+        },
+        {
+            "id": "30",
+            "entry": "[30] D. J. Rezende, S. Mohamed, and D. Wierstra. Stochastic Backpropagation and Approximate Inference in Deep Generative Models. In Proceedings of the 31st International Conference on Machine Learning (ICML), 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rezende%2C%20D.J.%20Mohamed%2C%20S.%20Wierstra%2C%20D.%20Stochastic%20Backpropagation%20and%20Approximate%20Inference%20in%20Deep%20Generative%20Models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rezende%2C%20D.J.%20Mohamed%2C%20S.%20Wierstra%2C%20D.%20Stochastic%20Backpropagation%20and%20Approximate%20Inference%20in%20Deep%20Generative%20Models%202014"
+        },
+        {
+            "id": "31",
+            "entry": "[31] F. J. R. Ruiz, M. K. Titsias, and D. M. Blei. The Generalized Reparameterization Gradient. In Proceedings of the 30th International Conference on Neural Information Processing Systems (NIPS), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ruiz%2C%20F.J.R.%20Titsias%2C%20M.K.%20Blei%2C%20D.M.%20The%20Generalized%20Reparameterization%20Gradient%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ruiz%2C%20F.J.R.%20Titsias%2C%20M.K.%20Blei%2C%20D.M.%20The%20Generalized%20Reparameterization%20Gradient%202016"
+        },
+        {
+            "id": "32",
+            "entry": "[32] R. H. Shumway and D. S. Stoffer. Time Series Analysis and Its Applications (Springer Texts in Statistics). Springer-Verlag, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shumway%2C%20R.H.%20Stoffer%2C%20D.S.%20Time%20Series%20Analysis%20and%20Its%20Applications%20%28Springer%20Texts%20in%20Statistics%29%202005"
+        },
+        {
+            "id": "33",
+            "entry": "[33] S. E. Z. Soudjani, R. Majumdar, and T. Nagapetyan. Multilevel Monte Carlo Method for Statistical Model Checking of Hybrid Systems. In Proceedings of the 14th International Conference on Quantitative Evaluation of Systems (QUEST), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Soudjani%2C%20S.E.Z.%20Majumdar%2C%20R.%20Nagapetyan%2C%20T.%20Multilevel%20Monte%20Carlo%20Method%20for%20Statistical%20Model%20Checking%20of%20Hybrid%20Systems%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Soudjani%2C%20S.E.Z.%20Majumdar%2C%20R.%20Nagapetyan%2C%20T.%20Multilevel%20Monte%20Carlo%20Method%20for%20Statistical%20Model%20Checking%20of%20Hybrid%20Systems%202017"
+        },
+        {
+            "id": "34",
+            "entry": "[34] G. Tucker, A. Mnih, C. J. Maddison, J. Lawson, and J. Sohl-Dickstein. REBAR: Low-variance, unbiased gradient estimates for discrete latent variable models. In Proceedings of the 31st International Conference on Neural Information Processing Systems (NIPS), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tucker%2C%20G.%20Mnih%2C%20A.%20Maddison%2C%20C.J.%20Lawson%2C%20J.%20REBAR%3A%20Low-variance%2C%20unbiased%20gradient%20estimates%20for%20discrete%20latent%20variable%20models%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tucker%2C%20G.%20Mnih%2C%20A.%20Maddison%2C%20C.J.%20Lawson%2C%20J.%20REBAR%3A%20Low-variance%2C%20unbiased%20gradient%20estimates%20for%20discrete%20latent%20variable%20models%202017"
+        },
+        {
+            "id": "35",
+            "entry": "[35] R. J. Williams. Simple Statistical Gradient-Following Algorithms for Connectionist Reinforcement Learning. Mach. Learn., 8(3-4):229\u2013256, May 1992.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%2C%20R.J.%20Simple%20Statistical%20Gradient-Following%20Algorithms%20for%20Connectionist%20Reinforcement%20Learning%201992-05",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Williams%2C%20R.J.%20Simple%20Statistical%20Gradient-Following%20Algorithms%20for%20Connectionist%20Reinforcement%20Learning%201992-05"
+        },
+        {
+            "id": "36",
+            "entry": "[36] D. Wingate and T. Weber. Automated Variational Inference in Probabilistic Programming. CoRR, abs/1301.1299, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1301.1299"
+        },
+        {
+            "id": "37",
+            "entry": "[37] F. Wood, J.-W. van de Meent, and V. Mansinghka. A New Approach to Probabilistic Programming Inference. In Proceedings of the 17th International Conference on Artificial Intelligence and Statistics (AISTATS), 2014. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wood%2C%20F.%20van%20de%20Meent%2C%20J.-W.%20Mansinghka%2C%20V.%20A%20New%20Approach%20to%20Probabilistic%20Programming%20Inference%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wood%2C%20F.%20van%20de%20Meent%2C%20J.-W.%20Mansinghka%2C%20V.%20A%20New%20Approach%20to%20Probabilistic%20Programming%20Inference%202014"
+        }
+    ]
+}

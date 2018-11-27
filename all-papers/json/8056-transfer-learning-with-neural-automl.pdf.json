@@ -1,0 +1,358 @@
+{
+    "filename": "8056-transfer-learning-with-neural-automl.pdf",
+    "metadata": {
+        "title": "Transfer Learning with Neural AutoML",
+        "author": "Catherine Wong MIT",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8056-transfer-learning-with-neural-automl.pdf"
+        },
+        "abstract": "We reduce the computational cost of Neural AutoML with transfer learning. AutoML relieves human effort by automating the design of ML algorithms. Neural AutoML has become popular for the design of deep learning architectures, however, this method has a high computation cost. To address this we propose Transfer Neural AutoML that uses knowledge from prior tasks to speed up network design. We extend RL-based architecture search methods to support parallel training on multiple tasks and then transfer the search strategy to new tasks. On language and image classification tasks, Transfer Neural AutoML reduces convergence time over single-task training by over an order of magnitude on many tasks."
+    },
+    "keywords": [
+        {
+            "term": "architecture search",
+            "url": "https://en.wikipedia.org/wiki/architecture_search"
+        },
+        {
+            "term": "bayesian optimization",
+            "url": "https://en.wikipedia.org/wiki/bayesian_optimization"
+        },
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "neural architecture search",
+            "url": "https://en.wikipedia.org/wiki/neural_architecture_search"
+        },
+        {
+            "term": "computational cost",
+            "url": "https://en.wikipedia.org/wiki/computational_cost"
+        },
+        {
+            "term": "genetic algorithm",
+            "url": "https://en.wikipedia.org/wiki/genetic_algorithm"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        },
+        {
+            "term": "random search",
+            "url": "https://en.wikipedia.org/wiki/random_search"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "feedforward neural networks",
+            "url": "https://en.wikipedia.org/wiki/feedforward_neural_networks"
+        },
+        {
+            "term": "convergence time",
+            "url": "https://en.wikipedia.org/wiki/convergence_time"
+        },
+        {
+            "term": "transfer learning",
+            "url": "https://en.wikipedia.org/wiki/transfer_learning"
+        }
+    ],
+    "highlights": [
+        "Automatic Machine Learning (AutoML) aims to find the best performing learning algorithms with minimal human intervention",
+        "We present Transfer Neural Automatic Machine Learning, a method to accelerate network design on new tasks based on priors learned on previous tasks",
+        "Transfer Neural Automatic Machine Learning is based on Neural Architecture Search (NAS) [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>]",
+        "We report the number of trials required by Automatic Machine Learning and T-Automatic Machine Learning to achieve the same validation accuracy-top10 as Random Search with B trials",
+        "To address this we propose transfer learning of the controller and show a large reductions in convergence time across many datasets",
+        "Attempting transfer across modalities; some priors over hyperparameter combinations learned on NLP tasks may be useful for images or other domains"
+    ],
+    "key_statements": [
+        "Automatic Machine Learning (AutoML) aims to find the best performing learning algorithms with minimal human intervention",
+        "We focus on neural Automatic Machine Learning, that uses deep RL to optimize architectures",
+        "We present Transfer Neural Automatic Machine Learning, a method to accelerate network design on new tasks based on priors learned on previous tasks",
+        "We reduce the time to converge in both text and image domains by over an order of magnitude in most tasks",
+        "Transfer Neural Automatic Machine Learning is based on Neural Architecture Search (NAS) [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>]",
+        "We propose Multitask Neural Automatic Machine Learning, that searches for model on multiple tasks simultaneously",
+        "The multitask controller is pretrained on a set of tasks and learns a prior over generic architectural and parameter choices, along with task-specific decisions encoded in the task embeddings",
+        "There is prior research on transfer of optimizers for Neural Automatic Machine Learning; Sequential Model-based Optimizers have been transferred across tasks to improve hyperparameter tuning [<a class=\"ref-link\" id=\"c31\" href=\"#r31\">31</a>, <a class=\"ref-link\" id=\"c32\" href=\"#r32\">32</a>], we propose a parallel solution for neural methods",
+        "In preliminary experiments on four NLP tasks, we found REINFORCE and TRPO to perform best and selected REINFORCE for the following experiments",
+        "Metrics To measure the ability of the different Automatic Machine Learning controllers to find good models, we compute the average accuracy of the topN child models generated during the search",
+        "We first compute accuracy-top10 on the validation set for Random Search given a fixed budget of B trials",
+        "We report the number of trials required by Automatic Machine Learning and T-Automatic Machine Learning to achieve the same validation accuracy-top10 as Random Search with B trials",
+        "Note that Random Search may exhibit fewer than B = 5000 trials if it converged earlier",
+        "These results shows that T-Automatic Machine Learning is effective at optimizing validation accuracy, offering a large reduction in time to attain a fixed reward",
+        "In 12 of the 13 datasets T-Automatic Machine Learning achieves the desired reward fastest, and in 9 cases achieves an order of magnitude speed-up",
+        "On some datasets the quality is improved with further training e.g. Emotion, Corp Messaging, but in others the initial configurations learned from the multitask model are not improved",
+        "Overall we find that Transfer Automatic Machine Learning with the search space described above yields models competitive with the state-of-the-art",
+        "To validate the generality of our approach we evaluate on image classification task: Cifar-10",
+        "To address this we propose transfer learning of the controller and show a large reductions in convergence time across many datasets",
+        "Attempting transfer across modalities; some priors over hyperparameter combinations learned on NLP tasks may be useful for images or other domains",
+        "Making the controller more robust to evaluation noise, and addressing the potential to meta overfit on small datasets"
+    ],
+    "summary": [
+        "Automatic Machine Learning (AutoML) aims to find the best performing learning algorithms with minimal human intervention.",
+        "We transfer this controller to new tasks and leverage the learned priors over performant models.",
+        "The performance of the child network on the validation set is used as a reward to update the controller via a policy gradient algorithm.",
+        "We propose Multitask Neural AutoML, that searches for model on multiple tasks simultaneously.",
+        "Multitask training allows the controller to learn a broadly applicable prior over the search space by observing shared behaviour across tasks.",
+        "The child model defined by these actions is trained and evaluated on the task, and the reward is used to update the task-agnostic parameters and the corresponding task embedding.",
+        "The multitask controller is pretrained on a set of tasks and learns a prior over generic architectural and parameter choices, along with task-specific decisions encoded in the task embeddings.",
+        "Transfer learning has achieved excellent results as an initialization method for deep networks, including for models trained using RL [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>, <a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>, <a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>].",
+        "Metrics To measure the ability of the different AutoML controllers to find good models, we compute the average accuracy of the topN child models generated during the search.",
+        "The multitask controller is pretrained on 8 randomly sampled tasks: Airline, Complaints, Economic News, News Aggregator, Political Message, Primary Emotion, Sentiment SST, US Economy.",
+        "On some datasets the quality is improved with further training e.g. Emotion, Corp Messaging, but in others the initial configurations learned from the multitask model are not improved.",
+        "100 CPUs. If we do not need the M models for the tasks used to train the multitask controller, we must run > (1 \u2212 1/S)\u22121M new tasks to amortize this cost.",
+        "The transferred controller attains an accuracy-top-10 of 96.5%, similar to the other methods, but converges much faster as in the NLP tasks.",
+        "Figure 4 shows the accuracy-top10 on the validation and test sets on the Prog Opinion dataset.",
+        "At trial 2000, T-AutoML attains a test accuracy-top10 of 79.8%, approximately equal to that or random search with 79.4%, and greater than single-task with 78.1%.",
+        "This indicates that transfer works best on similar tasks, the controller is still able to adapt to outliers given sufficient training time.",
+        "Figure 1 shows the cosine similarity between the task embeddings learned during multitask training.",
+        "The cluster {Economic News, Political Emotion, Sentiment SST} is assigned 2-layer networks with 64 units, Relu activation, wide-layer learning rate 0.003, and dropout rate 0.3.",
+        "We train the task-agnostic multitask controller to convergence, and select the final child model.",
+        "Making the controller more robust to evaluation noise, and addressing the potential to meta overfit on small datasets"
+    ],
+    "headline": "We reduce the computational cost of Neural Automatic Machine Learning with transfer learning",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] James Bergstra and Yoshua Bengio. Random search for hyper-parameter optimization. JMLR, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bergstra%2C%20James%20Bengio%2C%20Yoshua%20Random%20search%20for%20hyper-parameter%20optimization%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bergstra%2C%20James%20Bengio%2C%20Yoshua%20Random%20search%20for%20hyper-parameter%20optimization%202012"
+        },
+        {
+            "id": "2",
+            "entry": "[2] James S Bergstra, R\u00e9mi Bardenet, Yoshua Bengio, and Bal\u00e1zs K\u00e9gl. Algorithms for hyper-parameter optimization. In NIPS, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=James%20S%20Bergstra%2C%20R%C3%A9mi%20Bardenet%2C%20Yoshua%20Bengio%20K%C3%A9gl%2C%20Bal%C3%A1zs%20Algorithms%20for%20hyper-parameter%20optimization%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=James%20S%20Bergstra%2C%20R%C3%A9mi%20Bardenet%2C%20Yoshua%20Bengio%20K%C3%A9gl%2C%20Bal%C3%A1zs%20Algorithms%20for%20hyper-parameter%20optimization%202011"
+        },
+        {
+            "id": "3",
+            "entry": "[3] James Bergstra, Daniel Yamins, and David Cox. Making a science of model search: Hyperparameter optimization in hundreds of dimensions for vision architectures. In ICML, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bergstra%2C%20James%20Yamins%2C%20Daniel%20Cox%2C%20David%20Making%20a%20science%20of%20model%20search%3A%20Hyperparameter%20optimization%20in%20hundreds%20of%20dimensions%20for%20vision%20architectures%202013"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Jasper Snoek, Hugo Larochelle, and Ryan P Adams. Practical bayesian optimization of machine learning algorithms. In NIPS, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Snoek%2C%20Jasper%20Larochelle%2C%20Hugo%20Adams%2C%20Ryan%20P.%20Practical%20bayesian%20optimization%20of%20machine%20learning%20algorithms%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Snoek%2C%20Jasper%20Larochelle%2C%20Hugo%20Adams%2C%20Ryan%20P.%20Practical%20bayesian%20optimization%20of%20machine%20learning%20algorithms%202012"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Esteban Real, Sherry Moore, Andrew Selle, Saurabh Saxena, Yutaka Leon Suematsu, Quoc Le, and Alex Kurakin. Large-scale evolution of image classifiers. In ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Esteban%20Real%20Sherry%20Moore%20Andrew%20Selle%20Saurabh%20Saxena%20Yutaka%20Leon%20Suematsu%20Quoc%20Le%20and%20Alex%20Kurakin%20Largescale%20evolution%20of%20image%20classifiers%20In%20ICML%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Esteban%20Real%20Sherry%20Moore%20Andrew%20Selle%20Saurabh%20Saxena%20Yutaka%20Leon%20Suematsu%20Quoc%20Le%20and%20Alex%20Kurakin%20Largescale%20evolution%20of%20image%20classifiers%20In%20ICML%202017"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Risto Miikkulainen, Jason Zhi Liang, Elliot Meyerson, Aditya Rawal, Dan Fink, Olivier Francon, Bala Raju, Hormoz Shahrzad, Arshak Navruzyan, Nigel Duffy, and Babak Hodjat. Evolving deep neural networks. CoRR, abs/1703.00548, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.00548"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Bowen Baker, Otkrist Gupta, Nikhil Naik, and Ramesh Raskar. Designing neural network architectures using reinforcement learning. In ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Baker%2C%20Bowen%20Gupta%2C%20Otkrist%20Naik%2C%20Nikhil%20Raskar%2C%20Ramesh%20Designing%20neural%20network%20architectures%20using%20reinforcement%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Baker%2C%20Bowen%20Gupta%2C%20Otkrist%20Naik%2C%20Nikhil%20Raskar%2C%20Ramesh%20Designing%20neural%20network%20architectures%20using%20reinforcement%20learning%202017"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Barret Zoph and Quoc V. Le. Neural architecture search with reinforcement learning. In ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zoph%2C%20Barret%20Le%2C%20Quoc%20V.%20Neural%20architecture%20search%20with%20reinforcement%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zoph%2C%20Barret%20Le%2C%20Quoc%20V.%20Neural%20architecture%20search%20with%20reinforcement%20learning%202017"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Zhao Zhong, Junjie Yan, and Cheng-Lin Liu. Practical network blocks design with q-learning. In AAAI, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhong%2C%20Zhao%20Yan%2C%20Junjie%20Liu%2C%20Cheng-Lin%20Practical%20network%20blocks%20design%20with%20q-learning%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhong%2C%20Zhao%20Yan%2C%20Junjie%20Liu%2C%20Cheng-Lin%20Practical%20network%20blocks%20design%20with%20q-learning%202018"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Barret Zoph, Vijay Vasudevan, Jonathon Shlens, and Quoc V. Le. Learning transferable architectures for scalable image recognition. CoRR, abs/1707.07012, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.07012"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Chenxi Liu, Barret Zoph, Jonathon Shlens, Wei Hua, Li-Jia Li, Li Fei-Fei, Alan Yuille, Jonathan Huang, and Kevin Murphy. Progressive neural architecture search. arXiv preprint arXiv:1712.00559, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1712.00559"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Hieu Pham, Melody Y Guan, Barret Zoph, Quoc V Le, and Jeff Dean. Efficient neural architecture search via parameter sharing. arXiv preprint arXiv:1802.03268, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.03268"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Hanxiao Liu, Karen Simonyan, and Yiming Yang. Darts: Differentiable architecture search. arXiv preprint arXiv:1806.09055, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1806.09055"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg S Corrado, and Jeff Dean. Distributed representations of words and phrases and their compositionality. In NIPS, pages 3111\u20133119, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mikolov%2C%20Tomas%20Sutskever%2C%20Ilya%20Chen%2C%20Kai%20Corrado%2C%20Greg%20S.%20Distributed%20representations%20of%20words%20and%20phrases%20and%20their%20compositionality%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mikolov%2C%20Tomas%20Sutskever%2C%20Ilya%20Chen%2C%20Kai%20Corrado%2C%20Greg%20S.%20Distributed%20representations%20of%20words%20and%20phrases%20and%20their%20compositionality%202013"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Evan Greensmith, Peter L Bartlett, and Jonathan Baxter. Variance reduction techniques for gradient estimates in reinforcement learning. JMLR, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Greensmith%2C%20Evan%20Bartlett%2C%20Peter%20L.%20Baxter%2C%20Jonathan%20Variance%20reduction%20techniques%20for%20gradient%20estimates%20in%20reinforcement%20learning%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Greensmith%2C%20Evan%20Bartlett%2C%20Peter%20L.%20Baxter%2C%20Jonathan%20Variance%20reduction%20techniques%20for%20gradient%20estimates%20in%20reinforcement%20learning%202004"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Matthias Feurer, Jost Tobias Springenberg, and Frank Hutter. Initializing bayesian hyperparameter optimization via meta-learning. In AAAI, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Feurer%2C%20Matthias%20Springenberg%2C%20Jost%20Tobias%20Hutter%2C%20Frank%20Initializing%20bayesian%20hyperparameter%20optimization%20via%20meta-learning%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Feurer%2C%20Matthias%20Springenberg%2C%20Jost%20Tobias%20Hutter%2C%20Frank%20Initializing%20bayesian%20hyperparameter%20optimization%20via%20meta-learning%202015"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Renato Negrinho and Geoff Gordon. Deeparchitect: Automatically designing and training deep architectures. arXiv preprint arXiv:1704.08792, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1704.08792"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Olga Wichrowska, Niru Maheswaranathan, Matthew W Hoffman, Sergio Gomez Colmenarejo, Misha Denil, Nando de Freitas, and Jascha Sohl-Dickstein. Learned optimizers that scale and generalize. arXiv preprint arXiv:1703.04813, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.04813"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Irwan Bello, Barret Zoph, Vijay Vasudevan, and Quoc V. Le. Neural optimizer search with reinforcement learning. In ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bello%2C%20Irwan%20Zoph%2C%20Barret%20Vasudevan%2C%20Vijay%20Le%2C%20Quoc%20V.%20Neural%20optimizer%20search%20with%20reinforcement%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bello%2C%20Irwan%20Zoph%2C%20Barret%20Vasudevan%2C%20Vijay%20Le%2C%20Quoc%20V.%20Neural%20optimizer%20search%20with%20reinforcement%20learning%202017"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Edoardo Conti, Vashisht Madhavan, Felipe Petroski Such, Joel Lehman, Kenneth O Stanley, and Jeff Clune. Improving exploration in evolution strategies for deep reinforcement learning via a population of novelty-seeking agents. arXiv preprint arXiv:1712.06560, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1712.06560"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Felipe Petroski Such, Vashisht Madhavan, Edoardo Conti, Joel Lehman, Kenneth O Stanley, and Jeff Clune. Deep neuroevolution: Genetic algorithms are a competitive alternative for training deep neural networks for reinforcement learning. arXiv preprint arXiv:1712.06567, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1712.06567"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Bowen Baker, Otkrist Gupta, Nikhil Naik, and Ramesh Raskar. Designing neural network architectures using reinforcement learning. arXiv preprint arXiv:1611.02167, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.02167"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Han Cai, Tianyao Chen, Weinan Zhang, Yong Yu, and Jun Wang. Reinforcement learning for architecture search by network transformation. arXiv preprint arXiv:1707.04873, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.04873"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Jason Yosinski, Jeff Clune, Yoshua Bengio, and Hod Lipson. How transferable are features in deep neural networks? In NIPS, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yosinski%2C%20Jason%20Clune%2C%20Jeff%20Bengio%2C%20Yoshua%20Lipson%2C%20Hod%20How%20transferable%20are%20features%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yosinski%2C%20Jason%20Clune%2C%20Jeff%20Bengio%2C%20Yoshua%20Lipson%2C%20Hod%20How%20transferable%20are%20features%202014"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Ali Sharif Razavian, Hossein Azizpour, Josephine Sullivan, and Stefan Carlsson. Cnn features off-the-shelf: an astounding baseline for recognition. In CVPR workshops, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Razavian%2C%20Ali%20Sharif%20Azizpour%2C%20Hossein%20Sullivan%2C%20Josephine%20Carlsson%2C%20Stefan%20Cnn%20features%20off-the-shelf%3A%20an%20astounding%20baseline%20for%20recognition%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Razavian%2C%20Ali%20Sharif%20Azizpour%2C%20Hossein%20Sullivan%2C%20Josephine%20Carlsson%2C%20Stefan%20Cnn%20features%20off-the-shelf%3A%20an%20astounding%20baseline%20for%20recognition%202014"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Yusen Zhan and Matthew E Taylor. Online transfer learning in reinforcement learning domains. arXiv preprint arXiv:1507.00436, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1507.00436"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Chelsea Finn, Pieter Abbeel, and Sergey Levine. Model-agnostic meta-learning for fast adaptation of deep networks. ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Finn%2C%20Chelsea%20Abbeel%2C%20Pieter%20Levine%2C%20Sergey%20Model-agnostic%20meta-learning%20for%20fast%20adaptation%20of%20deep%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Finn%2C%20Chelsea%20Abbeel%2C%20Pieter%20Levine%2C%20Sergey%20Model-agnostic%20meta-learning%20for%20fast%20adaptation%20of%20deep%20networks%202017"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Nikhil Mishra, Mostafa Rohaninejad, Xi Chen, and Pieter Abbeel. A simple neural attentive meta-learner. In NIPS 2017 Workshop on Meta-Learning, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mishra%2C%20Nikhil%20Rohaninejad%2C%20Mostafa%20Chen%2C%20Xi%20Abbeel%2C%20Pieter%20A%20simple%20neural%20attentive%20meta-learner%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mishra%2C%20Nikhil%20Rohaninejad%2C%20Mostafa%20Chen%2C%20Xi%20Abbeel%2C%20Pieter%20A%20simple%20neural%20attentive%20meta-learner%202017"
+        },
+        {
+            "id": "29",
+            "entry": "[29] James Kirkpatrick, Razvan Pascanu, Neil Rabinowitz, Joel Veness, Guillaume Desjardins, Andrei A Rusu, Kieran Milan, John Quan, Tiago Ramalho, Agnieszka Grabska-Barwinska, et al. Overcoming catastrophic forgetting in neural networks. PNAS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kirkpatrick%2C%20James%20Pascanu%2C%20Razvan%20Rabinowitz%2C%20Neil%20Veness%2C%20Joel%20Overcoming%20catastrophic%20forgetting%20in%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kirkpatrick%2C%20James%20Pascanu%2C%20Razvan%20Rabinowitz%2C%20Neil%20Veness%2C%20Joel%20Overcoming%20catastrophic%20forgetting%20in%20neural%20networks%202017"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Yee Whye Teh, Victor Bapst, Wojciech Marian Czarnecki, John Quan, James Kirkpatrick, Raia Hadsell, Nicolas Heess, and Razvan Pascanu. Distral: Robust multitask reinforcement learning. arXiv preprint arXiv:1707.04175, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.04175"
+        },
+        {
+            "id": "31",
+            "entry": "[31] R\u00e9mi Bardenet, M\u00e1ty\u00e1s Brendel, Bal\u00e1zs K\u00e9gl, and Michele Sebag. Collaborative hyperparameter tuning. In ICML, pages 199\u2013207, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=R%C3%A9mi%20Bardenet%2C%20M%C3%A1ty%C3%A1s%20Brendel%2C%20Bal%C3%A1zs%20K%C3%A9gl%20Sebag%2C%20Michele%20Collaborative%20hyperparameter%20tuning%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=R%C3%A9mi%20Bardenet%2C%20M%C3%A1ty%C3%A1s%20Brendel%2C%20Bal%C3%A1zs%20K%C3%A9gl%20Sebag%2C%20Michele%20Collaborative%20hyperparameter%20tuning%202013"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Dani Yogatama and Gideon Mann. Efficient transfer learning method for automatic hyperparameter tuning. In AISTATS, pages 1077\u20131085, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yogatama%2C%20Dani%20Mann%2C%20Gideon%20Efficient%20transfer%20learning%20method%20for%20automatic%20hyperparameter%20tuning%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yogatama%2C%20Dani%20Mann%2C%20Gideon%20Efficient%20transfer%20learning%20method%20for%20automatic%20hyperparameter%20tuning%202014"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Heng-Tze Cheng, Levent Koc, Jeremiah Harmsen, Tal Shaked, Tushar Chandra, Hrishi Aradhye, Glen Anderson, Greg Corrado, Wei Chai, Mustafa Ispir, Rohan Anil, Zakaria Haque, Lichan Hong, Vihan Jain, Xiaobing Liu, and Hemal Shah. Wide & deep learning for recommender systems. CoRR, abs/1606.07792, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.07792"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Ronald J Williams. Simple statistical gradient-following algorithms for connectionist reinforcement learning. In Reinforcement Learning. Springer, 1992.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%2C%20Ronald%20J.%20Simple%20statistical%20gradient-following%20algorithms%20for%20connectionist%20reinforcement%20learning.%20In%20Reinforcement%20Learning%201992"
+        },
+        {
+            "id": "35",
+            "entry": "[35] John Schulman, Sergey Levine, Pieter Abbeel, Michael Jordan, and Philipp Moritz. Trust region policy optimization. In ICML, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schulman%2C%20John%20Levine%2C%20Sergey%20Abbeel%2C%20Pieter%20Jordan%2C%20Michael%20Trust%20region%20policy%20optimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schulman%2C%20John%20Levine%2C%20Sergey%20Abbeel%2C%20Pieter%20Jordan%2C%20Michael%20Trust%20region%20policy%20optimization%202015"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Ofir Nachum, Mohammad Norouzi, and Dale Schuurmans. Improving policy gradient by exploring under-appreciated rewards. In ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nachum%2C%20Ofir%20Norouzi%2C%20Mohammad%20Schuurmans%2C%20Dale%20Improving%20policy%20gradient%20by%20exploring%20under-appreciated%20rewards%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nachum%2C%20Ofir%20Norouzi%2C%20Mohammad%20Schuurmans%2C%20Dale%20Improving%20policy%20gradient%20by%20exploring%20under-appreciated%20rewards%202017"
+        },
+        {
+            "id": "37",
+            "entry": "[37] John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov. Proximal policy optimization algorithms. arXiv preprint arXiv:1707.06347, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.06347"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Tiago Almeida, Jos\u00e9 Mar\u00eda G\u00f3mez Hidalgo, and Tiago Pasqualini Silva. Towards sms spam filtering: Results under a new dataset. International Journal of Information Security Science, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Almeida%2C%20Tiago%20Hidalgo%2C%20Jos%C3%A9%20Mar%C3%ADa%20G%C3%B3mez%20Silva%2C%20Tiago%20Pasqualini%20Towards%20sms%20spam%20filtering%3A%20Results%20under%20a%20new%20dataset%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Almeida%2C%20Tiago%20Hidalgo%2C%20Jos%C3%A9%20Mar%C3%ADa%20G%C3%B3mez%20Silva%2C%20Tiago%20Pasqualini%20Towards%20sms%20spam%20filtering%3A%20Results%20under%20a%20new%20dataset%202013"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Quoc Le and Tomas Mikolov. Distributed representations of sentences and documents. In ICML, ICML\u201914, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Le%2C%20Quoc%20Mikolov%2C%20Tomas%20Distributed%20representations%20of%20sentences%20and%20documents%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Le%2C%20Quoc%20Mikolov%2C%20Tomas%20Distributed%20representations%20of%20sentences%20and%20documents%202014"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Bofang Li, Zhe Zhao, Tao Liu, Puwei Wang, and Xiaoyong Du. Weighted neural bag-of-n-grams model: New baselines for text classification. In COLING, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Bofang%20Zhao%2C%20Zhe%20Liu%2C%20Tao%20Wang%2C%20Puwei%20Weighted%20neural%20bag-of-n-grams%20model%3A%20New%20baselines%20for%20text%20classification%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20Bofang%20Zhao%2C%20Zhe%20Liu%2C%20Tao%20Wang%2C%20Puwei%20Weighted%20neural%20bag-of-n-grams%20model%3A%20New%20baselines%20for%20text%20classification%202016"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Jeremy Barnes, Roman Klinger, and Sabine Schulte im Walde. Assessing state-of-the-art sentiment models on state-of-the-art sentiment datasets. In Proceedings of the 8th Workshop on Computational Approaches to Subjectivity, Sentiment and Social Media Analysis. ACL, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Barnes%2C%20Jeremy%20Klinger%2C%20Roman%20and%20Sabine%20Schulte%20im%20Walde.%20Assessing%20state-of-the-art%20sentiment%20models%20on%20state-of-the-art%20sentiment%20datasets%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Barnes%2C%20Jeremy%20Klinger%2C%20Roman%20and%20Sabine%20Schulte%20im%20Walde.%20Assessing%20state-of-the-art%20sentiment%20models%20on%20state-of-the-art%20sentiment%20datasets%202017"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Andrew L. Maas, Raymond E. Daly, Peter T. Pham, Dan Huang, Andrew Y. Ng, and Christopher Potts. Learning word vectors for sentiment analysis. In ACL: Human Language Technologies. ACL, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Maas%2C%20Andrew%20L.%20Daly%2C%20Raymond%20E.%20Pham%2C%20Peter%20T.%20Huang%2C%20Dan%20Ng%2C%20and%20Christopher%20Potts.%20Learning%20word%20vectors%20for%20sentiment%20analysis.%20In%20ACL%3A%20Human%20Language%20Technologies%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Maas%2C%20Andrew%20L.%20Daly%2C%20Raymond%20E.%20Pham%2C%20Peter%20T.%20Huang%2C%20Dan%20Ng%2C%20and%20Christopher%20Potts.%20Learning%20word%20vectors%20for%20sentiment%20analysis.%20In%20ACL%3A%20Human%20Language%20Technologies%202011"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Prajit Ramachandran, Barret Zoph, and Quoc V Le. Swish: a self-gated activation function. arXiv preprint arXiv:1710.05941, 2017. ",
+            "arxiv_url": "https://arxiv.org/pdf/1710.05941"
+        }
+    ]
+}

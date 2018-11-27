@@ -1,0 +1,321 @@
+{
+    "filename": "8138-deep-dynamical-modeling-and-control-of-unsteady-fluid-flows.pdf",
+    "metadata": {
+        "title": "Deep Dynamical Modeling and Control of Unsteady Fluid Flows",
+        "author": "Jeremy Morton, Antony Jameson, Mykel J. Kochenderfer, Freddie Witherden",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8138-deep-dynamical-modeling-and-control-of-unsteady-fluid-flows.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "The design of flow control systems remains a challenge due to the nonlinear nature of the equations that govern fluid flow. However, recent advances in computational fluid dynamics (CFD) have enabled the simulation of complex fluid flows with high accuracy, opening the possibility of using learning-based approaches to facilitate controller design. We present a method for learning the forced and unforced dynamics of airflow over a cylinder directly from CFD data. The proposed approach, grounded in Koopman theory, is shown to produce stable dynamical models that can predict the time evolution of the cylinder system over extended time horizons. Finally, by performing model predictive control with the learned dynamical models, we are able to find a straightforward, interpretable control law for suppressing vortex shedding in the wake of the cylinder."
+    },
+    "keywords": [
+        {
+            "term": "flow control",
+            "url": "https://en.wikipedia.org/wiki/flow_control"
+        },
+        {
+            "term": "vortex shedding",
+            "url": "https://en.wikipedia.org/wiki/vortex_shedding"
+        },
+        {
+            "term": "dynamic mode decomposition",
+            "url": "https://en.wikipedia.org/wiki/dynamic_mode_decomposition"
+        },
+        {
+            "term": "fluid flow",
+            "url": "https://en.wikipedia.org/wiki/fluid_flow"
+        },
+        {
+            "term": "control law",
+            "url": "https://en.wikipedia.org/wiki/control_law"
+        },
+        {
+            "term": "computational fluid dynamics",
+            "url": "https://en.wikipedia.org/wiki/computational_fluid_dynamics"
+        },
+        {
+            "term": "model predictive control",
+            "url": "https://en.wikipedia.org/wiki/model_predictive_control"
+        }
+    ],
+    "highlights": [
+        "Fluid flow control represents a significant challenge, with the potential for high impact in a variety of sectors, most notably the automotive and aerospace industries",
+        "The Variational Bayes Filter constructs a new locally linear dynamical model at each time step, but relies on information from the first 32 time steps to sample the initial value of the process noise w0",
+        "We introduced a method for training Deep Koopman models, demonstrating that the learned models were capable of stably simulating airflow over a cylinder for significant prediction horizons",
+        "We detailed how the Koopman models could be modified to account for control inputs and thereby leveraged for flow control in order to suppress vortex shedding",
+        "Learning sufficiently accurate dynamical models from approximately 4000 training examples, the method is very sample efficient, which is of high importance due to the large computational cost associated with computational fluid dynamics simulations",
+        "By incorporating the Deep Koopman model into an model predictive control framework, we showed that the resulting control law was both interpretable and sensible, aligning with well studied flow control approaches from the literature"
+    ],
+    "key_statements": [
+        "Fluid flow control represents a significant challenge, with the potential for high impact in a variety of sectors, most notably the automotive and aerospace industries",
+        "While the time evolution of fluid flows can be described by the Navier-Stokes equations, their nonlinear nature means that many control techniques, largely derived for linear systems, prove ineffective when applied to fluid flows",
+        "In addition to the Deep Variational Bayes Filter, we benchmark the Deep Koopman model against a model trained using the procedure proposed by Takeishi et al, which sets Ypred = AXrather than calculating Ypred by applying A recursively to g(x1)",
+        "Each model is trained on 32-step sequences of data extracted from two-dimensional cylinder simulations",
+        "The Koopman method construct its dynamical model based on state mappings from the first 16 time steps, simulates the system for all time steps using the derived A-matrix",
+        "The Takeishi baseline derives its A-matrix based on state mappings from the first 32 time steps",
+        "The Variational Bayes Filter constructs a new locally linear dynamical model at each time step, but relies on information from the first 32 time steps to sample the initial value of the process noise w0",
+        "With the ability to train Koopman models that account for control inputs, we consider a modified version the two-dimensional cylinder test case that allows for a scalar control input to affect the fluid flow",
+        "While the flow at this lower Reynolds number is qualitatively different from the flow at a Reynolds number of 50, we find that formulating the problem in this way leads to a reliable estimate of the cost, as demonstrated",
+        "We introduced a method for training Deep Koopman models, demonstrating that the learned models were capable of stably simulating airflow over a cylinder for significant prediction horizons",
+        "We detailed how the Koopman models could be modified to account for control inputs and thereby leveraged for flow control in order to suppress vortex shedding",
+        "Learning sufficiently accurate dynamical models from approximately 4000 training examples, the method is very sample efficient, which is of high importance due to the large computational cost associated with computational fluid dynamics simulations",
+        "By incorporating the Deep Koopman model into an model predictive control framework, we showed that the resulting control law was both interpretable and sensible, aligning with well studied flow control approaches from the literature"
+    ],
+    "summary": [
+        "Fluid flow control represents a significant challenge, with the potential for high impact in a variety of sectors, most notably the automotive and aerospace industries.",
+        "We present the Deep Koopman model, which employs a modified form of the training algorithm proposed by Takeishi et al to learn state mappings that approximately span a Koopman invariant subspace.",
+        "The matrices At, Bt, and Ct are assumed to comprise a locally linear dynamical model, and are determined at each time step as a function of the current latent state and control input.",
+        "The Koopman method construct its dynamical model based on state mappings from the first 16 time steps, simulates the system for all time steps using the derived A-matrix.",
+        "We see that the Deep Koopman model, aided by its ability to construct state mappings that approximately span an invariant subspace, is able to generate stable predictions for much longer time horizons.",
+        "We explain how the proposed Deep Koopman algorithm can be extended to account for the effect that control inputs have on the time evolution of dynamical systems.",
+        "We have already demonstrated how the Deep Koopman algorithm can learn state mappings that are suitable for modeling unforced dynamics.",
+        "With the ability to train Koopman models that account for control inputs, we consider a modified version the two-dimensional cylinder test case that allows for a scalar control input to affect the fluid flow.",
+        "The form of control inputs applied to the system in generating the training data has a strong effect on the quality of learned models.",
+        "This aligns with the Deep Koopman model training process, where the neural network generates predictions for 16 time steps beyond what it uses to construct its dynamical model.",
+        "In Fig. 4, we get a qualitative picture for the effectiveness of the applied control, as the cylinder wake exhibits a curved region of low x-momentum characteristic of vortex shedding at early time steps, flattens out to a profile more characteristic of laminar flow over time.",
+        "Given that both Koopman-centric approaches and SRL attempt to discover state mappings that are useful for describing the time evolution of high-dimensional systems, an opportunity likely exists to bridge the gap between these fields.",
+        "We introduced a method for training Deep Koopman models, demonstrating that the learned models were capable of stably simulating airflow over a cylinder for significant prediction horizons.",
+        "By incorporating the Deep Koopman model into an MPC framework, we showed that the resulting control law was both interpretable and sensible, aligning with well studied flow control approaches from the literature.",
+        "The code associated with this work can be found at https://github.com/sisl/deep_flow_control"
+    ],
+    "headline": "We present a method for learning the forced and unforced dynamics of airflow over a cylinder directly from computational fluid dynamics data",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] E. Berger, \u201cSuppression of vortex shedding and turbulence behind oscillating cylinders,\u201d The Physics of Fluids, vol. 10, no. 9, S191\u2013S193, 1967.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Berger%2C%20E.%20Suppression%20of%20vortex%20shedding%20and%20turbulence%20behind%20oscillating%20cylinders%2C%201967",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Berger%2C%20E.%20Suppression%20of%20vortex%20shedding%20and%20turbulence%20behind%20oscillating%20cylinders%2C%201967"
+        },
+        {
+            "id": "2",
+            "entry": "[2] K. Roussopoulos, \u201cFeedback control of vortex shedding at low Reynolds numbers,\u201d Journal of Fluid Mechanics, vol. 248, pp. 267\u2013296, 1993.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Roussopoulos%2C%20K.%20Feedback%20control%20of%20vortex%20shedding%20at%20low%20Reynolds%20numbers%2C%201993",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Roussopoulos%2C%20K.%20Feedback%20control%20of%20vortex%20shedding%20at%20low%20Reynolds%20numbers%2C%201993"
+        },
+        {
+            "id": "3",
+            "entry": "[3] D. S. Park, D. M. Ladd, and E. W. Hendricks, \u201cFeedback control of von K\u00e1rm\u00e1n vortex shedding behind a circular cylinder at low reynolds numbers,\u201d Physics of Fluids, vol. 6, no. 7, pp. 2390\u20132405, 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Park%2C%20D.S.%20Ladd%2C%20D.M.%20Hendricks%2C%20E.W.%20Feedback%20control%20of%20von%20K%C3%A1rm%C3%A1n%20vortex%20shedding%20behind%20a%20circular%20cylinder%20at%20low%20reynolds%20numbers%2C%201994",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Park%2C%20D.S.%20Ladd%2C%20D.M.%20Hendricks%2C%20E.W.%20Feedback%20control%20of%20von%20K%C3%A1rm%C3%A1n%20vortex%20shedding%20behind%20a%20circular%20cylinder%20at%20low%20reynolds%20numbers%2C%201994"
+        },
+        {
+            "id": "4",
+            "entry": "[4] M. D. Gunzburger and H. C. Lee, \u201cFeedback control of karman vortex shedding,\u201d Journal of Applied Mechanics, vol. 63, no. 3, pp. 828\u2013835, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gunzburger%2C%20M.D.%20Lee%2C%20H.C.%20Feedback%20control%20of%20karman%20vortex%20shedding%2C%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gunzburger%2C%20M.D.%20Lee%2C%20H.C.%20Feedback%20control%20of%20karman%20vortex%20shedding%2C%201996"
+        },
+        {
+            "id": "5",
+            "entry": "[5] S. J. Illingworth, H. Naito, and K. Fukagata, \u201cActive control of vortex shedding: An explanation of the gain window,\u201d Phys. Rev. E, vol. 90, no. 4, p. 043 014, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Illingworth%2C%20S.J.%20Naito%2C%20H.%20Fukagata%2C%20K.%20Active%20control%20of%20vortex%20shedding%3A%20An%20explanation%20of%20the%20gain%20window%2C%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Illingworth%2C%20S.J.%20Naito%2C%20H.%20Fukagata%2C%20K.%20Active%20control%20of%20vortex%20shedding%3A%20An%20explanation%20of%20the%20gain%20window%2C%202014"
+        },
+        {
+            "id": "6",
+            "entry": "[6] S. J. Illingworth, \u201cModel-based control of vortex shedding at low reynolds numbers,\u201d Theoretical and Computational Fluid Dynamics, vol. 30, no. 5, pp. 429\u2013448, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Illingworth%2C%20S.J.%20Model-based%20control%20of%20vortex%20shedding%20at%20low%20reynolds%20numbers%2C%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Illingworth%2C%20S.J.%20Model-based%20control%20of%20vortex%20shedding%20at%20low%20reynolds%20numbers%2C%202016"
+        },
+        {
+            "id": "7",
+            "entry": "[7] H. T. Huynh, \u201cA flux reconstruction approach to high-order schemes including discontinuous galerkin methods,\u201d in 18th AIAA Computational Fluid Dynamics Conference, 2007, p. 4079.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Huynh%2C%20H.T.%20A%20flux%20reconstruction%20approach%20to%20high-order%20schemes%20including%20discontinuous%20galerkin%20methods%2C%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huynh%2C%20H.T.%20A%20flux%20reconstruction%20approach%20to%20high-order%20schemes%20including%20discontinuous%20galerkin%20methods%2C%202007"
+        },
+        {
+            "id": "8",
+            "entry": "[8] P. E. Vincent, P. Castonguay, and A. Jameson, \u201cA new class of high-order energy stable flux reconstruction schemes,\u201d Journal of Scientific Computing, vol. 47, no. 1, pp. 50\u201372, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vincent%2C%20P.E.%20Castonguay%2C%20P.%20Jameson%2C%20A.%20A%20new%20class%20of%20high-order%20energy%20stable%20flux%20reconstruction%20schemes%2C%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vincent%2C%20P.E.%20Castonguay%2C%20P.%20Jameson%2C%20A.%20A%20new%20class%20of%20high-order%20energy%20stable%20flux%20reconstruction%20schemes%2C%202011"
+        },
+        {
+            "id": "9",
+            "entry": "[9] P. Castonguay, P. E. Vincent, and A. Jameson, \u201cA new class of high-order energy stable flux reconstruction schemes for triangular elements,\u201d Journal of Scientific Computing, vol. 51, no. 1, pp. 224\u2013256, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Castonguay%2C%20P.%20Vincent%2C%20P.E.%20Jameson%2C%20A.%20A%20new%20class%20of%20high-order%20energy%20stable%20flux%20reconstruction%20schemes%20for%20triangular%20elements%2C%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Castonguay%2C%20P.%20Vincent%2C%20P.E.%20Jameson%2C%20A.%20A%20new%20class%20of%20high-order%20energy%20stable%20flux%20reconstruction%20schemes%20for%20triangular%20elements%2C%202012"
+        },
+        {
+            "id": "10",
+            "entry": "[10] D. Williams and A. Jameson, \u201cEnergy stable flux reconstruction schemes for advection\u2013 diffusion problems on tetrahedra,\u201d Journal of Scientific Computing, vol. 59, no. 3, pp. 721\u2013759, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%2C%20D.%20Jameson%2C%20A.%20Energy%20stable%20flux%20reconstruction%20schemes%20for%20advection%E2%80%93%20diffusion%20problems%20on%20tetrahedra%2C%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Williams%2C%20D.%20Jameson%2C%20A.%20Energy%20stable%20flux%20reconstruction%20schemes%20for%20advection%E2%80%93%20diffusion%20problems%20on%20tetrahedra%2C%202014"
+        },
+        {
+            "id": "11",
+            "entry": "[11] A. Jameson, P. E. Vincent, and P. Castonguay, \u201cOn the non-linear stability of flux reconstruction schemes,\u201d Journal of Scientific Computing, vol. 50, no. 2, pp. 434\u2013445, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jameson%2C%20A.%20Vincent%2C%20P.E.%20Castonguay%2C%20P.%20On%20the%20non-linear%20stability%20of%20flux%20reconstruction%20schemes%2C%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jameson%2C%20A.%20Vincent%2C%20P.E.%20Castonguay%2C%20P.%20On%20the%20non-linear%20stability%20of%20flux%20reconstruction%20schemes%2C%202012"
+        },
+        {
+            "id": "12",
+            "entry": "[12] C. W. Rowley and S. T. Dawson, \u201cModel reduction for flow analysis and control,\u201d Annual Review of Fluid Mechanics, vol. 49, no. 1, pp. 387\u2013417, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rowley%2C%20C.W.%20Dawson%2C%20S.T.%20Model%20reduction%20for%20flow%20analysis%20and%20control%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rowley%2C%20C.W.%20Dawson%2C%20S.T.%20Model%20reduction%20for%20flow%20analysis%20and%20control%2C%202017"
+        },
+        {
+            "id": "13",
+            "entry": "[13] E. Kaiser, J. N. Kutz, and S. L. Brunton, \u201cData-driven discovery of Koopman eigenfunctions for control,\u201d arXiv preprint arXiv:1707.01146, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.01146"
+        },
+        {
+            "id": "14",
+            "entry": "[14] M. Korda and I. Mezic, \u201cLinear predictors for nonlinear dynamical systems: Koopman operator meets model predictive control,\u201d arXiv preprint arXiv: 1611.03537, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.03537"
+        },
+        {
+            "id": "15",
+            "entry": "[15] M. Hessel, J. Modayil, H. van Hasselt, T. Schaul, G. Ostrovski, W. Dabney, D. Horgan, B. Piot, M. G. Azar, and D. Silver, \u201cRainbow: Combining improvements in deep reinforcement learning,\u201d arXiv preprint arXiv:1710.02298, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.02298"
+        },
+        {
+            "id": "16",
+            "entry": "[16] J. Schulman, F. Wolski, P. Dhariwal, A. Radford, and O. Klimov, \u201cProximal policy optimization algorithms,\u201d arXiv preprint arXiv:1707.06347, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.06347"
+        },
+        {
+            "id": "17",
+            "entry": "[17] M. Watter, J. Springenberg, J. Boedecker, and M. Riedmiller, \u201cEmbed to control: A locally linear latent dynamics model for control from raw images,\u201d in Advances in Neural Information Processing Systems (NIPS), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Watter%2C%20M.%20Springenberg%2C%20J.%20Boedecker%2C%20J.%20Riedmiller%2C%20M.%20Embed%20to%20control%3A%20A%20locally%20linear%20latent%20dynamics%20model%20for%20control%20from%20raw%20images%2C%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Watter%2C%20M.%20Springenberg%2C%20J.%20Boedecker%2C%20J.%20Riedmiller%2C%20M.%20Embed%20to%20control%3A%20A%20locally%20linear%20latent%20dynamics%20model%20for%20control%20from%20raw%20images%2C%202015"
+        },
+        {
+            "id": "18",
+            "entry": "[18] M. Deisenroth and C. Rasmussen, \u201cPILCO: A model-based and data-efficient approach to policy search,\u201d in International Conference on Machine Learning (ICML), 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Deisenroth%2C%20M.%20Rasmussen%2C%20C.%20PILCO%3A%20A%20model-based%20and%20data-efficient%20approach%20to%20policy%20search%2C%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Deisenroth%2C%20M.%20Rasmussen%2C%20C.%20PILCO%3A%20A%20model-based%20and%20data-efficient%20approach%20to%20policy%20search%2C%202011"
+        },
+        {
+            "id": "19",
+            "entry": "[19] N. Takeishi, Y. Kawahara, and T. Yairi, \u201cLearning Koopman invariant subspaces for dynamic mode decomposition,\u201d in Advances in Neural Information Processing Systems (NIPS), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Takeishi%2C%20N.%20Kawahara%2C%20Y.%20Yairi%2C%20T.%20Learning%20Koopman%20invariant%20subspaces%20for%20dynamic%20mode%20decomposition%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Takeishi%2C%20N.%20Kawahara%2C%20Y.%20Yairi%2C%20T.%20Learning%20Koopman%20invariant%20subspaces%20for%20dynamic%20mode%20decomposition%2C%202017"
+        },
+        {
+            "id": "20",
+            "entry": "[20] J. Kutz, S. Brunton, B. Brunton, and J. Proctor, Dynamic Mode Decomposition: Data-Driven Modeling of Complex Systems. Society for Industrial and Applied Mathematics, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kutz%2C%20J.%20Brunton%2C%20S.%20Brunton%2C%20B.%20Proctor%2C%20J.%20Dynamic%20Mode%20Decomposition%3A%20Data-Driven%20Modeling%20of%20Complex%20Systems.%20Society%20for%20Industrial%20and%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kutz%2C%20J.%20Brunton%2C%20S.%20Brunton%2C%20B.%20Proctor%2C%20J.%20Dynamic%20Mode%20Decomposition%3A%20Data-Driven%20Modeling%20of%20Complex%20Systems.%20Society%20for%20Industrial%20and%202016"
+        },
+        {
+            "id": "21",
+            "entry": "[21] K. He, X. Zhang, S. Ren, and J. Sun, \u201cDeep residual learning for image recognition,\u201d in IEEE Computer Society Conference on Computer Vision and Pattern Recognition (CVPR), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%2C%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%2C%202016"
+        },
+        {
+            "id": "22",
+            "entry": "[22] M. Abadi, A. Agarwal, P. Barham, E. Brevdo, Z. Chen, C. Citro, G. S. Corrado, A. Davis, J. Dean, M. Devin, S. Ghemawat, I. Goodfellow, A. Harp, G. Irving, M. Isard, Y. Jia, R. Jozefowicz, L. Kaiser, M. Kudlur, J. Levenberg, D. Man\u00e9, R. Monga, S. Moore, D. Murray, C. Olah, M. Schuster, J. Shlens, B. Steiner, I. Sutskever, K. Talwar, P. Tucker, V. Vanhoucke, V. Vasudevan, F. Vi\u00e9gas, O. Vinyals, P. Warden, M. Wattenberg, M. Wicke, Y. Yu, and X. Zheng, TensorFlow: Large-scale machine learning on heterogeneous systems, Software available from tensorflow.org, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abadi%2C%20M.%20Agarwal%2C%20A.%20Barham%2C%20P.%20Brevdo%2C%20E.%20TensorFlow%3A%20Large-scale%20machine%20learning%20on%20heterogeneous%20systems",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abadi%2C%20M.%20Agarwal%2C%20A.%20Barham%2C%20P.%20Brevdo%2C%20E.%20TensorFlow%3A%20Large-scale%20machine%20learning%20on%20heterogeneous%20systems"
+        },
+        {
+            "id": "23",
+            "entry": "[23] A. Roshko, \u201cOn the wake and drag of bluff bodies,\u201d Journal of the Aeronautical Sciences, vol. 22, no. 2, pp. 124\u2013132, 1955.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Roshko%2C%20A.%20On%20the%20wake%20and%20drag%20of%20bluff%20bodies%2C%201955",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Roshko%2C%20A.%20On%20the%20wake%20and%20drag%20of%20bluff%20bodies%2C%201955"
+        },
+        {
+            "id": "24",
+            "entry": "[24] C. H. K. Williamson, \u201cVortex dynamics in the cylinder wake,\u201d Annual Review of Fluid Mechanics, vol. 28, no. 1, pp. 477\u2013539, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williamson%2C%20C.H.K.%20Vortex%20dynamics%20in%20the%20cylinder%20wake%2C%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Williamson%2C%20C.H.K.%20Vortex%20dynamics%20in%20the%20cylinder%20wake%2C%201996"
+        },
+        {
+            "id": "25",
+            "entry": "[25] F. D. Witherden, A. M. Farrington, and P. E. Vincent, \u201cPyFR: An open source framework for solving advection\u2013diffusion type problems on streaming architectures using the flux reconstruction approach,\u201d Computer Physics Communications, vol. 185, no. 11, pp. 3028\u2013 3040, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Witherden%2C%20F.D.%20Farrington%2C%20A.M.%20Vincent%2C%20P.E.%20PyFR%3A%20An%20open%20source%20framework%20for%20solving%20advection%E2%80%93diffusion%20type%20problems%20on%20streaming%20architectures%20using%20the%20flux%20reconstruction%20approach%2C%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Witherden%2C%20F.D.%20Farrington%2C%20A.M.%20Vincent%2C%20P.E.%20PyFR%3A%20An%20open%20source%20framework%20for%20solving%20advection%E2%80%93diffusion%20type%20problems%20on%20streaming%20architectures%20using%20the%20flux%20reconstruction%20approach%2C%202014"
+        },
+        {
+            "id": "26",
+            "entry": "[26] M. Karl, M. Soelch, J. Bayer, and P. van der Smagt, \u201cDeep variational Bayes filters: Unsupervised learning of state space models from raw data,\u201d in International Conference on Learning Representations (ICLR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Karl%2C%20M.%20Soelch%2C%20M.%20Bayer%2C%20J.%20van%20der%20Smagt%2C%20P.%20Deep%20variational%20Bayes%20filters%3A%20Unsupervised%20learning%20of%20state%20space%20models%20from%20raw%20data%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Karl%2C%20M.%20Soelch%2C%20M.%20Bayer%2C%20J.%20van%20der%20Smagt%2C%20P.%20Deep%20variational%20Bayes%20filters%3A%20Unsupervised%20learning%20of%20state%20space%20models%20from%20raw%20data%2C%202017"
+        },
+        {
+            "id": "27",
+            "entry": "[27] A. Venkatraman, M. Hebert, and J. A. Bagnell, \u201cImproving multi-step prediction of learned time series models,\u201d in AAAI Conference on Artificial Intelligence, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Venkatraman%2C%20A.%20Hebert%2C%20M.%20Bagnell%2C%20J.A.%20Improving%20multi-step%20prediction%20of%20learned%20time%20series%20models%2C%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Venkatraman%2C%20A.%20Hebert%2C%20M.%20Bagnell%2C%20J.A.%20Improving%20multi-step%20prediction%20of%20learned%20time%20series%20models%2C%202015"
+        },
+        {
+            "id": "28",
+            "entry": "[28] J. L. Proctor, S. L. Brunton, and J. N. Kutz, \u201cDynamic mode decomposition with control,\u201d SIAM Journal on Applied Dynamical Systems, vol. 15, no. 1, pp. 142\u2013161, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Proctor%2C%20J.L.%20Brunton%2C%20S.L.%20Kutz%2C%20J.N.%20Dynamic%20mode%20decomposition%20with%20control%2C%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Proctor%2C%20J.L.%20Brunton%2C%20S.L.%20Kutz%2C%20J.N.%20Dynamic%20mode%20decomposition%20with%20control%2C%202016"
+        },
+        {
+            "id": "29",
+            "entry": "[29] B. Mettler, M. Tischler, and T. Kanade, \u201cSystem identification of small-size unmanned helicopter dynamics,\u201d Annual Forum Proceedings - American Helicopter Society, vol. 2, pp. 1706\u2013 1717, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mettler%2C%20B.%20Tischler%2C%20M.%20Kanade%2C%20T.%20%E2%80%9CSystem%20identification%20of%20small-size%20unmanned%20helicopter%20dynamics%2C%E2%80%9D%20Annual%20Forum%20Proceedings%20-%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mettler%2C%20B.%20Tischler%2C%20M.%20Kanade%2C%20T.%20%E2%80%9CSystem%20identification%20of%20small-size%20unmanned%20helicopter%20dynamics%2C%E2%80%9D%20Annual%20Forum%20Proceedings%20-%201999"
+        },
+        {
+            "id": "30",
+            "entry": "[30] S. Diamond and S. Boyd, \u201cCVXPY: A Python-embedded modeling language for convex optimization,\u201d Journal of Machine Learning Research, vol. 17, no. 83, pp. 1\u20135, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Diamond%2C%20S.%20Boyd%2C%20S.%20CVXPY%3A%20A%20Python-embedded%20modeling%20language%20for%20convex%20optimization%2C%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Diamond%2C%20S.%20Boyd%2C%20S.%20CVXPY%3A%20A%20Python-embedded%20modeling%20language%20for%20convex%20optimization%2C%202016"
+        },
+        {
+            "id": "31",
+            "entry": "[31] B. O. Koopman, \u201cHamiltonian systems and transformation in Hilbert space,\u201d Proceedings of the National Academy of Sciences, vol. 17, no. 5, pp. 315\u2013318, 1931.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Koopman%2C%20B.O.%20Hamiltonian%20systems%20and%20transformation%20in%20Hilbert%20space%2C%201931",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Koopman%2C%20B.O.%20Hamiltonian%20systems%20and%20transformation%20in%20Hilbert%20space%2C%201931"
+        },
+        {
+            "id": "32",
+            "entry": "[32] C. W. Rowley, I. Mezic, S. Bagheri, P. Schlatter, and D. S. Henningson, \u201cSpectral analysis of nonlinear flows,\u201d Journal of Fluid Mechanics, vol. 641, 115\u2013127, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rowley%2C%20C.W.%20Mezic%2C%20I.%20Bagheri%2C%20S.%20Schlatter%2C%20P.%20Spectral%20analysis%20of%20nonlinear%20flows%2C%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rowley%2C%20C.W.%20Mezic%2C%20I.%20Bagheri%2C%20S.%20Schlatter%2C%20P.%20Spectral%20analysis%20of%20nonlinear%20flows%2C%202009"
+        },
+        {
+            "id": "33",
+            "entry": "[33] M. O. Williams, I. G. Kevrekidis, and C. W Rowley, \u201cA data-driven approximation of the Koopman operator: Extending dynamic mode decomposition,\u201d Journal of Nonlinear Science, vol. 8, no. 1, pp. 1\u201340, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%2C%20M.O.%20Kevrekidis%2C%20I.G.%20Rowley%2C%20C.W.%20A%20data-driven%20approximation%20of%20the%20Koopman%20operator%3A%20Extending%20dynamic%20mode%20decomposition%2C%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Williams%2C%20M.O.%20Kevrekidis%2C%20I.G.%20Rowley%2C%20C.W.%20A%20data-driven%20approximation%20of%20the%20Koopman%20operator%3A%20Extending%20dynamic%20mode%20decomposition%2C%202015"
+        },
+        {
+            "id": "34",
+            "entry": "[34] B. Lusch, J. N. Kutz, and S. L. Brunton, \u201cDeep learning for universal linear embeddings of nonlinear dynamics,\u201d arXiv preprint arXiv: 1712.09707, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1712.09707"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Q. Li, F. Dietrich, E. M. Bollt, and I. G. Kevrekidis, \u201cExtended dynamic mode decomposition with dictionary learning: A data-driven adaptive spectral decomposition of the Koopman operator,\u201d Chaos: An Interdisciplinary Journal of Nonlinear Science, vol. 27, no. 10, p. 103 111, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Q.%20Dietrich%2C%20F.%20Bollt%2C%20E.M.%20Kevrekidis%2C%20I.G.%20Extended%20dynamic%20mode%20decomposition%20with%20dictionary%20learning%3A%20A%20data-driven%20adaptive%20spectral%20decomposition%20of%20the%20Koopman%20operator%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20Q.%20Dietrich%2C%20F.%20Bollt%2C%20E.M.%20Kevrekidis%2C%20I.G.%20Extended%20dynamic%20mode%20decomposition%20with%20dictionary%20learning%3A%20A%20data-driven%20adaptive%20spectral%20decomposition%20of%20the%20Koopman%20operator%2C%202017"
+        },
+        {
+            "id": "36",
+            "entry": "[36] E. Yeung, S. Kundu, and N. Hodas, \u201cLearning deep neural network representations for Koopman operators of nonlinear dynamical systems,\u201d arXiv preprint arXiv: 1708.06850, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1708.06850"
+        },
+        {
+            "id": "37",
+            "entry": "[37] N. Mishra, P. Abbeel, and I. Mordatch, \u201cPrediction and control with temporal segment models,\u201d arXiv preprint arXiv: 1703.04070, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.04070"
+        },
+        {
+            "id": "38",
+            "entry": "[38] A. Nagabandi, G. Kahn, R. S. Fearing, and S. Levine, \u201cNeural network dynamics for model-based deep reinforcement learning with model-free fine-tuning,\u201d arXiv preprint arXiv: 1708.02596, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1708.02596"
+        },
+        {
+            "id": "39",
+            "entry": "[39] A. Nagabandi, G. Yang, T. Asmar, R. Pandya, G. Kahn, S. Levine, and R. S. Fearing, \u201cLearning image-conditioned dynamics models for control of under-actuated legged millirobots,\u201d arXiv preprint arXiv: 1711.05253, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.05253"
+        },
+        {
+            "id": "40",
+            "entry": "[40] T. Lesort, N. D\u00edaz-Rodr\u00edguez, J.-F. Goudou, and D. Filliat, \u201cState representation learning for control: An overview,\u201d arXiv preprint arXiv: 1802.04181, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.04181"
+        },
+        {
+            "id": "41",
+            "entry": "[41] M. Fraccaro, S. Kamronn, U. Paquet, and O. Winther, \u201cA disentangled recognition and nonlinear dynamics model for unsupervised learning,\u201d in Advances in Neural Information Processing Systems (NIPS), 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fraccaro%2C%20M.%20Kamronn%2C%20S.%20Paquet%2C%20U.%20Winther%2C%20O.%20A%20disentangled%20recognition%20and%20nonlinear%20dynamics%20model%20for%20unsupervised%20learning%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fraccaro%2C%20M.%20Kamronn%2C%20S.%20Paquet%2C%20U.%20Winther%2C%20O.%20A%20disentangled%20recognition%20and%20nonlinear%20dynamics%20model%20for%20unsupervised%20learning%2C%202017"
+        }
+    ]
+}

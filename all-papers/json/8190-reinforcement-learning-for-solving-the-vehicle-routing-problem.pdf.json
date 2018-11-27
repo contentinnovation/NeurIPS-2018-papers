@@ -1,0 +1,330 @@
+{
+    "filename": "8190-reinforcement-learning-for-solving-the-vehicle-routing-problem.pdf",
+    "metadata": {
+        "title": "Reinforcement Learning for Solving the Vehicle Routing Problem",
+        "author": "MohammadReza Nazari, Afshin Oroojlooy, Lawrence Snyder, Martin Takac",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8190-reinforcement-learning-for-solving-the-vehicle-routing-problem.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We present an end-to-end framework for solving the Vehicle Routing Problem (VRP) using reinforcement learning. In this approach, we train a single policy model that finds near-optimal solutions for a broad range of problem instances of similar size, only by observing the reward signals and following feasibility rules. We consider a parameterized stochastic policy, and by applying a policy gradient algorithm to optimize its parameters, the trained model produces the solution as a sequence of consecutive actions in real time, without the need to re-train for every new problem instance. On capacitated VRP, our approach outperforms classical heuristics and Google\u2019s OR-Tools on medium-sized instances in solution quality with comparable computation time (after training). We demonstrate how our approach can handle problems with split delivery and explore the effect of such deliveries on the solution quality. Our proposed framework can be applied to other variants of the VRP such as the stochastic VRP, and has the potential to be applied more generally to combinatorial optimization problems."
+    },
+    "keywords": [
+        {
+            "term": "Markov Decision Process",
+            "url": "https://en.wikipedia.org/wiki/Markov_Decision_Process"
+        },
+        {
+            "term": "recurrent neural network",
+            "url": "https://en.wikipedia.org/wiki/recurrent_neural_network"
+        },
+        {
+            "term": "Traveling Salesman Problem",
+            "url": "https://en.wikipedia.org/wiki/Traveling_Salesman_Problem"
+        },
+        {
+            "term": "Reinforcement Learning",
+            "url": "https://en.wikipedia.org/wiki/Reinforcement_Learning"
+        },
+        {
+            "term": "beam search",
+            "url": "https://en.wikipedia.org/wiki/beam_search"
+        },
+        {
+            "term": "combinatorial optimization",
+            "url": "https://en.wikipedia.org/wiki/combinatorial_optimization"
+        },
+        {
+            "term": "convolutional neural network",
+            "url": "https://en.wikipedia.org/wiki/convolutional_neural_network"
+        },
+        {
+            "term": "neural machine translation",
+            "url": "https://en.wikipedia.org/wiki/neural_machine_translation"
+        },
+        {
+            "term": "deep convolutional neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_convolutional_neural_network"
+        },
+        {
+            "term": "deep Q-learning",
+            "url": "https://en.wikipedia.org/wiki/deep_Q-learning"
+        }
+    ],
+    "highlights": [
+        "Before presenting the problem formalization, we briefly review the required notation and relation to existing work.<br/><br/>Sequence-to-Sequence Models Sequence-to-Sequence models [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>, <a class=\"ref-link\" id=\"c32\" href=\"#r32\">32</a>, <a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>] are useful in tasks for which a mapping from one sequence to another is required",
+        "We run our tests on problems with 10, 20, 50 and 100 customer nodes and corresponding vehicle capacity of 20, 30, 40 and 50; for example, VRP10 consists of 10 customer and the default vehicle capacity is 20 unless otherwise specified",
+        "According to the findings of this paper, our Reinforcement Learning algorithm is competitive with state-of-the-art Vehicle Routing Problem heuristics, and this represents progress toward solving the Vehicle Routing Problem with Reinforcement Learning for real applications",
+        "A vehicle equipped with a processor can use the trained model and solve its own Vehicle Routing Problem, only by doing a sequence of pre-defined arithmetic operations",
+        "One important discrepancy which is usually neglected by the classical heuristics is that one or more of the elements of the Vehicle Routing Problem are stochastic in the real world",
+        "We expect that the proposed architecture has significant potential to be used in real-world problems with further improvements and extensions that incorporate other realistic constraints"
+    ],
+    "key_statements": [
+        "Before presenting the problem formalization, we briefly review the required notation and relation to existing work.<br/><br/>Sequence-to-Sequence Models Sequence-to-Sequence models [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>, <a class=\"ref-link\" id=\"c32\" href=\"#r32\">32</a>, <a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>] are useful in tasks for which a mapping from one sequence to another is required",
+        "We develop a framework with the capability of solving a wide variety of combinatorial optimization problems using Reinforcement Learning (RL) and show how it can be applied to solve the Vehicle Routing Problem",
+        "Rather than focusing on training a separate policy for every problem instance, we propose a structure that performs well on any problem sampled from a given distribution",
+        "We propose an alternate approach\u2014which is simpler than the Pointer Network approach\u2014that can efficiently handle both the static and dynamic elements of the system",
+        "Generic combinatoWe allow some of the elements of each input to change between the decoding steps, which is, the case in many problems such as the Vehicle Routing Problem",
+        "We argue that the recurrent neural network encoder adds extra complication to the encoder but is not necessary, and the approach can be made much more general by omitting it",
+        "The policy gradient algorithm contains two networks: (i) an actor network that predicts a probability distribution over the action at any given decision step, and a critic network that estimates the reward for any problem instance from a given state",
+        "We run our tests on problems with 10, 20, 50 and 100 customer nodes and corresponding vehicle capacity of 20, 30, 40 and 50; for example, VRP10 consists of 10 customer and the default vehicle capacity is 20 unless otherwise specified",
+        "The results are based on 1000 instances, sampled for each problem size",
+        "To test our conjecture that active search will not be effective for our problem, we implemented active search for VRP10 with samples of size 640 and 1280, and the average route length was 4.78 and 4.77 with 15s and 31s solution times per instance, which are far worse than beam search decoders",
+        "We use the models trained for VRP50-Cap40 and VRP50-Cap50 in order to generate a solution for VRP100-Cap50",
+        "Using beam search(10), the average tour length is 18.00 and 17.80, which is still better than the classical heuristics, but worse than OR-Tools",
+        "These two experiments suggest that when the problems are close in terms of the number of customer and vehicle capacity, it is reasonable to expect a near-optimal solution, but we will see a degradation when the testing problems are very different from the training ones.\n4.2",
+        "In Appendix C.6, we design an experiment to illustrate the performance of the algorithm on a Vehicle Routing Problem where both customer locations and their demands are subject to change",
+        "According to the findings of this paper, our Reinforcement Learning algorithm is competitive with state-of-the-art Vehicle Routing Problem heuristics, and this represents progress toward solving the Vehicle Routing Problem with Reinforcement Learning for real applications",
+        "A vehicle equipped with a processor can use the trained model and solve its own Vehicle Routing Problem, only by doing a sequence of pre-defined arithmetic operations",
+        "One important discrepancy which is usually neglected by the classical heuristics is that one or more of the elements of the Vehicle Routing Problem are stochastic in the real world",
+        "We expect that the proposed architecture has significant potential to be used in real-world problems with further improvements and extensions that incorporate other realistic constraints",
+        "Noting that the proposed algorithm is not limited to Vehicle Routing Problem, it will be an important topic of future research to apply it to other combinatorial optimization problems such as bin-packing and job-shop or flow-shop scheduling"
+    ],
+    "summary": [
+        "Before presenting the problem formalization, we briefly review the required notation and relation to existing work.<br/><br/>Sequence-to-Sequence Models Sequence-to-Sequence models [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>, <a class=\"ref-link\" id=\"c32\" href=\"#r32\">32</a>, <a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>] are useful in tasks for which a mapping from one sequence to another is required.",
+        "This means that if we generate a new VRP instance with the same number of nodes and vehicle capacity, and the same location and demand distributions as the ones that we used during training, the trained policy will work well, and we can solve the problem right away, without retraining for every new instance.",
+        "Generic combinatoWe allow some of the elements of each input to change between the decoding steps, which is, the case in many problems such as the VRP.",
+        "We utilize a context-based attention mechanism with glimpse, similar to Vinyals et al [<a class=\"ref-link\" id=\"c35\" href=\"#r35\">35</a>], which extracts the relevant information from the inputs using a variable-length alignment vector at.",
+        "The policy model proposed in this paper does not suffer from such a complication since the embeddings and the attention mechanism are invariant to the input order.",
+        "We parameterize the stochastic policy \u03c0 with parameters \u03b8, where \u03b8 is vector of all trainable variables used in embedding, decoder, and attention mechanism.",
+        "Figure 3 shows the distribution of total tour lengths generated by our method, using greedy and BS decoders, with the number inside the parentheses indicating the beam-width parameter.",
+        "To test our conjecture that active search will not be effective for our problem, we implemented active search for VRP10 with samples of size 640 and 1280, and the average route length was 4.78 and 4.77 with 15s and 31s solution times per instance, which are far worse than BS decoders.",
+        "These two experiments suggest that when the problems are close in terms of the number of customer and vehicle capacity, it is reasonable to expect a near-optimal solution, but we will see a degradation when the testing problems are very different from the training ones.",
+        "In Appendix C.6, we design an experiment to illustrate the performance of the algorithm on a VRP where both customer locations and their demands are subject to change.",
+        "Unlike many classical heuristics, our proposed method scales well as the problem size increases, and it has superior performance with competitive solution-time.",
+        "Noting that the proposed algorithm is not limited to VRP, it will be an important topic of future research to apply it to other combinatorial optimization problems such as bin-packing and job-shop or flow-shop scheduling."
+    ],
+    "headline": "We present an end-to-end framework for solving the Vehicle Routing Problem  using reinforcement learning",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] David L Applegate, Robert E Bixby, Vasek Chvatal, and William J Cook. The traveling salesman problem: a computational study. Princeton university press, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Applegate%2C%20David%20L.%20Bixby%2C%20Robert%20E.%20Chvatal%2C%20Vasek%20Cook%2C%20William%20J.%20The%20traveling%20salesman%20problem%3A%20a%20computational%20study%202006"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Claudia Archetti and Maria Grazia Speranza. The split delivery vehicle routing problem: a survey. In The vehicle routing problem: Latest advances and new challenges, pages 103\u2013122.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Archetti%2C%20Claudia%20Speranza%2C%20Maria%20Grazia%20The%20split%20delivery%20vehicle%20routing%20problem%3A%20a%20survey.%20In%20The%20vehicle%20routing%20problem%3A%20Latest",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Archetti%2C%20Claudia%20Speranza%2C%20Maria%20Grazia%20The%20split%20delivery%20vehicle%20routing%20problem%3A%20a%20survey.%20In%20The%20vehicle%20routing%20problem%3A%20Latest"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio. Neural machine translation by jointly learning to align and translate. In International Conference on Learning Representations, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bahdanau%2C%20Dzmitry%20Cho%2C%20Kyunghyun%20Bengio%2C%20Yoshua%20Neural%20machine%20translation%20by%20jointly%20learning%20to%20align%20and%20translate%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bahdanau%2C%20Dzmitry%20Cho%2C%20Kyunghyun%20Bengio%2C%20Yoshua%20Neural%20machine%20translation%20by%20jointly%20learning%20to%20align%20and%20translate%202015"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Irwan Bello, Hieu Pham, Quoc V Le, Mohammad Norouzi, and Samy Bengio. Neural combinatorial optimization with reinforcement learning. arXiv preprint arXiv:1611.09940, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.09940"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Lucian Busoniu, Robert Babu\u0161ka, and Bart De Schutter. Multi-agent reinforcement learning: An overview. In Innovations in multi-agent systems and applications-1, pages 183\u2013221.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Busoniu%2C%20Lucian%20Babu%C5%A1ka%2C%20Robert%20Schutter%2C%20Bart%20De%20Multi-agent%20reinforcement%20learning%3A%20An%20overview",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Busoniu%2C%20Lucian%20Babu%C5%A1ka%2C%20Robert%20Schutter%2C%20Bart%20De%20Multi-agent%20reinforcement%20learning%3A%20An%20overview"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Kan Chen, Jiang Wang, Liang-Chieh Chen, Haoyuan Gao, Wei Xu, and Ram Nevatia. Abc-cnn: An attention based convolutional neural network for visual question answering. arXiv preprint arXiv:1511.05960, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.05960"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Kyunghyun Cho, Bart Van Merri\u00ebnboer, Caglar Gulcehre, Dzmitry Bahdanau, Fethi Bougares, Holger Schwenk, and Yoshua Bengio. Learning phrase representations using rnn encoderdecoder for statistical machine translation. Conference on Empirical Methods in Natural Language Processing, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cho%2C%20Kyunghyun%20Merri%C3%ABnboer%2C%20Bart%20Van%20Gulcehre%2C%20Caglar%20Bahdanau%2C%20Dzmitry%20Learning%20phrase%20representations%20using%20rnn%20encoderdecoder%20for%20statistical%20machine%20translation%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cho%2C%20Kyunghyun%20Merri%C3%ABnboer%2C%20Bart%20Van%20Gulcehre%2C%20Caglar%20Bahdanau%2C%20Dzmitry%20Learning%20phrase%20representations%20using%20rnn%20encoderdecoder%20for%20statistical%20machine%20translation%202014"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Nicos Christofides. Worst-case analysis of a new heuristic for the travelling salesman problem. Technical report, Carnegie-Mellon Univ Pittsburgh Pa Management Sciences Research Group, 1976.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Christofides%2C%20Nicos%20Worst-case%20analysis%20of%20a%20new%20heuristic%20for%20the%20travelling%20salesman%20problem%201976"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Geoff Clarke and John W Wright. Scheduling of vehicles from a central depot to a number of delivery points. Operations research, 12(4):568\u2013581, 1964.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Clarke%2C%20Geoff%20Wright%2C%20John%20W.%20Scheduling%20of%20vehicles%20from%20a%20central%20depot%20to%20a%20number%20of%20delivery%20points%201964",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Clarke%2C%20Geoff%20Wright%2C%20John%20W.%20Scheduling%20of%20vehicles%20from%20a%20central%20depot%20to%20a%20number%20of%20delivery%20points%201964"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Hanjun Dai, Bo Dai, and Le Song. Discriminative embeddings of latent variable models for structured data. In International Conference on Machine Learning, pages 2702\u20132711, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dai%2C%20Hanjun%20Dai%2C%20Bo%20Song%2C%20Le%20Discriminative%20embeddings%20of%20latent%20variable%20models%20for%20structured%20data%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dai%2C%20Hanjun%20Dai%2C%20Bo%20Song%2C%20Le%20Discriminative%20embeddings%20of%20latent%20variable%20models%20for%20structured%20data%202016"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Hanjun Dai, Elias B Khalil, Yuyu Zhang, Bistra Dilkina, and Le Song. Learning combinatorial optimization algorithms over graphs. Advances in Neural Information Processing Systems, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dai%2C%20Hanjun%20Khalil%2C%20Elias%20B.%20Zhang%2C%20Yuyu%20Dilkina%2C%20Bistra%20Learning%20combinatorial%20optimization%20algorithms%20over%20graphs%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dai%2C%20Hanjun%20Khalil%2C%20Elias%20B.%20Zhang%2C%20Yuyu%20Dilkina%2C%20Bistra%20Learning%20combinatorial%20optimization%20algorithms%20over%20graphs%202017"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Ricardo Fukasawa, Humberto Longo, Jens Lysgaard, Marcus Poggi de Arag\u00e3o, Marcelo Reis, Eduardo Uchoa, and Renato F Werneck. Robust branch-and-cut-and-price for the capacitated vehicle routing problem. Mathematical programming, 106(3):491\u2013511, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fukasawa%2C%20Ricardo%20Longo%2C%20Humberto%20Lysgaard%2C%20Jens%20de%20Arag%C3%A3o%2C%20Marcus%20Poggi%20Robust%20branch-and-cut-and-price%20for%20the%20capacitated%20vehicle%20routing%20problem%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fukasawa%2C%20Ricardo%20Longo%2C%20Humberto%20Lysgaard%2C%20Jens%20de%20Arag%C3%A3o%2C%20Marcus%20Poggi%20Robust%20branch-and-cut-and-price%20for%20the%20capacitated%20vehicle%20routing%20problem%202006"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Xavier Glorot and Yoshua Bengio. Understanding the difficulty of training deep feedforward neural networks. In Proceedings of the Thirteenth International Conference on Artificial Intelligence and Statistics, pages 249\u2013256, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Glorot%2C%20Xavier%20Bengio%2C%20Yoshua%20Understanding%20the%20difficulty%20of%20training%20deep%20feedforward%20neural%20networks%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Glorot%2C%20Xavier%20Bengio%2C%20Yoshua%20Understanding%20the%20difficulty%20of%20training%20deep%20feedforward%20neural%20networks%202010"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Fred Glover and Manuel Laguna. Tabu search*. In Handbook of combinatorial optimization, pages 3261\u20133362.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Glover%2C%20Fred%20Laguna%2C%20Manuel%20Tabu%20search%2A",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Glover%2C%20Fred%20Laguna%2C%20Manuel%20Tabu%20search%2A"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Bruce L Golden, Subramanian Raghavan, and Edward A Wasil. The Vehicle Routing Problem: Latest Advances and New Challenges, volume 43. Springer Science & Business Media, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Golden%2C%20Bruce%20L.%20Raghavan%2C%20Subramanian%20and%20Edward%20A%20Wasil.%20The%20Vehicle%20Routing%20Problem%3A%20Latest%20Advances%20and%20New%202008",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Golden%2C%20Bruce%20L.%20Raghavan%2C%20Subramanian%20and%20Edward%20A%20Wasil.%20The%20Vehicle%20Routing%20Problem%3A%20Latest%20Advances%20and%20New%202008"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Inc. Google. Google\u2019s optimization tools (or-tools), 2018. URL https://github.com/google/or-tools.",
+            "url": "https://github.com/google/or-tools"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Inc. Gurobi Optimization. Gurobi optimizer reference manual, 2016. URL http://www.gurobi.com.",
+            "url": "http://www.gurobi.com"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Seunghoon Hong, Junhyuk Oh, Honglak Lee, and Bohyung Han. Learning transferrable knowledge for semantic segmentation with deep convolutional neural network. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 3204\u20133212, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hong%2C%20Seunghoon%20Oh%2C%20Junhyuk%20Lee%2C%20Honglak%20Han%2C%20Bohyung%20Learning%20transferrable%20knowledge%20for%20semantic%20segmentation%20with%20deep%20convolutional%20neural%20network%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hong%2C%20Seunghoon%20Oh%2C%20Junhyuk%20Lee%2C%20Honglak%20Han%2C%20Bohyung%20Learning%20transferrable%20knowledge%20for%20semantic%20segmentation%20with%20deep%20convolutional%20neural%20network%202016"
+        },
+        {
+            "id": "19",
+            "entry": "[19] S\u00e9bastien Jean, Kyunghyun Cho, Roland Memisevic, and Yoshua Bengio. On using very large target vocabulary for neural machine translation. 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jean%2C%20S%C3%A9bastien%20Cho%2C%20Kyunghyun%20Memisevic%2C%20Roland%20Bengio%2C%20Yoshua%20On%20using%20very%20large%20target%20vocabulary%20for%20neural%20machine%20translation%202015"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Diederik P Kingma and Jimmy Ba. Adam: A method for stochastic optimization. In International Conference on Machine Learning, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Ba%2C%20Jimmy%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Ba%2C%20Jimmy%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202015"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Thomas N Kipf and Max Welling. Semi-supervised classification with graph convolutional networks. arXiv preprint arXiv:1609.02907, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.02907"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Scott Kirkpatrick, C Daniel Gelatt, and Mario P Vecchi. Optimization by simulated annealing. science, 220(4598):671\u2013680, 1983.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Scott%20Kirkpatrick%2C%20C.Daniel%20Gelatt%20Vecchi%2C%20Mario%20P.%20Optimization%20by%20simulated%20annealing%201983",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Scott%20Kirkpatrick%2C%20C.Daniel%20Gelatt%20Vecchi%2C%20Mario%20P.%20Optimization%20by%20simulated%20annealing%201983"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Gilbert Laporte. The vehicle routing problem: An overview of exact and approximate algorithms. European journal of operational research, 59(3):345\u2013358, 1992.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Laporte%2C%20Gilbert%20The%20vehicle%20routing%20problem%3A%20An%20overview%20of%20exact%20and%20approximate%20algorithms%201992",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Laporte%2C%20Gilbert%20The%20vehicle%20routing%20problem%3A%20An%20overview%20of%20exact%20and%20approximate%20algorithms%201992"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Gilbert Laporte, Michel Gendreau, Jean-Yves Potvin, and Fr\u00e9d\u00e9ric Semet. Classical and modern heuristics for the vehicle routing problem. International transactions in operational research, 7 (4-5):285\u2013300, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Laporte%2C%20Gilbert%20Gendreau%2C%20Michel%20Potvin%2C%20Jean-Yves%20Semet%2C%20Fr%C3%A9d%C3%A9ric%20Classical%20and%20modern%20heuristics%20for%20the%20vehicle%20routing%20problem%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Laporte%2C%20Gilbert%20Gendreau%2C%20Michel%20Potvin%2C%20Jean-Yves%20Semet%2C%20Fr%C3%A9d%C3%A9ric%20Classical%20and%20modern%20heuristics%20for%20the%20vehicle%20routing%20problem%202000"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Minh-Thang Luong, Hieu Pham, and Christopher D Manning. Effective approaches to attentionbased neural machine translation. Conference on Empirical Methods in Natural Language Processing, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Luong%2C%20Minh-Thang%20Pham%2C%20Hieu%20Manning%2C%20Christopher%20D.%20Effective%20approaches%20to%20attentionbased%20neural%20machine%20translation%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Luong%2C%20Minh-Thang%20Pham%2C%20Hieu%20Manning%2C%20Christopher%20D.%20Effective%20approaches%20to%20attentionbased%20neural%20machine%20translation%202015"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei A Rusu, Joel Veness, Marc G Bellemare, Alex Graves, Martin Riedmiller, Andreas K Fidjeland, Georg Ostrovski, et al. Human-level control through deep reinforcement learning. Nature, 518(7540):529\u2013533, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20Volodymyr%20Kavukcuoglu%2C%20Koray%20Silver%2C%20David%20Rusu%2C%20Andrei%20A.%20Human-level%20control%20through%20deep%20reinforcement%20learning%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20Volodymyr%20Kavukcuoglu%2C%20Koray%20Silver%2C%20David%20Rusu%2C%20Andrei%20A.%20Human-level%20control%20through%20deep%20reinforcement%20learning%202015"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Volodymyr Mnih, Adria Puigdomenech Badia, Mehdi Mirza, Alex Graves, Timothy Lillicrap, Tim Harley, David Silver, and Koray Kavukcuoglu. Asynchronous methods for deep reinforcement learning. In International Conference on Machine Learning, pages 1928\u20131937, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20Volodymyr%20Badia%2C%20Adria%20Puigdomenech%20Mirza%2C%20Mehdi%20Graves%2C%20Alex%20Asynchronous%20methods%20for%20deep%20reinforcement%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20Volodymyr%20Badia%2C%20Adria%20Puigdomenech%20Mirza%2C%20Mehdi%20Graves%2C%20Alex%20Asynchronous%20methods%20for%20deep%20reinforcement%20learning%202016"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Graham Neubig. Neural machine translation and sequence-to-sequence models: A tutorial. arXiv preprint arXiv:1703.01619, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.01619"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Ulrike Ritzinger, Jakob Puchinger, and Richard F Hartl. A survey on dynamic and stochastic vehicle routing problems. International Journal of Production Research, 54(1):215\u2013231, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ritzinger%2C%20Ulrike%20Puchinger%2C%20Jakob%20Hartl%2C%20Richard%20F.%20A%20survey%20on%20dynamic%20and%20stochastic%20vehicle%20routing%20problems%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ritzinger%2C%20Ulrike%20Puchinger%2C%20Jakob%20Hartl%2C%20Richard%20F.%20A%20survey%20on%20dynamic%20and%20stochastic%20vehicle%20routing%20problems%202016"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Franco Scarselli, Marco Gori, Ah Chung Tsoi, Markus Hagenbuchner, and Gabriele Monfardini. Computational capabilities of graph neural networks. IEEE Transactions on Neural Networks, 20(1):81\u2013102, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Scarselli%2C%20Franco%20Gori%2C%20Marco%20Tsoi%2C%20Ah%20Chung%20Hagenbuchner%2C%20Markus%20Computational%20capabilities%20of%20graph%20neural%20networks%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Scarselli%2C%20Franco%20Gori%2C%20Marco%20Tsoi%2C%20Ah%20Chung%20Hagenbuchner%2C%20Markus%20Computational%20capabilities%20of%20graph%20neural%20networks%202009"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Lawrence V Snyder and Zuo-Jun Max Shen. Fundamentals of Supply Chain Theory. John Wiley & Sons, 2nd edition, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Snyder%2C%20Lawrence%20V.%20Shen%2C%20Zuo-Jun%20Max%20Fundamentals%20of%20Supply%20Chain%20Theory%202018"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Ilya Sutskever, Oriol Vinyals, and Quoc V Le. Sequence to sequence learning with neural networks. In Advances in neural information processing systems, pages 3104\u20133112, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutskever%2C%20Ilya%20Vinyals%2C%20Oriol%20Le%2C%20Quoc%20V.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutskever%2C%20Ilya%20Vinyals%2C%20Oriol%20Le%2C%20Quoc%20V.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Paolo Toth and Daniele Vigo. The Vehicle Routing Problem. SIAM, 2002.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Toth%2C%20Paolo%20Vigo%2C%20Daniele%20The%20Vehicle%20Routing%20Problem%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Toth%2C%20Paolo%20Vigo%2C%20Daniele%20The%20Vehicle%20Routing%20Problem%202002"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Oriol Vinyals, Meire Fortunato, and Navdeep Jaitly. Pointer networks. In Advances in Neural Information Processing Systems, pages 2692\u20132700, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vinyals%2C%20Oriol%20Fortunato%2C%20Meire%20Jaitly%2C%20Navdeep%20Pointer%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vinyals%2C%20Oriol%20Fortunato%2C%20Meire%20Jaitly%2C%20Navdeep%20Pointer%20networks%202015"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Oriol Vinyals, Samy Bengio, and Manjunath Kudlur. Order matters: Sequence to sequence for sets. 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vinyals%2C%20Oriol%20Bengio%2C%20Samy%20Kudlur%2C%20Manjunath%20Order%20matters%3A%20Sequence%20to%20sequence%20for%20sets%202016"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Christos Voudouris and Edward Tsang. Guided local search and its application to the traveling salesman problem. European journal of operational research, 113(2):469\u2013499, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Voudouris%2C%20Christos%20Tsang%2C%20Edward%20Guided%20local%20search%20and%20its%20application%20to%20the%20traveling%20salesman%20problem%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Voudouris%2C%20Christos%20Tsang%2C%20Edward%20Guided%20local%20search%20and%20its%20application%20to%20the%20traveling%20salesman%20problem%201999"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Ronald J Williams and Jing Peng. Function optimization using connectionist reinforcement learning algorithms. Connection Science, 3(3):241\u2013268, 1991.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%2C%20Ronald%20J.%20Peng%2C%20Jing%20Function%20optimization%20using%20connectionist%20reinforcement%20learning%20algorithms%201991",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Williams%2C%20Ronald%20J.%20Peng%2C%20Jing%20Function%20optimization%20using%20connectionist%20reinforcement%20learning%20algorithms%201991"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Anthony Wren and Alan Holliday. Computer scheduling of vehicles from one or more depots to a number of delivery points. Operational Research Quarterly, pages 333\u2013344, 1972.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wren%2C%20Anthony%20Holliday%2C%20Alan%20Computer%20scheduling%20of%20vehicles%20from%20one%20or%20more%20depots%20to%20a%20number%20of%20delivery%20points%201972",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wren%2C%20Anthony%20Holliday%2C%20Alan%20Computer%20scheduling%20of%20vehicles%20from%20one%20or%20more%20depots%20to%20a%20number%20of%20delivery%20points%201972"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Tianjun Xiao, Yichong Xu, Kuiyuan Yang, Jiaxing Zhang, Yuxin Peng, and Zheng Zhang. The application of two-level attention models in deep convolutional neural network for fine-grained image classification. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 842\u2013850, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xiao%2C%20Tianjun%20Xu%2C%20Yichong%20Yang%2C%20Kuiyuan%20Zhang%2C%20Jiaxing%20The%20application%20of%20two-level%20attention%20models%20in%20deep%20convolutional%20neural%20network%20for%20fine-grained%20image%20classification%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xiao%2C%20Tianjun%20Xu%2C%20Yichong%20Yang%2C%20Kuiyuan%20Zhang%2C%20Jiaxing%20The%20application%20of%20two-level%20attention%20models%20in%20deep%20convolutional%20neural%20network%20for%20fine-grained%20image%20classification%202015"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Kelvin Xu, Jimmy Ba, Ryan Kiros, Kyunghyun Cho, Aaron Courville, Ruslan Salakhudinov, Rich Zemel, and Yoshua Bengio. Show, attend and tell: Neural image caption generation with visual attention. In International Conference on Machine Learning, pages 2048\u20132057, 2015. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xu%2C%20Kelvin%20Ba%2C%20Jimmy%20Kiros%2C%20Ryan%20Cho%2C%20Kyunghyun%20attend%20and%20tell%3A%20Neural%20image%20caption%20generation%20with%20visual%20attention%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xu%2C%20Kelvin%20Ba%2C%20Jimmy%20Kiros%2C%20Ryan%20Cho%2C%20Kyunghyun%20attend%20and%20tell%3A%20Neural%20image%20caption%20generation%20with%20visual%20attention%202015"
+        }
+    ]
+}

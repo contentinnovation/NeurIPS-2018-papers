@@ -1,0 +1,157 @@
+{
+    "filename": "8196-variance-reduced-stochastic-gradient-descent-on-streaming-data.pdf",
+    "metadata": {
+        "title": "Variance-Reduced Stochastic Gradient Descent on Streaming Data",
+        "author": "Ellango Jothimurugesan, Ashraf Tahmasbi, Phillip Gibbons, Srikanta Tirthapura",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8196-variance-reduced-stochastic-gradient-descent-on-streaming-data.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We present an algorithm STRSAGA for efficiently maintaining a machine learning model over data points that arrive over time, quickly updating the model as new training data is observed. We present a competitive analysis comparing the suboptimality of the model maintained by STRSAGA with that of an offline algorithm that is given the entire data beforehand, and analyze the risk-competitiveness of STRSAGA under different arrival patterns. Our theoretical and experimental results show that the risk of STRSAGA is comparable to that of offline algorithms on a variety of input arrival patterns, and its experimental performance is significantly better than prior algorithms suited for streaming data, such as SGD and SSVRG."
+    },
+    "keywords": [
+        {
+            "term": "data point",
+            "url": "https://en.wikipedia.org/wiki/data_point"
+        },
+        {
+            "term": "offline algorithm",
+            "url": "https://en.wikipedia.org/wiki/offline_algorithm"
+        },
+        {
+            "term": "empirical risk minimizer",
+            "url": "https://en.wikipedia.org/wiki/empirical_risk_minimizer"
+        }
+    ],
+    "highlights": [
+        "We consider the maintenance of a model over streaming data that are arriving as an endless sequence of data points",
+        "We prove this using a \u201ccompetitive analysis\u201d framework that compares the accuracy of STRSAGA to a state-of-the-art offline algorithm DYNASAGA [DLH16], which is based on variance-reduced Stochastic Gradient Descent",
+        "We show that STRSAGA significantly outperforms natural streaming data versions of both Stochastic Gradient Descent and Streaming SVRG [FGKS15]",
+        "We considered the ongoing maintenance of a model over data points that are arriving over time, according to an unknown arrival distribution",
+        "We presented STRSAGA, and showed through both analysis and experiments that, for various arrival distributions, (i) its empirical risk over the data arriving so far is close to the empirical risk minimizer over the same data, it is competitive with a state-of-the-art offline algorithm DYNASAGA, and it significantly outperforms streaming data versions of both Stochastic Gradient Descent and Streaming SVRG",
+        "We conclude that STRSAGA should be the algorithm of choice for variance-reduced Stochastic Gradient Descent on streaming data in the setting where memory is not limited"
+    ],
+    "key_statements": [
+        "We consider the maintenance of a model over streaming data that are arriving as an endless sequence of data points",
+        "Methods that recompute the model from scratch upon the arrival of new data points are infeasible due to their high computational costs, and we need methods that efficiently update the model as more data arrive",
+        "Such efficiency should not come at the expense of accuracy\u2014the accuracy of the model maintained through such updates should be close to that obtained if we were to build a model from scratch, using all the training data points seen so far",
+        "We prove this using a \u201ccompetitive analysis\u201d framework that compares the accuracy of STRSAGA to a state-of-the-art offline algorithm DYNASAGA [DLH16], which is based on variance-reduced Stochastic Gradient Descent",
+        "We show that these conditions are satisfied by a number of common arrival distributions, including Poisson arrivals and many classes of skewed arrivals",
+        "We show that STRSAGA significantly outperforms natural streaming data versions of both Stochastic Gradient Descent and Streaming SVRG [FGKS15]",
+        "We found STRSAGA to be significantly more accurate than Streaming SVRG",
+        "We focus on a basic step used in all Stochastic Gradient Descent-style algorithms: A random training point x is chosen from a set of training samples, and the vector w is updated through a gradient computed at point x",
+        "We show if a streaming data algorithm is risk-competitive with respect to DYNASAGA(\u03c1) it is risk-competitive with respect to the empirical risk minimizer, under certain conditions",
+        "We considered the ongoing maintenance of a model over data points that are arriving over time, according to an unknown arrival distribution",
+        "We presented STRSAGA, and showed through both analysis and experiments that, for various arrival distributions, (i) its empirical risk over the data arriving so far is close to the empirical risk minimizer over the same data, it is competitive with a state-of-the-art offline algorithm DYNASAGA, and it significantly outperforms streaming data versions of both Stochastic Gradient Descent and Streaming SVRG",
+        "We conclude that STRSAGA should be the algorithm of choice for variance-reduced Stochastic Gradient Descent on streaming data in the setting where memory is not limited"
+    ],
+    "summary": [
+        "We consider the maintenance of a model over streaming data that are arriving as an endless sequence of data points.",
+        "Algorithm 1: STRSAGA: Process a set of training points Xi that arrived in time step i, i > 0.",
+        "Let tSiTR, tDi , tEi RM respectively denote the sizes of the effective sample sets of STRSAGA, DYNASAGA(\u03c1), ERM respectively, after i time steps.",
+        "For c \u2265 1, a streaming data algorithm I is said to be c-risk-competitive to DYNASAGA(\u03c1) at time step i if E [SUBOPTSi (I)] \u2264 cH.",
+        "For any arrival distribution with mean \u03bb, bounded variance \u03c32 and satisfying Bernstein\u2019s condition with parameter b, STRSAGA is 8\u03b1(2 + o(1))-risk-competitive to DYNASAGA(\u03c1), with probability at least 1 \u2212",
+        "For Poisson arrival distribution with mean \u03bb, STRSAGA is 8\u03b1(2 + o(1))-risk-competitive to DYNASAGA(\u03c1) with probability at least 1 \u2212",
+        "We empirically confirm the competitiveness of STRSAGA with the offline algorithm DYNASAGA(\u03c1) through a set of experiments on real world datasets streamed in under various arrival distributions.",
+        "At each time step i, a streaming data algorithm has access to \u03c1 gradient computations to update the model; we show results for \u03c1/\u03bb = 1 and \u03c1/\u03bb = 5.",
+        "We compare the sub-optimality of STRSAGA with the offline algorithm DYNASAGA(\u03c1), which is run from scratch at each time i using \u03c1i steps on Si. We compare with two streaming data algorithms, SGD, and for the case \u03c1/\u03bb = 1, the single-pass algorithm SSVRG.",
+        "4 In the streaming data setting, in which we are not limited in storage and the available processing time \u03c1 may permit revisiting points, our implementation of SGD needs clarification in its sampling procedure.",
+        "As the sample-competitive ratio increases, the risk-competitiveness of STRSAGA improves so that the sub-optimality of STRSAGA is comparable to that of the offline DYNASAGA(\u03c1), which is the best we can do given limited computational power.",
+        "In Figure 1, we observe that STRSAGA outperforms both our streaming data version of SGD, due to the faster convergence rate when using SAGA steps with reduced variance, and SSVRG, showing the benefit of revisiting data points, even when the processing rate is constrained at \u03c1 = 1\u03bb.",
+        "We presented STRSAGA, and showed through both analysis and experiments that, for various arrival distributions, (i) its empirical risk over the data arriving so far is close to the empirical risk minimizer over the same data, it is competitive with a state-of-the-art offline algorithm DYNASAGA, and it significantly outperforms streaming data versions of both SGD and SSVRG.",
+        "We conclude that STRSAGA should be the algorithm of choice for variance-reduced SGD on streaming data in the setting where memory is not limited"
+    ],
+    "headline": "We present an algorithm STRSAGA for efficiently maintaining a machine learning model over data points that arrive over time, quickly updating the model as new training data is observed",
+    "reference_links": [
+        {
+            "id": "Bottou_2007_a",
+            "entry": "[BB07] L. Bottou and O. Bousquet. The tradeoffs of large scale learning. In NIPS, pages 161\u2013168, 2007.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bottou%2C%20L.%20Bousquet%2C%20O.%20The%20tradeoffs%20of%20large%20scale%20learning%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bottou%2C%20L.%20Bousquet%2C%20O.%20The%20tradeoffs%20of%20large%20scale%20learning%202007"
+        },
+        {
+            "id": "Bercu_et+al_2015_a",
+            "entry": "[BDR15] B. Bercu, B. Delyon, and E. Rio. Concentration inequalities for sums and martingales. Springer, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bercu%2C%20B.%20Delyon%2C%20B.%20Rio%2C%20E.%20Concentration%20inequalities%20for%20sums%20and%20martingales%202015"
+        },
+        {
+            "id": "Bertsekas_2016_a",
+            "entry": "[Ber16] D. P. Bertsekas. Nonlinear Programming (3rd Ed.). Athena Scientific, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bertsekas%2C%20D.P.%20Nonlinear%20Programming%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bertsekas%2C%20D.P.%20Nonlinear%20Programming%202016"
+        },
+        {
+            "id": "Bottou_2003_a",
+            "entry": "[BL03] L. Bottou and Y. LeCun. Large scale online learning. In NIPS, pages 217\u2013224, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bottou%2C%20L.%20LeCun%2C%20Y.%20Large%20scale%20online%20learning%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bottou%2C%20L.%20LeCun%2C%20Y.%20Large%20scale%20online%20learning%202003"
+        },
+        {
+            "id": "Defazio_et+al_2014_a",
+            "entry": "[DBLJ14] A. Defazio, F. Bach, and S. Lacoste-Julien. Saga: A fast incremental gradient method with support for non-strongly convex composite objectives. In NIPS, pages 1646\u20131654, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Defazio%2C%20A.%20Bach%2C%20F.%20Lacoste-Julien%2C%20S.%20Saga%3A%20A%20fast%20incremental%20gradient%20method%20with%20support%20for%20non-strongly%20convex%20composite%20objectives%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Defazio%2C%20A.%20Bach%2C%20F.%20Lacoste-Julien%2C%20S.%20Saga%3A%20A%20fast%20incremental%20gradient%20method%20with%20support%20for%20non-strongly%20convex%20composite%20objectives%202014"
+        },
+        {
+            "id": "Dua_2017_a",
+            "entry": "[DKT17] D. Dua and E. Karra Taniskidou. UCI machine learning repository, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dua%2C%20D.%20Taniskidou%2C%20E.Karra%20UCI%20machine%20learning%20repository%202017"
+        },
+        {
+            "id": "Daneshmand_et+al_2016_a",
+            "entry": "[DLH16] H. Daneshmand, A. Lucchi, and T. Hofmann. Starting small-learning with adaptive sample sizes. In ICML, pages 1463\u20131471, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Daneshmand%2C%20H.%20Lucchi%2C%20A.%20Hofmann%2C%20T.%20Starting%20small-learning%20with%20adaptive%20sample%20sizes%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Daneshmand%2C%20H.%20Lucchi%2C%20A.%20Hofmann%2C%20T.%20Starting%20small-learning%20with%20adaptive%20sample%20sizes%202016"
+        },
+        {
+            "id": "Frostig_et+al_2015_a",
+            "entry": "[FGKS15] R. Frostig, R. Ge, S. M. Kakade, and A. Sidford. Competing with the empirical risk minimizer in a single pass. In COLT, pages 728\u2013763, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Frostig%2C%20R.%20Ge%2C%20R.%20Kakade%2C%20S.M.%20Sidford%2C%20A.%20Competing%20with%20the%20empirical%20risk%20minimizer%20in%20a%20single%20pass%202015"
+        },
+        {
+            "id": "Harper_2016_a",
+            "entry": "[HK16] F. M. Harper and J. A. Konstan. The movielens datasets: History and context. ACM TIIS, 5(4):19, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Harper%2C%20F.M.%20Konstan%2C%20J.A.%20The%20movielens%20datasets%3A%20History%20and%20context%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Harper%2C%20F.M.%20Konstan%2C%20J.A.%20The%20movielens%20datasets%3A%20History%20and%20context%202016"
+        },
+        {
+            "id": "Johnson_2013_a",
+            "entry": "[JZ13] R. Johnson and T. Zhang. Accelerating stochastic gradient descent using predictive variance reduction. In NIPS, pages 315\u2013323, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Johnson%2C%20R.%20Zhang%2C%20T.%20Accelerating%20stochastic%20gradient%20descent%20using%20predictive%20variance%20reduction%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Johnson%2C%20R.%20Zhang%2C%20T.%20Accelerating%20stochastic%20gradient%20descent%20using%20predictive%20variance%20reduction%202013"
+        },
+        {
+            "id": "Richt_2013_a",
+            "entry": "[KR13] J. Konecnyand P. Richt\u00e1rik. Semi-stochastic gradient descent methods. arXiv preprint arXiv:1312.1666, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.1666"
+        },
+        {
+            "id": "Lewis_et+al_2004_a",
+            "entry": "[LYRL04] D. D. Lewis, Y. Yang, T. G. Rose, and F. Li. Rcv1: A new benchmark collection for text categorization research. JMLR, 5(Apr):361\u2013397, 2004.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lewis%2C%20D.D.%20Yang%2C%20Y.%20Rose%2C%20T.G.%20Li%2C%20F.%20Rcv1%3A%20A%20new%20benchmark%20collection%20for%20text%20categorization%20research%202004",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lewis%2C%20D.D.%20Yang%2C%20Y.%20Rose%2C%20T.G.%20Li%2C%20F.%20Rcv1%3A%20A%20new%20benchmark%20collection%20for%20text%20categorization%20research%202004"
+        },
+        {
+            "id": "Mitzenmacher_2017_a",
+            "entry": "[MU17] M. Mitzenmacher and E. Upfal. Probability and Computing: Randomization and Probabilistic Techniques in Algorithms and Data Analysis. Cambridge university press, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mitzenmacher%2C%20M.%20Upfal%2C%20E.%20Probability%20and%20Computing%3A%20Randomization%20and%20Probabilistic%20Techniques%20in%20Algorithms%20and%20Data%20Analysis%202017"
+        },
+        {
+            "id": "Robbins_1951_a",
+            "entry": "[RM51] H. Robbins and S. Monro. A stochastic approximation method. The Annals of Mathematical Statistics, pages 400\u2013407, 1951.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Robbins%2C%20H.%20Monro%2C%20S.%20A%20stochastic%20approximation%20method%201951",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Robbins%2C%20H.%20Monro%2C%20S.%20A%20stochastic%20approximation%20method%201951"
+        },
+        {
+            "id": "Roux_et+al_2012_a",
+            "entry": "[RSB12] N. L. Roux, M. Schmidt, and F. R. Bach. A stochastic gradient method with an exponential convergence rate for finite training sets. In NIPS, pages 2663\u20132671, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Roux%2C%20N.L.%20Schmidt%2C%20M.%20Bach%2C%20F.R.%20A%20stochastic%20gradient%20method%20with%20an%20exponential%20convergence%20rate%20for%20finite%20training%20sets%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Roux%2C%20N.L.%20Schmidt%2C%20M.%20Bach%2C%20F.R.%20A%20stochastic%20gradient%20method%20with%20an%20exponential%20convergence%20rate%20for%20finite%20training%20sets%202012"
+        },
+        {
+            "id": "Shah_et+al_2016_a",
+            "entry": "[SAKS16] V. Shah, M. Asteris, A. Kyrillidis, and S. Sanghavi. Trading-off variance and complexity in stochastic gradient descent. arXiv preprint arXiv:1603.06861, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1603.06861"
+        }
+    ]
+}

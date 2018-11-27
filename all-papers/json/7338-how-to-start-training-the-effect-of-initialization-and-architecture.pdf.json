@@ -1,0 +1,276 @@
+{
+    "filename": "7338-how-to-start-training-the-effect-of-initialization-and-architecture.pdf",
+    "metadata": {
+        "title": "How to Start Training: The Effect of Initialization and Architecture",
+        "author": "Boris Hanin, David Rolnick",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7338-how-to-start-training-the-effect-of-initialization-and-architecture.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We identify and study two common failure modes for early training in deep ReLU nets. For each, we give a rigorous proof of when it occurs and how to avoid it, for fully connected, convolutional, and residual architectures. We show that the first failure mode, exploding or vanishing mean activation length, can be avoided by initializing weights from a symmetric distribution with variance 2/fan-in and, for ResNets, by correctly scaling the residual modules. We prove that the second failure mode, exponentially large variance of activation length, never occurs in residual nets once the first failure mode is avoided. In contrast, for fully connected nets, we prove that this failure mode can happen and is avoided by keeping constant the sum of the reciprocals of layer widths. We demonstrate empirically the effectiveness of our theoretical results in predicting when networks are able to start training. In particular, we note that many popular initializations fail our criteria, whereas correct initialization and architecture allows much deeper networks to be trained."
+    },
+    "keywords": [
+        {
+            "term": "saddle point",
+            "url": "https://en.wikipedia.org/wiki/saddle_point"
+        },
+        {
+            "term": "local minima",
+            "url": "https://en.wikipedia.org/wiki/local_minima"
+        },
+        {
+            "term": "deep neural network",
+            "url": "https://en.wikipedia.org/wiki/deep_neural_network"
+        },
+        {
+            "term": "failure mode",
+            "url": "https://en.wikipedia.org/wiki/failure_mode"
+        },
+        {
+            "term": "deep network",
+            "url": "https://en.wikipedia.org/wiki/deep_network"
+        },
+        {
+            "term": "neural network",
+            "url": "https://en.wikipedia.org/wiki/neural_network"
+        },
+        {
+            "term": "length scale",
+            "url": "https://en.wikipedia.org/wiki/length_scale"
+        },
+        {
+            "term": "deep learning",
+            "url": "https://en.wikipedia.org/wiki/deep_learning"
+        }
+    ],
+    "highlights": [
+        "Despite the growing number of practical uses for deep learning, training deep neural networks remains a challenge",
+        "Among the many possible obstacles to training, it is natural to distinguish two kinds: problems that prevent a given neural network from ever achieving better-than-chance performance and problems that have to do with later stages of training, such as escaping flat regions and saddle points [<a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>, <a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>], reaching spurious local minima [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>, <a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>], and overfitting [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>, <a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>]",
+        "This paper focuses specifically on two failure modes related to the first kind of difficulty: (FM1): The mean length scale in the final layer increases/decreases exponentially with the depth. (FM2): The empirical variance of length scales across layers grows exponentially with the depth",
+        "We find that a careful choice of initial weights is needed for well-behaved mean length scales",
+        "We prove that to control not merely the mean but the variance of layerwise length scales requires choosing a sufficiently wide architecture, while for residual nets nothing further is required",
+        "We demonstrate empirically that both the mean and variance of length scales are strong predictors of early training dynamics"
+    ],
+    "key_statements": [
+        "Despite the growing number of practical uses for deep learning, training deep neural networks remains a challenge",
+        "Among the many possible obstacles to training, it is natural to distinguish two kinds: problems that prevent a given neural network from ever achieving better-than-chance performance and problems that have to do with later stages of training, such as escaping flat regions and saddle points [<a class=\"ref-link\" id=\"c12\" href=\"#r12\">12</a>, <a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>], reaching spurious local minima [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>, <a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>], and overfitting [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>, <a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>]",
+        "This paper focuses specifically on two failure modes related to the first kind of difficulty: (FM1): The mean length scale in the final layer increases/decreases exponentially with the depth. (FM2): The empirical variance of length scales across layers grows exponentially with the depth",
+        "Initializing weights with the correct variance and correctly weighting residual modules prevents the mean size of activations from becoming exponentially large or small as a function of the depth, allowing training to start for deeper architectures",
+        "We prove that the key to avoiding FM1 in residual networks is to correctly rescale the contributions of individual residual modules",
+        "We find that a careful choice of initial weights is needed for well-behaved mean length scales",
+        "We prove that to control not merely the mean but the variance of layerwise length scales requires choosing a sufficiently wide architecture, while for residual nets nothing further is required",
+        "We demonstrate empirically that both the mean and variance of length scales are strong predictors of early training dynamics"
+    ],
+    "summary": [
+        "Despite the growing number of practical uses for deep learning, training deep neural networks remains a challenge.",
+        "(FM2): The empirical variance of length scales across layers grows exponentially with the depth.",
+        "Initializing weights with the correct variance and correctly weighting residual modules prevents the mean size of activations from becoming exponentially large or small as a function of the depth, allowing training to start for deeper architectures.",
+        "For fully connected and convolutional networks, FM2 is a function of architecture, rather than just of initialization, and can occur even if FM1 does not.",
+        "The idea that controlling means and variances of activations at various hidden layers in a deep network can help with the start of training was previously considered in Klaumbauer et al [<a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>].",
+        "We would like to point out a previous appearance in Hanin [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>] of the sum of reciprocals of layer widths, which we here show determines the variance of the sizes of the activations in randomly initialized fully connected ReLU nets.",
+        "3.1 Avoiding FM1 for Fully Connected Networks: Variance of Weights",
+        "We prove in Theorem 5 that the mean of the normalized output length M , which controls whether failure d mode FM1 occurs, is determined by the variance of the distribution used to initialize weights.",
+        "Theorem 1 (FM1 for fully connected output length is equal to the input length networks).",
+        "This leads to a decrease in the variance of the resulting weight distribution, causing a catastrophic decay in the lengths of output activations.",
+        "The mean E[Vdar[M ]] of the empirical variance for the lengths of activations in a fully connected ReLU",
+        "In Figure 4, we show that the output length behavior we observed in fully connected networks holds in ConvNets.",
+        "We state our results only for fully connected feed-forward ReLU nets, the proof techniques carry over essentially verbatim to any feed-forward network in which only weights in the same hidden layer are tied.",
+        "Our final result about fully connected networks is a corollary of Theorem 5, which explains precisely when failure mode FM2 occurs.",
+        "We give a rigorous analysis of the layerwise length scales in fully connected, convolutional, and residual ReLU networks at initialization.",
+        "For fully connected and convolutional networks, this entails a critical variance for i.i.d. weights, while for residual nets this entails appropriately rescaling the residual modules.",
+        "We prove that to control not merely the mean but the variance of layerwise length scales requires choosing a sufficiently wide architecture, while for residual nets nothing further is required.",
+        "We demonstrate empirically that both the mean and variance of length scales are strong predictors of early training dynamics"
+    ],
+    "headline": "We identify and study two common failure modes for early training in deep ReLU nets",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Martin Arjovsky, Amar Shah, and Yoshua Bengio. Unitary evolution recurrent neural networks. In International Conference on Machine Learning, pages 1120\u20131128, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Arjovsky%2C%20Martin%20Shah%2C%20Amar%20Bengio%2C%20Yoshua%20Unitary%20evolution%20recurrent%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Arjovsky%2C%20Martin%20Shah%2C%20Amar%20Bengio%2C%20Yoshua%20Unitary%20evolution%20recurrent%20neural%20networks%202016"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Devansh Arpit, Stanislaw Jastrzebski, Nicolas Ballas, David Krueger, Emmanuel Bengio, Maxinder S Kanwal, Tegan Maharaj, Asja Fischer, Aaron Courville, Yoshua Bengio, et al. A closer look at memorization in deep networks. arXiv preprint arXiv:1706.05394, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.05394"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Patrick Billingsley. Probability and measure. John Wiley & Sons, 2008.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Billingsley%2C%20Patrick%20Probability%20and%20measure%202008"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Fran\u00e7ois Chollet et al. Keras. https://github.com/keras-team/keras, 2018.",
+            "url": "https://github.com/keras-team/keras"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Rong Ge, Chi Jin, and Yi Zheng. No spurious local minima in nonconvex low rank problems: A unified geometric analysis. arXiv preprint arXiv:1704.00708, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1704.00708"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Raja Giryes, Guillermo Sapiro, and Alexander M Bronstein. Deep neural networks with random Gaussian weights: a universal classification strategy? IEEE Trans. Signal Processing, 64(13):3444\u20133457, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Giryes%2C%20Raja%20Sapiro%2C%20Guillermo%20Bronstein%2C%20Alexander%20M.%20Deep%20neural%20networks%20with%20random%20Gaussian%20weights%3A%20a%20universal%20classification%20strategy%3F%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Giryes%2C%20Raja%20Sapiro%2C%20Guillermo%20Bronstein%2C%20Alexander%20M.%20Deep%20neural%20networks%20with%20random%20Gaussian%20weights%3A%20a%20universal%20classification%20strategy%3F%202016"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Boris Hanin. Which neural net architectures give rise to exploding and vanishing gradients? In Advances in Neural Information Processing Systems, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hanin%2C%20Boris%20Which%20neural%20net%20architectures%20give%20rise%20to%20exploding%20and%20vanishing%20gradients%3F%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hanin%2C%20Boris%20Which%20neural%20net%20architectures%20give%20rise%20to%20exploding%20and%20vanishing%20gradients%3F%202018"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Delving deep into rectifiers: Surpassing human-level performance on ImageNet classification. In Proceedings of the IEEE international conference on computer vision, pages 1026\u20131034, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Delving%20deep%20into%20rectifiers%3A%20Surpassing%20human-level%20performance%20on%20ImageNet%20classification%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Delving%20deep%20into%20rectifiers%3A%20Surpassing%20human-level%20performance%20on%20ImageNet%20classification%202015"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 770\u2013778, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20Kaiming%20Zhang%2C%20Xiangyu%20Ren%2C%20Shaoqing%20Sun%2C%20Jian%20Deep%20residual%20learning%20for%20image%20recognition%202016"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Mikael Henaff, Arthur Szlam, and Yann LeCun. Recurrent orthogonal networks and longmemory tasks. In International Conference on Machine Learning, pages 2034\u20132042, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Henaff%2C%20Mikael%20Szlam%2C%20Arthur%20LeCun%2C%20Yann%20Recurrent%20orthogonal%20networks%20and%20longmemory%20tasks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Henaff%2C%20Mikael%20Szlam%2C%20Arthur%20LeCun%2C%20Yann%20Recurrent%20orthogonal%20networks%20and%20longmemory%20tasks%202016"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Sergey Ioffe and Christian Szegedy. Batch normalization: Accelerating deep network training by reducing internal covariate shift. arXiv preprint arXiv:1502.03167, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1502.03167"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Chi Jin, Rong Ge, Praneeth Netrapalli, Sham M Kakade, and Michael I Jordan. How to escape saddle points efficiently. arXiv preprint arXiv:1703.00887, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.00887"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Li Jing, Yichen Shen, Tena Dubcek, John Peurifoy, Scott Skirlo, Yann LeCun, Max Tegmark, and Marin Soljacic. Tunable efficient unitary neural networks (eunn) and their application to rnns. In International Conference on Machine Learning, pages 1733\u20131741, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jing%2C%20Li%20Shen%2C%20Yichen%20Dubcek%2C%20Tena%20Peurifoy%2C%20John%20Tunable%20efficient%20unitary%20neural%20networks%20%28eunn%29%20and%20their%20application%20to%20rnns%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jing%2C%20Li%20Shen%2C%20Yichen%20Dubcek%2C%20Tena%20Peurifoy%2C%20John%20Tunable%20efficient%20unitary%20neural%20networks%20%28eunn%29%20and%20their%20application%20to%20rnns%202017"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Jonathan Kadmon and Haim Sompolinsky. Transition to chaos in random neuronal networks. Physical Review X, 5(4):041030, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kadmon%2C%20Jonathan%20Sompolinsky%2C%20Haim%20Transition%20to%20chaos%20in%20random%20neuronal%20networks%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kadmon%2C%20Jonathan%20Sompolinsky%2C%20Haim%20Transition%20to%20chaos%20in%20random%20neuronal%20networks%202015"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Kenji Kawaguchi. Deep learning without poor local minima. In Advances in Neural Information Processing Systems, pages 586\u2013594, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kawaguchi%2C%20Kenji%20Deep%20learning%20without%20poor%20local%20minima%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kawaguchi%2C%20Kenji%20Deep%20learning%20without%20poor%20local%20minima%202016"
+        },
+        {
+            "id": "16",
+            "entry": "[16] G\u00fcnter Klambauer, Thomas Unterthiner, Andreas Mayr, and Sepp Hochreiter. Self-normalizing neural networks. In Advances in Neural Information Processing Systems, pages 972\u2013981, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Klambauer%2C%20G%C3%BCnter%20Unterthiner%2C%20Thomas%20Mayr%2C%20Andreas%20Hochreiter%2C%20Sepp%20Self-normalizing%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Klambauer%2C%20G%C3%BCnter%20Unterthiner%2C%20Thomas%20Mayr%2C%20Andreas%20Hochreiter%2C%20Sepp%20Self-normalizing%20neural%20networks%202017"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Alex Krizhevsky. Learning multiple layers of features from tiny images. 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krizhevsky%2C%20Alex%20Learning%20multiple%20layers%20of%20features%20from%20tiny%20images%202009"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Quoc V Le, Navdeep Jaitly, and Geoffrey E Hinton. A simple way to initialize recurrent networks of rectified linear units. arXiv preprint arXiv:1504.00941, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1504.00941"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Yann LeCun, Corinna Cortes, and Christopher J.C. Burges. The MNIST database of handwritten digits. http://yann.lecun.com/exdb/mnist/, 1998.",
+            "url": "http://yann.lecun.com/exdb/mnist/"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Adam Paszke, Sam Gross, Soumith Chintala, Gregory Chanan, Edward Yang, Zachary DeVito, Zeming Lin, Alban Desmaison, Luca Antiga, and Adam Lerer. Automatic differentiation in PyTorch. 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Paszke%2C%20Adam%20Gross%2C%20Sam%20Chintala%2C%20Soumith%20Chanan%2C%20Gregory%20Automatic%20differentiation%20in%20PyTorch%202017"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Jeffrey Pennington, Samuel Schoenholz, and Surya Ganguli. Resurrecting the sigmoid in deep learning through dynamical isometry: theory and practice. In Advances in Neural Information Processing Systems, pages 4788\u20134798, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pennington%2C%20Jeffrey%20Schoenholz%2C%20Samuel%20Ganguli%2C%20Surya%20Resurrecting%20the%20sigmoid%20in%20deep%20learning%20through%20dynamical%20isometry%3A%20theory%20and%20practice%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pennington%2C%20Jeffrey%20Schoenholz%2C%20Samuel%20Ganguli%2C%20Surya%20Resurrecting%20the%20sigmoid%20in%20deep%20learning%20through%20dynamical%20isometry%3A%20theory%20and%20practice%202017"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Ben Poole, Subhaneil Lahiri, Maithra Raghu, Jascha Sohl-Dickstein, and Surya Ganguli. Exponential expressivity in deep neural networks through transient chaos. In Advances in Neural Information Processing Systems, pages 3360\u20133368, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Poole%2C%20Ben%20Lahiri%2C%20Subhaneil%20Raghu%2C%20Maithra%20Sohl-Dickstein%2C%20Jascha%20Exponential%20expressivity%20in%20deep%20neural%20networks%20through%20transient%20chaos%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Poole%2C%20Ben%20Lahiri%2C%20Subhaneil%20Raghu%2C%20Maithra%20Sohl-Dickstein%2C%20Jascha%20Exponential%20expressivity%20in%20deep%20neural%20networks%20through%20transient%20chaos%202016"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Maithra Raghu, Ben Poole, Jon Kleinberg, Surya Ganguli, and Jascha Sohl-Dickstein. On the expressive power of deep neural networks. In Proceedings of the 34th International Conference on Machine Learning, pages 2847\u20132854, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Raghu%2C%20Maithra%20Poole%2C%20Ben%20Kleinberg%2C%20Jon%20Ganguli%2C%20Surya%20On%20the%20expressive%20power%20of%20deep%20neural%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Raghu%2C%20Maithra%20Poole%2C%20Ben%20Kleinberg%2C%20Jon%20Ganguli%2C%20Surya%20On%20the%20expressive%20power%20of%20deep%20neural%20networks%202017"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Andrew M Saxe, James L McClelland, and Surya Ganguli. Exact solutions to the nonlinear dynamics of learning in deep linear neural networks. arXiv preprint arXiv:1312.6120, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.6120"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Samuel S Schoenholz, Justin Gilmer, Surya Ganguli, and Jascha Sohl-Dickstein. Deep information propagation. arXiv preprint arXiv:1611.01232, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.01232"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Samuel S Schoenholz, Jeffrey Pennington, and Jascha Sohl-Dickstein. A correspondence between random neural networks and statistical field theory. arXiv preprint arXiv:1710.06570, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.06570"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Shai Shalev-Shwartz, Ohad Shamir, and Shaked Shammah. Failures of gradient-based deep learning. In Proceedings of the 34th International Conference on Machine Learning, volume 70, pages 3067\u20133075, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shalev-Shwartz%2C%20Shai%20Shamir%2C%20Ohad%20Shammah%2C%20Shaked%20Failures%20of%20gradient-based%20deep%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shalev-Shwartz%2C%20Shai%20Shamir%2C%20Ohad%20Shammah%2C%20Shaked%20Failures%20of%20gradient-based%20deep%20learning%202017"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Ramalingam Shanmugam and Rajan Chattamvelli. Statistics for scientists and engineers. Wiley Online Library, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shanmugam%2C%20Ramalingam%20Chattamvelli%2C%20Rajan%20Statistics%20for%20scientists%20and%20engineers%202015"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Masato Taki. Deep residual networks and weight initialization. arXiv preprint arXiv:1709.02956, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1709.02956"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Andreas Veit, Michael J Wilber, and Serge Belongie. Residual networks behave like ensembles of relatively shallow networks. In Advances in Neural Information Processing Systems, pages 550\u2013558, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Veit%2C%20Andreas%20Wilber%2C%20Michael%20J.%20Belongie%2C%20Serge%20Residual%20networks%20behave%20like%20ensembles%20of%20relatively%20shallow%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Veit%2C%20Andreas%20Wilber%2C%20Michael%20J.%20Belongie%2C%20Serge%20Residual%20networks%20behave%20like%20ensembles%20of%20relatively%20shallow%20networks%202016"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Yuhuai Wu, Elman Mansimov, Roger B. Grosse, Shun Liao, and Jimmy Ba. Second-order optimization for deep reinforcement learning using Kronecker-factored approximation. In Advances in Neural Information Processing Systems 30, pages 5285\u20135294, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20Yuhuai%20Mansimov%2C%20Elman%20Grosse%2C%20Roger%20B.%20Liao%2C%20Shun%20Second-order%20optimization%20for%20deep%20reinforcement%20learning%20using%20Kronecker-factored%20approximation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20Yuhuai%20Mansimov%2C%20Elman%20Grosse%2C%20Roger%20B.%20Liao%2C%20Shun%20Second-order%20optimization%20for%20deep%20reinforcement%20learning%20using%20Kronecker-factored%20approximation%202017"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Greg Yang and Samuel S Schoenholz. Mean field residual networks: On the edge of chaos. In Advances in neural information processing systems, pages 7103\u20137114, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yang%2C%20Greg%20Schoenholz%2C%20Samuel%20S.%20Mean%20field%20residual%20networks%3A%20On%20the%20edge%20of%20chaos%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yang%2C%20Greg%20Schoenholz%2C%20Samuel%20S.%20Mean%20field%20residual%20networks%3A%20On%20the%20edge%20of%20chaos%202017"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Greg Yang and Samuel S Schoenholz. Deep mean field theory: Layerwise variance and width variation as methods to control gradient explosion. Workshop of International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yang%2C%20Greg%20Schoenholz%2C%20Samuel%20S.%20Deep%20mean%20field%20theory%3A%20Layerwise%20variance%20and%20width%20variation%20as%20methods%20to%20control%20gradient%20explosion%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yang%2C%20Greg%20Schoenholz%2C%20Samuel%20S.%20Deep%20mean%20field%20theory%3A%20Layerwise%20variance%20and%20width%20variation%20as%20methods%20to%20control%20gradient%20explosion%202018"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Chiyuan Zhang, Samy Bengio, Moritz Hardt, Benjamin Recht, and Oriol Vinyals. Understanding deep learning requires rethinking generalization. In International Conference on Learning Representations, 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Chiyuan%20Bengio%2C%20Samy%20Hardt%2C%20Moritz%20Recht%2C%20Benjamin%20Understanding%20deep%20learning%20requires%20rethinking%20generalization%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Chiyuan%20Bengio%2C%20Samy%20Hardt%2C%20Moritz%20Recht%2C%20Benjamin%20Understanding%20deep%20learning%20requires%20rethinking%20generalization%202017"
+        }
+    ]
+}

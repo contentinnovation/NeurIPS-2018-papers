@@ -1,0 +1,327 @@
+{
+    "filename": "7527-isolating-sources-of-disentanglement-in-variational-autoencoders.pdf",
+    "metadata": {
+        "title": "Isolating Sources of Disentanglement in Variational Autoencoders",
+        "date": 2018,
+        "author": "Ricky T. Q. Chen, Xuechen Li, Roger Grosse, David Duvenaud University of Toronto, Vector Institute",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7527-isolating-sources-of-disentanglement-in-variational-autoencoders.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We decompose the evidence lower bound to show the existence of a term measuring the total correlation between latent variables. We use this to motivate the \u03b2-TCVAE (Total Correlation Variational Autoencoder) algorithm, a refinement and plug-in replacement of the \u03b2-VAE for learning disentangled representations, requiring no additional hyperparameters during training. We further propose a principled classifier-free measure of disentanglement called the mutual information gap (MIG). We perform extensive quantitative and qualitative experiments, in both restricted and non-restricted settings, and show a strong relation between total correlation and disentanglement, when the model is trained using our framework. Learning disentangled representations without supervision is a difficult open problem. Disentangled variables are generally considered to contain interpretable semantic information and reflect separate factors of variation in the data. While the definition of disentanglement is open to debate, many believe a factorial representation, one with statistically independent variables, is a good starting point [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>, <a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>, <a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>]. Such representations distill information into a compact form which is oftentimes semantically meaningful and useful for a variety of tasks [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>, <a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>]. For instance, it is found that such representations are more generalizable and robust against adversarial attacks [<a class=\"ref-link\" id=\"c5\" href=\"#r5\">5</a>]. Many state-of-the-art methods for learning disentangled representations are based on re-weighting parts of an existing objective. For instance, it is claimed that mutual information between latent variables and the observed data can encourage the latents into becoming more interpretable [<a class=\"ref-link\" id=\"c6\" href=\"#r6\">6</a>]. It is also argued that encouraging independence between latent variables induces disentanglement [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>]. However, there is no strong evidence linking factorial representations to disentanglement. In part, this can be attributed to weak qualitative evaluation procedures. While traversals in the latent representation can qualitatively illustrate disentanglement, quantitative measures of disentanglement are in their infancy. In this paper, we: \u2022 show a decomposition of the variational lower bound that can be used to explain the success of the \u03b2-VAE [<a class=\"ref-link\" id=\"c7\" href=\"#r7\">7</a>] in learning disentangled representations. \u2022 propose a simple method based on weighted minibatches to stochastically train with arbitrary weights on the terms of our decomposition without any additional hyperparameters. \u2022 introduce the \u03b2-TCVAE, which can be used as a plug-in replacement for the \u03b2-VAE with no extra hyperparameters. Empirical evaluations suggest that the \u03b2-TCVAE discovers more interpretable representations than existing methods, while also being fairly robust to random initialization. \u2022 propose a new information-theoretic disentanglement metric, which is classifier-free and generalizable to arbitrarily-distributed and non-scalar latent variables. While Kim & Mnih [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>] have independently proposed augmenting VAEs with an equivalent total correlation penalty to the \u03b2-TCVAE, their proposed training method differs from ours and requires an auxiliary discriminator network."
+    },
+    "keywords": [
+        {
+            "term": "generative adversarial network",
+            "url": "https://en.wikipedia.org/wiki/generative_adversarial_network"
+        },
+        {
+            "term": "evidence lower bound",
+            "url": "https://en.wikipedia.org/wiki/evidence_lower_bound"
+        },
+        {
+            "term": "total correlation",
+            "url": "https://en.wikipedia.org/wiki/total_correlation"
+        },
+        {
+            "term": "mutual information",
+            "url": "https://en.wikipedia.org/wiki/mutual_information"
+        },
+        {
+            "term": "latent variable",
+            "url": "https://en.wikipedia.org/wiki/latent_variable"
+        }
+    ],
+    "highlights": [
+        "Learning and Evaluating Disentangled Representations<br/><br/>We discuss existing work that aims at either learning disentangled representations without supervision or evaluating such representations",
+        "Disentangled Representations While a low total correlation has been previously conjectured to lead to disentanglement, we provide concrete evidence that our \u03b2-TCVAE learning algorithm satisfies this property",
+        "Qualitative Comparisons We show qualitatively that \u03b2-TCVAE discovers more disentangled factors than \u03b2-variational autoencoder on datasets of chairs [<a class=\"ref-link\" id=\"c41\" href=\"#r41\">41</a>] and real faces [<a class=\"ref-link\" id=\"c42\" href=\"#r42\">42</a>]. 3D Chairs Figure 6 shows traversals in latent variables that depict an interpretable property in generating 3D chairs",
+        "We present a decomposition of the evidence lower bound with the goal of explaining why \u03b2-variational autoencoder works",
+        "We designate a special case as \u03b2-TCVAE, which can be trained stochastically using minibatch estimator with no additional hyperparameters compared to the \u03b2-variational autoencoder",
+        "Unsupervised learning of disentangled representations is inherently a difficult problem due to the lack of a prior for semantic awareness, but we show some evidence in simple datasets with uniform factors that independence between latent variables can be strongly related to disentanglement"
+    ],
+    "key_statements": [
+        "Learning and Evaluating Disentangled Representations<br/><br/>We discuss existing work that aims at either learning disentangled representations without supervision or evaluating such representations",
+        "variational autoencoder and \u03b2-variational autoencoder The variational autoencoder (VAE) [<a class=\"ref-link\" id=\"c9\" href=\"#r9\">9</a>, <a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>] is a latent variable model that pairs a top-down generator with a bottom-up inference network",
+        "Our key insight is that the empirical mutual information between a latent variable zj and a ground truth factor vk can be estimated using the joint distribution defined by q =",
+        "Efficient estimation of mutual information is an ongoing research Table 1: In comparison to prior metrics, our proposed topic [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>, <a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>], but we find that the simple mutual information gap detects axis-alignment, is unbiased for all hyperestimator (5) is sufficient for the datasets we parameter settings, and can be generally applied to any use",
+        "The existence of the index-code mutual information in the evidence lower bound has been shown before [<a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>], and as a result, FactorVAE, which uses an equivalent objective to the \u03b2-TCVAE, is independently proposed [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>]",
+        "We find that \u03b2-TCVAE provides a better trade-off between density estimation and disentanglement",
+        "To further understand the robustness of each algorithm, we show box plots depicting the quartiles of the mutual information gap score distribution for various methods in Figure 3",
+        "We find that the median score is highest for \u03b2-TCVAE and it is close to the highest score achieved by all methods",
+        "Disentangled Representations While a low total correlation has been previously conjectured to lead to disentanglement, we provide concrete evidence that our \u03b2-TCVAE learning algorithm satisfies this property",
+        "Figure 4 shows a scatter plot of total correlation and the mutual information gap disentanglement metric for varying values of \u03b2 trained on the dSprites and faces datasets, averaged over 40 random initializations",
+        "We find that \u03b2-TCVAE has no problem in finding the correct factors of variation in a toy dataset and can find more interpretable factors of variation than those found in prior work, even though the independence assumption is violated. 2D Factors We start off with a toy dataset with only two factors and test \u03b2-TCVAE using sampling distributions with varying degrees of correlation and dependence",
+        "Qualitative Comparisons We show qualitatively that \u03b2-TCVAE discovers more disentangled factors than \u03b2-variational autoencoder on datasets of chairs [<a class=\"ref-link\" id=\"c41\" href=\"#r41\">41</a>] and real faces [<a class=\"ref-link\" id=\"c42\" href=\"#r42\">42</a>]. 3D Chairs Figure 6 shows traversals in latent variables that depict an interpretable property in generating 3D chairs",
+        "We find that \u03b2-TCVAE can learn two additional interpretable properties: material of the chair, and leg rotation for swivel chairs",
+        "We present a decomposition of the evidence lower bound with the goal of explaining why \u03b2-variational autoencoder works",
+        "We designate a special case as \u03b2-TCVAE, which can be trained stochastically using minibatch estimator with no additional hyperparameters compared to the \u03b2-variational autoencoder",
+        "Unsupervised learning of disentangled representations is inherently a difficult problem due to the lack of a prior for semantic awareness, but we show some evidence in simple datasets with uniform factors that independence between latent variables can be strongly related to disentanglement"
+    ],
+    "summary": [
+        "Learning and Evaluating Disentangled Representations<br/><br/>We discuss existing work that aims at either learning disentangled representations without supervision or evaluating such representations.",
+        "We propose a metric based on the empirical mutual information between latent variables and ground truth factors.",
+        "Our key insight is that the empirical mutual information between a latent variable zj and a ground truth factor vk can be estimated using the joint distribution defined by q =",
+        "Efficient estimation of mutual information is an ongoing research Table 1: In comparison to prior metrics, our proposed topic [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>, <a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>], but we find that the simple MIG detects axis-alignment, is unbiased for all hyperestimator (5) is sufficient for the datasets we parameter settings, and can be generally applied to any use.",
+        "The existence of the index-code MI in the ELBO has been shown before [<a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>], and as a result, FactorVAE, which uses an equivalent objective to the \u03b2-TCVAE, is independently proposed [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>].",
+        "We emphasize the success of \u03b2-VAE using our refined decomposition, and propose a training method that allows assigning arbitrary weights to each term of the objective without requiring any additional networks.",
+        "Instead of a perfect inversion, we only aim for maximizing the mutual information between our learned representation and the ground truth factors.",
+        "Independent Factors of Variation First, we analyze the performance of our proposed \u03b2-TCVAE and MIG metric in a restricted setting, with ground truth factors that are uniformly and independently sampled.",
+        "Disentanglement Trade-off Since the \u03b2-VAE and \u03b2-TCVAE objectives are lower bounds on the standard ELBO, we would like to see the effect of training with this modification.",
+        "With higher values of \u03b2, the mutual information penality in \u03b2-VAE is too strong and this hinders the usefulness of the latent variables.",
+        "We perform ablation studies on the removal of the index-code MI term by setting \u03b1 = 0 in (4), and a model using a factorized normalizing flow as the prior distribution which is jointly trained to maximize the modified objective.",
+        "Figure 4 shows a scatter plot of total correlation and the MIG disentanglement metric for varying values of \u03b2 trained on the dSprites and faces datasets, averaged over 40 random initializations.",
+        "The simplicity of our method allows easy integration into different frameworks [<a class=\"ref-link\" id=\"c43\" href=\"#r43\">43</a>].To quantitatively evaluate our approach, we propose a classifier-free disentanglement metric called MIG.",
+        "Unsupervised learning of disentangled representations is inherently a difficult problem due to the lack of a prior for semantic awareness, but we show some evidence in simple datasets with uniform factors that independence between latent variables can be strongly related to disentanglement."
+    ],
+    "headline": "We further propose a principled classifier-free measure of disentanglement called the mutual information gap ",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] J\u00fcrgen Schmidhuber. Learning factorial codes by predictability minimization. Neural Computation, 4(6):863\u2013879, 1992.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schmidhuber%2C%20J%C3%BCrgen%20Learning%20factorial%20codes%20by%20predictability%20minimization%201992",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schmidhuber%2C%20J%C3%BCrgen%20Learning%20factorial%20codes%20by%20predictability%20minimization%201992"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Karl Ridgeway. A survey of inductive biases for factorial representation-learning. arXiv preprint arXiv:1612.05299, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1612.05299"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Alessandro Achille and Stefano Soatto. On the emergence of invariance and disentangling in deep representations. arXiv preprint arXiv:1706.01350, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.01350"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Yoshua Bengio, Aaron Courville, and Pascal Vincent. Representation learning: A review and new perspectives. IEEE transactions on pattern analysis and machine intelligence, 35(8):1798\u20131828, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bengio%2C%20Yoshua%20Courville%2C%20Aaron%20Vincent%2C%20Pascal%20Representation%20learning%3A%20A%20review%20and%20new%20perspectives%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bengio%2C%20Yoshua%20Courville%2C%20Aaron%20Vincent%2C%20Pascal%20Representation%20learning%3A%20A%20review%20and%20new%20perspectives%202013"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Alexander A Alemi, Ian Fischer, Joshua V Dillon, and Kevin Murphy. Deep variational information bottleneck. International Conference on Learning Representations, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Alemi%2C%20Alexander%20A.%20Fischer%2C%20Ian%20Dillon%2C%20Joshua%20V.%20Murphy%2C%20Kevin%20Deep%20variational%20information%20bottleneck%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Alemi%2C%20Alexander%20A.%20Fischer%2C%20Ian%20Dillon%2C%20Joshua%20V.%20Murphy%2C%20Kevin%20Deep%20variational%20information%20bottleneck%202017"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Xi Chen, Yan Duan, Rein Houthooft, John Schulman, Ilya Sutskever, and Pieter Abbeel. Infogan: Interpretable representation learning by information maximizing generative adversarial nets. In Advances in Neural Information Processing Systems, pages 2172\u20132180, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20Xi%20Duan%2C%20Yan%20Houthooft%2C%20Rein%20Schulman%2C%20John%20Infogan%3A%20Interpretable%20representation%20learning%20by%20information%20maximizing%20generative%20adversarial%20nets%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20Xi%20Duan%2C%20Yan%20Houthooft%2C%20Rein%20Schulman%2C%20John%20Infogan%3A%20Interpretable%20representation%20learning%20by%20information%20maximizing%20generative%20adversarial%20nets%202016"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Irina Higgins, Loic Matthey, Arka Pal, Christopher Burgess, Xavier Glorot, Matthew Botvinick, Shakir Mohamed, and Alexander Lerchner. beta-vae: Learning basic visual concepts with a constrained variational framework. International Conference on Learning Representations, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Higgins%2C%20Irina%20Matthey%2C%20Loic%20Pal%2C%20Arka%20Burgess%2C%20Christopher%20beta-vae%3A%20Learning%20basic%20visual%20concepts%20with%20a%20constrained%20variational%20framework%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Higgins%2C%20Irina%20Matthey%2C%20Loic%20Pal%2C%20Arka%20Burgess%2C%20Christopher%20beta-vae%3A%20Learning%20basic%20visual%20concepts%20with%20a%20constrained%20variational%20framework%202017"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Hyunjik Kim and Andriy Mnih. Disentangling by factorising. arXiv preprint arXiv:1802.05983, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.05983"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Diederik P Kingma and Max Welling. Auto-encoding variational bayes. arXiv preprint arXiv:1312.6114, 2013.",
+            "arxiv_url": "https://arxiv.org/pdf/1312.6114"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Danilo Jimenez Rezende, Shakir Mohamed, and Daan Wierstra. Stochastic backpropagation and approximate inference in deep generative models. arXiv preprint arXiv:1401.4082, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1401.4082"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Ian Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, and Yoshua Bengio. Generative adversarial nets. In Advances in neural information processing systems, pages 2672\u20132680, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goodfellow%2C%20Ian%20Pouget-Abadie%2C%20Jean%20Mirza%2C%20Mehdi%20Xu%2C%20Bing%20Generative%20adversarial%20nets%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goodfellow%2C%20Ian%20Pouget-Abadie%2C%20Jean%20Mirza%2C%20Mehdi%20Xu%2C%20Bing%20Generative%20adversarial%20nets%202014"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Will Grathwohl and Aaron Wilson. Disentangling space and time in video with hierarchical variational auto-encoders. arXiv preprint arXiv:1612.04440, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1612.04440"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Christopher K. I. Williams Cian Eastwood. A framework for the quantitative evaluation of disentangled representations. International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Eastwood%2C%20Christopher%20K.I.Williams%20Cian%20A%20framework%20for%20the%20quantitative%20evaluation%20of%20disentangled%20representations%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Eastwood%2C%20Christopher%20K.I.Williams%20Cian%20A%20framework%20for%20the%20quantitative%20evaluation%20of%20disentangled%20representations%202018"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Xavier Glorot, Antoine Bordes, and Yoshua Bengio. Domain adaptation for large-scale sentiment classification: A deep learning approach. In Proceedings of the 28th international conference on machine learning (ICML-11), pages 513\u2013520, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Glorot%2C%20Xavier%20Bordes%2C%20Antoine%20Bengio%2C%20Yoshua%20Domain%20adaptation%20for%20large-scale%20sentiment%20classification%3A%20A%20deep%20learning%20approach%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Glorot%2C%20Xavier%20Bordes%2C%20Antoine%20Bengio%2C%20Yoshua%20Domain%20adaptation%20for%20large-scale%20sentiment%20classification%3A%20A%20deep%20learning%20approach%202011"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Theofanis Karaletsos, Serge Belongie, and Gunnar R\u00e4tsch. Bayesian representation learning with oracle constraints. International Conference on Learning Representations, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Karaletsos%2C%20Theofanis%20Belongie%2C%20Serge%20R%C3%A4tsch%2C%20Gunnar%20Bayesian%20representation%20learning%20with%20oracle%20constraints%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Karaletsos%2C%20Theofanis%20Belongie%2C%20Serge%20R%C3%A4tsch%2C%20Gunnar%20Bayesian%20representation%20learning%20with%20oracle%20constraints%202016"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Matthew D Hoffman and Matthew J Johnson. Elbo surgery: yet another way to carve up the variational evidence lower bound. In Workshop in Advances in Approximate Bayesian Inference, NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hoffman%2C%20Matthew%20D.%20Johnson%2C%20Matthew%20J.%20Elbo%20surgery%3A%20yet%20another%20way%20to%20carve%20up%20the%20variational%20evidence%20lower%20bound%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hoffman%2C%20Matthew%20D.%20Johnson%2C%20Matthew%20J.%20Elbo%20surgery%3A%20yet%20another%20way%20to%20carve%20up%20the%20variational%20evidence%20lower%20bound%202016"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Alireza Makhzani, Jonathon Shlens, Navdeep Jaitly, Ian Goodfellow, and Brendan Frey. Adversarial autoencoders. ICLR 2016 Workshop, International Conference on Learning Representations, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Makhzani%2C%20Alireza%20Shlens%2C%20Jonathon%20Jaitly%2C%20Navdeep%20Goodfellow%2C%20Ian%20Adversarial%20autoencoders%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Makhzani%2C%20Alireza%20Shlens%2C%20Jonathon%20Jaitly%2C%20Navdeep%20Goodfellow%2C%20Ian%20Adversarial%20autoencoders%202016"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Shengjia Zhao, Jiaming Song, and Stefano Ermon. Infovae: Information maximizing variational autoencoders. arXiv preprint arXiv:1706.02262, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.02262"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Christopher Burgess, Irina Higgins, Arka Pal, Loic Matthey, Nick Watters, Guillaume Desjardins, and Alexander Lerchner. Understanding disentangling in beta-vae. Learning Disentangled Representations: From Perception to Control Workshop, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Burgess%2C%20Christopher%20Higgins%2C%20Irina%20Pal%2C%20Arka%20Matthey%2C%20Loic%20Understanding%20disentangling%20in%20beta-vae.%20Learning%20Disentangled%20Representations%3A%20From%20Perception%20to%20Control%20Workshop%202017"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Satosi Watanabe. Information theoretical analysis of multivariate correlation. IBM Journal of research and development, 4(1):66\u201382, 1960.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Watanabe%2C%20Satosi%20Information%20theoretical%20analysis%20of%20multivariate%20correlation%201960",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Watanabe%2C%20Satosi%20Information%20theoretical%20analysis%20of%20multivariate%20correlation%201960"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Geoffrey E Hinton and Richard S Zemel. Autoencoders, minimum description length and helmholtz free energy. In Advances in neural information processing systems, pages 3\u201310, 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hinton%2C%20Geoffrey%20E.%20Zemel%2C%20Richard%20S.%20Autoencoders%2C%20minimum%20description%20length%20and%20helmholtz%20free%20energy%201994",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hinton%2C%20Geoffrey%20E.%20Zemel%2C%20Richard%20S.%20Autoencoders%2C%20minimum%20description%20length%20and%20helmholtz%20free%20energy%201994"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Alessandro Achille and Stefano Soatto. Information dropout: Learning optimal representations through noisy computation. IEEE Transactions on Pattern Analysis and Machine Intelligence, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Achille%2C%20Alessandro%20Soatto%2C%20Stefano%20Information%20dropout%3A%20Learning%20optimal%20representations%20through%20noisy%20computation%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Achille%2C%20Alessandro%20Soatto%2C%20Stefano%20Information%20dropout%3A%20Learning%20optimal%20representations%20through%20noisy%20computation%202018"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Ishmael Belghazi, Sai Rajeswar, Aristide Baratin, R Devon Hjelm, and Aaron Courville. MINE: Mutual information neural estimation. arXiv preprint arXiv:1801.04062, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1801.04062"
+        },
+        {
+            "id": "24",
+            "entry": "[24] David N Reshef, Yakir A Reshef, Hilary K Finucane, Sharon R Grossman, Gilean McVean, Peter J Turnbaugh, Eric S Lander, Michael Mitzenmacher, and Pardis C Sabeti. Detecting novel associations in large data sets. science, 334(6062):1518\u20131524, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Reshef%2C%20David%20N.%20Reshef%2C%20Yakir%20A.%20Finucane%2C%20Hilary%20K.%20Grossman%2C%20Sharon%20R.%20Eric%20S%20Lander%2C%20Michael%20Mitzenmacher%2C%20and%20Pardis%20C%20Sabeti.%20Detecting%20novel%20associations%20in%20large%20data%20sets%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Reshef%2C%20David%20N.%20Reshef%2C%20Yakir%20A.%20Finucane%2C%20Hilary%20K.%20Grossman%2C%20Sharon%20R.%20Eric%20S%20Lander%2C%20Michael%20Mitzenmacher%2C%20and%20Pardis%20C%20Sabeti.%20Detecting%20novel%20associations%20in%20large%20data%20sets%202011"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Geoffrey E Hinton, Alex Krizhevsky, and Sida D Wang. Transforming auto-encoders. In International Conference on Artificial Neural Networks, pages 44\u201351.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hinton%2C%20Geoffrey%20E.%20Krizhevsky%2C%20Alex%20Wang%2C%20Sida%20D.%20Transforming%20auto-encoders",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hinton%2C%20Geoffrey%20E.%20Krizhevsky%2C%20Alex%20Wang%2C%20Sida%20D.%20Transforming%20auto-encoders"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Tejas D Kulkarni, William F Whitney, Pushmeet Kohli, and Josh Tenenbaum. Deep convolutional inverse graphics network. In Advances in Neural Information Processing Systems, pages 2539\u20132547, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kulkarni%2C%20Tejas%20D.%20Whitney%2C%20William%20F.%20Kohli%2C%20Pushmeet%20Tenenbaum%2C%20Josh%20Deep%20convolutional%20inverse%20graphics%20network%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kulkarni%2C%20Tejas%20D.%20Whitney%2C%20William%20F.%20Kohli%2C%20Pushmeet%20Tenenbaum%2C%20Josh%20Deep%20convolutional%20inverse%20graphics%20network%202015"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Brian Cheung, Jesse A Livezey, Arjun K Bansal, and Bruno A Olshausen. Discovering hidden factors of variation in deep networks. arXiv preprint arXiv:1412.6583, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1412.6583"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Ramakrishna Vedantam, Ian Fischer, Jonathan Huang, and Kevin Murphy. Generative models of visually grounded imagination. International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vedantam%2C%20Ramakrishna%20Fischer%2C%20Ian%20Huang%2C%20Jonathan%20Murphy%2C%20Kevin%20Generative%20models%20of%20visually%20grounded%20imagination%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vedantam%2C%20Ramakrishna%20Fischer%2C%20Ian%20Huang%2C%20Jonathan%20Murphy%2C%20Kevin%20Generative%20models%20of%20visually%20grounded%20imagination%202018"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Alec Radford, Luke Metz, and Soumith Chintala. Unsupervised representation learning with deep convolutional generative adversarial networks. arXiv preprint arXiv:1511.06434, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1511.06434"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Yichuan Tang, Ruslan Salakhutdinov, and Geoffrey Hinton. Tensor analyzers. In International Conference on Machine Learning, pages 163\u2013171, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tang%2C%20Yichuan%20Salakhutdinov%2C%20Ruslan%20Hinton%2C%20Geoffrey%20Tensor%20analyzers%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tang%2C%20Yichuan%20Salakhutdinov%2C%20Ruslan%20Hinton%2C%20Geoffrey%20Tensor%20analyzers%202013"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Guillaume Desjardins, Aaron Courville, and Yoshua Bengio. Disentangling factors of variation via generative entangling. arXiv preprint arXiv:1210.5474, 2012.",
+            "arxiv_url": "https://arxiv.org/pdf/1210.5474"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Greg Ver Steeg and Aram Galstyan. Maximally informative hierarchical representations of highdimensional data. In Artificial Intelligence and Statistics, pages 1004\u20131012, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Steeg%2C%20Greg%20Ver%20Galstyan%2C%20Aram%20Maximally%20informative%20hierarchical%20representations%20of%20highdimensional%20data%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Steeg%2C%20Greg%20Ver%20Galstyan%2C%20Aram%20Maximally%20informative%20hierarchical%20representations%20of%20highdimensional%20data%202015"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Abhishek Kumar, Prasanna Sattigeri, and Avinash Balakrishnan. Variational inference of disentangled latent concepts from unlabeled observations. arXiv preprint arXiv:1711.00848, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.00848"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Shuyang Gao, Rob Brekelmans, Greg Ver Steeg, and Aram Galstyan. Auto-encoding total correlation explanation. arXiv preprint arXiv:1802.05822, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.05822"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Masashi Sugiyama, Taiji Suzuki, and Takafumi Kanamori. Density ratio estimation in machine learning. Cambridge University Press, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sugiyama%2C%20Masashi%20Suzuki%2C%20Taiji%20Kanamori%2C%20Takafumi%20Density%20ratio%20estimation%20in%20machine%20learning%202012"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Pierre Comon. Independent component analysis, a new concept? Signal processing, 36(3):287\u2013314, 1994.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Comon%2C%20Pierre%20Independent%20component%20analysis%2C%20a%20new%20concept%3F%201994",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Comon%2C%20Pierre%20Independent%20component%20analysis%2C%20a%20new%20concept%3F%201994"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Aapo Hyv\u00e4rinen and Petteri Pajunen. Nonlinear independent component analysis: Existence and uniqueness results. Neural Networks, 12(3):429\u2013439, 1999.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hyv%C3%A4rinen%2C%20Aapo%20Pajunen%2C%20Petteri%20Nonlinear%20independent%20component%20analysis%3A%20Existence%20and%20uniqueness%20results%201999",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hyv%C3%A4rinen%2C%20Aapo%20Pajunen%2C%20Petteri%20Nonlinear%20independent%20component%20analysis%3A%20Existence%20and%20uniqueness%20results%201999"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Christian Jutten and Juha Karhunen. Advances in nonlinear blind source separation. In Proc. of the 4th Int. Symp. on Independent Component Analysis and Blind Signal Separation, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jutten%2C%20Christian%20Karhunen%2C%20Juha%20Advances%20in%20nonlinear%20blind%20source%20separation%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jutten%2C%20Christian%20Karhunen%2C%20Juha%20Advances%20in%20nonlinear%20blind%20source%20separation%202003"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Loic Matthey, Irina Higgins, Demis Hassabis, and Alexander Lerchner. dsprites: Disentanglement testing sprites dataset. https://github.com/deepmind/dsprites-dataset/, 2017.",
+            "url": "https://github.com/deepmind/dsprites-dataset/"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Pascal Paysan, Reinhard Knothe, Brian Amberg, Sami Romdhani, and Thomas Vetter. A 3d face model for pose and illumination invariant face recognition. In Advanced Video and Signal Based Surveillance, 2009. AVSS\u201909. Sixth IEEE International Conference on, pages 296\u2013301.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Paysan%2C%20Pascal%20Knothe%2C%20Reinhard%20Amberg%2C%20Brian%20Romdhani%2C%20Sami%20A%203d%20face%20model%20for%20pose%20and%20illumination%20invariant%20face%20recognition.%20In%20Advanced%20Video%20and%20Signal%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Paysan%2C%20Pascal%20Knothe%2C%20Reinhard%20Amberg%2C%20Brian%20Romdhani%2C%20Sami%20A%203d%20face%20model%20for%20pose%20and%20illumination%20invariant%20face%20recognition.%20In%20Advanced%20Video%20and%20Signal%202009"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Mathieu Aubry, Daniel Maturana, Alexei Efros, Bryan Russell, and Josef Sivic. Seeing 3d chairs: exemplar part-based 2d-3d alignment using a large dataset of cad models. In CVPR, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Aubry%2C%20Mathieu%20Maturana%2C%20Daniel%20Efros%2C%20Alexei%20Russell%2C%20Bryan%20Seeing%203d%20chairs%3A%20exemplar%20part-based%202d-3d%20alignment%20using%20a%20large%20dataset%20of%20cad%20models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Aubry%2C%20Mathieu%20Maturana%2C%20Daniel%20Efros%2C%20Alexei%20Russell%2C%20Bryan%20Seeing%203d%20chairs%3A%20exemplar%20part-based%202d-3d%20alignment%20using%20a%20large%20dataset%20of%20cad%20models%202014"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Ziwei Liu, Ping Luo, Xiaogang Wang, and Xiaoou Tang. Deep learning face attributes in the wild. In Proceedings of the IEEE International Conference on Computer Vision, pages 3730\u20133738, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20Ziwei%20Luo%2C%20Ping%20Wang%2C%20Xiaogang%20Tang%2C%20Xiaoou%20Deep%20learning%20face%20attributes%20in%20the%20wild%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liu%2C%20Ziwei%20Luo%2C%20Ping%20Wang%2C%20Xiaogang%20Tang%2C%20Xiaoou%20Deep%20learning%20face%20attributes%20in%20the%20wild%202015"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Jin Xu and Yee Whye Teh. Controllable semantic image inpainting. arXiv preprint arXiv:1806.05953, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1806.05953"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Diederik P Kingma and Jimmy Ba. Adam: A method for stochastic optimization. International Conference on Learning Representations, 2015. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Ba%2C%20Jimmy%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Ba%2C%20Jimmy%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202015"
+        }
+    ]
+}

@@ -1,0 +1,209 @@
+{
+    "filename": "7955-implicit-probabilistic-integrators-for-odes.pdf",
+    "metadata": {
+        "title": "Implicit Probabilistic Integrators for ODEs",
+        "author": "Onur Teymur, Han Cheng Lie, Tim Sullivan, Ben Calderhead",
+        "date": 2016,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7955-implicit-probabilistic-integrators-for-odes.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We introduce a family of implicit probabilistic integrators for initial value problems (IVPs), taking as a starting point the multistep Adams\u2013Moulton method. The implicit construction allows for dynamic feedback from the forthcoming timestep, in contrast to previous probabilistic integrators, all of which are based on explicit methods. We begin with a concise survey of the rapidly-expanding field of probabilistic ODE solvers. We then introduce our method, which builds on and adapts the work of Conrad et al. (2016) and Teymur et al. (2016), and provide a rigorous proof of its well-definedness and convergence. We discuss the problem of the calibration of such integrators and suggest one approach. We give an illustrative example highlighting the effect of the use of probabilistic integrators\u2014including our new method\u2014in the setting of parameter inference within an inverse problem."
+    },
+    "keywords": [
+        {
+            "term": "uncertainty quantification",
+            "url": "https://en.wikipedia.org/wiki/uncertainty_quantification"
+        },
+        {
+            "term": "Gaussian process",
+            "url": "https://en.wikipedia.org/wiki/Gaussian_process"
+        },
+        {
+            "term": "National Science Foundation",
+            "url": "https://en.wikipedia.org/wiki/National_Science_Foundation"
+        },
+        {
+            "term": "differential equations",
+            "url": "https://en.wikipedia.org/wiki/differential_equations"
+        },
+        {
+            "term": "ordinary differential equations",
+            "url": "https://en.wikipedia.org/wiki/ordinary_differential_equations"
+        },
+        {
+            "term": "gaussian processes",
+            "url": "https://en.wikipedia.org/wiki/gaussian_processes"
+        }
+    ],
+    "highlights": [
+        "This approach does not make direct use of the sequence Z; rather it is merely generated in order to produce the numerical data F which is compared to the prior model in derivative space",
+        "Our focus here is on initial value problems (IVPs) where we assume the initial value X0 \u2261 x(0) is known",
+        "Treating the problem in a discrete setting, they produce a sequence Z of values approximating X, with Fi+1 \u2261 f (Zi+1, \u03b8) constituting the data and Zi+1 calculated from the previous values Zi and Fi by employing some iterative relation akin to a randomised version of a standard initial value problems solver",
+        "We propose a different, novel sequential procedure which incorporates information from the ordinary differential equation at time step ti+1 but does so directly",
+        "In order to transform to the correct space without linearising the ordinary differential equation, we apply the multivariate delta method (<a class=\"ref-link\" id=\"cOehlert_1992_a\" href=\"#rOehlert_1992_a\">Oehlert, 1992</a>) to give an approximation for the variance of the transformed random variable, and set H to be equal to the result",
+        "We have given preliminary experimental results showing the effect on parameter inference of the use of different first-order methods, both existing and new, in the evaluation of the forward model"
+    ],
+    "key_statements": [
+        "This approach does not make direct use of the sequence Z; rather it is merely generated in order to produce the numerical data F which is compared to the prior model in derivative space",
+        "Our focus here is on initial value problems (IVPs) where we assume the initial value X0 \u2261 x(0) is known",
+        "Treating the problem in a discrete setting, they produce a sequence Z of values approximating X, with Fi+1 \u2261 f (Zi+1, \u03b8) constituting the data and Zi+1 calculated from the previous values Zi and Fi by employing some iterative relation akin to a randomised version of a standard initial value problems solver",
+        "We propose a different, novel sequential procedure which incorporates information from the ordinary differential equation at time step ti+1 but does so directly",
+        "In order to transform to the correct space without linearising the ordinary differential equation, we apply the multivariate delta method (<a class=\"ref-link\" id=\"cOehlert_1992_a\" href=\"#rOehlert_1992_a\">Oehlert, 1992</a>) to give an approximation for the variance of the transformed random variable, and set H to be equal to the result",
+        "As in <a class=\"ref-link\" id=\"cConrad_et+al_2016_a\" href=\"#rConrad_et+al_2016_a\">Conrad et al (2016</a>), we calculate a value \u03b1\u2217 that maximises the agreement between the output of the probabilistic integrator and a measure of global error from the deterministic method, and fix and proceed with this value",
+        "We have given preliminary experimental results showing the effect on parameter inference of the use of different first-order methods, both existing and new, in the evaluation of the forward model"
+    ],
+    "summary": [
+        "This approach does not make direct use of the sequence Z; rather it is merely generated in order to produce the numerical data F which is compared to the prior model in derivative space.",
+        "Treating the problem in a discrete setting, they produce a sequence Z of values approximating X, with Fi+1 \u2261 f (Zi+1, \u03b8) constituting the data and Zi+1 calculated from the previous values Zi and Fi by employing some iterative relation akin to a randomised version of a standard IVP solver.",
+        "Note that all distributions in this framework are Gaussian, to permit fast filtering, and as a result the non-linearities in f are effectively linearised, and any numerical method which produces non-Gaussian errors has Gaussians fitted to them anyway.",
+        "In order to transform to the correct space without linearising the ODE, we apply the multivariate delta method (<a class=\"ref-link\" id=\"cOehlert_1992_a\" href=\"#rOehlert_1992_a\">Oehlert, 1992</a>) to give an approximation for the variance of the transformed random variable, and set H to be equal to the result.",
+        "Even if this sampling is performed using a method well-suited to targeting distributions close to Gaussian\u2014we use a modified version of the pre-conditioned Crank\u2013Nicolson algorithm proposed by <a class=\"ref-link\" id=\"cCotter_et+al_2013_a\" href=\"#rCotter_et+al_2013_a\">Cotter et al (2013</a>)\u2014there is clearly a significant computational penalty associated with this.",
+        "We note that this procedure is merely to facilitate straightforward sampling\u2014though r(z) is linear in z, the inclusion of the first additional term from the Taylor expansion means that information about the non-linearity of f are still incorporated to second order, and the generated solution Z is not jointly Gaussian across time steps i.",
+        "<a class=\"ref-link\" id=\"cConrad_et+al_2016_a\" href=\"#rConrad_et+al_2016_a\"><a class=\"ref-link\" id=\"cConrad_et+al_2016_a\" href=\"#rConrad_et+al_2016_a\">Conrad et al (2016</a></a>) remark on the biasing effect on the posterior distribution for \u03b8 of naively evaluating the forward model using a standard numerical method.",
+        "As in <a class=\"ref-link\" id=\"cConrad_et+al_2016_a\" href=\"#rConrad_et+al_2016_a\"><a class=\"ref-link\" id=\"cConrad_et+al_2016_a\" href=\"#rConrad_et+al_2016_a\">Conrad et al (2016</a></a>), we calculate a value \u03b1\u2217 that maximises the agreement between the output of the probabilistic integrator and a measure of global error from the deterministic method, and fix and proceed with this value.",
+        "This is to stress that each randomised run is not intended to be viewed as a \u2018typical sample\u2019 from some underlying continuous probability measure, as in some other probabilistic ODE methods, but rather that collectively they form an ensemble from which an empirical distribution characterising discrete-time solution uncertainty can be calculated.",
+        "We have given preliminary experimental results showing the effect on parameter inference of the use of different first-order methods, both existing and new, in the evaluation of the forward model."
+    ],
+    "headline": "We introduce a family of implicit probabilistic integrators for initial value problems , taking as a starting point the multistep Adams\u2013Moulton method",
+    "reference_links": [
+        {
+            "id": "Abdulle_2018_a",
+            "entry": "Abdulle, A. and Garegnani, G. (2018). Random Time Step Probabilistic Methods for Uncertainty Quantification in Chaotic and Geometric Numerical Integration. arXiv:1801.01340.",
+            "arxiv_url": "https://arxiv.org/pdf/1801.01340"
+        },
+        {
+            "id": "Butcher_2008_a",
+            "entry": "Butcher, J. (2008). Numerical Methods for Ordinary Differential Equations: Second Edition. Wiley.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Butcher%2C%20J.%20Numerical%20Methods%20for%20Ordinary%20Differential%20Equations%3A%20Second%20Edition%202008"
+        },
+        {
+            "id": "Calderhead_et+al_2009_a",
+            "entry": "Calderhead, B., Girolami, M., and Lawrence, N. (2009). Accelerating Bayesian Inference over Nonlinear",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Calderhead%2C%20B.%20Girolami%2C%20M.%20Lawrence%2C%20N.%20Accelerating%20Bayesian%20Inference%20over%20Nonlinear%202009"
+        },
+        {
+            "id": "Chkrebtii_et+al_2016_a",
+            "entry": "Chkrebtii, O., Campbell, D., Calderhead, B., and Girolami, M. (2016). Bayesian Solution Uncertainty Quantification for Differential Equations. Bayesian Analysis, 11(4):1239\u20131267.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chkrebtii%2C%20O.%20Campbell%2C%20D.%20Calderhead%2C%20B.%20Girolami%2C%20M.%20Bayesian%20Solution%20Uncertainty%20Quantification%20for%20Differential%20Equations%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chkrebtii%2C%20O.%20Campbell%2C%20D.%20Calderhead%2C%20B.%20Girolami%2C%20M.%20Bayesian%20Solution%20Uncertainty%20Quantification%20for%20Differential%20Equations%202016"
+        },
+        {
+            "id": "Conrad_et+al_2016_a",
+            "entry": "Conrad, P., Girolami, M., Sarkka, S., Stuart, A., and Zygalakis, K. (2016). Statistical Analysis of Differential Equations: Introducing Probability Measures on Numerical Solutions. Statistics and Computing, pages 1\u201318.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Conrad%2C%20P.%20Girolami%2C%20M.%20Sarkka%2C%20S.%20Stuart%2C%20A.%20Statistical%20Analysis%20of%20Differential%20Equations%3A%20Introducing%20Probability%20Measures%20on%20Numerical%20Solutions%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Conrad%2C%20P.%20Girolami%2C%20M.%20Sarkka%2C%20S.%20Stuart%2C%20A.%20Statistical%20Analysis%20of%20Differential%20Equations%3A%20Introducing%20Probability%20Measures%20on%20Numerical%20Solutions%202016"
+        },
+        {
+            "id": "Cotter_et+al_2013_a",
+            "entry": "Cotter, S., Roberts, G., Stuart, A., and White, D. (2013). MCMC Methods for Functions: Modifying Old Algorithms to Make Them Faster. Statistical Science, 28(3):424\u2013446.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cotter%2C%20S.%20Roberts%2C%20G.%20Stuart%2C%20A.%20White%2C%20D.%20MCMC%20Methods%20for%20Functions%3A%20Modifying%20Old%20Algorithms%20to%20Make%20Them%20Faster%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cotter%2C%20S.%20Roberts%2C%20G.%20Stuart%2C%20A.%20White%2C%20D.%20MCMC%20Methods%20for%20Functions%3A%20Modifying%20Old%20Algorithms%20to%20Make%20Them%20Faster%202013"
+        },
+        {
+            "id": "Dondelinger_et+al_2013_a",
+            "entry": "Dondelinger, F., Rogers, S., and Husmeier, D. (2013). ODE Parameter Inference using Adaptive Gradient Matching with Gaussian Processes. Proc. of the 16th Int. Conf. on Artificial Intelligence and Statistics (AISTATS), 31:216\u2013228.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dondelinger%2C%20F.%20Rogers%2C%20S.%20Husmeier%2C%20D.%20ODE%20Parameter%20Inference%20using%20Adaptive%20Gradient%20Matching%20with%20Gaussian%20Processes%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dondelinger%2C%20F.%20Rogers%2C%20S.%20Husmeier%2C%20D.%20ODE%20Parameter%20Inference%20using%20Adaptive%20Gradient%20Matching%20with%20Gaussian%20Processes%202013"
+        },
+        {
+            "id": "Haario_et+al_2001_a",
+            "entry": "Haario, H., Saksman, E., and Tamminen, J. (2001). An Adaptive Metropolis Algorithm. Bernoulli, 7(2):223\u2013242.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Haario%2C%20H.%20Saksman%2C%20E.%20Tamminen%2C%20J.%20An%20Adaptive%20Metropolis%20Algorithm%202001",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Haario%2C%20H.%20Saksman%2C%20E.%20Tamminen%2C%20J.%20An%20Adaptive%20Metropolis%20Algorithm%202001"
+        },
+        {
+            "id": "Hennig_2014_a",
+            "entry": "Hennig, P. and Hauberg, S. (2014). Probabilistic Solutions to Differential Equations and their Application to Riemannian Statistics. Proc. of the 17th Int. Conf. on Artificial Intelligence and Statistics (AISTATS), 33:347\u2013355.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hennig%2C%20P.%20Hauberg%2C%20S.%20Probabilistic%20Solutions%20to%20Differential%20Equations%20and%20their%20Application%20to%20Riemannian%20Statistics%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hennig%2C%20P.%20Hauberg%2C%20S.%20Probabilistic%20Solutions%20to%20Differential%20Equations%20and%20their%20Application%20to%20Riemannian%20Statistics%202014"
+        },
+        {
+            "id": "Hennig_et+al_2015_a",
+            "entry": "Hennig, P., Osborne, M., and Girolami, M. (2015). Probabilistic Numerics and Uncertainty in Computations. Proc. R. Soc. A, 471(2179):20150142.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hennig%2C%20P.%20Osborne%2C%20M.%20Girolami%2C%20M.%20Probabilistic%20Numerics%20and%20Uncertainty%20in%20Computations%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hennig%2C%20P.%20Osborne%2C%20M.%20Girolami%2C%20M.%20Probabilistic%20Numerics%20and%20Uncertainty%20in%20Computations%202015"
+        },
+        {
+            "id": "Kersting_2016_a",
+            "entry": "Kersting, H. and Hennig, P. (2016). Active Uncertainty Calibration in Bayesian ODE Solvers. Uncertainty in Artificial Intelligence (UAI), 32.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kersting%2C%20H.%20Hennig%2C%20P.%20Active%20Uncertainty%20Calibration%20in%20Bayesian%20ODE%20Solvers%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kersting%2C%20H.%20Hennig%2C%20P.%20Active%20Uncertainty%20Calibration%20in%20Bayesian%20ODE%20Solvers%202016"
+        },
+        {
+            "id": "Lie_et+al_2017_a",
+            "entry": "Lie, H. C., Stuart, A., and Sullivan, T. (2017). Strong Convergence Rates of Probabilistic Integrators for Ordinary Differential Equations. arXiv:1703.03680.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.03680"
+        },
+        {
+            "id": "Lie_et+al_2018_a",
+            "entry": "Lie, H. C., Sullivan, T. J., and Teckentrup, A. L. (2018). Random Forward Models and Log-Likelihoods in Bayesian Inverse Problems. SIAM/ASA Journal on Uncertainty Quantification. To appear.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lie%2C%20H.C.%20Sullivan%2C%20T.J.%20Teckentrup%2C%20A.L.%20Random%20Forward%20Models%20and%20Log-Likelihoods%20in%20Bayesian%20Inverse%20Problems%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lie%2C%20H.C.%20Sullivan%2C%20T.J.%20Teckentrup%2C%20A.L.%20Random%20Forward%20Models%20and%20Log-Likelihoods%20in%20Bayesian%20Inverse%20Problems%202018"
+        },
+        {
+            "id": "Macdonald_et+al_2015_a",
+            "entry": "Macdonald, B., Higham, C., and Husmeier, D. (2015). Controversy in Mechanistic Modelling with Gaussian Processes. Proc. of the 32nd Int. Conf. on Machine Learning (ICML), 37:1539\u20131547.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Macdonald%2C%20B.%20Higham%2C%20C.%20Husmeier%2C%20D.%20Controversy%20in%20Mechanistic%20Modelling%20with%20Gaussian%20Processes%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Macdonald%2C%20B.%20Higham%2C%20C.%20Husmeier%2C%20D.%20Controversy%20in%20Mechanistic%20Modelling%20with%20Gaussian%20Processes%202015"
+        },
+        {
+            "id": "Oehlert_1992_a",
+            "entry": "Oehlert, G. (1992). A Note on the Delta Method. The American Statistician, 46(1):27\u201329.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Oehlert%2C%20G.%20A%20Note%20on%20the%20Delta%20Method%201992",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Oehlert%2C%20G.%20A%20Note%20on%20the%20Delta%20Method%201992"
+        },
+        {
+            "id": "Press_et+al_2007_a",
+            "entry": "Press, W., Teukolsky, S., Vetterling, W., and Flannery, B. (2007). Numerical Recipes 3rd Edition: The Art of Scientific Computing. Cambridge University Press.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Press%2C%20W.%20Teukolsky%2C%20S.%20Vetterling%2C%20W.%20Flannery%2C%20B.%20Numerical%20RecipesThe%20Art%20of%20Scientific%20Computing%202007"
+        },
+        {
+            "id": "Ramsay_et+al_2007_a",
+            "entry": "Ramsay, J., Hooker, G., Campbell, D., and Cao, J. (2007). Parameter Estimation for Differential Equations: a Generalized Smoothing Approach. J. Royal Stat. Soc. B, 69(5):741\u2013796.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ramsay%2C%20J.%20Hooker%2C%20G.%20Campbell%2C%20D.%20Cao%2C%20J.%20Parameter%20Estimation%20for%20Differential%20Equations%3A%20a%20Generalized%20Smoothing%20Approach%202007",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ramsay%2C%20J.%20Hooker%2C%20G.%20Campbell%2C%20D.%20Cao%2C%20J.%20Parameter%20Estimation%20for%20Differential%20Equations%3A%20a%20Generalized%20Smoothing%20Approach%202007"
+        },
+        {
+            "id": "Sarkka_2013_a",
+            "entry": "Sarkka, S. (2013). Bayesian Filtering and Smoothing. Cambridge University Press.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sarkka%2C%20S.%20Bayesian%20Filtering%20and%20Smoothing%202013"
+        },
+        {
+            "id": "Schober_et+al_2014_a",
+            "entry": "Schober, M., Duvenaud, D., and Hennig, P. (2014). Probabilistic ODE Solvers with Runge-Kutta Means. Advances in Neural Information Processing Systems (NIPS), 27:739\u2013747.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schober%2C%20M.%20Duvenaud%2C%20D.%20Hennig%2C%20P.%20Probabilistic%20ODE%20Solvers%20with%20Runge-Kutta%20Means%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schober%2C%20M.%20Duvenaud%2C%20D.%20Hennig%2C%20P.%20Probabilistic%20ODE%20Solvers%20with%20Runge-Kutta%20Means%202014"
+        },
+        {
+            "id": "Schober_et+al_2018_a",
+            "entry": "Schober, M., Sarkka, S., and Hennig, P. (2018). A Probabilistic Model for the Numerical Solution of Initial Value Problems. Statistics and Computing, pages 1\u201324.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schober%2C%20M.%20Sarkka%2C%20S.%20Hennig%2C%20P.%20A%20Probabilistic%20Model%20for%20the%20Numerical%20Solution%20of%20Initial%20Value%20Problems%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schober%2C%20M.%20Sarkka%2C%20S.%20Hennig%2C%20P.%20A%20Probabilistic%20Model%20for%20the%20Numerical%20Solution%20of%20Initial%20Value%20Problems%202018"
+        },
+        {
+            "id": "Skilling_1991_a",
+            "entry": "Skilling, J. (1991). Bayesian Solution of Ordinary Differential Equations. In Smith, C. R., editor, Maximum Entropy and Bayesian Methods, Fundamental Theories of Physics, pages 23\u201337.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Skilling%2C%20J.%20Bayesian%20Solution%20of%20Ordinary%20Differential%20Equations%201991",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Skilling%2C%20J.%20Bayesian%20Solution%20of%20Ordinary%20Differential%20Equations%201991"
+        },
+        {
+            "id": "Skilling_1993_a",
+            "entry": "Skilling, J. (1993). Bayesian Numerical Analysis. In Grandy, W. J. and Milonni, P., editors, Physics and Probability, pages 207\u2013222. Cambridge University Press.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Skilling%2C%20J.%20Bayesian%20Numerical%20Analysis%201993",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Skilling%2C%20J.%20Bayesian%20Numerical%20Analysis%201993"
+        },
+        {
+            "id": "Teymur_et+al_2016_a",
+            "entry": "Teymur, O., Zygalakis, K., and Calderhead, B. (2016). Probabilistic Linear Multistep Methods. Advances in Neural Information Processing Systems (NIPS), 29:4314\u20134321.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Teymur%2C%20O.%20Zygalakis%2C%20K.%20Calderhead%2C%20B.%20Probabilistic%20Linear%20Multistep%20Methods%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Teymur%2C%20O.%20Zygalakis%2C%20K.%20Calderhead%2C%20B.%20Probabilistic%20Linear%20Multistep%20Methods%202016"
+        },
+        {
+            "id": "Wang_2014_a",
+            "entry": "Wang, Y. and Barber, D. (2014). Gaussian Processes for Bayesian Estimation in Ordinary Differential Equations. Proc. of the 31st Int. Conf. on Machine Learning (ICML), 32:1485\u20131493.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Y.%20Barber%2C%20D.%20Gaussian%20Processes%20for%20Bayesian%20Estimation%20in%20Ordinary%20Differential%20Equations%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Y.%20Barber%2C%20D.%20Gaussian%20Processes%20for%20Bayesian%20Estimation%20in%20Ordinary%20Differential%20Equations%202014"
+        }
+    ]
+}
