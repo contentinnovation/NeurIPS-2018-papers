@@ -1,0 +1,489 @@
+{
+    "filename": "8204-memory-augmented-policy-optimization-for-program-synthesis-and-semantic-parsing.pdf",
+    "metadata": {
+        "title": "Memory Augmented Policy Optimization for Program Synthesis and Semantic Parsing",
+        "author": "Chen Liang, Mohammad Norouzi, Jonathan Berant, Quoc V. Le, Ni Lao",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/8204-memory-augmented-policy-optimization-for-program-synthesis-and-semantic-parsing.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We present Memory Augmented Policy Optimization (MAPO), a simple and novel way to leverage a memory buffer of promising trajectories to reduce the variance of policy gradient estimate. MAPO is applicable to deterministic environments with discrete actions, such as structured prediction and combinatorial optimization tasks. We express the expected return objective as a weighted sum of two terms: an expectation over the high-reward trajectories inside the memory buffer, and a separate expectation over trajectories outside the buffer. To make an efficient algorithm of MAPO, we propose: (1) memory weight clipping to accelerate and stabilize training; (2) systematic exploration to discover high-reward trajectories; (3) distributed sampling from inside and outside of the memory buffer to scale up training. MAPO improves the sample efficiency and robustness of policy gradient, especially on tasks with sparse rewards. We evaluate MAPO on weakly supervised program synthesis from natural language (semantic parsing). On the WIKITABLEQUESTIONS benchmark, we improve the state-of-the-art by 2.6%, achieving an accuracy of 46.3%. On the WIKISQL benchmark, MAPO achieves an accuracy of 74.9% with only weak supervision, outperforming several strong baselines with full supervision. Our source code is available at goo.gl/TXBp4e"
+    },
+    "keywords": [
+        {
+            "term": "program synthesis",
+            "url": "https://en.wikipedia.org/wiki/program_synthesis"
+        },
+        {
+            "term": "Monte Carlo",
+            "url": "https://en.wikipedia.org/wiki/Monte_Carlo"
+        },
+        {
+            "term": "semantic parsing",
+            "url": "https://en.wikipedia.org/wiki/semantic_parsing"
+        },
+        {
+            "term": "policy gradient method",
+            "url": "https://en.wikipedia.org/wiki/policy_gradient_method"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "natural language",
+            "url": "https://en.wikipedia.org/wiki/natural_language"
+        },
+        {
+            "term": "memory buffer",
+            "url": "https://en.wikipedia.org/wiki/memory_buffer"
+        }
+    ],
+    "highlights": [
+        "There has been a recent surge of interest in applying policy gradient methods to various application domains including program synthesis [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>, <a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c68\" href=\"#r68\">68</a>, <a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>], dialogue generation [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>, <a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>], architecture search [<a class=\"ref-link\" id=\"c69\" href=\"#r69\">69</a>, <a class=\"ref-link\" id=\"c71\" href=\"#r71\">71</a>], game [<a class=\"ref-link\" id=\"c53\" href=\"#r53\">53</a>, <a class=\"ref-link\" id=\"c31\" href=\"#r31\">31</a>] and continuous control [<a class=\"ref-link\" id=\"c44\" href=\"#r44\">44</a>, <a class=\"ref-link\" id=\"c50\" href=\"#r50\">50</a>]",
+        "To make an efficient algorithm for memory augmented policy optimization, we propose 3 techniques: (1) memory weight clipping to accelerate and stabilize training; (2) systematic exploration of the search space to efficiently discover the high-reward trajectories; (3) distributed sampling from inside and outside of the memory buffer to scale up training; We assess the effectiveness of memory augmented policy optimization on weakly supervised program synthesis from natural language",
+        "We present memory augmented policy optimization (MAPO) that incorporates a memory buffer of promising trajectories to reduce the variance of policy gradients",
+        "We propose 3 techniques to enable an efficient algorithm for memory augmented policy optimization: (1) memory weight clipping to accelerate and stabilize training; (2) systematic exploration to efficiently discover high-reward trajectories; (3) distributed sampling from inside and outside memory buffer to scale up training",
+        "memory augmented policy optimization is evaluated on real world program synthesis from natural language / semantic parsing tasks",
+        "On WIKITABLEQUESTIONS, memory augmented policy optimization is the first reinforcement learning approach that significantly outperforms previous state-of-the-art; on WIKISQL, memory augmented policy optimization trained with only weak supervision outperforms several strong baselines trained with full supervision"
+    ],
+    "key_statements": [
+        "There has been a recent surge of interest in applying policy gradient methods to various application domains including program synthesis [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>, <a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c68\" href=\"#r68\">68</a>, <a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>], dialogue generation [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>, <a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>], architecture search [<a class=\"ref-link\" id=\"c69\" href=\"#r69\">69</a>, <a class=\"ref-link\" id=\"c71\" href=\"#r71\">71</a>], game [<a class=\"ref-link\" id=\"c53\" href=\"#r53\">53</a>, <a class=\"ref-link\" id=\"c31\" href=\"#r31\">31</a>] and continuous control [<a class=\"ref-link\" id=\"c44\" href=\"#r44\">44</a>, <a class=\"ref-link\" id=\"c50\" href=\"#r50\">50</a>]",
+        "This paper presents memory augmented policy optimization: a simple and novel way to incorporate a memory buffer of promising trajectories within the policy gradient framework",
+        "To make an efficient algorithm for memory augmented policy optimization, we propose 3 techniques: (1) memory weight clipping to accelerate and stabilize training; (2) systematic exploration of the search space to efficiently discover the high-reward trajectories; (3) distributed sampling from inside and outside of the memory buffer to scale up training; We assess the effectiveness of memory augmented policy optimization on weakly supervised program synthesis from natural language",
+        "To reduce the variance in gradient estimation and prevent forgetting high-reward trajectories, we introduce a memory buffer, which saves a set of promising trajectories denoted B \u201d tpapiqquM i\u201c1",
+        "We evaluate memory augmented policy optimization on two program synthesis from natural language ( known as semantic parsing) benchmarks, WIKITABLEQUESTIONS and WIKISQL, which requires generating programs to query and process data from tables to answer natural language questions",
+        "We present an analysis of the bias introduced by memory weight clipping",
+        "Previous work [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>] reports negative results when applying simple policy gradient methods like REINFORCE [<a class=\"ref-link\" id=\"c58\" href=\"#r58\">58</a>], which highlights the difficulty of exploration and optimization when applying reinforcement learning techniques",
+        "memory augmented policy optimization takes a different approach to reformulate the gradient as a combination of expectations inside and outside a memory buffer",
+        "memory augmented policy optimization reduces the variance by sampling from a smaller stochastic space or through stratified sampling, and accelerates and stabilizes training by clipping the weight of the memory buffer",
+        "We present memory augmented policy optimization (MAPO) that incorporates a memory buffer of promising trajectories to reduce the variance of policy gradients",
+        "We propose 3 techniques to enable an efficient algorithm for memory augmented policy optimization: (1) memory weight clipping to accelerate and stabilize training; (2) systematic exploration to efficiently discover high-reward trajectories; (3) distributed sampling from inside and outside memory buffer to scale up training",
+        "memory augmented policy optimization is evaluated on real world program synthesis from natural language / semantic parsing tasks",
+        "On WIKITABLEQUESTIONS, memory augmented policy optimization is the first reinforcement learning approach that significantly outperforms previous state-of-the-art; on WIKISQL, memory augmented policy optimization trained with only weak supervision outperforms several strong baselines trained with full supervision"
+    ],
+    "summary": [
+        "There has been a recent surge of interest in applying policy gradient methods to various application domains including program synthesis [<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>, <a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c68\" href=\"#r68\">68</a>, <a class=\"ref-link\" id=\"c10\" href=\"#r10\">10</a>], dialogue generation [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>, <a class=\"ref-link\" id=\"c11\" href=\"#r11\">11</a>], architecture search [<a class=\"ref-link\" id=\"c69\" href=\"#r69\">69</a>, <a class=\"ref-link\" id=\"c71\" href=\"#r71\">71</a>], game [<a class=\"ref-link\" id=\"c53\" href=\"#r53\">53</a>, <a class=\"ref-link\" id=\"c31\" href=\"#r31\">31</a>] and continuous control [<a class=\"ref-link\" id=\"c44\" href=\"#r44\">44</a>, <a class=\"ref-link\" id=\"c50\" href=\"#r50\">50</a>].",
+        "To make an efficient algorithm for MAPO, we propose 3 techniques: (1) memory weight clipping to accelerate and stabilize training; (2) systematic exploration of the search space to efficiently discover the high-reward trajectories; (3) distributed sampling from inside and outside of the memory buffer to scale up training; We assess the effectiveness of MAPO on weakly supervised program synthesis from natural language.",
+        "To reduce the variance in gradient estimation and prevent forgetting high-reward trajectories, we introduce a memory buffer, which saves a set of promising trajectories denoted B \u201d tpapiqquM i\u201c1.",
+        "A key observation is that a \u201cbad\u201d policy, one that achieves low expected return, will assign small probabilities to the high-reward trajectories, which in turn causes them to be ignored during gradient estimation.",
+        "To discover high-reward trajectories for the memory buffer B, we need to efficiently explore the search space.",
+        "We continue the systematic exploration with the current policy to discover new high reward trajectories.",
+        "To apply MAPO, each actor maintains a memory buffer B to save the high-reward i trajectories.",
+        "We first apply systematic exploration using a random policy to discover highreward programs to warm start the memory buffer of each example.",
+        "\u00a7 REINFORCE: We use on-policy samples to estimate the gradient of expected return as in (2), not utilizing any form of memory buffer.",
+        "Removing systematic exploration or the memory weight clipping significantly weaken MAPO possibly because high-reward trajectories are not found or forgotten.",
+        "Previous work [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>, <a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>] reports negative results when applying simple policy gradient methods like REINFORCE [<a class=\"ref-link\" id=\"c58\" href=\"#r58\">58</a>], which highlights the difficulty of exploration and optimization when applying RL techniques.",
+        "Previous work[<a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>] assigns a fixed weight to the trajectories, which introduces bias into the policy gradient estimates.",
+        "MAPO takes a different approach to reformulate the gradient as a combination of expectations inside and outside a memory buffer.",
+        "MAPO reduces the variance by sampling from a smaller stochastic space or through stratified sampling, and accelerates and stabilizes training by clipping the weight of the memory buffer.",
+        "We present memory augmented policy optimization (MAPO) that incorporates a memory buffer of promising trajectories to reduce the variance of policy gradients.",
+        "We propose 3 techniques to enable an efficient algorithm for MAPO: (1) memory weight clipping to accelerate and stabilize training; (2) systematic exploration to efficiently discover high-reward trajectories; (3) distributed sampling from inside and outside memory buffer to scale up training.",
+        "On WIKITABLEQUESTIONS, MAPO is the first RL approach that significantly outperforms previous state-of-the-art; on WIKISQL, MAPO trained with only weak supervision outperforms several strong baselines trained with full supervision"
+    ],
+    "headline": "We present Memory Augmented Policy Optimization , a simple and novel way to leverage a memory buffer of promising trajectories to reduce the variance of policy gradient estimate",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Mart\u00edn Abadi, Ashish Agarwal, Paul Barham, Eugene Brevdo, Zhifeng Chen, Craig Citro, Gregory S. Corrado, Andy Davis, Jeffrey Dean, Matthieu Devin, Sanjay Ghemawat, Ian J. Goodfellow, Andrew Harp, Geoffrey Irving, Michael Isard, Yangqing Jia, Rafal J\u00f3zefowicz, Lukasz Kaiser, Manjunath Kudlur, Josh Levenberg, Dan Man\u00e9, Rajat Monga, Sherry Moore, Derek Gordon Murray, Chris Olah, Mike Schuster, Jonathon Shlens, Benoit Steiner, Ilya Sutskever, Kunal Talwar, Paul A. Tucker, Vincent Vanhoucke, Vijay Vasudevan, Fernanda B. Vi\u00e9gas, Oriol Vinyals, Pete Warden, Martin Wattenberg, Martin Wicke, Yuan Yu, and Xiaoqiang Zheng. Tensorflow: Large-scale machine learning on heterogeneous distributed systems. ArXiv:1603.04467, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1603.04467"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Daniel A Abolafia, Mohammad Norouzi, and Quoc V Le. Neural program synthesis with priority queue training. arXiv preprint arXiv:1801.03526, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1801.03526"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Daniel A. Abolafia, Mohammad Norouzi, Jonathan Shen, Rui Zhao, and Quoc V. Le. Neural program synthesis with priority queue training. arXiv:1801.03526, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1801.03526"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Marcin Andrychowicz, Filip Wolski, Alex Ray, Jonas Schneider, Rachel Fong, Peter Welinder, Bob McGrew, Josh Tobin, OpenAI Pieter Abbeel, and Wojciech Zaremba. Hindsight experience replay. NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Andrychowicz%2C%20Marcin%20Wolski%2C%20Filip%20Ray%2C%20Alex%20Schneider%2C%20Jonas%20Hindsight%20experience%20replay%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Andrychowicz%2C%20Marcin%20Wolski%2C%20Filip%20Ray%2C%20Alex%20Schneider%2C%20Jonas%20Hindsight%20experience%20replay%202017"
+        },
+        {
+            "id": "5",
+            "entry": "[5] M. Balog, A. L. Gaunt, M. Brockschmidt, S. Nowozin, and D. Tarlow. Deepcoder: Learning to write programs. ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Balog%2C%20M.%20Gaunt%2C%20A.L.%20Brockschmidt%2C%20M.%20Nowozin%2C%20S.%20Deepcoder%3A%20Learning%20to%20write%20programs%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Balog%2C%20M.%20Gaunt%2C%20A.L.%20Brockschmidt%2C%20M.%20Nowozin%2C%20S.%20Deepcoder%3A%20Learning%20to%20write%20programs%202017"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Marc G Bellemare, Yavar Naddaf, Joel Veness, and Michael Bowling. The arcade learning environment: An evaluation platform for general agents. JMLR, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bellemare%2C%20Marc%20G.%20Naddaf%2C%20Yavar%20Veness%2C%20Joel%20Bowling%2C%20Michael%20The%20arcade%20learning%20environment%3A%20An%20evaluation%20platform%20for%20general%20agents%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bellemare%2C%20Marc%20G.%20Naddaf%2C%20Yavar%20Veness%2C%20Joel%20Bowling%2C%20Michael%20The%20arcade%20learning%20environment%3A%20An%20evaluation%20platform%20for%20general%20agents%202013"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Irwan Bello, Hieu Pham, Quoc V Le, Mohammad Norouzi, and Samy Bengio. Neural combinatorial optimization with reinforcement learning. arXiv:1611.09940, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.09940"
+        },
+        {
+            "id": "8",
+            "entry": "[8] Jonathan Berant, Andrew Chou, Roy Frostig, and Percy Liang. Semantic parsing on freebase from question-answer pairs. EMNLP, 2(5):6, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Berant%2C%20Jonathan%20Chou%2C%20Andrew%20Frostig%2C%20Roy%20Liang%2C%20Percy%20Semantic%20parsing%20on%20freebase%20from%20question-answer%20pairs%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Berant%2C%20Jonathan%20Chou%2C%20Andrew%20Frostig%2C%20Roy%20Liang%2C%20Percy%20Semantic%20parsing%20on%20freebase%20from%20question-answer%20pairs%202013"
+        },
+        {
+            "id": "9",
+            "entry": "[9] Greg Brockman, Vicki Cheung, Ludwig Pettersson, Jonas Schneider, John Schulman, Jie Tang, and Wojciech Zaremba. Openai gym. arXiv:1606.01540, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.01540"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Rudy Bunel, Matthew Hausknecht, Jacob Devlin, Rishabh Singh, and Pushmeet Kohli. Leveraging grammar and reinforcement learning for neural program synthesis. In International Conference on Learning Representations, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bunel%2C%20Rudy%20Hausknecht%2C%20Matthew%20Devlin%2C%20Jacob%20Singh%2C%20Rishabh%20Leveraging%20grammar%20and%20reinforcement%20learning%20for%20neural%20program%20synthesis%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bunel%2C%20Rudy%20Hausknecht%2C%20Matthew%20Devlin%2C%20Jacob%20Singh%2C%20Rishabh%20Leveraging%20grammar%20and%20reinforcement%20learning%20for%20neural%20program%20synthesis%202018"
+        },
+        {
+            "id": "11",
+            "entry": "[11] Abhishek Das, Satwik Kottur, Jos\u00e9 MF Moura, Stefan Lee, and Dhruv Batra. Learning cooperative visual dialog agents with deep reinforcement learning. arXiv:1703.06585, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.06585"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Thomas Degris, Martha White, and Richard S Sutton. Off-policy actor-critic. ICML, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Thomas%20Degris%20Martha%20White%20and%20Richard%20S%20Sutton%20Offpolicy%20actorcritic%20ICML%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Thomas%20Degris%20Martha%20White%20and%20Richard%20S%20Sutton%20Offpolicy%20actorcritic%20ICML%202012"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Nan Ding and Radu Soricut. Cold-start reinforcement learning with softmax policy gradient. In Advances in Neural Information Processing Systems, pages 2817\u20132826, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ding%2C%20Nan%20Soricut%2C%20Radu%20Cold-start%20reinforcement%20learning%20with%20softmax%20policy%20gradient%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ding%2C%20Nan%20Soricut%2C%20Radu%20Cold-start%20reinforcement%20learning%20with%20softmax%20policy%20gradient%202017"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Li Dong and Mirella Lapata. Coarse-to-fine decoding for neural semantic parsing. CoRR, abs/1805.04793, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1805.04793"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Lasse Espeholt, Hubert Soyer, Remi Munos, Karen Simonyan, Volodymir Mnih, Tom Ward, Yotam Doron, Vlad Firoiu, Tim Harley, Iain Dunning, et al. Impala: Scalable distributed deep-rl with importance weighted actor-learner architectures. arXiv:1802.01561, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1802.01561"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Will Grathwohl, Dami Choi, Yuhuai Wu, Geoff Roeder, and David Duvenaud. Backpropagation through the void: Optimizing control variates for black-box gradient estimation. arXiv preprint arXiv:1711.00123, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1711.00123"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Kelvin Guu, Panupong Pasupat, Evan Liu, and Percy Liang. From language to programs: Bridging reinforcement learning and maximum marginal likelihood. ACL, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Guu%2C%20Kelvin%20Pasupat%2C%20Panupong%20Liu%2C%20Evan%20Liang%2C%20Percy%20From%20language%20to%20programs%3A%20Bridging%20reinforcement%20learning%20and%20maximum%20marginal%20likelihood%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Guu%2C%20Kelvin%20Pasupat%2C%20Panupong%20Liu%2C%20Evan%20Liang%2C%20Percy%20From%20language%20to%20programs%3A%20Bridging%20reinforcement%20learning%20and%20maximum%20marginal%20likelihood%202017"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Till Haug, Octavian-Eugen Ganea, and Paulina Grnarova. Neural multi-step reasoning for question answering on semi-structured tables. In ECIR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Haug%2C%20Till%20Ganea%2C%20Octavian-Eugen%20Grnarova%2C%20Paulina%20Neural%20multi-step%20reasoning%20for%20question%20answering%20on%20semi-structured%20tables%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Haug%2C%20Till%20Ganea%2C%20Octavian-Eugen%20Grnarova%2C%20Paulina%20Neural%20multi-step%20reasoning%20for%20question%20answering%20on%20semi-structured%20tables%202018"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Todd Hester, Matej Vecerik, Olivier Pietquin, Marc Lanctot, Tom Schaul, Bilal Piot, Andrew Sendonaris, Gabriel Dulac-Arnold, Ian Osband, John Agapiou, Joel Z. Leibo, and Audrunas Gruslys. Deep q-learning from demonstrations. AAAI, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hester%2C%20Todd%20Vecerik%2C%20Matej%20Pietquin%2C%20Olivier%20Lanctot%2C%20Marc%20Deep%20q-learning%20from%20demonstrations%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hester%2C%20Todd%20Vecerik%2C%20Matej%20Pietquin%2C%20Olivier%20Lanctot%2C%20Marc%20Deep%20q-learning%20from%20demonstrations%202018"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Sepp Hochreiter and J\u00fcrgen Schmidhuber. Long short-term memory. Neural Comput., 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Long%20short-term%20memory%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Long%20short-term%20memory%201997"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Rein Houthooft, Xi Chen, Yan Duan, John Schulman, Filip De Turck, and Pieter Abbeel. Vime: Variational information maximizing exploration. In Advances in Neural Information Processing Systems, pages 1109\u20131117, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Houthooft%2C%20Rein%20Chen%2C%20Xi%20Duan%2C%20Yan%20Schulman%2C%20John%20Vime%3A%20Variational%20information%20maximizing%20exploration%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Houthooft%2C%20Rein%20Chen%2C%20Xi%20Duan%2C%20Yan%20Schulman%2C%20John%20Vime%3A%20Variational%20information%20maximizing%20exploration%202016"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Po-Sen Huang, Chenglong Wang, Rishabh Singh, Wen tau Yih, and Xiaodong He. Natural language to structured query generation via meta-learning. CoRR, abs/1803.02400, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.02400"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Vijay R Konda and John N Tsitsiklis. Actor-critic algorithms. In Advances in neural information processing systems, pages 1008\u20131014, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Konda%2C%20Vijay%20R.%20Tsitsiklis%2C%20John%20N.%20Actor-critic%20algorithms%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Konda%2C%20Vijay%20R.%20Tsitsiklis%2C%20John%20N.%20Actor-critic%20algorithms%202000"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Jayant Krishnamurthy, Pradeep Dasigi, and Matt Gardner. Neural semantic parsing with type constraints for semi-structured tables. EMNLP, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Krishnamurthy%2C%20Jayant%20Dasigi%2C%20Pradeep%20Gardner%2C%20Matt%20Neural%20semantic%20parsing%20with%20type%20constraints%20for%20semi-structured%20tables%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Krishnamurthy%2C%20Jayant%20Dasigi%2C%20Pradeep%20Gardner%2C%20Matt%20Neural%20semantic%20parsing%20with%20type%20constraints%20for%20semi-structured%20tables%202017"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Jiwei Li, Will Monroe, Alan Ritter, Michel Galley, Jianfeng Gao, and Dan Jurafsky. Deep reinforcement learning for dialogue generation. arXiv:1606.01541, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.01541"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Chen Liang, Jonathan Berant, Quoc Le, Kenneth D. Forbus, and Ni Lao. Neural symbolic machines: Learning semantic parsers on freebase with weak supervision. ACL, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liang%2C%20Chen%20Berant%2C%20Jonathan%20Le%2C%20Quoc%20Forbus%2C%20Kenneth%20D.%20Neural%20symbolic%20machines%3A%20Learning%20semantic%20parsers%20on%20freebase%20with%20weak%20supervision%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liang%2C%20Chen%20Berant%2C%20Jonathan%20Le%2C%20Quoc%20Forbus%2C%20Kenneth%20D.%20Neural%20symbolic%20machines%3A%20Learning%20semantic%20parsers%20on%20freebase%20with%20weak%20supervision%202017"
+        },
+        {
+            "id": "27",
+            "entry": "[27] P. Liang, M. I. Jordan, and D. Klein. Learning dependency-based compositional semantics. ACL, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liang%2C%20P.%20Jordan%2C%20M.I.%20Klein%2C%20D.%20Learning%20dependency-based%20compositional%20semantics%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liang%2C%20P.%20Jordan%2C%20M.I.%20Klein%2C%20D.%20Learning%20dependency-based%20compositional%20semantics%202011"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Long-Ji Lin. Self-improving reactive agents based on reinforcement learning, planning and teaching. Machine learning, 8(3-4):293\u2013321, 1992.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20Long-Ji%20Self-improving%20reactive%20agents%20based%20on%20reinforcement%20learning%2C%20planning%20and%20teaching%201992",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lin%2C%20Long-Ji%20Self-improving%20reactive%20agents%20based%20on%20reinforcement%20learning%2C%20planning%20and%20teaching%201992"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Hao Liu, Yihao Feng, Yi Mao, Dengyong Zhou, Jian Peng, and Qiang Liu. Sample-efficient policy optimization with stein control variate. arXiv preprint arXiv:1710.11198, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.11198"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Horia Mania, Aurelia Guy, and Benjamin Recht. Simple random search provides a competitive approach to reinforcement learning. arXiv preprint arXiv:1803.07055, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.07055"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Volodymyr Mnih, Adria Puigdomenech Badia, Mehdi Mirza, Alex Graves, Timothy Lillicrap, Tim Harley, David Silver, and Koray Kavukcuoglu. Asynchronous methods for deep reinforcement learning. In International Conference on Machine Learning, pages 1928\u20131937, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mnih%2C%20Volodymyr%20Badia%2C%20Adria%20Puigdomenech%20Mirza%2C%20Mehdi%20Graves%2C%20Alex%20Asynchronous%20methods%20for%20deep%20reinforcement%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mnih%2C%20Volodymyr%20Badia%2C%20Adria%20Puigdomenech%20Mirza%2C%20Mehdi%20Graves%2C%20Alex%20Asynchronous%20methods%20for%20deep%20reinforcement%20learning%202016"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Pramod Kaushik Mudrakarta, Ankur Taly, Mukund Sundararajan, and Kedar Dhamdhere. It was the training data pruning too! arXiv:1803.04579, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.04579"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Ofir Nachum, Mohammad Norouzi, Kelvin Xu, and Dale Schuurmans. Bridging the gap between value and policy based reinforcement learning. In Advances in Neural Information Processing Systems, pages 2775\u20132785, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nachum%2C%20Ofir%20Norouzi%2C%20Mohammad%20Xu%2C%20Kelvin%20Schuurmans%2C%20Dale%20Bridging%20the%20gap%20between%20value%20and%20policy%20based%20reinforcement%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nachum%2C%20Ofir%20Norouzi%2C%20Mohammad%20Xu%2C%20Kelvin%20Schuurmans%2C%20Dale%20Bridging%20the%20gap%20between%20value%20and%20policy%20based%20reinforcement%20learning%202017"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Arvind Neelakantan, Quoc V. Le, Mart\u00edn Abadi, Andrew D McCallum, and Dario Amodei. Learning a natural language interface with neural programmer. arXiv:1611.08945, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.08945"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Alex Nichol, Vicki Pfau, Christopher Hesse, Oleg Klimov, and John Schulman. Gotta learn fast: A new benchmark for generalization in rl. arXiv:1804.03720, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1804.03720"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Mohammad Norouzi, Samy Bengio, Navdeep Jaitly, Mike Schuster, Yonghui Wu, Dale Schuurmans, et al. Reward augmented maximum likelihood for neural structured prediction. In Advances In Neural Information Processing Systems, pages 1723\u20131731, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Norouzi%2C%20Mohammad%20Bengio%2C%20Samy%20Jaitly%2C%20Navdeep%20Schuster%2C%20Mike%20Reward%20augmented%20maximum%20likelihood%20for%20neural%20structured%20prediction%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Norouzi%2C%20Mohammad%20Bengio%2C%20Samy%20Jaitly%2C%20Navdeep%20Schuster%2C%20Mike%20Reward%20augmented%20maximum%20likelihood%20for%20neural%20structured%20prediction%202016"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Sebastian Nowozin, Christoph H Lampert, et al. Structured learning and prediction in computer vision. Foundations and Trends R in Computer Graphics and Vision, 6(3\u20134):185\u2013365, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nowozin%2C%20Sebastian%20Lampert%2C%20Christoph%20H.%20Structured%20learning%20and%20prediction%20in%20computer%20vision%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nowozin%2C%20Sebastian%20Lampert%2C%20Christoph%20H.%20Structured%20learning%20and%20prediction%20in%20computer%20vision%202011"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Junhyuk Oh, Yijie Guo, Satinder Singh, and Honglak Lee. Self-imitation learning. ICML, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Oh%2C%20Junhyuk%20Guo%2C%20Yijie%20Singh%2C%20Satinder%20Lee%2C%20Honglak%20Self-imitation%20learning%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Oh%2C%20Junhyuk%20Guo%2C%20Yijie%20Singh%2C%20Satinder%20Lee%2C%20Honglak%20Self-imitation%20learning%202018"
+        },
+        {
+            "id": "39",
+            "entry": "[39] Panupong Pasupat and Percy Liang. Compositional semantic parsing on semi-structured tables. ACL, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pasupat%2C%20Panupong%20Liang%2C%20Percy%20Compositional%20semantic%20parsing%20on%20semi-structured%20tables%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pasupat%2C%20Panupong%20Liang%2C%20Percy%20Compositional%20semantic%20parsing%20on%20semi-structured%20tables%202015"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Panupong Pasupat and Percy Liang. Inferring logical forms from denotations. In Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), volume 1, pages 23\u201332, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pasupat%2C%20Panupong%20Liang%2C%20Percy%20Inferring%20logical%20forms%20from%20denotations%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pasupat%2C%20Panupong%20Liang%2C%20Percy%20Inferring%20logical%20forms%20from%20denotations%202016"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Panupong Pasupat and Percy Liang. Inferring logical forms from denotations. ACL, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pasupat%2C%20Panupong%20Liang%2C%20Percy%20Inferring%20logical%20forms%20from%20denotations%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pasupat%2C%20Panupong%20Liang%2C%20Percy%20Inferring%20logical%20forms%20from%20denotations%202016"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Deepak Pathak, Pulkit Agrawal, Alexei A. Efros, and Trevor Darrell. Curiosity-driven exploration by self-supervised prediction. In ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pathak%2C%20Deepak%20Agrawal%2C%20Pulkit%20Efros%2C%20Alexei%20A.%20Darrell%2C%20Trevor%20Curiosity-driven%20exploration%20by%20self-supervised%20prediction%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pathak%2C%20Deepak%20Agrawal%2C%20Pulkit%20Efros%2C%20Alexei%20A.%20Darrell%2C%20Trevor%20Curiosity-driven%20exploration%20by%20self-supervised%20prediction%202017"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Jeffrey Pennington, Richard Socher, and Christopher D. Manning. Glove: Global vectors for word representation. EMNLP, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pennington%2C%20Jeffrey%20Socher%2C%20Richard%20Manning%2C%20Christopher%20D.%20Glove%3A%20Global%20vectors%20for%20word%20representation%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pennington%2C%20Jeffrey%20Socher%2C%20Richard%20Manning%2C%20Christopher%20D.%20Glove%3A%20Global%20vectors%20for%20word%20representation%202014"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Jan Peters and Stefan Schaal. Policy gradient methods for robotics. IROS, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Peters%2C%20Jan%20Schaal%2C%20Stefan%20Policy%20gradient%20methods%20for%20robotics%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Peters%2C%20Jan%20Schaal%2C%20Stefan%20Policy%20gradient%20methods%20for%20robotics%202006"
+        },
+        {
+            "id": "45",
+            "entry": "[45] Aravind Rajeswaran, Kendall Lowrey, Emanuel V Todorov, and Sham M Kakade. Towards generalization and simplicity in continuous control. NIPS, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rajeswaran%2C%20Aravind%20Lowrey%2C%20Kendall%20Todorov%2C%20Emanuel%20V.%20Kakade%2C%20Sham%20M.%20Towards%20generalization%20and%20simplicity%20in%20continuous%20control%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rajeswaran%2C%20Aravind%20Lowrey%2C%20Kendall%20Todorov%2C%20Emanuel%20V.%20Kakade%2C%20Sham%20M.%20Towards%20generalization%20and%20simplicity%20in%20continuous%20control%202017"
+        },
+        {
+            "id": "46",
+            "entry": "[46] Marc\u2019Aurelio Ranzato, Sumit Chopra, Michael Auli, and Wojciech Zaremba. Sequence level training with recurrent neural networks. ICLR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ranzato%2C%20Marc%E2%80%99Aurelio%20Chopra%2C%20Sumit%20Auli%2C%20Michael%20Zaremba%2C%20Wojciech%20Sequence%20level%20training%20with%20recurrent%20neural%20networks%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ranzato%2C%20Marc%E2%80%99Aurelio%20Chopra%2C%20Sumit%20Auli%2C%20Michael%20Zaremba%2C%20Wojciech%20Sequence%20level%20training%20with%20recurrent%20neural%20networks%202016"
+        },
+        {
+            "id": "47",
+            "entry": "[47] St\u00e9phane Ross, Geoffrey Gordon, and Drew Bagnell. A reduction of imitation learning and structured prediction to no-regret online learning. In Proceedings of the fourteenth international conference on artificial intelligence and statistics, pages 627\u2013635, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ross%2C%20St%C3%A9phane%20Gordon%2C%20Geoffrey%20Bagnell%2C%20Drew%20A%20reduction%20of%20imitation%20learning%20and%20structured%20prediction%20to%20no-regret%20online%20learning%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ross%2C%20St%C3%A9phane%20Gordon%2C%20Geoffrey%20Bagnell%2C%20Drew%20A%20reduction%20of%20imitation%20learning%20and%20structured%20prediction%20to%20no-regret%20online%20learning%202011"
+        },
+        {
+            "id": "48",
+            "entry": "[48] Nicolas Le Roux. Tighter bounds lead to improved classifiers. ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Roux%2C%20Nicolas%20Le%20Tighter%20bounds%20lead%20to%20improved%20classifiers%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Roux%2C%20Nicolas%20Le%20Tighter%20bounds%20lead%20to%20improved%20classifiers%202017"
+        },
+        {
+            "id": "49",
+            "entry": "[49] Tom Schaul, John Quan, Ioannis Antonoglou, and David Silver. Prioritized experience replay. ICLR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schaul%2C%20Tom%20Quan%2C%20John%20Antonoglou%2C%20Ioannis%20Silver%2C%20David%20Prioritized%20experience%20replay%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schaul%2C%20Tom%20Quan%2C%20John%20Antonoglou%2C%20Ioannis%20Silver%2C%20David%20Prioritized%20experience%20replay%202016"
+        },
+        {
+            "id": "50",
+            "entry": "[50] John Schulman, Sergey Levine, Pieter Abbeel, Michael Jordan, and Philipp Moritz. Trust region policy optimization. ICML, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Schulman%2C%20John%20Levine%2C%20Sergey%20Abbeel%2C%20Pieter%20Jordan%2C%20Michael%20Trust%20region%20policy%20optimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Schulman%2C%20John%20Levine%2C%20Sergey%20Abbeel%2C%20Pieter%20Jordan%2C%20Michael%20Trust%20region%20policy%20optimization%202015"
+        },
+        {
+            "id": "51",
+            "entry": "[51] John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov. Proximal policy optimization algorithms. arXiv:1707.06347, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.06347"
+        },
+        {
+            "id": "52",
+            "entry": "[52] David Silver, Aja Huang, Chris J Maddison, Arthur Guez, Laurent Sifre, George Van Den Driessche, Julian Schrittwieser, Ioannis Antonoglou, Veda Panneershelvam, Marc Lanctot, et al. Mastering the game of go with deep neural networks and tree search. Nature, 529(7587):484\u2013489, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silver%2C%20David%20Huang%2C%20Aja%20Maddison%2C%20Chris%20J.%20Guez%2C%20Arthur%20Mastering%20the%20game%20of%20go%20with%20deep%20neural%20networks%20and%20tree%20search%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silver%2C%20David%20Huang%2C%20Aja%20Maddison%2C%20Chris%20J.%20Guez%2C%20Arthur%20Mastering%20the%20game%20of%20go%20with%20deep%20neural%20networks%20and%20tree%20search%202016"
+        },
+        {
+            "id": "53",
+            "entry": "[53] David Silver, Julian Schrittwieser, Karen Simonyan, Ioannis Antonoglou, Aja Huang, Arthur Guez, Thomas Hubert, Lucas Baker, Matthew Lai, Adrian Bolton, et al. Mastering the game of go without human knowledge. Nature, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Silver%2C%20David%20Schrittwieser%2C%20Julian%20Simonyan%2C%20Karen%20Antonoglou%2C%20Ioannis%20Mastering%20the%20game%20of%20go%20without%20human%20knowledge%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Silver%2C%20David%20Schrittwieser%2C%20Julian%20Simonyan%2C%20Karen%20Antonoglou%2C%20Ioannis%20Mastering%20the%20game%20of%20go%20without%20human%20knowledge%202017"
+        },
+        {
+            "id": "54",
+            "entry": "[54] Yibo Sun, Duyu Tang, Nan Duan, Jianshu Ji, Guihong Cao, Xiaocheng Feng, Bing Qin, Ting Liu, and Ming Zhou. Semantic parsing with syntax-and table-aware sql generation. arXiv:1804.08338, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1804.08338"
+        },
+        {
+            "id": "55",
+            "entry": "[55] Haoran Tang, Rein Houthooft, Davis Foote, Adam Stooke, OpenAI Xi Chen, Yan Duan, John Schulman, Filip DeTurck, and Pieter Abbeel. #exploration: A study of count-based exploration for deep reinforcement learning. In I. Guyon, U. V. Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, Advances in Neural Information Processing Systems 30, pages 2753\u20132762. Curran Associates, Inc., 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tang%2C%20Haoran%20Houthooft%2C%20Rein%20Foote%2C%20Davis%20Stooke%2C%20Adam%20%23exploration%3A%20A%20study%20of%20count-based%20exploration%20for%20deep%20reinforcement%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tang%2C%20Haoran%20Houthooft%2C%20Rein%20Foote%2C%20Davis%20Stooke%2C%20Adam%20%23exploration%3A%20A%20study%20of%20count-based%20exploration%20for%20deep%20reinforcement%20learning%202017"
+        },
+        {
+            "id": "56",
+            "entry": "[56] Chenglong Wang, Marc Brockschmidt, and Rishabh Singh. Pointing out SQL queries from text. ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Chenglong%20Brockschmidt%2C%20Marc%20Singh%2C%20Rishabh%20Pointing%20out%20SQL%20queries%20from%20text%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Chenglong%20Brockschmidt%2C%20Marc%20Singh%2C%20Rishabh%20Pointing%20out%20SQL%20queries%20from%20text%202018"
+        },
+        {
+            "id": "57",
+            "entry": "[57] Ziyu Wang, Victor Bapst, Nicolas Heess, Volodymyr Mnih, Remi Munos, Koray Kavukcuoglu, and Nando de Freitas. Sample efficient actor-critic with experience replay. ICLR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Ziyu%20Bapst%2C%20Victor%20Heess%2C%20Nicolas%20Mnih%2C%20Volodymyr%20Sample%20efficient%20actor-critic%20with%20experience%20replay%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Ziyu%20Bapst%2C%20Victor%20Heess%2C%20Nicolas%20Mnih%2C%20Volodymyr%20Sample%20efficient%20actor-critic%20with%20experience%20replay%202017"
+        },
+        {
+            "id": "58",
+            "entry": "[58] Ronald J. Williams. Simple statistical gradient-following algorithms for connectionist reinforcement learning. Machine Learning, pages 229\u2013256, 1992.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%2C%20Ronald%20J.%20Simple%20statistical%20gradient-following%20algorithms%20for%20connectionist%20reinforcement%20learning%201992",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Williams%2C%20Ronald%20J.%20Simple%20statistical%20gradient-following%20algorithms%20for%20connectionist%20reinforcement%20learning%201992"
+        },
+        {
+            "id": "59",
+            "entry": "[59] Cathy Wu, Aravind Rajeswaran, Yan Duan, Vikash Kumar, Alexandre M Bayen, Sham Kakade, Igor Mordatch, and Pieter Abbeel. Variance reduction for policy gradient with action-dependent factorized baselines. ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20Cathy%20Rajeswaran%2C%20Aravind%20Duan%2C%20Yan%20Kumar%2C%20Vikash%20Variance%20reduction%20for%20policy%20gradient%20with%20action-dependent%20factorized%20baselines%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20Cathy%20Rajeswaran%2C%20Aravind%20Duan%2C%20Yan%20Kumar%2C%20Vikash%20Variance%20reduction%20for%20policy%20gradient%20with%20action-dependent%20factorized%20baselines%202018"
+        },
+        {
+            "id": "60",
+            "entry": "[60] Yonghui Wu, Mike Schuster, Zhifeng Chen, Quoc V. Le, Mohammad Norouzi, Wolfgang Macherey, Maxim Krikun, Yuan Cao, Qin Gao, Klaus Macherey, Jeff Klingner, Apurva Shah, Melvin Johnson, Xiaobing Liu, Lukasz Kaiser, Stephan Gouws, Yoshikiyo Kato, Taku Kudo, Hideto Kazawa, Keith Stevens, George Kurian, Nishant Patil, Wei Wang, Cliff Young, Jason Smith, Jason Riesa, Alex Rudnick, Oriol Vinyals, Greg Corrado, Macduff Hughes, and Jeffrey Dean. Google\u2019s neural machine translation system: Bridging the gap between human and machine translation. arXiv:1609.08144, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1609.08144"
+        },
+        {
+            "id": "61",
+            "entry": "[61] Xiaojun Xu, Chang Liu, and Dawn Song. SQLNet: Generating structured queries from natural language without reinforcement learning. ICLR, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xu%2C%20Xiaojun%20Liu%2C%20Chang%20Song%2C%20Dawn%20SQLNet%3A%20Generating%20structured%20queries%20from%20natural%20language%20without%20reinforcement%20learning%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xu%2C%20Xiaojun%20Liu%2C%20Chang%20Song%2C%20Dawn%20SQLNet%3A%20Generating%20structured%20queries%20from%20natural%20language%20without%20reinforcement%20learning%202018"
+        },
+        {
+            "id": "62",
+            "entry": "[62] Wen-tau Yih, Matthew Richardson, Chris Meek, Ming-Wei Chang, and Jina Suh. The value of semantic parse labeling for knowledge base question answering. ACL, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yih%2C%20Wen-tau%20Richardson%2C%20Matthew%20Meek%2C%20Chris%20Chang%2C%20Ming-Wei%20The%20value%20of%20semantic%20parse%20labeling%20for%20knowledge%20base%20question%20answering%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yih%2C%20Wen-tau%20Richardson%2C%20Matthew%20Meek%2C%20Chris%20Chang%2C%20Ming-Wei%20The%20value%20of%20semantic%20parse%20labeling%20for%20knowledge%20base%20question%20answering%202016"
+        },
+        {
+            "id": "63",
+            "entry": "[63] Tao Yu, Zifan Li, Zilin Zhang, Rui Zhang, and Dragomir Radev. Typesql: Knowledge-based type-aware neural text-to-sql generation. arXiv:1804.09769, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1804.09769"
+        },
+        {
+            "id": "64",
+            "entry": "[64] Wojciech Zaremba and Ilya Sutskever. Reinforcement learning neural turing machines. arXiv:1505.00521, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1505.00521"
+        },
+        {
+            "id": "65",
+            "entry": "[65] M. Zelle and R. J. Mooney. Learning to parse database queries using inductive logic programming. Association for the Advancement of Artificial Intelligence (AAAI), pages 1050\u20131055, 1996.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zelle%2C%20M.%20Mooney%2C%20R.J.%20Learning%20to%20parse%20database%20queries%20using%20inductive%20logic%20programming%201996",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zelle%2C%20M.%20Mooney%2C%20R.J.%20Learning%20to%20parse%20database%20queries%20using%20inductive%20logic%20programming%201996"
+        },
+        {
+            "id": "66",
+            "entry": "[66] L. S. Zettlemoyer and M. Collins. Learning to map sentences to logical form: Structured classification with probabilistic categorial grammars. Uncertainty in Artificial Intelligence (UAI), pages 658\u2013666, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zettlemoyer%2C%20L.S.%20Collins%2C%20M.%20Learning%20to%20map%20sentences%20to%20logical%20form%3A%20Structured%20classification%20with%20probabilistic%20categorial%20grammars%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zettlemoyer%2C%20L.S.%20Collins%2C%20M.%20Learning%20to%20map%20sentences%20to%20logical%20form%3A%20Structured%20classification%20with%20probabilistic%20categorial%20grammars%202005"
+        },
+        {
+            "id": "67",
+            "entry": "[67] Yuchen Zhang, Panupong Pasupat, and Percy Liang. Macro grammars and holistic triggering for efficient semantic parsing. ACL, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20Yuchen%20Pasupat%2C%20Panupong%20Liang%2C%20Percy%20Macro%20grammars%20and%20holistic%20triggering%20for%20efficient%20semantic%20parsing%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhang%2C%20Yuchen%20Pasupat%2C%20Panupong%20Liang%2C%20Percy%20Macro%20grammars%20and%20holistic%20triggering%20for%20efficient%20semantic%20parsing%202017"
+        },
+        {
+            "id": "68",
+            "entry": "[68] Victor Zhong, Caiming Xiong, and Richard Socher. Seq2sql: Generating structured queries from natural language using reinforcement learning. arXiv:1709.00103, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1709.00103"
+        },
+        {
+            "id": "69",
+            "entry": "[69] Barret Zoph and Quoc V Le. Neural architecture search with reinforcement learning. ICLR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zoph%2C%20Barret%20Le%2C%20Quoc%20V.%20Neural%20architecture%20search%20with%20reinforcement%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zoph%2C%20Barret%20Le%2C%20Quoc%20V.%20Neural%20architecture%20search%20with%20reinforcement%20learning%202016"
+        },
+        {
+            "id": "70",
+            "entry": "[70] Barret Zoph and Quoc V Le. Neural architecture search with reinforcement learning. arXiv:1611.01578, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.01578"
+        },
+        {
+            "id": "71",
+            "entry": "[71] Barret Zoph, Vijay Vasudevan, Jonathon Shlens, and Quoc V Le. Learning transferable architectures for scalable image recognition. arXiv:1707.07012, 2017. ",
+            "arxiv_url": "https://arxiv.org/pdf/1707.07012"
+        }
+    ]
+}

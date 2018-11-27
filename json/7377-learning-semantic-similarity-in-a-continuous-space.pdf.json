@@ -1,0 +1,388 @@
+{
+    "filename": "7377-learning-semantic-similarity-in-a-continuous-space.pdf",
+    "metadata": {
+        "title": "Learning semantic similarity in a continuous space",
+        "author": "Michel Deudon",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7377-learning-semantic-similarity-in-a-continuous-space.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We address the problem of learning semantic representation of questions to measure similarity between pairs as a continuous distance metric. Our work naturally extends Word Mover\u2019s Distance (WMD) [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>] by representing text documents as normal distributions instead of bags of embedded words. Our learned metric measures the dissimilarity between two questions as the minimum amount of distance the intent (hidden representation) of one question needs to \"travel\" to match the intent of another question. We first learn to repeat, reformulate questions to infer intents as normal distributions with a deep generative model [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>] (variational auto encoder). Semantic similarity between pairs is then learned discriminatively as an optimal transport distance metric (Wasserstein 2) with our novel variational siamese framework. Among known models that can read sentences individually, our proposed framework achieves competitive results on Quora duplicate questions dataset. Our work sheds light on how deep generative models can approximate distributions (semantic representations) to effectively measure semantic similarity with meaningful distance metrics from Information Theory."
+    },
+    "keywords": [
+        {
+            "term": "long short-term memory",
+            "url": "https://en.wikipedia.org/wiki/long_short-term_memory"
+        },
+        {
+            "term": "Recurrent Neural Networks",
+            "url": "https://en.wikipedia.org/wiki/Recurrent_Neural_Network"
+        },
+        {
+            "term": "normal distribution",
+            "url": "https://en.wikipedia.org/wiki/normal_distribution"
+        },
+        {
+            "term": "distance metric",
+            "url": "https://en.wikipedia.org/wiki/distance_metric"
+        },
+        {
+            "term": "Convolutional Neural Networks",
+            "url": "https://en.wikipedia.org/wiki/Convolutional_Neural_Network"
+        },
+        {
+            "term": "continuous space",
+            "url": "https://en.wikipedia.org/wiki/continuous_space"
+        },
+        {
+            "term": "Natural Language Processing",
+            "url": "https://en.wikipedia.org/wiki/Natural_Language_Processing"
+        },
+        {
+            "term": "semantic similarity",
+            "url": "https://en.wikipedia.org/wiki/semantic_similarity"
+        }
+    ],
+    "highlights": [
+        "Semantics is the study of meaning in language, used for understanding human expressions",
+        "Measuring semantic similarity between pairs of sentences is an important problem in Natural Language Processing (NLP), for conversation systems, knowledge deduplication [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>] or image captioning evaluation metrics [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>] for example",
+        "We consider the case where the prediction is binary, a problem known as paraphrase detection or semantic question matching in Natural Language Processing",
+        "Normal representation of sentences can be learned with Variational Auto Encoders (VAE), a class of deep generative models first proposed in [<a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>] [<a class=\"ref-link\" id=\"c35\" href=\"#r35\">35</a>]",
+        "Instead of capturing the relationships among multiple words and phrases in a single vector, we decompose the representation of a sentence in a mean vector and a diagonal covariance matrix to account for uncertainty and ambiguity in language",
+        "Our novel approach to measure semantic similarity between pair of sentences is based on these continuous probabilistic representations"
+    ],
+    "key_statements": [
+        "Semantics is the study of meaning in language, used for understanding human expressions",
+        "Measuring semantic similarity between pairs of sentences is an important problem in Natural Language Processing (NLP), for conversation systems, knowledge deduplication [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>] or image captioning evaluation metrics [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>] for example",
+        "We consider the case where the prediction is binary, a problem known as paraphrase detection or semantic question matching in Natural Language Processing",
+        "Normal representation of sentences can be learned with Variational Auto Encoders (VAE), a class of deep generative models first proposed in [<a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>] [<a class=\"ref-link\" id=\"c35\" href=\"#r35\">35</a>]",
+        "To learn and measure semantic similarity with our variational siamese network, we express the previous metrics \"element-wise\" and feed the resulting tensor as input to a Multi-Layer Perceptron \u03c8 that predicts the degree of similarity of the corresponding pair",
+        "Learning semantic similarity is a difficult task and our variational siamese network fails with randomly initialized intents",
+        "Instead of capturing the relationships among multiple words and phrases in a single vector, we decompose the representation of a sentence in a mean vector and a diagonal covariance matrix to account for uncertainty and ambiguity in language",
+        "Our novel approach to measure semantic similarity between pair of sentences is based on these continuous probabilistic representations",
+        "Our code is made publicly available on github.2"
+    ],
+    "summary": [
+        "Semantics is the study of meaning in language, used for understanding human expressions.",
+        "Siamese networks are a type of neural networks that appeared in vision and have recently been extensively studied to learn representations of sentences and predict similarity or entailment between pairs as an end-to-end differentiable task [<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>] [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>] [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>] [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>].",
+        "We learn and measure semantic similarity between question pairs with our novel variational siamese framework, which differs from the original one ([<a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>] [<a class=\"ref-link\" id=\"c4\" href=\"#r4\">4</a>] [<a class=\"ref-link\" id=\"c23\" href=\"#r23\">23</a>] [<a class=\"ref-link\" id=\"c24\" href=\"#r24\">24</a>] [<a class=\"ref-link\" id=\"c25\" href=\"#r25\">25</a>]) as our hidden representations consist of two Gaussian distributions instead of two vectors.",
+        "The following presents how unsupervised neural auto encoders and variants can learn meaningful sentence representations, given a sequence of embedded words.",
+        "Normal representation of sentences can be learned with Variational Auto Encoders (VAE), a class of deep generative models first proposed in [<a class=\"ref-link\" id=\"c34\" href=\"#r34\">34</a>] [<a class=\"ref-link\" id=\"c35\" href=\"#r35\">35</a>].",
+        "S be a pair of semantically equivalent sentences, represented as two sequences of word vectors, s = w1, w2, ...w|s|, wi \u2208 Rd. Our goal is to predict s given s.",
+        "The second term enforces the hidden distributions to match a prior (a standard normal) to fill the semantic space (\u03c3 > 0) and smoothly measure similarity as an optimal transport distance metric.",
+        "To learn and measure semantic similarity with our variational siamese network, we express the previous metrics \"element-wise\" and feed the resulting tensor as input to a Multi-Layer Perceptron \u03c8 that predicts the degree of similarity of the corresponding pair.",
+        "Learning semantic similarity is a difficult task and our variational siamese network fails with randomly initialized intents.",
+        "Generative pretraining helps our variational siamese network learn semantic representations and semantic similarity.",
+        "Our best results (2 first lines in Table 3) were obtained when further retraining a VAE discriminatively with our variational siamese network to learn a similarity metric in a latent space.",
+        "Our model learns, with the Wasserstein-2 tensor, how to optimally transform a continuous distribution into another one to measure semantic similarity.",
+        "Reformulate with our generative framework, this factorization encodes semantic information in an explicit sentence representation for various downstream applications.",
+        "Our novel approach to measure semantic similarity between pair of sentences is based on these continuous probabilistic representations.",
+        "Our variational siamese network extends Word Mover\u2019s Distance [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>] to continuous representation of sentences.",
+        "We plan to train/test our model on other datasets, such as PARANMT-50M [<a class=\"ref-link\" id=\"c51\" href=\"#r51\">51</a>], a dataset of more than 50M English paraphrase pairs, and further propose a similar framework for the task of natural language inference [<a class=\"ref-link\" id=\"c20\" href=\"#r20\">20</a>] [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>] to predict if a sentence entails or contradicts another one."
+    ],
+    "headline": "We address the problem of learning semantic representation of questions to measure similarity between pairs as a continuous distance metric",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Matt Kusner, Yu Sun, Nicholas Kolkin, and Kilian Weinberger. From word embeddings to document distances. In International Conference on Machine Learning (ICML), pages 957\u2013966, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kusner%2C%20Matt%20Sun%2C%20Yu%20Kolkin%2C%20Nicholas%20Weinberger%2C%20Kilian%20From%20word%20embeddings%20to%20document%20distances%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kusner%2C%20Matt%20Sun%2C%20Yu%20Kolkin%2C%20Nicholas%20Weinberger%2C%20Kilian%20From%20word%20embeddings%20to%20document%20distances%202015"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Samuel R Bowman, Luke Vilnis, Oriol Vinyals, Andrew M Dai, Rafal Jozefowicz, and Samy Bengio. Generating sentences from a continuous space. In Proceedings of the 20th SIGNLL Conference on Computational Natural Language Learning (CoNLL), pages 10\u201321, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bowman%2C%20Samuel%20R.%20Vilnis%2C%20Luke%20Vinyals%2C%20Oriol%20Dai%2C%20Andrew%20M.%20Generating%20sentences%20from%20a%20continuous%20space%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bowman%2C%20Samuel%20R.%20Vilnis%2C%20Luke%20Vinyals%2C%20Oriol%20Dai%2C%20Andrew%20M.%20Generating%20sentences%20from%20a%20continuous%20space%202016"
+        },
+        {
+            "id": "3",
+            "entry": "[3] Elkhan Dadashov, Sukolsak Sakshuwong, and Katherine Yu. Quora question duplication. Stanford CS224n report.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dadashov%2C%20Elkhan%20Sakshuwong%2C%20Sukolsak%20Yu%2C%20Katherine%20Quora%20question%20duplication"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Adrian Sanborn and Jacek Skryzalin. Deep learning for semantic similarity. CS224d report, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sanborn%2C%20Adrian%20Skryzalin%2C%20Jacek%20Deep%20learning%20for%20semantic%20similarity%202015"
+        },
+        {
+            "id": "5",
+            "entry": "[5] Tomas Mikolov, Kai Chen, Greg Corrado, and Jeffrey Dean. Efficient estimation of word representations in vector space. In International Conference on Learning Representations (ICLR) Workshop, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mikolov%2C%20Tomas%20Chen%2C%20Kai%20Corrado%2C%20Greg%20Dean%2C%20Jeffrey%20Efficient%20estimation%20of%20word%20representations%20in%20vector%20space%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mikolov%2C%20Tomas%20Chen%2C%20Kai%20Corrado%2C%20Greg%20Dean%2C%20Jeffrey%20Efficient%20estimation%20of%20word%20representations%20in%20vector%20space%202013"
+        },
+        {
+            "id": "6",
+            "entry": "[6] Jeffrey Pennington, Richard Socher, and Christopher Manning. Glove: Global vectors for word representation. In Proceedings of the conference on Empirical Methods in Natural Language Processing (EMNLP), pages 1532\u20131543, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pennington%2C%20Jeffrey%20Socher%2C%20Richard%20Manning%2C%20Christopher%20Glove%3A%20Global%20vectors%20for%20word%20representation%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pennington%2C%20Jeffrey%20Socher%2C%20Richard%20Manning%2C%20Christopher%20Glove%3A%20Global%20vectors%20for%20word%20representation%202014"
+        },
+        {
+            "id": "7",
+            "entry": "[7] Gaspard Monge. M\u00e9moire sur la th\u00e9orie des d\u00e9blais et des remblais. Histoire de l\u2019Acad\u00e9mie Royale des Sciences de Paris, 1781.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Monge%2C%20Gaspard%20M%C3%A9moire%20sur%20la%20th%C3%A9orie%20des%20d%C3%A9blais%20et%20des%20remblais.%20Histoire%20de%20l%E2%80%99Acad%C3%A9mie%20Royale%20des%20Sciences%201781"
+        },
+        {
+            "id": "8",
+            "entry": "[8] L Kantorovich. On the transfer of masses (in russian). In Doklady Akademii Nauk, volume 37, pages 227\u2013229, 1942.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kantorovich%2C%20L.%20On%20the%20transfer%20of%20masses%20%28in%20russian%29%201942",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kantorovich%2C%20L.%20On%20the%20transfer%20of%20masses%20%28in%20russian%29%201942"
+        },
+        {
+            "id": "9",
+            "entry": "[9] C\u00e9dric Villani. Topics in optimal transportation (graduate studies in mathematics, vol. 58). 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Villani%2C%20C%C3%A9dric%20Topics%20in%20optimal%20transportation%20%28graduate%20studies%20in%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Villani%2C%20C%C3%A9dric%20Topics%20in%20optimal%20transportation%20%28graduate%20studies%20in%202003"
+        },
+        {
+            "id": "10",
+            "entry": "[10] Karen Sparck Jones. A statistical interpretation of term specificity and its application in retrieval. Journal of documentation, 28(1):11\u201321, 1972.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Jones%2C%20Karen%20Sparck%20A%20statistical%20interpretation%20of%20term%20specificity%20and%20its%20application%20in%20retrieval%201972",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Jones%2C%20Karen%20Sparck%20A%20statistical%20interpretation%20of%20term%20specificity%20and%20its%20application%20in%20retrieval%201972"
+        },
+        {
+            "id": "11",
+            "entry": "[11] M Beaulieu, M Gatford, Xiangji Huang, S Robertson, S Walker, and P Williams. Okapi at trec-5. NIST Special Publication SP, pages 143\u2013166, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Beaulieu%2C%20M.%20Gatford%2C%20M.%20Xiangji%20Huang%2C%20S.Robertson%20Walker%2C%20S.%20Okapi%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Beaulieu%2C%20M.%20Gatford%2C%20M.%20Xiangji%20Huang%2C%20S.Robertson%20Walker%2C%20S.%20Okapi%201997"
+        },
+        {
+            "id": "12",
+            "entry": "[12] Sanjeev Arora, Yingyu Liang, and Tengyu Ma. A simple but tough-to-beat baseline for sentence embeddings. In International Conference on Learning Representations (ICLR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Arora%2C%20Sanjeev%20Liang%2C%20Yingyu%20Ma%2C%20Tengyu%20A%20simple%20but%20tough-to-beat%20baseline%20for%20sentence%20embeddings%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Arora%2C%20Sanjeev%20Liang%2C%20Yingyu%20Ma%2C%20Tengyu%20A%20simple%20but%20tough-to-beat%20baseline%20for%20sentence%20embeddings%202017"
+        },
+        {
+            "id": "13",
+            "entry": "[13] Jiaqi Mu, Suma Bhat, and Pramod Viswanath. All-but-the-top: simple and effective postprocessing for word representations. In International Conference on Learning Representations (ICLR), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mu%2C%20Jiaqi%20Bhat%2C%20Suma%20Viswanath%2C%20Pramod%20All-but-the-top%3A%20simple%20and%20effective%20postprocessing%20for%20word%20representations%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mu%2C%20Jiaqi%20Bhat%2C%20Suma%20Viswanath%2C%20Pramod%20All-but-the-top%3A%20simple%20and%20effective%20postprocessing%20for%20word%20representations%202018"
+        },
+        {
+            "id": "14",
+            "entry": "[14] Yoon Kim. Convolutional neural networks for sentence classification. In Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP), pages 1746\u20131751, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kim%2C%20Yoon%20Convolutional%20neural%20networks%20for%20sentence%20classification%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kim%2C%20Yoon%20Convolutional%20neural%20networks%20for%20sentence%20classification%202014"
+        },
+        {
+            "id": "15",
+            "entry": "[15] Mingbo Ma, Liang Huang, Bing Xiang, and Bowen Zhou. Dependency-based convolutional neural networks for sentence embedding. In Proceedings of the 53rd Annual Meeting of the Association for Computational Linguistics and the 7th International Joint Conference on Natural Language Processing, pages 1106\u20131115, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ma%2C%20Mingbo%20Huang%2C%20Liang%20Xiang%2C%20Bing%20Zhou%2C%20Bowen%20Dependency-based%20convolutional%20neural%20networks%20for%20sentence%20embedding%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ma%2C%20Mingbo%20Huang%2C%20Liang%20Xiang%2C%20Bing%20Zhou%2C%20Bowen%20Dependency-based%20convolutional%20neural%20networks%20for%20sentence%20embedding%202015"
+        },
+        {
+            "id": "16",
+            "entry": "[16] Ilya Sutskever, Oriol Vinyals, and Quoc V Le. Sequence to sequence learning with neural networks. In Advances in Nural Information Processing Systems (NIPS), pages 3104\u20133112, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutskever%2C%20Ilya%20Vinyals%2C%20Oriol%20Le%2C%20Quoc%20V.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutskever%2C%20Ilya%20Vinyals%2C%20Oriol%20Le%2C%20Quoc%20V.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014"
+        },
+        {
+            "id": "17",
+            "entry": "[17] Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio. Neural machine translation by jointly learning to align and translate. In International Conference on Learning Representations (ICLR), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bahdanau%2C%20Dzmitry%20Cho%2C%20Kyunghyun%20Bengio%2C%20Yoshua%20Neural%20machine%20translation%20by%20jointly%20learning%20to%20align%20and%20translate%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bahdanau%2C%20Dzmitry%20Cho%2C%20Kyunghyun%20Bengio%2C%20Yoshua%20Neural%20machine%20translation%20by%20jointly%20learning%20to%20align%20and%20translate%202015"
+        },
+        {
+            "id": "18",
+            "entry": "[18] Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, \u0141ukasz Kaiser, and Illia Polosukhin. Attention is all you need. In Advances in Neural Information Processing Systems (NIPS), pages 6000\u20136010, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ashish%20Vaswani%20Noam%20Shazeer%20Niki%20Parmar%20Jakob%20Uszkoreit%20Llion%20Jones%20Aidan%20N%20Gomez%20%C5%81ukasz%20Kaiser%20and%20Illia%20Polosukhin%20Attention%20is%20all%20you%20need%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20NIPS%20pages%2060006010%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ashish%20Vaswani%20Noam%20Shazeer%20Niki%20Parmar%20Jakob%20Uszkoreit%20Llion%20Jones%20Aidan%20N%20Gomez%20%C5%81ukasz%20Kaiser%20and%20Illia%20Polosukhin%20Attention%20is%20all%20you%20need%20In%20Advances%20in%20Neural%20Information%20Processing%20Systems%20NIPS%20pages%2060006010%202017"
+        },
+        {
+            "id": "19",
+            "entry": "[19] Zhouhan Lin, Minwei Feng, Cicero Nogueira dos Santos, Mo Yu, Bing Xiang, Bowen Zhou, and Yoshua Bengio. A structured self-attentive sentence embedding. In International Conference on Learning Representations (ICLR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lin%2C%20Zhouhan%20Feng%2C%20Minwei%20dos%20Santos%2C%20Cicero%20Nogueira%20Yu%2C%20Mo%20and%20Yoshua%20Bengio.%20A%20structured%20self-attentive%20sentence%20embedding%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lin%2C%20Zhouhan%20Feng%2C%20Minwei%20dos%20Santos%2C%20Cicero%20Nogueira%20Yu%2C%20Mo%20and%20Yoshua%20Bengio.%20A%20structured%20self-attentive%20sentence%20embedding%202017"
+        },
+        {
+            "id": "20",
+            "entry": "[20] Samuel R Bowman, Gabor Angeli, Christopher Potts, and Christopher D Manning. A large annotated corpus for learning natural language inference. In Proceedings of the conference on Empirical Methods in Natural Language Processing (EMNLP), page 632\u2013642, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bowman%2C%20Samuel%20R.%20Angeli%2C%20Gabor%20Potts%2C%20Christopher%20Manning%2C%20Christopher%20D.%20A%20large%20annotated%20corpus%20for%20learning%20natural%20language%20inference",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bowman%2C%20Samuel%20R.%20Angeli%2C%20Gabor%20Potts%2C%20Christopher%20Manning%2C%20Christopher%20D.%20A%20large%20annotated%20corpus%20for%20learning%20natural%20language%20inference"
+        },
+        {
+            "id": "21",
+            "entry": "[21] Adina Williams, Nikita Nangia, and Samuel R Bowman. A broad-coverage challenge corpus for sentence understanding through inference. In Proceedings of NAACL-HLT, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Williams%2C%20Adina%20Nangia%2C%20Nikita%20Bowman%2C%20Samuel%20R.%20A%20broad-coverage%20challenge%20corpus%20for%20sentence%20understanding%20through%20inference%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Williams%2C%20Adina%20Nangia%2C%20Nikita%20Bowman%2C%20Samuel%20R.%20A%20broad-coverage%20challenge%20corpus%20for%20sentence%20understanding%20through%20inference%202018"
+        },
+        {
+            "id": "22",
+            "entry": "[22] Yichen Gong, Heng Luo, and Jian Zhang. Natural language inference over interaction space. In International Conference on Learning Representations (ICLR), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gong%2C%20Yichen%20Luo%2C%20Heng%20Zhang%2C%20Jian%20Natural%20language%20inference%20over%20interaction%20space%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gong%2C%20Yichen%20Luo%2C%20Heng%20Zhang%2C%20Jian%20Natural%20language%20inference%20over%20interaction%20space%202018"
+        },
+        {
+            "id": "23",
+            "entry": "[23] Sumit Chopra, Raia Hadsell, and Yann LeCun. Learning a similarity metric discriminatively, with application to face verification. In Proceedings of the IEEE conference on Computer Vision and Pattern Recognition (CVPR), volume 1, pages 539\u2013546, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chopra%2C%20Sumit%20Hadsell%2C%20Raia%20LeCun%2C%20Yann%20Learning%20a%20similarity%20metric%20discriminatively%2C%20with%20application%20to%20face%20verification%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chopra%2C%20Sumit%20Hadsell%2C%20Raia%20LeCun%2C%20Yann%20Learning%20a%20similarity%20metric%20discriminatively%2C%20with%20application%20to%20face%20verification%202005"
+        },
+        {
+            "id": "24",
+            "entry": "[24] Alexis Conneau, Douwe Kiela, Holger Schwenk, Loic Barrault, and Antoine Bordes. Supervised learning of universal sentence representations from natural language inference data. In Proceedings of the conference on Empirical Methods in Natural Language Processing (EMNLP), page 670\u2013680, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Conneau%2C%20Alexis%20Kiela%2C%20Douwe%20Schwenk%2C%20Holger%20Barrault%2C%20Loic%20Supervised%20learning%20of%20universal%20sentence%20representations%20from%20natural%20language%20inference%20data",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Conneau%2C%20Alexis%20Kiela%2C%20Douwe%20Schwenk%2C%20Holger%20Barrault%2C%20Loic%20Supervised%20learning%20of%20universal%20sentence%20representations%20from%20natural%20language%20inference%20data"
+        },
+        {
+            "id": "25",
+            "entry": "[25] Yushi Homma, Stuart Sy, and Christopher Yeh. Detecting duplicate questions with deep learning. Stanford CS224n report.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Homma%2C%20Yushi%20Sy%2C%20Stuart%20Yeh%2C%20Christopher%20Detecting%20duplicate%20questions%20with%20deep%20learning"
+        },
+        {
+            "id": "26",
+            "entry": "[26] Maximilian Nickel and Douwe Kiela. Poincar\u00e9 embeddings for learning hierarchical representations. In Advances in Neural Information Processing Systems (NIPS), pages 6341\u20136350, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nickel%2C%20Maximilian%20Kiela%2C%20Douwe%20Poincar%C3%A9%20embeddings%20for%20learning%20hierarchical%20representations%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nickel%2C%20Maximilian%20Kiela%2C%20Douwe%20Poincar%C3%A9%20embeddings%20for%20learning%20hierarchical%20representations%202017"
+        },
+        {
+            "id": "27",
+            "entry": "[27] Bhuwan Dhingra, Christopher J Shallue, Mohammad Norouzi, Andrew M Dai, and George E Dahl. Embedding text in hyperbolic spaces. In Proceedings of NAACL-HLT, page 59, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Dhingra%2C%20Bhuwan%20Shallue%2C%20Christopher%20J.%20Norouzi%2C%20Mohammad%20Dai%2C%20Andrew%20M.%20and%20George%20E%20Dahl.%20Embedding%20text%20in%20hyperbolic%20spaces%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Dhingra%2C%20Bhuwan%20Shallue%2C%20Christopher%20J.%20Norouzi%2C%20Mohammad%20Dai%2C%20Andrew%20M.%20and%20George%20E%20Dahl.%20Embedding%20text%20in%20hyperbolic%20spaces%202018"
+        },
+        {
+            "id": "28",
+            "entry": "[28] Luke Vilnis and Andrew McCallum. Word representations via gaussian embedding. In International Conference on Learning Representations (ICLR), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vilnis%2C%20Luke%20McCallum%2C%20Andrew%20Word%20representations%20via%20gaussian%20embedding%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vilnis%2C%20Luke%20McCallum%2C%20Andrew%20Word%20representations%20via%20gaussian%20embedding%202015"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Jiwei Li, Minh-Thang Luong, and Dan Jurafsky. A hierarchical neural autoencoder for paragraphs and documents. In Proceedings of the 53rd Annual Meeting of the Association for Computational Linguistics and the 7th International Joint Conference on Natural Language Processing, pages 1106\u20131115, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Li%2C%20Jiwei%20Luong%2C%20Minh-Thang%20Jurafsky%2C%20Dan%20A%20hierarchical%20neural%20autoencoder%20for%20paragraphs%20and%20documents%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Li%2C%20Jiwei%20Luong%2C%20Minh-Thang%20Jurafsky%2C%20Dan%20A%20hierarchical%20neural%20autoencoder%20for%20paragraphs%20and%20documents%202015"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Felix Hill, Kyunghyun Cho, and Anna Korhonen. Learning distributed representations of sentences from unlabelled data. In Proceedings of NAACL-HLT, pages 1367\u20131377, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hill%2C%20Felix%20Cho%2C%20Kyunghyun%20Korhonen%2C%20Anna%20Learning%20distributed%20representations%20of%20sentences%20from%20unlabelled%20data%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hill%2C%20Felix%20Cho%2C%20Kyunghyun%20Korhonen%2C%20Anna%20Learning%20distributed%20representations%20of%20sentences%20from%20unlabelled%20data%202016"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Sepp Hochreiter and J\u00fcrgen Schmidhuber. Long short-term memory. Neural computation, 9(8):1735\u20131780, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Long%20short-term%20memory%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hochreiter%2C%20Sepp%20Schmidhuber%2C%20J%C3%BCrgen%20Long%20short-term%20memory%201997"
+        },
+        {
+            "id": "32",
+            "entry": "[32] Ryan Kiros, Yukun Zhu, Ruslan R Salakhutdinov, Richard Zemel, Raquel Urtasun, Antonio Torralba, and Sanja Fidler. Skip-thought vectors. In Advances in Neural Information Processing Systems (NIPS), pages 3294\u20133302, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kiros%2C%20Ryan%20Zhu%2C%20Yukun%20Salakhutdinov%2C%20Ruslan%20R.%20Zemel%2C%20Richard%20Skip-thought%20vectors%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kiros%2C%20Ryan%20Zhu%2C%20Yukun%20Salakhutdinov%2C%20Ruslan%20R.%20Zemel%2C%20Richard%20Skip-thought%20vectors%202015"
+        },
+        {
+            "id": "33",
+            "entry": "[33] Marco Marelli, Stefano Menini, Marco Baroni, Luisa Bentivogli, Raffaella Bernardi, and Roberto Zamparelli. A sick cure for the evaluation of compositional distributional semantic models. In LREC, pages 216\u2013223, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Marelli%2C%20Marco%20Menini%2C%20Stefano%20Baroni%2C%20Marco%20Bentivogli%2C%20Luisa%20A%20sick%20cure%20for%20the%20evaluation%20of%20compositional%20distributional%20semantic%20models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Marelli%2C%20Marco%20Menini%2C%20Stefano%20Baroni%2C%20Marco%20Bentivogli%2C%20Luisa%20A%20sick%20cure%20for%20the%20evaluation%20of%20compositional%20distributional%20semantic%20models%202014"
+        },
+        {
+            "id": "34",
+            "entry": "[34] Diederik P Kingma and Max Welling. Auto-encoding variational bayes. In International Conference on Learning Representations (ICLR), 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Welling%2C%20Max%20Auto-encoding%20variational%20bayes%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Welling%2C%20Max%20Auto-encoding%20variational%20bayes%202014"
+        },
+        {
+            "id": "35",
+            "entry": "[35] Danilo Jimenez Rezende, Shakir Mohamed, and Daan Wierstra. Stochastic backpropagation and approximate inference in deep generative models. In Proceedings of the 31st International Conference on Machine Learning, PMLR 32(2), pages 1278\u20131286, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rezende%2C%20Danilo%20Jimenez%20Mohamed%2C%20Shakir%20Wierstra%2C%20Daan%20Stochastic%20backpropagation%20and%20approximate%20inference%20in%20deep%20generative%20models%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rezende%2C%20Danilo%20Jimenez%20Mohamed%2C%20Shakir%20Wierstra%2C%20Daan%20Stochastic%20backpropagation%20and%20approximate%20inference%20in%20deep%20generative%20models%202014"
+        },
+        {
+            "id": "36",
+            "entry": "[36] Yishu Miao, Lei Yu, and Phil Blunsom. Neural variational inference for text processing. In International Conference on Machine Learning (ICML), pages 1727\u20131736, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Miao%2C%20Yishu%20Yu%2C%20Lei%20Blunsom%2C%20Phil%20Neural%20variational%20inference%20for%20text%20processing%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Miao%2C%20Yishu%20Yu%2C%20Lei%20Blunsom%2C%20Phil%20Neural%20variational%20inference%20for%20text%20processing%202016"
+        },
+        {
+            "id": "37",
+            "entry": "[37] Dinghan Shen, Yizhe Zhang, Ricardo Henao, Qinliang Su, and Lawrence Carin. Deconvolutional latentvariable model for text sequence matching. In the Thirty-Second AAAI Conference on Artificial Intelligence (AAAI-18), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shen%2C%20Dinghan%20Zhang%2C%20Yizhe%20Henao%2C%20Ricardo%20Su%2C%20Qinliang%20Deconvolutional%20latentvariable%20model%20for%20text%20sequence%20matching%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shen%2C%20Dinghan%20Zhang%2C%20Yizhe%20Henao%2C%20Ricardo%20Su%2C%20Qinliang%20Deconvolutional%20latentvariable%20model%20for%20text%20sequence%20matching%202018"
+        },
+        {
+            "id": "38",
+            "entry": "[38] Jonas Mueller, David Gifford, and Tommi Jaakkola. Sequence to better sequence: continuous revision of combinatorial structures. In International Conference on Machine Learning (ICML), pages 2536\u20132544, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mueller%2C%20Jonas%20Gifford%2C%20David%20Jaakkola%2C%20Tommi%20Sequence%20to%20better%20sequence%3A%20continuous%20revision%20of%20combinatorial%20structures%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mueller%2C%20Jonas%20Gifford%2C%20David%20Jaakkola%2C%20Tommi%20Sequence%20to%20better%20sequence%3A%20continuous%20revision%20of%20combinatorial%20structures%202017"
+        },
+        {
+            "id": "39",
+            "entry": "[39] John Wieting, Mohit Bansal, Kevin Gimpel, and Karen Livescu. Towards universal paraphrastic sentence embeddings. In International Conference on Learning Representations (ICLR), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wieting%2C%20John%20Bansal%2C%20Mohit%20Gimpel%2C%20Kevin%20Livescu%2C%20Karen%20Towards%20universal%20paraphrastic%20sentence%20embeddings%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wieting%2C%20John%20Bansal%2C%20Mohit%20Gimpel%2C%20Kevin%20Livescu%2C%20Karen%20Towards%20universal%20paraphrastic%20sentence%20embeddings%202016"
+        },
+        {
+            "id": "40",
+            "entry": "[40] Juri Ganitkevitch, Benjamin Van Durme, and Chris Callison-Burch. Ppdb: The paraphrase database. In Proceedings of NAACL-HLT, pages 758\u2013764, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ganitkevitch%2C%20Juri%20Durme%2C%20Benjamin%20Van%20Callison-Burch%2C%20Chris%20Ppdb%3A%20The%20paraphrase%20database%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Ganitkevitch%2C%20Juri%20Durme%2C%20Benjamin%20Van%20Callison-Burch%2C%20Chris%20Ppdb%3A%20The%20paraphrase%20database%202013"
+        },
+        {
+            "id": "41",
+            "entry": "[41] Jaume Verg\u00e9s-Llah\u00ed and Alberto Sanfeliu. Evaluation of distances between color image segmentations. Pattern Recognition and Image Analysis, pages 13\u201325, 2005.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Verg%C3%A9s-Llah%C3%AD%2C%20Jaume%20Sanfeliu%2C%20Alberto%20Evaluation%20of%20distances%20between%20color%20image%20segmentations%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Verg%C3%A9s-Llah%C3%AD%2C%20Jaume%20Sanfeliu%2C%20Alberto%20Evaluation%20of%20distances%20between%20color%20image%20segmentations%202005"
+        },
+        {
+            "id": "42",
+            "entry": "[42] Mart\u00edn Abadi, Paul Barham, Jianmin Chen, Zhifeng Chen, Andy Davis, Jeffrey Dean, Matthieu Devin, Sanjay Ghemawat, Geoffrey Irving, Michael Isard, et al. Tensorflow: A system for large-scale machine learning. In OSDI, volume 16, pages 265\u2013283, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Abadi%2C%20Mart%C3%ADn%20Barham%2C%20Paul%20Chen%2C%20Jianmin%20Chen%2C%20Zhifeng%20Tensorflow%3A%20A%20system%20for%20large-scale%20machine%20learning%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Abadi%2C%20Mart%C3%ADn%20Barham%2C%20Paul%20Chen%2C%20Jianmin%20Chen%2C%20Zhifeng%20Tensorflow%3A%20A%20system%20for%20large-scale%20machine%20learning%202016"
+        },
+        {
+            "id": "43",
+            "entry": "[43] Radim Rehurek and Petr Sojka. Software Framework for Topic Modelling with Large Corpora. In Proceedings of the LREC 2010 Workshop on New Challenges for NLP Frameworks, pages 45\u201350, Valletta, Malta, May 2010. ELRA. http://is.muni.cz/publication/884893/en.",
+            "url": "http://is.muni.cz/publication/884893/en",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rehurek%2C%20Radim%20Sojka%2C%20Petr%20Software%20Framework%20for%20Topic%20Modelling%20with%20Large%20Corpora%202010-05"
+        },
+        {
+            "id": "44",
+            "entry": "[44] Steven Bird, Ewan Klein, and Edward Loper. Natural language processing with Python: analyzing text with the natural language toolkit. \" O\u2019Reilly Media, Inc.\", 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bird%2C%20Steven%20Klein%2C%20Ewan%20Loper%2C%20Edward%20Natural%20language%20processing%20with%20Python%3A%20analyzing%20text%20with%20the%20natural%20language%20toolkit.%20%22%20O%E2%80%99Reilly%20Media%2C%20Inc.%22%202009"
+        },
+        {
+            "id": "45",
+            "entry": "[45] Xavier Glorot and Yoshua Bengio. Understanding the difficulty of training deep feedforward neural networks. In Proceedings of the thirteenth international conference on artificial intelligence and statistics, pages 249\u2013256, 2010.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Glorot%2C%20Xavier%20Bengio%2C%20Yoshua%20Understanding%20the%20difficulty%20of%20training%20deep%20feedforward%20neural%20networks%202010",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Glorot%2C%20Xavier%20Bengio%2C%20Yoshua%20Understanding%20the%20difficulty%20of%20training%20deep%20feedforward%20neural%20networks%202010"
+        },
+        {
+            "id": "46",
+            "entry": "[46] Diederik P Kingma and Jimmy Ba. Adam: A method for stochastic optimization. In International Conference on Learning Representations (ICLR), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kingma%2C%20Diederik%20P.%20Ba%2C%20Jimmy%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kingma%2C%20Diederik%20P.%20Ba%2C%20Jimmy%20Adam%3A%20A%20method%20for%20stochastic%20optimization%202015"
+        },
+        {
+            "id": "47",
+            "entry": "[47] Zhiguo Wang, Wael Hamza, and Radu Florian. Bilateral multi-perspective matching for natural language sentences. In Proceedings of the Twenty-Sixth International Joint Conference on Artificial Intelligence (IJCAI), pages 4144\u20134150, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20Zhiguo%20Hamza%2C%20Wael%20Florian%2C%20Radu%20Bilateral%20multi-perspective%20matching%20for%20natural%20language%20sentences%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20Zhiguo%20Hamza%2C%20Wael%20Florian%2C%20Radu%20Bilateral%20multi-perspective%20matching%20for%20natural%20language%20sentences%202017"
+        },
+        {
+            "id": "48",
+            "entry": "[48] Gaurav Singh Tomar, Thyago Duque, Oscar T\u00e4ckstr\u00f6m, Jakob Uszkoreit, and Dipanjan Das. Neural paraphrase identification of questions with noisy pretraining. In Proceedings of the 1st Workshop on Subword and Character Level Models in NLP, page 142\u2013147, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Neural%20paraphrase%20identification%20of%20questions%20with%20noisy%20pretraining",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Neural%20paraphrase%20identification%20of%20questions%20with%20noisy%20pretraining"
+        },
+        {
+            "id": "49",
+            "entry": "[49] Dinghan Shen, Guoyin Wang, Wenlin Wang, Martin Renqiang Min, Qinliang Su, Yizhe Zhang, Chunyuan Li, Ricardo Henao, and Lawrence Carin. Baseline needs more love: On simple word-embedding-based models and associated pooling mechanisms. In Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics, 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Shen%2C%20Dinghan%20Wang%2C%20Guoyin%20Wang%2C%20Wenlin%20Min%2C%20Martin%20Renqiang%20Baseline%20needs%20more%20love%3A%20On%20simple%20word-embedding-based%20models%20and%20associated%20pooling%20mechanisms%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Shen%2C%20Dinghan%20Wang%2C%20Guoyin%20Wang%2C%20Wenlin%20Min%2C%20Martin%20Renqiang%20Baseline%20needs%20more%20love%3A%20On%20simple%20word-embedding-based%20models%20and%20associated%20pooling%20mechanisms%202018"
+        },
+        {
+            "id": "50",
+            "entry": "[50] David M Blei, Andrew Y Ng, and Michael I Jordan. Latent dirichlet allocation. Journal of Machine Learning Research, 3(Jan):993\u20131022, 2003.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Blei%2C%20David%20M.%20Andrew%20Y%20Ng%2C%20and%20Michael%20I%20Jordan.%20Latent%20dirichlet%20allocation%202003",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Blei%2C%20David%20M.%20Andrew%20Y%20Ng%2C%20and%20Michael%20I%20Jordan.%20Latent%20dirichlet%20allocation%202003"
+        },
+        {
+            "id": "51",
+            "entry": "[51] John Wieting and Kevin Gimpel. Paranmt-50m: Pushing the limits of paraphrastic sentence embeddings with millions of machine translations. In Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics, volume 1, pages 451\u2013462, 2018. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wieting%2C%20John%20Gimpel%2C%20Kevin%20Paranmt-%2050m%3A%20Pushing%20the%20limits%20of%20paraphrastic%20sentence%20embeddings%20with%20millions%20of%20machine%20translations%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wieting%2C%20John%20Gimpel%2C%20Kevin%20Paranmt-%2050m%3A%20Pushing%20the%20limits%20of%20paraphrastic%20sentence%20embeddings%20with%20millions%20of%20machine%20translations%202018"
+        }
+    ]
+}

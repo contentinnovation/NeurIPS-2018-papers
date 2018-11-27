@@ -1,0 +1,401 @@
+{
+    "filename": "7592-speaker-follower-models-for-vision-and-language-navigation.pdf",
+    "metadata": {
+        "title": "Speaker-Follower Models for Vision-and-Language Navigation",
+        "author": "Daniel Fried\u22171, Ronghang Hu\u22171, Volkan Cirik\u22172, Anna Rohrbach1, Jacob Andreas1, Louis-Philippe Morency2, Taylor Berg-Kirkpatrick2, Kate Saenko3, Dan Klein\u2217\u22171, Trevor Darrell\u2217\u22171",
+        "date": 2018,
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7592-speaker-follower-models-for-vision-and-language-navigation.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "Navigation guided by natural language instructions presents a challenging reasoning problem for instruction followers. Natural language instructions typically identify only a few high-level decisions and landmarks rather than complete lowlevel motor behaviors; much of the missing information must be inferred based on perceptual context. In machine learning settings, this is doubly challenging: it is difficult to collect enough annotated data to enable learning of this reasoning process from scratch, and also difficult to implement the reasoning process using generic sequence models. Here we describe an approach to vision-and-language navigation that addresses both these issues with an embedded speaker model. We use this speaker model to (1) synthesize new instructions for data augmentation and to (2) implement pragmatic reasoning, which evaluates how well candidate action sequences explain an instruction. Both steps are supported by a panoramic action space that reflects the granularity of human-generated instructions. Experiments show that all three components of this approach\u2014speaker-driven data augmentation, pragmatic reasoning and panoramic action space\u2014dramatically improve the performance of a baseline instruction follower, more than doubling the success rate over the best existing approach on a standard benchmark."
+    },
+    "keywords": [
+        {
+            "term": "neural machine translation",
+            "url": "https://en.wikipedia.org/wiki/neural_machine_translation"
+        },
+        {
+            "term": "success rate",
+            "url": "https://en.wikipedia.org/wiki/success_rate"
+        }
+    ],
+    "highlights": [
+        "In the vision-and-language navigation task [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>], an agent is placed in a realistic environment, and provided a natural language instruction such as \u201cGo down the stairs, go slight left at the bottom and go through door, take an immediate left and enter the bathroom, stop just inside in front of the sink\u201d",
+        "We report the oracle success rate (OSR), measuring success rate at the closest point to the goal that the follower has visited along the route, allowing the agent to overshoot the goal without being penalized",
+        "We begin with a baseline (Row 1 of Table 1), which uses only a follower model with a non-panoramic action space at both training and test time, which is equivalent to the student-forcing model in [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>].2",
+        "The language-and-vision navigation task presents a pair of challenging reasoning problems: in language, because agents must interpret instructions in a changing environmental context; and in vision, because of the tight coupling between local perception and long-term decision-making",
+        "The comparatively poor performance of the baseline sequence-to-sequence model for instruction following suggests that more powerful modeling tools are needed to meet these challenges",
+        "We have introduced such a tool, showing that a follower model for vision-and-language navigation is substantially improved by carefully structuring the action space and integrating an explicit model of a speaker that predicts how navigation routes are described"
+    ],
+    "key_statements": [
+        "In the vision-and-language navigation task [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>], an agent is placed in a realistic environment, and provided a natural language instruction such as \u201cGo down the stairs, go slight left at the bottom and go through door, take an immediate left and enter the bathroom, stop just inside in front of the sink\u201d",
+        "The vision-and-language navigation task requires the agent to actively interact with the environment to find a path to the goal following the natural language instruction",
+        "Both follower and speaker are supported by the panoramic action space in Sec. 3.3 that reflects the high-level granularity of the navigational instructions (Figure 3).\n3.1",
+        "We report the oracle success rate (OSR), measuring success rate at the closest point to the goal that the follower has visited along the route, allowing the agent to overshoot the goal without being penalized",
+        "We begin with a baseline (Row 1 of Table 1), which uses only a follower model with a non-panoramic action space at both training and test time, which is equivalent to the student-forcing model in [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>].2",
+        "Comparing Row 1 against Row 2 in Table 1, we see that adding the augmented data improves success rate (SR) from 40.3% to 46.8% on validation seen and from 19.9% to 24.6% on validation unseen, respectively. This higher relative gain on unseen environments shows that the follower can learn from the speaker-annotated routes to better generalize to new scenes",
+        "The language-and-vision navigation task presents a pair of challenging reasoning problems: in language, because agents must interpret instructions in a changing environmental context; and in vision, because of the tight coupling between local perception and long-term decision-making",
+        "The comparatively poor performance of the baseline sequence-to-sequence model for instruction following suggests that more powerful modeling tools are needed to meet these challenges",
+        "We have introduced such a tool, showing that a follower model for vision-and-language navigation is substantially improved by carefully structuring the action space and integrating an explicit model of a speaker that predicts how navigation routes are described",
+        "We believe that these results point toward further opportunities for improvements in instruction following by modeling the global structure of navigation behaviors and the pragmatic contexts in which they occur"
+    ],
+    "summary": [
+        "In the vision-and-language navigation task [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>], an agent is placed in a realistic environment, and provided a natural language instruction such as \u201cGo down the stairs, go slight left at the bottom and go through door, take an immediate left and enter the bathroom, stop just inside in front of the sink\u201d.",
+        "We incorporate the speaker both at training time and at test time, where it works together with the learned instruction follower model to solve the navigation task.",
+        "The approach most relevant to our work is the SEQ4 model [<a class=\"ref-link\" id=\"c27\" href=\"#r27\">27</a>], which applies semi-supervision to a navigation task by sampling new environments and maps, and training an autoencoder to reconstruct routes, using language as a latent variable.",
+        "The vision-and-language navigation task requires the agent to actively interact with the environment to find a path to the goal following the natural language instruction.",
+        "The speaker produces synthetic navigation instructions for novel sampled routes in the training environments, which are used as additional supervision for the follower, as described in Sec. 3.1 (Figure 2 (b)).",
+        "Both follower and speaker are supported by the panoramic action space in Sec. 3.3 that reflects the high-level granularity of the navigational instructions (Figure 3).",
+        "Following previous work on pragmatic language generation and interpretation [<a class=\"ref-link\" id=\"c46\" href=\"#r46\">46</a>, <a class=\"ref-link\" id=\"c3\" href=\"#r3\">3</a>, <a class=\"ref-link\" id=\"c35\" href=\"#r35\">35</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>], we use a rescoring procedure: produce candidate route interpretations for a given instruction using the base follower model, and rescore these routes using the base speaker model (Figure 2(c)).",
+        "Our pragmatic follower produces a route for a given instruction by obtaining K candidate paths from the base follower using a search procedure described below, chooses the highest scoring path under a combination of the follower and speaker model probabilities: arg max PS(d | r)\u03bb \u00b7 PF (r | d)(1\u2212\u03bb)",
+        "In the baseline without using synthetic instructions, we train follower and speaker models using the human-generated instructions for routes present in the training set.",
+        "We begin with a baseline (Row 1 of Table 1), which uses only a follower model with a non-panoramic action space at both training and test time, which is equivalent to the student-forcing model in [<a class=\"ref-link\" id=\"c1\" href=\"#r1\">1</a>].2",
+        "This higher relative gain on unseen environments shows that the follower can learn from the speaker-annotated routes to better generalize to new scenes.",
+        "\u201cours\u201d shows our performance using the route selected by our pragmatic inference procedure, while \u201cours\u201d uses a modified inference procedure for submission to the Vision-and-Language Navigation Challenge (See Sec. E in the supplementary material for details).",
+        "We have introduced such a tool, showing that a follower model for vision-and-language navigation is substantially improved by carefully structuring the action space and integrating an explicit model of a speaker that predicts how navigation routes are described.",
+        "We believe that these results point toward further opportunities for improvements in instruction following by modeling the global structure of navigation behaviors and the pragmatic contexts in which they occur"
+    ],
+    "headline": "We describe an approach to vision-and-language navigation that addresses both these issues with an embedded speaker model",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] P. Anderson, Q. Wu, D. Teney, J. Bruce, M. Johnson, N. S\u00fcnderhauf, I. Reid, S. Gould, and A. v. d. Hengel. Vision-and-language navigation: Interpreting visually-grounded navigation instructions in real environments. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Anderson%2C%20P.%20Wu%2C%20Q.%20Teney%2C%20D.%20Bruce%2C%20J.%20Vision-and-language%20navigation%3A%20Interpreting%20visually-grounded%20navigation%20instructions%20in%20real%20environments%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Anderson%2C%20P.%20Wu%2C%20Q.%20Teney%2C%20D.%20Bruce%2C%20J.%20Vision-and-language%20navigation%3A%20Interpreting%20visually-grounded%20navigation%20instructions%20in%20real%20environments%202018"
+        },
+        {
+            "id": "2",
+            "entry": "[2] J. Andreas and D. Klein. Alignment-based compositional semantics for instruction following. In Proceedings of the Conference on Empirical Methods in Natural Language Processing (EMNLP), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Andreas%2C%20J.%20Klein%2C%20D.%20Alignment-based%20compositional%20semantics%20for%20instruction%20following%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Andreas%2C%20J.%20Klein%2C%20D.%20Alignment-based%20compositional%20semantics%20for%20instruction%20following%202015"
+        },
+        {
+            "id": "3",
+            "entry": "[3] J. Andreas and D. Klein. Reasoning about pragmatics with neural listeners and speakers. In Proceedings of the Conference on Empirical Methods in Natural Language Processing (EMNLP), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Andreas%2C%20J.%20Klein%2C%20D.%20Reasoning%20about%20pragmatics%20with%20neural%20listeners%20and%20speakers%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Andreas%2C%20J.%20Klein%2C%20D.%20Reasoning%20about%20pragmatics%20with%20neural%20listeners%20and%20speakers%202016"
+        },
+        {
+            "id": "4",
+            "entry": "[4] Y. Artzi and L. Zettlemoyer. Weakly supervised learning of semantic parsers for mapping instructions to actions. Transactions of the Association for Computational Linguistics, 1(1):49\u201362, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Artzi%2C%20Y.%20Zettlemoyer%2C%20L.%20Weakly%20supervised%20learning%20of%20semantic%20parsers%20for%20mapping%20instructions%20to%20actions%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Artzi%2C%20Y.%20Zettlemoyer%2C%20L.%20Weakly%20supervised%20learning%20of%20semantic%20parsers%20for%20mapping%20instructions%20to%20actions%202013"
+        },
+        {
+            "id": "5",
+            "entry": "[5] D. Bahdanau, K. Cho, and Y. Bengio. Neural machine translation by jointly learning to align and translate. In Proceedings of the International Conference on Learning Representations (ICLR), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Bahdanau%2C%20D.%20Cho%2C%20K.%20Bengio%2C%20Y.%20Neural%20machine%20translation%20by%20jointly%20learning%20to%20align%20and%20translate%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Bahdanau%2C%20D.%20Cho%2C%20K.%20Bengio%2C%20Y.%20Neural%20machine%20translation%20by%20jointly%20learning%20to%20align%20and%20translate%202015"
+        },
+        {
+            "id": "6",
+            "entry": "[6] A. Blum and T. Mitchell. Combining labeled and unlabeled data with co-training. In Proceedings of the eleventh annual conference on Computational learning theory, pages 92\u2013100. ACM, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Blum%2C%20A.%20Mitchell%2C%20T.%20Combining%20labeled%20and%20unlabeled%20data%20with%20co-training%201998",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Blum%2C%20A.%20Mitchell%2C%20T.%20Combining%20labeled%20and%20unlabeled%20data%20with%20co-training%201998"
+        },
+        {
+            "id": "7",
+            "entry": "[7] S. Branavan, H. Chen, L. S. Zettlemoyer, and R. Barzilay. Reinforcement learning for mapping instructions to actions. In Proceedings of the Annual Meeting of the Association for Computational Linguistics (ACL), pages 82\u201390. Association for Computational Linguistics, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Branavan%2C%20S.%20Chen%2C%20H.%20Zettlemoyer%2C%20L.S.%20Barzilay%2C%20R.%20Reinforcement%20learning%20for%20mapping%20instructions%20to%20actions%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Branavan%2C%20S.%20Chen%2C%20H.%20Zettlemoyer%2C%20L.S.%20Barzilay%2C%20R.%20Reinforcement%20learning%20for%20mapping%20instructions%20to%20actions%202009"
+        },
+        {
+            "id": "8",
+            "entry": "[8] A. Chang, A. Dai, T. Funkhouser, M. Halber, M. Niessner, M. Savva, S. Song, A. Zeng, and Y. Zhang. Matterport3d: Learning from rgb-d data in indoor environments. International Conference on 3D Vision (3DV), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chang%2C%20A.%20Dai%2C%20A.%20Funkhouser%2C%20T.%20Halber%2C%20M.%20Matterport3d%3A%20Learning%20from%20rgb-d%20data%20in%20indoor%20environments%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chang%2C%20A.%20Dai%2C%20A.%20Funkhouser%2C%20T.%20Halber%2C%20M.%20Matterport3d%3A%20Learning%20from%20rgb-d%20data%20in%20indoor%20environments%202017"
+        },
+        {
+            "id": "9",
+            "entry": "[9] D. L. Chen. Fast online lexicon learning for grounded language acquisition. In Proceedings of the 50th Annual Meeting of the Association for Computational Linguistics: Long Papers - Volume 1, ACL \u201912, pages 430\u2013439, Stroudsburg, PA, USA, 2012. Association for Computational Linguistics.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20D.L.%20Fast%20online%20lexicon%20learning%20for%20grounded%20language%20acquisition%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20D.L.%20Fast%20online%20lexicon%20learning%20for%20grounded%20language%20acquisition%202012"
+        },
+        {
+            "id": "10",
+            "entry": "[10] K. Chen, R. Kovvuri, and R. Nevatia. Query-guided regression network with context policy for phrase grounding. In Proceedings of the IEEE International Conference on Computer Vision (ICCV), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20K.%20Kovvuri%2C%20R.%20Nevatia%2C%20R.%20Query-guided%20regression%20network%20with%20context%20policy%20for%20phrase%20grounding%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20K.%20Kovvuri%2C%20R.%20Nevatia%2C%20R.%20Query-guided%20regression%20network%20with%20context%20policy%20for%20phrase%20grounding%202017"
+        },
+        {
+            "id": "11",
+            "entry": "[11] V. Cirik, T. Berg-Kirkpatrick, and L.-P. Morency. Using syntax to ground referring expressions in natural images. In 32nd AAAI Conference on Artificial Intelligence (AAAI-18), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cirik%2C%20V.%20Berg-Kirkpatrick%2C%20T.%20Morency%2C%20L.-P.%20Using%20syntax%20to%20ground%20referring%20expressions%20in%20natural%20images%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cirik%2C%20V.%20Berg-Kirkpatrick%2C%20T.%20Morency%2C%20L.-P.%20Using%20syntax%20to%20ground%20referring%20expressions%20in%20natural%20images%202018"
+        },
+        {
+            "id": "12",
+            "entry": "[12] R. Cohn-Gordon, N. Goodman, and C. Potts. Pragmatically informative image captioning with characterlevel reference. In Proceedings of the Conference of the North American Chapter of the Association for Computational Linguistics (NAACL), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Cohn-Gordon%2C%20R.%20Goodman%2C%20N.%20Potts%2C%20C.%20Pragmatically%20informative%20image%20captioning%20with%20characterlevel%20reference%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Cohn-Gordon%2C%20R.%20Goodman%2C%20N.%20Potts%2C%20C.%20Pragmatically%20informative%20image%20captioning%20with%20characterlevel%20reference%202018"
+        },
+        {
+            "id": "13",
+            "entry": "[13] A. Das, S. Datta, G. Gkioxari, S. Lee, D. Parikh, and D. Batra. Embodied question answering. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Das%2C%20A.%20Datta%2C%20S.%20Gkioxari%2C%20G.%20Lee%2C%20S.%20Embodied%20question%20answering%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Das%2C%20A.%20Datta%2C%20S.%20Gkioxari%2C%20G.%20Lee%2C%20S.%20Embodied%20question%20answering%202018"
+        },
+        {
+            "id": "14",
+            "entry": "[14] M. C. Frank and N. D. Goodman. Predicting pragmatic reasoning in language games. Science, 336(6084):998\u2013998, 2012.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Frank%2C%20M.C.%20Goodman%2C%20N.D.%20Predicting%20pragmatic%20reasoning%20in%20language%20games%202012",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Frank%2C%20M.C.%20Goodman%2C%20N.D.%20Predicting%20pragmatic%20reasoning%20in%20language%20games%202012"
+        },
+        {
+            "id": "15",
+            "entry": "[15] M. C. Frank, N. D. Goodman, P. Lai, and J. B. Tenenbaum. Informative communication in word production and word learning. In Proceedings of the Annual Conference of the Cognitive Science Society, 2009.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Frank%2C%20M.C.%20Goodman%2C%20N.D.%20Lai%2C%20P.%20Tenenbaum%2C%20J.B.%20Informative%20communication%20in%20word%20production%20and%20word%20learning%202009",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Frank%2C%20M.C.%20Goodman%2C%20N.D.%20Lai%2C%20P.%20Tenenbaum%2C%20J.B.%20Informative%20communication%20in%20word%20production%20and%20word%20learning%202009"
+        },
+        {
+            "id": "16",
+            "entry": "[16] D. Fried, J. Andreas, and D. Klein. Unified pragmatic models for generating and following instructions. In Proceedings of the Conference of the North American Chapter of the Association for Computational Linguistics (NAACL), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Fried%2C%20D.%20Andreas%2C%20J.%20Klein%2C%20D.%20Unified%20pragmatic%20models%20for%20generating%20and%20following%20instructions%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Fried%2C%20D.%20Andreas%2C%20J.%20Klein%2C%20D.%20Unified%20pragmatic%20models%20for%20generating%20and%20following%20instructions%202018"
+        },
+        {
+            "id": "17",
+            "entry": "[17] N. D. Goodman and A. Stuhlm\u00fcller. Knowledge and implicature: Modeling language understanding as social cognition. Topics in cognitive science, 5(1):173\u2013184, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goodman%2C%20N.D.%20Stuhlm%C3%BCller%2C%20A.%20Knowledge%20and%20implicature%3A%20Modeling%20language%20understanding%20as%20social%20cognition%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goodman%2C%20N.D.%20Stuhlm%C3%BCller%2C%20A.%20Knowledge%20and%20implicature%3A%20Modeling%20language%20understanding%20as%20social%20cognition%202013"
+        },
+        {
+            "id": "18",
+            "entry": "[18] H. P. Grice. Logic and conversation. In P. Cole and J. L. Morgan, editors, Syntax and Semantics: Vol. 3: Speech Acts, pages 41\u201358. Academic Press, San Diego, CA, 1975.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Grice%2C%20H.P.%20Logic%20and%20conversation%201975",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Grice%2C%20H.P.%20Logic%20and%20conversation%201975"
+        },
+        {
+            "id": "19",
+            "entry": "[19] C. Gulcehre, O. Firat, K. Xu, K. Cho, L. Barrault, H.-C. Lin, F. Bougares, H. Schwenk, and Y. Bengio. On using monolingual corpora in neural machine translation. arXiv preprint arXiv:1503.03535, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1503.03535"
+        },
+        {
+            "id": "20",
+            "entry": "[20] K. Guu, P. Pasupat, E. Z. Liu, and P. Liang. From language to programs: Bridging reinforcement learning and maximum marginal likelihood. In Proceedings of the Annual Meeting of the Association for Computational Linguistics (ACL), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Guu%2C%20K.%20Pasupat%2C%20P.%20Liu%2C%20E.Z.%20Liang%2C%20P.%20From%20language%20to%20programs%3A%20Bridging%20reinforcement%20learning%20and%20maximum%20marginal%20likelihood%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Guu%2C%20K.%20Pasupat%2C%20P.%20Liu%2C%20E.Z.%20Liang%2C%20P.%20From%20language%20to%20programs%3A%20Bridging%20reinforcement%20learning%20and%20maximum%20marginal%20likelihood%202017"
+        },
+        {
+            "id": "21",
+            "entry": "[21] K. He, X. Zhang, S. Ren, and J. Sun. Deep residual learning for image recognition. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), pages 770\u2013778, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%202016"
+        },
+        {
+            "id": "22",
+            "entry": "[22] K. M. Hermann, F. Hill, S. Green, F. Wang, R. Faulkner, H. Soyer, D. Szepesvari, W. M. Czarnecki, M. Jaderberg, D. Teplyashin, M. Wainwright, C. Apps, D. Hassabis, and P. Blunsom. Grounded language learning in a simulated 3d world. CoRR, abs/1706.06551, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1706.06551"
+        },
+        {
+            "id": "23",
+            "entry": "[23] S. Hochreiter and J. Schmidhuber. Long short-term memory. Neural computation, 9(8):1735\u20131780, 1997.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hochreiter%2C%20S.%20Schmidhuber%2C%20J.%20Long%20short-term%20memory%201997",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hochreiter%2C%20S.%20Schmidhuber%2C%20J.%20Long%20short-term%20memory%201997"
+        },
+        {
+            "id": "24",
+            "entry": "[24] R. Hu, M. Rohrbach, J. Andreas, T. Darrell, and K. Saenko. Modeling relationships in referential expressions with compositional modular networks. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hu%2C%20R.%20Rohrbach%2C%20M.%20Andreas%2C%20J.%20Darrell%2C%20T.%20Modeling%20relationships%20in%20referential%20expressions%20with%20compositional%20modular%20networks%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hu%2C%20R.%20Rohrbach%2C%20M.%20Andreas%2C%20J.%20Darrell%2C%20T.%20Modeling%20relationships%20in%20referential%20expressions%20with%20compositional%20modular%20networks%202017"
+        },
+        {
+            "id": "25",
+            "entry": "[25] R. Hu, M. Rohrbach, and T. Darrell. Segmentation from natural language expressions. In Proceedings of the European Conference on Computer Vision (ECCV), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hu%2C%20R.%20Rohrbach%2C%20M.%20Darrell%2C%20T.%20Segmentation%20from%20natural%20language%20expressions%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hu%2C%20R.%20Rohrbach%2C%20M.%20Darrell%2C%20T.%20Segmentation%20from%20natural%20language%20expressions%202016"
+        },
+        {
+            "id": "26",
+            "entry": "[26] R. Hu, H. Xu, M. Rohrbach, J. Feng, K. Saenko, and T. Darrell. Natural language object retrieval. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Hu%2C%20R.%20Xu%2C%20H.%20Rohrbach%2C%20M.%20Feng%2C%20J.%20Natural%20language%20object%20retrieval%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Hu%2C%20R.%20Xu%2C%20H.%20Rohrbach%2C%20M.%20Feng%2C%20J.%20Natural%20language%20object%20retrieval%202016"
+        },
+        {
+            "id": "27",
+            "entry": "[27] T. Kocisk\u00fd, G. Melis, E. Grefenstette, C. Dyer, W. Ling, P. Blunsom, and K. M. Hermann. Semantic parsing with semi-supervised sequential autoencoders. In Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing, pages 1078\u20131087, Austin, Texas, November 2016. Association for Computational Linguistics.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kocisk%C3%BD%2C%20T.%20Melis%2C%20G.%20Grefenstette%2C%20E.%20Dyer%2C%20C.%20Semantic%20parsing%20with%20semi-supervised%20sequential%20autoencoders%202016-11",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kocisk%C3%BD%2C%20T.%20Melis%2C%20G.%20Grefenstette%2C%20E.%20Dyer%2C%20C.%20Semantic%20parsing%20with%20semi-supervised%20sequential%20autoencoders%202016-11"
+        },
+        {
+            "id": "28",
+            "entry": "[28] C. Liu, Z. Lin, X. Shen, J. Yang, X. Lu, and A. Yuille. Recurrent multimodal interaction for referring image segmentation. In Proceedings of the IEEE International Conference on Computer Vision (ICCV), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Liu%2C%20C.%20Lin%2C%20Z.%20Shen%2C%20X.%20Yang%2C%20J.%20Recurrent%20multimodal%20interaction%20for%20referring%20image%20segmentation%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Liu%2C%20C.%20Lin%2C%20Z.%20Shen%2C%20X.%20Yang%2C%20J.%20Recurrent%20multimodal%20interaction%20for%20referring%20image%20segmentation%202017"
+        },
+        {
+            "id": "29",
+            "entry": "[29] R. Long, P. Pasupat, and P. Liang. Simpler context-dependent logical forms via model projections. In Proceedings of the Annual Meeting of the Association for Computational Linguistics (ACL), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Long%2C%20R.%20Pasupat%2C%20P.%20Liang%2C%20P.%20Simpler%20context-dependent%20logical%20forms%20via%20model%20projections%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Long%2C%20R.%20Pasupat%2C%20P.%20Liang%2C%20P.%20Simpler%20context-dependent%20logical%20forms%20via%20model%20projections%202016"
+        },
+        {
+            "id": "30",
+            "entry": "[30] R. Luo and G. Shakhnarovich. Comprehension-guided referring expressions. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Luo%2C%20R.%20Shakhnarovich%2C%20G.%20Comprehension-guided%20referring%20expressions%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Luo%2C%20R.%20Shakhnarovich%2C%20G.%20Comprehension-guided%20referring%20expressions%202017"
+        },
+        {
+            "id": "31",
+            "entry": "[31] J. Mao, H. Jonathan, A. Toshev, O. Camburu, A. Yuille, and K. Murphy. Generation and comprehension of unambiguous object descriptions. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mao%2C%20J.%20Jonathan%2C%20H.%20Toshev%2C%20A.%20Camburu%2C%20O.%20Generation%20and%20comprehension%20of%20unambiguous%20object%20descriptions%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mao%2C%20J.%20Jonathan%2C%20H.%20Toshev%2C%20A.%20Camburu%2C%20O.%20Generation%20and%20comprehension%20of%20unambiguous%20object%20descriptions%202016"
+        },
+        {
+            "id": "32",
+            "entry": "[32] D. McClosky, E. Charniak, and M. Johnson. Effective self-training for parsing. In Proceedings of the main conference on human language technology conference of the North American Chapter of the Association of Computational Linguistics, pages 152\u2013159. Association for Computational Linguistics, 2006.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=McClosky%2C%20D.%20Charniak%2C%20E.%20Johnson%2C%20M.%20Effective%20self-training%20for%20parsing%202006",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=McClosky%2C%20D.%20Charniak%2C%20E.%20Johnson%2C%20M.%20Effective%20self-training%20for%20parsing%202006"
+        },
+        {
+            "id": "33",
+            "entry": "[33] H. Mei, M. Bansal, and M. Walter. Listen, attend, and walk: Neural mapping of navigational instructions to action sequences. In Proceedings of the Conference on Artificial Intelligence (AAAI), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mei%2C%20H.%20Bansal%2C%20M.%20Listen%2C%20M.Walter%20attend%20and%20walk%3A%20Neural%20mapping%20of%20navigational%20instructions%20to%20action%20sequences%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mei%2C%20H.%20Bansal%2C%20M.%20Listen%2C%20M.Walter%20attend%20and%20walk%3A%20Neural%20mapping%20of%20navigational%20instructions%20to%20action%20sequences%202016"
+        },
+        {
+            "id": "34",
+            "entry": "[34] D. Misra, J. Langford, and Y. Artzi. Mapping instructions and visual observations to actions with reinforcement learning. In Proceedings of the Conference on Empirical Methods in Natural Language Processing (EMNLP), 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Misra%2C%20D.%20Langford%2C%20J.%20Artzi%2C%20Y.%20Mapping%20instructions%20and%20visual%20observations%20to%20actions%20with%20reinforcement%20learning%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Misra%2C%20D.%20Langford%2C%20J.%20Artzi%2C%20Y.%20Mapping%20instructions%20and%20visual%20observations%20to%20actions%20with%20reinforcement%20learning%202017"
+        },
+        {
+            "id": "35",
+            "entry": "[35] W. Monroe, R. Hawkins, N. Goodman, and C. Potts. Colors in context: A pragmatic neural model for grounded language understanding. Transactions of the Association for Computational Linguistics, 5:325\u2013338, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Monroe%2C%20W.%20Hawkins%2C%20R.%20Goodman%2C%20N.%20Potts%2C%20C.%20Colors%20in%20context%3A%20A%20pragmatic%20neural%20model%20for%20grounded%20language%20understanding%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Monroe%2C%20W.%20Hawkins%2C%20R.%20Goodman%2C%20N.%20Potts%2C%20C.%20Colors%20in%20context%3A%20A%20pragmatic%20neural%20model%20for%20grounded%20language%20understanding%202017"
+        },
+        {
+            "id": "36",
+            "entry": "[36] V. K. Nagaraja, V. I. Morariu, and L. S. Davis. Modeling context between objects for referring expression understanding. In Proceedings of the European Conference on Computer Vision (ECCV), pages 792\u2013807.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Nagaraja%2C%20V.K.%20Morariu%2C%20V.I.%20Davis%2C%20L.S.%20Modeling%20context%20between%20objects%20for%20referring%20expression%20understanding",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Nagaraja%2C%20V.K.%20Morariu%2C%20V.I.%20Davis%2C%20L.S.%20Modeling%20context%20between%20objects%20for%20referring%20expression%20understanding"
+        },
+        {
+            "id": "37",
+            "entry": "[37] D. Pathak, P. Mahmoudieh, G. Luo, P. Agrawal, D. Chen, Y. Shentu, E. Shelhamer, J. Malik, A. A. Efros, and T. Darrell. Zero-shot visual imitation. arXiv preprint arXiv:1804.08606, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1804.08606"
+        },
+        {
+            "id": "38",
+            "entry": "[38] J. Pennington, R. Socher, and C. Manning. Glove: Global vectors for word representation. In Proceedings of the 2014 conference on empirical methods in natural language processing (EMNLP), pages 1532\u20131543, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pennington%2C%20J.%20Socher%2C%20R.%20Manning%2C%20C.%20Glove%3A%20Global%20vectors%20for%20word%20representation%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Pennington%2C%20J.%20Socher%2C%20R.%20Manning%2C%20C.%20Glove%3A%20Global%20vectors%20for%20word%20representation%202014"
+        },
+        {
+            "id": "39",
+            "entry": "[39] B. Plummer, L. Wang, C. Cervantes, J. Caicedo, J. Hockenmaier, and S. Lazebnik. Flickr30k entities: Collecting region-to-phrase correspondences for richer image-to-sentence models. In Proceedings of the IEEE International Conference on Computer Vision (ICCV), 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Plummer%2C%20B.%20Wang%2C%20L.%20Cervantes%2C%20C.%20Caicedo%2C%20J.%20Flickr30k%20entities%3A%20Collecting%20region-to-phrase%20correspondences%20for%20richer%20image-to-sentence%20models%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Plummer%2C%20B.%20Wang%2C%20L.%20Cervantes%2C%20C.%20Caicedo%2C%20J.%20Flickr30k%20entities%3A%20Collecting%20region-to-phrase%20correspondences%20for%20richer%20image-to-sentence%20models%202015"
+        },
+        {
+            "id": "40",
+            "entry": "[40] I. Radosavovic, P. Doll\u00e1r, R. Girshick, G. Gkioxari, and K. He. Data distillation: Towards omni-supervised learning. arXiv preprint arXiv:1712.04440, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1712.04440"
+        },
+        {
+            "id": "41",
+            "entry": "[41] A. Rohrbach, M. Rohrbach, R. Hu, T. Darrell, and B. Schiele. Grounding of textual phrases in images by reconstruction. In Proceedings of the European Conference on Computer Vision (ECCV), 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rohrbach%2C%20A.%20Rohrbach%2C%20M.%20Hu%2C%20R.%20Darrell%2C%20T.%20Grounding%20of%20textual%20phrases%20in%20images%20by%20reconstruction%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rohrbach%2C%20A.%20Rohrbach%2C%20M.%20Hu%2C%20R.%20Darrell%2C%20T.%20Grounding%20of%20textual%20phrases%20in%20images%20by%20reconstruction%202016"
+        },
+        {
+            "id": "42",
+            "entry": "[42] O. Russakovsky, J. Deng, H. Su, J. Krause, S. Satheesh, S. Ma, Z. Huang, A. Karpathy, A. Khosla, M. Bernstein, et al. Imagenet large scale visual recognition challenge. International Journal of Computer Vision, 115(3):211\u2013252, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Russakovsky%2C%20O.%20Deng%2C%20J.%20Su%2C%20H.%20Krause%2C%20J.%20Imagenet%20large%20scale%20visual%20recognition%20challenge%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Russakovsky%2C%20O.%20Deng%2C%20J.%20Su%2C%20H.%20Krause%2C%20J.%20Imagenet%20large%20scale%20visual%20recognition%20challenge%202015"
+        },
+        {
+            "id": "43",
+            "entry": "[43] H. Scudder. Probability of error of some adaptive pattern-recognition machines. IEEE Transactions on Information Theory, 11(3):363\u2013371, 1965.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Scudder%2C%20H.%20Probability%20of%20error%20of%20some%20adaptive%20pattern-recognition%20machines%201965",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Scudder%2C%20H.%20Probability%20of%20error%20of%20some%20adaptive%20pattern-recognition%20machines%201965"
+        },
+        {
+            "id": "44",
+            "entry": "[44] R. Sennrich, B. Haddow, and A. Birch. Improving neural machine translation models with monolingual data. In Proceedings of the Annual Meeting of the Association for Computational Linguistics (ACL), pages 86\u201396, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sennrich%2C%20R.%20Haddow%2C%20B.%20Birch%2C%20A.%20Improving%20neural%20machine%20translation%20models%20with%20monolingual%20data%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sennrich%2C%20R.%20Haddow%2C%20B.%20Birch%2C%20A.%20Improving%20neural%20machine%20translation%20models%20with%20monolingual%20data%202016"
+        },
+        {
+            "id": "45",
+            "entry": "[45] D. Silver, T. Hubert, J. Schrittwieser, I. Antonoglou, M. Lai, A. Guez, M. Lanctot, L. Sifre, D. Kumaran, T. Graepel, et al. Mastering chess and shogi by self-play with a general reinforcement learning algorithm. arXiv preprint arXiv:1712.01815, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1712.01815"
+        },
+        {
+            "id": "46",
+            "entry": "[46] N. J. Smith, N. Goodman, and M. Frank. Learning and using language via recursive pragmatic reasoning about other agents. In Advances in neural information processing systems, pages 3039\u20133047, 2013.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Smith%2C%20N.J.%20Goodman%2C%20N.%20Frank%2C%20M.%20Learning%20and%20using%20language%20via%20recursive%20pragmatic%20reasoning%20about%20other%20agents%202013",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Smith%2C%20N.J.%20Goodman%2C%20N.%20Frank%2C%20M.%20Learning%20and%20using%20language%20via%20recursive%20pragmatic%20reasoning%20about%20other%20agents%202013"
+        },
+        {
+            "id": "47",
+            "entry": "[47] S. Sukhbaatar, Z. Lin, I. Kostrikov, G. Synnaeve, A. Szlam, and R. Fergus. Intrinsic motivation and automatic curricula via asymmetric self-play. arXiv preprint arXiv:1703.05407, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1703.05407"
+        },
+        {
+            "id": "48",
+            "entry": "[48] I. Sutskever, O. Vinyals, and Q. V. Le. Sequence to sequence learning with neural networks. In Advances in neural information processing systems, pages 3104\u20133112, 2014.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutskever%2C%20I.%20Vinyals%2C%20O.%20Le%2C%20Q.V.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutskever%2C%20I.%20Vinyals%2C%20O.%20Le%2C%20Q.V.%20Sequence%20to%20sequence%20learning%20with%20neural%20networks%202014"
+        },
+        {
+            "id": "49",
+            "entry": "[49] R. S. Sutton and A. G. Barto. Reinforcement learning: An introduction, volume 1. MIT press Cambridge, 1998.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20R.S.%20Barto%2C%20A.G.%20Reinforcement%20learning%3A%20An%20introduction%2C%20volume%201%201998"
+        },
+        {
+            "id": "50",
+            "entry": "[50] R. S. Sutton, D. A. McAllester, S. P. Singh, and Y. Mansour. Policy gradient methods for reinforcement learning with function approximation. In Advances in neural information processing systems, pages 1057\u20131063, 2000.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Sutton%2C%20R.S.%20McAllester%2C%20D.A.%20Singh%2C%20S.P.%20Mansour%2C%20Y.%20Policy%20gradient%20methods%20for%20reinforcement%20learning%20with%20function%20approximation%202000",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Sutton%2C%20R.S.%20McAllester%2C%20D.A.%20Singh%2C%20S.P.%20Mansour%2C%20Y.%20Policy%20gradient%20methods%20for%20reinforcement%20learning%20with%20function%20approximation%202000"
+        },
+        {
+            "id": "51",
+            "entry": "[51] S. Tellex, T. Kollar, S. Dickerson, M. R. Walter, A. G. Banerjee, S. J. Teller, and N. Roy. Understanding natural language commands for robotic navigation and mobile manipulation. In AAAI, volume 1, page 2, 2011.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Tellex%2C%20S.%20Kollar%2C%20T.%20Dickerson%2C%20S.%20Walter%2C%20M.R.%20Understanding%20natural%20language%20commands%20for%20robotic%20navigation%20and%20mobile%20manipulation%202011",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Tellex%2C%20S.%20Kollar%2C%20T.%20Dickerson%2C%20S.%20Walter%2C%20M.R.%20Understanding%20natural%20language%20commands%20for%20robotic%20navigation%20and%20mobile%20manipulation%202011"
+        },
+        {
+            "id": "52",
+            "entry": "[52] A. B. Vasudevan, D. Dai, and L. V. Gool. Object referring in visual scene with spoken language. In Proc. IEEE Winter Conf. on Applications of Computer Vision (WACV), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vasudevan%2C%20A.B.%20Dai%2C%20D.%20Gool%2C%20L.V.%20Object%20referring%20in%20visual%20scene%20with%20spoken%20language%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vasudevan%2C%20A.B.%20Dai%2C%20D.%20Gool%2C%20L.V.%20Object%20referring%20in%20visual%20scene%20with%20spoken%20language%202018"
+        },
+        {
+            "id": "53",
+            "entry": "[53] R. Vedantam, S. Bengio, K. Murphy, D. Parikh, and G. Chechik. Context-aware captions from contextagnostic supervision. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), volume 3, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vedantam%2C%20R.%20Bengio%2C%20S.%20Murphy%2C%20K.%20Parikh%2C%20D.%20Context-aware%20captions%20from%20contextagnostic%20supervision%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vedantam%2C%20R.%20Bengio%2C%20S.%20Murphy%2C%20K.%20Parikh%2C%20D.%20Context-aware%20captions%20from%20contextagnostic%20supervision%202017"
+        },
+        {
+            "id": "54",
+            "entry": "[54] M. Wang, M. Azab, N. Kojima, R. Mihalcea, and J. Deng. Structured matching for phrase localization. In Proceedings of the European Conference on Computer Vision (ECCV), pages 696\u2013711.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wang%2C%20M.%20Azab%2C%20M.%20Kojima%2C%20N.%20Mihalcea%2C%20R.%20Structured%20matching%20for%20phrase%20localization",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wang%2C%20M.%20Azab%2C%20M.%20Kojima%2C%20N.%20Mihalcea%2C%20R.%20Structured%20matching%20for%20phrase%20localization"
+        },
+        {
+            "id": "55",
+            "entry": "[55] X. Wang, W. Xiong, H. Wang, and W. Y. Wang. Look before you leap: Bridging model-free and modelbased reinforcement learning for planned-ahead vision-and-language navigation. arXiv:1803.07729, 2018.",
+            "arxiv_url": "https://arxiv.org/pdf/1803.07729"
+        },
+        {
+            "id": "56",
+            "entry": "[56] T. Weber, S. Racani\u00e8re, D. P. Reichert, L. Buesing, A. Guez, D. J. Rezende, A. P. Badia, O. Vinyals, N. Heess, Y. Li, et al. Imagination-augmented agents for deep reinforcement learning. arXiv preprint arXiv:1707.06203, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1707.06203"
+        },
+        {
+            "id": "57",
+            "entry": "[57] L. Yu, Z. Lin, X. Shen, J. Yang, X. Lu, M. Bansal, and T. L. Berg. Mattnet: Modular attention network for referring expression comprehension. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yu%2C%20L.%20Lin%2C%20Z.%20Shen%2C%20X.%20Yang%2C%20J.%20Mattnet%3A%20Modular%20attention%20network%20for%20referring%20expression%20comprehension%202018",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yu%2C%20L.%20Lin%2C%20Z.%20Shen%2C%20X.%20Yang%2C%20J.%20Mattnet%3A%20Modular%20attention%20network%20for%20referring%20expression%20comprehension%202018"
+        },
+        {
+            "id": "58",
+            "entry": "[58] L. Yu, H. Tan, M. Bansal, and T. L. Berg. A joint speaker-listener-reinforcer model for referring expressions. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yu%2C%20L.%20Tan%2C%20H.%20Bansal%2C%20M.%20Berg%2C%20T.L.%20A%20joint%20speaker-listener-reinforcer%20model%20for%20referring%20expressions%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yu%2C%20L.%20Tan%2C%20H.%20Bansal%2C%20M.%20Berg%2C%20T.L.%20A%20joint%20speaker-listener-reinforcer%20model%20for%20referring%20expressions%202017"
+        }
+    ]
+}

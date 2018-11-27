@@ -1,0 +1,327 @@
+{
+    "filename": "7881-turbo-learning-for-captionbot-and-drawingbot.pdf",
+    "metadata": {
+        "title": "Turbo Learning for CaptionBot and DrawingBot",
+        "author": "Qiuyuan Huang, Pengchuan Zhang, Dapeng Wu, Lei Zhang",
+        "identifiers": {
+            "url": "https://papers.nips.cc/paper/7881-turbo-learning-for-captionbot-and-drawingbot.pdf"
+        },
+        "journal": "Conference on Neural Information Processing Systems",
+        "abstract": "We study in this paper the problems of both image captioning and text-to-image generation, and present a novel turbo learning approach to jointly training an image-to-text generator (a.k.a. CaptionBot) and a text-to-image generator (a.k.a. DrawingBot). The key idea behind the joint training is that image-to-text generation and text-to-image generation as dual problems can form a closed loop to provide informative feedback to each other. Based on such feedback, we introduce a new loss metric by comparing the original input with the output produced by the closed loop. In addition to the old loss metrics used in CaptionBot and DrawingBot, this extra loss metric makes the jointly trained CaptionBot and DrawingBot better than the separately trained CaptionBot and DrawingBot. Furthermore, the turbolearning approach enables semi-supervised learning since the closed loop can provide peudo-labels for unlabeled samples. Experimental results on the COCO dataset demonstrate that the proposed turbo learning can significantly improve the performance of both CaptionBot and DrawingBot by a large margin."
+    },
+    "keywords": [
+        {
+            "term": "long short-term memory",
+            "url": "https://en.wikipedia.org/wiki/long_short-term_memory"
+        },
+        {
+            "term": "dual problem",
+            "url": "https://en.wikipedia.org/wiki/dual_problem"
+        },
+        {
+            "term": "NIPS",
+            "url": "https://en.wikipedia.org/wiki/NIPS"
+        },
+        {
+            "term": "ICLR",
+            "url": "https://en.wikipedia.org/wiki/ICLR"
+        },
+        {
+            "term": "ICML",
+            "url": "https://en.wikipedia.org/wiki/ICML"
+        },
+        {
+            "term": "closed loop",
+            "url": "https://en.wikipedia.org/wiki/closed_loop"
+        },
+        {
+            "term": "language model",
+            "url": "https://en.wikipedia.org/wiki/language_model"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
+        },
+        {
+            "term": "COCO",
+            "url": "https://en.wikipedia.org/wiki/COCO"
+        },
+        {
+            "term": "CVPR",
+            "url": "https://en.wikipedia.org/wiki/CVPR"
+        },
+        {
+            "term": "Convolutional Neural Network",
+            "url": "https://en.wikipedia.org/wiki/Convolutional_Neural_Network"
+        },
+        {
+            "term": "recurrent neural network",
+            "url": "https://en.wikipedia.org/wiki/recurrent_neural_network"
+        }
+    ],
+    "highlights": [
+        "Due to the breakthrough of deep learning, recent years have witnessed great progresses in both computer vision and natural language processing",
+        "After experimenting with pixel-wise loss, Deep Structured Semantic Models (DSSM) loss [<a class=\"ref-link\" id=\"c35\" href=\"#r35\">35</a>], and our \u201cperceptual\u201d-like loss \u03b1(\u02c6Il, I\u2217), we found that our \u201cperceptual\u201d-like loss achieves significantly better performance",
+        "Same as Section 4.4, we use COCO dataset to evaluate the performance of the proposed semi-supervised learning approach for CaptionBot",
+        "We have presented a novel turbo learning approach to jointly training a CaptionBot and a DrawingBot",
+        "The framework leverages the duality of image captioning and text-to-image generation and forms a closed loop, which results in a new loss metric by comparing the initial input with the feedback produced by the whole loop",
+        "Experimental results on the COCO dataset have effectively validated the advantages of the proposed joint learning approach"
+    ],
+    "key_statements": [
+        "Due to the breakthrough of deep learning, recent years have witnessed great progresses in both computer vision and natural language processing",
+        "After experimenting with pixel-wise loss, Deep Structured Semantic Models (DSSM) loss [<a class=\"ref-link\" id=\"c35\" href=\"#r35\">35</a>], and our \u201cperceptual\u201d-like loss \u03b1(\u02c6Il, I\u2217), we found that our \u201cperceptual\u201d-like loss achieves significantly better performance",
+        "Same as Section 4.4, we use COCO dataset to evaluate the performance of the proposed semi-supervised learning approach for CaptionBot",
+        "We have presented a novel turbo learning approach to jointly training a CaptionBot and a DrawingBot",
+        "The framework leverages the duality of image captioning and text-to-image generation and forms a closed loop, which results in a new loss metric by comparing the initial input with the feedback produced by the whole loop",
+        "Experimental results on the COCO dataset have effectively validated the advantages of the proposed joint learning approach"
+    ],
+    "summary": [
+        "Due to the breakthrough of deep learning, recent years have witnessed great progresses in both computer vision and natural language processing.",
+        "Fig. 1 shows the turbo architecture for the proposed joint training of CaptionBot and DrawingBot. As shown in the left hand side of Fig. 1, for a given gold sentence S\u2217, the DrawingBot generates an imageIl; the generated image is supplied to the CaptionBot, which produces a captioning sentence Sl. we use the loss function of pairs (Sl, S\u2217) and (\u02c6Il, I\u2217) to calculate the gradients and update \u03b8draw and \u03b8cap, the parameters of the DrawingBot and CaptionBot, simultaneously.",
+        "Step 1: minimizing Ll. As shown in the left hand side of Fig. 1, for a given gold sentence S\u2217, the DrawingBot generates an imageIl; the generated image is supplied to the CaptionBot, which produces a captioning sentence Sl. we use the following loss function to calculate the gradients and update \u03b8draw and \u03b8cap simultaneously: Ll = \u03b22(\u03b1(\u02c6Il, I\u2217) \u2212 r(Sl)) + (1 \u2212 \u03b22)(\u03b21\u03b1(\u02c6Il, I\u2217)) + (1 \u2212 \u03b21)LXE), (7) Ll = \u03b22(\u03b1(\u02c6Il, I\u2217) \u2212 r(Sl)) + (1 \u2212 \u03b22)(\u03b21\u03b1(\u02c6Il, I\u2217)) + (1 \u2212 \u03b21)Lmix), (8)",
+        "Step 2: minimizing Lr. As shown in the right hand side of Fig. 1, for a given gold image I\u2217, the CaptionBot generates a sentence Sr; the generated sentence is supplied to the DrawingBot, which produces an imageIr. we use the loss function Lr, which is defined by replacing (Sl, \u02c6Il) with (Sr, \u02c6Ir) in (7) or (8), to calculate the gradients and update \u03b8draw and \u03b8cap simultaneously.",
+        "As shown in the table, our proposed turbo approach achieves significant gain over separate training of CaptionBot and DrawingBot. Following [<a class=\"ref-link\" id=\"c2\" href=\"#r2\">2</a>], we use the Inception score [<a class=\"ref-link\" id=\"c42\" href=\"#r42\">42</a>] as the quantitative evaluation measure.",
+        "As shown in the table, our proposed turbo approach achieves significant gain over separate training of CaptionBot and DrawingBot. Because we use ResNet-50 instead of ResNet-152, the performance of the baseline LSTM CaptionBot is not as good as the state-of-the-art LSTM, which uses ResNet-152 or better features.",
+        "We compute the gradient of the total loss of all labeled and unlabeled samples in a mini-batch and update the neural weights \u03b8cap of the CaptionBot. Here, we would like to relate our semi-supervised learning to the CycleGAN scheme [<a class=\"ref-link\" id=\"c43\" href=\"#r43\">43</a>].",
+        "Same as Section 4.4, we use COCO dataset to evaluate the performance of the proposed semi-supervised learning approach for CaptionBot. We set \u03b21 = 0.85.",
+        "Experimental results on the COCO dataset have effectively validated the advantages of the proposed joint learning approach"
+    ],
+    "headline": "We study in this paper the problems of both image captioning and text-to-image generation, and present a novel turbo learning approach to jointly training an image-to-text generator (a.k.a",
+    "reference_links": [
+        {
+            "id": "1",
+            "entry": "[1] Z. Gan, C. Gan, X. He, Y. Pu, K. Tran, J. Gao, L. Carin, and L. Deng, \u201cSemantic compositional networks for visual captioning,\u201d in Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gan%2C%20Z.%20Gan%2C%20C.%20He%2C%20X.%20Pu%2C%20Y.%20Semantic%20compositional%20networks%20for%20visual%20captioning%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Gan%2C%20Z.%20Gan%2C%20C.%20He%2C%20X.%20Pu%2C%20Y.%20Semantic%20compositional%20networks%20for%20visual%20captioning%2C%202017"
+        },
+        {
+            "id": "2",
+            "entry": "[2] Q. H. H. Z. Z. G. X. H. X. H. Tao Xu, Pengchuan Zhang, \u201cAttngan: Fine-grained text to image generation with attentional generative adversarial networks,\u201d 2018.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xu%2C%20Q.H.H.Z.Z.G.X.H.X.H.Tao%20Zhang%2C%20Pengchuan%20Attngan%3A%20Fine-grained%20text%20to%20image%20generation%20with%20attentional%20generative%20adversarial%20networks%2C%202018"
+        },
+        {
+            "id": "3",
+            "entry": "[3] J. Mao, W. Xu, Y. Yang, J. Wang, Z. Huang, and A. Yuille, \u201cDeep captioning with multimodal recurrent neural networks (m-rnn),\u201d in Proceedings of International Conference on Learning Representations, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mao%2C%20J.%20Xu%2C%20W.%20Yang%2C%20Y.%20Wang%2C%20J.%20Deep%20captioning%20with%20multimodal%20recurrent%20neural%20networks%20%28m-rnn%29%2C%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Mao%2C%20J.%20Xu%2C%20W.%20Yang%2C%20Y.%20Wang%2C%20J.%20Deep%20captioning%20with%20multimodal%20recurrent%20neural%20networks%20%28m-rnn%29%2C%202015"
+        },
+        {
+            "id": "4",
+            "entry": "[4] O. Vinyals, A. Toshev, S. Bengio, and D. Erhan, \u201cShow and tell: A neural image caption generator,\u201d in Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2015, pp. 3156\u20133164.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vinyals%2C%20O.%20Toshev%2C%20A.%20Bengio%2C%20S.%20Erhan%2C%20D.%20Show%20and%20tell%3A%20A%20neural%20image%20caption%20generator%2C%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vinyals%2C%20O.%20Toshev%2C%20A.%20Bengio%2C%20S.%20Erhan%2C%20D.%20Show%20and%20tell%3A%20A%20neural%20image%20caption%20generator%2C%202015"
+        },
+        {
+            "id": "5",
+            "entry": "[5] J. Devlin, H. Cheng, H. Fang, S. Gupta, L. Deng, X. He, G. Zweig, and M. Mitchell, \u201cLanguage models for image captioning: The quirks and what works,\u201d arXiv preprint arXiv:1505.01809, 2015.",
+            "arxiv_url": "https://arxiv.org/pdf/1505.01809"
+        },
+        {
+            "id": "6",
+            "entry": "[6] X. Chen and L. Zitnick, \u201cMind\u2019s eye: A recurrent visual representation for image caption generation,\u201d in Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2015, pp. 2422\u20132431.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Chen%2C%20X.%20Zitnick%2C%20L.%20Mind%E2%80%99s%20eye%3A%20A%20recurrent%20visual%20representation%20for%20image%20caption%20generation%2C%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Chen%2C%20X.%20Zitnick%2C%20L.%20Mind%E2%80%99s%20eye%3A%20A%20recurrent%20visual%20representation%20for%20image%20caption%20generation%2C%202015"
+        },
+        {
+            "id": "7",
+            "entry": "[7] J. Donahue, L. Anne Hendricks, S. Guadarrama, M. Rohrbach, S. Venugopalan, K. Saenko, and T. Darrell, \u201cLong-term recurrent convolutional networks for visual recognition and description,\u201d in Proceedings of the IEEE conference on computer vision and pattern recognition, 2015, pp. 2625\u20132634.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Donahue%2C%20J.%20Hendricks%2C%20L.Anne%20Guadarrama%2C%20S.%20Rohrbach%2C%20M.%20Long-term%20recurrent%20convolutional%20networks%20for%20visual%20recognition%20and%20description%2C%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Donahue%2C%20J.%20Hendricks%2C%20L.Anne%20Guadarrama%2C%20S.%20Rohrbach%2C%20M.%20Long-term%20recurrent%20convolutional%20networks%20for%20visual%20recognition%20and%20description%2C%202015"
+        },
+        {
+            "id": "8",
+            "entry": "[8] A. Karpathy and L. Fei-Fei, \u201cDeep visual-semantic alignments for generating image descriptions,\u201d in Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2015, pp. 3128\u20133137.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Karpathy%2C%20A.%20Fei-Fei%2C%20L.%20Deep%20visual-semantic%20alignments%20for%20generating%20image%20descriptions%2C%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Karpathy%2C%20A.%20Fei-Fei%2C%20L.%20Deep%20visual-semantic%20alignments%20for%20generating%20image%20descriptions%2C%202015"
+        },
+        {
+            "id": "9",
+            "entry": "[9] R. Kiros, R. Salakhutdinov, and R. Zemel, \u201cMultimodal neural language models,\u201d in Proceedings of the 31st International Conference on Machine Learning (ICML-14), 2014, pp. 595\u2013603.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Kiros%2C%20R.%20Salakhutdinov%2C%20R.%20Zemel%2C%20R.%20Multimodal%20neural%20language%20models%2C%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Kiros%2C%20R.%20Salakhutdinov%2C%20R.%20Zemel%2C%20R.%20Multimodal%20neural%20language%20models%2C%202014"
+        },
+        {
+            "id": "10",
+            "entry": "[10] R. Kiros, R. Salakhutdinov, and R. S. Zemel, \u201cUnifying visual-semantic embeddings with multimodal neural language models,\u201d arXiv preprint arXiv:1411.2539, 2014.",
+            "arxiv_url": "https://arxiv.org/pdf/1411.2539"
+        },
+        {
+            "id": "11",
+            "entry": "[11] K. Xu, H. Wang, and P. Tang, \u201cImage captioning with deep lstm based on sequential residual,\u201d in Proceedings of IEEE International Conference on Multimedia and Expo (ICME), 2017, pp. 361\u2013366.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Xu%2C%20K.%20Wang%2C%20H.%20Tang%2C%20P.%20Image%20captioning%20with%20deep%20lstm%20based%20on%20sequential%20residual%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Xu%2C%20K.%20Wang%2C%20H.%20Tang%2C%20P.%20Image%20captioning%20with%20deep%20lstm%20based%20on%20sequential%20residual%2C%202017"
+        },
+        {
+            "id": "12",
+            "entry": "[12] S. J. Rennie, E. Marcheret, Y. Mroueh, J. Ross, and V. Goel, \u201cSelf-critical sequence training for image captioning,\u201d in Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Rennie%2C%20S.J.%20Marcheret%2C%20E.%20Mroueh%2C%20Y.%20Ross%2C%20J.%20Self-critical%20sequence%20training%20for%20image%20captioning%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Rennie%2C%20S.J.%20Marcheret%2C%20E.%20Mroueh%2C%20Y.%20Ross%2C%20J.%20Self-critical%20sequence%20training%20for%20image%20captioning%2C%202017"
+        },
+        {
+            "id": "13",
+            "entry": "[13] T. Yao, Y. Pan, Y. Li, Z. Qiu, and T. Mei, \u201cBoosting image captioning with attributes,\u201d in Proceedings of International Conference on Computer Vision, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Yao%2C%20T.%20Pan%2C%20Y.%20Li%2C%20Y.%20Qiu%2C%20Z.%20Boosting%20image%20captioning%20with%20attributes%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Yao%2C%20T.%20Pan%2C%20Y.%20Li%2C%20Y.%20Qiu%2C%20Z.%20Boosting%20image%20captioning%20with%20attributes%2C%202017"
+        },
+        {
+            "id": "14",
+            "entry": "[14] J. Lu, C. Xiong, D. Parikh, and R. Socher, \u201cKnowing when to look: Adaptive attention via a visual sentinel for image captioning,\u201d in Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR), vol. 6, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Lu%2C%20J.%20Xiong%2C%20C.%20Parikh%2C%20D.%20Socher%2C%20R.%20Knowing%20when%20to%20look%3A%20Adaptive%20attention%20via%20a%20visual%20sentinel%20for%20image%20captioning%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Lu%2C%20J.%20Xiong%2C%20C.%20Parikh%2C%20D.%20Socher%2C%20R.%20Knowing%20when%20to%20look%3A%20Adaptive%20attention%20via%20a%20visual%20sentinel%20for%20image%20captioning%2C%202017"
+        },
+        {
+            "id": "15",
+            "entry": "[15] E. Mansimov, E. Parisotto, L. J. Ba, and R. Salakhutdinov, \u201cGenerating images from captions with attention,\u201d in ICLR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Mansimov%2C%20E.%20Parisotto%2C%20E.%20Ba%2C%20L.J.%20Salakhutdinov%2C%20R.%20%E2%80%9CGenerating%20images%20from%20captions%20with%20attention%2C%E2%80%9D%20in%20ICLR%202016"
+        },
+        {
+            "id": "16",
+            "entry": "[16] K. Gregor, I. Danihelka, A. Graves, D. J. Rezende, and D. Wierstra, \u201cDRAW: A recurrent neural network for image generation,\u201d in ICML, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Gregor%2C%20K.%20Danihelka%2C%20I.%20Graves%2C%20A.%20Rezende%2C%20D.J.%20%E2%80%9CDRAW%3A%20A%20recurrent%20neural%20network%20for%20image%20generation%2C%E2%80%9D%20in%20ICML%202015"
+        },
+        {
+            "id": "17",
+            "entry": "[17] S. E. Reed, A. van den Oord, N. Kalchbrenner, S. G. Colmenarejo, Z. Wang, Y. Chen, D. Belov, and N. de Freitas, \u201cParallel multiscale autoregressive density estimation,\u201d in ICML, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Reed%2C%20S.E.%20van%20den%20Oord%2C%20A.%20Kalchbrenner%2C%20N.%20Colmenarejo%2C%20S.G.%20%E2%80%9CParallel%20multiscale%20autoregressive%20density%20estimation%2C%E2%80%9D%20in%20ICML%202017"
+        },
+        {
+            "id": "18",
+            "entry": "[18] A. van den Oord, N. Kalchbrenner, O. Vinyals, L. Espeholt, A. Graves, and K. Kavukcuoglu, \u201cConditional image generation with pixelcnn decoders,\u201d in NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=van%20den%20Oord%2C%20A.%20Kalchbrenner%2C%20N.%20Vinyals%2C%20O.%20Espeholt%2C%20L.%20%E2%80%9CConditional%20image%20generation%20with%20pixelcnn%20decoders%2C%E2%80%9D%20in%20NIPS%202016"
+        },
+        {
+            "id": "19",
+            "entry": "[19] S. Reed, Z. Akata, X. Yan, L. Logeswaran, B. Schiele, and H. Lee, \u201cGenerative adversarial text-to-image synthesis,\u201d in ICML, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Reed%2C%20S.%20Akata%2C%20Z.%20Yan%2C%20X.%20Logeswaran%2C%20L.%20%E2%80%9CGenerative%20adversarial%20text-to-image%20synthesis%2C%E2%80%9D%20in%20ICML%202016"
+        },
+        {
+            "id": "20",
+            "entry": "[20] S. Reed, Z. Akata, S. Mohan, S. Tenka, B. Schiele, and H. Lee, \u201cLearning what and where to draw,\u201d in NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Reed%2C%20S.%20Akata%2C%20Z.%20Mohan%2C%20S.%20Tenka%2C%20S.%20%E2%80%9CLearning%20what%20and%20where%20to%20draw%2C%E2%80%9D%20in%20NIPS%202016"
+        },
+        {
+            "id": "21",
+            "entry": "[21] H. Zhang, T. Xu, H. Li, S. Zhang, X. Wang, X. Huang, and D. Metaxas, \u201cStackgan: Text to photo-realistic image synthesis with stacked generative adversarial networks,\u201d in ICCV, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhang%2C%20H.%20Xu%2C%20T.%20Li%2C%20H.%20Zhang%2C%20S.%20%E2%80%9CStackgan%3A%20Text%20to%20photo-realistic%20image%20synthesis%20with%20stacked%20generative%20adversarial%20networks%2C%E2%80%9D%20in%20ICCV%202017"
+        },
+        {
+            "id": "22",
+            "entry": "[22] H. Zhang, T. Xu, H. Li, S. Zhang, X. Wang, X. Huang, and D. N. Metaxas, \u201cStackgan++: Realistic image synthesis with stacked generative adversarial networks,\u201d arXiv: 1710.10916, 2017.",
+            "arxiv_url": "https://arxiv.org/pdf/1710.10916"
+        },
+        {
+            "id": "23",
+            "entry": "[23] I. Goodfellow, J. Pouget-Abadie, M. Mirza, B. Xu, D. Warde-Farley, S. Ozair, A. Courville, and Y. Bengio, \u201cGenerative adversarial nets,\u201d in Advances in neural information processing systems, 2014, pp. 2672\u20132680.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Goodfellow%2C%20I.%20Pouget-Abadie%2C%20J.%20Mirza%2C%20M.%20Xu%2C%20B.%20%E2%80%9CGenerative%20adversarial%20nets%2C%E2%80%9D%20in%20Advances%20in%20neural%202014",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Goodfellow%2C%20I.%20Pouget-Abadie%2C%20J.%20Mirza%2C%20M.%20Xu%2C%20B.%20%E2%80%9CGenerative%20adversarial%20nets%2C%E2%80%9D%20in%20Advances%20in%20neural%202014"
+        },
+        {
+            "id": "24",
+            "entry": "[24] A. Radford, L. Metz, and S. Chintala, \u201cUnsupervised representation learning with deep convolutional generative adversarial networks,\u201d in ICLR, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Radford%2C%20A.%20Metz%2C%20L.%20S.%20Chintala%2C%20%E2%80%9CUnsupervised%20representation%20learning%20with%20deep%20convolutional%20generative%20adversarial%20networks%2C%E2%80%9D%20in%20ICLR%202016"
+        },
+        {
+            "id": "25",
+            "entry": "[25] E. L. Denton, S. Chintala, A. Szlam, and R. Fergus, \u201cDeep generative image models using a laplacian pyramid of adversarial networks,\u201d in NIPS, 2015.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Denton%2C%20E.L.%20Chintala%2C%20S.%20Szlam%2C%20A.%20Fergus%2C%20R.%20%E2%80%9CDeep%20generative%20image%20models%20using%20a%20laplacian%20pyramid%20of%20adversarial%20networks%2C%E2%80%9D%20in%20NIPS%202015"
+        },
+        {
+            "id": "26",
+            "entry": "[26] T. Salimans, I. J. Goodfellow, W. Zaremba, V. Cheung, A. Radford, and X. Chen, \u201cImproved techniques for training gans,\u201d in NIPS, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Salimans%2C%20T.%20Goodfellow%2C%20I.J.%20Zaremba%2C%20W.%20Cheung%2C%20V.%20%E2%80%9CImproved%20techniques%20for%20training%20gans%2C%E2%80%9D%20in%20NIPS%202016"
+        },
+        {
+            "id": "27",
+            "entry": "[27] C. Ledig, L. Theis, F. Huszar, J. Caballero, A. Aitken, A. Tejani, J. Totz, Z. Wang, and W. Shi, \u201cPhotorealistic single image super-resolution using a generative adversarial network,\u201d in CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Ledig%2C%20C.%20Theis%2C%20L.%20Huszar%2C%20F.%20Caballero%2C%20J.%20%E2%80%9CPhotorealistic%20single%20image%20super-resolution%20using%20a%20generative%20adversarial%20network%2C%E2%80%9D%20in%20CVPR%202017"
+        },
+        {
+            "id": "28",
+            "entry": "[28] P. Isola, J.-Y. Zhu, T. Zhou, and A. A. Efros, \u201cImage-to-image translation with conditional adversarial networks,\u201d in CVPR, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Isola%2C%20P.%20Zhu%2C%20J.-Y.%20Zhou%2C%20T.%20Efros%2C%20A.A.%20%E2%80%9CImage-to-image%20translation%20with%20conditional%20adversarial%20networks%2C%E2%80%9D%20in%20CVPR%202017"
+        },
+        {
+            "id": "29",
+            "entry": "[29] Y. Xia, D. He, T. Qin, L. Wang, N. Yu, T.-Y. Liu, and W.-Y. Ma, \u201cDual learning for machine translation,\u201d arXiv preprint arXiv:1611.00179, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1611.00179"
+        },
+        {
+            "id": "30",
+            "entry": "[30] Q. Wu, C. Shen, L. Liu, A. Dick, and A. van den Hengel, \u201cWhat value do explicit high level concepts have in vision to language problems?\u201d in Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2016, pp. 203\u2013212.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Wu%2C%20Q.%20Shen%2C%20C.%20Liu%2C%20L.%20Dick%2C%20A.%20What%20value%20do%20explicit%20high%20level%20concepts%20have%20in%20vision%20to%20language%20problems%3F%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Wu%2C%20Q.%20Shen%2C%20C.%20Liu%2C%20L.%20Dick%2C%20A.%20What%20value%20do%20explicit%20high%20level%20concepts%20have%20in%20vision%20to%20language%20problems%3F%202016"
+        },
+        {
+            "id": "31",
+            "entry": "[31] Q. You, H. Jin, Z. Wang, C. Fang, and J. Luo, \u201cImage captioning with semantic attention,\u201d in Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2016, pp. 4651\u20134659.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=You%2C%20Q.%20Jin%2C%20H.%20Wang%2C%20Z.%20Fang%2C%20C.%20Image%20captioning%20with%20semantic%20attention%2C%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=You%2C%20Q.%20Jin%2C%20H.%20Wang%2C%20Z.%20Fang%2C%20C.%20Image%20captioning%20with%20semantic%20attention%2C%202016"
+        },
+        {
+            "id": "32",
+            "entry": "[32] R. Vedantam, C. Lawrence Zitnick, and D. Parikh, \u201cCider: Consensus-based image description evaluation,\u201d in Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2015, pp. 4566\u20134575.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Vedantam%2C%20R.%20Zitnick%2C%20C.Lawrence%20Parikh%2C%20D.%20%E2%80%9CCider%3A%20Consensus-based%20image%20description%20evaluation%2C%E2%80%9D%20in%202015",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Vedantam%2C%20R.%20Zitnick%2C%20C.Lawrence%20Parikh%2C%20D.%20%E2%80%9CCider%3A%20Consensus-based%20image%20description%20evaluation%2C%E2%80%9D%20in%202015"
+        },
+        {
+            "id": "33",
+            "entry": "[33] R. Pasunuru and M. Bansal, \u201cReinforced video captioning with entailment rewards,\u201d in EMNLP, 2017.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Pasunuru%2C%20R.%20Bansal%2C%20M.%20%E2%80%9CReinforced%20video%20captioning%20with%20entailment%20rewards%2C%E2%80%9D%20in%20EMNLP%202017"
+        },
+        {
+            "id": "34",
+            "entry": "[34] M. Abadi, A. Agarwal, P. Barham, E. Brevdo, Z. Chen, C. Citro, G. S. Corrado, A. Davis, J. Dean, M. Devin, S. Ghemawat, I. Goodfellow, A. Harp, G. Irving, M. Isard, Y. Jia, R. Jozefowicz, L. Kaiser, M. Kudlur, J. Levenberg, D. Man\u00e9, R. Monga, S. Moore, D. Murray, C. Olah, M. Schuster, J. Shlens, B. Steiner, I. Sutskever, K. Talwar, P. Tucker, V. Vanhoucke, V. Vasudevan, F. Vi\u00e9gas, O. Vinyals, P. Warden, M. Wattenberg, M. Wicke, Y. Yu, and X. Zheng, \u201cTensorFlow: Large-scale machine learning on heterogeneous systems,\u201d 2015, software available from tensorflow.org. [Online]. Available: https://www.tensorflow.org/",
+            "url": "https://www.tensorflow.org/"
+        },
+        {
+            "id": "35",
+            "entry": "[35] P.-S. Huang, X. He, J. Gao, L. Deng, A. Acero, and L. Heck, \u201cLearning deep structured semantic models for web search using clickthrough data,\u201d in Proceedings of the 22Nd ACM International Conference on Information & Knowledge Management, ser. CIKM\u201913. New York, NY, USA: ACM, 2013, pp. 2333\u20132338. [Online]. Available: http://doi.acm.org/10.1145/2505515.2505665",
+            "url": "http://doi.acm.org/10.1145/2505515.2505665",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Huang%2C%20P.-S.%20He%2C%20X.%20Gao%2C%20J.%20Deng%2C%20L.%20%E2%80%9CLearning%20deep%20structured%20semantic%20models%20for%20web%20search%20using%20clickthrough%20data%2C%E2%80%9D%20in%20Proceedings%20of%20the%2022Nd%202013"
+        },
+        {
+            "id": "36",
+            "entry": "[36] COCO, \u201cCoco dataset for image captioning,\u201d http://mscoco.org/dataset/#download, 2017.",
+            "url": "http://mscoco.org/dataset/#download"
+        },
+        {
+            "id": "37",
+            "entry": "[37] K. He, X. Zhang, S. Ren, and J. Sun, \u201cDeep residual learning for image recognition,\u201d in Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2016, pp. 770\u2013778.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%2C%202016",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=He%2C%20K.%20Zhang%2C%20X.%20Ren%2C%20S.%20Sun%2C%20J.%20Deep%20residual%20learning%20for%20image%20recognition%2C%202016"
+        },
+        {
+            "id": "38",
+            "entry": "[38] J. Pennington, R. Socher, and C. Manning, \u201cStanford glove: Global vectors for word representation,\u201d https://nlp.stanford.edu/projects/glove/, 2017.",
+            "url": "https://nlp.stanford.edu/projects/glove/"
+        },
+        {
+            "id": "39",
+            "entry": "[39] K. Papineni, S. Roukos, T. Ward, and W.-J. Zhu, \u201cBleu: a method for automatic evaluation of machine translation,\u201d in Proceedings of the 40th annual meeting on association for computational linguistics. Association for Computational Linguistics, 2002, pp. 311\u2013318.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Papineni%2C%20K.%20Roukos%2C%20S.%20Ward%2C%20T.%20Zhu%2C%20W.-J.%20Bleu%3A%20a%20method%20for%20automatic%20evaluation%20of%20machine%20translation%2C%202002",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Papineni%2C%20K.%20Roukos%2C%20S.%20Ward%2C%20T.%20Zhu%2C%20W.-J.%20Bleu%3A%20a%20method%20for%20automatic%20evaluation%20of%20machine%20translation%2C%202002"
+        },
+        {
+            "id": "40",
+            "entry": "[40] S. Banerjee and A. Lavie, \u201cMeteor: An automatic metric for mt evaluation with improved correlation with human judgments,\u201d in Proceedings of the ACL workshop on intrinsic and extrinsic evaluation measures for machine translation and/or summarization. Association for Computational Linguistics, 2005, pp. 65\u201372.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Banerjee%2C%20S.%20Lavie%2C%20A.%20%E2%80%9CMeteor%3A%20An%20automatic%20metric%20for%20mt%20evaluation%20with%20improved%20correlation%20with%20human%20judgments%2C%E2%80%9D%20in%20Proceedings%20of%20the%20ACL%20workshop%20on%20intrinsic%20and%20extrinsic%20evaluation%20measures%20for%20machine%20translation%20and/or%20summarization.%20Association%20for%202005",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Banerjee%2C%20S.%20Lavie%2C%20A.%20%E2%80%9CMeteor%3A%20An%20automatic%20metric%20for%20mt%20evaluation%20with%20improved%20correlation%20with%20human%20judgments%2C%E2%80%9D%20in%20Proceedings%20of%20the%20ACL%20workshop%20on%20intrinsic%20and%20extrinsic%20evaluation%20measures%20for%20machine%20translation%20and/or%20summarization.%20Association%20for%202005"
+        },
+        {
+            "id": "41",
+            "entry": "[41] P. Anderson, B. Fernando, M. Johnson, and S. Gould, \u201cSpice: Semantic propositional image caption evaluation,\u201d in ECCV, 2016.",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Anderson%2C%20P.%20Fernando%2C%20B.%20Johnson%2C%20M.%20Gould%2C%20S.%20%E2%80%9CSpice%3A%20Semantic%20propositional%20image%20caption%20evaluation%2C%E2%80%9D%20in%20ECCV%202016"
+        },
+        {
+            "id": "42",
+            "entry": "[42] T. Salimans, I. Goodfellow, W. Zaremba, V. Cheung, A. Radford, and X. Chen, \u201cImproved techniques for training gans,\u201d arXiv preprint arXiv:1606.03498, 2016.",
+            "arxiv_url": "https://arxiv.org/pdf/1606.03498"
+        },
+        {
+            "id": "43",
+            "entry": "[43] J.-Y. Zhu, T. Park, P. Isola, and A. A. Efros, \u201cUnpaired image-to-image translation using cycle-consistent adversarial networks,\u201d in IEEE International Conference on Computer Vision (ICCV), 2017. ",
+            "scholar_url": "https://scholar.google.co.uk/scholar?q=Zhu%2C%20J.-Y.%20Park%2C%20T.%20Isola%2C%20P.%20Efros%2C%20A.A.%20Unpaired%20image-to-image%20translation%20using%20cycle-consistent%20adversarial%20networks%2C%202017",
+            "oa_query": "https://api.scholarcy.com/oa_version?query=Zhu%2C%20J.-Y.%20Park%2C%20T.%20Isola%2C%20P.%20Efros%2C%20A.A.%20Unpaired%20image-to-image%20translation%20using%20cycle-consistent%20adversarial%20networks%2C%202017"
+        }
+    ]
+}
