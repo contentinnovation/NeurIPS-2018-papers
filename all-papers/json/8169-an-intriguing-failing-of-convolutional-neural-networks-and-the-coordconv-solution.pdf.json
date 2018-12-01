@@ -3,6 +3,7 @@
     "metadata": {
         "title": "An intriguing failing of convolutional neural networks and the CoordConv solution",
         "author": "Rosanne Liu, Joel Lehman, Piero Molino, Felipe Petroski Such, Eric Frank, Alex Sergeev, Jason Yosinski",
+        "date": 2018,
         "identifiers": {
             "url": "https://papers.nips.cc/paper/8169-an-intriguing-failing-of-convolutional-neural-networks-and-the-coordconv-solution.pdf"
         },
@@ -10,14 +11,6 @@
         "abstract": "Few ideas have enjoyed as large an impact on deep learning as convolution. For any problem involving pixels or spatial representations, common intuition holds that convolutional neural networks may be appropriate. In this paper we show a striking counterexample to this intuition via the seemingly trivial coordinate transform problem, which simply requires learning a mapping between coordinates in (x, y) Cartesian space and coordinates in one-hot pixel space. Although convolutional networks would seem appropriate for this task, we show that they fail spectacularly. We demonstrate and carefully analyze the failure first on a toy problem, at which point a simple fix becomes obvious. We call this solution CoordConv, which works by giving convolution access to its own input coordinates through the use of extra coordinate channels. Without sacrificing the computational and parametric efficiency of ordinary convolution, CoordConv allows networks to learn either complete translation invariance or varying degrees of translation dependence, as required by the end task. CoordConv solves the coordinate transform problem with perfect generalization and 150 times faster with 10\u2013100 times fewer parameters than convolution. This stark contrast raises the question: to what extent has this inability of convolution persisted insidiously inside other tasks, subtly hampering performance from within? A complete answer to this question will require further investigation, but we show preliminary evidence that swapping convolution for CoordConv can improve models on a diverse set of tasks. Using CoordConv in a GAN produced less mode collapse as the transform between high-level spatial latents and pixels becomes easier to learn. A Faster R-CNN detection model trained on MNIST detection showed 24% better IOU when using CoordConv, and in the Reinforcement Learning (RL) domain agents playing Atari games benefit significantly from the use of CoordConv layers."
     },
     "keywords": [
-        {
-            "term": "Generative Adversarial Networks",
-            "url": "https://en.wikipedia.org/wiki/Generative_Adversarial_Networks"
-        },
-        {
-            "term": "generative model",
-            "url": "https://en.wikipedia.org/wiki/generative_model"
-        },
         {
             "term": "coordinate transform",
             "url": "https://en.wikipedia.org/wiki/coordinate_transform"
@@ -27,8 +20,12 @@
             "url": "https://en.wikipedia.org/wiki/deep_learning"
         },
         {
-            "term": "Reinforcement Learning",
-            "url": "https://en.wikipedia.org/wiki/Reinforcement_Learning"
+            "term": "generative model",
+            "url": "https://en.wikipedia.org/wiki/generative_model"
+        },
+        {
+            "term": "Generative Adversarial Networks",
+            "url": "https://en.wikipedia.org/wiki/Generative_Adversarial_Networks"
         },
         {
             "term": "neural network",
@@ -41,13 +38,17 @@
         {
             "term": "Compositional Pattern Producing Networks",
             "url": "https://en.wikipedia.org/wiki/Compositional_Pattern_Producing_Network"
+        },
+        {
+            "term": "reinforcement learning",
+            "url": "https://en.wikipedia.org/wiki/reinforcement_learning"
         }
     ],
     "highlights": [
         "Convolutional neural networks (CNNs) [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>] have enjoyed immense success as a key tool for enabling effective deep learning in a broad array of applications, like modeling natural images [<a class=\"ref-link\" id=\"c36\" href=\"#r36\">36</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>], images of human faces [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>], audio [<a class=\"ref-link\" id=\"c33\" href=\"#r33\">33</a>], and enabling agents to play games in domains with synthetic imagery like Atari [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>]",
         "Throughout the rest of the paper, we examine the coordinate transform problem starting with the simplest scenario and ending with the most complex",
         "On two-object Sort-of-Clevr [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>] images, Generative Adversarial Networks (GANs) and Variational Autoencoders (VAEs) using CoordConv exhibit less mode collapse, perhaps because ease of learning coordinate transforms translates to ease of using latents to span a 2D Cartesian space",
-        "While such works might appear to provide alternative solutions to the problem explored in this paper, in reality, similar coordinate transforms are often embedded within such models (e.g. a spatial transformer network contains a localization network that regresses from an image to a coordinate-based representation [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>]) and might benefit from CoordConv layers",
+        "Connections can be made to mechanisms of spatial attention [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>] and to generative models that separately learn what and where to draw [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>, <a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>]. While such works might appear to provide alternative solutions to the problem explored in this paper, in reality, similar coordinate transforms are often embedded within such models (e.g. a spatial transformer network contains a localization network that regresses from an image to a coordinate-based representation [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>]) and might benefit from CoordConv layers",
         "We have shown the curious inability of Convolutional neural networks to model the coordinate transform task, shown a simple fix in the form of the CoordConv layer, and given results that suggest including these layers can boost performance in a wide range of applications",
         "Future work will further evaluate the benefits of CoordConv in large-scale datasets, exploring its ability against perturbations of translation, its impact in relational reasoning [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>], language tasks, video prediction, with spatial transformer networks [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>], and with cutting-edge generative models [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>]"
     ],
@@ -55,7 +56,7 @@
         "Convolutional neural networks (CNNs) [<a class=\"ref-link\" id=\"c17\" href=\"#r17\">17</a>] have enjoyed immense success as a key tool for enabling effective deep learning in a broad array of applications, like modeling natural images [<a class=\"ref-link\" id=\"c36\" href=\"#r36\">36</a>, <a class=\"ref-link\" id=\"c16\" href=\"#r16\">16</a>], images of human faces [<a class=\"ref-link\" id=\"c15\" href=\"#r15\">15</a>], audio [<a class=\"ref-link\" id=\"c33\" href=\"#r33\">33</a>], and enabling agents to play games in domains with synthetic imagery like Atari [<a class=\"ref-link\" id=\"c21\" href=\"#r21\">21</a>]",
         "Throughout the rest of the paper, we examine the coordinate transform problem starting with the simplest scenario and ending with the most complex",
         "On two-object Sort-of-Clevr [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>] images, Generative Adversarial Networks (GANs) and Variational Autoencoders (VAEs) using CoordConv exhibit less mode collapse, perhaps because ease of learning coordinate transforms translates to ease of using latents to span a 2D Cartesian space",
-        "While such works might appear to provide alternative solutions to the problem explored in this paper, in reality, similar coordinate transforms are often embedded within such models (e.g. a spatial transformer network contains a localization network that regresses from an image to a coordinate-based representation [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>]) and might benefit from CoordConv layers",
+        "Connections can be made to mechanisms of spatial attention [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>] and to generative models that separately learn what and where to draw [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>, <a class=\"ref-link\" id=\"c26\" href=\"#r26\">26</a>]. While such works might appear to provide alternative solutions to the problem explored in this paper, in reality, similar coordinate transforms are often embedded within such models (e.g. a spatial transformer network contains a localization network that regresses from an image to a coordinate-based representation [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>]) and might benefit from CoordConv layers",
         "On a simple problem of detecting MNIST digits scattered on a canvas, we found the test intersection-over-union (IOU) of a Faster R-Convolutional neural networks network improved by 24% when using CoordConv",
         "We have shown the curious inability of Convolutional neural networks to model the coordinate transform task, shown a simple fix in the form of the CoordConv layer, and given results that suggest including these layers can boost performance in a wide range of applications",
         "Future work will further evaluate the benefits of CoordConv in large-scale datasets, exploring its ability against perturbations of translation, its impact in relational reasoning [<a class=\"ref-link\" id=\"c29\" href=\"#r29\">29</a>], language tasks, video prediction, with spatial transformer networks [<a class=\"ref-link\" id=\"c13\" href=\"#r13\">13</a>], and with cutting-edge generative models [<a class=\"ref-link\" id=\"c8\" href=\"#r8\">8</a>]"
