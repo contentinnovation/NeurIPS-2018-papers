@@ -4,7 +4,7 @@ Machine-generated summaries and highlights of every paper accepted at the Thirty
 
 There are 1008 papers in total. The 41 NLP NeurIPS papers are now in a separate directory.
 
-Generated with the Scholarcy Highlights API.
+Generated with the [Scholarcy](https://www.scholarcy.com) Highlights API.
 
 Pulled from the list of NLP papers at:
 
